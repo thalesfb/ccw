@@ -172,3 +172,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Drive files
+desktop.ini
+
+results/ptc/
+results/tcc/
+
+research/cache/
