@@ -180,3 +180,6 @@ results/ptc/
 results/tcc/
 
 research/cache/
+research/logs/
+research/*.db
+research/exports/
