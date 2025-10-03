@@ -179,4 +179,21 @@ desktop.ini
 results/ptc/
 results/tcc/
 
+# Research module artifacts
 research/cache/
+research/exports/
+research/logs/
+research/*.db
+*.db
+
+# IDE configs
+.vscode/
+.specify/
+.idea/
+
+# Temporary files
+brainstorm.txt
+debug_db.py
+test_report.json
+*_backup.*
+*.tmp
