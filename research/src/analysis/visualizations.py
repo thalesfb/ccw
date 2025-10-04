@@ -11,6 +11,8 @@ import pandas as pd
 import seaborn as sns
 from matplotlib.patches import Rectangle
 
+from ..config import load_config
+
 logger = logging.getLogger(__name__)
 
 # Configuração do estilo
@@ -27,8 +29,10 @@ class ReviewVisualizer:
         Args:
             output_dir: Diretório para salvar gráficos
         """
+        config = load_config()
+        
         if output_dir is None:
-            output_dir = Path(__file__).parents[3] / "exports" / "visualizations"
+            output_dir = Path(config.database.exports_dir) / "visualizations"
         
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -71,9 +75,9 @@ class ReviewVisualizer:
         if save_path is None:
             save_path = self.output_dir / "prisma_flow.png"
         
-        fig, ax = plt.subplots(figsize=(12, 14))
-        ax.set_xlim(0, 10)
-        ax.set_ylim(0, 12)
+        fig, ax = plt.subplots(figsize=(12, 8))
+        ax.set_xlim(0, 8)
+        ax.set_ylim(0, 8)
         ax.axis('off')
         
         # Colors
@@ -86,26 +90,42 @@ class ReviewVisualizer:
         box_height = 0.8
         
         # Title
-        ax.text(5, 11.5, 'Fluxo PRISMA da Revisão Sistemática', 
+        ax.text(5, 9.7, 'Fluxo PRISMA da Revisão Sistemática', 
                 ha='center', va='center', fontsize=16, fontweight='bold')
         
         # Identification
-        identification = stats.get('identification', 0)
-        after_duplicates = identification - stats.get('duplicates_removed', 0)
+        identification = int(stats.get('identification', 0))
+        duplicates_removed = int(stats.get('duplicates_removed', 0))
+        after_duplicates = identification - duplicates_removed
+
+        # Usar diretamente valores progressivos fornecidos nas stats
+        screening = int(stats.get('screening', max(0, after_duplicates)))
+        eligibility = int(stats.get('eligibility', max(0, screening)))
+        included = int(stats.get('included', 0))
+
+        # Caixas de exclusão (informativas)
+        screening_excluded = int(stats.get('screening_excluded', max(0, identification - screening)))
+        eligibility_excluded = int(stats.get('eligibility_excluded', max(0, screening - eligibility)))
+
+        logger.info(
+            f"PRISMA stats used -> ident={identification}, dup_removed={duplicates_removed}, "
+            f"screening={screening}, eligibility={eligibility}, included={included}, "
+            f"screening_excl={screening_excluded}, eligibility_excl={eligibility_excluded}"
+        )
         
-        # Main flow boxes
+        # Main flow boxes with correct PRISMA stages
         boxes = [
-            (5, 10, f"Registros identificados\nnas bases de dados\n(n = {identification})", box_color),
-            (5, 9, f"Registros após remoção\nde duplicatas\n(n = {after_duplicates})", box_color),
-            (5, 8, f"Registros selecionados\npara triagem\n(n = {after_duplicates})", box_color),
-            (5, 7, f"Artigos completos\navaliados para elegibilidade\n(n = {stats.get('screening', 0)})", box_color),
-            (5, 6, f"Estudos incluídos\nna síntese qualitativa\n(n = {stats.get('included', 0)})", box_color),
+            (5, 8.5, f"Registros identificados\nnas bases de dados\n(n = {identification})", box_color),
+            (5, 7.5, f"Registros sem duplicatas\n(n = {after_duplicates})", box_color),
+            (5, 6.5, f"Registros selecionados\npara triagem\n(n = {screening})", box_color),
+            (5, 5.5, f"Artigos avaliados\npara elegibilidade\n(n = {eligibility})", box_color),
+            (5, 4.5, f"Estudos incluídos\nna síntese qualitativa\n(n = {included})", box_color),
         ]
         
-        # Exclusion boxes
+        # Exclusion boxes with correct counts
         exclusions = [
-            (8, 8, f"Registros excluídos\nna triagem\n(n = {stats.get('screening_excluded', 0)})", exclude_color),
-            (8, 7, f"Artigos completos excluídos\ncom razões:\n(n = {stats.get('eligibility_excluded', 0)})", exclude_color),
+            (8, 6.5, f"Registros excluídos\nna triagem\n(n = {screening_excluded})", exclude_color),
+            (8, 5.5, f"Artigos excluídos\nna elegibilidade\n(n = {eligibility_excluded})", exclude_color),
         ]
         
         # Draw main flow boxes
@@ -134,9 +154,9 @@ class ReviewVisualizer:
                        arrowprops=arrow_props)
         
         # Exclusion arrows
-        ax.annotate('', xy=(8 - box_width/2, 8), xytext=(5 + box_width/2, 8), 
+        ax.annotate('', xy=(8 - box_width/2, 6.5), xytext=(5 + box_width/2, 6.5), 
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
-        ax.annotate('', xy=(8 - box_width/2, 7), xytext=(5 + box_width/2, 7), 
+        ax.annotate('', xy=(8 - box_width/2, 5.5), xytext=(5 + box_width/2, 5.5), 
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
         
         plt.tight_layout()
@@ -391,47 +411,70 @@ Desvio Padrão: {scores.std():.2f}"""
         """
         if save_path is None:
             save_path = self.output_dir / "selection_funnel.png"
-        
+
         if 'selection_stage' not in df.columns:
             logger.warning("No selection stage information found")
             return save_path
-        
-        # Count by stage
-        stage_counts = df['selection_stage'].value_counts()
-        
-        # Define stage order and colors
-        stages = ['identification', 'screening', 'eligibility', 'included']
-        colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4']
-        
-        # Prepare data
-        counts = [stage_counts.get(stage, 0) for stage in stages]
-        labels = [f'{stage.title()}\n(n={count})' for stage, count in zip(stages, counts)]
-        
+
+        # Calculate PRISMA progressive stages by reached stage
+        identification = int(len(df))
+        # Quantos chegaram à triagem (tudo que está em screening/eligibility/included)
+        screened = int(df['selection_stage'].isin(['screening', 'eligibility', 'included']).sum())
+        # Quantos chegaram à elegibilidade (eligibility/included)
+        eligible = int(df['selection_stage'].isin(['eligibility', 'included']).sum())
+        # Quantos incluídos
+        included = int((df['selection_stage'] == 'included').sum())
+
+        logger.info(
+            f"Funnel counts -> ident={identification}, triagem={screened}, elegibilidade={eligible}, incluidos={included}"
+        )
+
+        # PRISMA funnel stages (cada etapa mostra quantos PASSARAM)
+        funnel_stages = [
+            ('Identificação', identification, '#E8F4FD'),
+            ('Triagem', screened, '#B3E5FC'), 
+            ('Elegibilidade', eligible, '#81C784'),
+            ('Incluídos', included, '#4CAF50')
+        ]
+
+        # Filtrar stages com dados
+        stages = [name for name, count, color in funnel_stages if count > 0]
+        counts = [count for name, count, color in funnel_stages if count > 0]
+        colors = [color for name, count, color in funnel_stages if count > 0]
+
+        labels = [f'{stage}\n(n={count})' for stage, count in zip(stages, counts)]
+
         fig, ax = plt.subplots(figsize=(12, 8))
-        
+
         # Create funnel effect
         y_positions = list(range(len(stages)))
         bars = ax.barh(y_positions, counts, color=colors, alpha=0.8, edgecolor='black')
-        
+
         ax.set_yticks(y_positions)
         ax.set_yticklabels(labels)
         ax.set_xlabel('Número de Artigos')
         ax.set_title('Funil de Seleção PRISMA')
-        
+
         # Add value labels
         for bar, count in zip(bars, counts):
             if count > 0:
-                ax.text(bar.get_width() + max(counts) * 0.01, 
-                       bar.get_y() + bar.get_height()/2,
-                       f'{count}', ha='left', va='center', fontsize=12, fontweight='bold')
-        
+                ax.text(
+                    bar.get_width() + max(counts) * 0.01,
+                    bar.get_y() + bar.get_height() / 2,
+                    f'{count}',
+                    ha='left',
+                    va='center',
+                    fontsize=12,
+                    fontweight='bold',
+                )
+
         # Invert y-axis to show funnel top-to-bottom
         ax.invert_yaxis()
-        
+
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        
+
         logger.info(f"Selection funnel chart saved to {save_path}")
         return save_path
     
