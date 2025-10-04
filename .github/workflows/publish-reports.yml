@@ -37,9 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Install requirements excluding Windows-specific packages
-          grep -v "pywin32\|pywinpty" research/requirements.txt > /tmp/requirements-linux.txt
-          pip install -r /tmp/requirements-linux.txt
+          pip install -r research/requirements.txt
       
       - name: Check database exists
         id: check_db
@@ -78,9 +76,8 @@ jobs:
             cp research/exports/visualizations/*.png docs/visualizations/ 2>/dev/null || true
           fi
           
-          # Criar página de navegação se não houver index
-          if [ ! -f "docs/index.html" ]; then
-            cat > docs/index.html << 'EOF'
+          # Criar página de navegação
+          cat > docs/navigation.html << 'EOF'
           <!DOCTYPE html>
           <html lang="pt-BR">
           <head>
@@ -154,33 +151,33 @@ jobs:
                       <h2>🔍 Sumário Executivo <span class="badge badge-info">Principal</span></h2>
                       <p>Visão geral completa da revisão sistemática incluindo estatísticas PRISMA, 
                          distribuições temporais, análise de técnicas computacionais e visualizações.</p>
-                      <a href="./index.html">Ver Sumário →</a>
+                      <a href="index.html">Ver Sumário →</a>
                   </div>
                   
                   <div class="card">
                       <h2>📄 Artigos Incluídos <span class="badge badge-success">Selecionados</span></h2>
                       <p>Lista detalhada dos artigos que passaram pelos critérios de seleção PRISMA,
                          com metadados completos, scores de relevância e análises.</p>
-                      <a href="./papers.html">Ver Artigos →</a>
+                      <a href="papers.html">Ver Artigos →</a>
                   </div>
                   
                   <div class="card">
                       <h2>📊 Análise de Lacunas <span class="badge badge-warning">Insights</span></h2>
                       <p>Identificação de gaps de pesquisa, áreas subexploradas e oportunidades
                          para investigações futuras no campo.</p>
-                      <a href="./gap-analysis.html">Ver Análise →</a>
+                      <a href="gap-analysis.html">Ver Análise →</a>
                   </div>
                   
                   <div class="card">
                       <h2>📈 Visualizações</h2>
                       <p>Gráficos e diagramas gerados durante a análise:</p>
                       <ul>
-                          <li><a href="./visualizations/prisma_flow.png">Diagrama PRISMA Flow</a></li>
-                          <li><a href="./visualizations/selection_funnel.png">Funil de Seleção</a></li>
-                          <li><a href="./visualizations/papers_by_year.png">Distribuição por Ano</a></li>
-                          <li><a href="./visualizations/techniques_distribution.png">Técnicas Computacionais</a></li>
-                          <li><a href="./visualizations/database_coverage.png">Cobertura por Base</a></li>
-                          <li><a href="./visualizations/relevance_distribution.png">Distribuição de Relevância</a></li>
+                          <li><a href="visualizations/prisma_flow.png">Diagrama PRISMA Flow</a></li>
+                          <li><a href="visualizations/selection_funnel.png">Funil de Seleção</a></li>
+                          <li><a href="visualizations/papers_by_year.png">Distribuição por Ano</a></li>
+                          <li><a href="visualizations/techniques_distribution.png">Técnicas Computacionais</a></li>
+                          <li><a href="visualizations/database_coverage.png">Cobertura por Base</a></li>
+                          <li><a href="visualizations/relevance_distribution.png">Distribuição de Relevância</a></li>
                       </ul>
                   </div>
                   
@@ -194,6 +191,10 @@ jobs:
           </body>
           </html>
           EOF
+          
+          # Se não houver index.html gerado, usar navegação como index
+          if [ ! -f "docs/index.html" ]; then
+            cp docs/navigation.html docs/index.html
           fi
       
       - name: Setup Pages
