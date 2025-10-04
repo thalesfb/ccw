@@ -10,6 +10,7 @@ from typing import Dict, List, Optional
 import pandas as pd
 
 from ..config import AppConfig, load_config
+from ..logging_config import get_audit_logger
 from ..db import init_db, read_papers, save_papers
 from ..exports.excel import export_complete_review
 from ..ingestion import search_semantic_scholar, search_openalex, search_crossref, search_core
@@ -38,6 +39,7 @@ class SystematicReviewPipeline:
         self.config = config or load_config()
         self.results = pd.DataFrame()
         self.search_queries = []
+        self.audit = get_audit_logger("pipeline")
 
         # Inicializar banco de dados
         init_db(self.config)
@@ -107,8 +109,7 @@ class SystematicReviewPipeline:
     def collect_data(
         self,
         queries: Optional[List[str]] = None,
-        apis: List[str] = ["semantic_scholar", "openalex",
-                           "crossref"],  # CORE removido por instabilidade
+        apis: List[str] = ["semantic_scholar", "openalex", "crossref", "core"],
         limit_per_query: int = 50  # Reduzido para múltiplas APIs
     ) -> pd.DataFrame:
         """Coleta dados das APIs configuradas.
@@ -137,7 +138,7 @@ class SystematicReviewPipeline:
 
         for i, query in enumerate(queries, 1):
             logger.info(
-                f"Processing query {i}/{total_queries}: {query[:50]}...")
+                f"🔎 Processando query {i}/{total_queries}: {query[:80]}...")
 
             for api_name in apis:
                 if api_name not in api_functions:
@@ -150,12 +151,12 @@ class SystematicReviewPipeline:
 
                     if not df.empty:
                         all_results.append(df)
-                        logger.info(f"  {api_name.title()}: {len(df)} results")
+                        logger.info(f"  ✅ {api_name.title()}: {len(df)} resultados")
                     else:
-                        logger.info(f"  {api_name.title()}: 0 results")
+                        logger.info(f"  ⚪ {api_name.title()}: 0 resultados")
 
                 except Exception as e:
-                    logger.error(f"  {api_name.title()} failed: {e}")
+                    logger.error(f"  ❌ {api_name.title()} falhou: {e}")
 
         if all_results:
             self.results = pd.concat(all_results, ignore_index=True)
@@ -168,10 +169,10 @@ class SystematicReviewPipeline:
                     logger.info(f"  {api}: {count} papers")
 
             logger.info(
-                f"Collected {len(self.results)} total results from {len(apis)} APIs")
+                f"📥 Coletados {len(self.results)} resultados totais de {len(apis)} APIs")
         else:
             self.results = pd.DataFrame()
-            logger.warning("No results collected from any API")
+            logger.warning("⚠️ Nenhum resultado coletado de nenhuma API")
 
         return self.results
 
@@ -179,7 +180,7 @@ class SystematicReviewPipeline:
         self,
         deduplicate_data: bool = True,
         compute_scores: bool = True,
-        save_to_db: bool = True
+        save_to_db: bool = False,  # ❌ MUDANÇA: Não salvar por padrão
     ) -> pd.DataFrame:
         """Processa os dados coletados.
 
@@ -200,17 +201,17 @@ class SystematicReviewPipeline:
         # Deduplicar
         if deduplicate_data:
             self.results = deduplicate(self.results)
-            logger.info(f"After deduplication: {len(self.results)} papers")
+            logger.info(f"🧹 Após deduplicação: {len(self.results)} artigos")
 
         # Calcular scores de relevância
         if compute_scores:
             self.results = compute_relevance_scores(self.results)
-            logger.info("Relevance scores computed")
+            logger.info("📈 Scores de relevância calculados")
 
         # Salvar no banco
         if save_to_db:
             saved = save_papers(self.results, self.config)
-            logger.info(f"Saved {saved} new papers to database")
+            logger.info(f"💾 Salvos {saved} novos papers no banco de dados")
 
         return self.results
 
@@ -250,9 +251,9 @@ class SystematicReviewPipeline:
         # Contar por estágio
         if "selection_stage" in self.results.columns:
             stage_counts = self.results["selection_stage"].value_counts()
-            logger.info("Selection results:")
+            logger.info("🎯 Resultados da seleção:")
             for stage, count in stage_counts.items():
-                logger.info(f"  {stage}: {count} papers")
+                logger.info(f"  {stage}: {count} artigos")
 
         return self.results
 
@@ -271,20 +272,30 @@ class SystematicReviewPipeline:
             Dicionário com paths dos arquivos gerados
         """
         if output_dir is None:
-            output_dir = Path(__file__).parents[3] / "exports"
+            output_dir = Path(self.config.database.exports_dir)
 
-        # Calcular estatísticas PRISMA
+        # Calcular estatísticas PRISMA (progressivas e consistentes)
         stats = {}
         if "selection_stage" in self.results.columns:
-            stage_counts = self.results["selection_stage"].value_counts()
+            identification = int(len(self.results))
+            screened = int(self.results['selection_stage'].isin(['screening', 'eligibility', 'included']).sum())
+            eligible = int(self.results['selection_stage'].isin(['eligibility', 'included']).sum())
+            included = int((self.results['selection_stage'] == 'included').sum())
+
+            # Excluídos derivados (diferenças consecutivas PRISMA)
+            # - Triagem: registros excluídos = screening - eligibility
+            # - Elegibilidade: artigos excluídos = eligibility - included
+            screening_excluded = max(0, screened - eligible)
+            eligibility_excluded = max(0, eligible - included)
+
             stats = {
-                "identification": len(self.results),
-                "screening": stage_counts.get("screening", 0),
-                "screening_excluded": stage_counts.get("screening_excluded", 0),
-                "eligibility": stage_counts.get("eligibility", 0),
-                "eligibility_excluded": stage_counts.get("eligibility_excluded", 0),
-                "included": stage_counts.get("included", 0),
-                "duplicates_removed": 0  # Would need to track this
+                "identification": identification,
+                "duplicates_removed": 0,
+                "screening": screened,
+                "screening_excluded": screening_excluded,
+                "eligibility": eligible,
+                "eligibility_excluded": eligibility_excluded,
+                "included": included,
             }
 
         # Configuração usada
@@ -325,6 +336,12 @@ class SystematicReviewPipeline:
         """
         logger.info("=" * 60)
         logger.info("🔬 REVISÃO SISTEMÁTICA - PIPELINE COMPLETO")
+        # Início auditoria
+        self.audit.start_pipeline({
+            "year_range": f"{self.config.review.year_min}-{self.config.review.year_max}",
+            "languages": list(self.config.review.languages),
+            "relevance_threshold": self.config.review.relevance_threshold,
+        })
         logger.info("=" * 60)
 
         # 1. Gerar ou usar queries
@@ -339,14 +356,27 @@ class SystematicReviewPipeline:
         # 2. Coletar dados
         logger.info("\n📥 Phase 2: Data Collection")
         self.collect_data()
+        self.audit.log_article_collection("APIs", len(self.results), len(self.results))
 
         # 3. Processar dados
         logger.info("\n🔄 Phase 3: Data Processing & Scoring")
         self.process_data()
+        self.audit.log_data_quality("pos-processamento", {
+            "total": len(self.results),
+            "colunas": list(self.results.columns),
+        })
 
         # 4. Aplicar critérios de seleção PRISMA
         logger.info("\n🔍 Phase 4: PRISMA Selection")
         self.apply_selection_criteria(min_relevance_score)
+        selected_count = int((self.results.get("selection_stage", pd.Series()) == "included").sum())
+        self.audit.log_article_selection("final", len(self.results), selected_count, {
+            "min_relevance_score": min_relevance_score
+        })
+        
+        # Salvar papers com selection_stage atualizado
+        saved = save_papers(self.results, self.config)
+        logger.info(f"Updated {saved} papers with selection stages")
 
         # 5. Exportar resultados
         if export:
@@ -354,14 +384,14 @@ class SystematicReviewPipeline:
             export_files = self.export_results()
 
             if isinstance(export_files, dict):
-                logger.info("📊 Generated files:")
+                logger.info("📊 Arquivos gerados:")
                 for file_type, path in export_files.items():
                     if isinstance(path, list):
-                        logger.info(f"  {file_type}: {len(path)} files")
+                        logger.info(f"  {file_type}: {len(path)} arquivos")
                     else:
                         logger.info(f"  {file_type}: {path}")
             else:
-                logger.info(f"📊 Results exported to: {export_files}")
+                logger.info(f"📊 Resultados exportados para: {export_files}")
 
         # Estatísticas finais
         included_papers = len(
@@ -377,6 +407,11 @@ class SystematicReviewPipeline:
                 f"📊 Taxa de inclusão: {included_papers/total_papers*100:.1f}%")
         logger.info("=" * 60)
 
+        # Finalizar auditoria
+        self.audit.end_pipeline({
+            "total": total_papers,
+            "incluidos": included_papers,
+        })
         return self.results
 
 

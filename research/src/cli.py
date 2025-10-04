@@ -1,13 +1,33 @@
 from __future__ import annotations
 
 import argparse
+import logging
+import sys
 from pathlib import Path
+
+import pandas as pd
+
+import argparse
+import logging
 
 import pandas as pd
 
 from .config import load_config
 from .db import get_statistics, init_db, read_papers, save_papers
+from .database.manager import DatabaseManager
 from .pipeline.run import SystematicReviewPipeline
+
+logger = logging.getLogger(__name__)
+
+# Garantir UTF-8 no Windows - método alternativo que não quebra logging
+if sys.platform == "win32":
+    # Configurar variável de ambiente antes de qualquer print
+    import os
+    os.environ["PYTHONIOENCODING"] = "utf-8"
+    # Reconfigurar stdout/stderr se ainda não estiver em UTF-8
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
 
 def cmd_init_db(_: argparse.Namespace) -> None:
@@ -43,8 +63,14 @@ def cmd_stats(_: argparse.Namespace) -> None:
     
     if stats.get('by_stage'):
         print("\n📋 Por estágio de seleção:")
+        label_map = {
+            'identification': 'Identification',
+            'screening_excluded': 'Screening Excluded',
+            'eligibility_excluded': 'Eligibility Excluded',
+            'included': 'Included'
+        }
         for stage, count in stats['by_stage'].items():
-            print(f"  {stage}: {count}")
+            print(f"  {label_map.get(stage, stage)}: {count}")
     
     if stats.get('by_database'):
         print("\n🗃️ Por base de dados:")
@@ -66,7 +92,7 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
     pipeline = SystematicReviewPipeline(cfg)
     
     # Configurações personalizadas
-    apis = getattr(ns, 'apis', ["semantic_scholar", "openalex", "crossref"])
+    apis = getattr(ns, 'apis', ["semantic_scholar", "openalex", "crossref", "core"])
     limit_per_query = getattr(ns, 'limit_per_query', 50)
     min_score = getattr(ns, 'min_score', 4.0)
     
@@ -83,7 +109,90 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
         pipeline.process_data()
         pipeline.apply_selection_criteria(min_score)
         
+        # ✅ CORREÇÃO: Salvar papers no banco após seleção PRISMA
+        saved = save_papers(pipeline.results, cfg)
+        print(f"💾 Salvos {saved} papers no banco de dados")
+        
+        # ✅ CORREÇÃO: Persistir análises usando IDs reais dos papers salvos
+        try:
+            db_manager = DatabaseManager()
+            analysis_count = 0
+            
+            # Buscar papers salvos com DOI/título para mapear IDs reais
+            import sqlite3
+            conn = sqlite3.connect('research/systematic_review.db')
+            cursor = conn.cursor()
+            
+            for idx, row in pipeline.results.iterrows():
+                if pd.notna(row.get('relevance_score')):
+                    # Buscar ID real do paper usando DOI ou título
+                    doi = row.get('doi')
+                    title = row.get('title', '')
+                    
+                    paper_id = None
+                    if doi:
+                        cursor.execute('SELECT id FROM papers WHERE doi = ? LIMIT 1', (doi,))
+                        result = cursor.fetchone()
+                        if result:
+                            paper_id = result[0]
+                    
+                    if not paper_id and title:
+                        cursor.execute('SELECT id FROM papers WHERE title = ? LIMIT 1', (title,))
+                        result = cursor.fetchone()
+                        if result:
+                            paper_id = result[0]
+                    
+                    if paper_id:
+                        # Preparar dados da análise
+                        analysis_results = {
+                            'relevance_score': float(row.get('relevance_score', 0)),
+                            'comp_techniques': row.get('comp_techniques'),
+                            'study_type': row.get('study_type'),
+                            'eval_methods': row.get('eval_methods'),
+                            'selection_stage': row.get('selection_stage')
+                        }
+                        
+                        # Salvar análise com ID real
+                        db_manager.save_analysis(
+                            paper_id=paper_id,
+                            analysis_type='relevance_scoring',
+                            results=analysis_results,
+                            confidence=float(row.get('relevance_score', 0))/10.0
+                        )
+                        analysis_count += 1
+            
+            conn.close()
+            print(f"📊 Salvou {analysis_count} análises no banco de dados")
+        except Exception as e:
+            print(f"⚠️ Erro ao salvar análises: {e}")
+        
+        # ✅ CORREÇÃO: Log da execução do pipeline na tabela searches
+        try:
+            search_log = {
+                'apis_used': apis,
+                'limit_per_query': limit_per_query,
+                'min_score': min_score,
+                'total_papers': len(pipeline.results),
+                'included_papers': len(pipeline.results[pipeline.results['selection_stage'] == 'included'])
+            }
+            
+            db_manager.save_search_log(
+                query_summary=f"Pipeline completo: {len(apis)} APIs, {limit_per_query} papers/query",
+                results_summary=search_log
+            )
+            print(f"📝 Log da execução salvo na tabela searches")
+        except Exception as e:
+            print(f"⚠️ Erro ao salvar log: {e}")
+        
         # Exportar resultados
+        # Recarregar do banco para garantir consistência com a fonte de verdade
+        try:
+            df_db = read_papers(cfg)
+            if not df_db.empty:
+                pipeline.results = df_db
+        except Exception as e:
+            logger.warning(f"Falha ao recarregar dados do banco antes de exportar: {e}")
+
         export_files = pipeline.export_results()
         
         print(f"\n✅ Pipeline concluído!")
@@ -109,6 +218,34 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
         logger.error(f"Pipeline failed: {e}", exc_info=True)
 
 
+def cmd_migrate_cache(ns: argparse.Namespace) -> None:
+    """Migrar cache de arquivos JSON para SQLite."""
+    from .cache.sqlite_cache import SQLiteAPICache, migrate_json_cache_to_sqlite
+    
+    cfg = load_config()
+    cache_dir = cfg.database.cache_dir
+    
+    print(f"🔄 Migrando cache de {cache_dir} para SQLite...")
+    
+    # Inicializar cache SQLite
+    sqlite_cache = SQLiteAPICache("research/cache/api_cache.db")
+    
+    # Executar migração
+    migrated = migrate_json_cache_to_sqlite(cache_dir, sqlite_cache)
+    
+    print(f"✅ Migração concluída: {migrated} arquivos migrados")
+    
+    # Mostrar estatísticas
+    stats = sqlite_cache.get_stats()
+    total_entries = stats['general']['total_entries']
+    print(f"📊 Cache SQLite agora tem {total_entries} entradas")
+    
+    if stats['apis']:
+        print("Por API:")
+        for api, data in stats['apis'].items():
+            print(f"  - {api}: {data.get('total_queries', 0)} queries")
+
+
 def cmd_export(ns: argparse.Namespace) -> None:
     cfg = load_config()
     df = read_papers(cfg)
@@ -119,8 +256,39 @@ def cmd_export(ns: argparse.Namespace) -> None:
     
     from .exports.excel import export_complete_review
     
+    # Calcular estatísticas PRISMA para visualizações
+    stats = None
+    try:
+        # Tentar extrair stats do DataFrame se tiver selection_stage
+        if "selection_stage" in df.columns:
+            # Estatísticas PRISMA por estágios ALCANÇADOS (alinhado ao funil)
+            identification = int(len(df))
+            status_series = df.get("status").fillna("") if "status" in df.columns else pd.Series([""]*len(df))
+
+            screened = int(df["selection_stage"].isin(["screening", "eligibility", "included"]).sum())
+            eligible = int(df["selection_stage"].isin(["eligibility", "included"]).sum())
+            included = int((df["selection_stage"] == "included").sum())
+
+            # Excluídos derivados (diferenças consecutivas PRISMA)
+            # - Triagem: registros excluídos = screening - eligibility
+            # - Elegibilidade: artigos excluídos = eligibility - included
+            screening_excluded = max(0, screened - eligible)
+            eligibility_excluded = max(0, eligible - included)
+
+            stats = {
+                "identification": identification,
+                "duplicates_removed": 0,  # duplicatas tratadas antes
+                "screening": screened,
+                "screening_excluded": screening_excluded,
+                "eligibility": eligible,
+                "eligibility_excluded": eligibility_excluded,
+                "included": included,
+            }
+    except Exception as e:
+        logger.warning(f"Could not calculate PRISMA stats: {e}")
+    
     output_dir = Path(ns.output) if hasattr(ns, 'output') and ns.output else None
-    files = export_complete_review(df, output_dir=output_dir)
+    files = export_complete_review(df, stats=stats, output_dir=output_dir)
     
     print("📊 Exportação completa realizada:")
     for file_type, path in files.items():
@@ -128,6 +296,16 @@ def cmd_export(ns: argparse.Namespace) -> None:
             print(f"  {file_type}: {len(path)} arquivos")
         else:
             print(f"  {file_type}: {path}")
+
+
+def cmd_normalize_prisma(_: argparse.Namespace) -> None:
+    cfg = load_config()
+    db = DatabaseManager(cfg)
+    res = db.normalize_prisma_stages()
+    print("🔧 Normalização PRISMA concluída:")
+    print(f"  screening_excluded -> screening/status=excluded: {res['screening']}")
+    print(f"  eligibility_excluded -> eligibility/status=excluded: {res['eligibility']}")
+
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -160,16 +338,24 @@ def build_parser() -> argparse.ArgumentParser:
                            help="Score mínimo de relevância (padrão: 4.0)")
     p_pipeline.add_argument("--apis", nargs="+", 
                            choices=["semantic_scholar", "openalex", "crossref", "core"],
-                           default=["semantic_scholar", "openalex", "crossref"],
+                           default=["semantic_scholar", "openalex", "crossref", "core"],
                            help="APIs a usar na busca")
     p_pipeline.add_argument("--limit-per-query", type=int, default=50,
                            help="Limite de resultados por query por API")
     p_pipeline.set_defaults(func=cmd_run_pipeline)
 
+    # Comando migrate-cache
+    p_migrate = sub.add_parser("migrate-cache", help="Migra cache de arquivos JSON para SQLite")
+    p_migrate.set_defaults(func=cmd_migrate_cache)
+
     # Comando export
     p_export = sub.add_parser("export", help="Exporta dados com relatórios e visualizações")
     p_export.add_argument("-o", "--output", help="Diretório de saída")
     p_export.set_defaults(func=cmd_export)
+
+    # Comando normalize-prisma
+    p_norm = sub.add_parser("normalize-prisma", help="Normaliza estágios PRISMA legados no banco")
+    p_norm.set_defaults(func=cmd_normalize_prisma)
 
     return p
 
