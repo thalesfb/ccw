@@ -1,39 +1,39 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Técnicas Computacionais na Educação Matemática",
-  "generated_at": "04/10/2025 00:42",
+  "generated_at": "04/10/2025 13:08",
   "statistics": {
-    "total_papers": 11994,
+    "total_papers": 11966,
     "prisma": {
-      "identification": 11994,
+      "identification": 11966,
       "duplicates_removed": 0,
-      "screening": 11994,
-      "screening_excluded": 9414,
-      "eligibility": 2580,
-      "eligibility_excluded": 2536,
-      "included": 44
+      "screening": 11966,
+      "screening_excluded": 0,
+      "eligibility": 11966,
+      "eligibility_excluded": 11925,
+      "included": 41
     },
     "years": {
       "min": 1899,
       "max": 2026,
       "mean": 2020.9,
       "distribution": {
-        "2024": 1861,
-        "2023": 1778,
-        "2025": 1405,
-        "2022": 1202,
-        "2021": 1145,
-        "2020": 1083,
-        "2019": 785,
-        "2017": 751,
-        "2018": 680,
-        "2016": 607,
-        "2015": 412,
+        "2024": 1869,
+        "2023": 1802,
+        "2025": 1393,
+        "2022": 1169,
+        "2021": 1102,
+        "2020": 1092,
+        "2019": 788,
+        "2017": 782,
+        "2018": 679,
+        "2016": 603,
+        "2015": 402,
         "2014": 41,
-        "2013": 28,
-        "2010": 23,
-        "2012": 18,
-        "2011": 17,
+        "2013": 29,
+        "2010": 22,
+        "2011": 18,
+        "2012": 17,
         "2004": 16,
         "2007": 15,
         "2009": 13,
@@ -41,61 +41,68 @@
         "2006": 10,
         "2005": 9,
         "2003": 7,
-        "2002": 6,
+        "2002": 5,
         "2000": 4,
         "2001": 4,
-        "2026": 3,
+        "2026": 4,
+        "1999": 3,
         "1997": 3,
         "1994": 2,
-        "1998": 2,
-        "1986": 2,
-        "1996": 2,
-        "1999": 2,
         "1988": 2,
+        "1986": 2,
+        "1998": 2,
         "1990": 2,
-        "1899": 1,
+        "1996": 2,
         "1992": 1,
+        "1899": 1,
         "1991": 1,
         "1985": 1,
         "1971": 1,
-        "1995": 1,
         "1984": 1
       }
     },
     "databases": {
-      "crossref": 5233,
-      "openalex": 3285,
-      "semantic_scholar": 3253,
-      "core": 223
+      "crossref": 5287,
+      "openalex": 3279,
+      "semantic_scholar": 3153,
+      "core": 247
     },
     "techniques": {
-      "machine_learning": 9075,
-      "learning_analytics": 3672,
-      "neural_network": 2116,
-      "statistical": 623,
-      "clustering": 499,
-      "tree_based": 405
+      "machine_learning": 9043,
+      "learning_analytics": 3638,
+      "neural_network": 2069,
+      "statistical": 596,
+      "clustering": 505,
+      "tree_based": 404
     },
     "relevance": {
       "min": 0.0,
       "max": 4.6,
-      "mean": 1.68,
+      "mean": 1.67,
       "median": 1.6,
       "std": 0.87,
       "high_relevance": 0,
-      "medium_relevance": 47,
-      "low_relevance": 11947
+      "medium_relevance": 41,
+      "low_relevance": 11925
     },
     "selection_stages": {
-      "Identificação": 11994,
-      "Triagem": 11994,
-      "Elegibilidade": 11994,
-      "Incluídos": 44,
+      "Identificação": 11966,
+      "Triagem": 11966,
+      "Elegibilidade": 41,
+      "Incluídos": 41,
       "Excluídos na Triagem": 0,
-      "Excluídos na Elegibilidade": 0
+      "Excluídos na Elegibilidade": 11925
     }
   },
-  "config": {},
+  "config": {
+    "year_range": "2015-2025",
+    "languages": [
+      "en",
+      "pt"
+    ],
+    "abstract_required": false,
+    "relevance_threshold": 4.0
+  },
   "included_list": [
     {
       "title": "The Effect of Teaching a Mathematics Teaching Theory Course Based on Deep Learning to Enhance Mathematics Teaching Competency for Student Teachers at Zhoukou Normal University",
@@ -123,19 +130,19 @@
     },
     {
       "title": "Math proficiency prediction in computer-based international large-scale assessments using a multi-class machine learning model",
-      "authors": "Aleksandar Pejić; Piroska Stanić Molcer; Kristian Gulaci",
-      "year": 2021,
-      "venue": "N/A",
-      "doi": "10.1109/sisy52375.2021.9582522",
-      "url": "https://openalex.org/W3209220346"
-    },
-    {
-      "title": "Math proficiency prediction in computer-based international large-scale assessments using a multi-class machine learning model",
       "authors": "Aleksandar Pejic; P. S. Molcer; Kristian Gulači",
       "year": 2021,
       "venue": "Symposium on Intelligent Systems and Informatics",
       "doi": "10.1109/SISY52375.2021.9582522",
       "url": "https://www.semanticscholar.org/paper/d23946361105e17d3234d3fc61af3496d84c2a25"
+    },
+    {
+      "title": "Math proficiency prediction in computer-based international large-scale assessments using a multi-class machine learning model",
+      "authors": "Aleksandar Pejić; Piroska Stanić Molcer; Kristian Gulaci",
+      "year": 2021,
+      "venue": "N/A",
+      "doi": "10.1109/sisy52375.2021.9582522",
+      "url": "https://openalex.org/W3209220346"
     },
     {
       "title": "Stock Market Prediction using Machine Learning Techniques: A Systematic Review",
@@ -168,14 +175,6 @@
       "venue": "2022 International Conference on Decision Aid Sciences and Applications (DASA)",
       "doi": "10.1109/DASA54658.2022.9765236",
       "url": "https://www.semanticscholar.org/paper/9ac3e2bb3fb9c85ebca77f960a2c6d212d1e66ce"
-    },
-    {
-      "title": "Analysis of Feature Selection and Data Mining Techniques to Predict Student Academic Performance",
-      "authors": "Mukesh Kumar; Chetan Sharma; Shamneesh Sharma; Nidhi Nidhi; Nazrul Islam",
-      "year": 2022,
-      "venue": "2022 International Conference on Decision Aid Sciences and Applications (DASA)",
-      "doi": "10.1109/dasa54658.2022.9765236",
-      "url": "https://openalex.org/W4225307903"
     },
     {
       "title": "Predicting Student Academic Performance using Support Vector Machine and Random Forest",
@@ -226,14 +225,6 @@
       "url": "https://www.semanticscholar.org/paper/1bbee8ff1d91cb08257bb34a081df15a588df7f5"
     },
     {
-      "title": "Identifying the Classification Performances of Educational Data Mining Methods: A Case Study for TIMSS",
-      "authors": "Serpil Kılıç Depren; Öyküm Esra Aşkın; Ersoy Öz",
-      "year": 2017,
-      "venue": "Educational Sciences Theory & Practice",
-      "doi": "10.12738/estp.2017.5.0634",
-      "url": "https://openalex.org/W2744614829"
-    },
-    {
       "title": "Electrogastrogram: Demonstrating Feasibility in Mental Stress Assessment Using Sensor Fusion",
       "authors": "Nam‐Ho Kim; Wonju Seo; Sehyeon Kim; Sung‐Min Park",
       "year": 2020,
@@ -258,28 +249,12 @@
       "url": "https://www.semanticscholar.org/paper/d18a48b857e9c8817964f255b62b1ab66cb29139"
     },
     {
-      "title": "Exploration of Teaching Mode Combining Theory and Practice in Deep Learning Courses",
-      "authors": "Yujie Zhang; Xia Qiu",
-      "year": 2024,
-      "venue": "Journal of Education and Educational Research",
-      "doi": "10.54097/cv4n9484",
-      "url": "https://www.semanticscholar.org/paper/9733a0d5eb35eaa30f235b6f516f47295aa189c3"
-    },
-    {
       "title": "Deep neural networks for collaborative learning analytics: Evaluating team collaborations using student gaze point prediction",
       "authors": "Roghayeh Barmaki; Zhang Guo",
       "year": 2020,
       "venue": "Australasian Journal of Educational Technology",
       "doi": "10.14742/ajet.6436",
       "url": "https://openalex.org/W3116951171"
-    },
-    {
-      "title": "Prediction of Confusion Attempting Algebra Homework in an Intelligent Tutoring System through Machine Learning Techniques for Educational Sustainable Development",
-      "authors": "Syed Muhammad Raza Abidi; Mushtaq Hussain; Yonglin Xu; Wu Zhang",
-      "year": 2018,
-      "venue": "Sustainability",
-      "doi": "10.3390/su11010105",
-      "url": "https://doi.org/10.3390/su11010105"
     },
     {
       "title": "Using machine learning to predict student science achievement based on science curriculum type in TIMSS 2019",
@@ -298,6 +273,14 @@
       "url": "https://www.semanticscholar.org/paper/4b3bbf545169132cb56a6d15ff9dee1a2874dd3a"
     },
     {
+      "title": "A Machine-Learning Approach to Predicting the Achievement of Australian Students Using School Climate; Learner Characteristics; and Economic, Social, and Cultural Status",
+      "authors": "M. Khine; Yang Liu; Vivek K. Pallipuram; E. Afari",
+      "year": 2024,
+      "venue": "Education sciences",
+      "doi": "10.3390/educsci14121350",
+      "url": "https://www.semanticscholar.org/paper/a6e2f9f83d6eaf6f41486f150d5e837a21986c79"
+    },
+    {
       "title": "Exploring Machine Learning Techniques for Predictive Analytics in Computational Mathematics",
       "authors": "Vidya Chitre",
       "year": 2024,
@@ -306,12 +289,12 @@
       "url": "https://doi.org/10.52783/pmj.v34.i2.919"
     },
     {
-      "title": "A Machine-Learning Approach to Predicting the Achievement of Australian Students Using School Climate; Learner Characteristics; and Economic, Social, and Cultural Status",
-      "authors": "M. Khine; Yang Liu; Vivek K. Pallipuram; E. Afari",
-      "year": 2024,
-      "venue": "Education sciences",
-      "doi": "10.3390/educsci14121350",
-      "url": "https://www.semanticscholar.org/paper/a6e2f9f83d6eaf6f41486f150d5e837a21986c79"
+      "title": "Dynamic visualization by GeoGebra for mathematics learning: a meta-analysis of 20 years of research",
+      "authors": "Ying Zhang; Pengjin Wang; Wei Jia; Aijun Zhang; Gaowei Chen",
+      "year": 2023,
+      "venue": "Journal of Research on Technology in Education",
+      "doi": "10.1080/15391523.2023.2250886",
+      "url": "https://openalex.org/W4386244167"
     },
     {
       "title": "A Machine Learning and Explainable AI Approach for Predicting Secondary School Student Performance",
@@ -362,28 +345,12 @@
       "url": "https://www.semanticscholar.org/paper/9f6c8033bc472a5ba26d203a13a0c7e3fc0f32c1"
     },
     {
-      "title": "Development and Application of Intelligent Tutoring System Based on AI-assisted Robots",
-      "authors": "Guanjia Shen; Shang Wang; Xinhua Gan",
-      "year": 2025,
-      "venue": "2025 7th International Conference on Computer Science and Technologies in Education (CSTE)",
-      "doi": "10.1109/CSTE64638.2025.11091958",
-      "url": "https://www.semanticscholar.org/paper/5d933475112105121f667ba7daf436132bf86264"
-    },
-    {
       "title": "Shaping integrity: why generative artificial intelligence does not have to undermine education",
       "authors": "Myles Joshua Toledo Tan; Nicholle Mae Amor Tan Maravilla",
       "year": 2024,
       "venue": "Frontiers in Artificial Intelligence",
       "doi": "10.3389/frai.2024.1471224",
       "url": "https://openalex.org/W4403745321"
-    },
-    {
-      "title": "Understanding college students’ cognitive engagement in online collaborative problem-solving: A multimodal data analysis",
-      "authors": "Hengtao Tang; Miao Dai; Xu Du; Jui-Long Hung; Hao Li",
-      "year": 2023,
-      "venue": "Distance Education",
-      "doi": "10.1080/01587919.2023.2209025",
-      "url": "https://openalex.org/W4376140511"
     },
     {
       "title": "IoT-based patient stretcher movement simulation in smart hospital using type-2 fuzzy sets systems",
@@ -394,12 +361,28 @@
       "url": "https://openalex.org/W4379157452"
     },
     {
+      "title": "Understanding college students’ cognitive engagement in online collaborative problem-solving: A multimodal data analysis",
+      "authors": "Hengtao Tang; Miao Dai; Xu Du; Jui-Long Hung; Hao Li",
+      "year": 2023,
+      "venue": "Distance Education",
+      "doi": "10.1080/01587919.2023.2209025",
+      "url": "https://openalex.org/W4376140511"
+    },
+    {
       "title": "Multi-Output Learning Based on Multimodal GCN and Co-Attention for Image Aesthetics and Emotion Analysis",
       "authors": "Haotian Miao; Yifei Zhang; Daling Wang; Shi Feng",
       "year": 2021,
       "venue": "Mathematics",
       "doi": "10.3390/math9121437",
       "url": "https://openalex.org/W3175848626"
+    },
+    {
+      "title": "Machine learning in pain research",
+      "authors": "Jörn Lötsch; Alfred Ultsch",
+      "year": 2017,
+      "venue": "Pain",
+      "doi": "10.1097/j.pain.0000000000001118",
+      "url": "https://openalex.org/W2770346636"
     },
     {
       "title": "Comparison of Mastery Learning and Traditional Lecture–Exam Models in a Large Enrollment Physics Course",
