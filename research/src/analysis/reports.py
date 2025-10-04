@@ -119,7 +119,8 @@ class ReportGenerator:
         if fields is None:
             fields = [
                 'title', 'authors', 'year', 'venue', 'abstract',
-                'relevance_score', 'comp_techniques', 'study_type'
+                'relevance_score', 'comp_techniques', 'study_type', 
+                'inclusion_criteria_met', 'exclusion_reason'
             ]
         
         # Filter by stage
@@ -137,7 +138,7 @@ class ReportGenerator:
             papers_df = papers_df.sort_values('relevance_score', ascending=False)
         
         # Generate detailed report
-        report_path = self.output_dir / f"papers_report_{stage}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html"
+        report_path = self.output_dir / f"papers_report_{stage}.html"
         
         papers_data = []
         for _, row in papers_df.iterrows():
@@ -176,7 +177,7 @@ class ReportGenerator:
         gaps = self._identify_research_gaps(df)
         
         # Create gap analysis report
-        report_path = self.output_dir / f"gap_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html"
+        report_path = self.output_dir / "gap_analysis.html"
         
         html_content = self._create_gap_analysis_html(gaps)
         
@@ -390,9 +391,9 @@ class ReportGenerator:
         <div class="navbar-content">
             <div class="navbar-title">📚 Revisão Sistemática</div>
             <div class="navbar-links">
-                <a href="index.html" class="active">🔍 Sumário</a>
-                <a href="papers.html">📄 Artigos</a>
-                <a href="gap-analysis.html">📊 Análise de Lacunas</a>
+                <a href="summary_report.html" class="active">🔍 Sumário</a>
+                <a href="papers_report_included.html">📄 Artigos</a>
+                <a href="gap_analysis.html">📊 Análise de Lacunas</a>
             </div>
         </div>
     </nav>
@@ -500,7 +501,7 @@ class ReportGenerator:
         template = self.env.from_string(html_template)
         html_content = template.render(**report_data)
         
-        report_path = self.output_dir / f"summary_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html"
+        report_path = self.output_dir / "summary_report.html"
         
         with open(report_path, 'w', encoding='utf-8') as f:
             f.write(html_content)
@@ -519,12 +520,182 @@ class ReportGenerator:
         # Remove non-serializable data
         json_data = {k: v for k, v in report_data.items() if k != 'charts'}
         
-        json_path = self.output_dir / f"summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        # Save JSON with timestamp inside content, not filename
+        json_path = self.output_dir / "summary.json"
         
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(json_data, f, ensure_ascii=False, indent=2)
         
-        return json_path
+        # Also save HTML report
+        html_path = self.output_dir / "summary_report.html"
+        html_content = self._create_summary_html(report_data)
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        
+        logger.info(f"Summary report generated: {html_path}")
+        return html_path
+    
+    def _create_summary_html(self, report_data: Dict) -> str:
+        """Create HTML content for summary report.
+        
+        Args:
+            report_data: Dictionary with report data
+            
+        Returns:
+            HTML content
+        """
+        stats = report_data.get('statistics', {})
+        prisma = stats.get('prisma', {})
+        
+        html_template = """
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f5f5f5; }
+        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-title { color: white; font-size: 1.5rem; font-weight: 600; }
+        .navbar-links { display: flex; gap: 1.5rem; }
+        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
+        .navbar-links a.active { background: rgba(255,255,255,0.3); }
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 2.5rem; margin: 0 0 1rem 0; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+        .content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .card { background: white; border-radius: 8px; padding: 30px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .stat-card h3 { font-size: 2.5rem; margin: 0; }
+        .stat-card p { margin: 10px 0 0 0; opacity: 0.9; }
+        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 20px; }
+        .chart-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .chart-card img { width: 100%; height: auto; border-radius: 4px; }
+        .chart-card h3 { margin-top: 0; color: #333; }
+        h2 { color: #333; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        .footer { text-align: center; padding: 20px; color: #666; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-title">Revisão Sistemática - CCW</div>
+            <div class="navbar-links">
+                <a href="summary_report.html" class="active">Resumo</a>
+                <a href="papers_report_included.html">Artigos Incluídos</a>
+                <a href="gap_analysis.html">Análise de Lacunas</a>
+                <a href="../index.html">Início</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="hero">
+        <h1>{{ title }}</h1>
+        <p>{{ subtitle }}</p>
+        <p style="font-size: 0.9rem; margin-top: 20px;">Gerado em: {{ generated_at }}</p>
+    </div>
+    
+    <div class="content">
+        <div class="card">
+            <h2>📊 Estatísticas Gerais</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>{{ stats.total_papers }}</h3>
+                    <p>Total de Papers</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{{ prisma.included }}</h3>
+                    <p>Papers Incluídos</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{{ stats.years.min }}-{{ stats.years.max }}</h3>
+                    <p>Intervalo de Anos</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{{ stats.databases|length }}</h3>
+                    <p>Bases de Dados</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🔍 Fluxo PRISMA</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Estágio</th>
+                    <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6;">Quantidade</th>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📚 Identificação</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.identification }}</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">🔍 Triagem (aprovados)</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.screening }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na triagem</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.screening_excluded }}</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Elegibilidade (aprovados)</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.eligibility }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na elegibilidade</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.eligibility_excluded }}</td>
+                </tr>
+                <tr style="background: #d4edda;">
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6; font-weight: bold;">✅ Incluídos (final)</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; font-weight: bold; color: #28a745;">{{ prisma.included }}</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>📈 Visualizações</h2>
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <h3>Fluxo PRISMA</h3>
+                    <img src="../visualizations/prisma_flow.png" alt="PRISMA Flow">
+                </div>
+                <div class="chart-card">
+                    <h3>Funil de Seleção</h3>
+                    <img src="../visualizations/selection_funnel.png" alt="Selection Funnel">
+                </div>
+                <div class="chart-card">
+                    <h3>Distribuição por Ano</h3>
+                    <img src="../visualizations/papers_by_year.png" alt="Papers by Year">
+                </div>
+                <div class="chart-card">
+                    <h3>Técnicas Identificadas</h3>
+                    <img src="../visualizations/techniques_distribution.png" alt="Techniques">
+                </div>
+                <div class="chart-card">
+                    <h3>Cobertura por Base</h3>
+                    <img src="../visualizations/database_coverage.png" alt="Database Coverage">
+                </div>
+                <div class="chart-card">
+                    <h3>Distribuição de Relevância</h3>
+                    <img src="../visualizations/relevance_distribution.png" alt="Relevance Distribution">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 Revisão Sistemática - Técnicas Computacionais na Educação Matemática</p>
+    </div>
+</body>
+</html>
+        """
+        
+        template = self.env.from_string(html_template)
+        return template.render(**report_data, stats=stats, prisma=prisma)
     
     def _create_papers_html(self, papers_data: List[Dict], stage: str) -> str:
         """Create HTML content for papers report.
@@ -557,6 +728,7 @@ class ReportGenerator:
         .paper-meta { color: #7f8c8d; font-size: 0.9em; margin-bottom: 15px; }
         .paper-abstract { text-align: justify; margin: 15px 0; }
         .paper-techniques { background: #ecf0f1; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .paper-criteria { background: #d4edda; padding: 10px; border-radius: 4px; margin: 10px 0; border-left: 4px solid #28a745; }
         .score { float: right; background: #27ae60; color: white; padding: 5px 10px; border-radius: 15px; }
     </style>
 </head>
@@ -565,9 +737,9 @@ class ReportGenerator:
         <div class="navbar-content">
             <div class="navbar-title">📚 Revisão Sistemática</div>
             <div class="navbar-links">
-                <a href="index.html">🔍 Sumário</a>
-                <a href="papers.html" class="active">📄 Artigos</a>
-                <a href="gap-analysis.html">📊 Análise de Lacunas</a>
+                <a href="summary_report.html">🔍 Sumário</a>
+                <a href="papers_report_included.html" class="active">📄 Artigos</a>
+                <a href="gap_analysis.html">📊 Análise de Lacunas</a>
             </div>
         </div>
     </nav>
@@ -596,9 +768,15 @@ class ReportGenerator:
         </div>
         {% endif %}
         
+        {% if paper.inclusion_criteria_met %}
+        <div class="paper-criteria">
+            <strong>✅ Critérios de Inclusão Atendidos:</strong> {{ paper.inclusion_criteria_met }}
+        </div>
+        {% endif %}
+        
         {% if paper.comp_techniques %}
         <div class="paper-techniques">
-            <strong>Técnicas:</strong> {{ paper.comp_techniques }}
+            <strong>Técnicas Computacionais:</strong> {{ paper.comp_techniques }}
         </div>
         {% endif %}
         
@@ -653,9 +831,9 @@ class ReportGenerator:
         <div class="navbar-content">
             <div class="navbar-title">📚 Revisão Sistemática</div>
             <div class="navbar-links">
-                <a href="index.html">🔍 Sumário</a>
-                <a href="papers.html">📄 Artigos</a>
-                <a href="gap-analysis.html" class="active">📊 Análise de Lacunas</a>
+                <a href="summary_report.html">🔍 Sumário</a>
+                <a href="papers_report_included.html">📄 Artigos</a>
+                <a href="gap_analysis.html" class="active">📊 Análise de Lacunas</a>
             </div>
         </div>
     </nav>

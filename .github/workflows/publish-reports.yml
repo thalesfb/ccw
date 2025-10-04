@@ -43,8 +43,8 @@ jobs:
           # Copiar relatórios HTML mais recentes
           if [ -d "research/exports/reports" ]; then
             # Encontrar arquivos mais recentes
-            SUMMARY=$(ls -t research/exports/reports/summary_report_*.html 2>/dev/null | head -1)
-            PAPERS=$(ls -t research/exports/reports/papers_report_included_*.html 2>/dev/null | head -1)
+            SUMMARY=$(ls -t research/exports/reports/summary_report.html 2>/dev/null | head -1)
+            PAPERS=$(ls -t research/exports/reports/papers_report_included.html 2>/dev/null | head -1)
             GAP=$(ls -t research/exports/reports/gap_analysis_*.html 2>/dev/null | head -1)
             
             # Copiar com nomes fixos

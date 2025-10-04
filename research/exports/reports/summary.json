@@ -1,97 +1,98 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Técnicas Computacionais na Educação Matemática",
-  "generated_at": "04/10/2025 14:21",
+  "generated_at": "04/10/2025 18:52",
   "statistics": {
-    "total_papers": 11966,
+    "total_papers": 12533,
     "prisma": {
-      "identification": 11966,
+      "identification": 12533,
       "duplicates_removed": 0,
-      "screening": 11966,
-      "screening_excluded": 0,
-      "eligibility": 11966,
-      "eligibility_excluded": 11925,
-      "included": 41
+      "screening": 0,
+      "screening_excluded": 9884,
+      "eligibility": 0,
+      "eligibility_excluded": 2606,
+      "included": 43
     },
     "years": {
       "min": 1899,
       "max": 2026,
-      "mean": 2020.9,
+      "mean": 2020.8,
       "distribution": {
-        "2024": 1869,
-        "2023": 1802,
-        "2025": 1393,
-        "2022": 1169,
-        "2021": 1102,
-        "2020": 1092,
-        "2019": 788,
-        "2017": 782,
-        "2018": 679,
-        "2016": 603,
-        "2015": 402,
-        "2014": 41,
-        "2013": 29,
-        "2010": 22,
-        "2011": 18,
-        "2012": 17,
-        "2004": 16,
-        "2007": 15,
-        "2009": 13,
-        "2008": 12,
-        "2006": 10,
-        "2005": 9,
-        "2003": 7,
-        "2002": 5,
+        "2024": 1909,
+        "2023": 1838,
+        "2025": 1424,
+        "2022": 1193,
+        "2020": 1130,
+        "2021": 1128,
+        "2019": 834,
+        "2017": 811,
+        "2018": 729,
+        "2016": 648,
+        "2015": 442,
+        "2014": 63,
+        "2013": 44,
+        "2010": 40,
+        "2011": 28,
+        "2012": 25,
+        "2007": 24,
+        "2004": 21,
+        "2008": 19,
+        "2009": 17,
+        "2006": 16,
+        "2005": 15,
+        "2002": 10,
+        "2003": 10,
+        "2001": 7,
+        "1997": 5,
+        "1999": 5,
         "2000": 4,
-        "2001": 4,
+        "1996": 4,
         "2026": 4,
-        "1999": 3,
-        "1997": 3,
+        "1990": 4,
         "1994": 2,
-        "1988": 2,
-        "1986": 2,
         "1998": 2,
-        "1990": 2,
-        "1996": 2,
-        "1992": 1,
-        "1899": 1,
+        "1988": 2,
+        "1971": 2,
+        "1992": 2,
+        "1986": 2,
+        "1985": 2,
         "1991": 1,
-        "1985": 1,
-        "1971": 1,
+        "1899": 1,
+        "1995": 1,
         "1984": 1
       }
     },
     "databases": {
-      "crossref": 5287,
-      "openalex": 3279,
-      "semantic_scholar": 3153,
+      "crossref": 5298,
+      "semantic_scholar": 3638,
+      "openalex": 3350,
       "core": 247
     },
     "techniques": {
-      "machine_learning": 9043,
-      "learning_analytics": 3638,
-      "neural_network": 2069,
-      "statistical": 596,
-      "clustering": 505,
-      "tree_based": 404
+      "machine_learning": 9373,
+      "learning_analytics": 3796,
+      "neural_network": 2138,
+      "statistical": 618,
+      "clustering": 528,
+      "tree_based": 411
     },
     "relevance": {
       "min": 0.0,
       "max": 4.6,
-      "mean": 1.67,
+      "mean": 1.65,
       "median": 1.6,
-      "std": 0.87,
+      "std": 0.88,
       "high_relevance": 0,
-      "medium_relevance": 41,
-      "low_relevance": 11925
+      "medium_relevance": 45,
+      "low_relevance": 12488
     },
     "selection_stages": {
-      "Identificação": 11966,
-      "Triagem": 11966,
-      "Elegibilidade": 41,
-      "Incluídos": 41,
-      "Excluídos na Triagem": 0,
-      "Excluídos na Elegibilidade": 11925
+      "Identificação": 12533,
+      "Triagem": 2649,
+      "Elegibilidade": 43,
+      "Incluídos": 43,
+      "Excluídos na Triagem": 9884,
+      "Excluídos na Elegibilidade": 2606
     }
   },
   "config": {},
@@ -169,6 +170,14 @@
       "url": "https://www.semanticscholar.org/paper/9ac3e2bb3fb9c85ebca77f960a2c6d212d1e66ce"
     },
     {
+      "title": "Analysis of Feature Selection and Data Mining Techniques to Predict Student Academic Performance",
+      "authors": "Mukesh Kumar; Chetan Sharma; Shamneesh Sharma; Nidhi Nidhi; Nazrul Islam",
+      "year": 2022,
+      "venue": "2022 International Conference on Decision Aid Sciences and Applications (DASA)",
+      "doi": "10.1109/dasa54658.2022.9765236",
+      "url": "https://openalex.org/W4225307903"
+    },
+    {
       "title": "Predicting Student Academic Performance using Support Vector Machine and Random Forest",
       "authors": "Leena H. Alamri; Ranim S. Almuslim; Mona S. Alotibi; Dana K. Alkadi; Irfan Ullah Khan; Nida Aslam",
       "year": 2020,
@@ -217,6 +226,14 @@
       "url": "https://www.semanticscholar.org/paper/1bbee8ff1d91cb08257bb34a081df15a588df7f5"
     },
     {
+      "title": "Identifying the Classification Performances of Educational Data Mining Methods: A Case Study for TIMSS",
+      "authors": "Serpil Kılıç Depren; Öyküm Esra Aşkın; Ersoy Öz",
+      "year": 2017,
+      "venue": "Educational Sciences Theory & Practice",
+      "doi": "10.12738/estp.2017.5.0634",
+      "url": "https://openalex.org/W2744614829"
+    },
+    {
       "title": "Electrogastrogram: Demonstrating Feasibility in Mental Stress Assessment Using Sensor Fusion",
       "authors": "Nam‐Ho Kim; Wonju Seo; Sehyeon Kim; Sung‐Min Park",
       "year": 2020,
@@ -239,6 +256,14 @@
       "venue": "Computer Applications in Engineering Education",
       "doi": "10.1002/cae.22787",
       "url": "https://www.semanticscholar.org/paper/d18a48b857e9c8817964f255b62b1ab66cb29139"
+    },
+    {
+      "title": "Exploration of Teaching Mode Combining Theory and Practice in Deep Learning Courses",
+      "authors": "Yujie Zhang; Xia Qiu",
+      "year": 2024,
+      "venue": "Journal of Education and Educational Research",
+      "doi": "10.54097/cv4n9484",
+      "url": "https://www.semanticscholar.org/paper/9733a0d5eb35eaa30f235b6f516f47295aa189c3"
     },
     {
       "title": "Deep neural networks for collaborative learning analytics: Evaluating team collaborations using student gaze point prediction",
@@ -279,14 +304,6 @@
       "venue": "Panamerican Mathematical Journal",
       "doi": "10.52783/pmj.v34.i2.919",
       "url": "https://doi.org/10.52783/pmj.v34.i2.919"
-    },
-    {
-      "title": "Dynamic visualization by GeoGebra for mathematics learning: a meta-analysis of 20 years of research",
-      "authors": "Ying Zhang; Pengjin Wang; Wei Jia; Aijun Zhang; Gaowei Chen",
-      "year": 2023,
-      "venue": "Journal of Research on Technology in Education",
-      "doi": "10.1080/15391523.2023.2250886",
-      "url": "https://openalex.org/W4386244167"
     },
     {
       "title": "A Machine Learning and Explainable AI Approach for Predicting Secondary School Student Performance",
@@ -337,6 +354,14 @@
       "url": "https://www.semanticscholar.org/paper/9f6c8033bc472a5ba26d203a13a0c7e3fc0f32c1"
     },
     {
+      "title": "Development and Application of Intelligent Tutoring System Based on AI-assisted Robots",
+      "authors": "Guanjia Shen; Shang Wang; Xinhua Gan",
+      "year": 2025,
+      "venue": "2025 7th International Conference on Computer Science and Technologies in Education (CSTE)",
+      "doi": "10.1109/CSTE64638.2025.11091958",
+      "url": "https://www.semanticscholar.org/paper/5d933475112105121f667ba7daf436132bf86264"
+    },
+    {
       "title": "Shaping integrity: why generative artificial intelligence does not have to undermine education",
       "authors": "Myles Joshua Toledo Tan; Nicholle Mae Amor Tan Maravilla",
       "year": 2024,
@@ -367,14 +392,6 @@
       "venue": "Mathematics",
       "doi": "10.3390/math9121437",
       "url": "https://openalex.org/W3175848626"
-    },
-    {
-      "title": "Machine learning in pain research",
-      "authors": "Jörn Lötsch; Alfred Ultsch",
-      "year": 2017,
-      "venue": "Pain",
-      "doi": "10.1097/j.pain.0000000000001118",
-      "url": "https://openalex.org/W2770346636"
     },
     {
       "title": "Comparison of Mastery Learning and Traditional Lecture–Exam Models in a Large Enrollment Physics Course",

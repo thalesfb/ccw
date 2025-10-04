@@ -398,13 +398,15 @@ Desvio Padrão: {scores.std():.2f}"""
     def selection_stages_funnel(
         self,
         df: pd.DataFrame,
-        save_path: Optional[Path] = None
+        save_path: Optional[Path] = None,
+        stats: Optional[Dict] = None
     ) -> Path:
         """Create selection stages funnel chart.
         
         Args:
             df: DataFrame with papers
             save_path: Path to save the plot
+            stats: Optional pre-calculated PRISMA statistics
             
         Returns:
             Path to saved plot
@@ -416,25 +418,40 @@ Desvio Padrão: {scores.std():.2f}"""
             logger.warning("No selection stage information found")
             return save_path
 
-        # Calculate PRISMA progressive stages by reached stage
-        identification = int(len(df))
-        # Quantos chegaram à triagem (tudo que está em screening/eligibility/included)
-        screened = int(df['selection_stage'].isin(['screening', 'eligibility', 'included']).sum())
-        # Quantos chegaram à elegibilidade (eligibility/included)
-        eligible = int(df['selection_stage'].isin(['eligibility', 'included']).sum())
-        # Quantos incluídos
-        included = int((df['selection_stage'] == 'included').sum())
+        # Use pre-calculated stats if available, otherwise calculate from DataFrame
+        if stats:
+            ident_count = int(stats.get('identification', len(df)))
+            screened_count = int(stats.get('screening', ident_count))
+            # eligible_count: quantos PASSARAM eligibility (não foram excluídos)
+            eligible_count = int(stats.get('eligibility', 0))
+            included_count = int(stats.get('included', 0))
+            logger.info(
+                f"Funnel usando stats pré-calculados -> ident={ident_count}, triagem={screened_count}, "
+                f"elegibilidade={eligible_count}, incluidos={included_count}"
+            )
+        else:
+            # Fallback: calculate from DataFrame
+            ident_count = int(len(df))
+            stage_counts = df['selection_stage'].value_counts()
+            included_count = int(stage_counts.get('included', 0))
+            eligibility_only = int(stage_counts.get('eligibility', 0))
+            screening_only = int(stage_counts.get('screening', 0))
+            
+            # Total que chegou à elegibilidade = eligibility + included
+            eligible_count = eligibility_only + included_count
+            screened_count = screening_only if screening_only > 0 else ident_count
 
-        logger.info(
-            f"Funnel counts -> ident={identification}, triagem={screened}, elegibilidade={eligible}, incluidos={included}"
-        )
+            logger.info(
+                f"Funnel calculado do DataFrame -> ident={ident_count}, triagem={screened_count}, "
+                f"elegibilidade={eligible_count}, incluidos={included_count}"
+            )
 
         # PRISMA funnel stages (cada etapa mostra quantos PASSARAM)
         funnel_stages = [
-            ('Identificação', identification, '#E8F4FD'),
-            ('Triagem', screened, '#B3E5FC'), 
-            ('Elegibilidade', eligible, '#81C784'),
-            ('Incluídos', included, '#4CAF50')
+            ('Identificação', ident_count, '#E8F4FD'),
+            ('Triagem', screened_count, '#B3E5FC'), 
+            ('Elegibilidade', eligible_count, '#81C784'),
+            ('Incluídos', included_count, '#4CAF50')
         ]
 
         # Filtrar stages com dados
@@ -456,10 +473,11 @@ Desvio Padrão: {scores.std():.2f}"""
         ax.set_title('Funil de Seleção PRISMA')
 
         # Add value labels
+        counts_max = max(counts) if counts else 0
         for bar, count in zip(bars, counts):
             if count > 0:
                 ax.text(
-                    bar.get_width() + max(counts) * 0.01,
+                    bar.get_width() + counts_max * 0.01,
                     bar.get_y() + bar.get_height() / 2,
                     f'{count}',
                     ha='left',
@@ -513,8 +531,8 @@ Desvio Padrão: {scores.std():.2f}"""
             # Relevance scores
             generated_files.append(self.relevance_score_distribution(df))
             
-            # Selection funnel
-            generated_files.append(self.selection_stages_funnel(df))
+            # Selection funnel (pass stats if available)
+            generated_files.append(self.selection_stages_funnel(df, stats=stats))
             
         except Exception as e:
             logger.error(f"Error generating visualizations: {e}")
