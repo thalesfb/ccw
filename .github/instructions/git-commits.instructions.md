@@ -7,7 +7,7 @@ applyTo: '**'
 
 ### 1.1 Formato Padrão
 ```
-<emoji> <tipo>[escopo opcional]: <descrição resumida em imperativo>
+:emoji_code: <tipo>[escopo opcional]: <descrição resumida em imperativo>
 
 [corpo opcional — detalhes, impactos, instruções]
 
@@ -15,11 +15,21 @@ applyTo: '**'
 ```
 
 ### 1.2 Regras de Formatação
+- **CRÍTICO**: Use **APENAS códigos Gitmoji** (`:emoji_name:`). NUNCA use emojis Unicode diretos (quebram encoding)
 - **Primeira linha** ≤ 72 caracteres
-- **Imperativo em inglês** na descrição (ex.: "add", "fix", "remove")
+- **SEMPRE em inglês** - título e corpo do commit (ex.: "add", "fix", "remove", "update")
+- **Imperativo** na descrição (ex.: "add feature" não "added feature")
 - **Escopo** opcional entre parênteses (ex.: `feat(api):`, `fix(auth):`)
 - **Linha em branco** separando título do corpo
-- **Corpo** explicativo quando necessário (máximo 100 caracteres por linha)
+- **Corpo** explicativo quando necessário (máximo 100 caracteres por linha, em inglês)
+
+**❌ ERRADO**: 
+- `📚 docs: atualizar README` (emoji Unicode quebra encoding)
+- `:books: docs: atualizar README` (português não permitido)
+
+**✅ CORRETO**: 
+- `:books: docs: update README with installation steps`
+- `:wrench: chore(ci): optimize GitHub Actions workflow`
 
 ## 2. Tipos de Commit e Emojis
 
@@ -61,27 +71,27 @@ applyTo: '**'
 ### 3.1 Commits Simples
 ```bash
 # Feature nova
-✨ feat(api): add user creation endpoint
+:sparkles: feat(api): add user creation endpoint
 
 # Bug fix
-🐛 fix(auth): fix token validation issue
+:bug: fix(auth): fix token validation issue
 
 # Documentação
-📚 docs: update README with installation instructions
+:books: docs: update README with installation instructions
 
 # Refatoração
-♻️ refactor(user): extract validation into separate class
+:recycle: refactor(user): extract validation into separate class
 
 # Performance
-⚡ perf(database): optimize active users query
+:zap: perf(database): optimize active users query
 
 # Teste
-🧪 test(user): add unit tests for UserService
+:test_tube: test(user): add unit tests for UserService
 ```
 
 ### 3.2 Commits com Corpo
 ```bash
-✨ feat(payment): implement PIX payment processing
+:sparkles: feat(payment): implement PIX payment processing
 
 - Add integration with Central Bank API
 - Implement PIX key validation
@@ -92,7 +102,7 @@ Refs #123
 ```
 
 ```bash
-🐛 fix(auth): fix memory leak in sessions
+:bug: fix(auth): fix memory leak in sessions
 
 The authentication middleware was not properly cleaning up
 expired sessions, causing memory accumulation in production.
@@ -107,7 +117,7 @@ Reviewed-by: @tech-lead
 
 ### 3.3 Breaking Changes
 ```bash
-💥 feat(api)!: refactor API response structure
+:boom: feat(api)!: refactor API response structure
 
 BREAKING CHANGE: The API response structure has been changed
 to include pagination metadata in an envelope.
