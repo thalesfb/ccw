@@ -57,7 +57,12 @@ jobs:
           if [ -d "research/exports/visualizations" ]; then
             mkdir -p docs/visualizations
             cp research/exports/visualizations/*.png docs/visualizations/ 2>/dev/null || true
+            echo "✅ Copied visualizations:"
+            ls -lh docs/visualizations/
           fi
+          
+          # Criar .nojekyll para evitar processamento Jekyll
+          touch docs/.nojekyll
           
           # Validar que index.html existe
           if [ ! -f "docs/index.html" ]; then
@@ -65,6 +70,13 @@ jobs:
             echo "Please run 'python -m research.src.cli export' locally and commit the results."
             exit 1
           fi
+          
+          # Debug: listar estrutura final
+          echo "📁 Final docs structure:"
+          ls -lh docs/
+          echo ""
+          echo "📁 Visualizations:"
+          ls -lh docs/visualizations/ || echo "No visualizations folder"
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
