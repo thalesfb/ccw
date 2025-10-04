@@ -5,7 +5,15 @@
     <meta charset="UTF-8">
     <title>Relatório de Artigos - Included</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 40px; line-height: 1.6; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
+        .navbar-links { display: flex; gap: 1.5rem; }
+        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
+        .navbar-links a.active { background: rgba(255,255,255,0.3); }
+        .content { margin: 40px; max-width: 1200px; margin: 0 auto; padding: 40px; }
         .paper { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
         .paper-title { color: #2c3e50; font-size: 1.2em; font-weight: bold; margin-bottom: 10px; }
         .paper-meta { color: #7f8c8d; font-size: 0.9em; margin-bottom: 15px; }
@@ -15,6 +23,18 @@
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-title">📚 Revisão Sistemática</div>
+            <div class="navbar-links">
+                <a href="index.html">🔍 Sumário</a>
+                <a href="papers.html" class="active">📄 Artigos</a>
+                <a href="gap-analysis.html">📊 Análise de Lacunas</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="content">
     <h1>Relatório de Artigos - Included</h1>
     <p><em>44 artigos encontrados</em></p>
     
@@ -1427,6 +1447,7 @@
         
     </div>
     
+    </div>
 </body>
 </html>
         
