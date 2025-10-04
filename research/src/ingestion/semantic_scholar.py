@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List
+from typing import Any, Dict, List, TYPE_CHECKING
 
 import pandas as pd
 
 from .base import BaseAPIClient
+
+if TYPE_CHECKING:
+    from ..config import AppConfig
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +37,12 @@ class SemanticScholarClient(BaseAPIClient):
         # Verificar cache primeiro
         cached = self._load_from_cache(query)
         if cached is not None:
-            return self.normalize_dataframe([self._normalize_result(item) for item in cached])
+            normalized = [self._normalize_result(item) for item in cached]
+            normalized = [r for r in normalized if r is not None]
+            df = self.normalize_dataframe(normalized)
+            df["database"] = "semantic_scholar"
+            df["query"] = query
+            return df
         
         # Campos a retornar
         fields = [
@@ -78,6 +86,7 @@ class SemanticScholarClient(BaseAPIClient):
         # Normalizar e retornar
         normalized = [self._normalize_result(item) for item in results]
         df = self.normalize_dataframe(normalized)
+        df["database"] = "semantic_scholar"
         df["query"] = query
         
         logger.info(f"Found {len(df)} results from Semantic Scholar")
@@ -92,6 +101,14 @@ class SemanticScholarClient(BaseAPIClient):
         Returns:
             Dicionário normalizado
         """
+        # Verificar se item é válido
+        if item is None:
+            logger.warning("Received None item in _normalize_result")
+            return {}
+        if not isinstance(item, dict):
+            logger.warning(f"Received non-dict item: {type(item)}")
+            return {}
+        
         # Extrair DOI se disponível
         doi = None
         external_ids = item.get("externalIds", {})
@@ -108,6 +125,9 @@ class SemanticScholarClient(BaseAPIClient):
         
         # Formatar keywords/fields
         fields = item.get("fieldsOfStudy", [])
+        # Garantir que fields é uma lista
+        if not isinstance(fields, list):
+            fields = []
         keywords = "; ".join(fields) if fields else None
         
         # URL do artigo
@@ -136,7 +156,7 @@ class SemanticScholarClient(BaseAPIClient):
             "is_open_access": is_open_access,
             "open_access_pdf": open_pdf,
             "publication_date": item.get("publicationDate"),
-            "publication_types": "; ".join(item.get("publicationTypes", [])),
+            "publication_types": "; ".join(item.get("publicationTypes") or []),
             "paper_id": item.get("paperId"),
         }
 

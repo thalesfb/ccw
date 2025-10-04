@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class COREClient(BaseAPIClient):
     """Cliente para buscar artigos no CORE."""
     
-    BASE_URL = "https://api.core.ac.uk/v3/search/works"
+    BASE_URL = "https://api.core.ac.uk/v3/search/outputs"
     
     def __init__(self, config, cache_dir=None):
         """Initialize CORE client.
@@ -50,7 +50,13 @@ class COREClient(BaseAPIClient):
         # Verificar cache primeiro
         cached = self._load_from_cache(query)
         if cached is not None:
-            return self.normalize_dataframe([self._normalize_result(item) for item in cached])
+            # Filtrar None antes de criar DataFrame
+            normalized = [self._normalize_result(item) for item in cached]
+            normalized = [r for r in normalized if r is not None]
+            df = self.normalize_dataframe(normalized)
+            df["database"] = "core"
+            df["query"] = query
+            return df
         
         # Verificar se API key está disponível
         if not self.api_key:
@@ -60,11 +66,12 @@ class COREClient(BaseAPIClient):
         # Simplificar query (CORE é sensível a sintaxe complexa)
         simplified_query = query.replace('"', '').strip()
         
-        # Filtros para CORE
-        language_filter = " OR ".join(self.config.review.languages)
-        filter_str = f"yearPublished:>={self.config.review.year_min} AND language:({language_filter})"
+        # Filtros simples para CORE API v3
+        filter_str = f"yearPublished:>={self.config.review.year_min}"
         
-        logger.info(f"Searching CORE for: {query}")
+        logger.info(f"[CORE] Searching CORE for: {query}")
+        logger.debug(f"[CORE] Simplified query: {simplified_query}")
+        logger.debug(f"[CORE] Filter: {filter_str}")
         
         results = []
         fetched_count = 0
@@ -75,20 +82,23 @@ class COREClient(BaseAPIClient):
             # Payload para CORE API v3
             payload = {
                 "q": simplified_query,
-                "pageSize": min(limit - fetched_count, 100),  # CORE max pageSize
-                "filter": filter_str,
-                "fields": "id,title,authors,yearPublished,publisher,abstract,fullText,doi,downloadUrl,documentType,language,topics,subjects",
+                "limit": min(limit - fetched_count, 100),  # Usar 'limit' não 'pageSize'
+                "exclude": ["fullText"],  # Excluir fullText para reduzir payload
             }
+            
+            # Adicionar filtro se definido
+            if filter_str:
+                payload["filter"] = filter_str
             
             if page_token:
                 payload["pageToken"] = page_token
             
             for attempt in range(max_attempts):
                 try:
-                    url = f'{self.BASE_URL}?apiKey={self.api_key}'
+                    headers = {"Authorization": f"Bearer {self.api_key}"}
                     
-                    logger.debug(f"CORE Request: POST {url}")
-                    response = self.session.post(url, json=payload, timeout=40)
+                    logger.debug(f"CORE Request: POST {self.BASE_URL}")
+                    response = self.session.post(self.BASE_URL, json=payload, headers=headers, timeout=40)
                     
                     # CORE API tem histórico de instabilidade
                     if response.status_code == 500:
@@ -141,12 +151,17 @@ class COREClient(BaseAPIClient):
         if results:
             self._save_to_cache(query, results)
         
-        # Normalizar e retornar
-        normalized = [self._normalize_result(item) for item in results if self._normalize_result(item)]
+        # Normalizar e retornar (filtrar None)
+        normalized = [self._normalize_result(item) for item in results]
+        normalized = [r for r in normalized if r is not None]
         df = self.normalize_dataframe(normalized)
+        
+        # Adicionar fonte e query
+        df["database"] = "core"
         df["query"] = query
         
-        logger.info(f"Found {len(df)} results from CORE")
+        logger.info(f"[CORE] Found {len(df)} results from CORE")
+        logger.debug(f"[CORE] Total API results collected: {len(results)}, After normalization: {len(df)}")
         return df
     
     def _normalize_result(self, item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
@@ -158,10 +173,30 @@ class COREClient(BaseAPIClient):
         Returns:
             Dicionário normalizado ou None se inválido
         """
+        # Verificar se item é válido
+        if item is None:
+            logger.warning("Received None item in _normalize_result")
+            return None
+        if not isinstance(item, dict):
+            logger.warning(f"Received non-dict item: {type(item)}")
+            return None
+            
         try:
-            # Verificar ano válido
-            year = item.get("yearPublished") or 0
-            if not year or not isinstance(year, int) or year < self.config.review.year_min:
+            # Verificar se está deletado
+            if item.get("deleted") == "DELETED" or item.get("disabled", False):
+                return None
+            
+            # Verificar ano válido (pode vir como string)
+            year_published = item.get("yearPublished", 0)
+            if isinstance(year_published, str):
+                try:
+                    year = int(year_published)
+                except (ValueError, TypeError):
+                    return None
+            else:
+                year = year_published or 0
+                
+            if not year or year < self.config.review.year_min:
                 return None
             
             # Extrair autores

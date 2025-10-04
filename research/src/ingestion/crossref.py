@@ -55,7 +55,12 @@ class CrossrefClient(BaseAPIClient):
         # Verificar cache primeiro
         cached = self._load_from_cache(query)
         if cached is not None:
-            return self.normalize_dataframe([self._normalize_result(item) for item in cached])
+            normalized = [self._normalize_result(item) for item in cached]
+            normalized = [r for r in normalized if r is not None]
+            df = self.normalize_dataframe(normalized)
+            df["database"] = "crossref"
+            df["query"] = query
+            return df
         
         # Limpar query
         clean_query = re.sub(r'[\"]|AND', '', query).strip()
@@ -79,10 +84,21 @@ class CrossrefClient(BaseAPIClient):
                 # Coletar resultados
                 count = 0
                 for item in search_results:
-                    if count >= limit:
-                        break
-                    results.append(item)
-                    count += 1
+                    try:
+                        if count >= limit:
+                            break
+                        # Verificar se item é válido (crossref.restful pode retornar None)
+                        if item is None:
+                            logger.warning("Crossref returned None item, skipping")
+                            continue
+                        if not isinstance(item, dict):
+                            logger.warning(f"Crossref returned non-dict item: {type(item)}, skipping")
+                            continue
+                        results.append(item)
+                        count += 1
+                    except Exception as item_error:
+                        logger.warning(f"Error processing Crossref item: {item_error}, skipping")
+                        continue
                 
                 logger.debug(f"Crossref returned {len(results)} items")
                 break  # Sucesso
@@ -107,6 +123,7 @@ class CrossrefClient(BaseAPIClient):
         # Normalizar e retornar
         normalized = [self._normalize_result(item) for item in results if self._normalize_result(item)]
         df = self.normalize_dataframe(normalized)
+        df["database"] = "crossref"
         df["query"] = query
         
         logger.info(f"Found {len(df)} results from Crossref")
@@ -121,6 +138,15 @@ class CrossrefClient(BaseAPIClient):
         Returns:
             Dicionário normalizado ou None se inválido
         """
+        # Verificar se item é válido
+        if item is None:
+            logger.warning("Received None item in _normalize_result")
+            return None
+            
+        if not isinstance(item, dict):
+            logger.warning(f"Received non-dict item in _normalize_result: {type(item)}")
+            return None
+            
         try:
             # Extrair ano de published-print ou published-online
             year = self._extract_year(item)
@@ -179,6 +205,9 @@ class CrossrefClient(BaseAPIClient):
     
     def _extract_year(self, item: Dict) -> Optional[int]:
         """Extrai ano de publicação."""
+        if not item:
+            return None
+            
         # Tentar published-print primeiro
         pub_date_parts = item.get("published-print", {}).get("date-parts", [[]])
         if not pub_date_parts or not pub_date_parts[0]:
@@ -195,6 +224,8 @@ class CrossrefClient(BaseAPIClient):
     
     def _extract_title(self, item: Dict) -> Optional[str]:
         """Extrai título."""
+        if not item:
+            return None
         title_list = item.get("title", [])
         if title_list and isinstance(title_list, list):
             return title_list[0].strip() if title_list[0] else None
@@ -202,6 +233,8 @@ class CrossrefClient(BaseAPIClient):
     
     def _extract_authors(self, item: Dict) -> Optional[str]:
         """Extrai autores."""
+        if not item:
+            return None
         authors_list = []
         for author in item.get("author", []):
             # Diferentes estruturas de nomes
@@ -224,6 +257,8 @@ class CrossrefClient(BaseAPIClient):
     
     def _extract_venue(self, item: Dict) -> Optional[str]:
         """Extrai venue (journal/conference)."""
+        if not item:
+            return None
         container_title = item.get("container-title", [])
         if container_title and isinstance(container_title, list):
             return container_title[0] if container_title[0] else None
@@ -231,6 +266,8 @@ class CrossrefClient(BaseAPIClient):
     
     def _extract_abstract(self, item: Dict) -> Optional[str]:
         """Extrai e limpa abstract."""
+        if not item:
+            return None
         abstract = item.get("abstract", "")
         if not abstract:
             return None
@@ -244,6 +281,8 @@ class CrossrefClient(BaseAPIClient):
     
     def _check_open_access(self, item: Dict) -> bool:
         """Verifica se é open access."""
+        if not item:
+            return False
         # Verificar flag direto se disponível
         if item.get("is_oa"):
             return True
@@ -258,6 +297,8 @@ class CrossrefClient(BaseAPIClient):
     
     def _extract_publication_date(self, item: Dict) -> Optional[str]:
         """Extrai data de publicação completa."""
+        if not item:
+            return None
         # Tentar published-print primeiro
         pub_date_parts = item.get("published-print", {}).get("date-parts", [[]])
         if not pub_date_parts or not pub_date_parts[0]:
