@@ -49,57 +49,28 @@ class AuditLogger:
         }
 
     def _setup_handlers(self):
-        """Configura os handlers de log."""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-        # Handler para arquivo de log principal
-        main_log_file = self.log_dir / f"systematic_review_{timestamp}.log"
-        main_handler = logging.FileHandler(main_log_file, encoding='utf-8')
-        main_handler.setLevel(logging.INFO)
-        main_formatter = logging.Formatter(
-            '%(asctime)s | %(levelname)s | %(name)s | %(funcName)s:%(lineno)d | %(message)s'
+        """Configura handlers de log otimizados (1 arquivo rotativo + console)."""
+        # Formatter unificado
+        formatter = logging.Formatter(
+            '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
         )
-        main_handler.setFormatter(main_formatter)
-        self.logger.addHandler(main_handler)
-
-        # Handler para arquivo de debug
-        debug_log_file = self.log_dir / f"debug_{timestamp}.log"
-        debug_handler = logging.FileHandler(debug_log_file, encoding='utf-8')
-        debug_handler.setLevel(logging.DEBUG)
-        debug_formatter = logging.Formatter(
-            '%(asctime)s | %(levelname)s | %(name)s | %(funcName)s:%(lineno)d | %(message)s'
-        )
-        debug_handler.setFormatter(debug_formatter)
-        self.logger.addHandler(debug_handler)
-
-        # Handler para arquivo de auditoria
-        audit_log_file = self.log_dir / f"audit_{timestamp}.log"
-        audit_handler = logging.FileHandler(audit_log_file, encoding='utf-8')
-        audit_handler.setLevel(logging.INFO)
-        audit_formatter = logging.Formatter(
-            '%(asctime)s | AUDIT | %(message)s'
-        )
-        audit_handler.setFormatter(audit_formatter)
-        self.logger.addHandler(audit_handler)
 
         # Handler para console (apenas INFO e acima)
         console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setLevel(logging.INFO)
-        console_formatter = logging.Formatter(
-            '%(asctime)s | %(levelname)s | %(message)s'
-        )
-        console_handler.setFormatter(console_formatter)
+        console_handler.setFormatter(formatter)
         self.logger.addHandler(console_handler)
 
-        # Rotating file handler para logs grandes
+        # Rotating file handler único
         rotating_handler = logging.handlers.RotatingFileHandler(
-            self.log_dir / "systematic_review_rotating.log",
+            self.log_dir / "systematic_review.log",
             maxBytes=10*1024*1024,  # 10MB
-            backupCount=5,
+            backupCount=3,  # Mantém 3 backups (30MB total máximo)
             encoding='utf-8'
         )
-        rotating_handler.setLevel(logging.INFO)
-        rotating_handler.setFormatter(main_formatter)
+        rotating_handler.setLevel(logging.DEBUG)  # Captura tudo no arquivo
+        rotating_handler.setFormatter(formatter)
         self.logger.addHandler(rotating_handler)
 
     def start_pipeline(self, config: Dict[str, Any]):
@@ -240,8 +211,8 @@ class AuditLogger:
 
     def _save_audit_report(self):
         """Salva relatório completo de auditoria."""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        report_file = self.log_dir / f"audit_report_{timestamp}.json"
+        report_file = self.log_dir / "audit_report.json"
+        self.audit_metrics["report_generated_at"] = datetime.now().isoformat()
 
         # Calcular duração total
         if self.audit_metrics["start_time"] and self.audit_metrics["end_time"]:

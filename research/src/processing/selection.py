@@ -9,6 +9,7 @@ from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 
+from .language_utils import detect_language_from_fields, add_language_criteria
 from ..config import AppConfig, load_config
 
 logger = logging.getLogger(__name__)
@@ -57,33 +58,30 @@ class PRISMASelector:
         
         # 2. Language criteria (if abstract exists)
         abstract = paper.get("abstract", "")
-        if abstract:
-            # Prefer specialized language detection if available; fallback to regex heuristics
-            detected_lang = None
-            try:
-                # langdetect is lightweight; detect returns iso639-1 codes
-                from langdetect import detect  # type: ignore
-                try:
-                    detected_lang = detect(abstract)
-                except Exception:
-                    detected_lang = None
-            except Exception:
-                detected_lang = None
-
-            languages = self.config.review.languages
-            if detected_lang:
-                if any(lang in ["en", "english"] for lang in languages) and detected_lang == "en":
+        
+        # Detectar idioma usando utilitários melhorados
+        detected_lang = detect_language_from_fields(
+            title=paper.get('title'),
+            abstract=abstract,
+            keywords=paper.get('keywords')
+        )
+        
+        languages = self.config.review.languages
+        if detected_lang:
+            # Usar códigos de idioma da configuração
+            if any(lang in ["en", "english"] for lang in languages) and detected_lang == "en":
+                met_criteria.append("language_en")
+            if any(lang in ["pt", "portuguese", "português"] for lang in languages) and detected_lang in ("pt", "pt-br"):
+                met_criteria.append("language_pt")
+        else:
+            # Fallback regex heuristics se detecção falhar
+            text_lang = f"{paper.get('title', '')} {abstract}".lower()
+            if any(lang in ["en", "english"] for lang in languages):
+                if re.search(r'\b(the|and|of|in|to|for|with|is|are|using|based|study|analysis)\b', text_lang):
                     met_criteria.append("language_en")
-                if any(lang in ["pt", "portuguese", "português"] for lang in languages) and detected_lang in ("pt", "pt-br"):
+            if any(lang in ["pt", "portuguese", "português"] for lang in languages):
+                if re.search(r'\b(de|da|do|para|com|em|que|não|uma|este|análise|estudo)\b', text_lang):
                     met_criteria.append("language_pt")
-            else:
-                # Fallback regex heuristics
-                if any(lang in ["en", "english"] for lang in languages):
-                    if re.search(r'\b(the|and|of|in|to|for|with|is|are)\b', abstract.lower()):
-                        met_criteria.append("language_en")
-                if any(lang in ["pt", "portuguese", "português"] for lang in languages):
-                    if re.search(r'\b(de|da|do|para|com|em|que|não)\b', abstract.lower()):
-                        met_criteria.append("language_pt")
         
         # 3. Mathematics focus
         text = f"{paper.get('title', '')} {paper.get('abstract', '')}"

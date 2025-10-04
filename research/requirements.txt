@@ -23,8 +23,8 @@ python-dotenv==1.1.0
 # HTML report generation
 jinja2==3.1.6
 
-# Optional: Language detection (used if installed)
-# langdetect==1.0.9
+# Language detection
+langdetect==1.0.9
 
 # Dashboard (optional - only for app.py)
 # streamlit==1.40.2

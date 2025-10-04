@@ -230,33 +230,47 @@ def cmd_export(ns: argparse.Namespace) -> None:
     # Calcular estatísticas PRISMA para visualizações
     stats = None
     try:
-        # Tentar extrair stats do DataFrame se tiver selection_stage
-        if "selection_stage" in df.columns:
-            # Estatísticas PRISMA por estágios ALCANÇADOS (alinhado ao funil)
+        if "selection_stage" in df.columns and "status" in df.columns:
             identification = int(len(df))
-            status_series = df.get("status").fillna("") if "status" in df.columns else pd.Series([""]*len(df))
-
-            screened = int(df["selection_stage"].isin(["screening", "eligibility", "included"]).sum())
-            eligible = int(df["selection_stage"].isin(["eligibility", "included"]).sum())
-            included = int((df["selection_stage"] == "included").sum())
-
-            # Excluídos derivados (diferenças consecutivas PRISMA)
-            # - Triagem: registros excluídos = screening - eligibility
-            # - Elegibilidade: artigos excluídos = eligibility - included
-            screening_excluded = max(0, screened - eligible)
-            eligibility_excluded = max(0, eligible - included)
-
+            
+            # Debug: distribuição de estágios
+            stage_dist = df["selection_stage"].value_counts().to_dict()
+            status_dist = df["status"].value_counts().to_dict()
+            logger.info(f"📊 Distribuição estágios: {stage_dist}")
+            logger.info(f"📋 Distribuição status: {status_dist}")
+            
+            # Screening: todos que passaram triagem
+            screening = int(((df["selection_stage"] == "screening") & (df["status"] != "excluded")).sum())
+            screening_excluded = int(((df["selection_stage"] == "screening") & (df["status"] == "excluded")).sum())
+            
+            # Eligibility: todos que passaram elegibilidade
+            eligibility = int(((df["selection_stage"] == "eligibility") & (df["status"] != "excluded")).sum())
+            eligibility_excluded = int(((df["selection_stage"] == "eligibility") & (df["status"] == "excluded")).sum())
+            
+            # Included: papers finais
+            included = int(((df["selection_stage"] == "included") & (df["status"] == "included")).sum())
+            
+            # Se não há screening no banco, assumir que todos foram direto para eligibility
+            # Nesse caso, screening = identification (todos passaram triagem implicitamente)
+            if screening == 0 and screening_excluded == 0:
+                screening = identification
+                logger.warning("⚠️ Nenhum registro em 'screening' - assumindo todos passaram triagem")
+            
+            logger.info(f"📈 PRISMA calculado: ident={identification}, screen={screening}, "
+                       f"screen_excl={screening_excluded}, elig={eligibility}, "
+                       f"elig_excl={eligibility_excluded}, incl={included}")
+            
             stats = {
                 "identification": identification,
                 "duplicates_removed": 0,  # duplicatas tratadas antes
-                "screening": screened,
+                "screening": screening,
                 "screening_excluded": screening_excluded,
-                "eligibility": eligible,
+                "eligibility": eligibility,
                 "eligibility_excluded": eligibility_excluded,
                 "included": included,
             }
     except Exception as e:
-        logger.warning(f"Could not calculate PRISMA stats: {e}")
+        logger.error(f"❌ Erro ao calcular PRISMA stats: {e}", exc_info=True)
     
     output_dir = Path(ns.output) if hasattr(ns, 'output') and ns.output else None
     files = export_complete_review(df, stats=stats, output_dir=output_dir)
