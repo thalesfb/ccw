@@ -64,8 +64,10 @@ CREATE TABLE IF NOT EXISTS papers (
 SEARCHES_SCHEMA = """
 CREATE TABLE IF NOT EXISTS searches (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    query TEXT NOT NULL,
-    api TEXT NOT NULL,
+    query_summary TEXT NOT NULL,
+    query TEXT,
+    api TEXT,
+    results_summary TEXT,  -- JSON
     results_count INTEGER,
     filtered_count INTEGER,
     executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -183,6 +185,7 @@ class PaperRecord:
     # Seleção
     selection_stage: str = "identification"
     exclusion_reason: Optional[str] = None
+    inclusion_criteria_met: Optional[str] = None
     relevance_score: Optional[float] = None
     
     # Status
