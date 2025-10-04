@@ -11,10 +11,19 @@ compatibility properties (e.g., ``config.review`` and
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, Any, Optional, List
 from dotenv import load_dotenv
 
-load_dotenv()
+# Carregar .env do diretório research/
+_research_dir = Path(__file__).resolve().parents[1]  # config.py -> src/ -> research/ (parents[1])
+_env_path = _research_dir / ".env"
+load_dotenv(_env_path)
+
+
+def _get_research_dir() -> Path:
+    """Retorna o diretório research/ de forma absoluta."""
+    return Path(__file__).resolve().parents[1]  # config.py -> src/ -> research/ (parents[1])
 
 
 @dataclass
@@ -28,10 +37,26 @@ class DatabaseConfig:
         SQLite database file path.
     cache_dir : str
         Base directory for on-disk API caches.
+    exports_dir : str
+        Base directory for exports (CSV, Excel, reports, visualizations).
     """
 
-    db_path: str = "systematic_review.db"
-    cache_dir: str = "cache/"
+    db_path: str = ""
+    cache_dir: str = ""
+    exports_dir: str = ""
+    logs_dir: str = ""
+    
+    def __post_init__(self):
+        """Inicializa paths absolutos baseados no diretório research/."""
+        research_dir = _get_research_dir()
+        if not self.db_path:
+            self.db_path = str(research_dir / "systematic_review.db")
+        if not self.cache_dir:
+            self.cache_dir = str(research_dir / "cache")
+        if not self.exports_dir:
+            self.exports_dir = str(research_dir / "exports")
+        if not self.logs_dir:
+            self.logs_dir = str(research_dir / "logs")
 
 
 @dataclass

@@ -1,18 +1,14 @@
 """Dashboard interativo para revisão sistemática."""
 
-from analysis.visualizations import create_visualizations
-from processing.adaptive_selection import AdaptiveSelection
-from db import read_papers, get_statistics
-from config import load_config
+from research.src.analysis.visualizations import ReviewVisualizer
+from research.src.processing.adaptive_selection import AdaptiveSelection
+from research.src.db import read_papers, get_statistics
+from research.src.config import load_config
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
-import sys
-
-# Adicionar src ao path
-sys.path.append(str(Path(__file__).parent.parent))
 
 
 # Configuração da página
@@ -145,7 +141,7 @@ def main():
         show_analysis_tab(df)
 
     with tab3:
-        show_config_tab(config)
+        show_config_tab(config, df)
 
     with tab4:
         show_reports_tab(df)
@@ -219,6 +215,28 @@ def show_overview_tab(df, stats):
 
     summary_df = pd.DataFrame(summary_data)
     st.table(summary_df)
+
+    # Últimos exports disponíveis
+    exports_dir = Path(load_config().database.exports_dir)
+    reports_dir = exports_dir / 'reports'
+    viz_dir = exports_dir / 'visualizations'
+
+    st.markdown("---")
+    st.subheader("🗂️ Últimos Arquivos Gerados")
+    latest_items = []
+    if reports_dir.exists():
+        latest_reports = sorted(reports_dir.glob('summary_report_*.html'))
+        if latest_reports:
+            latest_items.append(("Último summary_report", latest_reports[-1]))
+    if viz_dir.exists():
+        latest_viz = sorted(viz_dir.glob('*.png'))
+        if latest_viz:
+            latest_items.append(("Últimas visualizações (diretório)", viz_dir))
+
+    for label, path in latest_items:
+        st.write(f"- {label}: {path}")
+    if not latest_items:
+        st.info("Sem arquivos de export recentes ainda. Use a CLI para gerar: run-pipeline/export.")
 
 
 def show_analysis_tab(df):
@@ -313,7 +331,7 @@ def show_analysis_tab(df):
                 f"Mostrando 20 de {len(filtered_df)} artigos. Use os filtros para refinar a busca.")
 
 
-def show_config_tab(config):
+def show_config_tab(config, df=None):
     """Mostra aba de configurações."""
 
     st.subheader("⚙️ Configurações do Sistema")
@@ -358,17 +376,14 @@ def show_config_tab(config):
     min_size = st.slider("Tamanho mínimo aceitável:", 5, 100, 20)
 
     if st.button("🔄 Aplicar Seleção Adaptativa"):
-        if 'df' in locals():
+        if df is not None and not df.empty:
             adaptive_selector = AdaptiveSelection(target_size, min_size)
             selected_df = adaptive_selector.select_adaptive(df)
-
-            st.success(
-                f"✅ Seleção adaptativa aplicada: {len(selected_df)} artigos selecionados")
-
-            # Mostrar relatório
+            st.success(f"✅ Seleção adaptativa aplicada: {len(selected_df)} artigos selecionados")
             report = adaptive_selector.get_selection_report(df, selected_df)
-
             st.json(report)
+        else:
+            st.warning("Carregue dados primeiro para aplicar a seleção adaptativa.")
 
 
 def show_reports_tab(df):

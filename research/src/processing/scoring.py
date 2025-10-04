@@ -275,6 +275,10 @@ def compute_relevance_scores(
     study_types = []
     eval_methods_list = []
 
+    # ✅ CORREÇÃO: Importar DatabaseManager para persistir análises
+    from ..database.manager import DatabaseManager
+    db_manager = DatabaseManager()
+
     for _, row in df.iterrows():
         paper_dict = row.to_dict()
 
@@ -292,6 +296,28 @@ def compute_relevance_scores(
         study_types.append(study_type)
         eval_methods_list.append(
             "; ".join(eval_methods) if eval_methods else None)
+        
+        # ✅ CORREÇÃO: Não persistir análises aqui ainda (papers não existem)
+        # As análises serão salvas após os papers serem inseridos no banco
+        # try:
+        #     # Preparar dados da análise
+        #     analysis_results = {
+        #         'relevance_score': float(score),
+        #         'comp_techniques': techniques,
+        #         'study_type': study_type,
+        #         'eval_methods': eval_methods
+        #     }
+        #     
+        #     # Salvar na tabela analysis (usando hash como paper_id temporário)
+        #     paper_id = hash(f"{paper_dict.get('title', '')}{paper_dict.get('doi', '')}") % 1000000
+        #     db_manager.save_analysis(
+        #         paper_id=paper_id,
+        #         analysis_type='relevance_scoring',
+        #         results=analysis_results,
+        #         confidence=score/10.0  # Normalizar para 0-1
+        #     )
+        # except Exception as e:
+        #     logger.warning(f"Failed to save analysis: {e}")
 
     # Add columns to DataFrame
     result = df.copy()
