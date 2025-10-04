@@ -180,8 +180,6 @@ results/ptc/
 results/tcc/
 
 # Research module artifacts
-research/cache/
-research/exports/analysis/
 research/exports/*.xlsx
 research/logs/
 research/*.db
@@ -194,7 +192,5 @@ research/*.db
 
 # Temporary files
 brainstorm.txt
-debug_db.py
-test_report.json
 *_backup.*
 *.tmp
