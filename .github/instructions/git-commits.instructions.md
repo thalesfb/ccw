@@ -16,7 +16,7 @@ applyTo: '**'
 
 ### 1.2 Regras de Formatação
 - **Primeira linha** ≤ 72 caracteres
-- **Imperativo** na descrição (ex.: "adicionar", "corrigir", "remover")
+- **Imperativo em inglês** na descrição (ex.: "add", "fix", "remove")
 - **Escopo** opcional entre parênteses (ex.: `feat(api):`, `fix(auth):`)
 - **Linha em branco** separando título do corpo
 - **Corpo** explicativo quando necessário (máximo 100 caracteres por linha)
@@ -61,45 +61,45 @@ applyTo: '**'
 ### 3.1 Commits Simples
 ```bash
 # Feature nova
-✨ feat(api): adicionar endpoint de criação de usuários
+✨ feat(api): add user creation endpoint
 
 # Bug fix
-🐛 fix(auth): corrigir validação de token expirado
+🐛 fix(auth): fix token validation issue
 
 # Documentação
-📚 docs: atualizar README com instruções de instalação
+📚 docs: update README with installation instructions
 
 # Refatoração
-♻️ refactor(user): extrair validação em classe separada
+♻️ refactor(user): extract validation into separate class
 
 # Performance
-⚡ perf(database): otimizar consulta de usuários ativos
+⚡ perf(database): optimize active users query
 
 # Teste
-🧪 test(user): adicionar testes unitários para UserService
+🧪 test(user): add unit tests for UserService
 ```
 
 ### 3.2 Commits com Corpo
 ```bash
-✨ feat(payment): implementar processamento de pagamentos PIX
+✨ feat(payment): implement PIX payment processing
 
-- Adicionar integração com API do Banco Central
-- Implementar validação de chave PIX
-- Criar modelos para transações PIX
-- Adicionar testes de integração
+- Add integration with Central Bank API
+- Implement PIX key validation
+- Create models for PIX transactions
+- Add integration tests
 
 Refs #123
 ```
 
 ```bash
-🐛 fix(auth): corrigir vazamento de memória em sessões
+🐛 fix(auth): fix memory leak in sessions
 
-O middleware de autenticação não estava limpando adequadamente
-as sessões expiradas, causando acúmulo de memória em produção.
+The authentication middleware was not properly cleaning up
+expired sessions, causing memory accumulation in production.
 
-- Implementar limpeza automática de sessões
-- Adicionar job cron para limpeza periódica
-- Melhorar logs de debug para monitoramento
+- Implement automatic session cleanup
+- Add cron job for periodic cleanup
+- Improve debug logs for monitoring
 
 Fixes #456
 Reviewed-by: @tech-lead
@@ -107,17 +107,17 @@ Reviewed-by: @tech-lead
 
 ### 3.3 Breaking Changes
 ```bash
-💥 feat(api)!: refatorar estrutura de resposta da API
+💥 feat(api)!: refactor API response structure
 
-BREAKING CHANGE: A estrutura de resposta da API foi alterada
-para incluir metadados de paginação em um envelope.
+BREAKING CHANGE: The API response structure has been changed
+to include pagination metadata in an envelope.
 
-Antes:
+Before:
 ```json
 [{id: 1, name: "User"}]
 ```
 
-Depois:
+After:
 ```json
 {
   "data": [{id: 1, name: "User"}],
@@ -125,7 +125,7 @@ Depois:
 }
 ```
 
-Migração necessária nos clientes da API.
+Migration required for API clients.
 
 Refs #789
 ```
@@ -225,13 +225,13 @@ git checkout -b feat/user-registration
 
 # 2. Commits incrementais
 git add .
-git commit -m "✨ feat(auth): adicionar modelo de usuário"
+git commit -m "✨ feat(auth): add user model"
 
 git add .
-git commit -m "✨ feat(auth): implementar validação de email"
+git commit -m "✨ feat(auth): implement email validation"
 
 git add .
-git commit -m "🧪 test(auth): adicionar testes para registro de usuário"
+git commit -m "🧪 test(auth): add tests for user registration"
 
 # 3. Rebase interativo para limpar histórico (opcional)
 git rebase -i main
@@ -248,10 +248,10 @@ git push origin feat/user-registration
 git checkout -b fix/critical-security-issue
 
 # 2. Commit da correção
-git commit -m "🔒 fix(auth): corrigir vulnerabilidade de injeção SQL
+git commit -m "🔒 fix(auth): fix SQL injection vulnerability
 
-Corrige vulnerabilidade crítica que permitia injeção SQL
-através do parâmetro de busca na API de usuários.
+Fix critical vulnerability that allowed SQL injection
+through search parameter in users API.
 
 CVE-2024-XXXX
 Refs #urgent-123"
@@ -304,7 +304,7 @@ git tag v1.2.1
 - **Teste antes** de fazer commit
 
 ### 8.2 Don'ts ❌
-- Evite descrições genéricas ("ajustes", "correções")
+- Evite descrições genéricas ("updates", "fixes")
 - Não use múltiplos emojis no mesmo commit
 - Não misture tipos diferentes no mesmo commit
 - Não faça commits gigantes (>50 arquivos alterados)
