@@ -75,9 +75,9 @@ class ReviewVisualizer:
         if save_path is None:
             save_path = self.output_dir / "prisma_flow.png"
         
-        fig, ax = plt.subplots(figsize=(12, 8))
-        ax.set_xlim(0, 8)
-        ax.set_ylim(0, 8)
+        fig, ax = plt.subplots(figsize=(12, 6))
+        ax.set_xlim(0, 10)
+        ax.set_ylim(0, 10)
         ax.axis('off')
         
         # Colors
