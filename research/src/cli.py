@@ -217,35 +217,6 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
         print(f"❌ Erro durante execução: {e}")
         logger.error(f"Pipeline failed: {e}", exc_info=True)
 
-
-def cmd_migrate_cache(ns: argparse.Namespace) -> None:
-    """Migrar cache de arquivos JSON para SQLite."""
-    from .cache.sqlite_cache import SQLiteAPICache, migrate_json_cache_to_sqlite
-    
-    cfg = load_config()
-    cache_dir = cfg.database.cache_dir
-    
-    print(f"🔄 Migrando cache de {cache_dir} para SQLite...")
-    
-    # Inicializar cache SQLite
-    sqlite_cache = SQLiteAPICache("research/cache/api_cache.db")
-    
-    # Executar migração
-    migrated = migrate_json_cache_to_sqlite(cache_dir, sqlite_cache)
-    
-    print(f"✅ Migração concluída: {migrated} arquivos migrados")
-    
-    # Mostrar estatísticas
-    stats = sqlite_cache.get_stats()
-    total_entries = stats['general']['total_entries']
-    print(f"📊 Cache SQLite agora tem {total_entries} entradas")
-    
-    if stats['apis']:
-        print("Por API:")
-        for api, data in stats['apis'].items():
-            print(f"  - {api}: {data.get('total_queries', 0)} queries")
-
-
 def cmd_export(ns: argparse.Namespace) -> None:
     cfg = load_config()
     df = read_papers(cfg)
@@ -343,10 +314,6 @@ def build_parser() -> argparse.ArgumentParser:
     p_pipeline.add_argument("--limit-per-query", type=int, default=50,
                            help="Limite de resultados por query por API")
     p_pipeline.set_defaults(func=cmd_run_pipeline)
-
-    # Comando migrate-cache
-    p_migrate = sub.add_parser("migrate-cache", help="Migra cache de arquivos JSON para SQLite")
-    p_migrate.set_defaults(func=cmd_migrate_cache)
 
     # Comando export
     p_export = sub.add_parser("export", help="Exporta dados com relatórios e visualizações")
