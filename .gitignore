@@ -181,7 +181,8 @@ results/tcc/
 
 # Research module artifacts
 research/cache/
-research/exports/
+research/exports/analysis/
+research/exports/*.xlsx
 research/logs/
 research/*.db
 *.db
