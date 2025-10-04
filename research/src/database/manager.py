@@ -115,19 +115,48 @@ class DatabaseManager:
 
             for paper in papers:
                 try:
-                    data = {k: v for k, v in paper.to_dict().items()
-                            if v is not None}
-                    columns = list(data.keys())
-                    placeholders = ["?" for _ in columns]
-                    query = f"""
-                        INSERT OR IGNORE INTO papers ({', '.join(columns)})
-                        VALUES ({', '.join(placeholders)})
-                    """
-                    cursor.execute(query, list(data.values()))
-                    if cursor.rowcount > 0:
-                        inserted += 1
+                    data = {k: v for k, v in paper.to_dict().items() if v is not None}
+
+                    # 1) Tenta inserir (ignora se já existir mesmo DOI)
+                    if data:
+                        columns = list(data.keys())
+                        placeholders = ["?" for _ in columns]
+                        insert_sql = f"""
+                            INSERT OR IGNORE INTO papers ({', '.join(columns)})
+                            VALUES ({', '.join(placeholders)})
+                        """
+                        cursor.execute(insert_sql, list(data.values()))
+                        if cursor.rowcount > 0:
+                            inserted += 1
+
+                    # 2) Atualiza campos críticos se já existia (upsert por DOI/título)
+                    update_candidates = {
+                        k: v for k, v in data.items() if k in {
+                            "selection_stage", "status", "exclusion_reason", "inclusion_criteria_met",
+                            "relevance_score", "comp_techniques", "edu_approach", "study_type", "eval_methods"
+                        }
+                    }
+                    if update_candidates:
+                        update_candidates["updated_at"] = datetime.now().isoformat()
+
+                        if data.get("doi"):
+                            set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
+                            params = list(update_candidates.values()) + [data["doi"]]
+                            cursor.execute(
+                                f"UPDATE papers SET {set_clause} WHERE doi = ?",
+                                params
+                            )
+                        elif data.get("title"):
+                            # fallback por título quando não há DOI (melhor esforço)
+                            set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
+                            params = list(update_candidates.values()) + [data["title"]]
+                            cursor.execute(
+                                f"UPDATE papers SET {set_clause} WHERE title = ?",
+                                params
+                            )
+
                 except Exception as e:
-                    logger.error(f"Error inserting paper: {e}")
+                    logger.error(f"Error inserting/updating paper: {e}")
 
             conn.commit()
 
@@ -368,6 +397,31 @@ class DatabaseManager:
             )
             conn.commit()
 
+    def save_search_log(
+        self,
+        query_summary: str,
+        results_summary: Dict[str, Any]
+    ):
+        """Save search execution log.
+
+        Args:
+            query_summary: Summary of the search query
+            results_summary: Dictionary with results summary
+        """
+        query = """
+            INSERT INTO searches 
+            (query_summary, results_summary)
+            VALUES (?, ?)
+        """
+
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                query,
+                (query_summary, json.dumps(results_summary))
+            )
+            conn.commit()
+
     # ============= Statistics Operations =============
 
     def get_statistics(self) -> Dict[str, Any]:
@@ -437,3 +491,48 @@ class DatabaseManager:
             df = pd.read_sql_query(f"SELECT * FROM {table}", conn)
 
         return df
+
+    # ============= Maintenance Utilities =============
+    def normalize_prisma_stages(self) -> Dict[str, int]:
+        """Normalize legacy selection_stage values into PRISMA-compliant stages.
+
+        - 'screening_excluded'  -> selection_stage='screening',   status='excluded'
+        - 'eligibility_excluded'-> selection_stage='eligibility', status='excluded'
+
+        Returns:
+            Dict with number of rows updated per rule.
+        """
+        results = {"screening": 0, "eligibility": 0}
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+
+            # Screening legacy
+            cur.execute(
+                """
+                UPDATE papers
+                SET selection_stage='screening',
+                    status=COALESCE(NULLIF(status,''), 'excluded'),
+                    updated_at = datetime('now')
+                WHERE selection_stage='screening_excluded'
+                """
+            )
+            results["screening"] = cur.rowcount
+
+            # Eligibility legacy
+            cur.execute(
+                """
+                UPDATE papers
+                SET selection_stage='eligibility',
+                    status=COALESCE(NULLIF(status,''), 'excluded'),
+                    updated_at = datetime('now')
+                WHERE selection_stage='eligibility_excluded'
+                """
+            )
+            results["eligibility"] = cur.rowcount
+
+            conn.commit()
+
+        logger.info(
+            f"Normalized PRISMA stages: screening={results['screening']}, eligibility={results['eligibility']}"
+        )
+        return results
