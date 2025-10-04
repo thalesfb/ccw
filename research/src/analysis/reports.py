@@ -12,6 +12,7 @@ import pandas as pd
 from jinja2 import Environment, FileSystemLoader
 
 from .visualizations import ReviewVisualizer
+from ..config import load_config
 
 logger = logging.getLogger(__name__)
 
@@ -25,8 +26,10 @@ class ReportGenerator:
         Args:
             output_dir: Diretório para salvar relatórios
         """
+        config = load_config()
+        
         if output_dir is None:
-            output_dir = Path(__file__).parents[3] / "exports" / "reports"
+            output_dir = Path(config.database.exports_dir) / "reports"
         
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -62,6 +65,20 @@ class ReportGenerator:
         
         # Generate visualizations
         chart_paths = self.visualizer.generate_all_visualizations(df, stats)
+
+        # Build included papers list (limit to 50 for readability)
+        included_list = []
+        if 'selection_stage' in df.columns:
+            included_df = df[df['selection_stage'] == 'included'].copy()
+            for _, row in included_df.head(50).iterrows():
+                included_list.append({
+                    'title': row.get('title') or 'Título não disponível',
+                    'authors': row.get('authors') or 'N/A',
+                    'year': int(row.get('year')) if pd.notna(row.get('year')) else 'N/A',
+                    'venue': row.get('venue') or row.get('source_publication') or 'N/A',
+                    'doi': row.get('doi') or '',
+                    'url': row.get('url') or ''
+                })
         
         # Create report content
         report_data = {
@@ -70,7 +87,8 @@ class ReportGenerator:
             'generated_at': datetime.now().strftime('%d/%m/%Y %H:%M'),
             'statistics': report_stats,
             'charts': [{'name': p.stem, 'path': p} for p in chart_paths],
-            'config': config or {}
+            'config': config or {},
+            'included_list': included_list
         }
         
         # Generate HTML report
@@ -182,26 +200,38 @@ class ReportGenerator:
         Returns:
             Dictionary with statistics
         """
+        # Normalizar PRISMA com ints nativos
+        prisma_stats = {}
+        if stats:
+            for k, v in stats.items():
+                try:
+                    prisma_stats[k] = int(v) if v is not None else 0
+                except Exception:
+                    prisma_stats[k] = v
+
         report_stats = {
-            'total_papers': len(df),
-            'prisma': stats or {},
+            'total_papers': int(len(df)),
+            'prisma': prisma_stats,
         }
         
         # Year statistics
         if 'year' in df.columns:
             years = df['year'].dropna()
             if not years.empty:
+                # Converter int64 para int nativo antes de serializar
+                year_dist = years.value_counts().to_dict()
                 report_stats['years'] = {
                     'min': int(years.min()),
                     'max': int(years.max()),
-                    'mean': round(years.mean(), 1),
-                    'distribution': years.value_counts().to_dict()
+                    'mean': round(float(years.mean()), 1),
+                    'distribution': {int(k): int(v) for k, v in year_dist.items()}
                 }
         
         # Database statistics
         if 'database' in df.columns:
             db_counts = df['database'].value_counts()
-            report_stats['databases'] = db_counts.to_dict()
+            # Converter int64 para int nativo
+            report_stats['databases'] = {str(k): int(v) for k, v in db_counts.to_dict().items()}
         
         # Techniques statistics
         if 'comp_techniques' in df.columns:
@@ -212,16 +242,17 @@ class ReportGenerator:
             
             if techniques:
                 tech_counts = pd.Series(techniques).value_counts()
-                report_stats['techniques'] = tech_counts.head(10).to_dict()
+                # Converter int64 para int nativo
+                report_stats['techniques'] = {str(k): int(v) for k, v in tech_counts.head(10).to_dict().items()}
         
         # Relevance scores
         if 'relevance_score' in df.columns:
             scores = df['relevance_score'].dropna()
             if not scores.empty:
                 report_stats['relevance'] = {
-                    'min': round(scores.min(), 2),
-                    'max': round(scores.max(), 2),
-                    'mean': round(scores.mean(), 2),
+                    'min': round(float(scores.min()), 2),
+                    'max': round(float(scores.max()), 2),
+                    'mean': round(float(scores.mean()), 2),
                     'median': round(scores.median(), 2),
                     'std': round(scores.std(), 2),
                     'high_relevance': len(scores[scores >= 7.0]),
@@ -229,10 +260,24 @@ class ReportGenerator:
                     'low_relevance': len(scores[scores < 4.0])
                 }
         
-        # Selection stages
+        # Selection stages (PRISMA-friendly derived stats)
         if 'selection_stage' in df.columns:
-            stage_counts = df['selection_stage'].value_counts()
-            report_stats['selection_stages'] = stage_counts.to_dict()
+            identification = int(len(df))
+            status_series = df.get('status', pd.Series([None] * len(df), index=df.index)).fillna('')
+            screening_excluded = int(((df['selection_stage'] == 'screening') & (status_series == 'excluded')).sum())
+            eligibility_excluded = int(((df['selection_stage'] == 'eligibility') & (status_series == 'excluded')).sum())
+            included = int((df['selection_stage'] == 'included').sum())
+            screening_remaining = identification - screening_excluded
+            eligibility_remaining = screening_remaining - eligibility_excluded
+
+            report_stats['selection_stages'] = {
+                'Identificação': identification,
+                'Triagem': screening_remaining,
+                'Elegibilidade': eligibility_remaining,
+                'Incluídos': included,
+                'Excluídos na Triagem': screening_excluded,
+                'Excluídos na Elegibilidade': eligibility_excluded,
+            }
         
         return report_stats
     
@@ -320,13 +365,16 @@ class ReportGenerator:
         .section { margin: 30px 0; padding: 20px; border-left: 4px solid #4CAF50; background: #f9f9f9; }
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .chart-card { text-align: center; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-card img { max-width: 100%; height: auto; }
+        .chart-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .chart-card { text-align: center; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .chart-card img { width: 100%; max-width: 1200px; height: auto; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: #f2f2f2; font-weight: bold; }
         .highlight { background-color: #fff3cd; padding: 10px; border-radius: 4px; }
+        .paper-item { background: white; padding: 14px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 10px; }
+        .paper-title { font-weight: 600; color: #2c3e50; }
+        .paper-meta { color: #7f8c8d; font-size: 0.95em; }
     </style>
 </head>
 <body>
@@ -370,11 +418,37 @@ class ReportGenerator:
         <div class="chart-grid">
             {% for chart in charts %}
             <div class="chart-card">
-                <h3>{{ chart.name.replace('_', ' ').title() }}</h3>
-                <img src="{{ chart.path.name }}" alt="{{ chart.name }}">
+                <h3>{{ chart.name
+                    .replace('_', ' ')
+                    .replace('prisma', 'Fluxo PRISMA')
+                    .replace('selection', 'Funil de Seleção')
+                    .replace('funnel', '')
+                    .replace('papers by year', 'Artigos por Ano')
+                    .replace('techniques distribution', 'Distribuição de Técnicas')
+                    .replace('database coverage', 'Cobertura por Base de Dados')
+                    .replace('relevance distribution', 'Distribuição de Relevância')
+                    .title() }}</h3>
+                <img src="../visualizations/{{ chart.path.name }}" alt="{{ chart.name }}">
             </div>
             {% endfor %}
         </div>
+    </div>
+    {% endif %}
+
+    {% if included_list %}
+    <div class="section">
+        <h2>✅ Artigos Incluídos (Top {{ included_list|length }})</h2>
+        {% for p in included_list %}
+        <div class="paper-item">
+            <div class="paper-title">{{ p.title }}</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> {{ p.authors }} | <strong>Ano:</strong> {{ p.year }} | <strong>Venue:</strong> {{ p.venue }}
+                {% if p.doi %}| <strong>DOI:</strong> {{ p.doi }}{% endif %}
+                {% if p.url %}| <a href="{{ p.url }}" target="_blank">Link</a>{% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <p><em>Lista limitada aos 50 primeiros. Consulte o relatório de artigos para a lista completa.</em></p>
     </div>
     {% endif %}
 
