@@ -3,10 +3,49 @@
 
 ## 🏆 Status da Refatoração: CONCLUÍDA COM SUCESSO
 
-✅ **DEZEMBRO 2024** - Notebook monolítico convertido para arquitetura modular  
+✅ **Outubro 2025** - Notebook monolítico convertido para arquitetura modular  
 ✅ **Pipeline end-to-end funcionando** com testes validados (100% pass rate)  
 ✅ **Performance otimizada** com sistema de cache inteligente  
 ✅ **Estrutura organizada** e arquivos obsoletos removidos  
+
+---
+
+## ⚡ Quick Start
+
+Este é um **módulo Python autocontido** dentro do repositório. Execute sempre **da raiz do projeto** (`c:\dev\ccw\`):
+
+```bash
+# 1. Navegar para raiz do projeto
+cd c:\dev\ccw\
+
+# 2. Criar ambiente virtual (recomendado)
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# ou
+.venv\Scripts\activate     # Windows
+
+# 3. Instalar dependências do módulo research
+pip install -r research/requirements.txt
+
+# 4. Configurar variáveis de ambiente
+cp research/.env.example research/.env
+# Editar research/.env com suas credenciais (CORE_API_KEY, USER_EMAIL)
+
+# 5. Executar pipeline (sempre da raiz)
+python -m research.src.cli run-pipeline   # Coletar novos dados
+python -m research.src.cli stats          # Ver estatísticas
+python -m research.src.cli export         # Gerar relatórios
+
+# 6. Executar testes (da raiz ou de research/)
+cd research && pytest                     # De dentro de research/
+# ou
+pytest research/                          # Da raiz
+```
+
+> **Importante**: 
+> - CLI: Execute `python -m research.src.cli` **da raiz** do projeto
+> - Testes: Execute `pytest` de dentro de `research/` ou `pytest research/` da raiz
+> - Configs: `.env`, `requirements.txt` e `pytest.ini` estão em `research/`
 
 ---
 
