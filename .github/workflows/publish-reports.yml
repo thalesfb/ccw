@@ -27,35 +27,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-          cache-dependency-path: 'research/requirements.txt'
-      
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r research/requirements.txt
-      
-      - name: Check database exists
-        id: check_db
-        run: |
-          if [ -f "research/systematic_review.db" ]; then
-            echo "db_exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "db_exists=false" >> $GITHUB_OUTPUT
-          fi
-      
-      - name: Generate reports from database
-        if: steps.check_db.outputs.db_exists == 'true'
-        run: |
-          python -m research.src.cli export
+      # Note: Reports and visualizations are pre-generated and versioned
+      # No need to install Python or regenerate on each deployment
       
       - name: Prepare Pages content
         run: |
           mkdir -p docs
+          
+          # Verificar se exports existem
+          if [ ! -d "research/exports/reports" ] || [ ! -d "research/exports/visualizations" ]; then
+            echo "⚠️ Warning: Pre-generated reports not found!"
+            echo "Run 'python -m research.src.cli export' locally and commit the results."
+          fi
           
           # Copiar relatórios HTML mais recentes
           if [ -d "research/exports/reports" ]; then
