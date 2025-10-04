@@ -360,7 +360,15 @@ class ReportGenerator:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; line-height: 1.6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
+        .navbar-links { display: flex; gap: 1.5rem; }
+        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
+        .navbar-links a.active { background: rgba(255,255,255,0.3); }
+        .content { margin: 40px; }
         .header { text-align: center; margin-bottom: 40px; }
         .section { margin: 30px 0; padding: 20px; border-left: 4px solid #4CAF50; background: #f9f9f9; }
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
@@ -378,6 +386,18 @@ class ReportGenerator:
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-title">📚 Revisão Sistemática</div>
+            <div class="navbar-links">
+                <a href="index.html" class="active">🔍 Sumário</a>
+                <a href="papers.html">📄 Artigos</a>
+                <a href="gap-analysis.html">📊 Análise de Lacunas</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="content">
     <div class="header">
         <h1>{{ title }}</h1>
         <h2>{{ subtitle }}</h2>
@@ -472,6 +492,7 @@ class ReportGenerator:
             <p><strong>Scoring:</strong> Baseado em relevância multi-critério</p>
         </div>
     </div>
+    </div>
 </body>
 </html>
         """
@@ -522,7 +543,15 @@ class ReportGenerator:
     <meta charset="UTF-8">
     <title>Relatório de Artigos - {{ stage.title() }}</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 40px; line-height: 1.6; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
+        .navbar-links { display: flex; gap: 1.5rem; }
+        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
+        .navbar-links a.active { background: rgba(255,255,255,0.3); }
+        .content { margin: 40px; max-width: 1200px; margin: 0 auto; padding: 40px; }
         .paper { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
         .paper-title { color: #2c3e50; font-size: 1.2em; font-weight: bold; margin-bottom: 10px; }
         .paper-meta { color: #7f8c8d; font-size: 0.9em; margin-bottom: 15px; }
@@ -532,6 +561,18 @@ class ReportGenerator:
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-title">📚 Revisão Sistemática</div>
+            <div class="navbar-links">
+                <a href="index.html">🔍 Sumário</a>
+                <a href="papers.html" class="active">📄 Artigos</a>
+                <a href="gap-analysis.html">📊 Análise de Lacunas</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="content">
     <h1>Relatório de Artigos - {{ stage.title() }}</h1>
     <p><em>{{ papers_data|length }} artigos encontrados</em></p>
     
@@ -568,6 +609,7 @@ class ReportGenerator:
         {% endif %}
     </div>
     {% endfor %}
+    </div>
 </body>
 </html>
         """
@@ -591,7 +633,15 @@ class ReportGenerator:
     <meta charset="UTF-8">
     <title>Análise de Lacunas da Revisão Sistemática</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 40px; line-height: 1.6; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
+        .navbar-links { display: flex; gap: 1.5rem; }
+        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
+        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
+        .navbar-links a.active { background: rgba(255,255,255,0.3); }
+        .content { max-width: 1200px; margin: 0 auto; padding: 40px; }
         .gap-section { margin: 30px 0; padding: 20px; border-left: 4px solid #e74c3c; background: #fdf2f2; }
         ul { padding-left: 20px; }
         li { margin: 10px 0; }
@@ -599,6 +649,18 @@ class ReportGenerator:
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-title">📚 Revisão Sistemática</div>
+            <div class="navbar-links">
+                <a href="index.html">🔍 Sumário</a>
+                <a href="papers.html">📄 Artigos</a>
+                <a href="gap-analysis.html" class="active">📊 Análise de Lacunas</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="content">
     <h1>Análise de Lacunas da Revisão Sistemática</h1>
     
     {% for gap_type, gap_list in gaps.items() %}
@@ -624,6 +686,7 @@ class ReportGenerator:
             <li>Desenvolver métricas padronizadas de avaliação</li>
             <li>Investigar aspectos de usabilidade e aceitação pelos professores</li>
         </ul>
+    </div>
     </div>
 </body>
 </html>
