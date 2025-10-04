@@ -1,91 +1,107 @@
-name: Publish Reports to GitHub Pages
+name: Deploy Reports to GitHub Pages
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:  # Permite execução manual
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Evita execuções concorrentes do mesmo workflow
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  generate-and-deploy:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Validate exports exist
+        run: |
+          echo "🔍 Validating pre-generated reports..."
+          
+          # Check required directories
+          if [ ! -d "research/exports/reports" ]; then
+            echo "❌ ERROR: research/exports/reports/ not found"
+            echo "Run: python -m research.src.cli export"
+            exit 1
+          fi
+          
+          if [ ! -d "research/exports/visualizations" ]; then
+            echo "❌ ERROR: research/exports/visualizations/ not found"
+            echo "Run: python -m research.src.cli export"
+            exit 1
+          fi
+          
+          # Check required files (sem timestamps)
+          REQUIRED_FILES=(
+            "research/exports/reports/index.html"
+            "research/exports/reports/summary_report.html"
+            "research/exports/reports/papers_report_included.html"
+            "research/exports/reports/gap_analysis.html"
+          )
+          
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ ERROR: $file not found"
+              echo "Run: python -m research.src.cli export"
+              exit 1
+            fi
+            echo "✅ Found: $file"
+          done
+          
+          # Validate visualizations
+          VIZ_COUNT=$(ls -1 research/exports/visualizations/*.png 2>/dev/null | wc -l)
+          if [ "$VIZ_COUNT" -lt 6 ]; then
+            echo "⚠️ WARNING: Expected 6 visualizations, found $VIZ_COUNT"
+          else
+            echo "✅ Found $VIZ_COUNT visualization(s)"
+          fi
+      
+      - name: Prepare Pages content
+        run: |
+          echo "📦 Preparing content for GitHub Pages..."
+          mkdir -p _site
+          
+          # Copy reports (usar index.html existente)
+          cp research/exports/reports/index.html _site/index.html
+          cp research/exports/reports/summary_report.html _site/summary.html
+          cp research/exports/reports/papers_report_included.html _site/papers.html
+          cp research/exports/reports/gap_analysis.html _site/gap-analysis.html
+          
+          # Copy visualizations
+          mkdir -p _site/visualizations
+          cp research/exports/visualizations/*.png _site/visualizations/
+          
+          # Create .nojekyll to bypass Jekyll processing
+          touch _site/.nojekyll
+          
+          # Summary
+          echo ""
+          echo "� Site structure:"
+          ls -lh _site/
+          echo ""
+          echo "� Visualizations:"
+          ls -lh _site/visualizations/
+          echo ""
+          echo "✅ Site prepared successfully"
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+  
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      # Note: Reports and visualizations are pre-generated and versioned
-      # No need to install Python or regenerate on each deployment
-      
-      - name: Prepare Pages content
-        run: |
-          mkdir -p docs
-          
-          # Verificar se exports existem
-          if [ ! -d "research/exports/reports" ] || [ ! -d "research/exports/visualizations" ]; then
-            echo "⚠️ Warning: Pre-generated reports not found!"
-            echo "Run 'python -m research.src.cli export' locally and commit the results."
-          fi
-          
-          # Copiar relatórios HTML mais recentes
-          if [ -d "research/exports/reports" ]; then
-            # Encontrar arquivos mais recentes
-            SUMMARY=$(ls -t research/exports/reports/summary_report.html 2>/dev/null | head -1)
-            PAPERS=$(ls -t research/exports/reports/papers_report_included.html 2>/dev/null | head -1)
-            GAP=$(ls -t research/exports/reports/gap_analysis_*.html 2>/dev/null | head -1)
-            
-            # Copiar com nomes fixos
-            [ -f "$SUMMARY" ] && cp "$SUMMARY" docs/index.html
-            [ -f "$PAPERS" ] && cp "$PAPERS" docs/papers.html
-            [ -f "$GAP" ] && cp "$GAP" docs/gap-analysis.html
-          fi
-          
-          # Copiar visualizações
-          if [ -d "research/exports/visualizations" ]; then
-            mkdir -p docs/visualizations
-            cp research/exports/visualizations/*.png docs/visualizations/ 2>/dev/null || true
-            echo "✅ Copied visualizations:"
-            ls -lh docs/visualizations/
-          fi
-          
-          # Criar .nojekyll para evitar processamento Jekyll
-          touch docs/.nojekyll
-          
-          # Validar que index.html existe
-          if [ ! -f "docs/index.html" ]; then
-            echo "⚠️ Error: No summary report found to use as index.html"
-            echo "Please run 'python -m research.src.cli export' locally and commit the results."
-            exit 1
-          fi
-          
-          # Debug: listar estrutura final
-          echo "📁 Final docs structure:"
-          ls -lh docs/
-          echo ""
-          echo "📁 Visualizations:"
-          ls -lh docs/visualizations/ || echo "No visualizations folder"
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'docs'
-      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
