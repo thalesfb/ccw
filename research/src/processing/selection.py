@@ -148,39 +148,44 @@ class PRISMASelector:
         logger.info(f"Starting screening phase with {len(df)} papers")
         
         result = df.copy()
-        selection_stages = []
-        exclusion_reasons = []
-        inclusion_criteria = []
-        
+        selection_stages: list[str] = []
+        exclusion_reasons: list[Optional[str]] = []
+        inclusion_criteria: list[Optional[str]] = []
+        statuses: list[str] = []
+
         for _, row in result.iterrows():
             paper = row.to_dict()
-            
+
             # Check exclusion criteria first
             should_exclude, reason = self.apply_exclusion_criteria(paper)
-            
+
             if should_exclude:
-                selection_stages.append("screening_excluded")
+                # Mantém 'screening' e marca status como excluído
+                selection_stages.append("screening")
                 exclusion_reasons.append(reason)
                 inclusion_criteria.append(None)
+                statuses.append("excluded")
                 self.stats["screening_excluded"] += 1
             else:
                 # Check inclusion criteria
                 meets_criteria, met = self.apply_inclusion_criteria(paper)
-                
+
+                selection_stages.append("screening")
                 if meets_criteria:
-                    selection_stages.append("screening")
                     exclusion_reasons.append(None)
                     inclusion_criteria.append("; ".join(met))
+                    statuses.append("reviewed")
                     self.stats["screening"] += 1
                 else:
-                    selection_stages.append("screening_excluded")
                     exclusion_reasons.append("inclusion_criteria_not_met")
                     inclusion_criteria.append("; ".join(met) if met else None)
+                    statuses.append("excluded")
                     self.stats["screening_excluded"] += 1
-        
+
         result["selection_stage"] = selection_stages
         result["exclusion_reason"] = exclusion_reasons
         result["inclusion_criteria_met"] = inclusion_criteria
+        result["status"] = statuses
         
         logger.info(f"Screening complete: {self.stats['screening']} passed, "
                    f"{self.stats['screening_excluded']} excluded")
@@ -213,17 +218,19 @@ class PRISMASelector:
         # Apply relevance score threshold
         if "relevance_score" in eligible_df.columns:
             high_relevance = eligible_df["relevance_score"] >= min_relevance_score
-            
-            # Update selection stage
-            df.loc[eligible_df[high_relevance].index, "selection_stage"] = "eligibility"
-            df.loc[eligible_df[~high_relevance].index, "selection_stage"] = "eligibility_excluded"
+
+            # Update selection stage (sempre 'eligibility') e status conforme limiar
+            df.loc[eligible_df.index, "selection_stage"] = "eligibility"
+            df.loc[eligible_df[high_relevance].index, "status"] = "reviewed"
+            df.loc[eligible_df[~high_relevance].index, "status"] = "excluded"
             df.loc[eligible_df[~high_relevance].index, "exclusion_reason"] = "low_relevance_score"
-            
-            self.stats["eligibility"] = high_relevance.sum()
-            self.stats["eligibility_excluded"] = (~high_relevance).sum()
+
+            self.stats["eligibility"] = int(high_relevance.sum())
+            self.stats["eligibility_excluded"] = int((~high_relevance).sum())
         else:
             # If no relevance score, all screening papers go to eligibility
             df.loc[eligible_df.index, "selection_stage"] = "eligibility"
+            df.loc[eligible_df.index, "status"] = "reviewed"
             self.stats["eligibility"] = len(eligible_df)
         
         logger.info(f"Eligibility complete: {self.stats['eligibility']} passed, "
@@ -245,8 +252,11 @@ class PRISMASelector:
         Returns:
             DataFrame with final inclusion results
         """
-        # Filter only papers that passed eligibility
-        includable_df = df[df["selection_stage"] == "eligibility"].copy()
+        # Filter only papers that passed eligibility (status not excluded)
+        elig = df["selection_stage"] == "eligibility"
+        status_series = df.get("status", pd.Series(["reviewed"] * len(df), index=df.index)).fillna("reviewed")
+        not_excluded = status_series != "excluded"
+        includable_df = df[elig & not_excluded].copy()
         
         if includable_df.empty:
             logger.warning("No papers passed eligibility phase")
@@ -264,12 +274,15 @@ class PRISMASelector:
             excluded_indices = includable_df.tail(len(includable_df) - max_papers).index
             
             df.loc[included_indices, "selection_stage"] = "included"
-            df.loc[excluded_indices, "selection_stage"] = "eligibility_excluded"
+            df.loc[included_indices, "status"] = "included"
+            df.loc[excluded_indices, "selection_stage"] = "eligibility"
+            df.loc[excluded_indices, "status"] = "excluded"
             df.loc[excluded_indices, "exclusion_reason"] = "max_papers_exceeded"
             
             self.stats["included"] = len(included_indices)
         else:
             df.loc[includable_df.index, "selection_stage"] = "included"
+            df.loc[includable_df.index, "status"] = "included"
             self.stats["included"] = len(includable_df)
         
         logger.info(f"Inclusion complete: {self.stats['included']} papers included")
@@ -318,7 +331,7 @@ class PRISMASelector:
         print("PRISMA FLOW DIAGRAM")
         print("="*60)
         print(f"📚 Identification: {self.stats['identification']} papers")
-        print(f"   └─ After duplicates removed: {self.stats['identification'] - self.stats['duplicates_removed']}")
+        print(f"   └─ Sem duplicatas: {self.stats['identification'] - self.stats['duplicates_removed']}")
         print(f"\n🔍 Screening: {self.stats['screening'] + self.stats['screening_excluded']} papers")
         print(f"   ├─ Included: {self.stats['screening']}")
         print(f"   └─ Excluded: {self.stats['screening_excluded']}")
