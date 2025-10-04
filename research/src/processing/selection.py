@@ -58,17 +58,32 @@ class PRISMASelector:
         # 2. Language criteria (if abstract exists)
         abstract = paper.get("abstract", "")
         if abstract:
-            # Simple language detection (can be improved with langdetect)
+            # Prefer specialized language detection if available; fallback to regex heuristics
+            detected_lang = None
+            try:
+                # langdetect is lightweight; detect returns iso639-1 codes
+                from langdetect import detect  # type: ignore
+                try:
+                    detected_lang = detect(abstract)
+                except Exception:
+                    detected_lang = None
+            except Exception:
+                detected_lang = None
+
             languages = self.config.review.languages
-            if any(lang in ["en", "english"] for lang in languages):
-                # Check for English patterns
-                if re.search(r'\b(the|and|of|in|to|for|with|is|are)\b', abstract.lower()):
+            if detected_lang:
+                if any(lang in ["en", "english"] for lang in languages) and detected_lang == "en":
                     met_criteria.append("language_en")
-            
-            if any(lang in ["pt", "portuguese", "português"] for lang in languages):
-                # Check for Portuguese patterns
-                if re.search(r'\b(de|da|do|para|com|em|que|não)\b', abstract.lower()):
+                if any(lang in ["pt", "portuguese", "português"] for lang in languages) and detected_lang in ("pt", "pt-br"):
                     met_criteria.append("language_pt")
+            else:
+                # Fallback regex heuristics
+                if any(lang in ["en", "english"] for lang in languages):
+                    if re.search(r'\b(the|and|of|in|to|for|with|is|are)\b', abstract.lower()):
+                        met_criteria.append("language_en")
+                if any(lang in ["pt", "portuguese", "português"] for lang in languages):
+                    if re.search(r'\b(de|da|do|para|com|em|que|não)\b', abstract.lower()):
+                        met_criteria.append("language_pt")
         
         # 3. Mathematics focus
         text = f"{paper.get('title', '')} {paper.get('abstract', '')}"
@@ -206,8 +221,9 @@ class PRISMASelector:
         Returns:
             DataFrame with eligibility results
         """
-        # Filter only papers that passed screening
-        eligible_df = df[df["selection_stage"] == "screening"].copy()
+        # Filter only papers that passed screening (status != excluded)
+        status_series = df.get("status", pd.Series(["reviewed"] * len(df), index=df.index)).fillna("reviewed")
+        eligible_df = df[(df["selection_stage"] == "screening") & (status_series != "excluded")].copy()
         
         if eligible_df.empty:
             logger.warning("No papers passed screening phase")
@@ -216,7 +232,7 @@ class PRISMASelector:
         logger.info(f"Starting eligibility phase with {len(eligible_df)} papers")
         
         # Apply relevance score threshold
-        if "relevance_score" in eligible_df.columns:
+        if "relevance_score" in eligible_df.columns and not eligible_df.empty:
             high_relevance = eligible_df["relevance_score"] >= min_relevance_score
 
             # Update selection stage (sempre 'eligibility') e status conforme limiar
@@ -229,9 +245,10 @@ class PRISMASelector:
             self.stats["eligibility_excluded"] = int((~high_relevance).sum())
         else:
             # If no relevance score, all screening papers go to eligibility
-            df.loc[eligible_df.index, "selection_stage"] = "eligibility"
-            df.loc[eligible_df.index, "status"] = "reviewed"
-            self.stats["eligibility"] = len(eligible_df)
+            if not eligible_df.empty:
+                df.loc[eligible_df.index, "selection_stage"] = "eligibility"
+                df.loc[eligible_df.index, "status"] = "reviewed"
+                self.stats["eligibility"] = len(eligible_df)
         
         logger.info(f"Eligibility complete: {self.stats['eligibility']} passed, "
                    f"{self.stats['eligibility_excluded']} excluded")
@@ -355,7 +372,7 @@ def apply_prisma_selection(
     config: Optional[AppConfig] = None,
     min_relevance_score: float = 4.0,
     max_papers: Optional[int] = None
-) -> pd.DataFrame:
+) -> Tuple[pd.DataFrame, Dict]:
     """Apply PRISMA selection criteria to papers.
     
     Args:
@@ -368,4 +385,5 @@ def apply_prisma_selection(
         DataFrame with selection results
     """
     selector = PRISMASelector(config)
-    return selector.apply_full_selection(df, min_relevance_score, max_papers)
+    result = selector.apply_full_selection(df, min_relevance_score, max_papers)
+    return result, selector.get_statistics()

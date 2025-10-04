@@ -241,12 +241,14 @@ class SystematicReviewPipeline:
         )
 
         # Aplicar seleção PRISMA
-        self.results = apply_prisma_selection(
+        self.results, selection_stats = apply_prisma_selection(
             self.results,
             self.config,
             threshold,
             max_papers
         )
+        # Guardar stats no objeto para uso posterior
+        self.selection_stats = selection_stats
 
         # Contar por estágio
         if "selection_stage" in self.results.columns:
@@ -276,18 +278,34 @@ class SystematicReviewPipeline:
 
         # Calcular estatísticas PRISMA (progressivas e consistentes)
         stats = {}
-        if "selection_stage" in self.results.columns:
+        # Preferir stats do selector quando disponíveis
+        if hasattr(self, 'selection_stats') and self.selection_stats:
+            stats = {
+                "identification": int(self.selection_stats.get("identification", len(self.results))),
+                "duplicates_removed": int(self.selection_stats.get("duplicates_removed", 0)),
+                "screening": int(self.selection_stats.get("screening", 0) + self.selection_stats.get("eligibility", 0) + self.selection_stats.get("included", 0)) if False else int(self.selection_stats.get("screening", 0) + self.selection_stats.get("eligibility", 0) + self.selection_stats.get("included", 0))
+            }
+            # As stats internas já têm elegibilidade e incluídos exatos
+            screened = int(self.results['selection_stage'].isin(['screening', 'eligibility', 'included']).sum()) if "selection_stage" in self.results.columns else stats.get("screening", 0)
+            eligibility = int(self.selection_stats.get("eligibility", 0))
+            included = int(self.selection_stats.get("included", 0))
+            # Derivar excluídos consistentes
+            screening_excluded = max(0, screened - eligibility)
+            eligibility_excluded = max(0, eligibility - included)
+            stats.update({
+                "screening": screened,
+                "screening_excluded": screening_excluded,
+                "eligibility": eligibility,
+                "eligibility_excluded": eligibility_excluded,
+                "included": included,
+            })
+        elif "selection_stage" in self.results.columns:
             identification = int(len(self.results))
             screened = int(self.results['selection_stage'].isin(['screening', 'eligibility', 'included']).sum())
             eligible = int(self.results['selection_stage'].isin(['eligibility', 'included']).sum())
             included = int((self.results['selection_stage'] == 'included').sum())
-
-            # Excluídos derivados (diferenças consecutivas PRISMA)
-            # - Triagem: registros excluídos = screening - eligibility
-            # - Elegibilidade: artigos excluídos = eligibility - included
             screening_excluded = max(0, screened - eligible)
             eligibility_excluded = max(0, eligible - included)
-
             stats = {
                 "identification": identification,
                 "duplicates_removed": 0,
