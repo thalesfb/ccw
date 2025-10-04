@@ -29,16 +29,19 @@ class BaseAPIClient(ABC):
 
         Args:
             config: Configuração da aplicação
-            cache_dir: Diretório para cache (padrão: research/cache/{api_name})
+            cache_dir: Diretório para cache (compatibilidade, não usado)
         """
         self.config = config
         self.api_name = self.__class__.__name__.replace("Client", "").lower()
 
-        # Configurar cache
+        # ✅ CORREÇÃO: Usar tabela cache do banco principal
+        from ..database.manager import DatabaseManager
+        self.db_manager = DatabaseManager()
+        
+        # Manter cache_dir para compatibilidade (mas não usar)
         if cache_dir is None:
-            cache_dir = Path(__file__).parents[3] / "cache" / self.api_name
+            cache_dir = Path(config.database.cache_dir) / self.api_name
         self.cache_dir = cache_dir
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
 
         # Configurar sessão HTTP com retry
         self.session = self._create_session()
@@ -152,105 +155,141 @@ class BaseAPIClient(ABC):
         return self.cache_dir / f"{cache_key}.json"
 
     def _load_from_cache(self, query: str) -> Optional[List[Dict]]:
-        """Carrega resultados do cache se existirem."""
-        cache_key = self._get_cache_key(query)
-        cache_file = self.cache_dir / f"{cache_key}.json"
-
-        if cache_file.exists():
-            try:
-                with open(cache_file, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    logger.debug(
-                        f"Loaded {len(data)} results from cache for query: {query}")
-                    # Log de hit de cache
-                    self._log_cache_hit(query, len(data))
-                    return data
-            except Exception as e:
-                logger.warning(f"Failed to load cache: {e}")
-                if self.audit_logger:
-                    self.audit_logger.log_error(
-                        e, "cache_load", recoverable=True)
+        """Carrega resultados da tabela cache do banco."""
+        try:
+            # ✅ CORREÇÃO: Usar tabela cache do banco principal
+            import hashlib
+            query_hash = hashlib.md5(f"{self.api_name}:{query}".encode()).hexdigest()
+            
+            cached_data = self.db_manager.get_cached_results(query_hash, self.api_name)
+            if cached_data:
+                logger.debug(
+                    f"Loaded {len(cached_data)} results from database cache for query: {query}")
+                # Log de hit de cache
+                self._log_cache_hit(query, len(cached_data))
+                return cached_data
+        except Exception as e:
+            logger.warning(f"Failed to load from database cache: {e}")
+            if self.audit_logger:
+                self.audit_logger.log_error(
+                    e, "database_cache_load", recoverable=True)
 
         # Log de miss de cache
         self._log_cache_miss(query)
         return None
 
     def _save_to_cache(self, query: str, results: List[Dict]):
-        """Salva resultados no cache."""
-        cache_key = self._get_cache_key(query)
-        cache_file = self.cache_dir / f"{cache_key}.json"
-
+        """Salva resultados na tabela cache do banco."""
         try:
-            with open(cache_file, "w", encoding="utf-8") as f:
-                json.dump(results, f, ensure_ascii=False, indent=2)
-                logger.debug(
-                    f"Saved {len(results)} results to cache for query: {query}")
+            # ✅ CORREÇÃO: Usar tabela cache do banco principal
+            import hashlib
+            query_hash = hashlib.md5(f"{self.api_name}:{query}".encode()).hexdigest()
+            
+            # Definir tempo de expiração baseado na API
+            expires_hours = {
+                'semantic_scholar': 24 * 7,  # 7 dias
+                'openalex': 24 * 7,          # 7 dias 
+                'crossref': 24 * 14,         # 14 dias
+                'core': 24 * 3               # 3 dias
+            }.get(self.api_name, 24)  # 1 dia padrão
+            
+            self.db_manager.save_cache(
+                query_hash=query_hash,
+                query_text=query,
+                api=self.api_name,
+                results=results,
+                expires_in_hours=expires_hours
+            )
+            
+            logger.debug(
+                f"Saved {len(results)} results to database cache for query: {query}")
 
-                # Log de auditoria para cache
-                if self.audit_logger:
-                    self.audit_logger.log_user_action(f"cache_save_{self.api_name}", {
-                        "query": query,
-                        "results_count": len(results),
-                        "cache_file": str(cache_file),
-                        "file_size_bytes": cache_file.stat().st_size if cache_file.exists() else 0
-                    })
-        except Exception as e:
-            logger.warning(f"Failed to save cache: {e}")
+            # Log de auditoria para cache
             if self.audit_logger:
-                self.audit_logger.log_error(e, "cache_save", recoverable=True)
+                self.audit_logger.log_user_action(f"database_cache_save_{self.api_name}", {
+                    "query": query,
+                    "results_count": len(results),
+                    "cache_type": "database",
+                    "expires_hours": expires_hours
+                })
+        except Exception as e:
+            logger.warning(f"Failed to save to database cache: {e}")
+            if self.audit_logger:
+                self.audit_logger.log_error(
+                    e, "database_cache_save", recoverable=True)
 
-    def _make_request(self, url: str, params: Optional[Dict] = None) -> Optional[Dict]:
+    def _make_request(self, url: str, params: Optional[Dict] = None, max_retries: int = 3) -> Optional[Dict]:
         """Faz uma requisição HTTP respeitando rate limits.
 
         Args:
             url: URL da requisição
             params: Parâmetros da query
+            max_retries: Número máximo de tentativas
 
         Returns:
             Resposta JSON ou None se falhar
         """
-        self._wait_rate_limit()
+        for attempt in range(max_retries):
+            self._wait_rate_limit()
 
-        start_time = time.time()
-        try:
-            response = self.session.get(url, params=params, timeout=30)
-            response_time = time.time() - start_time
+            start_time = time.time()
+            try:
+                response = self.session.get(url, params=params, timeout=30)
+                response_time = time.time() - start_time
 
-            if response.status_code == 200:
-                result = response.json()
-                # Log de sucesso
+                if response.status_code == 200:
+                    result = response.json()
+                    # Log de sucesso
+                    self._log_api_call(
+                        query=str(params.get('query', 'unknown')),
+                        response_time=response_time,
+                        results_count=len(result.get('data', [])) if isinstance(
+                            result, dict) else len(result) if isinstance(result, list) else 0,
+                        status_code=response.status_code
+                    )
+                    return result
+                    
+                elif response.status_code == 429:
+                    # Rate limit exceeded - backoff exponencial
+                    retry_after = int(response.headers.get('Retry-After', self.rate_delay * (attempt + 2)))
+                    logger.warning(f"Rate limit exceeded (429). Waiting {retry_after}s before retry {attempt + 1}/{max_retries}")
+                    time.sleep(retry_after)
+                    continue
+                    
+                else:
+                    # Log de erro HTTP
+                    self._log_api_call(
+                        query=str(params.get('query', 'unknown')),
+                        response_time=response_time,
+                        results_count=0,
+                        status_code=response.status_code
+                    )
+                    logger.error(f"HTTP {response.status_code} for {url}")
+                    return None
+
+            except requests.exceptions.RequestException as e:
+                response_time = time.time() - start_time
+                # Log de erro de requisição
                 self._log_api_call(
-                    query=str(params.get('query', 'unknown')),
-                    response_time=response_time,
-                    results_count=len(result.get('data', [])) if isinstance(
-                        result, dict) else len(result) if isinstance(result, list) else 0,
-                    status_code=response.status_code
-                )
-                return result
-            else:
-                # Log de erro HTTP
-                self._log_api_call(
-                    query=str(params.get('query', 'unknown')),
+                    query=str(params.get('query', 'unknown')
+                              ) if params else 'unknown',
                     response_time=response_time,
                     results_count=0,
-                    status_code=response.status_code
+                    status_code=0,
+                    error=e
                 )
-                logger.error(f"HTTP {response.status_code} for {url}")
-                return None
-
-        except requests.exceptions.RequestException as e:
-            response_time = time.time() - start_time
-            # Log de erro de requisição
-            self._log_api_call(
-                query=str(params.get('query', 'unknown')
-                          ) if params else 'unknown',
-                response_time=response_time,
-                results_count=0,
-                status_code=0,
-                error=e
-            )
-            logger.error(f"Request failed for {url}: {e}")
-            return None
+                
+                # Se for erro de rede temporário, tentar novamente
+                if attempt < max_retries - 1:
+                    backoff = self.rate_delay * (attempt + 1)
+                    logger.warning(f"Request failed: {e}. Retrying in {backoff}s (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(backoff)
+                    continue
+                else:
+                    logger.error(f"Request failed after {max_retries} attempts for {url}: {e}")
+                    return None
+        
+        return None
 
     def normalize_dataframe(self, results: List[Dict]) -> pd.DataFrame:
         """Converte lista de resultados normalizados em DataFrame.

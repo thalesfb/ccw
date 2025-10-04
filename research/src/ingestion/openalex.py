@@ -36,7 +36,12 @@ class OpenAlexClient(BaseAPIClient):
         # Verificar cache primeiro
         cached = self._load_from_cache(query)
         if cached is not None:
-            return self.normalize_dataframe([self._normalize_result(item) for item in cached])
+            normalized = [self._normalize_result(item) for item in cached]
+            normalized = [r for r in normalized if r is not None]
+            df = self.normalize_dataframe(normalized)
+            df["database"] = "openalex"
+            df["query"] = query
+            return df
         
         # Limpar query
         clean_query = query.replace('"', '').strip()
@@ -61,7 +66,7 @@ class OpenAlexClient(BaseAPIClient):
                 "search": clean_query,
                 "per-page": per_page,
                 "page": page,
-                "select": "id,doi,title,publication_year,authorships,host_venue,abstract_inverted_index,open_access,concepts,topics,keywords"
+                "select": "id,doi,title,publication_year,authorships,primary_location,abstract_inverted_index,open_access,concepts,topics,keywords,cited_by_count"
             }
             
             response = self._make_request(self.BASE_URL, params)
@@ -92,6 +97,7 @@ class OpenAlexClient(BaseAPIClient):
         # Normalizar e retornar
         normalized = [self._normalize_result(item) for item in results if self._normalize_result(item)]
         df = self.normalize_dataframe(normalized)
+        df["database"] = "openalex"
         df["query"] = query
         
         logger.info(f"Found {len(df)} results from OpenAlex")
@@ -130,9 +136,10 @@ class OpenAlexClient(BaseAPIClient):
             if doi and doi.startswith("https://doi.org/"):
                 doi = doi[16:]  # Remove o prefixo
             
-            # Venue (journal/conference)
-            host_venue = item.get("host_venue", {}) or {}
-            venue = host_venue.get("display_name", "")
+            # Venue (journal/conference) - use primary_location instead of deprecated host_venue
+            primary_location = item.get("primary_location", {}) or {}
+            source = primary_location.get("source", {}) or {}
+            venue = source.get("display_name", "")
             
             # Open access status
             open_access = item.get("open_access", {}) or {}
