@@ -448,7 +448,7 @@ class ReportGenerator:
                     .replace('database coverage', 'Cobertura por Base de Dados')
                     .replace('relevance distribution', 'Distribuição de Relevância')
                     .title() }}</h3>
-                <img src="../visualizations/{{ chart.path.name }}" alt="{{ chart.name }}">
+                <img src="visualizations/{{ chart.path.name }}" alt="{{ chart.name }}">
             </div>
             {% endfor %}
         </div>
