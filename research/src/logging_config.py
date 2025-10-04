@@ -18,10 +18,15 @@ class AuditLogger:
     Logger especializado para auditoria do pipeline de revisão sistemática.
     """
 
-    def __init__(self, name: str = "systematic_review", log_dir: str = "logs"):
+    def __init__(self, name: str = "systematic_review", log_dir: Optional[str] = None):
         self.name = name
+        # Usar config se log_dir não fornecido
+        if log_dir is None:
+            from .config import load_config
+            cfg = load_config()
+            log_dir = cfg.database.logs_dir
         self.log_dir = Path(log_dir)
-        self.log_dir.mkdir(exist_ok=True)
+        self.log_dir.mkdir(parents=True, exist_ok=True)
 
         # Configurar logger principal
         self.logger = logging.getLogger(name)
@@ -333,8 +338,10 @@ def setup_logging_for_module(module_name: str) -> logging.Logger:
         logger.addHandler(console_handler)
 
         # Handler para arquivo
-        log_dir = Path("logs")
-        log_dir.mkdir(exist_ok=True)
+        from .config import load_config
+        cfg = load_config()
+        log_dir = Path(cfg.database.logs_dir)
+        log_dir.mkdir(parents=True, exist_ok=True)
 
         file_handler = logging.FileHandler(
             log_dir / f"{module_name}.log",
@@ -347,4 +354,5 @@ def setup_logging_for_module(module_name: str) -> logging.Logger:
         file_handler.setFormatter(file_formatter)
         logger.addHandler(file_handler)
 
+    logger.setLevel(logging.DEBUG)
     return logger
