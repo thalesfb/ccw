@@ -12,7 +12,7 @@ Este repositório contém o desenvolvimento de uma ferramenta tecnológica para 
 
 ## Orientação
 
-- **Orientador:** Prof. Me. Rafael Zanin (IFC)
+- **Orientador:** Prof. Dr. Rafael Zanin (IFC)
 - **Coorientador:** Prof. Dr. Manassés Ribeiro (IFC)
 
 ## Objetivos
