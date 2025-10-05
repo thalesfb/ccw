@@ -6,74 +6,78 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Relatórios e Visualizações - Revisão Sistemática</title>
+    <title>Revisão Sistemática - Técnicas Computacionais na Educação Matemática</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            margin: 0;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: rgba(255,255,255,0.08);
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 16px;
-        }
-        a {
-            color: #fff;
-            text-decoration: underline;
-            font-weight: bold;
-        }
-        .section-title {
-            margin-top: 32px;
-            font-size: 1.2em;
-            color: #ffe;
-        }
-        .viz-thumb {
-            max-width: 120px;
-            max-height: 80px;
-            margin-right: 12px;
-            vertical-align: middle;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .card { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        h1 { color: #333; font-size: 2.5rem; margin: 0 0 10px 0; text-align: center; }
+        .subtitle { color: #666; font-size: 1.2rem; text-align: center; margin-bottom: 40px; }
+        .link-grid { display: grid; gap: 20px; margin-top: 30px; }
+        .link-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 8px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+        .link-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .link-card .icon { font-size: 2rem; }
+        .link-card .content { flex: 1; margin-left: 20px; }
+        .link-card h2 { margin: 0; font-size: 1.4rem; }
+        .link-card p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem; }
+        footer { text-align: center; color: white; margin-top: 40px; opacity: 0.9; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📊 Relatórios e Visualizações</h1>
-        <div class="section-title">Relatórios</div>
-        <ul>
-            <li><a href="exports/reports/reports.html">Relatório Principal</a></li>
-            <li><a href="exports/reports/summary_report.html">Resumo</a></li>
-            <li><a href="exports/reports/papers_report_included.html">Papers Incluídos</a></li>
-            <li><a href="exports/reports/gap_analysis.html">Análise de Gaps</a></li>
-            <li><a href="exports/reports/summary.json">Resumo (JSON)</a></li>
-        </ul>
-        <div class="section-title">Visualizações</div>
-        <ul>
-            <li><a href="exports/visualizations/database_coverage.png" target="_blank"><img src="exports/visualizations/database_coverage.png" class="viz-thumb" alt="Cobertura de Bases">Cobertura de Bases</a></li>
-            <li><a href="exports/visualizations/papers_by_year.png" target="_blank"><img src="exports/visualizations/papers_by_year.png" class="viz-thumb" alt="Papers por Ano">Papers por Ano</a></li>
-            <li><a href="exports/visualizations/prisma_flow.png" target="_blank"><img src="exports/visualizations/prisma_flow.png" class="viz-thumb" alt="Fluxo PRISMA">Fluxo PRISMA</a></li>
-            <li><a href="exports/visualizations/relevance_distribution.png" target="_blank"><img src="exports/visualizations/relevance_distribution.png" class="viz-thumb" alt="Distribuição de Relevância">Distribuição de Relevância</a></li>
-            <li><a href="exports/visualizations/selection_funnel.png" target="_blank"><img src="exports/visualizations/selection_funnel.png" class="viz-thumb" alt="Funil de Seleção">Funil de Seleção</a></li>
-            <li><a href="exports/visualizations/techniques_distribution.png" target="_blank"><img src="exports/visualizations/techniques_distribution.png" class="viz-thumb" alt="Distribuição de Técnicas">Distribuição de Técnicas</a></li>
-        </ul>
+        <div class="card">
+            <h1>📊 Revisão Sistemática</h1>
+            <p class="subtitle">Técnicas Computacionais na Educação Matemática</p>
+            
+            <div class="link-grid">
+                <a href="exports/reports/summary_report.html" class="link-card">
+                    <div class="icon">📈</div>
+                    <div class="content">
+                        <h2>Resumo Executivo</h2>
+                        <p>Estatísticas gerais, fluxo PRISMA e visualizações</p>
+                    </div>
+                </a>
+                
+                <a href="exports/reports/papers_report_included.html" class="link-card">
+                    <div class="icon">📄</div>
+                    <div class="content">
+                        <h2>Artigos Incluídos</h2>
+                        <p>Lista completa dos papers selecionados</p>
+                    </div>
+                </a>
+                
+                <a href="exports/reports/gap_analysis.html" class="link-card">
+                    <div class="icon">🔍</div>
+                    <div class="content">
+                        <h2>Análise de Lacunas</h2>
+                        <p>Identificação de gaps e oportunidades de pesquisa</p>
+                    </div>
+                </a>
+                
+                <a href="exports/analysis/papers.xlsx" class="link-card">
+                    <div class="icon">📊</div>
+                    <div class="content">
+                        <h2>Dados Brutos (Excel)</h2>
+                        <p>Planilha completa com todos os dados</p>
+                    </div>
+                </a>
+                
+                <a href="exports/reports/summary.json" class="link-card">
+                    <div class="icon">💾</div>
+                    <div class="content">
+                        <h2>Dados JSON</h2>
+                        <p>Estatísticas em formato JSON para integração</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>Conclusion Course Work (CCW)</strong></p>
+            <p>Trabalho de Conclusão de Curso - Ciência da Computação</p>
+            <p>Instituto Federal Catarinense - Campus Videira</p>
+            <p>© 2025 Thales Ferreira | <a href="https://github.com/thalesfb/ccw">GitHub</a></p>
+        </footer>
     </div>
 </body>
 </html>
