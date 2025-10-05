@@ -75,8 +75,8 @@ jobs:
           # Create research directory structure  
           mkdir -p _site/research
           cp -r research/exports _site/research/
-          # Copy redirect index.html for /research/
-          cp research/exports/index.html _site/research/index.html
+          # Copy main research index.html for /research/
+          cp research/index.html _site/research/index.html
           
           # Create .nojekyll to bypass Jekyll processing
           touch _site/.nojekyll

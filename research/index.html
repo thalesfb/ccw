@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios e Visualizações - Revisão Sistemática</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.08);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 16px;
+        }
+        a {
+            color: #fff;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .section-title {
+            margin-top: 32px;
+            font-size: 1.2em;
+            color: #ffe;
+        }
+        .viz-thumb {
+            max-width: 120px;
+            max-height: 80px;
+            margin-right: 12px;
+            vertical-align: middle;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Relatórios e Visualizações</h1>
+        <div class="section-title">Relatórios</div>
+        <ul>
+            <li><a href="exports/reports/reports.html">Relatório Principal</a></li>
+            <li><a href="exports/reports/summary_report.html">Resumo</a></li>
+            <li><a href="exports/reports/papers_report_included.html">Papers Incluídos</a></li>
+            <li><a href="exports/reports/gap_analysis.html">Análise de Gaps</a></li>
+            <li><a href="exports/reports/summary.json">Resumo (JSON)</a></li>
+        </ul>
+        <div class="section-title">Visualizações</div>
+        <ul>
+            <li><a href="exports/visualizations/database_coverage.png" target="_blank"><img src="exports/visualizations/database_coverage.png" class="viz-thumb">Cobertura de Bases</a></li>
+            <li><a href="exports/visualizations/papers_by_year.png" target="_blank"><img src="exports/visualizations/papers_by_year.png" class="viz-thumb">Papers por Ano</a></li>
+            <li><a href="exports/visualizations/prisma_flow.png" target="_blank"><img src="exports/visualizations/prisma_flow.png" class="viz-thumb">Fluxo PRISMA</a></li>
+            <li><a href="exports/visualizations/relevance_distribution.png" target="_blank"><img src="exports/visualizations/relevance_distribution.png" class="viz-thumb">Distribuição de Relevância</a></li>
+            <li><a href="exports/visualizations/selection_funnel.png" target="_blank"><img src="exports/visualizations/selection_funnel.png" class="viz-thumb">Funil de Seleção</a></li>
+            <li><a href="exports/visualizations/techniques_distribution.png" target="_blank"><img src="exports/visualizations/techniques_distribution.png" class="viz-thumb">Distribuição de Técnicas</a></li>
+        </ul>
+    </div>
+</body>
+</html>
