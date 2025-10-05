@@ -599,7 +599,7 @@ class ReportGenerator:
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <a href="../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
+            <a href="../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
             <div class="navbar-links">
                 <a href="summary_report.html" class="active">📈 Resumo</a>
                 <a href="papers_report_included.html">📄 Artigos Incluídos</a>
@@ -748,7 +748,7 @@ class ReportGenerator:
 <body>
      <nav class="navbar">
          <div class="navbar-content">
-             <a href="../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
+             <a href="../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
              <div class="navbar-links">
                  <a href="summary_report.html">📈 Resumo</a>
                  <a href="papers_report_included.html" class="active">📄 Artigos Incluídos</a>
@@ -841,7 +841,7 @@ class ReportGenerator:
 <body>
      <nav class="navbar">
          <div class="navbar-content">
-             <a href="../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
+             <a href="../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
              <div class="navbar-links">
                  <a href="summary_report.html">📈 Resumo</a>
                  <a href="papers_report_included.html">📄 Artigos Incluídos</a>
