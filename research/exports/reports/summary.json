@@ -1,15 +1,15 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Técnicas Computacionais na Educação Matemática",
-  "generated_at": "04/10/2025 18:52",
+  "generated_at": "04/10/2025 22:48",
   "statistics": {
     "total_papers": 12533,
     "prisma": {
       "identification": 12533,
       "duplicates_removed": 0,
-      "screening": 0,
+      "screening": 12533,
       "screening_excluded": 9884,
-      "eligibility": 0,
+      "eligibility": 2649,
       "eligibility_excluded": 2606,
       "included": 43
     },

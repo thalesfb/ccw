@@ -446,26 +446,29 @@ Desvio Padrão: {scores.std():.2f}"""
                 f"elegibilidade={eligible_count}, incluidos={included_count}"
             )
 
-        # PRISMA funnel stages (cada etapa mostra quantos PASSARAM)
+        # PRISMA funnel stages (sempre mostrar as 4 etapas)
         funnel_stages = [
-            ('Identificação', ident_count, '#E8F4FD'),
-            ('Triagem', screened_count, '#B3E5FC'), 
-            ('Elegibilidade', eligible_count, '#81C784'),
-            ('Incluídos', included_count, '#4CAF50')
+            ('Identificação', max(0, ident_count), '#E8F4FD'),
+            ('Triagem', max(0, screened_count), '#B3E5FC'), 
+            ('Elegibilidade', max(0, eligible_count), '#81C784'),
+            ('Incluídos', max(0, included_count), '#4CAF50')
         ]
 
-        # Filtrar stages com dados
-        stages = [name for name, count, color in funnel_stages if count > 0]
-        counts = [count for name, count, color in funnel_stages if count > 0]
-        colors = [color for name, count, color in funnel_stages if count > 0]
+        stages = [name for name, _, _ in funnel_stages]
+        counts = [count for _, count, _ in funnel_stages]
+        colors = [color for _, _, color in funnel_stages]
 
         labels = [f'{stage}\n(n={count})' for stage, count in zip(stages, counts)]
 
         fig, ax = plt.subplots(figsize=(12, 8))
 
+        # Usar valor mínimo visual para zero para a barra aparecer (ex.: 1% do máximo)
+        max_count = max(counts) if counts else 1
+        plot_counts = [c if c > 0 else max_count * 0.01 for c in counts]
+
         # Create funnel effect
         y_positions = list(range(len(stages)))
-        bars = ax.barh(y_positions, counts, color=colors, alpha=0.8, edgecolor='black')
+        bars = ax.barh(y_positions, plot_counts, color=colors, alpha=0.8, edgecolor='black')
 
         ax.set_yticks(y_positions)
         ax.set_yticklabels(labels)
@@ -473,18 +476,17 @@ Desvio Padrão: {scores.std():.2f}"""
         ax.set_title('Funil de Seleção PRISMA')
 
         # Add value labels
-        counts_max = max(counts) if counts else 0
+        counts_max = max(counts) if counts else 1
         for bar, count in zip(bars, counts):
-            if count > 0:
-                ax.text(
-                    bar.get_width() + counts_max * 0.01,
-                    bar.get_y() + bar.get_height() / 2,
-                    f'{count}',
-                    ha='left',
-                    va='center',
-                    fontsize=12,
-                    fontweight='bold',
-                )
+            ax.text(
+                min(bar.get_width(), counts_max) + counts_max * 0.01,
+                bar.get_y() + bar.get_height() / 2,
+                f'{count}',
+                ha='left',
+                va='center',
+                fontsize=12,
+                fontweight='bold',
+            )
 
         # Invert y-axis to show funnel top-to-bottom
         ax.invert_yaxis()
