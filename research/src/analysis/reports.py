@@ -41,6 +41,22 @@ class ReportGenerator:
         template_dir = Path(__file__).parent / "templates"
         template_dir.mkdir(exist_ok=True)
         self.env = Environment(loader=FileSystemLoader(template_dir))
+
+    def _footer_html(self) -> str:
+        """Footer HTML consistent with research/index.html.
+
+        Returns:
+            HTML string to be injected at the end of pages.
+        """
+        return (
+            '<div class="footer" style="text-align:center;color:white;margin-top:40px;opacity:0.9;padding:20px;'
+            'background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);">\n'
+            '    <p><strong>Conclusion Course Work (CCW)</strong></p>\n'
+            '    <p>Trabalho de Conclusão de Curso - Ciência da Computação</p>\n'
+            '    <p>Instituto Federal Catarinense - Campus Videira</p>\n'
+            '    <p>© 2025 Thales Ferreira | <a href="https://github.com/thalesfb/ccw" style="color:#fff;text-decoration:underline;">GitHub</a></p>\n'
+            '</div>'
+        )
     
     def generate_summary_report(
         self,
@@ -577,7 +593,7 @@ class ReportGenerator:
         .chart-card img { width: 100%; height: auto; border-radius: 4px; }
         .chart-card h3 { margin-top: 0; color: #333; }
         h2 { color: #333; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
-        .footer { text-align: center; padding: 20px; color: #666; margin-top: 40px; }
+        .footer { text-align: center; padding: 20px; margin-top: 40px; }
     </style>
 </head>
 <body>
@@ -687,15 +703,13 @@ class ReportGenerator:
         </div>
     </div>
     
-    <div class="footer">
-        <p>&copy; 2025 Revisão Sistemática - Técnicas Computacionais na Educação Matemática</p>
-    </div>
+    {{ footer_html | safe }}
 </body>
 </html>
         """
         
         template = self.env.from_string(html_template)
-        return template.render(**report_data, stats=stats, prisma=prisma)
+        return template.render(**report_data, stats=stats, prisma=prisma, footer_html=self._footer_html())
     
     def _create_papers_html(self, papers_data: List[Dict], stage: str) -> str:
         """Create HTML content for papers report.
@@ -788,12 +802,13 @@ class ReportGenerator:
     </div>
     {% endfor %}
     </div>
+    {{ footer_html | safe }}
 </body>
 </html>
         """
         
         template = self.env.from_string(html_template)
-        return template.render(papers_data=papers_data, stage=stage)
+        return template.render(papers_data=papers_data, stage=stage, footer_html=self._footer_html())
     
     def _create_gap_analysis_html(self, gaps: Dict) -> str:
         """Create HTML content for gap analysis.
@@ -866,9 +881,10 @@ class ReportGenerator:
         </ul>
     </div>
     </div>
+    {{ footer_html | safe }}
 </body>
 </html>
         """
         
         template = self.env.from_string(html_template)
-        return template.render(gaps=gaps)
+        return template.render(gaps=gaps, footer_html=self._footer_html())
