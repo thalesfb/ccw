@@ -599,12 +599,11 @@ class ReportGenerator:
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <div class="navbar-title">Revisão Sistemática - CCW</div>
+            <a href="../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
             <div class="navbar-links">
-                <a href="summary_report.html" class="active">Resumo</a>
-                <a href="papers_report_included.html">Artigos Incluídos</a>
-                <a href="gap_analysis.html">Análise de Lacunas</a>
-                <a href="../index.html">Início</a>
+                <a href="summary_report.html" class="active">📈 Resumo</a>
+                <a href="papers_report_included.html">📄 Artigos Incluídos</a>
+                <a href="gap_analysis.html">🔍 Análise de Lacunas</a>
             </div>
         </div>
     </nav>
@@ -747,18 +746,16 @@ class ReportGenerator:
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="navbar-title">📚 Revisão Sistemática</div>
-            <div class="navbar-links">
-                <a href="summary_report.html">🔍 Sumário</a>
-                <a href="papers_report_included.html" class="active">📄 Artigos</a>
-                <a href="gap_analysis.html">📊 Análise de Lacunas</a>
-            </div>
-        </div>
-    </nav>
-    
-    <div class="content">
+     <nav class="navbar">
+         <div class="navbar-content">
+             <a href="../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
+             <div class="navbar-links">
+                 <a href="summary_report.html">📈 Resumo</a>
+                 <a href="papers_report_included.html" class="active">📄 Artigos Incluídos</a>
+                 <a href="gap_analysis.html">📊 Análise de Lacunas</a>
+             </div>
+         </div>
+     </nav>    <div class="content">
     <h1>Relatório de Artigos - {{ stage.title() }}</h1>
     <p><em>{{ papers_data|length }} artigos encontrados</em></p>
     
@@ -842,18 +839,16 @@ class ReportGenerator:
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="navbar-title">📚 Revisão Sistemática</div>
-            <div class="navbar-links">
-                <a href="summary_report.html">🔍 Sumário</a>
-                <a href="papers_report_included.html">📄 Artigos</a>
-                <a href="gap_analysis.html" class="active">📊 Análise de Lacunas</a>
-            </div>
-        </div>
-    </nav>
-    
-    <div class="content">
+     <nav class="navbar">
+         <div class="navbar-content">
+             <a href="../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
+             <div class="navbar-links">
+                 <a href="summary_report.html">📈 Resumo</a>
+                 <a href="papers_report_included.html">📄 Artigos Incluídos</a>
+                 <a href="gap_analysis.html" class="active">📊 Análise de Lacunas</a>
+             </div>
+         </div>
+     </nav>    <div class="content">
     <h1>Análise de Lacunas da Revisão Sistemática</h1>
     
     {% for gap_type, gap_list in gaps.items() %}
