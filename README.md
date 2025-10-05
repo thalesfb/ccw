@@ -45,8 +45,6 @@ Desenvolver uma ferramenta tecnológica que permita ao professor diagnosticar co
 ├── src/                # Phase 2: Main product (competency diagnosis tool - future)
 ├── results/            # Phase 3: TCC artifacts (LaTeX, validation reports)
 ├── .gitignore          # Git exclusion patterns
-├── requirements.txt    # Python dependencies
-├── pytest.ini          # Test configuration
 └── README.md           # Project documentation
 ```
 
@@ -57,11 +55,12 @@ O módulo `research/` implementa a revisão sistemática automatizada (Fase 1 do
 ### Configuração
 
 1. Instalar dependências:
-   ```bash
+
+```bash
    python -m venv .venv
    source .venv/bin/activate  # Windows: .venv\Scripts\activate
    pip install -r requirements.txt
-   ```
+```
 
 2. Configurar APIs (copiar `.env.example` para `.env` e adicionar chaves):
    - Semantic Scholar API
