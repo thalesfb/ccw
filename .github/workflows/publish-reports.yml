@@ -69,15 +69,12 @@ jobs:
           echo "📦 Preparing content for GitHub Pages..."
           mkdir -p _site
           
-          # Copy reports (usar index.html existente)
-          cp research/exports/reports/index.html _site/index.html
-          cp research/exports/reports/summary_report.html _site/summary.html
-          cp research/exports/reports/papers_report_included.html _site/papers.html
-          cp research/exports/reports/gap_analysis.html _site/gap-analysis.html
+          # Copy main index.html (projeto principal)
+          cp index.html _site/index.html
           
-          # Copy visualizations
-          mkdir -p _site/visualizations
-          cp research/exports/visualizations/*.png _site/visualizations/
+          # Create research directory structure  
+          mkdir -p _site/research
+          cp -r research/exports _site/research/
           
           # Create .nojekyll to bypass Jekyll processing
           touch _site/.nojekyll
@@ -87,8 +84,8 @@ jobs:
           echo "� Site structure:"
           ls -lh _site/
           echo ""
-          echo "� Visualizations:"
-          ls -lh _site/visualizations/
+          echo "📊 Research structure:"
+          ls -lh _site/research/exports/
           echo ""
           echo "✅ Site prepared successfully"
       
