@@ -41,7 +41,7 @@ jobs:
           
           # Check required files (sem timestamps)
           REQUIRED_FILES=(
-            "research/exports/reports/index.html"
+            "research/exports/reports/reports.html"
             "research/exports/reports/summary_report.html"
             "research/exports/reports/papers_report_included.html"
             "research/exports/reports/gap_analysis.html"

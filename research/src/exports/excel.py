@@ -328,8 +328,8 @@ def export_complete_review(
         gap_path = report_generator.generate_gap_analysis(df)
         exported_files["gap_analysis"] = gap_path
         
-        # Create index.html
-        index_path = report_generator.output_dir / "index.html"
+        # Create reports.html
+        index_path = report_generator.output_dir / "reports.html"
         index_html = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
