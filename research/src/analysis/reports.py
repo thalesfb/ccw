@@ -26,10 +26,10 @@ class ReportGenerator:
         Args:
             output_dir: Diretório para salvar relatórios
         """
-        config = load_config()
-        
+        self.config = load_config()
+
         if output_dir is None:
-            output_dir = Path(config.database.exports_dir) / "reports"
+            output_dir = Path(self.config.database.exports_dir) / "reports"
         
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -79,22 +79,32 @@ class ReportGenerator:
         # Generate statistics
         report_stats = self._calculate_statistics(df, stats)
         
-        # Generate visualizations
-        chart_paths = self.visualizer.generate_all_visualizations(df, stats)
+        # Generate visualizations (pass calculated PRISMA stats)
+        chart_paths = self.visualizer.generate_all_visualizations(df, report_stats.get('prisma'))
 
         # Build included papers list (limit to 50 for readability)
         included_list = []
         if 'selection_stage' in df.columns:
             included_df = df[df['selection_stage'] == 'included'].copy()
-            for _, row in included_df.head(50).iterrows():
-                included_list.append({
-                    'title': row.get('title') or 'Título não disponível',
-                    'authors': row.get('authors') or 'N/A',
-                    'year': int(row.get('year')) if pd.notna(row.get('year')) else 'N/A',
-                    'venue': row.get('venue') or row.get('source_publication') or 'N/A',
-                    'doi': row.get('doi') or '',
-                    'url': row.get('url') or ''
-                })
+            # Data already deduplicated by pipeline - just limit display
+            if not included_df.empty:
+                included_df = included_df.head(50)
+
+                for _, row in included_df.iterrows():
+                    year_val = row.get('year')
+                    try:
+                        year_out = int(year_val) if pd.notna(year_val) else 'N/A'
+                    except Exception:
+                        year_out = 'N/A'
+
+                    included_list.append({
+                        'title': row.get('title') or 'Título não disponível',
+                        'authors': row.get('authors') or 'N/A',
+                        'year': year_out,
+                        'venue': row.get('venue') or row.get('source_publication') or 'N/A',
+                        'doi': row.get('doi') or '',
+                        'url': row.get('url') or ''
+                    })
         
         # Create report content
         report_data = {
@@ -136,10 +146,10 @@ class ReportGenerator:
             fields = [
                 'title', 'authors', 'year', 'venue', 'abstract',
                 'relevance_score', 'comp_techniques', 'study_type', 
-                'inclusion_criteria_met', 'exclusion_reason'
+                'inclusion_criteria_met', 'exclusion_reason', 'doi', 'url'
             ]
         
-        # Filter by stage
+        # Filter by stage (data already deduplicated by pipeline)
         if 'selection_stage' in df.columns:
             papers_df = df[df['selection_stage'] == stage].copy()
         else:
@@ -148,7 +158,7 @@ class ReportGenerator:
         if papers_df.empty:
             logger.warning(f"No papers found for stage: {stage}")
             return Path()
-        
+
         # Sort by relevance score
         if 'relevance_score' in papers_df.columns:
             papers_df = papers_df.sort_values('relevance_score', ascending=False)
@@ -217,7 +227,7 @@ class ReportGenerator:
         Returns:
             Dictionary with statistics
         """
-        # Normalizar PRISMA com ints nativos
+        # Normalizar PRISMA com ints nativos (começa a partir de `stats` se fornecido)
         prisma_stats = {}
         if stats:
             for k, v in stats.items():
@@ -226,23 +236,85 @@ class ReportGenerator:
                 except Exception:
                     prisma_stats[k] = v
 
+        # If selection stage information is available in the DataFrame, we can
+        # derive PRISMA counts from it. However, when canonical stats are
+        # provided (from DB snapshot), we should NOT override them. Only fill
+        # missing keys to preserve the canonical truth.
+        if 'selection_stage' in df.columns:
+            identification_df = int(len(df))
+            
+            # PRISMA requer contar apenas registros ÚNICOS após Identificação
+            # Identificação: total com duplicatas
+            # Triagem em diante: apenas únicos (is_duplicate = 0)
+            if 'is_duplicate' in df.columns:
+                # Filtrar apenas únicos para os estágios pós-identificação
+                unique_df = df[df['is_duplicate'] == 0]
+                status_series = unique_df.get('status', pd.Series([None] * len(unique_df), index=unique_df.index)).fillna('')
+                screening_excluded_df = int(((unique_df['selection_stage'] == 'screening') & (status_series == 'excluded')).sum())
+                eligibility_excluded_df = int(((unique_df['selection_stage'] == 'eligibility') & (status_series == 'excluded')).sum())
+                included_df = int((unique_df['selection_stage'] == 'included').sum())
+                screened_df = int(len(unique_df))  # Total de únicos
+                eligibility_df = int(unique_df['selection_stage'].isin(['eligibility', 'included']).sum())
+            else:
+                # Fallback se não tiver is_duplicate
+                status_series = df.get('status', pd.Series([None] * len(df), index=df.index)).fillna('')
+                screening_excluded_df = int(((df['selection_stage'] == 'screening') & (status_series == 'excluded')).sum())
+                eligibility_excluded_df = int(((df['selection_stage'] == 'eligibility') & (status_series == 'excluded')).sum())
+                included_df = int((df['selection_stage'] == 'included').sum())
+                screened_df = int(df['selection_stage'].isin(['screening', 'eligibility', 'included']).sum())
+                eligibility_df = int(df['selection_stage'].isin(['eligibility', 'included']).sum())
+
+            df_prisma = {
+                'identification': identification_df,
+                'screening': screened_df,
+                'screening_excluded': screening_excluded_df,
+                'eligibility': eligibility_df,
+                'eligibility_excluded': eligibility_excluded_df,
+                'included': included_df,
+            }
+
+            # Only set keys that are not already present in prisma_stats
+            for k, v in df_prisma.items():
+                if k not in prisma_stats:
+                    prisma_stats[k] = v
+
         report_stats = {
-            'total_papers': int(len(df)),
+            # Prefer canonical identification for the headline total if provided
+            'total_papers': int(prisma_stats.get('identification', len(df))),
             'prisma': prisma_stats,
         }
         
-        # Year statistics
+        # Year statistics: coerce to int, exclude out-of-range years from per-year
+        # distribution (but report how many were excluded).
         if 'year' in df.columns:
-            years = df['year'].dropna()
-            if not years.empty:
-                # Converter int64 para int nativo antes de serializar
-                year_dist = years.value_counts().to_dict()
-                report_stats['years'] = {
-                    'min': int(years.min()),
-                    'max': int(years.max()),
-                    'mean': round(float(years.mean()), 1),
-                    'distribution': {int(k): int(v) for k, v in year_dist.items()}
-                }
+            # Coerce to numeric years
+            years_num = pd.to_numeric(df['year'], errors='coerce').dropna().astype(int)
+            if not years_num.empty:
+                ymin = int(self.config.review.year_min)
+                ymax = int(self.config.review.year_max)
+
+                in_range_mask = (years_num >= ymin) & (years_num <= ymax)
+                in_range_years = years_num[in_range_mask]
+                out_of_range_years = years_num[~in_range_mask]
+
+                year_dist = in_range_years.value_counts().to_dict() if not in_range_years.empty else {}
+
+                if in_range_years.empty:
+                    report_stats['years'] = {
+                        'min': None,
+                        'max': None,
+                        'mean': None,
+                        'distribution': {},
+                        'out_of_range_count': int(len(out_of_range_years))
+                    }
+                else:
+                    report_stats['years'] = {
+                        'min': int(in_range_years.min()),
+                        'max': int(in_range_years.max()),
+                        'mean': round(float(in_range_years.mean()), 1),
+                        'distribution': {int(k): int(v) for k, v in year_dist.items()},
+                        'out_of_range_count': int(len(out_of_range_years))
+                    }
         
         # Database statistics
         if 'database' in df.columns:
@@ -279,13 +351,20 @@ class ReportGenerator:
         
         # Selection stages (PRISMA-friendly derived stats)
         if 'selection_stage' in df.columns:
-            identification = int(len(df))
+            # Derive DF-based values in case some fields are missing, but prefer
+            # canonical values from prisma when available
+            identification_df = int(len(df))
             status_series = df.get('status', pd.Series([None] * len(df), index=df.index)).fillna('')
-            screening_excluded = int(((df['selection_stage'] == 'screening') & (status_series == 'excluded')).sum())
-            eligibility_excluded = int(((df['selection_stage'] == 'eligibility') & (status_series == 'excluded')).sum())
-            included = int((df['selection_stage'] == 'included').sum())
-            screening_remaining = identification - screening_excluded
-            eligibility_remaining = screening_remaining - eligibility_excluded
+            screening_excluded_df = int(((df['selection_stage'] == 'screening') & (status_series == 'excluded')).sum())
+            eligibility_excluded_df = int(((df['selection_stage'] == 'eligibility') & (status_series == 'excluded')).sum())
+            included_df = int((df['selection_stage'] == 'included').sum())
+
+            identification = int(prisma_stats.get('identification', identification_df))
+            screening_excluded = int(prisma_stats.get('screening_excluded', screening_excluded_df))
+            eligibility_excluded = int(prisma_stats.get('eligibility_excluded', eligibility_excluded_df))
+            included = int(prisma_stats.get('included', included_df))
+            screening_remaining = int(prisma_stats.get('screening', identification - screening_excluded))
+            eligibility_remaining = int(prisma_stats.get('eligibility', screening_remaining - eligibility_excluded))
 
             report_stats['selection_stages'] = {
                 'Identificação': identification,
@@ -316,16 +395,40 @@ class ReportGenerator:
         
         # Temporal gaps
         if 'year' in df.columns:
-            years = df['year'].dropna()
-            if not years.empty:
-                year_counts = years.value_counts().sort_index()
+            # Filter years to only consider those within the configured scope
+            ymin = int(self.config.review.year_min)
+            ymax = int(self.config.review.year_max)
+            
+            years = pd.to_numeric(df['year'], errors='coerce').dropna()
+            years_in_scope = years[(years >= ymin) & (years <= ymax)]
+            
+            if not years_in_scope.empty:
+                year_counts = years_in_scope.value_counts().sort_index()
                 # Find years with low publication counts
                 mean_count = year_counts.mean()
                 low_years = year_counts[year_counts < mean_count * 0.5]
                 gaps['temporal_gaps'] = [
-                    f"Baixo número de publicações em {year} ({count} artigos)"
+                    f"Baixo número de publicações em {int(year)} ({int(count)} artigos)"
                     for year, count in low_years.items()
                 ]
+                
+                # Identify years with no publications in scope
+                all_years_in_scope = set(range(ymin, ymax + 1))
+                years_with_data = set(year_counts.index.astype(int))
+                missing_years = sorted(all_years_in_scope - years_with_data)
+                
+                if missing_years:
+                    # Group consecutive years for better readability
+                    if len(missing_years) <= 3:
+                        gaps['temporal_gaps'].extend([
+                            f"Nenhuma publicação encontrada em {year}"
+                            for year in missing_years
+                        ])
+                    else:
+                        gaps['temporal_gaps'].append(
+                            f"Nenhuma publicação encontrada em {len(missing_years)} anos: "
+                            f"{missing_years[0]}-{missing_years[-1]}"
+                        )
         
         # Technical gaps
         if 'comp_techniques' in df.columns:
@@ -725,6 +828,8 @@ class ReportGenerator:
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Artigos - {{ stage.title() }}</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
@@ -770,12 +875,18 @@ class ReportGenerator:
         <div class="paper-meta">
             <strong>Autores:</strong> {{ paper.authors or 'N/A' }}<br>
             <strong>Ano:</strong> {{ paper.year or 'N/A' }}<br>
-            <strong>Venue:</strong> {{ paper.venue or 'N/A' }}
+            <strong>Venue:</strong> {{ paper.venue or 'N/A' }}<br>
+            {% if paper.doi %}
+            <strong>DOI:</strong> <a href="https://doi.org/{{ paper.doi }}" target="_blank" rel="noopener">{{ paper.doi }}</a><br>
+            {% endif %}
+            {% if paper.url %}
+            <strong>URL:</strong> <a href="{{ paper.url }}" target="_blank" rel="noopener">{{ paper.url[:60] }}{{ '...' if paper.url|length > 60 else '' }}</a>
+            {% endif %}
         </div>
         
         {% if paper.abstract %}
         <div class="paper-abstract">
-            <strong>Resumo:</strong> {{ paper.abstract[:500] }}{% if paper.abstract|length > 500 %}...{% endif %}
+            <strong>Resumo:</strong> {{ paper.abstract }}
         </div>
         {% endif %}
         
@@ -821,6 +932,7 @@ class ReportGenerator:
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Análise de Lacunas da Revisão Sistemática</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
