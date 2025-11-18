@@ -183,6 +183,9 @@ research/exports/*.xlsx
 research/logs/
 research/*.db
 *.db
+# SQLite files
+research/*.sqlite
+*.sqlite
 
 # IDE configs
 .vscode/
