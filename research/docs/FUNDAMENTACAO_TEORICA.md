@@ -1,5 +1,7 @@
 # 📰 Fundamentação Teórica: Técnicas Computacionais na Educação Matemática
 
+> **Nota**: Esta fundamentação teórica serve como base para a **Fase 1** do Projeto de TCC (PTCC) - Revisão Sistemática da Literatura. As bases teóricas para as Fases 2 e 3 serão expandidas conforme o desenvolvimento do protótipo e validação experimental.
+
 ## 🌟 Contexto e Relevância
 
 A transformação digital tem impactado significativamente diversas áreas, inclusive a educação. No ensino da matemática, técnicas computacionais emergem como ferramentas poderosas para personalizar o ensino, diagnosticar o desempenho dos alunos e identificar, de forma automatizada, seus pontos fortes e fracos. 
@@ -70,21 +72,46 @@ A busca é realizada de forma **automatizada utilizando as APIs** das seguintes 
 - "math learning" / "aprendizagem matemática" 
 - "mathematics teaching" / "ensino de matemática"
 
-#### Termos Secundários (Técnicas Computacionais)
-- "adaptive learning" / "aprendizagem adaptativa"
-- "personalized learning" / "aprendizagem personalizada"
-- "intelligent tutoring systems" / "sistemas de tutoria inteligente"
-- "learning analytics" / "análise de aprendizagem"
-- "educational data mining" / "mineração de dados educacionais"
-- "machine learning" / "aprendizado de máquina"
-- "artificial intelligence" / "inteligência artificial"
-- "automated assessment" / "avaliação automatizada"
-- "competency identification" / "identificação de competências"
-- "student modeling" / "modelagem de estudantes"
-- "predictive analytics" / "análise preditiva"
+#### Termos Secundários (22 Técnicas Computacionais)
+1. "machine learning" / "aprendizado de máquina"
+2. "artificial intelligence" / "inteligência artificial"
+3. "deep learning" / "aprendizado profundo"
+4. "neural networks" / "redes neurais"
+5. "natural language processing" / "processamento de linguagem natural"
+6. "educational data mining" / "mineração de dados educacionais"
+7. "learning analytics" / "análise de aprendizagem"
+8. "adaptive learning" / "aprendizagem adaptativa"
+9. "personalized learning" / "aprendizagem personalizada"
+10. "intelligent tutoring systems" / "sistemas de tutoria inteligente"
+11. "automated assessment" / "avaliação automatizada"
+12. "predictive analytics" / "análise preditiva"
+13. "student modeling" / "modelagem de estudantes"
+14. "competency identification" / "identificação de competências"
+15. "recommendation systems" / "sistemas de recomendação"
+16. "reinforcement learning" / "aprendizado por reforço"
+17. "knowledge tracing" / "rastreamento de conhecimento"
+18. "cognitive modeling" / "modelagem cognitiva"
+19. "learning design" / "design de aprendizagem"
+20. "educational technology" / "tecnologia educacional"
+21. "computer-aided instruction" / "instrução assistida por computador"
+22. "e-learning systems" / "sistemas de e-learning"
 
 #### Geração de Combinações
-A combinação dos termos primários e secundários utiliza o operador booleano `AND`, gerando **132 combinações** únicas para busca (6 termos primários × 22 termos secundários).
+A combinação dos termos primários e secundários utiliza o operador booleano `AND`, gerando **132 combinações** únicas para busca:
+
+```python
+# Fonte: research/src/search_terms.py
+FIRST_TERMS = 6   # Termos educacionais (PT + EN)
+SECOND_TERMS = 22 # Técnicas computacionais
+TOTAL_QUERIES = 6 × 22 = 132 queries ✅ VERIFICADO
+```
+
+Cada query segue o formato: `"termo_primário" AND "termo_secundário"`
+
+Exemplos práticos:
+- "mathematics education" AND "machine learning"
+- "educação matemática" AND "aprendizado de máquina"
+- "math learning" AND "intelligent tutoring systems"
 
 ### 🚩 Critérios de Seleção
 
@@ -168,4 +195,31 @@ Esta fundamentação teórica e metodológica visa:
 
 ---
 
+---
+
+## 📚 Referências
+
+BAKER, R. S.; INVENTADO, P. S. **Educational data mining and learning analytics**. In: LARUSSON, J. A.; WHITE, B. (Ed.). Learning analytics: From research to practice. New York: Springer, 2014. p. 61-75.
+
+CHASSIGNOL, M. et al. Artificial Intelligence trends in education: a narrative overview. **Procedia Computer Science**, v. 136, p. 16-24, 2018. DOI: 10.1016/j.procs.2018.08.233.
+
+HOLMES, W. et al. **Artificial intelligence in education**: Promises and implications for teaching and learning. Brussels: European Parliament, 2019.
+
+LUCKIN, R. et al. **Intelligence Unleashed: An argument for AI in Education**. London: Pearson, 2016.
+
+ROLL, I.; WYLIE, R. Evolution and revolution in artificial intelligence in education. **International Journal of Artificial Intelligence in Education**, v. 26, n. 2, p. 582-599, 2016. DOI: 10.1007/s40593-016-0110-3.
+
+SIEMENS, G.; BAKER, R. S. Learning analytics and educational data mining: towards communication and collaboration. In: **Proceedings of the 2nd International Conference on Learning Analytics and Knowledge**. ACM, 2012. p. 252-254. DOI: 10.1145/2330601.2330661.
+
+VAN LEEUWEN, A. et al. Teacher perspectives on the development of adaptive educational technology. **Educational Technology Research and Development**, v. 67, n. 5, p. 1207-1233, 2019. DOI: 10.1007/s11423-019-09655-2.
+
+ZAWACKI-RICHTER, O. et al. Systematic review of research on artificial intelligence applications in higher education – where are the educators? **International Journal of Educational Technology in Higher Education**, v. 16, n. 1, p. 1-27, 2019. DOI: 10.1186/s41239-019-0171-0.
+
+BAKER, R. S. J. D.; YACEF, K. The state of educational data mining in 2009: A review and future visions. **Journal of Educational Data Mining**, v. 1, n. 1, p. 3-17, 2009.
+
+CONATI, C.; JAQUES, N.; MUIR, M. Understanding attention to adaptive hints in educational games: An eye-tracking study. **International Journal of Artificial Intelligence in Education**, v. 23, n. 1-4, p. 136-161, 2013. DOI: 10.1007/s40593-013-0002-8.
+
+---
+
 *Esta fundamentação teórica serve como base científica para o desenvolvimento de sistemas computacionais aplicados à educação matemática, garantindo rigor metodológico e relevância prática dos resultados obtidos.*
+```
