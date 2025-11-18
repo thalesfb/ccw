@@ -1,4 +1,4 @@
-## Contributing
+# Contributing
 
 We prefer a clean Git history and standardized commit messages. This repo uses the Conventional Commits style:
 

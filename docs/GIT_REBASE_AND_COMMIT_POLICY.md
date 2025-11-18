@@ -1,4 +1,4 @@
-## Git Flow, Rebase, and Commit Message Policy
+# Git Flow, Rebase, and Commit Message Policy
 
 This document describes the recommended developer workflow and how we keep a clean commit history.
 
