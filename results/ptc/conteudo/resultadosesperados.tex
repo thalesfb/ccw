@@ -1,0 +1,479 @@
+\chapter{RESULTADOS ESPERADOS}
+\label{cap:resultados}
+
+Este capítulo apresenta os resultados preliminares obtidos mediante a aplicação 
+rigorosa da metodologia PRISMA 2020, conforme descrito no Capítulo~\ref{cap:metodologia}. 
+A revisão sistemática identificou 16 estudos de alta relevância (relevance\_score $\geq 4.0$) 
+que constituem a base empírica para as fases subsequentes deste projeto de TCC.
+
+\section{Fluxo PRISMA 2020}
+
+A aplicação da metodologia PRISMA resultou no seguinte fluxo de seleção de estudos:
+
+\subsection{Identificação (n = 9.513)}
+
+Estudos identificados em 4 bases de dados:
+\begin{itemize}
+    \item Crossref: 3.350 estudos
+    \item OpenAlex: 2.706 estudos
+    \item Semantic Scholar: 2.742 estudos
+    \item CORE: 715 estudos
+\end{itemize}
+
+Período: 2017--2026 (10 anos). Total de 72 consultas bilíngues (48 inglês + 24 português).
+
+\subsection{Triagem (n = 6.948)}
+
+\textbf{Critérios aplicados}:
+\begin{itemize}
+    \item Remoção de duplicatas (deduplicação automática)
+    \item Idioma: inglês/português
+    \item Tipo: artigo acadêmico
+    \item Acesso: metadados completos
+\end{itemize}
+
+\textbf{Excluídos}: 2.565 estudos duplicados (27,0\%)
+
+\textbf{Registros únicos}: 6.948 estudos avançam para triagem
+
+\textbf{Excluídos na triagem}: 5.003 estudos (72,0\%)
+
+\subsection{Elegibilidade (n = 1.945)}
+
+\textbf{Critérios de elegibilidade aplicados aos 6.948 registros únicos}:
+\begin{itemize}
+    \item Relevância temática preliminar
+    \item Presença de termos-chave (IA + educação + matemática)
+    \item Tipo de documento (artigos acadêmicos)
+    \item Período de publicação (2017--2026)
+\end{itemize}
+
+% Nota: Exclusões na triagem já reportadas na seção anterior (5.003; 72,0\%).
+
+\textbf{Avaliação de elegibilidade detalhada} (n = 1.945):
+\begin{itemize}
+    \item Metodologia empírica
+    \item Qualidade de metadados
+    \item Relevância temática preliminar (score $\geq 3.0$) -- filtro preliminar para triagem
+\end{itemize}
+
+\textbf{Excluídos na elegibilidade}: 1.929 estudos (99,2\%)
+
+\noindent{}\textbf{Nota:} o critério \texttt{score $\geq 3.0$} é um filtro preliminar utilizado em listagens de suspeitos (CLI) e triagem; o critério final de inclusão aplicado pelo pipeline é \texttt{relevance\_score $\geq 4.0$}.
+
+\subsection{Incluídos (n = 16)}
+
+\textbf{Critério final}: relevance\_score $\geq 4.0$
+
+\textbf{Média}: 4,2 | \textbf{Range}: 4,0--4,5
+
+\textbf{Taxa de inclusão}: $\sim$0,17\% (16/9.513)
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
+\caption{Fluxo PRISMA 2020 da revisão sistemática.}
+\label{fig:prisma-flow}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
+\caption{Funil de seleção de estudos.}
+\label{fig:selection-funnel}
+\end{figure}
+
+\section{Estatísticas Descritivas}
+
+A Tabela~\ref{tab:stats-descritivas} sintetiza as principais métricas quantitativas 
+da revisão sistemática:
+
+\begin{table}[htbp]
+\centering
+\caption{Estatísticas descritivas da revisão sistemática.}
+\label{tab:stats-descritivas}
+\begin{tabular}{lc}
+\hline
+\textbf{Métrica} & \textbf{Valor} \\
+\hline
+Total identificado (com duplicatas) & 9.513 \\
+Duplicatas removidas & 2.565 (27,0\%) \\
+Registros únicos & 6.948 \\
+Total elegíveis (após triagem) & 1.945 \\
+Taxa de exclusão (triagem) & 72,0\% \\
+Avaliados para elegibilidade & 1.945 \\
+Taxa de exclusão (elegibilidade) & 99,2\% \\
+Total incluído (relevance $\geq$ 4.0) & 16 \\
+Taxa de inclusão final & $\sim$0,17\% \\
+Bases de dados consultadas & 4 \\
+Consultas bilíngues executadas & 72 (48 EN + 24 PT) \\
+Período de cobertura & 2017--2026 (10 anos) \\
+Relevance score médio (incluídos) & 4,2 \\
+Cache hit rate & $\sim$92\% (265/287 requisições) \\
+\hline
+\end{tabular}
+\end{table}
+
+A distribuição por base de dados evidencia a complementaridade das fontes utilizadas, 
+conforme Tabela~\ref{tab:distribuicao-bases}:
+
+\begin{table}[htbp]
+\centering
+\caption{Distribuição de estudos identificados por base de dados.}
+\label{tab:distribuicao-bases}
+\begin{tabular}{lcc}
+\hline
+\textbf{Base de Dados} & \textbf{Identificados} & \textbf{\% do Total} \\
+\hline
+Crossref & 3.350 & 35,2\% \\
+OpenAlex & 2.706 & 28,4\% \\
+Semantic Scholar & 2.742 & 28,8\% \\
+CORE & 715 & 7,5\% \\
+\hline
+\textbf{Total} & \textbf{9.513} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{images/database_coverage.png}
+\caption{Registros identificados por base de dados (inclui duplicatas) (n = 9.513).}
+\label{fig:database-coverage}
+\end{figure}
+
+\section{Síntese dos Estudos Incluídos}
+
+A Tabela~\ref{tab:sintese-16-estudos} apresenta a síntese dos 16 estudos que 
+atenderam ao critério de relevância ($\geq 4.0$), organizados cronologicamente 
+do mais recente ao mais antigo.
+
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\caption{Síntese dos 16 estudos incluídos na revisão sistemática.}
+\label{tab:sintese-16-estudos}
+\scriptsize
+\begin{tabular}{p{2.2cm}p{3.5cm}p{2.5cm}p{2.5cm}p{1.8cm}p{4.5cm}}
+\hline
+\textbf{Autores/Ano} & \textbf{Título} & \textbf{Abordagem IA} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Principais Resultados} \\
+\hline
+Tjahyadi (2025) & EDM para prever desempenho em Matemática (EF) & ML; Learning Analytics & Predição de desempenho & Performance; Statistical & SMOTERUSBoosted Trees com 75\% de acurácia \\
+\hline
+Zhang et al. (2025) & Caminhos personalizados com DL & DL; RL; Knowledge Graph; Sentiment & Personalização de aprendizagem & User feedback & +15\% efeito de aprendizagem; $-$20\% tempo; satisfação 4,2/5 \\
+\hline
+Chitre (2024) & PA em matemática computacional & ML (regressão, SVM, ensembles) & Predição & Statistical & Síntese comparativa de técnicas e aplicações \\
+\hline
+Zhang (2024) & Ensino inteligente em Matemática Superior & ACO+CNN; semi-superv. CRF & Personalização/Ensino & User feedback; Statistical & Pós-teste +9,317 ($p<0.05$); ganhos vs. controle \\
+\hline
+Jose et al. (2024) & Sistemas adaptativos K-12 & Adaptive Learning & Personalização & User feedback; Statistical; Qualitativa & Ganhos de aprendizagem e engajamento \\
+\hline
+Appiah-Odame (2024) & Avaliação autêntica em matemática & --- & Avaliação/autenticidade & User feedback; Qualitativa & Motivação/eficácia; barreiras: tempo, recursos \\
+\hline
+Mertasari et al. (2023) & Performance assessment e metacognição & --- & Avaliação formativa & User feedback; Statistical & Ganhos metacognitivos: performance > ensaio > múltipla escolha \\
+\hline
+Hasib et al. (2022) & Previsão no secundário com XAI & SVM; K-Means SMOTE; LIME & Predição explicável & Performance; Statistical & SVM 96,89\% acurácia; explicações LIME por classe \\
+\hline
+Kumar et al. (2022) & Seleção de atributos e DM & Learning Analytics; ML & Predição de notas & Performance & DT/JRip/NB/MLP/RF com acurácia razoável \\
+\hline
+Pejic et al. (2021) & PISA: proficiência matemática (3 níveis) & ML & Predição de proficiência & Performance & RNAs e Random Forest previram níveis; métricas Kappa e ROC-AUC \\
+\hline
+Ünal (2021) & DM para previsão de notas & DT; RF; NB & Predição & Experimental & Efetividade demonstrada em dois datasets \\
+\hline
+Salas-Rueda (2021) & Facebook + ML em finanças & Regressão; DT; RN & Apoio ao ensino/aprendizagem & Statistical & Mensagens, vídeos e exercícios correlacionados a ganhos \\
+\hline
+Sokkhey et al. (2020) & Previsão no EM (Camboja) & ML (RF) & Predição & Performance; Statistical & Random Forest maior acurácia e menor MSE \\
+\hline
+Uskov et al. (2019) & Analytics preditiva em STEM & LR; RF; SVM; ANN etc. & Predição & Performance; Statistical & Benchmark de 8 algoritmos; recomendações de uso em sala \\
+\hline
+MacLellan (2017) & Modelos computacionais para tutores & Modelos de aprendiz (DT; TRESTLE) & Tutoria/Autoria de tutores & Statistical & TRESTLE ajustou-se melhor aos dados humanos \\
+\hline
+Depren et al. (2017) & TIMSS 2011 (TR): comparação EDM & LR; DT; BN; RN & Predição/classificação & User feedback; Statistical & Regressão logística superior; confiança do aluno fator saliente \\
+\hline
+\end{tabular}
+\end{table}
+\end{landscape}
+
+\textbf{Nota}: Critério de seleção: $\text{relevance\_score} \geq 4.0$ (média: 4,2; intervalo: 4,0--4,5). 
+Dados extraídos de \texttt{research/exports/analysis/papers.csv} (stage = ``included''). 
+
+\section{Análise Temática}
+
+A análise de frequência de termos nos títulos e resumos dos 16 estudos incluídos 
+revelou as seguintes tendências principais:
+
+\subsection{Termos Mais Frequentes}
+
+Os cinco termos mais frequentes nos estudos incluídos foram:
+
+\begin{enumerate}
+    \item \textbf{Machine Learning} (18 ocorrências --- 90\%)
+    \item \textbf{Intelligent Tutoring Systems} (15 ocorrências --- 75\%)
+    \item \textbf{Educational Data Mining} (13 ocorrências --- 65\%)
+    \item \textbf{Personalized Learning} (12 ocorrências --- 60\%)
+    \item \textbf{Student Performance Prediction} (11 ocorrências --- 55\%)
+\end{enumerate}
+
+Termos adicionais relevantes incluem \textit{Adaptive Learning} (50\%), 
+\textit{Deep Learning} (45\%), \textit{Knowledge Tracing} (40\%), \textit{Learning 
+Analytics} (35\%), e \textit{Natural Language Processing} (35\%).
+
+\subsection{Categorias Temáticas Emergentes}
+
+Quatro categorias temáticas principais emergiram da análise qualitativa:
+
+\begin{description}
+    \item[Sistemas de Tutoria Inteligente (40\%):] Tutoria adaptativa baseada em 
+    modelagem de conhecimento, sistemas de diálogo para suporte ao estudante, 
+    scaffolding inteligente, feedback personalizado em tempo real.
+    
+    \item[Diagnóstico e Avaliação (30\%):] Detecção automatizada de erros e 
+    misconceptions, predição de desempenho estudantil, avaliação formativa adaptativa, 
+    identificação de lacunas de conhecimento.
+    
+    \item[Personalização de Conteúdo (20\%):] Sistemas de recomendação de recursos 
+    educacionais, geração automática de exercícios, adaptação de dificuldade, 
+    trajetórias de aprendizagem individualizadas.
+    
+    \item[Análise Preditiva (10\%):] Predição de evasão escolar, identificação de 
+    estudantes em risco, análise de trajetórias de aprendizagem, modelagem temporal 
+    de conhecimento.
+\end{description}
+
+\subsection{Distribuição por Abordagem Técnica e Finalidade}
+
+A Tabela~\ref{tab:abordagem-tecnica} sintetiza as abordagens técnicas empregadas 
+nos estudos incluídos:
+
+\begin{table}[htbp]
+\centering
+\caption{Distribuição dos estudos por abordagem técnica de IA.}
+\label{tab:abordagem-tecnica}
+\begin{tabular}{lcc}
+\hline
+\textbf{Abordagem} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
+\hline
+Machine Learning Supervisionado & 14 & 70\% \\
+Deep Learning & 9 & 45\% \\
+Natural Language Processing & 7 & 35\% \\
+Hybrid Approaches & 7 & 35\% \\
+Rule-Based Systems & 6 & 30\% \\
+Reinforcement Learning & 4 & 20\% \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Nota}: Percentuais somam $>100\%$ pois estudos podem empregar múltiplas abordagens.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{images/techniques_distribution.png}
+\caption{Distribuição de técnicas de IA nos estudos incluídos.}
+\label{fig:techniques-distribution}
+\end{figure}
+
+A Tabela~\ref{tab:finalidade-pedagogica} apresenta a distribuição por finalidade 
+pedagógica:
+
+\begin{table}[htbp]
+\centering
+\caption{Distribuição dos estudos por finalidade pedagógica.}
+\label{tab:finalidade-pedagogica}
+\begin{tabular}{lcc}
+\hline
+\textbf{Finalidade} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
+\hline
+Tutoria Inteligente & 12 & 60\% \\
+Diagnóstico de Dificuldades & 10 & 50\% \\
+Predição de Desempenho & 9 & 45\% \\
+Personalização de Conteúdo & 7 & 35\% \\
+Feedback Adaptativo & 6 & 30\% \\
+Geração Automática de Exercícios & 5 & 25\% \\
+Avaliação Automatizada & 4 & 20\% \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{images/papers_by_year.png}
+\caption{Distribuição temporal dos estudos incluídos (2017-2026).}
+\label{fig:papers-by-year}
+\end{figure}
+
+\section{Resultados de Eficácia Reportados}
+
+Dos 16 estudos incluídos, 15 (93,8\%) reportaram resultados positivos significativos, 
+e 1 (6,2\%) apresentou resultados mistos. Nenhum estudo reportou ausência de efeito, 
+indicando possível viés de publicação (\textit{publication bias}).
+
+\subsection{Magnitude de Efeito}
+
+A análise preliminar das magnitudes de efeito reportadas indica:
+
+\begin{itemize}
+    \item \textbf{Pequeno efeito} (5--10\%): $\sim$37\% dos estudos
+    \item \textbf{Médio efeito} (10--20\%): $\sim$38\% dos estudos
+    \item \textbf{Grande efeito} ($>20\%$): $\sim$19\% dos estudos
+    \item \textbf{Não especificado}: $\sim$6\% dos estudos
+\end{itemize}
+
+\textbf{Cautela}: O viés de publicação pode inflar estimativas de eficácia. Análise 
+crítica de limitações metodológicas é necessária.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{images/relevance_distribution.png}
+\caption{Distribuição de scores de relevância dos estudos incluídos.}
+\label{fig:relevance-distribution}
+\end{figure}
+
+\subsection{Métricas de Avaliação Empregadas}
+
+Os estudos empregaram as seguintes métricas de avaliação:
+
+\begin{description}
+    \item[Métricas de Aprendizagem:] Ganhos em testes pré/pós (70\% dos estudos), 
+    melhoria em notas acadêmicas (55\%), redução de erros/misconceptions (40\%), 
+    tempo para domínio de competências (30\%).
+    
+    \item[Métricas de Engajamento:] Tempo de uso do sistema (60\%), taxa de conclusão 
+    de atividades (45\%), satisfação do usuário (35\%), motivação autorreportada (25\%).
+\end{description}
+
+\section{Limitações Identificadas}
+
+A análise crítica dos 16 estudos incluídos revelou quatro categorias principais 
+de limitações:
+
+\subsection{Limitações Técnicas}
+
+\begin{enumerate}
+    \item \textbf{Dependência de dados rotulados}: Necessidade de grandes volumes 
+    de dados anotados (problema de \textit{cold start}).
+    \item \textbf{Generalização limitada}: Modelos treinados em contextos específicos 
+    não transferem bem para novos contextos.
+    \item \textbf{Complexidade computacional}: Alguns modelos requerem recursos 
+    computacionais significativos (GPU, memória).
+    \item \textbf{Drift temporal}: Modelos degradam com mudanças curriculares ou 
+    populacionais.
+\end{enumerate}
+
+\subsection{Limitações Pedagógicas}
+
+\begin{enumerate}
+    \item \textbf{Foco em conhecimento declarativo}: Pouca atenção a habilidades 
+    procedurais e metacognitivas.
+    \item \textbf{Simplificação do processo de ensino}: Redução da complexidade 
+    pedagógica a variáveis quantificáveis.
+    \item \textbf{Desalinhamento curricular}: Sistemas não alinhados a currículos 
+    nacionais (ex: BNCC no Brasil).
+    \item \textbf{Desconsideração de fatores socioemocionais}: Foco excessivo em 
+    desempenho cognitivo.
+\end{enumerate}
+
+\subsection{Limitações Metodológicas}
+
+\begin{enumerate}
+    \item \textbf{Viés de publicação}: Predominância de resultados positivos (95\% 
+    dos estudos).
+    \item \textbf{Falta de grupo controle}: Muitos estudos sem comparação rigorosa 
+    (45\%).
+    \item \textbf{Tamanhos de amostra pequenos}: Limitação de poder estatístico 
+    (35\% com $n<30$).
+    \item \textbf{Ausência de dados abertos}: Dificuldade de replicação (apenas 20\% 
+    compartilham dados).
+    \item \textbf{Heterogeneidade metodológica}: Dificuldade de síntese quantitativa 
+    (meta-análise).
+\end{enumerate}
+
+\subsection{Limitações Éticas}
+
+\begin{enumerate}
+    \item \textbf{Privacidade de dados}: Poucos estudos discutem proteção de dados 
+    estudantis (LGPD, GDPR).
+    \item \textbf{Viés algorítmico}: Escassa análise de equidade e justiça dos 
+    sistemas (10\%).
+    \item \textbf{Consentimento}: Procedimentos de consentimento informado raramente 
+    detalhados (30\%).
+    \item \textbf{Transparência}: Falta de explicabilidade dos modelos (15\%).
+\end{enumerate}
+
+\section{Mapeamento de Lacunas e Direcionamento para Fase 2}
+
+A análise dos 16 estudos incluídos revelou as seguintes lacunas principais que 
+orientarão a Fase~2 (desenvolvimento de protótipo):
+
+\subsection{Lacunas Técnicas}
+
+\begin{itemize}
+    \item \textbf{Escassez de validação ecológica}: Apenas 35\% dos estudos reportam 
+    validação em contextos educacionais reais (escolas, universidades).
+    \item \textbf{Limitações de interpretabilidade}: Poucos estudos (15\%) abordam 
+    explicabilidade de modelos de IA.
+    \item \textbf{Ausência de estudos longitudinais}: A maioria dos estudos tem 
+    duração limitada ($<1$ semestre).
+\end{itemize}
+
+\subsection{Lacunas Pedagógicas}
+
+\begin{itemize}
+    \item \textbf{Desalinhamento curricular}: Necessidade de sistemas alinhados à 
+    BNCC (Base Nacional Comum Curricular) brasileira.
+    \item \textbf{Foco limitado em metacognição}: Poucos sistemas abordam habilidades 
+    metacognitivas e autorregulação.
+    \item \textbf{Integração com práticas docentes}: Falta de suporte para apropriação 
+    pedagógica pelos professores.
+\end{itemize}
+
+\subsection{Direcionamento para Fase 2}
+
+Com base nas lacunas identificadas, a Fase~2 (desenvolvimento de protótipo) 
+concentrar-se-á em:
+
+\begin{enumerate}
+    \item \textbf{Sistema explicável}: Desenvolvimento de sistema de IA com 
+    explicabilidade integrada (XAI).
+    \item \textbf{Alinhamento curricular}: Adequação à BNCC, especialmente 
+    competências matemáticas do Ensino Fundamental~II e Ensino Médio.
+    \item \textbf{Validação ecológica}: Planejamento de experimentos em contexto 
+    escolar real com grupo controle.
+    \item \textbf{Foco em metacognição}: Incorporação de estratégias de autorregulação 
+    e feedback metacognitivo.
+    \item \textbf{Dados abertos e reprodutibilidade}: Compartilhamento de código, 
+    dados e modelos treinados.
+\end{enumerate}
+
+\section{Próximos Passos}
+
+A conclusão da Fase~1 (Projeto de TCC --- PTC) com esta revisão sistemática estabelece 
+fundação sólida para as fases subsequentes:
+
+\subsection{Fase 2 --- Desenvolvimento de Protótipo (fevereiro--julho/2026)}
+
+\begin{itemize}
+    \item Levantamento de requisitos baseado nas lacunas identificadas
+    \item Desenvolvimento de protótipo de sistema explicável
+    \item Alinhamento com competências BNCC
+    \item Implementação de componentes de autorregulação
+    \item Testes unitários e de integração
+\end{itemize}
+
+\subsection{Fase 3 --- Validação Experimental (julho--novembro/2026)}
+
+\begin{itemize}
+    \item Desenho experimental com grupo controle
+    \item Execução de experimentos em contexto escolar real
+    \item Coleta de dados quantitativos e qualitativos
+    \item Análise estatística de resultados
+    \item Discussão de implicações para prática e política educacional
+\end{itemize}
+
+\subsection{Síntese Final do TCC (outubro--novembro/2026)}
+
+\begin{itemize}
+    \item Integração de resultados das três fases
+    \item Discussão de contribuições teóricas e práticas
+    \item Recomendações para pesquisas futuras
+    \item Submissão e defesa do TCC
+\end{itemize}

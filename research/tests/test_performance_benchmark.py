@@ -13,7 +13,7 @@ from typing import Dict, List
 # Adicionar o diretório raiz do projeto ao path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.pipeline.improved_pipeline import ImprovedSystematicReviewPipeline
+from src.pipeline.run import SystematicReviewPipeline
 
 
 class PerformanceBenchmark:
@@ -50,8 +50,10 @@ class PerformanceBenchmark:
             start_time = time.time()
             
             try:
-                pipeline = ImprovedSystematicReviewPipeline(limit_queries=limit)
-                df_results = pipeline.run_complete_pipeline()
+                pipeline = SystematicReviewPipeline()
+                # Gerar queries limitadas
+                queries = pipeline.generate_search_queries()[:limit]
+                df_results = pipeline.run_full_pipeline(search_queries=queries, export=False)
                 
                 # Métricas finais
                 end_time = time.time()
@@ -80,46 +82,37 @@ class PerformanceBenchmark:
         """Testa performance individual de cada API."""
         print("🌐 Executando benchmark de APIs...")
         
-        # Usar apenas 2 queries para teste rápido
-        pipeline = ImprovedSystematicReviewPipeline(limit_queries=2)
-        
-        # Medir tempo de cada cliente individualmente
+        # Testar com uma query simples através do pipeline
         api_metrics = {}
+        test_query = ["mathematics education AND adaptive learning"]
+        apis_to_test = ["semantic_scholar", "openalex", "crossref", "core"]
         
-        for client_name, client in pipeline.clients.items():
-            print(f"\n📡 Testando API: {client_name}")
+        for api_name in apis_to_test:
+            print(f"\n📡 Testando API: {api_name}")
             
             start_time = time.time()
             try:
-                # Testar com uma query simples
-                test_query = "mathematics education AND adaptive learning"
-                results = client.search(query=test_query, limit=5)
+                pipeline = SystematicReviewPipeline()
+                results = pipeline.collect_data(queries=test_query, apis=[api_name], limit_per_query=5)
                 
                 end_time = time.time()
+                count = len(results) if results is not None else 0
                 
-                # Converter DataFrame para contagem se necessário
-                if hasattr(results, '__len__'):
-                    count = len(results)
-                elif hasattr(results, 'to_dict'):
-                    count = len(results.to_dict('records'))
-                else:
-                    count = 0
-                
-                api_metrics[client_name] = {
+                api_metrics[api_name] = {
                     'response_time': end_time - start_time,
                     'results_count': count,
                     'results_per_second': count / (end_time - start_time) if (end_time - start_time) > 0 else 0,
                     'status': 'success'
                 }
                 
-                print(f"✅ {client_name}: {end_time - start_time:.2f}s, {count} resultados")
+                print(f"✅ {api_name}: {end_time - start_time:.2f}s, {count} resultados")
                 
             except Exception as e:
-                api_metrics[client_name] = {
+                api_metrics[api_name] = {
                     'error': str(e),
                     'status': 'failed'
                 }
-                print(f"❌ {client_name}: {e}")
+                print(f"❌ {api_name}: {e}")
         
         return api_metrics
     
@@ -132,15 +125,16 @@ class PerformanceBenchmark:
         # Primeira execução (sem cache)
         print("\n🔥 Primeira execução (populando cache)...")
         start_time = time.time()
-        pipeline1 = ImprovedSystematicReviewPipeline(limit_queries=2)
-        results1 = pipeline1.run_complete_pipeline()
+        pipeline1 = SystematicReviewPipeline()
+        queries = pipeline1.generate_search_queries()[:2]
+        results1 = pipeline1.run_full_pipeline(search_queries=queries, export=False)
         first_execution_time = time.time() - start_time
         
         # Segunda execução (com cache)
         print("\n⚡ Segunda execução (usando cache)...")
         start_time = time.time()
-        pipeline2 = ImprovedSystematicReviewPipeline(limit_queries=2)
-        results2 = pipeline2.run_complete_pipeline()
+        pipeline2 = SystematicReviewPipeline()
+        results2 = pipeline2.run_full_pipeline(search_queries=queries, export=False)
         second_execution_time = time.time() - start_time
         
         # Calcular métricas

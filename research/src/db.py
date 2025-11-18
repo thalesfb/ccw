@@ -93,7 +93,6 @@ def save_papers(df: pd.DataFrame, cfg: AppConfig | None = None) -> int:
     
     return inserted
 
-
 def read_papers(cfg: AppConfig | None = None) -> pd.DataFrame:
     """Read all papers from database.
     

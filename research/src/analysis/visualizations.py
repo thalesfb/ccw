@@ -93,19 +93,20 @@ class ReviewVisualizer:
         ax.text(5, 9.7, 'Fluxo PRISMA da Revisão Sistemática', 
                 ha='center', va='center', fontsize=16, fontweight='bold')
         
-        # Identification
+        # PRISMA stats com lógica progressiva correta
         identification = int(stats.get('identification', 0))
         duplicates_removed = int(stats.get('duplicates_removed', 0))
-        after_duplicates = identification - duplicates_removed
-
-        # Usar diretamente valores progressivos fornecidos nas stats
-        screening = int(stats.get('screening', max(0, after_duplicates)))
-        eligibility = int(stats.get('eligibility', max(0, screening)))
+        screening = int(stats.get('screening', 0))  # Registros únicos para triagem
+        
+        # Passaram triagem -> foram para elegibilidade
+        eligibility = int(stats.get('eligibility', 0))  
+        
+        # Incluídos finais
         included = int(stats.get('included', 0))
-
-        # Caixas de exclusão (informativas)
-        screening_excluded = int(stats.get('screening_excluded', max(0, identification - screening)))
-        eligibility_excluded = int(stats.get('eligibility_excluded', max(0, screening - eligibility)))
+        
+        # Excluídos são calculados como diferenças no fluxo progressivo
+        screening_excluded = int(stats.get('screening_excluded', max(0, screening - eligibility)))
+        eligibility_excluded = int(stats.get('eligibility_excluded', max(0, eligibility - included)))
 
         logger.info(
             f"PRISMA stats used -> ident={identification}, dup_removed={duplicates_removed}, "
@@ -113,19 +114,19 @@ class ReviewVisualizer:
             f"screening_excl={screening_excluded}, eligibility_excl={eligibility_excluded}"
         )
         
-        # Main flow boxes with correct PRISMA stages
+        # Main flow boxes seguindo PRISMA 2020
         boxes = [
-            (5, 8.5, f"Registros identificados\nnas bases de dados\n(n = {identification})", box_color),
-            (5, 7.5, f"Registros sem duplicatas\n(n = {after_duplicates})", box_color),
-            (5, 6.5, f"Registros selecionados\npara triagem\n(n = {screening})", box_color),
-            (5, 5.5, f"Artigos avaliados\npara elegibilidade\n(n = {eligibility})", box_color),
-            (5, 4.5, f"Estudos incluídos\nna síntese qualitativa\n(n = {included})", box_color),
+            (5, 8.5, f"Registros identificados\nnas bases de dados\n(n = {identification:,})", box_color),
+            (5, 7.5, f"Duplicatas removidas\n(n = {duplicates_removed:,})", exclude_color),
+            (5, 6.5, f"Registros únicos\nselecionados para triagem\n(n = {screening:,})", box_color),
+            (5, 5.5, f"Registros que passaram triagem\navaliados para elegibilidade\n(n = {eligibility:,})", box_color),
+            (5, 4.5, f"Estudos incluídos\nna síntese qualitativa\n(n = {included:,})", box_color),
         ]
         
-        # Exclusion boxes with correct counts
+        # Exclusion boxes com contagens corretas de cada estágio
         exclusions = [
-            (8, 6.5, f"Registros excluídos\nna triagem\n(n = {screening_excluded})", exclude_color),
-            (8, 5.5, f"Artigos excluídos\nna elegibilidade\n(n = {eligibility_excluded})", exclude_color),
+            (8, 6.5, f"Registros excluídos\nna triagem\n(n = {screening_excluded:,})", exclude_color),
+            (8, 5.5, f"Artigos excluídos\nna elegibilidade\n(n = {eligibility_excluded:,})", exclude_color),
         ]
         
         # Draw main flow boxes
@@ -144,14 +145,22 @@ class ReviewVisualizer:
             ax.add_patch(rect)
             ax.text(x, y, text, ha='center', va='center', fontsize=9, color=text_color)
         
-        # Draw arrows
+        # Draw arrows - fluxo progressivo correto
         arrow_props = dict(arrowstyle='->', lw=2, color='black')
         
-        # Main flow arrows
-        for i in range(len(boxes) - 1):
-            ax.annotate('', xy=(5, boxes[i+1][1] + box_height/2), 
-                       xytext=(5, boxes[i][1] - box_height/2), 
-                       arrowprops=arrow_props)
+        # Main flow arrows (pula a caixa de duplicatas removidas que é informativa)
+        ax.annotate('', xy=(5, boxes[1][1] + box_height/2), 
+                   xytext=(5, boxes[0][1] - box_height/2), 
+                   arrowprops=arrow_props)
+        ax.annotate('', xy=(5, boxes[2][1] + box_height/2), 
+                   xytext=(5, boxes[1][1] - box_height/2), 
+                   arrowprops=arrow_props)
+        ax.annotate('', xy=(5, boxes[3][1] + box_height/2), 
+                   xytext=(5, boxes[2][1] - box_height/2), 
+                   arrowprops=arrow_props)
+        ax.annotate('', xy=(5, boxes[4][1] + box_height/2), 
+                   xytext=(5, boxes[3][1] - box_height/2), 
+                   arrowprops=arrow_props)
         
         # Exclusion arrows
         ax.annotate('', xy=(8 - box_width/2, 6.5), xytext=(5 + box_width/2, 6.5), 
@@ -260,6 +269,14 @@ class ReviewVisualizer:
         # Count techniques
         tech_counts = pd.Series(techniques_data).value_counts()
         
+        # Limit to top 20 techniques for better visualization
+        if len(tech_counts) > 20:
+            top_20 = tech_counts.head(20)
+            other_count = tech_counts.iloc[20:].sum()
+            # Create new series with top 20 + "Outras"
+            tech_counts = pd.concat([top_20, pd.Series({'Outras': other_count})])
+            logger.info(f"Limiting technique visualization to top 20 (+ 'Outras' category with {other_count} papers)")
+        
         # Create horizontal bar chart
         fig, ax = plt.subplots(figsize=(12, 8))
         
@@ -269,7 +286,7 @@ class ReviewVisualizer:
         ax.set_yticks(range(len(tech_counts)))
         ax.set_yticklabels(tech_counts.index)
         ax.set_xlabel('Número de Artigos')
-        ax.set_title('Distribuição de Técnicas Computacionais')
+        ax.set_title('Distribuição de Técnicas Computacionais (Top 20)')
         
         # Add value labels
         for i, (bar, count) in enumerate(zip(bars, tech_counts.values)):

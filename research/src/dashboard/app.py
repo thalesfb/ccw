@@ -1,7 +1,7 @@
 """Dashboard interativo para revisão sistemática."""
 
 from research.src.analysis.visualizations import ReviewVisualizer
-from research.src.processing.adaptive_selection import AdaptiveSelection
+from research.src.processing.selection import apply_prisma_selection
 from research.src.db import read_papers, get_statistics
 from research.src.config import load_config
 import streamlit as st
@@ -370,20 +370,22 @@ def show_config_tab(config, df=None):
             st.write(f"**{key}:** {value}")
 
     # Seletor adaptativo
-    st.markdown("### 🎯 Seleção Adaptativa")
+    st.markdown("### 🎯 Apply PRISMA Selection")
 
-    target_size = st.slider("Tamanho desejado da amostra:", 10, 500, 100)
-    min_size = st.slider("Tamanho mínimo aceitável:", 5, 100, 20)
+    min_relevance = st.slider(
+        "Minimum relevance score for eligibility:",
+        min_value=0.0,
+        max_value=10.0,
+        value=float(load_config().review.relevance_threshold)
+    )
 
-    if st.button("🔄 Aplicar Seleção Adaptativa"):
+    if st.button("🔄 Apply PRISMA Selection"):
         if df is not None and not df.empty:
-            adaptive_selector = AdaptiveSelection(target_size, min_size)
-            selected_df = adaptive_selector.select_adaptive(df)
-            st.success(f"✅ Seleção adaptativa aplicada: {len(selected_df)} artigos selecionados")
-            report = adaptive_selector.get_selection_report(df, selected_df)
-            st.json(report)
+            selected_df, stats = apply_prisma_selection(df, min_relevance_score=min_relevance)
+            st.success(f"✅ PRISMA selection applied: {len(selected_df[selected_df['status']=='included'])} articles included")
+            st.json(stats)
         else:
-            st.warning("Carregue dados primeiro para aplicar a seleção adaptativa.")
+            st.warning("Load data first to apply selection.")
 
 
 def show_reports_tab(df):

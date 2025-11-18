@@ -11,12 +11,14 @@ import pandas as pd
 
 from ..config import AppConfig, load_config
 from ..logging_config import get_audit_logger
-from ..db import init_db, read_papers, save_papers
+from ..db import init_db, read_papers, save_papers, get_db_manager
 from ..exports.excel import export_complete_review
 from ..ingestion import search_semantic_scholar, search_openalex, search_crossref, search_core
-from ..processing.dedup import deduplicate
+from ..processing.dedup import find_duplicates
 from ..processing.scoring import compute_relevance_scores
-from ..processing.selection import apply_prisma_selection
+from ..processing.enrichment import enrich_dataframe
+from ..processing.selection import apply_prisma_selection, apply_post_collection_filter
+from ..search_terms import generate_search_queries  # Import canonical query generator
 
 # Configurar logging
 logging.basicConfig(
@@ -45,65 +47,20 @@ class SystematicReviewPipeline:
         init_db(self.config)
         logger.info("Pipeline initialized")
 
-    def generate_search_queries(
-        self,
-        base_terms: Optional[List[str]] = None,
-        technique_terms: Optional[List[str]] = None,
-        education_terms: Optional[List[str]] = None
-    ) -> List[str]:
-        """Gera combinações de termos de busca.
+    def generate_search_queries(self) -> List[str]:
+        """Gera lista de queries usando gerador canônico bilingue.
 
-        Args:
-            base_terms: Termos base (ex: ["mathematics", "math"])
-            technique_terms: Termos de técnicas (ex: ["machine learning", "AI"])
-            education_terms: Termos educacionais (ex: ["education", "learning"])
+        Nova lógica: gera apenas triplas (base AND técnica AND educação) separadas
+        por idioma conforme `search_terms.generate_search_queries`.
 
-        Returns:
-            Lista de queries geradas
+        Returns
+        -------
+        list[str]
+            Lista de queries geradas.
         """
-        if base_terms is None:
-            base_terms = [
-                "mathematics",
-                "math",
-                "matemática"
-            ]
-
-        if technique_terms is None:
-            technique_terms = [
-                "machine learning",
-                "artificial intelligence",
-                "AI",
-                "deep learning",
-                "data mining",
-                "learning analytics",
-                "educational data mining"
-            ]
-
-        if education_terms is None:
-            education_terms = [
-                "education",
-                "teaching",
-                "learning",
-                "assessment",
-                "personalization",
-                "adaptive learning",
-                "intelligent tutoring"
-            ]
-
-        queries = []
-
-        # Gerar combinações
-        for base in base_terms:
-            for tech in technique_terms:
-                # Base + Técnica
-                queries.append(f"{base} AND {tech}")
-
-                # Base + Técnica + Educação
-                for edu in education_terms:
-                    queries.append(f"{base} AND {tech} AND {edu}")
-
+        queries = generate_search_queries()
         self.search_queries = queries
-        logger.info(f"Generated {len(queries)} search queries")
+        logger.info(f"Generated {len(queries)} bilingual triple queries (base AND tech AND edu)")
         return queries
 
     def collect_data(
@@ -198,15 +155,53 @@ class SystematicReviewPipeline:
 
         initial_count = len(self.results)
 
-        # Deduplicar
+        # Deduplicação não-destrutiva: marcar duplicatas, não remover
         if deduplicate_data:
-            self.results = deduplicate(self.results)
-            logger.info(f"🧹 Após deduplicação: {len(self.results)} artigos")
+            self.results = find_duplicates(self.results)
+            try:
+                total = int(len(self.results))
+                dup_removed = int(self.results.get('is_duplicate', pd.Series(dtype=bool)).astype(bool).sum())
+                self.results.attrs = getattr(self.results, 'attrs', {}) or {}
+                self.results.attrs['dedup_stats'] = {
+                    'initial_count': total,
+                    'removed_by_doi': None,
+                    'removed_by_url': None,
+                    'removed_by_title': None,
+                    'total_removed': dup_removed,
+                }
+                self.dedup_stats = self.results.attrs['dedup_stats']
+            except Exception:
+                self.dedup_stats = None
+
+            # Persist analysis artifact with identified duplicates
+            try:
+                analysis_dir = Path(self.config.database.exports_dir) / "analysis"
+                analysis_dir.mkdir(parents=True, exist_ok=True)
+                dup_df = self.results[self.results.get('is_duplicate', False) == True]
+                dup_df.to_csv(analysis_dir / "deduplicated_rows.csv", index=False, encoding='utf-8-sig')
+                logger.info(f"🧹 Deduplicação não-destrutiva: marcadas {len(dup_df)} duplicatas (artefato salvo)")
+            except Exception as e:
+                logger.warning(f"Falha ao salvar artefato de duplicatas: {e}")
 
         # Calcular scores de relevância
         if compute_scores:
             self.results = compute_relevance_scores(self.results)
             logger.info("📈 Scores de relevância calculados")
+
+            # Enrichment: add descriptive fields (comp_techniques, main_results, identified_gaps)
+            try:
+                self.results = enrich_dataframe(self.results)
+                logger.info("🔧 Enrichment applied (comp_techniques, main_results, identified_gaps)")
+            except Exception as e:
+                logger.warning(f"Enrichment step failed: {e}")
+
+        # Ensure dedup_stats survive transformations
+        try:
+            if getattr(self, 'dedup_stats', None):
+                self.results.attrs = getattr(self.results, 'attrs', {}) or {}
+                self.results.attrs['dedup_stats'] = self.dedup_stats
+        except Exception:
+            pass
 
         # Salvar no banco
         if save_to_db:
@@ -240,6 +235,14 @@ class SystematicReviewPipeline:
             min_relevance_score if min_relevance_score is not None else self.config.review.relevance_threshold
         )
 
+        # Ensure PRISMA has access to dedup identification stats
+        try:
+            if getattr(self, 'dedup_stats', None):
+                self.results.attrs = getattr(self.results, 'attrs', {}) or {}
+                self.results.attrs['dedup_stats'] = self.dedup_stats
+        except Exception:
+            pass
+
         # Aplicar seleção PRISMA
         self.results, selection_stats = apply_prisma_selection(
             self.results,
@@ -263,7 +266,7 @@ class SystematicReviewPipeline:
         self,
         output_dir: Optional[Path] = None,
         include_visualizations: bool = True
-    ) -> Dict[str, Path]:
+    , keep_analysis_artifacts: bool = True) -> Dict[str, Path]:
         """Exporta os resultados completos com relatórios e visualizações.
 
         Args:
@@ -323,9 +326,28 @@ class SystematicReviewPipeline:
             "abstract_required": self.config.review.abstract_required,
             "relevance_threshold": self.config.review.relevance_threshold
         }
+        # Control cleanup behaviour: when keep_analysis_artifacts is True, we
+        # instruct exporter to NOT cleanup analysis files
+        config_dict["cleanup_analysis"] = not bool(keep_analysis_artifacts)
+
+        # Ensure we generate visuals/reports from the canonical DB source.
+        # Prefer the persisted DB table as the single source of truth when available.
+        try:
+            # Harmonize DB selection fields to avoid export/DB mismatches
+            try:
+                get_db_manager(self.config).normalize_consistency()
+            except Exception:
+                pass
+            df_db = read_papers(self.config)
+            if df_db is not None and not df_db.empty:
+                df_to_export = df_db
+            else:
+                df_to_export = self.results
+        except Exception:
+            df_to_export = self.results
 
         if include_visualizations:
-            return export_complete_review(self.results, stats, config_dict, output_dir)
+            return export_complete_review(df_to_export, stats, config_dict, output_dir)
         else:
             # Exportação básica em Excel apenas
             from ..exports.excel import to_excel_with_filters
@@ -340,7 +362,10 @@ class SystematicReviewPipeline:
         self,
         search_queries: Optional[List[str]] = None,
         export: bool = True,
-        min_relevance_score: float = 4.0
+        min_relevance_score: float = 4.0,
+        *,
+        skip_audit_filter: bool = False,
+        keep_analysis_artifacts: bool = True,
     ) -> pd.DataFrame:
         """Executa o pipeline completo.
 
@@ -392,14 +417,32 @@ class SystematicReviewPipeline:
             "min_relevance_score": min_relevance_score
         })
         
-        # Salvar papers com selection_stage atualizado
+        # 4.5 Post-collection auditable filter (minimal)
+        if not skip_audit_filter:
+            try:
+                analysis_dir = Path(self.config.database.exports_dir) / "analysis"
+                # persist_decisions True -> annotate decisions and persist exclusions
+                # to the canonical DB (cfg passed) so exclusion decisions are
+                # recorded even if the in-memory DataFrame is replaced by the
+                # kept-subset returned by the function.
+                self.results = apply_post_collection_filter(
+                    self.results,
+                    analysis_dir,
+                    persist_decisions=True,
+                    cfg=self.config,
+                )
+                logger.info("Applied post-collection audit filter (decisions annotated)")
+            except Exception as e:
+                logger.warning(f"Post-collection filter failed: {e}")
+
+        # Salvar papers com selection_stage e decisões de filtro atualizados
         saved = save_papers(self.results, self.config)
-        logger.info(f"Updated {saved} papers with selection stages")
+        logger.info(f"Updated {saved} papers with selection stages and filter decisions")
 
         # 5. Exportar resultados
         if export:
             logger.info("\n💾 Phase 5: Export & Visualization")
-            export_files = self.export_results()
+            export_files = self.export_results(keep_analysis_artifacts=keep_analysis_artifacts)
 
             if isinstance(export_files, dict):
                 logger.info("📊 Arquivos gerados:")
@@ -436,7 +479,10 @@ class SystematicReviewPipeline:
 def run_systematic_review(
     queries: Optional[List[str]] = None,
     config: Optional[AppConfig] = None,
-    export: bool = True
+    export: bool = True,
+    *,
+    skip_audit_filter: bool = False,
+    keep_analysis_artifacts: bool = False,
 ) -> pd.DataFrame:
     """Função conveniente para executar a revisão sistemática.
 
@@ -449,7 +495,13 @@ def run_systematic_review(
         DataFrame com os resultados
     """
     pipeline = SystematicReviewPipeline(config)
-    return pipeline.run_full_pipeline(queries, export)
+    return pipeline.run_full_pipeline(
+        queries,
+        export,
+        min_relevance_score=4.0,
+        skip_audit_filter=skip_audit_filter,
+        keep_analysis_artifacts=keep_analysis_artifacts,
+    )
 
 
 if __name__ == "__main__":

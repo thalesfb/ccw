@@ -8,7 +8,7 @@ Este repositório contém o desenvolvimento de uma ferramenta tecnológica para 
 
 ### Tema
 
-"Apoio à Otimização dos Planos de Ensino de Matemática por meio da identificação automatizada das competências individuais dos alunos usando técnicas computacionais."
+Apoio à Otimização dos Planos de Ensino de Matemática por meio da identificação automatizada das competências individuais dos alunos usando técnicas computacionais.
 
 ## Orientação
 
@@ -19,14 +19,13 @@ Este repositório contém o desenvolvimento de uma ferramenta tecnológica para 
 
 ### Objetivo Geral
 
-Desenvolver uma ferramenta tecnológica que permita ao professor diagnosticar competências individuais dos alunos e sugerindo planos de ensino adaptativos.
+Desenvolver uma ferramenta tecnológica que permita ao professor um acompanhamento individualizado dos alunos através de um ensino personalizado.
 
 ### Objetivos Específicos
 
 1. Realizar revisão sistemática da literatura sobre tecnologias computacionais aplicadas à educação (learning analytics, personalização do ensino, sistemas tutores inteligentes).
 2. Explorar técnicas de machine learning e análise preditiva para avaliação de desempenho em matemática.
-3. Projetar e implementar um protótipo de software capaz de analisar dados de avaliação e gerar recomendações pedagógicas.
-4. Validar o protótipo em ambiente experimental usando dados reais de turmas de matemática.
+3. Projetar e implementar um protótipo de software para uso em ambiente educacional.
 
 ## Estrutura do Repositório
 
@@ -43,40 +42,98 @@ Desenvolver uma ferramenta tecnológica que permita ao professor diagnosticar co
 │   ├── exports/        # Analysis results (CSV, JSON, HTML) [gitignored]
 │   └── logs/           # Execution logs [gitignored]
 ├── src/                # Phase 2: Main product (competency diagnosis tool - future)
-├── results/            # Phase 3: TCC artifacts (LaTeX, validation reports)
+├── results/            # Phase 1 e 2: PTC e TCC artifacts (LaTeX, validation reports)
 ├── .gitignore          # Git exclusion patterns
 └── README.md           # Project documentation
 ```
 
 ## Uso do Módulo Research
 
-O módulo `research/` implementa a revisão sistemática automatizada (Fase 1 do TCC):
+O módulo `research/` implementa a revisão sistemática automatizada seguindo PRISMA 2020.
 
-### Configuração
+### Configuração Inicial
 
 1. Instalar dependências:
 
 ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # Windows: .venv\Scripts\activate
-   pip install -r requirements.txt
+cd research
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-2. Configurar APIs (copiar `.env.example` para `.env` e adicionar chaves):
-   - Semantic Scholar API
-   - OpenAlex
-   - Crossref
-   - CORE
-
-### Execução
+2. Inicializar banco de dados:
 
 ```bash
-# Coletar artigos das APIs
-python -m research.src.cli collect
+python -m research.src.cli init-db
+```
 
-# Ver resultados em research/exports/
-ls research/exports/analysis/        # papers_*.csv, papers_*.json
-ls research/exports/reports/         # summary_*.html
+### Comandos Disponíveis
+
+#### 1. Pipeline Completo
+Executa revisão sistemática completa (busca → screening → seleção):
+
+```bash
+python -m research.src.cli run-pipeline --min-score 4.0
+```
+
+#### 2. Estatísticas
+Visualiza métricas do banco de dados:
+
+```bash
+python -m research.src.cli stats
+```
+
+#### 3. Exportação Padrão
+Gera relatórios HTML, CSV, JSON e visualizações:
+
+```bash
+python -m research.src.cli export
+```
+
+**Saídas**:
+- `research/exports/analysis/papers.csv` - Dados tabulares
+- `research/exports/reports/summary_report.html` - Relatório visual
+- `research/exports/visualizations/*.png` - Gráficos PRISMA
+
+#### 4. Análise Aprofundada (NOVO ✨)
+Enriquece papers via Semantic Scholar API e gera análises temáticas:
+
+```bash
+python -m research.src.cli deep-analysis
+```
+
+**Saídas**:
+- `research/exports/deep_analysis/DEEP_ANALYSIS_REPORT.md` - Relatório completo
+- `research/exports/deep_analysis/enriched_papers_cache.json` - Cache de APIs
+- `research/exports/deep_analysis/analyses_summary.json` - Dados estruturados
+
+**Recursos**:
+- ✅ TL;DR automático via Semantic Scholar
+- ✅ Análise de citações e referências
+- ✅ Tendências temporais (2015-2025)
+- ✅ Ranking de técnicas computacionais
+
+#### 5. Exportação BibTeX (NOVO ✨)
+Gera referências bibliográficas formatadas para LaTeX:
+
+```bash
+# Apenas papers incluídos (16)
+python -m research.src.cli export-bibtex --included-only
+
+# Todos os papers do banco
+python -m research.src.cli export-bibtex
+```
+
+**Saídas**:
+- `research/exports/references/included_papers.bib` - Papers incluídos (16)
+- `research/exports/references/high_relevance.bib` - Score ≥ 7.0
+- `research/exports/references/technique_*.bib` - Por técnica computacional
+
+**Uso em LaTeX**:
+```latex
+\bibliography{included_papers}
+\bibliographystyle{abntex2-num}
 ```
 
 ### Testes
@@ -91,25 +148,48 @@ pytest research/tests/test_performance_benchmark.py
 ```
 
 Para detalhes sobre metodologia PRISMA e arquitetura do pipeline, consulte:
+
 - `research/README.md` - Guia de uso detalhado
 - `research/docs/METODOLOGIA.md` - Implementação PRISMA
 - `research/docs/FUNDAMENTACAO_TEORICA.md` - Base teórica
 - `docs/CONSTITUTION.md` - Governança do projeto
 
+---
+
+## 🛠️ Scripts do Repositório
+
+### Scripts Ativos (Uso Recomendado)
+
+- **`research/src/cli.py`**: Interface CLI oficial para todas operações do pipeline
+  - Uso: `python -m research.src.cli [comando] [opções]`
+  - Comandos: `collect`, `filter`, `export`, `stats`, `audit`
+- **`research/src/pipeline/`**: Módulos do pipeline de revisão sistemática
+- **`research/src/database/`**: Gerenciamento de banco SQLite
+- **`research/tests/`**: Testes automatizados (pytest)
+
+---
+
 ## Status do Projeto
 
-🚧 Em desenvolvimento 🚧
+### Fase 1: Revisão Sistemática ✅ COMPLETA
 
-## Próximos Passos
+**Resultados PRISMA (atualizado em 16/11/2025)**:
+
+- 📚 **Identificação**: 6.516 registros únicos (108 queries bilíngues × 4 APIs)
+- 🔍 **Triagem (Screening)**: 4.665 avaliados (excluídos na triagem: 1.851 / 28,4%)
+- 📖 **Elegibilidade**: 1.835 avaliados em profundidade (excluídos na elegibilidade: 1.819 / 99,1%)
+- ✅ **Incluídos**: 16 estudos (relevance_score ≥4.0)
+- 📊 **Taxa de inclusão final**: ~0,25% do total identificado
+
+### Próximos Passos
 
 - [x] Completar protocolo de revisão sistemática
 - [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
-- [x] Realizar busca nas bases de dados
-- [x] Analisar e categorizar os artigos encontrados
-- [ ] Investigar ferramentas semelhantes (ex: Edmodo, Google Classroom, Moodle, Khan Academy, etc.)
-- [ ] Desenvolver cronograma detalhado do projeto
-- [ ] Modelo de projeto em LaTeX
-
+- [x] Realizar busca nas bases de dados (108 queries bilíngues × 4 APIs)
+- [x] Analisar e categorizar os artigos encontrados (16 incluídos)
+- [x] Gerar relatórios e visualizações PRISMA
+- [ ] Desenvolver cronograma detalhado da Fase 2 (protótipo)
+- [ ] Finalizar documentação acadêmica (LaTeX)
 
 ## Autor
 

@@ -277,11 +277,12 @@
             <div>
                 <span class="badge">✅ Fase 1: Revisão Sistemática</span>
                 <span class="badge progress">🚧 Fase 2: Desenvolvimento</span>
-                <span class="badge planned">📋 Fase 3: TCC</span>
+                <span class="badge planned">📋 Fase 3: Avaliação</span>
             </div>
         </header>
         
         <nav>
+            <a href="results/ptc/main.pdf">📄 PTC (PDF)</a>
             <a href="research/">📊 Revisão Sistemática</a>
             <a href="https://github.com/thalesfb/ccw">💻 Repositório GitHub</a>
             <a href="research/exports/analysis/papers.csv">📄 Dados CSV</a>
@@ -308,22 +309,22 @@
             <section class="section">
                 <h2>📊 Resultados da Revisão Sistemática (Fase 1)</h2>
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="number">132</span>
-                        <span class="label">Consultas Estruturadas</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="number">12.333</span>
-                        <span class="label">Papers Identificados</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="number">2.614</span>
-                        <span class="label">Triagem Aprovada</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="number">43</span>
-                        <span class="label">Papers Incluídos</span>
-                    </div>
+                        <div class="stat-card">
+                            <span class="number">72</span>
+                            <span class="label">Consultas Estruturadas</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number">9.513</span>
+                            <span class="label">Papers Identificados</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number">6.948</span>
+                            <span class="label">Únicos para Triagem</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number">16</span>
+                            <span class="label">Papers Incluídos</span>
+                        </div>
                 </div>
                 
                 <h3>🔍 Metodologia PRISMA</h3>
@@ -332,10 +333,10 @@
                     (Preferred Reporting Items for Systematic Reviews and Meta-Analyses):
                 </p>
                 <ul>
-                    <li><strong>Identificação:</strong> 12.333 registros coletados de 4 bases de dados acadêmicas</li>
-                    <li><strong>Triagem:</strong> 2.614 artigos aprovados após análise de título/resumo</li>
-                    <li><strong>Elegibilidade:</strong> Avaliação por score de relevância (min: 4.0/10)</li>
-                    <li><strong>Inclusão:</strong> 43 estudos incluídos na síntese qualitativa</li>
+                    <li><strong>Identificação:</strong> 9.513 registros coletados de 4 bases de dados acadêmicas (incluindo duplicatas)</li>
+                    <li><strong>Triagem:</strong> 6.948 artigos únicos avaliados (após remover 2.565 duplicatas) - 5.003 excluídos</li>
+                    <li><strong>Elegibilidade:</strong> 1.945 artigos selecionados para avaliação de texto completo - 1.929 excluídos</li>
+                    <li><strong>Inclusão:</strong> 16 estudos incluídos na síntese qualitativa final</li>
                 </ul>
                 
                 <h3>🗄️ Bases de Dados Consultadas</h3>
@@ -360,12 +361,14 @@
                 
                 <h3>🔑 Termos de Busca</h3>
                 <p>
-                    <strong>132 combinações únicas</strong> geradas a partir de:
+                    <strong>72 combinações únicas</strong> executadas através de 4 APIs acadêmicas:
                 </p>
                 <ul>
-                    <li><strong>6 termos primários</strong> (educação matemática em PT/EN)</li>
-                    <li><strong>22 termos secundários</strong> (técnicas computacionais: AI, ML, adaptive learning, etc.)</li>
-                    <li><strong>Operador booleano AND</strong> para combinações estruturadas</li>
+                    <li><strong>3 termos matemáticos:</strong> "mathematics", "math", "matemática"</li>
+                    <li><strong>24 termos computacionais:</strong> adaptive, personalized, machine learning, AI, intelligent tutor, predictive analytics, student modeling, etc. (12 EN + 12 PT)</li>
+                    <li><strong>4 termos educacionais:</strong> "education", "learning", "educacao", "ensino"</li>
+                    <li><strong>Estratégia:</strong> Combinações triplas com operador booleano AND (base_term AND tech_term AND edu_term)</li>
+                    <li><strong>Distribuição:</strong> 48 consultas em inglês + 24 consultas em português</li>
                 </ul>
             </section>
             
@@ -408,7 +411,7 @@
                     </div>
                     <div class="feature-card">
                         <h4>🧪 Pytest</h4>
-                        <p>Framework de testes automatizados (9/9 testes passando)</p>
+                        <p>Framework de testes automatizados (15/15 tests passing)</p>
                     </div>
                     <div class="feature-card">
                         <h4>🚀 GitHub Actions</h4>
@@ -420,6 +423,7 @@
             <div class="cta-section">
                 <h2>🔗 Acesse os Resultados</h2>
                 <p>Explore os relatórios interativos e visualizações da revisão sistemática</p>
+                <a href="results/ptc/main.pdf" class="cta-button">📄 PTC (PDF)</a>
                 <a href="research/" class="cta-button">📊 Revisão Sistemática</a>
                 <a href="https://github.com/thalesfb/ccw" class="cta-button">💻 Repositório GitHub</a>
             </div>

@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import logging
-from typing import List, Set, Tuple
+import re
+from typing import List, Set, Tuple, Optional
 
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,8 +13,24 @@ from sklearn.metrics.pairwise import cosine_similarity
 logger = logging.getLogger(__name__)
 
 
+def normalize_doi(doi: Optional[str]) -> str:
+    """Normalize a DOI string: trim, lower, remove leading 'doi:'.
+    
+    Args:
+        doi: DOI string to normalize
+        
+    Returns:
+        Normalized DOI string
+    """
+    if doi is None:
+        return ""
+    d = str(doi).strip().lower()
+    d = re.sub(r"^doi:\s*", "", d)
+    return d.strip()
+
+
 def deduplicate_by_doi(df: pd.DataFrame) -> pd.DataFrame:
-    """Remove duplicatas baseando-se no DOI.
+    """Remove duplicatas baseando-se no DOI normalizado.
     
     Args:
         df: DataFrame com os artigos
@@ -26,12 +43,20 @@ def deduplicate_by_doi(df: pd.DataFrame) -> pd.DataFrame:
     
     initial_count = len(df)
     
-    # Remover linhas com DOI vazio ou None
-    df_with_doi = df[df["doi"].notna() & (df["doi"] != "")]
-    df_without_doi = df[df["doi"].isna() | (df["doi"] == "")]
+    # Normalizar DOIs
+    df = df.copy()
+    df['doi_normalized'] = df.get('doi', '').fillna('').astype(str).apply(normalize_doi)
     
-    # Deduplicar por DOI
-    df_dedup = df_with_doi.drop_duplicates(subset=["doi"], keep="first")
+    # Remover linhas com DOI vazio ou None
+    df_with_doi = df[df["doi_normalized"] != ""]
+    df_without_doi = df[df["doi_normalized"] == ""]
+    
+    # Deduplicar por DOI normalizado (case-insensitive, sem prefixo 'doi:')
+    df_dedup = df_with_doi.drop_duplicates(subset=["doi_normalized"], keep="first")
+    df_dedup = df_dedup.drop(columns=['doi_normalized'])
+    
+    # Remover coluna temporária de df_without_doi também
+    df_without_doi = df_without_doi.drop(columns=['doi_normalized'])
     
     # Combinar com artigos sem DOI
     result = pd.concat([df_dedup, df_without_doi], ignore_index=True)
@@ -99,8 +124,20 @@ def deduplicate_by_title_similarity(
     if len(df_valid) == 0:
         return df
     
-    # Preprocessar títulos
-    df_valid["title_clean"] = df_valid["title"].str.lower().str.strip()
+    # Preprocessar títulos: normalizar case, remover diacríticos e pontuação, colapsar espaços
+    def _normalize_title(t: str) -> str:
+        import unicodedata
+        s = str(t).lower().strip()
+        # Remover diacríticos (á -> a)
+        s = ''.join(ch for ch in unicodedata.normalize('NFKD', s) if not unicodedata.combining(ch))
+        # Remover pontuação
+        s = ''.join(ch if ch.isalnum() or ch.isspace() else ' ' for ch in s)
+        # Colapsar espaços múltiplos
+        s = ' '.join(s.split())
+        return s
+
+    df_valid = df_valid.copy()
+    df_valid["title_clean"] = df_valid["title"].apply(_normalize_title)
     
     # Processar em batches para datasets grandes
     duplicates_to_remove = set()
@@ -184,19 +221,43 @@ def deduplicate(
     
     initial_count = len(df)
     result = df.copy()
-    
+
+    removed_by_doi = 0
+    removed_by_url = 0
+    removed_by_title = 0
+
     if by_doi:
+        before = len(result)
         result = deduplicate_by_doi(result)
-    
+        removed_by_doi = before - len(result)
+
     if by_url:
+        before = len(result)
         result = deduplicate_by_url(result)
-    
+        removed_by_url = before - len(result)
+
     if by_title:
+        before = len(result)
         result = deduplicate_by_title_similarity(result, title_threshold)
-    
+        removed_by_title = before - len(result)
+
     total_removed = initial_count - len(result)
     logger.info(f"Total deduplication: removed {total_removed} items ({initial_count} -> {len(result)})")
-    
+
+    # Record deduplication statistics on the returned DataFrame (pandas attrs)
+    try:
+        result.attrs = getattr(result, 'attrs', {}) or {}
+        result.attrs['dedup_stats'] = {
+            'initial_count': int(initial_count),
+            'removed_by_doi': int(removed_by_doi),
+            'removed_by_url': int(removed_by_url),
+            'removed_by_title': int(removed_by_title),
+            'total_removed': int(total_removed),
+        }
+    except Exception:
+        # Non-fatal: if attrs can't be written, just continue
+        logger.debug("Could not attach dedup_stats to DataFrame.attrs")
+
     return result
 
 
@@ -216,18 +277,28 @@ def find_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     result["is_duplicate"] = False
     result["duplicate_of"] = None
     
-    # Marcar duplicatas por DOI
+    # Marcar duplicatas por DOI (case-insensitive)
     if "doi" in df.columns:
-        doi_counts = df["doi"].value_counts()
+        # Normalizar DOIs para comparação case-insensitive
+        result['doi_normalized'] = result.get('doi', '').fillna('').astype(str).apply(normalize_doi)
+        
+        # Contar DOIs normalizados (ignorar vazios)
+        doi_counts = result[result['doi_normalized'] != '']['doi_normalized'].value_counts()
         duplicate_dois = doi_counts[doi_counts > 1].index
         
-        for doi in duplicate_dois:
-            if pd.notna(doi) and doi != "":
-                indices = df[df["doi"] == doi].index
+        for doi_norm in duplicate_dois:
+            if doi_norm != "":
+                # Encontrar todos os índices com esse DOI normalizado
+                indices = result[result['doi_normalized'] == doi_norm].index.tolist()
                 # Marcar todos exceto o primeiro como duplicata
+                first_idx = indices[0]
                 for idx in indices[1:]:
                     result.loc[idx, "is_duplicate"] = True
-                    result.loc[idx, "duplicate_of"] = f"DOI:{doi}"
+                    # Usar o DOI original do primeiro registro como referência
+                    result.loc[idx, "duplicate_of"] = f"DOI:{result.loc[first_idx, 'doi']}"
+        
+        # Remover coluna temporária
+        result = result.drop(columns=['doi_normalized'])
     
     # Marcar duplicatas por URL
     if "url" in df.columns:

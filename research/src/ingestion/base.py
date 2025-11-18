@@ -29,7 +29,7 @@ class BaseAPIClient(ABC):
 
         Args:
             config: Configuração da aplicação
-            cache_dir: Diretório para cache (compatibilidade, não usado)
+            cache_dir: Parâmetro mantido apenas para compatibilidade; ignorado.
         """
         self.config = config
         self.api_name = self.__class__.__name__.replace("Client", "").lower()
@@ -38,10 +38,9 @@ class BaseAPIClient(ABC):
         from ..database.manager import DatabaseManager
         self.db_manager = DatabaseManager()
         
-        # Manter cache_dir para compatibilidade (mas não usar)
-        if cache_dir is None:
-            cache_dir = Path(config.database.cache_dir) / self.api_name
-        self.cache_dir = cache_dir
+        # Cache em disco removido: usar apenas cache no banco.
+        # Manter atributo para métodos que constroem paths virtuais para logs.
+        self.cache_dir = Path("db_cache") / self.api_name
 
         # Configurar sessão HTTP com retry
         self.session = self._create_session()
@@ -150,7 +149,11 @@ class BaseAPIClient(ABC):
         return hashlib.md5(f"{self.api_name}:{query}".encode()).hexdigest()
 
     def _get_cache_path(self, query: str) -> Path:
-        """Retorna o caminho do arquivo de cache para a query."""
+        """Retorna um path virtual representando a entrada de cache.
+
+        Observação: o cache em disco foi descontinuado; este path é usado
+        apenas para fins de auditoria/log e não deve ser acessado no FS.
+        """
         cache_key = self._get_cache_key(query)
         return self.cache_dir / f"{cache_key}.json"
 

@@ -11,7 +11,7 @@ from pathlib import Path
 # Adicionar o diretório raiz do projeto ao path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.pipeline.improved_pipeline import ImprovedSystematicReviewPipeline
+from src.pipeline.run import SystematicReviewPipeline
 
 
 def run_simple_benchmark():
@@ -32,8 +32,9 @@ def run_simple_benchmark():
         
         start_time = time.time()
         try:
-            pipeline = ImprovedSystematicReviewPipeline(limit_queries=config['queries'])
-            df_results = pipeline.run_complete_pipeline()
+            pipeline = SystematicReviewPipeline()
+            queries = pipeline.generate_search_queries()[:config['queries']]
+            df_results = pipeline.run_full_pipeline(search_queries=queries, export=False)
             
             end_time = time.time()
             execution_time = end_time - start_time

@@ -12,81 +12,66 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.search_terms import get_all_queries
 from src.config import load_config
-from src.pipeline.improved_pipeline import ImprovedSystematicReviewPipeline
-
-
-
+from src.pipeline.run import SystematicReviewPipeline
 
 def test_configuration():
     """Testa se a configuração foi carregada corretamente."""
     print("🔧 Testando configuração...")
-
-    try:
-        config = load_config()
-        print(f"✅ Configuração carregada:")
-        print(f"   - Semantic Scholar delay: {config.apis.semantic_scholar.get('rate_delay', 'N/A')}s")
-        print(f"   - OpenAlex delay: {config.apis.open_alex.get('rate_delay', 'N/A')}s")
-        print(f"   - Crossref delay: {config.apis.crossref.get('rate_delay', 'N/A')}s")
-        print(f"   - CORE ativo: {config.apis.core.get('is_active', 'N/A')}")
-        print(f"   - Max results per query: {config.max_results_per_query}")
-        return True
-    except Exception as e:
-        print(f"❌ Erro ao carregar configuração: {{e}}")
-        return False
+    config = load_config()
+    print(f"✅ Configuração carregada:")
+    # Basic sanity assertions for configuration
+    assert config is not None
+    assert hasattr(config, 'apis')
+    # access some common keys to ensure structure
+    assert hasattr(config.apis, 'semantic_scholar')
+    assert hasattr(config.apis, 'open_alex')
+    assert hasattr(config.apis, 'crossref')
+    assert hasattr(config.apis, 'core')
+    assert hasattr(config, 'max_results_per_query')
 
 
 def test_search_terms():
     """Testa se os termos de busca foram carregados corretamente."""
     print("🔍 Testando termos de busca...")
-
-    try:
-        queries = get_all_queries()
-        print(f"✅ Termos de busca carregados:")
-        print(f"   - Total de combinações: {len(queries)}")
-        print(f"   - Primeiras 3 combinações:")
-        for i, query in enumerate(queries[:3]):
-            print(f"     {i+1}. {query}")
-        return True
-    except Exception as e:
-        print(f"❌ Erro ao carregar termos de busca: {{e}}")
-        return False
+    queries = get_all_queries()
+    print(f"✅ Termos de busca carregados:")
+    # Basic checks
+    assert queries is not None
+    assert isinstance(queries, (list, tuple))
+    assert len(queries) > 0
+    print(f"   - Total de combinações: {len(queries)}")
+    print(f"   - Primeiras 3 combinações:")
+    for i, query in enumerate(queries[:3]):
+        print(f"     {i+1}. {query}")
 
 
 def test_pipeline(limit_queries: int = None):
     """Testa o pipeline melhorado."""
     print("🚀 Testando pipeline melhorado...")
+    print("🔍 Debugando inicialização do pipeline...")
+    config = load_config()
+    print(f"   - Tipo da config: {type(config)}")
+    print(f"   - Tem database: {hasattr(config, 'database')}")
+    if hasattr(config, 'database'):
+        print(f"   - Tipo database: {type(config.database)}")
+        print(f"   - Database path: {config.database.db_path}")
 
-    try:
-        print("🔍 Debugando inicialização do pipeline...")
-        config = load_config()
-        print(f"   - Tipo da config: {type(config)}")
-        print(f"   - Tem database: {hasattr(config, 'database')}")
-        if hasattr(config, 'database'):
-            print(f"   - Tipo database: {type(config.database)}")
-            print(f"   - Database path: {config.database.db_path}")
-        
-        pipeline = ImprovedSystematicReviewPipeline(limit_queries=limit_queries)
-        print(f"✅ Pipeline inicializado com sucesso (limite de queries: {limit_queries or 'Nenhum'})")
+    pipeline = SystematicReviewPipeline()
+    queries = None
+    if limit_queries:
+        queries = pipeline.generate_search_queries()[:limit_queries]
+    print(f"✅ Pipeline inicializado com sucesso (limite de queries: {limit_queries or 'Nenhum'})")
 
-        # Executar pipeline (pode demorar)
-        print("⏳ Executando pipeline (pode demorar alguns minutos)...")
-        results = pipeline.run_complete_pipeline()
+    # Executar pipeline (pode demorar)
+    print("⏳ Executando pipeline (pode demorar alguns minutos)...")
+    results = pipeline.run_full_pipeline(search_queries=queries, export=False)
 
-        if results is None or results.empty:
-            print("⚠️ O pipeline foi executado, mas não retornou resultados.")
-            # Considerar isso uma falha se esperamos resultados
-            return False
+    assert results is not None, "Pipeline returned None"
+    assert not getattr(results, 'empty', False), "Pipeline returned empty results"
 
-        print(f"✅ Pipeline executado com sucesso:")
-        print(f"   - Total de artigos: {len(results)}")
-        print(f"   - Colunas: {list(results.columns)}")
-
-        return True
-    except Exception as e:
-        print(f"❌ Erro ao executar pipeline: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
+    print(f"✅ Pipeline executado com sucesso:")
+    print(f"   - Total de artigos: {len(results)}")
+    print(f"   - Colunas: {list(results.columns)}")
 
 
 def main():
@@ -107,14 +92,29 @@ def main():
 
     # O teste de pipeline é o mais importante e demorado.
     # Os outros são verificações rápidas de sanidade.
-    config_ok = test_configuration()
-    terms_ok = test_search_terms()
+    # Run tests but keep main script semantics: catch assertion failures and
+    # convert them into boolean results so the CLI-friendly main() continues
+    try:
+        test_configuration()
+        config_ok = True
+    except Exception:
+        config_ok = False
+
+    try:
+        test_search_terms()
+        terms_ok = True
+    except Exception:
+        terms_ok = False
 
     if not config_ok or not terms_ok:
         print("\n❌ Testes de pré-requisitos falharam. Abortando o teste do pipeline.")
         return
 
-    pipeline_ok = test_pipeline(limit_queries=args.limit_queries)
+    try:
+        test_pipeline(limit_queries=args.limit_queries)
+        pipeline_ok = True
+    except Exception:
+        pipeline_ok = False
 
     # Resumo dos resultados
     results = {

@@ -13,7 +13,7 @@ Esta pasta contém todos os testes para validar o funcionamento do pipeline refa
 
 - **`test_minimal_pipeline.py`** - Teste mínimo com dados simulados
 - **`test_improved_corrections.py`** - Teste das correções implementadas
-- **`test_improved_pipeline.py`** - Teste do pipeline melhorado
+- **`test_complete_pipeline.py`** - Teste do pipeline canônico completo
 
 ### 📊 Testes de Auditoria
 

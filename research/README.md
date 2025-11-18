@@ -31,7 +31,7 @@ python -m research.src.cli export
 
 ## 🏗️ Arquitetura do Sistema
 
-```
+```text
 research/
 ├── src/                          # Código fonte modular
 │   ├── config.py                 # Configuração centralizada
@@ -87,26 +87,32 @@ research/
 
 ### Estratégia de Busca
 
-**55 queries estruturadas** combinando:
+**108 queries bilíngues estruturadas** (72 inglês + 36 português) combinando:
 
-**Termos Primários** (domínio):
-- Mathematics education, math learning
-- Ensino de matemática, educação matemática
+**Termos Primários** (6 termos - domínio educacional):
 
-**Termos Secundários** (técnicas):
-- Machine learning, artificial intelligence
-- Adaptive learning, intelligent tutoring systems
-- Learning analytics, educational data mining
+- "mathematics education", "math learning", "mathematics teaching"
+- "educação matemática", "aprendizagem matemática", "ensino de matemática"
+
+**Termos Secundários** (22 termos - técnicas computacionais):
+
+- Machine learning, artificial intelligence, deep learning, neural networks
+- Adaptive learning, personalized learning, intelligent tutoring systems
+- Learning analytics, educational data mining, predictive analytics
+- Student modeling, competency identification, automated assessment
+- E mais 10 termos relacionados
 
 ### Critérios de Seleção
 
 **✅ Inclusão**:
+
 - Artigos peer-reviewed (2015-2025)
 - Foco em técnicas computacionais + educação matemática
 - Metodologia e evidências empíricas claras
 - Idiomas: inglês ou português
 
 **❌ Exclusão**:
+
 - Metodologia insuficiente (abstract <50 palavras)
 - Foco não-educacional (biologia, física sem contexto educacional)
 - Conteúdo não-científico (editoriais, comentários)
@@ -114,17 +120,33 @@ research/
 
 ### Fluxo PRISMA
 
-```
-Identificação → Deduplicação → Triagem → Elegibilidade → Inclusão
-    (APIs)         (DOI+TF-IDF)   (Critérios) (Score≥4.0)  (Final)
+O pipeline segue as fases padrão: Identificação → Deduplicação → Triagem →
+Elegibilidade → Inclusão.
+
+**Números atuais (16/11/2025)**:
+
+- **Identificação**: 6.516 registros únicos
+- **Screening**: 4.665 avaliados (excluídos na triagem: 1.851 / 28,4%)
+- **Elegibilidade**: 1.835 avaliados em profundidade (excluídos na elegibilidade: 1.819 / 99,1%)
+- **Incluídos**: 16 estudos (relevance_score ≥4.0)
+
+Todos os contadores oficiais são derivados em tempo de execução a partir
+do banco de dados canônico `research/systematic_review.db`.
+
+Para obter os números atualizados execute:
+
+```bash
+# Mostrar contagens PRISMA diretamente do banco
+python -m research.src.cli stats
+
+# Ou consultar via SQL:
+sqlite3 research/systematic_review.db "SELECT COUNT(*) FROM papers;"
+sqlite3 research/systematic_review.db "SELECT COUNT(*) FROM papers WHERE selection_stage='included';"
 ```
 
-**Pipeline atual do banco**:
-- **Identificação**: 11.966 papers coletados
-- **Triagem**: 11.966 avaliados (100% passam critérios básicos)
-- **Elegibilidade**: 11.966 analisados por relevância
-- **Incluídos**: 41 papers de alta relevância (score ≥4.0)
-- **Excluídos**: 11.925 papers por baixo score de relevância
+Arquivos de exportação e relatórios em `research/exports/` contêm as versões
+renderizadas (CSV/HTML/PNG) usadas para publicações e para o README. Sempre
+consulte esses artefatos para números fixos gerados em uma execução específica.
 
 ---
 
@@ -133,12 +155,9 @@ Identificação → Deduplicação → Triagem → Elegibilidade → Inclusão
 ### CLI Completo
 
 ```bash
-# Inicializar banco
-python -m research.src.cli init-db
-
 # Executar pipeline completo
 python -m research.src.cli run-pipeline
-  --apis semantic_scholar openalex crossref  # APIs específicas
+  --apis semantic_scholar openalex crossref core  # APIs específicas
   --min-score 4.5                            # Score mínimo customizado
   --limit-per-query 100                      # Limite por query
 
@@ -157,6 +176,33 @@ python -m research.src.cli export -o research/exports/
 # Normalizar estágios PRISMA (se necessário)
 python -m research.src.cli normalize-prisma
 ```
+
+### Utilitários de Auditoria (Centralizados no CLI)
+
+Use estes comandos em vez dos scripts avulsos em `tools/` e `research/scripts/`:
+
+```bash
+# Auditoria cruzada DB → Exports → PTC (gera JSON/MD em research/logs)
+python -m research.src.cli audit
+
+# Valida DB ↔ CSV ↔ summary.json (salva JSON em research/logs)
+python -m research.src.cli validate-exports
+
+# Checagem ampla de exports, incluindo parsing dos relatórios HTML
+python -m research.src.cli check-exports
+
+# Verificação de duplicatas/ausências/irrelevância no CSV (gera CSV de relatório)
+python -m research.src.cli verify-papers --csv research/exports/analysis/papers.csv
+
+# Regenera summary.json a partir do DB canônico
+python -m research.src.cli regenerate-summary
+
+# Diagnostica por que um paper foi incluído (busca por título)
+python -m research.src.cli diagnose-included --title "parte do título"
+```
+
+Observação: os scripts antigos `tools/*.py` e `research/scripts/*.py` estão
+obsoletos e serão removidos em breve. Todos os fluxos foram centralizados no CLI.
 
 ### Uso Programático
 
@@ -190,16 +236,18 @@ files = pipeline.export_results()
 **Em `research/exports/`** (arquivos fixos, data no conteúdo):
 
 1. **summary_report.html**: Relatório resumido com estatísticas gerais
-2. **papers_report.html**: Lista de papers incluídos com detalhes
+2. **papers_report_included.html**: Lista de papers incluídos com detalhes
 3. **gap_analysis.html**: Análise de lacunas de pesquisa
 4. **index.html**: Índice navegável de todos os relatórios
 
 **Em `research/exports/analysis/`**:
+
 - `papers.xlsx`: Dados completos em Excel
 - `papers.csv`: Dados em CSV
 - `papers.json`: Dados em JSON
 
 **Em `research/exports/visualizations/`**:
+
 - `prisma_flow.png`: Diagrama de fluxo PRISMA
 - `selection_funnel.png`: Funil de seleção
 - `papers_by_year.png`: Distribuição temporal
@@ -210,6 +258,7 @@ files = pipeline.export_results()
 ### Dados nos Papers Incluídos
 
 Cada paper incluído registra:
+
 - **Critérios atendidos**: year_range, language, math_focus, computational_techniques
 - **Score de relevância**: 0-10 (incluídos ≥4.0)
 - **Motivo de inclusão**: Lista de critérios que qualificaram o paper
@@ -236,18 +285,21 @@ pytest --cov=research.src --cov-report=html
 ### Suite de Testes
 
 **✅ test_prisma_stages.py** (9 testes, 100% pass):
+
 - Critérios de inclusão/exclusão
 - Fases PRISMA (screening, eligibility, inclusion)
 - Consistência de estatísticas
 - Registro de motivos de exclusão/inclusão
 
 **✅ test_complete_pipeline.py**:
+
 - Integração completa do pipeline
 - Validação de APIs e coleta
 - Processamento e deduplicação
 - Seleção PRISMA e exportação
 
 **✅ test_performance_benchmark.py**:
+
 - Métricas de performance
 - Cache hit rate
 - Tempo de execução por fase
@@ -302,6 +354,7 @@ EDUCATIONAL_CONTEXTS_PT.append("novo_contexto")
 ### Deduplicação Avançada
 
 **Estratégia em 3 níveis**:
+
 1. DOI/URL idênticos (remoção direta)
 2. Similaridade TF-IDF de títulos (threshold 0.9)
 3. Preservação da melhor fonte (DOI > abstract completo)
@@ -309,6 +362,7 @@ EDUCATIONAL_CONTEXTS_PT.append("novo_contexto")
 ### Scoring Multi-Critério
 
 **Score 0-10 baseado em**:
+
 - Técnicas computacionais mencionadas
 - Contexto educacional matemático
 - Qualidade metodológica
@@ -317,6 +371,7 @@ EDUCATIONAL_CONTEXTS_PT.append("novo_contexto")
 ### Detecção Robusta de Idioma
 
 **Estratégia híbrida**:
+
 1. `langdetect` em título + abstract + keywords
 2. Fallback regex para português/inglês
 3. Cache de resultados para performance
@@ -324,6 +379,7 @@ EDUCATIONAL_CONTEXTS_PT.append("novo_contexto")
 ### Logging Estruturado
 
 **Único arquivo de log ativo**:
+
 - `research/logs/ingestion.base.log`: Log consolidado de todas as operações
 - Rotação automática quando atinge 10MB
 - 3 backups mantidos
@@ -336,19 +392,15 @@ EDUCATIONAL_CONTEXTS_PT.append("novo_contexto")
 ### Problemas Comuns
 
 **Rate Limiting (HTTP 429)**:
+
 ```bash
 # Aumentar delays no .env
 SEMANTIC_SCHOLAR_RATE_DELAY=6.0
 OPENALEX_RATE_DELAY=8.0
 ```
 
-**Cache Corrompido**:
-```bash
-# Limpar cache
-rm -rf research/cache/
-```
-
 **Logs Detalhados**:
+
 ```bash
 # Habilitar debug
 export DEBUG=1
@@ -356,6 +408,7 @@ python -m research.src.cli run-pipeline
 ```
 
 **Performance Lenta**:
+
 - Usar cache em execuções subsequentes (automático)
 - Reduzir número de queries (`--limit-per-query 50`)
 - Usar apenas APIs estáveis (`--apis semantic_scholar openalex`)
@@ -367,10 +420,11 @@ python -m research.src.cli run-pipeline
 ### Performance Atual
 
 - **Taxa de sucesso das APIs**: >95% (exceto CORE ~70%)
-- **Tempo de execução**: 30-60 minutos (55 queries)
+- **Tempo de execução**: 30-60 minutos (108 queries × 4 APIs)
 - **Taxa de deduplicação**: ~40% (DOI+similaridade)
-- **Taxa de inclusão final**: ~0.3% (41 de 11.966)
-- **Cobertura temporal**: 2015-2025 (10 anos completos)
+- **Taxa de inclusão final**: ~0,25% (16 de 6.516)
+- **Cobertura temporal**: 2017-2026 (10 anos completos)
+- **Cache hit rate**: ~63% (268 hits / 425 entradas)
 
 ### Qualidade dos Dados
 
@@ -402,12 +456,14 @@ python -m research.src.cli run-pipeline
 ### Insights para o Protótipo
 
 **Técnicas Mais Utilizadas**:
+
 - Machine learning para modelagem
 - Learning analytics para personalização
 - Sistemas adaptativos baseados em competências
 - Avaliação automatizada com feedback
 
 **Lacunas Identificadas**:
+
 - Integração de múltiplas técnicas
 - Escalabilidade para grandes turmas
 - Adaptação cultural e pedagógica
@@ -417,17 +473,18 @@ python -m research.src.cli run-pipeline
 
 ## 👥 Créditos
 
+**Autor**: Thales Ferreira
 **TCC - Ciência da Computação**  
 **Instituição**: IFC Videira  
-**Período**: 2024-2025
+**Período**: 2025-2026
 
 ### 📚 Referências
 
-- PRISMA Guidelines: http://www.prisma-statement.org/
-- Semantic Scholar API: https://api.semanticscholar.org/
-- OpenAlex API: https://docs.openalex.org/
-- Crossref API: https://github.com/CrossRef/rest-api-doc
-- CORE API: https://core.ac.uk/docs/
+- [PRISMA Guidelines](http://www.prisma-statement.org/)
+- [Semantic Scholar API](https://api.semanticscholar.org/)
+- [OpenAlex API](https://docs.openalex.org/)
+- [Crossref API](https://github.com/CrossRef/rest-api-doc)
+- [CORE API](https://core.ac.uk/docs/)
 
 ---
 

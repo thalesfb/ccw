@@ -49,11 +49,14 @@ class DatabaseManager:
     def _init_database(self):
         """Initialize database with all tables, indexes and views."""
         with self._get_connection() as conn:
-            # Create tables
+            # Create tables (idempotent)
             conn.execute(PAPERS_SCHEMA)
             conn.execute(SEARCHES_SCHEMA)
             conn.execute(CACHE_SCHEMA)
             conn.execute(ANALYSIS_SCHEMA)
+
+            # Attempt schema migration to non-destructive dedup strategy
+            self._migrate_schema_if_needed(conn)
 
             # Create indexes
             for index in INDEXES:
@@ -66,6 +69,60 @@ class DatabaseManager:
             conn.commit()
 
         logger.info(f"Database initialized at {self.db_path}")
+
+    def _migrate_schema_if_needed(self, conn: sqlite3.Connection) -> None:
+        """Migrate existing schema to remove UNIQUE on DOI and add duplicate flags.
+
+        - If current papers table definition contains UNIQUE on doi, rebuild table without UNIQUE.
+        - Ensure columns `is_duplicate` and `duplicate_of` exist.
+        """
+        cur = conn.cursor()
+        # Check current table SQL
+        cur.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name='papers'")
+        row = cur.fetchone()
+        current_sql = (row[0] or "") if row else ""
+
+        # Add missing columns if needed (cheap migration)
+        def _has_column(name: str) -> bool:
+            cur.execute("PRAGMA table_info(papers)")
+            return any(col[1] == name for col in cur.fetchall())
+
+        try:
+            if not _has_column("is_duplicate"):
+                cur.execute("ALTER TABLE papers ADD COLUMN is_duplicate BOOLEAN DEFAULT 0")
+            if not _has_column("duplicate_of"):
+                cur.execute("ALTER TABLE papers ADD COLUMN duplicate_of TEXT")
+        except Exception:
+            # If table doesn't exist yet, ignore; it will be created by PAPERS_SCHEMA
+            pass
+
+        # If UNIQUE still present on DOI, rebuild table without UNIQUE
+        if "UNIQUE" in current_sql.upper():
+            logger.info("Migrating 'papers' table to remove UNIQUE constraint on DOI (non-destructive dedup)")
+            
+            # Temporarily disable foreign key enforcement during migration
+            cur.execute("PRAGMA foreign_keys = OFF")
+            
+            # Create new table with desired schema
+            cur.execute("ALTER TABLE papers RENAME TO papers_old")
+            cur.execute(PAPERS_SCHEMA)
+
+            # Determine shared columns between old and new schemas
+            cur.execute("PRAGMA table_info(papers_old)")
+            old_cols = [r[1] for r in cur.fetchall()]
+            cur.execute("PRAGMA table_info(papers)")
+            new_cols = [r[1] for r in cur.fetchall()]
+            shared_cols = [c for c in old_cols if c in new_cols]
+
+            # Build insert selecting shared columns; add defaults for new columns if missing
+            insert_cols = ", ".join(shared_cols)
+            select_cols = ", ".join(shared_cols)
+            cur.execute(f"INSERT INTO papers ({insert_cols}) SELECT {select_cols} FROM papers_old")
+            cur.execute("DROP TABLE papers_old")
+            
+            # Re-enable foreign key enforcement
+            cur.execute("PRAGMA foreign_keys = ON")
+            conn.commit()
 
     # ============= Paper Operations =============
 
@@ -84,11 +141,11 @@ class DatabaseManager:
             # Convert to dict and remove None values
             data = {k: v for k, v in paper.to_dict().items() if v is not None}
 
-            # Build INSERT query
+            # Build INSERT query (no IGNORE: we keep all records, mark duplicates later)
             columns = list(data.keys())
             placeholders = ["?" for _ in columns]
             query = f"""
-                INSERT OR IGNORE INTO papers ({', '.join(columns)})
+                INSERT INTO papers ({', '.join(columns)})
                 VALUES ({', '.join(placeholders)})
             """
 
@@ -117,43 +174,43 @@ class DatabaseManager:
                 try:
                     data = {k: v for k, v in paper.to_dict().items() if v is not None}
 
-                    # 1) Tenta inserir (ignora se já existir mesmo DOI)
+                    # Always insert; do not upsert by DOI/title to avoid overwriting duplicates
                     if data:
                         columns = list(data.keys())
                         placeholders = ["?" for _ in columns]
                         insert_sql = f"""
-                            INSERT OR IGNORE INTO papers ({', '.join(columns)})
+                            INSERT INTO papers ({', '.join(columns)})
                             VALUES ({', '.join(placeholders)})
                         """
                         cursor.execute(insert_sql, list(data.values()))
                         if cursor.rowcount > 0:
                             inserted += 1
 
-                    # 2) Atualiza campos críticos se já existia (upsert por DOI/título)
-                    update_candidates = {
-                        k: v for k, v in data.items() if k in {
-                            "selection_stage", "status", "exclusion_reason", "inclusion_criteria_met",
-                            "relevance_score", "comp_techniques", "edu_approach", "study_type", "eval_methods"
-                        }
-                    }
-                    if update_candidates:
-                        update_candidates["updated_at"] = datetime.now().isoformat()
+                    # # 2) Atualiza campos críticos se já existia (upsert por DOI/título)
+                    # update_candidates = {
+                    #     k: v for k, v in data.items() if k in {
+                    #         "selection_stage", "status", "exclusion_reason", "inclusion_criteria_met",
+                    #         "relevance_score", "comp_techniques", "edu_approach", "study_type", "eval_methods"
+                    #     }
+                    # }
+                    # if update_candidates:
+                    #     update_candidates["updated_at"] = datetime.now().isoformat()
 
-                        if data.get("doi"):
-                            set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
-                            params = list(update_candidates.values()) + [data["doi"]]
-                            cursor.execute(
-                                f"UPDATE papers SET {set_clause} WHERE doi = ?",
-                                params
-                            )
-                        elif data.get("title"):
-                            # fallback por título quando não há DOI (melhor esforço)
-                            set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
-                            params = list(update_candidates.values()) + [data["title"]]
-                            cursor.execute(
-                                f"UPDATE papers SET {set_clause} WHERE title = ?",
-                                params
-                            )
+                    #     if data.get("doi"):
+                    #         set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
+                    #         params = list(update_candidates.values()) + [data["doi"]]
+                    #         cursor.execute(
+                    #             f"UPDATE papers SET {set_clause} WHERE doi = ?",
+                    #             params
+                    #         )
+                    #     elif data.get("title"):
+                    #         # fallback por título quando não há DOI (melhor esforço)
+                    #         set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
+                    #         params = list(update_candidates.values()) + [data["title"]]
+                    #         cursor.execute(
+                    #             f"UPDATE papers SET {set_clause} WHERE title = ?",
+                    #             params
+                    #         )
 
                 except Exception as e:
                     logger.error(f"Error inserting/updating paper: {e}")
@@ -492,6 +549,20 @@ class DatabaseManager:
 
         return df
 
+    def get_last_search_results(self) -> Optional[Dict[str, Any]]:
+        """Return the results_summary JSON from the most recent entry in searches, if any."""
+        query = "SELECT results_summary FROM searches ORDER BY rowid DESC LIMIT 1"
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(query)
+            row = cursor.fetchone()
+            if row and row["results_summary"]:
+                try:
+                    return json.loads(row["results_summary"])
+                except Exception:
+                    return None
+        return None
+
     # ============= Maintenance Utilities =============
     def normalize_prisma_stages(self) -> Dict[str, int]:
         """Normalize legacy selection_stage values into PRISMA-compliant stages.
@@ -536,3 +607,41 @@ class DatabaseManager:
             f"Normalized PRISMA stages: screening={results['screening']}, eligibility={results['eligibility']}"
         )
         return results
+
+    def normalize_consistency(self) -> Dict[str, int]:
+        """Normalize and align PRISMA-related fields for consistency.
+
+        - Fix legacy stages via normalize_prisma_stages
+        - Ensure rows with status='included' also have selection_stage='included'
+
+        Returns:
+            Dict with counters of updated rows per rule.
+        """
+        counters = {"legacy_fixed": 0, "included_aligned": 0}
+        try:
+            legacy = self.normalize_prisma_stages()
+            counters["legacy_fixed"] = sum(legacy.values())
+        except Exception:
+            # Best-effort; continue
+            pass
+
+        with self._get_connection() as conn:
+            cur = conn.cursor()
+            cur.execute(
+                """
+                UPDATE papers
+                SET selection_stage = 'included',
+                    updated_at = datetime('now')
+                WHERE LOWER(COALESCE(status,'')) = 'included'
+                  AND LOWER(COALESCE(selection_stage,'')) != 'included'
+                """
+            )
+            counters["included_aligned"] = cur.rowcount
+            conn.commit()
+
+        if any(counters.values()):
+            logger.info(
+                f"Normalized consistency: legacy_fixed={counters['legacy_fixed']}, "
+                f"included_aligned={counters['included_aligned']}"
+            )
+        return counters

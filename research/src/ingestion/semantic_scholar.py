@@ -161,7 +161,12 @@ class SemanticScholarClient(BaseAPIClient):
         }
 
 
-def search_semantic_scholar(query: str, config: AppConfig, limit: int = 100) -> pd.DataFrame:
+def search_semantic_scholar(# The `query` parameter in the `search_semantic_scholar` function is used
+# to specify the search string that will be used to search for articles in
+# the Semantic Scholar database. This string represents the search query
+# that the Semantic Scholar API will use to retrieve relevant articles
+# based on the provided input.
+query: str, config: AppConfig, limit: int = 100) -> pd.DataFrame:
     """Função conveniente para buscar no Semantic Scholar.
     
     Args:

@@ -176,7 +176,6 @@ cython_debug/
 # Drive files
 desktop.ini
 
-results/ptc/
 results/tcc/
 
 # Research module artifacts

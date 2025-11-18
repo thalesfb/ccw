@@ -1,0 +1,868 @@
+\glsdefs@newdocentry{ifc}%
+{%
+name={\acronymfont {\glsentryshort {ifc}}},%
+sort={IFC},%
+type={acronym},%
+first={IFC},%
+firstplural={IFCs},%
+text={IFC},%
+plural={IFCs},%
+description={Instituto Federal Catarinense},%
+descriptionplural={Instituto Federal Catarinense},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Instituto Federal Catarinense},%
+longplural={Instituto Federal Catarinenses},%
+short={IFC},%
+shortplural={IFCs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ids}%
+{%
+name={\acronymfont {\glsentryshort {ids}}},%
+sort={IDS},%
+type={acronym},%
+first={Sistema de Detecção de Intrusão (IDS, do ingl\^es \protect \emph  {Intrusion Detection System})},%
+firstplural={Sistemas de Detecção de Intrusão (IDS, do ingl\^es \protect \emph  {Intrusion Detection System})},%
+text={IDS},%
+plural={IDSs},%
+description={sistema de detecção de intrusão},%
+descriptionplural={sistema de detecção de intrusão},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={sistema de detecção de intrusão},%
+longplural={sistemas de detecção de intrusão},%
+short={IDS},%
+shortplural={IDSs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{aco}%
+{%
+name={\acronymfont {\glsentryshort {aco}}},%
+sort={ACO},%
+type={acronym},%
+first={ACO},%
+firstplural={ACOs},%
+text={ACO},%
+plural={ACOs},%
+description={Ant Colony Optimization},%
+descriptionplural={Ant Colony Optimization},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ant Colony Optimization},%
+longplural={Ant Colony Optimizations},%
+short={ACO},%
+shortplural={ACOs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{bn}%
+{%
+name={\acronymfont {\glsentryshort {bn}}},%
+sort={BN},%
+type={acronym},%
+first={BN},%
+firstplural={BNs},%
+text={BN},%
+plural={BNs},%
+description={Bayesian Networks},%
+descriptionplural={Bayesian Networks},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Bayesian Networks},%
+longplural={Bayesian Networkss},%
+short={BN},%
+shortplural={BNs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cnn}%
+{%
+name={\acronymfont {\glsentryshort {cnn}}},%
+sort={CNN},%
+type={acronym},%
+first={CNN},%
+firstplural={CNNs},%
+text={CNN},%
+plural={CNNs},%
+description={Convolutional Neural Networks},%
+descriptionplural={Convolutional Neural Networks},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Convolutional Neural Networks},%
+longplural={Convolutional Neural Networkss},%
+short={CNN},%
+shortplural={CNNs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{crf}%
+{%
+name={\acronymfont {\glsentryshort {crf}}},%
+sort={CRF},%
+type={acronym},%
+first={CRF},%
+firstplural={CRFs},%
+text={CRF},%
+plural={CRFs},%
+description={Conditional Random Fields},%
+descriptionplural={Conditional Random Fields},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Conditional Random Fields},%
+longplural={Conditional Random Fieldss},%
+short={CRF},%
+shortplural={CRFs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{dl}%
+{%
+name={\acronymfont {\glsentryshort {dl}}},%
+sort={DL},%
+type={acronym},%
+first={DL},%
+firstplural={DLs},%
+text={DL},%
+plural={DLs},%
+description={Deep Learning},%
+descriptionplural={Deep Learning},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Deep Learning},%
+longplural={Deep Learnings},%
+short={DL},%
+shortplural={DLs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{dm}%
+{%
+name={\acronymfont {\glsentryshort {dm}}},%
+sort={DM},%
+type={acronym},%
+first={DM},%
+firstplural={DMs},%
+text={DM},%
+plural={DMs},%
+description={Data Mining},%
+descriptionplural={Data Mining},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Data Mining},%
+longplural={Data Minings},%
+short={DM},%
+shortplural={DMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{dt}%
+{%
+name={\acronymfont {\glsentryshort {dt}}},%
+sort={DT},%
+type={acronym},%
+first={DT},%
+firstplural={DTs},%
+text={DT},%
+plural={DTs},%
+description={Decision Trees},%
+descriptionplural={Decision Trees},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Decision Trees},%
+longplural={Decision Treess},%
+short={DT},%
+shortplural={DTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{edm}%
+{%
+name={\acronymfont {\glsentryshort {edm}}},%
+sort={EDM},%
+type={acronym},%
+first={EDM},%
+firstplural={EDMs},%
+text={EDM},%
+plural={EDMs},%
+description={Educational Data Mining},%
+descriptionplural={Educational Data Mining},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Educational Data Mining},%
+longplural={Educational Data Minings},%
+short={EDM},%
+shortplural={EDMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ef}%
+{%
+name={\acronymfont {\glsentryshort {ef}}},%
+sort={EF},%
+type={acronym},%
+first={EF},%
+firstplural={EFs},%
+text={EF},%
+plural={EFs},%
+description={Ensino Fundamental},%
+descriptionplural={Ensino Fundamental},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ensino Fundamental},%
+longplural={Ensino Fundamentals},%
+short={EF},%
+shortplural={EFs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{em}%
+{%
+name={\acronymfont {\glsentryshort {em}}},%
+sort={EM},%
+type={acronym},%
+first={EM},%
+firstplural={EMs},%
+text={EM},%
+plural={EMs},%
+description={Ensino Médio},%
+descriptionplural={Ensino Médio},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ensino Médio},%
+longplural={Ensino Médios},%
+short={EM},%
+shortplural={EMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{kdoze}%
+{%
+name={\acronymfont {\glsentryshort {kdoze}}},%
+sort={K-12},%
+type={acronym},%
+first={K-12},%
+firstplural={K-12s},%
+text={K-12},%
+plural={K-12s},%
+description={Kindergarten to 12th grade},%
+descriptionplural={Kindergarten to 12th grade},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Kindergarten to 12th grade},%
+longplural={Kindergarten to 12th grades},%
+short={K-12},%
+shortplural={K-12s},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{lime}%
+{%
+name={\acronymfont {\glsentryshort {lime}}},%
+sort={LIME},%
+type={acronym},%
+first={LIME},%
+firstplural={LIMEs},%
+text={LIME},%
+plural={LIMEs},%
+description={Local Interpretable Model-agnostic Explanations},%
+descriptionplural={Local Interpretable Model-agnostic Explanations},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Local Interpretable Model-agnostic Explanations},%
+longplural={Local Interpretable Model-agnostic Explanationss},%
+short={LIME},%
+shortplural={LIMEs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{lr}%
+{%
+name={\acronymfont {\glsentryshort {lr}}},%
+sort={LR},%
+type={acronym},%
+first={LR},%
+firstplural={LRs},%
+text={LR},%
+plural={LRs},%
+description={Logistic Regression},%
+descriptionplural={Logistic Regression},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Logistic Regression},%
+longplural={Logistic Regressions},%
+short={LR},%
+shortplural={LRs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ml}%
+{%
+name={\acronymfont {\glsentryshort {ml}}},%
+sort={ML},%
+type={acronym},%
+first={ML},%
+firstplural={MLs},%
+text={ML},%
+plural={MLs},%
+description={Machine Learning},%
+descriptionplural={Machine Learning},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Machine Learning},%
+longplural={Machine Learnings},%
+short={ML},%
+shortplural={MLs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{mlp}%
+{%
+name={\acronymfont {\glsentryshort {mlp}}},%
+sort={MLP},%
+type={acronym},%
+first={MLP},%
+firstplural={MLPs},%
+text={MLP},%
+plural={MLPs},%
+description={Multilayer Perceptron},%
+descriptionplural={Multilayer Perceptron},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Multilayer Perceptron},%
+longplural={Multilayer Perceptrons},%
+short={MLP},%
+shortplural={MLPs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{nb}%
+{%
+name={\acronymfont {\glsentryshort {nb}}},%
+sort={NB},%
+type={acronym},%
+first={NB},%
+firstplural={NBs},%
+text={NB},%
+plural={NBs},%
+description={Naive Bayes},%
+descriptionplural={Naive Bayes},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Naive Bayes},%
+longplural={Naive Bayess},%
+short={NB},%
+shortplural={NBs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{nlp}%
+{%
+name={\acronymfont {\glsentryshort {nlp}}},%
+sort={NLP},%
+type={acronym},%
+first={NLP},%
+firstplural={NLPs},%
+text={NLP},%
+plural={NLPs},%
+description={Natural Language Processing},%
+descriptionplural={Natural Language Processing},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Natural Language Processing},%
+longplural={Natural Language Processings},%
+short={NLP},%
+shortplural={NLPs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{pa}%
+{%
+name={\acronymfont {\glsentryshort {pa}}},%
+sort={PA},%
+type={acronym},%
+first={PA},%
+firstplural={PAs},%
+text={PA},%
+plural={PAs},%
+description={Preditiva Analytics},%
+descriptionplural={Preditiva Analytics},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Preditiva Analytics},%
+longplural={Preditiva Analyticss},%
+short={PA},%
+shortplural={PAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{pisa}%
+{%
+name={\acronymfont {\glsentryshort {pisa}}},%
+sort={PISA},%
+type={acronym},%
+first={PISA},%
+firstplural={PISAs},%
+text={PISA},%
+plural={PISAs},%
+description={Programme for International Student Assessment},%
+descriptionplural={Programme for International Student Assessment},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Programme for International Student Assessment},%
+longplural={Programme for International Student Assessments},%
+short={PISA},%
+shortplural={PISAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rf}%
+{%
+name={\acronymfont {\glsentryshort {rf}}},%
+sort={RF},%
+type={acronym},%
+first={RF},%
+firstplural={RFs},%
+text={RF},%
+plural={RFs},%
+description={Random Forest},%
+descriptionplural={Random Forest},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Random Forest},%
+longplural={Random Forests},%
+short={RF},%
+shortplural={RFs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rl}%
+{%
+name={\acronymfont {\glsentryshort {rl}}},%
+sort={RL},%
+type={acronym},%
+first={RL},%
+firstplural={RLs},%
+text={RL},%
+plural={RLs},%
+description={Reinforcement Learning},%
+descriptionplural={Reinforcement Learning},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Reinforcement Learning},%
+longplural={Reinforcement Learnings},%
+short={RL},%
+shortplural={RLs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rn}%
+{%
+name={\acronymfont {\glsentryshort {rn}}},%
+sort={RN},%
+type={acronym},%
+first={RN},%
+firstplural={RNs},%
+text={RN},%
+plural={RNs},%
+description={Redes Neurais},%
+descriptionplural={Redes Neurais},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Redes Neurais},%
+longplural={Redes Neuraiss},%
+short={RN},%
+shortplural={RNs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rna}%
+{%
+name={\acronymfont {\glsentryshort {rna}}},%
+sort={RNA},%
+type={acronym},%
+first={RNA},%
+firstplural={RNAs},%
+text={RNA},%
+plural={RNAs},%
+description={Redes Neurais Artificiais},%
+descriptionplural={Redes Neurais Artificiais},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Redes Neurais Artificiais},%
+longplural={Redes Neurais Artificiaiss},%
+short={RNA},%
+shortplural={RNAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{smote}%
+{%
+name={\acronymfont {\glsentryshort {smote}}},%
+sort={SMOTE},%
+type={acronym},%
+first={SMOTE},%
+firstplural={SMOTEs},%
+text={SMOTE},%
+plural={SMOTEs},%
+description={Synthetic Minority Over-sampling Technique},%
+descriptionplural={Synthetic Minority Over-sampling Technique},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Synthetic Minority Over-sampling Technique},%
+longplural={Synthetic Minority Over-sampling Techniques},%
+short={SMOTE},%
+shortplural={SMOTEs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{stem}%
+{%
+name={\acronymfont {\glsentryshort {stem}}},%
+sort={STEM},%
+type={acronym},%
+first={STEM},%
+firstplural={STEMs},%
+text={STEM},%
+plural={STEMs},%
+description={Science, Technology, Engineering, Mathematics},%
+descriptionplural={Science, Technology, Engineering, Mathematics},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Science, Technology, Engineering, Mathematics},%
+longplural={Science, Technology, Engineering, Mathematicss},%
+short={STEM},%
+shortplural={STEMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{svm}%
+{%
+name={\acronymfont {\glsentryshort {svm}}},%
+sort={SVM},%
+type={acronym},%
+first={SVM},%
+firstplural={SVMs},%
+text={SVM},%
+plural={SVMs},%
+description={Support Vector Machines},%
+descriptionplural={Support Vector Machines},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Support Vector Machines},%
+longplural={Support Vector Machiness},%
+short={SVM},%
+shortplural={SVMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{timss}%
+{%
+name={\acronymfont {\glsentryshort {timss}}},%
+sort={TIMSS},%
+type={acronym},%
+first={TIMSS},%
+firstplural={TIMSSs},%
+text={TIMSS},%
+plural={TIMSSs},%
+description={Trends in International Mathematics and Science Study},%
+descriptionplural={Trends in International Mathematics and Science Study},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Trends in International Mathematics and Science Study},%
+longplural={Trends in International Mathematics and Science Studys},%
+short={TIMSS},%
+shortplural={TIMSSs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{tr}%
+{%
+name={\acronymfont {\glsentryshort {tr}}},%
+sort={TR},%
+type={acronym},%
+first={TR},%
+firstplural={TRs},%
+text={TR},%
+plural={TRs},%
+description={Turquia},%
+descriptionplural={Turquia},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Turquia},%
+longplural={Turquias},%
+short={TR},%
+shortplural={TRs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{xai}%
+{%
+name={\acronymfont {\glsentryshort {xai}}},%
+sort={XAI},%
+type={acronym},%
+first={XAI},%
+firstplural={XAIs},%
+text={XAI},%
+plural={XAIs},%
+description={eXplainable Artificial Intelligence},%
+descriptionplural={eXplainable Artificial Intelligence},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={eXplainable Artificial Intelligence},%
+longplural={eXplainable Artificial Intelligences},%
+short={XAI},%
+shortplural={XAIs},%
+counter={page},%
+parent={},%
+%
+}%
+

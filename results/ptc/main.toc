@@ -1,0 +1,81 @@
+\changetocdepth {4}
+\babel@toc {brazil}{}\relax 
+\contentsline {chapter}{\chapternumberline {1}INTRODUÇÃO}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Problema de Pesquisa}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Objetivos}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Objetivo Geral}{8}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Objetivos Específicos}{8}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Justificativa}{9}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Relevância Acadêmica}{9}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Relevância Prática}{10}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Estrutura do Trabalho}{10}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Fase 1: Revisão Sistemática da Literatura (PTC)}{10}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Fase 2: Desenvolvimento do Protótipo (TCC)}{11}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Fase 3: Validação Experimental (TCC)}{11}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Organização do Documento}{12}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Delimitação de Escopo}{12}{subsection.1.4.5}%
+\contentsline {chapter}{\chapternumberline {2}FUNDAMENTAÇÃO TEÓRICA}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Contexto e Relevância}{13}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Questões de Pesquisa}{13}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Técnicas Computacionais na Educação Matemática}{14}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Machine Learning e Inteligência Artificial}{14}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Learning Analytics e Educational Data Mining}{14}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Sistemas Tutores Inteligentes}{15}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Aprendizagem Adaptativa e Personalizada}{16}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Avaliação Automatizada e Métricas de Desempenho}{16}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Tipos de Avaliação}{16}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Métricas Computacionais}{17}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Justificativas Metodológicas para a Revisão Sistemática}{17}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Escolha de Múltiplas Bases de Dados}{17}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Critérios de Recorte Temporal}{18}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Abordagem Bilíngue}{18}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Contribuições Esperadas}{18}{section.2.6}%
+\contentsline {chapter}{\chapternumberline {3}METODOLOGIA}{20}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Protocolo da Revisão Sistemática}{20}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Estratégia de Busca}{20}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Bases de Dados e APIs}{20}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Estratégia de Busca Bilíngue}{20}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Critérios de Seleção (PICOS)}{22}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Critérios de Inclusão}{22}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Critérios de Exclusão}{22}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Processo de Seleção (PRISMA)}{23}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Identificação}{23}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Triagem}{23}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Elegibilidade}{23}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Inclusão}{24}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Deduplicação}{24}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Infraestrutura Tecnológica}{24}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Pipeline Automatizado}{24}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Reprodutibilidade}{25}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}Limitações Metodológicas}{25}{section.3.7}%
+\contentsline {chapter}{\chapternumberline {4}RESULTADOS ESPERADOS}{27}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Fluxo PRISMA 2020}{27}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Identificação (n = 9.513)}{27}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Triagem (n = 6.948)}{27}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Elegibilidade (n = 1.945)}{28}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Incluídos (n = 16)}{28}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}Estatísticas Descritivas}{28}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Síntese dos Estudos Incluídos}{28}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Análise Temática}{32}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Termos Mais Frequentes}{32}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Categorias Temáticas Emergentes}{32}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Distribuição por Abordagem Técnica e Finalidade}{33}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Resultados de Eficácia Reportados}{33}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Magnitude de Efeito}{34}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Métricas de Avaliação Empregadas}{34}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.6}Limitações Identificadas}{35}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Limitações Técnicas}{35}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Limitações Pedagógicas}{35}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Limitações Metodológicas}{36}{subsection.4.6.3}%
+\contentsline {subsection}{\numberline {4.6.4}Limitações Éticas}{36}{subsection.4.6.4}%
+\contentsline {section}{\numberline {4.7}Mapeamento de Lacunas e Direcionamento para Fase 2}{36}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Lacunas Técnicas}{36}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Lacunas Pedagógicas}{37}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Direcionamento para Fase 2}{37}{subsection.4.7.3}%
+\contentsline {section}{\numberline {4.8}Próximos Passos}{37}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Fase 2 --- Desenvolvimento de Protótipo (fevereiro--julho/2026)}{38}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Fase 3 --- Validação Experimental (julho--novembro/2026)}{38}{subsection.4.8.2}%
+\contentsline {subsection}{\numberline {4.8.3}Síntese Final do TCC (outubro--novembro/2026)}{38}{subsection.4.8.3}%
+\contentsline {chapter}{\chapternumberline {5}CRONOGRAMA}{39}{chapter.5}%
+\vspace {\cftbeforepartskip }
+\contentsline {chapter}{\indent \hspace {\cftparagraphnumwidth } {\hspace {-0.1cm}\uppercase {Refer\^encias}} }{40}{section*.6}%

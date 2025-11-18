@@ -44,7 +44,7 @@ class SQLiteAPICache:
     - Limpeza automática
     """
     
-    def __init__(self, db_path: str = "research/cache/api_cache.db"):
+    def __init__(self, db_path: str = "research/cache/api_cache.sqlite"):
         """
         Inicializa o cache SQLite.
         
@@ -449,7 +449,7 @@ def migrate_json_cache_to_sqlite(json_cache_dir: str, sqlite_cache: SQLiteAPICac
 
 if __name__ == "__main__":
     # Teste básico do sistema
-    cache = SQLiteAPICache("research/cache/api_cache.db")
+    cache = SQLiteAPICache("research/cache/api_cache.sqlite")
     
     # Teste de armazenamento e recuperação
     test_data = [

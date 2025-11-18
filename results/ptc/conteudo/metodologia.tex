@@ -1,0 +1,201 @@
+\chapter{METODOLOGIA}
+\label{cap:metodologia}
+
+\section{Protocolo da Revisão Sistemática}
+
+Este trabalho adota a metodologia de \textbf{Revisão Sistemática da Literatura} seguindo as diretrizes PRISMA 2020 (\textit{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}) \cite{PRISMA2020}. A revisão sistemática é um método estruturado e transparente para identificar, selecionar, avaliar e sintetizar estudos relevantes publicados sobre um tópico específico, minimizando vieses e garantindo reprodutibilidade.
+
+A escolha da abordagem PRISMA justifica-se por sua ampla aceitação na comunidade científica, seu rigor metodológico e sua capacidade de assegurar que o processo de revisão seja explícito, replicável e auditável. Esta metodologia é especialmente adequada para a Fase 1 do projeto, na qual o objetivo principal é mapear o estado da arte das técnicas computacionais aplicadas à educação matemática.
+
+\section{Estratégia de Busca}
+
+\subsection{Bases de Dados e APIs}
+
+A coleta de dados foi realizada mediante integração automatizada com as APIs de quatro bases científicas complementares:
+
+\begin{enumerate}
+    \item \textbf{Semantic Scholar}: Ampla cobertura em ciência da computação com métricas de influência científica;
+    \item \textbf{OpenAlex}: Base de dados aberta e abrangente, sucessora do Microsoft Academic Graph;
+    \item \textbf{Crossref}: Foco em metadados precisos de publicações e identificadores DOI;
+    \item \textbf{CORE}: Agregador especializado em artigos de acesso aberto.
+\end{enumerate}
+
+A integração de múltiplas fontes proporciona: (i)~cobertura complementar, pois cada base possui especialidades distintas; (ii)~redução de viés de seleção; (iii)~reprodutibilidade mediante automação; e (iv)~eficiência na coleta sistemática de grandes volumes de dados.
+
+\subsection{Estratégia de Busca Bilíngue}
+
+A estratégia de busca combina três camadas de termos (base matemática, técnicas computacionais e domínio educacional), utilizando o operador booleano \texttt{AND} para garantir precisão e relevância temática.
+
+\textbf{Camada 1 -- Base Matemática}:
+\begin{itemize}
+    \item Inglês: \textit{mathematics}, \textit{math} (2 termos)
+    \item Português: \textit{matemática} (1 termo)
+\end{itemize}
+
+\textbf{Camada 2 -- Técnicas Computacionais} (12 termos para ambos os idiomas, com equivalentes em português):
+\begin{itemize}
+    \item \textit{adaptive} (adaptivo), \textit{personalized} (personalizado), \textit{tutoring} (tutor), \textit{analytics} (analítica), \textit{mining} (mineração), \textit{machine learning} (aprendizado de máquina), \textit{ai} (ia), \textit{assessment} (avaliação), \textit{student modeling} (modelagem do aluno), \textit{predictive} (preditivo), \textit{intelligent tutor} (tutor inteligente), \textit{artificial intelligence} (inteligência artificial)
+\end{itemize}
+
+\textbf{Camada 3 -- Domínio Educacional}:
+\begin{itemize}
+    \item Inglês: \textit{education}, \textit{learning} (2 termos)
+    \item Português: \textit{educacao}, \textit{ensino} (2 termos)
+\end{itemize}
+
+A estratégia resultou em \textbf{72 consultas únicas}:
+\begin{itemize}
+    \item 48 consultas em inglês (2 termos base $\times$ 12 técnicas $\times$ 2 educacionais)
+    \item 24 consultas em português (1 termo base $\times$ 12 técnicas $\times$ 2 educacionais)
+\end{itemize}
+
+Cada consulta segue o formato: \texttt{"termo\_base" AND "termo\_tecnica" AND "termo\_educacional"}. 
+
+\textbf{Exemplos}:
+\begin{itemize}
+    \item \texttt{"mathematics" AND "machine learning" AND "education"}
+    \item \texttt{"math" AND "intelligent tutor" AND "learning"}
+    \item \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}ao"}
+\end{itemize}
+
+Esta abordagem de \textbf{expansão em 3 camadas} garante:
+\begin{enumerate}
+    \item \textbf{Precisão temática}: Todas as queries combinam matemática + técnica computacional + domínio educacional
+    \item \textbf{Cobertura abrangente}: 12 termos técnicos capturam diferentes áreas de IA/ML/LA
+    \item \textbf{Inclusão bilinguística}: Queries em inglês e português ampliam representação geográfica
+    \item \textbf{Reprodutibilidade}: Estrutura documentada em \texttt{search\_terms.py} (módulo canônico)
+\end{enumerate}
+
+\section{Critérios de Seleção (PICOS)}
+
+Os critérios de inclusão e exclusão foram definidos conforme o framework PICOS:
+
+\begin{itemize}
+    \item \textbf{P (Population)}: Estudantes de matemática em qualquer nível educacional;
+    \item \textbf{I (Intervention)}: Aplicação de técnicas computacionais (ML, IA, LA, STI, NLP, etc.);
+    \item \textbf{C (Comparison)}: Abordagens pedagógicas tradicionais ou alternativas (quando aplicável);
+    \item \textbf{O (Outcomes)}: Desempenho acadêmico, diagnóstico de competências, personalização do ensino;
+    \item \textbf{S (Study Design)}: Estudos empíricos, quasi-experimentais ou estudos de caso com evidências práticas.
+\end{itemize}
+
+\subsection{Critérios de Inclusão}
+
+\begin{enumerate}
+    \item Artigos completos revisados por pares (\textit{peer-reviewed});
+    \item Publicações entre 2015 e 2025 (últimos 10 anos);
+    \item Foco explícito em técnicas computacionais aplicadas à educação matemática;
+    \item Apresentação de dados empíricos, metodologias detalhadas ou evidências de desenvolvimento/avaliação de sistemas;
+    \item Idiomas: inglês ou português.
+\end{enumerate}
+
+\subsection{Critérios de Exclusão}
+
+\begin{enumerate}
+    \item Estudos com metodologia insuficiente ou incoerente;
+    \item Trabalhos com foco indireto ou descontextualizado da matemática;
+    \item Publicações predominantemente teóricas sem suporte empírico;
+    \item Estudos com impacto não mensurável ou irrelevante;
+    \item Documentos não validados cientificamente (\textit{preprints}, relatórios internos);
+    \item Publicações com falhas conceituais ou contradições metodológicas;
+    \item Idiomas diferentes de inglês ou português.
+\end{enumerate}
+
+\section{Processo de Seleção (PRISMA)}
+
+O fluxo de seleção dos estudos seguiu rigorosamente as etapas PRISMA:
+
+\subsection{Identificação}
+
+Execução automatizada das 72 consultas nas quatro APIs, resultando na coleta inicial de \textbf{9.513 registros}. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}).
+
+\subsection{Triagem}
+
+Aplicação de deduplicação automática e filtros para remover:
+\begin{itemize}
+    \item Registros duplicados identificados via cache;
+    \item Sem título ou resumo válido;
+    \item Fora do período 2017--2026;
+    \item Em idiomas não compatíveis.
+\end{itemize}
+
+Nesta etapa foram excluídos \textbf{2.565 registros duplicados} (27,0\%), resultando em \textbf{6.948 estudos únicos}. Após aplicação de critérios de triagem, \textbf{1.945 estudos} avançaram para análise de elegibilidade.
+
+\subsection{Elegibilidade}
+
+Avaliação dos estudos mediante sistema de pontuação (\textit{scoring}) multi-critério baseado em:
+
+\begin{enumerate}
+    \item \textbf{Técnicas Computacionais} (0--3 pontos): Presença e relevância de termos relacionados a ML, IA, LA, STI, etc.;
+    \item \textbf{Contexto Educacional Matemático} (0--3 pontos): Aderência explícita ao domínio da educação matemática;
+    \item \textbf{Qualidade de Metadados/Abstract} (0--2 pontos): Completude e clareza das informações bibliográficas;
+    \item \textbf{Impacto e Acesso} (0--2 pontos): Disponibilidade de DOI, acesso aberto, número de citações.
+\end{enumerate}
+
+A pontuação total varia de 0 a 10. O \textit{threshold} de inclusão foi definido em $\text{relevance\_score} \geq 4.0$, garantindo seleção rigorosa de estudos com aderência temática e metodológica adequadas.
+
+Nesta etapa foram excluídos \textbf{1.929 registros} (99,2\% dos elegíveis), refletindo o rigor dos critérios de seleção.
+
+\subsection{Inclusão}
+
+Após aplicação do \textit{threshold}, foram incluídos \textbf{16 estudos} para síntese qualitativa, representando uma taxa de inclusão de aproximadamente \textbf{0,17\%} em relação ao total identificado (16/9.513).
+
+\section{Deduplicação}
+
+A deduplicação foi realizada em dois níveis:
+
+\begin{enumerate}
+    \item \textbf{Por DOI}: Registros com DOI idêntico foram unificados, priorizando a fonte com maior completude de metadados;
+    \item \textbf{Por Similaridade de Título}: Títulos com similaridade TF-IDF coseno $>0.9$ foram considerados duplicatas, mantendo-se apenas o registro mais completo.
+\end{enumerate}
+
+Este processo foi executado durante a ingestão dos dados, antes da triagem.
+
+\section{Infraestrutura Tecnológica}
+
+\subsection{Pipeline Automatizado}
+
+O pipeline de revisão sistemática foi implementado em \textbf{Python 3.11+}, utilizando:
+
+\begin{itemize}
+    \item \textbf{SQLite}: Banco de dados local para armazenamento estruturado (\texttt{systematic\_review.sqlite});
+    \item \textbf{Requests}: Cliente HTTP para comunicação com APIs;
+    \item \textbf{Pandas}: Manipulação e análise de dados tabulares;
+    \item \textbf{Scikit-learn}: Cálculo de similaridades TF-IDF para deduplicação.
+\end{itemize}
+
+O sistema implementa cache local com taxa de reutilização de aproximadamente \textbf{63\%}, reduzindo significativamente o tempo de reprocessamento e o número de requisições às APIs.
+
+\subsection{Reprodutibilidade}
+
+O pipeline é totalmente reprodutível mediante comandos CLI (\textit{Command Line Interface}):
+
+\begin{verbatim}
+# Executar pipeline completo
+python -m research.src.cli run-pipeline --min-score 4.0
+
+# Gerar estatísticas
+python -m research.src.cli stats
+
+# Exportar resultados
+python -m research.src.cli export
+\end{verbatim}
+
+Todos os parâmetros de configuração (thresholds, APIs, termos de busca) estão documentados e versionados no repositório Git do projeto.
+
+\section{Limitações Metodológicas}
+
+As principais limitações identificadas incluem:
+
+\begin{enumerate}
+    \item \textbf{Viés Linguístico}: Cobertura limitada a inglês e português, excluindo potencialmente estudos relevantes em outros idiomas;
+    \item \textbf{Viés Temporal}: Foco nos últimos 10 anos pode excluir estudos seminais anteriores a 2015;
+    \item \textbf{Alta Taxa de Exclusão}: A taxa de inclusão de 0,17\% reflete rigor elevado, mas pode limitar a abrangência da síntese;
+    \item \textbf{Dependência de APIs}: Disponibilidade e completude dos dados dependem das APIs consultadas;
+    \item \textbf{Ausência de Grey Literature}: Não foram incluídas teses, dissertações ou relatórios técnicos não indexados.
+\end{enumerate}
+
+Apesar dessas limitações, a metodologia adotada garante alto grau de rigor, transparência e reprodutibilidade, alinhada às melhores práticas de revisões sistemáticas.
+
+% 
+%--------- FIM METODOLOGIA ------------
+%

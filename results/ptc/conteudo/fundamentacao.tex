@@ -1,0 +1,185 @@
+\chapter{FUNDAMENTAÇÃO TEÓRICA}
+\label{cap:fundamentacao}
+
+\section{Contexto e Relevância}
+
+A transformação digital tem impactado significativamente diversas áreas do conhecimento, incluindo a educação. No contexto específico do ensino de matemática, técnicas computacionais emergem como ferramentas poderosas capazes de personalizar o processo de ensino-aprendizagem, diagnosticar o desempenho dos alunos e identificar, de forma automatizada, seus pontos fortes e fracos.
+
+Abordagens como \textbf{Machine Learning} (ML), \textbf{Learning Analytics} (LA) e \textbf{Sistemas Tutores Inteligentes} (STI) têm demonstrado grande potencial ao proporcionar intervenções pedagógicas precisas e personalizadas, contribuindo para uma gestão mais eficaz da aprendizagem. Estudos recentes indicam que a aplicação dessas tecnologias pode resultar em ganhos significativos de desempenho acadêmico, com melhorias que variam entre 10\% e 20\% em avaliações padronizadas \cite{Implementation2025_000, Math2021_001}.
+
+Este capítulo estabelece as bases teóricas para a Fase 1 do projeto --- uma revisão sistemática da literatura --- que visa mapear as técnicas e abordagens computacionais aplicadas à educação matemática. As bases teóricas para as Fases 2 e 3 (desenvolvimento e validação) serão expandidas conforme o avanço do projeto.
+
+\section{Questões de Pesquisa}
+
+A presente investigação busca responder às seguintes questões fundamentais que norteiam a revisão sistemática da literatura:
+
+\begin{enumerate}
+    \item \textbf{Personalização Tecnológica}: Quais tecnologias computacionais estão sendo aplicadas para personalizar o ensino de matemática?
+    
+    \item \textbf{Identificação de Competências}: Como técnicas de machine learning e inteligência artificial têm sido utilizadas para identificar competências individuais de alunos?
+    
+    \item \textbf{Metodologias Adaptativas}: Quais são as metodologias mais eficazes para adaptar planos de ensino com base em dados de desempenho dos alunos?
+    
+    \item \textbf{Métricas de Avaliação}: Que tipos de métricas e indicadores são usados para avaliar competências matemáticas em ambientes educacionais?
+\end{enumerate}
+
+Estas questões orientam o escopo da revisão sistemática e estabelecem os critérios para seleção e análise dos estudos identificados.
+
+\section{Técnicas Computacionais na Educação Matemática}
+
+\subsection{Machine Learning e Inteligência Artificial}
+
+Machine Learning (ML) é um subcampo da Inteligência Artificial (IA) que permite que sistemas computacionais aprendam padrões a partir de dados sem serem explicitamente programados para tarefas específicas. No contexto educacional, algoritmos de ML têm sido amplamente utilizados para:
+
+\begin{itemize}
+    \item \textbf{Predição de Desempenho}: Modelos preditivos que estimam o desempenho futuro dos alunos com base em dados históricos \cite{Multimodels2020_002, Machine2022_010};
+    
+    \item \textbf{Classificação de Competências}: Algoritmos que categorizam alunos segundo seus níveis de proficiência em diferentes tópicos matemáticos \cite{Math2021_001, Analysis2022_003};
+    
+    \item \textbf{Detecção de Padrões}: Identificação automática de estilos de aprendizagem, dificuldades recorrentes e estratégias bem-sucedidas \cite{Identifying2017_006};
+    
+    \item \textbf{Recomendação Personalizada}: Sistemas que sugerem conteúdos, exercícios e trajetórias de aprendizagem adaptadas às necessidades individuais \cite{Design2025_004}.
+\end{itemize}
+
+Técnicas específicas incluem redes neurais artificiais, árvores de decisão, máquinas de vetores de suporte (SVM), k-vizinhos mais próximos (KNN), algoritmos de \textit{ensemble} (Random Forest, XGBoost) e aprendizado profundo (\textit{deep learning}) \cite{Implementation2025_000, Machine2022_010}.
+
+\subsection{Learning Analytics e Educational Data Mining}
+
+Learning Analytics (LA) refere-se à medição, coleta, análise e apresentação de dados sobre alunos e seus contextos de aprendizagem, com o objetivo de compreender e otimizar o processo educacional. Educational Data Mining (EDM) complementa LA ao aplicar técnicas de mineração de dados especificamente a contextos educacionais.
+
+Aplicações típicas incluem:
+
+\begin{itemize}
+    \item \textbf{Dashboards de Desempenho}: Visualizações interativas que apresentam métricas de progresso individual e coletivo em tempo real;
+    
+    \item \textbf{Análise Preditiva}: Identificação precoce de alunos em risco de evasão ou baixo desempenho \cite{Machine2019_007, Data2020_011};
+    
+    \item \textbf{Modelagem de Conhecimento}: Representações computacionais do estado de conhecimento dos alunos (\textit{knowledge tracing}) que evoluem ao longo do tempo \cite{Computational2017_008};
+    
+    \item \textbf{Análise de Interações}: Estudo de padrões de navegação, tempo de resposta, tentativas e erros em ambientes digitais.
+\end{itemize}
+
+A integração entre LA e EDM permite uma compreensão mais profunda dos processos de aprendizagem, subsidiando decisões pedagógicas baseadas em evidências.
+
+\subsection{Sistemas Tutores Inteligentes}
+
+Sistemas Tutores Inteligentes (STI) são ambientes computacionais que simulam a interação individual entre tutor e aluno, adaptando-se dinamicamente às necessidades e características do aprendiz. Os STI clássicos são compostos por quatro módulos principais:
+
+\begin{enumerate}
+    \item \textbf{Módulo do Domínio}: Representa o conhecimento especializado sobre o conteúdo a ser ensinado;
+    \item \textbf{Módulo do Estudante}: Modela o estado cognitivo atual do aluno, incluindo conhecimentos, habilidades e lacunas;
+    \item \textbf{Módulo Pedagógico}: Define estratégias de ensino e escolhe intervenções apropriadas;
+    \item \textbf{Módulo de Interface}: Gerencia a comunicação com o usuário, incluindo feedback e visualizações.
+\end{enumerate}
+
+Estudos recentes indicam que STI podem reduzir o tempo necessário para atingir objetivos de aprendizagem em até 20\%, comparados a métodos tradicionais \cite{Computational2017_008}. A eficácia dos STI está diretamente relacionada à qualidade da modelagem do estudante e à capacidade do sistema de fornecer feedback imediato e contextualizado.
+
+\subsection{Aprendizagem Adaptativa e Personalizada}
+
+Sistemas de aprendizagem adaptativa utilizam dados em tempo real para ajustar automaticamente o conteúdo, a dificuldade e o ritmo de apresentação conforme o desempenho e as características do aluno. Diferentemente dos STI tradicionais, esses sistemas frequentemente empregam técnicas de aprendizado por reforço (\textit{reinforcement learning}) para otimizar trajetórias de aprendizagem.
+
+Características principais incluem:
+
+\begin{itemize}
+    \item \textbf{Caminhos de Aprendizagem Dinâmicos}: Sequenciamento automático de conteúdos baseado em grafos de conhecimento \cite{Design2025_004, Innovative2024_005};
+    
+    \item \textbf{Ajuste de Dificuldade}: Seleção dinâmica de exercícios conforme o nível de proficiência demonstrado;
+    
+    \item \textbf{Análise de Sentimentos}: Integração de reconhecimento emocional para ajustar estratégias pedagógicas segundo o estado afetivo do aluno \cite{Design2025_004};
+    
+    \item \textbf{Feedback Formativo}: Orientações personalizadas que direcionam o aluno para recursos específicos de remediação ou aprofundamento.
+\end{itemize}
+
+Estudos demonstram que sistemas adaptativos podem melhorar a motivação e o engajamento dos alunos, além de promover ganhos de aprendizagem estatisticamente significativos \cite{Assessing2024_014}.
+
+\section{Avaliação Automatizada e Métricas de Desempenho}
+
+A avaliação é um componente crítico do processo educacional, e técnicas computacionais têm transformado significativamente as práticas avaliativas. Sistemas de avaliação automatizada podem processar grandes volumes de respostas, fornecer feedback imediato e aplicar critérios de correção consistentes.
+
+\subsection{Tipos de Avaliação}
+
+\begin{itemize}
+    \item \textbf{Avaliação Formativa}: Realizada durante o processo de aprendizagem para identificar lacunas e orientar intervenções \cite{Performance2023_013};
+    
+    \item \textbf{Avaliação Somativa}: Aplicada ao final de unidades ou cursos para certificar competências adquiridas;
+    
+    \item \textbf{Avaliação Diagnóstica}: Identifica o estado inicial de conhecimento para personalizar trajetórias de ensino;
+    
+    \item \textbf{Avaliação Autêntica}: Envolve tarefas contextualizadas e práticas que refletem aplicações do mundo real \cite{Authentic2024_012}.
+\end{itemize}
+
+\subsection{Métricas Computacionais}
+
+Sistemas baseados em IA utilizam diversas métricas para quantificar o desempenho e o progresso dos alunos:
+
+\begin{itemize}
+    \item \textbf{Acurácia de Respostas}: Percentual de acertos em avaliações;
+    \item \textbf{Tempo de Resolução}: Duração necessária para completar tarefas;
+    \item \textbf{Taxa de Tentativas}: Número de tentativas até atingir resposta correta;
+    \item \textbf{Nível de Proficiência}: Classificação em escalas padronizadas (e.g., iniciante, intermediário, avançado) \cite{Math2021_001};
+    \item \textbf{Ganho de Aprendizagem}: Diferença entre avaliações pré e pós-intervenção;
+    \item \textbf{Engajamento}: Métricas de interação, como tempo online, acessos a recursos e participação em atividades.
+\end{itemize}
+
+Estudos indicam que a avaliação automatizada, quando bem projetada, pode ser tão confiável quanto avaliações conduzidas por especialistas humanos, com a vantagem adicional de escalabilidade \cite{Authentic2024_012}.
+
+\section{Justificativas Metodológicas para a Revisão Sistemática}
+
+\subsection{Escolha de Múltiplas Bases de Dados}
+
+A integração de múltiplas APIs de bases científicas proporciona:
+
+\begin{itemize}
+    \item \textbf{Cobertura Complementar}: Cada base possui forças específicas --- \textit{Semantic Scholar} para métricas de impacto, \textit{OpenAlex} para amplitude de cobertura, \textit{Crossref} para precisão bibliográfica, e \textit{CORE} para acesso aberto;
+    
+    \item \textbf{Redução de Viés}: Minimiza vieses de seleção inerentes a fontes únicas;
+    
+    \item \textbf{Reprodutibilidade}: Automação via APIs permite replicação exata do processo de busca;
+    
+    \item \textbf{Eficiência}: Coleta sistemática de grandes volumes de dados com consistência metodológica.
+\end{itemize}
+
+\subsection{Critérios de Recorte Temporal}
+
+O período de 2015-2025 foi escolhido por representar:
+
+\begin{itemize}
+    \item \textbf{Era da IA Educacional}: Década de maior evolução nas técnicas computacionais aplicadas à educação;
+    \item \textbf{Maturidade do Machine Learning}: Consolidação de técnicas de ML em ambientes educacionais;
+    \item \textbf{Explosão do Learning Analytics}: Desenvolvimento massivo de ferramentas de análise educacional;
+    \item \textbf{Relevância Tecnológica}: Tecnologias ainda atuais e aplicáveis em contextos contemporâneos.
+\end{itemize}
+
+\subsection{Abordagem Bilíngue}
+
+A inclusão de termos de busca em português e inglês visa:
+
+\begin{itemize}
+    \item \textbf{Amplitude Geográfica}: Capturar pesquisas de diferentes regiões e contextos culturais;
+    \item \textbf{Diversidade Cultural}: Incluir abordagens pedagógicas culturalmente específicas;
+    \item \textbf{Completude}: Evitar perda de estudos relevantes devido a limitações linguísticas.
+\end{itemize}
+
+A estratégia bilíngue resultou em 72 combinações de termos de busca (48 em inglês + 24 em português), estruturada em 3 camadas: termos base de matemática (2 EN, 1 PT), 12 termos de técnicas computacionais (ambos idiomas), e termos educacionais (2 para cada idioma).
+
+\section{Contribuições Esperadas}
+
+Esta fundamentação teórica estabelece as bases para a revisão sistemática da literatura, que visa:
+
+\begin{enumerate}
+    \item \textbf{Mapeamento Sistemático}: Criar um panorama completo e atualizado das técnicas computacionais aplicadas à educação matemática;
+    
+    \item \textbf{Identificação de Lacunas}: Encontrar oportunidades de pesquisa e desenvolvimento que fundamentarão as Fases 2 e 3 do projeto;
+    
+    \item \textbf{Base para Protótipo}: Fornecer subsídios científicos sólidos para o desenvolvimento de ferramentas educacionais baseadas em evidências;
+    
+    \item \textbf{Referencial Teórico}: Estabelecer uma base conceitual robusta que sustente futuras pesquisas na área;
+    
+    \item \textbf{Diretrizes Práticas}: Orientar implementações de tecnologias educacionais alinhadas às melhores práticas identificadas na literatura.
+\end{enumerate}
+
+Os resultados desta revisão sistemática servirão como alicerce para as próximas fases do projeto, nas quais será desenvolvido e validado um protótipo de ferramenta computacional para personalização do ensino de matemática.
+
+% 
+%--------- FIM FUNDAMENTAÇÃO TEÓRICA ------------
+%

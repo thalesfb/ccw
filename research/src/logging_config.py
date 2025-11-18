@@ -12,7 +12,6 @@ from typing import Optional, Dict, Any
 import json
 import traceback
 
-
 class AuditLogger:
     """
     Logger especializado para auditoria do pipeline de revisão sistemática.

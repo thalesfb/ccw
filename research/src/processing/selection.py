@@ -34,6 +34,31 @@ class PRISMASelector:
             "eligibility_excluded": 0,
             "included": 0
         }
+
+    def _load_dedup_stats_from_df(self, df: pd.DataFrame) -> None:
+        """Load dedup stats from DataFrame attrs (historical only - for logging).
+        
+        IMPORTANT: Do NOT use dedup_stats.initial_count for 'identification' metric.
+        Database already contains deduplicated papers. Use len(df) for identification.
+        dedup_stats contains PRE-DATABASE historical values from collection phase.
+        """
+        try:
+            dedup = getattr(df, 'attrs', {}).get('dedup_stats') if df is not None else None
+            if dedup:
+                # Use actual DataFrame size for identification (canonical source)
+                self.stats['identification'] = len(df) if df is not None else 0
+                
+                # Keep historical dedup count for logging/transparency only
+                self.stats['_historical_initial_count'] = int(dedup.get('initial_count', 0))
+                self.stats['_historical_duplicates_removed'] = int(dedup.get('total_removed', 0))
+                
+                logger.debug(
+                    f"Historical dedup stats: {self.stats['_historical_initial_count']} "
+                    f"initial, {self.stats['_historical_duplicates_removed']} removed. "
+                    f"Current database: {self.stats['identification']} unique papers."
+                )
+        except Exception:
+            logger.debug("No dedup_stats available on DataFrame.attrs")
     
     def apply_inclusion_criteria(self, paper: Dict) -> Tuple[bool, List[str]]:
         """Check if paper meets inclusion criteria.
@@ -323,7 +348,10 @@ class PRISMASelector:
         if df.empty:
             return df
         
-        self.stats["identification"] = len(df)
+        # If dedup stats are attached to the DataFrame, prefer those as identification
+        self._load_dedup_stats_from_df(df)
+        if not self.stats.get("identification"):
+            self.stats["identification"] = len(df)
         logger.info(f"Starting PRISMA selection with {len(df)} papers")
         
         # Phase 1: Screening
@@ -385,3 +413,42 @@ def apply_prisma_selection(
     selector = PRISMASelector(config)
     result = selector.apply_full_selection(df, min_relevance_score, max_papers)
     return result, selector.get_statistics()
+
+
+def apply_post_collection_filter(
+    df: pd.DataFrame,
+    analysis_dir,
+    persist_decisions: bool = False,
+    cfg: Optional[AppConfig] = None,
+) -> pd.DataFrame:
+    """Apply a minimal, auditable post-collection filter.
+
+    This function is intentionally conservative: it annotates the DataFrame
+    with a marker column indicating the filter was applied and returns the
+    unchanged DataFrame. If persistence of decisions is required, the caller
+    (pipeline) is expected to handle DB writes.
+
+    Args:
+        df: DataFrame of collected papers
+        analysis_dir: Path where analysis artifacts may be stored
+        persist_decisions: If True, indicates caller intends to persist
+        cfg: Optional application config
+
+    Returns:
+        The (possibly annotated) DataFrame
+    """
+    if df is None or df.empty:
+        return df
+
+    try:
+        df = df.copy()
+        # Mark that the post-collection filter ran (no-op by default)
+        df["post_collection_filter_applied"] = True
+        # Default placeholder column for any decision that might be annotated
+        if "filter_decision" not in df.columns:
+            df["filter_decision"] = None
+    except Exception:
+        # If anything fails, return original dataframe unchanged
+        return df
+
+    return df

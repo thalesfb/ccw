@@ -35,14 +35,11 @@ class DatabaseConfig:
     ----------
     db_path : str
         SQLite database file path.
-    cache_dir : str
-        Base directory for on-disk API caches.
     exports_dir : str
         Base directory for exports (CSV, Excel, reports, visualizations).
     """
 
     db_path: str = ""
-    cache_dir: str = ""
     exports_dir: str = ""
     logs_dir: str = ""
     
@@ -50,9 +47,8 @@ class DatabaseConfig:
         """Inicializa paths absolutos baseados no diretório research/."""
         research_dir = _get_research_dir()
         if not self.db_path:
-            self.db_path = str(research_dir / "systematic_review.db")
-        if not self.cache_dir:
-            self.cache_dir = str(research_dir / "cache")
+            # Use .sqlite as the canonical filename to make the DB file explicit
+            self.db_path = str(research_dir / "systematic_review.sqlite")
         if not self.exports_dir:
             self.exports_dir = str(research_dir / "exports")
         if not self.logs_dir:
@@ -161,13 +157,18 @@ class ReviewCriteria:
         if self.languages is None:
             self.languages = ["en", "pt"]
         if self.keywords is None:
-            self.keywords = ["education", "educacao", "ensino",
-                             "learning", "matematica", "mathematics"]
+            self.keywords = [
+                "education", "educacao", "ensino",
+                "learning", "matematica", "mathematics"
+                ]
         if self.tech_terms is None:
             self.tech_terms = [
                 "adaptive", "personalized", "tutoring", "analytics", "mining",
                 "machine learning", "ai", "assessment", "student modeling", "predictive",
-                "intelligent tutor", "artificial intelligence"
+                "intelligent tutor", "artificial intelligence", "adaptivo", "personalizado",
+                "tutor", "analitica", "mineração", "aprendizado de máquina", "ia",
+                "avaliação", "modelagem do aluno", "preditivo", "tutor inteligente",
+                "inteligência artificial"
             ]
 
 
@@ -261,8 +262,16 @@ def load_config() -> AppConfig:
         or os.getenv("USER_EMAIL")
     )
 
+    # Allow runtime override of the DB path via environment variable
+    # This lets the CLI set a different sqlite file (e.g., a copied .sqlite)
+    env_db = os.getenv("CCW_DB_PATH", "")
+    if env_db:
+        db_conf = DatabaseConfig(db_path=env_db)
+    else:
+        db_conf = DatabaseConfig()
+
     return AppConfig(
-        database=DatabaseConfig(),
+        database=db_conf,
         apis=api_config,
         criteria=ReviewCriteria(),
     )

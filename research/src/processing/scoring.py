@@ -35,6 +35,64 @@ EVAL_METHODS = {
 }
 
 
+def normalize_text(text: Optional[str]) -> str:
+    """Normalize text to plain ascii lowercase (utility shared by filters).
+
+    Kept lightweight to avoid pulling heavy dependencies; used by
+    compatibility shim and by selection heuristics when needed.
+    """
+    if not isinstance(text, str):
+        return ""
+    text = text.lower()
+    import unicodedata
+    text = unicodedata.normalize('NFKD', text)
+    text = ''.join([c for c in text if not unicodedata.combining(c)])
+    return text
+
+
+def is_relevant_paper(paper: Dict, year_min: int, langs: List[str],
+                      keywords: List[str], tech_terms: List[str]) -> Tuple[bool, str]:
+    """Lightweight pre-filter for candidate papers.
+
+    This mirrors the previous `filtering_patterns.is_relevant_paper` logic but
+    lives in the canonical `processing.scoring` module so callers import
+    from a single, authoritative place.
+    """
+    # Year
+    try:
+        year_val = int(paper.get('year') or 0)
+    except Exception:
+        year_val = 0
+    if year_val < int(year_min):
+        return False, f"Ano < {year_min}"
+
+    # Title or abstract empty
+    if not paper.get('title') and not paper.get('abstract'):
+        return False, "Título e Resumo vazios"
+
+    text_to_check = (str(paper.get('title', '')) + " " + str(paper.get('abstract', ''))).lower()
+
+    # Language heuristic (simple)
+    if text_to_check and langs:
+        lang_detected = False
+        if any(w in text_to_check for w in ['the', 'a', 'is', 'in', 'of', 'and']):
+            if 'en' in langs:
+                lang_detected = True
+        if any(w in text_to_check for w in ['o', 'a', 'é', 'em', 'de', 'e']):
+            if 'pt' in langs:
+                lang_detected = True
+
+    # Keywords preference or EDU_MATH regex fallback
+    if keywords:
+        if not any(k.lower() in text_to_check for k in keywords):
+            return False, "Sem palavra-chave de educacao"
+    else:
+        if not re.search(EDU_MATH, text_to_check, re.IGNORECASE):
+            return False, "Sem foco educacional detectado"
+
+    return True, ""
+
+
 def extract_techniques(text: str) -> List[str]:
     """Extract computational techniques from text.
 
@@ -321,6 +379,11 @@ def compute_relevance_scores(
 
     # Add columns to DataFrame
     result = df.copy()
+    # Preserve attrs (e.g., dedup_stats) so downstream modules can access them
+    try:
+        result.attrs = getattr(df, 'attrs', {}).copy() if getattr(df, 'attrs', None) else {}
+    except Exception:
+        pass
     result["relevance_score"] = scores
     result["comp_techniques"] = techniques_list
     result["study_type"] = study_types

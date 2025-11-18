@@ -8,7 +8,7 @@ PAPERS_SCHEMA = """
 CREATE TABLE IF NOT EXISTS papers (
     -- Identificadores únicos
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    doi TEXT UNIQUE,
+    doi TEXT,
     url TEXT,
     paper_id TEXT,  -- ID específico da API (ex: Semantic Scholar paperId)
     
@@ -49,6 +49,10 @@ CREATE TABLE IF NOT EXISTS papers (
     exclusion_reason TEXT,
     inclusion_criteria_met TEXT,
     relevance_score REAL,
+    
+    -- Deduplicação não destrutiva
+    is_duplicate BOOLEAN DEFAULT 0,
+    duplicate_of TEXT,
     
     -- Controle e notas
     status TEXT DEFAULT 'pending',  -- pending, reviewed, included, excluded
@@ -187,6 +191,10 @@ class PaperRecord:
     exclusion_reason: Optional[str] = None
     inclusion_criteria_met: Optional[str] = None
     relevance_score: Optional[float] = None
+    
+    # Deduplicação não-destrutiva
+    is_duplicate: Optional[bool] = False
+    duplicate_of: Optional[str] = None
     
     # Status
     status: str = "pending"
