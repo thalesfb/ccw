@@ -1,15 +1,25 @@
 \chapter{INTRODUÇÃO}
 \label{cap:introducao}
 
-A educação matemática enfrenta o desafio constante de atender às diversas necessidades de aprendizagem dos alunos em salas de aula heterogêneas. A personalização do ensino, embora reconhecida como uma abordagem eficaz para melhorar o desempenho e o engajamento dos estudantes, é uma tarefa complexa e demorada para os professores \cite{Innovative2024_005, Design2025_004}. A dificuldade em diagnosticar com precisão e em tempo hábil as competências e dificuldades individuais de cada aluno representa uma barreira significativa para a otimização dos planos de ensino \cite{Authentic2024_012}.
+A educação matemática enfrenta o desafio constante de atender às diversas necessidades de aprendizagem dos alunos em salas de aula heterogêneas. A personalização do ensino, embora reconhecida como uma abordagem eficaz para melhorar o desempenho e o engajamento dos estudantes, é uma tarefa complexa e demorada para os professores \cite{Innovative2023_005, Design2025_004}. A dificuldade em diagnosticar com precisão e em tempo hábil as competências e dificuldades individuais de cada aluno representa uma barreira significativa para a otimização dos planos de ensino \cite{Authentic2024_013}.
 
-Nesse contexto, as tecnologias computacionais — como \textit{machine learning}, análise de dados educacionais (\textit{learning analytics}) e inteligência artificial — surgem como aliadas poderosas \cite{Machine2019_007, Implementation2025_000}. Essas técnicas oferecem o potencial de automatizar a avaliação diagnóstica e fornecer aos educadores informações estruturadas e acionáveis para intervenções pedagógicas mais direcionadas e eficazes \cite{Math2021_001, Multimodels2020_002}. Estudos recentes demonstram que sistemas adaptativos baseados em dados podem melhorar significativamente o desempenho estudantil e reduzir o tempo necessário para alcançar objetivos de aprendizagem \cite{Assessing2024_014}.
+Nesse contexto, as tecnologias computacionais — como \textit{machine learning}, análise de dados educacionais (\textit{learning analytics}) e inteligência artificial — surgem como aliadas poderosas \cite{Machine2019_007, Implementation2025_000}. Essas técnicas oferecem o potencial de automatizar a avaliação diagnóstica e fornecer aos educadores informações estruturadas e acionáveis para intervenções pedagógicas mais direcionadas e eficazes \cite{Math2021_001, Multimodels2020_002}. Estudos recentes demonstram que sistemas adaptativos baseados em dados podem melhorar significativamente o desempenho estudantil e reduzir o tempo necessário para alcançar objetivos de aprendizagem \cite{Assessing2024_015}.
 
-\section{Problema de Pesquisa}
+\section{Justificativa}
+
+A relevância deste projeto reside no seu potencial de impacto tanto para educadores quanto para alunos. Para os professores, a síntese sistemática das técnicas computacionais aplicadas à educação matemática oferece fundamentação científica sólida para a tomada de decisão sobre investimentos em tecnologia educacional e adoção de práticas baseadas em evidências \cite{Identifying2017_006}. Além disso, a identificação de abordagens eficazes pode orientar o desenvolvimento de ferramentas que reduzam a carga de trabalho manual de avaliação e forneçam \textit{insights} acionáveis baseados em dados, permitindo que os educadores dediquem mais tempo à elaboração de estratégias pedagógicas personalizadas \cite{Performance2023_014}.
+
+Para os alunos, um ensino adaptado às suas necessidades individuais — fundamentado em diagnósticos automatizados precisos — pode resultar em melhoria significativa na aprendizagem, na motivação e na redução da ansiedade em relação à matemática \cite{Assessing2024_015}. Estudos reportam ganhos de aprendizagem de 10 a 20\% em sistemas adaptativos quando comparados a abordagens tradicionais, além de redução de até 20\% no tempo necessário para atingir objetivos pedagógicos \cite{Design2025_004}.
+
+Do ponto de vista acadêmico, a literatura sobre IA educacional encontra-se fragmentada em diversas áreas, carecendo de consenso terminológico. A aplicação da metodologia PRISMA 2020 garante rigor, transparência e reprodutibilidade, preenchendo lacunas deixadas por revisões anteriores que não utilizaram pipelines automatizados.
+
+Praticamente, este trabalho orienta desenvolvedores de software e formuladores de políticas públicas com evidências empíricas, além de fundamentar cientificamente o desenvolvimento do protótipo nas fases subsequentes do TCC, garantindo escolhas técnicas e pedagógicas respaldadas por dados \cite{Data2020_011, Machine2024_009}.
 
 O acompanhamento individualizado do progresso dos alunos em matemática é fundamental para um ensino de qualidade. No entanto, professores frequentemente carecem de ferramentas eficientes para diagnosticar as competências específicas de cada estudante em larga escala \cite{Analysis2022_003}, o que dificulta a adaptação dos planos de ensino às necessidades reais da turma. A ausência de um sistema automatizado para essa finalidade leva a um ensino mais generalizado, que pode não atender adequadamente nem os alunos com dificuldades nem os mais avançados.
 
 Apesar do crescente número de pesquisas sobre inteligência artificial aplicada à educação matemática, a literatura científica apresenta-se fragmentada e dispersa em múltiplas bases de dados, subdisciplinas e abordagens metodológicas. Pesquisadores e desenvolvedores enfrentam dificuldades para identificar quais técnicas computacionais são mais adequadas para diferentes objetivos pedagógicos e quais abordagens foram efetivamente validadas em contextos educacionais reais \cite{Computational2017_008}.
+
+\section{Problema de Pesquisa}
 
 Diante desse contexto, o presente trabalho aborda o seguinte problema de pesquisa:
 
@@ -19,12 +29,12 @@ Diante desse contexto, o presente trabalho aborda o seguinte problema de pesquis
 
 \subsection{Objetivo Geral}
 	
-Mapear e analisar sistematicamente as aplicações de técnicas computacionais — especialmente \textit{machine learning}, \textit{learning analytics} e sistemas de tutoria inteligente — no contexto da educação matemática, identificando tendências, lacunas de pesquisa e oportunidades para o desenvolvimento de ferramentas que apoiem o processo de ensino-aprendizagem personalizado.
+Mapear e analisar sistematicamente as aplicações de técnicas computacionais — especialmente \textit{machine learning}, \textit{learning analytics} e sistemas de tutoria inteligente — no contexto da educação matemática, identificando tendências, lacunas de pesquisa e oportunidades para o desenvolvimento de um modelo computacional (MVP) que auxilie professores na personalização do ensino e no diagnóstico de competências.
 
 \subsection{Objetivos Específicos} 
 
 \begin{itemize}
-    \item \textbf{OE1}: Realizar revisão sistemática da literatura seguindo o protocolo PRISMA 2020 para identificar estudos que apliquem técnicas computacionais no ensino da matemática, publicados nos últimos 10 anos (2015-2025).
+    \item \textbf{OE1}: Realizar revisão sistemática da literatura seguindo o protocolo \cite{PRISMA2020} para identificar estudos que apliquem técnicas computacionais na educação matemática, publicados nos últimos 10 anos (2015-2025).
     
     \item \textbf{OE2}: Identificar e categorizar as principais abordagens de inteligência artificial (Machine Learning, Deep Learning, NLP, Educational Data Mining) aplicadas à educação matemática reportadas na literatura científica.
     
@@ -37,37 +47,7 @@ Mapear e analisar sistematicamente as aplicações de técnicas computacionais �
     \item \textbf{OE6}: Criar um pipeline automatizado e reproduzível para coleta, processamento e análise de literatura científica, contribuindo para futuras revisões sistemáticas no campo e fundamentando o desenvolvimento do protótipo nas fases subsequentes do TCC.
 \end{itemize}
 
-\section{Justificativa}
 
-A relevância deste projeto reside no seu potencial de impacto tanto para educadores quanto para alunos. Para os professores, a síntese sistemática das técnicas computacionais aplicadas à educação matemática oferece fundamentação científica sólida para a tomada de decisão sobre investimentos em tecnologia educacional e adoção de práticas baseadas em evidências \cite{Identifying2017_006}. Além disso, a identificação de abordagens eficazes pode orientar o desenvolvimento de ferramentas que reduzam a carga de trabalho manual de avaliação e forneçam \textit{insights} acionáveis baseados em dados, permitindo que os educadores dediquem mais tempo à elaboração de estratégias pedagógicas personalizadas \cite{Performance2023_013}.
-
-Para os alunos, um ensino adaptado às suas necessidades individuais — fundamentado em diagnósticos automatizados precisos — pode resultar em melhoria significativa na aprendizagem, na motivação e na redução da ansiedade em relação à matemática \cite{Assessing2024_014}. Estudos reportam ganhos de aprendizagem de 10 a 20\% em sistemas adaptativos quando comparados a abordagens tradicionais, além de redução de até 20\% no tempo necessário para atingir objetivos pedagógicos \cite{Design2025_004}.
-
-\subsection{Relevância Acadêmica}
-
-A realização de uma revisão sistemática sobre técnicas computacionais na educação matemática justifica-se por múltiplas razões acadêmicas:
-
-\begin{enumerate}
-    \item \textbf{Consolidação do Conhecimento Disperso}: A literatura sobre IA educacional está fragmentada em conferências de Educação, Ciência da Computação, Inteligência Artificial e Tecnologia Educacional. Não existe consenso sobre terminologias e classificações das aplicações.
-    
-    \item \textbf{Rigor Metodológico}: A metodologia PRISMA 2020 garante transparência, reprodutibilidade e qualidade na seleção de estudos. O uso de múltiplas bases de dados (Crossref, OpenAlex, Semantic Scholar, CORE) minimiza viés de publicação, e a aplicação de critérios de elegibilidade explícitos assegura qualidade dos estudos incluídos.
-    
-    \item \textbf{Lacuna de Pesquisa Identificada}: Revisões anteriores não utilizaram pipelines automatizados e reproduzíveis. Poucos estudos focam especificamente na interseção entre IA e educação matemática, e falta análise crítica das metodologias de avaliação empregadas nos estudos primários \cite{Machine2019_007}.
-\end{enumerate}
-
-\subsection{Relevância Prática}
-
-Do ponto de vista prático, este trabalho contribui para:
-
-\begin{enumerate}
-    \item \textbf{Orientação para Desenvolvimento de Sistemas}: Desenvolvedores de software educacional necessitam evidências sobre quais técnicas são mais eficazes. A síntese da literatura fornece diretrizes baseadas em dados empíricos para escolha de abordagens técnicas \cite{Computational2017_008}.
-    
-    \item \textbf{Suporte a Políticas Públicas}: Formuladores de políticas educacionais precisam de sínteses baseadas em evidências para decisões sobre infraestrutura tecnológica escolar e formação docente em tecnologias educacionais.
-    
-    \item \textbf{Direcionamento de Pesquisas Futuras}: Identificação de lacunas orienta novos projetos de pesquisa e desenvolvimento. O mapeamento de limitações sugere áreas prioritárias para investigação nas fases subsequentes do TCC.
-    
-    \item \textbf{Base para Desenvolvimento de Protótipo}: A síntese da literatura fundamentará cientificamente o desenvolvimento da ferramenta nas Fases 2 e 3 do TCC, garantindo que as escolhas técnicas e pedagógicas sejam respaldadas por evidências empíricas \cite{Data2020_011, Exploring2024_009}.
-\end{enumerate}
 
 \section{Estrutura do Trabalho}
 
@@ -84,7 +64,7 @@ A presente fase, correspondente ao PTC, realiza uma revisão sistemática seguin
     \item Criar uma base de conhecimento estruturada para orientar as fases seguintes
 \end{itemize}
 
-\textbf{Entrega}: Relatório de revisão sistemática contendo: protocolo de pesquisa, análise de 16 estudos incluídos (de 9.513 identificados, 6.948 únicos após deduplicação), síntese narrativa das aplicações, mapeamento de lacunas e diretrizes para desenvolvimento de ferramentas educacionais.
+\textbf{Entrega}: Relatório de revisão sistemática contendo: protocolo de pesquisa, análise de 17 estudos incluídos (de 9.431 identificados, 6.937 únicos após deduplicação), síntese narrativa das aplicações, mapeamento de lacunas e diretrizes para desenvolvimento de ferramentas educacionais.
 
 \subsection{Fase 2: Desenvolvimento do Protótipo (TCC)}
 
@@ -121,11 +101,11 @@ O presente documento (PTC - Fase 1) está organizado da seguinte forma:
     
     \item[Capítulo 3 - Metodologia:] Descreve em detalhes a metodologia PRISMA 2020 aplicada, incluindo estratégias de busca bilíngue (72 consultas em 4 APIs), critérios de seleção PICOS, processo de triagem e extração de dados.
     
-    \item[Capítulo 4 - Resultados Esperados:] Apresenta os resultados preliminares da revisão sistemática, incluindo fluxo PRISMA (9.513 identificados $\rightarrow$ 6.948 únicos $\rightarrow$ 16 incluídos), síntese dos estudos incluídos (Tabela 1), análise temática das aplicações de IA identificadas, e mapeamento de lacunas de pesquisa.
+    \item[Capítulo 4 - Resultados Esperados:] Apresenta os resultados preliminares da revisão sistemática, incluindo fluxo PRISMA (9.431 identificados $\rightarrow$ 6.937 únicos $\rightarrow$ 17 incluídos), síntese dos estudos incluídos (Tabela 1), análise temática das aplicações de IA identificadas, e mapeamento de lacunas de pesquisa.
     
     \item[Capítulo 5 - Cronograma:] Apresenta o planejamento temporal detalhado das três fases do projeto (Fase 1: março-novembro 2025; Fase 2: fevereiro-julho 2026; Fase 3: julho-novembro 2026).
     
-    \item[Referências Bibliográficas:] Lista completa das obras citadas ao longo do trabalho, formatadas segundo normas ABNT NBR 6023:2018, incluindo os 16 estudos incluídos na revisão sistemática.
+    \item[Referências Bibliográficas:] Lista completa das obras citadas ao longo do trabalho, formatadas segundo normas ABNT NBR 6023:2018, incluindo os 17 estudos incluídos na revisão sistemática.
 \end{description}
 
 \subsection{Delimitação de Escopo}

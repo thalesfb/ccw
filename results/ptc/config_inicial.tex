@@ -36,10 +36,15 @@
 \makeglossaries
 
 \usepackage[a4paper]{geometry}
+
+% Adicionar suporte a URLs antes do abntex2cite
+\usepackage{url}
+\urlstyle{same}  % URLs com mesma fonte do texto
+
 %Referência
 \usepackage[alf, 	
 			 		abnt-emphasize=bf,
-				    abnt-url-package=none,
+				    abnt-url-package=url,
 				    abnt-repeated-title-omit=yes,
 				    abnt-full-initials=yes,                                        %yes nome por extenso, no apenas iniciais
 					abnt-etal-list=3												%abreviar com mais de 3 autores

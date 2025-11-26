@@ -13,9 +13,9 @@ from jinja2 import Environment, FileSystemLoader
 
 from .visualizations import ReviewVisualizer
 from ..config import load_config
+from ..database.manager import DatabaseManager
 
 logger = logging.getLogger(__name__)
-
 
 class ReportGenerator:
     """Gera relatórios completos da revisão sistemática."""
@@ -62,7 +62,8 @@ class ReportGenerator:
         self,
         df: pd.DataFrame,
         stats: Optional[Dict] = None,
-        config: Optional[Dict] = None
+        config: Optional[Dict] = None,
+        fulltext_stats: Optional[Dict] = None
     ) -> Path:
         """Generate summary report with key statistics.
         
@@ -70,6 +71,7 @@ class ReportGenerator:
             df: DataFrame with papers
             stats: PRISMA statistics
             config: Configuration used
+            fulltext_stats: Full-text extraction statistics (optional)
             
         Returns:
             Path to generated report
@@ -109,12 +111,13 @@ class ReportGenerator:
         # Create report content
         report_data = {
             'title': 'Relatório da Revisão Sistemática',
-            'subtitle': 'Técnicas Computacionais na Educação Matemática',
+            'subtitle': 'Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais',
             'generated_at': datetime.now().strftime('%d/%m/%Y %H:%M'),
             'statistics': report_stats,
             'charts': [{'name': p.stem, 'path': p} for p in chart_paths],
             'config': config or {},
-            'included_list': included_list
+            'included_list': included_list,
+            'fulltext_stats': fulltext_stats  # Add fulltext statistics for template
         }
         
         # Generate HTML report
@@ -130,7 +133,8 @@ class ReportGenerator:
         self,
         df: pd.DataFrame,
         stage: str = "included",
-        fields: Optional[List[str]] = None
+        fields: Optional[List[str]] = None,
+        fulltext_stats: Optional[Dict] = None
     ) -> Path:
         """Generate detailed papers report.
         
@@ -138,6 +142,7 @@ class ReportGenerator:
             df: DataFrame with papers
             stage: Selection stage to include
             fields: Fields to include in report
+            fulltext_stats: Full-text extraction statistics (optional)
             
         Returns:
             Path to generated report
@@ -175,6 +180,28 @@ class ReportGenerator:
                     if pd.isna(value):
                         value = "N/A"
                     paper_data[field] = value
+            
+            # Add full_text field if present
+            if 'full_text' in row.index:
+                paper_data['full_text'] = row['full_text']
+            
+            # Add full-text extraction info if available
+            if fulltext_stats and 'extraction_results' in fulltext_stats:
+                # Find matching paper in extraction results by DOI or title
+                paper_doi = row.get('doi', '')
+                paper_title = row.get('title', '')
+                
+                for extracted in fulltext_stats['extraction_results']:
+                    if (paper_doi and extracted.get('doi') == paper_doi) or \
+                       (paper_title and extracted.get('title') == paper_title):
+                        paper_data['fulltext_extracted'] = bool(extracted.get('full_text'))
+                        paper_data['fulltext_size'] = len(extracted.get('full_text', '')) if extracted.get('full_text') else 0
+                        paper_data['pdf_failure_reasons'] = extracted.get('pdf_failure_reasons', [])
+                        # Extract keywords from full_text if available
+                        if extracted.get('full_text'):
+                            paper_data['fulltext_keywords'] = self._extract_keywords(extracted['full_text'])
+                        break
+            
             papers_data.append(paper_data)
         
         # Create HTML content
@@ -255,6 +282,14 @@ class ReportGenerator:
                 included_df = int((unique_df['selection_stage'] == 'included').sum())
                 screened_df = int(len(unique_df))  # Total de únicos
                 eligibility_df = int(unique_df['selection_stage'].isin(['eligibility', 'included']).sum())
+                # Duplicatas removidas (não sobrescrever se já fornecido em stats)
+                if 'duplicates_removed' not in prisma_stats:
+                    try:
+                        duplicates_removed_df = int(df['is_duplicate'].astype(bool).sum())
+                    except Exception:
+                        duplicates_removed_df = identification_df - screened_df
+                else:
+                    duplicates_removed_df = int(prisma_stats.get('duplicates_removed', 0))
             else:
                 # Fallback se não tiver is_duplicate
                 status_series = df.get('status', pd.Series([None] * len(df), index=df.index)).fillna('')
@@ -263,14 +298,18 @@ class ReportGenerator:
                 included_df = int((df['selection_stage'] == 'included').sum())
                 screened_df = int(df['selection_stage'].isin(['screening', 'eligibility', 'included']).sum())
                 eligibility_df = int(df['selection_stage'].isin(['eligibility', 'included']).sum())
+                # Sem coluna de duplicatas -> se já vier de stats mantém
+                duplicates_removed_df = int(prisma_stats.get('duplicates_removed', 0))
 
             df_prisma = {
+                # Não sobrescrever identificação se fornecida (usa distinct_doi do export)
                 'identification': identification_df,
                 'screening': screened_df,
                 'screening_excluded': screening_excluded_df,
                 'eligibility': eligibility_df,
                 'eligibility_excluded': eligibility_excluded_df,
                 'included': included_df,
+                'duplicates_removed': duplicates_removed_df,
             }
 
             # Only set keys that are not already present in prisma_stats
@@ -278,10 +317,24 @@ class ReportGenerator:
                 if k not in prisma_stats:
                     prisma_stats[k] = v
 
+        # Construir bloco de integridade (auditoria)
+        # Usa chaves adicionadas em export (raw_rows, distinct_doi)
+        raw_rows = int(prisma_stats.get('raw_rows', len(df)))
+        distinct_doi = int(prisma_stats.get('distinct_doi', raw_rows))
+        duplicates_removed = int(prisma_stats.get('duplicates_removed', raw_rows - distinct_doi))
+        included_unique = int(prisma_stats.get('included', 0))
+
+        integrity_block = {
+            'raw_rows': raw_rows,
+            'distinct_doi': distinct_doi,
+            'duplicates_removed': duplicates_removed,
+            'included_unique': included_unique,
+        }
+
         report_stats = {
-            # Prefer canonical identification for the headline total if provided
             'total_papers': int(prisma_stats.get('identification', len(df))),
             'prisma': prisma_stats,
+            'integrity': integrity_block,
         }
         
         # Year statistics: coerce to int, exclude out-of-range years from per-year
@@ -351,8 +404,6 @@ class ReportGenerator:
         
         # Selection stages (PRISMA-friendly derived stats)
         if 'selection_stage' in df.columns:
-            # Derive DF-based values in case some fields are missing, but prefer
-            # canonical values from prisma when available
             identification_df = int(len(df))
             status_series = df.get('status', pd.Series([None] * len(df), index=df.index)).fillna('')
             screening_excluded_df = int(((df['selection_stage'] == 'screening') & (status_series == 'excluded')).sum())
@@ -376,6 +427,39 @@ class ReportGenerator:
             }
         
         return report_stats
+    
+    def _extract_keywords(self, text: str, top_n: int = 5) -> List[str]:
+        """Extract top keywords from full text using simple frequency analysis.
+        
+        Args:
+            text: Full text to analyze
+            top_n: Number of top keywords to return
+            
+        Returns:
+            List of top keywords
+        """
+        if not text or not isinstance(text, str):
+            return []
+        
+        # Common stop words (Portuguese + English)
+        stop_words = {
+            'o', 'a', 'de', 'da', 'do', 'que', 'e', 'para', 'com', 'em', 'os', 'as', 'dos', 'das',
+            'um', 'uma', 'por', 'no', 'na', 'nos', 'nas', 'ao', 'aos', 'à', 'às', 'pelo', 'pela',
+            'the', 'is', 'are', 'was', 'were', 'of', 'in', 'to', 'and', 'or', 'for', 'with', 'on',
+            'at', 'by', 'from', 'as', 'an', 'be', 'been', 'has', 'have', 'had', 'that', 'this'
+        }
+        
+        # Split into words and filter
+        words = text.lower().split()
+        words = [w.strip('.,;:!?()[]{}"\'-') for w in words]
+        words = [w for w in words if len(w) > 3 and w not in stop_words and w.isalpha()]
+        
+        # Count frequencies
+        from collections import Counter
+        word_counts = Counter(words)
+        
+        # Return top N
+        return [word for word, _ in word_counts.most_common(top_n)]
     
     def _identify_research_gaps(self, df: pd.DataFrame) -> Dict:
         """Identify research gaps from the literature.
@@ -551,6 +635,41 @@ class ReportGenerator:
             {% endif %}
         </div>
     </div>
+
+    {% if fulltext_stats %}
+    <div class="section">
+        <h2>📄 Extração de Texto Completo</h2>
+        <div class="stat-grid">
+            <div class="stat-card">
+                <h3>Cobertura</h3>
+                <h2 style="color: {% if fulltext_stats.coverage_pct >= 70 %}#4CAF50{% elif fulltext_stats.coverage_pct >= 40 %}#FF9800{% else %}#f44336{% endif %};">
+                    {{ "%.1f"|format(fulltext_stats.coverage_pct) }}%
+                </h2>
+                <p style="color: #7f8c8d; font-size: 0.9em;">{{ fulltext_stats.extracted }}/{{ fulltext_stats.total_papers }} artigos</p>
+            </div>
+            <div class="stat-card">
+                <h3>Extraídos</h3>
+                <h2 style="color: #4CAF50;">{{ fulltext_stats.extracted }}</h2>
+            </div>
+            <div class="stat-card">
+                <h3>Falhas</h3>
+                <h2 style="color: #f44336;">{{ fulltext_stats.failed }}</h2>
+            </div>
+        </div>
+        {% if fulltext_stats.top_failures %}
+        <h3 style="margin-top: 20px;">Top Causas de Falha:</h3>
+        <table style="max-width: 600px;">
+            <tr><th>Causa</th><th>Ocorrências</th></tr>
+            {% for reason, count in fulltext_stats.top_failures %}
+            <tr>
+                <td>{{ reason.replace('_', ' ').title() }}</td>
+                <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    {% endif %}
 
     {% if charts %}
     <div class="section">
@@ -905,6 +1024,26 @@ class ReportGenerator:
         {% if paper.study_type %}
         <div class="paper-meta">
             <strong>Tipo de Estudo:</strong> {{ paper.study_type }}
+        </div>
+        {% endif %}
+        
+        {% if paper.get('fulltext_extracted') is not none %}
+        <div class="paper-fulltext" style="background: {% if paper.fulltext_extracted %}#d1ecf1{% else %}#f8d7da{% endif %}; padding: 10px; border-radius: 4px; margin: 10px 0; border-left: 4px solid {% if paper.fulltext_extracted %}#17a2b8{% else %}#dc3545{% endif %};">
+            <strong>📄 Extração de Texto Completo:</strong>
+            {% if paper.fulltext_extracted %}
+                <span style="color: #155724; font-weight: bold;">✅ Extraído</span>
+                {% if paper.fulltext_size %}
+                <br><strong>Tamanho:</strong> {{ "%.1f"|format(paper.fulltext_size / 1024) }} KB
+                {% endif %}
+                {% if paper.fulltext_keywords %}
+                <br><strong>Palavras-chave detectadas:</strong> {{ paper.fulltext_keywords | join(', ') }}
+                {% endif %}
+            {% else %}
+                <span style="color: #721c24; font-weight: bold;">❌ Não extraído</span>
+                {% if paper.pdf_failure_reasons %}
+                <br><strong>Motivo:</strong> {{ paper.pdf_failure_reasons | join(', ') | replace('_', ' ') | title }}
+                {% endif %}
+            {% endif %}
         </div>
         {% endif %}
     </div>

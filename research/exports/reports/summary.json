@@ -1,71 +1,87 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Técnicas Computacionais na Educação Matemática",
-  "generated_at": "18/11/2025 01:33",
+  "generated_at": "25/11/2025 02:30",
   "statistics": {
-    "total_papers": 9513,
+    "total_papers": 9431,
     "prisma": {
-      "identification": 9513,
-      "screening": 6948,
-      "screening_excluded": 5003,
-      "eligibility": 1945,
-      "eligibility_excluded": 1929,
-      "included": 16
+      "raw_rows": 6914,
+      "distinct_doi": 6411,
+      "identification": 9431,
+      "duplicates_removed": 2494,
+      "screening": 6914,
+      "screening_excluded": 5031,
+      "eligibility": 1883,
+      "eligibility_excluded": 1866,
+      "included": 17,
+      "_audit": {
+        "raw_included_total": 17,
+        "duplicates_marked_included": 0,
+        "unique_included": 17,
+        "expected_delta": 0,
+        "actual_delta": 0
+      }
+    },
+    "integrity": {
+      "raw_rows": 6914,
+      "distinct_doi": 6411,
+      "duplicates_removed": 2494,
+      "included_unique": 17
     },
     "years": {
       "min": 2015,
       "max": 2025,
-      "mean": 2021.0,
+      "mean": 2020.9,
       "distribution": {
-        "2024": 1437,
-        "2023": 1097,
-        "2022": 1002,
-        "2025": 984,
-        "2020": 974,
-        "2021": 946,
-        "2019": 641,
-        "2017": 614,
-        "2018": 551,
-        "2016": 546,
-        "2015": 451
+        "2024": 970,
+        "2023": 801,
+        "2020": 761,
+        "2025": 714,
+        "2022": 707,
+        "2021": 696,
+        "2019": 533,
+        "2017": 441,
+        "2018": 405,
+        "2016": 369,
+        "2015": 312
       },
-      "out_of_range_count": 270
+      "out_of_range_count": 205
     },
     "databases": {
-      "crossref": 3350,
-      "semantic_scholar": 2742,
-      "openalex": 2706,
-      "core": 715
+      "crossref": 2865,
+      "openalex": 1817,
+      "semantic_scholar": 1786,
+      "core": 446
     },
     "techniques": {
-      "Não especificado": 4830,
-      "Assessment": 823,
-      "AI/Artificial Intelligence": 747,
-      "Machine Learning": 564,
-      "Machine Learning, AI/Artificial Intelligence": 284,
-      "Intelligent Tutoring": 269,
-      "Predictive Analytics": 254,
-      "Adaptive Learning": 213,
-      "Machine Learning, Predictive Analytics": 203,
-      "Learning Analytics": 167
+      "Não especificado": 3791,
+      "Assessment": 628,
+      "AI/Artificial Intelligence": 477,
+      "Machine Learning": 461,
+      "Predictive Analytics": 194,
+      "Machine Learning, AI/Artificial Intelligence": 180,
+      "Machine Learning, Predictive Analytics": 155,
+      "Adaptive Learning": 148,
+      "Learning Analytics": 116,
+      "Intelligent Tutoring": 115
     },
     "relevance": {
       "min": 0.0,
       "max": 4.5,
-      "mean": 1.81,
-      "median": 1.9,
-      "std": 0.94,
+      "mean": 1.7,
+      "median": 1.65,
+      "std": 0.92,
       "high_relevance": 0,
-      "medium_relevance": 27,
-      "low_relevance": 9486
+      "medium_relevance": 17,
+      "low_relevance": 6897
     },
     "selection_stages": {
-      "Identificação": 9513,
-      "Triagem": 6948,
-      "Elegibilidade": 1945,
-      "Incluídos": 16,
-      "Excluídos na Triagem": 5003,
-      "Excluídos na Elegibilidade": 1929
+      "Identificação": 9431,
+      "Triagem": 6914,
+      "Elegibilidade": 1883,
+      "Incluídos": 17,
+      "Excluídos na Triagem": 5031,
+      "Excluídos na Elegibilidade": 1866
     }
   },
   "config": {
@@ -75,7 +91,8 @@
       "pt"
     ],
     "abstract_required": false,
-    "relevance_threshold": 4.0
+    "relevance_threshold": 4.0,
+    "cleanup_analysis": false
   },
   "included_list": [
     {
@@ -91,31 +108,7 @@
       "authors": "Aleksandar Pejic; P. S. Molcer; Kristian Gulači",
       "year": 2021,
       "venue": "Symposium on Intelligent Systems and Informatics",
-      "doi": "10.1109/SISY52375.2021.9582522",
-      "url": "https://www.semanticscholar.org/paper/d23946361105e17d3234d3fc61af3496d84c2a25"
-    },
-    {
-      "title": "Math proficiency prediction in computer-based international large-scale assessments using a multi-class machine learning model",
-      "authors": "Aleksandar Pejic; P. S. Molcer; Kristian Gulači",
-      "year": 2021,
-      "venue": "Symposium on Intelligent Systems and Informatics",
-      "doi": "10.1109/SISY52375.2021.9582522",
-      "url": "https://www.semanticscholar.org/paper/d23946361105e17d3234d3fc61af3496d84c2a25"
-    },
-    {
-      "title": "Math proficiency prediction in computer-based international large-scale assessments using a multi-class machine learning model",
-      "authors": "Aleksandar Pejić; Piroska Stanić Molcer; Kristian Gulaci",
-      "year": 2021,
-      "venue": "N/A",
       "doi": "10.1109/sisy52375.2021.9582522",
-      "url": "https://openalex.org/W3209220346"
-    },
-    {
-      "title": "Math proficiency prediction in computer-based international large-scale assessments using a multi-class machine learning model",
-      "authors": "Aleksandar Pejic; P. S. Molcer; Kristian Gulači",
-      "year": 2021,
-      "venue": "Symposium on Intelligent Systems and Informatics",
-      "doi": "10.1109/SISY52375.2021.9582522",
       "url": "https://www.semanticscholar.org/paper/d23946361105e17d3234d3fc61af3496d84c2a25"
     },
     {
@@ -139,24 +132,16 @@
       "authors": "Lei Zhang; Weihua Zhu; Ling Feng",
       "year": 2025,
       "venue": "International Conferences on Computers, Information Processing and Advanced Education",
-      "doi": "10.1109/CIPAE66821.2025.00116",
-      "url": "https://www.semanticscholar.org/paper/131a6b2c5194fbe51f601d09d70b7bb1ec2970b5"
-    },
-    {
-      "title": "Design of Personalized Learning Path Optimization Algorithm Based on Deep Learning",
-      "authors": "Lei Zhang; Weihua Zhu; Ling Feng",
-      "year": 2025,
-      "venue": "International Conferences on Computers, Information Processing and Advanced Education",
-      "doi": "10.1109/CIPAE66821.2025.00116",
+      "doi": "10.1109/cipae66821.2025.00116",
       "url": "https://www.semanticscholar.org/paper/131a6b2c5194fbe51f601d09d70b7bb1ec2970b5"
     },
     {
       "title": "An Innovative Model of Higher Mathematics Curriculum Education Incorporating Artificial Intelligence Technology",
       "authors": "Xiaohui Zhang",
-      "year": 2024,
+      "year": 2023,
       "venue": "Applied Mathematics and Nonlinear Sciences",
       "doi": "10.2478/amns.2023.2.01524",
-      "url": "https://doi.org/10.2478/amns.2023.2.01524"
+      "url": "https://www.semanticscholar.org/paper/1bbee8ff1d91cb08257bb34a081df15a588df7f5"
     },
     {
       "title": "Identifying the Classification Performances of Educational Data Mining Methods: A Case Study for TIMSS",
@@ -175,52 +160,28 @@
       "url": "https://openalex.org/W2946865664"
     },
     {
-      "title": "Machine Learning-based Predictive Analytics of Student Academic Performance in STEM Education",
-      "authors": "Vladimir L. Uskov; Jeffrey P. Bakken; Adam Byerly; Ashok Shah",
-      "year": 2019,
-      "venue": "N/A",
-      "doi": "10.1109/educon.2019.8725237",
-      "url": "https://openalex.org/W2946865664"
-    },
-    {
       "title": "Computational Models of Human Learning: Applications for Tutor Development, Behavior Prediction, and Theory Testing",
       "authors": "Christopher J. MacLellan",
       "year": 2017,
       "venue": "Research Showcase @ Carnegie Mellon University (Carnegie Mellon University)",
-      "doi": "10.1184/r1/6715271.v1",
+      "doi": "10.1184/r1/6715271",
       "url": "https://openalex.org/W2758976604"
     },
     {
-      "title": "Exploring Machine Learning Techniques for Predictive Analytics in Computational Mathematics",
-      "authors": "Vidya Chitre",
+      "title": "Machine learning methods as auxiliary tool for effective mathematics teaching",
+      "authors": "Marina Milićević; Budimirka Marinović; Ljerka Jeftić",
       "year": 2024,
-      "venue": "Panamerican Mathematical Journal",
-      "doi": "10.52783/pmj.v34.i2.919",
-      "url": "https://doi.org/10.52783/pmj.v34.i2.919"
+      "venue": "Computer Applications in Engineering Education",
+      "doi": "10.1002/cae.22787",
+      "url": "https://doi.org/10.1002/cae.22787"
     },
     {
       "title": "A Machine Learning and Explainable AI Approach for Predicting Secondary School Student Performance",
       "authors": "Khan Md Hasib; Farhana Rahman; Rashik Hasnat; Md. Golam Rabiul Alam",
       "year": 2022,
       "venue": "Computing and Communication Workshop and Conference",
-      "doi": "10.1109/CCWC54503.2022.9720806",
+      "doi": "10.1109/ccwc54503.2022.9720806",
       "url": "https://www.semanticscholar.org/paper/d8baeb876681111e245f523d4771218142884a38"
-    },
-    {
-      "title": "A Machine Learning and Explainable AI Approach for Predicting Secondary School Student Performance",
-      "authors": "Khan Md Hasib; Farhana Rahman; Rashik Hasnat; Md. Golam Rabiul Alam",
-      "year": 2022,
-      "venue": "Computing and Communication Workshop and Conference",
-      "doi": "10.1109/CCWC54503.2022.9720806",
-      "url": "https://www.semanticscholar.org/paper/d8baeb876681111e245f523d4771218142884a38"
-    },
-    {
-      "title": "Data Mining for Student Performance Prediction in Education",
-      "authors": "Ferda Ünal",
-      "year": 2021,
-      "venue": "Data Mining - Methods, Applications and Systems",
-      "doi": "10.5772/intechopen.91449",
-      "url": "https://doi.org/10.5772/intechopen.91449"
     },
     {
       "title": "Data Mining for Student Performance Prediction in Education",
@@ -231,12 +192,12 @@
       "url": "https://openalex.org/W3015458685"
     },
     {
-      "title": "Data Mining for Student Performance Prediction in Education",
-      "authors": "Ferda Ünal",
-      "year": 2020,
-      "venue": "IntechOpen eBooks",
-      "doi": "10.5772/intechopen.91449",
-      "url": "https://openalex.org/W3015458685"
+      "title": "Enhancing Student Achievement in Circle Theorems: Integrating Computer Animation with the Jigsaw Cooperative Learning Model",
+      "authors": "Rahmat Opoku Nyantah; Nana Kena Frempong; Ernest Larbi",
+      "year": 2025,
+      "venue": "International Journal of Mathematics and Mathematics Education",
+      "doi": "10.56855/ijmme.v3i2.1299",
+      "url": "https://doi.org/10.56855/ijmme.v3i2.1299"
     },
     {
       "title": "Authentic Assessment for Motivating Student Learning and Teaching Effectiveness in Rural, High-Need Secondary Schools in Manitoba, Canada",
@@ -255,36 +216,12 @@
       "url": "https://www.semanticscholar.org/paper/18c8bdd1f25a4048e13f13067736719a96a57d58"
     },
     {
-      "title": "Performance assessment: Improving metacognitive ability in mathematics learning",
-      "authors": "N. M. S. Mertasari; Ni Luh Putu Pranena Sastri; Ida Bagus Nyoman Pascima",
-      "year": 2023,
-      "venue": "Journal of Education and e-Learning Research",
-      "doi": "10.20448/jeelr.v10i4.5260",
-      "url": "https://www.semanticscholar.org/paper/18c8bdd1f25a4048e13f13067736719a96a57d58"
-    },
-    {
       "title": "Assessing the Effectiveness of Adaptive Learning Systems in K-12 Education",
       "authors": "Boby Chellanthara Jose; M. Ashok Kumar; T. UdayaBanu; M. Nagalakshmi",
       "year": 2024,
       "venue": "International Journal of Advanced IT Research and Development",
       "doi": "10.69942/1920184/20240101/02",
       "url": "https://www.semanticscholar.org/paper/b4cfe8f3adedc7ded70c91b5e95e6ea97bd842f9"
-    },
-    {
-      "title": "Assessing the Effectiveness of Adaptive Learning Systems in K-12 Education",
-      "authors": "Boby Chellanthara Jose; M. Ashok Kumar; T. UdayaBanu; M. Nagalakshmi",
-      "year": 2024,
-      "venue": "International Journal of Advanced IT Research and Development",
-      "doi": "10.69942/1920184/20240101/02",
-      "url": "https://www.semanticscholar.org/paper/b4cfe8f3adedc7ded70c91b5e95e6ea97bd842f9"
-    },
-    {
-      "title": "Analysis of Facebook in the Teaching-Learning Process about Mathematics Through Data Science",
-      "authors": "R. Salas-Rueda",
-      "year": 2021,
-      "venue": "Canadian Journal of Learning and Technology",
-      "doi": "10.21432/cjlt27895",
-      "url": "https://www.semanticscholar.org/paper/9d3dbb938e9df9e78449b2e3e4a3fd66d9101fe2"
     },
     {
       "title": "Analysis of Facebook in the Teaching-Learning Process about Mathematics Through Data Science",
@@ -294,5 +231,6 @@
       "doi": "10.21432/cjlt27895",
       "url": "https://www.semanticscholar.org/paper/9d3dbb938e9df9e78449b2e3e4a3fd66d9101fe2"
     }
-  ]
+  ],
+  "fulltext_stats": null
 }

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import json
 import logging
+import sqlite3
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 from openpyxl import Workbook
@@ -19,6 +21,60 @@ from ..db import read_papers
 from ..processing.dedup import normalize_doi
 
 logger = logging.getLogger(__name__)
+
+
+def _get_historical_dedup_stats() -> Tuple[int, int]:
+    """Busca estatísticas históricas de deduplicação da tabela searches.
+    
+    PRISMA 2020 exige que 'Identification' mostre o total ORIGINAL coletado
+    (antes de qualquer deduplicação). Como o banco atual já está limpo,
+    precisamos buscar o initial_count registrado durante a coleta.
+    
+    Returns:
+        Tuple[initial_count, total_removed]: Total original coletado e duplicatas removidas.
+        Se não encontrado, retorna (0, 0).
+    """
+    try:
+        config = load_config()
+        db_path = Path(config.database.db_path)
+        
+        if not db_path.exists():
+            return (0, 0)
+        
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        
+        # Buscar o registro mais recente com dedup_stats
+        cursor.execute("""
+            SELECT results_summary FROM searches 
+            WHERE results_summary IS NOT NULL 
+            ORDER BY id DESC LIMIT 1
+        """)
+        
+        row = cursor.fetchone()
+        conn.close()
+        
+        if row and row[0]:
+            try:
+                data = json.loads(row[0])
+                dedup_stats = data.get('dedup_stats', {})
+                initial_count = dedup_stats.get('initial_count', 0)
+                total_removed = dedup_stats.get('total_removed', 0)
+                
+                if initial_count > 0:
+                    logger.info(
+                        f"Histórico de dedup encontrado: initial_count={initial_count}, "
+                        f"total_removed={total_removed}"
+                    )
+                    return (initial_count, total_removed)
+            except (json.JSONDecodeError, TypeError):
+                pass
+        
+        return (0, 0)
+        
+    except Exception as e:
+        logger.warning(f"Erro ao buscar histórico de dedup: {e}")
+        return (0, 0)
 
 
 def to_excel(
@@ -264,7 +320,7 @@ def export_for_analysis(
     return exported_files
 
 
-def _select_best_duplicate(group: pd.DataFrame) -> pd.Series:
+def _select_best_duplicate(group: pd.DataFrame, preserve_stage: bool = True) -> pd.Series:
     """Seleciona o melhor registro entre duplicatas baseado em critérios de qualidade.
     
     Critérios (em ordem de prioridade):
@@ -273,11 +329,16 @@ def _select_best_duplicate(group: pd.DataFrame) -> pd.Series:
     3. Com open_access_pdf disponível
     4. Primeiro registro (mais antigo na coleta)
     
+    IMPORTANTE: Preserva selection_stage mais alto do original quando duplicate vencedor
+    tiver estágio inferior (ex: duplicate com abstract melhor mas stage='screening' não
+    substitui original com stage='included').
+    
     Args:
         group: DataFrame com registros duplicados
+        preserve_stage: Se True, propaga selection_stage mais alto do original
         
     Returns:
-        Melhor registro do grupo
+        Melhor registro do grupo com stage preservado se aplicável
     """
     if len(group) == 1:
         return group.iloc[0]
@@ -307,79 +368,173 @@ def _select_best_duplicate(group: pd.DataFrame) -> pd.Series:
     
     # Retornar registro com maior score
     best_idx = scores.idxmax()
-    return group.loc[best_idx]
+    best = group.loc[best_idx].copy()
+    
+    # CORREÇÃO: Preservar selection_stage mais alto do original
+    if preserve_stage and 'selection_stage' in group.columns:
+        # Encontrar registro original (não duplicata)
+        originals = group[~group['is_duplicate'].astype(bool)]
+        if not originals.empty:
+            original = originals.iloc[0]
+            
+            # Hierarquia de prioridade de estágios
+            stage_priority = {'included': 3, 'eligibility': 2, 'screening': 1}
+            original_priority = stage_priority.get(original.get('selection_stage'), 0)
+            best_priority = stage_priority.get(best.get('selection_stage'), 0)
+            
+            # Propagar stage do original se for mais alto
+            if original_priority > best_priority:
+                old_stage = best.get('selection_stage')
+                best['selection_stage'] = original['selection_stage']
+                if 'status' in original.index:
+                    best['status'] = original['status']
+                logger.info(
+                    f"Stage preservado: Duplicate vencedor tinha stage '{old_stage}' "
+                    f"mas original era '{original.get('selection_stage')}' - propagando stage mais alto"
+                )
+    
+    return best
 
 
-def _compute_prisma_stats_from_df(df: pd.DataFrame) -> dict:
+def _compute_prisma_stats_from_df(
+    df: pd.DataFrame,
+    unique_subset: Optional[pd.DataFrame] = None
+) -> dict:
     """Compute PRISMA stats from DataFrame.
 
     PRISMA 2020 flow correto:
-    - identification: Total de registros coletados (incluindo duplicatas)
-    - duplicates_removed: Registros marcados como duplicatas
+    - identification: Total de registros coletados (incluindo duplicatas) - busca histórico
+    - duplicates_removed: Registros removidos por deduplicação
     - screening: Registros únicos disponíveis para triagem
     - screening_excluded: Registros excluídos NA TRIAGEM (selection_stage='screening')
     - eligibility: Registros que PASSARAM triagem (selection_stage='eligibility' ou 'included')
     - eligibility_excluded: Registros excluídos NA ELEGIBILIDADE (selection_stage='eligibility')
     - included: Registros finalmente incluídos (selection_stage='included')
     
-    IMPORTANTE: Esta função deve receber o DataFrame COMPLETO (com duplicatas) para
-    calcular corretamente identification e duplicates_removed. As contagens de estágios
-    (screening, eligibility, included) são calculadas apenas sobre registros únicos.
+    IMPORTANTE: Usa histórico da tabela searches para identification (total original
+    coletado antes de deduplicação), pois o banco atual já está limpo.
     
     Args:
-        df: DataFrame com papers (incluindo duplicatas marcadas)
+        df: DataFrame com papers (já deduplicados)
+        unique_subset: Subconjunto único para consistência (opcional)
         
     Returns:
         Dicionário com estatísticas PRISMA
     """
     stats = {}
 
-    total_count = int(len(df))
-    stats['identification'] = total_count
+    raw_rows = int(len(df))
 
-    # Duplicatas removidas e criar subset de únicos
-    if 'is_duplicate' in df.columns:
-        dup_removed = int(df['is_duplicate'].astype(bool).sum())
-        unique_df = df[~df['is_duplicate'].astype(bool)].copy()
+    # Normalizar DOIs apenas para métricas de integridade (não para PRISMA)
+    if 'doi' in df.columns:
+        normalized = (
+            df['doi']
+            .fillna('')
+            .astype(str)
+            .str.strip()
+            .str.lower()
+        )
+        distinct_dois = {d for d in normalized if d}
     else:
-        # Legacy fallback
-        dup_removed = 0
-        try:
-            cfg = load_config()
-            dedup_file = Path(cfg.database.exports_dir) / "analysis" / "deduplicated_rows.csv"
-            if dedup_file.exists():
-                dup_df = pd.read_csv(dedup_file)
-                dup_removed = int(len(dup_df))
-        except Exception as e:
-            logger.debug(f"Could not load dedup info: {e}")
-        unique_df = df.copy()
+        distinct_dois = set()
+
+    distinct_count = int(len(distinct_dois)) if distinct_dois else raw_rows
+
+    stats['raw_rows'] = raw_rows
+    stats['distinct_doi'] = distinct_count
     
-    stats['duplicates_removed'] = dup_removed
-    stats['screening'] = int(len(unique_df))  # Registros únicos para triagem
+    # PRISMA 2020: Identification deve ser o total ORIGINAL coletado (antes de dedup)
+    # Buscar do histórico da tabela searches
+    historical_initial, historical_removed = _get_historical_dedup_stats()
+    
+    if historical_initial > 0:
+        # Usar dados históricos reais
+        stats['identification'] = historical_initial
+        stats['duplicates_removed'] = historical_removed
+        logger.info(
+            f"PRISMA usando histórico: identification={historical_initial}, "
+            f"duplicates_removed={historical_removed}"
+        )
+    else:
+        # Fallback: usar dados do DataFrame (menos preciso)
+        stats['identification'] = raw_rows
+        stats['duplicates_removed'] = 0
+        logger.warning(
+            "Histórico de dedup não encontrado - usando contagem atual do DataFrame. "
+            "PRISMA identification pode estar subestimado."
+        )
+
+    # Subconjunto único para cálculos de estágios
+    if unique_subset is not None:
+        unique_df = unique_subset.copy()
+    elif 'is_duplicate' in df.columns:
+        duplicate_mask = df['is_duplicate'].fillna(False).astype(bool)
+        unique_df = df[~duplicate_mask].copy()
+    else:
+        unique_df = df.copy()
+
+    stats['screening'] = int(len(unique_df))  # Registros únicos disponíveis para triagem
 
     # Cálculo baseado em selection_stage APENAS sobre registros únicos
-    if 'selection_stage' in unique_df.columns:
-        # Excluídos NA TRIAGEM (ficaram em 'screening' + status='excluded')
-        screening_excluded = unique_df['selection_stage'] == 'screening'
+    if not unique_df.empty and 'selection_stage' in unique_df.columns:
+        stage_series = unique_df['selection_stage'].fillna('').astype(str).str.lower()
+        if 'status' in unique_df.columns:
+            status_series = unique_df['status'].fillna('').astype(str).str.lower()
+        else:
+            status_series = pd.Series('', index=unique_df.index)
+
+        # Excluídos na triagem exigem status de exclusão
+        screening_mask = stage_series == 'screening'
+        screening_excluded = screening_mask & status_series.str.contains('exclu')
         stats['screening_excluded'] = int(screening_excluded.sum())
-        
-        # Passaram triagem = elegibilidade + incluídos
-        passed_screening = unique_df['selection_stage'].isin(['eligibility', 'included'])
+
+        # Passaram triagem: elegibilidade ou incluídos
+        passed_screening = stage_series.isin(['eligibility', 'included'])
         stats['eligibility'] = int(passed_screening.sum())
-        
-        # Excluídos NA ELEGIBILIDADE (ficaram em 'eligibility' + status='excluded')
-        eligibility_excluded = unique_df['selection_stage'] == 'eligibility'
+
+        # Excluídos na elegibilidade
+        eligibility_mask = stage_series == 'eligibility'
+        eligibility_excluded = eligibility_mask & status_series.str.contains('exclu')
         stats['eligibility_excluded'] = int(eligibility_excluded.sum())
-        
+
         # Incluídos finais
-        included = unique_df['selection_stage'] == 'included'
-        stats['included'] = int(included.sum())
+        included_mask = stage_series == 'included'
+        stats['included'] = int(included_mask.sum())
     else:
-        # Sem selection_stage - defaults
         stats['screening_excluded'] = 0
         stats['eligibility'] = int(len(unique_df))
         stats['eligibility_excluded'] = 0
         stats['included'] = int(len(unique_df))
+
+    # AUDITORIA: Métricas de validação para preservação de stage
+    if unique_subset is not None:
+        raw_included = len(df[df['selection_stage'] == 'included'])
+        unique_included = stats['included']
+        duplicates_included = len(df[
+            (df['selection_stage'] == 'included') & 
+            (df['is_duplicate'].astype(bool))
+        ])
+        
+        expected_delta = duplicates_included
+        actual_delta = raw_included - unique_included
+        
+        stats['_audit'] = {
+            'raw_included_total': raw_included,
+            'duplicates_marked_included': duplicates_included,
+            'unique_included': unique_included,
+            'expected_delta': expected_delta,
+            'actual_delta': actual_delta
+        }
+        
+        if actual_delta != expected_delta:
+            logger.warning(
+                f"⚠️ VALIDAÇÃO FALHOU: Esperava remover {expected_delta} papers 'included' duplicados, "
+                f"mas removeu {actual_delta}. Delta incorreto: {actual_delta - expected_delta} papers perdidos."
+            )
+        else:
+            logger.info(
+                f"✓ Validação passou: Removidos {actual_delta} papers 'included' duplicados conforme esperado"
+            )
 
     return stats
 
@@ -390,11 +545,13 @@ def get_best_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     Para cada grupo de duplicatas, seleciona o registro com melhor qualidade.
     Registros únicos (is_duplicate=False) são mantidos como estão.
     
+    CORREÇÃO (2025-11-24): Agora remove originals quando um duplicate melhor é encontrado.
+    
     Args:
         df: DataFrame com papers (incluindo duplicatas)
         
     Returns:
-        DataFrame com melhores registros
+        DataFrame com melhores registros (duplicatas removidas, originals substituídos se necessário)
     """
     if df.empty:
         return df
@@ -410,6 +567,9 @@ def get_best_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     if duplicate_papers.empty:
         return unique_papers
     
+    # Track DOIs being replaced (originals que serão removidos)
+    processed_dois = set()
+    
     # Agrupar duplicatas por duplicate_of e selecionar melhor de cada grupo
     best_duplicates = []
     for dup_ref, group in duplicate_papers.groupby('duplicate_of'):
@@ -421,6 +581,11 @@ def get_best_duplicates(df: pd.DataFrame) -> pd.DataFrame:
                 # Incluir original no grupo para comparação
                 full_group = pd.concat([original, group], ignore_index=True)
                 best = _select_best_duplicate(full_group)
+                
+                # Se o melhor é um duplicate (não o original), marcar DOI para remoção
+                if best.get('is_duplicate', False):
+                    processed_dois.add(doi)
+                
                 best_duplicates.append(best)
             else:
                 # Original não encontrado, selecionar melhor das duplicatas
@@ -430,6 +595,27 @@ def get_best_duplicates(df: pd.DataFrame) -> pd.DataFrame:
             # Sem referência clara, selecionar melhor
             best = _select_best_duplicate(group)
             best_duplicates.append(best)
+    
+    # CORREÇÃO: Remover originals que foram substituídos por duplicates melhores
+    if processed_dois:
+        originals_to_remove = unique_papers[unique_papers['doi'].isin(processed_dois)]
+        logger.info(f"Removing {len(processed_dois)} originals replaced by better duplicates")
+        
+        # AUDITORIA: Registrar distribuição de stages dos originals removidos
+        if 'selection_stage' in originals_to_remove.columns:
+            removed_stages = originals_to_remove['selection_stage'].value_counts()
+            logger.info(f"Originals removidos por stage: {removed_stages.to_dict()}")
+            
+            # Aviso se perdendo papers included/eligibility
+            critical_stages = ['included', 'eligibility']
+            for stage in critical_stages:
+                if stage in removed_stages.index:
+                    logger.warning(
+                        f"⚠️ Removidos {removed_stages[stage]} papers '{stage}' durante deduplicação - "
+                        f"verificar se lógica de preservação de stage funcionou corretamente"
+                    )
+        
+        unique_papers = unique_papers[~unique_papers['doi'].isin(processed_dois)]
     
     if best_duplicates:
         best_df = pd.DataFrame(best_duplicates)
@@ -447,7 +633,8 @@ def export_complete_review(
     df: pd.DataFrame,
     stats: Optional[Dict] = None,
     config: Optional[Dict] = None,
-    output_dir: Optional[Path] = None
+    output_dir: Optional[Path] = None,
+    fulltext_stats: Optional[Dict] = None
 ) -> Dict[str, Path]:
     """Export complete review with Excel, visualizations and reports.
     
@@ -456,6 +643,7 @@ def export_complete_review(
         stats: PRISMA statistics
         config: Configuration used
         output_dir: Output directory
+        fulltext_stats: Full-text extraction statistics (optional)
         
     Returns:
         Dictionary with paths to generated files
@@ -491,27 +679,56 @@ def export_complete_review(
             df = df.copy()
             df['doi'] = df['doi'].fillna('').astype(str).apply(normalize_doi)
 
-        # ALWAYS recompute identification from DataFrame (canonical source)
-        # Do NOT use historical dedup_stats.initial_count (pre-database values)
-        local_stats = _compute_prisma_stats_from_df(df)
-        
-        # Merge with provided stats but ensure identification reflects database reality
-        if stats:
-            local_stats.update({k: v for k, v in stats.items() if k not in ['identification', 'duplicates_removed']})
+        raw_df = df
 
-        # CRITICAL: Filtrar APENAS registros únicos (is_duplicate=False) para todas as análises
-        # Não criar registros sintéticos, usar dados reais únicos
-        df_for_export = df
-        if 'is_duplicate' in df.columns:
-            df_for_export = df[~df['is_duplicate'].astype(bool)].copy()
-            logger.info(f"Filtrando registros únicos: {len(df_for_export)} de {len(df)} (removidos {len(df) - len(df_for_export)} duplicatas)")
+        # AUDITORIA: Capturar contagens de stage antes da deduplicação
+        raw_stages = raw_df['selection_stage'].value_counts().to_dict() if 'selection_stage' in raw_df.columns else {}
         
-        # RECALCULAR stats baseado nos dados FILTRADOS para manter consistência
-        local_stats = _compute_prisma_stats_from_df(df)  # Stats originais com duplicatas
+        # Selecionar melhores duplicatas em vez de descartar totalmente (qualidade)
+        df_best = get_best_duplicates(raw_df) if 'is_duplicate' in raw_df.columns else raw_df
+        if 'is_duplicate' in df_best.columns:
+            # Após seleção de melhores duplicatas, garantir flag consistente
+            df_best = df_best.copy()
+            if 'is_duplicate' in df_best.columns:
+                # Recalcular flag (todos agora únicos)
+                df_best['is_duplicate'] = False
+                df_best['duplicate_of'] = None
+        df_for_export = df_best
+        logger.info(f"Registros para export (após melhor duplicata): {len(df_for_export)}")
         
-        # Merge com stats fornecidos mantendo identification original
+        # AUDITORIA: Comparar contagens de stage após deduplicação
+        if raw_stages and 'selection_stage' in df_for_export.columns:
+            export_stages = df_for_export['selection_stage'].value_counts().to_dict()
+            logger.info(f"Contagem de stages antes dedup: {raw_stages}")
+            logger.info(f"Contagem de stages após dedup: {export_stages}")
+            
+            # Avisos para perdas em stages críticos
+            for stage in ['included', 'eligibility']:
+                raw_count = raw_stages.get(stage, 0)
+                export_count = export_stages.get(stage, 0)
+                delta = raw_count - export_count
+                
+                if delta > 0:
+                    logger.warning(
+                        f"⚠️ Stage '{stage}' perdeu {delta} papers durante deduplicação "
+                        f"({raw_count} -> {export_count})"
+                    )
+                elif delta < 0:
+                    logger.error(
+                        f"❌ Stage '{stage}' GANHOU papers durante deduplicação - problema de integridade! "
+                        f"({raw_count} -> {export_count})"
+                    )
+
+        # Calcular estatísticas uma única vez (inclui raw_rows/distinct_doi)
+        local_stats = _compute_prisma_stats_from_df(raw_df, df_for_export)
         if stats:
-            local_stats.update({k: v for k, v in stats.items() if k not in ['identification', 'duplicates_removed']})
+            prisma_keys = {
+                'identification', 'duplicates_removed', 'screening',
+                'screening_excluded', 'eligibility', 'eligibility_excluded', 'included'
+            }
+            for k, v in stats.items():
+                if k not in prisma_keys:
+                    local_stats[k] = v
 
         # 1. Excel files (moved to analysis folder to avoid duplicate basenames)
         analysis_dir = output_dir / "analysis"
@@ -539,17 +756,17 @@ def export_complete_review(
         # 4. Reports (usa dados únicos)
         report_generator = ReportGenerator(output_dir / "reports")
         
-        # Summary report (passa DataFrame filtrado e stats originais)
-        summary_path = report_generator.generate_summary_report(df_for_export, local_stats, config)
+        # Summary report (passa DataFrame filtrado e stats originais + fulltext_stats)
+        summary_path = report_generator.generate_summary_report(df_for_export, local_stats, config, fulltext_stats=fulltext_stats)
         exported_files["summary_report"] = summary_path
         
-        # Papers report (included papers only - já filtrado)
+        # Papers report (included papers only - já filtrado) - passa fulltext_stats para incluir dados de extração
         if "selection_stage" in df_for_export.columns:
-            papers_path = report_generator.generate_papers_report(df_for_export, "included")
+            papers_path = report_generator.generate_papers_report(df_for_export, "included", fulltext_stats=fulltext_stats)
             exported_files["papers_report"] = papers_path
         
         # Gap analysis
-        gap_path = report_generator.generate_gap_analysis(df)
+        gap_path = report_generator.generate_gap_analysis(df_for_export)
         exported_files["gap_analysis"] = gap_path
 
         # Optional cleanup: remove analysis-level artifacts after they have

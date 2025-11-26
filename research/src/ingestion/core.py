@@ -263,6 +263,89 @@ class COREClient(BaseAPIClient):
             return None
 
 
+    def get_pdf_url_by_doi(self, doi: str) -> Optional[str]:
+        """Get PDF URL from CORE by DOI.
+        
+        Args:
+            doi: Paper DOI (with or without https://doi.org/ prefix)
+            
+        Returns:
+            PDF download URL if found, None otherwise
+        """
+        if not doi:
+            return None
+            
+        if not self.api_key:
+            logger.debug("CORE API key not available, skipping DOI lookup")
+            return None
+        
+        # Normalize DOI
+        clean_doi = doi.replace("https://doi.org/", "").strip()
+        
+        # Query CORE for this specific DOI
+        payload = {
+            "q": f'doi:"{clean_doi}"',
+            "limit": 5,
+            "exclude": ["fullText"]  # Don't need full text for URL resolution
+        }
+        
+        try:
+            headers = {"Authorization": f"Bearer {self.api_key}"}
+            logger.debug(f"CORE DOI lookup: {clean_doi}")
+            
+            response = self.session.post(
+                self.BASE_URL,
+                json=payload,
+                headers=headers,
+                timeout=15
+            )
+            
+            if response.status_code != 200:
+                logger.debug(f"CORE DOI lookup failed with status {response.status_code}")
+                return None
+            
+            data = response.json()
+            results = data.get("results", [])
+            
+            if not results:
+                logger.debug(f"No CORE results for DOI: {clean_doi}")
+                return None
+            
+            # Check each result for download URL
+            for item in results:
+                # Skip deleted or disabled
+                if item.get("deleted") == "DELETED" or item.get("disabled", False):
+                    continue
+                
+                # Try downloadUrl first (direct PDF link)
+                download_url = item.get("downloadUrl", "").strip()
+                if download_url and download_url.lower().endswith(".pdf"):
+                    logger.info(f"✓ CORE found PDF URL for {clean_doi}: {download_url}")
+                    return download_url
+                
+                # Try links array
+                links = item.get("links", [])
+                for link in links:
+                    if isinstance(link, dict):
+                        link_url = link.get("url", "").strip()
+                        link_type = link.get("type", "").lower()
+                        if link_url and (link_type == "download" or link_url.lower().endswith(".pdf")):
+                            logger.info(f"✓ CORE found PDF link for {clean_doi}: {link_url}")
+                            return link_url
+                
+                # Fallback to downloadUrl even if not .pdf extension
+                if download_url:
+                    logger.info(f"✓ CORE found download URL for {clean_doi}: {download_url}")
+                    return download_url
+            
+            logger.debug(f"CORE results exist but no PDF URL found for {clean_doi}")
+            return None
+            
+        except Exception as e:
+            logger.error(f"CORE DOI lookup error for {clean_doi}: {e}")
+            return None
+
+
 def search_core(query: str, config, limit: int = 100) -> pd.DataFrame:
     """Função conveniente para buscar no CORE.
     

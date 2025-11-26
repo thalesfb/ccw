@@ -11,7 +11,7 @@ research/exports/
 ├── analysis/              # Análises quantitativas (CSV, JSON)
 │   ├── papers_YYYYMMDD_HHMMSS.csv
 │   └── papers_YYYYMMDD_HHMMSS.json
-├── deep_analysis/         # Análise aprofundada via APIs
+├── deep_analysis/         # Análise aprofundada via MCPs e APIs externas
 │   ├── DEEP_ANALYSIS_REPORT.md
 │   ├── enriched_papers_cache.json
 │   └── analyses_summary.json

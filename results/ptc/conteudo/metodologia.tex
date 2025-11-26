@@ -20,7 +20,14 @@ A coleta de dados foi realizada mediante integração automatizada com as APIs d
     \item \textbf{CORE}: Agregador especializado em artigos de acesso aberto.
 \end{enumerate}
 
-A integração de múltiplas fontes proporciona: (i)~cobertura complementar, pois cada base possui especialidades distintas; (ii)~redução de viés de seleção; (iii)~reprodutibilidade mediante automação; e (iv)~eficiência na coleta sistemática de grandes volumes de dados.
+A integração de múltiplas APIs de bases científicas proporciona:
+
+\begin{itemize}
+    \item \textbf{Cobertura Complementar}: Cada base possui forças específicas --- \textit{Semantic Scholar} para métricas de impacto, \textit{OpenAlex} para amplitude de cobertura, \textit{Crossref} para precisão bibliográfica, e \textit{CORE} para acesso aberto;
+    \item \textbf{Redução de Viés}: Minimiza vieses de seleção inerentes a fontes únicas;
+    \item \textbf{Reprodutibilidade}: Automação via APIs permite replicação exata do processo de busca;
+    \item \textbf{Eficiência}: Coleta sistemática de grandes volumes de dados com consistência metodológica.
+\end{itemize}
 
 \subsection{Estratégia de Busca Bilíngue}
 
@@ -41,6 +48,14 @@ A estratégia de busca combina três camadas de termos (base matemática, técni
 \begin{itemize}
     \item Inglês: \textit{education}, \textit{learning} (2 termos)
     \item Português: \textit{educacao}, \textit{ensino} (2 termos)
+\end{itemize}
+
+A inclusão de termos de busca em português e inglês visa:
+
+\begin{itemize}
+    \item \textbf{Amplitude Geográfica}: Capturar pesquisas de diferentes regiões e contextos culturais;
+    \item \textbf{Diversidade Cultural}: Incluir abordagens pedagógicas culturalmente específicas;
+    \item \textbf{Completude}: Evitar perda de estudos relevantes devido a limitações linguísticas.
 \end{itemize}
 
 A estratégia resultou em \textbf{72 consultas únicas}:
@@ -78,6 +93,17 @@ Os critérios de inclusão e exclusão foram definidos conforme o framework PICO
     \item \textbf{S (Study Design)}: Estudos empíricos, quasi-experimentais ou estudos de caso com evidências práticas.
 \end{itemize}
 
+\subsection{Justificativa do Recorte Temporal}
+
+O período de 2015-2025 foi escolhido por representar:
+
+\begin{itemize}
+    \item \textbf{Era da IA Educacional}: Década de maior evolução nas técnicas computacionais aplicadas à educação;
+    \item \textbf{Maturidade do Machine Learning}: Consolidação de técnicas de ML em ambientes educacionais;
+    \item \textbf{Explosão do Learning Analytics}: Desenvolvimento massivo de ferramentas de análise educacional;
+    \item \textbf{Relevância Tecnológica}: Tecnologias ainda atuais e aplicáveis em contextos contemporâneos.
+\end{itemize}
+
 \subsection{Critérios de Inclusão}
 
 \begin{enumerate}
@@ -106,7 +132,7 @@ O fluxo de seleção dos estudos seguiu rigorosamente as etapas PRISMA:
 
 \subsection{Identificação}
 
-Execução automatizada das 72 consultas nas quatro APIs, resultando na coleta inicial de \textbf{9.513 registros}. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}).
+Execução automatizada das 72 consultas nas quatro APIs, resultando na coleta inicial de \textbf{9.431 registros}. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}).
 
 \subsection{Triagem}
 
@@ -118,7 +144,7 @@ Aplicação de deduplicação automática e filtros para remover:
     \item Em idiomas não compatíveis.
 \end{itemize}
 
-Nesta etapa foram excluídos \textbf{2.565 registros duplicados} (27,0\%), resultando em \textbf{6.948 estudos únicos}. Após aplicação de critérios de triagem, \textbf{1.945 estudos} avançaram para análise de elegibilidade.
+Nesta etapa foram excluídos \textbf{2.494 registros duplicados} (26,4\%), resultando em \textbf{6.937 estudos únicos}. Após aplicação de critérios de triagem, \textbf{1.883 estudos} avançaram para análise de elegibilidade.
 
 \subsection{Elegibilidade}
 
@@ -133,11 +159,11 @@ Avaliação dos estudos mediante sistema de pontuação (\textit{scoring}) multi
 
 A pontuação total varia de 0 a 10. O \textit{threshold} de inclusão foi definido em $\text{relevance\_score} \geq 4.0$, garantindo seleção rigorosa de estudos com aderência temática e metodológica adequadas.
 
-Nesta etapa foram excluídos \textbf{1.929 registros} (99,2\% dos elegíveis), refletindo o rigor dos critérios de seleção.
+Nesta etapa foram excluídos \textbf{1.866 registros} (99,1\% dos 1.883 estudos avaliados), refletindo o rigor dos critérios de seleção baseados no \textit{score} de relevância.
 
 \subsection{Inclusão}
 
-Após aplicação do \textit{threshold}, foram incluídos \textbf{16 estudos} para síntese qualitativa, representando uma taxa de inclusão de aproximadamente \textbf{0,17\%} em relação ao total identificado (16/9.513).
+Após aplicação do \textit{threshold}, foram incluídos \textbf{17 estudos} para síntese qualitativa, representando uma taxa de inclusão de aproximadamente \textbf{0,18\%} em relação ao total identificado (17/9.431).
 
 \section{Deduplicação}
 
@@ -157,7 +183,7 @@ Este processo foi executado durante a ingestão dos dados, antes da triagem.
 O pipeline de revisão sistemática foi implementado em \textbf{Python 3.11+}, utilizando:
 
 \begin{itemize}
-    \item \textbf{SQLite}: Banco de dados local para armazenamento estruturado (\texttt{systematic\_review.sqlite});
+    \item \textbf{SQLite}: Banco de dados local para armazenamento estruturado (\texttt{systematic\_review.\\sqlite});
     \item \textbf{Requests}: Cliente HTTP para comunicação com APIs;
     \item \textbf{Pandas}: Manipulação e análise de dados tabulares;
     \item \textbf{Scikit-learn}: Cálculo de similaridades TF-IDF para deduplicação.
@@ -182,20 +208,4 @@ python -m research.src.cli export
 
 Todos os parâmetros de configuração (thresholds, APIs, termos de busca) estão documentados e versionados no repositório Git do projeto.
 
-\section{Limitações Metodológicas}
-
-As principais limitações identificadas incluem:
-
-\begin{enumerate}
-    \item \textbf{Viés Linguístico}: Cobertura limitada a inglês e português, excluindo potencialmente estudos relevantes em outros idiomas;
-    \item \textbf{Viés Temporal}: Foco nos últimos 10 anos pode excluir estudos seminais anteriores a 2015;
-    \item \textbf{Alta Taxa de Exclusão}: A taxa de inclusão de 0,17\% reflete rigor elevado, mas pode limitar a abrangência da síntese;
-    \item \textbf{Dependência de APIs}: Disponibilidade e completude dos dados dependem das APIs consultadas;
-    \item \textbf{Ausência de Grey Literature}: Não foram incluídas teses, dissertações ou relatórios técnicos não indexados.
-\end{enumerate}
-
-Apesar dessas limitações, a metodologia adotada garante alto grau de rigor, transparência e reprodutibilidade, alinhada às melhores práticas de revisões sistemáticas.
-
-% 
 %--------- FIM METODOLOGIA ------------
-%

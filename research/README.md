@@ -123,12 +123,13 @@ research/
 O pipeline segue as fases padrão: Identificação → Deduplicação → Triagem →
 Elegibilidade → Inclusão.
 
-**Números atuais (16/11/2025)**:
+**Números atuais (25/11/2025)**:
 
-- **Identificação**: 6.516 registros únicos
-- **Screening**: 4.665 avaliados (excluídos na triagem: 1.851 / 28,4%)
-- **Elegibilidade**: 1.835 avaliados em profundidade (excluídos na elegibilidade: 1.819 / 99,1%)
-- **Incluídos**: 16 estudos (relevance_score ≥4.0)
+- **Identificação**: 9.431 registros coletados
+- **Duplicatas Removidas**: 2.494 (26,4%)
+- **Screening**: 6.937 estudos únicos avaliados
+- **Elegibilidade**: 1.883 avaliados em profundidade (excluídos na elegibilidade: 1.866 / 99,1%)
+- **Incluídos**: 17 estudos (relevance_score ≥4.0)
 
 Todos os contadores oficiais são derivados em tempo de execução a partir
 do banco de dados canônico `research/systematic_review.db`.
@@ -172,6 +173,12 @@ python -m research.src.cli import-csv dados.csv
 
 # Exportar com relatórios e visualizações
 python -m research.src.cli export -o research/exports/
+
+# Exportar incluindo extração de texto completo dos PDFs
+python -m research.src.cli export --fetch-fulltext
+
+# Extrair apenas artigos sem full_text no banco
+python -m research.src.cli export --fetch-fulltext --only-missing
 
 # Normalizar estágios PRISMA (se necessário)
 python -m research.src.cli normalize-prisma
@@ -264,6 +271,76 @@ Cada paper incluído registra:
 - **Motivo de inclusão**: Lista de critérios que qualificaram o paper
 - **Fonte**: API de origem (semantic_scholar, openalex, crossref, core)
 - **Metadados completos**: título, abstract, autores, ano, DOI, etc.
+
+---
+
+## 📄 Extração de Texto Completo
+
+### Funcionalidade Integrada
+
+A partir da versão atual, a extração de texto completo dos PDFs foi **integrada ao comando `export`**, eliminando a necessidade de executar comandos separados. O sistema agora oferece:
+
+**Uso**:
+
+```bash
+# Exportar + extrair texto completo de todos os papers
+python -m research.src.cli export --fetch-fulltext
+
+# Processar apenas papers sem texto já extraído (incremental)
+python -m research.src.cli export --fetch-fulltext --only-missing
+```
+
+### Estratégias de Extração
+
+O sistema utiliza múltiplas estratégias para maximizar a taxa de sucesso:
+
+1. **Resolvedores de PDF**:
+   - IEEE Stamp URLs (papers do IEEE Xplore)
+   - Unpaywall API (open access papers)
+   - Crossref metadata links
+   - CORE API (repositórios acadêmicos)
+   - HTML scraping para publishers open access
+
+2. **Fallbacks Inteligentes**:
+   - Tentativa de múltiplos protocolos (HTTPS → HTTP)
+   - Rotação de User-Agents
+   - Cache de resultados para evitar reprocessamento
+
+3. **Validação Robusta**:
+   - Verificação HEAD antes do download completo
+   - Detecção de content-type (PDF vs HTML)
+   - Extração de texto com PyPDF2 + pdfplumber
+
+### Informações nos Relatórios
+
+Os relatórios HTML gerados agora incluem:
+
+**Em `summary_report.html`**:
+- Card de cobertura com percentual de extração
+- Total de papers extraídos vs falhas
+- Top 5 causas de falha mais frequentes
+
+**Em `papers_report_included.html`**:
+- Badge de status (✅ Extraído / ❌ Não extraído)
+- Tamanho do texto extraído (em KB)
+- Palavras-chave detectadas automaticamente
+- Motivos de falha quando aplicável
+
+### Taxa de Sucesso Atual
+
+**Cobertura**: ~41% (7/17 papers incluídos)
+
+**Principais Causas de Falha**:
+- `connection_exhausted`: Timeout após múltiplas tentativas
+- `head_error`: Erro na verificação HEAD do URL
+- `ieee_no_fallback_link`: IEEE sem link de fallback disponível
+- `html_no_pdf_link`: Página HTML sem link direto para PDF
+
+### Cache e Persistência
+
+- **Cache JSON**: `research/exports/full_texts_cache.json`
+- **Banco de dados**: Campo `full_text` na tabela `papers`
+- **Incremental**: Flag `--only-missing` processa apenas novos papers
 
 ---
 

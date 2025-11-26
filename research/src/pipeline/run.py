@@ -13,12 +13,12 @@ from ..config import AppConfig, load_config
 from ..logging_config import get_audit_logger
 from ..db import init_db, read_papers, save_papers, get_db_manager
 from ..exports.excel import export_complete_review
-from ..ingestion import search_semantic_scholar, search_openalex, search_crossref, search_core
 from ..processing.dedup import find_duplicates
 from ..processing.scoring import compute_relevance_scores
 from ..processing.enrichment import enrich_dataframe
 from ..processing.selection import apply_prisma_selection, apply_post_collection_filter
 from ..search_terms import generate_search_queries  # Import canonical query generator
+from ..ingestion import search_semantic_scholar, search_openalex, search_crossref, search_core
 
 # Configurar logging
 logging.basicConfig(

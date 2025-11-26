@@ -8,7 +8,7 @@ from pathlib import Path
 import argparse
 
 # Adicionar o diretório raiz do projeto (research) ao path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+
 
 from src.search_terms import get_all_queries
 from src.config import load_config

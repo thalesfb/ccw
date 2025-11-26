@@ -56,7 +56,7 @@ def save_papers(df: pd.DataFrame, cfg: AppConfig | None = None) -> int:
         cfg: Application configuration
         
     Returns:
-        Number of papers inserted
+        Number of papers inserted (new records only)
     """
     if df.empty:
         return 0
@@ -64,15 +64,30 @@ def save_papers(df: pd.DataFrame, cfg: AppConfig | None = None) -> int:
     # Reset index to ensure proper column structure
     df = df.reset_index(drop=True)
     
+    # Filter out papers marked as duplicates in DataFrame
+    # (insert_papers_bulk will also check database for existing records)
+    initial_count = len(df)
+    if 'is_duplicate' in df.columns:
+        df_to_save = df[df['is_duplicate'] != True].copy()
+        skipped = initial_count - len(df_to_save)
+        if skipped > 0:
+            logger.info(f"🧹 Filtrando {skipped} duplicatas marcadas antes de salvar no banco")
+    else:
+        df_to_save = df
+    
+    if df_to_save.empty:
+        logger.info("Nenhum paper novo para salvar (todos já marcados como duplicatas)")
+        return 0
+    
     manager = get_db_manager(cfg)
     
     # Convert DataFrame rows to PaperRecord objects
     papers = []
-    for _, row in df.iterrows():
+    for _, row in df_to_save.iterrows():
         paper = PaperRecord()
         
         # Map DataFrame columns to PaperRecord fields
-        for field in df.columns:
+        for field in df_to_save.columns:
             try:
                 field_str = str(field)  # Ensure field is string
                 if hasattr(paper, field_str):
@@ -87,7 +102,7 @@ def save_papers(df: pd.DataFrame, cfg: AppConfig | None = None) -> int:
         
         papers.append(paper)
     
-    # Bulk insert
+    # Bulk insert (will check for existing records by DOI/title)
     inserted = manager.insert_papers_bulk(papers)
     logger.info(f"Saved {inserted} papers to database")
     

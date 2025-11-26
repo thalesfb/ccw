@@ -1,10 +1,10 @@
 # Constituição do Projeto — ccw
 
-> Apoio ao TCC: Diagnóstico de competências em matemática para adaptação do aprendizado; foco atual na revisão sistemática automatizada e infraestrutura de coleta/análise para fundamentar o produto final.
+> Ensino Personalizado de Matemática: Diagnóstico de competências em matemática para adaptação do aprendizado; foco atual na revisão sistemática automatizada e infraestrutura de coleta/análise para fundamentar o produto final.
 
 ## 1) Propósito e Escopo
 
-- Objetivo geral: apoiar professores de matemática no diagnóstico de competências e na otimização de planos de ensino com base em evidências.
+- Objetivo geral: apoiar professores de matemática no ensino personalizado através do diagnóstico de competências com base em evidências.
 - Escopo atual: módulo research com pipeline modular para revisão sistemática (coleta, cache, deduplicação, scoring, seleção PRISMA, exports e logs).
 - Produto final: ainda em concepção; expansão futura no diretório `src/` para protótipo/aplicação principal que consumirá a base de evidências para avaliação do que a comunidade já fez.
 

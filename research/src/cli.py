@@ -6,9 +6,12 @@ import sys
 import subprocess
 from pathlib import Path
 
-import pandas as pd
-import argparse
-import logging
+# Fix imports when running as script (not as module)
+if __name__ == "__main__" and __package__ is None:
+    # Add parent directory to path so we can import from src
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    __package__ = "src"
+
 import pandas as pd
 
 from .config import load_config
@@ -27,7 +30,6 @@ from .pipelines.validations import (
 )
 
 # Import cross-audit functionality
-import sys
 import importlib.util
 _audit_script = Path(__file__).resolve().parents[1] / "scripts" / "cross_audit.py"
 if _audit_script.exists():
@@ -259,6 +261,61 @@ def cmd_export(ns: argparse.Namespace) -> None:
         print("❌ Nenhum paper encontrado no banco")
         return
     
+    # Full-text extraction integration (replaces separate deep-analysis command)
+    fulltext_stats = None
+    if hasattr(ns, 'fetch_fulltext') and ns.fetch_fulltext:
+        print("\n🔬 Iniciando extração de texto completo...")
+        only_missing = hasattr(ns, 'only_missing') and ns.only_missing
+        
+        try:
+            analyzer = DeepReviewAnalyzer(db_path=cfg.database.db_path, config=cfg)
+            # Use standard exports directory structure
+            analyzer.output_dir = Path(cfg.database.exports_dir)
+            
+            # Carregar apenas papers únicos incluídos antes da extração
+            try:
+                analyzer.load_included_papers()
+                print(f"📄 Papers únicos incluídos carregados para extração: {len(analyzer.papers)}")
+            except Exception as e:
+                print(f"⚠️ Falha ao carregar subconjunto incluído (usando DataFrame completo): {e}")
+
+            # Extract full texts (updates database and returns results)
+            extraction_results = analyzer.fetch_full_text(only_missing=only_missing)
+            
+            # Reload dataframe after extraction to get updated full_text field
+            df = read_papers(cfg)
+            
+            # Calculate statistics for report generation
+            total = len(extraction_results)
+            extracted = sum(1 for p in extraction_results if p.get('full_text'))
+            coverage_pct = (extracted / total * 100) if total > 0 else 0
+            
+            # Count failure reasons
+            failure_counts = {}
+            for paper in extraction_results:
+                if not paper.get('full_text'):
+                    reasons = paper.get('pdf_failure_reasons', ['unknown'])
+                    for reason in reasons:
+                        failure_counts[reason] = failure_counts.get(reason, 0) + 1
+            
+            # Sort by frequency
+            top_failures = sorted(failure_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+            
+            fulltext_stats = {
+                'total_papers': total,
+                'extracted': extracted,
+                'failed': total - extracted,
+                'coverage_pct': coverage_pct,
+                'top_failures': top_failures,
+                'extraction_results': extraction_results
+            }
+            
+            print(f"✅ Extração concluída: {extracted}/{total} papers ({coverage_pct:.1f}%)")
+            
+        except Exception as e:
+            print(f"⚠️ Erro durante extração de texto completo: {e}")
+            logger.error(f"Full-text extraction failed: {e}", exc_info=True)
+    
     from .exports.excel import export_complete_review
     
     # Calcular estatísticas PRISMA para visualizações
@@ -279,7 +336,7 @@ def cmd_export(ns: argparse.Namespace) -> None:
         logger.debug(f"Could not compute stage distribution: {e}")
     
     output_dir = Path(ns.output) if hasattr(ns, 'output') and ns.output else None
-    files = export_complete_review(df, output_dir=output_dir)
+    files = export_complete_review(df, output_dir=output_dir, fulltext_stats=fulltext_stats)
     
     print("📊 Exportação completa realizada:")
     for file_type, path in files.items():
@@ -295,43 +352,6 @@ def cmd_normalize_prisma(_: argparse.Namespace) -> None:
     print("🔧 Normalização PRISMA concluída:")
     print(f"  screening_excluded -> screening/status=excluded: {res['screening']}")
     print(f"  eligibility_excluded -> eligibility/status=excluded: {res['eligibility']}")
-
-
-def cmd_deep_analysis(ns: argparse.Namespace) -> None:
-    """
-    Realiza análise aprofundada dos papers incluídos.
-    
-    - Enriquece via Semantic Scholar API (tldr, citations, references)
-    - Analisa temas, tendências temporais, redes de citação
-    - Gera relatórios Markdown estruturados
-    - Exporta cache JSON para reprodutibilidade
-    """
-    cfg = load_config()
-    output_dir = Path(ns.output) if hasattr(ns, 'output') and ns.output else Path(cfg.database.exports_dir) / "deep_analysis"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
-    print("🔬 Iniciando análise aprofundada...")
-    print(f"📁 Saída: {output_dir}")
-    
-    # Criar analisador e executar
-    analyzer = DeepReviewAnalyzer()
-    analyzer.output_dir = output_dir  # Override output directory
-    
-    try:
-        results = analyzer.run_full_analysis()
-        
-        print("\n✅ Análise completa!")
-        print(f"📊 Papers analisados: {results.get('total_papers', 0)}")
-        print(f"📈 Período: {results.get('year_range', 'N/A')}")
-        print(f"📚 Média de citações: {results.get('avg_citations', 0):.1f}")
-        print(f"\n📄 Arquivos gerados:")
-        print(f"  - {output_dir / 'DEEP_ANALYSIS_REPORT.md'}")
-        print(f"  - {output_dir / 'enriched_papers_cache.json'}")
-        print(f"  - {output_dir / 'analyses_summary.json'}")
-        
-    except Exception as e:
-        print(f"❌ Erro durante análise: {e}")
-        logger.error(f"Deep analysis failed: {e}", exc_info=True)
 
 
 def cmd_export_bibtex(ns: argparse.Namespace) -> None:
@@ -593,16 +613,13 @@ def build_parser() -> argparse.ArgumentParser:
     # Comando export
     p_export = sub.add_parser("export", help="Exporta dados com relatórios e visualizações")
     p_export.add_argument("-o", "--output", help="Diretório de saída")
+    p_export.add_argument("--fetch-fulltext", action="store_true", help="Extrair texto completo dos PDFs antes de exportar")
+    p_export.add_argument("--only-missing", action="store_true", help="Com --fetch-fulltext, processar apenas papers sem full_text")
     p_export.set_defaults(func=cmd_export)
 
     # Comando normalize-prisma
     p_norm = sub.add_parser("normalize-prisma", help="Normaliza estágios PRISMA legados no banco")
     p_norm.set_defaults(func=cmd_normalize_prisma)
-
-    # Comando deep-analysis
-    p_deep = sub.add_parser("deep-analysis", help="Análise aprofundada dos papers incluídos (APIs + relatórios)")
-    p_deep.add_argument("-o", "--output", help="Diretório de saída (default: research/exports/deep_analysis)")
-    p_deep.set_defaults(func=cmd_deep_analysis)
 
     # Comando export-bibtex
     p_bib = sub.add_parser("export-bibtex", help="Exporta referências bibliográficas em formato BibTeX")

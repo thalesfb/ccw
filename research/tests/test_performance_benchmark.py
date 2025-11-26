@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Dict, List
 
 # Adicionar o diretório raiz do projeto ao path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+
 
 from src.pipeline.run import SystematicReviewPipeline
 

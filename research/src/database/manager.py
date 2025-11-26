@@ -155,13 +155,13 @@ class DatabaseManager:
             return cursor.lastrowid
 
     def insert_papers_bulk(self, papers: List[PaperRecord]) -> int:
-        """Insert multiple papers in bulk.
+        """Insert multiple papers in bulk with duplicate checking.
 
         Args:
             papers: List of paper records
 
         Returns:
-            Number of papers inserted
+            Number of papers inserted (new records only)
         """
         if not papers:
             return 0
@@ -169,13 +169,54 @@ class DatabaseManager:
         with self._get_connection() as conn:
             cursor = conn.cursor()
             inserted = 0
+            updated = 0
+            skipped = 0
 
             for paper in papers:
                 try:
                     data = {k: v for k, v in paper.to_dict().items() if v is not None}
-
-                    # Always insert; do not upsert by DOI/title to avoid overwriting duplicates
-                    if data:
+                    
+                    if not data:
+                        continue
+                    
+                    # Skip papers already marked as duplicates in the DataFrame
+                    if data.get('is_duplicate', False):
+                        skipped += 1
+                        continue
+                    
+                    # Check if paper already exists by DOI (primary) or title (fallback)
+                    existing_id = None
+                    if data.get('doi'):
+                        cursor.execute("SELECT id FROM papers WHERE doi = ? LIMIT 1", (data['doi'],))
+                        result = cursor.fetchone()
+                        if result:
+                            existing_id = result[0]
+                    elif data.get('title'):
+                        # Fallback to title match when no DOI (best effort)
+                        cursor.execute("SELECT id FROM papers WHERE title = ? LIMIT 1", (data['title'],))
+                        result = cursor.fetchone()
+                        if result:
+                            existing_id = result[0]
+                    
+                    if existing_id:
+                        # UPDATE existing paper with new/enriched data
+                        update_candidates = {
+                            k: v for k, v in data.items() if k in {
+                                "selection_stage", "status", "exclusion_reason", "inclusion_criteria_met",
+                                "relevance_score", "comp_techniques", "edu_approach", "study_type", "eval_methods",
+                                "abstract", "keywords", "authors", "journal", "year", "citation_count",
+                                "main_results", "identified_gaps", "abstract_len"
+                            }
+                        }
+                        if update_candidates:
+                            update_candidates["updated_at"] = datetime.now().isoformat()
+                            set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
+                            params = list(update_candidates.values()) + [existing_id]
+                            cursor.execute(f"UPDATE papers SET {set_clause} WHERE id = ?", params)
+                            if cursor.rowcount > 0:
+                                updated += 1
+                    else:
+                        # INSERT new paper
                         columns = list(data.keys())
                         placeholders = ["?" for _ in columns]
                         insert_sql = f"""
@@ -186,38 +227,12 @@ class DatabaseManager:
                         if cursor.rowcount > 0:
                             inserted += 1
 
-                    # # 2) Atualiza campos críticos se já existia (upsert por DOI/título)
-                    # update_candidates = {
-                    #     k: v for k, v in data.items() if k in {
-                    #         "selection_stage", "status", "exclusion_reason", "inclusion_criteria_met",
-                    #         "relevance_score", "comp_techniques", "edu_approach", "study_type", "eval_methods"
-                    #     }
-                    # }
-                    # if update_candidates:
-                    #     update_candidates["updated_at"] = datetime.now().isoformat()
-
-                    #     if data.get("doi"):
-                    #         set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
-                    #         params = list(update_candidates.values()) + [data["doi"]]
-                    #         cursor.execute(
-                    #             f"UPDATE papers SET {set_clause} WHERE doi = ?",
-                    #             params
-                    #         )
-                    #     elif data.get("title"):
-                    #         # fallback por título quando não há DOI (melhor esforço)
-                    #         set_clause = ", ".join([f"{k} = ?" for k in update_candidates.keys()])
-                    #         params = list(update_candidates.values()) + [data["title"]]
-                    #         cursor.execute(
-                    #             f"UPDATE papers SET {set_clause} WHERE title = ?",
-                    #             params
-                    #         )
-
                 except Exception as e:
                     logger.error(f"Error inserting/updating paper: {e}")
 
             conn.commit()
 
-        logger.info(f"Inserted {inserted} papers")
+        logger.info(f"Inserted {inserted} new papers, updated {updated} existing papers, skipped {skipped} marked duplicates")
         return inserted
 
     def get_papers(

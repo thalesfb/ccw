@@ -77,6 +77,14 @@ jobs:
           # Copy main research index.html for /research/
           cp research/index.html _site/research/index.html
           
+          # Copy results directory (PTC and TCC)
+          mkdir -p _site/results
+          cp -r results/ptc _site/results/
+          if [ -d "results/tcc" ]; then
+            cp -r results/tcc _site/results/
+          fi
+          echo "✅ Copied results/ directory"
+          
           # Create .nojekyll to bypass Jekyll processing
           touch _site/.nojekyll
           
@@ -87,6 +95,9 @@ jobs:
           echo ""
           echo "📊 Research structure:"
           ls -lh _site/research/exports/
+          echo ""
+          echo "📄 Results structure:"
+          ls -lh _site/results/
           echo ""
           echo "✅ Site prepared successfully"
       

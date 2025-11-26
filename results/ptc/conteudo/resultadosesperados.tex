@@ -3,80 +3,21 @@
 
 Este capítulo apresenta os resultados preliminares obtidos mediante a aplicação 
 rigorosa da metodologia PRISMA 2020, conforme descrito no Capítulo~\ref{cap:metodologia}. 
-A revisão sistemática identificou 16 estudos de alta relevância (relevance\_score $\geq 4.0$) 
+A revisão sistemática identificou 17 estudos de alta relevância (relevance\_score $\geq 4.0$) 
 que constituem a base empírica para as fases subsequentes deste projeto de TCC.
 
 \section{Fluxo PRISMA 2020}
 
-A aplicação da metodologia PRISMA resultou no seguinte fluxo de seleção de estudos:
+A Figura~\ref{fig:prisma-flow} ilustra o fluxo de seleção PRISMA. O processo iniciou com a identificação de 9.431 registros. Após a remoção de duplicatas e triagem inicial, 1.883 estudos foram avaliados quanto à elegibilidade. Destes, 1.866 foram excluídos com base no critério de relevância ($\text{score} < 4.0$), resultando na inclusão final de 17 estudos (taxa de inclusão de $\sim$0,18\%).
 
-\subsection{Identificação (n = 9.513)}
-
-Estudos identificados em 4 bases de dados:
-\begin{itemize}
-    \item Crossref: 3.350 estudos
-    \item OpenAlex: 2.706 estudos
-    \item Semantic Scholar: 2.742 estudos
-    \item CORE: 715 estudos
-\end{itemize}
-
-Período: 2017--2026 (10 anos). Total de 72 consultas bilíngues (48 inglês + 24 português).
-
-\subsection{Triagem (n = 6.948)}
-
-\textbf{Critérios aplicados}:
-\begin{itemize}
-    \item Remoção de duplicatas (deduplicação automática)
-    \item Idioma: inglês/português
-    \item Tipo: artigo acadêmico
-    \item Acesso: metadados completos
-\end{itemize}
-
-\textbf{Excluídos}: 2.565 estudos duplicados (27,0\%)
-
-\textbf{Registros únicos}: 6.948 estudos avançam para triagem
-
-\textbf{Excluídos na triagem}: 5.003 estudos (72,0\%)
-
-\subsection{Elegibilidade (n = 1.945)}
-
-\textbf{Critérios de elegibilidade aplicados aos 6.948 registros únicos}:
-\begin{itemize}
-    \item Relevância temática preliminar
-    \item Presença de termos-chave (IA + educação + matemática)
-    \item Tipo de documento (artigos acadêmicos)
-    \item Período de publicação (2017--2026)
-\end{itemize}
-
-% Nota: Exclusões na triagem já reportadas na seção anterior (5.003; 72,0\%).
-
-\textbf{Avaliação de elegibilidade detalhada} (n = 1.945):
-\begin{itemize}
-    \item Metodologia empírica
-    \item Qualidade de metadados
-    \item Relevância temática preliminar (score $\geq 3.0$) -- filtro preliminar para triagem
-\end{itemize}
-
-\textbf{Excluídos na elegibilidade}: 1.929 estudos (99,2\%)
-
-\noindent{}\textbf{Nota:} o critério \texttt{score $\geq 3.0$} é um filtro preliminar utilizado em listagens de suspeitos (CLI) e triagem; o critério final de inclusão aplicado pelo pipeline é \texttt{relevance\_score $\geq 4.0$}.
-
-\subsection{Incluídos (n = 16)}
-
-\textbf{Critério final}: relevance\_score $\geq 4.0$
-
-\textbf{Média}: 4,2 | \textbf{Range}: 4,0--4,5
-
-\textbf{Taxa de inclusão}: $\sim$0,17\% (16/9.513)
-
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
 \caption{Fluxo PRISMA 2020 da revisão sistemática.}
 \label{fig:prisma-flow}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
 \caption{Funil de seleção de estudos.}
@@ -88,7 +29,7 @@ Período: 2017--2026 (10 anos). Total de 72 consultas bilíngues (48 inglês + 2
 A Tabela~\ref{tab:stats-descritivas} sintetiza as principais métricas quantitativas 
 da revisão sistemática:
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Estatísticas descritivas da revisão sistemática.}
 \label{tab:stats-descritivas}
@@ -96,15 +37,15 @@ da revisão sistemática:
 \hline
 \textbf{Métrica} & \textbf{Valor} \\
 \hline
-Total identificado (com duplicatas) & 9.513 \\
-Duplicatas removidas & 2.565 (27,0\%) \\
-Registros únicos & 6.948 \\
-Total elegíveis (após triagem) & 1.945 \\
-Taxa de exclusão (triagem) & 72,0\% \\
-Avaliados para elegibilidade & 1.945 \\
-Taxa de exclusão (elegibilidade) & 99,2\% \\
-Total incluído (relevance $\geq$ 4.0) & 16 \\
-Taxa de inclusão final & $\sim$0,17\% \\
+Total identificado (com duplicatas) & 9.431 \\
+Duplicatas removidas & 2.494 (26,4\%) \\
+Registros únicos & 6.937 \\
+Total elegíveis (após triagem) & 1.883 \\
+Taxa de exclusão (triagem) & 72,8\% \\
+Avaliados para elegibilidade & 1.883 \\
+Taxa de exclusão (elegibilidade) & 99,1\% \\
+Total incluído (relevance $\geq$ 4.0) & 17 \\
+Taxa de inclusão final & $\sim$0,18\% \\
 Bases de dados consultadas & 4 \\
 Consultas bilíngues executadas & 72 (48 EN + 24 PT) \\
 Período de cobertura & 2017--2026 (10 anos) \\
@@ -114,45 +55,27 @@ Cache hit rate & $\sim$92\% (265/287 requisições) \\
 \end{tabular}
 \end{table}
 
-A distribuição por base de dados evidencia a complementaridade das fontes utilizadas, 
-conforme Tabela~\ref{tab:distribuicao-bases}:
+% A distribuição por base de dados evidencia a complementaridade das fontes utilizadas, 
+% conforme Tabela~\ref{tab:distribuicao-bases}:
 
-\begin{table}[htbp]
-\centering
-\caption{Distribuição de estudos identificados por base de dados.}
-\label{tab:distribuicao-bases}
-\begin{tabular}{lcc}
-\hline
-\textbf{Base de Dados} & \textbf{Identificados} & \textbf{\% do Total} \\
-\hline
-Crossref & 3.350 & 35,2\% \\
-OpenAlex & 2.706 & 28,4\% \\
-Semantic Scholar & 2.742 & 28,8\% \\
-CORE & 715 & 7,5\% \\
-\hline
-\textbf{Total} & \textbf{9.513} & \textbf{100\%} \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/database_coverage.png}
-\caption{Registros identificados por base de dados (inclui duplicatas) (n = 9.513).}
+\caption{Registros identificados por base de dados (inclui duplicatas) (n = 9.431).}
 \label{fig:database-coverage}
 \end{figure}
 
 \section{Síntese dos Estudos Incluídos}
 
-A Tabela~\ref{tab:sintese-16-estudos} apresenta a síntese dos 16 estudos que 
+A Tabela~\ref{tab:sintese-17-estudos} apresenta a síntese dos 17 estudos que 
 atenderam ao critério de relevância ($\geq 4.0$), organizados cronologicamente 
 do mais recente ao mais antigo.
 
 \begin{landscape}
 \begin{table}[htbp]
 \centering
-\caption{Síntese dos 16 estudos incluídos na revisão sistemática.}
-\label{tab:sintese-16-estudos}
+\caption{Síntese dos 17 estudos incluídos na revisão sistemática.}
+\label{tab:sintese-17-estudos}
 \scriptsize
 \begin{tabular}{p{2.2cm}p{3.5cm}p{2.5cm}p{2.5cm}p{1.8cm}p{4.5cm}}
 \hline
@@ -162,9 +85,11 @@ Tjahyadi (2025) & EDM para prever desempenho em Matemática (EF) & ML; Learning 
 \hline
 Zhang et al. (2025) & Caminhos personalizados com DL & DL; RL; Knowledge Graph; Sentiment & Personalização de aprendizagem & User feedback & +15\% efeito de aprendizagem; $-$20\% tempo; satisfação 4,2/5 \\
 \hline
-Chitre (2024) & PA em matemática computacional & ML (regressão, SVM, ensembles) & Predição & Statistical & Síntese comparativa de técnicas e aplicações \\
+Nyantah et al. (2025) & Teoremas de círculo com jigsaw + animação & Computer Animation; Jigsaw Cooperative Learning & Ensino de geometria & User feedback; Statistical & Ganhos significativos vs. ensino tradicional ($p<0.05$) \\
 \hline
-Zhang (2024) & Ensino inteligente em Matemática Superior & ACO+CNN; semi-superv. CRF & Personalização/Ensino & User feedback; Statistical & Pós-teste +9,317 ($p<0.05$); ganhos vs. controle \\
+Milićević et al. (2024) & Métodos de ML como apoio ao ensino & ML; Learning Analytics; Predictive Analytics & Predição / apoio ao ensino & Performance; Statistical & Heurísticas de classificação para sucesso matemático \\
+\hline
+Zhang (2023) & Ensino inteligente em Matemática Superior & ACO+CNN; semi-superv. CRF & Personalização/Ensino & User feedback; Statistical & Pós-teste +9,317 ($p<0.05$); ganhos vs. controle \\
 \hline
 Jose et al. (2024) & Sistemas adaptativos K-12 & Adaptive Learning & Personalização & User feedback; Statistical; Qualitativa & Ganhos de aprendizagem e engajamento \\
 \hline
@@ -178,7 +103,7 @@ Kumar et al. (2022) & Seleção de atributos e DM & Learning Analytics; ML & Pre
 \hline
 Pejic et al. (2021) & PISA: proficiência matemática (3 níveis) & ML & Predição de proficiência & Performance & RNAs e Random Forest previram níveis; métricas Kappa e ROC-AUC \\
 \hline
-Ünal (2021) & DM para previsão de notas & DT; RF; NB & Predição & Experimental & Efetividade demonstrada em dois datasets \\
+Ünal (2020) & DM para previsão de notas & DT; RF; NB & Predição & Experimental & Efetividade demonstrada em dois datasets \\
 \hline
 Salas-Rueda (2021) & Facebook + ML em finanças & Regressão; DT; RN & Apoio ao ensino/aprendizagem & Statistical & Mensagens, vídeos e exercícios correlacionados a ganhos \\
 \hline
@@ -195,11 +120,10 @@ Depren et al. (2017) & TIMSS 2011 (TR): comparação EDM & LR; DT; BN; RN & Pred
 \end{landscape}
 
 \textbf{Nota}: Critério de seleção: $\text{relevance\_score} \geq 4.0$ (média: 4,2; intervalo: 4,0--4,5). 
-Dados extraídos de \texttt{research/exports/analysis/papers.csv} (stage = ``included''). 
 
 \section{Análise Temática}
 
-A análise de frequência de termos nos títulos e resumos dos 16 estudos incluídos 
+A análise de frequência de termos nos títulos e resumos dos 17 estudos incluídos 
 revelou as seguintes tendências principais:
 
 \subsection{Termos Mais Frequentes}
@@ -207,16 +131,16 @@ revelou as seguintes tendências principais:
 Os cinco termos mais frequentes nos estudos incluídos foram:
 
 \begin{enumerate}
-    \item \textbf{Machine Learning} (18 ocorrências --- 90\%)
-    \item \textbf{Intelligent Tutoring Systems} (15 ocorrências --- 75\%)
-    \item \textbf{Educational Data Mining} (13 ocorrências --- 65\%)
-    \item \textbf{Personalized Learning} (12 ocorrências --- 60\%)
-    \item \textbf{Student Performance Prediction} (11 ocorrências --- 55\%)
+    \item \textbf{Machine Learning} (10 ocorrências --- 58,8\%)
+    \item \textbf{Assessment} (9 ocorrências --- 52,9\%)
+    \item \textbf{Predictive Analytics} (8 ocorrências --- 47,1\%)
+    \item \textbf{Learning Analytics} (7 ocorrências --- 41,2\%)
+    \item \textbf{Adaptive Learning} (4 ocorrências --- 23,5\%)
 \end{enumerate}
 
-Termos adicionais relevantes incluem \textit{Adaptive Learning} (50\%), 
-\textit{Deep Learning} (45\%), \textit{Knowledge Tracing} (40\%), \textit{Learning 
-Analytics} (35\%), e \textit{Natural Language Processing} (35\%).
+Termos menos frequentes, mas relevantes: \textit{AI/Artificial Intelligence} (2; 11,8\%), \textit{Intelligent Tutoring} (1; 5,9\%), além de abordagens específicas presentes em títulos (e.g., \textit{Reinforcement Learning}, \textit{Knowledge Graph}, \textit{Computer Animation}) que não aparecem como palavras-chave padronizadas.
+
+\textbf{Nota metodológica}: As porcentagens referem-se a presença do termo em pelo menos um estudo; termos não listados nos campos \texttt{keywords} mas citados em títulos ou textos (como \textit{Personalized Learning}) não foram incluídos nesta contagem para manter consistência reprodutível.
 
 \subsection{Categorias Temáticas Emergentes}
 
@@ -243,27 +167,27 @@ Quatro categorias temáticas principais emergiram da análise qualitativa:
 \subsection{Distribuição por Abordagem Técnica e Finalidade}
 
 A Tabela~\ref{tab:abordagem-tecnica} sintetiza as abordagens técnicas empregadas 
-nos estudos incluídos:
+nos estudos incluídos. Categorias raras (Knowledge Graph, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, ACO, CRF, LIME) foram agrupadas em ``Outras/Específicas''. 
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Distribuição dos estudos por abordagem técnica de IA.}
+\caption{Distribuição de abordagens técnicas}
 \label{tab:abordagem-tecnica}
 \begin{tabular}{lcc}
 \hline
 \textbf{Abordagem} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
 \hline
-Machine Learning Supervisionado & 14 & 70\% \\
-Deep Learning & 9 & 45\% \\
-Natural Language Processing & 7 & 35\% \\
-Hybrid Approaches & 7 & 35\% \\
-Rule-Based Systems & 6 & 30\% \\
-Reinforcement Learning & 4 & 20\% \\
+Machine Learning Supervisionado & 13 & 76,5\% \\
+Deep Learning (CNN/DL) & 2 & 11,8\% \\
+Reinforcement Learning & 1 & 5,9\% \\
+Adaptive Learning & 1 & 5,9\% \\
+Modelagem de Conhecimento/Tutores (Aprendiz) & 1 & 5,9\% \\
+Outras/Específicas (ACO, CRF, Knowledge Graph, Sentiment, Animation, Jigsaw, XAI) & 6 & 35,3\% \\
 \hline
 \end{tabular}
 \end{table}
 
-\textbf{Nota}: Percentuais somam $>100\%$ pois estudos podem empregar múltiplas abordagens.
+\textbf{Nota metodológica}: Contagem considera presença binária da categoria por estudo; categorias não são mutuamente exclusivas e percentuais podem somar $>100\%$. A categoria ``Outras/Específicas'' agrega técnicas singulares de baixa frequência. Tabela reconciliada com `referencias.bib` (remoção de estudo não incluído e correção de anos 2023 e 2020).
 
 \begin{figure}[htbp]
 \centering
@@ -275,26 +199,25 @@ Reinforcement Learning & 4 & 20\% \\
 A Tabela~\ref{tab:finalidade-pedagogica} apresenta a distribuição por finalidade 
 pedagógica:
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Distribuição dos estudos por finalidade pedagógica.}
+\caption{Distribuição dos estudos por finalidade principal.}
 \label{tab:finalidade-pedagogica}
 \begin{tabular}{lcc}
 \hline
-\textbf{Finalidade} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
+\textbf{Finalidade Principal} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
 \hline
-Tutoria Inteligente & 12 & 60\% \\
-Diagnóstico de Dificuldades & 10 & 50\% \\
-Predição de Desempenho & 9 & 45\% \\
-Personalização de Conteúdo & 7 & 35\% \\
-Feedback Adaptativo & 6 & 30\% \\
-Geração Automática de Exercícios & 5 & 25\% \\
-Avaliação Automatizada & 4 & 20\% \\
+Predição / Modelagem de Desempenho & 9 & 52,9\% \\
+Personalização / Trajetórias Adaptativas & 3 & 17,6\% \\
+Ensino / Suporte Instrucional & 2 & 11,8\% \\
+Avaliação / Assessment Formativo & 2 & 11,8\% \\
+Tutoria Inteligente / Autoria de Tutores & 1 & 5,9\% \\
 \hline
 \end{tabular}
 \end{table}
+\textbf{Nota metodológica}: Cada estudo classificado em uma única finalidade para preservação de proporções; estudos com descrições híbridas receberam atribuição pela finalidade predominante explícita.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/papers_by_year.png}
 \caption{Distribuição temporal dos estudos incluídos (2017-2026).}
@@ -303,7 +226,7 @@ Avaliação Automatizada & 4 & 20\% \\
 
 \section{Resultados de Eficácia Reportados}
 
-Dos 16 estudos incluídos, 15 (93,8\%) reportaram resultados positivos significativos, 
+Dos 17 estudos incluídos, 16 (94,1\%) reportaram resultados positivos significativos, 
 e 1 (6,2\%) apresentou resultados mistos. Nenhum estudo reportou ausência de efeito, 
 indicando possível viés de publicação (\textit{publication bias}).
 
@@ -321,7 +244,7 @@ A análise preliminar das magnitudes de efeito reportadas indica:
 \textbf{Cautela}: O viés de publicação pode inflar estimativas de eficácia. Análise 
 crítica de limitações metodológicas é necessária.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/relevance_distribution.png}
 \caption{Distribuição de scores de relevância dos estudos incluídos.}
@@ -343,7 +266,7 @@ Os estudos empregaram as seguintes métricas de avaliação:
 
 \section{Limitações Identificadas}
 
-A análise crítica dos 16 estudos incluídos revelou quatro categorias principais 
+A análise crítica dos 17 estudos incluídos revelou quatro categorias principais 
 de limitações:
 
 \subsection{Limitações Técnicas}
@@ -401,7 +324,7 @@ de limitações:
 
 \section{Mapeamento de Lacunas e Direcionamento para Fase 2}
 
-A análise dos 16 estudos incluídos revelou as seguintes lacunas principais que 
+A análise dos 17 estudos incluídos revelou as seguintes lacunas principais que 
 orientarão a Fase~2 (desenvolvimento de protótipo):
 
 \subsection{Lacunas Técnicas}

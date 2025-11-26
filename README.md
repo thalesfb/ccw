@@ -1,14 +1,14 @@
-# Otimização de Planos de Ensino de Matemática
+# Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais
 
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
 ## Sobre o Projeto
 
-Este repositório contém o desenvolvimento de uma ferramenta tecnológica para auxiliar professores de matemática na otimização de seus planos de ensino, através da identificação automatizada das competências individuais dos alunos.
+Este repositório contém o desenvolvimento de uma ferramenta tecnológica para auxiliar professores de matemática no ensino personalizado, através da identificação automatizada das competências individuais dos alunos.
 
 ### Tema
 
-Apoio à Otimização dos Planos de Ensino de Matemática por meio da identificação automatizada das competências individuais dos alunos usando técnicas computacionais.
+Ensino personalizado de matemática através da identificação automatizada das competências individuais dos alunos usando técnicas computacionais.
 
 ## Orientação
 
@@ -96,29 +96,12 @@ python -m research.src.cli export
 - `research/exports/reports/summary_report.html` - Relatório visual
 - `research/exports/visualizations/*.png` - Gráficos PRISMA
 
-#### 4. Análise Aprofundada (NOVO ✨)
-Enriquece papers via Semantic Scholar API e gera análises temáticas:
+#### 4. Exportação BibTeX (✨)
 
-```bash
-python -m research.src.cli deep-analysis
-```
-
-**Saídas**:
-- `research/exports/deep_analysis/DEEP_ANALYSIS_REPORT.md` - Relatório completo
-- `research/exports/deep_analysis/enriched_papers_cache.json` - Cache de APIs
-- `research/exports/deep_analysis/analyses_summary.json` - Dados estruturados
-
-**Recursos**:
-- ✅ TL;DR automático via Semantic Scholar
-- ✅ Análise de citações e referências
-- ✅ Tendências temporais (2015-2025)
-- ✅ Ranking de técnicas computacionais
-
-#### 5. Exportação BibTeX (NOVO ✨)
 Gera referências bibliográficas formatadas para LaTeX:
 
 ```bash
-# Apenas papers incluídos (16)
+# Apenas papers incluídos
 python -m research.src.cli export-bibtex --included-only
 
 # Todos os papers do banco
@@ -126,11 +109,13 @@ python -m research.src.cli export-bibtex
 ```
 
 **Saídas**:
+
 - `research/exports/references/included_papers.bib` - Papers incluídos (16)
 - `research/exports/references/high_relevance.bib` - Score ≥ 7.0
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
 **Uso em LaTeX**:
+
 ```latex
 \bibliography{included_papers}
 \bibliographystyle{abntex2-num}
@@ -162,7 +147,7 @@ Para detalhes sobre metodologia PRISMA e arquitetura do pipeline, consulte:
 
 - **`research/src/cli.py`**: Interface CLI oficial para todas operações do pipeline
   - Uso: `python -m research.src.cli [comando] [opções]`
-  - Comandos: `collect`, `filter`, `export`, `stats`, `audit`
+  - Comandos principais: `init-db`, `run-pipeline`, `stats`, `export`, `export-bibtex`, `normalize-prisma`, `audit`, `validate-exports`
 - **`research/src/pipeline/`**: Módulos do pipeline de revisão sistemática
 - **`research/src/database/`**: Gerenciamento de banco SQLite
 - **`research/tests/`**: Testes automatizados (pytest)
@@ -173,20 +158,20 @@ Para detalhes sobre metodologia PRISMA e arquitetura do pipeline, consulte:
 
 ### Fase 1: Revisão Sistemática ✅ COMPLETA
 
-**Resultados PRISMA (atualizado em 16/11/2025)**:
+**Resultados PRISMA (atualizado em 25/11/2025)**:
 
-- 📚 **Identificação**: 6.516 registros únicos (108 queries bilíngues × 4 APIs)
-- 🔍 **Triagem (Screening)**: 4.665 avaliados (excluídos na triagem: 1.851 / 28,4%)
-- 📖 **Elegibilidade**: 1.835 avaliados em profundidade (excluídos na elegibilidade: 1.819 / 99,1%)
-- ✅ **Incluídos**: 16 estudos (relevance_score ≥4.0)
-- 📊 **Taxa de inclusão final**: ~0,25% do total identificado
+- 📚 **Identificação**: 9.431 registros coletados (72 queries bilíngües × 4 APIs)
+- 🔍 **Triagem (Screening)**: 6.937 estudos únicos avaliados (duplicatas removidas: 2.494 / 26,4%)
+- 📖 **Elegibilidade**: 1.883 avaliados em profundidade (excluídos na elegibilidade: 1.866 / 99,1%)
+- ✅ **Incluídos**: 17 estudos (relevance_score ≥4.0)
+- 📊 **Taxa de inclusão final**: ~0,18% do total identificado
 
 ### Próximos Passos
 
 - [x] Completar protocolo de revisão sistemática
 - [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
-- [x] Realizar busca nas bases de dados (108 queries bilíngues × 4 APIs)
-- [x] Analisar e categorizar os artigos encontrados (16 incluídos)
+- [x] Realizar busca nas bases de dados (72 queries bilíngües × 4 APIs)
+- [x] Analisar e categorizar os artigos encontrados (17 incluídos)
 - [x] Gerar relatórios e visualizações PRISMA
 - [ ] Desenvolver cronograma detalhado da Fase 2 (protótipo)
 - [ ] Finalizar documentação acadêmica (LaTeX)

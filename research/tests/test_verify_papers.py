@@ -1,10 +1,12 @@
-import os
+from pathlib import Path
+
 import pandas as pd
 import pytest
 
 
-CSV_PATH = os.path.join("research", "exports", "analysis", "papers.csv")
-REFINED_INCLUDED = os.path.join("tools", "verify_papers_included_refined.csv")
+BASE_DIR = Path(__file__).resolve().parents[1]
+CSV_PATH = BASE_DIR / "exports" / "analysis" / "papers.csv"
+REFINED_INCLUDED = Path(__file__).resolve().parents[2] / "tools" / "verify_papers_included_refined.csv"
 
 
 def _load_included(df: pd.DataFrame) -> pd.DataFrame:
@@ -18,7 +20,7 @@ def _load_included(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def test_included_have_abstracts_and_refined_report():
-    assert os.path.exists(CSV_PATH), f"Missing CSV at {CSV_PATH}"
+    assert CSV_PATH.exists(), f"Missing CSV at {CSV_PATH}"
     df = pd.read_csv(CSV_PATH, dtype=str)
     inc = _load_included(df)
     assert len(inc) > 0, "No included rows found in CSV"
@@ -30,7 +32,7 @@ def test_included_have_abstracts_and_refined_report():
     # If refined included report exists, ensure it is consistent with exported included rows.
     # The refined report may be generated from the DB; we check if export is a subset of refined.
     # NOTE: Refined report may be outdated - warn instead of failing hard.
-    if os.path.exists(REFINED_INCLUDED):
+    if REFINED_INCLUDED.exists():
         rdf = pd.read_csv(REFINED_INCLUDED, dtype=str)
         # Prefer DOI-based matching when available
         if 'doi' in rdf.columns and 'doi' in inc.columns:

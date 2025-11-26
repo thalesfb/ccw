@@ -320,6 +320,30 @@ class CrossrefClient(BaseAPIClient):
         
         return None
 
+    # === PDF LINK RESOLUTION ===
+    def get_pdf_link(self, doi: str) -> Optional[str]:
+        """Tenta obter um link direto de PDF para um DOI via Crossref.
+
+        Busca o registro do DOI e inspeciona a chave 'link' procurando
+        entradas com content-type 'application/pdf'. Retorna a primeira encontrada.
+        """
+        if not doi:
+            return None
+        try:
+            record = self.works.doi(doi)
+            if not record or not isinstance(record, dict):
+                return None
+            links = record.get("link", []) or []
+            for link in links:
+                if link.get("content-type") == "application/pdf" and link.get("URL"):
+                    pdf_url = link["URL"].strip()
+                    logger.info(f"📥 Crossref forneceu link de PDF para DOI {doi}: {pdf_url}")
+                    return pdf_url
+        except Exception as e:
+            logger.debug(f"Crossref get_pdf_link falhou para {doi}: {e}")
+            return None
+        return None
+
 
 def search_crossref(query: str, config, limit: int = 100) -> pd.DataFrame:
     """Função conveniente para buscar no Crossref.
