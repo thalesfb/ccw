@@ -42,7 +42,7 @@ Mapear e analisar sistematicamente as aplicações de técnicas computacionais �
 │   ├── references/     # BibTeX academic references
 │   ├── papers/         # Downloaded PDFs
 │   ├── cache/          # API response cache (SQLite)
-│   ├── exports/        # Analysis results (CSV, JSON, HTML) [gitignored]
+│   ├── exports/        # Analysis results (CSV, JSON, HTML)
 │   └── logs/           # Execution logs [gitignored]
 ├── src/                # Phase 2: Main product (competency diagnosis tool - future)
 ├── results/            # Phase 1 e 2: PTC e TCC artifacts (LaTeX, validation reports)
@@ -56,7 +56,7 @@ O módulo `research/` implementa a revisão sistemática automatizada seguindo P
 
 ### Configuração Inicial
 
-1. Instalar dependências:
+#### Instalar dependências
 
 ```bash
 cd research
@@ -65,7 +65,7 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-2. Inicializar banco de dados:
+#### Inicializar banco de dados:
 
 ```bash
 python -m research.src.cli init-db
@@ -74,6 +74,7 @@ python -m research.src.cli init-db
 ### Comandos Disponíveis
 
 #### 1. Pipeline Completo
+
 Executa revisão sistemática completa (busca → screening → seleção):
 
 ```bash
@@ -81,6 +82,7 @@ python -m research.src.cli run-pipeline --min-score 4.0
 ```
 
 #### 2. Estatísticas
+
 Visualiza métricas do banco de dados:
 
 ```bash
@@ -88,6 +90,7 @@ python -m research.src.cli stats
 ```
 
 #### 3. Exportação Padrão
+
 Gera relatórios HTML, CSV, JSON e visualizações:
 
 ```bash
@@ -95,6 +98,7 @@ python -m research.src.cli export
 ```
 
 **Saídas**:
+
 - `research/exports/analysis/papers.csv` - Dados tabulares
 - `research/exports/reports/summary_report.html` - Relatório visual
 - `research/exports/visualizations/*.png` - Gráficos PRISMA
@@ -135,13 +139,6 @@ pytest research/tests/test_complete_pipeline.py
 pytest research/tests/test_performance_benchmark.py
 ```
 
-Para detalhes sobre metodologia PRISMA e arquitetura do pipeline, consulte:
-
-- `research/README.md` - Guia de uso detalhado
-- `research/docs/METODOLOGIA.md` - Implementação PRISMA
-- `research/docs/FUNDAMENTACAO_TEORICA.md` - Base teórica
-- `docs/CONSTITUTION.md` - Governança do projeto
-
 ---
 
 ## 🛠️ Scripts do Repositório
@@ -174,11 +171,13 @@ Para detalhes sobre metodologia PRISMA e arquitetura do pipeline, consulte:
 | 📊 **Taxa de Inclusão Final** | ~0,18% | Do total identificado |
 
 **Métricas Adicionais:**
-- 🎯 **Pontuação média de relevância:** 4.2 (escala 0-5)
+
+- 🎯 **Pontuação média de relevância:** 4,2 (intervalo: 4,0–4,5)
 - ⚡ **Cache hit rate:** ~92%
-- 📅 **Período coberto:** 2017–2026 (10 anos)
+- 📅 **Período coberto:** 2015–2025 (10 anos)
 
 **Síntese Temática dos Estudos Incluídos:**
+
 - **Abordagens Técnicas:** ML Supervisionado (76,5%), Deep Learning (11,8%), Sistemas Híbridos (5,9%), Redes Bayesianas (5,9%)
 - **Finalidades Pedagógicas:** Predição (52,9%), Personalização (17,6%), Diagnóstico (11,8%), Recomendação (11,8%), Modelagem (5,9%)
 - **Termos Frequentes:** Machine Learning (58,8%), Assessment (52,9%), Predictive Analytics (47,1%), Adaptive Learning (35,3%)
