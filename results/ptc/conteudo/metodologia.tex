@@ -157,13 +157,13 @@ Avaliação dos estudos mediante sistema de pontuação (\textit{scoring}) multi
     \item \textbf{Impacto e Acesso} (0--2 pontos): Disponibilidade de DOI, acesso aberto, número de citações.
 \end{enumerate}
 
-A pontuação total varia de 0 a 10. O \textit{threshold} de inclusão foi definido em $\text{relevance\_score} \geq 4.0$, garantindo seleção rigorosa de estudos com aderência temática e metodológica adequadas.
+A pontuação total varia de 0 a 10. O limiar de inclusão foi definido como pontuação de relevância maior ou igual a 4,0, garantindo seleção rigorosa de estudos com aderência temática e metodológica adequadas.
 
-Nesta etapa foram excluídos \textbf{1.866 registros} (99,1\% dos 1.883 estudos avaliados), refletindo o rigor dos critérios de seleção baseados no \textit{score} de relevância.
+Nesta etapa foram excluídos \textbf{1.866 registros} (99,1\% dos 1.883 estudos avaliados), refletindo o rigor dos critérios de seleção baseados na pontuação de relevância.
 
 \subsection{Inclusão}
 
-Após aplicação do \textit{threshold}, foram incluídos \textbf{17 estudos} para síntese qualitativa, representando uma taxa de inclusão de aproximadamente \textbf{0,18\%} em relação ao total identificado (17/9.431).
+Após aplicação do limiar de relevância, foram incluídos \textbf{17 estudos} para síntese qualitativa, representando uma taxa de inclusão de aproximadamente \textbf{0,18\%} em relação ao total identificado (17/9.431).
 
 \section{Deduplicação}
 
@@ -206,6 +206,6 @@ python -m research.src.cli stats
 python -m research.src.cli export
 \end{verbatim}
 
-Todos os parâmetros de configuração (thresholds, APIs, termos de busca) estão documentados e versionados no repositório Git do projeto.
+Todos os parâmetros de configuração (limiares, APIs, termos de busca) estão documentados e versionados no repositório Git do projeto.
 
 %--------- FIM METODOLOGIA ------------

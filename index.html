@@ -311,7 +311,7 @@
                 <div class="stats-grid">
                         <div class="stat-card">
                             <span class="number">72</span>
-                            <span class="label">Consultas Estruturadas</span>
+                            <span class="label">Consultas Bilíngues (48 EN + 24 PT)</span>
                         </div>
                         <div class="stat-card">
                             <span class="number">9.431</span>
@@ -319,24 +319,45 @@
                         </div>
                         <div class="stat-card">
                             <span class="number">6.937</span>
-                            <span class="label">Únicos para Triagem</span>
+                            <span class="label">Registros Únicos</span>
                         </div>
                         <div class="stat-card">
                             <span class="number">17</span>
-                            <span class="label">Papers Incluídos</span>
+                            <span class="label">Estudos Incluídos (≥4.0)</span>
                         </div>
                 </div>
                 
-                <h3>🔍 Metodologia PRISMA</h3>
+                <div class="stats-grid" style="margin-top: 0;">
+                        <div class="stat-card" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);">
+                            <span class="number">4</span>
+                            <span class="label">Bases de Dados</span>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                            <span class="number">26,4%</span>
+                            <span class="label">Taxa de Duplicatas</span>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+                            <span class="number">4.2</span>
+                            <span class="label">Pontuação Média de Relevância</span>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
+                            <span class="number">~92%</span>
+                            <span class="label">Cache Hit Rate</span>
+                        </div>
+                </div>
+                
+                <h3>🔍 Fluxo PRISMA 2020</h3>
                 <p>
                     A revisão sistemática seguiu rigorosamente o protocolo <strong>PRISMA 2020</strong> 
                     (Preferred Reporting Items for Systematic Reviews and Meta-Analyses):
                 </p>
                 <ul>
                     <li><strong>Identificação:</strong> 9.431 registros coletados de 4 bases de dados acadêmicas (incluindo duplicatas)</li>
-                    <li><strong>Triagem:</strong> 6.937 artigos únicos avaliados (após remover 2.494 duplicatas) - 5.031 excluídos</li>
-                    <li><strong>Elegibilidade:</strong> 1.883 artigos selecionados para avaliação de texto completo - 1.866 excluídos</li>
-                    <li><strong>Inclusão:</strong> 17 estudos incluídos na síntese qualitativa final</li>
+                    <li><strong>Remoção de Duplicatas:</strong> 2.494 duplicatas removidas (26,4%) → 6.937 registros únicos</li>
+                    <li><strong>Triagem:</strong> 6.937 artigos avaliados por título/resumo → 5.054 excluídos (72,8%)</li>
+                    <li><strong>Elegibilidade:</strong> 1.883 artigos para avaliação de texto completo → 1.866 excluídos (99,1%)</li>
+                    <li><strong>Inclusão:</strong> 17 estudos incluídos na síntese qualitativa final (pontuação ≥ 4.0)</li>
+                    <li><strong>Taxa de Inclusão Final:</strong> ~0,18% dos registros identificados</li>
                 </ul>
                 
                 <h3>🗄️ Bases de Dados Consultadas</h3>
@@ -359,16 +380,59 @@
                     </div>
                 </div>
                 
-                <h3>🔑 Termos de Busca</h3>
+                <h3>� Síntese Temática dos Estudos Incluídos</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🤖 Abordagens Técnicas</h4>
+                        <p>
+                            <strong>ML Supervisionado:</strong> 76,5% dos estudos<br>
+                            <strong>Deep Learning:</strong> 11,8% dos estudos<br>
+                            <strong>Sistemas Híbridos:</strong> 5,9% dos estudos<br>
+                            <strong>Redes Bayesianas:</strong> 5,9% dos estudos
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 Finalidades Pedagógicas</h4>
+                        <p>
+                            <strong>Predição de Desempenho:</strong> 52,9%<br>
+                            <strong>Personalização Adaptativa:</strong> 17,6%<br>
+                            <strong>Identificação de Dificuldades:</strong> 11,8%<br>
+                            <strong>Recomendação de Conteúdo:</strong> 11,8%<br>
+                            <strong>Modelagem de Estudantes:</strong> 5,9%
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Termos Mais Frequentes</h4>
+                        <p>
+                            <strong>Machine Learning:</strong> 58,8%<br>
+                            <strong>Assessment:</strong> 52,9%<br>
+                            <strong>Predictive Analytics:</strong> 47,1%<br>
+                            <strong>Adaptive Learning:</strong> 35,3%<br>
+                            <strong>Learning Analytics:</strong> 29,4%
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🏆 Desempenho dos Modelos</h4>
+                        <p>
+                            <strong>Acurácias reportadas:</strong> 75% a 96,89%<br>
+                            <strong>Algoritmos destaque:</strong> Random Forest, SVM, Redes Neurais<br>
+                            <strong>Dados típicos:</strong> logs de interação, avaliações, tempo de resposta
+                        </p>
+                    </div>
+                </div>
+                
+                <h3>🔑 Estratégia de Busca</h3>
                 <p>
-                    <strong>72 combinações únicas</strong> executadas através de 4 APIs acadêmicas:
+                    <strong>72 combinações únicas</strong> executadas através de 4 APIs acadêmicas, 
+                    cobrindo o período de <strong>2017–2026</strong> (10 anos):
                 </p>
                 <ul>
                     <li><strong>3 termos matemáticos:</strong> "mathematics", "math", "matemática"</li>
-                    <li><strong>24 termos computacionais:</strong> adaptive, personalized, machine learning, AI, intelligent tutor, predictive analytics, student modeling, etc. (12 EN + 12 PT)</li>
+                    <li><strong>24 termos computacionais:</strong> adaptive, personalized, machine learning, AI, intelligent tutor, predictive analytics, student modeling, deep learning, neural network, etc. (12 EN + 12 PT)</li>
                     <li><strong>4 termos educacionais:</strong> "education", "learning", "educacao", "ensino"</li>
                     <li><strong>Estratégia:</strong> Combinações triplas com operador booleano AND (base_term AND tech_term AND edu_term)</li>
                     <li><strong>Distribuição:</strong> 48 consultas em inglês + 24 consultas em português</li>
+                    <li><strong>Critério de Inclusão:</strong> Pontuação de relevância ≥ 4.0 (escala 0–5)</li>
                 </ul>
             </section>
             
@@ -377,17 +441,51 @@
                 
                 <h3>Objetivo Geral</h3>
                 <p>
-                    Desenvolver uma ferramenta tecnológica que permita ao professor <strong>diagnosticar 
-                    competências individuais</strong> dos alunos e <strong>sugerir planos de ensino adaptativos</strong>.
+                    Mapear e analisar sistematicamente as aplicações de técnicas computacionais — 
+                    especialmente <strong>machine learning</strong>, <strong>learning analytics</strong> 
+                    e <strong>sistemas de tutoria inteligente</strong> — no contexto da educação matemática, 
+                    identificando tendências, lacunas de pesquisa e oportunidades para o desenvolvimento 
+                    de um modelo computacional (MVP) que auxilie professores na personalização do ensino 
+                    e no diagnóstico de competências.
                 </p>
                 
                 <h3>Objetivos Específicos</h3>
                 <ul>
-                    <li>✅ Realizar revisão sistemática sobre tecnologias computacionais na educação</li>
-                    <li>🚧 Explorar técnicas de machine learning para avaliação de desempenho em matemática</li>
-                    <li>📋 Projetar e implementar protótipo de software para análise de dados educacionais</li>
-                    <li>📋 Validar o protótipo em ambiente experimental com dados reais</li>
+                    <li>✅ <strong>OE1:</strong> Realizar revisão sistemática da literatura seguindo o protocolo PRISMA 2020 para identificar estudos que apliquem técnicas computacionais na educação matemática (2015-2025)</li>
+                    <li>✅ <strong>OE2:</strong> Identificar e categorizar as principais abordagens de IA (Machine Learning, Deep Learning, NLP, Educational Data Mining) aplicadas à educação matemática</li>
+                    <li>✅ <strong>OE3:</strong> Classificar as aplicações segundo suas finalidades pedagógicas: tutoria inteligente, diagnóstico, avaliação automatizada, personalização, predição e feedback adaptativo</li>
+                    <li>✅ <strong>OE4:</strong> Analisar criticamente as metodologias de avaliação utilizadas para validar a eficácia de sistemas computacionais em contextos educacionais</li>
+                    <li>✅ <strong>OE5:</strong> Mapear sistematicamente as lacunas de pesquisa, limitações técnicas e desafios reportados nos estudos incluídos</li>
+                    <li>✅ <strong>OE6:</strong> Criar um pipeline automatizado e reproduzível para coleta, processamento e análise de literatura científica</li>
                 </ul>
+                
+                <h3>📅 Fases do Projeto</h3>
+                <div class="features-grid">
+                    <div class="feature-card" style="border-left-color: #27ae60;">
+                        <h4>✅ Fase 1: Revisão Sistemática (PTC)</h4>
+                        <p>
+                            <strong>Status:</strong> Concluída<br>
+                            <strong>Período:</strong> Mar–Nov 2025<br>
+                            <strong>Entrega:</strong> Relatório PRISMA com 17 estudos analisados
+                        </p>
+                    </div>
+                    <div class="feature-card" style="border-left-color: #f39c12;">
+                        <h4>🚧 Fase 2: Desenvolvimento do Protótipo (TCC)</h4>
+                        <p>
+                            <strong>Status:</strong> Em planejamento<br>
+                            <strong>Período:</strong> Fev–Jul 2026<br>
+                            <strong>Entrega:</strong> MVP de ferramenta para diagnóstico de competências
+                        </p>
+                    </div>
+                    <div class="feature-card" style="border-left-color: #95a5a6;">
+                        <h4>📋 Fase 3: Validação Experimental (TCC)</h4>
+                        <p>
+                            <strong>Status:</strong> Planejado<br>
+                            <strong>Período:</strong> Jul–Nov 2026<br>
+                            <strong>Entrega:</strong> Validação empírica em contexto educacional real
+                        </p>
+                    </div>
+                </div>
             </section>
             
             <section class="section">

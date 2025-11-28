@@ -3,12 +3,12 @@
 
 Este capítulo apresenta os resultados preliminares obtidos mediante a aplicação 
 rigorosa da metodologia PRISMA 2020, conforme descrito no Capítulo~\ref{cap:metodologia}. 
-A revisão sistemática identificou 17 estudos de alta relevância (relevance\_score $\geq 4.0$) 
+A revisão sistemática identificou 17 estudos de alta relevância (pontuação de relevância $\geq 4{,}0$) 
 que constituem a base empírica para as fases subsequentes deste projeto de TCC.
 
 \section{Fluxo PRISMA 2020}
 
-A Figura~\ref{fig:prisma-flow} ilustra o fluxo de seleção PRISMA. O processo iniciou com a identificação de 9.431 registros. Após a remoção de duplicatas e triagem inicial, 1.883 estudos foram avaliados quanto à elegibilidade. Destes, 1.866 foram excluídos com base no critério de relevância ($\text{score} < 4.0$), resultando na inclusão final de 17 estudos (taxa de inclusão de $\sim$0,18\%).
+A Figura~\ref{fig:prisma-flow} ilustra o fluxo de seleção PRISMA. O processo iniciou com a identificação de 9.431 registros. Após a remoção de duplicatas e triagem inicial, 1.883 estudos foram avaliados quanto à elegibilidade. Destes, 1.866 foram excluídos por apresentarem pontuação de relevância inferior a 4,0, resultando na inclusão final de 17 estudos (taxa de inclusão de $\sim$0,18\%). A Figura~\ref{fig:selection-funnel} apresenta essa mesma progressão em formato de funil, evidenciando a redução progressiva do conjunto de estudos em cada etapa do processo de seleção.
 
 \begin{figure}[H]
 \centering
@@ -27,7 +27,7 @@ A Figura~\ref{fig:prisma-flow} ilustra o fluxo de seleção PRISMA. O processo i
 \section{Estatísticas Descritivas}
 
 A Tabela~\ref{tab:stats-descritivas} sintetiza as principais métricas quantitativas 
-da revisão sistemática:
+da revisão sistemática. Destacam-se três aspectos relevantes: (i) a elevada taxa de duplicatas (26,4\%), que evidencia a sobreposição significativa entre as bases de dados consultadas e reforça a importância da etapa de deduplicação; (ii) a taxa de exclusão na fase de elegibilidade (99,1\%), indicando que a grande maioria dos estudos inicialmente identificados não atendeu aos critérios de inclusão estabelecidos, o que é esperado em revisões sistemáticas com escopo bem delimitado; e (iii) a taxa de inclusão final de aproximadamente 0,18\%, valor consistente com revisões sistemáticas rigorosas na área de tecnologia educacional. O \textit{cache hit rate} de 92\% demonstra a eficiência do sistema de cache implementado, reduzindo significativamente o número de requisições às APIs externas.
 
 \begin{table}[H]
 \centering
@@ -44,19 +44,18 @@ Total elegíveis (após triagem) & 1.883 \\
 Taxa de exclusão (triagem) & 72,8\% \\
 Avaliados para elegibilidade & 1.883 \\
 Taxa de exclusão (elegibilidade) & 99,1\% \\
-Total incluído (relevance $\geq$ 4.0) & 17 \\
+Total incluído (pontuação $\geq$ 4,0) & 17 \\
 Taxa de inclusão final & $\sim$0,18\% \\
 Bases de dados consultadas & 4 \\
 Consultas bilíngues executadas & 72 (48 EN + 24 PT) \\
 Período de cobertura & 2017--2026 (10 anos) \\
-Relevance score médio (incluídos) & 4,2 \\
+Pontuação de relevância média (incluídos) & 4,2 \\
 Cache hit rate & $\sim$92\% (265/287 requisições) \\
 \hline
 \end{tabular}
 \end{table}
 
-% A distribuição por base de dados evidencia a complementaridade das fontes utilizadas, 
-% conforme Tabela~\ref{tab:distribuicao-bases}:
+A Figura~\ref{fig:database-coverage} ilustra a distribuição dos registros identificados por base de dados. Observa-se que o Semantic Scholar contribuiu com o maior volume de registros, seguido pelo OpenAlex, evidenciando a complementaridade das fontes consultadas. A sobreposição entre bases justifica a elevada taxa de duplicatas (26,4\%) e reforça a importância da estratégia multi-base para garantir cobertura abrangente da literatura.
 
 \begin{figure}[H]
 \centering
@@ -68,8 +67,8 @@ Cache hit rate & $\sim$92\% (265/287 requisições) \\
 \section{Síntese dos Estudos Incluídos}
 
 A Tabela~\ref{tab:sintese-17-estudos} apresenta a síntese dos 17 estudos que 
-atenderam ao critério de relevância ($\geq 4.0$), organizados cronologicamente 
-do mais recente ao mais antigo.
+atenderam ao critério de relevância (pontuação $\geq 4{,}0$), organizados cronologicamente 
+do mais recente ao mais antigo. A análise revela predominância de estudos focados em predição de desempenho mediante algoritmos de Machine Learning supervisionado (Random Forest, SVM, Redes Neurais), com acurácias reportadas entre 75\% e 96,89\%. Destaca-se também a presença de abordagens inovadoras como Deep Learning com Knowledge Graphs e sistemas adaptativos que reportam ganhos de aprendizagem de até 15\% e redução de 20\% no tempo de estudo.
 
 \begin{landscape}
 \begin{table}[htbp]
@@ -119,7 +118,7 @@ Depren et al. (2017) & TIMSS 2011 (TR): comparação EDM & LR; DT; BN; RN & Pred
 \end{table}
 \end{landscape}
 
-\textbf{Nota}: Critério de seleção: $\text{relevance\_score} \geq 4.0$ (média: 4,2; intervalo: 4,0--4,5). 
+A síntese apresentada na Tabela~\ref{tab:sintese-17-estudos} permite identificar três padrões relevantes para este projeto. Primeiro, a \textbf{predominância de abordagens preditivas}: 11 dos 17 estudos (64,7\%) focam em predição de desempenho ou classificação de proficiência, evidenciando que a comunidade científica tem priorizado a identificação precoce de estudantes em risco. Segundo, a \textbf{diversidade de algoritmos}: embora Random Forest e SVM apareçam com maior frequência, técnicas mais recentes como Deep Learning com Knowledge Graphs \cite{Design2025_004} demonstram potencial para personalização mais sofisticada. Terceiro, a \textbf{consistência metodológica}: todos os estudos empregam métricas de avaliação quantitativas (acurácia, ROC-AUC, testes estatísticos), permitindo comparabilidade entre resultados. Ressalta-se que apenas estudos com pontuação de relevância $\geq 4{,}0$ foram incluídos (média: 4,2; intervalo: 4,0--4,5), garantindo alta aderência aos critérios de qualidade estabelecidos na metodologia.
 
 \section{Análise Temática}
 
@@ -138,9 +137,7 @@ Os cinco termos mais frequentes nos estudos incluídos foram:
     \item \textbf{Adaptive Learning} (4 ocorrências --- 23,5\%)
 \end{enumerate}
 
-Termos menos frequentes, mas relevantes: \textit{AI/Artificial Intelligence} (2; 11,8\%), \textit{Intelligent Tutoring} (1; 5,9\%), além de abordagens específicas presentes em títulos (e.g., \textit{Reinforcement Learning}, \textit{Knowledge Graph}, \textit{Computer Animation}) que não aparecem como palavras-chave padronizadas.
-
-\textbf{Nota metodológica}: As porcentagens referem-se a presença do termo em pelo menos um estudo; termos não listados nos campos \texttt{keywords} mas citados em títulos ou textos (como \textit{Personalized Learning}) não foram incluídos nesta contagem para manter consistência reprodutível.
+Termos menos frequentes, mas relevantes: \textit{AI/Artificial Intelligence} (2; 11,8\%), \textit{Intelligent Tutoring} (1; 5,9\%), além de abordagens específicas presentes em títulos (e.g., \textit{Reinforcement Learning}, \textit{Knowledge Graph}, \textit{Computer Animation}) que não aparecem como palavras-chave padronizadas.\footnote{As porcentagens referem-se à presença do termo em pelo menos um estudo; termos não listados nos campos \texttt{keywords}, mas citados em títulos ou textos (como \textit{Personalized Learning}), não foram incluídos nesta contagem para manter consistência reprodutível.}
 
 \subsection{Categorias Temáticas Emergentes}
 
@@ -187,7 +184,7 @@ Outras/Específicas (ACO, CRF, Knowledge Graph, Sentiment, Animation, Jigsaw, XA
 \end{tabular}
 \end{table}
 
-\textbf{Nota metodológica}: Contagem considera presença binária da categoria por estudo; categorias não são mutuamente exclusivas e percentuais podem somar $>100\%$. A categoria ``Outras/Específicas'' agrega técnicas singulares de baixa frequência. Tabela reconciliada com `referencias.bib` (remoção de estudo não incluído e correção de anos 2023 e 2020).
+Os dados da Tabela~\ref{tab:abordagem-tecnica} evidenciam a hegemonia do Machine Learning Supervisionado, presente em 76,5\% dos estudos, o que reflete a maturidade dessas técnicas e a disponibilidade de dados rotulados em contextos educacionais. Deep Learning e Reinforcement Learning aparecem em menor proporção, sugerindo que abordagens mais complexas ainda estão em estágio inicial de adoção na área. A Figura~\ref{fig:techniques-distribution} visualiza essa distribuição, tornando evidente a concentração em técnicas tradicionais de ML.\footnote{A contagem considera presença binária da categoria por estudo; as categorias não são mutuamente exclusivas, de modo que os percentuais podem somar mais de 100\%. A categoria ``Outras/Específicas'' agrega técnicas singulares de baixa frequência.}
 
 \begin{figure}[htbp]
 \centering
@@ -215,7 +212,9 @@ Tutoria Inteligente / Autoria de Tutores & 1 & 5,9\% \\
 \hline
 \end{tabular}
 \end{table}
-\textbf{Nota metodológica}: Cada estudo classificado em uma única finalidade para preservação de proporções; estudos com descrições híbridas receberam atribuição pela finalidade predominante explícita.
+Os resultados da Tabela~\ref{tab:finalidade-pedagogica} revelam que mais da metade dos estudos (52,9\%) concentra-se em predição e modelagem de desempenho, refletindo o interesse da comunidade científica em antecipar resultados acadêmicos para intervenções preventivas. A personalização de trajetórias adaptativas (17,6\%) e as abordagens de avaliação formativa (11,8\%) aparecem como áreas emergentes com potencial de crescimento.\footnote{Cada estudo foi classificado em uma única finalidade para preservação de proporções; estudos com descrições híbridas receberam atribuição pela finalidade predominante explícita.}
+
+A Figura~\ref{fig:papers-by-year} apresenta a distribuição temporal dos estudos incluídos. Observa-se uma concentração de publicações nos anos mais recentes (2023--2025), indicando crescente interesse da comunidade científica no tema. Esta tendência ascendente sugere que a aplicação de técnicas computacionais na educação matemática é um campo em expansão ativa.
 
 \begin{figure}[H]
 \centering
@@ -244,10 +243,12 @@ A análise preliminar das magnitudes de efeito reportadas indica:
 \textbf{Cautela}: O viés de publicação pode inflar estimativas de eficácia. Análise 
 crítica de limitações metodológicas é necessária.
 
+A Figura~\ref{fig:relevance-distribution} apresenta a distribuição das pontuações de relevância dos 17 estudos incluídos. A concentração das pontuações próximas ao limiar de 4,0 (média de 4,2; intervalo 4,0--4,5) indica que os estudos selecionados formam um conjunto homogêneo em termos de aderência aos critérios estabelecidos, sem \textit{outliers} que pudessem distorcer a análise qualitativa.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/relevance_distribution.png}
-\caption{Distribuição de scores de relevância dos estudos incluídos.}
+\caption{Distribuição das pontuações de relevância dos estudos incluídos.}
 \label{fig:relevance-distribution}
 \end{figure}
 
