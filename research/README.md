@@ -129,7 +129,7 @@ Elegibilidade → Inclusão.
 - **Duplicatas Removidas**: 2.494 (26,4%)
 - **Screening**: 6.937 estudos únicos avaliados
 - **Elegibilidade**: 1.883 avaliados em profundidade (excluídos na elegibilidade: 1.866 / 99,1%)
-- **Incluídos**: 17 estudos (relevance_score ≥4.0)
+- **Incluídos**: 17 estudos (pontuação de relevância ≥ 4,0)
 
 Todos os contadores oficiais são derivados em tempo de execução a partir
 do banco de dados canônico `research/systematic_review.db`.
@@ -267,7 +267,7 @@ files = pipeline.export_results()
 Cada paper incluído registra:
 
 - **Critérios atendidos**: year_range, language, math_focus, computational_techniques
-- **Score de relevância**: 0-10 (incluídos ≥4.0)
+- **Pontuação de relevância**: 0–10 (incluídos ≥ 4,0)
 - **Motivo de inclusão**: Lista de critérios que qualificaram o paper
 - **Fonte**: API de origem (semantic_scholar, openalex, crossref, core)
 - **Metadados completos**: título, abstract, autores, ano, DOI, etc.
@@ -402,7 +402,7 @@ CROSSREF_RATE_DELAY=4.0
 REVIEW_YEAR_MIN=2015
 REVIEW_YEAR_MAX=2025
 REVIEW_LANGUAGES=en,pt
-REVIEW_RELEVANCE_THRESHOLD=4.0
+REVIEW_RELEVANCE_THRESHOLD=4.0  # limiar de relevância
 ```
 
 ### Personalizar Termos de Busca
@@ -433,7 +433,7 @@ EDUCATIONAL_CONTEXTS_PT.append("novo_contexto")
 **Estratégia em 3 níveis**:
 
 1. DOI/URL idênticos (remoção direta)
-2. Similaridade TF-IDF de títulos (threshold 0.9)
+2. Similaridade TF-IDF de títulos (limiar 0,9)
 3. Preservação da melhor fonte (DOI > abstract completo)
 
 ### Scoring Multi-Critério

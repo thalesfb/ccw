@@ -44,7 +44,7 @@ Variáveis típicas (sem expor segredos):
 
 - APIs: `SEMANTIC_SCHOLAR_API_KEY` (opcional), `CORE_API_KEY` (opcional), `USER_EMAIL` (para identificação em APIs que exigem contato).
 - Rate limits (segundos): `SEMANTIC_SCHOLAR_RATE_DELAY`, `OPENALEX_RATE_DELAY`, `CROSSREF_RATE_DELAY`.
-- Critérios PRISMA: `REVIEW_YEAR_MIN`, `REVIEW_YEAR_MAX`, `REVIEW_LANGUAGES` (ex.: `en,pt`), `REVIEW_RELEVANCE_THRESHOLD`.
+- Critérios PRISMA: `REVIEW_YEAR_MIN`, `REVIEW_YEAR_MAX`, `REVIEW_LANGUAGES` (ex.: `en,pt`), `REVIEW_RELEVANCE_THRESHOLD` (limiar de relevância).
 
 Atenção: não versionar `.env` no repositório; usar `.env.example` como referência.
 
