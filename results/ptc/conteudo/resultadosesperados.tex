@@ -71,51 +71,42 @@ atenderam ao critério de relevância (pontuação $\geq 4{,}0$), organizados cr
 do mais recente ao mais antigo. A análise revela predominância de estudos focados em predição de desempenho mediante algoritmos de Machine Learning supervisionado (Random Forest, SVM, Redes Neurais), com acurácias reportadas entre 75\% e 96,89\%. Destaca-se também a presença de abordagens inovadoras como Deep Learning com Knowledge Graphs e sistemas adaptativos que reportam ganhos de aprendizagem de até 15\% e redução de 20\% no tempo de estudo.
 
 \begin{landscape}
-\begin{table}[htbp]
-\centering
-\caption{Síntese dos 17 estudos incluídos na revisão sistemática.}
-\label{tab:sintese-17-estudos}
 \scriptsize
-\begin{tabular}{p{2.2cm}p{3.5cm}p{2.5cm}p{2.5cm}p{1.8cm}p{4.5cm}}
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.03}
+\begin{longtable}{p{2.1cm}p{3.2cm}p{2.2cm}p{2.2cm}p{1.7cm}p{7.5cm}}
+\caption{Síntese dos 17 estudos incluídos na revisão sistemática.}\label{tab:sintese-17-estudos}\\
 \hline
 \textbf{Autores/Ano} & \textbf{Título} & \textbf{Abordagem IA} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Principais Resultados} \\
 \hline
+\endfirsthead
+\hline
+\textbf{Autores/Ano} & \textbf{Título} & \textbf{Abordagem IA} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Principais Resultados} \\
+\hline
+\endhead
+\hline
+\multicolumn{6}{r}{\textit{Continua na próxima página}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
 Tjahyadi (2025) & EDM para prever desempenho em Matemática (EF) & ML; Learning Analytics & Predição de desempenho & Performance; Statistical & SMOTERUSBoosted Trees com 75\% de acurácia \\
-\hline
 Zhang et al. (2025) & Caminhos personalizados com DL & DL; RL; Knowledge Graph; Sentiment & Personalização de aprendizagem & User feedback & +15\% efeito de aprendizagem; $-$20\% tempo; satisfação 4,2/5 \\
-\hline
 Nyantah et al. (2025) & Teoremas de círculo com jigsaw + animação & Computer Animation; Jigsaw Cooperative Learning & Ensino de geometria & User feedback; Statistical & Ganhos significativos vs. ensino tradicional ($p<0.05$) \\
-\hline
 Milićević et al. (2024) & Métodos de ML como apoio ao ensino & ML; Learning Analytics; Predictive Analytics & Predição / apoio ao ensino & Performance; Statistical & Heurísticas de classificação para sucesso matemático \\
-\hline
 Zhang (2023) & Ensino inteligente em Matemática Superior & ACO+CNN; semi-superv. CRF & Personalização/Ensino & User feedback; Statistical & Pós-teste +9,317 ($p<0.05$); ganhos vs. controle \\
-\hline
 Jose et al. (2024) & Sistemas adaptativos K-12 & Adaptive Learning & Personalização & User feedback; Statistical; Qualitativa & Ganhos de aprendizagem e engajamento \\
-\hline
 Appiah-Odame (2024) & Avaliação autêntica em matemática & --- & Avaliação/autenticidade & User feedback; Qualitativa & Motivação/eficácia; barreiras: tempo, recursos \\
-\hline
 Mertasari et al. (2023) & Performance assessment e metacognição & --- & Avaliação formativa & User feedback; Statistical & Ganhos metacognitivos: performance > ensaio > múltipla escolha \\
-\hline
 Hasib et al. (2022) & Previsão no secundário com XAI & SVM; K-Means SMOTE; LIME & Predição explicável & Performance; Statistical & SVM 96,89\% acurácia; explicações LIME por classe \\
-\hline
 Kumar et al. (2022) & Seleção de atributos e DM & Learning Analytics; ML & Predição de notas & Performance & DT/JRip/NB/MLP/RF com acurácia razoável \\
-\hline
 Pejic et al. (2021) & PISA: proficiência matemática (3 níveis) & ML & Predição de proficiência & Performance & RNAs e Random Forest previram níveis; métricas Kappa e ROC-AUC \\
-\hline
 Ünal (2020) & DM para previsão de notas & DT; RF; NB & Predição & Experimental & Efetividade demonstrada em dois datasets \\
-\hline
 Salas-Rueda (2021) & Facebook + ML em finanças & Regressão; DT; RN & Apoio ao ensino/aprendizagem & Statistical & Mensagens, vídeos e exercícios correlacionados a ganhos \\
-\hline
 Sokkhey et al. (2020) & Previsão no EM (Camboja) & ML (RF) & Predição & Performance; Statistical & Random Forest maior acurácia e menor MSE \\
-\hline
 Uskov et al. (2019) & Analytics preditiva em STEM & LR; RF; SVM; ANN etc. & Predição & Performance; Statistical & Benchmark de 8 algoritmos; recomendações de uso em sala \\
-\hline
 MacLellan (2017) & Modelos computacionais para tutores & Modelos de aprendiz (DT; TRESTLE) & Tutoria/Autoria de tutores & Statistical & TRESTLE ajustou-se melhor aos dados humanos \\
-\hline
 Depren et al. (2017) & TIMSS 2011 (TR): comparação EDM & LR; DT; BN; RN & Predição/classificação & User feedback; Statistical & Regressão logística superior; confiança do aluno fator saliente \\
-\hline
-\end{tabular}
-\end{table}
+\end{longtable}
 \end{landscape}
 
 A síntese apresentada na Tabela~\ref{tab:sintese-17-estudos} permite identificar três padrões relevantes para este projeto. Primeiro, a \textbf{predominância de abordagens preditivas}: 11 dos 17 estudos (64,7\%) focam em predição de desempenho ou classificação de proficiência, evidenciando que a comunidade científica tem priorizado a identificação precoce de estudantes em risco. Segundo, a \textbf{diversidade de algoritmos}: embora Random Forest e SVM apareçam com maior frequência, técnicas mais recentes como Deep Learning com Knowledge Graphs \cite{Design2025_004} demonstram potencial para personalização mais sofisticada. Terceiro, a \textbf{consistência metodológica}: todos os estudos empregam métricas de avaliação quantitativas (acurácia, ROC-AUC, testes estatísticos), permitindo comparabilidade entre resultados. Ressalta-se que apenas estudos com pontuação de relevância $\geq 4{,}0$ foram incluídos (média: 4,2; intervalo: 4,0--4,5), garantindo alta aderência aos critérios de qualidade estabelecidos na metodologia.
@@ -179,10 +170,11 @@ Deep Learning (CNN/DL) & 2 & 11,8\% \\
 Reinforcement Learning & 1 & 5,9\% \\
 Adaptive Learning & 1 & 5,9\% \\
 Modelagem de Conhecimento/Tutores (Aprendiz) & 1 & 5,9\% \\
-Outras/Específicas (ACO, CRF, Knowledge Graph, Sentiment, Animation, Jigsaw, XAI) & 6 & 35,3\% \\
+Outras/Específicas\footnotemark & 6 & 35,3\% \\
 \hline
 \end{tabular}
 \end{table}
+\footnotetext{ACO, CRF, Knowledge Graph, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, XAI (inclui LIME).}
 
 Os dados da Tabela~\ref{tab:abordagem-tecnica} evidenciam a hegemonia do Machine Learning Supervisionado, presente em 76,5\% dos estudos, o que reflete a maturidade dessas técnicas e a disponibilidade de dados rotulados em contextos educacionais. Deep Learning e Reinforcement Learning aparecem em menor proporção, sugerindo que abordagens mais complexas ainda estão em estágio inicial de adoção na área. A Figura~\ref{fig:techniques-distribution} visualiza essa distribuição, tornando evidente a concentração em técnicas tradicionais de ML.\footnote{A contagem considera presença binária da categoria por estudo; as categorias não são mutuamente exclusivas, de modo que os percentuais podem somar mais de 100\%. A categoria ``Outras/Específicas'' agrega técnicas singulares de baixa frequência.}
 
@@ -240,8 +232,7 @@ A análise preliminar das magnitudes de efeito reportadas indica:
     \item \textbf{Não especificado}: $\sim$6\% dos estudos
 \end{itemize}
 
-\textbf{Cautela}: O viés de publicação pode inflar estimativas de eficácia. Análise 
-crítica de limitações metodológicas é necessária.
+O possível viés de publicação pode superestimar as estimativas de eficácia; portanto, é necessária análise crítica das limitações metodológicas dos estudos.
 
 A Figura~\ref{fig:relevance-distribution} apresenta a distribuição das pontuações de relevância dos 17 estudos incluídos. A concentração das pontuações próximas ao limiar de 4,0 (média de 4,2; intervalo 4,0--4,5) indica que os estudos selecionados formam um conjunto homogêneo em termos de aderência aos critérios estabelecidos, sem \textit{outliers} que pudessem distorcer a análise qualitativa.
 
