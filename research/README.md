@@ -500,7 +500,7 @@ python -m research.src.cli run-pipeline
 - **Tempo de execução**: 30-60 minutos (108 queries × 4 APIs)
 - **Taxa de deduplicação**: ~40% (DOI+similaridade)
 - **Taxa de inclusão final**: ~0,25% (16 de 6.516)
-- **Cobertura temporal**: 2017-2026 (10 anos completos)
+- **Cobertura temporal**: 2015-2025 (11 anos)
 - **Cache hit rate**: ~63% (268 hits / 425 entradas)
 
 ### Qualidade dos Dados

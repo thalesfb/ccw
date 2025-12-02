@@ -196,3 +196,16 @@ research/*.sqlite
 brainstorm.txt
 *_backup.*
 *.tmp
+
+*.aux
+*.log
+*.acn
+*.bbl
+*.blg
+*.brf
+*.glsdefs
+*.idx
+*.ist
+*.lof
+*.lot
+*.toc
