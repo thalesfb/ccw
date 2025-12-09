@@ -174,7 +174,7 @@ pytest research/tests/test_performance_benchmark.py
 
 - 🎯 **Pontuação média de relevância:** 4,2 (intervalo: 4,0–4,5)
 - ⚡ **Cache hit rate:** ~92%
-- 📅 **Período coberto:** 2015–2025 (10 anos)
+- 📅 **Período coberto:** 2015–2025 (11 anos)
 
 **Síntese Temática dos Estudos Incluídos:**
 
