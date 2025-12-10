@@ -6,6 +6,8 @@
 
 Este repositório contém o desenvolvimento de uma ferramenta tecnológica para auxiliar professores de matemática no ensino personalizado, através da identificação automatizada das competências individuais dos alunos.
 
+![Raio-X da Inteligência Artificial na Educação Matemática](results/ptc/presentation/ensino_personalizado_de_matematica.jpeg)
+
 ### Tema
 
 Ensino personalizado de matemática através da identificação automatizada das competências individuais dos alunos usando técnicas computacionais.
