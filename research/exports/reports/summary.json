@@ -1,14 +1,14 @@
 {
   "title": "Relatório da Revisão Sistemática",
-  "subtitle": "Técnicas Computacionais na Educação Matemática",
-  "generated_at": "25/11/2025 02:30",
+  "subtitle": "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais",
+  "generated_at": "09/12/2025 23:08",
   "statistics": {
     "total_papers": 9431,
     "prisma": {
       "raw_rows": 6914,
       "distinct_doi": 6411,
       "identification": 9431,
-      "duplicates_removed": 2494,
+      "duplicates_removed": 2517,
       "screening": 6914,
       "screening_excluded": 5031,
       "eligibility": 1883,
@@ -25,7 +25,7 @@
     "integrity": {
       "raw_rows": 6914,
       "distinct_doi": 6411,
-      "duplicates_removed": 2494,
+      "duplicates_removed": 2517,
       "included_unique": 17
     },
     "years": {
@@ -84,16 +84,7 @@
       "Excluídos na Elegibilidade": 1866
     }
   },
-  "config": {
-    "year_range": "2015-2025",
-    "languages": [
-      "en",
-      "pt"
-    ],
-    "abstract_required": false,
-    "relevance_threshold": 4.0,
-    "cleanup_analysis": false
-  },
+  "config": {},
   "included_list": [
     {
       "title": "The Implementation of Educational Data Mining in Predicting Students’ Academic Achievement in Mathematics at a Private Elementary School",

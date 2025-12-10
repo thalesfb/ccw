@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Automatiza a compilação multi-pass do documento LaTeX PTC.
 
 Contexto: No PTC não há capítulo de conclusão. O script NÃO cria mais placeholder

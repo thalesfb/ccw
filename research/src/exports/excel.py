@@ -443,28 +443,7 @@ def _compute_prisma_stats_from_df(
     stats['raw_rows'] = raw_rows
     stats['distinct_doi'] = distinct_count
     
-    # PRISMA 2020: Identification deve ser o total ORIGINAL coletado (antes de dedup)
-    # Buscar do histórico da tabela searches
-    historical_initial, historical_removed = _get_historical_dedup_stats()
-    
-    if historical_initial > 0:
-        # Usar dados históricos reais
-        stats['identification'] = historical_initial
-        stats['duplicates_removed'] = historical_removed
-        logger.info(
-            f"PRISMA usando histórico: identification={historical_initial}, "
-            f"duplicates_removed={historical_removed}"
-        )
-    else:
-        # Fallback: usar dados do DataFrame (menos preciso)
-        stats['identification'] = raw_rows
-        stats['duplicates_removed'] = 0
-        logger.warning(
-            "Histórico de dedup não encontrado - usando contagem atual do DataFrame. "
-            "PRISMA identification pode estar subestimado."
-        )
-
-    # Subconjunto único para cálculos de estágios
+    # Subconjunto único para cálculos de estágios (define antes de usar)
     if unique_subset is not None:
         unique_df = unique_subset.copy()
     elif 'is_duplicate' in df.columns:
@@ -473,7 +452,41 @@ def _compute_prisma_stats_from_df(
     else:
         unique_df = df.copy()
 
-    stats['screening'] = int(len(unique_df))  # Registros únicos disponíveis para triagem
+    # PRISMA 2020: Identification deve ser o total ORIGINAL coletado (antes de dedup)
+    # Buscar do histórico da tabela searches
+    historical_initial, historical_removed = _get_historical_dedup_stats()
+
+    # Contagem única efetiva após deduplicação
+    screening_count = int(len(unique_df))
+
+    if historical_initial > 0:
+        stats['identification'] = historical_initial
+
+        computed_removed = max(0, historical_initial - screening_count)
+        stats['duplicates_removed'] = computed_removed
+
+        # Se o valor histórico não bate com o cálculo atual, registrar divergência
+        if historical_removed and historical_removed != computed_removed:
+            delta = computed_removed - historical_removed
+            logger.warning(
+                "PRISMA: divergência entre histórico e banco atual. "
+                f"historical_removed={historical_removed}, computed_removed={computed_removed}, delta={delta}"
+            )
+        else:
+            logger.info(
+                f"PRISMA usando histórico: identification={historical_initial}, "
+                f"duplicates_removed={computed_removed}"
+            )
+    else:
+        # Fallback: usar contagem atual garantindo coerência com screening
+        stats['identification'] = raw_rows
+        stats['duplicates_removed'] = max(0, stats['identification'] - screening_count)
+        logger.warning(
+            "Histórico de dedup não encontrado - usando contagem atual do DataFrame. "
+            "PRISMA identification pode estar subestimado."
+        )
+
+    stats['screening'] = screening_count  # Registros únicos disponíveis para triagem
 
     # Cálculo baseado em selection_stage APENAS sobre registros únicos
     if not unique_df.empty and 'selection_stage' in unique_df.columns:

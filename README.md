@@ -117,7 +117,7 @@ python -m research.src.cli export-bibtex
 
 **Saídas**:
 
-- `research/exports/references/included_papers.bib` - Papers incluídos (16)
+- `research/exports/references/included_papers.bib` - Papers incluídos (17)
 - `research/exports/references/high_relevance.bib` - Score ≥ 7.0
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
@@ -163,8 +163,8 @@ pytest research/tests/test_performance_benchmark.py
 | Etapa | Quantidade | Observação |
 |-------|------------|------------|
 | 📚 **Identificação** | 9.431 | 72 consultas bilíngues × 4 APIs |
-| 🔄 **Duplicatas Removidas** | 2.494 | 26,4% do total |
-| 🔍 **Triagem (Screening)** | 6.937 | Registros únicos avaliados |
+| 🔄 **Duplicatas Removidas** | 2.517 | 26,6% do total |
+| 🔍 **Triagem (Screening)** | 6.914 | Registros únicos avaliados |
 | 📖 **Elegibilidade** | 1.883 | Taxa de exclusão: 72,8% |
 | ❌ **Excluídos (Elegibilidade)** | 1.866 | Taxa de exclusão: 99,1% |
 | ✅ **Incluídos** | 17 | Pontuação ≥ 4.0 |

@@ -21,13 +21,25 @@ from .pipeline.run import SystematicReviewPipeline
 from .analysis.deep_review_analysis import DeepReviewAnalyzer
 from .exports.bibtex import export_bibtex_by_category
 from .cli_audit import list_suspects, bulk_exclude, load_dois_from_csv
-from .pipelines.validations import (
-    validate_exports_report,
-    check_exports_consistency,
-    verify_papers as vp_internal,
-    regenerate_summary_from_db,
-    diagnose_included as diag_internal,
-)
+# Módulo de validações pode ter sido removido; importar de forma resiliente
+try:
+    from .pipelines.validations import (
+        validate_exports_report,
+        check_exports_consistency,
+        verify_papers as vp_internal,
+        regenerate_summary_from_db,
+        diagnose_included as diag_internal,
+    )
+except Exception as import_err:  # pragma: no cover - proteção em runtime
+    logger = logging.getLogger(__name__)
+    logger.warning(
+        "Modulo pipelines.validations ausente: algumas operações de auditoria estarão indisponíveis."
+    )
+    validate_exports_report = None
+    check_exports_consistency = None
+    vp_internal = None
+    regenerate_summary_from_db = None
+    diag_internal = None
 
 # Import cross-audit functionality
 import importlib.util
@@ -473,6 +485,9 @@ def _repo_root() -> Path:
 
 def cmd_diagnose_included(ns: argparse.Namespace) -> None:
     """Diagnostica por que um paper foi incluído (usa o módulo interno)."""
+    if diag_internal is None:
+        print("❌ Modulo pipelines.validations ausente; restaure-o para usar diagnose-included")
+        return
     if not getattr(ns, 'title', None):
         print("❌ Informe --title para diagnosticar um paper")
         return
@@ -496,6 +511,9 @@ def cmd_diagnose_included(ns: argparse.Namespace) -> None:
 
 def cmd_validate_exports(_: argparse.Namespace) -> None:
     """Valida DB ↔ CSV ↔ summary.json usando módulo interno e grava JSON."""
+    if validate_exports_report is None:
+        print("❌ Modulo pipelines.validations ausente; restaure-o para usar validate-exports")
+        return
     print("🔎 Validando exports (DB ↔ CSV ↔ summary.json)…")
     try:
         data = validate_exports_report()
@@ -524,6 +542,9 @@ def cmd_validate_exports(_: argparse.Namespace) -> None:
 
 def cmd_check_exports(_: argparse.Namespace) -> None:
     """Checa consistência de exports usando o módulo interno (inclui HTML)."""
+    if check_exports_consistency is None:
+        print("❌ Modulo pipelines.validations ausente; restaure-o para usar check-exports")
+        return
     print("🧮 Checando consistência de exports (inclui HTML reports)…")
     try:
         out_path, content = check_exports_consistency()
@@ -535,6 +556,9 @@ def cmd_check_exports(_: argparse.Namespace) -> None:
 
 def cmd_verify_papers(ns: argparse.Namespace) -> None:
     """Checagens de qualidade do CSV de papers usando o módulo interno."""
+    if vp_internal is None:
+        print("❌ Modulo pipelines.validations ausente; restaure-o para usar verify-papers")
+        return
     csv_path = Path(ns.csv) if getattr(ns, 'csv', None) else _repo_root() / "research" / "exports" / "analysis" / "papers.csv"
     out_path = Path(ns.out) if getattr(ns, 'out', None) else _repo_root() / "research" / "logs" / "verify_papers_report.csv"
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -558,6 +582,9 @@ def cmd_verify_papers(ns: argparse.Namespace) -> None:
 
 def cmd_regenerate_summary(_: argparse.Namespace) -> None:
     """Regenera summary.json a partir do DB canônico (módulo interno)."""
+    if regenerate_summary_from_db is None:
+        print("❌ Modulo pipelines.validations ausente; restaure-o para usar regenerate-summary")
+        return
     print("♻️  Regenerando summary.json a partir do DB…")
     try:
         out = regenerate_summary_from_db()

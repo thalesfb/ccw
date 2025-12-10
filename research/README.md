@@ -126,8 +126,8 @@ Elegibilidade → Inclusão.
 **Números atuais (25/11/2025)**:
 
 - **Identificação**: 9.431 registros coletados
-- **Duplicatas Removidas**: 2.494 (26,4%)
-- **Screening**: 6.937 estudos únicos avaliados
+- **Duplicatas Removidas**: 2.517 (26,6%)
+- **Screening**: 6.914 estudos únicos avaliados
 - **Elegibilidade**: 1.883 avaliados em profundidade (excluídos na elegibilidade: 1.866 / 99,1%)
 - **Incluídos**: 17 estudos (pontuação de relevância ≥ 4,0)
 
