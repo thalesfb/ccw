@@ -12,13 +12,21 @@ Entre os algoritmos supervisionados identificados na revisão, três apresentara
 
 \subsection{Random Forest como Algoritmo Primário}
 
-O algoritmo Random Forest foi selecionado como classificador primário do protótipo em razão de sua presença recorrente nos estudos com melhores resultados e maior consistência entre contextos educacionais distintos. Sokkhey et al. (2020) demonstraram que, entre múltiplos modelos avaliados para predição de desempenho em matemática no ensino médio cambojano, o Random Forest obteve a maior acurácia e o menor erro quadrático médio \cite{Multimodels2020_002}. Ünal (2020) confirmou a efetividade do Random Forest em dois conjuntos de dados educacionais independentes, evidenciando sua capacidade de generalização \cite{Data2020_011}. Uskov et al. (2019) incluíram o Random Forest em um \textit{benchmark} de oito algoritmos aplicados à educação STEM, no qual este se destacou entre os mais indicados para uso em sala de aula \cite{Machine2019_007}. Pejic et al. (2021), utilizando dados do PISA 2012, compararam redes neurais e Random Forest para predição de proficiência matemática em três níveis, obtendo resultados competitivos com ambos os modelos \cite{Math2021_001}. Kumar et al. (2022) igualmente empregaram Random Forest entre cinco algoritmos para predição de notas, reforçando sua aplicabilidade no domínio educacional \cite{Analysis2022_003}.
+O algoritmo Random Forest foi selecionado como classificador primário do protótipo em razão de sua presença recorrente nos estudos com melhores resultados e maior consistência entre contextos educacionais distintos.
+
+Sokkhey et al. (2020) demonstraram que, entre múltiplos modelos avaliados para predição de desempenho em matemática no ensino médio cambojano, o Random Forest obteve a maior acurácia e o menor erro quadrático médio \cite{Multimodels2020_002}. Ünal (2020) confirmou a efetividade do Random Forest em dois conjuntos de dados educacionais independentes, evidenciando sua capacidade de generalização \cite{Data2020_011}.
+
+Uskov et al. (2019) incluíram o Random Forest em um \textit{benchmark} de oito algoritmos aplicados à educação STEM, no qual este se destacou entre os mais indicados para uso em sala de aula \cite{Machine2019_007}. Pejic et al. (2021), utilizando dados do PISA 2012, compararam redes neurais e Random Forest para predição de proficiência matemática em três níveis, obtendo resultados competitivos com ambos os modelos \cite{Math2021_001}.
+
+Kumar et al. (2022) igualmente empregaram Random Forest entre cinco algoritmos para predição de notas, reforçando sua aplicabilidade no domínio educacional \cite{Analysis2022_003}.
 
 As características intrínsecas do Random Forest --- robustez a \textit{overfitting}, capacidade de lidar com dados heterogêneos, interpretabilidade por meio de importância de variáveis, e desempenho consistente sem necessidade extensiva de ajuste de hiperparâmetros --- alinharam-se aos requisitos do protótipo, que demandava um modelo confiável para operar com dados educacionais reais de diferentes origens.
 
 \subsection{SVM como Algoritmo Secundário}
 
-O Support Vector Machine (SVM) foi adotado como classificador secundário para fins de comparação e validação cruzada dos resultados. A escolha fundamentou-se no estudo de Hasib et al. (2022), que reportou a maior acurácia individual entre todos os 17 estudos analisados: 96,89\% na predição de desempenho de estudantes do ensino secundário, empregando SVM com balanceamento de classes via \textit{K-Means SMOTE} \cite{Machine2022_010}. Adicionalmente, Uskov et al. (2019) incluíram SVM em seu \textit{benchmark} comparativo, corroborando sua eficácia em contextos de educação STEM \cite{Machine2019_007}, e Depren et al. (2017) utilizaram variantes de modelos de classificação --- incluindo abordagens baseadas em margens --- na análise de dados do TIMSS 2011 \cite{Identifying2017_006}.
+O Support Vector Machine (SVM) foi adotado como classificador secundário para fins de comparação e validação cruzada dos resultados. A escolha fundamentou-se no estudo de Hasib et al. (2022), que reportou a maior acurácia individual entre todos os 17 estudos analisados: 96,89\% na predição de desempenho de estudantes do ensino secundário, empregando SVM com balanceamento de classes via \textit{K-Means SMOTE} \cite{Machine2022_010}.
+
+Adicionalmente, Uskov et al. (2019) incluíram SVM em seu \textit{benchmark} comparativo, corroborando sua eficácia em contextos de educação STEM \cite{Machine2019_007}, e Depren et al. (2017) utilizaram variantes de modelos de classificação --- incluindo abordagens baseadas em margens --- na análise de dados do TIMSS 2011 \cite{Identifying2017_006}.
 
 Embora o SVM tenha apresentado a maior acurácia pontual, sua maior sensibilidade a ajuste de hiperparâmetros e menor interpretabilidade nativa em comparação ao Random Forest justificaram sua adoção como algoritmo secundário, e não primário.
 
@@ -88,7 +96,9 @@ A seleção das fontes de dados seguiu dois critérios: disponibilidade pública
 
 \subsection{Microdados SAEB/INEP}
 
-A principal fonte de dados foram os microdados do Sistema de Avaliação da Educação Básica (SAEB), disponibilizados publicamente pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP) \cite{SAEB2021}. Esses dados incluem escores de proficiência em matemática, respostas por item e variáveis contextuais de alunos do 5\textsuperscript{o} e 9\textsuperscript{o} anos do Ensino Fundamental e da 3\textsuperscript{a} série do Ensino Médio. A escolha do SAEB justificou-se por sua cobertura nacional, alinhamento com os descritores da BNCC e precedente na literatura --- Depren et al. (2017) utilizaram dados de avaliação em larga escala (TIMSS) para tarefa análoga de classificação de desempenho \cite{Identifying2017_006}, e Pejic et al. (2021) empregaram microdados do PISA para predição de proficiência matemática \cite{Math2021_001}.
+A principal fonte de dados foram os microdados do Sistema de Avaliação da Educação Básica (SAEB), disponibilizados publicamente pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP) \cite{SAEB2021}. Esses dados incluem escores de proficiência em matemática, respostas por item e variáveis contextuais de alunos do 5\textsuperscript{o} e 9\textsuperscript{o} anos do Ensino Fundamental e da 3\textsuperscript{a} série do Ensino Médio.
+
+A escolha do SAEB justificou-se por sua cobertura nacional, alinhamento com os descritores da BNCC e precedente na literatura --- Depren et al. (2017) utilizaram dados de avaliação em larga escala (TIMSS) para tarefa análoga de classificação de desempenho \cite{Identifying2017_006}, e Pejic et al. (2021) empregaram microdados do PISA para predição de proficiência matemática \cite{Math2021_001}.
 
 \subsection{Microdados PISA}
 
@@ -107,7 +117,9 @@ A possibilidade de coleta de dados em escola parceira foi prevista como fonte co
 
 \subsection{Random Forest}
 
-O classificador Random Forest foi implementado utilizando a classe \texttt{RandomForestClassifier} da biblioteca scikit-learn, com os seguintes parâmetros definidos a partir da literatura: número de estimadores ($n=200$), profundidade máxima controlada para evitar \textit{overfitting}, e critério de divisão baseado em entropia. A validação cruzada estratificada com $k=10$ \textit{folds} foi adotada como procedimento padrão, em consonância com a prática observada em Sokkhey et al. (2020) \cite{Multimodels2020_002} e Ünal (2020) \cite{Data2020_011}. O Random Forest também forneceu nativamente a importância de cada \textit{feature} via \textit{Mean Decrease Impurity} (MDI), o que possibilitou a identificação dos descritores BNCC mais relevantes para cada predição.
+O classificador Random Forest foi implementado utilizando a classe \texttt{RandomForestClassifier} da biblioteca scikit-learn, com os seguintes parâmetros definidos a partir da literatura: número de estimadores ($n=200$), profundidade máxima controlada para evitar \textit{overfitting}, e critério de divisão baseado em entropia.
+
+A validação cruzada estratificada com $k=10$ \textit{folds} foi adotada como procedimento padrão, em consonância com a prática observada em Sokkhey et al. (2020) \cite{Multimodels2020_002} e Ünal (2020) \cite{Data2020_011}. O Random Forest também forneceu nativamente a importância de cada \textit{feature} via \textit{Mean Decrease Impurity} (MDI), o que possibilitou a identificação dos descritores BNCC mais relevantes para cada predição.
 
 \subsection{Support Vector Machine}
 
