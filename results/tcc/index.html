@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TCC - Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais">
+    <meta name="author" content="Thales Ferreira">
+    <title>TCC - Ensino Personalizado de Matemática</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f39c12;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .btn-secondary:hover {
+            background: #bdc3c7;
+            transform: translateY(-2px);
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+
+        .info-box h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .info-box p, .info-box ul {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-box ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        .info-box li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .pdf-viewer {
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 TCC — Trabalho de Conclusão de Curso</h1>
+            <p>Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</p>
+            <div>
+                <span class="badge">🚧 Em Andamento</span>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="info-box">
+                <h3>ℹ️ Sobre o Documento</h3>
+                <p>
+                    Este é o Trabalho de Conclusão de Curso completo, contendo a revisão sistemática
+                    da literatura (Fase 1 — concluída), o planejamento técnico do protótipo (Fase 2 — em projeto),
+                    e estrutura para resultados experimentais (Fase 3 — planejada).
+                    O documento possui 74 páginas e integra metodologia PRISMA 2020, avaliação MMAT 2018,
+                    e especificação técnica do protótipo de diagnóstico de competências em matemática.
+                </p>
+            </div>
+
+            <div class="actions">
+                <a href="main.pdf" class="btn btn-primary" download>
+                    📥 Baixar PDF
+                </a>
+                <a href="main.pdf" class="btn btn-primary" target="_blank">
+                    🔗 Abrir em Nova Aba
+                </a>
+                <a href="../../index.html" class="btn btn-secondary">
+                    🏠 Voltar ao Projeto
+                </a>
+                <a href="https://github.com/thalesfb/ccw" class="btn btn-secondary" target="_blank">
+                    💻 Ver no GitHub
+                </a>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <h2 style="color: #2c3e50; margin-bottom: 15px;">📖 Visualização do Documento</h2>
+            </div>
+
+            <iframe
+                src="main.pdf"
+                class="pdf-viewer"
+                title="TCC - Ensino Personalizado de Matemática"
+            ></iframe>
+
+            <div class="info-box" style="border-left-color: #27ae60;">
+                <h3>✅ Estrutura do Documento</h3>
+                <ul>
+                    <li><strong>✅ Cap 1:</strong> Introdução</li>
+                    <li><strong>✅ Cap 2:</strong> Fundamentação Teórica (ensino de matemática + IA)</li>
+                    <li><strong>✅ Cap 3:</strong> Metodologia (PRISMA 2020 + MMAT 2018)</li>
+                    <li><strong>✅ Cap 4:</strong> Revisão Sistemática da Literatura (17 estudos)</li>
+                    <li><strong>📋 Cap 5:</strong> Desenvolvimento do Protótipo (planejado — aguarda aprovação)</li>
+                    <li><strong>📋 Cap 6:</strong> Resultados e Discussão (aguarda Fase 2)</li>
+                    <li><strong>📋 Cap 7:</strong> Conclusão (aguarda Fase 3)</li>
+                    <li><strong>✅ Cap 8:</strong> Cronograma</li>
+                    <li><strong>✅ Apêndice A:</strong> Checklist PRISMA 2020 (27/27 itens)</li>
+                </ul>
+            </div>
+
+            <div class="info-box" style="border-left-color: #9b59b6;">
+                <h3>📊 Revisão Sistemática — Números-Chave</h3>
+                <ul>
+                    <li><strong>9.431</strong> publicações identificadas (4 bases de dados)</li>
+                    <li><strong>6.914</strong> registros únicos (duplicatas: 26,6%)</li>
+                    <li><strong>17</strong> estudos incluídos (pontuação ≥ 4.0)</li>
+                    <li><strong>MMAT média:</strong> 3.12/5 (qualidade metodológica)</li>
+                    <li><strong>ML supervisionado:</strong> 76,5% dos estudos</li>
+                    <li><strong>Predição de desempenho:</strong> 52,9% das finalidades</li>
+                    <li><strong>Período de cobertura:</strong> 2016–2025 (10 anos)</li>
+                </ul>
+            </div>
+
+            <div class="info-box" style="border-left-color: #e74c3c;">
+                <h3>✅ Informações do Projeto</h3>
+                <p>
+                    <strong>Instituição:</strong> Instituto Federal Catarinense — Campus Videira<br>
+                    <strong>Curso:</strong> Ciência da Computação (Bacharelado)<br>
+                    <strong>Orientador:</strong> Prof. Dr. Rafael Zanin<br>
+                    <strong>Coorientador:</strong> Prof. Dr. Manassés Ribeiro<br>
+                    <strong>Acadêmico:</strong> Thales Ferreira Batista<br>
+                    <strong>Status:</strong> Em andamento — Fase 2 (projeto técnico do protótipo)
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>TCC — Trabalho de Conclusão de Curso</strong></p>
+            <p>Instituto Federal Catarinense — Campus Videira</p>
+            <p>© 2026 Thales Ferreira | <a href="https://github.com/thalesfb/ccw">GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>
