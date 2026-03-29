@@ -72,7 +72,7 @@ A Figura~\ref{fig:database-coverage} ilustra a distribuição dos registros iden
 
 A Tabela~\ref{tab:sintese-17-estudos} apresenta a síntese dos 17 estudos que 
 atenderam ao critério de relevância (pontuação $\geq 4{,}0$), organizados cronologicamente 
-do mais recente ao mais antigo. A análise revela predominância de estudos focados em predição de desempenho mediante algoritmos de \textit{Machine Learning} supervisionado (Random Forest, SVM, Redes Neurais), com acurácias reportadas entre 75\% e 96,89\%. Destaca-se também a presença de abordagens inovadoras como \textit{Deep Learning} com \textit{\textit{Knowledge Graph}s} e sistemas adaptativos que reportam ganhos de aprendizagem de até 15\% e redução de 20\% no tempo de estudo.
+do mais recente ao mais antigo. A análise revela predominância de estudos focados em predição de desempenho mediante algoritmos de \textbf{\textit{Machine Learning}} supervisionado (Random Forest, SVM, Redes Neurais), com acurácias reportadas entre 75\% e 96,89\%. Destaca-se também a presença de abordagens inovadoras como \textbf{\textit{Deep Learning}} com \textbf{\textit{Knowledge Graphs}} e sistemas adaptativos que reportam ganhos de aprendizagem de até 15\% e redução de 20\% no tempo de estudo.
 
 \begin{landscape}
 \scriptsize
@@ -118,7 +118,7 @@ A síntese apresentada na Tabela~\ref{tab:sintese-17-estudos} permite identifica
 
 Primeiro, a \textbf{predominância de abordagens preditivas}: 11 dos 17 estudos (64,7\%) focam em predição de desempenho ou classificação de proficiência, evidenciando que a comunidade científica tem priorizado a identificação precoce de estudantes em risco.
 
-Segundo, a \textbf{diversidade de algoritmos}: embora Random Forest e SVM apareçam com maior frequência, técnicas mais recentes como \textit{Deep Learning} com \textit{\textit{Knowledge Graph}s} \cite{Design2025_004} demonstram potencial para personalização mais sofisticada.
+Segundo, a \textbf{diversidade de algoritmos}: embora Random Forest e SVM apareçam com maior frequência, técnicas mais recentes como \textbf{\textit{Deep Learning}} com \textbf{\textit{Knowledge Graphs}} \cite{Design2025_004} demonstram potencial para personalização mais sofisticada.
 
 Terceiro, a \textbf{consistência metodológica}: todos os estudos empregam métricas de avaliação quantitativas (acurácia, ROC-AUC, testes estatísticos), permitindo comparabilidade entre resultados. Ressalta-se que apenas estudos com pontuação de relevância $\geq 4{,}0$ foram incluídos (média: 4,2; intervalo: 4,0--4,5), garantindo alta aderência aos critérios de qualidade estabelecidos na metodologia.
 
@@ -223,7 +223,7 @@ Os cinco termos mais frequentes nos estudos incluídos foram:
     \item \textbf{Adaptive Learning} (4 ocorrências --- 23,5\%)
 \end{enumerate}
 
-Termos menos frequentes, mas relevantes: \textit{AI/Artificial Intelligence} (2; 11,8\%), \textit{Intelligent Tutoring} (1; 5,9\%), além de abordagens específicas presentes em títulos (e.g., \textit{\textit{Reinforcement Learning}}, \textit{\textit{Knowledge Graph}}, \textit{Computer Animation}) que não aparecem como palavras-chave padronizadas.\footnote{As porcentagens referem-se à presença do termo em pelo menos um estudo; termos não listados nos campos \texttt{keywords}, mas citados em títulos ou textos (como \textit{Personalized Learning}), não foram incluídos nesta contagem para manter consistência reprodutível.}
+Termos menos frequentes, mas relevantes: \textit{AI/Artificial Intelligence} (2; 11,8\%), \textit{Intelligent Tutoring} (1; 5,9\%), além de abordagens específicas presentes em títulos (e.g., \textbf{\textit{Reinforcement Learning}}, \textbf{\textbf{\textit{Knowledge Graph}}}, \textit{Computer Animation}) que não aparecem como palavras-chave padronizadas.\footnote{As porcentagens referem-se à presença do termo em pelo menos um estudo; termos não listados nos campos \texttt{keywords}, mas citados em títulos ou textos (como \textit{Personalized Learning}), não foram incluídos nesta contagem para manter consistência reprodutível.}
 
 \subsection{Categorias Temáticas Emergentes}
 
@@ -250,7 +250,7 @@ Quatro categorias temáticas principais emergiram da análise qualitativa dos es
 \subsection{Distribuição por Abordagem Técnica e Finalidade}
 
 A Tabela~\ref{tab:abordagem-tecnica} sintetiza as abordagens técnicas empregadas 
-nos estudos incluídos. Categorias raras (\textit{Knowledge Graph}, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, ACO, CRF, LIME) foram agrupadas em ``Outras/Específicas''. Como um mesmo estudo pode empregar múltiplas abordagens, as categorias não são mutuamente exclusivas e os percentuais totalizam mais de 100\%.
+nos estudos incluídos. Categorias raras (\textbf{\textit{Knowledge Graph}}, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, ACO, CRF, LIME) foram agrupadas em ``Outras/Específicas''. Como um mesmo estudo pode empregar múltiplas abordagens, as categorias não são mutuamente exclusivas e os percentuais totalizam mais de 100\%.
 
 \begin{table}[H]
 \centering
@@ -260,8 +260,8 @@ nos estudos incluídos. Categorias raras (\textit{Knowledge Graph}, Sentiment An
 \hline
 \textbf{Abordagem} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
 \hline
-\textit{Machine Learning} Supervisionado & 13 & 76,5\% \\
-\textit{Deep Learning} (CNN/DL) & 2 & 11,8\% \\
+\textbf{\textit{Machine Learning}} Supervisionado & 13 & 76,5\% \\
+\textbf{\textit{Deep Learning}} (CNN/DL) & 2 & 11,8\% \\
 \textit{Reinforcement Learning} & 1 & 5,9\% \\
 Adaptive Learning & 1 & 5,9\% \\
 Modelagem de Conhecimento/Tutores (Aprendiz) & 1 & 5,9\% \\
@@ -270,9 +270,9 @@ Outras/Específicas\footnotemark & 6 & 35,3\% \\
 \end{tabular}
 \fonte{Elaborado pelo autor com dados da revisão sistemática.}
 \end{table}
-\footnotetext{ACO, CRF, \textit{Knowledge Graph}, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, XAI (inclui LIME).}
+\footnotetext{ACO, CRF, \textbf{\textit{Knowledge Graph}}, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, XAI (inclui LIME).}
 
-Os dados da Tabela~\ref{tab:abordagem-tecnica} evidenciam a hegemonia do \textit{Machine Learning} Supervisionado, presente em 76,5\% dos estudos, o que reflete a maturidade dessas técnicas e a disponibilidade de dados rotulados em contextos educacionais. Deep Learning e \textit{Reinforcement Learning} aparecem em menor proporção, sugerindo que abordagens mais complexas ainda estão em estágio inicial de adoção na área. A Figura~\ref{fig:techniques-distribution} visualiza essa distribuição, tornando evidente a concentração em técnicas tradicionais de ML.\footnote{A contagem considera presença binária da categoria por estudo; as categorias não são mutuamente exclusivas, de modo que os percentuais podem somar mais de 100\%. A categoria ``Outras/Específicas'' agrega técnicas singulares de baixa frequência.}
+Os dados da Tabela~\ref{tab:abordagem-tecnica} evidenciam a hegemonia do \textbf{\textit{Machine Learning}} Supervisionado, presente em 76,5\% dos estudos, o que reflete a maturidade dessas técnicas e a disponibilidade de dados rotulados em contextos educacionais. Deep Learning e \textit{Reinforcement Learning} aparecem em menor proporção, sugerindo que abordagens mais complexas ainda estão em estágio inicial de adoção na área. A Figura~\ref{fig:techniques-distribution} visualiza essa distribuição, tornando evidente a concentração em técnicas tradicionais de ML.\footnote{A contagem considera presença binária da categoria por estudo; as categorias não são mutuamente exclusivas, de modo que os percentuais podem somar mais de 100\%. A categoria ``Outras/Específicas'' agrega técnicas singulares de baixa frequência.}
 
 \begin{figure}[htbp]
 \centering

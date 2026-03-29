@@ -5,17 +5,17 @@
 
 A transformação digital tem impactado significativamente diversas áreas do conhecimento, incluindo a educação. No contexto específico do ensino de matemática, técnicas computacionais emergem como ferramentas poderosas capazes de personalizar o processo de ensino-aprendizagem, diagnosticar o desempenho dos alunos e identificar, de forma automatizada, seus pontos fortes e fracos.
 
-Abordagens como \textbf{Machine Learning} (ML), \textbf{Learning Analytics} (LA) e \textbf{Sistemas Tutores Inteligentes} (STI) têm demonstrado grande potencial ao proporcionar intervenções pedagógicas precisas e personalizadas, contribuindo para uma gestão mais eficaz da aprendizagem. Estudos recentes indicam que a aplicação dessas tecnologias pode resultar em ganhos significativos de desempenho acadêmico, com melhorias que variam entre 10\% e 20\% em avaliações padronizadas \cite{Implementation2025_000, Math2021_001}.
+Abordagens como \textbf{\textit{Machine Learning}} (ML), \textbf{\textit{Learning Analytics}} (LA) e \textbf{Sistemas Tutores Inteligentes} (STI) têm demonstrado grande potencial ao proporcionar intervenções pedagógicas precisas e personalizadas, contribuindo para uma gestão mais eficaz da aprendizagem. Estudos recentes indicam que a aplicação dessas tecnologias pode resultar em ganhos significativos de desempenho acadêmico, com melhorias que variam entre 10\% e 20\% em avaliações padronizadas \cite{Implementation2025_000, Math2021_001}.
 
 Este capítulo estabeleceu as bases teóricas do projeto, contemplando uma revisão sistemática da literatura que visou mapear as técnicas e abordagens computacionais aplicadas à educação matemática. As bases teóricas para as Fases 2 e 3 (desenvolvimento e validação) foram expandidas ao longo do desenvolvimento do trabalho.
 
-A presente investigação buscou responder a questões fundamentais que nortearam a revisão sistemática da literatura, especificamente: quais tecnologias computacionais estão sendo aplicadas para personalizar o ensino de matemática; como técnicas de \textit{machine learning} e inteligência artificial têm sido utilizadas para identificar competências individuais de alunos; quais são as metodologias mais eficazes para adaptar planos de ensino com base em dados de desempenho; e que tipos de métricas e indicadores são usados para avaliar competências matemáticas em ambientes educacionais. Estas questões orientaram o escopo da revisão sistemática e estabeleceram os critérios para seleção e análise dos estudos identificados.
+A presente investigação buscou responder a questões fundamentais que nortearam a revisão sistemática da literatura, especificamente: quais tecnologias computacionais estão sendo aplicadas para personalizar o ensino de matemática; como técnicas de \textbf{\textit{machine learning}} e inteligência artificial têm sido utilizadas para identificar competências individuais de alunos; quais são as metodologias mais eficazes para adaptar planos de ensino com base em dados de desempenho; e que tipos de métricas e indicadores são usados para avaliar competências matemáticas em ambientes educacionais. Estas questões orientaram o escopo da revisão sistemática e estabeleceram os critérios para seleção e análise dos estudos identificados.
 
 \section{Ensino de Matemática: Desafios e Perspectivas}
 
 \subsection{Desafios do Ensino de Matemática no Brasil}
 
-O ensino de matemática no Brasil enfrenta desafios estruturais que se refletem nos indicadores de desempenho dos estudantes em avaliações nacionais e internacionais. Os resultados do Sistema de Avaliação da Educação Básica (SAEB) evidenciam que parcela significativa dos alunos brasileiros conclui o ensino fundamental sem alcançar os níveis adequados de proficiência em matemática \cite{SAEB2021}. No cenário internacional, os dados do \textit{Programme for International Student Assessment} (PISA) de 2022 confirmaram que o Brasil permanece abaixo da média dos países da Organização para a Cooperação e Desenvolvimento Econômico (OCDE), com desempenho particularmente deficitário nas competências de raciocínio quantitativo e resolução de problemas \cite{PISA2022}.
+O ensino de matemática no Brasil enfrenta desafios estruturais que se refletem nos indicadores de desempenho dos estudantes em avaliações nacionais e internacionais. Os resultados do Sistema de Avaliação da Educação Básica (SAEB) evidenciam que parcela significativa dos alunos brasileiros conclui o ensino fundamental sem alcançar os níveis adequados de proficiência em matemática \cite{SAEB2021}. No cenário internacional, os dados do \textbf{\textit{Programme for International Student Assessment}} (PISA) de 2022 confirmaram que o Brasil permanece abaixo da média dos países da Organização para a Cooperação e Desenvolvimento Econômico (OCDE), com desempenho particularmente deficitário nas competências de raciocínio quantitativo e resolução de problemas \cite{PISA2022}.
 
 A Base Nacional Comum Curricular (BNCC), documento normativo que orienta os currículos da educação básica brasileira, estabelece competências e habilidades específicas para a área de matemática, organizadas em torno de cinco unidades temáticas: Números, Álgebra, Geometria, Grandezas e Medidas, e Probabilidade e Estatística \cite{BNCC2018}.
 
@@ -31,7 +31,7 @@ A epistemologia genética de Jean Piaget postula que o conhecimento não é simp
 
 \subsubsection{Zona de Desenvolvimento Proximal de Vygotsky}
 
-Lev Vygotsky introduziu o conceito de Zona de Desenvolvimento Proximal (ZDP), que corresponde à distância entre o nível de desenvolvimento real do estudante --- aquilo que ele consegue realizar de forma autônoma --- e o nível de desenvolvimento potencial --- aquilo que pode alcançar com a mediação de um par mais experiente ou de um instrutor \cite{Vygotsky1978}. A noção de \textit{scaffolding} (andaimento), derivada dessa teoria, refere-se ao suporte temporário oferecido ao aprendiz, que é gradualmente retirado à medida que este desenvolve competência para atuar de forma independente. Esse conceito fundamenta a ideia de que sistemas computacionais podem atuar como mediadores, oferecendo apoio calibrado ao nível de conhecimento do estudante.
+Lev Vygotsky introduziu o conceito de Zona de Desenvolvimento Proximal (ZDP), que corresponde à distância entre o nível de desenvolvimento real do estudante --- aquilo que ele consegue realizar de forma autônoma --- e o nível de desenvolvimento potencial --- aquilo que pode alcançar com a mediação de um par mais experiente ou de um instrutor \cite{Vygotsky1978}. A noção de \textbf{\textit{scaffolding}} (andaimento), derivada dessa teoria, refere-se ao suporte temporário oferecido ao aprendiz, que é gradualmente retirado à medida que este desenvolve competência para atuar de forma independente. Esse conceito fundamenta a ideia de que sistemas computacionais podem atuar como mediadores, oferecendo apoio calibrado ao nível de conhecimento do estudante.
 
 \subsubsection{Aprendizagem Significativa de Ausubel}
 
@@ -45,7 +45,7 @@ As três vertentes teóricas apresentadas convergem para um princípio central: 
 
 Diante dos desafios do ensino de matemática no Brasil e das contribuições das teorias de aprendizagem, as tecnologias computacionais emergem como instrumentos com potencial para mediar e transformar a prática pedagógica. Ferramentas baseadas em inteligência artificial, aprendizado de máquina e análise de dados educacionais possibilitam a implementação de abordagens personalizadas e adaptativas em larga escala, atendendo às recomendações teóricas de adequação às necessidades individuais dos estudantes.
 
-Sistemas computacionais podem, por exemplo, realizar diagnóstico automatizado de competências (conforme preconiza Ausubel), fornecer \textit{scaffolding} dinâmico (em consonância com Vygotsky) e propor atividades que desafiem o aluno de forma construtiva (alinhando-se a Piaget). A seção seguinte apresenta as técnicas computacionais específicas que têm sido empregadas nesse contexto.
+Sistemas computacionais podem, por exemplo, realizar diagnóstico automatizado de competências (conforme preconiza Ausubel), fornecer \textbf{\textit{scaffolding}} dinâmico (em consonância com Vygotsky) e propor atividades que desafiem o aluno de forma construtiva (alinhando-se a Piaget). A seção seguinte apresenta as técnicas computacionais específicas que têm sido empregadas nesse contexto.
 
 \section{Técnicas Computacionais na Educação Matemática}
 
@@ -63,11 +63,11 @@ Sistemas computacionais podem, por exemplo, realizar diagnóstico automatizado d
     \item \textbf{Recomendação Personalizada}: Sistemas que sugerem conteúdos, exercícios e trajetórias de aprendizagem adaptadas às necessidades individuais \cite{Design2025_004}.
 \end{itemize}
 
-Técnicas específicas incluem redes neurais artificiais, árvores de decisão, máquinas de vetores de suporte (SVM), k-vizinhos mais próximos (KNN), algoritmos de \textit{ensemble} (Random Forest, XGBoost) e aprendizado profundo (\textit{deep learning}) \cite{Implementation2025_000, Machine2022_010}.
+Técnicas específicas incluem redes neurais artificiais, árvores de decisão, máquinas de vetores de suporte (SVM), k-vizinhos mais próximos (KNN), algoritmos de \textbf{\textit{ensemble}} (Random Forest, XGBoost) e aprendizado profundo (\textbf{\textit{deep learning}}) \cite{Implementation2025_000, Machine2022_010}.
 
-\subsection{\textit{Learning Analytics} e \textit{Educational Data Mining}}
+\subsection{\textbf{\textit{Learning Analytics}} e \textbf{\textbf{\textit{Educational Data Mining}}}}
 
-\textit{Learning Analytics} (LA) refere-se à medição, coleta, análise e apresentação de dados sobre alunos e seus contextos de aprendizagem, com o objetivo de compreender e otimizar o processo educacional. \textit{Educational Data Mining} (EDM) complementa LA ao aplicar técnicas de mineração de dados especificamente a contextos educacionais.
+\textbf{\textit{Learning Analytics}} (LA) refere-se à medição, coleta, análise e apresentação de dados sobre alunos e seus contextos de aprendizagem, com o objetivo de compreender e otimizar o processo educacional. \textbf{\textit{Educational Data Mining}} (EDM) complementa LA ao aplicar técnicas de mineração de dados especificamente a contextos educacionais.
 
 Aplicações típicas incluem:
 
@@ -76,7 +76,7 @@ Aplicações típicas incluem:
     
     \item \textbf{Análise Preditiva}: Identificação precoce de alunos em risco de evasão ou baixo desempenho \cite{Machine2019_007, Data2020_011};
     
-    \item \textbf{Modelagem de Conhecimento}: Representações computacionais do estado de conhecimento dos alunos (\textit{knowledge tracing}) que evoluem ao longo do tempo \cite{Computational2017_008};
+    \item \textbf{Modelagem de Conhecimento}: Representações computacionais do estado de conhecimento dos alunos (\textbf{\textit{knowledge tracing}}) que evoluem ao longo do tempo \cite{Computational2017_008};
     
     \item \textbf{Análise de Interações}: Estudo de padrões de navegação, tempo de resposta, tentativas e erros em ambientes digitais.
 \end{itemize}
@@ -91,14 +91,14 @@ Sistemas Tutores Inteligentes (STI) são ambientes computacionais que simulam a 
     \item \textbf{Módulo do Domínio}: Representa o conhecimento especializado sobre o conteúdo a ser ensinado;
     \item \textbf{Módulo do Estudante}: Modela o estado cognitivo atual do aluno, incluindo conhecimentos, habilidades e lacunas;
     \item \textbf{Módulo Pedagógico}: Define estratégias de ensino e escolhe intervenções apropriadas;
-    \item \textbf{Módulo de Interface}: Gerencia a comunicação com o usuário, incluindo \textit{feedback} e visualizações.
+    \item \textbf{Módulo de Interface}: Gerencia a comunicação com o usuário, incluindo \textbf{\textit{feedback}} e visualizações.
 \end{enumerate}
 
-Estudos recentes indicam que STI podem reduzir o tempo necessário para atingir objetivos de aprendizagem em até 20\%, comparados a métodos tradicionais \cite{Computational2017_008}. A eficácia dos STI está diretamente relacionada à qualidade da modelagem ao estudante e à capacidade do sistema de fornecer \textit{feedback} imediato e contextualizado.
+Estudos recentes indicam que STI podem reduzir o tempo necessário para atingir objetivos de aprendizagem em até 20\%, comparados a métodos tradicionais \cite{Computational2017_008}. A eficácia dos STI está diretamente relacionada à qualidade da modelagem ao estudante e à capacidade do sistema de fornecer \textbf{\textit{feedback}} imediato e contextualizado.
 
 \subsection{Aprendizagem Adaptativa e Personalizada}
 
-Sistemas de aprendizagem adaptativa utilizam dados em tempo real para ajustar automaticamente o conteúdo, a dificuldade e o ritmo de apresentação conforme o desempenho e as características do aluno \cite{Xie2019}. Diferentemente dos STI tradicionais, esses sistemas frequentemente empregam técnicas de aprendizado por reforço (\textit{reinforcement learning}) para otimizar trajetórias de aprendizagem.
+Sistemas de aprendizagem adaptativa utilizam dados em tempo real para ajustar automaticamente o conteúdo, a dificuldade e o ritmo de apresentação conforme o desempenho e as características do aluno \cite{Xie2019}. Diferentemente dos STI tradicionais, esses sistemas frequentemente empregam técnicas de aprendizado por reforço (\textbf{\textit{reinforcement learning}}) para otimizar trajetórias de aprendizagem.
 
 Características principais incluem:
 
@@ -116,7 +116,7 @@ Estudos demonstram que sistemas adaptativos podem melhorar a motivação e o eng
 
 \section{Avaliação Automatizada e Métricas de Desempenho}
 
-A avaliação é um componente crítico do processo educacional, e técnicas computacionais têm transformado significativamente as práticas avaliativas \cite{Yan2021}. Sistemas de avaliação automatizada podem processar grandes volumes de respostas, fornecer \textit{feedback} imediato e aplicar critérios de correção consistentes.
+A avaliação é um componente crítico do processo educacional, e técnicas computacionais têm transformado significativamente as práticas avaliativas \cite{Yan2021}. Sistemas de avaliação automatizada podem processar grandes volumes de respostas, fornecer \textbf{\textit{feedback}} imediato e aplicar critérios de correção consistentes.
 
 \subsection{Tipos de Avaliação}
 
@@ -140,7 +140,7 @@ Sistemas baseados em IA utilizam diversas métricas para quantificar o desempenh
     \item \textbf{Taxa de Tentativas}: Número de tentativas até atingir resposta correta;
     \item \textbf{Nível de Proficiência}: Classificação em escalas padronizadas (e.g., iniciante, intermediário, avançado) \cite{Math2021_001};
     \item \textbf{Ganho de Aprendizagem}: Diferença entre avaliações pré e pós-intervenção;
-    \item \textbf{Engajamento}: Métricas de interação, como tempo \textit{online}, acessos a recursos e participação em atividades.
+    \item \textbf{Engajamento}: Métricas de interação, como tempo \textbf{\textit{online}}, acessos a recursos e participação em atividades.
 \end{itemize}
 
 Estudos indicam que a avaliação automatizada, quando bem projetada, pode ser tão confiável quanto avaliações conduzidas por especialistas humanos, com a vantagem adicional de escalabilidade \cite{Authentic2024_013}.
