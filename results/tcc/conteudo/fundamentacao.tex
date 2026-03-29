@@ -1,0 +1,164 @@
+\chapter{FUNDAMENTAÇÃO TEÓRICA}
+\label{cap:fundamentacao}
+
+\section{Contexto e Relevância}
+
+A transformação digital tem impactado significativamente diversas áreas do conhecimento, incluindo a educação. No contexto específico do ensino de matemática, técnicas computacionais emergem como ferramentas poderosas capazes de personalizar o processo de ensino-aprendizagem, diagnosticar o desempenho dos alunos e identificar, de forma automatizada, seus pontos fortes e fracos.
+
+Abordagens como \textbf{Machine Learning} (ML), \textbf{Learning Analytics} (LA) e \textbf{Sistemas Tutores Inteligentes} (STI) têm demonstrado grande potencial ao proporcionar intervenções pedagógicas precisas e personalizadas, contribuindo para uma gestão mais eficaz da aprendizagem. Estudos recentes indicam que a aplicação dessas tecnologias pode resultar em ganhos significativos de desempenho acadêmico, com melhorias que variam entre 10\% e 20\% em avaliações padronizadas \cite{Implementation2025_000, Math2021_001}.
+
+Este capítulo estabeleceu as bases teóricas do projeto, contemplando uma revisão sistemática da literatura que visou mapear as técnicas e abordagens computacionais aplicadas à educação matemática. As bases teóricas para as Fases 2 e 3 (desenvolvimento e validação) foram expandidas ao longo do desenvolvimento do trabalho.
+
+A presente investigação buscou responder a questões fundamentais que nortearam a revisão sistemática da literatura, especificamente: quais tecnologias computacionais estão sendo aplicadas para personalizar o ensino de matemática; como técnicas de \textit{machine learning} e inteligência artificial têm sido utilizadas para identificar competências individuais de alunos; quais são as metodologias mais eficazes para adaptar planos de ensino com base em dados de desempenho; e que tipos de métricas e indicadores são usados para avaliar competências matemáticas em ambientes educacionais. Estas questões orientaram o escopo da revisão sistemática e estabeleceram os critérios para seleção e análise dos estudos identificados.
+
+\section{Ensino de Matemática: Desafios e Perspectivas}
+
+\subsection{Desafios do Ensino de Matemática no Brasil}
+
+O ensino de matemática no Brasil enfrenta desafios estruturais que se refletem nos indicadores de desempenho dos estudantes em avaliações nacionais e internacionais. Os resultados do Sistema de Avaliação da Educação Básica (SAEB) evidenciam que parcela significativa dos alunos brasileiros conclui o ensino fundamental sem alcançar os níveis adequados de proficiência em matemática \cite{SAEB2021}. No cenário internacional, os dados do \textit{Programme for International Student Assessment} (PISA) de 2022 confirmaram que o Brasil permanece abaixo da média dos países da Organização para a Cooperação e Desenvolvimento Econômico (OCDE), com desempenho particularmente deficitário nas competências de raciocínio quantitativo e resolução de problemas \cite{PISA2022}.
+
+A Base Nacional Comum Curricular (BNCC), documento normativo que orienta os currículos da educação básica brasileira, estabelece competências e habilidades específicas para a área de matemática, organizadas em torno de cinco unidades temáticas: Números, Álgebra, Geometria, Grandezas e Medidas, e Probabilidade e Estatística \cite{BNCC2018}. A BNCC enfatiza o desenvolvimento do letramento matemático, definido como a capacidade de raciocinar, representar, comunicar e argumentar matematicamente, de modo a favorecer o estabelecimento de conjecturas, a formulação e a resolução de problemas em contextos variados. Entretanto, a implementação efetiva dessas diretrizes curriculares permanece um desafio, especialmente diante da heterogeneidade de condições das escolas brasileiras e da necessidade de abordagens pedagógicas que contemplem as diferenças individuais dos estudantes.
+
+\subsection{Teorias de Aprendizagem Relevantes}
+
+A fundamentação em teorias de aprendizagem é essencial para a concepção de estratégias educacionais eficazes, incluindo aquelas mediadas por tecnologia. Três vertentes teóricas oferecem contribuições particularmente relevantes para o contexto desta pesquisa.
+
+\subsubsection{Construtivismo de Piaget}
+
+A epistemologia genética de Jean Piaget postula que o conhecimento não é simplesmente transmitido, mas ativamente construído pelo sujeito por meio de sua interação com o meio \cite{Piaget1972}. Segundo essa perspectiva, a aprendizagem ocorre quando o indivíduo enfrenta situações que provocam desequilíbrio cognitivo, desencadeando processos de assimilação e acomodação que resultam na reorganização das estruturas mentais. No ensino de matemática, essa abordagem implica que os estudantes devem ser expostos a problemas desafiadores que mobilizem seu raciocínio e os conduzam à construção ativa de conceitos, em oposição à mera memorização de procedimentos algorítmicos.
+
+\subsubsection{Zona de Desenvolvimento Proximal de Vygotsky}
+
+Lev Vygotsky introduziu o conceito de Zona de Desenvolvimento Proximal (ZDP), que corresponde à distância entre o nível de desenvolvimento real do estudante --- aquilo que ele consegue realizar de forma autônoma --- e o nível de desenvolvimento potencial --- aquilo que pode alcançar com a mediação de um par mais experiente ou de um instrutor \cite{Vygotsky1978}. A noção de \textit{scaffolding} (andaimento), derivada dessa teoria, refere-se ao suporte temporário oferecido ao aprendiz, que é gradualmente retirado à medida que este desenvolve competência para atuar de forma independente. Esse conceito fundamenta a ideia de que sistemas computacionais podem atuar como mediadores, oferecendo apoio calibrado ao nível de conhecimento do estudante.
+
+\subsubsection{Aprendizagem Significativa de Ausubel}
+
+David Ausubel propôs que a aprendizagem significativa ocorre quando novas informações são relacionadas, de maneira substantiva e não arbitrária, a conceitos relevantes já presentes na estrutura cognitiva do aprendiz --- os chamados subsunçores \cite{Ausubel1968}. Em contraposição à aprendizagem mecânica, na qual o conteúdo é assimilado sem conexão com o conhecimento prévio, a aprendizagem significativa favorece a retenção duradoura e a capacidade de transferência do conhecimento para novas situações. No contexto do ensino de matemática, essa teoria ressalta a importância de diagnosticar os conhecimentos prévios dos alunos e de organizar os conteúdos de forma progressiva, garantindo que cada novo conceito se ancore em uma base previamente consolidada.
+
+\subsubsection{Convergência com a Aprendizagem Personalizada e Adaptativa}
+
+As três vertentes teóricas apresentadas convergem para um princípio central: a aprendizagem eficaz demanda atenção às características individuais do estudante. O construtivismo de Piaget requer que as atividades sejam adequadas ao estágio de desenvolvimento cognitivo; a ZDP de Vygotsky exige que o suporte instrucional esteja calibrado ao nível atual de competência; e a aprendizagem significativa de Ausubel pressupõe o diagnóstico e a consideração dos conhecimentos prévios. Essas exigências, de difícil implementação em sala de aula tradicional com turmas numerosas, encontram nas tecnologias computacionais um caminho promissor de viabilização, por meio de sistemas capazes de modelar o perfil cognitivo de cada aluno e de adaptar dinamicamente as estratégias de ensino.
+
+\subsection{Tecnologia e Ensino de Matemática}
+
+Diante dos desafios do ensino de matemática no Brasil e das contribuições das teorias de aprendizagem, as tecnologias computacionais emergem como instrumentos com potencial para mediar e transformar a prática pedagógica. Ferramentas baseadas em inteligência artificial, aprendizado de máquina e análise de dados educacionais possibilitam a implementação de abordagens personalizadas e adaptativas em larga escala, atendendo às recomendações teóricas de adequação às necessidades individuais dos estudantes. Sistemas computacionais podem, por exemplo, realizar diagnóstico automatizado de competências (conforme preconiza Ausubel), fornecer \textit{scaffolding} dinâmico (em consonância com Vygotsky) e propor atividades que desafiem o aluno de forma construtiva (alinhando-se a Piaget). A seção seguinte apresenta as técnicas computacionais específicas que têm sido empregadas nesse contexto.
+
+\section{Técnicas Computacionais na Educação Matemática}
+
+\subsection{Machine Learning e Inteligência Artificial}
+
+\textit{Machine Learning} (ML) é um subcampo da Inteligência Artificial (IA) que permite que sistemas computacionais aprendam padrões a partir de dados sem serem explicitamente programados para tarefas específicas. No contexto educacional, algoritmos de ML têm sido amplamente utilizados para:
+
+\begin{itemize}
+    \item \textbf{Predição de Desempenho}: Modelos preditivos que estimam o desempenho futuro dos alunos com base em dados históricos \cite{Multimodels2020_002, Machine2022_010};
+    
+    \item \textbf{Classificação de Competências}: Algoritmos que categorizam alunos segundo seus níveis de proficiência em diferentes tópicos matemáticos \cite{Math2021_001, Analysis2022_003};
+    
+    \item \textbf{Detecção de Padrões}: Identificação automática de estilos de aprendizagem, dificuldades recorrentes e estratégias bem-sucedidas \cite{Identifying2017_006};
+    
+    \item \textbf{Recomendação Personalizada}: Sistemas que sugerem conteúdos, exercícios e trajetórias de aprendizagem adaptadas às necessidades individuais \cite{Design2025_004}.
+\end{itemize}
+
+Técnicas específicas incluem redes neurais artificiais, árvores de decisão, máquinas de vetores de suporte (SVM), k-vizinhos mais próximos (KNN), algoritmos de \textit{ensemble} (Random Forest, XGBoost) e aprendizado profundo (\textit{deep learning}) \cite{Implementation2025_000, Machine2022_010}.
+
+\subsection{\textit{Learning Analytics} e \textit{Educational Data Mining}}
+
+\textit{Learning Analytics} (LA) refere-se à medição, coleta, análise e apresentação de dados sobre alunos e seus contextos de aprendizagem, com o objetivo de compreender e otimizar o processo educacional. \textit{Educational Data Mining} (EDM) complementa LA ao aplicar técnicas de mineração de dados especificamente a contextos educacionais.
+
+Aplicações típicas incluem:
+
+\begin{itemize}
+    \item \textbf{\textit{Dashboards} de Desempenho}: Visualizações interativas que apresentam métricas de progresso individual e coletivo em tempo real;
+    
+    \item \textbf{Análise Preditiva}: Identificação precoce de alunos em risco de evasão ou baixo desempenho \cite{Machine2019_007, Data2020_011};
+    
+    \item \textbf{Modelagem de Conhecimento}: Representações computacionais do estado de conhecimento dos alunos (\textit{knowledge tracing}) que evoluem ao longo do tempo \cite{Computational2017_008};
+    
+    \item \textbf{Análise de Interações}: Estudo de padrões de navegação, tempo de resposta, tentativas e erros em ambientes digitais.
+\end{itemize}
+
+A integração entre LA e EDM permite uma compreensão mais profunda dos processos de aprendizagem, subsidiando decisões pedagógicas baseadas em evidências.
+
+\subsection{Sistemas Tutores Inteligentes}
+
+Sistemas Tutores Inteligentes (STI) são ambientes computacionais que simulam a interação individual entre tutor e aluno, adaptando-se dinamicamente às necessidades e características do aprendiz. Os STI clássicos são compostos por quatro módulos principais \cite{Nye2015}:
+
+\begin{enumerate}
+    \item \textbf{Módulo do Domínio}: Representa o conhecimento especializado sobre o conteúdo a ser ensinado;
+    \item \textbf{Módulo do Estudante}: Modela o estado cognitivo atual do aluno, incluindo conhecimentos, habilidades e lacunas;
+    \item \textbf{Módulo Pedagógico}: Define estratégias de ensino e escolhe intervenções apropriadas;
+    \item \textbf{Módulo de Interface}: Gerencia a comunicação com o usuário, incluindo \textit{feedback} e visualizações.
+\end{enumerate}
+
+Estudos recentes indicam que STI podem reduzir o tempo necessário para atingir objetivos de aprendizagem em até 20\%, comparados a métodos tradicionais \cite{Computational2017_008}. A eficácia dos STI está diretamente relacionada à qualidade da modelagem ao estudante e à capacidade do sistema de fornecer \textit{feedback} imediato e contextualizado.
+
+\subsection{Aprendizagem Adaptativa e Personalizada}
+
+Sistemas de aprendizagem adaptativa utilizam dados em tempo real para ajustar automaticamente o conteúdo, a dificuldade e o ritmo de apresentação conforme o desempenho e as características do aluno \cite{Xie2019}. Diferentemente dos STI tradicionais, esses sistemas frequentemente empregam técnicas de aprendizado por reforço (\textit{reinforcement learning}) para otimizar trajetórias de aprendizagem.
+
+Características principais incluem:
+
+\begin{itemize}
+    \item \textbf{Caminhos de Aprendizagem Dinâmicos}: Sequenciamento automático de conteúdos baseado em grafos de conhecimento \cite{Design2025_004, Innovative2023_005};
+    
+    \item \textbf{Ajuste de Dificuldade}: Seleção dinâmica de exercícios conforme o nível de proficiência demonstrado;
+    
+    \item \textbf{Análise de Sentimentos}: Integração de reconhecimento emocional para ajustar estratégias pedagógicas segundo o estado afetivo do aluno \cite{Design2025_004};
+    
+    \item \textbf{Feedback Formativo}: Orientações personalizadas que direcionam o aluno para recursos específicos de remediação ou aprofundamento.
+\end{itemize}
+
+Estudos demonstram que sistemas adaptativos podem melhorar a motivação e o engajamento dos alunos, além de promover ganhos de aprendizagem estatisticamente significativos \cite{Assessing2024_015}.
+
+\section{Avaliação Automatizada e Métricas de Desempenho}
+
+A avaliação é um componente crítico do processo educacional, e técnicas computacionais têm transformado significativamente as práticas avaliativas \cite{Yan2021}. Sistemas de avaliação automatizada podem processar grandes volumes de respostas, fornecer \textit{feedback} imediato e aplicar critérios de correção consistentes.
+
+\subsection{Tipos de Avaliação}
+
+\begin{itemize}
+    \item \textbf{Avaliação Formativa}: Realizada durante o processo de aprendizagem para identificar lacunas e orientar intervenções \cite{Performance2023_014};
+    
+    \item \textbf{Avaliação Somativa}: Aplicada ao final de unidades ou cursos para certificar competências adquiridas;
+    
+    \item \textbf{Avaliação Diagnóstica}: Identifica o estado inicial de conhecimento para personalizar trajetórias de ensino;
+    
+    \item \textbf{Avaliação Autêntica}: Envolve tarefas contextualizadas e práticas que refletem aplicações do mundo real \cite{Authentic2024_013}.
+\end{itemize}
+
+\subsection{Métricas Computacionais}
+
+Sistemas baseados em IA utilizam diversas métricas para quantificar o desempenho e o progresso dos alunos \cite{Romero2020}:
+
+\begin{itemize}
+    \item \textbf{Acurácia de Respostas}: Percentual de acertos em avaliações;
+    \item \textbf{Tempo de Resolução}: Duração necessária para completar tarefas;
+    \item \textbf{Taxa de Tentativas}: Número de tentativas até atingir resposta correta;
+    \item \textbf{Nível de Proficiência}: Classificação em escalas padronizadas (e.g., iniciante, intermediário, avançado) \cite{Math2021_001};
+    \item \textbf{Ganho de Aprendizagem}: Diferença entre avaliações pré e pós-intervenção;
+    \item \textbf{Engajamento}: Métricas de interação, como tempo \textit{online}, acessos a recursos e participação em atividades.
+\end{itemize}
+
+Estudos indicam que a avaliação automatizada, quando bem projetada, pode ser tão confiável quanto avaliações conduzidas por especialistas humanos, com a vantagem adicional de escalabilidade \cite{Authentic2024_013}.
+
+\section{Contribuições da Fundamentação}
+
+Esta fundamentação teórica estabeleceu as bases para a revisão sistemática da literatura, que visou:
+
+\begin{enumerate}
+    \item \textbf{Mapeamento Sistemático}: Criar um panorama completo e atualizado das técnicas computacionais aplicadas à educação matemática;
+    
+    \item \textbf{Identificação de Lacunas}: Encontrar oportunidades de pesquisa e desenvolvimento que fundamentarão as Fases 2 e 3 do projeto;
+    
+    \item \textbf{Base para Protótipo}: Fornecer subsídios científicos sólidos para o desenvolvimento de ferramentas educacionais baseadas em evidências;
+    
+    \item \textbf{Referencial Teórico}: Estabelecer uma base conceitual robusta que sustente futuras pesquisas na área;
+    
+    \item \textbf{Diretrizes Práticas}: Orientar implementações de tecnologias educacionais alinhadas às melhores práticas identificadas na literatura.
+\end{enumerate}
+
+Os resultados desta revisão sistemática serviram como alicerce para as fases subsequentes do projeto, nas quais foi desenvolvido e validado um protótipo de ferramenta computacional para personalização do ensino de matemática.
+
+% 
+%--------- FIM FUNDAMENTAÇÃO TEÓRICA ------------
+%

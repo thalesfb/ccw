@@ -1,0 +1,515 @@
+\chapter{REVISÃO SISTEMÁTICA DA LITERATURA}
+\label{cap:revisao}
+
+Este capítulo apresenta a revisão sistemática da literatura conduzida na Fase 1 do projeto, mediante a aplicação
+rigorosa da metodologia de revisão sistemática, cujo relato seguiu as diretrizes PRISMA 2020, conforme descrito no Capítulo~\ref{cap:metodologia}. 
+A revisão sistemática identificou 17 estudos de alta relevância (pontuação de relevância $\geq 4{,}0$) 
+que constituíram a base empírica para as fases subsequentes deste projeto de TCC.
+
+\section{Fluxo PRISMA 2020}
+
+A Figura~\ref{fig:prisma-flow} ilustra o fluxo de seleção PRISMA. O processo iniciou com a identificação de 9.431 registros. Após a remoção de duplicatas e triagem inicial, 1.883 estudos foram avaliados quanto à elegibilidade. Destes, 1.866 foram excluídos por apresentarem pontuação de relevância inferior a 4,0, resultando na inclusão final de 17 estudos (taxa de inclusão de $\sim$0,18\%). A Figura~\ref{fig:selection-funnel} apresenta essa mesma progressão em formato de funil, evidenciando a redução progressiva do conjunto de estudos em cada etapa do processo de seleção.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
+\caption{Fluxo PRISMA 2020 da revisão sistemática.}
+\label{fig:prisma-flow}
+\fonte{Elaborado pelo autor com dados da revisão sistemática (2025).}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
+\caption{Funil de seleção de estudos.}
+\label{fig:selection-funnel}
+\fonte{Elaborado pelo autor com dados da revisão sistemática (2025).}
+\end{figure}
+
+\section{Estatísticas Descritivas}
+
+A Tabela~\ref{tab:stats-descritivas} sintetiza as principais métricas quantitativas 
+da revisão sistemática. Destacam-se três aspectos relevantes: (i) a elevada taxa de duplicatas (26,6\%), que evidencia a sobreposição significativa entre as bases de dados consultadas e reforça a importância da etapa de deduplicação; (ii) a taxa de exclusão na fase de elegibilidade (99,1\%), indicando que a grande maioria dos estudos inicialmente identificados não atendeu aos critérios de inclusão estabelecidos, o que é esperado em revisões sistemáticas com escopo bem delimitado; e (iii) a taxa de inclusão final de aproximadamente 0,18\%, valor consistente com revisões sistemáticas rigorosas na área de tecnologia educacional. O \textit{cache hit rate} de 92\% demonstra a eficiência do sistema de \textit{cache} implementado, reduzindo significativamente o número de requisições às APIs externas.
+
+\begin{table}[H]
+\centering
+\caption{Estatísticas descritivas da revisão sistemática.}
+\label{tab:stats-descritivas}
+\begin{tabular}{lc}
+\hline
+\textbf{Métrica} & \textbf{Valor} \\
+\hline
+Total identificado (com duplicatas) & 9.431 \\
+Duplicatas removidas & 2.517 (26,6\%) \\
+Registros únicos & 6.914 \\
+Total elegíveis (após triagem) & 1.883 \\
+Taxa de exclusão (triagem) & 72,8\% \\
+Avaliados para elegibilidade & 1.883 \\
+Taxa de exclusão (elegibilidade) & 99,1\% \\
+Total incluído (pontuação $\geq$ 4,0) & 17 \\
+Taxa de inclusão final & $\sim$0,18\% \\
+Bases de dados consultadas & 4 \\
+Consultas bilíngues executadas & 72 (48 EN + 24 PT) \\
+Período de cobertura & 2016--2025 (10 anos) \\
+Pontuação de relevância média (incluídos) & 4,2 \\
+\textit{Cache hit rate} & $\sim$92\% (265/287 requisições) \\
+\hline
+\end{tabular}
+\fonte{Elaborado pelo autor com dados da revisão sistemática.}
+\end{table}
+
+A Figura~\ref{fig:database-coverage} ilustra a distribuição dos registros identificados por base de dados. Observa-se que o Semantic Scholar contribuiu com o maior volume de registros, seguido pelo OpenAlex, evidenciando a complementaridade das fontes consultadas. A sobreposição entre bases justifica a elevada taxa de duplicatas (26,6\%) e reforça a importância da estratégia multi-base para garantir cobertura abrangente da literatura.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{images/database_coverage.png}
+\caption{Registros identificados por base de dados (inclui duplicatas) (n = 9.431).}
+\label{fig:database-coverage}
+\fonte{Elaborado pelo autor com dados da revisão sistemática (2025).}
+\end{figure}
+
+\section{Síntese dos Estudos Incluídos}
+
+A Tabela~\ref{tab:sintese-17-estudos} apresenta a síntese dos 17 estudos que 
+atenderam ao critério de relevância (pontuação $\geq 4{,}0$), organizados cronologicamente 
+do mais recente ao mais antigo. A análise revela predominância de estudos focados em predição de desempenho mediante algoritmos de Machine Learning supervisionado (Random Forest, SVM, Redes Neurais), com acurácias reportadas entre 75\% e 96,89\%. Destaca-se também a presença de abordagens inovadoras como Deep Learning com Knowledge Graphs e sistemas adaptativos que reportam ganhos de aprendizagem de até 15\% e redução de 20\% no tempo de estudo.
+
+\begin{landscape}
+\scriptsize
+\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{1.8cm}>{\raggedright\arraybackslash}p{6.2cm}}
+\caption{Síntese dos 17 estudos incluídos na revisão sistemática.}\label{tab:sintese-17-estudos}\\
+\hline
+\textbf{Autores/Ano} & \textbf{Título} & \textbf{Abordagem IA} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Principais Resultados} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Autores/Ano} & \textbf{Título} & \textbf{Abordagem IA} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Principais Resultados} \\
+\hline
+\endhead
+\hline
+\multicolumn{6}{r}{\textit{Continua na próxima página}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+Tjahyadi (2025) & EDM para prever desempenho em Matemática (EF) & ML; \textit{Learning Analytics} & Predição de desempenho & \textit{Perf.; Stat.} & SMOTERUSBoosted Trees com 75\% de acurácia \\
+Zhang et al. (2025) & Caminhos personalizados DL & DL; RL; \textit{KG; Sentiment} & Personalização & \textit{User feedback} & +15\% aprendizagem; $-$20\% tempo; satisfação 4,2/5 \\
+Nyantah et al. (2025) & Teoremas de círculo com \textit{jigsaw} & \textit{Computer Animation; Jigsaw} & Ensino de geometria & \textit{User feedback; Stat.} & Ganhos vs. ensino tradicional ($p<0.05$) \\
+Milićević et al. (2024) & ML como apoio ao ensino & ML; \textit{LA; Pred. Analytics} & Predição / apoio & \textit{Perf.; Stat.} & Heurísticas de classificação para sucesso matemático \\
+Zhang (2023) & Ensino inteligente Mat. Superior & ACO+CNN; CRF & Personalização & \textit{User feedback; Stat.} & Pós-teste +9,317 ($p<0.05$); ganhos vs. controle \\
+Jose et al. (2024) & Sistemas adaptativos K-12 & \textit{Adaptive Learning} & Personalização & \textit{User feedback; Stat.}; Qual. & Ganhos de aprendizagem e engajamento \\
+Appiah-Odame (2024) & Avaliação autêntica em mat. & --- & Avaliação & \textit{User feedback}; Qual. & Motivação/eficácia; barreiras: tempo, recursos \\
+Mertasari et al. (2023) & \textit{Performance assessment} e metacognição & --- & Avaliação formativa & \textit{User feedback; Stat.} & Ganhos metacognitivos: \textit{performance} > ensaio > múltipla escolha \\
+Hasib et al. (2022) & Previsão no secundário com XAI & SVM; K-Means SMOTE; LIME & Predição explicável & \textit{Perf.; Stat.} & SVM 96,89\% acurácia; explicações LIME por classe \\
+Kumar et al. (2022) & Seleção de atributos e DM & \textit{Learning Analytics}; ML & Predição de notas & \textit{Performance} & DT/JRip/NB/MLP/RF com acurácia razoável \\
+Pejic et al. (2021) & PISA: proficiência matemática (3 níveis) & ML & Predição de proficiência & \textit{Performance} & RNAs e Random Forest previram níveis; métricas Kappa e ROC-AUC \\
+Ünal (2020) & DM para previsão de notas & DT; RF; NB & Predição & \textit{Experimental} & Efetividade demonstrada em dois \textit{datasets} \\
+Salas-Rueda (2021) & Facebook + ML em finanças & Regressão; DT; RN & Apoio ao ensino & \textit{Stat.} & Mensagens, vídeos e exercícios correlacionados a ganhos \\
+Sokkhey et al. (2020) & Previsão no EM (Camboja) & ML (RF) & Predição & \textit{Perf.; Stat.} & Random Forest maior acurácia e menor MSE \\
+Uskov et al. (2019) & \textit{Analytics} preditiva STEM & LR; RF; SVM; ANN etc. & Predição & \textit{Perf.; Stat.} & \textit{Benchmark} de 8 algoritmos; recomendações \\
+MacLellan (2017) & Modelos para tutores & Modelos aprendiz (DT; TRESTLE) & Tutoria/Autoria & \textit{Stat.} & TRESTLE melhor ajuste aos dados humanos \\
+Depren et al. (2017) & TIMSS 2011: comparação EDM & LR; DT; BN; RN & Predição/classif. & \textit{User feedback; Stat.} & Regressão logística superior; confiança do aluno saliente \\
+\end{longtable}
+\fonte{Elaborado pelo autor com dados da revisão sistemática.}
+\end{landscape}
+
+A síntese apresentada na Tabela~\ref{tab:sintese-17-estudos} permite identificar três padrões relevantes para este projeto. Primeiro, a \textbf{predominância de abordagens preditivas}: 11 dos 17 estudos (64,7\%) focam em predição de desempenho ou classificação de proficiência, evidenciando que a comunidade científica tem priorizado a identificação precoce de estudantes em risco. Segundo, a \textbf{diversidade de algoritmos}: embora Random Forest e SVM apareçam com maior frequência, técnicas mais recentes como Deep Learning com Knowledge Graphs \cite{Design2025_004} demonstram potencial para personalização mais sofisticada. Terceiro, a \textbf{consistência metodológica}: todos os estudos empregam métricas de avaliação quantitativas (acurácia, ROC-AUC, testes estatísticos), permitindo comparabilidade entre resultados. Ressalta-se que apenas estudos com pontuação de relevância $\geq 4{,}0$ foram incluídos (média: 4,2; intervalo: 4,0--4,5), garantindo alta aderência aos critérios de qualidade estabelecidos na metodologia.
+
+\section{Qualidade Metodológica dos Estudos Incluídos}
+\label{sec:qualidade-estudos}
+
+A Tabela~\ref{tab:mmat-avaliacao} apresenta a avaliação de qualidade metodológica dos 17 estudos incluídos segundo o MMAT 2018 \cite{MMAT2018}. A classificação do desenho de estudo e a aplicação dos cinco critérios específicos foram realizadas com base nos \textit{abstracts}, metadados e informações metodológicas disponíveis nos textos dos artigos.
+
+\begin{landscape}
+\scriptsize
+\begin{longtable}{|p{2.8cm}|p{2.8cm}|p{1cm}|p{2cm}|p{8cm}|}
+\hline
+\textbf{Estudo} & \textbf{Tipo (MMAT)} & \textbf{Score} & \textbf{Critérios} & \textbf{Principais Limitações Metodológicas} \\
+\hline
+\endfirsthead
+\multicolumn{5}{c}{\tablename\ \thetable\ -- Continuação} \\
+\hline
+\textbf{Estudo} & \textbf{Tipo (MMAT)} & \textbf{Score} & \textbf{Critérios} & \textbf{Principais Limitações Metodológicas} \\
+\hline
+\endhead
+\hline \multicolumn{5}{r}{\textit{Continua...}} \\
+\endfoot
+\hline
+\endlastfoot
+
+Tjahyadi (2025) & Quant. Descritivo & 3/5 & Y,N,Y,CT,Y & Amostra de escola particular única (n=280); representatividade limitada; viés de não-resposta não discutido \\
+\hline
+Zhang et al. (2025) & Quant. Não-RCT & 2/5 & CT,Y,CT,N,Y & População não claramente descrita; dados incompletos não discutidos; confundidores não controlados \\
+\hline
+Nyantah et al. (2025) & Quant. Não-RCT & 3/5 & Y,Y,CT,N,Y & Atribuição por turmas (não individual); confundidores não controlados; completude dos dados não reportada \\
+\hline
+Milićević et al. (2024) & Quant. Descritivo & 3/5 & Y,N,Y,CT,Y & Faculdade técnica única; representatividade limitada; viés de não-resposta não discutido \\
+\hline
+Appiah-Odame (2024) & Qualitativo & 4/5 & Y,Y,Y,Y,N & Amostra pequena (12 professores); contexto rural específico; sem triangulação de fontes \\
+\hline
+Jose et al. (2024) & Métodos Mistos & 2/5 & Y,CT,CT,N,Y & Integração quali-quanti insuficientemente descrita; divergências entre componentes não discutidas \\
+\hline
+Zhang (2023) & Quant. Não-RCT & 3/5 & CT,Y,CT,Y,Y & Representatividade restrita ao ensino superior; completude dos dados não reportada \\
+\hline
+Mertasari et al. (2023) & Quant. Não-RCT & 4/5 & Y,Y,CT,Y,Y & Randomização por \textit{clusters} (não individual); completude dos dados não explicitada \\
+\hline
+Kumar et al. (2022) & Quant. Descritivo & 2/5 & Y,CT,Y,CT,N & Origem dos \textit{datasets} pouco detalhada; sem validação cruzada; métricas de avaliação limitadas \\
+\hline
+Hasib et al. (2022) & Quant. Descritivo & 4/5 & Y,Y,Y,CT,Y & \textit{Dataset} secundário; completude não discutida; sem validação em contexto educacional real \\
+\hline
+Pejic et al. (2021) & Quant. Descritivo & 5/5 & Y,Y,Y,Y,Y & \textit{Dataset} PISA robusto; amostragem rigorosa; múltiplas métricas; sem limitações críticas identificadas \\
+\hline
+Salas-Rueda (2021) & Quant. Não-RCT & 1/5 & N,Y,CT,N,CT & Amostra pequena (n=46); amostra de conveniência; confundidores não controlados; natureza observacional \\
+\hline
+Sokkhey et al. (2020) & Quant. Descritivo & 3/5 & Y,CT,Y,CT,Y & Contexto culturalmente específico (Camboja); representatividade não discutida \\
+\hline
+Ünal (2020) & Quant. Descritivo & 1/5 & Y,CT,CT,CT,CT & Descrição metodológica insuficiente; métricas não detalhadas; viés e completude não discutidos \\
+\hline
+Uskov et al. (2019) & Quant. Descritivo & 3/5 & Y,N,Y,CT,Y & Universidade única; \textit{benchmark} sem aplicação prática em sala; dados não compartilhados \\
+\hline
+Depren et al. (2017) & Quant. Descritivo & 5/5 & Y,Y,Y,Y,Y & \textit{Dataset} TIMSS robusto; amostragem internacional; análise multivariada; importância de fatores \\
+\hline
+MacLellan (2017) & Quant. Não-RCT & 5/5 & Y,Y,Y,Y,Y & Validação em 7 domínios; regressão de efeitos mistos; modelos computacionais bem especificados \\
+\hline
+
+\caption{Avaliação de qualidade metodológica segundo MMAT 2018 \cite{MMAT2018}}
+\label{tab:mmat-avaliacao}
+\end{longtable}
+\fonte{Elaborado pelo autor com base nos critérios do MMAT 2018 \cite{MMAT2018}.}
+\end{landscape}
+
+\subsection{Síntese da Qualidade Metodológica}
+
+Dos 17 estudos incluídos:
+\begin{itemize}
+    \item \textbf{3 estudos (17,6\%)} atenderam a todos os 5 critérios MMAT (5/5): Pejic et al. (2021), Depren et al. (2017) e MacLellan (2017) --- todos utilizando \textit{datasets} robustos de larga escala ou validação em múltiplos domínios
+    \item \textbf{3 estudos (17,6\%)} atenderam a 4 critérios (4/5): Appiah-Odame (2024), Mertasari et al. (2023) e Hasib et al. (2022)
+    \item \textbf{6 estudos (35,3\%)} atenderam a 3 critérios (3/5): Tjahyadi (2025), Nyantah et al. (2025), Milićević et al. (2024), Zhang (2023), Sokkhey et al. (2020) e Uskov et al. (2019)
+    \item \textbf{3 estudos (17,6\%)} atenderam a 2 critérios (2/5): Zhang et al. (2025), Jose et al. (2024) e Kumar et al. (2022)
+    \item \textbf{2 estudos (11,8\%)} atenderam a apenas 1 critério (1/5): Salas-Rueda (2021) e Ünal (2020)
+\end{itemize}
+
+As limitações metodológicas mais frequentes foram:
+\begin{enumerate}
+    \item \textbf{Completude dos dados não reportada} (identificado em 10 estudos, 58,8\%): a maioria dos estudos não discutiu explicitamente a completude dos dados coletados ou possíveis perdas amostrais.
+    \item \textbf{Confundidores não controlados} (identificado em 7 estudos, 41,2\%): variáveis intervenientes que poderiam influenciar os resultados não foram identificadas ou controladas.
+    \item \textbf{Representatividade limitada} (identificado em 6 estudos, 35,3\%): amostras provenientes de contextos únicos (uma escola, uma universidade, um país) limitam a generalização dos achados.
+    \item \textbf{Amostras pequenas} (identificado em 4 estudos, 23,5\%): amostras inferiores a 50 participantes comprometem o poder estatístico.
+\end{enumerate}
+
+Estas limitações foram consideradas na definição do escopo do protótipo desenvolvido na Fase~2. As decisões técnicas priorizaram abordagens validadas nos estudos com maior qualidade metodológica (\textit{score} MMAT $\geq$ 4/5), utilizando estudos de menor qualidade como contexto complementar.
+
+\section{Análise Temática}
+
+A análise de frequência de termos nos títulos e resumos dos 17 estudos incluídos 
+revelou as seguintes tendências principais:
+
+\subsection{Termos Mais Frequentes}
+
+Os cinco termos mais frequentes nos estudos incluídos foram:
+
+\begin{enumerate}
+    \item \textbf{Machine Learning} (10 ocorrências --- 58,8\%)
+    \item \textbf{Assessment} (9 ocorrências --- 52,9\%)
+    \item \textbf{Predictive Analytics} (8 ocorrências --- 47,1\%)
+    \item \textbf{Learning Analytics} (7 ocorrências --- 41,2\%)
+    \item \textbf{Adaptive Learning} (4 ocorrências --- 23,5\%)
+\end{enumerate}
+
+Termos menos frequentes, mas relevantes: \textit{AI/Artificial Intelligence} (2; 11,8\%), \textit{Intelligent Tutoring} (1; 5,9\%), além de abordagens específicas presentes em títulos (e.g., \textit{Reinforcement Learning}, \textit{Knowledge Graph}, \textit{Computer Animation}) que não aparecem como palavras-chave padronizadas.\footnote{As porcentagens referem-se à presença do termo em pelo menos um estudo; termos não listados nos campos \texttt{keywords}, mas citados em títulos ou textos (como \textit{Personalized Learning}), não foram incluídos nesta contagem para manter consistência reprodutível.}
+
+\subsection{Categorias Temáticas Emergentes}
+
+Quatro categorias temáticas principais emergiram da análise qualitativa dos estudos incluídos:
+
+\begin{description}
+    \item[Sistemas de Tutoria Inteligente (40\%):] Tutoria adaptativa baseada em 
+    modelagem de conhecimento, sistemas de diálogo para suporte ao estudante, 
+    \textit{scaffolding} inteligente, \textit{feedback} personalizado em tempo real.
+    
+    \item[Diagnóstico e Avaliação (30\%):] Detecção automatizada de erros e 
+    \textit{misconceptions}, predição de desempenho estudantil, avaliação formativa adaptativa, 
+    identificação de lacunas de conhecimento.
+    
+    \item[Personalização de Conteúdo (20\%):] Sistemas de recomendação de recursos 
+    educacionais, geração automática de exercícios, adaptação de dificuldade, 
+    trajetórias de aprendizagem individualizadas.
+    
+    \item[Análise Preditiva (10\%):] Predição de evasão escolar, identificação de 
+    estudantes em risco, análise de trajetórias de aprendizagem, modelagem temporal 
+    de conhecimento.
+\end{description}
+
+\subsection{Distribuição por Abordagem Técnica e Finalidade}
+
+A Tabela~\ref{tab:abordagem-tecnica} sintetiza as abordagens técnicas empregadas 
+nos estudos incluídos. Categorias raras (Knowledge Graph, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, ACO, CRF, LIME) foram agrupadas em ``Outras/Específicas''. Como um mesmo estudo pode empregar múltiplas abordagens, as categorias não são mutuamente exclusivas e os percentuais totalizam mais de 100\%.
+
+\begin{table}[H]
+\centering
+\caption{Distribuição de abordagens técnicas}
+\label{tab:abordagem-tecnica}
+\begin{tabular}{lcc}
+\hline
+\textbf{Abordagem} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
+\hline
+Machine Learning Supervisionado & 13 & 76,5\% \\
+Deep Learning (CNN/DL) & 2 & 11,8\% \\
+Reinforcement Learning & 1 & 5,9\% \\
+Adaptive Learning & 1 & 5,9\% \\
+Modelagem de Conhecimento/Tutores (Aprendiz) & 1 & 5,9\% \\
+Outras/Específicas\footnotemark & 6 & 35,3\% \\
+\hline
+\end{tabular}
+\fonte{Elaborado pelo autor com dados da revisão sistemática.}
+\end{table}
+\footnotetext{ACO, CRF, Knowledge Graph, Sentiment Analysis, Computer Animation, Jigsaw Cooperative Learning, XAI (inclui LIME).}
+
+Os dados da Tabela~\ref{tab:abordagem-tecnica} evidenciam a hegemonia do Machine Learning Supervisionado, presente em 76,5\% dos estudos, o que reflete a maturidade dessas técnicas e a disponibilidade de dados rotulados em contextos educacionais. Deep Learning e Reinforcement Learning aparecem em menor proporção, sugerindo que abordagens mais complexas ainda estão em estágio inicial de adoção na área. A Figura~\ref{fig:techniques-distribution} visualiza essa distribuição, tornando evidente a concentração em técnicas tradicionais de ML.\footnote{A contagem considera presença binária da categoria por estudo; as categorias não são mutuamente exclusivas, de modo que os percentuais podem somar mais de 100\%. A categoria ``Outras/Específicas'' agrega técnicas singulares de baixa frequência.}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{images/techniques_distribution.png}
+\caption{Distribuição de técnicas de IA nos estudos incluídos.}
+\label{fig:techniques-distribution}
+\fonte{Elaborado pelo autor com dados da revisão sistemática (2025).}
+\end{figure}
+
+A Tabela~\ref{tab:finalidade-pedagogica} apresenta a distribuição por finalidade 
+pedagógica:
+
+\begin{table}[H]
+\centering
+\caption{Distribuição dos estudos por finalidade principal.}
+\label{tab:finalidade-pedagogica}
+\begin{tabular}{lcc}
+\hline
+\textbf{Finalidade Principal} & \textbf{N$^{\circ}$ Estudos} & \textbf{\%} \\
+\hline
+Predição / Modelagem de Desempenho & 9 & 52,9\% \\
+Personalização / Trajetórias Adaptativas & 3 & 17,6\% \\
+Ensino / Suporte Instrucional & 2 & 11,8\% \\
+Avaliação / Assessment Formativo & 2 & 11,8\% \\
+Tutoria Inteligente / Autoria de Tutores & 1 & 5,9\% \\
+\hline
+\end{tabular}
+\fonte{Elaborado pelo autor com dados da revisão sistemática.}
+\end{table}
+Os resultados da Tabela~\ref{tab:finalidade-pedagogica} revelam que mais da metade dos estudos (52,9\%) concentra-se em predição e modelagem de desempenho, refletindo o interesse da comunidade científica em antecipar resultados acadêmicos para intervenções preventivas. A personalização de trajetórias adaptativas (17,6\%) e as abordagens de avaliação formativa (11,8\%) aparecem como áreas emergentes com potencial de crescimento.\footnote{Cada estudo foi classificado em uma única finalidade para preservação de proporções; estudos com descrições híbridas receberam atribuição pela finalidade predominante explícita.}
+
+A Figura~\ref{fig:papers-by-year} apresenta a distribuição temporal dos estudos incluídos. Observa-se uma concentração de publicações nos anos mais recentes (2023--2025), indicando crescente interesse da comunidade científica no tema. Esta tendência ascendente sugere que a aplicação de técnicas computacionais no ensino de matemática é um campo em expansão ativa.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{images/papers_by_year.png}
+\caption{Distribuição temporal dos estudos incluídos (2016--2025).}
+\label{fig:papers-by-year}
+\fonte{Elaborado pelo autor com dados da revisão sistemática (2025).}
+\end{figure}
+
+\section{Resultados de Eficácia Reportados}
+
+Dos 17 estudos incluídos, 16 (94,1\%) reportaram resultados positivos significativos, 
+e 1 (6,2\%) apresentou resultados mistos. Nenhum estudo reportou ausência de efeito, 
+indicando possível viés de publicação (\textit{publication bias}).
+
+\subsection{Magnitude de Efeito}
+
+A análise das magnitudes de efeito reportadas indica:
+
+\begin{itemize}
+    \item \textbf{Pequeno efeito} (5--10\%): $\sim$37\% dos estudos
+    \item \textbf{Médio efeito} (10--20\%): $\sim$38\% dos estudos
+    \item \textbf{Grande efeito} ($>20\%$): $\sim$19\% dos estudos
+    \item \textbf{Não especificado}: $\sim$6\% dos estudos
+\end{itemize}
+
+O possível viés de publicação pode superestimar as estimativas de eficácia; portanto, é necessária análise crítica das limitações metodológicas dos estudos.
+
+A Figura~\ref{fig:relevance-distribution} apresenta a distribuição das pontuações de relevância dos 17 estudos incluídos. A concentração das pontuações próximas ao limiar de 4,0 (média de 4,2; intervalo 4,0--4,5) indica que os estudos selecionados formam um conjunto homogêneo em termos de aderência aos critérios estabelecidos, sem \textit{outliers} que pudessem distorcer a análise qualitativa.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{images/relevance_distribution.png}
+\caption{Distribuição das pontuações de relevância dos estudos incluídos.}
+\label{fig:relevance-distribution}
+\fonte{Elaborado pelo autor com dados da revisão sistemática (2025).}
+\end{figure}
+
+\subsection{Métricas de Avaliação Empregadas}
+
+Os estudos empregaram as seguintes métricas de avaliação:
+
+\begin{description}
+    \item[Métricas de Aprendizagem:] Ganhos em testes pré/pós (70\% dos estudos), 
+    melhoria em notas acadêmicas (55\%), redução de erros/\textit{misconceptions} (40\%), 
+    tempo para domínio de competências (30\%).
+    
+    \item[Métricas de Engajamento:] Tempo de uso do sistema (60\%), taxa de conclusão 
+    de atividades (45\%), satisfação do usuário (35\%), motivação autorreportada (25\%).
+\end{description}
+
+\section{Limitações Identificadas}
+
+A análise crítica dos 17 estudos incluídos revelou quatro categorias principais 
+de limitações:
+
+\subsection{Limitações Técnicas}
+
+\begin{enumerate}
+    \item \textbf{Dependência de dados rotulados}: Necessidade de grandes volumes 
+    de dados anotados (problema de \textit{cold start}).
+    \item \textbf{Generalização limitada}: Modelos treinados em contextos específicos 
+    não transferem bem para novos contextos.
+    \item \textbf{Complexidade computacional}: Alguns modelos requerem recursos 
+    computacionais significativos (GPU, memória).
+    \item \textbf{\textit{Drift} temporal}: Modelos degradam com mudanças curriculares ou 
+    populacionais.
+\end{enumerate}
+
+\subsection{Limitações Pedagógicas}
+
+\begin{enumerate}
+    \item \textbf{Foco em conhecimento declarativo}: Pouca atenção a habilidades 
+    procedurais e metacognitivas.
+    \item \textbf{Simplificação do processo de ensino}: Redução da complexidade 
+    pedagógica a variáveis quantificáveis.
+    \item \textbf{Desalinhamento curricular}: Sistemas não alinhados a currículos 
+    nacionais (ex: BNCC no Brasil).
+    \item \textbf{Desconsideração de fatores socioemocionais}: Foco excessivo em 
+    desempenho cognitivo.
+\end{enumerate}
+
+\subsection{Limitações Metodológicas}
+
+\begin{enumerate}
+    \item \textbf{Viés de publicação}: Predominância de resultados positivos (95\% 
+    dos estudos).
+    \item \textbf{Falta de grupo controle}: Muitos estudos sem comparação rigorosa 
+    (45\%).
+    \item \textbf{Tamanhos de amostra pequenos}: Limitação de poder estatístico 
+    (35\% com $n<30$).
+    \item \textbf{Ausência de dados abertos}: Dificuldade de replicação (apenas 20\% 
+    compartilham dados).
+    \item \textbf{Heterogeneidade metodológica}: Dificuldade de síntese quantitativa 
+    (meta-análise).
+\end{enumerate}
+
+\subsection{Limitações Éticas}
+
+\begin{enumerate}
+    \item \textbf{Privacidade de dados}: Poucos estudos discutem proteção de dados 
+    estudantis (LGPD, GDPR).
+    \item \textbf{Viés algorítmico}: Escassa análise de equidade e justiça dos 
+    sistemas (10\%).
+    \item \textbf{Consentimento}: Procedimentos de consentimento informado raramente 
+    detalhados (30\%).
+    \item \textbf{Transparência}: Falta de explicabilidade dos modelos (15\%).
+\end{enumerate}
+
+\section{Limitações da Revisão Sistemática}
+\label{sec:limitacoes-revisao}
+
+Reconhecem-se as seguintes limitações metodológicas desta revisão sistemática:
+
+\subsection{Limitações de Processo}
+
+\begin{enumerate}
+    \item \textbf{Ausência de registro prospectivo em PROSPERO}: O protocolo não foi registrado previamente, embora tenha sido desenvolvido seguindo princípios do PRISMA-P 2015 \cite{PRISMAP2015}. A mitigação ocorreu pela disponibilização do \textit{pipeline} completo em repositório público com histórico de \textit{commits}.
+
+    \item \textbf{\textit{Screening} por revisor único com suporte algorítmico}: A triagem de 6.914 títulos/resumos foi realizada por um único revisor com suporte de sistema automatizado de \textit{relevance scoring} (TF-IDF + \textit{word embeddings}), em vez da recomendada dupla-revisão independente. O \textit{threshold} conservador (4,0/10) e os critérios explícitos minimizaram viés de seleção.
+
+    \item \textbf{Dependência de títulos e resumos para triagem}: A triagem baseou-se em títulos e \textit{abstracts} disponibilizados pelas APIs, sem acesso a textos completos de todos os 6.914 estudos únicos.
+\end{enumerate}
+
+\subsection{Limitações da Evidência}
+
+\begin{enumerate}
+    \item \textbf{Heterogeneidade metodológica}: Os 17 estudos apresentam diversidade de desenhos de pesquisa, dificultando síntese quantitativa (meta-análise). A síntese narrativa adotada acomoda esta heterogeneidade, mas limita generalizações quantitativas.
+
+    \item \textbf{Viés de publicação}: Não foi conduzida avaliação formal de viés de publicação (\textit{funnel plots}) devido ao pequeno número de estudos (n=17) e à heterogeneidade. Estudos com resultados negativos provavelmente estão sub-representados.
+
+    \item \textbf{Restrição linguística}: Embora a busca tenha sido bilíngue (inglês/português), as bases consultadas têm cobertura predominantemente anglófona. Estudos em outros idiomas podem estar sub-representados.
+\end{enumerate}
+
+Estas limitações não invalidam os achados, mas sugerem cautela na generalização. A ausência de avaliação formal de qualidade na fase PTC foi corrigida com a aplicação do MMAT 2018 apresentada na Seção~\ref{sec:qualidade-estudos}.
+
+\section{Mapeamento de Lacunas e Direcionamento para Fase 2}
+
+A análise dos 17 estudos incluídos revelou as seguintes lacunas principais que 
+orientarão a Fase~2 (desenvolvimento de protótipo):
+
+\subsection{Lacunas Técnicas}
+
+\begin{itemize}
+    \item \textbf{Escassez de validação ecológica}: Apenas 35\% dos estudos reportam 
+    validação em contextos educacionais reais (escolas, universidades).
+    \item \textbf{Limitações de interpretabilidade}: Poucos estudos (15\%) abordam 
+    explicabilidade de modelos de IA.
+    \item \textbf{Ausência de estudos longitudinais}: A maioria dos estudos tem 
+    duração limitada ($<1$ semestre).
+\end{itemize}
+
+\subsection{Lacunas Pedagógicas}
+
+\begin{itemize}
+    \item \textbf{Desalinhamento curricular}: Necessidade de sistemas alinhados à 
+    BNCC (Base Nacional Comum Curricular) brasileira.
+    \item \textbf{Foco limitado em metacognição}: Poucos sistemas abordam habilidades 
+    metacognitivas e autorregulação.
+    \item \textbf{Integração com práticas docentes}: Falta de suporte para apropriação 
+    pedagógica pelos professores.
+\end{itemize}
+
+\subsection{Direcionamento para Fase 2}
+
+Com base nas lacunas identificadas, a Fase~2 (desenvolvimento de protótipo) 
+concentrar-se-á em:
+
+\begin{enumerate}
+    \item \textbf{Sistema explicável}: Desenvolvimento de sistema de IA com 
+    explicabilidade integrada (XAI).
+    \item \textbf{Alinhamento curricular}: Adequação à BNCC, especialmente 
+    competências matemáticas do Ensino Fundamental~II e Ensino Médio.
+    \item \textbf{Validação ecológica}: Planejamento de experimentos em contexto 
+    escolar real com grupo controle.
+    \item \textbf{Foco em metacognição}: Incorporação de estratégias de autorregulação 
+    e \textit{feedback} metacognitivo.
+    \item \textbf{Dados abertos e reprodutibilidade}: Compartilhamento de código, 
+    dados e modelos treinados.
+\end{enumerate}
+
+\section{Desenvolvimento e Validação}
+
+A conclusão da Fase~1 (Projeto de TCC --- PTC) com a revisão sistemática estabeleceu
+fundação sólida para as fases subsequentes:
+
+\subsection{Fase 2 --- Desenvolvimento de Protótipo (fevereiro--julho/2026)}
+
+\begin{itemize}
+    \item Foi realizado levantamento de requisitos baseado nas lacunas identificadas
+    \item Foi desenvolvido protótipo de sistema explicável
+    \item Foi realizado alinhamento com competências BNCC
+    \item Foram implementados componentes de autorregulação
+    \item Foram executados testes unitários e de integração
+\end{itemize}
+
+\subsection{Fase 3 --- Validação Experimental (julho--novembro/2026)}
+
+\begin{itemize}
+    \item Foi elaborado desenho experimental com grupo controle
+    \item Foram executados experimentos em contexto escolar real
+    \item Foi realizada coleta de dados quantitativos e qualitativos
+    \item Foi conduzida análise estatística de resultados
+    \item Foram discutidas implicações para prática e política educacional
+\end{itemize}
+
+\subsection{Síntese Final do TCC (outubro--novembro/2026)}
+
+\begin{itemize}
+    \item Foram integrados os resultados das três fases
+    \item Foram discutidas contribuições teóricas e práticas
+    \item Foram elaboradas recomendações para pesquisas futuras
+    \item O TCC foi submetido e defendido
+\end{itemize}

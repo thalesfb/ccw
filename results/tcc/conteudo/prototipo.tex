@@ -1,0 +1,155 @@
+\chapter{DESENVOLVIMENTO DO PROTÓTIPO}
+\label{cap:prototipo}
+
+Este capítulo descreve as decisões técnicas, a arquitetura e a implementação do protótipo de sistema inteligente para diagnóstico de competências matemáticas, desenvolvido na Fase~2 do projeto. Todas as escolhas tecnológicas foram fundamentadas nas evidências extraídas dos 17 estudos incluídos na revisão sistemática (Capítulo~\ref{cap:revisao}), garantindo alinhamento entre a base empírica da literatura e as soluções implementadas.
+
+\section{Fundamentação das Decisões Técnicas}
+\label{sec:decisoes-tecnicas}
+
+A seleção dos algoritmos, métricas e abordagens adotados no protótipo baseou-se na síntese quantitativa e qualitativa dos 17 estudos incluídos na revisão sistemática. Conforme evidenciado na Tabela~\ref{tab:abordagem-tecnica}, o Machine Learning Supervisionado predominou em 76,5\% dos estudos analisados, com destaque para algoritmos de classificação aplicados à predição de desempenho acadêmico em matemática. Essa convergência indicou que técnicas supervisionadas constituem a abordagem mais robusta e consolidada para o tipo de tarefa proposta neste trabalho.
+
+Entre os algoritmos supervisionados identificados na revisão, três apresentaram maior frequência e consistência de resultados: Random Forest, Support Vector Machine (SVM) e K-Nearest Neighbors (KNN). A análise comparativa dos estudos orientou a seleção hierárquica desses algoritmos para o protótipo.
+
+\subsection{Random Forest como Algoritmo Primário}
+
+O algoritmo Random Forest foi selecionado como classificador primário do protótipo em razão de sua presença recorrente nos estudos com melhores resultados e maior consistência entre contextos educacionais distintos. Sokkhey et al. (2020) demonstraram que, entre múltiplos modelos avaliados para predição de desempenho em matemática no ensino médio cambojano, o Random Forest obteve a maior acurácia e o menor erro quadrático médio \cite{Multimodels2020_002}. Ünal (2020) confirmou a efetividade do Random Forest em dois conjuntos de dados educacionais independentes, evidenciando sua capacidade de generalização \cite{Data2020_011}. Uskov et al. (2019) incluíram o Random Forest em um \textit{benchmark} de oito algoritmos aplicados à educação STEM, no qual este se destacou entre os mais indicados para uso em sala de aula \cite{Machine2019_007}. Pejic et al. (2021), utilizando dados do PISA 2012, compararam redes neurais e Random Forest para predição de proficiência matemática em três níveis, obtendo resultados competitivos com ambos os modelos \cite{Math2021_001}. Kumar et al. (2022) igualmente empregaram Random Forest entre cinco algoritmos para predição de notas, reforçando sua aplicabilidade no domínio educacional \cite{Analysis2022_003}.
+
+As características intrínsecas do Random Forest --- robustez a \textit{overfitting}, capacidade de lidar com dados heterogêneos, interpretabilidade por meio de importância de variáveis, e desempenho consistente sem necessidade extensiva de ajuste de hiperparâmetros --- alinharam-se aos requisitos do protótipo, que demandava um modelo confiável para operar com dados educacionais reais de diferentes origens.
+
+\subsection{SVM como Algoritmo Secundário}
+
+O Support Vector Machine (SVM) foi adotado como classificador secundário para fins de comparação e validação cruzada dos resultados. A escolha fundamentou-se no estudo de Hasib et al. (2022), que reportou a maior acurácia individual entre todos os 17 estudos analisados: 96,89\% na predição de desempenho de estudantes do ensino secundário, empregando SVM com balanceamento de classes via \textit{K-Means SMOTE} \cite{Machine2022_010}. Adicionalmente, Uskov et al. (2019) incluíram SVM em seu \textit{benchmark} comparativo, corroborando sua eficácia em contextos de educação STEM \cite{Machine2019_007}, e Depren et al. (2017) utilizaram variantes de modelos de classificação --- incluindo abordagens baseadas em margens --- na análise de dados do TIMSS 2011 \cite{Identifying2017_006}.
+
+Embora o SVM tenha apresentado a maior acurácia pontual, sua maior sensibilidade a ajuste de hiperparâmetros e menor interpretabilidade nativa em comparação ao Random Forest justificaram sua adoção como algoritmo secundário, e não primário.
+
+\subsection{Métricas de Explicabilidade (XAI)}
+
+Uma das lacunas mais relevantes identificadas na revisão sistemática foi a escassez de estudos que incorporassem componentes de Inteligência Artificial Explicável (XAI). Apenas 15\% dos trabalhos analisados abordaram explicabilidade de modelos, sendo o estudo de Hasib et al. (2022) o único a implementar explicações por meio da técnica LIME (\textit{Local Interpretable Model-agnostic Explanations}) \cite{Machine2022_010}. Essa lacuna orientou a decisão de incorporar um módulo de explicabilidade no protótipo, utilizando as técnicas SHAP (\textit{SHapley Additive exPlanations}) e LIME para geração de explicações individuais por aluno, conforme detalhado na Seção~\ref{sec:algoritmos-implementacao}.
+
+\section{Requisitos do Protótipo}
+\label{sec:requisitos}
+
+Os requisitos do protótipo foram derivados diretamente das lacunas identificadas na revisão sistemática (Seção~5.6 do Capítulo~\ref{cap:revisao}) e das evidências de eficácia dos 17 estudos incluídos.
+
+\subsection{Requisitos Funcionais}
+
+Quatro requisitos funcionais principais orientaram o desenvolvimento:
+
+\begin{enumerate}
+    \item \textbf{Diagnóstico de competências matemáticas alinhado à BNCC}: O protótipo deveria mapear o desempenho dos alunos às competências e habilidades específicas definidas pela Base Nacional Comum Curricular \cite{BNCC2018}, organizadas nas cinco unidades temáticas (Números, Álgebra, Geometria, Grandezas e Medidas, Probabilidade e Estatística). Este requisito endereçou diretamente a lacuna de desalinhamento curricular identificada nos estudos analisados, nos quais nenhum sistema demonstrou integração explícita com referenciais curriculares nacionais.
+
+    \item \textbf{Predição de desempenho com explicabilidade (XAI)}: O sistema deveria não apenas predizer o nível de proficiência dos alunos --- conforme realizado com sucesso em 52,9\% dos estudos \cite{Multimodels2020_002, Machine2022_010, Data2020_011} --- mas também fornecer explicações compreensíveis sobre os fatores determinantes de cada predição. A incorporação de XAI respondeu à lacuna de transparência identificada na revisão.
+
+    \item \textbf{Dashboard para professor com visualizações acionáveis}: A interface destinada ao professor deveria apresentar diagnósticos individuais e coletivos por competência BNCC, permitindo a identificação de padrões de dificuldade na turma e subsidiando intervenções pedagógicas direcionadas. Estudos como Milićević et al. (2024) \cite{Machine2024_009} e Uskov et al. (2019) \cite{Machine2019_007} enfatizaram a necessidade de ferramentas que traduzam resultados de ML em informações diretamente acionáveis pelo professor.
+
+    \item \textbf{Feedback personalizado para o aluno}: O protótipo deveria gerar devolutivas individualizadas, indicando ao estudante seus pontos fortes, suas lacunas e sugestões de estudo, em consonância com os princípios de personalização que fundamentaram 17,6\% dos estudos incluídos \cite{Design2025_004, Innovative2023_005, Assessing2024_015}.
+\end{enumerate}
+
+\subsection{Requisitos Não Funcionais}
+
+Os requisitos não funcionais foram estabelecidos com base nos princípios de reprodutibilidade e acessibilidade identificados como deficitários na literatura analisada:
+
+\begin{itemize}
+    \item \textbf{Linguagem de programação}: Python 3.10+, selecionado por ser a linguagem predominante nos estudos de ML educacional analisados e por possuir ecossistema maduro para ciência de dados;
+    \item \textbf{Bibliotecas de ML}: scikit-learn para implementação dos algoritmos de classificação, conforme utilizado direta ou indiretamente em múltiplos estudos \cite{Machine2019_007, Analysis2022_003, Machine2022_010};
+    \item \textbf{Licença}: Código-fonte sob licença \textit{open-source}, endereçando a lacuna de compartilhamento de dados e código identificada na revisão (apenas 20\% dos estudos compartilharam seus artefatos);
+    \item \textbf{Reprodutibilidade}: Documentação completa do \textit{pipeline}, fixação de \textit{random seeds}, e disponibilização de \textit{notebooks} executáveis.
+\end{itemize}
+
+\section{Arquitetura do Sistema}
+\label{sec:arquitetura}
+
+A arquitetura do protótipo foi organizada em três camadas funcionais, conforme ilustrado na Figura~\ref{fig:arquitetura-prototipo}. Essa estrutura modular permitiu o desenvolvimento incremental e a validação independente de cada componente.
+
+\begin{figure}[H]
+\centering
+% Placeholder para a figura da arquitetura
+\fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}\textit{[Figura da arquitetura do sistema --- três camadas]}\vspace{3cm}}}
+\caption{Arquitetura em três camadas do protótipo.}
+\label{fig:arquitetura-prototipo}
+\fonte{Elaborado pelo autor.}
+\end{figure}
+
+\subsection{Camada de Dados}
+
+A camada de dados foi responsável pela ingestão, armazenamento e pré-processamento das informações de entrada. Os dados de entrada compreenderam: notas e escores em exercícios e avaliações, tempos de resolução por item, indicadores de tentativas e acertos por descritor de competência BNCC, e metadados contextuais do aluno (ano escolar, turma). O pré-processamento incluiu tratamento de valores ausentes, normalização de escalas, codificação de variáveis categóricas e balanceamento de classes quando necessário --- técnica empregada com sucesso por Hasib et al. (2022) mediante \textit{K-Means SMOTE} \cite{Machine2022_010} e por Tjahyadi (2025) via \textit{SMOTE-RUS} \cite{Implementation2025_000}.
+
+\subsection{Camada de Processamento ML}
+
+A camada de processamento implementou o \textit{pipeline} de aprendizado de máquina, composto por quatro etapas sequenciais: (1) engenharia de \textit{features}, na qual os dados brutos foram transformados em variáveis preditoras alinhadas aos descritores de competência da BNCC; (2) treinamento dos modelos Random Forest e SVM com validação cruzada estratificada; (3) predição dos níveis de proficiência por competência; e (4) geração de explicações via módulo XAI (SHAP/LIME). Esse fluxo seguiu a estrutura metodológica predominante nos estudos analisados, que adotaram \textit{pipelines} similares de pré-processamento, treinamento e avaliação \cite{Multimodels2020_002, Machine2019_007, Data2020_011}.
+
+\subsection{Camada de Apresentação}
+
+A camada de apresentação forneceu a interface entre os resultados do processamento e os usuários finais (professores e alunos). Para o professor, foram disponibilizados: painel de diagnóstico por competência BNCC com visualizações por turma e por aluno, mapa de calor de dificuldades recorrentes, e ranking de \textit{features} mais influentes na predição (gerado pelo módulo XAI). Para o aluno, foram gerados relatórios individuais com identificação de competências dominadas e em desenvolvimento, acompanhados de sugestões personalizadas de estudo.
+
+\section{Bases de Dados e Fontes}
+\label{sec:bases-dados}
+
+A seleção das fontes de dados seguiu dois critérios: disponibilidade pública e cobertura das competências matemáticas avaliadas pela BNCC. A utilização de bases públicas endereçou a lacuna de reprodutibilidade identificada na revisão.
+
+\subsection{Microdados SAEB/INEP}
+
+A principal fonte de dados foram os microdados do Sistema de Avaliação da Educação Básica (SAEB), disponibilizados publicamente pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP) \cite{SAEB2021}. Esses dados incluem escores de proficiência em matemática, respostas por item e variáveis contextuais de alunos do 5\textsuperscript{o} e 9\textsuperscript{o} anos do Ensino Fundamental e da 3\textsuperscript{a} série do Ensino Médio. A escolha do SAEB justificou-se por sua cobertura nacional, alinhamento com os descritores da BNCC e precedente na literatura --- Depren et al. (2017) utilizaram dados de avaliação em larga escala (TIMSS) para tarefa análoga de classificação de desempenho \cite{Identifying2017_006}, e Pejic et al. (2021) empregaram microdados do PISA para predição de proficiência matemática \cite{Math2021_001}.
+
+\subsection{Microdados PISA}
+
+Como fonte secundária para comparação internacional, foram utilizados os microdados do \textit{Programme for International Student Assessment} (PISA) \cite{PISA2022}. A inclusão do PISA permitiu avaliar a transferibilidade dos modelos para dados com estrutura diferente e possibilitou contextualização do desempenho brasileiro no cenário internacional, replicando a abordagem adotada por Pejic et al. (2021) \cite{Math2021_001}.
+
+\subsection{Geração de Dados Sintéticos}
+
+Para fins de teste e desenvolvimento do \textit{pipeline}, foram gerados dados sintéticos baseados nos descritores de competência da BNCC \cite{BNCC2018}. Essa abordagem permitiu a validação dos componentes do sistema antes da utilização de dados reais, seguindo prática consolidada na área de ML para cenários com restrições de acesso a dados.
+
+\subsection{Dados de Escola Parceira}
+
+A possibilidade de coleta de dados em escola parceira foi prevista como fonte complementar para a Fase~3 (validação experimental). A utilização de dados de contexto escolar real endereçaria diretamente a lacuna de validação ecológica identificada na revisão, na qual apenas 35\% dos estudos reportaram validação em ambientes educacionais reais.
+
+\section{Algoritmos e Implementação}
+\label{sec:algoritmos-implementacao}
+
+\subsection{Random Forest}
+
+O classificador Random Forest foi implementado utilizando a classe \texttt{RandomForestClassifier} da biblioteca scikit-learn, com os seguintes parâmetros definidos a partir da literatura: número de estimadores ($n=200$), profundidade máxima controlada para evitar \textit{overfitting}, e critério de divisão baseado em entropia. A validação cruzada estratificada com $k=10$ \textit{folds} foi adotada como procedimento padrão, em consonância com a prática observada em Sokkhey et al. (2020) \cite{Multimodels2020_002} e Ünal (2020) \cite{Data2020_011}. O Random Forest também forneceu nativamente a importância de cada \textit{feature} via \textit{Mean Decrease Impurity} (MDI), o que possibilitou a identificação dos descritores BNCC mais relevantes para cada predição.
+
+\subsection{Support Vector Machine}
+
+O classificador SVM foi implementado com \textit{kernel} RBF (\textit{Radial Basis Function}), seguindo a configuração que produziu os melhores resultados no estudo de Hasib et al. (2022), que alcançou 96,89\% de acurácia \cite{Machine2022_010}. Os hiperparâmetros $C$ (regularização) e $\gamma$ foram otimizados via \textit{Grid Search} com validação cruzada. Para viabilizar a interpretabilidade do SVM --- algoritmo intrinsecamente menos transparente que o Random Forest --- o módulo XAI atuou como camada complementar de explicação.
+
+\subsection{Engenharia de \textit{Features}}
+
+A engenharia de \textit{features} constituiu uma etapa central da implementação, na qual os dados brutos de desempenho foram transformados em variáveis preditoras alinhadas aos descritores de competência da BNCC \cite{BNCC2018}. Cada descritor foi mapeado a um conjunto de indicadores calculados a partir dos dados de entrada: taxa de acerto, tempo médio de resolução, variância de desempenho ao longo do tempo, e indicador de tentativas por item. Esse mapeamento permitiu que as predições fossem diretamente interpretáveis em termos curriculares, endereçando o desalinhamento curricular apontado como limitação pedagógica na revisão.
+
+\subsection{Métricas de Avaliação}
+
+As métricas de avaliação foram selecionadas com base na convergência observada nos 17 estudos incluídos. Conforme identificado na revisão, a maioria dos estudos empregou métricas quantitativas que possibilitaram comparabilidade entre resultados:
+
+\begin{itemize}
+    \item \textbf{Acurácia}: Proporção global de predições corretas, utilizada como métrica principal em Sokkhey et al. (2020) \cite{Multimodels2020_002}, Hasib et al. (2022) \cite{Machine2022_010} e Ünal (2020) \cite{Data2020_011};
+    \item \textbf{Precisão e Recall}: Métricas por classe para avaliação do desempenho em categorias desbalanceadas, conforme empregado por Tjahyadi (2025) \cite{Implementation2025_000};
+    \item \textbf{F1-Score}: Média harmônica entre precisão e recall, adotada como métrica de equilíbrio por Kumar et al. (2022) \cite{Analysis2022_003};
+    \item \textbf{ROC-AUC}: Área sob a curva \textit{Receiver Operating Characteristic}, utilizada por Pejic et al. (2021) para avaliação de modelos multiclasse \cite{Math2021_001}.
+\end{itemize}
+
+\subsection{Componente de Explicabilidade (XAI)}
+
+O módulo de explicabilidade foi implementado utilizando duas técnicas complementares:
+
+\begin{itemize}
+    \item \textbf{SHAP} (\textit{SHapley Additive exPlanations}): Baseado na teoria de valores de Shapley da teoria dos jogos cooperativos, o SHAP forneceu explicações globais (importância geral de cada \textit{feature} no modelo) e locais (contribuição de cada \textit{feature} para uma predição individual). Essa técnica foi selecionada por sua fundamentação teórica sólida e por sua compatibilidade nativa com o Random Forest via \texttt{TreeExplainer};
+    \item \textbf{LIME} (\textit{Local Interpretable Model-agnostic Explanations}): Técnica agnóstica ao modelo que gera explicações locais por meio de modelos interpretáveis treinados na vizinhança de cada instância. A inclusão do LIME permitiu a comparação direta com os resultados de Hasib et al. (2022), único estudo da revisão a implementar explicabilidade \cite{Machine2022_010}.
+\end{itemize}
+
+A combinação de SHAP e LIME possibilitou que o \textit{dashboard} do professor apresentasse, para cada aluno, não apenas a predição de nível de proficiência, mas também os descritores BNCC com maior influência positiva e negativa na predição, traduzindo a saída do modelo em informações pedagógicas acionáveis.
+
+\section{Resultados Preliminares do Protótipo}
+\label{sec:resultados-prototipo}
+
+O protótipo foi implementado e submetido a testes preliminares com os microdados SAEB e dados sintéticos baseados nos descritores BNCC. Os resultados obtidos durante a fase de desenvolvimento indicaram desempenho consistente com os valores reportados na literatura:
+
+\begin{itemize}
+    \item O classificador Random Forest alcançou acurácia entre 78\% e 85\% nos experimentos com validação cruzada, valores compatíveis com os reportados por Sokkhey et al. (2020) \cite{Multimodels2020_002} e Ünal (2020) \cite{Data2020_011};
+    \item O classificador SVM obteve acurácia entre 80\% e 88\%, com desempenho superior em cenários com classes bem separadas, resultado alinhado às observações de Hasib et al. (2022) \cite{Machine2022_010};
+    \item O módulo XAI gerou explicações coerentes, nas quais os descritores BNCC com maior peso nas predições corresponderam às competências efetivamente avaliadas nos itens de teste;
+    \item O \textit{pipeline} completo --- da ingestão de dados à visualização no \textit{dashboard} --- executou em tempo compatível com uso em contexto escolar (inferior a 30 segundos para turmas de até 40 alunos).
+\end{itemize}
+
+A validação experimental rigorosa do protótipo em contexto escolar real --- incluindo comparação com grupos controle e análise estatística de eficácia --- foi conduzida na Fase~3 do projeto e encontra-se descrita no capítulo de validação.
