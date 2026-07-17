@@ -1,111 +1,74 @@
 %=======================================================================
-%
-% ------------------------------------------------------------------------
-% ------------------------------------------------------------------------
-% abnTeX2: Modelo de Trabalho Academico  em conformidade com 
-% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos
-% ------------------------------------------------------------------------
-%Customização IFC
-% ------------------------------------------------------------------------
-% Autor:  Tiago Possato (tiago.possato@yahoo.com.br), baseado no modelo de Eliton Tiago (elitontiago@hotmail.com)
-% Versão: 08 de Outubro de 2017.
+% Legacy IFC abnTeX2 customization created in 2017.
+% The final PDF must be checked against the current institutional template
+% and the normative baseline recorded in docs/TCC_REVISION_SCOPE.md.
 % Codificação: UTF-8
-% LaTeX:  abnTeX2
-%
 %=======================================================================
 
 \documentclass[
 	% -- opções da classe memoir --
-	12pt,				% tamanho da fonte	
-	oneside,          % não imprimir em verso e anverso, oposto do twoside 
-	a4paper,			% tamanho do papel. 
+	12pt,
+	oneside,
+	a4paper,
 	% -- opções da classe abntex2 --
-	chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-	section=TITLE,		% títulos de seções convertidos em letras maiúsculas
-	subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
-	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	chapter=TITLE,
+	section=TITLE,
+	subsection=TITLE,
 	% -- opções do pacote babel --
-	english,			% idioma adicional para hifenização
-	brazil			% o último idioma é o principal do documento
-	,sumario=tradicional,
-	]{abntex2-IFC}
+	english,
+	brazil,
+	sumario=tradicional,
+]{abntex2-IFC}
 
-
-\include{config_inicial}
-
-%----Include da capa é fora do documento 
-\include{pretextuais/capa}
-%---
+% Arquivos de configuração do preâmbulo devem ser carregados com \input.
+\input{config_inicial}
+\input{pretextuais/capa}
 
 \begin{document}
-% Retira espaço extra obsoleto entre as frases.
-\frenchspacing 
+\frenchspacing
 
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
 % ----------------------------------------------------------
 
-%--- CAPA ----
 \imprimircapa
-
-% --- FOLHA DE ROSTO
 \imprimirfolhaderosto
-% \imprimirfolhaderosto* (o * indica que haverá a ficha bibliográfica)
 
-% Inserir FOLHA DE APROVAÇÃO
 \include{pretextuais/folhadeaprovacao}
-
-% Inserir FOLHA DE AUTORIZAÇÃO
 % \include{pretextuais/folhadeautorizacao}
-
-% DEDICATÓRIA
 \include{pretextuais/dedicatoria}
-
-% AGRADECIMENTO
 \include{pretextuais/agradecimentos}
-
-%EPÍGRAFE
 \include{pretextuais/epigrafe}
-
-% RESUMO
 \include{pretextuais/resumo}
 
-% lista de ilustrações
 \pdfbookmark[0]{\listfigurename}{lof}
 \listoffigures*
 \cleardoublepage
-% ---
 
-% lista de quadros
-% --- 
-%PRECISO VER COMO FAZER O CONTROLE DE QUANDO TIVER MENOS Q 10 VAI PARA LISTA DE ILUSTRAÇÕES
 \pdfbookmark[0]{\listofquadrosname}{loq}
-%\listofquadros*
-%\cleardoublepage
-% ---
+% \listofquadros*
+% \cleardoublepage
 
-% LISTA DE TABELAS
 \pdfbookmark[0]{\listtablename}{lot}
-%\listoftables*
-%\cleardoublepage  %-- força proxima pagina
+% \listoftables*
+% \cleardoublepage
 
-% ---
-% inserir lista de abreviaturas e siglas
-% ---
 \begin{siglas}
   \item[ABNT] Associação Brasileira de Normas Técnicas
   \item[ACO] \textit{Ant Colony Optimization} (Otimização por Colônia de Formigas)
   \item[ANN] \textit{Artificial Neural Networks} (Redes Neurais Artificiais)
+  \item[API] \textit{Application Programming Interface} (Interface de Programação de Aplicações)
   \item[BNCC] Base Nacional Comum Curricular
   \item[CNN] \textit{Convolutional Neural Networks} (Redes Neurais Convolucionais)
   \item[DL] \textit{Deep Learning} (Aprendizado Profundo)
+  \item[DOI] \textit{Digital Object Identifier}
   \item[DT] \textit{Decision Trees} (Árvores de Decisão)
   \item[EDM] \textit{Educational Data Mining} (Mineração de Dados Educacionais)
   \item[IA] Inteligência Artificial
   \item[IFC] Instituto Federal Catarinense
   \item[IOM] \textit{Institute of Medicine}
   \item[KNN] \textit{K-Nearest Neighbors} (K-Vizinhos Mais Próximos)
-  \item[LA] \textit{Learning Analytics} (Analítica de Aprendizagem)
+  \item[LA] \textit{Learning Analytics} (Analítica da Aprendizagem)
   \item[LIME] \textit{Local Interpretable Model-agnostic Explanations}
   \item[LR] \textit{Logistic Regression} (Regressão Logística)
   \item[ML] \textit{Machine Learning} (Aprendizado de Máquina)
@@ -116,6 +79,7 @@
   \item[PICOS] \textit{Population, Intervention, Comparison, Outcomes, Study Design}
   \item[PISA] \textit{Programme for International Student Assessment}
   \item[PRISMA] \textit{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}
+  \item[PRISMA-P] \textit{Preferred Reporting Items for Systematic Review and Meta-Analysis Protocols}
   \item[PTC] Projeto de Trabalho de Conclusão de Curso
   \item[RF] \textit{Random Forest} (Floresta Aleatória)
   \item[RL] \textit{Reinforcement Learning} (Aprendizado por Reforço)
@@ -126,22 +90,10 @@
   \item[STI] Sistemas Tutores Inteligentes
   \item[SVM] \textit{Support Vector Machines} (Máquinas de Vetores de Suporte)
   \item[TCC] Trabalho de Conclusão de Curso
+  \item[TF-IDF] \textit{Term Frequency--Inverse Document Frequency}
   \item[XAI] \textit{eXplainable Artificial Intelligence} (Inteligência Artificial Explicável)
 \end{siglas}
-% ---
 
-% ---
-% inserir lista de símbolos
-% ---
-%\begin{simbolos}
-%  \item[$ \Gamma $] Descrever o que o símbolo representa em seu trabalho. Exemplo abaixo.
-%  \item[$ \omega $] Frequência angular [rad/s].
-%  \item[$ \zeta $] Coeficiente de amortecimento.
-
-%\end{simbolos}
-% ---
-
-% SUMARIO
 \pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents*
 \cleardoublepage
@@ -150,28 +102,14 @@
 % ELEMENTOS TEXTUAIS
 % ------------------------------------------------------
 \textual
-% INTRODUÇÃO
+
 \include{conteudo/introducao}
-
-% FUNDAMENTAÇÃO TEÓRICA
 \include{conteudo/fundamentacao}
-
-% METODOLOGIA
 \include{conteudo/metodologia}
-
-% REVISÃO SISTEMÁTICA DA LITERATURA
 \include{conteudo/resultadosesperados}
-
-% DESENVOLVIMENTO DO PROTÓTIPO
 \include{conteudo/prototipo}
-
-% RESULTADOS E DISCUSSÃO
 \include{conteudo/resultados}
-
-% CONCLUSÃO
 \include{conteudo/conclusao}
-
-% CRONOGRAMA
 \include{conteudo/cronograma}
 
 % ----------------------------------------------------------
@@ -179,20 +117,9 @@
 % ----------------------------------------------------------
 \postextual
 
-% ----------------------------------------------------------
-% Referências bibliográficas
-% ----------------------------------------------------------
-
 \bibliography{referencias}
-
-%Apêndices
 \include{postextuais/apendice}
-
-%Anexos
 % \include{postextuais/anexo}
-
-%---------------------------------------------------------------------
-% INDICE REMISSIVO
-%---------------------------------------------------------------------
 % \printindex
+
 \end{document}

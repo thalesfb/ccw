@@ -1,0 +1,125 @@
+name: TCC quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tcc-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check whitespace errors
+        run: git diff --check origin/main...HEAD
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: research/requirements.txt
+
+      - name: Install research dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r research/requirements.txt pytest
+
+      - name: Compile Python sources
+        working-directory: research
+        run: python -m compileall -q src
+
+      - name: Check generated MMAT table
+        working-directory: research
+        run: python -m src.analysis.mmat_tcc_table --check
+
+      - name: Check canonical MMAT CSV export
+        run: cmp research/data/mmat_assessments.csv research/exports/analysis/mmat_assessment.csv
+
+      - name: Run MMAT and advisor-feedback regression tests
+        working-directory: research
+        shell: bash
+        run: |
+          set +e
+          python -m pytest \
+            tests/test_mmat.py \
+            tests/test_mmat_artifacts.py \
+            tests/test_tcc_advisor_feedback.py \
+            -q --tb=short 2>&1 | tee advisor-tests.log
+          status=${PIPESTATUS[0]}
+          exit "$status"
+
+      - name: Upload source-validation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tcc-source-validation
+          path: research/advisor-tests.log
+          if-no-files-found: warn
+          retention-days: 7
+
+  latex-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk \
+            texlive-fonts-recommended \
+            texlive-lang-portuguese \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-plain-generic
+
+      - name: Prepare legacy IFC template paths
+        working-directory: results/tcc
+        run: |
+          test -d abnetx2
+          ln -sfn abnetx2 abntex2
+
+      - name: Compile TCC
+        working-directory: results/tcc
+        run: |
+          if ! latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex > build.log 2>&1; then
+            echo "LaTeX compilation failed. Last 120 lines:"
+            tail -n 120 build.log
+            exit 1
+          fi
+
+      - name: Upload LaTeX diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tcc-latex-diagnostics
+          path: |
+            results/tcc/build.log
+            results/tcc/main.log
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Upload compiled TCC
+        uses: actions/upload-artifact@v4
+        with:
+          name: tcc-pdf
+          path: results/tcc/main.pdf
+          if-no-files-found: error
+          retention-days: 7
