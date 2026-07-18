@@ -7,23 +7,23 @@ Nesse contexto, recursos como aprendizado de máquina (\textbf{\textit{machine l
 
 \section{Justificativa}
 
-A relevância deste trabalho decorreu de duas necessidades complementares. A primeira foi organizar a literatura, dispersa entre diferentes bases e áreas de pesquisa, sobre técnicas computacionais aplicadas ao ensino de matemática. A segunda foi produzir uma base técnica e pedagógica para uma etapa posterior de levantamento de tecnologias, fontes de dados e alternativas de prototipação.
+A relevância deste trabalho decorreu de duas necessidades complementares. A primeira consistiu em organizar a literatura, dispersa entre diferentes bases e áreas de pesquisa, sobre técnicas computacionais aplicadas ao ensino de matemática. A segunda consistiu em transformar as evidências encontradas em requisitos técnicos e pedagógicos para uma especificação de protótipo voltada ao apoio do professor.
 
-Para professores, uma síntese crítica pode auxiliar na compreensão de quais abordagens foram estudadas, quais resultados foram reportados e quais limitações permanecem. Para estudantes e instituições, a pesquisa contribui ao explicitar que desempenho observado, proficiência estimada, competência e aprendizagem são conceitos relacionados, porém não equivalentes. Essa distinção é necessária para impedir que uma classificação algorítmica seja tratada como diagnóstico definitivo.
+Para professores, uma síntese crítica auxilia na compreensão das abordagens investigadas, dos resultados reportados e das limitações metodológicas recorrentes. Para estudantes e instituições, a pesquisa contribui ao explicitar que desempenho observado, proficiência estimada, competência e aprendizagem são conceitos relacionados, porém não equivalentes. Essa distinção reduz o risco de uma classificação algorítmica ser tratada como diagnóstico definitivo.
 
-Do ponto de vista acadêmico, a revisão sistemática permitiu documentar as estratégias de busca, a seleção dos estudos e a avaliação de suas limitações metodológicas. O relato foi estruturado com apoio do PRISMA 2020 \cite{PRISMA2020}, enquanto a qualidade dos estudos incluídos foi examinada pelo MMAT 2018 \cite{MMAT2018}.
+Do ponto de vista acadêmico, a revisão sistemática documentou as estratégias de busca, a seleção dos estudos e a avaliação de suas limitações metodológicas. O relato foi estruturado com apoio do PRISMA 2020 \cite{PRISMA2020}, enquanto os estudos incluídos foram examinados pelo MMAT 2018 \cite{MMAT2018}. A síntese da revisão e a fundamentação pedagógica sustentaram a definição dos requisitos, dos critérios de dados e modelagem, do protocolo de avaliação e da arquitetura de referência apresentados neste trabalho.
 
 \section{Problema de Pesquisa}
 
 Diante desse contexto, o trabalho respondeu ao seguinte problema de pesquisa:
 
-Como identificar e sintetizar, por meio de revisão sistemática da literatura, as principais técnicas computacionais aplicadas ao ensino de matemática, de modo a subsidiar a futura definição de uma ferramenta de apoio ao professor para o diagnóstico de competências e dificuldades dos estudantes?
+Como identificar e sintetizar, por meio de revisão sistemática da literatura, as principais técnicas computacionais aplicadas ao ensino de matemática e converter essas evidências em uma especificação de protótipo que apoie o professor no diagnóstico de competências e dificuldades dos estudantes?
 
 \section{Objetivos}
 
 \subsection{Objetivo Geral}
 
-Mapear e analisar sistematicamente as aplicações de técnicas computacionais no ensino de matemática, identificando tendências, limitações e requisitos que possam fundamentar o levantamento posterior de tecnologias, fontes de dados e alternativas de prototipação.
+Mapear e analisar sistematicamente as aplicações de técnicas computacionais no ensino de matemática e, a partir das evidências encontradas, elaborar uma especificação técnica e pedagógica de protótipo para apoio ao diagnóstico de competências.
 
 \subsection{Objetivos Específicos}
 
@@ -34,14 +34,14 @@ Mapear e analisar sistematicamente as aplicações de técnicas computacionais n
     \item \textbf{OE4}: analisar criticamente as metodologias e limitações dos estudos incluídos;
     \item \textbf{OE5}: mapear lacunas técnicas, pedagógicas, metodológicas e éticas;
     \item \textbf{OE6}: manter um \textit{pipeline} automatizado e auditável para coleta, processamento e exportação da revisão;
-    \item \textbf{OE7}: estabelecer requisitos e critérios para a futura avaliação de tecnologias, bases de dados e possibilidades de prototipação.
+    \item \textbf{OE7}: derivar requisitos funcionais e não funcionais, critérios de seleção de dados e modelos, um protocolo de avaliação e uma arquitetura de referência para o protótipo.
 \end{itemize}
 
 \section{Delimitação do Trabalho}
 
-A etapa concluída e documentada neste momento correspondeu à revisão sistemática da literatura e à preparação de seus artefatos de pesquisa. A seleção definitiva da base de dados, da arquitetura, das bibliotecas e dos modelos do protótipo não foi apresentada como resultado concluído. Essas decisões serão tomadas depois da consolidação das correções metodológicas e textuais, com registro das justificativas e limitações.
+O escopo executado compreendeu a revisão sistemática da literatura, a avaliação metodológica dos estudos incluídos e a elaboração de uma especificação conceitual de protótipo. Essa especificação consolidou princípios pedagógicos, requisitos, critérios para seleção de fontes de dados e modelos, procedimentos de avaliação e uma arquitetura de referência.
 
-Também não se afirmou eficácia pedagógica de uma ferramenta ainda não submetida a validação experimental. Uma futura validação em contexto escolar dependerá de desenho de pesquisa apropriado, autorização institucional, proteção dos dados dos participantes e participação de profissionais da educação.
+O desenvolvimento de uma aplicação funcional, o treinamento de modelos com uma base definitiva e a validação com participantes não integraram o escopo empírico desta pesquisa. Por essa razão, o trabalho não atribuiu ao protótipo métricas próprias de acurácia nem alegou eficácia pedagógica. Essa delimitação preservou a correspondência entre as afirmações apresentadas e os artefatos efetivamente produzidos.
 
 \section{Estrutura do Trabalho}
 
@@ -50,12 +50,12 @@ O documento foi organizado da seguinte forma:
 \begin{description}
     \item[Capítulo 1 -- Introdução:] apresenta o contexto, a justificativa, o problema, os objetivos e a delimitação do trabalho;
     \item[Capítulo 2 -- Fundamentação Teórica:] discute aprendizagem matemática, avaliação, técnicas computacionais e limites das inferências baseadas em dados;
-    \item[Capítulo 3 -- Metodologia:] descreve a revisão sistemática, a estratégia de busca, os critérios de seleção, o processo de deduplicação, o PRISMA e o MMAT;
+    \item[Capítulo 3 -- Metodologia:] descreve a revisão sistemática, a estratégia de busca, os critérios de seleção, o processo de deduplicação, o PRISMA, o MMAT e o procedimento de derivação da especificação;
     \item[Capítulo 4 -- Revisão Sistemática da Literatura:] apresenta o fluxo de seleção, a síntese dos estudos, a avaliação por critérios e as lacunas identificadas;
-    \item[Capítulo 5 -- Planejamento do Protótipo:] organiza requisitos e alternativas que deverão orientar o levantamento de tecnologias, fontes de dados e arquitetura;
-    \item[Capítulo 6 -- Resultados e Discussão:] permanece reservado para resultados produzidos após implementação e validação;
-    \item[Capítulo 7 -- Conclusão:] será consolidado após a conclusão das etapas ainda pendentes;
-    \item[Capítulo 8 -- Cronograma:] registra o estado das atividades concluídas, em andamento e planejadas.
+    \item[Capítulo 5 -- Especificação do Protótipo:] consolida princípios, requisitos, critérios de dados e modelagem, protocolo de avaliação e arquitetura de referência;
+    \item[Capítulo 6 -- Resultados e Discussão:] integra os resultados da revisão, da avaliação metodológica, da fundamentação e da especificação;
+    \item[Capítulo 7 -- Conclusão:] sintetiza as contribuições, as limitações e as possibilidades de continuidade da pesquisa;
+    \item[Capítulo 8 -- Execução do Trabalho:] registra a cronologia das atividades realizadas.
 \end{description}
 
 %--------- FIM INTRODUÇÃO------------
