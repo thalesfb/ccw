@@ -1,69 +1,120 @@
-\chapter{PLANEJAMENTO DO PROTÓTIPO}
+\chapter{ESPECIFICAÇÃO DO PROTÓTIPO}
 \label{cap:prototipo}
 
-Este capítulo organiza os requisitos e as decisões que serão avaliados na etapa posterior de prototipação. A revisão sistemática apresentou abordagens, limitações e necessidades pedagógicas, mas não determinou automaticamente uma tecnologia, uma base de dados ou um algoritmo final.
+Este capítulo apresenta a especificação conceitual do protótipo elaborada a partir dos resultados da revisão sistemática e da fundamentação pedagógica. O artefato produzido consolidou princípios de projeto, requisitos funcionais e não funcionais, critérios para fontes de dados e modelos, um protocolo de avaliação e uma arquitetura de referência.
 
-O capítulo não apresenta implementação concluída nem resultados experimentais. Seu objetivo é estabelecer critérios verificáveis para o levantamento tecnológico e para a construção futura de um protótipo compatível com o escopo do TCC.
+A especificação não foi tratada como evidência de uma aplicação funcional. Seu resultado consistiu em transformar as evidências da literatura em decisões técnicas e pedagógicas documentadas, auditáveis e coerentes com o escopo do trabalho.
 
-\section{Princípios}
+\section{Princípios de Projeto}
 
-A futura solução deverá apoiar a decisão pedagógica sem substituir o professor, distinguir desempenho de aprendizagem, explicar suas estimativas, registrar incertezas, proteger os dados utilizados e permitir a reprodução dos experimentos.
+A especificação adotou os seguintes princípios:
 
-\section{Requisitos Preliminares}
+\begin{itemize}
+    \item apoiar a decisão pedagógica sem substituir o professor;
+    \item distinguir desempenho observado, proficiência estimada, competência e aprendizagem;
+    \item apresentar explicações e limitações associadas às estimativas;
+    \item preservar a revisão humana das recomendações;
+    \item proteger os dados educacionais e registrar sua finalidade de uso;
+    \item permitir a reprodução dos procedimentos de preparação, treinamento e avaliação;
+    \item evitar rótulos permanentes ou deterministas sobre os estudantes.
+\end{itemize}
 
-A solução será avaliada quanto à capacidade de:
+\section{Requisitos Funcionais}
+
+Foram definidos os seguintes requisitos funcionais para o protótipo:
 
 \begin{enumerate}
     \item importar dados documentados e relacionados a objetivos curriculares;
-    \item produzir indicadores por habilidade sem tratá-los como diagnóstico definitivo;
+    \item organizar evidências de desempenho por habilidade ou descritor;
+    \item produzir estimativas de proficiência acompanhadas de incertezas e limitações;
     \item apresentar resultados individuais e agregados ao professor;
     \item explicar as variáveis relacionadas a cada estimativa;
-    \item permitir revisão humana das recomendações;
-    \item registrar versões dos dados, dos modelos e dos parâmetros;
-    \item exportar resultados para auditoria.
+    \item permitir revisão humana das recomendações produzidas;
+    \item exportar dados, parâmetros e resultados para auditoria.
 \end{enumerate}
 
-Entre os requisitos não funcionais estão reprodutibilidade, acessibilidade, privacidade, testabilidade, portabilidade e rastreabilidade.
+A especificação também estabeleceu que indicadores computacionais não representam, isoladamente, diagnósticos de aprendizagem. Sua interpretação depende da natureza da atividade, da qualidade dos dados e do contexto pedagógico.
 
-\section{Levantamento de Fontes de Dados}
+\section{Requisitos Não Funcionais}
 
-A base de dados será escolhida antes da implementação. Entre as fontes candidatas estão os microdados do SAEB, do PISA e dados sintéticos destinados apenas a testes do \textit{pipeline}. A análise considerará licença, dicionário de dados, unidade de análise, qualidade dos metadados, valores ausentes, representatividade e possibilidade de alinhamento com a BNCC.
+Os requisitos não funcionais definidos foram:
 
-O uso de dados coletados diretamente em ambiente escolar dependerá de objetivo definido, autorização institucional e procedimentos adequados de proteção aos participantes. Até que essas condições sejam atendidas, o trabalho não afirmará validação em contexto escolar real.
+\begin{itemize}
+    \item \textbf{reprodutibilidade}: registro das versões dos dados, dos parâmetros, dos modelos e das dependências;
+    \item \textbf{rastreabilidade}: associação entre cada resultado, a fonte de dados e a versão do experimento;
+    \item \textbf{testabilidade}: separação entre componentes de ingestão, preparação, modelagem e apresentação;
+    \item \textbf{portabilidade}: execução em ambiente documentado e reproduzível;
+    \item \textbf{acessibilidade}: apresentação de informações compreensíveis e compatíveis com diferentes usuários;
+    \item \textbf{privacidade}: minimização dos dados pessoais e controle de finalidade e acesso;
+    \item \textbf{transparência}: comunicação das limitações dos modelos e das condições de validade das estimativas.
+\end{itemize}
+
+\section{Critérios para Fontes de Dados}
+
+A análise considerou microdados de avaliações educacionais, como SAEB e PISA, e dados sintéticos destinados à verificação do \textit{pipeline}. A comparação não selecionou uma base definitiva; ela estabeleceu os critérios que orientaram a especificação:
+
+\begin{itemize}
+    \item licença e condições de uso;
+    \item disponibilidade de dicionário de dados e documentação metodológica;
+    \item unidade de análise e relação com o problema de pesquisa;
+    \item qualidade dos metadados e tratamento de valores ausentes;
+    \item representatividade da população;
+    \item presença de variáveis relacionadas a desempenho e contexto;
+    \item possibilidade de associação com competências ou descritores curriculares;
+    \item riscos de identificação, discriminação ou uso indevido.
+\end{itemize}
+
+Dados sintéticos foram considerados adequados apenas para testar fluxos de processamento, interfaces e regras de validação. Eles não foram considerados evidência de desempenho educacional nem substitutos de uma base empírica.
 
 \section{Alternativas de Modelagem}
 
-A revisão identificou uso frequente de \textbf{\textit{Random Forest}} e máquinas de vetores de suporte (SVM). Esses algoritmos serão tratados como candidatos, e não como escolhas confirmadas.
+A revisão identificou uso recorrente de \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), árvores de decisão, regressão logística e redes neurais. A especificação manteve modelos supervisionados simples e interpretáveis como referências iniciais de comparação e condicionou o uso de modelos mais complexos à demonstração de ganho e à possibilidade de interpretação adequada.
 
-A experimentação começará com modelos de referência simples. Modelos mais complexos somente serão mantidos quando apresentarem ganho demonstrável e interpretação compatível com a finalidade educacional.
+\textbf{\textit{Random Forest}} e SVM foram registrados como alternativas de modelagem, não como algoritmos definitivamente implementados. A escolha entre eles depende da base selecionada, da distribuição das classes, do tipo de variável, do custo computacional e dos requisitos de explicabilidade.
 
-Em uma possível implementação com scikit-learn, identificadores longos, como \texttt{RandomForest\allowbreak Classifier}, serão formatados de modo que possam ser quebrados corretamente no documento. A existência da classe na biblioteca não constitui justificativa para sua seleção.
+Em uma implementação com scikit-learn, identificadores longos, como \texttt{RandomForest\allowbreak Classifier}, devem ser documentados sem comprometer a legibilidade do texto ou a reprodução do código.
 
-\section{Plano de Avaliação}
+\section{Protocolo de Avaliação}
 
-Para tarefas de classificação, a avaliação deverá incluir métricas por classe, matriz de confusão, precisão, revocação, medida F1 e, quando aplicável, área sob a curva ROC e calibração. Os resultados serão comparados com modelos de referência.
+O protocolo de avaliação definido incluiu:
 
-A separação entre treino, validação e teste deverá impedir vazamento de informação. A validação cruzada será utilizada apenas quando respeitar a estrutura da base escolhida.
+\begin{enumerate}
+    \item separação explícita entre conjuntos de treino, validação e teste;
+    \item prevenção de vazamento de informação entre as etapas;
+    \item comparação com modelos de referência simples;
+    \item análise de métricas por classe, além de medidas agregadas;
+    \item uso de matriz de confusão, precisão, revocação e medida F1;
+    \item avaliação de área sob a curva ROC e calibração quando compatíveis com a tarefa;
+    \item análise de estabilidade das explicações e de possíveis diferenças entre grupos;
+    \item registro das limitações de generalização.
+\end{enumerate}
 
-\section{Explicabilidade}
+A especificação distinguiu avaliação técnica de eficácia pedagógica. Métricas preditivas descrevem o comportamento do modelo em uma base; elas não demonstram, por si só, melhoria da aprendizagem ou adequação de uma intervenção escolar.
 
-SHAP e LIME serão avaliados como alternativas para explicar modelos. A escolha dependerá do algoritmo, do custo computacional e da estabilidade das explicações. As saídas deverão ser traduzidas para termos curriculares e analisadas pelo professor; não serão usadas para produzir rótulos permanentes sobre estudantes.
+\section{Explicabilidade e Participação Docente}
 
-\section{Arquitetura e Entregáveis}
+SHAP e LIME foram incluídos como alternativas para explicar modelos, pois permitem relacionar variáveis de entrada às estimativas produzidas. A especificação condicionou seu uso à estabilidade das explicações, ao custo computacional e à possibilidade de tradução dos resultados para uma linguagem curricular compreensível.
 
-A arquitetura poderá conter componentes de ingestão, preparação, treinamento, avaliação, explicabilidade e apresentação. A escolha entre \textit{notebook}, aplicação local, API ou interface web ocorrerá após o levantamento de requisitos, priorizando a solução mais simples que permita demonstrar e reproduzir o processo.
+O professor permaneceu como responsável por interpretar as evidências, relacioná-las ao contexto da turma e decidir intervenções. O protótipo foi especificado como instrumento de apoio, e não como mecanismo autônomo de classificação ou prescrição pedagógica.
 
-A próxima etapa deverá produzir:
+\section{Arquitetura de Referência}
 
-\begin{itemize}
-    \item comparação das bases de dados candidatas;
-    \item documento de requisitos;
-    \item registro das decisões arquiteturais;
-    \item modelos de referência e experimento reproduzível;
-    \item protótipo mínimo;
-    \item relatório de limitações.
-\end{itemize}
+A arquitetura conceitual foi organizada em cinco componentes:
 
-Somente depois desses artefatos existirem o texto será atualizado para descrever tecnologias efetivamente utilizadas, resultados obtidos e validações realizadas.
+\begin{enumerate}
+    \item \textbf{ingestão}: leitura e validação das fontes de dados;
+    \item \textbf{preparação}: tratamento de valores ausentes, codificação, transformação e documentação das variáveis;
+    \item \textbf{modelagem}: treinamento e comparação dos modelos candidatos;
+    \item \textbf{avaliação e explicabilidade}: cálculo das métricas, análise dos erros e geração de explicações;
+    \item \textbf{apresentação}: disponibilização de indicadores e limitações para análise docente.
+\end{enumerate}
 
-%--------- FIM PLANEJAMENTO DO PROTÓTIPO ------------
+A separação dos componentes favoreceu testabilidade, rastreabilidade e substituição controlada de técnicas. A arquitetura não impôs uma interface específica, podendo ser materializada como \textit{notebook}, aplicação local, API ou sistema web, desde que os requisitos de auditoria e interpretação fossem preservados.
+
+\section{Resultado da Especificação}
+
+O resultado deste capítulo foi um artefato de especificação que conectou as evidências da revisão às decisões de projeto. Foram definidos o propósito do protótipo, seus limites, os requisitos mínimos, os critérios de seleção de dados e modelos, o protocolo de avaliação e a arquitetura de referência.
+
+Essa entrega permitiu concluir o objetivo de transformar a literatura analisada em uma base técnica e pedagógica estruturada, sem confundir uma especificação validada documentalmente com uma implementação funcional ou com evidência de eficácia em sala de aula.
+
+%--------- FIM ESPECIFICAÇÃO DO PROTÓTIPO ------------
