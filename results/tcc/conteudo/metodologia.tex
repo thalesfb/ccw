@@ -67,7 +67,7 @@ Os critérios de inclusão e exclusão foram estruturados com apoio do modelo PI
 
 \subsection{Recorte Temporal}
 
-O período de 2016 a 2025 foi escolhido para representar dez anos de produção científica recente sobre técnicas computacionais aplicadas à educação. O recorte permitiu concentrar a análise em tecnologias ainda relevantes ao desenvolvimento posterior do trabalho.
+O período de 2016 a 2025 foi escolhido para representar dez anos de produção científica recente sobre técnicas computacionais aplicadas à educação. O recorte concentrou a análise em abordagens contemporâneas e compatíveis com a especificação desenvolvida no trabalho.
 
 \subsection{Critérios de Inclusão}
 
@@ -136,7 +136,7 @@ O fluxo automatizado da revisão foi implementado em Python e utilizou:
     \item \textbf{scikit-learn}: representação TF-IDF e cálculo da similaridade do cosseno.
 \end{itemize}
 
-Foi utilizado um \textit{cache} local, isto é, um armazenamento temporário de respostas previamente obtidas. Um acerto de cache ocorre quando uma nova solicitação pode ser atendida com um resultado já armazenado, sem consultar novamente a API externa. Como os contadores dependem do histórico e do momento de execução, o texto não apresenta uma taxa fixa; a métrica deve ser obtida diretamente das estatísticas registradas pelo sistema para a execução analisada.
+Foi utilizado um \textit{cache} local, isto é, um armazenamento temporário de respostas previamente obtidas. Um acerto de cache ocorre quando uma nova solicitação pode ser atendida com um resultado já armazenado, sem consultar novamente a API externa. Como os contadores dependem do histórico e do momento de execução, a taxa de acertos não foi utilizada como indicador fixo do \textit{pipeline}; sua interpretação permaneceu vinculada às estatísticas da execução analisada.
 
 \subsection{Reprodutibilidade}
 
@@ -166,5 +166,19 @@ O processo compreendeu:
 As respostas não foram convertidas em pontuação geral, média, ranking ou categoria de qualidade. A apresentação por critério preserva quais aspectos metodológicos foram atendidos e quais permaneceram problemáticos ou insuficientemente descritos. Os estudos não foram excluídos em razão do MMAT; suas limitações foram consideradas na interpretação da síntese.
 
 A avaliação foi realizada por um único revisor com base nos resumos, metadados e informações metodológicas disponíveis. Essa condição limita a confiabilidade dos julgamentos e foi registrada como limitação da revisão. Os resultados por critério são apresentados na Seção~\ref{sec:qualidade-estudos}.
+
+\section{Derivação da Especificação do Protótipo}
+
+A especificação do protótipo foi elaborada a partir da integração entre os resultados da revisão sistemática e os princípios pedagógicos discutidos na fundamentação teórica. O procedimento foi organizado em cinco etapas:
+
+\begin{enumerate}
+    \item consolidação das finalidades, técnicas e limitações identificadas nos 17 estudos;
+    \item agrupamento das lacunas em dimensões técnicas, pedagógicas, metodológicas e éticas;
+    \item tradução dessas dimensões em requisitos funcionais e não funcionais;
+    \item definição de critérios para fontes de dados, alternativas de modelagem, explicabilidade e avaliação;
+    \item organização dos requisitos em uma arquitetura conceitual de referência.
+\end{enumerate}
+
+As decisões foram registradas como especificação, e não como evidência de uma implementação funcional. Esse procedimento permitiu transformar os achados da literatura em um artefato técnico e pedagógico coerente com o escopo executado e com as limitações explicitadas no trabalho.
 
 %--------- FIM METODOLOGIA ------------
