@@ -12,6 +12,7 @@ from src.analysis.mmat_tcc_table import load_rows, render_table
 REPO_ROOT = Path(__file__).resolve().parents[2]
 TCC_ROOT = REPO_ROOT / "results" / "tcc"
 TCC_CONTENT = TCC_ROOT / "conteudo"
+TCC_ABSTRACT = TCC_ROOT / "pretextuais" / "resumo.tex"
 MMAT_DATA = REPO_ROOT / "research" / "data" / "mmat_assessments.csv"
 MMAT_EXPORT = REPO_ROOT / "research" / "exports" / "analysis" / "mmat_assessment.csv"
 MMAT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_tcc_table.tex"
@@ -87,13 +88,41 @@ def test_long_python_identifier_is_breakable() -> None:
     assert r"\nolinkurl{RandomForestClassifier}" not in source
 
 
-def test_completed_and_planned_work_are_not_conflated() -> None:
-    source = _all_tex().lower()
+def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
+    key_files = [
+        TCC_ABSTRACT,
+        TCC_CONTENT / "introducao.tex",
+        TCC_CONTENT / "fundamentacao.tex",
+        TCC_CONTENT / "metodologia.tex",
+        TCC_CONTENT / "resultadosesperados.tex",
+        TCC_CONTENT / "prototipo.tex",
+        TCC_CONTENT / "resultados.tex",
+        TCC_CONTENT / "conclusao.tex",
+        TCC_CONTENT / "cronograma.tex",
+    ]
+    source = "\n".join(_read(path) for path in key_files).lower()
+
+    proposal_markers = (
+        "como próxima etapa",
+        "a próxima etapa deverá",
+        "etapa posterior de prototipação",
+        "etapas ainda pendentes",
+        "será destinado aos resultados",
+        "resultados que deverão ser documentados",
+        "permanece reservado para resultados",
+        "a conclusão final deverá ser atualizada",
+        "será escolhido antes da implementação",
+        "o capítulo não apresenta implementação concluída",
+        "em andamento &",
+        "planejado \\",
+    )
+    for marker in proposal_markers:
+        assert marker not in source, f"Proposal-style marker remains: {marker}"
+
     unsupported_completion_claims = (
         "o protótipo foi implementado",
-        "foi desenvolvido protótipo",
+        "foi desenvolvido um protótipo funcional",
         "foram executados experimentos em contexto escolar real",
-        "foi conduzida na fase~3",
         "o tcc foi submetido e defendido",
         "o projeto foi concluído em todas as suas fases",
     )
@@ -102,10 +131,16 @@ def test_completed_and_planned_work_are_not_conflated() -> None:
 
     introduction = _read(TCC_CONTENT / "introducao.tex")
     prototype = _read(TCC_CONTENT / "prototipo.tex")
-    assert "etapa concluída" in introduction
-    assert "etapa posterior" in introduction
-    assert "etapas ainda pendentes" in introduction
-    assert "não apresenta implementação concluída" in prototype
+    results = _read(TCC_CONTENT / "resultados.tex")
+    conclusion = _read(TCC_CONTENT / "conclusao.tex")
+    abstract = _read(TCC_ABSTRACT)
+
+    assert "O escopo executado compreendeu" in introduction
+    assert "especificação conceitual do protótipo" in prototype
+    assert "não foi tratada como evidência de uma aplicação funcional" in prototype
+    assert "O objetivo geral foi alcançado" in results
+    assert "Este trabalho investigou" in conclusion
+    assert "Como contribuições, o trabalho produziu" in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:
