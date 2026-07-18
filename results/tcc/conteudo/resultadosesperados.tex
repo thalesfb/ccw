@@ -1,7 +1,7 @@
 \chapter{REVISÃO SISTEMÁTICA DA LITERATURA}
 \label{cap:revisao}
 
-Este capítulo apresenta os resultados da revisão sistemática concluída na primeira etapa do trabalho. O processo identificou 9.431 registros nas quatro fontes consultadas e incluiu 17 estudos na síntese narrativa. A pontuação usada na elegibilidade representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
+Este capítulo apresenta os resultados da revisão sistemática desenvolvida no trabalho. O processo identificou 9.431 registros nas quatro fontes consultadas e incluiu 17 estudos na síntese narrativa. A pontuação usada na elegibilidade representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
 
 \section{Fluxo de Seleção}
 
@@ -29,7 +29,7 @@ A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de regist
 
 A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A taxa de duplicatas evidencia a sobreposição entre as fontes e justifica a combinação de DOI e similaridade de títulos. A pequena proporção de estudos incluídos decorreu do escopo específico e da aplicação do limiar de relevância temática.
 
-Não foi apresentada uma taxa fixa de acertos do \textit{cache}. Um acerto ocorre quando uma consulta é atendida com uma resposta previamente armazenada, sem nova requisição à API. Como essa proporção depende do histórico de execução, seu valor deve ser obtido diretamente dos contadores do sistema no momento analisado.
+A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um acerto ocorreu quando uma consulta foi atendida com uma resposta previamente armazenada, sem nova requisição à API. Como essa proporção dependeu do histórico de execução, sua interpretação permaneceu vinculada aos contadores registrados em cada execução do sistema.
 
 \begin{table}[H]
 \centering
@@ -70,7 +70,7 @@ Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve 
 
 Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, características contextuais e registros de interação para estimar categorias ou escores. Outros estudos investigaram personalização, avaliação formativa, recursos pedagógicos ou modelos computacionais de aprendizagem. Essa diversidade ampliou o panorama da revisão, mas também impediu tratar todos os resultados como se medissem o mesmo fenômeno educacional.
 
-Acurácia elevada em uma base específica não demonstra automaticamente que a técnica produzirá o mesmo resultado em outra escola ou população. Da mesma forma, predição de desempenho não equivale a explicar como o estudante aprende matemática. Essas restrições foram consideradas ao extrair requisitos para a futura etapa de prototipação.
+Acurácia elevada em uma base específica não demonstra automaticamente que a técnica produzirá o mesmo resultado em outra escola ou população. Da mesma forma, predição de desempenho não equivale a explicar como o estudante aprende matemática. Essas restrições foram incorporadas aos requisitos e aos critérios de avaliação da especificação apresentada no Capítulo~\ref{cap:prototipo}.
 
 Na Tabela~\ref{tab:sintese-17-estudos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT.
 
@@ -120,7 +120,7 @@ Depren et al. (2017) & Classificação no TIMSS & LR; DT; BN; RN & Predição & 
 
 O MMAT 2018 foi aplicado conforme o desenho metodológico de cada estudo \cite{MMAT2018}. As respostas S (``Sim''), N (``Não'') e ND (``Não é possível determinar'') foram mantidas por critério, sem média, ranking ou categoria geral. A avaliação foi realizada por um único revisor com base nos resumos, metadados e na descrição metodológica disponível; por isso, os julgamentos constituem uma apreciação estruturada e passível de revisão, não uma classificação definitiva dos artigos.
 
-A Tabela~\ref{tab:mmat-avaliacao} é gerada automaticamente a partir do arquivo versionado \path{research/data/mmat_assessments.csv}. Dessa forma, os critérios apresentados no TCC, no CSV exportado e no relatório HTML possuem uma fonte única e verificável.
+A Tabela~\ref{tab:mmat-avaliacao} foi gerada automaticamente a partir do arquivo versionado \texttt{research/data/mmat\_assessments.csv}. Dessa forma, os critérios apresentados no TCC, no CSV exportado e no relatório HTML possuem uma fonte única e verificável.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
@@ -155,10 +155,10 @@ O protocolo não foi registrado prospectivamente. Foram adotados princípios de 
 
 As fontes consultadas possuem cobertura predominantemente anglófona, e a busca foi limitada a português e inglês. A heterogeneidade dos desenhos, populações e métricas impediu uma síntese quantitativa conjunta. Além disso, a avaliação MMAT por revisor único está sujeita a divergências interpretativas.
 
-\section{Direcionamento para a Próxima Etapa}
+\section{Contribuições para a Especificação do Protótipo}
 
-A revisão forneceu critérios para o levantamento posterior de tecnologias e bases de dados. A próxima etapa deverá comparar fontes como SAEB e PISA, definir o problema computacional, construir modelos de referência e registrar as decisões arquiteturais.
+A revisão forneceu a base empírica para a especificação do protótipo. A predominância de tarefas preditivas justificou a inclusão de modelos supervisionados entre as alternativas de modelagem, enquanto a heterogeneidade das bases impôs critérios explícitos de seleção e validação. As lacunas de explicabilidade, integração curricular, participação docente e reprodutibilidade foram convertidas em requisitos técnicos e pedagógicos.
 
-Não foram apresentados neste capítulo resultados de um protótipo já implementado ou validado. A implementação e a experimentação somente serão incorporadas ao TCC quando houver artefatos reproduzíveis e evidências correspondentes.
+Dessa forma, os resultados da revisão não foram tratados apenas como levantamento bibliográfico. Eles sustentaram as decisões consolidadas no Capítulo~\ref{cap:prototipo}, preservando a distinção entre evidências reportadas na literatura e resultados produzidos pelo próprio trabalho.
 
 %--------- FIM REVISÃO SISTEMÁTICA ------------
