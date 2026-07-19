@@ -3,30 +3,30 @@
 
 \section{Aprendizagem Matemática e Evidências de Desempenho}
 
-Aprender matemática não se limita a memorizar procedimentos ou obter respostas corretas. O processo envolve construir significados, relacionar novos conceitos ao conhecimento prévio, desenvolver formas de representação, justificar estratégias e transferir o que foi aprendido para problemas diferentes. Por essa razão, uma medida isolada de acerto, nota ou tempo de resposta oferece apenas uma evidência parcial do processo de aprendizagem.
+Aprender matemática não se limita a memorizar procedimentos ou obter respostas corretas. O processo envolve construir significados, relacionar novos conceitos ao conhecimento prévio, desenvolver formas de representação, justificar estratégias e transferir o que foi aprendido para problemas diferentes \cite{Piaget1972EN, Vygotsky1978, Ausubel1968}. Por essa razão, uma medida isolada de acerto, nota ou tempo de resposta oferece apenas uma evidência parcial do processo de aprendizagem.
 
 A Base Nacional Comum Curricular (BNCC) associa o letramento matemático às capacidades de raciocinar, representar, comunicar e argumentar matematicamente, além de formular e resolver problemas em contextos variados \cite{BNCC2018}. Essa definição reforça que competência matemática envolve a mobilização integrada de conhecimentos, procedimentos e atitudes, e não apenas o desempenho observado em uma atividade.
 
-Neste trabalho, quatro conceitos foram diferenciados:
+Para evitar que medidas distintas fossem tratadas como equivalentes, este trabalho adotou definições operacionais. A avaliação educacional parte de observações produzidas por tarefas e respostas para realizar inferências sobre conhecimentos e habilidades; essas inferências dependem do modelo de cognição, dos instrumentos e dos procedimentos de mensuração empregados \cite{NRC2001}. Em avaliações como o PISA, a proficiência é estimada em uma escala e interpretada por níveis que descrevem o que os estudantes tipicamente conseguem realizar \cite{OECDPISA2022Framework}.
 
 \begin{description}
-    \item[Desempenho observado:] resultado registrado em uma tarefa, como acerto, nota, número de tentativas ou tempo de resolução;
-    \item[Proficiência estimada:] posição inferida em uma escala a partir de um conjunto de evidências e de um modelo de avaliação;
-    \item[Competência:] capacidade de mobilizar conhecimentos e estratégias para enfrentar situações e problemas;
-    \item[Aprendizagem:] transformação que ocorre ao longo do tempo, evidenciada pela compreensão, pela autonomia e pela possibilidade de aplicar conhecimentos em novos contextos.
+    \item[Desempenho observado:] registro diretamente obtido em uma tarefa, como acerto, nota, número de tentativas, estratégia apresentada ou tempo de resolução \cite{NRC2001};
+    \item[Proficiência estimada:] inferência sobre a posição do estudante em uma escala de conhecimentos e habilidades, calculada a partir de um conjunto de evidências e de um modelo de mensuração \cite{NRC2001, OECDPISA2022Framework};
+    \item[Competência:] capacidade de mobilizar conhecimentos, procedimentos, estratégias e atitudes para enfrentar situações e resolver problemas \cite{BNCC2018};
+    \item[Aprendizagem:] processo de transformação construído ao longo do tempo, evidenciado por mudanças na compreensão, na autonomia, nas estratégias e na capacidade de aplicar conhecimentos em novos contextos \cite{Piaget1972EN, Vygotsky1978, Ausubel1968}.
 \end{description}
 
-Um modelo computacional pode reconhecer padrões nos dados de desempenho e produzir estimativas de proficiência. Entretanto, não observa diretamente todos os processos cognitivos, sociais e afetivos envolvidos na aprendizagem. Suas saídas devem ser interpretadas como apoio à análise docente, e não como diagnóstico definitivo do estudante.
+Essas definições são relacionadas, mas não intercambiáveis. Um modelo computacional pode reconhecer padrões nos dados de desempenho e produzir estimativas de proficiência. Entretanto, não observa diretamente todos os processos cognitivos, sociais e afetivos envolvidos na aprendizagem. Suas saídas devem ser interpretadas como apoio à análise docente, e não como diagnóstico definitivo do estudante.
 
 \section{Contribuições de Teorias de Aprendizagem}
 
 \subsection{Construção Ativa do Conhecimento}
 
-A epistemologia genética de Piaget descreve o conhecimento como uma construção realizada pelo sujeito em interação com o meio \cite{Piaget1972}. Situações que desafiam explicações anteriores podem provocar reorganizações cognitivas. No ensino de matemática, essa perspectiva valoriza a resolução de problemas, a comparação de estratégias e a compreensão dos conceitos, em contraste com a repetição mecânica de algoritmos.
+A epistemologia genética de Piaget descreve o conhecimento como uma construção realizada pelo sujeito em interação com o meio \cite{Piaget1972EN}. Situações que desafiam explicações anteriores podem provocar reorganizações cognitivas. No ensino de matemática, essa perspectiva valoriza a resolução de problemas, a comparação de estratégias e a compreensão dos conceitos, em contraste com a repetição mecânica de algoritmos.
 
-\subsection{Mediação e Zona de Desenvolvimento Proximal}
+\subsection{Mediação, Zona de Desenvolvimento Proximal e \textit{Scaffolding}}
 
-Vygotsky definiu a Zona de Desenvolvimento Proximal como a distância entre aquilo que o estudante realiza de forma autônoma e aquilo que consegue realizar com mediação \cite{Vygotsky1978}. O suporte temporário, frequentemente denominado \textbf{\textit{scaffolding}} ou andaimento, deve ser ajustado e gradualmente retirado conforme aumenta a autonomia. Sistemas computacionais podem apoiar essa mediação, mas a adequação pedagógica das intervenções depende do contexto e da interpretação do professor.
+Vygotsky definiu a Zona de Desenvolvimento Proximal como a distância entre aquilo que o estudante realiza de forma autônoma e aquilo que consegue realizar com mediação \cite{Vygotsky1978}. O conceito de \textbf{\textit{scaffolding}}, ou andaimento, foi formulado posteriormente por Wood, Bruner e Ross para descrever um suporte temporário oferecido durante a resolução de problemas e retirado gradualmente conforme aumenta a autonomia do aprendiz \cite{WoodBrunerRoss1976}. Sistemas computacionais podem apoiar esse processo de mediação, mas a adequação pedagógica das intervenções depende do contexto e da interpretação do professor.
 
 \subsection{Conhecimento Prévio e Aprendizagem Significativa}
 
@@ -34,7 +34,9 @@ Ausubel destacou que novas informações são aprendidas de forma significativa 
 
 \subsection{Avaliação Formativa e \textit{Feedback}}
 
-A avaliação formativa ocorre durante o processo de aprendizagem e utiliza evidências para orientar as próximas ações de ensino e estudo \cite{Performance2023_014}. O \textit{feedback} é útil quando informa o que foi compreendido, qual dificuldade precisa ser enfrentada e quais ações podem ajudar o estudante a avançar. Uma previsão algorítmica, por si só, não constitui \textit{feedback} formativo; ela precisa ser traduzida em informação compreensível, contextualizada e pedagogicamente acionável.
+A avaliação formativa utiliza evidências produzidas durante o processo de aprendizagem para orientar decisões sobre as próximas ações de ensino e estudo \cite{BlackWiliam1998}. A efetividade do \textit{feedback} depende de seu foco, de sua clareza e da forma como ajuda o estudante a compreender os objetivos, avaliar seu estado atual e identificar ações para avançar \cite{HattieTimperley2007}. Em contexto de aprendizagem matemática, Mertasari et al. observaram diferenças no desenvolvimento de habilidades metacognitivas entre modalidades de avaliação formativa, oferecendo uma evidência empírica específica para esse domínio \cite{Performance2023_014}.
+
+Uma previsão algorítmica, por si só, não constitui \textit{feedback} formativo. Para cumprir essa função, a saída precisa ser traduzida em informação compreensível, contextualizada e pedagogicamente acionável, preservando a possibilidade de interpretação e intervenção do professor.
 
 \section{Tecnologia como Apoio à Decisão Pedagógica}
 
@@ -68,7 +70,7 @@ O aprendizado de máquina, ou \textbf{\textit{machine learning}} (ML), é uma á
 
 \subsection{\textbf{\textit{Learning Analytics}} e \textbf{\textit{Educational Data Mining}}}
 
-A \textbf{\textit{Learning Analytics}} (LA), ou analítica da aprendizagem, envolve medir, coletar, analisar e apresentar dados sobre estudantes e seus contextos para compreender e apoiar a aprendizagem. A \textbf{\textit{Educational Data Mining}} (EDM), ou mineração de dados educacionais, concentra-se no desenvolvimento e na aplicação de métodos de análise a dados educacionais.
+A \textbf{\textit{Learning Analytics}} (LA), ou analítica da aprendizagem, envolve medir, coletar, analisar e apresentar dados sobre estudantes e seus contextos para compreender e apoiar a aprendizagem. A \textbf{\textit{Educational Data Mining}} (EDM), ou mineração de dados educacionais, concentra-se no desenvolvimento e na aplicação de métodos de análise a dados educacionais \cite{Romero2020}.
 
 Essas áreas podem produzir painéis, alertas e modelos de conhecimento, mas a existência de uma correlação não prova uma relação causal. Um padrão de acesso ou tempo de resposta pode refletir diferentes condições, como conhecimento prévio, familiaridade com a interface, acessibilidade ou disponibilidade de conexão.
 
@@ -80,7 +82,7 @@ A adaptação é pedagogicamente relevante quando os critérios de decisão são
 
 \section{Avaliação Automatizada e Métricas}
 
-Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. As métricas mais comuns incluem acurácia, precisão, revocação (\textit{recall}), medida F1 e área sob a curva ROC. Essas métricas avaliam o comportamento do modelo; não medem diretamente a qualidade pedagógica da intervenção.
+Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. As métricas mais comuns incluem acurácia, precisão, revocação (\textit{recall}), medida F1 e área sob a curva ROC \cite{Romero2020}. Essas métricas avaliam o comportamento do modelo; não medem diretamente a qualidade pedagógica da intervenção.
 
 No domínio educacional, também podem ser observados:
 
