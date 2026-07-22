@@ -12,7 +12,8 @@ Este módulo implementa o pipeline reproduzível que transforma conjuntos educac
 - dados sintéticos são utilizados no CI, não como evidência educacional;
 - atributos de uma resposta usam somente eventos anteriores;
 - estudantes ou períodos futuros não podem contaminar o treinamento;
-- métricas preditivas não são tratadas como prova de aprendizagem.
+- métricas preditivas não são tratadas como prova de aprendizagem;
+- explicações descrevem o modelo e não estabelecem causalidade.
 
 ## Instalação
 
@@ -50,8 +51,6 @@ O protocolo compara duas formas de divisão:
 - `cold_start`: estudantes inteiros ficam restritos a uma partição;
 - `temporal`: o passado de cada estudante antecede validação e teste.
 
-Exemplo:
-
 ```bash
 tcc-prototype evaluate-baselines \
   --input data/processed/assistments_2009_2010_skill_builder_corrected.parquet \
@@ -69,13 +68,46 @@ São avaliados:
 - probabilidade suavizada pelo histórico do estudante;
 - regressão logística regularizada com atributos históricos e variáveis categóricas.
 
-As métricas incluem log-loss, Brier Score, ROC-AUC, precisão média, acurácia, precisão, revocação, F1 e erro esperado de calibração. As saídas incluem:
+As métricas incluem log-loss, Brier Score, ROC-AUC, precisão média, acurácia, precisão, revocação, F1 e erro esperado de calibração. As saídas incluem métricas, previsões e atribuições das partições.
 
-- métricas globais e por habilidade em JSON;
-- previsões do conjunto de teste em Parquet;
-- atribuição de todas as linhas às partições em Parquet.
+## Avaliar o candidato não linear
 
-O modelo de regressão usa apenas contagens e taxas anteriores à resposta atual. Para itens ou habilidades inéditos, o pré-processamento ignora categorias desconhecidas sem consultar o conjunto de teste durante o ajuste.
+A Random Forest é executada nas mesmas partições dos baselines:
+
+```bash
+tcc-prototype evaluate-candidate \
+  --input data/processed/assistments_2009_2010_skill_builder_corrected.parquet \
+  --output-dir data/reports \
+  --split-strategy temporal \
+  --seed 2026 \
+  --n-estimators 300 \
+  --min-samples-leaf 5 \
+  --minimum-profile-evidence 5
+```
+
+O comando produz:
+
+- métricas dos baselines e da Random Forest;
+- previsões do teste;
+- importância por permutação das variáveis originais;
+- explicações locais exatas da regressão logística em log-odds;
+- perfil por estudante e habilidade;
+- avisos obrigatórios de interpretação.
+
+A Random Forest é apenas um modelo candidato. A preferência por ela exige ganho consistente em relação aos baselines, calibração adequada, estabilidade e custo interpretativo aceitável.
+
+## Perfil por habilidade
+
+O perfil contínuo contém:
+
+- probabilidade média estimada;
+- dispersão das previsões;
+- quantidade de evidências;
+- acurácia observada;
+- intervalo de Wilson da proporção observada;
+- estado de suficiência das evidências.
+
+Os níveis ordinais e o alerta binário permanecem desabilitados em `config/profile.json`. O código somente gera níveis quando recebe limiares explícitos e versionados. Esse mecanismo permite testar uma futura regra sem transformar limites arbitrários em resultado científico.
 
 ## Contrato canônico
 
@@ -91,7 +123,7 @@ Cada interação contém, no mínimo:
 
 Campos como timestamp, tentativas, dicas e tempo são preservados quando disponíveis.
 
-No primeiro experimento, interações com múltiplas habilidades recebem uma habilidade primária determinística apenas para os baselines. O conjunto original de habilidades permanece preservado para modelos e análises posteriores.
+No primeiro experimento, interações com múltiplas habilidades recebem uma habilidade primária determinística para comparação dos modelos iniciais. O conjunto original de habilidades permanece preservado para modelos e análises posteriores.
 
 ## Testes
 
@@ -101,20 +133,19 @@ python -m pytest tests
 
 Os testes usam arquivos temporários sintéticos e verificam:
 
-- integridade do manifesto;
-- rejeição de hash divergente;
-- mapeamento do ASSISTments para o contrato canônico;
-- remoção de duplicatas exatas;
-- ordenação determinística;
-- geração do Parquet e do relatório de qualidade;
+- integridade do manifesto e rejeição de hash divergente;
+- normalização do ASSISTments e remoção de duplicatas;
 - atributos baseados exclusivamente no histórico anterior;
 - separação de estudantes e ordem temporal;
 - suavização e fallback dos baselines;
 - métricas probabilísticas e calibração;
-- geração de artefatos do experimento.
+- determinismo do candidato não linear;
+- reconstrução exata das predições logísticas por contribuições;
+- suficiência de evidências e ativação explícita de limiares;
+- geração dos artefatos de cada experimento.
 
-## Extensões planejadas
+## Extensões
 
 Novas fontes serão integradas por adaptadores independentes. Cada adaptador deverá produzir o mesmo contrato canônico e seus próprios testes, evitando que regras específicas de uma base contaminem o restante do pipeline.
 
-Modelos não lineares, explicabilidade e perfil pedagógico serão adicionados somente depois que os baselines forem executados na base real e seus resultados forem congelados para comparação.
+SHAP poderá ser acrescentado após a execução real caso apresente estabilidade e valor comunicacional superior às explicações já implementadas. Nenhuma extensão será incorporada à redação dos resultados antes da geração reproduzível dos artefatos.
