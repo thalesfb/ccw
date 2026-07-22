@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "baseline_id": "systematic-review-2025-11-25",
+  "source_commit": "7527fb8bdc19d3ec69ece855d512dcfa12f7d74c",
+  "corpus_bib": "research/exports/references/included_papers.bib",
+  "artifacts": [
+    "research/exports/references/included_papers.bib",
+    "research/data/mmat_assessments.csv",
+    "research/exports/analysis/mmat_assessment.csv",
+    "research/exports/references/mmat_table.tex",
+    "research/exports/references/mmat_tcc_table.tex",
+    "research/exports/reports/summary_report.html",
+    "research/src/pipeline/run.py",
+    "research/src/processing/selection.py",
+    "research/src/processing/scoring.py",
+    "results/tcc/conteudo/metodologia.tex",
+    "results/tcc/conteudo/resultadosesperados.tex"
+  ],
+  "reported_counts": {
+    "identified": 9431,
+    "duplicates_removed": 2517,
+    "unique_after_deduplication": 6914,
+    "eligible_for_relevance_assessment": 1883,
+    "excluded_at_eligibility": 1866,
+    "included": 17
+  },
+  "temporal_scope": {
+    "status": "discrepancy",
+    "methodology_document": "2016-2025",
+    "historical_readme": "2015-2025",
+    "resolution_required_before_update": true,
+    "rule": "The future update protocol must explicitly choose and justify one baseline window; no date range may be inherited implicitly."
+  },
+  "search_execution": {
+    "bibliography_generated_at": "2025-11-25T02:40:15",
+    "languages": ["English", "Portuguese"],
+    "reported_queries": 72,
+    "reported_sources": [
+      "Semantic Scholar",
+      "OpenAlex",
+      "Crossref",
+      "CORE"
+    ],
+    "minimum_relevance_score": 4.0,
+    "quality_appraisal": "MMAT 2018",
+    "prospective_registration": false
+  },
+  "update_policy": {
+    "mode": "systematic_review_update",
+    "preserve_baseline": true,
+    "minimum_overlap_days": 31,
+    "deduplicate_against_baseline": true,
+    "report_added_removed_changed_unchanged": true,
+    "require_new_quality_appraisal": true,
+    "require_decision_impact_analysis": true,
+    "prohibit_silent_replacement": true,
+    "prohibit_automatic_tcc_rewrite": true
+  }
+}

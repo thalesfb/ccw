@@ -53,6 +53,13 @@ jobs:
         working-directory: research
         run: python -m src.validation.bibliography_audit
 
+      - name: Check systematic review baseline declaration
+        working-directory: research
+        run: |
+          python -m src.validation.review_baseline check-config \
+            --config config/review_baseline.json \
+            --repository-root ..
+
       - name: Check generated MMAT table
         working-directory: research
         run: python -m src.analysis.mmat_tcc_table --check
@@ -67,6 +74,7 @@ jobs:
           set +e
           python -m pytest \
             tests/test_bibliography_audit.py \
+            tests/test_review_baseline.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
             tests/test_tcc_advisor_feedback.py \
