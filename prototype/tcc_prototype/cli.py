@@ -17,6 +17,7 @@ from .modeling.candidate_experiment import (
 from .modeling.experiment import run_baseline_experiment, write_baseline_artifacts
 from .pipeline import prepare_assistments
 from .reporting.teacher_report import build_teacher_report
+from .workflow import run_autonomous_workflow
 
 
 def _add_experiment_arguments(parser: argparse.ArgumentParser) -> None:
@@ -97,7 +98,53 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="secret salt; alternatively set TCC_PSEUDONYM_SALT",
     )
+
+    workflow = subcommands.add_parser(
+        "run-all",
+        help="prepare data, execute all declared experiments, build the report, and freeze a run manifest",
+    )
+    workflow.add_argument("--source-manifest", type=Path, required=True)
+    workflow.add_argument("--raw-dir", type=Path, required=True)
+    workflow.add_argument("--output-root", type=Path, required=True)
+    workflow.add_argument("--run-id", required=True)
+    workflow.add_argument("--git-commit", required=True)
+    workflow.add_argument("--seeds", type=int, nargs="+", default=[2026, 1701, 31415])
+    workflow.add_argument(
+        "--split-strategies",
+        nargs="+",
+        choices=("cold_start", "temporal"),
+        default=["cold_start", "temporal"],
+    )
+    workflow.add_argument("--dataset-label", required=True)
+    workflow.add_argument("--model-version", required=True)
+    workflow.add_argument("--n-estimators", type=int, default=300)
+    workflow.add_argument("--min-samples-leaf", type=int, default=5)
+    workflow.add_argument("--minimum-profile-evidence", type=int, default=5)
+    workflow.add_argument("--minimum-skill-rows", type=int, default=100)
+    workflow.add_argument("--explanation-rows", type=int, default=20)
+    workflow.add_argument("--permutation-repeats", type=int, default=5)
+    workflow.add_argument(
+        "--preferred-report-split",
+        choices=("cold_start", "temporal"),
+        default="temporal",
+    )
+    workflow.add_argument("--preferred-report-seed", type=int, default=2026)
+    workflow.add_argument(
+        "--pseudonym-salt",
+        default=None,
+        help="secret salt; alternatively set TCC_PSEUDONYM_SALT",
+    )
     return parser
+
+
+def _resolve_salt(argument: str | None) -> str:
+    salt = argument or os.environ.get("TCC_PSEUDONYM_SALT")
+    if not salt:
+        raise SystemExit(
+            "pseudonym salt is required through --pseudonym-salt "
+            "or TCC_PSEUDONYM_SALT"
+        )
+    return salt
 
 
 def main() -> int:
@@ -127,12 +174,6 @@ def main() -> int:
         return 0
 
     if args.command == "build-teacher-report":
-        salt = args.pseudonym_salt or os.environ.get("TCC_PSEUDONYM_SALT")
-        if not salt:
-            raise SystemExit(
-                "pseudonym salt is required through --pseudonym-salt "
-                "or TCC_PSEUDONYM_SALT"
-            )
         profiles = pd.read_parquet(args.profiles)
         metrics = json.loads(args.metrics.read_text(encoding="utf-8"))
         importance = pd.read_csv(args.importance)
@@ -141,11 +182,37 @@ def main() -> int:
             metrics=metrics,
             importance=importance,
             output_path=args.output,
-            pseudonym_salt=salt,
+            pseudonym_salt=_resolve_salt(args.pseudonym_salt),
             dataset_label=args.dataset_label,
             model_version=args.model_version,
         )
         print(f"teacher_report={output}")
+        return 0
+
+    if args.command == "run-all":
+        result = run_autonomous_workflow(
+            source_manifest_path=args.source_manifest,
+            raw_dir=args.raw_dir,
+            output_root=args.output_root,
+            run_id=args.run_id,
+            git_commit=args.git_commit,
+            seeds=args.seeds,
+            split_strategies=args.split_strategies,
+            pseudonym_salt=_resolve_salt(args.pseudonym_salt),
+            dataset_label=args.dataset_label,
+            model_version=args.model_version,
+            n_estimators=args.n_estimators,
+            min_samples_leaf=args.min_samples_leaf,
+            minimum_profile_evidence=args.minimum_profile_evidence,
+            minimum_skill_rows=args.minimum_skill_rows,
+            explanation_rows=args.explanation_rows,
+            permutation_repeats=args.permutation_repeats,
+            preferred_report_split=args.preferred_report_split,
+            preferred_report_seed=args.preferred_report_seed,
+        )
+        print(f"run_directory={result.run_directory}")
+        print(f"run_manifest={result.manifest_path}")
+        print(f"teacher_report={result.teacher_report_path}")
         return 0
 
     interactions = pd.read_parquet(args.input)
