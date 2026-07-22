@@ -21,6 +21,11 @@ REQUIRED_FIELDS = {
     "redistribution_allowed",
     "acquisition_method",
 }
+TERMS_REQUIRED_FIELDS = {
+    "terms_url",
+    "terms_accepted_at",
+    "research_purpose",
+}
 
 
 class ManifestError(ValueError):
@@ -40,6 +45,9 @@ class DatasetManifest:
     acquisition_method: str
     size_bytes: int | None = None
     download_url: str | None = None
+    terms_url: str | None = None
+    terms_accepted_at: str | None = None
+    research_purpose: str | None = None
     notes: tuple[str, ...] = ()
 
 
@@ -65,6 +73,23 @@ def load_manifest(path: Path) -> DatasetManifest:
     if missing:
         raise ManifestError("manifest is missing fields: " + ", ".join(missing))
 
+    acquisition_method = str(payload["acquisition_method"])
+    if acquisition_method == "terms_acceptance_required":
+        missing_terms = sorted(
+            field
+            for field in TERMS_REQUIRED_FIELDS
+            if not str(payload.get(field, "")).strip()
+        )
+        if missing_terms:
+            raise ManifestError(
+                "terms-controlled manifest is missing fields: "
+                + ", ".join(missing_terms)
+            )
+        if bool(payload["redistribution_allowed"]):
+            raise ManifestError(
+                "terms-controlled manifest cannot allow redistribution"
+            )
+
     digest = str(payload["sha256"]).lower()
     if not SHA256_PATTERN.fullmatch(digest):
         raise ManifestError("manifest sha256 must contain 64 lowercase hex characters")
@@ -86,10 +111,21 @@ def load_manifest(path: Path) -> DatasetManifest:
         sha256=digest,
         license_or_terms=str(payload["license_or_terms"]),
         redistribution_allowed=bool(payload["redistribution_allowed"]),
-        acquisition_method=str(payload["acquisition_method"]),
+        acquisition_method=acquisition_method,
         size_bytes=size,
         download_url=(
             str(payload["download_url"]) if payload.get("download_url") else None
+        ),
+        terms_url=str(payload["terms_url"]) if payload.get("terms_url") else None,
+        terms_accepted_at=(
+            str(payload["terms_accepted_at"])
+            if payload.get("terms_accepted_at")
+            else None
+        ),
+        research_purpose=(
+            str(payload["research_purpose"])
+            if payload.get("research_purpose")
+            else None
         ),
         notes=tuple(notes),
     )
