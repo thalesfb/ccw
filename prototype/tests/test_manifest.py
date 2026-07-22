@@ -60,3 +60,55 @@ def test_verify_manifest_rejects_hash_mismatch(tmp_path: Path) -> None:
 
     with pytest.raises(ManifestError, match="SHA-256 mismatch"):
         verify_manifest_file(manifest, tmp_path)
+
+
+def test_terms_controlled_manifest_requires_acceptance_metadata(tmp_path: Path) -> None:
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "dataset_id": "assistments",
+                "version": "corrected",
+                "canonical_url": "https://example.org/dataset",
+                "accessed_at": "2026-07-22T00:00:00Z",
+                "local_filename": "assistments.csv",
+                "sha256": "0" * 64,
+                "license_or_terms": "controlled terms",
+                "redistribution_allowed": False,
+                "acquisition_method": "terms_acceptance_required",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ManifestError, match="terms-controlled manifest"):
+        load_manifest(manifest_path)
+
+
+def test_terms_controlled_manifest_preserves_purpose_and_acceptance(tmp_path: Path) -> None:
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "dataset_id": "assistments",
+                "version": "corrected",
+                "canonical_url": "https://example.org/dataset",
+                "accessed_at": "2026-07-22T00:00:00Z",
+                "local_filename": "assistments.csv",
+                "sha256": "0" * 64,
+                "license_or_terms": "controlled terms",
+                "terms_url": "https://example.org/terms",
+                "terms_accepted_at": "2026-07-22T00:00:00Z",
+                "research_purpose": "TCC experiment",
+                "redistribution_allowed": False,
+                "acquisition_method": "terms_acceptance_required",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    manifest = load_manifest(manifest_path)
+
+    assert manifest.terms_url == "https://example.org/terms"
+    assert manifest.terms_accepted_at == "2026-07-22T00:00:00Z"
+    assert manifest.research_purpose == "TCC experiment"

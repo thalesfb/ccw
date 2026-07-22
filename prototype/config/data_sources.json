@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "primary_source": "assistments_2009_2010_skill_builder_corrected",
   "sources": [
     {
@@ -12,14 +12,24 @@
         "knowledge_tracing_baseline"
       ],
       "canonical_page": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
-      "acquisition": "manual_or_verified_direct_download",
+      "terms_page": "https://sites.google.com/site/assistmentsdata/termsofuseforusingdata",
+      "source_file_id": "1NNXHFRxcArrU0ZJSb9BIL56vmUt5FhlE",
+      "acquisition": "terms_acceptance_required",
       "redistribute_raw": false,
       "expected_format": "csv",
       "required_manifest": true,
+      "obligations": [
+        "do not attempt reidentification",
+        "delete and report accidentally identifying information",
+        "do not redistribute student-level data",
+        "acknowledge ASSISTments and cite the canonical dataset page",
+        "make analysis code public when publishing results"
+      ],
       "known_risks": [
         "older downloads contain duplicated records",
         "skill tags may contain multiple skills collapsed in one field",
-        "historical platform behavior may not generalize to current Brazilian classrooms"
+        "historical platform behavior may not generalize to current Brazilian classrooms",
+        "pseudonymized student-level data may still carry reidentification risk"
       ]
     },
     {
@@ -39,7 +49,8 @@
       "known_risks": [
         "large files",
         "dataset terms must be reviewed before automation",
-        "taxonomy must be mapped to the canonical skill schema"
+        "taxonomy must be mapped to the canonical skill schema",
+        "CC BY-NC-ND restrictions prohibit redistribution of transformed material"
       ]
     },
     {

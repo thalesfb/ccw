@@ -52,6 +52,18 @@
       "type": "string",
       "minLength": 1
     },
+    "terms_url": {
+      "type": ["string", "null"],
+      "format": "uri"
+    },
+    "terms_accepted_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "research_purpose": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
     "redistribution_allowed": {
       "type": "boolean"
     },
@@ -69,5 +81,24 @@
         "type": "string"
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "acquisition_method": {
+            "const": "terms_acceptance_required"
+          }
+        },
+        "required": ["acquisition_method"]
+      },
+      "then": {
+        "required": [
+          "terms_url",
+          "terms_accepted_at",
+          "research_purpose"
+        ]
+      }
+    }
+  ]
 }
