@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .academic import generate_academic_artifacts
 from .acquisition import acquire_assistments
 from .modeling.candidate_experiment import (
     run_candidate_experiment,
@@ -134,6 +135,14 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="secret salt; alternatively set TCC_PSEUDONYM_SALT",
     )
+
+    academic = subcommands.add_parser(
+        "generate-academic-artifacts",
+        help="validate a completed run and generate traceable LaTeX tables without rewriting TCC prose",
+    )
+    academic.add_argument("--run-manifest", type=Path, required=True)
+    academic.add_argument("--approved-sources", type=Path, required=True)
+    academic.add_argument("--output-dir", type=Path, required=True)
     return parser
 
 
@@ -213,6 +222,18 @@ def main() -> int:
         print(f"run_directory={result.run_directory}")
         print(f"run_manifest={result.manifest_path}")
         print(f"teacher_report={result.teacher_report_path}")
+        return 0
+
+    if args.command == "generate-academic-artifacts":
+        artifacts = generate_academic_artifacts(
+            run_manifest_path=args.run_manifest,
+            approved_sources_path=args.approved_sources,
+            output_dir=args.output_dir,
+        )
+        print(f"model_comparison={artifacts.model_comparison_path}")
+        print(f"data_quality={artifacts.data_quality_path}")
+        print(f"skill_summary={artifacts.skill_summary_path}")
+        print(f"provenance={artifacts.provenance_path}")
         return 0
 
     interactions = pd.read_parquet(args.input)
