@@ -1,6 +1,6 @@
 # Protótipo do TCC
 
-Este módulo implementa o pipeline reproduzível que transforma conjuntos educacionais autorizados em interações canônicas e executa experimentos probabilísticos para o TCC.
+Este módulo implementa o pipeline reproduzível que transforma conjuntos educacionais autorizados em interações canônicas, executa experimentos probabilísticos e gera um relatório docente autônomo.
 
 ## Princípios
 
@@ -13,7 +13,8 @@ Este módulo implementa o pipeline reproduzível que transforma conjuntos educac
 - atributos de uma resposta usam somente eventos anteriores;
 - estudantes ou períodos futuros não podem contaminar o treinamento;
 - métricas preditivas não são tratadas como prova de aprendizagem;
-- explicações descrevem o modelo e não estabelecem causalidade.
+- explicações descrevem o modelo e não estabelecem causalidade;
+- identificadores estudantis não são inseridos diretamente no relatório HTML.
 
 ## Instalação
 
@@ -39,10 +40,7 @@ tcc-prototype prepare-assistments \
   --output-dir data/processed
 ```
 
-A execução produz:
-
-- `*.parquet`: tabela normalizada de interações;
-- `*.quality.json`: relatório de qualidade, contagens e hashes.
+A execução produz uma tabela Parquet normalizada e um relatório JSON de qualidade, contagens e hashes.
 
 ## Executar os baselines
 
@@ -60,15 +58,7 @@ tcc-prototype evaluate-baselines \
   --minimum-skill-rows 100
 ```
 
-São avaliados:
-
-- probabilidade global;
-- probabilidade suavizada por item;
-- probabilidade suavizada por habilidade;
-- probabilidade suavizada pelo histórico do estudante;
-- regressão logística regularizada com atributos históricos e variáveis categóricas.
-
-As métricas incluem log-loss, Brier Score, ROC-AUC, precisão média, acurácia, precisão, revocação, F1 e erro esperado de calibração. As saídas incluem métricas, previsões e atribuições das partições.
+São avaliados probabilidade global, probabilidades suavizadas por item, habilidade e estudante, além de regressão logística. As métricas incluem log-loss, Brier Score, ROC-AUC, precisão média, métricas de classificação e erro esperado de calibração.
 
 ## Avaliar o candidato não linear
 
@@ -85,45 +75,37 @@ tcc-prototype evaluate-candidate \
   --minimum-profile-evidence 5
 ```
 
-O comando produz:
-
-- métricas dos baselines e da Random Forest;
-- previsões do teste;
-- importância por permutação das variáveis originais;
-- explicações locais exatas da regressão logística em log-odds;
-- perfil por estudante e habilidade;
-- avisos obrigatórios de interpretação.
-
-A Random Forest é apenas um modelo candidato. A preferência por ela exige ganho consistente em relação aos baselines, calibração adequada, estabilidade e custo interpretativo aceitável.
+O comando produz métricas, previsões, importância por permutação, explicações logísticas, perfis por habilidade e avisos de interpretação. A Random Forest é apenas um candidato; sua preferência exige ganho consistente, calibração, estabilidade e custo interpretativo aceitável.
 
 ## Perfil por habilidade
 
-O perfil contínuo contém:
+O perfil contínuo contém probabilidade média, dispersão, quantidade de evidências, acurácia observada, intervalo de Wilson e estado de suficiência das evidências.
 
-- probabilidade média estimada;
-- dispersão das previsões;
-- quantidade de evidências;
-- acurácia observada;
-- intervalo de Wilson da proporção observada;
-- estado de suficiência das evidências.
+Os níveis ordinais e o alerta binário permanecem desabilitados em `config/profile.json`. O código somente gera níveis quando recebe limiares explícitos e versionados.
 
-Os níveis ordinais e o alerta binário permanecem desabilitados em `config/profile.json`. O código somente gera níveis quando recebe limiares explícitos e versionados. Esse mecanismo permite testar uma futura regra sem transformar limites arbitrários em resultado científico.
+## Gerar o relatório docente
+
+O relatório é um HTML único, sem bibliotecas ou chamadas externas. Os estudantes recebem pseudônimos derivados por SHA-256 com um sal local.
+
+```bash
+export TCC_PSEUDONYM_SALT='valor-secreto-local'
+
+tcc-prototype build-teacher-report \
+  --profiles data/reports/candidate_temporal_seed_2026.skill_profiles.parquet \
+  --metrics data/reports/candidate_temporal_seed_2026.metrics.json \
+  --importance data/reports/candidate_temporal_seed_2026.permutation_importance.csv \
+  --output data/reports/teacher-report.html \
+  --dataset-label 'ASSISTments Skill Builder 2009–2010 corrigido' \
+  --model-version '0.2.0'
+```
+
+A interface permite selecionar um estudante pseudonimizado, revisar habilidades, comparar modelos, consultar dependência preditiva, registrar notas locais, exportar CSV e imprimir. O relatório não persiste notas nem envia dados.
 
 ## Contrato canônico
 
-Cada interação contém, no mínimo:
+Cada interação contém estudante anonimizado, item, habilidade ou conjunto de habilidades, ordem, correção, conjunto de origem e identificador rastreável da linha original. Tentativas, dicas, timestamp e tempo são preservados quando disponíveis.
 
-- estudante anonimizado;
-- item;
-- habilidade ou conjunto de habilidades;
-- ordem da interação;
-- correção da resposta;
-- conjunto de origem;
-- identificador rastreável da linha original.
-
-Campos como timestamp, tentativas, dicas e tempo são preservados quando disponíveis.
-
-No primeiro experimento, interações com múltiplas habilidades recebem uma habilidade primária determinística para comparação dos modelos iniciais. O conjunto original de habilidades permanece preservado para modelos e análises posteriores.
+No primeiro experimento, interações com múltiplas habilidades recebem uma habilidade primária determinística para comparação dos modelos iniciais. O conjunto original permanece preservado.
 
 ## Testes
 
@@ -131,21 +113,21 @@ No primeiro experimento, interações com múltiplas habilidades recebem uma hab
 python -m pytest tests
 ```
 
-Os testes usam arquivos temporários sintéticos e verificam:
+Os testes sintéticos verificam:
 
 - integridade do manifesto e rejeição de hash divergente;
-- normalização do ASSISTments e remoção de duplicatas;
-- atributos baseados exclusivamente no histórico anterior;
-- separação de estudantes e ordem temporal;
-- suavização e fallback dos baselines;
-- métricas probabilísticas e calibração;
+- normalização e remoção de duplicatas;
+- atributos sem vazamento;
+- partições por estudante e tempo;
+- baselines, calibração e artefatos;
 - determinismo do candidato não linear;
-- reconstrução exata das predições logísticas por contribuições;
-- suficiência de evidências e ativação explícita de limiares;
-- geração dos artefatos de cada experimento.
+- reconstrução das predições logísticas;
+- suficiência de evidências e limiares explícitos;
+- pseudonimização e escape dos dados incorporados ao HTML;
+- presença de avisos e elementos básicos de acessibilidade.
 
 ## Extensões
 
-Novas fontes serão integradas por adaptadores independentes. Cada adaptador deverá produzir o mesmo contrato canônico e seus próprios testes, evitando que regras específicas de uma base contaminem o restante do pipeline.
+Novas fontes serão integradas por adaptadores independentes que produzam o mesmo contrato canônico. SHAP poderá ser acrescentado após a execução real caso apresente estabilidade e valor comunicacional superior às explicações existentes.
 
-SHAP poderá ser acrescentado após a execução real caso apresente estabilidade e valor comunicacional superior às explicações já implementadas. Nenhuma extensão será incorporada à redação dos resultados antes da geração reproduzível dos artefatos.
+Nenhuma extensão ou resultado será incorporado à redação acadêmica antes da geração reproduzível e da revisão dos artefatos.
