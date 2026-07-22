@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .acquisition import acquire_assistments
 from .modeling.candidate_experiment import (
     run_candidate_experiment,
     write_candidate_artifacts,
@@ -32,6 +33,23 @@ def _add_experiment_arguments(parser: argparse.ArgumentParser) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="tcc-prototype")
     subcommands = parser.add_subparsers(dest="command", required=True)
+
+    acquire = subcommands.add_parser(
+        "acquire-assistments",
+        help="download the corrected ASSISTments dataset after explicit terms acceptance",
+    )
+    acquire.add_argument("--raw-dir", type=Path, required=True)
+    acquire.add_argument("--manifest-dir", type=Path, required=True)
+    acquire.add_argument(
+        "--purpose",
+        required=True,
+        help="specific scientific purpose recorded in the provenance manifest",
+    )
+    acquire.add_argument(
+        "--accept-terms",
+        action="store_true",
+        help="confirm acceptance of the official non-reidentification and non-redistribution terms",
+    )
 
     prepare = subcommands.add_parser(
         "prepare-assistments",
@@ -84,6 +102,18 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     args = build_parser().parse_args()
+    if args.command == "acquire-assistments":
+        result = acquire_assistments(
+            raw_dir=args.raw_dir,
+            manifest_dir=args.manifest_dir,
+            purpose=args.purpose,
+            accept_terms=args.accept_terms,
+        )
+        print(f"raw_file={result.raw_path}")
+        print(f"manifest={result.manifest_path}")
+        print(f"sha256={result.sha256}")
+        return 0
+
     if args.command == "prepare-assistments":
         artifacts = prepare_assistments(
             manifest_path=args.manifest,
