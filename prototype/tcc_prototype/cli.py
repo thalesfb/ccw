@@ -7,8 +7,23 @@ from pathlib import Path
 
 import pandas as pd
 
+from .modeling.candidate_experiment import (
+    run_candidate_experiment,
+    write_candidate_artifacts,
+)
 from .modeling.experiment import run_baseline_experiment, write_baseline_artifacts
 from .pipeline import prepare_assistments
+
+
+def _add_experiment_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--input", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--split-strategy",
+        choices=("cold_start", "temporal"),
+        required=True,
+    )
+    parser.add_argument("--seed", type=int, default=2026)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -32,15 +47,19 @@ def build_parser() -> argparse.ArgumentParser:
         "evaluate-baselines",
         help="run leakage-safe probability baselines on canonical interactions",
     )
-    evaluate.add_argument("--input", type=Path, required=True)
-    evaluate.add_argument("--output-dir", type=Path, required=True)
-    evaluate.add_argument(
-        "--split-strategy",
-        choices=("cold_start", "temporal"),
-        required=True,
-    )
-    evaluate.add_argument("--seed", type=int, default=2026)
+    _add_experiment_arguments(evaluate)
     evaluate.add_argument("--minimum-skill-rows", type=int, default=100)
+
+    candidate = subcommands.add_parser(
+        "evaluate-candidate",
+        help="compare a random forest and generate explanations and skill profiles",
+    )
+    _add_experiment_arguments(candidate)
+    candidate.add_argument("--n-estimators", type=int, default=300)
+    candidate.add_argument("--min-samples-leaf", type=int, default=5)
+    candidate.add_argument("--minimum-profile-evidence", type=int, default=5)
+    candidate.add_argument("--explanation-rows", type=int, default=20)
+    candidate.add_argument("--permutation-repeats", type=int, default=5)
     return parser
 
 
@@ -58,8 +77,8 @@ def main() -> int:
         print(f"processed_sha256={artifacts.processed_sha256}")
         return 0
 
+    interactions = pd.read_parquet(args.input)
     if args.command == "evaluate-baselines":
-        interactions = pd.read_parquet(args.input)
         result = run_baseline_experiment(
             interactions,
             split_strategy=args.split_strategy,
@@ -70,6 +89,25 @@ def main() -> int:
         print(f"metrics={artifacts.metrics_path}")
         print(f"predictions={artifacts.predictions_path}")
         print(f"splits={artifacts.splits_path}")
+        return 0
+
+    if args.command == "evaluate-candidate":
+        result = run_candidate_experiment(
+            interactions,
+            split_strategy=args.split_strategy,
+            seed=args.seed,
+            n_estimators=args.n_estimators,
+            min_samples_leaf=args.min_samples_leaf,
+            minimum_profile_evidence=args.minimum_profile_evidence,
+            explanation_rows=args.explanation_rows,
+            permutation_repeats=args.permutation_repeats,
+        )
+        artifacts = write_candidate_artifacts(result, output_dir=args.output_dir)
+        print(f"metrics={artifacts.metrics_path}")
+        print(f"predictions={artifacts.predictions_path}")
+        print(f"importance={artifacts.importance_path}")
+        print(f"profiles={artifacts.profiles_path}")
+        print(f"explanations={artifacts.explanations_path}")
         return 0
 
     raise AssertionError(f"unsupported command: {args.command}")

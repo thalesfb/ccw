@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "probability_source": "random_forest_probability",
+  "minimum_evidence": 5,
+  "continuous_profile": {
+    "enabled": true,
+    "fields": [
+      "predicted_probability",
+      "prediction_std",
+      "observed_accuracy",
+      "observed_accuracy_lower",
+      "observed_accuracy_upper",
+      "evidence_count"
+    ]
+  },
+  "ordinal_levels": {
+    "enabled": false,
+    "threshold_version": null,
+    "thresholds": null,
+    "activation_requirement": "Thresholds must be justified using validation data, error costs, stability analysis, and pedagogical review."
+  },
+  "binary_alert": {
+    "enabled": false,
+    "activation_requirement": "An alert requires an explicit decision threshold, cost analysis, calibration evidence, and human review workflow."
+  },
+  "mandatory_warning": "Profile derived from available interactions and model estimates; it is not a definitive diagnosis of competence or learning."
+}
