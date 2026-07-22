@@ -23,6 +23,23 @@ Página canônica do conjunto:
 
 A utilização acadêmica também deverá citar o sistema ASSISTments por meio de Feng, Heffernan e Koedinger (2009), DOI `10.1007/s11257-009-9063-7`.
 
+### Termos específicos do ASSISTments
+
+A disponibilização pública do arquivo não elimina as condições de uso. A página oficial de termos exige compromisso com a proteção dos dados estudantis:
+
+- não tentar descobrir informações pessoalmente identificáveis;
+- excluir e comunicar imediatamente qualquer informação identificável encontrada;
+- não redistribuir os dados estudantis;
+- utilizar a base somente para a finalidade informada;
+- reconhecer o ASSISTments nas publicações;
+- tornar públicos os dados próprios e algoritmos produzidos no trabalho científico, respeitando a proibição de redistribuição da base original.
+
+Termos oficiais:
+
+`https://sites.google.com/site/assistmentsdata/termsofuseforusingdata`
+
+O comando de aquisição exige `--accept-terms` e uma finalidade científica textual. A data do aceite, a finalidade, o endereço dos termos, a versão, o tamanho e o SHA-256 são registrados no manifesto. O arquivo bruto permanece ignorado pelo Git.
+
 ## Base secundária
 
 O conjunto **Eedi / Diagnostic Questions – NeurIPS 2020 Education Challenge** será a primeira opção de replicação e teste de escalabilidade.
@@ -36,7 +53,7 @@ Justificativas:
 - tarefas de qualidade de questões e recomendação que podem sustentar extensões futuras;
 - artigo e materiais públicos descrevendo o desafio.
 
-A base Eedi não será necessária para concluir o primeiro experimento. Seu uso dependerá da validação dos termos de acesso, licença, estrutura das habilidades e capacidade computacional.
+A base Eedi não será necessária para concluir o primeiro experimento. Seu uso dependerá da validação dos termos de acesso, licença, estrutura das habilidades e capacidade computacional. A licença indicada na página do desafio é CC BY-NC-ND 4.0, o que permite uso não comercial com atribuição, mas restringe redistribuição de material transformado.
 
 Fontes canônicas:
 
@@ -91,12 +108,14 @@ Ele poderá ser usado somente como teste técnico opcional de escalabilidade ou 
 ## Regras de aquisição
 
 1. dados brutos não serão commitados;
-2. cada fonte terá manifesto com URL, data de acesso, versão, licença, tamanho e SHA-256;
-3. downloads automáticos somente serão habilitados quando os termos permitirem acesso direto;
-4. fontes que exigem aceite manual terão comando de registro e validação, sem contornar o mecanismo de acesso;
-5. o pipeline falhará quando o hash não corresponder ao manifesto;
-6. arquivos corrigidos ou republicados receberão nova versão de manifesto;
-7. a extração não sobrescreverá versões anteriores silenciosamente.
+2. cada fonte terá manifesto com URL, data de acesso, versão, licença ou termos, tamanho e SHA-256;
+3. downloads automáticos somente serão habilitados quando os termos permitirem e, quando exigido, após aceite explícito;
+4. a finalidade científica e a evidência de aceite serão registradas para fontes controladas;
+5. o pipeline não contornará autenticação, aceite ou restrições do provedor;
+6. o pipeline falhará quando o hash não corresponder ao manifesto;
+7. arquivos corrigidos ou republicados receberão nova versão de manifesto;
+8. a extração não sobrescreverá versões anteriores silenciosamente;
+9. proibições de redistribuição se aplicam também a anexos, artefatos de CI e relatórios públicos.
 
 ## Organização dos dados
 
@@ -117,7 +136,8 @@ prototype/data/
 - dados individuais reais não serão exibidos na interface pública;
 - exemplos de interface utilizarão registros sintéticos ou agregados;
 - variáveis sensíveis não serão usadas no modelo individual principal;
-- licenças e termos de uso prevalecerão sobre conveniência técnica.
+- licenças e termos de uso prevalecerão sobre conveniência técnica;
+- se informação identificável for encontrada, o processamento será interrompido e a obrigação específica da fonte será seguida.
 
 ## Critério para mudar a base principal
 
