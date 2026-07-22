@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import json
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -13,6 +15,7 @@ from .modeling.candidate_experiment import (
 )
 from .modeling.experiment import run_baseline_experiment, write_baseline_artifacts
 from .pipeline import prepare_assistments
+from .reporting.teacher_report import build_teacher_report
 
 
 def _add_experiment_arguments(parser: argparse.ArgumentParser) -> None:
@@ -60,6 +63,22 @@ def build_parser() -> argparse.ArgumentParser:
     candidate.add_argument("--minimum-profile-evidence", type=int, default=5)
     candidate.add_argument("--explanation-rows", type=int, default=20)
     candidate.add_argument("--permutation-repeats", type=int, default=5)
+
+    report = subcommands.add_parser(
+        "build-teacher-report",
+        help="generate a standalone privacy-preserving HTML teacher report",
+    )
+    report.add_argument("--profiles", type=Path, required=True)
+    report.add_argument("--metrics", type=Path, required=True)
+    report.add_argument("--importance", type=Path, required=True)
+    report.add_argument("--output", type=Path, required=True)
+    report.add_argument("--dataset-label", required=True)
+    report.add_argument("--model-version", required=True)
+    report.add_argument(
+        "--pseudonym-salt",
+        default=None,
+        help="secret salt; alternatively set TCC_PSEUDONYM_SALT",
+    )
     return parser
 
 
@@ -75,6 +94,28 @@ def main() -> int:
         print(f"parquet={artifacts.parquet_path}")
         print(f"quality_report={artifacts.report_path}")
         print(f"processed_sha256={artifacts.processed_sha256}")
+        return 0
+
+    if args.command == "build-teacher-report":
+        salt = args.pseudonym_salt or os.environ.get("TCC_PSEUDONYM_SALT")
+        if not salt:
+            raise SystemExit(
+                "pseudonym salt is required through --pseudonym-salt "
+                "or TCC_PSEUDONYM_SALT"
+            )
+        profiles = pd.read_parquet(args.profiles)
+        metrics = json.loads(args.metrics.read_text(encoding="utf-8"))
+        importance = pd.read_csv(args.importance)
+        output = build_teacher_report(
+            profiles=profiles,
+            metrics=metrics,
+            importance=importance,
+            output_path=args.output,
+            pseudonym_salt=salt,
+            dataset_label=args.dataset_label,
+            model_version=args.model_version,
+        )
+        print(f"teacher_report={output}")
         return 0
 
     interactions = pd.read_parquet(args.input)
