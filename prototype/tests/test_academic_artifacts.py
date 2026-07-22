@@ -202,7 +202,10 @@ def test_generation_rejects_tampered_artifact(tmp_path: Path) -> None:
     manifest_path, approved = _complete_run(tmp_path)
     run_dir = manifest_path.parent
     metrics_path = next(run_dir.rglob("*.metrics.json"))
-    metrics_path.write_text("{}", encoding="utf-8")
+    original = metrics_path.read_text(encoding="utf-8")
+    tampered = original.replace("0.58", "0.57", 1)
+    assert len(tampered.encode("utf-8")) == len(original.encode("utf-8"))
+    metrics_path.write_text(tampered, encoding="utf-8")
 
     with pytest.raises(AcademicArtifactError, match="SHA-256 mismatch"):
         generate_academic_artifacts(
