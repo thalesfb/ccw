@@ -4,12 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ccw-tcc-prototype"
-version = "0.1.0"
-description = "Reproducible educational interaction pipeline for the CCW TCC prototype"
+version = "0.2.0"
+description = "Reproducible educational interaction and modeling pipeline for the CCW TCC prototype"
 requires-python = ">=3.11,<3.13"
 dependencies = [
   "pandas==2.2.3",
-  "pyarrow==19.0.1"
+  "pyarrow==19.0.1",
+  "scikit-learn==1.6.1"
 ]
 
 [project.optional-dependencies]
