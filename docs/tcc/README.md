@@ -12,6 +12,7 @@ Os documentos deste diretório não alteram, por si só, a classe LaTeX, o conte
 
 - [`NORMATIVE_GOVERNANCE.md`](NORMATIVE_GOVERNANCE.md): política para fontes normativas e institucionais, preservação de particularidades do IFC, detecção de drift e resolução de conflitos.
 - [`DOCUMENT_ENGINEERING_ROADMAP.md`](DOCUMENT_ENGINEERING_ROADMAP.md): arquitetura proposta para previews de PR, verificações de conformidade, monitoramento de mudanças externas e eventual contribuição upstream após a conclusão do TCC.
+- [`PROJECT_INTEGRATION.md`](PROJECT_INTEGRATION.md): posicionamento da engenharia documental em relação à issue #7, ao merge do PR #6 e à sequência de revisão dos PRs científicos e técnicos.
 - [`../adr/0001-preserve-ifc-institutional-formatting.md`](../adr/0001-preserve-ifc-institutional-formatting.md): registro da decisão arquitetural de não substituir automaticamente particularidades institucionais durante atualizações normativas.
 
 ## Princípios
