@@ -1,13 +1,9 @@
-"""Módulo para avaliação de qualidade MMAT (Mixed Methods Appraisal Tool) 2018.
+"""Criterion-level MMAT 2018 appraisal support.
 
-Implementa a avaliação de qualidade metodológica dos estudos incluídos
-na revisão sistemática, conforme o MMAT versão 2018 (Hong et al., 2018).
-
-References
-----------
-Hong, Q. N., Pluye, P., Fàbregues, S., Bartlett, G., Boardman, F.,
-Cargo, M., ... & Vedel, I. (2018). Mixed Methods Appraisal Tool (MMAT),
-version 2018. Registration of Copyright (#1148552).
+The MMAT authors discourage producing a single overall numerical score because
+it hides which methodological criteria were met or not met. This module keeps
+Q1--Q5 responses visible, validates their provenance, and exports deterministic
+criterion-level artefacts.
 """
 
 from __future__ import annotations
@@ -15,20 +11,18 @@ from __future__ import annotations
 import csv
 import json
 import logging
+import re
 import sqlite3
-from datetime import datetime
+import unicodedata
+from collections import Counter
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Mapping, Optional, Sequence
 
 import pandas as pd
 
 from ..config import load_config
 
 logger = logging.getLogger(__name__)
-
-# ---------------------------------------------------------------------------
-# MMAT 2018 criteria definitions per study design
-# ---------------------------------------------------------------------------
 
 MMAT_CRITERIA: Dict[str, Dict[str, str]] = {
     "qualitative": {
@@ -47,10 +41,10 @@ MMAT_CRITERIA: Dict[str, Dict[str, str]] = {
     },
     "quantitative_nonrandomized": {
         "Q1": "Are the participants representative of the target population?",
-        "Q2": "Are measurements appropriate regarding both the outcome and intervention (or exposure)?",
+        "Q2": "Are measurements appropriate regarding both the outcome and intervention?",
         "Q3": "Are there complete outcome data?",
         "Q4": "Are the confounders accounted for in the design and analysis?",
-        "Q5": "During the study period, is the intervention administered (or exposure occurred) as intended?",
+        "Q5": "Did the intervention or exposure occur as intended?",
     },
     "quantitative_descriptive": {
         "Q1": "Is the sampling strategy relevant to address the research question?",
@@ -62,541 +56,226 @@ MMAT_CRITERIA: Dict[str, Dict[str, str]] = {
     "mixed_methods": {
         "Q1": "Is there an adequate rationale for using a mixed methods design?",
         "Q2": "Are the different components of the study effectively integrated?",
-        "Q3": "Are the outputs of the integration of qualitative and quantitative components adequately interpreted?",
-        "Q4": "Are divergences and inconsistencies between quantitative and qualitative results adequately addressed?",
-        "Q5": "Do the different components of the study adhere to the quality criteria of each tradition?",
+        "Q3": "Are the outputs of the integration adequately interpreted?",
+        "Q4": "Are divergences between quantitative and qualitative results addressed?",
+        "Q5": "Do the components adhere to the quality criteria of each tradition?",
     },
 }
 
-# Valores válidos para cada critério MMAT
-VALID_RESPONSES = {"Y", "N", "CT"}  # Yes, No, Can't Tell
-
-# ---------------------------------------------------------------------------
-# Mapping: paper_id prefix -> database id (title fragment)
-# These are the 17 included studies with their real MMAT assessments.
-# ---------------------------------------------------------------------------
-
-MMAT_ASSESSMENTS: Dict[str, Dict[str, Any]] = {
-    "Implementation2025_000": {
-        "title_fragment": "Implementation of Educational Data Mining",
-        "authors_fragment": "Tjahyadi",
-        "year": 2025,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "N", "Q3": "Y", "Q4": "CT", "Q5": "Y"},
-        "score": 3,
-        "limitations": "Single private school (n=280); limited representativeness; nonresponse not discussed",
-    },
-    "Design2025_004": {
-        "title_fragment": "Design of Personalized Learning Path",
-        "authors_fragment": "Zhang",
-        "year": 2025,
-        "design": "quantitative_nonrandomized",
-        "criteria": {"Q1": "CT", "Q2": "Y", "Q3": "CT", "Q4": "N", "Q5": "Y"},
-        "score": 2,
-        "limitations": "Population unclear; data completeness not discussed; confounders not controlled",
-    },
-    "Enhancing2025_012": {
-        "title_fragment": "Enhancing Student Achievement in Circle Theorems",
-        "authors_fragment": "Nyantah",
-        "year": 2025,
-        "design": "quantitative_nonrandomized",
-        "criteria": {"Q1": "Y", "Q2": "Y", "Q3": "CT", "Q4": "N", "Q5": "Y"},
-        "score": 3,
-        "limitations": "Cluster assignment; confounders not controlled; data completeness not reported",
-    },
-    "Machine2024_009": {
-        "title_fragment": "Machine learning methods as auxiliary tool",
-        "authors_fragment": "Milićević",
-        "year": 2024,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "N", "Q3": "Y", "Q4": "CT", "Q5": "Y"},
-        "score": 3,
-        "limitations": "Single technical faculty; limited representativeness; nonresponse not discussed",
-    },
-    "Authentic2024_013": {
-        "title_fragment": "Authentic Assessment for Motivating Student Learning",
-        "authors_fragment": "Appiah-Odame",
-        "year": 2024,
-        "design": "qualitative",
-        "criteria": {"Q1": "Y", "Q2": "Y", "Q3": "Y", "Q4": "Y", "Q5": "N"},
-        "score": 4,
-        "limitations": "Small sample (12 teachers); specific rural context; no triangulation",
-    },
-    "Assessing2024_015": {
-        "title_fragment": "Assessing the Effectiveness of Adaptive Learning",
-        "authors_fragment": "Jose",
-        "year": 2024,
-        "design": "mixed_methods",
-        "criteria": {"Q1": "Y", "Q2": "CT", "Q3": "CT", "Q4": "N", "Q5": "Y"},
-        "score": 2,
-        "limitations": "Quali-quanti integration insufficient; divergences not discussed",
-    },
-    "Innovative2023_005": {
-        "title_fragment": "Innovative Model of Higher Mathematics",
-        "authors_fragment": "Zhang",
-        "year": 2023,
-        "design": "quantitative_nonrandomized",
-        "criteria": {"Q1": "CT", "Q2": "Y", "Q3": "CT", "Q4": "Y", "Q5": "Y"},
-        "score": 3,
-        "limitations": "Higher education only; data completeness not reported",
-    },
-    "Performance2023_014": {
-        "title_fragment": "Performance assessment: Improving metacognitive",
-        "authors_fragment": "Mertasari",
-        "year": 2023,
-        "design": "quantitative_nonrandomized",
-        "criteria": {"Q1": "Y", "Q2": "Y", "Q3": "CT", "Q4": "Y", "Q5": "Y"},
-        "score": 4,
-        "limitations": "Cluster randomization; data completeness not explicit",
-    },
-    "Analysis2022_003": {
-        "title_fragment": "Analysis of Feature Selection and Data Mining",
-        "authors_fragment": "Kumar",
-        "year": 2022,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "CT", "Q3": "Y", "Q4": "CT", "Q5": "N"},
-        "score": 2,
-        "limitations": "Dataset origin unclear; no cross-validation; limited metrics",
-    },
-    "Machine2022_010": {
-        "title_fragment": "Machine Learning and Explainable AI Approach",
-        "authors_fragment": "Hasib",
-        "year": 2022,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "Y", "Q3": "Y", "Q4": "CT", "Q5": "Y"},
-        "score": 4,
-        "limitations": "Secondary dataset; completeness not discussed; no real classroom validation",
-    },
-    "Math2021_001": {
-        "title_fragment": "Math proficiency prediction in computer-based",
-        "authors_fragment": "Pejic",
-        "year": 2021,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "Y", "Q3": "Y", "Q4": "Y", "Q5": "Y"},
-        "score": 5,
-        "limitations": "Robust PISA dataset; rigorous sampling; no critical limitations identified",
-    },
-    "Analysis2021_016": {
-        "title_fragment": "Analysis of Facebook in the Teaching-Learning",
-        "authors_fragment": "Salas-Rueda",
-        "year": 2021,
-        "design": "quantitative_nonrandomized",
-        "criteria": {"Q1": "N", "Q2": "Y", "Q3": "CT", "Q4": "N", "Q5": "CT"},
-        "score": 1,
-        "limitations": "Small sample (n=46); convenience sample; confounders not controlled; observational",
-    },
-    "Multimodels2020_002": {
-        "title_fragment": "Multi-models of Educational Data Mining",
-        "authors_fragment": "Sokkhey",
-        "year": 2020,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "CT", "Q3": "Y", "Q4": "CT", "Q5": "Y"},
-        "score": 3,
-        "limitations": "Cambodia-specific context; representativeness not discussed",
-    },
-    "Data2020_011": {
-        "title_fragment": "Data Mining for Student Performance Prediction",
-        "authors_fragment": "Ünal",
-        "year": 2020,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "CT", "Q3": "CT", "Q4": "CT", "Q5": "CT"},
-        "score": 1,
-        "limitations": "Insufficient methodology description; metrics not detailed; bias not discussed",
-    },
-    "Machine2019_007": {
-        "title_fragment": "Machine Learning-based Predictive Analytics",
-        "authors_fragment": "Uskov",
-        "year": 2019,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "N", "Q3": "Y", "Q4": "CT", "Q5": "Y"},
-        "score": 3,
-        "limitations": "Single university; benchmark without classroom application; data not shared",
-    },
-    "Identifying2017_006": {
-        "title_fragment": "Identifying the Classification Performances",
-        "authors_fragment": "Depren",
-        "year": 2017,
-        "design": "quantitative_descriptive",
-        "criteria": {"Q1": "Y", "Q2": "Y", "Q3": "Y", "Q4": "Y", "Q5": "Y"},
-        "score": 5,
-        "limitations": "Robust TIMSS dataset; international sampling; multivariate analysis",
-    },
-    "Computational2017_008": {
-        "title_fragment": "Computational Models of Human Learning",
-        "authors_fragment": "MacLellan",
-        "year": 2017,
-        "design": "quantitative_nonrandomized",
-        "criteria": {"Q1": "Y", "Q2": "Y", "Q3": "Y", "Q4": "Y", "Q5": "Y"},
-        "score": 5,
-        "limitations": "7-domain validation; mixed-effects regression; well-specified models",
-    },
-}
-
-# ---------------------------------------------------------------------------
-# Design labels (Portuguese and English)
-# ---------------------------------------------------------------------------
-
-DESIGN_LABELS: Dict[str, str] = {
+VALID_RESPONSES = {"Y", "N", "CT"}
+EXPECTED_COLUMNS = [
+    "ID",
+    "Title",
+    "Authors",
+    "Year",
+    "Design",
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4",
+    "Q5",
+    "AssessmentBasis",
+    "ReviewerRole",
+    "Limitations",
+]
+DESIGN_LABELS = {
     "qualitative": "Qualitativo",
     "quantitative_randomized": "Quantitativo Randomizado",
     "quantitative_nonrandomized": "Quantitativo Não-Randomizado",
     "quantitative_descriptive": "Quantitativo Descritivo",
     "mixed_methods": "Métodos Mistos",
 }
-
-DESIGN_LABELS_EN: Dict[str, str] = {
-    "qualitative": "Qualitative",
-    "quantitative_randomized": "Quantitative Randomized",
-    "quantitative_nonrandomized": "Quantitative Non-randomized",
-    "quantitative_descriptive": "Quantitative Descriptive",
-    "mixed_methods": "Mixed Methods",
-}
+DEFAULT_DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "mmat_assessments.csv"
 
 
-# ---------------------------------------------------------------------------
-# Helper functions
-# ---------------------------------------------------------------------------
-
-
-def classify_study_design(title: str, abstract: str, study_type: Optional[str] = None) -> str:
-    """Classify a study design based on metadata.
-
-    This is a heuristic classifier; for the 17 included studies the design
-    is already encoded in ``MMAT_ASSESSMENTS``.  This function is provided
-    for extensibility to new studies.
-
-    Parameters
-    ----------
-    title : str
-        Paper title.
-    abstract : str
-        Paper abstract.
-    study_type : str, optional
-        Pre-classified study type from database.
-
-    Returns
-    -------
-    str
-        One of the keys from ``MMAT_CRITERIA``.
-    """
+def classify_study_design(
+    title: str,
+    abstract: str,
+    study_type: Optional[str] = None,
+) -> str:
+    """Classify a study design heuristically for records without manual review."""
     text = f"{title} {abstract} {study_type or ''}".lower()
-
-    if any(kw in text for kw in ["mixed method", "quali-quanti", "qualitative and quantitative"]):
+    if any(term in text for term in ("mixed method", "quali-quanti")):
         return "mixed_methods"
-    if any(kw in text for kw in ["qualitative", "interview", "thematic analysis", "phenomenolog"]):
+    if any(term in text for term in ("qualitative", "interview", "thematic analysis")):
         return "qualitative"
-    if any(kw in text for kw in ["randomized controlled", "rct", "randomized trial"]):
+    if any(term in text for term in ("randomized controlled", "randomised controlled", " rct ")):
         return "quantitative_randomized"
-    if any(kw in text for kw in [
-        "quasi-experiment", "pre-post", "comparison group",
-        "non-randomized", "nonrandomized", "control group",
-    ]):
+    if any(
+        term in text
+        for term in (
+            "quasi-experiment",
+            "pre-post",
+            "comparison group",
+            "non-randomized",
+            "nonrandomized",
+            "control group",
+        )
+    ):
         return "quantitative_nonrandomized"
-
-    # Default for ML/data mining studies
     return "quantitative_descriptive"
 
 
-def compute_mmat_score(criteria: Dict[str, str]) -> int:
-    """Compute the MMAT quality score (count of 'Y' responses).
-
-    Parameters
-    ----------
-    criteria : dict
-        Mapping Q1..Q5 -> 'Y'|'N'|'CT'.
-
-    Returns
-    -------
-    int
-        Number of criteria rated 'Y' (range 0-5).
-    """
-    return sum(1 for v in criteria.values() if v == "Y")
+def _normalize(value: object) -> str:
+    """Normalize text for stable cross-source matching."""
+    text = unicodedata.normalize("NFKD", str(value or ""))
+    text = "".join(char for char in text if not unicodedata.combining(char))
+    return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
 
 
-def get_quality_rating(score: int) -> str:
-    """Return a human-readable quality rating from the MMAT score.
-
-    Parameters
-    ----------
-    score : int
-        MMAT score (0-5).
-
-    Returns
-    -------
-    str
-        Quality label.
-    """
-    if score >= 4:
-        return "Alta"
-    elif score >= 3:
-        return "Moderada"
-    elif score >= 2:
-        return "Baixa"
-    else:
-        return "Muito Baixa"
+def _first_author(value: object) -> str:
+    """Return a normalized first-author token from JSON or plain text."""
+    if value is None:
+        return ""
+    text = str(value)
+    try:
+        parsed = json.loads(text)
+        if isinstance(parsed, list) and parsed:
+            first = parsed[0]
+            if isinstance(first, Mapping):
+                first = first.get("name") or first.get("author") or ""
+            return _normalize(first).split(" ")[-1]
+    except (json.JSONDecodeError, TypeError):
+        pass
+    first = re.split(r"[;,]", text, maxsplit=1)[0]
+    normalized = re.sub(r"\bet\s+al\b.*$", "", _normalize(first)).strip()
+    return normalized.split(" ")[-1] if normalized else ""
 
 
-def get_quality_rating_en(score: int) -> str:
-    """Return an English quality rating label.
+def load_assessments(
+    csv_path: Path | str = DEFAULT_DATA_PATH,
+    *,
+    expected_count: Optional[int] = 17,
+) -> List[Dict[str, Any]]:
+    """Load and validate the canonical criterion-level appraisal dataset."""
+    path = Path(csv_path)
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames != EXPECTED_COLUMNS:
+            raise ValueError(
+                f"Unexpected MMAT columns: {reader.fieldnames}; expected {EXPECTED_COLUMNS}"
+            )
+        rows = [dict(row) for row in reader]
 
-    Parameters
-    ----------
-    score : int
-        MMAT score (0-5).
+    if expected_count is not None and len(rows) != expected_count:
+        raise ValueError(f"Expected {expected_count} MMAT assessments, found {len(rows)}")
 
-    Returns
-    -------
-    str
-        Quality label in English.
-    """
-    if score >= 4:
-        return "High"
-    elif score >= 3:
-        return "Moderate"
-    elif score >= 2:
-        return "Low"
-    else:
-        return "Very Low"
+    ids = [row["ID"] for row in rows]
+    if len(ids) != len(set(ids)):
+        raise ValueError("MMAT assessment IDs must be unique")
 
+    for row in rows:
+        if row["Design"] not in MMAT_CRITERIA:
+            raise ValueError(f"Invalid MMAT design for {row['ID']}: {row['Design']}")
+        try:
+            row["Year"] = int(row["Year"])
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"Invalid year for {row['ID']}: {row['Year']}") from exc
+        for criterion in ("Q1", "Q2", "Q3", "Q4", "Q5"):
+            if row[criterion] not in VALID_RESPONSES:
+                raise ValueError(
+                    f"Invalid response for {row['ID']}.{criterion}: {row[criterion]}"
+                )
+        for field in ("Title", "Authors", "AssessmentBasis", "ReviewerRole", "Limitations"):
+            if not str(row[field]).strip():
+                raise ValueError(f"{row['ID']} is missing {field}")
 
-# ---------------------------------------------------------------------------
-# Match assessment keys to database papers
-# ---------------------------------------------------------------------------
+    return rows
 
 
 def match_assessments_to_papers(
     db_path: str,
+    assessments: Optional[Sequence[Mapping[str, Any]]] = None,
 ) -> List[Dict[str, Any]]:
-    """Match MMAT assessment entries to papers in the database.
+    """Match each appraisal to exactly one included database record.
 
-    Uses ``title_fragment`` from each assessment to locate the
-    corresponding row in the ``papers`` table where
-    ``selection_stage = 'included'``.
-
-    Parameters
-    ----------
-    db_path : str
-        Path to the SQLite database.
-
-    Returns
-    -------
-    list of dict
-        Each dict contains assessment data enriched with database
-        fields (``db_id``, ``full_title``, ``authors``, ``year``).
+    Matching requires normalized title, publication year, and first author.
+    Missing or ambiguous matches fail closed instead of silently producing an
+    incomplete export.
     """
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    rows = conn.execute(
-        "SELECT id, title, authors, year FROM papers WHERE selection_stage = 'included'"
-    ).fetchall()
-    conn.close()
+    records = list(assessments or load_assessments())
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        papers = conn.execute(
+            "SELECT id, title, authors, year FROM papers "
+            "WHERE selection_stage = 'included'"
+        ).fetchall()
 
     results: List[Dict[str, Any]] = []
+    for assessment in records:
+        title_key = _normalize(assessment["Title"])
+        author_key = _first_author(assessment["Authors"])
+        year = int(assessment["Year"])
 
-    for key, assessment in MMAT_ASSESSMENTS.items():
-        fragment = assessment["title_fragment"].lower()
-        matched = None
-        for row in rows:
-            if fragment in (row["title"] or "").lower():
-                matched = row
-                break
+        candidates = [
+            paper
+            for paper in papers
+            if _normalize(paper["title"]) == title_key
+            and int(paper["year"]) == year
+            and _first_author(paper["authors"]) == author_key
+        ]
 
-        if matched is None:
-            logger.warning("Could not match assessment '%s' to any included paper.", key)
-            continue
+        if len(candidates) != 1:
+            raise ValueError(
+                f"Assessment {assessment['ID']} expected one database match, "
+                f"found {len(candidates)}"
+            )
 
-        results.append({
-            "assessment_key": key,
-            "db_id": matched["id"],
-            "full_title": matched["title"],
-            "authors": matched["authors"],
-            "year": matched["year"],
-            "design": assessment["design"],
-            "design_label": DESIGN_LABELS.get(assessment["design"], assessment["design"]),
-            "criteria": assessment["criteria"],
-            "score": assessment["score"],
-            "quality_rating": get_quality_rating(assessment["score"]),
-            "limitations": assessment["limitations"],
-        })
+        paper = candidates[0]
+        criteria = {key: assessment[key] for key in ("Q1", "Q2", "Q3", "Q4", "Q5")}
+        results.append(
+            {
+                "assessment_key": assessment["ID"],
+                "db_id": paper["id"],
+                "full_title": paper["title"],
+                "authors": assessment["Authors"],
+                "year": year,
+                "design": assessment["Design"],
+                "design_label": DESIGN_LABELS[assessment["Design"]],
+                "criteria": criteria,
+                "assessment_basis": assessment["AssessmentBasis"],
+                "reviewer_role": assessment["ReviewerRole"],
+                "limitations": assessment["Limitations"],
+            }
+        )
 
-    logger.info("Matched %d/%d assessments to database papers.", len(results), len(MMAT_ASSESSMENTS))
     return results
 
 
-# ---------------------------------------------------------------------------
-# Export functions
-# ---------------------------------------------------------------------------
-
-
-def build_results_dataframe(results: List[Dict[str, Any]]) -> pd.DataFrame:
-    """Build a flat DataFrame from matched assessment results.
-
-    Parameters
-    ----------
-    results : list of dict
-        Output of ``match_assessments_to_papers``.
-
-    Returns
-    -------
-    pd.DataFrame
-    """
+def build_results_dataframe(results: Sequence[Mapping[str, Any]]) -> pd.DataFrame:
+    """Build the deterministic criterion-level export dataframe."""
     rows = []
-    for r in results:
+    for result in results:
         row = {
-            "ID": r["assessment_key"],
-            "Title": r["full_title"],
-            "Authors": _short_authors(r["authors"]),
-            "Year": r["year"],
-            "Design": r["design_label"],
-            "Q1": r["criteria"]["Q1"],
-            "Q2": r["criteria"]["Q2"],
-            "Q3": r["criteria"]["Q3"],
-            "Q4": r["criteria"]["Q4"],
-            "Q5": r["criteria"]["Q5"],
-            "Score": r["score"],
-            "Quality": r["quality_rating"],
-            "Limitations": r["limitations"],
+            "ID": result["assessment_key"],
+            "Title": result["full_title"],
+            "Authors": result["authors"],
+            "Year": int(result["year"]),
+            "Design": result["design"],
+            **dict(result["criteria"]),
+            "AssessmentBasis": result["assessment_basis"],
+            "ReviewerRole": result["reviewer_role"],
+            "Limitations": result["limitations"],
         }
         rows.append(row)
-
-    df = pd.DataFrame(rows)
-    df = df.sort_values(["Year", "Authors"], ascending=[False, True]).reset_index(drop=True)
-    return df
-
-
-def _short_authors(authors_str: Optional[str]) -> str:
-    """Extract a short 'First Author et al.' label."""
-    if not authors_str:
-        return "N/A"
-    # authors may be JSON list or semicolon-separated
-    try:
-        authors_list = json.loads(authors_str)
-        if isinstance(authors_list, list) and len(authors_list) > 0:
-            first = authors_list[0] if isinstance(authors_list[0], str) else str(authors_list[0])
-            if len(authors_list) > 1:
-                return f"{first} et al."
-            return first
-    except (json.JSONDecodeError, TypeError):
-        pass
-    # Fallback: semicolon or comma separated
-    parts = [p.strip() for p in authors_str.replace(";", ",").split(",") if p.strip()]
-    if len(parts) > 1:
-        return f"{parts[0]} et al."
-    return parts[0] if parts else "N/A"
+    return (
+        pd.DataFrame(rows, columns=EXPECTED_COLUMNS)
+        .sort_values(["Year", "Authors", "ID"], ascending=[False, True, True])
+        .reset_index(drop=True)
+    )
 
 
 def export_csv(df: pd.DataFrame, output_path: Path) -> Path:
-    """Export MMAT results to CSV.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Results dataframe from ``build_results_dataframe``.
-    output_path : Path
-        Target CSV file path.
-
-    Returns
-    -------
-    Path
-        Path to the written file.
-    """
+    """Export criterion-level MMAT data without volatile timestamps."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(output_path, index=False, encoding="utf-8-sig")
-    logger.info("CSV exported to %s", output_path)
+    df.to_csv(output_path, index=False, encoding="utf-8-sig", lineterminator="\n")
     return output_path
 
 
-def export_latex_table(df: pd.DataFrame, output_path: Path) -> Path:
-    """Export MMAT results as a LaTeX longtable.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Results dataframe.
-    output_path : Path
-        Target .tex file path.
-
-    Returns
-    -------
-    Path
-        Path to the written file.
-    """
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    # Build LaTeX content
-    lines: List[str] = []
-    lines.append("% MMAT Quality Assessment Table (auto-generated)")
-    lines.append(f"% Generated on {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-    lines.append("")
-    lines.append(r"\begin{longtable}{p{3.5cm}cp{3cm}ccccccc}")
-    lines.append(r"\caption{Avaliação de qualidade MMAT dos estudos incluídos}")
-    lines.append(r"\label{tab:mmat_assessment} \\")
-    lines.append(r"\toprule")
-    lines.append(r"\textbf{Autores (Ano)} & \textbf{Design} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Score} & \textbf{Qualidade} \\")
-    lines.append(r"\midrule")
-    lines.append(r"\endfirsthead")
-    lines.append("")
-    lines.append(r"\multicolumn{9}{c}{\tablename\ \thetable\ -- Continuação} \\")
-    lines.append(r"\toprule")
-    lines.append(r"\textbf{Autores (Ano)} & \textbf{Design} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Score} & \textbf{Qualidade} \\")
-    lines.append(r"\midrule")
-    lines.append(r"\endhead")
-    lines.append("")
-    lines.append(r"\midrule")
-    lines.append(r"\multicolumn{9}{r}{Continua na próxima página} \\")
-    lines.append(r"\endfoot")
-    lines.append("")
-    lines.append(r"\bottomrule")
-    lines.append(r"\endlastfoot")
-    lines.append("")
-
-    # Map response to LaTeX symbols
-    def _latex_symbol(val: str) -> str:
-        if val == "Y":
-            return r"\checkmark"
-        elif val == "N":
-            return r"\texttimes"
-        else:
-            return "?"
-
-    # Design abbreviations for compactness
-    design_abbrev: Dict[str, str] = {
-        "Qualitativo": "QL",
-        "Quantitativo Randomizado": "QR",
-        "Quantitativo Não-Randomizado": "QNR",
-        "Quantitativo Descritivo": "QD",
-        "Métodos Mistos": "MM",
-    }
-
-    for _, row in df.iterrows():
-        authors_year = _latex_escape(f"{row['Authors']} ({row['Year']})")
-        design = design_abbrev.get(row["Design"], row["Design"])
-        q1 = _latex_symbol(row["Q1"])
-        q2 = _latex_symbol(row["Q2"])
-        q3 = _latex_symbol(row["Q3"])
-        q4 = _latex_symbol(row["Q4"])
-        q5 = _latex_symbol(row["Q5"])
-        score = f"{row['Score']}/5"
-        quality = _latex_escape(row["Quality"])
-        lines.append(
-            f"{authors_year} & {design} & {q1} & {q2} & {q3} & {q4} & {q5} & {score} & {quality} \\\\"
-        )
-
-    lines.append("")
-    lines.append(r"\end{longtable}")
-    lines.append("")
-    lines.append(r"% Legend: \checkmark = Yes, \texttimes = No, ? = Can't Tell")
-    lines.append(r"% Design: QL = Qualitative, QR = Quantitative Randomized,")
-    lines.append(r"% QNR = Quantitative Non-randomized, QD = Quantitative Descriptive, MM = Mixed Methods")
-
-    output_path.write_text("\n".join(lines), encoding="utf-8")
-    logger.info("LaTeX table exported to %s", output_path)
-    return output_path
-
-
-def _latex_escape(text: str) -> str:
-    """Escape special LaTeX characters."""
+def _latex_escape(value: object) -> str:
+    text = str(value)
     replacements = {
+        "\\": r"\textbackslash{}",
         "&": r"\&",
         "%": r"\%",
         "$": r"\$",
@@ -607,182 +286,129 @@ def _latex_escape(text: str) -> str:
         "~": r"\textasciitilde{}",
         "^": r"\textasciicircum{}",
     }
-    for char, escaped in replacements.items():
-        text = text.replace(char, escaped)
-    return text
+    return "".join(replacements.get(char, char) for char in text)
 
 
-# ---------------------------------------------------------------------------
-# Database update
-# ---------------------------------------------------------------------------
+def export_latex_table(df: pd.DataFrame, output_path: Path) -> Path:
+    """Export an eight-column longtable with Q1--Q5 and limitations."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "% MMAT 2018 criterion-level appraisal (auto-generated)",
+        r"\begin{longtable}{|p{2.8cm}|p{2.4cm}|ccccc|p{7cm}|}",
+        r"\caption{Respostas aos critérios do MMAT 2018}",
+        r"\label{tab:mmat_assessment} \\",
+        r"\hline",
+        r"\textbf{Autores (Ano)} & \textbf{Desenho} & \textbf{Q1} & "
+        r"\textbf{Q2} & \textbf{Q3} & \textbf{Q4} & \textbf{Q5} & "
+        r"\textbf{Limitações observadas} \\",
+        r"\hline",
+        r"\endfirsthead",
+        r"\multicolumn{8}{c}{\tablename\ \thetable\ -- Continuação} \\",
+        r"\hline",
+        r"\textbf{Autores (Ano)} & \textbf{Desenho} & \textbf{Q1} & "
+        r"\textbf{Q2} & \textbf{Q3} & \textbf{Q4} & \textbf{Q5} & "
+        r"\textbf{Limitações observadas} \\",
+        r"\hline",
+        r"\endhead",
+        r"\hline",
+        r"\multicolumn{8}{r}{Continua na próxima página} \\",
+        r"\endfoot",
+        r"\hline",
+        r"\endlastfoot",
+    ]
+    for _, row in df.iterrows():
+        values = [
+            _latex_escape(f"{row['Authors']} ({row['Year']})"),
+            _latex_escape(DESIGN_LABELS[row["Design"]]),
+            *[
+                "ND" if row[key] == "CT" else ("S" if row[key] == "Y" else "N")
+                for key in ("Q1", "Q2", "Q3", "Q4", "Q5")
+            ],
+            _latex_escape(row["Limitations"]),
+        ]
+        lines.append(" & ".join(values) + r" \\")
+    lines.extend(
+        [
+            r"\end{longtable}",
+            r"% S = Sim; N = Não; ND = Não é possível determinar.",
+        ]
+    )
+    output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return output_path
 
 
-def update_database_with_scores(
+def update_database_with_assessments(
     db_path: str,
-    results: List[Dict[str, Any]],
+    results: Sequence[Mapping[str, Any]],
 ) -> int:
-    """Update the papers table with MMAT quality scores.
+    """Persist criterion-level appraisal data while preserving existing notes."""
+    with sqlite3.connect(db_path) as conn:
+        for result in results:
+            row = conn.execute(
+                "SELECT notes FROM papers WHERE id = ?", (result["db_id"],)
+            ).fetchone()
+            existing = row[0] if row and row[0] else ""
+            try:
+                notes = json.loads(existing) if existing else {}
+            except (json.JSONDecodeError, TypeError):
+                notes = {"_original_notes": existing} if existing else {}
+            notes.update(
+                {
+                    "mmat_version": "2018",
+                    "mmat_design": result["design"],
+                    "mmat_criteria": dict(result["criteria"]),
+                    "mmat_assessment_basis": result["assessment_basis"],
+                    "mmat_reviewer_role": result["reviewer_role"],
+                    "mmat_limitations": result["limitations"],
+                }
+            )
+            notes.pop("mmat_score", None)
+            notes.pop("mmat_quality", None)
+            conn.execute(
+                "UPDATE papers SET notes = ?, updated_at = CURRENT_TIMESTAMP "
+                "WHERE id = ?",
+                (json.dumps(notes, ensure_ascii=False), result["db_id"]),
+            )
+        conn.commit()
+    return len(results)
 
-    Stores the MMAT score and assessment details in the ``notes`` column
-    as a JSON-enriched string, preserving any existing notes.
 
-    Parameters
-    ----------
-    db_path : str
-        Path to the SQLite database.
-    results : list of dict
-        Output of ``match_assessments_to_papers``.
-
-    Returns
-    -------
-    int
-        Number of rows updated.
-    """
-    conn = sqlite3.connect(db_path)
-    updated = 0
-
-    for r in results:
-        mmat_data = {
-            "mmat_design": r["design"],
-            "mmat_criteria": r["criteria"],
-            "mmat_score": r["score"],
-            "mmat_quality": r["quality_rating"],
-            "mmat_limitations": r["limitations"],
-            "mmat_assessed_at": datetime.now().isoformat(),
+def summarize_criteria(
+    results: Sequence[Mapping[str, Any]],
+) -> Dict[str, Dict[str, int]]:
+    """Count Y/N/CT responses separately for every criterion."""
+    summary: Dict[str, Dict[str, int]] = {}
+    for criterion in ("Q1", "Q2", "Q3", "Q4", "Q5"):
+        counts = Counter(result["criteria"][criterion] for result in results)
+        summary[criterion] = {
+            response: counts.get(response, 0) for response in ("Y", "N", "CT")
         }
-
-        # Read existing notes
-        row = conn.execute(
-            "SELECT notes FROM papers WHERE id = ?", (r["db_id"],)
-        ).fetchone()
-        existing_notes = row[0] if row and row[0] else ""
-
-        # Try to merge with existing JSON notes
-        try:
-            notes_dict = json.loads(existing_notes) if existing_notes else {}
-        except (json.JSONDecodeError, TypeError):
-            notes_dict = {"_original_notes": existing_notes} if existing_notes else {}
-
-        notes_dict.update(mmat_data)
-
-        conn.execute(
-            "UPDATE papers SET notes = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
-            (json.dumps(notes_dict, ensure_ascii=False), r["db_id"]),
-        )
-        updated += 1
-
-    conn.commit()
-    conn.close()
-    logger.info("Updated %d papers with MMAT scores in database.", updated)
-    return updated
+    return summary
 
 
-# ---------------------------------------------------------------------------
-# Summary statistics
-# ---------------------------------------------------------------------------
-
-
-def print_summary(results: List[Dict[str, Any]]) -> None:
-    """Print summary statistics of the MMAT assessment.
-
-    Parameters
-    ----------
-    results : list of dict
-        Output of ``match_assessments_to_papers``.
-    """
-    if not results:
-        print("No results to summarize.")
-        return
-
-    scores = [r["score"] for r in results]
-    designs = [r["design"] for r in results]
-
-    print("\n" + "=" * 60)
-    print("MMAT 2018 - Quality Assessment Summary")
-    print("=" * 60)
-    print(f"Total studies assessed: {len(results)}")
-    print(f"Mean score: {sum(scores) / len(scores):.2f}/5")
-    print(f"Median score: {sorted(scores)[len(scores) // 2]}/5")
-    print(f"Min score: {min(scores)}/5")
-    print(f"Max score: {max(scores)}/5")
-
-    # Score distribution
-    print("\nScore distribution:")
-    for s in range(1, 6):
-        count = scores.count(s)
-        bar = "#" * count
-        print(f"  {s}/5: {count:2d} studies {bar}")
-
-    # Quality rating distribution
-    print("\nQuality rating:")
-    ratings = [get_quality_rating(s) for s in scores]
-    for label in ["Alta", "Moderada", "Baixa", "Muito Baixa"]:
-        count = ratings.count(label)
-        if count > 0:
-            print(f"  {label}: {count} studies")
-
-    # Design distribution
-    print("\nStudy designs:")
-    for design_key, design_label in DESIGN_LABELS.items():
-        count = designs.count(design_key)
-        if count > 0:
-            print(f"  {design_label}: {count} studies")
-
-    print("=" * 60)
-
-
-# ---------------------------------------------------------------------------
-# Main entry point
-# ---------------------------------------------------------------------------
+def print_summary(results: Sequence[Mapping[str, Any]]) -> None:
+    """Print design and criterion counts without an overall quality score."""
+    print(f"MMAT 2018 studies assessed: {len(results)}")
+    designs = Counter(result["design"] for result in results)
+    for design, count in sorted(designs.items()):
+        print(f"  {DESIGN_LABELS[design]}: {count}")
+    print("Criterion responses:")
+    for criterion, counts in summarize_criteria(results).items():
+        print(f"  {criterion}: Y={counts['Y']} N={counts['N']} CT={counts['CT']}")
 
 
 def main() -> None:
-    """Run the full MMAT assessment pipeline.
-
-    1. Connect to the SQLite database
-    2. Match assessments to included papers
-    3. Export CSV and LaTeX table
-    4. Update database with MMAT scores
-    5. Print summary statistics
-    """
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-    )
-
+    """Run matching, criterion-level exports, and database synchronization."""
+    logging.basicConfig(level=logging.INFO)
     config = load_config()
-    db_path = config.database.db_path
+    assessments = load_assessments()
+    results = match_assessments_to_papers(config.database.db_path, assessments)
+    dataframe = build_results_dataframe(results)
     exports_dir = Path(config.database.exports_dir)
-
-    logger.info("Starting MMAT assessment pipeline...")
-    logger.info("Database: %s", db_path)
-
-    # 1. Match assessments to database papers
-    results = match_assessments_to_papers(db_path)
-
-    if not results:
-        logger.error("No assessments could be matched to database papers.")
-        return
-
-    # 2. Build results dataframe
-    df = build_results_dataframe(results)
-
-    # 3. Export CSV
-    csv_path = exports_dir / "analysis" / "mmat_assessment.csv"
-    export_csv(df, csv_path)
-
-    # 4. Export LaTeX table
-    latex_path = exports_dir / "references" / "mmat_table.tex"
-    export_latex_table(df, latex_path)
-
-    # 5. Update database
-    updated = update_database_with_scores(db_path, results)
-    logger.info("Database updated: %d papers.", updated)
-
-    # 6. Print summary
+    export_csv(dataframe, exports_dir / "analysis" / "mmat_assessment.csv")
+    export_latex_table(dataframe, exports_dir / "references" / "mmat_table.tex")
+    update_database_with_assessments(config.database.db_path, results)
     print_summary(results)
-
-    logger.info("MMAT assessment pipeline complete.")
 
 
 if __name__ == "__main__":

@@ -1,140 +1,232 @@
-"""Tests for the MMAT (Mixed Methods Appraisal Tool) 2018 assessment module."""
+"""Tests for criterion-level MMAT 2018 appraisal support."""
 
+from __future__ import annotations
+
+import csv
+import json
+import sqlite3
+from pathlib import Path
+
+import pandas as pd
 import pytest
 
 from src.analysis.mmat_assessment import (
-    MMAT_ASSESSMENTS,
-    MMAT_CRITERIA,
+    EXPECTED_COLUMNS,
     VALID_RESPONSES,
+    build_results_dataframe,
     classify_study_design,
-    compute_mmat_score,
-    get_quality_rating,
-    get_quality_rating_en,
+    export_csv,
+    export_latex_table,
+    load_assessments,
+    match_assessments_to_papers,
+    summarize_criteria,
+    update_database_with_assessments,
 )
 
 
-class TestMmatAssessmentData:
-    """Validate the integrity of the hardcoded MMAT assessment data."""
+def _assessment(**overrides):
+    row = {
+        "ID": "Study2026_001",
+        "Title": "A Study About Mathematics Learning",
+        "Authors": "Ana Silva et al.",
+        "Year": 2026,
+        "Design": "quantitative_descriptive",
+        "Q1": "Y",
+        "Q2": "N",
+        "Q3": "CT",
+        "Q4": "Y",
+        "Q5": "Y",
+        "AssessmentBasis": "Full text",
+        "ReviewerRole": "Single reviewer",
+        "Limitations": "Single-site study with incomplete reporting",
+    }
+    row.update(overrides)
+    return row
 
-    def test_all_17_studies_assessed(self):
-        """All 17 included studies must have an assessment entry."""
-        assert len(MMAT_ASSESSMENTS) == 17
 
-    def test_each_study_has_exactly_5_criteria(self):
-        """Each assessment must have exactly 5 criteria (Q1-Q5)."""
-        for key, entry in MMAT_ASSESSMENTS.items():
-            criteria = entry["criteria"]
-            assert len(criteria) == 5, f"{key} has {len(criteria)} criteria, expected 5"
-            assert set(criteria.keys()) == {"Q1", "Q2", "Q3", "Q4", "Q5"}, (
-                f"{key} criteria keys mismatch: {set(criteria.keys())}"
+def _database(path: Path, rows):
+    with sqlite3.connect(path) as conn:
+        conn.execute(
+            """
+            CREATE TABLE papers (
+                id INTEGER PRIMARY KEY,
+                title TEXT,
+                authors TEXT,
+                year INTEGER,
+                selection_stage TEXT,
+                notes TEXT,
+                updated_at TEXT
             )
+            """
+        )
+        conn.executemany(
+            """
+            INSERT INTO papers
+                (id, title, authors, year, selection_stage, notes)
+            VALUES (?, ?, ?, ?, 'included', ?)
+            """,
+            rows,
+        )
+        conn.commit()
 
-    def test_scores_between_1_and_5(self):
-        """All MMAT scores must be in the range [1, 5]."""
-        for key, entry in MMAT_ASSESSMENTS.items():
-            score = entry["score"]
-            assert 1 <= score <= 5, f"{key} has score {score}, expected 1-5"
 
-    def test_criteria_values_are_valid(self):
-        """Each criterion response must be Y, N, or CT."""
-        for key, entry in MMAT_ASSESSMENTS.items():
-            for qk, qv in entry["criteria"].items():
-                assert qv in VALID_RESPONSES, (
-                    f"{key}.{qk} = '{qv}' is not a valid MMAT response"
+class TestCanonicalData:
+    def test_loads_all_17_assessments(self):
+        rows = load_assessments()
+        assert len(rows) == 17
+        assert len({row["ID"] for row in rows}) == 17
+
+    def test_uses_criterion_level_columns(self):
+        rows = load_assessments()
+        assert list(rows[0]) == EXPECTED_COLUMNS
+        assert "Score" not in rows[0]
+        assert "Quality" not in rows[0]
+
+    def test_responses_and_provenance_are_valid(self):
+        for row in load_assessments():
+            assert {row[key] for key in ("Q1", "Q2", "Q3", "Q4", "Q5")} <= VALID_RESPONSES
+            assert row["AssessmentBasis"]
+            assert row["ReviewerRole"]
+            assert row["Limitations"]
+
+    def test_rejects_invalid_response(self, tmp_path):
+        path = tmp_path / "invalid.csv"
+        row = _assessment(Q1="MAYBE")
+        with path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=EXPECTED_COLUMNS)
+            writer.writeheader()
+            writer.writerow(row)
+        with pytest.raises(ValueError, match="Invalid response"):
+            load_assessments(path, expected_count=1)
+
+
+class TestMatching:
+    def test_matches_title_year_and_first_author(self, tmp_path):
+        db = tmp_path / "papers.db"
+        _database(
+            db,
+            [
+                (
+                    1,
+                    "A Study About Mathematics Learning",
+                    json.dumps(["Ana Silva", "João Souza"]),
+                    2026,
+                    "{}",
                 )
+            ],
+        )
+        results = match_assessments_to_papers(str(db), [_assessment()])
+        assert len(results) == 1
+        assert results[0]["db_id"] == 1
 
-    def test_score_matches_criteria_yes_count(self):
-        """Score must equal the number of 'Y' responses in criteria."""
-        for key, entry in MMAT_ASSESSMENTS.items():
-            expected = sum(1 for v in entry["criteria"].values() if v == "Y")
-            assert entry["score"] == expected, (
-                f"{key}: score={entry['score']} but Y count={expected}"
-            )
+    def test_missing_match_fails_closed(self, tmp_path):
+        db = tmp_path / "papers.db"
+        _database(db, [])
+        with pytest.raises(ValueError, match="found 0"):
+            match_assessments_to_papers(str(db), [_assessment()])
 
-    def test_each_study_has_valid_design(self):
-        """Each assessment design must be a valid MMAT category."""
-        valid_designs = set(MMAT_CRITERIA.keys())
-        for key, entry in MMAT_ASSESSMENTS.items():
-            assert entry["design"] in valid_designs, (
-                f"{key} design '{entry['design']}' not in {valid_designs}"
-            )
-
-    def test_each_study_has_limitations(self):
-        """Each assessment must document limitations."""
-        for key, entry in MMAT_ASSESSMENTS.items():
-            assert entry.get("limitations"), f"{key} is missing limitations"
-            assert len(entry["limitations"]) > 10, (
-                f"{key} limitations too short: '{entry['limitations']}'"
-            )
+    def test_ambiguous_match_fails_closed(self, tmp_path):
+        db = tmp_path / "papers.db"
+        repeated = (
+            "A Study About Mathematics Learning",
+            json.dumps(["Ana Silva"]),
+            2026,
+            "{}",
+        )
+        _database(db, [(1, *repeated), (2, *repeated)])
+        with pytest.raises(ValueError, match="found 2"):
+            match_assessments_to_papers(str(db), [_assessment()])
 
 
-class TestMmatCriteria:
-    """Validate the MMAT criteria definitions."""
-
-    def test_all_five_designs_defined(self):
-        """MMAT criteria must cover all 5 study designs."""
-        expected = {
-            "qualitative",
-            "quantitative_randomized",
-            "quantitative_nonrandomized",
-            "quantitative_descriptive",
-            "mixed_methods",
+class TestExports:
+    def test_dataframe_has_no_score_or_quality(self):
+        result = {
+            "assessment_key": "Study2026_001",
+            "full_title": "A Study About Mathematics Learning",
+            "authors": "Ana Silva et al.",
+            "year": 2026,
+            "design": "quantitative_descriptive",
+            "criteria": {"Q1": "Y", "Q2": "N", "Q3": "CT", "Q4": "Y", "Q5": "Y"},
+            "assessment_basis": "Full text",
+            "reviewer_role": "Single reviewer",
+            "limitations": "Single-site study",
         }
-        assert set(MMAT_CRITERIA.keys()) == expected
+        frame = build_results_dataframe([result])
+        assert list(frame.columns) == EXPECTED_COLUMNS
+        assert "Score" not in frame
+        assert "Quality" not in frame
 
-    def test_each_design_has_5_questions(self):
-        """Each design category must have exactly 5 criteria questions."""
-        for design, criteria in MMAT_CRITERIA.items():
-            assert len(criteria) == 5, f"{design} has {len(criteria)} criteria"
-            assert set(criteria.keys()) == {"Q1", "Q2", "Q3", "Q4", "Q5"}
+    def test_csv_export_is_deterministic(self, tmp_path):
+        frame = pd.DataFrame([_assessment()], columns=EXPECTED_COLUMNS)
+        first = tmp_path / "first.csv"
+        second = tmp_path / "second.csv"
+        export_csv(frame, first)
+        export_csv(frame, second)
+        assert first.read_bytes() == second.read_bytes()
+
+    def test_latex_export_has_eight_columns_and_no_score(self, tmp_path):
+        frame = pd.DataFrame([_assessment()], columns=EXPECTED_COLUMNS)
+        output = tmp_path / "mmat.tex"
+        export_latex_table(frame, output)
+        content = output.read_text(encoding="utf-8")
+        assert r"\multicolumn{8}" in content
+        assert "Score" not in content
+        assert "Qualidade" not in content
+        assert "ND" in content
 
 
-class TestHelperFunctions:
-    """Test helper/utility functions."""
+class TestDatabaseUpdate:
+    def test_replaces_legacy_score_fields(self, tmp_path):
+        db = tmp_path / "papers.db"
+        legacy_notes = json.dumps({"mmat_score": 4, "mmat_quality": "Alta", "keep": True})
+        _database(
+            db,
+            [
+                (
+                    1,
+                    "A Study About Mathematics Learning",
+                    json.dumps(["Ana Silva"]),
+                    2026,
+                    legacy_notes,
+                )
+            ],
+        )
+        result = {
+            "db_id": 1,
+            "design": "quantitative_descriptive",
+            "criteria": {"Q1": "Y", "Q2": "N", "Q3": "CT", "Q4": "Y", "Q5": "Y"},
+            "assessment_basis": "Full text",
+            "reviewer_role": "Single reviewer",
+            "limitations": "Single-site study",
+        }
+        assert update_database_with_assessments(str(db), [result]) == 1
+        with sqlite3.connect(db) as conn:
+            notes = json.loads(conn.execute("SELECT notes FROM papers").fetchone()[0])
+        assert notes["keep"] is True
+        assert notes["mmat_criteria"]["Q3"] == "CT"
+        assert "mmat_score" not in notes
+        assert "mmat_quality" not in notes
 
-    def test_compute_mmat_score_all_yes(self):
-        criteria = {"Q1": "Y", "Q2": "Y", "Q3": "Y", "Q4": "Y", "Q5": "Y"}
-        assert compute_mmat_score(criteria) == 5
 
-    def test_compute_mmat_score_all_no(self):
-        criteria = {"Q1": "N", "Q2": "N", "Q3": "N", "Q4": "N", "Q5": "N"}
-        assert compute_mmat_score(criteria) == 0
+class TestSummariesAndClassification:
+    def test_summary_preserves_each_response_type(self):
+        results = [
+            {"criteria": {"Q1": "Y", "Q2": "N", "Q3": "CT", "Q4": "Y", "Q5": "Y"}},
+            {"criteria": {"Q1": "N", "Q2": "N", "Q3": "Y", "Q4": "CT", "Q5": "Y"}},
+        ]
+        summary = summarize_criteria(results)
+        assert summary["Q1"] == {"Y": 1, "N": 1, "CT": 0}
+        assert summary["Q3"] == {"Y": 1, "N": 0, "CT": 1}
 
-    def test_compute_mmat_score_mixed(self):
-        criteria = {"Q1": "Y", "Q2": "CT", "Q3": "Y", "Q4": "N", "Q5": "Y"}
-        assert compute_mmat_score(criteria) == 3
-
-    def test_quality_rating_high(self):
-        assert get_quality_rating(5) == "Alta"
-        assert get_quality_rating(4) == "Alta"
-
-    def test_quality_rating_moderate(self):
-        assert get_quality_rating(3) == "Moderada"
-
-    def test_quality_rating_low(self):
-        assert get_quality_rating(2) == "Baixa"
-
-    def test_quality_rating_very_low(self):
-        assert get_quality_rating(1) == "Muito Baixa"
-        assert get_quality_rating(0) == "Muito Baixa"
-
-    def test_quality_rating_en(self):
-        assert get_quality_rating_en(5) == "High"
-        assert get_quality_rating_en(3) == "Moderate"
-        assert get_quality_rating_en(2) == "Low"
-        assert get_quality_rating_en(0) == "Very Low"
-
-    def test_classify_mixed_methods(self):
-        assert classify_study_design("A mixed method study", "") == "mixed_methods"
-
-    def test_classify_qualitative(self):
-        assert classify_study_design("", "qualitative interview study") == "qualitative"
-
-    def test_classify_randomized(self):
-        assert classify_study_design("A randomized controlled trial", "") == "quantitative_randomized"
-
-    def test_classify_nonrandomized(self):
-        assert classify_study_design("", "quasi-experimental design") == "quantitative_nonrandomized"
-
-    def test_classify_default_descriptive(self):
-        assert classify_study_design("Machine learning prediction", "data mining") == "quantitative_descriptive"
+    @pytest.mark.parametrize(
+        ("title", "abstract", "expected"),
+        [
+            ("Mixed method study", "", "mixed_methods"),
+            ("", "Qualitative interview study", "qualitative"),
+            ("Randomized controlled trial", "", "quantitative_randomized"),
+            ("", "Quasi-experimental design", "quantitative_nonrandomized"),
+            ("Machine learning prediction", "Data mining", "quantitative_descriptive"),
+        ],
+    )
+    def test_design_classification(self, title, abstract, expected):
+        assert classify_study_design(title, abstract) == expected

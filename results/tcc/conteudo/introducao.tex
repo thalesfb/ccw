@@ -1,112 +1,61 @@
 \chapter{INTRODUÇÃO}
 \label{cap:introducao}
 
-O ensino de matemática enfrenta o desafio constante de atender às diversas necessidades de aprendizagem dos alunos em salas de aula heterogêneas. A personalização do ensino, embora reconhecida como uma abordagem eficaz para melhorar o desempenho e o engajamento dos estudantes, é uma tarefa complexa e demorada para os professores \cite{Innovative2023_005, Design2025_004}. A dificuldade em diagnosticar com precisão e em tempo hábil as competências e dificuldades individuais de cada aluno representa uma barreira significativa para a otimização dos planos de ensino \cite{Authentic2024_013}.
+O ensino de matemática enfrenta o desafio de atender estudantes com conhecimentos prévios, ritmos e dificuldades diferentes. Em turmas numerosas, o acompanhamento individual exige tempo, instrumentos adequados e interpretação pedagógica dos dados produzidos nas atividades. Técnicas computacionais podem apoiar esse processo ao organizar evidências de desempenho e tornar padrões mais visíveis, mas suas respostas não substituem a avaliação do professor nem representam, isoladamente, a aprendizagem do estudante.
 
-Nesse contexto, as tecnologias computacionais — como \textbf{\textit{machine learning}}, análise de dados educacionais (\textbf{\textit{learning analytics}}) e inteligência artificial — surgiram como aliadas poderosas \cite{Machine2019_007, Implementation2025_000}. Essas técnicas ofereceram o potencial de automatizar a avaliação diagnóstica e fornecer aos educadores informações estruturadas e acionáveis para intervenções pedagógicas mais direcionadas e eficazes \cite{Math2021_001, Multimodels2020_002}. Estudos recentes demonstram que sistemas adaptativos baseados em dados podem melhorar significativamente o desempenho estudantil e reduzir o tempo necessário para alcançar objetivos de aprendizagem \cite{Assessing2024_015}.
+Nesse contexto, recursos como aprendizado de máquina (\textbf{\textit{machine learning}}), analítica da aprendizagem (\textbf{\textit{learning analytics}}) e sistemas tutores inteligentes têm sido investigados para apoiar avaliações diagnósticas, estimar níveis de proficiência e orientar intervenções pedagógicas \cite{Machine2019_007, Implementation2025_000, Math2021_001}. O uso responsável dessas técnicas requer clareza sobre os dados empregados, os limites das inferências e a relação entre as saídas computacionais e os objetivos educacionais.
 
 \section{Justificativa}
 
-A relevância deste projeto reside no seu potencial de impacto tanto para educadores quanto para alunos. Para os professores, a síntese sistemática das técnicas computacionais aplicadas ao ensino de matemática oferece fundamentação científica sólida para a tomada de decisão sobre investimentos em tecnologia educacional e adoção de práticas baseadas em evidências \cite{Identifying2017_006}. Além disso, a identificação de abordagens eficazes pode orientar o desenvolvimento de ferramentas que reduzam a carga de trabalho manual de avaliação e forneçam \textbf{\textit{insights}} acionáveis baseados em dados, permitindo que os educadores dediquem mais tempo à elaboração de estratégias pedagógicas personalizadas \cite{Performance2023_014}.
+A relevância deste trabalho decorreu de duas necessidades complementares. A primeira consistiu em organizar a literatura, dispersa entre diferentes bases e áreas de pesquisa, sobre técnicas computacionais aplicadas ao ensino de matemática. A segunda consistiu em transformar as evidências encontradas em requisitos técnicos e pedagógicos para uma especificação de protótipo voltada ao apoio do professor.
 
-Para os alunos, um ensino adaptado às suas necessidades individuais — fundamentado em diagnósticos automatizados precisos — pode resultar em melhoria significativa na aprendizagem, na motivação e na redução da ansiedade em relação à matemática \cite{Assessing2024_015}. Estudos reportam ganhos de aprendizagem de 10 a 20\% em sistemas adaptativos quando comparados a abordagens tradicionais, além de redução de até 20\% no tempo necessário para atingir objetivos pedagógicos \cite{Design2025_004}.
+Para professores, uma síntese crítica auxilia na compreensão das abordagens investigadas, dos resultados reportados e das limitações metodológicas recorrentes. Para estudantes e instituições, a pesquisa contribui ao explicitar que desempenho observado, proficiência estimada, competência e aprendizagem são conceitos relacionados, porém não equivalentes. Essa distinção reduz o risco de uma classificação algorítmica ser tratada como diagnóstico definitivo.
 
-Do ponto de vista acadêmico, a literatura sobre IA educacional encontra-se fragmentada em diversas áreas, carecendo de consenso terminológico. O relato estruturado conforme as diretrizes PRISMA 2020 buscou garantir rigor, transparência e reprodutibilidade na comunicação dos achados desta revisão.
-
-Praticamente, este trabalho ofereceu aos professores de matemática evidências empíricas para a adoção de tecnologias educacionais, além de fundamentar cientificamente o desenvolvimento do protótipo nas fases subsequentes do TCC, garantindo escolhas técnicas e pedagógicas respaldadas por dados \cite{Data2020_011, Machine2024_009}.
-
-O acompanhamento individualizado do progresso dos alunos em matemática é fundamental para um ensino de qualidade. No entanto, professores frequentemente carecem de ferramentas eficientes para diagnosticar as competências específicas de cada estudante em larga escala \cite{Analysis2022_003}, o que dificulta a adaptação dos planos de ensino às necessidades reais da turma. A ausência de um sistema automatizado para essa finalidade leva a um ensino mais generalizado, que pode não atender adequadamente nem os alunos com dificuldades nem os mais avançados.
-
-Apesar do crescente número de pesquisas sobre inteligência artificial aplicada ao ensino de matemática, a literatura científica apresenta-se fragmentada e dispersa em múltiplas bases de dados, subdisciplinas e abordagens metodológicas. Pesquisadores e desenvolvedores enfrentam dificuldades para identificar quais técnicas computacionais são mais adequadas para diferentes objetivos pedagógicos e quais abordagens foram efetivamente validadas em contextos educacionais reais \cite{Computational2017_008}.
+Do ponto de vista acadêmico, a revisão sistemática documentou as estratégias de busca, a seleção dos estudos e a avaliação de suas limitações metodológicas. O relato foi estruturado com apoio do PRISMA 2020 \cite{PRISMA2020}, enquanto os estudos incluídos foram examinados pelo MMAT 2018 \cite{MMAT2018}. A síntese da revisão e a fundamentação pedagógica sustentaram a definição dos requisitos, dos critérios de dados e modelagem, do protocolo de avaliação e da arquitetura de referência apresentados neste trabalho.
 
 \section{Problema de Pesquisa}
 
-Diante desse contexto, o presente trabalho aborda o seguinte problema de pesquisa:
+Diante desse contexto, o trabalho respondeu ao seguinte problema de pesquisa:
 
-Como identificar e sintetizar, através de revisão sistemática da literatura, as principais técnicas computacionais aplicadas ao ensino de matemática, de modo a fundamentar o desenvolvimento de uma ferramenta que auxilie professores na otimização de seus planos de ensino a partir da identificação automatizada das competências e dificuldades individuais dos alunos?
+Como identificar e sintetizar, por meio de revisão sistemática da literatura, as principais técnicas computacionais aplicadas ao ensino de matemática e converter essas evidências em uma especificação de protótipo que apoie o professor no diagnóstico de competências e dificuldades dos estudantes?
 
 \section{Objetivos}
 
 \subsection{Objetivo Geral}
-	
-Mapear e analisar sistematicamente as aplicações de técnicas computacionais — especialmente \textbf{\textit{machine learning}}, \textbf{\textit{learning analytics}} e sistemas de tutoria inteligente — no contexto do ensino de matemática, identificando tendências, lacunas de pesquisa e oportunidades para o desenvolvimento de um modelo computacional (MVP) que auxilie professores na personalização do ensino e no diagnóstico de competências.
 
-\subsection{Objetivos Específicos} 
+Mapear e analisar sistematicamente as aplicações de técnicas computacionais no ensino de matemática e, a partir das evidências encontradas, elaborar uma especificação técnica e pedagógica de protótipo para apoio ao diagnóstico de competências.
+
+\subsection{Objetivos Específicos}
 
 \begin{itemize}
-    \item \textbf{OE1}: Realizar revisão sistemática da literatura, com relato estruturado conforme PRISMA 2020 \cite{PRISMA2020}, para identificar estudos que apliquem técnicas computacionais no ensino de matemática, publicados nos últimos 10 anos (2016-2025).
-    
-    \item \textbf{OE2}: Identificar e categorizar as principais abordagens de inteligência artificial (\textbf{\textit{Machine Learning}}, \textbf{\textit{Deep Learning}}, \textbf{\textit{NLP}}, \textbf{\textit{Educational Data Mining}}) aplicadas ao ensino de matemática reportadas na literatura científica.
-    
-    \item \textbf{OE3}: Classificar as aplicações identificadas segundo suas finalidades pedagógicas: tutoria inteligente, diagnóstico de dificuldades, avaliação automatizada, personalização de conteúdo, predição de desempenho e \textbf{\textit{feedback}} adaptativo.
-    
-    \item \textbf{OE4}: Analisar criticamente as metodologias de avaliação utilizadas para validar a eficácia de sistemas computacionais em contextos educacionais, identificando boas práticas e limitações metodológicas.
-    
-    \item \textbf{OE5}: Mapear sistematicamente as lacunas de pesquisa, limitações técnicas e desafios reportados nos estudos incluídos, propondo direções prioritárias para o desenvolvimento de ferramentas computacionais eficazes no ensino de matemática.
-    
-    \item \textbf{OE6}: Criar um \textbf{\textit{pipeline}} automatizado e reproduzível para coleta, processamento e análise de literatura científica, contribuindo para futuras revisões sistemáticas no campo e fundamentando o desenvolvimento do protótipo nas fases subsequentes do TCC.
+    \item \textbf{OE1}: realizar uma revisão sistemática da literatura, com relato apoiado pelo PRISMA 2020, sobre estudos publicados entre 2016 e 2025;
+    \item \textbf{OE2}: identificar e categorizar as principais abordagens computacionais aplicadas ao ensino de matemática;
+    \item \textbf{OE3}: classificar as finalidades pedagógicas atribuídas às aplicações encontradas;
+    \item \textbf{OE4}: analisar criticamente as metodologias e limitações dos estudos incluídos;
+    \item \textbf{OE5}: mapear lacunas técnicas, pedagógicas, metodológicas e éticas;
+    \item \textbf{OE6}: manter um \textit{pipeline} automatizado e auditável para coleta, processamento e exportação da revisão;
+    \item \textbf{OE7}: derivar requisitos funcionais e não funcionais, critérios de seleção de dados e modelos, um protocolo de avaliação e uma arquitetura de referência para o protótipo.
 \end{itemize}
+
+\section{Delimitação do Trabalho}
+
+O escopo executado compreendeu a revisão sistemática da literatura, a avaliação metodológica dos estudos incluídos e a elaboração de uma especificação conceitual de protótipo. Essa especificação consolidou princípios pedagógicos, requisitos, critérios para seleção de fontes de dados e modelos, procedimentos de avaliação e uma arquitetura de referência.
+
+O desenvolvimento de uma aplicação funcional, o treinamento de modelos com uma base definitiva e a validação com participantes não integraram o escopo empírico desta pesquisa. Por essa razão, o trabalho não atribuiu ao protótipo métricas próprias de acurácia nem alegou eficácia pedagógica. Essa delimitação preservou a correspondência entre as afirmações apresentadas e os artefatos efetivamente produzidos.
 
 \section{Estrutura do Trabalho}
 
-Este Trabalho de Conclusão de Curso (TCC) apresenta os resultados de um projeto de pesquisa dividido em três etapas sequenciais:
-
-\subsection{Fase 1: Revisão Sistemática da Literatura}
-
-A primeira fase realizou uma revisão sistemática da literatura cujo relato seguiu as diretrizes PRISMA 2020 para mapear o estado da arte das técnicas computacionais aplicadas ao ensino de matemática. Esta fase foi fundamentalmente \textbf{exploratória e analítica}, tendo como objetivo:
-
-\begin{itemize}
-    \item Identificar quais técnicas de IA, \textit{machine learning} e \textit{learning analytics} têm sido aplicadas no ensino de matemática
-    \item Analisar os resultados reportados e metodologias de avaliação utilizadas
-    \item Mapear lacunas de pesquisa e oportunidades de desenvolvimento
-    \item Criar uma base de conhecimento estruturada para orientar as fases seguintes
-\end{itemize}
-
-\textbf{Entrega realizada}: Relatório de revisão sistemática contendo: protocolo de pesquisa, análise de 17 estudos incluídos (de 9.431 identificados, 6.914 únicos após deduplicação), síntese narrativa das aplicações, mapeamento de lacunas e diretrizes para desenvolvimento de ferramentas educacionais.
-
-\subsection{Fase 2: Desenvolvimento do Protótipo}
-
-A Fase 2 consistiu no \textbf{projeto e implementação} de um protótipo funcional de ferramenta computacional para diagnóstico de competências matemáticas, fundamentado nos achados da revisão sistemática. Atividades realizadas:
-
-\begin{itemize}
-    \item Levantamento de requisitos funcionais e não-funcionais baseado na literatura
-    \item Definição de arquitetura de \textit{software} e escolha de tecnologias
-    \item Implementação de algoritmos de \textit{machine learning} para diagnóstico automatizado
-    \item Desenvolvimento de interface para professores e alunos
-    \item Integração com bases de dados educacionais e sistemas de gestão escolar
-\end{itemize}
-
-\subsection{Fase 3: Validação Experimental}
-
-A Fase 3 consistiu na \textbf{validação empírica} do protótipo desenvolvido em contexto educacional real. Atividades realizadas:
-
-\begin{itemize}
-    \item Planejamento de estudo experimental (\textit{design}, amostra, instrumentos)
-    \item Coleta de dados em ambiente escolar controlado
-    \item Análise quantitativa e qualitativa dos resultados
-    \item Avaliação de eficácia, usabilidade e aceitação pelos usuários
-    \item Refinamento do protótipo com base nos resultados
-\end{itemize}
-
-\subsection{Organização do Documento}
-
-O presente documento está organizado da seguinte forma:
+O documento foi organizado da seguinte forma:
 
 \begin{description}
-    \item[Capítulo 1 - Introdução:] Apresentou a contextualização do tema, o problema de pesquisa, os objetivos, a justificativa e a estrutura do trabalho (este capítulo).
-
-    \item[Capítulo 2 - Fundamentação Teórica:] Apresentou os conceitos fundamentais sobre Inteligência Artificial, \textit{Machine Learning}, \textit{Learning Analytics}, Educação Matemática e Revisões Sistemáticas que embasaram teoricamente a pesquisa.
-
-    \item[Capítulo 3 - Metodologia:] Descreveu em detalhes a metodologia de revisão sistemática adotada, com relato conforme PRISMA 2020, incluindo estratégias de busca bilíngue (72 consultas em 4 APIs), critérios de seleção PICOS, processo de triagem e extração de dados.
-
-    \item[Capítulo 4 - Revisão Sistemática da Literatura:] Apresentou os resultados da revisão sistemática, incluindo fluxo PRISMA (9.431 identificados $\rightarrow$ 6.914 únicos $\rightarrow$ 17 incluídos), síntese dos estudos incluídos (Tabela 1), análise temática das aplicações de IA identificadas, e mapeamento de lacunas de pesquisa.
-
-    \item[Capítulo 5 - Desenvolvimento do Protótipo:] Descreveu as decisões técnicas, a arquitetura e a implementação do protótipo de sistema inteligente para diagnóstico de competências matemáticas, fundamentado nas evidências da revisão sistemática.
-
-    \item[Capítulo 6 - Cronograma:] Apresentou o planejamento temporal detalhado das três fases do projeto (Fase 1: março-novembro 2025; Fase 2: fevereiro-julho 2026; Fase 3: julho-novembro 2026).
-
-    \item[Referências Bibliográficas:] Lista completa das obras citadas ao longo do trabalho, formatadas segundo normas ABNT NBR 6023:2018, incluindo os 17 estudos incluídos na revisão sistemática.
+    \item[Capítulo 1 -- Introdução:] apresenta o contexto, a justificativa, o problema, os objetivos e a delimitação do trabalho;
+    \item[Capítulo 2 -- Fundamentação Teórica:] discute aprendizagem matemática, avaliação, técnicas computacionais e limites das inferências baseadas em dados;
+    \item[Capítulo 3 -- Metodologia:] descreve a revisão sistemática, a estratégia de busca, os critérios de seleção, o processo de deduplicação, o PRISMA, o MMAT e o procedimento de derivação da especificação;
+    \item[Capítulo 4 -- Revisão Sistemática da Literatura:] apresenta o fluxo de seleção, a síntese dos estudos, a avaliação por critérios e as lacunas identificadas;
+    \item[Capítulo 5 -- Especificação do Protótipo:] consolida princípios, requisitos, critérios de dados e modelagem, protocolo de avaliação e arquitetura de referência;
+    \item[Capítulo 6 -- Resultados e Discussão:] integra os resultados da revisão, da avaliação metodológica, da fundamentação e da especificação;
+    \item[Capítulo 7 -- Conclusão:] sintetiza as contribuições, as limitações e as possibilidades de continuidade da pesquisa;
+    \item[Capítulo 8 -- Execução do Trabalho:] registra a cronologia das atividades realizadas.
 \end{description}
-% 
+
 %--------- FIM INTRODUÇÃO------------
-%
