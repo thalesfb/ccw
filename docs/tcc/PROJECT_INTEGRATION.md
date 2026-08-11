@@ -42,9 +42,22 @@ Em particular:
 
 A sequência científica permanece a já definida na issue #7 e nos PRs empilhados.
 
+### Pré-requisito técnico — normalizar a pilha de PRs
+
+O PR #6 foi incorporado por squash merge. Portanto, o commit consolidado na `main` não preserva como ancestral o histórico da branch `agent/revise-tcc-methodology`, sobre a qual a pilha #9–#19 foi originalmente construída.
+
+Antes de revisar o mérito do lote 2, deve-se:
+
+1. reconstruir ou rebasear `agent/tcc-reference-audit` sobre a `main` atual, preservando somente as mudanças próprias do PR #9;
+2. confirmar que o diff do #9 não reapresenta as alterações do PR #6;
+3. executar novamente os checks do CI;
+4. reconstruir os PRs descendentes sequencialmente sobre os novos heads de seus pais.
+
+Enquanto houver PRs empilhados, a política de merge deve ser escolhida conscientemente. Merge commits preservam a ancestralidade das branches e reduzem a necessidade de restacking. Squash merges são compatíveis com a pilha, mas exigem reconstrução do próximo PR após cada integração.
+
 ### Etapa imediata — revisar o lote 2
 
-O PR #9 passa a ser o próximo ponto de revisão porque trata da auditoria bibliográfica completa e está diretamente apoiado sobre a baseline acadêmica agora incorporada à `main`.
+Depois da normalização da branch, o PR #9 é o próximo ponto de revisão porque trata da auditoria bibliográfica completa e está diretamente apoiado sobre a baseline acadêmica agora incorporada à `main`.
 
 A revisão deve confirmar, antes de merge:
 
