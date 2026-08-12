@@ -82,8 +82,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout
+      - name: Checkout source revision
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
       - name: Install LaTeX dependencies
         run: |
@@ -129,3 +131,77 @@ jobs:
           path: results/tcc/main.pdf
           if-no-files-found: error
           retention-days: 7
+
+  canonical-pdf-sync:
+    name: canonical-pdf-sync
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    needs: latex-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout pull request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Determine whether the canonical PDF is stale
+        id: canonical
+        shell: bash
+        run: |
+          set -euo pipefail
+          pdf_commit="$(git log -1 --format=%H -- results/tcc/main.pdf || true)"
+          stale=false
+
+          if [ -z "$pdf_commit" ]; then
+            stale=true
+          elif ! git merge-base --is-ancestor "$pdf_commit" HEAD; then
+            stale=true
+          elif ! git diff --quiet "$pdf_commit"..HEAD -- \
+            results/tcc \
+            ':(exclude)results/tcc/main.pdf' \
+            ':(exclude)results/tcc/index.html' \
+            ':(exclude)results/tcc/README.md'; then
+            stale=true
+          fi
+
+          echo "pdf_commit=${pdf_commit:-none}"
+          echo "stale=$stale"
+          echo "stale=$stale" >> "$GITHUB_OUTPUT"
+
+      - name: Download compiled PDF from this workflow run
+        if: steps.canonical.outputs.stale == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: tcc-pdf
+          path: _compiled_tcc
+
+      - name: Validate compiled PDF
+        if: steps.canonical.outputs.stale == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s _compiled_tcc/main.pdf
+          test "$(head -c 5 _compiled_tcc/main.pdf)" = "%PDF-"
+
+      - name: Update canonical PDF on the pull request branch
+        if: steps.canonical.outputs.stale == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp _compiled_tcc/main.pdf results/tcc/main.pdf
+
+          if git diff --quiet -- results/tcc/main.pdf; then
+            echo "Canonical PDF is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/tcc/main.pdf
+          git commit -m ":books: docs(tcc): refresh compiled PDF"
+          git push origin "HEAD:${{ github.head_ref }}"
