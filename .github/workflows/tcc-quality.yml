@@ -43,6 +43,10 @@ jobs:
         working-directory: research
         run: python -m compileall -q src
 
+      - name: Check bibliography audit coverage
+        working-directory: research
+        run: python -m src.validation.bibliography_audit
+
       - name: Check generated MMAT table
         working-directory: research
         run: python -m src.analysis.mmat_tcc_table --check
@@ -50,12 +54,13 @@ jobs:
       - name: Check canonical MMAT CSV export
         run: cmp research/data/mmat_assessments.csv research/exports/analysis/mmat_assessment.csv
 
-      - name: Run MMAT and advisor-feedback regression tests
+      - name: Run MMAT, bibliography, and advisor-feedback regression tests
         working-directory: research
         shell: bash
         run: |
           set +e
           python -m pytest \
+            tests/test_bibliography_audit.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
             tests/test_tcc_advisor_feedback.py \
