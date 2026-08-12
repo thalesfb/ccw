@@ -41,7 +41,9 @@
     "answer"
   ],
   "eligibility": {
-    "minimum_interactions_per_student": 10,
+    "minimum_interactions_per_student": null,
+    "threshold_freeze_stage": "after_dataset_characterization_before_split_generation",
+    "threshold_rationale_required": true,
     "require_skill_mapping": true,
     "require_stable_order": true,
     "require_target_item_known_before_response": true,
@@ -163,6 +165,7 @@
     "target-event outcome fields are never features in the primary protocol",
     "no random row split in the primary protocol",
     "test data do not tune smoothing, hyperparameters, thresholds, preprocessing, or calibration rules",
+    "eligibility thresholds are justified and frozen before split generation",
     "no educational effectiveness claim from predictive metrics alone",
     "no causal claim from feature importance or local explanation",
     "demographic variables are excluded from the primary individual prediction model",
