@@ -68,7 +68,7 @@ Dados sintéticos foram considerados adequados apenas para testar fluxos de proc
 
 \section{Alternativas de Modelagem}
 
-A revisão identificou uso recorrente de \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), árvores de decisão, regressão logística e redes neurais. A especificação manteve modelos supervisionados simples e interpretáveis como referências iniciais de comparação e condicionou o uso de modelos mais complexos à demonstração de ganho e à possibilidade de interpretação adequada.
+A revisão identificou uso recorrente de \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), árvores de decisão, regressão logística e redes neurais. Na especificação, \textit{Random Forest} e SVM também foram ancoradas em suas fontes metodológicas primárias \cite{Breiman2001,CortesVapnik1995}. Modelos supervisionados simples e interpretáveis foram mantidos como referências iniciais de comparação, condicionando o uso de modelos mais complexos à demonstração de ganho e à possibilidade de interpretação adequada.
 
 \textbf{\textit{Random Forest}} e SVM foram registrados como alternativas de modelagem, não como algoritmos definitivamente implementados. A escolha entre eles depende da base selecionada, da distribuição das classes, do tipo de variável, do custo computacional e dos requisitos de explicabilidade.
 
@@ -84,7 +84,7 @@ O protocolo de avaliação definido incluiu:
     \item comparação com modelos de referência simples;
     \item análise de métricas por classe, além de medidas agregadas;
     \item uso de matriz de confusão, precisão, revocação e medida F1;
-    \item avaliação de área sob a curva ROC e calibração quando compatíveis com a tarefa;
+    \item avaliação de área sob a curva ROC e calibração quando compatíveis com a tarefa \cite{Fawcett2006,NiculescuMizilCaruana2005};
     \item análise de estabilidade das explicações e de possíveis diferenças entre grupos;
     \item registro das limitações de generalização.
 \end{enumerate}
@@ -93,7 +93,7 @@ A especificação distinguiu avaliação técnica de eficácia pedagógica. Mét
 
 \section{Explicabilidade e Participação Docente}
 
-SHAP e LIME foram incluídos como alternativas para explicar modelos, pois permitem relacionar variáveis de entrada às estimativas produzidas. A especificação condicionou seu uso à estabilidade das explicações, ao custo computacional e à possibilidade de tradução dos resultados para uma linguagem curricular compreensível.
+SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. A especificação condicionou seu uso à estabilidade das explicações, ao custo computacional e à possibilidade de tradução dos resultados para uma linguagem curricular compreensível.
 
 O professor permaneceu como responsável por interpretar as evidências, relacioná-las ao contexto da turma e decidir intervenções. O protótipo foi especificado como instrumento de apoio, e não como mecanismo autônomo de classificação ou prescrição pedagógica.
 
