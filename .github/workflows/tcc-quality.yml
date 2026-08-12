@@ -54,13 +54,14 @@ jobs:
       - name: Check canonical MMAT CSV export
         run: cmp research/data/mmat_assessments.csv research/exports/analysis/mmat_assessment.csv
 
-      - name: Run MMAT, bibliography, and advisor-feedback regression tests
+      - name: Run TCC source and experiment regression tests
         working-directory: research
         shell: bash
         run: |
           set +e
           python -m pytest \
             tests/test_bibliography_audit.py \
+            tests/test_experiment_contract.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
             tests/test_tcc_advisor_feedback.py \

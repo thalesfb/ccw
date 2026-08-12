@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/thalesfb/ccw/prototype/contracts/interaction.schema.json",
+  "title": "Canonical student-item interaction",
+  "description": "Normalized interaction used by the TCC prototype. The row represents the target event itself: item and skill context are known before the response, while outcome fields are revealed only after the prediction and may become historical evidence for later events.",
+  "$comment": "In the primary protocol, the observed `correct` value on this target event is the modeling label named `correct_next` relative to the prior history. Outcome fields from this same event must not be used as predictors.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "student_id",
+    "item_id",
+    "skill_ids",
+    "interaction_order",
+    "correct",
+    "source_dataset",
+    "source_row_id"
+  ],
+  "properties": {
+    "student_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Anonymous or dataset-native public student identifier."
+    },
+    "item_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Target item identifier known before the response in the primary protocol."
+    },
+    "skill_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more skills mapped to the target item and known before the response.",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "interaction_order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Stable within-student order used to define strictly prior history."
+    },
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Event timestamp when available. Ordering rules for ties must be deterministic and versioned."
+    },
+    "correct": {
+      "type": "boolean",
+      "description": "Observed outcome of the target interaction. It is unavailable at prediction time and becomes the `correct_next` label only after the response."
+    },
+    "answer": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ],
+      "description": "Observed answer on the target event. It is not a predictor for that same event in the primary protocol."
+    },
+    "attempt_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Attempts observed for this event. The target-event value is excluded from primary predictors; prior-event values may contribute to historical features."
+    },
+    "hint_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Hints observed for this event. The target-event value is excluded from primary predictors; prior-event values may contribute to historical features."
+    },
+    "elapsed_time_ms": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Elapsed time observed for this event. The target-event value is excluded from primary predictors; prior-event values may contribute to historical features."
+    },
+    "session_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional session identifier when supplied by the source dataset."
+    },
+    "source_dataset": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Versioned dataset identifier used for provenance."
+    },
+    "source_row_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable source-record identifier used for traceability and duplicate detection."
+    }
+  }
+}

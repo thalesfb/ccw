@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.1.0",
+  "research_question": "Estimate the probability that a student's next eligible mathematics response is correct, conditioned on prior history and the target item and skills known before the response, and derive an auditable skill-evidence profile.",
+  "target": {
+    "name": "correct_next",
+    "type": "binary",
+    "positive_value": 1,
+    "prediction": "probability",
+    "horizon": "one_eligible_interaction_ahead",
+    "prediction_anchor": "immediately_before_target_response",
+    "label_source": "correct field of the target interaction",
+    "target_context_known_before_response": [
+      "item_id",
+      "skill_ids"
+    ],
+    "forbidden_target_event_features": [
+      "correct",
+      "answer",
+      "attempt_count",
+      "hint_count",
+      "elapsed_time_ms"
+    ],
+    "pedagogical_interpretation": "operational evidence of future performance, not direct evidence of learning, latent competence, causality, or pedagogical effectiveness"
+  },
+  "unit_of_analysis": "student_item_interaction",
+  "required_columns": [
+    "student_id",
+    "item_id",
+    "skill_ids",
+    "interaction_order",
+    "correct",
+    "source_dataset",
+    "source_row_id"
+  ],
+  "optional_columns": [
+    "timestamp",
+    "attempt_count",
+    "hint_count",
+    "elapsed_time_ms",
+    "session_id",
+    "answer"
+  ],
+  "eligibility": {
+    "minimum_interactions_per_student": null,
+    "threshold_freeze_stage": "after_dataset_characterization_before_split_generation",
+    "threshold_rationale_required": true,
+    "require_skill_mapping": true,
+    "require_stable_order": true,
+    "require_target_item_known_before_response": true,
+    "drop_exact_duplicates": true,
+    "binary_outcome_mapping": "dataset_specific_and_frozen_before_test"
+  },
+  "splits": {
+    "student_holdout": {
+      "strategy": "group_by_student",
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "test_fraction": 0.15,
+      "model_parameters_may_use_held_out_students": false,
+      "held_out_student_history": "prior_events_only_for_online_features",
+      "report_first_eligible_interaction_as_true_cold_start_slice": true
+    },
+    "personalized_temporal": {
+      "strategy": "chronological_within_student",
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "test_fraction": 0.15,
+      "learned_aggregates_source": "training_partition_only",
+      "rounding_and_time_tie_policy": "deterministic_and_versioned"
+    }
+  },
+  "random_seeds": [
+    2026,
+    1701,
+    31415
+  ],
+  "seed_policy": "report_all_predefined_seeds_without_best_seed_selection",
+  "baselines": [
+    "global_probability",
+    "item_smoothed_probability",
+    "skill_smoothed_probability",
+    "student_history_smoothed_probability",
+    "logistic_regression"
+  ],
+  "baseline_tuning_policy": "smoothing_and_hyperparameters_use_training_and_validation_only_and_are_frozen_before_test",
+  "candidate_models": [
+    "hist_gradient_boosting"
+  ],
+  "hypotheses": {
+    "confirmatory": [
+      {
+        "id": "H1",
+        "claim": "historical student, item, or skill baselines improve probabilistic quality over the global probability baseline"
+      },
+      {
+        "id": "H2",
+        "claim": "regularized logistic regression improves probabilistic quality over the best simple historical baseline"
+      }
+    ],
+    "exploratory": [
+      "nonlinear model improvement over logistic regression",
+      "heterogeneity of performance and calibration across skills",
+      "descriptive value of a skill-evidence profile relative to a binary alert"
+    ]
+  },
+  "model_selection_metric": "log_loss",
+  "primary_metrics": [
+    "log_loss",
+    "brier_score"
+  ],
+  "calibration_metrics": [
+    "calibration_intercept",
+    "calibration_slope",
+    "reliability_curve",
+    "expected_calibration_error"
+  ],
+  "secondary_metrics": [
+    "roc_auc",
+    "average_precision",
+    "accuracy",
+    "precision",
+    "recall",
+    "f1"
+  ],
+  "reporting": {
+    "evaluate_by_skill": true,
+    "skill_support": {
+      "minimum_test_rows": null,
+      "minimum_test_students": null,
+      "freeze_stage": "after_dataset_selection_before_test_evaluation",
+      "below_threshold_behavior": "report_insufficient_evidence"
+    },
+    "bootstrap": {
+      "unit": "student",
+      "mode": "paired_cluster_resampling_of_held_out_predictions",
+      "iterations": 1000,
+      "interpretation": "held_out_sample_uncertainty_not_full_training_variability"
+    },
+    "include_reliability_curves": true,
+    "include_error_analysis": true,
+    "expected_calibration_error_binning": "versioned_before_test_evaluation"
+  },
+  "multi_skill_policy": {
+    "training_rows": "retain_single_interaction_with_multiple_skill_ids",
+    "per_skill_reporting": "an_interaction_may_contribute_to_each_mapped_skill",
+    "support_counts": [
+      "unique_interactions",
+      "unique_students"
+    ],
+    "uncertainty_unit": "student"
+  },
+  "derived_outputs": {
+    "skill_profile": true,
+    "ordinal_levels": {
+      "enabled": false,
+      "reason": "thresholds must be justified and frozen before test evaluation"
+    },
+    "binary_risk_alert": {
+      "enabled": false,
+      "reason": "alerts are secondary outputs and require an explicit cost and interpretation analysis"
+    }
+  },
+  "guardrails": [
+    "features must be available before the target response",
+    "target-event outcome fields are never features in the primary protocol",
+    "no random row split in the primary protocol",
+    "test data do not tune smoothing, hyperparameters, thresholds, preprocessing, or calibration rules",
+    "eligibility thresholds are justified and frozen before split generation",
+    "no educational effectiveness claim from predictive metrics alone",
+    "no causal claim from feature importance or local explanation",
+    "demographic variables are excluded from the primary individual prediction model",
+    "skills with insufficient support are reported as insufficient rather than classified"
+  ]
+}
