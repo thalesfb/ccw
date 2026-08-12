@@ -1,0 +1,46 @@
+key,category,existence,metadata_status,use_status,canonical_identifier,decision,notes
+PRISMA2020,methodology,verified,verified,verified,10.1136/bmj.n71,keep,Use as reporting guideline
+PRISMAP2015,methodology,verified,verified,scope_limited,10.1186/2046-4053-4-1,keep,Use for protocol principles and disclose no prospective registration
+CochraneHandbook,methodology,verified,update_version,scope_limited,https://training.cochrane.org/handbook,keep,Version 6.4 remains pinned because it is the historically recorded version; newer upstream versions require deliberate methodological review rather than silent replacement
+MMAT2018,methodology,verified,verified,verified,10.3233/EFI-180221,keep,Peer-reviewed MMAT 2018 article is the bibliographic source; operational manual remains a methodological aid
+Implementation2025_000,included_study,verified,verified,scope_limited,10.18178/ijiet.2025.15.1.2228,keep,Second author volume issue pages and DOI URL verified against journal record
+Math2021_001,included_study,verified,verified,verified,10.1109/SISY52375.2021.9582522,keep,Conference title pages and DOI URL normalized
+Multimodels2020_002,included_study,verified,verified,scope_limited,10.5573/IEIESPC.2020.9.3.217,keep,Journal metadata and DOI URL normalized
+Analysis2022_003,included_study,verified,verified,scope_limited,10.1109/DASA54658.2022.9765236,keep,Conference metadata pages and DOI URL normalized
+Design2025_004,included_study,verified,verified,editorial_caution,10.1109/CIPAE66821.2025.00116,retain_with_caution,Conference metadata normalized; do not use as sole evidence for effectiveness
+Innovative2023_005,included_study,verified,metadata_fix,editorial_caution,10.2478/amns.2023.2.01524,retain_with_caution,Canonical DOI URL applied; publication-year and issue metadata still require publisher-level confirmation before central use
+Identifying2017_006,included_study,verified,verified,verified,10.12738/estp.2017.5.0634,keep,Volume issue pages and DOI URL normalized
+Machine2019_007,included_study,verified,verified,scope_limited,10.1109/EDUCON.2019.8725237,keep,EDUCON proceedings title pages and DOI URL normalized
+Computational2017_008,included_study,verified,verified,scope_limited,10.1184/R1/6715271,keep,Classified as Carnegie Mellon University doctoral dissertation
+Machine2024_009,included_study,verified,verified,scope_limited,10.1002/cae.22787,keep,Use as specific empirical evidence
+Machine2022_010,included_study,verified,verified,verified,10.1109/CCWC54503.2022.9720806,keep,Full conference title pages and DOI URL normalized
+Data2020_011,included_study,verified,verified,scope_limited,10.5772/intechopen.91449,keep,Classified as IntechOpen book chapter
+Enhancing2025_012,included_study,verified,verified,scope_limited,10.56855/ijmme.v3i2.1299,keep,Specific quasi-experimental evidence only
+Authentic2024_013,included_study,verified,verified,scope_limited,10.12973/ejmse.5.2.93,keep,Volume issue pages and DOI URL normalized; specific qualitative evidence only
+Performance2023_014,included_study,verified,verified,scope_limited,10.20448/jeelr.v10i4.5260,keep,Volume issue pages and DOI URL normalized; use for metacognitive result not general feedback definition
+Assessing2024_015,included_study,verified,metadata_fix,editorial_caution,10.69942/1920184/20240101/02,retain_with_caution,Canonical DOI URL applied; conflicting secondary metadata prevents silent author or pagination correction
+Analysis2021_016,included_study,verified,verified,scope_limited,10.21432/cjlt27895,keep,Author volume issue and DOI URL normalized; small contextual study and not a benchmark for the prototype
+BNCC2018,pedagogy,verified,verified,verified,https://basenacionalcomum.mec.gov.br/,keep,Official MEC document and canonical institutional URL
+PISA2022,assessment,verified,verified,verified,10.1787/53f23881-en,keep,Use for proficiency descriptors and results
+SAEB2021,assessment,verified,metadata_fix,scope_limited,https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb,normalize,Distinguish report documentation and microdata release before using as a dataset citation
+Piaget1972,pedagogy,verified,replace,unused,,replace,Exact Portuguese edition is uncertain and key is superseded by Piaget1972EN
+Vygotsky1978,pedagogy,verified,metadata_fix,verified,9780674576292,normalize,Add editors and edition metadata after checking the cited edition
+Ausubel1968,pedagogy,verified,verified,verified,,keep,Meaningful learning and prior knowledge
+Nye2015,technology,verified,verified,unused,10.1007/s40593-014-0029-5,retain_unused,Publication year is 2014 and current text no longer relies on it
+Xie2019,technology,verified,verified,verified,10.1016/j.compedu.2019.103599,keep,Adaptive and personalized learning review
+Yan2021,pedagogy,verified,verified,unused,10.1007/s10648-020-09572-8,retain_unused,Real source but not adequate for automated assessment claim
+Romero2020,technology,verified,verified,verified,10.1002/widm.1355,keep,Core EDM and Learning Analytics survey
+Mousavinasab2021,technology,verified,verified,verified,10.1080/10494820.2018.1558257,keep,ITS characteristics applications and evaluation
+Zawacki2019,technology,verified,verified,scope_limited,10.1186/s41239-019-0171-0,keep,Higher education review and contextual limitation
+Piaget1972EN,pedagogy,verified,verified,scope_limited,9780710072962,keep,Construction of knowledge not every mathematics teaching implication
+WoodBrunerRoss1976,pedagogy,verified,verified,verified,10.1111/j.1469-7610.1976.tb00381.x,keep,Canonical scaffolding source
+BlackWiliam1998,pedagogy,verified,verified,verified,10.1080/0969595980050102,keep,Formative assessment
+HattieTimperley2007,pedagogy,verified,verified,verified,10.3102/003465430298487,keep,Feedback framework
+NRC2001,assessment,verified,verified,verified,10.17226/10019,keep,Assessment inference and evidence-centered reasoning
+OECDPISA2022Framework,assessment,verified,verified,scope_limited,10.1787/dfe0bf9c-en,keep,Framework and constructs; use results report for level descriptors
+Breiman2001,technology,verified,verified,verified,10.1023/A:1010933404324,keep,Primary Random Forest source
+CortesVapnik1995,technology,verified,verified,verified,10.1007/BF00994018,keep,Primary support-vector network source
+Fawcett2006,technology,verified,verified,verified,10.1016/j.patrec.2005.10.010,keep,Primary methodological source for ROC analysis used in the specification
+NiculescuMizilCaruana2005,technology,verified,verified,verified,10.1145/1102351.1102430,keep,Primary methodological source for probability calibration
+RibeiroSinghGuestrin2016,technology,verified,verified,verified,10.1145/2939672.2939778,keep,Primary LIME source
+LundbergLee2017,technology,verified,verified,verified,https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html,keep,Primary SHAP source
