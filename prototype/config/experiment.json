@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "research_question": "Estimate the probability that a student's next response to a mathematics item is correct and derive an auditable skill profile.",
+  "target": {
+    "name": "correct_next",
+    "type": "binary",
+    "positive_value": 1,
+    "prediction": "probability",
+    "pedagogical_interpretation": "operational evidence, not a definitive diagnosis"
+  },
+  "unit_of_analysis": "student_item_interaction",
+  "required_columns": [
+    "student_id",
+    "item_id",
+    "skill_ids",
+    "interaction_order",
+    "correct",
+    "source_dataset",
+    "source_row_id"
+  ],
+  "optional_columns": [
+    "timestamp",
+    "attempt_count",
+    "hint_count",
+    "elapsed_time_ms",
+    "session_id",
+    "answer"
+  ],
+  "eligibility": {
+    "minimum_interactions_per_student": 10,
+    "require_skill_mapping": true,
+    "require_stable_order": true,
+    "drop_exact_duplicates": true
+  },
+  "splits": {
+    "cold_start": {
+      "strategy": "group_by_student",
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "test_fraction": 0.15
+    },
+    "personalized_temporal": {
+      "strategy": "chronological_within_student",
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "test_fraction": 0.15
+    }
+  },
+  "random_seeds": [2026, 1701, 31415],
+  "baselines": [
+    "global_probability",
+    "item_smoothed_probability",
+    "skill_smoothed_probability",
+    "student_history_smoothed_probability",
+    "logistic_regression"
+  ],
+  "candidate_models": [
+    "hist_gradient_boosting"
+  ],
+  "primary_metrics": [
+    "log_loss",
+    "brier_score"
+  ],
+  "secondary_metrics": [
+    "roc_auc",
+    "average_precision",
+    "accuracy",
+    "precision",
+    "recall",
+    "f1",
+    "expected_calibration_error"
+  ],
+  "reporting": {
+    "evaluate_by_skill": true,
+    "minimum_skill_test_rows": 100,
+    "bootstrap_unit": "student",
+    "bootstrap_iterations": 1000,
+    "include_reliability_curves": true,
+    "include_error_analysis": true
+  },
+  "derived_outputs": {
+    "skill_profile": true,
+    "ordinal_levels": {
+      "enabled": false,
+      "reason": "thresholds must be justified using validation evidence before activation"
+    },
+    "binary_risk_alert": {
+      "enabled": false,
+      "reason": "alerts are secondary outputs and require an explicit cost analysis"
+    }
+  },
+  "guardrails": [
+    "features must be available before the predicted response",
+    "no random row split in the primary protocol",
+    "no educational effectiveness claim from predictive metrics alone",
+    "demographic variables are excluded from the primary individual prediction model",
+    "skills with insufficient evidence are reported as insufficient rather than classified"
+  ]
+}
