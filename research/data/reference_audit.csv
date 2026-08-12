@@ -1,0 +1,40 @@
+key,category,existence,metadata_status,use_status,canonical_identifier,decision,notes
+PRISMA2020,methodology,verified,verified,verified,10.1136/bmj.n71,keep,Use as reporting guideline
+PRISMAP2015,methodology,verified,verified,scope_limited,10.1186/2046-4053-4-1,keep,Use for protocol principles and disclose no prospective registration
+CochraneHandbook,methodology,verified,update_version,scope_limited,https://training.cochrane.org/handbook,keep,Record exact consulted version
+MMAT2018,methodology,verified,metadata_fix,verified,10.3233/EFI-180221,normalize,Prefer peer-reviewed article and retain manual as operational source
+Implementation2025_000,included_study,verified,metadata_fix,scope_limited,10.18178/ijiet.2025.15.1.2228,normalize,Add second author and DOI URL
+Math2021_001,included_study,verified,metadata_fix,verified,10.1109/SISY52375.2021.9582522,normalize,Normalize conference title and DOI URL
+Multimodels2020_002,included_study,verified,metadata_fix,scope_limited,10.5573/IEIESPC.2020.9.3.217,normalize,Replace OpenAlex URL by DOI URL
+Analysis2022_003,included_study,verified,metadata_fix,scope_limited,10.1109/DASA54658.2022.9765236,normalize,Replace OpenAlex URL by DOI URL
+Design2025_004,included_study,verified,metadata_fix,editorial_caution,10.1109/CIPAE66821.2025.00116,retain_with_caution,Do not use as sole evidence for effectiveness
+Innovative2023_005,included_study,verified,metadata_fix,editorial_caution,10.2478/amns.2023.2.01524,retain_with_caution,Inspect full text before central claims
+Identifying2017_006,included_study,verified,metadata_fix,verified,10.12738/estp.2017.5.0634,normalize,Replace OpenAlex URL by DOI URL
+Machine2019_007,included_study,verified,metadata_fix,scope_limited,10.1109/EDUCON.2019.8725237,normalize,Fill EDUCON 2019 proceedings metadata
+Computational2017_008,included_study,verified,metadata_fix,scope_limited,10.1184/R1/6715271,normalize,Classify as doctoral dissertation
+Machine2024_009,included_study,verified,verified,scope_limited,10.1002/cae.22787,keep,Use as specific empirical evidence
+Machine2022_010,included_study,verified,metadata_fix,verified,10.1109/CCWC54503.2022.9720806,normalize,Use DOI URL and full conference name
+Data2020_011,included_study,verified,metadata_fix,scope_limited,10.5772/intechopen.91449,normalize,Classify as book chapter
+Enhancing2025_012,included_study,verified,verified,scope_limited,10.56855/ijmme.v3i2.1299,keep,Specific quasi-experimental evidence only
+Authentic2024_013,included_study,verified,metadata_fix,scope_limited,10.12973/ejmse.5.2.93,normalize,Specific qualitative evidence only
+Performance2023_014,included_study,verified,metadata_fix,scope_limited,10.20448/jeelr.v10i4.5260,normalize,Use for metacognitive result not general feedback definition
+Assessing2024_015,included_study,verified,metadata_fix,editorial_caution,10.69942/1920184/20240101/02,retain_with_caution,Keep in review traceability but not as central evidence
+Analysis2021_016,included_study,verified,metadata_fix,scope_limited,10.21432/cjlt27895,normalize,Small contextual study and not a benchmark for the prototype
+BNCC2018,pedagogy,verified,metadata_fix,verified,https://basenacionalcomum.mec.gov.br/,normalize,Use official document metadata and access date
+PISA2022,assessment,verified,verified,verified,10.1787/53f23881-en,keep,Use for proficiency descriptors and results
+SAEB2021,assessment,verified,metadata_fix,scope_limited,https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb,normalize,Distinguish report documentation and microdata release
+Piaget1972,pedagogy,verified,replace,unused,,replace,Exact Portuguese edition is uncertain and key is superseded
+Vygotsky1978,pedagogy,verified,metadata_fix,verified,9780674576292,normalize,Add editors and edition metadata
+Ausubel1968,pedagogy,verified,verified,verified,,keep,Meaningful learning and prior knowledge
+Nye2015,technology,verified,verified,unused,10.1007/s40593-014-0029-5,retain_unused,Publication year is 2014 and current text no longer relies on it
+Xie2019,technology,verified,verified,verified,10.1016/j.compedu.2019.103599,keep,Adaptive and personalized learning review
+Yan2021,pedagogy,verified,verified,unused,10.1007/s10648-020-09572-8,retain_unused,Real source but not adequate for automated assessment claim
+Romero2020,technology,verified,verified,verified,10.1002/widm.1355,keep,Core EDM and Learning Analytics survey
+Mousavinasab2021,technology,verified,verified,verified,10.1080/10494820.2018.1558257,keep,ITS characteristics applications and evaluation
+Zawacki2019,technology,verified,verified,scope_limited,10.1186/s41239-019-0171-0,keep,Higher education review and contextual limitation
+Piaget1972EN,pedagogy,verified,verified,scope_limited,9780710072962,keep,Construction of knowledge not every mathematics teaching implication
+WoodBrunerRoss1976,pedagogy,verified,verified,verified,10.1111/j.1469-7610.1976.tb00381.x,keep,Canonical scaffolding source
+BlackWiliam1998,pedagogy,verified,verified,verified,10.1080/0969595980050102,keep,Formative assessment
+HattieTimperley2007,pedagogy,verified,verified,verified,10.3102/003465430298487,keep,Feedback framework
+NRC2001,assessment,verified,verified,verified,10.17226/10019,keep,Assessment inference and evidence-centered reasoning
+OECDPISA2022Framework,assessment,verified,verified,scope_limited,10.1787/dfe0bf9c-en,keep,Framework and constructs; use results report for level descriptors
