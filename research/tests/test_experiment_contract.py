@@ -68,6 +68,22 @@ def test_primary_splits_preserve_student_and_temporal_structure() -> None:
     assert "no random row split in the primary protocol" in experiment["guardrails"]
 
 
+def test_eligibility_threshold_is_deferred_until_dataset_characterization() -> None:
+    experiment = _load_json(EXPERIMENT_PATH)
+    eligibility = experiment["eligibility"]
+
+    assert eligibility["minimum_interactions_per_student"] is None
+    assert (
+        eligibility["threshold_freeze_stage"]
+        == "after_dataset_characterization_before_split_generation"
+    )
+    assert eligibility["threshold_rationale_required"] is True
+    assert (
+        "eligibility thresholds are justified and frozen before split generation"
+        in experiment["guardrails"]
+    )
+
+
 def test_test_support_thresholds_are_not_selected_from_test_performance() -> None:
     experiment = _load_json(EXPERIMENT_PATH)
     support = experiment["reporting"]["skill_support"]
