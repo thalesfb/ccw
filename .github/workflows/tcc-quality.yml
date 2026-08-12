@@ -141,6 +141,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
+      actions: write
       contents: write
     steps:
       - name: Checkout pull request branch
@@ -189,6 +190,7 @@ jobs:
           test "$(head -c 5 _compiled_tcc/main.pdf)" = "%PDF-"
 
       - name: Update canonical PDF on the pull request branch
+        id: sync
         if: steps.canonical.outputs.stale == 'true'
         shell: bash
         run: |
@@ -197,6 +199,7 @@ jobs:
 
           if git diff --quiet -- results/tcc/main.pdf; then
             echo "Canonical PDF is already current."
+            echo "updated=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -205,3 +208,11 @@ jobs:
           git add results/tcc/main.pdf
           git commit -m ":books: docs(tcc): refresh compiled PDF"
           git push origin "HEAD:${{ github.head_ref }}"
+          echo "updated=true" >> "$GITHUB_OUTPUT"
+
+      - name: Validate the synchronized branch head
+        if: steps.sync.outputs.updated == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: gh workflow run tcc-quality.yml --ref "${{ github.head_ref }}"
