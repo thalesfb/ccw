@@ -47,6 +47,22 @@ def test_adapter_normalizes_and_orders_interactions() -> None:
     assert report["duplicate_rows_removed"] == 0
 
 
+def test_adapter_preserves_collapsed_multiskill_ids_from_corrected_export() -> None:
+    source = pd.DataFrame(
+        {
+            "user_id": [1],
+            "problem_id": [10],
+            "skill_id": ["17_42"],
+            "order_id": [1],
+            "correct": [1],
+        }
+    )
+
+    normalized, _ = AssistmentsAdapter().normalize(source)
+
+    assert normalized.loc[0, "skill_ids"] == ["17", "42"]
+
+
 def test_adapter_removes_exact_duplicate_interactions() -> None:
     source = pd.DataFrame(
         {
