@@ -54,7 +54,12 @@ def test_verify_manifest_rejects_hash_mismatch(tmp_path: Path) -> None:
 @pytest.mark.parametrize(
     ("field", "value", "message"),
     [
+        ("version", "", "version must be a non-empty string"),
+        ("canonical_url", "", "canonical_url must be a non-empty string"),
+        ("accessed_at", "", "accessed_at must be a non-empty string"),
+        ("license_or_terms", "", "license_or_terms must be a non-empty string"),
         ("redistribution_allowed", "false", "redistribution_allowed must be boolean"),
+        ("acquisition_method", [], "unsupported acquisition_method"),
         ("acquisition_method", "scraped_download", "unsupported acquisition_method"),
         ("local_filename", "../assistments.csv", "local_filename must be a file name"),
         ("sha256", "A" * 64, "sha256 must contain 64 lowercase hex characters"),
