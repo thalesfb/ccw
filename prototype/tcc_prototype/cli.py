@@ -19,11 +19,6 @@ def build_parser() -> argparse.ArgumentParser:
     prepare.add_argument("--manifest", type=Path, required=True)
     prepare.add_argument("--raw-dir", type=Path, required=True)
     prepare.add_argument("--output-dir", type=Path, required=True)
-    prepare.add_argument(
-        "--skill-separator",
-        default=None,
-        help="optional separator used when one source field contains multiple skills",
-    )
     return parser
 
 
@@ -34,7 +29,6 @@ def main() -> int:
             manifest_path=args.manifest,
             raw_dir=args.raw_dir,
             output_dir=args.output_dir,
-            skill_separator=args.skill_separator,
         )
         print(f"parquet={artifacts.parquet_path}")
         print(f"quality_report={artifacts.report_path}")
