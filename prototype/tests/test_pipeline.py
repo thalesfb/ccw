@@ -4,7 +4,28 @@ from pathlib import Path
 
 import pandas as pd
 
-from tcc_prototype.pipeline import prepare_assistments
+from tcc_prototype.manifest import DatasetManifest
+from tcc_prototype.pipeline import _artifact_stem, prepare_assistments
+
+
+def test_artifact_stem_distinguishes_source_file_versions() -> None:
+    first = DatasetManifest(
+        dataset_id="assistments_2009_2010_skill_builder_corrected",
+        version="corrected",
+        canonical_url="https://example.org/dataset",
+        accessed_at="2026-07-22T00:00:00Z",
+        local_filename="assistments.csv",
+        sha256="a" * 64,
+        license_or_terms="terms",
+        redistribution_allowed=False,
+        acquisition_method="manual_download",
+    )
+    second = DatasetManifest(
+        **{**first.__dict__, "sha256": "b" * 64},
+    )
+
+    assert _artifact_stem(first) != _artifact_stem(second)
+    assert _artifact_stem(first).endswith("-aaaaaaaaaaaa")
 
 
 def test_prepare_assistments_writes_parquet_and_quality_report(tmp_path: Path) -> None:
@@ -49,6 +70,7 @@ def test_prepare_assistments_writes_parquet_and_quality_report(tmp_path: Path) -
 
     assert artifacts.parquet_path.exists()
     assert artifacts.report_path.exists()
+    assert digest[:12] in artifacts.parquet_path.name
     prepared = pd.read_parquet(artifacts.parquet_path)
     report = json.loads(artifacts.report_path.read_text(encoding="utf-8"))
     assert len(prepared) == 3
@@ -57,3 +79,5 @@ def test_prepare_assistments_writes_parquet_and_quality_report(tmp_path: Path) -
     assert report["items"] == 2
     assert report["skills"] == 2
     assert report["processed_sha256"] == artifacts.processed_sha256
+    assert report["target_label_semantics"] == "correct_on_first_attempt_without_help"
+    assert report["interaction_order_semantics"] == "chronological_original_problem_log_id"
