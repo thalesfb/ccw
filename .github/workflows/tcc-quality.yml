@@ -75,7 +75,7 @@ jobs:
           status=${PIPESTATUS[0]}
           exit "$status"
 
-      - name: Run prototype data pipeline tests
+      - name: Run prototype regression tests
         shell: bash
         run: |
           set +e
