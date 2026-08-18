@@ -35,19 +35,23 @@ tcc-prototype prepare-assistments \
   --output-dir data/processed
 ```
 
-A execução produz nomes versionados pelo hash da fonte, como
-`<dataset_id>-<sha256-prefix>.parquet` e
-`<dataset_id>-<sha256-prefix>.quality.json`. Assim, uma republicação do
-arquivo bruto não sobrescreve silenciosamente os artefatos de uma versão
-anterior.
+A execução produz nomes versionados pelo SHA-256 completo da fonte, como
+`<dataset_id>-<sha256>.parquet` e `<dataset_id>-<sha256>.quality.json`. Assim,
+uma republicação do arquivo bruto não sobrescreve silenciosamente os artefatos
+de uma versão anterior.
 
 ## Semântica do ASSISTments corrigido
 
-O adaptador assume a versão corrigida do Skill Builder 2009–2010. Nessa
-versão, uma interação estudante-problema ocupa uma única linha. Quando
-`skill_id` representa várias habilidades no formato `skill1_skill2`, o
+O comando aceita somente o identificador aprovado
+`assistments_2009_2010_skill_builder_corrected`. O adaptador assume a versão
+corrigida do Skill Builder 2009–2010, na qual uma interação estudante-problema
+ocupa uma única linha. Se detectar a codificação legada em várias linhas, a
+execução é interrompida.
+
+Quando `skill_id` representa várias habilidades no formato `skill1_skill2`, o
 adaptador preserva essas tags separadamente em `skill_ids`, sem criar linhas
-artificiais adicionais.
+artificiais adicionais. Essa codificação é fixa para a fonte aprovada e não é
+um parâmetro ajustável do experimento.
 
 O campo `order_id` é usado como ordem cronológica da interação. O campo
 `correct` é preservado como o rótulo observado da interação e significa acerto
@@ -80,11 +84,13 @@ Os testes usam arquivos temporários sintéticos e verificam:
 
 - integridade e contenção do manifesto;
 - rejeição de hash, tipos e métodos de aquisição fora do contrato;
+- vínculo do comando à fonte ASSISTments aprovada;
 - mapeamento do ASSISTments para o contrato canônico;
 - preservação de múltiplas habilidades na versão corrigida;
+- rejeição da representação legada em múltiplas linhas;
 - remoção de duplicatas exatas;
 - ordenação determinística;
-- versionamento dos nomes de artefato pelo hash da fonte;
+- versionamento dos nomes de artefato pelo hash integral da fonte;
 - geração do Parquet e do relatório de qualidade.
 
 ## Extensões planejadas
