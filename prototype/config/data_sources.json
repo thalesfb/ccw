@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "primary_source": "assistments_2009_2010_skill_builder_corrected",
+  "sources": [
+    {
+      "id": "assistments_2009_2010_skill_builder_corrected",
+      "role": "primary",
+      "domain": "mathematics",
+      "task_fit": [
+        "next_response_prediction",
+        "skill_profile",
+        "knowledge_tracing_baseline"
+      ],
+      "canonical_page": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
+      "license_or_terms": "Official dataset page states that the data are free to use; exact access terms must be recorded in the manifest",
+      "acquisition": "public_download",
+      "redistribute_raw": false,
+      "expected_format": "csv",
+      "required_manifest": true,
+      "known_risks": [
+        "older downloads contain duplicated records",
+        "skill tags may contain multiple skills collapsed in one field",
+        "historical platform behavior may not generalize to current Brazilian classrooms"
+      ]
+    },
+    {
+      "id": "eedi_neurips_2020",
+      "role": "replication",
+      "domain": "mathematics",
+      "task_fit": [
+        "answer_prediction",
+        "question_quality",
+        "personalized_question_selection"
+      ],
+      "canonical_page": "https://www.eedischool.com/projects/neurips-education-challenge",
+      "publication": "https://proceedings.mlr.press/v133/wang21a.html",
+      "license": "CC BY-NC-ND 4.0",
+      "acquisition": "public_download",
+      "redistribute_raw": false,
+      "required_manifest": true,
+      "known_risks": [
+        "large files",
+        "CC BY-NC-ND 4.0 restricts commercial use and distribution of adapted material",
+        "question images have additional use restrictions stated on the official dataset page",
+        "taxonomy must be mapped to the canonical skill schema"
+      ]
+    },
+    {
+      "id": "saeb_2023",
+      "role": "brazilian_context",
+      "domain": "mathematics_and_language",
+      "task_fit": [
+        "proficiency_analysis",
+        "contextual_analysis"
+      ],
+      "canonical_page": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb/resultados/2023",
+      "acquisition": "official_public_download",
+      "redistribute_raw": false,
+      "required_manifest": true,
+      "known_risks": [
+        "not equivalent to longitudinal tutoring interactions",
+        "privacy-driven revisions may change available variables",
+        "survey design and proficiency methodology must be respected"
+      ]
+    },
+    {
+      "id": "pisa_2022",
+      "role": "international_context",
+      "domain": "mathematics_reading_science",
+      "task_fit": [
+        "proficiency_analysis",
+        "international_comparison"
+      ],
+      "canonical_page": "https://www.oecd.org/en/data/datasets/pisa-2022-database.html",
+      "acquisition": "official_public_download",
+      "redistribute_raw": false,
+      "required_manifest": true,
+      "known_risks": [
+        "plausible values and sampling weights are required",
+        "not a tutoring sequence dataset",
+        "country-specific comparability limitations"
+      ]
+    },
+    {
+      "id": "timss_2023_grade_8",
+      "role": "external_context",
+      "domain": "mathematics_and_science",
+      "task_fit": [
+        "proficiency_analysis",
+        "external_method_validation"
+      ],
+      "canonical_page": "https://www.iea.nl/data-tools/repository",
+      "dataset_doi": "10.58150/IEA_TIMSS_2023_G8_data_edition_1",
+      "acquisition": "terms_acceptance_required",
+      "redistribute_raw": false,
+      "required_manifest": true,
+      "known_risks": [
+        "complex survey design",
+        "not a tutoring sequence dataset",
+        "study materials have separate intellectual-property rules"
+      ]
+    },
+    {
+      "id": "ednet_kt1",
+      "role": "optional_technical_stress_test",
+      "domain": "english_language_test_preparation",
+      "task_fit": [
+        "pipeline_scalability",
+        "schema_compatibility"
+      ],
+      "canonical_page": "https://github.com/riiid/ednet",
+      "publication_doi": "10.1007/978-3-030-52240-7_13",
+      "license": "CC BY-NC 4.0",
+      "acquisition": "public_download",
+      "redistribute_raw": false,
+      "required_manifest": true,
+      "known_risks": [
+        "not mathematics",
+        "cannot support conclusions about mathematics learning",
+        "large number of per-user files"
+      ]
+    }
+  ]
+}
