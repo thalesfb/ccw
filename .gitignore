@@ -185,6 +185,16 @@ research/*.db
 research/*.sqlite
 *.sqlite
 
+# Prototype educational data and generated artifacts
+prototype/data/raw/*
+prototype/data/interim/*
+prototype/data/processed/*
+prototype/data/reports/*
+!prototype/data/raw/.gitkeep
+!prototype/data/interim/.gitkeep
+!prototype/data/processed/.gitkeep
+!prototype/data/reports/.gitkeep
+
 # IDE configs
 .vscode/
 .specify/
