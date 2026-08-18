@@ -21,6 +21,8 @@ Página canônica do conjunto:
 
 `https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010`
 
+A página oficial declara o conjunto como livre para uso, mas não apresenta nessa página uma licença padronizada equivalente a um identificador SPDX. Por isso, o manifesto da execução deverá registrar a URL canônica, a data de acesso e os termos observados no momento da aquisição, sem inferir permissões adicionais.
+
 A utilização acadêmica também deverá citar o sistema ASSISTments por meio de Feng, Heffernan e Koedinger (2009), DOI `10.1007/s11257-009-9063-7`.
 
 ## Base secundária
@@ -36,7 +38,9 @@ Justificativas:
 - tarefas de qualidade de questões e recomendação que podem sustentar extensões futuras;
 - artigo e materiais públicos descrevendo o desafio.
 
-A base Eedi não será necessária para concluir o primeiro experimento. Seu uso dependerá da validação dos termos de acesso, licença, estrutura das habilidades e capacidade computacional.
+A página oficial disponibiliza os dados sob licença **CC BY-NC-ND 4.0**. O uso no TCC deverá respeitar as restrições de uso não comercial e de distribuição de material adaptado, bem como as restrições específicas informadas para imagens das questões. Os dados brutos e artefatos que reproduzam ou adaptem material licenciado não serão redistribuídos sem revisão específica dos termos aplicáveis.
+
+A base Eedi não será necessária para concluir o primeiro experimento. Seu uso dependerá da validação do manifesto de acesso, da estrutura das habilidades e da capacidade computacional.
 
 Fontes canônicas:
 
@@ -49,9 +53,11 @@ Fontes canônicas:
 
 O SAEB será a principal referência brasileira para proficiência, contexto educacional e discussão de aplicabilidade nacional. Os microdados de 2023 poderão sustentar um experimento complementar de proficiência, mas não substituem registros sequenciais por habilidade necessários ao alvo de próxima resposta.
 
+A página oficial de resultados de 2023 do Inep é a referência canônica desta edição e disponibiliza o acesso aos Microdados Saeb 2023.
+
 Fonte oficial:
 
-`https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/saeb`
+`https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb/resultados/2023`
 
 ### PISA 2022
 
@@ -70,6 +76,8 @@ Fontes oficiais e DOI dos dados:
 - Grade 4: `10.58150/IEA_TIMSS_2023_G4_data_edition_1`
 - Grade 8: `10.58150/IEA_TIMSS_2023_G8_data_edition_1`
 - Repositório: `https://www.iea.nl/data-tools/repository`
+
+O repositório da IEA exige aceite dos termos e condições antes do acesso aos arquivos. O pipeline não deverá automatizar ou contornar esse aceite.
 
 ## Fonte metodológica não matemática
 
@@ -91,12 +99,13 @@ Ele poderá ser usado somente como teste técnico opcional de escalabilidade ou 
 ## Regras de aquisição
 
 1. dados brutos não serão commitados;
-2. cada fonte terá manifesto com URL, data de acesso, versão, licença, tamanho e SHA-256;
-3. downloads automáticos somente serão habilitados quando os termos permitirem acesso direto;
-4. fontes que exigem aceite manual terão comando de registro e validação, sem contornar o mecanismo de acesso;
-5. o pipeline falhará quando o hash não corresponder ao manifesto;
-6. arquivos corrigidos ou republicados receberão nova versão de manifesto;
-7. a extração não sobrescreverá versões anteriores silenciosamente.
+2. cada fonte terá manifesto com URL, data de acesso, versão, licença ou termos, tamanho e SHA-256;
+3. os métodos de aquisição registrados em configuração deverão usar o mesmo vocabulário aceito pelo contrato de manifesto;
+4. downloads automáticos somente serão habilitados quando os termos permitirem acesso direto;
+5. fontes que exigem aceite manual terão comando de registro e validação, sem contornar o mecanismo de acesso;
+6. o pipeline falhará quando o hash não corresponder ao manifesto;
+7. arquivos corrigidos ou republicados receberão nova versão de manifesto;
+8. a extração não sobrescreverá versões anteriores silenciosamente.
 
 ## Organização dos dados
 
