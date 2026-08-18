@@ -1,6 +1,7 @@
 import pandas as pd
+import pytest
 
-from tcc_prototype.adapters.assistments import AssistmentsAdapter
+from tcc_prototype.adapters.assistments import AdapterError, AssistmentsAdapter
 
 
 def test_adapter_normalizes_and_orders_interactions() -> None:
@@ -61,6 +62,21 @@ def test_adapter_preserves_collapsed_multiskill_ids_from_corrected_export() -> N
     normalized, _ = AssistmentsAdapter().normalize(source)
 
     assert normalized.loc[0, "skill_ids"] == ["17", "42"]
+
+
+def test_adapter_rejects_legacy_multiline_skill_encoding() -> None:
+    source = pd.DataFrame(
+        {
+            "user_id": [1, 1],
+            "problem_id": [10, 10],
+            "skill_id": ["17", "42"],
+            "order_id": [1, 1],
+            "correct": [1, 1],
+        }
+    )
+
+    with pytest.raises(AdapterError, match="corrected one-row-per-interaction format"):
+        AssistmentsAdapter().normalize(source)
 
 
 def test_adapter_removes_exact_duplicate_interactions() -> None:
