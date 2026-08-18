@@ -88,26 +88,39 @@ todas as habilidades. O hashing não usa o alvo, possui largura fixa e aceita
 categorias inéditas sem ajuste no teste. O `early_stopping` é desativado para
 não criar uma partição implícita fora do protocolo versionado.
 
+As taxas históricas começam com os pseudocontadores versionados em
+`evaluation_execution.history_rate_prior`. O código expõe os mesmos valores
+como defaults explícitos e os testes de contrato impedem que configuração e
+runtime divirjam silenciosamente.
+
 Antes da primeira execução com dados reais, os limiares ainda nulos de
 eligibilidade e suporte por habilidade em `config/experiment.json` precisam ser
 justificados e congelados após a caracterização da base. Enquanto isso não
 ocorrer, a CLI interrompe a avaliação em vez de inventar valores padrão.
+
+A avaliação também exige o relatório `.quality.json` gerado pelo pipeline de
+preparação. Antes de ler o Parquet, a CLI recalcula seu SHA-256 e exige igualdade
+com `processed_sha256` do relatório. O hash bruto original permanece separado em
+`source_sha256`, preservando a cadeia arquivo bruto -> artefato processado ->
+execução experimental.
 
 Exemplo após o congelamento desses critérios:
 
 ```bash
 tcc-prototype evaluate-baselines \
   --input data/processed/<dataset>-<sha256>.parquet \
+  --preparation-report data/processed/<dataset>-<sha256>.quality.json \
   --output-dir data/reports \
   --experiment-config config/experiment.json \
   --split-strategy student_holdout
 ```
 
-Cada seed gera um diretório imutável identificado pelos hashes completos da
-fonte e da configuração. Os artefatos incluem `metrics.json`,
-`predictions.parquet` e `splits.parquet`, com parâmetros selecionados, métricas
-de validação e teste, calibração, suporte por habilidade, comparações pareadas e
-versões de software.
+Cada seed gera um diretório imutável identificado pelo hash do input processado,
+pelo SHA-256 bruto da fonte, pelo hash da configuração, pela estratégia de split
+e pela seed. Os artefatos incluem `metrics.json`, `predictions.parquet`,
+`splits.parquet` e `input-provenance.json`. Este último registra separadamente o
+hash da fonte bruta, do Parquet processado, do relatório de preparação e da
+configuração experimental.
 
 As comparações principais usam bootstrap pareado por estudante. O relatório por
 habilidade associa uma interação a todas as habilidades mapeadas e conta
@@ -139,8 +152,8 @@ Os testes usam arquivos temporários sintéticos e verificam o pipeline de dados
 a construção de atributos apenas com histórico anterior, as duas divisões
 experimentais, os baselines, a regressão logística, o candidato não linear, as
 métricas probabilísticas e de calibração, o bootstrap pareado por estudante, o
-suporte multihabilidade, o bloqueio de critérios não congelados e a geração de
-artefatos imutáveis.
+suporte multihabilidade, o bloqueio de critérios não congelados, a cadeia de
+proveniência do Parquet e a geração de artefatos imutáveis.
 
 ## Limites
 
