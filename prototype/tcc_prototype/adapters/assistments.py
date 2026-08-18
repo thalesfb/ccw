@@ -33,55 +33,29 @@ class AssistmentsAdapter:
     """Normalize the corrected ASSISTments Skill Builder export."""
 
     source_dataset: str = "assistments_2009_2010_skill_builder_corrected"
-    skill_separator: str | None = None
 
-    def _skill_values(
-        self,
-        value: Any,
-        *,
-        default_separator: str | None = None,
-    ) -> list[str]:
+    @staticmethod
+    def _skill_values(value: Any) -> list[str]:
         if pd.isna(value):
             return []
         text = str(value).strip()
         if not text:
             return []
-        separator = (
-            self.skill_separator
-            if self.skill_separator is not None
-            else default_separator
-        )
-        if separator:
-            return sorted(
-                {
-                    token.strip()
-                    for token in text.split(separator)
-                    if token.strip()
-                }
-            )
-        return [text]
+        return sorted({token.strip() for token in text.split("_") if token.strip()})
 
     def normalize(self, source: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, int]]:
         """Return canonical interactions and a deterministic quality report."""
 
-        required = {"user_id", "problem_id", "order_id", "correct"}
+        required = {"user_id", "problem_id", "order_id", "correct", "skill_id"}
         missing = sorted(required.difference(source.columns))
-        skill_column = next(
-            (name for name in ("skill_id", "skill_name") if name in source.columns),
-            None,
-        )
         if missing:
             raise AdapterError("missing ASSISTments columns: " + ", ".join(missing))
-        if skill_column is None:
-            raise AdapterError("missing ASSISTments skill_id or skill_name column")
 
         input_rows = len(source)
         working = source.copy()
         working["_source_row_id"] = working.index.map(str)
-        duplicate_mask = working.duplicated(
-            subset=["user_id", "problem_id", "order_id", "correct", skill_column],
-            keep="first",
-        )
+
+        duplicate_mask = source.duplicated(keep="first")
         duplicate_rows_removed = int(duplicate_mask.sum())
         working = working.loc[~duplicate_mask].copy()
 
@@ -95,13 +69,7 @@ class AssistmentsAdapter:
                 "one-row-per-interaction format"
             )
 
-        default_skill_separator = "_" if skill_column == "skill_id" else None
-        working["_skill_ids"] = working[skill_column].map(
-            lambda value: self._skill_values(
-                value,
-                default_separator=default_skill_separator,
-            )
-        )
+        working["_skill_ids"] = working["skill_id"].map(self._skill_values)
         valid_mask = (
             working["user_id"].notna()
             & working["problem_id"].notna()
