@@ -15,6 +15,8 @@ REQUIRED_COLUMNS = {
     "source_dataset",
     "source_row_id",
 }
+HISTORY_VIRTUAL_SUCCESSES = 1.0
+HISTORY_VIRTUAL_FAILURES = 1.0
 
 
 def normalize_skill_ids(value: object) -> tuple[str, ...]:
@@ -38,8 +40,19 @@ def skill_signature(value: object) -> str:
     return "||".join(normalize_skill_ids(value))
 
 
-def build_history_features(interactions: pd.DataFrame) -> pd.DataFrame:
+def build_history_features(
+    interactions: pd.DataFrame,
+    *,
+    virtual_successes: float = HISTORY_VIRTUAL_SUCCESSES,
+    virtual_failures: float = HISTORY_VIRTUAL_FAILURES,
+) -> pd.DataFrame:
     """Create pre-response history features and retain current correctness only as target."""
+
+    if virtual_successes < 0 or virtual_failures < 0:
+        raise ValueError("history-rate virtual counts must be non-negative")
+    prior_strength = virtual_successes + virtual_failures
+    if prior_strength <= 0:
+        raise ValueError("history-rate prior must have positive total strength")
 
     missing = sorted(REQUIRED_COLUMNS.difference(interactions.columns))
     if missing:
@@ -65,8 +78,8 @@ def build_history_features(interactions: pd.DataFrame) -> pd.DataFrame:
         student_group["target"].cumsum() - frame["target"]
     ).astype(int)
     frame["prior_student_accuracy"] = (
-        frame["prior_student_correct"] + 1.0
-    ) / (frame["prior_student_attempts"] + 2.0)
+        frame["prior_student_correct"] + virtual_successes
+    ) / (frame["prior_student_attempts"] + prior_strength)
 
     skillset_group = frame.groupby(
         ["student_id", "skill_signature"], sort=False, dropna=False
@@ -76,7 +89,7 @@ def build_history_features(interactions: pd.DataFrame) -> pd.DataFrame:
         skillset_group["target"].cumsum() - frame["target"]
     ).astype(int)
     frame["prior_student_skillset_accuracy"] = (
-        frame["prior_student_skillset_correct"] + 1.0
-    ) / (frame["prior_student_skillset_attempts"] + 2.0)
+        frame["prior_student_skillset_correct"] + virtual_successes
+    ) / (frame["prior_student_skillset_attempts"] + prior_strength)
 
     return frame
