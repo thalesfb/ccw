@@ -12,7 +12,8 @@
         "knowledge_tracing_baseline"
       ],
       "canonical_page": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
-      "acquisition": "manual_or_verified_direct_download",
+      "license_or_terms": "Official dataset page states that the data are free to use; exact access terms must be recorded in the manifest",
+      "acquisition": "public_download",
       "redistribute_raw": false,
       "expected_format": "csv",
       "required_manifest": true,
@@ -33,12 +34,14 @@
       ],
       "canonical_page": "https://www.eedischool.com/projects/neurips-education-challenge",
       "publication": "https://proceedings.mlr.press/v133/wang21a.html",
-      "acquisition": "manual_terms_review_required",
+      "license": "CC BY-NC-ND 4.0",
+      "acquisition": "public_download",
       "redistribute_raw": false,
       "required_manifest": true,
       "known_risks": [
         "large files",
-        "dataset terms must be reviewed before automation",
+        "CC BY-NC-ND 4.0 restricts commercial use and distribution of adapted material",
+        "question images have additional use restrictions stated on the official dataset page",
         "taxonomy must be mapped to the canonical skill schema"
       ]
     },
@@ -50,7 +53,7 @@
         "proficiency_analysis",
         "contextual_analysis"
       ],
-      "canonical_page": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/saeb",
+      "canonical_page": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb/resultados/2023",
       "acquisition": "official_public_download",
       "redistribute_raw": false,
       "required_manifest": true,
