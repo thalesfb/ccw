@@ -47,3 +47,15 @@ def test_history_features_preserve_complete_multiskill_context() -> None:
     assert modeled.loc[2, "skill_ids"] == ("fractions", "ratio")
     assert modeled.loc[2, "skill_signature"] == "fractions||ratio"
     assert modeled.loc[0, "prior_student_accuracy"] == 0.5
+
+
+def test_history_rate_prior_is_explicitly_configurable() -> None:
+    modeled = build_history_features(
+        _interactions(),
+        virtual_successes=2.0,
+        virtual_failures=1.0,
+    )
+
+    assert modeled.loc[0, "prior_student_accuracy"] == 2 / 3
+    assert modeled.loc[0, "prior_student_skillset_accuracy"] == 2 / 3
+    assert modeled.loc[1, "prior_student_accuracy"] == 3 / 4
