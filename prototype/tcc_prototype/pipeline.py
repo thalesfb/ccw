@@ -9,7 +9,15 @@ from pathlib import Path
 import pandas as pd
 
 from .adapters.assistments import AssistmentsAdapter
-from .manifest import DatasetManifest, load_manifest, sha256_file, verify_manifest_file
+from .manifest import (
+    DatasetManifest,
+    ManifestError,
+    load_manifest,
+    sha256_file,
+    verify_manifest_file,
+)
+
+ASSISTMENTS_DATASET_ID = "assistments_2009_2010_skill_builder_corrected"
 
 
 @dataclass(frozen=True)
@@ -26,9 +34,9 @@ def _count_skills(frame: pd.DataFrame) -> int:
 
 
 def _artifact_stem(manifest: DatasetManifest) -> str:
-    """Return a stable source-versioned stem without exposing mutable labels."""
+    """Return a stable source-versioned stem using the full source digest."""
 
-    return f"{manifest.dataset_id}-{manifest.sha256[:12]}"
+    return f"{manifest.dataset_id}-{manifest.sha256}"
 
 
 def prepare_assistments(
@@ -36,21 +44,25 @@ def prepare_assistments(
     manifest_path: Path,
     raw_dir: Path,
     output_dir: Path,
-    skill_separator: str | None = None,
 ) -> PreparedArtifacts:
-    """Validate, normalize, and persist ASSISTments interactions.
+    """Validate, normalize, and persist corrected ASSISTments interactions.
 
-    The raw file is never modified. Output filenames include the source digest,
-    so a republished or otherwise changed source file does not silently replace
-    artifacts produced from a previously registered source version.
+    The raw file is never modified. Output filenames include the full source
+    digest, so a republished or otherwise changed source file does not silently
+    replace artifacts produced from a previously registered source version.
     """
 
     manifest = load_manifest(manifest_path)
+    if manifest.dataset_id != ASSISTMENTS_DATASET_ID:
+        raise ManifestError(
+            "prepare-assistments requires the approved ASSISTments dataset_id "
+            f"{ASSISTMENTS_DATASET_ID!r}; found {manifest.dataset_id!r}"
+        )
+
     raw_file = verify_manifest_file(manifest, raw_dir)
     source = pd.read_csv(raw_file, low_memory=False)
     normalized, quality = AssistmentsAdapter(
         source_dataset=manifest.dataset_id,
-        skill_separator=skill_separator,
     ).normalize(source)
 
     output_dir.mkdir(parents=True, exist_ok=True)
