@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/thalesfb/ccw/prototype/contracts/dataset_manifest.schema.json",
+  "title": "Dataset provenance manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dataset_id",
+    "version",
+    "canonical_url",
+    "accessed_at",
+    "local_filename",
+    "sha256",
+    "license_or_terms",
+    "redistribution_allowed",
+    "acquisition_method"
+  ],
+  "properties": {
+    "dataset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "download_url": {
+      "type": ["string", "null"],
+      "format": "uri"
+    },
+    "accessed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "local_filename": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "size_bytes": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "license_or_terms": {
+      "type": "string",
+      "minLength": 1
+    },
+    "redistribution_allowed": {
+      "type": "boolean"
+    },
+    "acquisition_method": {
+      "enum": [
+        "official_public_download",
+        "public_download",
+        "manual_download",
+        "terms_acceptance_required"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
