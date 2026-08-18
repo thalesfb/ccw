@@ -35,10 +35,26 @@ tcc-prototype prepare-assistments \
   --output-dir data/processed
 ```
 
-A execução produz:
+A execução produz nomes versionados pelo hash da fonte, como
+`<dataset_id>-<sha256-prefix>.parquet` e
+`<dataset_id>-<sha256-prefix>.quality.json`. Assim, uma republicação do
+arquivo bruto não sobrescreve silenciosamente os artefatos de uma versão
+anterior.
 
-- `*.parquet`: tabela normalizada de interações;
-- `*.quality.json`: relatório de qualidade, contagens e hashes.
+## Semântica do ASSISTments corrigido
+
+O adaptador assume a versão corrigida do Skill Builder 2009–2010. Nessa
+versão, uma interação estudante-problema ocupa uma única linha. Quando
+`skill_id` representa várias habilidades no formato `skill1_skill2`, o
+adaptador preserva essas tags separadamente em `skill_ids`, sem criar linhas
+artificiais adicionais.
+
+O campo `order_id` é usado como ordem cronológica da interação. O campo
+`correct` é preservado como o rótulo observado da interação e significa acerto
+na primeira tentativa; uma primeira resposta incorreta ou um pedido de ajuda é
+registrado como incorreto. Tentativas, dicas e tempo da própria interação são
+preservados somente como campos observados e continuam proibidos como atributos
+da mesma interação no protocolo preditivo definido no TCC.
 
 ## Contrato canônico
 
@@ -62,11 +78,13 @@ python -m pytest tests
 
 Os testes usam arquivos temporários sintéticos e verificam:
 
-- integridade do manifesto;
-- rejeição de hash divergente;
+- integridade e contenção do manifesto;
+- rejeição de hash, tipos e métodos de aquisição fora do contrato;
 - mapeamento do ASSISTments para o contrato canônico;
+- preservação de múltiplas habilidades na versão corrigida;
 - remoção de duplicatas exatas;
 - ordenação determinística;
+- versionamento dos nomes de artefato pelo hash da fonte;
 - geração do Parquet e do relatório de qualidade.
 
 ## Extensões planejadas
