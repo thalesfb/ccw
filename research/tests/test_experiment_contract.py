@@ -1,6 +1,11 @@
 import json
 from pathlib import Path
 
+from tcc_prototype.modeling.features import (
+    HISTORY_VIRTUAL_FAILURES,
+    HISTORY_VIRTUAL_SUCCESSES,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 EXPERIMENT_PATH = REPO_ROOT / "prototype" / "config" / "experiment.json"
@@ -124,6 +129,16 @@ def test_model_evaluation_choices_are_frozen_before_real_test_execution() -> Non
     assert experiment["eligibility"]["minimum_interactions_per_student"] is None
     assert experiment["reporting"]["skill_support"]["minimum_test_rows"] is None
     assert experiment["reporting"]["skill_support"]["minimum_test_students"] is None
+
+
+def test_history_rate_prior_matches_the_runtime_feature_defaults() -> None:
+    experiment = _load_json(EXPERIMENT_PATH)
+    prior = experiment["evaluation_execution"]["history_rate_prior"]
+
+    assert prior == {
+        "virtual_successes": HISTORY_VIRTUAL_SUCCESSES,
+        "virtual_failures": HISTORY_VIRTUAL_FAILURES,
+    }
 
 
 def test_multiskill_and_subgroup_reporting_contracts_are_explicit() -> None:
