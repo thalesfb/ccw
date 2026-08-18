@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from tcc_prototype.cli import build_parser
+from tcc_prototype.cli import _load_preparation_provenance, build_parser
 from tcc_prototype.modeling.experiment import (
     ExperimentConfigError,
     run_baseline_experiment,
@@ -131,13 +131,15 @@ def test_nonlinear_context_hash_is_fixed_width_and_target_independent() -> None:
     assert (features == hashed_tree_features(changed, hash_features=8)).all()
 
 
-def test_cli_uses_configured_seed_set_instead_of_single_seed_argument() -> None:
+def test_cli_uses_configured_seed_set_and_preparation_provenance() -> None:
     parser = build_parser()
     args = parser.parse_args(
         [
             "evaluate-baselines",
             "--input",
             "data.parquet",
+            "--preparation-report",
+            "data.quality.json",
             "--output-dir",
             "reports",
             "--experiment-config",
@@ -148,7 +150,39 @@ def test_cli_uses_configured_seed_set_instead_of_single_seed_argument() -> None:
     )
 
     assert args.split_strategy == "student_holdout"
+    assert args.preparation_report == Path("data.quality.json")
     assert not hasattr(args, "seed")
+
+
+def test_preparation_provenance_verifies_processed_input_hash(tmp_path: Path) -> None:
+    prepared = tmp_path / "prepared.parquet"
+    prepared.write_bytes(b"prepared-input")
+    processed_hash = hashlib.sha256(prepared.read_bytes()).hexdigest()
+    source_hash = hashlib.sha256(b"raw-source").hexdigest()
+    report = tmp_path / "prepared.quality.json"
+    report.write_text(
+        json.dumps(
+            {
+                "dataset_id": "synthetic",
+                "dataset_version": "v1",
+                "source_sha256": source_hash,
+                "processed_sha256": processed_hash,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    provenance = _load_preparation_provenance(report, prepared)
+
+    assert provenance["source_sha256"] == source_hash
+    assert provenance["processed_input_sha256"] == processed_hash
+    assert provenance["preparation_report_sha256"] == hashlib.sha256(
+        report.read_bytes()
+    ).hexdigest()
+
+    prepared.write_bytes(b"changed-after-report")
+    with pytest.raises(ValueError, match="processed input SHA-256 mismatch"):
+        _load_preparation_provenance(report, prepared)
 
 
 def test_artifacts_record_hashes_and_refuse_silent_overwrite(tmp_path: Path) -> None:
