@@ -60,6 +60,13 @@ def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
     return digest.hexdigest()
 
 
+def _required_string(payload: dict[str, Any], field: str) -> str:
+    value = payload[field]
+    if not isinstance(value, str) or not value.strip():
+        raise ManifestError(f"{field} must be a non-empty string")
+    return value
+
+
 def load_manifest(path: Path) -> DatasetManifest:
     """Load a JSON manifest and validate its required fields and value contract."""
 
@@ -72,15 +79,18 @@ def load_manifest(path: Path) -> DatasetManifest:
     if missing:
         raise ManifestError("manifest is missing fields: " + ", ".join(missing))
 
-    dataset_id = payload["dataset_id"]
-    if not isinstance(dataset_id, str) or not DATASET_ID_PATTERN.fullmatch(dataset_id):
+    dataset_id = _required_string(payload, "dataset_id")
+    if not DATASET_ID_PATTERN.fullmatch(dataset_id):
         raise ManifestError("dataset_id contains unsafe characters")
 
-    local_filename = payload["local_filename"]
+    version = _required_string(payload, "version")
+    canonical_url = _required_string(payload, "canonical_url")
+    accessed_at = _required_string(payload, "accessed_at")
+    license_or_terms = _required_string(payload, "license_or_terms")
+
+    local_filename = _required_string(payload, "local_filename")
     if (
-        not isinstance(local_filename, str)
-        or not local_filename
-        or local_filename in {".", ".."}
+        local_filename in {".", ".."}
         or "/" in local_filename
         or "\\" in local_filename
         or Path(local_filename).is_absolute()
@@ -96,31 +106,40 @@ def load_manifest(path: Path) -> DatasetManifest:
         raise ManifestError("redistribution_allowed must be boolean")
 
     acquisition_method = payload["acquisition_method"]
-    if acquisition_method not in ACQUISITION_METHODS:
+    if (
+        not isinstance(acquisition_method, str)
+        or acquisition_method not in ACQUISITION_METHODS
+    ):
         raise ManifestError(f"unsupported acquisition_method: {acquisition_method}")
 
     size = payload.get("size_bytes")
-    if size is not None and (not isinstance(size, int) or isinstance(size, bool) or size < 0):
+    if size is not None and (
+        not isinstance(size, int) or isinstance(size, bool) or size < 0
+    ):
         raise ManifestError("manifest size_bytes must be a non-negative integer")
 
     notes = payload.get("notes", [])
     if not isinstance(notes, list) or not all(isinstance(note, str) for note in notes):
         raise ManifestError("manifest notes must be a list of strings")
 
+    download_url = payload.get("download_url")
+    if download_url is not None and (
+        not isinstance(download_url, str) or not download_url.strip()
+    ):
+        raise ManifestError("download_url must be null or a non-empty string")
+
     return DatasetManifest(
         dataset_id=dataset_id,
-        version=str(payload["version"]),
-        canonical_url=str(payload["canonical_url"]),
-        accessed_at=str(payload["accessed_at"]),
+        version=version,
+        canonical_url=canonical_url,
+        accessed_at=accessed_at,
         local_filename=local_filename,
         sha256=digest,
-        license_or_terms=str(payload["license_or_terms"]),
+        license_or_terms=license_or_terms,
         redistribution_allowed=redistribution_allowed,
-        acquisition_method=str(acquisition_method),
+        acquisition_method=acquisition_method,
         size_bytes=size,
-        download_url=(
-            str(payload["download_url"]) if payload.get("download_url") else None
-        ),
+        download_url=download_url,
         notes=tuple(notes),
     )
 
