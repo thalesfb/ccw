@@ -46,7 +46,11 @@ class AssistmentsAdapter:
         text = str(value).strip()
         if not text:
             return []
-        separator = self.skill_separator if self.skill_separator is not None else default_separator
+        separator = (
+            self.skill_separator
+            if self.skill_separator is not None
+            else default_separator
+        )
         if separator:
             return sorted(
                 {
@@ -80,6 +84,16 @@ class AssistmentsAdapter:
         )
         duplicate_rows_removed = int(duplicate_mask.sum())
         working = working.loc[~duplicate_mask].copy()
+
+        legacy_multiline_mask = working.duplicated(
+            subset=["user_id", "problem_id", "order_id"],
+            keep=False,
+        )
+        if legacy_multiline_mask.any():
+            raise AdapterError(
+                "ASSISTments source does not match the corrected "
+                "one-row-per-interaction format"
+            )
 
         default_skill_separator = "_" if skill_column == "skill_id" else None
         working["_skill_ids"] = working[skill_column].map(
