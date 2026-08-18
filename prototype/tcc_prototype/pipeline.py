@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 from .adapters.assistments import AssistmentsAdapter
-from .manifest import load_manifest, sha256_file, verify_manifest_file
+from .manifest import DatasetManifest, load_manifest, sha256_file, verify_manifest_file
 
 
 @dataclass(frozen=True)
@@ -25,6 +25,12 @@ def _count_skills(frame: pd.DataFrame) -> int:
     return len({skill for skills in frame["skill_ids"] for skill in skills})
 
 
+def _artifact_stem(manifest: DatasetManifest) -> str:
+    """Return a stable source-versioned stem without exposing mutable labels."""
+
+    return f"{manifest.dataset_id}-{manifest.sha256[:12]}"
+
+
 def prepare_assistments(
     *,
     manifest_path: Path,
@@ -34,9 +40,9 @@ def prepare_assistments(
 ) -> PreparedArtifacts:
     """Validate, normalize, and persist ASSISTments interactions.
 
-    The raw file is never modified. Output filenames derive from the dataset ID
-    in the manifest so repeated executions overwrite only the same declared
-    dataset version artifacts.
+    The raw file is never modified. Output filenames include the source digest,
+    so a republished or otherwise changed source file does not silently replace
+    artifacts produced from a previously registered source version.
     """
 
     manifest = load_manifest(manifest_path)
@@ -48,8 +54,9 @@ def prepare_assistments(
     ).normalize(source)
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    parquet_path = output_dir / f"{manifest.dataset_id}.parquet"
-    report_path = output_dir / f"{manifest.dataset_id}.quality.json"
+    artifact_stem = _artifact_stem(manifest)
+    parquet_path = output_dir / f"{artifact_stem}.parquet"
+    report_path = output_dir / f"{artifact_stem}.quality.json"
 
     normalized.to_parquet(parquet_path, index=False, engine="pyarrow")
     processed_sha256 = sha256_file(parquet_path)
@@ -57,8 +64,11 @@ def prepare_assistments(
     report = {
         "dataset_id": manifest.dataset_id,
         "dataset_version": manifest.version,
+        "source_filename": manifest.local_filename,
         "source_sha256": manifest.sha256,
         "processed_sha256": processed_sha256,
+        "target_label_semantics": "correct_on_first_attempt_without_help",
+        "interaction_order_semantics": "chronological_original_problem_log_id",
         **quality,
         "students": int(normalized["student_id"].nunique()),
         "items": int(normalized["item_id"].nunique()),
