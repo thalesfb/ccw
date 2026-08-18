@@ -3,8 +3,9 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
-from tcc_prototype.manifest import DatasetManifest
+from tcc_prototype.manifest import DatasetManifest, ManifestError
 from tcc_prototype.pipeline import _artifact_stem, prepare_assistments
 
 
@@ -25,7 +26,34 @@ def test_artifact_stem_distinguishes_source_file_versions() -> None:
     )
 
     assert _artifact_stem(first) != _artifact_stem(second)
-    assert _artifact_stem(first).endswith("-aaaaaaaaaaaa")
+    assert _artifact_stem(first).endswith("-" + "a" * 64)
+
+
+def test_prepare_assistments_rejects_unapproved_dataset_id(tmp_path: Path) -> None:
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "dataset_id": "other_dataset",
+                "version": "v1",
+                "canonical_url": "https://example.org/dataset",
+                "accessed_at": "2026-07-22T00:00:00Z",
+                "local_filename": "other.csv",
+                "sha256": "0" * 64,
+                "license_or_terms": "test fixture",
+                "redistribution_allowed": False,
+                "acquisition_method": "manual_download",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ManifestError, match="approved ASSISTments dataset_id"):
+        prepare_assistments(
+            manifest_path=manifest_path,
+            raw_dir=tmp_path,
+            output_dir=tmp_path / "processed",
+        )
 
 
 def test_prepare_assistments_writes_parquet_and_quality_report(tmp_path: Path) -> None:
@@ -70,7 +98,7 @@ def test_prepare_assistments_writes_parquet_and_quality_report(tmp_path: Path) -
 
     assert artifacts.parquet_path.exists()
     assert artifacts.report_path.exists()
-    assert digest[:12] in artifacts.parquet_path.name
+    assert digest in artifacts.parquet_path.name
     prepared = pd.read_parquet(artifacts.parquet_path)
     report = json.loads(artifacts.report_path.read_text(encoding="utf-8"))
     assert len(prepared) == 3
