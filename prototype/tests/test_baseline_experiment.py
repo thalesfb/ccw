@@ -1,10 +1,12 @@
 import hashlib
 import json
+import tomllib
 from pathlib import Path
 
 import pandas as pd
 import pytest
 
+from tcc_prototype import __version__
 from tcc_prototype.cli import _load_preparation_provenance, build_parser
 from tcc_prototype.modeling.experiment import (
     ExperimentConfigError,
@@ -216,3 +218,10 @@ def test_artifacts_record_hashes_and_refuse_silent_overwrite(tmp_path: Path) -> 
             source_sha256=source_hash,
             config_sha256=config_hash,
         )
+
+
+def test_package_version_matches_pyproject() -> None:
+    pyproject_path = Path(__file__).resolve().parents[1] / "pyproject.toml"
+    project = tomllib.loads(pyproject_path.read_text(encoding="utf-8"))["project"]
+
+    assert __version__ == project["version"]
