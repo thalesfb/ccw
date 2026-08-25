@@ -1,0 +1,35 @@
+{
+  "schema_version": "2.0.0",
+  "probability_source": null,
+  "probability_source_freeze_stage": "selected_from_validation_before_test_profile_generation",
+  "minimum_student_skill_interactions": null,
+  "minimum_evidence_freeze_stage": "after_dataset_characterization_before_test_profile_generation",
+  "continuous_profile": {
+    "enabled": true,
+    "fields": [
+      "evidence_count",
+      "mean_predicted_correct_probability",
+      "predicted_probability_dispersion",
+      "observed_accuracy",
+      "observed_accuracy_lower",
+      "observed_accuracy_upper",
+      "evidence_status"
+    ]
+  },
+  "explanation_rows": 20,
+  "permutation_repeats": 5,
+  "explainability": {
+    "logistic_exact_contributions": true,
+    "logistic_permutation_importance": true,
+    "interpretation": "Exact contributions describe the fitted logistic computation in log-odds space. Permutation importance describes held-out predictive dependence. Neither establishes causal factors, learning, competence, or pedagogical effectiveness."
+  },
+  "ordinal_levels": {
+    "enabled": false,
+    "reason": "Ordinal labels require a separate validation, error-cost, stability, and pedagogical review decision before implementation."
+  },
+  "binary_alert": {
+    "enabled": false,
+    "reason": "A pedagogical alert requires an explicit decision threshold, error-cost analysis, calibration evidence, and human review workflow."
+  },
+  "mandatory_warning": "This profile summarizes held-out interaction evidence and contextual prediction probabilities. It is not a direct measure of mastery, competence, learning, diagnosis, causality, or pedagogical effectiveness."
+}
