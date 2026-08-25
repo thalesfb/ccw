@@ -12,7 +12,10 @@ from tcc_prototype.modeling.experiment import (
     run_baseline_experiment,
     write_baseline_artifacts,
 )
-from tcc_prototype.profile_analysis import build_profile_artifacts
+from tcc_prototype.profile_analysis import (
+    build_profile_artifacts,
+    verify_profile_input_provenance,
+)
 from tcc_prototype.profiles import (
     ProfileConfigError,
     build_skill_profiles,
@@ -221,6 +224,8 @@ def test_profile_artifacts_consume_frozen_experiment_run_without_new_split_or_tu
 
     assert manifest["probability_source"] == "logistic_regression"
     assert manifest["minimum_student_skill_interactions"] == 2
+    assert manifest["explanation_rows"] == 3
+    assert manifest["permutation_repeats"] == 2
     assert manifest["experiment_predictions_sha256"] == sha256_file(
         experiment_artifacts.predictions_path
     )
@@ -241,6 +246,31 @@ def test_profile_artifacts_consume_frozen_experiment_run_without_new_split_or_tu
             explanation_rows=3,
             permutation_repeats=2,
         )
+
+
+def test_profile_input_must_match_experiment_provenance(tmp_path: Path) -> None:
+    prepared = tmp_path / "prepared.parquet"
+    prepared.write_bytes(b"registered-prepared-input")
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    provenance_path = run_dir / "input-provenance.json"
+    provenance_path.write_text(
+        json.dumps(
+            {
+                "processed_input_sha256": sha256_file(prepared),
+                "source_sha256": hashlib.sha256(b"raw").hexdigest(),
+                "experiment_config_sha256": hashlib.sha256(b"config").hexdigest(),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    provenance = verify_profile_input_provenance(prepared, run_dir)
+    assert provenance["processed_input_sha256"] == sha256_file(prepared)
+
+    prepared.write_bytes(b"changed-input")
+    with pytest.raises(ValueError, match="processed input SHA-256 mismatch"):
+        verify_profile_input_provenance(prepared, run_dir)
 
 
 def test_profile_cli_does_not_expose_split_seed_or_model_tuning_options() -> None:
