@@ -7,6 +7,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from sklearn.inspection import permutation_importance
 from sklearn.pipeline import Pipeline
 
 from .features import build_history_features
@@ -19,6 +20,7 @@ class LogisticExplanationReconstruction:
 
     max_abs_probability_error: float
     explanations: list[dict[str, Any]]
+    permutation_importance: pd.DataFrame
 
 
 def explain_logistic_rows(
@@ -90,6 +92,7 @@ def reconstruct_logistic_explanations(
     seed: int,
     explanation_rows: int = 20,
     probability_tolerance: float = 1e-12,
+    permutation_repeats: int = 5,
 ) -> LogisticExplanationReconstruction:
     """Refit only the frozen logistic specification and verify registered probabilities."""
 
@@ -97,6 +100,8 @@ def reconstruct_logistic_explanations(
         raise ValueError("explanation_rows must be non-negative")
     if probability_tolerance < 0:
         raise ValueError("probability_tolerance must be non-negative")
+    if permutation_repeats < 1:
+        raise ValueError("permutation_repeats must be positive")
     if "C" not in selected_parameters or "max_iter" not in selected_parameters:
         raise ValueError("selected logistic parameters must include C and max_iter")
 
@@ -179,7 +184,29 @@ def reconstruct_logistic_explanations(
     ):
         explanation["source_row_id"] = str(source_row_id)
 
+    importance = permutation_importance(
+        model,
+        aligned[columns],
+        aligned["target"],
+        scoring="neg_log_loss",
+        n_repeats=permutation_repeats,
+        random_state=seed,
+        n_jobs=-1,
+    )
+    importance_frame = (
+        pd.DataFrame(
+            {
+                "feature": columns,
+                "importance_mean": importance.importances_mean,
+                "importance_std": importance.importances_std,
+            }
+        )
+        .sort_values("importance_mean", ascending=False, kind="mergesort")
+        .reset_index(drop=True)
+    )
+
     return LogisticExplanationReconstruction(
         max_abs_probability_error=max_abs_error,
         explanations=explanations,
+        permutation_importance=importance_frame,
     )
