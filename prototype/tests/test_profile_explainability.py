@@ -1,8 +1,18 @@
+import hashlib
+import json
+from pathlib import Path
+
 import pandas as pd
 import pytest
 
+from tcc_prototype.cli import build_parser
+from tcc_prototype.manifest import sha256_file
 from tcc_prototype.modeling.explanations import reconstruct_logistic_explanations
-from tcc_prototype.modeling.experiment import run_baseline_experiment
+from tcc_prototype.modeling.experiment import (
+    run_baseline_experiment,
+    write_baseline_artifacts,
+)
+from tcc_prototype.profile_analysis import build_profile_artifacts
 from tcc_prototype.profiles import (
     ProfileConfigError,
     build_skill_profiles,
@@ -161,3 +171,94 @@ def test_logistic_explanations_reconstruct_registered_test_predictions() -> None
         assert contribution_sum == pytest.approx(explanation["log_odds"], abs=1e-10)
         assert "source_row_id" in explanation
         assert "do not establish causal" in explanation["interpretation_limit"]
+
+
+def test_profile_artifacts_consume_frozen_experiment_run_without_new_split_or_tuning(
+    tmp_path: Path,
+) -> None:
+    interactions = _interactions()
+    experiment_config = _experiment_config()
+    result = run_baseline_experiment(
+        interactions,
+        config=experiment_config,
+        split_strategy="personalized_temporal",
+        seed=2026,
+    )
+    source_hash = hashlib.sha256(b"synthetic-source").hexdigest()
+    experiment_config_hash = hashlib.sha256(
+        json.dumps(experiment_config, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+    experiment_artifacts = write_baseline_artifacts(
+        result,
+        output_dir=tmp_path / "experiment",
+        source_sha256=source_hash,
+        config_sha256=experiment_config_hash,
+    )
+
+    profile_config = {
+        "schema_version": "2.0.0-test",
+        "probability_source": "logistic_regression",
+        "minimum_student_skill_interactions": 2,
+        "ordinal_levels": {"enabled": False},
+        "binary_alert": {"enabled": False},
+    }
+    profile_config_path = tmp_path / "profile.json"
+    profile_config_path.write_text(
+        json.dumps(profile_config, sort_keys=True), encoding="utf-8"
+    )
+
+    artifacts = build_profile_artifacts(
+        interactions,
+        experiment_run_dir=experiment_artifacts.metrics_path.parent,
+        profile_config=profile_config,
+        profile_config_sha256=sha256_file(profile_config_path),
+        output_dir=tmp_path / "profiles",
+        explanation_rows=3,
+        permutation_repeats=2,
+    )
+    manifest = json.loads(artifacts.manifest_path.read_text(encoding="utf-8"))
+    importance = pd.read_csv(artifacts.permutation_importance_path)
+
+    assert manifest["probability_source"] == "logistic_regression"
+    assert manifest["minimum_student_skill_interactions"] == 2
+    assert manifest["experiment_predictions_sha256"] == sha256_file(
+        experiment_artifacts.predictions_path
+    )
+    assert manifest["experiment_splits_sha256"] == sha256_file(
+        experiment_artifacts.splits_path
+    )
+    assert manifest["logistic_probability_reproduction_max_abs_error"] <= 1e-12
+    assert {"item_id", "skill_signature"}.issubset(set(importance["feature"]))
+    assert "primary_skill_id" not in set(importance["feature"])
+
+    with pytest.raises(FileExistsError):
+        build_profile_artifacts(
+            interactions,
+            experiment_run_dir=experiment_artifacts.metrics_path.parent,
+            profile_config=profile_config,
+            profile_config_sha256=sha256_file(profile_config_path),
+            output_dir=tmp_path / "profiles",
+            explanation_rows=3,
+            permutation_repeats=2,
+        )
+
+
+def test_profile_cli_does_not_expose_split_seed_or_model_tuning_options() -> None:
+    args = build_parser().parse_args(
+        [
+            "build-evidence-profile",
+            "--input",
+            "prepared.parquet",
+            "--experiment-run-dir",
+            "experiment-run",
+            "--profile-config",
+            "profile.json",
+            "--output-dir",
+            "profiles",
+        ]
+    )
+
+    assert args.input == Path("prepared.parquet")
+    assert args.experiment_run_dir == Path("experiment-run")
+    assert not hasattr(args, "split_strategy")
+    assert not hasattr(args, "seed")
