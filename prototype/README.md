@@ -128,6 +128,63 @@ interações únicas e estudantes únicos. Como o contrato canônico atual não
 contém colunas de subgrupo aprovadas para auditoria, o artefato registra essa
 análise como não aplicável em vez de fabricar grupos.
 
+## Construir perfil de evidências
+
+`build-evidence-profile` consome um diretório de execução já produzido por
+`evaluate-baselines`. Ele não possui argumentos de split, seed ou tuning: essas
+decisões pertencem ao experimento de origem e são verificadas pelos artefatos
+registrados.
+
+Antes da execução real, `config/profile.json` exige duas decisões científicas:
+
+- `probability_source`: modelo escolhido a partir da validação, antes de gerar o
+  perfil do teste;
+- `minimum_student_skill_interactions`: suporte individual justificado após a
+  caracterização da base e congelado antes do perfil do teste.
+
+Os dois campos permanecem `null` no repositório até que essas decisões sejam
+documentadas. A CLI interrompe a execução enquanto estiverem indefinidos.
+
+Exemplo após o congelamento:
+
+```bash
+tcc-prototype build-evidence-profile \
+  --input data/processed/<dataset>-<sha256>.parquet \
+  --experiment-run-dir data/reports/input-<sha256>/source-<sha256>/config-<sha256>/<split>-seed-<seed> \
+  --profile-config config/profile.json \
+  --output-dir data/reports/profiles
+```
+
+A CLI verifica que `--input` é exatamente o Parquet registrado em
+`input-provenance.json` do run. Também verifica os hashes de
+`predictions.parquet` e `splits.parquet` contra `metrics.json`.
+
+O perfil associa cada interação a todas as habilidades presentes em `skill_ids`
+e produz, por estudante e habilidade, quantidade de evidências, média das
+probabilidades contextuais de acerto, dispersão dessas probabilidades, acurácia
+observada e intervalo de Wilson da proporção observada. A média prevista não é
+probabilidade de domínio, a dispersão não é incerteza completa do modelo e o
+intervalo de Wilson não é intervalo da probabilidade predita.
+
+Para explicabilidade, a regressão logística é reconstruída somente com o split
+de treino, a seed e os hiperparâmetros registrados no experimento. As
+probabilidades reconstruídas precisam coincidir numericamente com as previsões
+armazenadas antes que contribuições locais sejam aceitas. A importância por
+permutação é calculada no teste apenas como dependência preditiva descritiva e
+não retorna ao ciclo de seleção.
+
+Cada execução cria um diretório imutável identificado pelo hash de
+`metrics.json` e pelo hash de `profile.json`, contendo:
+
+- `skill-profiles.parquet`;
+- `logistic-explanations.json`;
+- `logistic-permutation-importance.csv`;
+- `profile-manifest.json`.
+
+Níveis ordinais e alertas binários permanecem desabilitados. Esses artefatos não
+constituem diagnóstico, medida de competência, evidência de aprendizagem ou
+prova de eficácia pedagógica.
+
 ## Contrato canônico
 
 Cada interação contém, no mínimo:
@@ -153,7 +210,8 @@ a construção de atributos apenas com histórico anterior, as duas divisões
 experimentais, os baselines, a regressão logística, o candidato não linear, as
 métricas probabilísticas e de calibração, o bootstrap pareado por estudante, o
 suporte multihabilidade, o bloqueio de critérios não congelados, a cadeia de
-proveniência do Parquet e a geração de artefatos imutáveis.
+proveniência do Parquet, a reconstrução verificável das previsões logísticas, o
+perfil contínuo multihabilidade e a geração de artefatos imutáveis.
 
 ## Limites
 
@@ -163,5 +221,7 @@ técnica. Métricas em dados reais poderão sustentar conclusões sobre desempen
 preditivo e calibração no conjunto analisado, não sobre aprendizagem,
 competência latente, causalidade ou eficácia pedagógica.
 
-Modelos de explicabilidade e o perfil pedagógico são tratados nos lotes
-seguintes, depois da consolidação dos baselines e da avaliação técnica real.
+O perfil de evidências e as explicações implementados neste lote permanecem
+artefatos técnicos de inspeção. Sua utilidade para professores, decisões de
+intervenção e qualquer impacto pedagógico exigem avaliação adicional e não são
+inferidos a partir das métricas preditivas.
