@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "research_question": "Estimate the probability that a student's next eligible mathematics response is correct, conditioned on prior history and the target item and skills known before the response, and derive an auditable skill-evidence profile.",
   "target": {
     "name": "correct_next",
@@ -9,37 +9,13 @@
     "horizon": "one_eligible_interaction_ahead",
     "prediction_anchor": "immediately_before_target_response",
     "label_source": "correct field of the target interaction",
-    "target_context_known_before_response": [
-      "item_id",
-      "skill_ids"
-    ],
-    "forbidden_target_event_features": [
-      "correct",
-      "answer",
-      "attempt_count",
-      "hint_count",
-      "elapsed_time_ms"
-    ],
+    "target_context_known_before_response": ["item_id", "skill_ids"],
+    "forbidden_target_event_features": ["correct", "answer", "attempt_count", "hint_count", "elapsed_time_ms"],
     "pedagogical_interpretation": "operational evidence of future performance, not direct evidence of learning, latent competence, causality, or pedagogical effectiveness"
   },
   "unit_of_analysis": "student_item_interaction",
-  "required_columns": [
-    "student_id",
-    "item_id",
-    "skill_ids",
-    "interaction_order",
-    "correct",
-    "source_dataset",
-    "source_row_id"
-  ],
-  "optional_columns": [
-    "timestamp",
-    "attempt_count",
-    "hint_count",
-    "elapsed_time_ms",
-    "session_id",
-    "answer"
-  ],
+  "required_columns": ["student_id", "item_id", "skill_ids", "interaction_order", "correct", "source_dataset", "source_row_id"],
+  "optional_columns": ["timestamp", "attempt_count", "hint_count", "elapsed_time_ms", "session_id", "answer"],
   "eligibility": {
     "minimum_interactions_per_student": null,
     "threshold_freeze_stage": "after_dataset_characterization_before_split_generation",
@@ -56,6 +32,8 @@
       "train_fraction": 0.7,
       "validation_fraction": 0.15,
       "test_fraction": 0.15,
+      "assignment_policy": "sha256_rank_of_seed_and_student_id",
+      "rounding_policy": "floor_train_and_validation_with_nonempty_partition_guard",
       "model_parameters_may_use_held_out_students": false,
       "held_out_student_history": "prior_events_only_for_online_features",
       "report_first_eligible_interaction_as_true_cold_start_slice": true
@@ -66,62 +44,53 @@
       "validation_fraction": 0.15,
       "test_fraction": 0.15,
       "learned_aggregates_source": "training_partition_only",
-      "rounding_and_time_tie_policy": "deterministic_and_versioned"
+      "rounding_policy": "floor_train_and_validation_with_nonempty_partition_guard",
+      "time_tie_policy": "interaction_order_then_lexicographic_source_row_id"
     }
   },
-  "random_seeds": [
-    2026,
-    1701,
-    31415
-  ],
+  "random_seeds": [2026, 1701, 31415],
   "seed_policy": "report_all_predefined_seeds_without_best_seed_selection",
-  "baselines": [
-    "global_probability",
-    "item_smoothed_probability",
-    "skill_smoothed_probability",
-    "student_history_smoothed_probability",
-    "logistic_regression"
-  ],
-  "baseline_tuning_policy": "smoothing_and_hyperparameters_use_training_and_validation_only_and_are_frozen_before_test",
-  "candidate_models": [
-    "hist_gradient_boosting"
-  ],
+  "baselines": ["global_probability", "item_smoothed_probability", "skill_smoothed_probability", "student_history_smoothed_probability", "logistic_regression"],
+  "baseline_tuning_policy": "hyperparameters_are_selected_on_validation_from_models_fit_on_training_only_and_are_frozen_before_test",
+  "candidate_models": ["hist_gradient_boosting"],
   "hypotheses": {
     "confirmatory": [
-      {
-        "id": "H1",
-        "claim": "historical student, item, or skill baselines improve probabilistic quality over the global probability baseline"
-      },
-      {
-        "id": "H2",
-        "claim": "regularized logistic regression improves probabilistic quality over the best simple historical baseline"
-      }
+      {"id": "H1", "claim": "historical student, item, or skill baselines improve probabilistic quality over the global probability baseline"},
+      {"id": "H2", "claim": "regularized logistic regression improves probabilistic quality over the best simple historical baseline"}
     ],
-    "exploratory": [
-      "nonlinear model improvement over logistic regression",
-      "heterogeneity of performance and calibration across skills",
-      "descriptive value of a skill-evidence profile relative to a binary alert"
-    ]
+    "exploratory": ["nonlinear model improvement over logistic regression", "heterogeneity of performance and calibration across skills", "descriptive value of a skill-evidence profile relative to a binary alert"]
   },
   "model_selection_metric": "log_loss",
-  "primary_metrics": [
-    "log_loss",
-    "brier_score"
-  ],
-  "calibration_metrics": [
-    "calibration_intercept",
-    "calibration_slope",
-    "reliability_curve",
-    "expected_calibration_error"
-  ],
-  "secondary_metrics": [
-    "roc_auc",
-    "average_precision",
-    "accuracy",
-    "precision",
-    "recall",
-    "f1"
-  ],
+  "primary_metrics": ["log_loss", "brier_score"],
+  "calibration_metrics": ["calibration_intercept", "calibration_slope", "reliability_curve", "expected_calibration_error"],
+  "secondary_metrics": ["roc_auc", "average_precision", "accuracy", "precision", "recall", "f1"],
+  "evaluation_execution": {
+    "selection_partition": "validation",
+    "final_fit_partition": "train_only",
+    "classification_threshold": 0.5,
+    "classification_threshold_role": "technical_reporting_only_not_pedagogical_risk_threshold",
+    "calibration_bins": 10,
+    "calibration_binning": "equal_width_on_probability_interval_0_1",
+    "history_rate_prior": {"virtual_successes": 1.0, "virtual_failures": 1.0},
+    "smoothing_strengths": [1.0, 5.0, 20.0],
+    "logistic_regression": {
+      "c_values": [0.1, 1.0, 10.0],
+      "penalty": "l2",
+      "solver": "lbfgs",
+      "max_iter": 1000,
+      "unknown_category_policy": "ignore_without_test_refit"
+    },
+    "hist_gradient_boosting": {
+      "learning_rate_values": [0.05, 0.1],
+      "max_leaf_nodes_values": [15, 31],
+      "l2_regularization_values": [0.0, 1.0],
+      "max_iter": 200,
+      "early_stopping": false,
+      "hash_features": 64,
+      "context_encoding": "target_independent_feature_hashing_of_item_and_all_skill_ids"
+    },
+    "execution_gate": "blocked_until_dataset_specific_eligibility_and_support_thresholds_are_frozen"
+  },
   "reporting": {
     "evaluate_by_skill": true,
     "skill_support": {
@@ -129,6 +98,13 @@
       "minimum_test_students": null,
       "freeze_stage": "after_dataset_selection_before_test_evaluation",
       "below_threshold_behavior": "report_insufficient_evidence"
+    },
+    "subgroup_audit": {
+      "columns": [],
+      "status": "no_approved_subgroup_columns_in_current_canonical_contract",
+      "minimum_test_rows": null,
+      "minimum_test_students": null,
+      "freeze_stage": "before_test_evaluation_if_subgroups_are_enabled"
     },
     "bootstrap": {
       "unit": "student",
@@ -138,33 +114,27 @@
     },
     "include_reliability_curves": true,
     "include_error_analysis": true,
-    "expected_calibration_error_binning": "versioned_before_test_evaluation"
+    "expected_calibration_error_binning": "10_equal_width_bins_frozen_before_test_evaluation"
   },
   "multi_skill_policy": {
     "training_rows": "retain_single_interaction_with_multiple_skill_ids",
+    "model_context": "retain_all_skill_ids_with_deterministic_full_set_encoding",
+    "skill_baseline": "one_interaction_may_inform_each_overlapping_skill_aggregate_without_row_explosion",
     "per_skill_reporting": "an_interaction_may_contribute_to_each_mapped_skill",
-    "support_counts": [
-      "unique_interactions",
-      "unique_students"
-    ],
+    "support_counts": ["unique_interactions", "unique_students"],
     "uncertainty_unit": "student"
   },
   "derived_outputs": {
     "skill_profile": true,
-    "ordinal_levels": {
-      "enabled": false,
-      "reason": "thresholds must be justified and frozen before test evaluation"
-    },
-    "binary_risk_alert": {
-      "enabled": false,
-      "reason": "alerts are secondary outputs and require an explicit cost and interpretation analysis"
-    }
+    "ordinal_levels": {"enabled": false, "reason": "thresholds must be justified and frozen before test evaluation"},
+    "binary_risk_alert": {"enabled": false, "reason": "alerts are secondary outputs and require an explicit cost and interpretation analysis"}
   },
   "guardrails": [
     "features must be available before the target response",
     "target-event outcome fields are never features in the primary protocol",
     "no random row split in the primary protocol",
     "test data do not tune smoothing, hyperparameters, thresholds, preprocessing, or calibration rules",
+    "validation data select hyperparameters but do not become fitted model parameters in the primary protocol",
     "eligibility thresholds are justified and frozen before split generation",
     "no educational effectiveness claim from predictive metrics alone",
     "no causal claim from feature importance or local explanation",

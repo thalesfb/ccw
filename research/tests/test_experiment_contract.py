@@ -1,6 +1,11 @@
 import json
 from pathlib import Path
 
+from tcc_prototype.modeling.features import (
+    HISTORY_VIRTUAL_FAILURES,
+    HISTORY_VIRTUAL_SUCCESSES,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 EXPERIMENT_PATH = REPO_ROOT / "prototype" / "config" / "experiment.json"
@@ -101,6 +106,53 @@ def test_predefined_seeds_cannot_be_cherry_picked() -> None:
     assert (
         experiment["seed_policy"]
         == "report_all_predefined_seeds_without_best_seed_selection"
+    )
+
+
+def test_model_evaluation_choices_are_frozen_before_real_test_execution() -> None:
+    experiment = _load_json(EXPERIMENT_PATH)
+    execution = experiment["evaluation_execution"]
+
+    assert experiment["schema_version"] == "1.2.0"
+    assert execution["selection_partition"] == "validation"
+    assert execution["final_fit_partition"] == "train_only"
+    assert execution["calibration_bins"] == 10
+    assert execution["classification_threshold"] == 0.5
+    assert execution["hist_gradient_boosting"]["early_stopping"] is False
+    assert execution["hist_gradient_boosting"]["hash_features"] == 64
+    assert experiment["random_seeds"] == [2026, 1701, 31415]
+    assert (
+        experiment["seed_policy"]
+        == "report_all_predefined_seeds_without_best_seed_selection"
+    )
+
+    assert experiment["eligibility"]["minimum_interactions_per_student"] is None
+    assert experiment["reporting"]["skill_support"]["minimum_test_rows"] is None
+    assert experiment["reporting"]["skill_support"]["minimum_test_students"] is None
+
+
+def test_history_rate_prior_matches_the_runtime_feature_defaults() -> None:
+    experiment = _load_json(EXPERIMENT_PATH)
+    prior = experiment["evaluation_execution"]["history_rate_prior"]
+
+    assert prior == {
+        "virtual_successes": HISTORY_VIRTUAL_SUCCESSES,
+        "virtual_failures": HISTORY_VIRTUAL_FAILURES,
+    }
+
+
+def test_multiskill_and_subgroup_reporting_contracts_are_explicit() -> None:
+    experiment = _load_json(EXPERIMENT_PATH)
+
+    assert experiment["multi_skill_policy"]["training_rows"] == (
+        "retain_single_interaction_with_multiple_skill_ids"
+    )
+    assert experiment["multi_skill_policy"]["model_context"] == (
+        "retain_all_skill_ids_with_deterministic_full_set_encoding"
+    )
+    assert experiment["reporting"]["subgroup_audit"]["columns"] == []
+    assert experiment["reporting"]["subgroup_audit"]["status"] == (
+        "no_approved_subgroup_columns_in_current_canonical_contract"
     )
 
 
