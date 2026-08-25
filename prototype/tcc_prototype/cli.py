@@ -16,6 +16,11 @@ from .modeling.experiment import (
     write_baseline_artifacts,
 )
 from .pipeline import prepare_assistments
+from .profile_analysis import (
+    build_profile_artifacts,
+    verify_profile_input_provenance,
+)
+from .profiles import ProfileConfigError, load_profile_config
 
 
 def _is_sha256(value: object) -> bool:
@@ -83,6 +88,15 @@ def build_parser() -> argparse.ArgumentParser:
         choices=("student_holdout", "personalized_temporal"),
         required=True,
     )
+
+    profile = subcommands.add_parser(
+        "build-evidence-profile",
+        help="derive auditable skill evidence from one frozen experiment run",
+    )
+    profile.add_argument("--input", type=Path, required=True)
+    profile.add_argument("--experiment-run-dir", type=Path, required=True)
+    profile.add_argument("--profile-config", type=Path, required=True)
+    profile.add_argument("--output-dir", type=Path, required=True)
     return parser
 
 
@@ -142,6 +156,28 @@ def main() -> int:
             return 0
         except (ExperimentConfigError, FileExistsError, OSError, ValueError) as error:
             raise SystemExit(f"baseline evaluation aborted: {error}") from error
+
+    if args.command == "build-evidence-profile":
+        try:
+            config = load_profile_config(args.profile_config)
+            verify_profile_input_provenance(args.input, args.experiment_run_dir)
+            interactions = pd.read_parquet(args.input)
+            artifacts = build_profile_artifacts(
+                interactions,
+                experiment_run_dir=args.experiment_run_dir,
+                profile_config=config,
+                profile_config_sha256=sha256_file(args.profile_config),
+                output_dir=args.output_dir,
+                explanation_rows=int(config.get("explanation_rows", 20)),
+                permutation_repeats=int(config.get("permutation_repeats", 5)),
+            )
+            print(f"profile={artifacts.profile_path}")
+            print(f"explanations={artifacts.explanations_path}")
+            print(f"importance={artifacts.permutation_importance_path}")
+            print(f"manifest={artifacts.manifest_path}")
+            return 0
+        except (ProfileConfigError, FileExistsError, OSError, ValueError) as error:
+            raise SystemExit(f"evidence profile aborted: {error}") from error
 
     raise AssertionError(f"unsupported command: {args.command}")
 
