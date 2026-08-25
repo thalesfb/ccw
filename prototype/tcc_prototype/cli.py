@@ -16,7 +16,10 @@ from .modeling.experiment import (
     write_baseline_artifacts,
 )
 from .pipeline import prepare_assistments
-from .profile_analysis import build_profile_artifacts
+from .profile_analysis import (
+    build_profile_artifacts,
+    verify_profile_input_provenance,
+)
 from .profiles import ProfileConfigError, load_profile_config
 
 
@@ -157,6 +160,7 @@ def main() -> int:
     if args.command == "build-evidence-profile":
         try:
             config = load_profile_config(args.profile_config)
+            verify_profile_input_provenance(args.input, args.experiment_run_dir)
             interactions = pd.read_parquet(args.input)
             artifacts = build_profile_artifacts(
                 interactions,
@@ -164,6 +168,8 @@ def main() -> int:
                 profile_config=config,
                 profile_config_sha256=sha256_file(args.profile_config),
                 output_dir=args.output_dir,
+                explanation_rows=int(config.get("explanation_rows", 20)),
+                permutation_repeats=int(config.get("permutation_repeats", 5)),
             )
             print(f"profile={artifacts.profile_path}")
             print(f"explanations={artifacts.explanations_path}")
