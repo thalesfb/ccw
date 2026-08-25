@@ -33,6 +33,58 @@ def _require_sha256(value: str, *, name: str) -> str:
     return value
 
 
+def verify_profile_input_provenance(
+    input_path: Path,
+    experiment_run_dir: Path,
+) -> dict[str, str]:
+    """Verify that profile generation uses the processed input bound to the run."""
+
+    provenance_path = experiment_run_dir / "input-provenance.json"
+    try:
+        payload = json.loads(provenance_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            f"unable to read experiment input provenance {provenance_path}: {exc}"
+        ) from exc
+
+    required = {
+        "processed_input_sha256",
+        "source_sha256",
+        "experiment_config_sha256",
+    }
+    missing = sorted(required.difference(payload))
+    if missing:
+        raise ValueError(
+            "experiment input provenance is missing fields: " + ", ".join(missing)
+        )
+
+    processed_input_sha256 = _require_sha256(
+        str(payload["processed_input_sha256"]),
+        name="processed_input_sha256",
+    )
+    source_sha256 = _require_sha256(
+        str(payload["source_sha256"]),
+        name="source_sha256",
+    )
+    experiment_config_sha256 = _require_sha256(
+        str(payload["experiment_config_sha256"]),
+        name="experiment_config_sha256",
+    )
+    actual_input_sha256 = sha256_file(input_path)
+    if actual_input_sha256 != processed_input_sha256:
+        raise ValueError(
+            "processed input SHA-256 mismatch: the profile input does not match "
+            "the canonical artifact registered by the experiment run"
+        )
+
+    return {
+        "processed_input_sha256": processed_input_sha256,
+        "source_sha256": source_sha256,
+        "experiment_config_sha256": experiment_config_sha256,
+        "input_provenance_sha256": sha256_file(provenance_path),
+    }
+
+
 def build_profile_artifacts(
     interactions: pd.DataFrame,
     *,
@@ -50,6 +102,10 @@ def build_profile_artifacts(
         profile_config_sha256,
         name="profile_config_sha256",
     )
+    if explanation_rows < 0:
+        raise ValueError("explanation_rows must be non-negative")
+    if permutation_repeats < 1:
+        raise ValueError("permutation_repeats must be positive")
 
     metrics_path = experiment_run_dir / "metrics.json"
     predictions_path = experiment_run_dir / "predictions.parquet"
@@ -139,6 +195,8 @@ def build_profile_artifacts(
         "minimum_student_skill_interactions": int(
             profile_config["minimum_student_skill_interactions"]
         ),
+        "explanation_rows": explanation_rows,
+        "permutation_repeats": permutation_repeats,
         "skill_profiles_sha256": sha256_file(profile_path),
         "logistic_explanations_sha256": sha256_file(explanations_path),
         "logistic_permutation_importance_sha256": sha256_file(
