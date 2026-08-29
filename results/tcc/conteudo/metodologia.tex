@@ -13,45 +13,15 @@ O PRISMA-P 2015 (\textit{Preferred Reporting Items for Systematic Review and Met
 
 \subsection{Bases de Dados e APIs}
 
-A coleta de dados foi realizada por meio de interfaces de programação de aplicações (APIs), que permitem consultar serviços externos de forma automatizada. Foram utilizadas quatro fontes científicas complementares:
-
-\begin{enumerate}
-    \item \textbf{Semantic Scholar}: fonte multidisciplinar com ampla cobertura em Ciência da Computação;
-    \item \textbf{OpenAlex}: catálogo acadêmico aberto e abrangente;
-    \item \textbf{Crossref}: fonte de metadados bibliográficos e identificadores DOI;
-    \item \textbf{CORE}: agregador de publicações disponibilizadas em acesso aberto.
-\end{enumerate}
+A coleta de dados foi realizada por meio de interfaces de programação de aplicações (APIs), que permitem consultar serviços externos de forma automatizada. Foram utilizadas quatro fontes científicas complementares. O Semantic Scholar foi empregado por sua cobertura multidisciplinar e presença relevante de estudos de Ciência da Computação; o OpenAlex forneceu um catálogo acadêmico aberto e abrangente; o Crossref contribuiu com metadados bibliográficos e identificadores DOI; e o CORE ampliou a recuperação de publicações disponibilizadas em acesso aberto.
 
 O uso de múltiplas fontes ampliou a cobertura da busca e reduziu a dependência de uma única base. Também exigiu uma etapa de normalização, pois o mesmo estudo poderia ser recuperado com diferenças de título, autores ou demais metadados.
 
 \subsection{Estratégia de Busca Bilíngue}
 
-A estratégia de busca combinou três camadas de termos: domínio matemático, técnica computacional e contexto educacional. O operador booleano \texttt{AND} foi utilizado para exigir a presença conjunta dessas dimensões.
+A estratégia de busca combinou três camadas de termos: domínio matemático, técnica computacional e contexto educacional. O operador booleano \texttt{AND} foi utilizado para exigir a presença conjunta dessas dimensões. Na camada referente ao domínio matemático foram utilizados \textit{mathematics} e \textit{math}, em inglês, e matemática, em português. A camada de técnicas computacionais reuniu termos relacionados a adaptação, personalização, tutoria, analítica, mineração, aprendizado de máquina, inteligência artificial, avaliação, modelagem do estudante e predição, com equivalentes em inglês e português. A terceira camada representou o contexto educacional por meio de termos como \textit{education} e \textit{learning}, em inglês, e educação e ensino, em português.
 
-\textbf{Camada 1 -- domínio matemático}:
-\begin{itemize}
-    \item Inglês: \textit{mathematics}, \textit{math};
-    \item Português: \textit{matemática}.
-\end{itemize}
-
-\textbf{Camada 2 -- técnicas computacionais}:
-\begin{itemize}
-    \item \textit{adaptive}, \textit{personalized}, \textit{tutoring}, \textit{analytics}, \textit{mining}, \textit{machine learning}, \textit{artificial intelligence}, \textit{assessment}, \textit{student modeling}, \textit{predictive} e termos equivalentes em português.
-\end{itemize}
-
-\textbf{Camada 3 -- contexto educacional}:
-\begin{itemize}
-    \item Inglês: \textit{education}, \textit{learning};
-    \item Português: \textit{educacao}, \textit{ensino}.
-\end{itemize}
-
-Foram executadas 72 consultas: 48 em inglês e 24 em português. Em cada consulta, um termo do domínio matemático foi combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Em notação simplificada, a estrutura foi: \textit{termo matemático} \texttt{AND} \textit{termo computacional} \texttt{AND} \textit{termo educacional}. Exemplos incluem:
-
-\begin{itemize}
-    \item \texttt{"mathematics" AND "machine learning" AND "education"};
-    \item \texttt{"math" AND "intelligent tutor" AND "learning"};
-    \item \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}ao"}.
-\end{itemize}
+Foram executadas 72 consultas: 48 em inglês e 24 em português. Em cada consulta, um termo do domínio matemático foi combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Em notação simplificada, a estrutura foi: \textit{termo matemático} \texttt{AND} \textit{termo computacional} \texttt{AND} \textit{termo educacional}. Entre os exemplos estão \texttt{"mathematics" AND "machine learning" AND "education"}, \texttt{"math" AND "intelligent tutor" AND "learning"} e \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}ao"}.
 
 \section{Critérios de Seleção}
 
@@ -125,18 +95,11 @@ Dos 1.883 registros avaliados nessa etapa, 1.866 ficaram abaixo do limiar ou nã
 
 \section{Infraestrutura Tecnológica da Revisão}
 
-\subsection{Pipeline Automatizado}
+\subsection{Fluxo Automatizado}
 
-O fluxo automatizado da revisão foi implementado em Python e utilizou:
+O fluxo automatizado da revisão foi implementado em Python. O SQLite foi utilizado para o armazenamento estruturado dos registros e das etapas de seleção; a biblioteca Requests realizou a comunicação com as APIs; o Pandas apoiou a manipulação e a exportação dos dados tabulares; e o scikit-learn foi empregado na representação TF-IDF e no cálculo da similaridade do cosseno.
 
-\begin{itemize}
-    \item \textbf{SQLite}: armazenamento estruturado dos registros e das etapas de seleção;
-    \item \textbf{Requests}: comunicação com as APIs;
-    \item \textbf{Pandas}: manipulação e exportação de dados tabulares;
-    \item \textbf{scikit-learn}: representação TF-IDF e cálculo da similaridade do cosseno.
-\end{itemize}
-
-Foi utilizado um \textit{cache} local, isto é, um armazenamento temporário de respostas previamente obtidas. Um acerto de cache ocorre quando uma nova solicitação pode ser atendida com um resultado já armazenado, sem consultar novamente a API externa. Como os contadores dependem do histórico e do momento de execução, a taxa de acertos não foi utilizada como indicador fixo do \textit{pipeline}; sua interpretação permaneceu vinculada às estatísticas da execução analisada.
+Foi utilizado um cache local, isto é, um armazenamento temporário de respostas previamente obtidas. Um acerto de cache ocorre quando uma nova solicitação pode ser atendida com um resultado já armazenado, sem consultar novamente a API externa. Como os contadores dependem do histórico e do momento de execução, a taxa de acertos não foi utilizada como indicador fixo do fluxo automatizado; sua interpretação permaneceu vinculada às estatísticas da execução analisada.
 
 \subsection{Reprodutibilidade}
 
