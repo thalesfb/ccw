@@ -13,6 +13,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 TCC_ROOT = REPO_ROOT / "results" / "tcc"
 TCC_CONTENT = TCC_ROOT / "conteudo"
 TCC_ABSTRACT = TCC_ROOT / "pretextuais" / "resumo.tex"
+TCC_APPENDIX = TCC_ROOT / "postextuais" / "apendice.tex"
+TCC_MAIN = TCC_ROOT / "main.tex"
 MMAT_DATA = REPO_ROOT / "research" / "data" / "mmat_assessments.csv"
 MMAT_EXPORT = REPO_ROOT / "research" / "exports" / "analysis" / "mmat_assessment.csv"
 MMAT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_tcc_table.tex"
@@ -80,9 +82,8 @@ def test_interpretation_precedes_the_long_synthesis_table() -> None:
     assert interpretation < table
 
 
-def test_long_python_identifier_is_breakable() -> None:
+def test_long_python_identifier_never_uses_an_unbreakable_form() -> None:
     source = _all_tex()
-    assert r"\texttt{RandomForest\allowbreak Classifier}" in source
     assert r"\texttt{RandomForestClassifier}" not in source
     assert r"\path{RandomForestClassifier}" not in source
     assert r"\nolinkurl{RandomForestClassifier}" not in source
@@ -98,7 +99,6 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
         TCC_CONTENT / "prototipo.tex",
         TCC_CONTENT / "resultados.tex",
         TCC_CONTENT / "conclusao.tex",
-        TCC_CONTENT / "cronograma.tex",
     ]
     source = "\n".join(_read(path) for path in key_files).lower()
 
@@ -197,3 +197,65 @@ def test_author_created_sources_use_the_standard_year_form() -> None:
                 invalid.append(f"{path.relative_to(REPO_ROOT)}: {source}")
 
     assert not invalid, "Non-standard author-created sources:\n" + "\n".join(invalid)
+
+
+def test_final_tcc_has_no_execution_chronology_chapter() -> None:
+    main = _read(TCC_MAIN)
+    introduction = _read(TCC_CONTENT / "introducao.tex")
+    assert r"\include{conteudo/cronograma}" not in main
+    assert not (TCC_CONTENT / "cronograma.tex").exists()
+    assert "Capítulo 8" not in introduction
+    assert "sete capítulos" in introduction.lower()
+
+
+def test_introduction_structure_is_continuous_prose() -> None:
+    introduction = _read(TCC_CONTENT / "introducao.tex")
+    structure = introduction[introduction.index(r"\section{Estrutura do Trabalho}") :]
+    assert r"\begin{description}" not in structure
+    assert r"\item[Capítulo" not in structure
+
+
+def test_prototype_chapter_uses_continuous_academic_prose() -> None:
+    prototype = _read(TCC_CONTENT / "prototipo.tex")
+    assert r"\begin{itemize}" not in prototype
+    assert r"\begin{enumerate}" not in prototype
+    assert "RandomForest\\allowbreak Classifier" not in prototype
+
+
+def test_chapter_four_figure_captions_precede_images() -> None:
+    chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
+    blocks = re.findall(r"\\begin\{figure\}.*?\\end\{figure\}", chapter, flags=re.DOTALL)
+    assert blocks, "No figures found in the systematic-review chapter"
+    for block in blocks:
+        assert r"\caption{" in block
+        assert r"\includegraphics" in block
+        assert block.index(r"\caption{") < block.index(r"\includegraphics")
+
+
+def test_prisma_appendix_is_current_and_does_not_claim_full_compliance() -> None:
+    appendix = _read(TCC_APPENDIX)
+    assert "Localização no PTC" not in appendix
+    assert "27/27" not in appendix
+    assert "Todos os 27 itens" not in appendix
+    assert "16a" in appendix
+    assert "20d" in appendix
+    assert "24a" in appendix
+    assert "não constitui declaração de conformidade integral" in appendix.lower()
+
+
+def test_portuguese_equivalents_are_preferred_for_core_technical_terms() -> None:
+    foundation = _read(TCC_CONTENT / "fundamentacao.tex")
+    introduction = _read(TCC_CONTENT / "introducao.tex")
+
+    assert "Aprendizado de Máquina e Inteligência Artificial" in foundation
+    assert "Analítica da Aprendizagem e Mineração de Dados Educacionais" in foundation
+    assert r"\subsection{\textbf{\textit{Machine Learning}}" not in foundation
+    assert r"\subsection{\textbf{\textit{Learning Analytics}}" not in foundation
+    assert "aprendizado de máquina" in introduction.lower()
+
+
+def test_retained_foreign_terms_keep_the_existing_emphasis_convention() -> None:
+    foundation = _read(TCC_CONTENT / "fundamentacao.tex")
+    introduction = _read(TCC_CONTENT / "introducao.tex")
+    assert r"\textbf{\textit{machine learning}}" in introduction
+    assert r"\textbf{\textit{scaffolding}}" in foundation
