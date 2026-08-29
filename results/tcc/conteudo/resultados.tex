@@ -1,71 +1,56 @@
 \chapter{RESULTADOS E DISCUSSÃO}
 \label{cap:resultados-discussao}
 
-Os resultados do trabalho foram organizados em quatro entregas complementares: a revisão sistemática da literatura, a avaliação metodológica dos estudos incluídos, a consolidação dos fundamentos pedagógicos e a especificação conceitual do protótipo. Esta seção integra essas entregas e discute como elas responderam ao problema de pesquisa e aos objetivos definidos.
+Os resultados do trabalho foram organizados em quatro entregas complementares: a revisão sistemática da literatura, a avaliação metodológica dos estudos incluídos, a consolidação dos fundamentos pedagógicos e a especificação conceitual do protótipo. Este capítulo integra essas entregas e discute como elas responderam ao problema de pesquisa e aos objetivos definidos, evitando repetir integralmente as descrições já apresentadas nos capítulos anteriores.
 
 \section{Resultados da Revisão Sistemática}
 
-A revisão identificou 9.431 registros em quatro fontes científicas e incluiu 17 estudos após deduplicação, triagem e avaliação de elegibilidade. O conjunto final apresentou predominância de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com uso recorrente de modelos supervisionados, especialmente \textbf{\textit{Random Forest}}, SVM, árvores de decisão e redes neurais.
+A revisão identificou 9.431 registros em quatro fontes científicas e incluiu 17 estudos após deduplicação, triagem e avaliação de elegibilidade. O conjunto final apresentou predominância de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com uso recorrente de modelos supervisionados, especialmente floresta aleatória, SVM, árvores de decisão e redes neurais.
 
 A heterogeneidade entre populações, instrumentos, variáveis e métricas impediu a comparação direta de todos os resultados. Acurácias reportadas em bases específicas foram interpretadas como evidências contextuais dos artigos, e não como garantias de desempenho em outros ambientes educacionais. Essa distinção evitou transferir resultados da literatura para o protótipo especificado sem validação empírica própria.
 
-As lacunas mais recorrentes envolveram explicabilidade limitada, baixa integração com referenciais curriculares, pouca participação docente no processo de decisão, ausência de análise de equidade, compartilhamento insuficiente de dados e código e validação restrita a contextos específicos.
+As lacunas mais recorrentes envolveram explicabilidade limitada, baixa integração com referenciais curriculares, pouca participação docente no processo de decisão, ausência de análise de equidade, compartilhamento insuficiente de dados e código e validação restrita a contextos específicos. Em conjunto, essas lacunas indicam que o avanço técnico de modelos preditivos não elimina a necessidade de critérios pedagógicos, metodológicos e éticos para sua utilização.
 
 \section{Resultados da Avaliação Metodológica}
 
-A aplicação do MMAT 2018 manteve as respostas aos cinco critérios separadas por estudo. Esse formato tornou visíveis as limitações relativas a representatividade, completude dos dados, controle de confundidores, integração de métodos e coerência entre desenho e análise.
+A aplicação do MMAT 2018 manteve as respostas aos cinco critérios separadas por estudo. Esse formato tornou visíveis limitações relativas a representatividade, completude dos dados, controle de confundidores, integração de métodos e coerência entre desenho e análise, sem reduzir essas dimensões a uma nota única.
 
-A avaliação não produziu nota geral, média ou ranking de qualidade. Essa decisão preservou a interpretação de cada critério e impediu que uma pontuação agregada ocultasse fragilidades metodológicas relevantes. Como os julgamentos foram realizados por um único revisor e, em parte, com base em resumos e metadados, seus resultados foram tratados como apreciação estruturada e auditável, não como classificação definitiva dos artigos.
+A avaliação não produziu média, ranking ou categoria geral de qualidade. Essa decisão preservou a interpretação de cada critério e impediu que uma pontuação agregada ocultasse fragilidades metodológicas relevantes. Como os julgamentos foram realizados por um único revisor e, em parte, com base em resumos e metadados, seus resultados foram tratados como apreciação estruturada e auditável, não como classificação definitiva dos artigos.
 
-O fortalecimento da rastreabilidade também constituiu um resultado técnico. Os julgamentos foram registrados em arquivo canônico versionado e passaram a alimentar os artefatos CSV, HTML e LaTeX utilizados no trabalho. A correspondência entre avaliação e estudo considerou título normalizado, ano e primeiro autor, reduzindo o risco de associações incorretas ou ambíguas.
+O fortalecimento da rastreabilidade também constituiu um resultado técnico. Os julgamentos foram registrados em arquivo canônico versionado e passaram a alimentar os artefatos CSV, HTML e LaTeX utilizados no trabalho. Essa organização não aumenta, por si só, a qualidade metodológica dos estudos avaliados, mas reduz inconsistências entre as representações dos resultados e permite revisar os julgamentos de forma controlada.
 
 \section{Resultados da Fundamentação Pedagógica}
 
 A fundamentação permitiu distinguir desempenho observado, proficiência estimada, competência e aprendizagem. Essa separação mostrou que notas, acertos, tentativas e tempos de resposta representam evidências parciais e dependentes do contexto, enquanto competência e aprendizagem exigem interpretação mais ampla e longitudinal.
 
-Os referenciais sobre conhecimento prévio, mediação, resolução de problemas, avaliação formativa e \textit{feedback} reforçaram que a utilidade de uma ferramenta computacional depende da forma como seus resultados são interpretados e incorporados à prática docente. A tecnologia foi posicionada como apoio à decisão, mantendo o professor responsável por considerar fatores pedagógicos, sociais e contextuais que não são observados diretamente pelo modelo.
+Os referenciais sobre conhecimento prévio, mediação, resolução de problemas, avaliação formativa e retorno pedagógico reforçaram que a utilidade de uma ferramenta computacional depende da forma como seus resultados são interpretados e incorporados à prática docente. A tecnologia foi posicionada como apoio à decisão, mantendo o professor responsável por considerar fatores pedagógicos, sociais e contextuais que não são observados diretamente pelo modelo.
 
-Esses resultados fundamentaram requisitos de explicabilidade, revisão humana, associação curricular, proteção de dados e comunicação de incertezas. Assim, a dimensão pedagógica não foi adicionada apenas como justificativa; ela orientou diretamente a especificação técnica.
+Esses fundamentos orientaram requisitos de explicabilidade, revisão humana, associação curricular, proteção de dados e comunicação de incertezas. Assim, a dimensão pedagógica não foi adicionada apenas como justificativa posterior, mas participou da definição dos limites e das funções atribuídas ao protótipo.
 
 \section{Resultados da Especificação do Protótipo}
 
 A integração entre revisão e fundamentação resultou em uma especificação conceitual composta por princípios de projeto, requisitos funcionais e não funcionais, critérios de seleção de fontes de dados, alternativas de modelagem, protocolo de avaliação e arquitetura de referência.
 
-Entre os resultados consolidados destacaram-se:
+O protótipo foi definido como instrumento de apoio à decisão docente, com rastreabilidade entre dados, modelos, parâmetros e resultados. Modelos supervisionados interpretáveis foram mantidos como alternativas iniciais de comparação, e a especificação separou explicitamente avaliação técnica de qualquer alegação de eficácia pedagógica. A explicabilidade e a análise de limitações foram incorporadas ao fluxo de avaliação, enquanto a arquitetura foi organizada em componentes de ingestão, preparação, modelagem, avaliação, explicabilidade e apresentação.
 
-\begin{itemize}
-    \item definição do protótipo como instrumento de apoio, sem substituição da interpretação docente;
-    \item exigência de rastreabilidade entre dados, modelos, parâmetros e resultados;
-    \item seleção de modelos supervisionados interpretáveis como alternativas iniciais de comparação;
-    \item separação entre avaliação técnica e alegações de eficácia pedagógica;
-    \item incorporação de explicabilidade e análise de limitações ao fluxo de avaliação;
-    \item organização da arquitetura em componentes de ingestão, preparação, modelagem, avaliação, explicabilidade e apresentação;
-    \item delimitação do uso de dados sintéticos a testes de fluxo, sem interpretação educacional.
-\end{itemize}
-
-A especificação constituiu um resultado final do trabalho porque transformou as evidências analisadas em decisões documentadas e verificáveis. Ao mesmo tempo, ela não foi apresentada como aplicação funcional nem recebeu métricas próprias de desempenho, preservando a correspondência entre o texto e os artefatos efetivamente produzidos.
+A especificação também delimitou o uso de dados sintéticos a testes de fluxo, sem interpretação educacional. Desse modo, o artefato produzido transforma as evidências analisadas em decisões documentadas e verificáveis, mas não é apresentado como aplicação funcional e não recebe métricas próprias de desempenho.
 
 \section{Atendimento aos Objetivos}
 
-Os objetivos definidos na introdução foram atendidos da seguinte forma:
+O objetivo geral foi alcançado pela combinação entre o mapeamento sistemático das técnicas computacionais e a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados. O OE1 foi atendido pela execução e pelo relato da revisão sistemática; os OE2 e OE3, pela categorização das técnicas e finalidades pedagógicas; e o OE4, pela avaliação metodológica por critérios do MMAT.
 
-\begin{itemize}
-    \item o \textbf{OE1} foi atendido pela execução e pelo relato da revisão sistemática;
-    \item os \textbf{OE2} e \textbf{OE3} foram atendidos pela categorização das técnicas e finalidades pedagógicas dos estudos;
-    \item o \textbf{OE4} foi atendido pela avaliação metodológica por critérios do MMAT;
-    \item o \textbf{OE5} foi atendido pelo mapeamento das lacunas técnicas, pedagógicas, metodológicas e éticas;
-    \item o \textbf{OE6} foi atendido pelo \textit{pipeline} automatizado e pelos artefatos versionados da revisão;
-    \item o \textbf{OE7} foi atendido pela elaboração da especificação técnica e pedagógica do protótipo.
-\end{itemize}
-
-O objetivo geral foi alcançado ao combinar o mapeamento sistemático das técnicas computacionais com a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados.
+O mapeamento das lacunas técnicas, pedagógicas, metodológicas e éticas respondeu ao OE5. O fluxo automatizado e os artefatos versionados da revisão atenderam ao OE6, enquanto a definição dos requisitos, critérios de dados e modelos, protocolo de avaliação e arquitetura de referência respondeu ao OE7. A relação entre esses objetivos mostra que a especificação não constituiu uma etapa independente da revisão, mas uma síntese orientada pelas evidências e limitações encontradas.
 
 \section{Discussão Integrada}
 
-Os resultados demonstraram que a escolha de uma técnica computacional para o ensino de matemática não pode ser sustentada apenas pela frequência de uso ou pela maior acurácia reportada em um artigo. A decisão depende da qualidade e da representatividade dos dados, da finalidade pedagógica, da possibilidade de interpretação e das condições de aplicação.
+A predominância de modelos preditivos na literatura demonstra que classificação de desempenho e estimativa de proficiência constituem problemas computacionais recorrentes no domínio analisado. Entretanto, essa recorrência não deve ser interpretada como evidência de que a predição seja, por si só, a finalidade pedagógica mais adequada. O resultado também pode refletir a maior disponibilidade de bases tabulares, métricas de classificação consolidadas e problemas mais facilmente formalizáveis computacionalmente.
 
-A predominância de modelos preditivos evidenciou maturidade técnica para tarefas de classificação e estimativa, mas também revelou uma tendência de reduzir fenômenos educacionais complexos a indicadores de desempenho. A especificação respondeu a esse risco ao separar explicitamente desempenho, proficiência, competência e aprendizagem e ao exigir participação docente na interpretação das saídas.
+Essa observação é especialmente relevante porque os estudos incluídos utilizaram populações, instrumentos e variáveis diferentes. Um algoritmo com desempenho elevado em determinada base pode perder desempenho ou produzir erros com distribuição distinta em outro contexto. As limitações metodológicas identificadas pelo MMAT reforçam essa cautela, pois problemas de representatividade, descrição dos dados e controle de variáveis de confusão reduzem a segurança de generalizações para outras populações escolares.
 
-A principal contribuição do trabalho esteve, portanto, na articulação entre revisão sistemática, avaliação metodológica, fundamentação pedagógica e engenharia de requisitos. Essa articulação produziu uma base mais consistente para soluções educacionais do que a seleção isolada de um algoritmo ou a apresentação de resultados sem contexto.
+A fundamentação pedagógica altera, portanto, a interpretação dos resultados computacionais. Se desempenho observado, proficiência estimada, competência e aprendizagem não são equivalentes, uma saída algorítmica deve ser entendida como uma evidência entre outras. Essa conclusão justifica a presença de revisão humana, explicabilidade e associação curricular na especificação e impede que uma estimativa estatística seja convertida automaticamente em diagnóstico ou recomendação pedagógica.
+
+As lacunas de integração curricular e participação docente também ajudam a explicar por que a especificação privilegia a apresentação de informações interpretáveis em vez de apenas maximizar métricas preditivas. Para uso educacional, um resultado tecnicamente superior pode ter utilidade limitada se o professor não compreender quais evidências contribuíram para a estimativa, quais são suas limitações e como ela se relaciona aos objetivos da atividade. Assim, a qualidade do apoio computacional depende simultaneamente de desempenho técnico, transparência e possibilidade de interpretação contextualizada.
+
+A contribuição do trabalho situa-se nessa articulação entre revisão sistemática, avaliação metodológica, fundamentação pedagógica e engenharia de requisitos. Em vez de selecionar um algoritmo apenas pela frequência de uso ou pelo maior resultado reportado, a especificação estabelece condições para uma etapa futura de implementação e avaliação. Essa escolha restringe as conclusões ao escopo documental e conceitual executado, mas fornece uma base explícita para que experimentos posteriores possam ser avaliados sem confundir desempenho computacional com eficácia pedagógica.
 
 %--------- FIM RESULTADOS E DISCUSSÃO ------------
