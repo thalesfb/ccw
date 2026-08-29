@@ -9,12 +9,7 @@ A Base Nacional Comum Curricular (BNCC) associa o letramento matemático às cap
 
 Para evitar que medidas distintas fossem tratadas como equivalentes, este trabalho adotou definições operacionais. A avaliação educacional parte de observações produzidas por tarefas e respostas para realizar inferências sobre conhecimentos e habilidades; essas inferências dependem do modelo de cognição, dos instrumentos e dos procedimentos de mensuração empregados \cite{NRC2001}. Em avaliações como o PISA, a proficiência é estimada em uma escala e interpretada por níveis que descrevem o que os estudantes tipicamente conseguem realizar \cite{OECDPISA2022Framework}.
 
-\begin{description}
-    \item[Desempenho observado:] registro diretamente obtido em uma tarefa, como acerto, nota, número de tentativas, estratégia apresentada ou tempo de resolução \cite{NRC2001};
-    \item[Proficiência estimada:] inferência sobre a posição do estudante em uma escala de conhecimentos e habilidades, calculada a partir de um conjunto de evidências e de um modelo de mensuração \cite{NRC2001, OECDPISA2022Framework};
-    \item[Competência:] capacidade de mobilizar conhecimentos, procedimentos, estratégias e atitudes para enfrentar situações e resolver problemas \cite{BNCC2018};
-    \item[Aprendizagem:] processo de transformação construído ao longo do tempo, evidenciado por mudanças na compreensão, na autonomia, nas estratégias e na capacidade de aplicar conhecimentos em novos contextos \cite{Piaget1972EN, Vygotsky1978, Ausubel1968}.
-\end{description}
+\textbf{Desempenho observado} corresponde ao registro diretamente obtido em uma tarefa, como acerto, nota, número de tentativas, estratégia apresentada ou tempo de resolução \cite{NRC2001}. \textbf{Proficiência estimada} corresponde a uma inferência sobre a posição do estudante em uma escala de conhecimentos e habilidades, calculada a partir de um conjunto de evidências e de um modelo de mensuração \cite{NRC2001, OECDPISA2022Framework}. \textbf{Competência} refere-se à capacidade de mobilizar conhecimentos, procedimentos, estratégias e atitudes para enfrentar situações e resolver problemas \cite{BNCC2018}. Por sua vez, \textbf{aprendizagem} é entendida como um processo de transformação construído ao longo do tempo, evidenciado por mudanças na compreensão, na autonomia, nas estratégias e na capacidade de aplicar conhecimentos em novos contextos \cite{Piaget1972EN, Vygotsky1978, Ausubel1968}.
 
 Essas definições são relacionadas, mas não intercambiáveis. Um modelo computacional pode reconhecer padrões nos dados de desempenho e produzir estimativas de proficiência. Entretanto, não observa diretamente todos os processos cognitivos, sociais e afetivos envolvidos na aprendizagem. Suas saídas devem ser interpretadas como apoio à análise docente, e não como diagnóstico definitivo do estudante.
 
@@ -24,53 +19,37 @@ Essas definições são relacionadas, mas não intercambiáveis. Um modelo compu
 
 A epistemologia genética de Piaget descreve o conhecimento como uma construção realizada pelo sujeito em interação com o meio \cite{Piaget1972EN}. Situações que desafiam explicações anteriores podem provocar reorganizações cognitivas. No ensino de matemática, essa perspectiva valoriza a resolução de problemas, a comparação de estratégias e a compreensão dos conceitos, em contraste com a repetição mecânica de algoritmos.
 
-\subsection{Mediação, Zona de Desenvolvimento Proximal e \textit{Scaffolding}}
+\subsection{Mediação, Zona de Desenvolvimento Proximal e Andaimento Pedagógico}
 
-Vygotsky definiu a Zona de Desenvolvimento Proximal como a distância entre aquilo que o estudante realiza de forma autônoma e aquilo que consegue realizar com mediação \cite{Vygotsky1978}. O conceito de \textbf{\textit{scaffolding}}, ou andaimento, foi formulado posteriormente por Wood, Bruner e Ross para descrever um suporte temporário oferecido durante a resolução de problemas e retirado gradualmente conforme aumenta a autonomia do aprendiz \cite{WoodBrunerRoss1976}. Sistemas computacionais podem apoiar esse processo de mediação, mas a adequação pedagógica das intervenções depende do contexto e da interpretação do professor.
+Vygotsky definiu a Zona de Desenvolvimento Proximal como a distância entre aquilo que o estudante realiza de forma autônoma e aquilo que consegue realizar com mediação \cite{Vygotsky1978}. O conceito de andaimento pedagógico (\textbf{\textit{scaffolding}}) foi formulado posteriormente por Wood, Bruner e Ross para descrever um suporte temporário oferecido durante a resolução de problemas e retirado gradualmente conforme aumenta a autonomia do aprendiz \cite{WoodBrunerRoss1976}. Sistemas computacionais podem apoiar esse processo de mediação, mas a adequação pedagógica das intervenções depende do contexto e da interpretação do professor.
 
 \subsection{Conhecimento Prévio e Aprendizagem Significativa}
 
 Ausubel destacou que novas informações são aprendidas de forma significativa quando se relacionam a conhecimentos relevantes já existentes na estrutura cognitiva do estudante \cite{Ausubel1968}. Para a matemática, isso implica identificar concepções anteriores, dificuldades e relações entre conteúdos. Um sistema de apoio pode organizar evidências sobre esses aspectos, mas não deve confundir ausência de acerto com ausência de compreensão sem considerar a natureza da tarefa e a estratégia utilizada.
 
-\subsection{Avaliação Formativa e \textit{Feedback}}
+\subsection{Avaliação Formativa e Retorno Pedagógico}
 
-A avaliação formativa utiliza evidências produzidas durante o processo de aprendizagem para orientar decisões sobre as próximas ações de ensino e estudo \cite{BlackWiliam1998}. A efetividade do \textit{feedback} depende de seu foco, de sua clareza e da forma como ajuda o estudante a compreender os objetivos, avaliar seu estado atual e identificar ações para avançar \cite{HattieTimperley2007}. Em contexto de aprendizagem matemática, Mertasari et al. observaram diferenças no desenvolvimento de habilidades metacognitivas entre modalidades de avaliação formativa, oferecendo uma evidência empírica específica para esse domínio \cite{Performance2023_014}.
+A avaliação formativa utiliza evidências produzidas durante o processo de aprendizagem para orientar decisões sobre as próximas ações de ensino e estudo \cite{BlackWiliam1998}. A efetividade do retorno pedagógico depende de seu foco, de sua clareza e da forma como ajuda o estudante a compreender os objetivos, avaliar seu estado atual e identificar ações para avançar \cite{HattieTimperley2007}. Em contexto de aprendizagem matemática, Mertasari et al. observaram diferenças no desenvolvimento de habilidades metacognitivas entre modalidades de avaliação formativa, oferecendo uma evidência empírica específica para esse domínio \cite{Performance2023_014}.
 
-Uma previsão algorítmica, por si só, não constitui \textit{feedback} formativo. Para cumprir essa função, a saída precisa ser traduzida em informação compreensível, contextualizada e pedagogicamente acionável, preservando a possibilidade de interpretação e intervenção do professor.
+Uma previsão algorítmica, por si só, não constitui retorno formativo. Para cumprir essa função, a saída precisa ser traduzida em informação compreensível, contextualizada e pedagogicamente acionável, preservando a possibilidade de interpretação e intervenção do professor.
 
 \section{Tecnologia como Apoio à Decisão Pedagógica}
 
 As tecnologias computacionais podem processar grandes volumes de registros, identificar regularidades e apresentar visualizações que auxiliem o acompanhamento de turmas. Seu valor educacional não decorre apenas da acurácia de um modelo, mas da qualidade dos dados, da interpretação das saídas e da forma como a informação é incorporada à prática docente.
 
-A adoção dessas tecnologias deve preservar alguns princípios:
-
-\begin{itemize}
-    \item o professor permanece responsável por interpretar evidências e decidir intervenções;
-    \item previsões devem apresentar incertezas e limitações;
-    \item dados socioeconômicos ou comportamentais não devem ser usados para naturalizar desigualdades;
-    \item estudantes não devem ser reduzidos a categorias fixas;
-    \item recomendações precisam estar alinhadas ao currículo e aos objetivos da atividade;
-    \item privacidade, consentimento e finalidade de uso dos dados devem ser considerados desde o planejamento.
-\end{itemize}
+A adoção dessas tecnologias requer que o professor permaneça responsável por interpretar as evidências e decidir intervenções. As previsões precisam explicitar incertezas e limitações, e dados socioeconômicos ou comportamentais não devem ser empregados de modo a naturalizar desigualdades ou reduzir estudantes a categorias fixas. As recomendações também precisam permanecer alinhadas ao currículo e aos objetivos da atividade, enquanto privacidade, consentimento e finalidade de uso dos dados devem ser considerados desde o planejamento.
 
 \section{Técnicas Computacionais na Educação}
 
-\subsection{\textbf{\textit{Machine Learning}} e Inteligência Artificial}
+\subsection{Aprendizado de Máquina e Inteligência Artificial}
 
-O aprendizado de máquina, ou \textbf{\textit{machine learning}} (ML), é uma área da Inteligência Artificial que desenvolve modelos capazes de identificar padrões a partir de dados. Em contextos educacionais, os estudos analisados utilizaram esses modelos para:
+O aprendizado de máquina é uma área da Inteligência Artificial dedicada ao desenvolvimento de modelos capazes de identificar padrões a partir de dados. Em contextos educacionais, os estudos analisados empregaram esses modelos para estimar desempenho ou níveis de proficiência \cite{Multimodels2020_002, Machine2022_010, Math2021_001}, reconhecer padrões de dificuldade, identificar variáveis associadas aos resultados e apoiar recomendações de conteúdos e atividades \cite{Design2025_004}.
 
-\begin{itemize}
-    \item estimar desempenho ou níveis de proficiência \cite{Multimodels2020_002, Machine2022_010, Math2021_001};
-    \item classificar padrões de dificuldade;
-    \item identificar variáveis associadas aos resultados;
-    \item apoiar recomendações de conteúdos e atividades \cite{Design2025_004}.
-\end{itemize}
+Árvores de decisão, florestas aleatórias, máquinas de vetores de suporte (SVM), redes neurais e outros modelos possuem pressupostos e limitações diferentes. A escolha de um algoritmo deve ser comparada a referências simples, considerar o equilíbrio entre as classes e usar métricas adequadas ao problema, em vez de se apoiar apenas na maior acurácia observada.
 
-Árvores de decisão, \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), redes neurais e outros modelos possuem pressupostos e limitações diferentes. A escolha de um algoritmo deve ser comparada a referências simples, considerar o equilíbrio entre as classes e usar métricas adequadas ao problema, em vez de se apoiar apenas na maior acurácia observada.
+\subsection{Analítica da Aprendizagem e Mineração de Dados Educacionais}
 
-\subsection{\textbf{\textit{Learning Analytics}} e \textbf{\textit{Educational Data Mining}}}
-
-A \textbf{\textit{Learning Analytics}} (LA), ou analítica da aprendizagem, envolve medir, coletar, analisar e apresentar dados sobre estudantes e seus contextos para compreender e apoiar a aprendizagem. A \textbf{\textit{Educational Data Mining}} (EDM), ou mineração de dados educacionais, concentra-se no desenvolvimento e na aplicação de métodos de análise a dados educacionais \cite{Romero2020}.
+A analítica da aprendizagem (LA) envolve medir, coletar, analisar e apresentar dados sobre estudantes e seus contextos para compreender e apoiar a aprendizagem. A mineração de dados educacionais (EDM) concentra-se no desenvolvimento e na aplicação de métodos de análise a dados educacionais \cite{Romero2020}.
 
 Essas áreas podem produzir painéis, alertas e modelos de conhecimento, mas a existência de uma correlação não prova uma relação causal. Um padrão de acesso ou tempo de resposta pode refletir diferentes condições, como conhecimento prévio, familiaridade com a interface, acessibilidade ou disponibilidade de conexão.
 
@@ -82,34 +61,14 @@ A adaptação é pedagogicamente relevante quando os critérios de decisão são
 
 \section{Avaliação Automatizada e Métricas}
 
-Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. As métricas mais comuns incluem acurácia, precisão, revocação (\textit{recall}), medida F1 e área sob a curva ROC \cite{Romero2020}. Essas métricas avaliam o comportamento do modelo; não medem diretamente a qualidade pedagógica da intervenção.
+Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. Entre as métricas mais comuns estão acurácia, precisão, revocação, medida F1 e área sob a curva ROC \cite{Romero2020}. Essas métricas avaliam o comportamento do modelo e não medem diretamente a qualidade pedagógica da intervenção.
 
-No domínio educacional, também podem ser observados:
-
-\begin{itemize}
-    \item acertos e erros por habilidade;
-    \item tempo e número de tentativas;
-    \item progressão entre avaliações;
-    \item participação e conclusão de atividades;
-    \item explicações ou estratégias registradas pelo estudante.
-\end{itemize}
-
-A interpretação deve considerar o instrumento, a população e a finalidade. Um modelo com bom desempenho médio pode apresentar erros sistemáticos para determinados grupos. Por isso, a avaliação técnica deve incluir análise por classe, validação em dados não utilizados no treinamento e investigação de possíveis vieses.
+No domínio educacional, a análise também pode considerar acertos e erros por habilidade, tempo e número de tentativas, progressão entre avaliações, participação e conclusão de atividades, além de explicações ou estratégias registradas pelo estudante. A interpretação desses indicadores depende do instrumento, da população e da finalidade. Um modelo com bom desempenho médio pode apresentar erros sistemáticos para determinados grupos; por isso, a avaliação técnica deve incluir análise por classe, validação em dados não utilizados no treinamento e investigação de possíveis vieses.
 
 \section{Requisitos Derivados da Fundamentação}
 
-A fundamentação teórica sustentou a definição dos seguintes requisitos para a especificação do protótipo:
+A fundamentação teórica orientou diretamente a especificação do protótipo. A distinção entre desempenho e aprendizagem levou ao requisito de apresentar indicadores como evidências parciais e contextualizadas; a relação com o currículo sustentou a associação dos resultados a descritores e objetivos educacionais; e a centralidade da mediação docente fundamentou os requisitos de explicabilidade, comunicação de incertezas e revisão humana. Da mesma forma, as discussões sobre dados educacionais justificaram requisitos de privacidade, rastreabilidade e avaliação técnica antes de qualquer alegação de eficácia pedagógica.
 
-\begin{enumerate}
-    \item apresentar evidências de desempenho sem tratá-las como medida completa de aprendizagem;
-    \item relacionar indicadores aos descritores e objetivos curriculares;
-    \item oferecer explicações compreensíveis ao professor;
-    \item registrar incertezas e limitações do modelo;
-    \item permitir revisão humana das recomendações;
-    \item proteger os dados educacionais;
-    \item exigir avaliação técnica antes de qualquer afirmação de eficácia pedagógica.
-\end{enumerate}
-
-Esses requisitos foram incorporados à especificação apresentada no Capítulo~\ref{cap:prototipo}. Dessa forma, a fundamentação não permaneceu apenas como discussão conceitual, mas orientou diretamente as decisões técnicas e pedagógicas consolidadas pelo trabalho.
+Essas relações são consolidadas no Capítulo~\ref{cap:prototipo}, no qual os fundamentos conceituais são convertidos em decisões de projeto sem duplicar a discussão teórica apresentada neste capítulo.
 
 %--------- FIM FUNDAMENTAÇÃO TEÓRICA ------------
