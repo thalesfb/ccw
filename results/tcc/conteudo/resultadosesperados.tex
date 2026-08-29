@@ -9,9 +9,9 @@ A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
 \caption{Fluxo de seleção da revisão sistemática.}
 \label{fig:prisma-flow}
+\includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
 \fonte{Elaborado pelo autor (2025).}
 \end{figure}
 
@@ -19,9 +19,9 @@ A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de regist
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
 \caption{Funil de seleção dos estudos.}
 \label{fig:selection-funnel}
+\includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
 \fonte{Elaborado pelo autor (2025).}
 \end{figure}
 
@@ -29,7 +29,7 @@ A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de regist
 
 A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A taxa de duplicatas evidencia a sobreposição entre as fontes e justifica a combinação de DOI e similaridade de títulos. A pequena proporção de estudos incluídos decorreu do escopo específico e da aplicação do limiar de relevância temática.
 
-A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um acerto ocorreu quando uma consulta foi atendida com uma resposta previamente armazenada, sem nova requisição à API. Como essa proporção dependeu do histórico de execução, sua interpretação permaneceu vinculada aos contadores registrados em cada execução do sistema.
+A taxa de acertos do cache não foi apresentada como métrica fixa. Um acerto ocorreu quando uma consulta foi atendida com uma resposta previamente armazenada, sem nova requisição à API. Como essa proporção dependeu do histórico de execução, sua interpretação permaneceu vinculada aos contadores registrados em cada execução do sistema.
 
 \begin{table}[H]
 \centering
@@ -57,16 +57,16 @@ A distribuição por fonte é apresentada na Figura~\ref{fig:database-coverage}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{images/database_coverage.png}
 \caption{Registros identificados por fonte científica.}
 \label{fig:database-coverage}
+\includegraphics[width=0.85\textwidth]{images/database_coverage.png}
 \fonte{Elaborado pelo autor (2025).}
 \end{figure}
 
 \clearpage
 \section{Síntese dos Estudos Incluídos}
 
-Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos.
+Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de floresta aleatória (RF), SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos.
 
 Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, características contextuais e registros de interação para estimar categorias ou escores. Outros estudos investigaram personalização, avaliação formativa, recursos pedagógicos ou modelos computacionais de aprendizagem. Essa diversidade ampliou o panorama da revisão, mas também impediu tratar todos os resultados como se medissem o mesmo fenômeno educacional.
 
@@ -108,7 +108,7 @@ Pejic et al. (2021) & Proficiência matemática no PISA & ML multiclasse & Predi
 Salas-Rueda (2021) & Facebook no ensino de matemática financeira & Regressão; árvore; rede neural & Apoio ao ensino & Testes estatísticos & Associações entre recursos e resultados \\
 Sokkhey et al. (2020) & Desempenho no ensino médio & ML; RF & Predição & Desempenho & RF com melhor resultado entre os modelos comparados \\
 Ünal (2020) & Predição de desempenho & DT; RF; NB & Predição & Experimento computacional & Efetividade reportada em duas bases \\
-Uskov et al. (2019) & Analítica preditiva em STEM & Oito algoritmos de ML & Predição & Comparação de modelos & Recomendações baseadas no \textit{benchmark} \\
+Uskov et al. (2019) & Analítica preditiva em STEM & Oito algoritmos de ML & Predição & Comparação de modelos & Recomendações baseadas na comparação de referência \\
 MacLellan (2017) & Modelos computacionais de aprendizagem & Árvores; TRESTLE & Tutoria e autoria & Testes estatísticos & Melhor ajuste de modelos em múltiplos domínios \\
 Depren et al. (2017) & Classificação no TIMSS & LR; DT; BN; RN & Predição & Desempenho & Regressão logística superior no estudo \\
 \end{longtable}
@@ -134,18 +134,9 @@ As limitações recorrentes envolveram descrição incompleta dos dados, control
 
 \section{Tendências e Lacunas}
 
-A análise dos estudos indicou concentração em modelos preditivos supervisionados. Abordagens de explicabilidade, integração curricular, avaliação longitudinal e participação docente apareceram com menor frequência.
+A análise dos estudos indicou concentração em modelos preditivos supervisionados. Abordagens de explicabilidade, integração curricular, avaliação longitudinal e participação docente apareceram com menor frequência. Também foram recorrentes a validação limitada em contextos escolares diversos, a pouca discussão sobre a relação entre indicadores computacionais e aprendizagem matemática e a escassez de análises de equidade e possíveis vieses.
 
-As principais lacunas identificadas foram:
-
-\begin{itemize}
-    \item validação limitada em contextos escolares diversos;
-    \item pouca discussão sobre como indicadores computacionais se relacionam à aprendizagem matemática;
-    \item escassez de análises de equidade e possíveis vieses;
-    \item baixa disponibilidade de dados e códigos para reprodução;
-    \item pouca integração entre resultados dos modelos e decisões pedagógicas;
-    \item ausência de alinhamento explícito com referenciais curriculares brasileiros em grande parte dos estudos.
-\end{itemize}
+Do ponto de vista da reprodutibilidade e da aplicação pedagógica, observou-se baixa disponibilidade de dados e códigos, pouca integração entre resultados dos modelos e decisões docentes e ausência de alinhamento explícito com referenciais curriculares brasileiros em grande parte dos estudos. Essas lacunas orientaram requisitos de rastreabilidade, explicabilidade, participação docente e associação curricular na especificação do protótipo.
 
 \section{Limitações da Revisão}
 
