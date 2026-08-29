@@ -24,7 +24,7 @@ A revisão metodológica consolidada foi realizada pela issue #5 e pelo PR #6. A
 - O Capítulo 6 prioriza interpretação e discussão integrada dos achados, reduzindo a repetição descritiva dos capítulos anteriores.
 - A conclusão apresenta contribuições e limitações em prosa e delimita o alcance dos resultados sem alegações defensivas de eficácia não demonstrada.
 - O apêndice PRISMA 2020 utiliza a estrutura atual do checklist, incluindo seus subitens, e registra explicitamente itens atendidos, parciais, não realizados e não aplicáveis. Ele não declara conformidade integral.
-- Termos técnicos em português são priorizados quando existe equivalente consagrado e natural no contexto científico, como `aprendizado de máquina`, `analítica da aprendizagem`, `mineração de dados educacionais`, `floresta aleatória`, `retorno pedagógico` e `fluxo automatizado`.
+- Termos técnicos em português são priorizados quando existe equivalente consagrado e natural no contexto científico, como `aprendizado de máquina`, `analítica da aprendizagem`, `mineração de dados educacionais`, `floresta aleatória`, `devolutiva pedagógica` e `fluxo automatizado`.
 - Quando um termo estrangeiro é mantido por utilidade técnica, identificação terminológica ou ausência de tradução adequada, preserva-se a convenção de destaque adotada no documento e pelo contexto institucional, sem promover uma substituição visual automática.
 - O título atual permanece no fonte até discussão com a orientação. A revisão registra propostas mais aderentes ao escopo final, mas não altera o título silenciosamente.
 
