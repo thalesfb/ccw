@@ -74,7 +74,7 @@ Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, ca
 
 Acurácia elevada em uma base específica não demonstra automaticamente que a técnica produzirá o mesmo resultado em outra escola ou população. Da mesma forma, predição de desempenho não equivale a explicar como o estudante aprende matemática. Essas restrições foram incorporadas aos requisitos e aos critérios de avaliação da especificação apresentada no Capítulo~\ref{cap:prototipo}.
 
-Na Tabela~\ref{tab:sintese-17-estudos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT.
+Na Tabela~\ref{tab:sintese-17-estudos}, a coluna de resultado preserva o sentido do achado reportado por cada estudo, sem formar um ranking entre trabalhos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
@@ -120,7 +120,7 @@ Depren et al. (2017) & Classificação no TIMSS & LR; DT; BN; RN & Predição & 
 \section{Avaliação Metodológica com o MMAT}
 \label{sec:qualidade-estudos}
 
-O MMAT 2018 foi aplicado conforme o desenho metodológico de cada estudo \cite{MMAT2018}. As respostas S (``Sim''), N (``Não'') e ND (``Não é possível determinar'') foram mantidas por critério, sem média, ranking ou categoria geral. A avaliação foi realizada por um único revisor com base nos resumos, metadados e na descrição metodológica disponível; por isso, os julgamentos constituem uma apreciação estruturada e passível de revisão, não uma classificação definitiva dos artigos.
+O MMAT 2018 foi aplicado conforme o desenho metodológico de cada estudo \cite{MMAT2018}. As respostas S (``Sim''), N (``Não'') e ND (``Não é possível determinar'') foram mantidas por critério, sem média, ranking ou categoria geral. A avaliação foi realizada por um único revisor com base nos resumos, metadados e na descrição metodológica disponível; por isso, os julgamentos constituem uma apreciação estruturada e passível de revisão, não uma classificação definitiva dos estudos.
 
 A Tabela~\ref{tab:mmat-avaliacao} foi gerada automaticamente a partir do arquivo versionado \texttt{research/data/\allowbreak{}mmat\_assessments.csv}. Dessa forma, os critérios apresentados no TCC, no CSV exportado e no relatório HTML possuem uma fonte única e verificável.
 
@@ -142,11 +142,13 @@ Do ponto de vista da reprodutibilidade e da aplicação pedagógica, observou-se
 
 \section{Limitações da Revisão}
 
-A revisão foi realizada por um único pesquisador, com suporte automatizado para deduplicação, triagem e organização dos registros. Não houve dupla revisão independente. A elegibilidade de grande parte dos registros foi avaliada a partir de títulos, resumos e metadados, pois nem todos os textos completos estavam disponíveis.
+A revisão foi realizada por um único pesquisador, com suporte automatizado para deduplicação, triagem e organização dos registros. Não houve dupla revisão independente. A seleção de grande parte dos registros baseou-se em títulos, resumos e metadados; o \textbf{texto completo} não estava disponível nem foi exigido para todos os candidatos. Essa condição reduz a profundidade com que alguns critérios puderam ser avaliados e aumenta a dependência da qualidade dos metadados recuperados pelas fontes.
 
-O protocolo não foi registrado prospectivamente. Foram adotados princípios de planejamento compatíveis com o PRISMA-P, mas não se afirmou conformidade integral. O PRISMA 2020 foi utilizado para orientar o relato do processo.
+A estratégia de busca foi formulada em português e inglês, mas \textbf{idioma não foi critério obrigatório} na lista de condições exigidas pelo seletor automatizado. Da mesma forma, o pipeline não aplicou filtro obrigatório por \textbf{tipo documental} ou situação de revisão por pares. A auditoria do conjunto final identificou artigos, trabalhos em eventos, uma dissertação de doutorado e um capítulo de livro. Essa heterogeneidade documental deve ser considerada na interpretação da força e da comparabilidade das evidências.
 
-As fontes consultadas possuem cobertura predominantemente anglófona, e a busca foi limitada a português e inglês. A heterogeneidade dos desenhos, populações e métricas impediu uma síntese quantitativa conjunta. Além disso, a avaliação MMAT por revisor único está sujeita a divergências interpretativas.
+O protocolo não foi registrado prospectivamente. Foram adotados princípios de planejamento compatíveis com o PRISMA-P, mas não se afirmou conformidade integral. O PRISMA 2020 foi utilizado para orientar o relato do processo. A reconstrução posterior do protocolo foi realizada a partir de código, histórico Git e exports preservados; ela permite corrigir divergências documentais, mas não substitui um registro prospectivo.
+
+As fontes consultadas possuem cobertura predominantemente anglófona. A heterogeneidade dos desenhos, populações e métricas impediu uma síntese quantitativa conjunta. Além disso, a avaliação MMAT por revisor único está sujeita a divergências interpretativas.
 
 \section{Contribuições para a Especificação do Protótipo}
 
