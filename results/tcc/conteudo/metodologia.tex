@@ -21,7 +21,9 @@ O uso de múltiplas fontes ampliou a cobertura da busca e reduziu a dependência
 
 A estratégia de busca combinou três camadas de termos: domínio matemático, técnica computacional e contexto educacional. O operador booleano \texttt{AND} foi utilizado para exigir a presença conjunta dessas dimensões. Na camada referente ao domínio matemático foram utilizados \textit{mathematics} e \textit{math}, em inglês, e matemática, em português. A camada de técnicas computacionais reuniu termos relacionados a adaptação, personalização, tutoria, analítica, mineração, aprendizado de máquina, inteligência artificial, avaliação, modelagem do estudante e predição, com equivalentes em inglês e português. A terceira camada representou o contexto educacional por meio de termos como \textit{education} e \textit{learning}, em inglês, e educação e ensino, em português.
 
-Foram executadas 72 consultas: 48 em inglês e 24 em português. Em cada consulta, um termo do domínio matemático foi combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Em notação simplificada, a estrutura foi: \textit{termo matemático} \texttt{AND} \textit{termo computacional} \texttt{AND} \textit{termo educacional}. Entre os exemplos estão \texttt{"mathematics" AND "machine learning" AND "education"}, \texttt{"math" AND "intelligent tutor" AND "learning"} e \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}ao"}.
+O gerador canônico versionado define 72 consultas, sendo 48 em inglês e 24 em português. Em cada consulta, um termo do domínio matemático é combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Em notação simplificada, a estrutura é: \textit{termo matemático} \texttt{AND} \textit{termo computacional} \texttt{AND} \textit{termo educacional}. Entre os exemplos estão \texttt{"mathematics" AND "machine learning" AND "education"}, \texttt{"math" AND "intelligent tutor" AND "learning"} e \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}ao"}.
+
+A reconstrução dos artefatos versionados confirma essa estratégia de 72 consultas no código anterior aos relatórios finais da revisão. Entretanto, não foi preservado um log histórico completo, por consulta, que permita auditar retrospectivamente o número exato de requisições HTTP efetivamente disparadas durante a coleta. Assim, o número 72 descreve a estratégia canônica reproduzível registrada no repositório, e não uma contagem retrospectiva de chamadas de rede. Essa distinção evita produzir evidência operacional que não foi preservada na execução original.
 
 \section{Critérios de Seleção}
 
@@ -37,13 +39,13 @@ Os critérios de inclusão e exclusão foram estruturados com apoio do modelo PI
 
 \subsection{Recorte Temporal}
 
-O período de 2016 a 2025 foi escolhido para representar dez anos de produção científica recente sobre técnicas computacionais aplicadas à educação. O recorte concentrou a análise em abordagens contemporâneas e compatíveis com a especificação desenvolvida no trabalho.
+Os artefatos preservados da execução registram o período de 2015 a 2025. Em particular, o relatório versionado gerado em 25 de novembro de 2025 contém explicitamente a configuração \texttt{year\_range = 2015-2025}, e o relatório consolidado preserva registros publicados em 2015. O recorte temporal é, portanto, relatado conforme a execução documentada, e não como uma reconstrução posterior baseada apenas na redação do TCC.
 
 \subsection{Critérios de Inclusão}
 
 \begin{enumerate}
     \item artigos completos revisados por pares;
-    \item publicações entre 2016 e 2025;
+    \item publicações entre 2015 e 2025;
     \item foco explícito em técnicas computacionais aplicadas ao ensino de matemática;
     \item apresentação de dados empíricos, metodologia ou evidência de desenvolvimento e avaliação de sistemas;
     \item texto em inglês ou português.
@@ -65,7 +67,7 @@ O processo de seleção foi documentado segundo as etapas de identificação, tr
 
 \subsection{Identificação}
 
-As 72 consultas executadas nas quatro APIs resultaram em 9.431 registros. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
+O fluxo de coleta associado à estratégia canônica de busca e às quatro APIs resultou em 9.431 registros no artefato consolidado. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo. O relatório preservado registra contribuições das quatro fontes: Crossref, OpenAlex, Semantic Scholar e CORE.
 
 \subsection{Deduplicação e Triagem}
 
@@ -111,7 +113,7 @@ python -m research.src.cli stats
 python -m research.src.cli export
 \end{verbatim}
 
-A disponibilização do código e dos artefatos favorece a auditoria do processo. Entretanto, a reprodução exata dos resultados também depende da disponibilidade das APIs e das alterações realizadas por cada fonte ao longo do tempo.
+Os relatórios e exports versionados preservam os números fixos utilizados neste trabalho. O banco SQLite da execução original, embora tenha sido utilizado pelo fluxo, não está versionado na branch atual; por isso, a auditoria histórica desta versão apoia-se nos exports preservados e no manifesto \texttt{research/protocol\_execution\_2025.json}. A disponibilização do código permite reexecutar o procedimento, mas a reprodução exata das respostas históricas também depende do estado das APIs externas, que pode mudar com o tempo.
 
 \section{Avaliação da Qualidade Metodológica}
 
