@@ -15,6 +15,7 @@ EXPORTS_README = RESEARCH_ROOT / "exports" / "README.md"
 INTRO_PATH = REPO_ROOT / "results" / "tcc" / "conteudo" / "introducao.tex"
 METHOD_PATH = REPO_ROOT / "results" / "tcc" / "conteudo" / "metodologia.tex"
 REVIEW_PATH = REPO_ROOT / "results" / "tcc" / "conteudo" / "resultadosesperados.tex"
+APPENDIX_PATH = REPO_ROOT / "results" / "tcc" / "postextuais" / "apendice.tex"
 
 
 def _read(path: Path) -> str:
@@ -115,3 +116,17 @@ def test_methodology_discloses_document_type_and_language_operationalization() -
     assert "não foi um critério obrigatório" in method.lower()
     assert "texto completo" in method.lower()
     assert "não foi exigida" in method.lower()
+
+
+def test_review_limitations_and_prisma_reflect_operational_selection_limits() -> None:
+    review = _read(REVIEW_PATH).lower()
+    appendix = _read(APPENDIX_PATH).lower()
+
+    assert "busca foi limitada a português e inglês" not in review
+    assert "idioma não foi critério obrigatório" in review
+    assert "tipo documental" in review
+    assert "texto completo" in review
+
+    assert "operacionalização" in appendix
+    assert "tipo documental" in appendix
+    assert "texto completo" in appendix
