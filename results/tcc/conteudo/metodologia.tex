@@ -27,39 +27,31 @@ A reconstrução dos artefatos versionados confirma essa estratégia de 72 consu
 
 \section{Critérios de Seleção}
 
-Os critérios de inclusão e exclusão foram estruturados com apoio do modelo PICOS:
+Os elementos do modelo PICOS foram utilizados para delimitar o problema e orientar a interpretação do corpus:
 
 \begin{itemize}
     \item \textbf{P (\textit{Population})}: estudantes de matemática em qualquer nível educacional;
     \item \textbf{I (\textit{Intervention})}: aplicação de técnicas computacionais, como aprendizado de máquina, inteligência artificial, analítica da aprendizagem e sistemas tutores inteligentes;
     \item \textbf{C (\textit{Comparison})}: abordagens pedagógicas alternativas ou tradicionais, quando disponíveis;
     \item \textbf{O (\textit{Outcomes})}: desempenho acadêmico, diagnóstico de competências, avaliação ou personalização do ensino;
-    \item \textbf{S (\textit{Study Design})}: estudos empíricos com descrição metodológica e evidências aplicadas.
+    \item \textbf{S (\textit{Study Design})}: estudos com descrição metodológica e evidências pertinentes ao problema investigado.
 \end{itemize}
+
+O PICOS expressa a delimitação conceitual da revisão, mas não deve ser confundido com uma lista de predicados integralmente aplicada pelo código. Para preservar a rastreabilidade, a operacionalização descrita a seguir foi reconstruída a partir da versão do seletor já presente no repositório quando o relatório de 9.431 registros e 17 estudos foi produzido.
 
 \subsection{Recorte Temporal}
 
 Os artefatos preservados da execução registram o período de 2015 a 2025. Em particular, o relatório versionado gerado em 25 de novembro de 2025 contém explicitamente a configuração \texttt{year\_range = 2015-2025}, e o relatório consolidado preserva registros publicados em 2015. O recorte temporal é, portanto, relatado conforme a execução documentada, e não como uma reconstrução posterior baseada apenas na redação do TCC.
 
-\subsection{Critérios de Inclusão}
+\subsection{Operacionalização dos Critérios}
 
-\begin{enumerate}
-    \item artigos completos revisados por pares;
-    \item publicações entre 2015 e 2025;
-    \item foco explícito em técnicas computacionais aplicadas ao ensino de matemática;
-    \item apresentação de dados empíricos, metodologia ou evidência de desenvolvimento e avaliação de sistemas;
-    \item texto em inglês ou português.
-\end{enumerate}
+Na triagem automatizada, três condições foram obrigatórias: publicação dentro do intervalo temporal configurado, presença de foco matemático no título ou no resumo e presença de termos associados a técnicas computacionais. Quando havia resumo, o fluxo também excluía registros muito curtos ou sem indícios mínimos de descrição metodológica, salvo quando identificados como revisão ou levantamento; além disso, aplicava regras para retirar conteúdos claramente fora do contexto educacional e documentos como editoriais, erratas, correções, retratações, comentários, respostas ou cartas.
 
-\subsection{Critérios de Exclusão}
+A busca foi formulada em inglês e português, e o código registrava a detecção de idioma. Entretanto, pertencer a um desses idiomas \textbf{não foi um critério obrigatório} na lista de condições exigidas pelo seletor automatizado. Por isso, inglês e português são descritos neste trabalho como idiomas-alvo da estratégia bilíngue, e não como um filtro cuja aplicação integral possa ser afirmada retrospectivamente.
 
-\begin{enumerate}
-    \item metodologia insuficientemente descrita para responder à questão da revisão;
-    \item foco apenas indireto no ensino ou na aprendizagem de matemática;
-    \item publicações teóricas sem evidências empíricas compatíveis com o escopo;
-    \item documentos não submetidos a avaliação científica, como editoriais e relatórios internos;
-    \item idiomas diferentes de inglês e português.
-\end{enumerate}
+Também não houve filtro automatizado que exigisse situação de revisão por pares ou um único tipo documental. A auditoria das referências do corpus final identificou, além de artigos de periódicos e trabalhos em eventos, uma \textbf{dissertação} de doutorado e um \textbf{capítulo de livro}. Consequentemente, os 17 itens são tratados como estudos ou publicações científicas incluídas, sem afirmar que todos sejam artigos revisados por pares.
+
+A disponibilidade de \textbf{texto completo} para todos os candidatos também \textbf{não foi exigida} pelo fluxo automatizado. Títulos, resumos e metadados tiveram papel central na seleção, e parte das avaliações posteriores permaneceu condicionada às informações acessíveis. Essas diferenças entre a delimitação conceitual e a operacionalização efetivamente preservada são relatadas como limitações metodológicas; o corpus não foi alterado retrospectivamente para fazê-lo coincidir com critérios que o código não aplicou.
 
 \section{Processo de Seleção}
 
@@ -78,22 +70,15 @@ A deduplicação ocorreu antes da triagem e utilizou duas estratégias:
     \item \textbf{Similaridade de títulos}: os títulos foram convertidos em representações numéricas pela técnica TF-IDF (\textit{Term Frequency--Inverse Document Frequency}), que atribui maior importância aos termos que ajudam a distinguir um documento dos demais. Em seguida, foi calculada a similaridade do cosseno, medida que varia de 0 a 1 e indica o quanto duas representações apontam para direções semelhantes. Pares com valor superior a $0{,}9$ foram tratados como possíveis duplicatas, preservando-se o registro mais completo.
 \end{enumerate}
 
-A combinação dessas estratégias removeu 2.517 duplicatas, resultando em 6.914 registros únicos. Depois da aplicação dos filtros de idioma, período e completude mínima, 1.883 registros avançaram para a avaliação de elegibilidade.
+A combinação dessas estratégias removeu 2.517 duplicatas, resultando em 6.914 registros únicos. A etapa automatizada de triagem aplicou as condições e exclusões descritas anteriormente e registrou os metadados necessários às etapas seguintes.
 
 \subsection{Elegibilidade}
 
-A elegibilidade utilizou uma pontuação de \textbf{relevância temática}, distinta da avaliação de qualidade metodológica. A heurística considerou:
+A etapa denominada elegibilidade no fluxo automatizado utilizou uma pontuação de \textbf{relevância temática}, distinta da avaliação de qualidade metodológica. A heurística combinou aderência ao domínio matemático, presença de técnicas computacionais, indicadores textuais de metodologia, atualidade e completude de metadados. Elementos como tamanho do resumo, presença de DOI e identificação do tipo de estudo contribuíam para a pontuação; por isso, o valor não deve ser interpretado como avaliação validada de qualidade ou risco de viés.
 
-\begin{enumerate}
-    \item presença e relevância de técnicas computacionais;
-    \item aderência explícita ao ensino de matemática;
-    \item completude dos metadados e do resumo;
-    \item disponibilidade de identificadores e informações bibliográficas.
-\end{enumerate}
+A pontuação variou de 0 a 10, e o limiar de inclusão foi definido em 4,0. Esse valor foi utilizado para priorizar estudos aderentes ao problema de pesquisa. A qualidade metodológica foi examinada separadamente com o MMAT 2018.
 
-A pontuação variou de 0 a 10, e o limiar de inclusão foi definido em 4,0. Esse valor foi utilizado para priorizar estudos aderentes ao problema de pesquisa, mas não foi interpretado como medida de qualidade científica. A qualidade metodológica foi examinada separadamente com o MMAT 2018.
-
-Dos 1.883 registros avaliados nessa etapa, 1.866 ficaram abaixo do limiar ou não atenderam aos critérios de elegibilidade. Ao final, 17 estudos foram incluídos na síntese narrativa.
+Os artefatos consolidados registram 1.883 registros na etapa de elegibilidade, dos quais 1.866 foram excluídos e 17 compuseram a síntese narrativa. A denominação dessa etapa no fluxo não implica que tenha ocorrido leitura de texto completo de todos os 1.883 registros, uma vez que a disponibilidade integral dos documentos não era requisito do pipeline.
 
 \section{Infraestrutura Tecnológica da Revisão}
 
