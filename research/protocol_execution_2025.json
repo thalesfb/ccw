@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "reconstructed_from_versioned_artifacts",
+  "scope": "systematic_literature_review_2025",
+  "evidence": {
+    "preserved_current_summary": {
+      "path": "research/exports/reports/summary.json",
+      "generated_at": "09/12/2025 23:08",
+      "blob_sha": "004b33bc44961115556de7e144768726ea5d1ee9",
+      "notes": "Preserved export with the final 9,431/17 corpus counts used by the current TCC. Its config object is empty after a later export update."
+    },
+    "configured_summary_snapshot": {
+      "commit": "bb8169f83917cf9584e725f9508d909963bf4974",
+      "generated_at": "25/11/2025 02:30",
+      "path": "research/exports/reports/summary.json",
+      "year_range": "2015-2025",
+      "identified": 9431,
+      "included": 17,
+      "notes": "Versioned snapshot with the same identified/included corpus and explicit execution configuration."
+    },
+    "query_generator_snapshot": {
+      "commit": "7aa0cc90022d6fee20f437d346f1c4a6ecceaa42",
+      "path": "research/src/search_terms.py",
+      "canonical_query_count": 72,
+      "english_queries": 48,
+      "portuguese_queries": 24,
+      "notes": "The canonical query generator was already versioned with 72 queries before the preserved 25/11/2025 report. No complete per-query HTTP request log is preserved in the current repository, so this proves the versioned strategy, not the exact number of network requests issued during collection."
+    }
+  },
+  "search_strategy": {
+    "canonical_query_count": 72,
+    "english_queries": 48,
+    "portuguese_queries": 24,
+    "query_count_evidence": "versioned_strategy_not_http_request_audit",
+    "languages": ["en", "pt"]
+  },
+  "eligibility": {
+    "year_min": 2015,
+    "year_max": 2025,
+    "relevance_threshold": 4.0,
+    "abstract_required": false
+  },
+  "sources": {
+    "crossref": 2865,
+    "openalex": 1817,
+    "semantic_scholar": 1786,
+    "core": 446
+  },
+  "counts": {
+    "identified": 9431,
+    "duplicates_removed": 2517,
+    "screening": 6914,
+    "eligibility": 1883,
+    "eligibility_excluded": 1866,
+    "included": 17
+  },
+  "temporal_evidence": {
+    "preserved_summary_min_year": 2015,
+    "preserved_summary_max_year": 2025,
+    "records_reported_for_2015": 312,
+    "included_studies_from_2015": 0
+  },
+  "limitations": {
+    "per_query_request_log_preserved": false,
+    "execution_database_versioned": false,
+    "current_summary_preserves_config": false,
+    "interpretation": "The fixed versioned exports are sufficient to audit the corpus counts, source contributions and temporal distribution. They are not sufficient to reconstruct every HTTP request or to claim that a third party can reproduce the exact historical API responses without re-running the collection against mutable external services."
+  }
+}
