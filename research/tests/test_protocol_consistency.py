@@ -1,12 +1,18 @@
 import json
+import re
 from pathlib import Path
 
+from bs4 import BeautifulSoup
+
+from src.processing.scoring import extract_techniques
+from src.processing.selection import PRISMASelector
 from src.search_terms import generate_search_queries
 
 
 RESEARCH_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = RESEARCH_ROOT.parent
 SUMMARY_PATH = RESEARCH_ROOT / "exports" / "reports" / "summary.json"
+INCLUDED_REPORT_PATH = RESEARCH_ROOT / "exports" / "reports" / "papers_report_included.html"
 MANIFEST_PATH = RESEARCH_ROOT / "protocol_execution_2025.json"
 REFERENCE_AUDIT_PATH = RESEARCH_ROOT / "data" / "reference_audit.csv"
 SELECTION_PATH = RESEARCH_ROOT / "src" / "processing" / "selection.py"
@@ -20,6 +26,27 @@ APPENDIX_PATH = REPO_ROOT / "results" / "tcc" / "postextuais" / "apendice.tex"
 
 def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
+
+
+def _included_report_papers() -> list[dict]:
+    soup = BeautifulSoup(_read(INCLUDED_REPORT_PATH), "html.parser")
+    papers: list[dict] = []
+    for block in soup.select("div.paper"):
+        title_node = block.select_one("div.paper-title")
+        abstract_node = block.select_one("div.paper-abstract")
+        meta_node = block.select_one("div.paper-meta")
+        if not title_node or not abstract_node or not meta_node:
+            continue
+        meta = meta_node.get_text(" ", strip=True)
+        year_match = re.search(r"Ano:\s*(\d{4})", meta)
+        papers.append(
+            {
+                "title": title_node.get_text(" ", strip=True),
+                "abstract": abstract_node.get_text(" ", strip=True).removeprefix("Resumo:").strip(),
+                "year": int(year_match.group(1)) if year_match else None,
+            }
+        )
+    return papers
 
 
 def test_versioned_search_strategy_has_72_canonical_queries() -> None:
@@ -130,3 +157,46 @@ def test_review_limitations_and_prisma_reflect_operational_selection_limits() ->
     assert "operacionalização" in appendix
     assert "tipo documental" in appendix
     assert "texto completo" in appendix
+
+
+def test_ai_token_does_not_match_substrings_inside_ordinary_words() -> None:
+    selector = PRISMASelector()
+    false_positive_texts = [
+        "This study aims to examine formative assessment in mathematics.",
+        "Teacher training supports mathematics assessment in rural schools.",
+        "Ghanaian students studied geometry with cooperative learning.",
+    ]
+
+    for abstract in false_positive_texts:
+        meets, criteria = selector.apply_inclusion_criteria(
+            {"title": "Mathematics education study", "abstract": abstract, "year": 2024}
+        )
+        assert "computational_techniques" not in criteria
+        assert meets is False
+        assert "machine_learning" not in extract_techniques(abstract)
+
+    explicit_ai = "Artificial intelligence and machine learning for mathematics education."
+    meets, criteria = selector.apply_inclusion_criteria(
+        {"title": "Mathematics education", "abstract": explicit_ai, "year": 2024}
+    )
+    assert "computational_techniques" in criteria
+    assert meets is True
+    assert "machine_learning" in extract_techniques(explicit_ai)
+
+
+def test_corrected_selector_flags_only_three_preserved_included_records_for_reaudit() -> None:
+    selector = PRISMASelector()
+    papers = _included_report_papers()
+    assert len(papers) == 17
+
+    flagged = {
+        paper["title"]
+        for paper in papers
+        if not selector.apply_inclusion_criteria(paper)[0]
+    }
+
+    assert flagged == {
+        "Enhancing Student Achievement in Circle Theorems: Integrating Computer Animation with the Jigsaw Cooperative Learning Model",
+        "Authentic Assessment for Motivating Student Learning and Teaching Effectiveness in Rural, High-Need Secondary Schools in Manitoba, Canada",
+        "Performance assessment: Improving metacognitive ability in mathematics learning",
+    }
