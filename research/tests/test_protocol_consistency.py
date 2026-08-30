@@ -8,6 +8,8 @@ RESEARCH_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = RESEARCH_ROOT.parent
 SUMMARY_PATH = RESEARCH_ROOT / "exports" / "reports" / "summary.json"
 MANIFEST_PATH = RESEARCH_ROOT / "protocol_execution_2025.json"
+REFERENCE_AUDIT_PATH = RESEARCH_ROOT / "data" / "reference_audit.csv"
+SELECTION_PATH = RESEARCH_ROOT / "src" / "processing" / "selection.py"
 RESEARCH_README = RESEARCH_ROOT / "README.md"
 EXPORTS_README = RESEARCH_ROOT / "exports" / "README.md"
 INTRO_PATH = REPO_ROOT / "results" / "tcc" / "conteudo" / "introducao.tex"
@@ -82,3 +84,34 @@ def test_documentation_does_not_preserve_stale_protocol_numbers() -> None:
     assert "43 papers" not in exports_readme
     assert "systematic_review.sqlite" in research_readme
     assert "não é versionado" in research_readme
+
+
+def test_manifest_records_operational_selection_instead_of_idealized_criteria() -> None:
+    manifest = json.loads(_read(MANIFEST_PATH))
+    operational = manifest["operational_selection"]
+
+    assert operational["required_automated_criteria"] == [
+        "year_range",
+        "math_focus",
+        "computational_techniques",
+    ]
+    assert operational["language_is_required_criterion"] is False
+    assert operational["peer_review_document_type_filter"] is False
+    assert operational["full_text_review_enforced_by_pipeline"] is False
+
+
+def test_methodology_discloses_document_type_and_language_operationalization() -> None:
+    method = _read(METHOD_PATH)
+    reference_audit = _read(REFERENCE_AUDIT_PATH)
+    selection_source = _read(SELECTION_PATH)
+
+    assert "doctoral dissertation" in reference_audit
+    assert "book chapter" in reference_audit
+    assert 'required = ["year_range", "math_focus", "computational_techniques"]' in selection_source
+
+    assert "artigos completos revisados por pares" not in method
+    assert "dissertação" in method.lower()
+    assert "capítulo de livro" in method.lower()
+    assert "não foi um critério obrigatório" in method.lower()
+    assert "texto completo" in method.lower()
+    assert "não foi exigida" in method.lower()
