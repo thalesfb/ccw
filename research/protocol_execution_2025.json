@@ -25,6 +25,14 @@
       "english_queries": 48,
       "portuguese_queries": 24,
       "notes": "The canonical query generator was already versioned with 72 queries before the preserved 25/11/2025 report. No complete per-query HTTP request log is preserved in the current repository, so this proves the versioned strategy, not the exact number of network requests issued during collection."
+    },
+    "selection_implementation": {
+      "path": "research/src/processing/selection.py",
+      "notes": "The preserved selector makes year_range, math_focus and computational_techniques mandatory. Language is detected and recorded but is not in the mandatory required list. The selector excludes short or methodologically uninformative abstracts, clearly off-topic records and non-research notices, but it does not enforce peer review, a specific document type or full-text availability."
+    },
+    "reference_audit": {
+      "path": "research/data/reference_audit.csv",
+      "notes": "The final included corpus contains heterogeneous scientific document types, including a doctoral dissertation and an IntechOpen book chapter, so the historical corpus cannot truthfully be described as restricted to peer-reviewed journal or conference articles."
     }
   },
   "search_strategy": {
@@ -39,6 +47,29 @@
     "year_max": 2025,
     "relevance_threshold": 4.0,
     "abstract_required": false
+  },
+  "operational_selection": {
+    "required_automated_criteria": [
+      "year_range",
+      "math_focus",
+      "computational_techniques"
+    ],
+    "language_is_detected_and_recorded": true,
+    "language_is_required_criterion": false,
+    "peer_review_document_type_filter": false,
+    "full_text_review_enforced_by_pipeline": false,
+    "automated_exclusion_checks": [
+      "abstract_too_short",
+      "no_methodology",
+      "off_topic",
+      "non_research"
+    ],
+    "document_types_observed_in_final_corpus": [
+      "journal_articles",
+      "conference_papers",
+      "doctoral_dissertation",
+      "book_chapter"
+    ]
   },
   "sources": {
     "crossref": 2865,
@@ -64,6 +95,9 @@
     "per_query_request_log_preserved": false,
     "execution_database_versioned": false,
     "current_summary_preserves_config": false,
-    "interpretation": "The fixed versioned exports are sufficient to audit the corpus counts, source contributions and temporal distribution. They are not sufficient to reconstruct every HTTP request or to claim that a third party can reproduce the exact historical API responses without re-running the collection against mutable external services."
+    "peer_review_status_enforced_during_selection": false,
+    "language_restriction_enforced_as_mandatory_selector_rule": false,
+    "full_text_required_for_all_included_studies": false,
+    "interpretation": "The fixed versioned exports are sufficient to audit corpus counts, source contributions and temporal distribution. The preserved code also supports reconstruction of the automated selection rules. They are not sufficient to reconstruct every HTTP request, to claim that all included records passed a peer-review document-type filter, or to claim that full text was reviewed for every included study."
   }
 }
