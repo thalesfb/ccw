@@ -8,6 +8,7 @@ import time
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
+import requests
 
 from .base import BaseAPIClient
 
@@ -66,8 +67,8 @@ class COREClient(BaseAPIClient):
         # Simplificar query (CORE é sensível a sintaxe complexa)
         simplified_query = query.replace('"', '').strip()
         
-        # Filtros simples para CORE API v3
-        filter_str = f"yearPublished:>={self.config.review.year_min}"
+        # CORE API v3 não aceita filter no body do POST; year filtering feito no _normalize_result
+        filter_str = None
         
         logger.info(f"[CORE] Searching CORE for: {query}")
         logger.debug(f"[CORE] Simplified query: {simplified_query}")
@@ -84,11 +85,10 @@ class COREClient(BaseAPIClient):
                 "q": simplified_query,
                 "limit": min(limit - fetched_count, 100),  # Usar 'limit' não 'pageSize'
                 "exclude": ["fullText"],  # Excluir fullText para reduzir payload
+                "sort": "yearPublished:desc",  # Most recent first to maximize useful results
             }
             
-            # Adicionar filtro se definido
-            if filter_str:
-                payload["filter"] = filter_str
+            # CORE API v3 não aceita filter no body do POST; year filtering já é feito em _normalize_result
             
             if page_token:
                 payload["pageToken"] = page_token
@@ -98,16 +98,25 @@ class COREClient(BaseAPIClient):
                     headers = {"Authorization": f"Bearer {self.api_key}"}
                     
                     logger.debug(f"CORE Request: POST {self.BASE_URL}")
-                    response = self.session.post(self.BASE_URL, json=payload, headers=headers, timeout=40)
+                    # Use plain requests.post() instead of self.session to avoid
+                    # urllib3 Retry adapter conflicting with our own retry loop
+                    response = requests.post(
+                        self.BASE_URL, json=payload, headers=headers, timeout=40
+                    )
                     
-                    # CORE API tem histórico de instabilidade
+                    # CORE API tem histórico de instabilidade — retry com backoff
                     if response.status_code == 500:
-                        logger.warning(f"CORE API returned 500 error for query: {query}")
-                        if attempt == max_attempts - 1:
-                            logger.error(f"CORE API persistently failing with 500 errors")
+                        wait = self.rate_delay * (attempt + 1)
+                        logger.warning(
+                            f"CORE 500 error (attempt {attempt + 1}/{max_attempts}). "
+                            f"Waiting {wait:.0f}s before retry..."
+                        )
+                        if attempt < max_attempts - 1:
+                            time.sleep(wait)
+                            continue
+                        else:
+                            logger.error("CORE API persistently failing (500) — skipping")
                             return pd.DataFrame()
-                        time.sleep(self.rate_delay * (attempt + 1))
-                        continue
                     
                     response.raise_for_status()
                     data = response.json()
@@ -190,7 +199,12 @@ class COREClient(BaseAPIClient):
             year_published = item.get("yearPublished", 0)
             if isinstance(year_published, str):
                 try:
-                    year = int(year_published)
+                    # CORE API may return YYYYMM format (e.g. "202022" = 2020/22)
+                    # Extract just the first 4 characters as the year
+                    clean = year_published.strip()
+                    if len(clean) > 4:
+                        clean = clean[:4]
+                    year = int(clean)
                 except (ValueError, TypeError):
                     return None
             else:

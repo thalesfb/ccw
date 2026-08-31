@@ -44,6 +44,16 @@ class SemanticScholarClient(BaseAPIClient):
             df["query"] = query
             return df
         
+        # Sem API key: Semantic Scholar impõe ~1 req/s; pular se sem chave
+        api_key = self.config.apis.semantic_scholar_api_key
+        if not api_key:
+            logger.warning(
+                "Semantic Scholar: no API key configured — "
+                "skipping to avoid 429 rate limits. "
+                "Set SEMANTIC_SCHOLAR_API_KEY in .env to enable."
+            )
+            return pd.DataFrame()
+        
         # Campos a retornar
         fields = [
             "paperId", "title", "abstract", "year", "authors",
