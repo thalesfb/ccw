@@ -11,8 +11,10 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 # Termos técnicos para identificação (baseado no notebook)
-ML_TERMS = r"(machine learning|deep learning|data mining|neural network|svm|random forest|bayes|lstm|artificial intelligence|AI|predictive|classification|clustering)"
-LA_TERMS = r"(learning analytics|educational data mining|intelligent tutor|adaptive learning|personalized learning|student modeling|competenc|skill|assessment)"
+# AI uses \b to avoid substring false positives (e.g. "aims", "training", "Ghanaian")
+ML_TERMS = r"(machine learning|deep learning|data mining|neural network|svm|random forest|bayes|lstm|artificial intelligence|\bai\b|predictive|classification|clustering)"
+# assessment removed from LA_TERMS — it's too broad and catches educational papers without actual analytics/ML
+LA_TERMS = r"(learning analytics|educational data mining|intelligent tutor|adaptive learning|personalized learning|student modeling|competenc)"
 EDU_MATH = r"(mathematics|matemática|algebra|geometry|geometria|calculus|cálculo|fractions?|fraç(ões|ao)|arithmetic|trigonometry)"
 
 # Tipos de estudo
@@ -197,7 +199,7 @@ def calculate_relevance_score(paper: Dict, config: Optional[Dict] = None) -> flo
             "quality": 0.1
         },
         "min_year": 2015,
-        "max_year": 2025
+        "max_year": 2026
     }
 
     config = config or default_config
@@ -460,7 +462,7 @@ class RelevanceScorer:
                 "quality": 0.1
             },
             "min_year": 2015,
-            "max_year": 2025
+            "max_year": 2026
         }
 
     def calculate_score(self, paper: Dict) -> float:
