@@ -419,7 +419,7 @@ Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated g
 ### 2.1. Avaliação de Qualidade com MMAT
 
 **Prazo:** Semanas 2-4 do TCC (pode ser feito em paralelo ao desenvolvimento do protótipo)  
-**Tempo estimado:** aproximadamente 8-10 horas (30-40 min por estudo × 16 estudos)  
+**Tempo estimado:** aproximadamente 8-10 horas (30-40 min por estudo × 16 estudos)
 **Vantagem:** Fortalece fundamentação teórica para decisões de design do protótipo
 
 #### Passo 2.1.1 - Familiarização com MMAT

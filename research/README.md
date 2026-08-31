@@ -593,5 +593,5 @@ python -m research.src.cli run-pipeline
 
 ---
 
-*📅 Última atualização: 31 de agosto de 2026*  
+*📅 Última atualização: 31 de agosto de 2026*
 *✅ Status: Snapshot reconciliado | Validações-alvo aprovadas | MMAT dos 16 estudos ainda pendente*
