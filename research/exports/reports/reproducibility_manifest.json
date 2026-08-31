@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "snapshot_date": "2026-08-31",
-  "generated_at": "2026-08-31T20:16:10+00:00",
+  "generated_at": "2026-08-31T20:57:34+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -216,7 +216,7 @@
     {
       "path": "research/src/pipelines/validations.py",
       "role": "versioned read-only cross-check of DB, exports and summary",
-      "sha256": "ed6f57e336a93bb490069e587755a68594ce9d04d6881abb51760a747aa0e2ba"
+      "sha256": "60d8be3af1d138c4bd2e1fb4d4f4237375b71fbea1aa945d7c2243c9f4fc761f"
     },
     {
       "path": "research/src/validation/reproducibility.py",
