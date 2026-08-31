@@ -253,9 +253,16 @@ class BaseAPIClient(ABC):
                     return result
                     
                 elif response.status_code == 429:
-                    # Rate limit exceeded - backoff exponencial
-                    retry_after = int(response.headers.get('Retry-After', self.rate_delay * (attempt + 2)))
-                    logger.warning(f"Rate limit exceeded (429). Waiting {retry_after}s before retry {attempt + 1}/{max_retries}")
+                    # Rate limit exceeded — exponential backoff with cap
+                    retry_after_header = response.headers.get("Retry-After")
+                    if retry_after_header and retry_after_header.isdigit():
+                        retry_after = int(retry_after_header)
+                    else:
+                        retry_after = min(self.rate_delay * (2 ** attempt), 120)
+                    logger.warning(
+                        f"Rate limit (429) from {self.api_name}. "
+                        f"Waiting {retry_after}s before retry {attempt + 1}/{max_retries}"
+                    )
                     time.sleep(retry_after)
                     continue
                     
