@@ -1,8 +1,10 @@
 # Reconciliação Atualizada do Baseline da Revisão Sistemática
 
-**Data:** 2026-08-31  
-**Fonte de verdade:** `research/systematic_review.sqlite`  
-**Relatório derivado:** `research/exports/reports/summary.json`  
+**Data:** 2026-08-31
+**Fonte operacional local:** `research/systematic_review.sqlite` (não versionada)
+**Representação versionada do snapshot:** `research/exports/analysis/papers.csv` e `research/exports/analysis/papers.json`
+**Relatório derivado:** `research/exports/reports/summary.json`
+**Manifesto de reprodutibilidade:** `research/exports/reports/reproducibility_manifest.json`
 **Status:** baseline local validado; sincronização textual concluída; reaplicação do MMAT pendente
 
 ## 1. Estado atual do banco
@@ -82,7 +84,7 @@ O banco atual permite reproduzir quais linhas foram retiradas do conjunto candid
 | 6925 | `10.1186/s40594-025-00590-y` | 4,00 | excluído manualmente após auditoria |
 | 6926 | `10.1016/j.aej.2025.03.095` | 4,00 | excluído manualmente após auditoria |
 
-Como a lógica determinística de inclusão pelo score ainda selecionaria esses 23 candidatos sem o override, a próxima execução deve receber um manifesto versionado com o critério de exclusão de cada linha. Até lá, os 16 estudos atuais são a composição auditada do snapshot, e não o resultado de uma regra automática suficiente, isoladamente, para reproduzir os sete descartes.
+Como a lógica determinística de inclusão pelo score ainda selecionaria esses 23 candidatos sem o override, o manifesto versionado registra os sete overrides e os campos necessários para reencontrar cada linha. Ele ainda não inventa uma justificativa substantiva que não esteja documentada na auditoria: o campo de justificativa individual permanece pendente. Assim, os 16 estudos atuais são a composição auditada do snapshot, e não o resultado de uma regra automática suficiente, isoladamente, para reproduzir os sete descartes.
 
 ## 5. Correções do pipeline
 
@@ -95,13 +97,42 @@ As correções preservadas no código são:
 
 ## 6. Bibliografia e MMAT
 
-O arquivo `results/tcc/referencias.bib` foi sincronizado para conter os 16 estudos atuais, além das referências metodológicas, pedagógicas e técnicas. O export `research/exports/references/included_papers.bib` também deve conter exatamente 16 entradas.
+Os arquivos `results/tcc/referencias.bib` e `results/tcc/referencias_pedagogicas.bib`, carregados conjuntamente pelo `main.tex`, mantêm os 16 estudos atuais e as referências metodológicas, pedagógicas, de avaliação e técnicas. O export `research/exports/references/included_papers.bib` contém somente os 16 estudos derivados do pipeline.
 
 A atualização do conjunto incluído tornou obsoleta a tabela MMAT histórica de 17 estudos. Não há julgamentos MMAT persistidos para os seis estudos novos no snapshot atual; por isso, a reaplicação do instrumento aos 16 estudos é uma pendência metodológica explícita. Até essa reaplicação, conclusões comparativas sobre qualidade metodológica ou certeza da evidência permanecem pendentes. Nenhum julgamento novo deve ser inferido apenas a partir dos metadados do banco.
 
 ## 7. Artefatos e próxima consolidação
 
 Os artefatos derivados do banco foram regenerados a partir do mesmo snapshot, incluindo `summary.json`, `summary_report.html`, `papers_report_included.html`, `included_papers.bib` e as visualizações. O manuscrito canônico é `results/tcc/main.tex`, que inclui os arquivos em `results/tcc/conteudo/`. O histórico `9.431/2.494` foi mantido apenas como contexto e é ignorado pelo cálculo atual quando não fecha com as 11.904 linhas exportadas.
+
+## 8. Reprodutibilidade sem versionar o SQLite
+
+O SQLite é necessário como fonte operacional local para consultas, estados e
+contagens, mas não é distribuído no repositório por ser um artefato grande e
+mutável. A representação versionada do snapshot é composta por:
+
+- `papers.csv` e `papers.json`, com os registros e estados usados na auditoria;
+- `summary.json`, com o fluxo PRISMA e as estatísticas derivadas;
+- `included_papers.bib`, com somente os 16 estudos do pipeline;
+- `reference_audit.csv` e os dois arquivos bibliográficos carregados pelo TCC,
+  `results/tcc/referencias.bib` e `results/tcc/referencias_pedagogicas.bib`, que
+  mantêm separadas as decisões bibliográficas dos estudos e as referências
+  teóricas/metodológicas;
+- o manifesto JSON, que registra os IDs incluídos, os sete overrides, os hashes
+  dos artefatos e as limitações da reexecução.
+
+Para verificar o snapshot publicado, use os arquivos versionados e execute:
+
+```text
+python -m research.src.cli --db /caminho/para/systematic_review.sqlite generate-manifest
+python -m research.src.cli --db /caminho/para/systematic_review.sqlite stats
+python -m research.src.cli --db /caminho/para/systematic_review.sqlite export
+```
+
+O primeiro comando atualiza o manifesto a partir de uma cópia local do banco;
+ele não adiciona o SQLite ao Git. Uma nova coleta com `run-pipeline` é uma
+reexecução metodológica, não uma garantia de obter exatamente o mesmo snapshot,
+porque APIs, cache e metadados externos podem mudar.
 
 Antes do commit final, devem ser verificados:
 

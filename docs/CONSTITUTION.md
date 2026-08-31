@@ -11,14 +11,14 @@
 ## 2) Arquitetura e Módulos
 
 - Clientes de APIs: Semantic Scholar, OpenAlex, Crossref, CORE (CORE pode ser instável).
-- Gerenciador de dados: SQLite (`research/systematic_review.sqlite`)
+- Gerenciador de dados operacional: SQLite (`research/systematic_review.sqlite`), mantido localmente e não versionado
 - Processamento: deduplicação (DOI/URL + similaridade de títulos), scoring multi-critério, seleção por critérios PRISMA.
-- Exports: planilhas (CSV/XLSX), relatórios HTML e visualizações em `research/exports/`.
+- Exports: planilhas (CSV/XLSX), relatórios HTML, visualizações e manifesto de reprodutibilidade em `research/exports/`.
 - Logs: auditoria e execução em `research/logs/`.
 
 Estrutura operacional consolidada:
 
-- Banco: `research/systematic_review.sqlite` (criado automaticamente pela CLI/pipeline).
+- Banco operacional local: `research/systematic_review.sqlite` (criado automaticamente pela CLI/pipeline; não é distribuído no Git).
 - Exports: `research/exports/…` (planilhas, relatórios, gráficos).
 - Logs de auditoria: `research/logs/…` (sem dados sensíveis).
 
@@ -50,7 +50,7 @@ Atenção: não versionar `.env` no repositório; usar `.env.example` como refer
 
 ## 5) Estado Atual
 
-- Pipeline cobre a fase inicial do TCC (revisão sistemática automatizada) e gera base de evidências reprodutível.
+- Pipeline cobre a fase inicial do TCC (revisão sistemática automatizada) e gera uma representação versionada e auditável do snapshot; uma nova coleta pode variar conforme APIs, cache e metadados externos.
 - Produto principal (diagnóstico e recomendações) seguirá em `src/` na próxima fase.
 
 ## 6) Roadmap de Evolução (alto nível)
@@ -71,7 +71,7 @@ Atenção: não versionar `.env` no repositório; usar `.env.example` como refer
 
 ## 8) Critérios de Qualidade e Sucesso
 
-- Reprodutibilidade: execução determinística com versão de termos de busca e parâmetros.
+- Reprodutibilidade: código, parâmetros, exports, decisões manuais e hashes devem ser versionados; a reexecução das APIs não é presumida como determinística.
 - Cobertura de fontes: múltiplas APIs com fallback; deduplicação robusta; metadados normalizados.
 - Qualidade dos dados: preenchimento adequado de campos críticos; scoring consistente; rastreio PRISMA.
 - Observabilidade: logs de auditoria, métricas básicas e relatórios exportados.
@@ -89,4 +89,4 @@ Atenção: não versionar `.env` no repositório; usar `.env.example` como refer
 
 ---
 
-Última atualização: Novembro/2025
+Última atualização: 31/08/2026

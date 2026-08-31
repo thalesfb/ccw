@@ -78,7 +78,7 @@
 
 ---
 
-## 4. Estrutura do TCC (74 paginas, compilado)
+## 4. Estrutura do TCC (65 paginas, compilado)
 
 ```text
 results/tcc/
@@ -124,7 +124,7 @@ python -m research.src.analysis.mmat_assessment
 
 - `research/exports/analysis/mmat_assessment.csv` — tabela CSV
 - `research/exports/references/mmat_table.tex` — tabela LaTeX
-- SQLite histórico atualizado (coluna `notes` com JSON do MMAT); a base canônica atual permanece sem julgamentos MMAT finais para os seis estudos novos
+- Banco SQLite operacional local (coluna `notes` com o histórico do MMAT); ele não é versionado nem necessário para verificar o snapshot publicado, e a base canônica atual permanece sem julgamentos MMAT finais para os seis estudos novos
 
 ### Testes
 

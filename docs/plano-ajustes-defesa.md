@@ -301,7 +301,7 @@ Os itens 9, 14, 17, 18, 20 e 21 referem-se a avaliações de qualidade metodoló
     \item \textbf{Planejamento do TCC:} Avaliação crítica aprofundada será conduzida na Fase 2
 \end{enumerate}
 
-A aplicação do \textbf{Mixed Methods Appraisal Tool (MMAT)} está programada para a fase TCC, permitindo avaliar a qualidade metodológica dos 17 estudos incluídos considerando a heterogeneidade de desenhos de pesquisa identificados.
+A aplicação do \textbf{Mixed Methods Appraisal Tool (MMAT)} está programada para a fase TCC, permitindo avaliar a qualidade metodológica dos 16 estudos incluídos no snapshot vigente, considerando a heterogeneidade de desenhos de pesquisa identificados.
 
 \textbf{Referência:}
 
@@ -419,7 +419,7 @@ Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated g
 ### 2.1. Avaliação de Qualidade com MMAT
 
 **Prazo:** Semanas 2-4 do TCC (pode ser feito em paralelo ao desenvolvimento do protótipo)  
-**Tempo estimado:** 8-10 horas (30-40 min por estudo × 17 estudos)  
+**Tempo estimado:** aproximadamente 8-10 horas (30-40 min por estudo × 16 estudos)  
 **Vantagem:** Fortalece fundamentação teórica para decisões de design do protótipo
 
 #### Passo 2.1.1 - Familiarização com MMAT
@@ -435,7 +435,7 @@ Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated g
    - Categoria 4: Quantitativo descritivo
    - Categoria 5: Métodos mistos
 
-#### Passo 2.1.2 - Aplicação do MMAT aos 17 Estudos
+#### Passo 2.1.2 - Aplicação do MMAT aos 16 Estudos Atuais
 
 Criar planilha de avaliação:
 
@@ -463,14 +463,14 @@ Os estudos incluídos foram submetidos a avaliação crítica de qualidade metod
 O processo de avaliação consistiu em:
 
 \begin{enumerate}
-    \item \textbf{Classificação do desenho de estudo}: Cada um dos 17 estudos incluídos foi categorizado conforme seu desenho metodológico (qualitativo, quantitativo randomizado, quantitativo não-randomizado, quantitativo descritivo ou métodos mistos).
+    \item \textbf{Classificação do desenho de estudo}: Cada um dos 16 estudos atuais deverá ser categorizado conforme seu desenho metodológico (qualitativo, quantitativo randomizado, quantitativo não-randomizado, quantitativo descritivo ou métodos mistos).
     
-    \item \textbf{Aplicação dos critérios MMAT}: Para cada estudo, foram aplicados 5 critérios de qualidade específicos ao seu desenho metodológico, respondendo "Sim", "Não" ou "Não é possível determinar" para cada critério.
+    \item \textbf{Aplicação dos critérios MMAT}: Para cada estudo, deverão ser aplicados 5 critérios de qualidade específicos ao seu desenho metodológico, respondendo "Sim", "Não" ou "Não é possível determinar" para cada critério.
     
-    \item \textbf{Síntese da qualidade}: Conforme recomendação dos autores do MMAT, a qualidade metodológica foi reportada descritivamente (contagem de critérios atendidos) sem cálculo de score percentual, evitando simplificação excessiva de aspectos complexos de qualidade.
+    \item \textbf{Síntese da qualidade}: Conforme recomendação dos autores do MMAT, a qualidade metodológica deverá ser reportada descritivamente (contagem de critérios atendidos) sem cálculo de score percentual, evitando simplificação excessiva de aspectos complexos de qualidade.
 \end{enumerate}
 
-A avaliação foi conduzida por um único revisor com registro detalhado de justificativas para cada julgamento, permitindo auditoria e revisão das decisões. Estudos com baixa qualidade metodológica não foram excluídos automaticamente, mas tiveram suas limitações consideradas na síntese narrativa e discussão dos achados.
+A avaliação deverá ser conduzida por um único revisor com registro detalhado de justificativas para cada julgamento, permitindo auditoria e revisão das decisões. Estudos com baixa qualidade metodológica não deverão ser excluídos automaticamente, mas terão suas limitações consideradas na síntese narrativa e discussão dos achados.
 
 Os resultados completos da avaliação MMAT encontram-se na Seção~\ref{sec:qualidade-estudos}.
 ```
@@ -483,7 +483,7 @@ Os resultados completos da avaliação MMAT encontram-se na Seção~\ref{sec:qua
 \section{Qualidade Metodológica dos Estudos Incluídos}
 \label{sec:qualidade-estudos}
 
-A Tabela~\ref{tab:mmat-avaliacao} apresenta a avaliação de qualidade metodológica dos 17 estudos incluídos segundo o MMAT 2018.
+A Tabela~\ref{tab:mmat-avaliacao} deverá apresentar a avaliação de qualidade metodológica dos 16 estudos atuais segundo o MMAT 2018, após a reaplicação do instrumento.
 
 \begin{landscape}
 \begin{longtable}{|p{1cm}|p{4cm}|p{3cm}|p{1.5cm}|p{8cm}|}
@@ -505,7 +505,7 @@ A Tabela~\ref{tab:mmat-avaliacao} apresenta a avaliação de qualidade metodoló
 \hline
 002 & ... & ... & .../5 & ... \\
 \hline
-% [PREENCHER COM OS 17 ESTUDOS]
+% [PREENCHER COM OS 16 ESTUDOS ATUAIS APÓS A REAPLICAÇÃO]
 
 \caption{Avaliação de qualidade metodológica segundo MMAT 2018}
 \label{tab:mmat-avaliacao}
@@ -514,7 +514,7 @@ A Tabela~\ref{tab:mmat-avaliacao} apresenta a avaliação de qualidade metodoló
 
 \subsection{Síntese da Qualidade Metodológica}
 
-Dos 17 estudos incluídos:
+Dos 16 estudos atuais:
 \begin{itemize}
     \item \textbf{X estudos (Y\%)} atenderam a todos os 5 critérios MMAT (5/5)
     \item \textbf{X estudos (Y\%)} atenderam a 4 critérios (4/5)
@@ -587,11 +587,11 @@ Reconhecemos as seguintes limitações metodológicas desta revisão sistemátic
 \begin{enumerate}
     \item \textbf{Heterogeneidade metodológica dos estudos incluídos}
     
-    Os 17 estudos incluídos apresentam grande diversidade de desenhos de pesquisa (estudos quasi-experimentais, estudos de caso, design-based research, surveys), dificultando síntese quantitativa (meta-análise). A síntese narrativa adotada permite acomodar esta heterogeneidade, mas limita generalizações quantitativas sobre eficácia.
+    Os 16 estudos atuais apresentam grande diversidade de desenhos de pesquisa (estudos quasi-experimentais, estudos de caso, design-based research, surveys), dificultando síntese quantitativa (meta-análise). A síntese narrativa adotada permite acomodar esta heterogeneidade, mas limita generalizações quantitativas sobre eficácia.
     
     \item \textbf{Viés de publicação}
     
-    Não foi conduzida avaliação formal de viés de publicação (funnel plots, testes estatísticos) devido ao pequeno número de estudos incluídos (n=17) e à heterogeneidade metodológica. É provável que estudos com resultados negativos ou nulos tenham menor probabilidade de publicação.
+    Não foi conduzida avaliação formal de viés de publicação (funnel plots, testes estatísticos) devido ao pequeno número de estudos incluídos (n=16) e à heterogeneidade metodológica. É provável que estudos com resultados negativos ou nulos tenham menor probabilidade de publicação.
     
     \item \textbf{Restrição linguística implícita}
     
@@ -648,10 +648,10 @@ Após completar avaliação MMAT e seção de limitações, atualizar o apêndic
 #### Segunda-feira (3h)
 - [ ] Baixar e ler manual MMAT 2018
 - [ ] Criar planilha de avaliação (Excel/Google Sheets)
-- [ ] Classificar desenho metodológico dos 17 estudos
+- [ ] Classificar desenho metodológico dos 16 estudos atuais
 
 #### Terça a Quinta (6-8h)
-- [ ] Aplicar MMAT aos 17 estudos (30-40 min cada)
+- [ ] Aplicar MMAT aos 16 estudos atuais (30-40 min cada)
 - [ ] Registrar justificativas para cada julgamento
 - [ ] Tabular resultados
 
@@ -751,13 +751,13 @@ print(f"Taxa de atendimento: {(atendidos/27)*100:.1f}%")
 
 **Resposta sugerida:**
 
-> "Sim, todas as correções solicitadas na defesa do PTC foram incorporadas. Especificamente: (1) corrigimos toda a terminologia para distinguir claramente condução metodológica (Cochrane) de relato (PRISMA 2020), (2) incluímos o checklist completo de 27 itens no Apêndice X, (3) aplicamos o MMAT 2018 aos 17 estudos incluídos com tabela de qualidade no Capítulo 3, e (4) adicionamos seção robusta de limitações na discussão. A taxa de atendimento ao PRISMA 2020 passou de 67% (versão PTC) para 100% (versão TCC)."
+> "As correções terminológicas e o checklist PRISMA 2020 foram incorporados. O MMAT foi definido como procedimento, mas ainda precisa ser reaplicado aos 16 estudos atuais antes de afirmarmos que a avaliação de qualidade está concluída; não devemos apresentar a tabela histórica de 17 estudos como resultado vigente."
 
 ### Cenário 2: Banca questiona como MMAT influenciou o design do protótipo
 
 **Resposta sugerida:**
 
-> "A avaliação de qualidade com MMAT foi fundamental para as decisões de design. Identificamos que X/17 estudos com maior qualidade metodológica (score 5/5 ou 4/5) convergiam para [padrão identificado]. Esta convergência de estudos robustos fundamentou nossa escolha de [decisão de design específica do protótipo]. Estudos com limitações metodológicas (score <3/5) foram considerados para contexto, mas não guiaram decisões críticas de arquitetura."
+> "A avaliação de qualidade com MMAT foi fundamental para as decisões de design. Identificamos que X/16 estudos com maior qualidade metodológica (score 5/5 ou 4/5) convergiam para [padrão identificado]. Esta convergência de estudos robustos fundamentou nossa escolha de [decisão de design específica do protótipo]. Estudos com limitações metodológicas (score <3/5) foram considerados para contexto, mas não guiaram decisões críticas de arquitetura."
 
 ### Cenário 3: Banca elogia o aprimoramento metodológico
 

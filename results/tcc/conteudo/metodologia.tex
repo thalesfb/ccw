@@ -138,7 +138,7 @@ O fluxo de seleção dos estudos foi organizado segundo as etapas PRISMA:
 
 \subsection{Identificação}
 
-Execução automatizada das consultas nas quatro APIs, resultando em \textbf{11.904 registros} no banco consolidado. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}). A base \path{research/systematic_review.sqlite} foi adotada como fonte de verdade para os estados e contagens desta consolidação. O snapshot foi persistido sem registros marcados pela flag \texttt{is\_duplicate}; por isso, não houve remoção adicional registrada no fluxo descrito neste capítulo. A auditoria de DOI é apresentada separadamente para não confundir a flag operacional com unicidade bibliográfica.
+Execução automatizada das consultas nas quatro APIs, resultando em \textbf{11.904 registros} no banco consolidado. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}). A base \path{research/systematic_review.sqlite} foi adotada como fonte operacional local para os estados e contagens desta consolidação; ela não é um artefato versionado do repositório. O snapshot publicado é representado pelos exports versionados, pelo manifesto de reprodutibilidade e pelos arquivos bibliográficos e de auditoria associados. O snapshot foi persistido sem registros marcados pela flag \texttt{is\_duplicate}; por isso, não houve remoção adicional registrada no fluxo descrito neste capítulo. A auditoria de DOI é apresentada separadamente para não confundir a flag operacional com unicidade bibliográfica.
 
 \subsection{Triagem}
 
@@ -201,20 +201,31 @@ O sistema implementa um \textit{cache} persistente na tabela \texttt{cache} do b
 
 \subsection{Reprodutibilidade}
 
-O \textit{pipeline} foi projetado para ser reexecutável mediante comandos CLI (\textit{Command Line Interface}), com parâmetros e artefatos versionados. A reprodução exata das respostas das APIs não é garantida, pois fontes externas, expiração do cache e metadados podem mudar. Para esta consolidação, as contagens e os estados devem ser reproduzidos a partir da base atual e dos exports derivados, sem presumir que uma nova coleta produza o mesmo snapshot:
+O \textit{pipeline} foi projetado para ser reexecutável mediante comandos CLI (\textit{Command Line Interface}), com parâmetros, código e artefatos derivados versionados. Há, contudo, dois níveis de reprodução. A reconstituição do snapshot desta consolidação usa os exports versionados \path{research/exports/analysis/papers.csv}, \path{research/exports/analysis/papers.json}, o resumo PRISMA, a bibliografia dos estudos incluídos, o audit CSV e o manifesto \path{research/exports/reports/reproducibility_manifest.json}; nenhum desses artefatos exige distribuir o SQLite. A reexecução da coleta depende das respostas externas e do estado do cache, portanto pode produzir metadados e contagens diferentes.
+
+O manifesto registra também os sete overrides aplicados após a auditoria de pertinência. Eles são necessários para reconstruir o conjunto vigente de 16 estudos, pois a regra de pontuação, isoladamente, ainda selecionaria os 23 candidatos operacionais. As justificativas substantivas individuais desses overrides permanecem uma pendência metodológica e não devem ser inferidas a partir do score.
+
+Para reexecutar o pipeline em ambiente local, usando uma cópia do banco operacional quando disponível, podem ser usados:
 
 \begin{verbatim}
-# Executar pipeline completo
+# Verificar estatísticas de uma cópia local do banco operacional
+python -m research.src.cli \
+  --db /caminho/para/systematic_review.sqlite stats
+
+# Regenerar exports a partir da cópia local
+python -m research.src.cli \
+  --db /caminho/para/systematic_review.sqlite export
+
+# Atualizar o manifesto e seus hashes
+python -m research.src.cli \
+  --db /caminho/para/systematic_review.sqlite generate-manifest
+
+# Executar nova coleta (pode divergir do snapshot publicado)
 python -m research.src.cli run-pipeline --min-score 4.0
 
-# Gerar estatísticas
-python -m research.src.cli stats
-
-# Exportar resultados
-python -m research.src.cli export
 \end{verbatim}
 
-Todos os parâmetros de configuração (limiares, APIs, termos de busca) estão documentados e versionados no repositório Git do projeto.
+Os parâmetros de configuração (limiares, APIs e termos de busca) estão documentados no repositório Git; credenciais e o banco operacional local permanecem fora do versionamento. A bibliografia completa do TCC é composta por \path{results/tcc/referencias.bib} e \path{results/tcc/referencias_pedagogicas.bib}. As referências de fundamentação teórica e metodológica não são contadas como estudos derivados do pipeline nem incluídas em \path{research/exports/references/included_papers.bib}.
 
 \section{Avaliação da Qualidade Metodológica}
 

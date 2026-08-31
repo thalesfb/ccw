@@ -80,6 +80,11 @@ Este tipo de imprecisão terminológica é comum em trabalhos iniciais com PRISM
 
 ## 4. PLANO DE CORREÇÃO PARA VERSÃO FINAL DO TCC
 
+> **Aplicação ao snapshot vigente:** as tarefas de avaliação abaixo devem ser
+> executadas sobre os **16 estudos atuais**. As menções a 17 estudos nas
+> seções que descrevem a execução do PTC são históricas e não representam o
+> conjunto vigente.
+
 ### 4.1. Correções Terminológicas (Prioridade Alta - 1ª quinzena do TCC)
 
 **A. Correções terminológicas em introducao.tex:**
@@ -122,7 +127,7 @@ e completude na comunicação dos achados.
 
 Atualmente o item #9 do PRISMA 2020 ("Risk of bias assessment") não está explicitamente atendido. Recomenda-se:
 
-1. Aplicar **MMAT** (Mixed Methods Appraisal Tool) nos 17 estudos incluídos
+1. Aplicar **MMAT** (Mixed Methods Appraisal Tool) nos 16 estudos incluídos
    - Justificativa: Cobre múltiplos desenhos de estudo (quantitativos, qualitativos, mistos)
    - Tempo estimado: 6-8 horas (20-30 min por estudo)
 
@@ -204,7 +209,7 @@ A observação da banca foi aceita e será incorporada integralmente na versão 
 3. ✅ **Completar** a avaliação de qualidade (MMAT) durante a Fase 1 do TCC
 4. ✅ **Adicionar** seção robusta de limitações na discussão final
 
-**Benefício adicional:** A aplicação do MMAT aos 17 estudos incluídos fortalecerá a fundamentação das decisões de design do protótipo, criando ponte metodológica entre as Fases 1 e 2 do projeto.
+**Benefício adicional:** A aplicação do MMAT aos 16 estudos incluídos fortalecerá a fundamentação das decisões de design do protótipo, criando ponte metodológica entre as Fases 1 e 2 do projeto.
 
 Este ajuste não representa retrabalho, mas aprimoramento natural da articulação entre condução metodológica (Cochrane) e relato transparente (PRISMA), agregando rigor à dissertação final.
 

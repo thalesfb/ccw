@@ -6,7 +6,7 @@
 
 Sistema modular para revisão sistemática da literatura em educação matemática com técnicas computacionais, com relato orientado pelo PRISMA 2020.
 
-**Status atual**: ✅ Pipeline completo funcionando | 🧪 Testes validados (100% pass rate) | 📊 Visualizações PRISMA corretas
+**Status atual**: ✅ Snapshot vigente reconciliado | 🧪 Testes-alvo da reconciliação validados | 📊 Visualizações PRISMA corretas
 
 ---
 
@@ -125,6 +125,21 @@ research/
 O pipeline segue as fases padrão: Identificação → Deduplicação → Triagem →
 Elegibilidade → Inclusão.
 
+**Baseline vigente (31/08/2026)**:
+
+- **Identificação**: 11.904 registros no snapshot consolidado
+- **Triagem**: 11.904 avaliados; 9.413 excluídos; 2.491 avançaram
+- **Elegibilidade**: 2.491 avaliados; 2.475 excluídos; 16 incluídos
+- **Auditoria de candidatos**: 23 candidatos operacionais; 7 falsos positivos removidos manualmente
+- **Incluídos**: 16 estudos no conjunto usado pela síntese
+
+Os sete falsos positivos já estão contabilizados nas exclusões de elegibilidade.
+O resultado atual decorre de nova ingestão, correção do scoring e auditoria de
+pertinência; não é uma simples troca de 17 por 16. O SQLite permanece como
+fonte operacional local, ignorada pelo Git. Para reconstituir o snapshot sem
+distribuir o banco, use os exports versionados e
+`research/exports/reports/reproducibility_manifest.json`.
+
 **Baseline histórico (25/11/2025; não vigente)**:
 
 - **Identificação**: 9.431 registros coletados
@@ -207,9 +222,19 @@ python -m research.src.cli verify-papers --csv research/exports/analysis/papers.
 # Regenera summary.json a partir do DB canônico
 python -m research.src.cli regenerate-summary
 
+# Gera o manifesto versionado do snapshot sem copiar o SQLite para o Git
+python -m research.src.cli generate-manifest
+
 # Diagnostica por que um paper foi incluído (busca por título)
 python -m research.src.cli diagnose-included --title "parte do título"
 ```
+
+O manifesto e os exports representam o snapshot sem distribuir o SQLite. O
+arquivo de referências derivadas do pipeline é
+`research/exports/references/included_papers.bib` e contém somente os 16
+estudos atuais. Referências pedagógicas, metodológicas, de avaliação e
+técnicas usadas na fundamentação permanecem na bibliografia completa do TCC;
+são externas ao conjunto da revisão e não entram na contagem PRISMA.
 
 Observação: os scripts antigos `tools/*.py` e `research/scripts/*.py` estão
 obsoletos e serão removidos em breve. Todos os fluxos foram centralizados no CLI.
@@ -364,7 +389,7 @@ pytest --cov=research.src --cov-report=html
 
 ### Suite de Testes
 
-**✅ test_prisma_stages.py** (9 testes, 100% pass):
+**✅ test_prisma_stages.py** (9 testes da validação PRISMA):
 
 - Critérios de inclusão/exclusão
 - Fases PRISMA (screening, eligibility, inclusion)
@@ -511,7 +536,7 @@ python -m research.src.cli run-pipeline
 - **Papers com abstract**: 11.885/11.904 (99,8%)
 - **Papers com DOI**: 10.682/11.904 (89,7%)
 - **Papers com ano válido**: 11.904/11.904 (100%)
-- **Reprodutibilidade**: o snapshot e os exports são auditáveis; nova coleta pode variar e os 7 overrides ainda requerem manifesto individual
+- **Reprodutibilidade**: o snapshot é representado por exports e manifesto versionados; nova coleta pode variar e as justificativas substantivas dos 7 overrides ainda requerem registro individual
 
 ---
 
@@ -519,17 +544,17 @@ python -m research.src.cli run-pipeline
 
 ### Entregáveis Prontos
 
-1. ✅ Base de dados estruturada (SQLite)
+1. ✅ Snapshot representado por exports versionados e manifesto de reprodutibilidade (o SQLite é local e não versionado)
 2. ✅ Análises estatísticas automatizadas
 3. ✅ Visualizações profissionais (PNG)
 4. ✅ Relatórios HTML completos
-5. ✅ Pipeline reprodutível e auditável
+5. ✅ Pipeline reexecutável e auditável
 
 ### Metodologia Científica
 
 - ✅ Protocolo PRISMA completo
 - ✅ Transparência total (código aberto)
-- ✅ Reprodutibilidade garantida
+- ✅ Reprodutibilidade do snapshot documentada por exports e manifesto
 - ✅ Auditabilidade via logs
 - ✅ Rastreabilidade de cada paper
 
@@ -568,5 +593,5 @@ python -m research.src.cli run-pipeline
 
 ---
 
-*📅 Última atualização: Outubro 2025*  
-*✅ Status: Sistema funcionando | Pipeline validado | Testes 100% pass*
+*📅 Última atualização: 31 de agosto de 2026*  
+*✅ Status: Snapshot reconciliado | Validações-alvo aprovadas | MMAT dos 16 estudos ainda pendente*

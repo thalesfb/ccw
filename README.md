@@ -104,6 +104,7 @@ python -m research.src.cli export
 **Saídas**:
 
 - `research/exports/analysis/papers.csv` - Dados tabulares
+- `research/exports/reports/reproducibility_manifest.json` - Manifesto versionado do snapshot, decisões de auditoria e hashes
 - `research/exports/reports/summary_report.html` - Relatório visual
 - `research/exports/visualizations/*.png` - Gráficos PRISMA
 
@@ -124,6 +125,11 @@ python -m research.src.cli export-bibtex
 - `research/exports/references/included_papers.bib` - Papers incluídos no snapshot vigente (16)
 - `research/exports/references/high_relevance.bib` - Score ≥ 7.0
 - `research/exports/references/technique_*.bib` - Por técnica computacional
+
+O arquivo `included_papers.bib` contém somente os 16 estudos derivados do
+pipeline. As referências de fundamentação pedagógica, avaliação,
+metodologia e técnica são mantidas separadamente na bibliografia completa do
+TCC e não alteram a contagem de estudos incluídos.
 
 **Uso em LaTeX**:
 
@@ -151,7 +157,7 @@ pytest research/tests/test_performance_benchmark.py
 
 - **`research/src/cli.py`**: Interface CLI oficial para todas operações do pipeline
   - Uso: `python -m research.src.cli [comando] [opções]`
-  - Comandos principais: `init-db`, `run-pipeline`, `stats`, `export`, `export-bibtex`, `normalize-prisma`, `audit`, `validate-exports`
+  - Comandos principais: `init-db`, `run-pipeline`, `stats`, `export`, `export-bibtex`, `generate-manifest`, `normalize-prisma`, `audit`, `validate-exports`
 - **`research/src/pipeline/`**: Módulos do pipeline de revisão sistemática
 - **`research/src/database/`**: Gerenciamento de banco SQLite
 - **`research/tests/`**: Testes automatizados (pytest)
@@ -160,7 +166,7 @@ pytest research/tests/test_performance_benchmark.py
 
 ## Status do Projeto
 
-### Fase 1: Revisão Sistemática ✅ COMPLETA
+### Fase 1: Revisão Sistemática — baseline reconciliado; MMAT pendente
 
 **Baseline vigente (31/08/2026):**
 
@@ -174,6 +180,11 @@ pytest research/tests/test_performance_benchmark.py
 
 Os sete falsos positivos já estão contabilizados nas exclusões de elegibilidade. A alteração envolveu nova ingestão, correção do scoring e revisão de pertinência; não se trata de trocar apenas o número 17 por 16. A fonte de verdade e as ressalvas sobre DOI e MMAT estão em [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](docs/RECONCILIACAO-BASELINE-2026-08-31.md).
 
+O SQLite é um artefato operacional local e permanece ignorado pelo Git. A
+reconstituição auditável do snapshot é feita pelos exports versionados, pela
+bibliografia dos 16 estudos, pelo audit CSV e pelo manifesto de
+reprodutibilidade; uma nova coleta nas APIs pode produzir metadados diferentes.
+
 **Baseline histórico (documento de 27/11/2025; não vigente)**:
 
 | Etapa | Quantidade | Observação |
@@ -186,13 +197,13 @@ Os sete falsos positivos já estão contabilizados nas exclusões de elegibilida
 | ✅ **Incluídos** | 17 | Pontuação ≥ 4.0 |
 | 📊 **Taxa de Inclusão Final** | ~0,18% | Do total identificado |
 
-**Métricas Adicionais:**
+**Métricas Adicionais do baseline histórico:**
 
 - 🎯 **Pontuação média de relevância:** 4,2 (intervalo: 4,0–4,5)
 - ⚡ **Cache hit rate:** ~92%
 - 📅 **Período coberto:** 2015–2025 (11 anos)
 
-**Síntese Temática dos Estudos Incluídos:**
+**Síntese Temática do baseline histórico:**
 
 - **Abordagens Técnicas:** ML Supervisionado (76,5%), Deep Learning (11,8%), Sistemas Híbridos (5,9%), Redes Bayesianas (5,9%)
 - **Finalidades Pedagógicas:** Predição (52,9%), Personalização (17,6%), Diagnóstico (11,8%), Recomendação (11,8%), Modelagem (5,9%)
@@ -224,7 +235,7 @@ Os sete falsos positivos já estão contabilizados nas exclusões de elegibilida
 - [x] Completar protocolo de revisão sistemática
 - [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
 - [x] Realizar busca nas bases de dados (72 queries bilíngues × 4 APIs)
-- [x] Analisar e categorizar os artigos encontrados (17 incluídos)
+- [x] Analisar e categorizar os artigos encontrados (16 incluídos no snapshot vigente; 17 no baseline histórico)
 - [x] Gerar relatórios e visualizações PRISMA
 - [x] Finalizar documentação acadêmica do PTC (LaTeX)
 - [ ] Desenvolver cronograma detalhado da Fase 2 (protótipo)
