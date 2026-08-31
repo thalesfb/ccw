@@ -6,6 +6,8 @@
 **Para:** Prof. Dr. Rafael Zanin (Orientador) e Prof. Dr. Manassés Ribeiro (Coorientador)  
 **Status:** PTC defendido e aprovado | Fase 1 do TCC em andamento
 
+> **Nota de atualização (31/08/2026):** este memorando registra o contexto e o plano do baseline histórico. A revisão foi reexecutada posteriormente: o snapshot vigente contém 11.904 registros e 16 estudos incluídos; 23 candidatos foram auditados e 7 falsos positivos foram removidos. A reaplicação do MMAT aos 16 estudos atuais permanece pendente. Para decisões atuais, prevalece `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
+
 ---
 
 ## 1. CONTEXTO

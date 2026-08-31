@@ -1,7 +1,15 @@
 # RESUMO DO CONTEXTO ATUAL
 
-**Data:** 07/03/2026  
-**Status:** ✅ PTC defendido e aprovado | 🟢 TCC Fase 1 em andamento  
+> **Atualização de 31/08/2026:** o baseline local da revisão foi atualizado e validado com 11.904 registros consolidados e 16 estudos incluídos (IDs 1--10, 6916, 6917, 6918, 6920, 6921 e 6923). Este documento preserva abaixo o planejamento histórico; para as contagens vigentes, use `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
+
+## Baseline vigente (31/08/2026)
+
+O banco consolidado contém **11.904 registros**. Na triagem, **9.413** foram excluídos e **2.491** avançaram à elegibilidade; nessa etapa, **2.475** foram excluídos, resultando em **16 estudos incluídos**. A lista atual é composta pelos IDs 1--10, 6916, 6917, 6918, 6920, 6921 e 6923.
+
+A execução histórica tinha 17 estudos incluídos. Em uma nova rodada, foram encontrados 23 candidatos e removidos 7 falsos positivos, chegando aos 16 atuais. A mudança não é uma simples troca numérica: também envolve nova contagem de ingestão e correção do scoring. A reaplicação do MMAT aos 16 estudos ainda está pendente; portanto, conclusões comparativas sobre qualidade metodológica ou certeza da evidência não devem ser tratadas como consolidadas.
+
+**Data do planejamento histórico:** 07/03/2026
+**Status no planejamento histórico:** ✅ PTC defendido e aprovado | 🟢 TCC Fase 1 em andamento
 **Aluno:** Thales Ferreira Batista (Ciência da Computação - IFC Videira)  
 **Orientador:** Prof. Dr. Rafael Zanin (IFC)  
 **Coorientador:** Prof. Dr. Manassés Ribeiro (IFC)
@@ -13,7 +21,7 @@
 ### Linha do Tempo
 
 ```
-✅ Jan-Fev 2026: Revisão sistemática executada (9.431 → 17 estudos)
+✅ Jan-Fev 2026: Revisão sistemática executada no baseline histórico (9.431 → 17 estudos)
 ✅ Fev 2026: PTC escrito e documentado
 ✅ Mar 2026: PTC DEFENDIDO E APROVADO
     ⚠️ Observação da banca: "PRISMA 2020 não é metodologia/protocolo de condução"
@@ -79,12 +87,12 @@ As correções serão incorporadas **na versão final do TCC** (não precisamos 
 - `apendice-prisma-checklist.tex` (novo arquivo, ~200 linhas)
 - `main.tex` (1 inclusão)
 
-### Etapa 2: Complementos Metodológicos (Semanas 2-4 do TCC)
+### Etapa 2: Complementos Metodológicos (planejamento histórico; Semanas 2-4 do TCC)
 
 **Tempo:** 10-12 horas  
 **Prioridade:** MÉDIA (pode ser feito em paralelo ao desenvolvimento do protótipo)
 
-- [ ] Aplicar MMAT 2018 aos 17 estudos incluídos (~30 min cada)
+- [ ] Aplicar MMAT 2018 aos 16 estudos do baseline vigente (o planejamento histórico mencionava 17; ~30 min cada)
 - [ ] Criar tabela de qualidade metodológica
 - [ ] Adicionar seção "Avaliação da Qualidade Metodológica" em metodologia.tex
 - [ ] Adicionar seção "Limitações da Revisão" em conclusao.tex
@@ -98,7 +106,9 @@ As correções serão incorporadas **na versão final do TCC** (não precisamos 
 
 ---
 
-## 📊 IMPACTO NO CHECKLIST PRISMA 2020
+## 📊 IMPACTO NO CHECKLIST PRISMA 2020 (PLANEJAMENTO HISTÓRICO)
+
+Os percentuais abaixo registram uma projeção do planejamento anterior e não representam o status documental atual.
 
 | Momento | Atendidos | Pendentes | Taxa |
 |---------|-----------|-----------|------|
@@ -131,11 +141,11 @@ As correções serão incorporadas **na versão final do TCC** (não precisamos 
 - [ ] Quarta-sexta: Iniciar avaliação MMAT (primeiros 5-6 estudos)
 - [ ] Paralelo: Desenvolvimento do protótipo
 
-### Semanas 3-4 do TCC
+### Semanas 3-4 do TCC (planejamento histórico)
 
 **Foco:** Completar MMAT + seção de limitações
 
-- [ ] Completar MMAT dos 17 estudos
+- [ ] Completar MMAT dos 16 estudos atuais (o plano histórico mencionava 17)
 - [ ] Criar tabela de qualidade
 - [ ] Escrever seção de limitações
 - [ ] Atualizar checklist PRISMA
@@ -156,13 +166,13 @@ As correções serão incorporadas **na versão final do TCC** (não precisamos 
 
 1. ✅ **Aprofundou compreensão metodológica** - Agora entendemos claramente a distinção entre condução (Cochrane) e relato (PRISMA)
 
-2. ✅ **Fortaleceu fundamentação do protótipo** - A aplicação do MMAT permitirá identificar quais estudos têm maior qualidade metodológica, permitindo decisões de design baseadas em evidências robustas
+2. ✅ **Fortaleceu fundamentação do protótipo** - A aplicação planejada do MMAT poderá identificar quais estudos têm maior qualidade metodológica, permitindo decisões de design baseadas em evidências robustas após a reaplicação ao conjunto atual
 
 3. ✅ **Melhorou transparência** - O checklist completo PRISMA 2020 tornará a dissertação mais transparente e reproduzível
 
 4. ✅ **Preparou para publicação** - A versão final do TCC terá padrão de qualidade suficiente para publicação em periódico científico
 
-5. ✅ **Diferencial competitivo** - 100% de aderência ao PRISMA 2020 + avaliação MMAT é raro em TCCs de graduação/especialização
+5. 🎯 **Objetivo de transparência** - aderência integral ao PRISMA 2020 e avaliação MMAT só poderão ser reivindicadas após a consolidação da reaplicação no conjunto atual
 
 ---
 
@@ -203,7 +213,7 @@ As correções serão incorporadas **na versão final do TCC** (não precisamos 
 
 ### O Que Está PRONTO ✅
 
-- ✅ Revisão sistemática completa (9.431 → 6.914 → 17 estudos)
+- ✅ Revisão sistemática: baseline histórico preservado (9.431 → 6.914 → 17 estudos) e baseline vigente validado (11.904 → 9.413 excluídos na triagem → 2.491 → 2.475 excluídos na elegibilidade → 16 estudos)
 - ✅ Pipeline automatizado e reproduzível (GitHub)
 - ✅ Diagrama PRISMA flow
 - ✅ Síntese narrativa dos achados
@@ -218,20 +228,21 @@ As correções serão incorporadas **na versão final do TCC** (não precisamos 
 ### O Que Está PENDENTE ⏳
 
 - ⏳ Correções terminológicas (Etapa 1) - 5-7h
-- ⏳ Avaliação MMAT (Etapa 2) - 10-12h
+- ⏳ Reaplicação da avaliação MMAT aos 16 estudos atuais e consolidação da tabela - 10-12h
+- ⏳ Auditoria da integridade dos identificadores (DOIs repetidos e registros sem DOI), conforme reconciliação do baseline
 - ⏳ Seção de limitações (Etapa 2) - 2h
 - ⏳ Validação experimental do protótipo (Fase 3)
 - ⏳ Defesa final do TCC
 
 ---
 
-## 🎯 PRÓXIMA AÇÃO IMEDIATA
+## 🎯 PRÓXIMA AÇÃO IMEDIATA (STATUS ATUAL)
 
 **O que fazer AGORA:**
 
-1. ✅ Ler este resumo + memorando + plano detalhado
-2. ✅ Alinhar com orientador sobre cronograma das correções
-3. 🚀 Decidir: Executar Etapa 1 imediatamente OU focar 100% no protótipo primeiro?
+1. Reaplicar o MMAT aos 16 estudos atuais e registrar os julgamentos por critério
+2. Consolidar a decisão sobre os DOIs repetidos e os registros sem DOI
+3. Atualizar o relato final somente após essas verificações
 
 **Minha recomendação:**
 

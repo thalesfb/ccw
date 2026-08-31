@@ -4,6 +4,8 @@
 **Reunião:** Gate de decisão com orientação (Prof. Dr. Rafael Zanin / Prof. Dr. Manassés Ribeiro)
 **Objetivo:** Comparar cenários A/B/C e registrar decisão sobre continuidade do TCC
 
+> **Nota de atualização (31/08/2026):** este material contém uma matriz de decisão construída antes da reconciliação bibliográfica final. A baseline vigente é 11.904 registros e 16 estudos incluídos, após auditoria de 23 candidatos e remoção de 7 falsos positivos. As linhas da matriz que citam estudos removidos e as conclusões baseadas em 17 estudos precisam ser reavaliadas; a reaplicação do MMAT aos 16 estudos atuais ainda está pendente. A fonte atual é `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
+
 ---
 
 ## 1. Inventário: Implementado vs. Especificado
@@ -109,13 +111,13 @@
 | **Custo de tempo** | ~2-3 semanas (revisão + escrita) | ~4-6 semanas (execução + escrita) | ~8-12 semanas (execução completa + BNCC + escrita) |
 | **Risco** | Baixo | Médio (dados podem falhar) | Médio-alto (execução completa + validação) |
 | **Contribuição central** | Revisão sistemática robusta + framework conceitual | Pipeline reproduzível + baselines calibrados | Pipeline + modelo + perfil de evidências + BNCC |
-| **Diferencial** | Revisão 9.431→17 + MMAT + framework | Revisão + execução reproduzível com dados reais | Revisão + execução + contextualização brasileira |
+| **Diferencial** | Revisão 11.904→16 + procedimento MMAT pendente + framework | Revisão + execução reproduzível com dados reais | Revisão + execução + contextualização brasileira |
 | **Requisito para banca** | TCC defensável | TCC defensável com demo | TCC defensável com resultados |
 
 ### Pergunta-chave para cada cenário
 
 **Cenário A:** "O que o TCC contribui sem executar o protótipo?"
-- Resposta: Revisão sistemática robusta (9.431→17), avaliação MMAT, framework conceitual completo, especificação do protótipo como hoax reprodutível.
+- Resposta: Revisão sistemática reconciliada (11.904→16), procedimento MMAT definido mas ainda pendente para o conjunto atual, framework conceitual e especificação do protótipo como artefato reproduzível.
 
 **Cenário B:** "É possível demonstrar viabilidade sem treinar do zero?"
 - Resposta: Sim, com baselines calibrados (probabilidade global, suavizada, LR). O ASSISTments permite executar o pipeline completo e produzir métricas reais.

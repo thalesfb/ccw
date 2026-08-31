@@ -2,6 +2,8 @@
 
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
+> **Baseline vigente (31/08/2026):** a fonte atual da revisão contém 11.904 registros e 16 estudos incluídos. Os números históricos de 9.431 registros e 17 incluídos permanecem neste README apenas como contexto; para o fluxo atual, a reconciliação semântica e o alerta de DOI, consulte [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](docs/RECONCILIACAO-BASELINE-2026-08-31.md).
+
 ## Sobre o Projeto
 
 Este repositório contém o desenvolvimento de uma ferramenta tecnológica para auxiliar professores de matemática no ensino personalizado, através da identificação automatizada das competências individuais dos alunos.
@@ -25,7 +27,7 @@ Mapear e analisar sistematicamente as aplicações de técnicas computacionais �
 
 ### Objetivos Específicos
 
-1. **OE1:** Realizar revisão sistemática da literatura seguindo o protocolo PRISMA 2020 para identificar estudos que apliquem técnicas computacionais na educação matemática (2015-2025).
+1. **OE1:** Realizar revisão sistemática da literatura com relato orientado pelo PRISMA 2020 para identificar estudos que apliquem técnicas computacionais na educação matemática (2015-2026).
 2. **OE2:** Identificar e categorizar as principais abordagens de IA (Machine Learning, Deep Learning, NLP, Educational Data Mining) aplicadas à educação matemática.
 3. **OE3:** Classificar as aplicações segundo suas finalidades pedagógicas: tutoria inteligente, diagnóstico, avaliação automatizada, personalização, predição e feedback adaptativo.
 4. **OE4:** Analisar criticamente as metodologias de avaliação utilizadas para validar a eficácia de sistemas computacionais em contextos educacionais.
@@ -119,7 +121,7 @@ python -m research.src.cli export-bibtex
 
 **Saídas**:
 
-- `research/exports/references/included_papers.bib` - Papers incluídos (17)
+- `research/exports/references/included_papers.bib` - Papers incluídos no snapshot vigente (16)
 - `research/exports/references/high_relevance.bib` - Score ≥ 7.0
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
@@ -160,7 +162,19 @@ pytest research/tests/test_performance_benchmark.py
 
 ### Fase 1: Revisão Sistemática ✅ COMPLETA
 
-**Resultados PRISMA (atualizado em 27/11/2025)**:
+**Baseline vigente (31/08/2026):**
+
+| Etapa | Quantidade | Interpretação |
+|-------|------------|---------------|
+| Identificação | 11.904 | Registros no snapshot consolidado |
+| Triagem | 11.904 → 2.491 | 9.413 excluídos na triagem |
+| Elegibilidade | 2.491 → 16 | 2.475 excluídos na elegibilidade |
+| Auditoria de candidatos | 23 → 16 | 7 falsos positivos removidos |
+| Incluídos | **16** | Conjunto atual para síntese |
+
+Os sete falsos positivos já estão contabilizados nas exclusões de elegibilidade. A alteração envolveu nova ingestão, correção do scoring e revisão de pertinência; não se trata de trocar apenas o número 17 por 16. A fonte de verdade e as ressalvas sobre DOI e MMAT estão em [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](docs/RECONCILIACAO-BASELINE-2026-08-31.md).
+
+**Baseline histórico (documento de 27/11/2025; não vigente)**:
 
 | Etapa | Quantidade | Observação |
 |-------|------------|------------|

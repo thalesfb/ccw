@@ -5,6 +5,8 @@
 **Prazo:** Ao longo da Fase 1 do TCC (próximas 4-6 semanas)  
 **Status:** 🟢 Pronto para execução
 
+> **Nota de atualização (31/08/2026):** este é um plano histórico elaborado antes da reconciliação do baseline. As referências a 17 estudos, às contagens antigas e à conclusão do MMAT descrevem planejamento ou snapshot anterior. O conjunto vigente tem 16 estudos após auditoria de 23 candidatos e remoção de 7 falsos positivos; a reaplicação do MMAT ainda não foi concluída. Use `docs/RECONCILIACAO-BASELINE-2026-08-31.md` para o estado atual.
+
 ---
 
 ## 📋 ÍNDICE

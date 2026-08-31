@@ -17,7 +17,9 @@ mdc: true
 
 <br>
 
-**Revisão Sistemática da Literatura — Protocolo PRISMA 2020**
+**Revisão Sistemática da Literatura — Relato orientado pelo PRISMA 2020**
+
+<small>Baseline vigente (31/08/2026): 11.904 registros no snapshot, 16 estudos incluídos. A execução histórica tinha 17; a nova rodada encontrou 23 candidatos e removeu 7 falsos positivos. A mudança alterou a composição da evidência, não apenas a contagem.</small>
 
 <br>
 
@@ -52,7 +54,7 @@ Professores de matemática enfrentam dificuldade em diagnosticar competências i
 3. Literatura científica fragmentada e dispersa
 4. Ausência de mapa claro do estado da arte
 
-> "Sistemas adaptativos baseados em dados podem melhorar o desempenho acadêmico em **10-20%** e reduzir tempo de aprendizagem em até **20%**."
+> Resultados de desempenho reportados em estudos específicos não podem ser tratados como efeito geral: populações, instrumentos, métricas e desenhos variam, e a avaliação MMAT do conjunto atual ainda está pendente.
 
 ---
 
@@ -122,13 +124,13 @@ layout: two-cols
 
 <br>
 
-## Protocolo PRISMA 2020
+## Relato orientado pelo PRISMA 2020
 
 **Preferred Reporting Items for Systematic Reviews and Meta-Analyses**
 
 <br>
 
-### 4 Etapas do Protocolo
+### 4 Etapas do Fluxo Relatado
 
 1. **Identificação** — Busca em múltiplas bases
 2. **Triagem** — Filtros iniciais de inclusão/exclusão
@@ -187,9 +189,9 @@ Português: "educacao", "ensino"            [2 termos]
 
 ### Sistema de Cache
 
-- **Cache Hit Rate**: ~92% (265/287 requisições)
-- **Benefício**: Reprocessamento 22x mais rápido
-- **Implicação**: Revisão é reproduzível rapidamente
+- O cache persistente reutiliza respostas quando a entrada ainda está disponível.
+- O contador é acumulado por entrada e depende do histórico de execução e expiração.
+- Não foi usado como evidência de qualidade, inclusão ou reprodutibilidade exata do snapshot.
 
 ---
 
@@ -205,7 +207,7 @@ Português: "educacao", "ensino"            [2 termos]
 
 <br>
 
-### Critérios de Inclusão (6)
+### Critérios de Inclusão Planejados (6)
 1. Artigos peer-reviewed
 2. Publicações 2015-2026
 3. Foco em técnicas computacionais + educação matemática
@@ -215,28 +217,28 @@ Português: "educacao", "ensino"            [2 termos]
 
 ---
 
-# Fluxo PRISMA 2020
+# Fluxo PRISMA 2020 — Baseline vigente
 
 ### IDENTIFICAÇÃO
 ```
-9.431 registros identificados (72 queries × 4 APIs)
+11.904 registros no snapshot consolidado (72 queries × 4 APIs)
 ```
 
 ### DEDUPLICAÇÃO & TRIAGEM
 ```
-9.431 → [-2.517 duplicatas = 26,6%] → 6.914 estudos únicos
-6.914 → [-5.031 filtros = 72,8%] → 1.883 elegíveis
+11.904 → [-9.413 excluídos na triagem] → 2.491 avançaram
+2.491 → [-2.475 excluídos na elegibilidade] → 16 incluídos
 ```
 
 ### ELEGIBILIDADE
 ```
-1.883 → [Sistema de scoring 0-10, limiar ≥ 4,0]
-1.883 → [-1.866 abaixo do limiar] → 17 ESTUDOS INCLUÍDOS
+23 candidatos no limiar operacional
+23 → [-7 falsos positivos após auditoria] → 16 ESTUDOS INCLUÍDOS
 ```
 
 ### TAXA FINAL
-- **17 de 9.431** = **0,18%**
-- Esperado em revisões sistemáticas rigorosas
+- **16 de 11.904** = **0,13%** no snapshot atual
+- A taxa descreve este snapshot; não é uma medida de qualidade científica.
 
 ---
 layout: two-cols
@@ -249,19 +251,17 @@ layout: two-cols
 <br>
 
 ```
-TOPO     9.431 registros
-  ↓ Redução 26,6%
-         6.914 únicos
-  ↓ Redução 72,8%
-         1.883 elegíveis
-  ↓ Redução 99,1%
-BASE     17 incluídos
-         Taxa: 0,18%
+TOPO     11.904 registros
+  ↓ 9.413 excluídos na triagem
+         2.491 avançaram
+  ↓ 2.475 excluídos na elegibilidade
+BASE     16 incluídos
+         Taxa: 0,13%
 ```
 
 <br>
 
-> "Cada redução representa a aplicação rigorosa de critérios de qualidade. Não é exclusão excessiva — é **garantia de qualidade**."
+> As exclusões representam decisões de triagem e pertinência. O score é um filtro operacional e não constitui garantia de qualidade metodológica.
 
 ---
 
@@ -269,17 +269,17 @@ BASE     17 incluídos
 
 | Métrica | Valor |
 |---------|-------|
-| Total identificado | 9.431 |
-| Duplicatas removidas | 2.517 (26,6%) |
-| Registros únicos | 6.914 |
-| Elegíveis (após triagem) | 1.883 |
-| Taxa de exclusão (elegibilidade) | 99,1% |
-| **Total incluído** | **17** |
-| Taxa de inclusão final | **0,18%** |
+| Total no snapshot | 11.904 |
+| Remoções pela flag de duplicata | 0 |
+| Excluídos na triagem | 9.413 |
+| Avançaram à elegibilidade | 2.491 |
+| Excluídos na elegibilidade | 2.475 |
+| **Total incluído** | **16** |
+| Taxa de inclusão final | **0,13%** |
 | Bases consultadas | 4 |
 | Consultas bilíngues | 72 |
 | Período | 2015–2026 |
-| Cache hit rate | ~92% |
+| Grupos de DOI repetido na auditoria | 24 |
 
 ---
 layout: two-cols
@@ -294,12 +294,12 @@ layout: two-cols
 ## Distribuição por Base
 
 ```
-Semantic Scholar:  ~4.200 (44%)
-OpenAlex:         ~2.800 (30%)
-Crossref:         ~1.600 (17%)
-CORE:             ~  831 (9%)
+Crossref:         5.055 (42,5%)
+OpenAlex:         3.064 (25,7%)
+Semantic Scholar: 1.940 (16,3%)
+CORE:             1.845 (15,5%)
 ──────────────────────────
-TOTAL:             9.431
+TOTAL:            11.904
 ```
 
 <br>
@@ -313,17 +313,17 @@ TOTAL:             9.431
 
 ---
 
-# Os 17 Estudos — Síntese
+# Os 16 Estudos — Síntese
 
 ### Exemplos Representativos
 
-**Hasib et al. (2022)** — SVM com LIME
-- Finalidade: Predição com explicabilidade
-- Resultado: 96,89% acurácia + explicações
+**Pejic et al. (2021)** — modelo multiclasses de ML
+- Finalidade: Estimar proficiência matemática
+- Limite: resultado vinculado a avaliação internacional específica
 
 **Zhang et al. (2025)** — Deep Learning + Knowledge Graph
 - Finalidade: Personalização de trajetórias
-- Resultado: +15% aprendizagem, -20% tempo
+- Limite: registro atual requer confirmação em fonte primária
 
 **Tjahyadi (2025)** — ML Supervisionado
 - Finalidade: Predição de desempenho
@@ -332,8 +332,9 @@ TOTAL:             9.431
 <br>
 
 ### Padrões Visíveis
-- Concentração em predição (52,9%)
-- ML Supervisionado predomina (76,5%)
+- As etiquetas do pipeline registram Machine Learning em 11/16 estudos (68,8%)
+- Predictive Analytics aparece em 9/16 (56,3%)
+- As categorias são sobrepostas e descrevem metadados, não qualidade metodológica
 
 ---
 
@@ -341,65 +342,49 @@ TOTAL:             9.431
 
 | Técnica | Nº Estudos | % |
 |---------|-----------|---|
-| **ML Supervisionado** | 13 | **76,5%** |
-| Deep Learning (CNN, RNN) | 2 | 11,8% |
-| Reinforcement Learning | 1 | 5,9% |
-| Adaptive Learning | 1 | 5,9% |
-| Modelagem de Conhecimento | 1 | 5,9% |
-| Outras (ACO, CRF, XAI) | 6 | 35,3% |
+| **Machine Learning** | 11 | **68,8%** |
+| Predictive Analytics | 9 | 56,3% |
+| Assessment | 8 | 50,0% |
+| Learning Analytics | 7 | 43,8% |
+| Adaptive Learning | 6 | 37,5% |
+| AI/Artificial Intelligence | 4 | 25,0% |
+| Intelligent Tutoring | 3 | 18,8% |
 
 <br>
 
-### Por que ML Supervisionado Lidera?
-
-1. **Maduro e estável** — décadas de desenvolvimento
-2. **Dados disponíveis** — históricos educacionais existem
-3. **Interpretável** — importante em contexto educacional
-4. **Eficiente** — roda em hardware padrão
+> As etiquetas podem coexistir no mesmo estudo. A classificação foi extraída de título/resumo e precisa ser confirmada na leitura primária; ela não permite concluir que todos os modelos sejam supervisionados.
 
 ---
 
-# EIXO 2 — Finalidades Pedagógicas
+# EIXO 2 — Finalidades e funções representadas
 
 | Finalidade | Nº | % | Descrição |
 |------------|---|---|-----------|
-| **Predição de Desempenho** | 9 | **52,9%** | Prever notas, risco de evasão |
-| Personalização / Trajetórias | 3 | 17,6% | Adaptar conteúdo dinamicamente |
-| Ensino / Suporte Instrucional | 2 | 11,8% | Tutoria inteligente |
-| Avaliação / Assessment | 2 | 11,8% | Avaliar competências automaticamente |
-| Tutoria Inteligente | 1 | 5,9% | Modelagem automática |
+| **Predictive Analytics** | 9 | **56,3%** | Estimar desempenho ou proficiência |
+| Assessment | 8 | 50,0% | Avaliar desempenho ou estados do estudante |
+| Learning Analytics | 7 | 43,8% | Analisar dados educacionais |
+| Adaptive Learning | 6 | 37,5% | Apoiar personalização ou adaptação |
+| Intelligent Tutoring | 3 | 18,8% | Apoiar tutoria ou feedback |
 
 <br>
 
-> **Achado Crítico:** A comunidade foca em IDENTIFICAR problemas (52,9%), mas menos em RESOLVER (17,6%). Há oportunidade para sistemas mais integrados.
+> **Leitura crítica:** o snapshot concentra etiquetas preditivas, mas elas não demonstram resolução de problemas pedagógicos nem eficácia de intervenção. A síntese não deve transformar frequência de técnica em recomendação automática.
 
 ---
 
-# EIXO 3 — Resultados de Eficácia
+# EIXO 3 — Evidência de avaliação
 
-### Acurácias Reportadas
+| Método de avaliação identificado | Nº de estudos | % |
+|----------------------------------|---------------|---:|
+| Desempenho | 10 | 62,5% |
+| Análise estatística | 9 | 56,3% |
+| Feedback de usuários | 5 | 31,3% |
 
-| Categoria | Faixa | Nº Estudos | % |
-|-----------|-------|-----------|---|
-| **Excelente** | >90% | 5 | 29,4% |
-| **Muito bom** | 85-90% | 4 | 23,5% |
-| **Bom** | 75-85% | 6 | 35,3% |
-| Não especificado | - | 2 | 11,8% |
+As categorias são sobrepostas e foram extraídas dos metadados do snapshot. Não foi calculada acurácia média, ganho médio ou efeito agregado: as métricas, populações e tarefas são heterogêneas, a confirmação em fonte primária ainda é necessária para seis registros e a reaplicação do MMAT está pendente.
 
-**Média estimada**: ~85% em predição de desempenho
+### ⚠️ Limite da inferência
 
-### Ganhos de Aprendizagem
-
-```
-Pequeno (5-10%):     ~37% dos estudos
-Médio (10-20%):      ~38% dos estudos (MAIS COMUM)
-Grande (>20%):       ~19% dos estudos
-```
-
-### ⚠️ Viés de Publicação
-- Resultados positivos: 16/17 (94,1%)
-- Resultados negativos: 0/17 (0%)
-- Eficácia real provavelmente **70-85%**
+Não é possível concluir, a partir deste snapshot, que os sistemas produzem ganhos de 10–20%, que uma acurácia é transferível entre escolas ou que há uma estimativa confiável de viés de publicação. Essas hipóteses exigem leitura completa, avaliação metodológica e síntese apropriada.
 
 ---
 
@@ -409,18 +394,18 @@ Grande (>20%):       ~19% dos estudos
 
 | Categoria | Principais | Impacto |
 |-----------|-----------|---------|
-| **Técnicas** | Falta de explicabilidade (85%), validação limitada (35% em lab) | Alto |
-| **Pedagógicas** | Desalinhamento BNCC (100%), foco cognitivo (80%) | Crítico |
-| **Metodológicas** | Viés publicação (94%), sem grupo controle (45%) | Alto |
-| **Éticas** | Privacidade (LGPD), viés algorítmico (90%) | Crítico |
+| **Técnicas** | Explicabilidade e transferibilidade dos modelos precisam de validação | Alto |
+| **Pedagógicas** | Relação entre indicador computacional e aprendizagem exige interpretação docente | Crítico |
+| **Metodológicas** | Desenhos, populações e métricas heterogêneos; MMAT atual pendente | Alto |
+| **Documentais** | Seis registros atuais ainda exigem confirmação bibliográfica primária | Alto |
 
 <br>
 
 ### 3 Lacunas Críticas para Fase 2
 
-1. **FALTA DE EXPLICABILIDADE** (85%) → Integrar XAI
-2. **DESALINHAMENTO CURRICULAR** (100%) → Mapear BNCC
-3. **VALIDAÇÃO ECOLÓGICA LIMITADA** (65% lab) → Estudo em escola real
+1. **EXPLICABILIDADE E INCERTEZA** → Integrar explicações e comunicar limites
+2. **ALINHAMENTO CURRICULAR** → Mapear BNCC sem inferir equivalência automática
+3. **VALIDAÇÃO ECOLÓGICA** → Testar em contextos escolares diversos
 
 ---
 
@@ -428,10 +413,10 @@ Grande (>20%):       ~19% dos estudos
 
 | Lacuna | Solução | Fundamento |
 |--------|---------|------------|
-| 85% sem explicabilidade | Integrar XAI (LIME/SHAP) | Hasib et al. 2022 |
-| 100% sem BNCC | Mapear competências BNCC | Alinhamento Brasil |
-| 65% validação lab | Experimento em escola real | Evidência ecológica |
-| 90% sem ética | Governance + auditoria viés | Literatura emergente |
+| Explicabilidade e incerteza não consolidadas | Integrar explicações e auditoria de viés | Avaliação metodológica futura |
+| Ausência de alinhamento curricular explícito | Mapear competências BNCC | Fundamentação pedagógica |
+| Validação contextual limitada | Experimento em escola real | Evidência ecológica |
+| Metadados e DOI ainda pendentes em seis registros | Confirmar fontes primárias | Auditoria bibliográfica |
 | Foco cognitivo | Módulo metacognitivo | Autonomia estudantil |
 
 <br>
@@ -480,7 +465,7 @@ Mar└────────────────────────�
 - ↑ Confiança em recomendações (XAI)
 
 ### Para Alunos
-- ↑ Desempenho acadêmico (10-20%)
+- ↑ Possibilidade de intervenções mais contextualizadas (a validar)
 - ↑ Engajamento e motivação
 - ↑ Autonomia de aprendizagem
 
@@ -504,13 +489,14 @@ layout: two-cols
 > "Como diagnosticar e personalizar o ensino de matemática em larga escala?"
 
 **Consultamos a literatura:**
-- 9.431 registros → 17 estudos
+- 11.904 registros → 16 estudos atuais
+- 23 candidatos no limiar operacional → 7 falsos positivos removidos → 16 incluídos
 - 4 bases · 72 queries · PRISMA 2020
 
 **Achados principais:**
-1. ML Supervisionado funciona (76,5%, ~85%)
-2. Ganhos reais (10-20% típicos)
-3. Mas há lacunas críticas
+1. Machine Learning aparece em 11/16 registros e Predictive Analytics em 9/16
+2. As medidas de avaliação são heterogêneas e não sustentam efeito agregado
+3. Permanecem lacunas de explicabilidade, contexto, currículo e avaliação metodológica
 
 **Nossa contribuição:**
 - XAI integrada · Alinhamento BNCC

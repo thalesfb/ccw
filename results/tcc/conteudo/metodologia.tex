@@ -3,11 +3,13 @@
 
 \section{Protocolo e Relato da Revisão Sistemática}
 
-Este trabalho adotou a metodologia de \textbf{Revisão Sistemática da Literatura}, fundamentada em princípios metodológicos consolidados do \textit{Cochrane Handbook for Systematic Reviews of Interventions} \cite{CochraneHandbook} e dos padrões do \textit{Institute of Medicine} (IOM). O relato dos resultados seguiu integralmente as 27 recomendações do PRISMA 2020 (\textit{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}) \cite{PRISMA2020}, garantindo transparência, reprodutibilidade e completude na comunicação dos achados.
+Este trabalho adotou a metodologia de \textbf{Revisão Sistemática da Literatura}, fundamentada em princípios metodológicos consolidados do \textit{Cochrane Handbook for Systematic Reviews of Interventions} \cite{CochraneHandbook} e dos padrões do \textit{Institute of Medicine} (IOM). O relato dos resultados foi estruturado considerando as 27 recomendações do PRISMA 2020 (\textit{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}) \cite{PRISMA2020}, buscando transparência, reprodutibilidade e completude na comunicação dos achados.
 
-A escolha da abordagem PRISMA 2020 para estruturação do relato justificou-se por sua ampla aceitação na comunidade científica internacional como padrão de transparência, seu rigor na documentação de todas as etapas do processo de revisão, e sua capacidade de assegurar que o relato seja explícito, replicável e auditável. Esta \textit{guideline} de relato mostrou-se especialmente adequada para comunicar os resultados da Fase 1 do projeto, na qual o objetivo principal é mapear o estado da arte das técnicas computacionais aplicadas ao ensino de matemática.
+A escolha da abordagem PRISMA 2020 para estruturação do relato justificou-se por sua ampla aceitação na comunidade científica internacional como padrão de transparência e por orientar a documentação das etapas do processo de revisão. A replicabilidade depende, adicionalmente, dos parâmetros, registros e artefatos disponibilizados. Esta \textit{diretriz de relato} mostrou-se especialmente adequada para comunicar os resultados da Fase 1 do projeto, na qual o objetivo principal é mapear o estado da arte das técnicas computacionais aplicadas ao ensino de matemática.
 
-\textbf{Importante:} Embora esta revisão não tenha sido registrada prospectivamente em bases como PROSPERO devido a restrições de cronograma acadêmico, o protocolo foi desenvolvido seguindo princípios do PRISMA-P 2015 (\textit{Preferred Reporting Items for Systematic Review and Meta-Analysis Protocols}) \cite{PRISMAP2015}, com definição \textit{a priori} de: (1) questão de pesquisa estruturada, (2) critérios de elegibilidade explícitos, (3) estratégia de busca reproduzível, (4) processo de seleção sistemático, e (5) método de síntese pré-definido. O checklist completo de aderência ao PRISMA 2020 encontra-se disponível no Apêndice~\ref{apendice:prisma-checklist}.
+\textbf{Importante:} Embora esta revisão não tenha sido registrada prospectivamente em bases como PROSPERO devido a restrições de cronograma acadêmico, o protocolo foi desenvolvido seguindo princípios de protocolos de revisões sistemáticas e do PRISMA-P 2015 (\textit{Preferred Reporting Items for Systematic Review and Meta-Analysis Protocols}) \cite{PRISMAP2015}, com definição \textit{a priori} de: (1) questão de pesquisa estruturada, (2) critérios de elegibilidade explícitos, (3) estratégia de busca reproduzível, (4) processo de seleção sistemático, e (5) método de síntese pré-definido. O checklist completo de aderência ao PRISMA 2020 encontra-se disponível no Apêndice~\ref{apendice:prisma-checklist}.
+
+Não se afirma conformidade integral com o PRISMA-P; o protocolo é utilizado como referência para explicitar as decisões metodológicas adotadas.
 
 \section{Estratégia de Busca}
 
@@ -22,18 +24,18 @@ A coleta de dados foi realizada mediante integração automatizada com as APIs d
     \item \textbf{CORE}: Agregador especializado em artigos de acesso aberto.
 \end{enumerate}
 
-A integração de múltiplas APIs de bases científicas \cite{CochraneHandbook} proporcionou:
+A integração de múltiplas APIs de bases científicas \cite{CochraneHandbook} foi adotada para ampliar:
 
 \begin{itemize}
     \item \textbf{Cobertura Complementar}: Cada base possui forças específicas --- \textit{Semantic Scholar} para métricas de impacto, \textit{OpenAlex} para amplitude de cobertura, \textit{Crossref} para precisão bibliográfica, e \textit{CORE} para acesso aberto;
-    \item \textbf{Redução de Viés}: Minimiza vieses de seleção inerentes a fontes únicas;
-    \item \textbf{Reprodutibilidade}: Automação via APIs permite replicação exata do processo de busca;
+    \item \textbf{Redução da dependência de uma única fonte}: amplia a cobertura consultada, sem eliminar vieses de seleção;
+    \item \textbf{Rastreabilidade}: Automação via APIs e versionamento permitem repetir os passos e auditar parâmetros, embora as respostas externas possam variar;
     \item \textbf{Eficiência}: Coleta sistemática de grandes volumes de dados com consistência metodológica.
 \end{itemize}
 
 \subsection{Estratégia de Busca Bilíngue}
 
-A estratégia de busca combinou três camadas de termos (base matemática, técnicas computacionais e domínio educacional), utilizando o operador booleano \texttt{AND} para garantir precisão e relevância temática.
+A estratégia de busca combinou três camadas de termos (base matemática, técnicas computacionais e domínio educacional), utilizando o operador booleano \texttt{AND} para buscar maior precisão e relevância temática.
 
 \textbf{Camada 1 -- Base Matemática}:
 \begin{itemize}
@@ -57,7 +59,7 @@ A inclusão de termos de busca em português e inglês visou:
 \begin{itemize}
     \item \textbf{Amplitude Geográfica}: Capturar pesquisas de diferentes regiões e contextos culturais;
     \item \textbf{Diversidade Cultural}: Incluir abordagens pedagógicas culturalmente específicas;
-    \item \textbf{Completude}: Evitar perda de estudos relevantes devido a limitações linguísticas.
+    \item \textbf{Ampliação de cobertura linguística}: aumentar a possibilidade de recuperar estudos relevantes em português e inglês, sem assegurar completude.
 \end{itemize}
 
 A estratégia resultou em \textbf{72 consultas únicas}:
@@ -75,11 +77,11 @@ Cada consulta segue o formato: \texttt{"termo\_base" AND "termo\_tecnica" AND "t
     \item \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}ao"}
 \end{itemize}
 
-Esta abordagem de \textbf{expansão em 3 camadas} garante:
+Esta abordagem de \textbf{expansão em 3 camadas} busca oferecer:
 \begin{enumerate}
     \item \textbf{Precisão temática}: Todas as queries combinam matemática + técnica computacional + domínio educacional
-    \item \textbf{Cobertura abrangente}: 12 termos técnicos capturam diferentes áreas de IA/ML/LA
-    \item \textbf{Inclusão bilinguística}: Queries em inglês e português ampliam representação geográfica
+    \item \textbf{Cobertura de diferentes áreas}: os 12 termos técnicos contemplam diferentes áreas de IA/ML/LA
+    \item \textbf{Inclusão bilinguística}: consultas em inglês e português podem ampliar a representação geográfica
     \item \textbf{Reprodutibilidade}: Estrutura documentada em \texttt{search\_terms.py} (módulo canônico)
 \end{enumerate}
 
@@ -116,6 +118,8 @@ O período de 2015-2026 (com data de corte em 31 de agosto de 2026) foi escolhid
     \item Idiomas: inglês ou português.
 \end{enumerate}
 
+Esses itens registram os critérios planejados, mas não constituem uma confirmação bibliográfica individual de cada registro incluído. No snapshot atual há registros com veículo ausente, classificação institucional ou metadados ainda pendentes de confirmação; por isso, a seleção vigente não deve ser usada para afirmar que o status de texto completo e revisão por pares foi verificado para os 16 estudos.
+
 \subsection{Critérios de Exclusão}
 
 \begin{enumerate}
@@ -130,53 +134,55 @@ O período de 2015-2026 (com data de corte em 31 de agosto de 2026) foi escolhid
 
 \section{Processo de Seleção (PRISMA)}
 
-O fluxo de seleção dos estudos seguiu rigorosamente as etapas PRISMA:
+O fluxo de seleção dos estudos foi organizado segundo as etapas PRISMA:
 
 \subsection{Identificação}
 
-Execução automatizada das 72 consultas nas quatro APIs, resultando na coleta inicial de \textbf{9.431 registros}. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}).
+Execução automatizada das consultas nas quatro APIs, resultando em \textbf{11.904 registros} no banco consolidado. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}). A base \path{research/systematic_review.sqlite} foi adotada como fonte de verdade para os estados e contagens desta consolidação. O snapshot foi persistido sem registros marcados pela flag \texttt{is\_duplicate}; por isso, não houve remoção adicional registrada no fluxo descrito neste capítulo. A auditoria de DOI é apresentada separadamente para não confundir a flag operacional com unicidade bibliográfica.
 
 \subsection{Triagem}
 
-Aplicação de deduplicação automática e filtros para remover:
+Na triagem, os registros foram avaliados por regras de disponibilidade de título/resumo, período e idioma. Os mecanismos de identificação de possíveis duplicatas são descritos na Seção de Deduplicação e não devem ser confundidos com as exclusões de triagem. Foram aplicados filtros para remover:
 \begin{itemize}
-    \item Registros duplicados identificados via \textit{cache};
     \item Sem título ou resumo válido;
     \item Fora do período 2015--2026;
     \item Em idiomas não compatíveis.
 \end{itemize}
 
-Nesta etapa foram excluídos \textbf{2.517 registros duplicados} (26,6\%), resultando em \textbf{6.914 estudos únicos}. Após aplicação de critérios de triagem, \textbf{1.883 estudos} avançaram para análise de elegibilidade.
+No banco consolidado, os \textbf{11.904 registros} foram avaliados na triagem. \textbf{9.413 registros} foram excluídos nessa etapa, e \textbf{2.491 estudos} avançaram para a análise de elegibilidade.
 
 \subsection{Elegibilidade}
 
-Avaliação dos estudos mediante sistema de pontuação (\textit{scoring}) multi-critério baseado em:
+Avaliação operacional dos registros mediante um sistema heurístico de pontuação (\textit{scoring}) de relevância temática, calculado sobre título e resumo quando disponíveis, baseado em:
 
 \begin{enumerate}
-    \item \textbf{Técnicas Computacionais} (0--3 pontos): Presença e relevância de termos relacionados a ML, IA, LA, STI, etc.;
-    \item \textbf{Contexto Educacional Matemático} (0--3 pontos): Aderência explícita ao domínio do ensino de matemática;
-    \item \textbf{Qualidade de Metadados/Abstract} (0--2 pontos): Completude e clareza das informações bibliográficas;
-    \item \textbf{Impacto e Acesso} (0--2 pontos): Disponibilidade de DOI, acesso aberto, número de citações.
+    \item \textbf{Domínio matemático} (peso 0,3): ocorrência de termos de matemática e bônus para alguns tópicos específicos;
+    \item \textbf{Relevância técnica} (peso 0,3): padrões de ML, IA, analítica da aprendizagem e algoritmos identificados no texto;
+    \item \textbf{Sinais metodológicos} (peso 0,2): tipo de estudo e métodos de avaliação reconhecidos por padrões textuais;
+    \item \textbf{Recência} (peso 0,1): faixa do ano de publicação;
+    \item \textbf{Indicadores de metadados} (peso 0,1): comprimento do resumo, presença de DOI e indicador simplificado de veículo.
 \end{enumerate}
 
-A pontuação total varia de 0 a 10. O limiar de inclusão foi definido como pontuação de relevância maior ou igual a 4,0, garantindo seleção rigorosa de estudos com aderência temática e metodológica adequadas.
+A implementação soma os componentes ponderados, limita o resultado ao intervalo de 0 a 10 e, no snapshot atual, produziu valores observados entre 0 e 4,5. O limiar operacional foi definido como pontuação de relevância maior ou igual a 4,0. DOI, citações e acesso aberto não funcionam como medida de qualidade científica nessa implementação: apenas a presença de DOI e um indicador simplificado de veículo entram no componente de metadados. Por isso, o limiar não garante elegibilidade metodológica, qualidade dos estudos ou validade dos resultados, e os candidatos ainda requereram auditoria de pertinência.
 
-Nesta etapa foram excluídos \textbf{1.866 registros} (99,1\% dos 1.883 estudos avaliados), refletindo o rigor dos critérios de seleção baseados na pontuação de relevância.
+Nesta etapa foram excluídos \textbf{2.475 registros} (99,4\% dos 2.491 registros avaliados). A pontuação foi um filtro operacional de aderência temática; essa contagem não constitui avaliação de qualidade metodológica.
+
+Na reexecução e auditoria da rodada atual, foram identificados \textbf{23 candidatos} pelo limiar operacional. A revisão de pertinência identificou \textbf{7 falsos positivos}, que foram excluídos, permanecendo os \textbf{16 estudos} do conjunto vigente. Essa reconciliação explica a diferença em relação à execução histórica, que registrava 17 incluídos: a nova rodada utilizou o snapshot atualizado e a lógica de scoring corrigida, não uma simples substituição numérica. Os sete falsos positivos fazem parte dos 2.475 registros com estágio \texttt{eligibility} e status de exclusão; portanto, não são sete exclusões adicionais a serem somadas ao fluxo PRISMA.
 
 \subsection{Inclusão}
 
-Após aplicação do limiar de relevância, foram incluídos \textbf{17 estudos} para síntese qualitativa, representando uma taxa de inclusão de aproximadamente \textbf{0,18\%} em relação ao total identificado (17/9.431).
+Após a auditoria de pertinência dos candidatos acima do limiar, foram incluídos \textbf{16 estudos} para síntese qualitativa, representando uma taxa de inclusão de aproximadamente \textbf{0,13\%} em relação ao total identificado (16/11.904).
 
 \section{Deduplicação}
 
-A deduplicação foi realizada em dois níveis:
+É necessário distinguir a deduplicação prevista por helpers do módulo de processamento da lógica efetivamente usada na reexecução. O módulo legado oferece rotinas destrutivas por DOI, URL e similaridade de título; nesta última, TF-IDF (\textit{Term Frequency--Inverse Document Frequency}) com n-gramas de caracteres é comparado pela similaridade do cosseno, que varia de 0 a 1, com limiar operacional de $0{,}9$. Essas rotinas não devem ser descritas como se tivessem sido aplicadas ao snapshot atual.
 
 \begin{enumerate}
-    \item \textbf{Por DOI}: Registros com DOI idêntico foram unificados, priorizando a fonte com maior completude de metadados;
-    \item \textbf{Por Similaridade de Título}: Títulos com similaridade TF-IDF coseno $>0.9$ foram considerados duplicatas, mantendo-se apenas o registro mais completo.
+    \item \textbf{Por DOI}: a rotina destrutiva normaliza o DOI (minúsculas e remoção do prefixo ``doi:'') e mantém a primeira ocorrência;
+    \item \textbf{Por URL e similaridade de título}: as rotinas correspondentes podem remover repetições por URL e títulos com similaridade TF-IDF pelo cosseno $\geq 0{,}9$.
 \end{enumerate}
 
-Este processo foi executado durante a ingestão dos dados, antes da triagem.
+Na execução canônica atual, o pipeline usa a identificação não destrutiva de possíveis duplicatas por DOI e URL: ela marca a flag, mas não remove linhas. Neste snapshot, os 11.904 registros possuem \texttt{is\_duplicate = 0} e o relatório registra zero remoções adicionais baseadas nessa flag. A auditoria do export encontrou 10.658 DOIs normalizados distintos, 1.222 registros sem DOI e 24 grupos de DOI repetido (48 linhas); esses casos requerem decisão de integridade própria e não foram convertidos automaticamente em exclusões. Assim, DOI repetido não equivale a duplicata removida, e nenhuma deduplicação por título deve ser inferida apenas a partir das contagens atuais.
 
 \section{Infraestrutura Tecnológica}
 
@@ -185,17 +191,17 @@ Este processo foi executado durante a ingestão dos dados, antes da triagem.
 O pipeline de revisão sistemática foi implementado em \textbf{Python 3.11+}, utilizando:
 
 \begin{itemize}
-    \item \textbf{SQLite}: Banco de dados local para armazenamento estruturado (\texttt{systematic\_review.\\sqlite});
+    \item \textbf{SQLite}: Banco de dados local para armazenamento estruturado (\path{systematic_review.sqlite});
     \item \textbf{Requests}: Cliente HTTP para comunicação com APIs;
     \item \textbf{Pandas}: Manipulação e análise de dados tabulares;
     \item \textbf{Scikit-learn}: Cálculo de similaridades TF-IDF para deduplicação.
 \end{itemize}
 
-O sistema implementa \textit{cache} local com taxa de reutilização de aproximadamente \textbf{63\%}, reduzindo significativamente o tempo de reprocessamento e o número de requisições às APIs.
+O sistema implementa um \textit{cache} persistente na tabela \texttt{cache} do banco, indexado por API e consulta e com expiração configurada por fonte. Um acerto de cache ocorre quando a solicitação é respondida por um resultado previamente armazenado, sem nova chamada à API; o campo \texttt{hit\_count} é acumulado por entrada e os eventos de acerto/erro são registrados na auditoria. O cache reduz chamadas repetidas, mas não deduplica registros nem altera os estágios PRISMA. Sua taxa depende do histórico de execução e não deve ser tratada como uma constante do estudo.
 
 \subsection{Reprodutibilidade}
 
-O \textit{pipeline} foi projetado para ser totalmente reprodutível mediante comandos CLI (\textit{Command Line Interface}):
+O \textit{pipeline} foi projetado para ser reexecutável mediante comandos CLI (\textit{Command Line Interface}), com parâmetros e artefatos versionados. A reprodução exata das respostas das APIs não é garantida, pois fontes externas, expiração do cache e metadados podem mudar. Para esta consolidação, as contagens e os estados devem ser reproduzidos a partir da base atual e dos exports derivados, sem presumir que uma nova coleta produza o mesmo snapshot:
 
 \begin{verbatim}
 # Executar pipeline completo
@@ -212,20 +218,20 @@ Todos os parâmetros de configuração (limiares, APIs, termos de busca) estão 
 
 \section{Avaliação da Qualidade Metodológica}
 
-Os estudos incluídos foram submetidos a avaliação crítica de qualidade metodológica utilizando o \textit{Mixed Methods Appraisal Tool} (MMAT) versão 2018 \cite{MMAT2018}. O MMAT foi selecionado por sua capacidade de avaliar diferentes desenhos de estudo (qualitativos, quantitativos e mistos) de forma padronizada, adequando-se à heterogeneidade metodológica identificada nesta revisão.
+Foi definido um procedimento de avaliação crítica de qualidade metodológica utilizando o \textit{Mixed Methods Appraisal Tool} (MMAT) versão 2018 \cite{MMAT2018}. O MMAT foi selecionado por sua capacidade de avaliar diferentes desenhos de estudo (qualitativos, quantitativos e mistos) de forma padronizada, adequando-se à heterogeneidade metodológica identificada nesta revisão. Como a atualização do banco alterou o conjunto incluído, os julgamentos MMAT disponíveis para a versão anterior não são apresentados como avaliação final dos 16 estudos atuais; a reaplicação ao conjunto atualizado permanece pendente.
 
-O processo de avaliação consistiu em:
+O processo de avaliação foi especificado nas seguintes etapas:
 
 \begin{enumerate}
-    \item \textbf{Classificação do desenho de estudo}: Cada um dos 17 estudos incluídos foi categorizado conforme seu desenho metodológico (qualitativo, quantitativo randomizado, quantitativo não-randomizado, quantitativo descritivo ou métodos mistos).
+    \item \textbf{Classificação do desenho de estudo}: Os estudos incluídos foram categorizados conforme seu desenho metodológico (qualitativo, quantitativo randomizado, quantitativo não-randomizado, quantitativo descritivo ou métodos mistos).
 
-    \item \textbf{Aplicação dos critérios MMAT}: Para cada estudo, foram aplicados 5 critérios de qualidade específicos ao seu desenho metodológico, respondendo ``Sim'', ``Não'' ou ``Não é possível determinar'' para cada critério.
+    \item \textbf{Aplicação dos critérios MMAT}: Para cada estudo, deverão ser aplicados 5 critérios de qualidade específicos ao seu desenho metodológico, respondendo ``Sim'', ``Não'' ou ``Não é possível determinar'' para cada critério.
 
-    \item \textbf{Síntese da qualidade}: Conforme recomendação dos autores do MMAT, a qualidade metodológica foi reportada descritivamente (contagem de critérios atendidos) sem cálculo de \textit{score} percentual, evitando simplificação excessiva de aspectos complexos de qualidade.
+    \item \textbf{Síntese da qualidade}: Conforme recomendação dos autores do MMAT, a qualidade metodológica deverá ser reportada descritivamente (contagem de critérios atendidos) sem cálculo de \textit{score} percentual, evitando simplificação excessiva de aspectos complexos de qualidade.
 \end{enumerate}
 
-A avaliação foi conduzida por um único revisor com registro detalhado de justificativas para cada julgamento, permitindo auditoria e revisão das decisões. Estudos com baixa qualidade metodológica não foram excluídos automaticamente, mas tiveram suas limitações consideradas na síntese narrativa e discussão dos achados.
+A avaliação planejada prevê registro por um único revisor, com justificativas detalhadas para cada julgamento, permitindo auditoria e revisão das decisões. Estudos com baixa qualidade metodológica não serão excluídos automaticamente, mas terão suas limitações consideradas na síntese narrativa e discussão dos achados.
 
-Os resultados completos da avaliação MMAT encontram-se na Seção~\ref{sec:qualidade-estudos}.
+O estado da avaliação MMAT do conjunto atualizado é registrado na Seção~\ref{sec:qualidade-estudos}, que explicita a pendência de reaplicação sem reutilizar a tabela histórica como resultado atual.
 
 %--------- FIM METODOLOGIA ------------

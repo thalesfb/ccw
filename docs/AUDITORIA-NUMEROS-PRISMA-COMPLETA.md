@@ -1,5 +1,14 @@
 # Auditoria Completa dos Números PRISMA — Verificação Detalhada
 
+## Estado vigente (31/08/2026)
+
+O banco atual contém **11.904 registros**: **9.413** foram excluídos na triagem, **2.491** avançaram à elegibilidade, **2.475** foram excluídos nessa etapa e **16** estudos foram incluídos. Os IDs incluídos são 1--10, 6916, 6917, 6918, 6920, 6921 e 6923.
+
+A execução histórica tinha 17 estudos incluídos. Em uma nova rodada, foram encontrados 23 candidatos e removidos 7 falsos positivos, chegando aos 16 atuais. A diferença também envolve nova contagem de ingestão e correção do scoring; não é uma simples troca numérica. A reaplicação do MMAT aos 16 estudos atuais permanece pendente, portanto conclusões comparativas sobre qualidade metodológica ou certeza da evidência ainda não estão consolidadas.
+
+## Baseline histórico auditado
+> **Aviso de versão:** este documento registra a auditoria do baseline histórico de 9.431 registros e 17 incluídos. Após a atualização do banco em 31/08/2026, a fonte atual é `docs/RECONCILIACAO-BASELINE-2026-08-31.md`, com 11.904 registros consolidados e 16 incluídos. Os valores abaixo devem ser lidos como histórico, não como contagens vigentes.
+
 **Data**: 29 de março de 2026
 **Projeto**: Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais
 **Aluno**: Thales Ferreira Batista
@@ -12,15 +21,15 @@
 
 ---
 
-## Conclusão
+## Conclusão do baseline histórico
 
-✅ **TODOS OS NÚMEROS ESTÃO CORRETOS E VERIFICADOS.**
+⚠️ **A reconciliação do baseline histórico permanece incompleta.**
 
-Não há inconsistência. O número `2494` é um erro de interpretação — refere-se ao índice de linha (row 2494) em um arquivo CSV, não ao número de duplicatas.
+Os documentos legados sustentam 2.517 duplicatas removidas e 6.914 registros únicos, mas o único registro histórico disponível na tabela `searches` do SQLite contém `initial_count=9431` e `total_removed=2494`, o que implicaria 6.937. O valor `2494` também aparece como índice de linha no CSV; portanto, não pode ser descartado apenas como erro de interpretação. A escolha entre 2.517 e 2.494 requer o artefato arquivado da execução histórica e não deve ser apresentada como resolvida pela fonte atual.
 
 ---
 
-## Números Corretos (Verificados em 5 Fontes Independentes)
+## Números do baseline histórico (verificados em 5 fontes)
 
 | Métrica | Valor | Status |
 |---------|-------|--------|
@@ -35,9 +44,9 @@ Não há inconsistência. O número `2494` é um erro de interpretação — ref
 
 ---
 
-## Verificação em 5 Locais Independentes
+## Verificação do snapshot histórico em 5 locais
 
-### 1. Fonte Oficial: `research/exports/reports/summary.json`
+### 1. Fonte do snapshot histórico: `research/exports/reports/summary.json`
 ```json
 {
   "statistics": {
@@ -54,11 +63,11 @@ Não há inconsistência. O número `2494` é um erro de interpretação — ref
 }
 ```
 
-**Status**: ✅ Source of truth — todos os números originam-se daqui
+**Status**: ✅ Consistente no snapshot histórico; o arquivo atual foi regenerado e é a fonte dos valores vigentes.
 
 ---
 
-### 2. Documento LaTeX — TCC (`results/tcc/conteudo/resultadosesperados.tex`)
+### 2. Documento LaTeX — TCC (versão histórica)
 
 **Tabela 4.1 — Estatísticas Descritivas:**
 ```latex
@@ -70,48 +79,50 @@ Total elegíveis (após triagem) & 1.883 \\
 Total incluído (pontuação ≥ 4,0) & 17 \\
 ```
 
-**Status**: ✅ Consistente com summary.json
+**Status**: ✅ Consistente com o snapshot histórico
 
 ---
 
-### 3. Documento LaTeX — PTC (anterior, referência)
+### 3. Documento LaTeX — PTC (anterior, referência histórica)
 
 **Arquivo**: `results/ptc/conteudo/resultadosesperados.tex`
 
 **Conteúdo**: Idêntico ao TCC (26,6%, 2.517, 6.914, etc.)
 
-**Status**: ✅ Consistente
+**Status**: ✅ Consistente no snapshot histórico
 
 ---
 
-### 4. Página Web Principal (`index.html`)
+### 4. Página Web Principal (versão histórica)
 
 **Seção: "Fluxo PRISMA 2020"**
 ```html
 <li><strong>Remoção de Duplicatas:</strong> 2.517 duplicatas removidas (26,6%) → 6.914 registros únicos</li>
-<li><strong>Triagem:</strong> 6.914 artigos avaliados por título/resumo → 5.054 excluídos (72,8%)</li>
+<li><strong>Triagem:</strong> 6.914 artigos avaliados por título/resumo → 5.031 excluídos (72,8%)</li>
 <li><strong>Elegibilidade:</strong> 1.883 artigos para avaliação de texto completo → 1.866 excluídos (99,1%)</li>
 ```
 
-**Status**: ✅ Consistente
+**Status**: ✅ Consistente no snapshot histórico
 
 ---
 
 ### 5. Imagens/Visualizações
 
-#### Figura 1: PRISMA Flow Diagram (`results/tcc/images/prisma_flow.png`)
+#### Figura 1: PRISMA Flow Diagram (versão histórica)
 - ✅ Mostra: 9.431 → 2.517 removidas → 6.914 únicos
 - ✅ Mostra: 1.883 elegíveis → 1.866 excluídos → 17 incluídos
-- **Status**: Correto
+- **Status**: Correto no snapshot histórico
 
-#### Figura 2: Selection Funnel (`results/tcc/images/selection_funnel.png`)
+#### Figura 2: Selection Funnel (versão histórica)
 - ✅ Mostra: 9.431 (Identificação) → 6.914 (Triagem) → 1.883 (Elegibilidade) → 17 (Incluídos)
 - **Status**: Correto
+- **Status**: Correto no snapshot histórico
 
-#### Figura 3: Database Coverage (`results/tcc/images/database_coverage.png`)
+#### Figura 3: Database Coverage (versão histórica)
 - ✅ Mostra distribuição por base: Semantic Scholar (2.865), OpenAlex (1.817), CrossRef (1.786), CORE (446)
 - ✅ Total = ~2.865 + 1.817 + 1.786 + 446 = ~6.914 (incluindo duplicatas em bases)
 - **Status**: Correto
+- **Status**: Correto no snapshot histórico
 
 ---
 
@@ -141,14 +152,14 @@ Taxa de inclusão final:
 O número `2494` aparece em:
 - **Arquivo**: `research/exports/analysis/papers.csv`
 - **Significado**: Índice de linha (row 2494) em um arquivo de dados
-- **NÃO É**: O número de duplicatas removidas
+- **Também consta como**: `total_removed` no registro histórico de `searches` do SQLite
 
 **Exemplo do CSV:**
 ```
 row_2494: 10.1109/icscee.2018.8538434 | Educational Data Mining...
 ```
 
-O `2494` é apenas a posição dessa linha na tabela, não um número significativo para PRISMA.
+O `2494` não pode ser tratado apenas como posição de linha; sua origem histórica para o cálculo PRISMA permanece não resolvida.
 
 ---
 
@@ -172,7 +183,7 @@ A remoção de 2.517 duplicatas foi realizada em **3 etapas**:
 
 ---
 
-## Checklist de Consistência
+## Checklist de Consistência do snapshot histórico
 
 | Item | Arquivo | Valor | Status |
 |------|---------|-------|--------|
@@ -192,11 +203,11 @@ A remoção de 2.517 duplicatas foi realizada em **3 etapas**:
 
 ---
 
-## Recomendação
+## Recomendação para uso atual
 
-✅ **Não há necessidade de corrigir nenhum número.**
+✅ **Não havia necessidade de corrigir os números dentro do snapshot histórico.**
 
-Todos os documentos, imagens e visualizações estão consistentes e corretos. O questionamento da banca pode ter surgido de:
+No snapshot histórico, os documentos, imagens e visualizações estavam consistentes e corretos. Esse resultado não substitui a reconciliação do baseline vigente. O questionamento da banca pode ter surgido de:
 
 1. Interpretação errada do índice de linha do CSV (2494) como um número PRISMA
 2. Cálculo mental que usou 2494 em vez de 2517

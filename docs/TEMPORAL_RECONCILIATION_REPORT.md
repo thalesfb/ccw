@@ -2,7 +2,9 @@
 
 **Data:** 2026-08-30  
 **Autor:** Thales Ferreira Batista  
-**Status:** Relatório para decisão do orientador
+**Status:** Histórico superseded pela reconciliação do baseline de 31/08/2026
+
+> **Nota:** as tabelas e recomendações abaixo preservam a análise temporal anterior, baseada em 9.431 registros e 17 incluídos. Elas não representam o fluxo vigente. A nova execução consolidou 11.904 registros, avaliou 23 candidatos, removeu 7 falsos positivos e manteve 16 estudos incluídos. Consulte `docs/RECONCILIACAO-BASELINE-2026-08-31.md` antes de reutilizar qualquer número ou recomendação.
 
 ---
 

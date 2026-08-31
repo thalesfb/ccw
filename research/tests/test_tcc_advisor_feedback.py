@@ -76,7 +76,7 @@ def test_tfidf_and_cosine_similarity_are_explained_before_use() -> None:
 def test_interpretation_precedes_the_long_synthesis_table() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
     interpretation = chapter.index("Antes da tabela detalhada")
-    table = chapter.index(r"\label{tab:sintese-17-estudos}")
+    table = chapter.index(r"\label{tab:sintese-estudos-incluidos}")
     assert interpretation < table
 
 
@@ -182,7 +182,9 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     mmat_section = chapter[chapter.index("Avaliação Metodológica com o MMAT") :]
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
     assert "sem média, ranking ou categoria geral" in mmat_section
-    assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" in chapter
+    assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" not in chapter
+    assert "reaplicação do instrumento ao conjunto atual" in chapter
+    assert "a tabela histórica não é apresentada como resultado final" in chapter
     assert "Tjahyadi (2025) & Quant." not in chapter
 
 

@@ -314,16 +314,16 @@
                             <span class="label">Consultas Bilíngues (48 EN + 24 PT)</span>
                         </div>
                         <div class="stat-card">
-                            <span class="number">9.431</span>
-                            <span class="label">Papers Identificados</span>
+                            <span class="number">11.904</span>
+                            <span class="label">Registros no Snapshot</span>
                         </div>
                         <div class="stat-card">
-                            <span class="number">6.914</span>
-                            <span class="label">Registros Únicos</span>
+                            <span class="number">2.491</span>
+                            <span class="label">Avançaram à Elegibilidade</span>
                         </div>
                         <div class="stat-card">
-                            <span class="number">17</span>
-                            <span class="label">Estudos Incluídos (≥4.0)</span>
+                            <span class="number">16</span>
+                            <span class="label">Estudos Incluídos</span>
                         </div>
                 </div>
                 
@@ -333,16 +333,16 @@
                             <span class="label">Bases de Dados</span>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
-                            <span class="number">26,6%</span>
-                            <span class="label">Taxa de Duplicatas</span>
+                            <span class="number">0</span>
+                            <span class="label">Remoções pela Flag de Duplicata</span>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
-                            <span class="number">4.2</span>
-                            <span class="label">Pontuação Média de Relevância</span>
+                            <span class="number">24</span>
+                            <span class="label">Grupos de DOI Repetido (auditoria)</span>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
-                            <span class="number">~92%</span>
-                            <span class="label">Cache Hit Rate</span>
+                            <span class="number">4,24</span>
+                            <span class="label">Relevância Média dos 16 (não qualidade)</span>
                         </div>
                 </div>
                 
@@ -352,12 +352,11 @@
                     (Preferred Reporting Items for Systematic Reviews and Meta-Analyses):
                 </p>
                 <ul>
-                    <li><strong>Identificação:</strong> 9.431 registros coletados de 4 bases de dados acadêmicas (incluindo duplicatas)</li>
-                    <li><strong>Remoção de Duplicatas:</strong> 2.517 duplicatas removidas (26,6%) → 6.914 registros únicos</li>
-                    <li><strong>Triagem:</strong> 6.914 artigos avaliados por título/resumo → 5.054 excluídos (72,8%)</li>
-                    <li><strong>Elegibilidade:</strong> 1.883 artigos para avaliação de texto completo → 1.866 excluídos (99,1%)</li>
-                    <li><strong>Inclusão:</strong> 17 estudos incluídos na síntese qualitativa final (pontuação ≥ 4.0)</li>
-                    <li><strong>Taxa de Inclusão Final:</strong> ~0,18% dos registros identificados</li>
+                    <li><strong>Identificação:</strong> 11.904 registros no snapshot consolidado, provenientes de 4 bases</li>
+                    <li><strong>Triagem:</strong> 11.904 registros avaliados → 9.413 excluídos → 2.491 avançaram</li>
+                    <li><strong>Elegibilidade:</strong> 2.491 registros avaliados → 2.475 excluídos → 16 incluídos</li>
+                    <li><strong>Auditoria:</strong> 23 candidatos no limiar operacional; 7 falsos positivos foram removidos após revisão de pertinência</li>
+                    <li><strong>Taxa de Inclusão Final:</strong> ~0,13% dos registros no snapshot</li>
                 </ul>
                 
                 <h3>🗄️ Bases de Dados Consultadas</h3>
@@ -382,20 +381,9 @@
                 
                 <h3>🔬 Avaliação de Qualidade (MMAT 2018)</h3>
                 <p>
-                    Os 17 estudos foram avaliados quanto à qualidade metodológica usando o <strong>MMAT 2018</strong>
-                    (Mixed Methods Appraisal Tool). A <strong>pontuação média foi 3.12/5</strong>, indicando qualidade moderada a boa:
-                </p>
-                <ul style="margin: 15px 0 15px 30px;">
-                    <li><strong>3 estudos (18%):</strong> Score 5/5 — Muito Alta (Pejic 2021, Depren 2017, MacLellan 2017)</li>
-                    <li><strong>3 estudos (18%):</strong> Score 4/5 — Alta (Appiah-Odame 2024, Mertasari 2023, Hasib 2022)</li>
-                    <li><strong>6 estudos (35%):</strong> Score 3/5 — Moderada</li>
-                    <li><strong>3 estudos (18%):</strong> Score 2/5 — Baixa</li>
-                    <li><strong>2 estudos (12%):</strong> Score 1/5 — Muito Baixa</li>
-                </ul>
-                <p style="margin: 15px 0;">
-                    <a href="research/exports/analysis/mmat_visualization.html" style="color: #3498db; font-weight: 600; text-decoration: none;">
-                        🔍 Visualizar relatório detalhado MMAT →
-                    </a>
+                    O procedimento MMAT 2018 foi definido por critério, mas a reaplicação aos 16 estudos atuais ainda está pendente.
+                    Os artefatos históricos de 17 estudos não são apresentados como resultado de qualidade vigente e não há média ou ranking atual.
+                    Consulte a <a href="docs/RECONCILIACAO-BASELINE-2026-08-31.md">reconciliação da baseline</a> para a pendência metodológica.
                 </p>
 
                 <h3>📈 Síntese Temática dos Estudos Incluídos</h3>
@@ -403,38 +391,37 @@
                     <div class="feature-card">
                         <h4>🤖 Abordagens Técnicas</h4>
                         <p>
-                            <strong>ML Supervisionado:</strong> 76,5% dos estudos<br>
-                            <strong>Deep Learning:</strong> 11,8% dos estudos<br>
-                            <strong>Sistemas Híbridos:</strong> 5,9% dos estudos<br>
-                            <strong>Redes Bayesianas:</strong> 5,9% dos estudos
+                            <strong>Machine Learning:</strong> 11/16 (68,8%)<br>
+                            <strong>Predictive Analytics:</strong> 9/16 (56,3%)<br>
+                            <strong>Assessment:</strong> 8/16 (50,0%)<br>
+                            <small>Etiquetas sobrepostas do snapshot; não são avaliação de qualidade.</small>
                         </p>
                     </div>
                     <div class="feature-card">
                         <h4>🎯 Finalidades Pedagógicas</h4>
                         <p>
-                            <strong>Predição de Desempenho:</strong> 52,9%<br>
-                            <strong>Personalização Adaptativa:</strong> 17,6%<br>
-                            <strong>Identificação de Dificuldades:</strong> 11,8%<br>
-                            <strong>Recomendação de Conteúdo:</strong> 11,8%<br>
-                            <strong>Modelagem de Estudantes:</strong> 5,9%
+                            <strong>Adaptive Learning:</strong> 6/16 (37,5%)<br>
+                            <strong>Learning Analytics:</strong> 7/16 (43,8%)<br>
+                            <strong>Intelligent Tutoring:</strong> 3/16 (18,8%)<br>
+                            <small>Os rótulos podem coexistir em um mesmo estudo.</small>
                         </p>
                     </div>
                     <div class="feature-card">
                         <h4>📊 Termos Mais Frequentes</h4>
                         <p>
-                            <strong>Machine Learning:</strong> 58,8%<br>
-                            <strong>Assessment:</strong> 52,9%<br>
-                            <strong>Predictive Analytics:</strong> 47,1%<br>
-                            <strong>Adaptive Learning:</strong> 35,3%<br>
-                            <strong>Learning Analytics:</strong> 29,4%
+                            <strong>Machine Learning:</strong> 11/16<br>
+                            <strong>Predictive Analytics:</strong> 9/16<br>
+                            <strong>Assessment:</strong> 8/16<br>
+                            <strong>Learning Analytics:</strong> 7/16<br>
+                            <strong>Adaptive Learning:</strong> 6/16
                         </p>
                     </div>
                     <div class="feature-card">
                         <h4>🏆 Desempenho dos Modelos</h4>
                         <p>
-                            <strong>Acurácias reportadas:</strong> 75% a 96,89%<br>
-                            <strong>Algoritmos destaque:</strong> Random Forest, SVM, Redes Neurais<br>
-                            <strong>Dados típicos:</strong> logs de interação, avaliações, tempo de resposta
+                            <strong>Medidas:</strong> desempenho, estatística e feedback de usuários<br>
+                            <strong>Modelos citados:</strong> Random Forest, SVM, redes neurais e modelos híbridos<br>
+                            <strong>Limite:</strong> resultados não são comparáveis sem análise MMAT e validação em fonte primária
                         </p>
                     </div>
                 </div>
@@ -442,7 +429,7 @@
                 <h3>🔑 Estratégia de Busca</h3>
                 <p>
                     <strong>72 combinações únicas</strong> executadas através de 4 APIs acadêmicas, 
-                    cobrindo o período de <strong>2016–2025</strong> (10 anos):
+                    cobrindo o período de <strong>2015–2026</strong> no snapshot atual:
                 </p>
                 <ul>
                     <li><strong>3 termos matemáticos:</strong> "mathematics", "math", "matemática"</li>
@@ -450,7 +437,7 @@
                     <li><strong>4 termos educacionais:</strong> "education", "learning", "educacao", "ensino"</li>
                     <li><strong>Estratégia:</strong> Combinações triplas com operador booleano AND (base_term AND tech_term AND edu_term)</li>
                     <li><strong>Distribuição:</strong> 48 consultas em inglês + 24 consultas em português</li>
-                    <li><strong>Critério de Inclusão:</strong> Pontuação de relevância ≥ 4.0 (escala 0–5)</li>
+                    <li><strong>Filtro operacional:</strong> Pontuação de relevância ≥ 4.0 (escala implementada 0–10; não é medida de qualidade científica)</li>
                 </ul>
             </section>
             
@@ -469,7 +456,7 @@
                 
                 <h3>Objetivos Específicos</h3>
                 <ul>
-                    <li>✅ <strong>OE1:</strong> Realizar revisão sistemática da literatura seguindo a <strong>guideline de relato PRISMA 2020</strong> para identificar estudos que apliquem técnicas computacionais na educação matemática (2016-2025)</li>
+                    <li>✅ <strong>OE1:</strong> Realizar revisão sistemática da literatura seguindo a <strong>guideline de relato PRISMA 2020</strong> para identificar estudos que apliquem técnicas computacionais na educação matemática (2015-2026)</li>
                     <li>✅ <strong>OE2:</strong> Identificar e categorizar as principais abordagens de IA (Machine Learning, Deep Learning, NLP, Educational Data Mining) aplicadas à educação matemática</li>
                     <li>✅ <strong>OE3:</strong> Classificar as aplicações segundo suas finalidades pedagógicas: tutoria inteligente, diagnóstico, avaliação automatizada, personalização, predição e feedback adaptativo</li>
                     <li>✅ <strong>OE4:</strong> Analisar criticamente as metodologias de avaliação utilizadas para validar a eficácia de sistemas computacionais em contextos educacionais</li>
@@ -484,7 +471,7 @@
                         <p>
                             <strong>Status:</strong> Concluída<br>
                             <strong>Período:</strong> Mar–Nov 2025<br>
-                            <strong>Entrega:</strong> Relatório PRISMA com 17 estudos analisados
+                            <strong>Entrega:</strong> Revisão reconciliada com 16 estudos atuais; MMAT pendente
                         </p>
                     </div>
                     <div class="feature-card" style="border-left-color: #f39c12;">

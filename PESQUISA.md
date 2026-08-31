@@ -3,7 +3,9 @@
 > Documento vivo para agentes e pesquisador. Funciona como CLAUDE.md do projeto,
 > rastreador de melhorias baseado em feedback da banca, e guia de workflow.
 >
-> **Ultima atualizacao:** 2026-03-28
+> **Ultima atualizacao:** 2026-08-31
+
+> **Baseline vigente (31/08/2026):** a base consolidada contém 11.904 registros. Destes, 9.413 foram excluídos na triagem, 2.491 avançaram à elegibilidade, 2.475 foram excluídos nessa etapa e 16 estudos permanecem incluídos. A reexecução partiu de 23 candidatos, removeu 7 falsos positivos e alterou a composição do conjunto; os números atuais não são uma simples substituição de 17 por 16. A reconciliação completa está em `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
 
 ---
 
@@ -24,11 +26,11 @@
 | Fase 2 | Desenvolvimento do Prototipo (TCC) | Fev-Jun 2026 | Em andamento |
 | Fase 3 | Validacao Experimental (TCC) | Jul-Nov 2026 | Planejada |
 
-**Revisao Sistematica:** 9.431 identificados, 6.914 unicos, **17 incluidos** (score >= 4.0). ML supervisionado 76.5%, predicao 52.9%.
+**Revisao Sistematica vigente:** 11.904 registros no snapshot; 9.413 excluídos na triagem; 2.491 avaliados na elegibilidade; 2.475 excluídos nessa etapa; **16 incluídos**. Entre os estudos atuais, as etiquetas do pipeline registram Machine Learning em 11/16 (68,8%) e Predictive Analytics em 9/16 (56,3%), com categorias sobrepostas; essas etiquetas descrevem o conteúdo bibliográfico e não qualidade metodológica.
 
 ---
 
-## 2. Observacoes da Banca (todas CONCLUIDAS)
+## 2. Observacoes da Banca e estado de atendimento
 
 | ID | Observacao | Severidade |
 |----|-----------|------------|
@@ -50,7 +52,7 @@
 | BANCA-016 | Referencias adicionadas: STI, adaptativa, avaliacao, metricas | MEDIA |
 | BANCA-017 | Citacao Cochrane no trecho de APIs | BAIXA |
 | BANCA-018 | Cap. Resultados renomeado para Revisao Sistematica | MEDIA |
-| BANCA-019 | MMAT integrado ao pipeline com dados reais | ALTA |
+| BANCA-019 | Procedimento MMAT definido; reaplicacao aos 16 estudos atuais ainda pendente | ALTA |
 
 ---
 
@@ -59,12 +61,12 @@
 ### Etapas concluidas
 
 - Etapa 1: Correcoes PRISMA
-- Etapa 2: MMAT + Limitacoes
+- Etapa 2: procedimento MMAT definido; reaplicacao aos 16 estudos atuais pendente
 - Etapa 2.5: Tempo verbal passado
 - Etapa 3: Fundamentacao ensino de matematica
 - Etapa 4: Capitulo do prototipo
 - Etapa 4.5: Revisao geral (italicos, terminologia, ABNT, numeros, referencias)
-- Etapa 5 parcial: Reestruturacao capitulos, MMAT pipeline, pretextuais, esqueletos
+- Etapa 5 parcial: Reestruturacao capitulos, pipeline MMAT historico, pretextuais, esqueletos
 
 ### Pendente (apos desenvolvimento do prototipo)
 
@@ -107,9 +109,9 @@ results/tcc/
 
 ---
 
-## 5. Pipeline MMAT
+## 5. Pipeline MMAT (snapshot historico)
 
-O modulo MMAT e standalone, nao integrado ao pipeline principal de revisao.
+O modulo MMAT e standalone e o arquivo atualmente versionado contém julgamentos do conjunto histórico de 17 estudos. Ele não representa a avaliação final do snapshot vigente de 16 estudos. A reaplicação por critério aos 16 estudos atuais deve ocorrer antes de qualquer síntese de qualidade metodológica ou afirmação de certeza da evidência.
 
 ### Executar
 
@@ -122,7 +124,7 @@ python -m research.src.analysis.mmat_assessment
 
 - `research/exports/analysis/mmat_assessment.csv` — tabela CSV
 - `research/exports/references/mmat_table.tex` — tabela LaTeX
-- SQLite atualizado (coluna `notes` com JSON do MMAT)
+- SQLite histórico atualizado (coluna `notes` com JSON do MMAT); a base canônica atual permanece sem julgamentos MMAT finais para os seis estudos novos
 
 ### Testes
 
@@ -130,19 +132,16 @@ python -m research.src.analysis.mmat_assessment
 python -m pytest research/tests/test_mmat.py -v
 ```
 
-22 testes, todos passando. Valida: 17 estudos, scores 1-5, 5 criterios por estudo, Y/N/CT validos.
+Os testes validam o artefato histórico de 17 estudos, os cinco critérios por estudo e as respostas Y/N/CT. Isso não deve ser lido como confirmação de que os 16 estudos atuais já foram avaliados.
 
-### Resultados MMAT
+### Estado dos artefatos MMAT
 
-| Score | Qtd | Estudos |
+| Snapshot | Estado | Uso permitido |
 |-------|-----|---------|
-| 5/5 | 3 | Pejic 2021, Depren 2017, MacLellan 2017 |
-| 4/5 | 3 | Appiah-Odame 2024, Mertasari 2023, Hasib 2022 |
-| 3/5 | 6 | Tjahyadi 2025, Nyantah 2025, Milicevic 2024, Zhang 2023, Sokkhey 2020, Uskov 2019 |
-| 2/5 | 3 | Zhang et al. 2025, Jose et al. 2024, Kumar 2022 |
-| 1/5 | 2 | Salas-Rueda 2021, Unal 2020 |
+| Histórico | 17 julgamentos por critério | somente auditoria e rastreabilidade histórica |
+| Vigente | 16 estudos incluídos; reaplicação pendente | não emitir síntese MMAT final |
 
-Media: 3.12/5
+Não há média ou ranking de qualidade reportado para o conjunto vigente.
 
 ---
 
@@ -165,7 +164,7 @@ Media: 3.12/5
 
 ### Numeros-chave (fonte unica de verdade)
 
-Total: 9.431 | Duplicatas: 2.517 (26,6%) | Unicos: 6.914 | Elegiveis: 1.883 | Excluidos: 1.866 | Incluidos: 17 | Taxa: ~0,18% | Consultas: 72 (48 EN + 24 PT) | Bases: 4 | Periodo: 2015-2026
+Total: 11.904 | Excluidos na triagem: 9.413 | Avancaram a elegibilidade: 2.491 | Excluidos na elegibilidade: 2.475 | Incluidos: 16 | Taxa: ~0,13% | Consultas: 72 (48 EN + 24 PT) | Bases: 4 | Periodo: 2015-2026
 
 ### Compilacao
 

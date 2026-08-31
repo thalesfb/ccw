@@ -1,13 +1,21 @@
 # Verificação dos Números PRISMA — Esclarecimento
 
-## Questão da Banca
+> **Aviso de versão:** esta verificação cobre o baseline histórico de 9.431 registros e 17 incluídos. A fonte atual, validada em 31/08/2026, é `docs/RECONCILIACAO-BASELINE-2026-08-31.md` e registra 11.904 registros consolidados e 16 incluídos.
+
+## Estado vigente (31/08/2026)
+
+O banco atual contém **11.904 registros**. O fluxo verificado é: **9.413** excluídos na triagem, **2.491** avançando à elegibilidade, **2.475** excluídos na elegibilidade e **16** incluídos. Os IDs incluídos são 1--10, 6916, 6917, 6918, 6920, 6921 e 6923.
+
+A execução histórica tinha 17 incluídos. Em uma nova rodada, foram encontrados 23 candidatos e removidos 7 falsos positivos, chegando aos 16 atuais. A diferença também envolve atualização da ingestão e correção do scoring; não é uma simples substituição numérica. A reaplicação do MMAT aos 16 estudos atuais permanece pendente, assim como conclusões comparativas sobre qualidade metodológica ou certeza da evidência.
+
+## Questão da Banca (baseline histórico)
 
 A banca questionou se o número de duplicatas removidas estava correto, sugerindo:
 - Se: 9.431 - 2.494 = 6.937 (diferente de 6.914)
 
-## Análise e Resultado
+## Análise e Resultado do baseline histórico
 
-### Números Corretos (Confirmados)
+### Números do snapshot histórico (confirmados)
 
 | Métrica | Valor | Verificação |
 |---------|-------|------------|
@@ -20,11 +28,13 @@ A banca questionou se o número de duplicatas removidas estava correto, sugerind
 
 O número **2494** aparece no arquivo de dados (`research/exports/analysis/papers.csv`), mas é apenas:
 - **Índice de linha** na tabela CSV (row 2494)
-- **NÃO é** o número de duplicatas removidas
+- **e também** consta como `total_removed` no registro histórico de `searches` do SQLite
+
+Logo, ele não pode ser descartado apenas como índice de linha.
 
 ### Verificação Técnica
 
-A fonte oficial dos números é o arquivo `research/exports/reports/summary.json`:
+O trecho abaixo é o registro do snapshot histórico de `research/exports/reports/summary.json`; o arquivo atual foi regenerado e não deve ser usado para atribuir estes valores ao baseline vigente:
 
 ```json
 {
@@ -45,9 +55,9 @@ A fonte oficial dos números é o arquivo `research/exports/reports/summary.json
 9.431 - 2.494 = 6.937 ✗ Incorreto (não coincide com 6.914)
 ```
 
-## Onde os Números Aparecem no Projeto
+## Onde os Números Apareciam no snapshot histórico
 
-### Documentos LaTeX (TCC)
+### Documentos LaTeX (TCC, versão histórica)
 
 - **`results/tcc/conteudo/resultadosesperados.tex`** (Capítulo 4, Seção 4.2)
   ```latex
@@ -56,22 +66,22 @@ A fonte oficial dos números é o arquivo `research/exports/reports/summary.json
 
 - **`results/ptc/conteudo/resultadosesperados.tex`** (mesmo conteúdo)
 
-### Página Web Principal
+### Página Web Principal (versão histórica)
 
 - **`index.html`** — Seção "Fluxo PRISMA 2020"
   ```html
   <li><strong>Remoção de Duplicatas:</strong> 2.517 duplicatas removidas (26,6%) → 6.914 registros únicos</li>
   ```
 
-### Visualizações (Imagens/Gráficos)
+### Visualizações (imagens/gráficos históricos)
 
 - `research/exports/visualizations/prisma_flow.png` — Diagrama PRISMA
 - `research/exports/visualizations/selection_funnel.png` — Funil de seleção
 - `research/exports/analysis/mmat_visualization.html` — Tabela de estatísticas
 
-**Todos os documentos e imagens estão consistentes com 2.517 duplicatas.**
+Os documentos legados estão consistentes entre si com 2.517 duplicatas, mas esse valor não é reproduzido pelo único registro histórico atualmente disponível na tabela `searches` do SQLite, que registra `total_removed=2494`. A divergência histórica requer o artefato arquivado da execução original.
 
-## Método de Remoção de Duplicatas
+## Método de Remoção de Duplicatas (snapshot histórico)
 
 A deduplicação foi realizada em **3 etapas**:
 
@@ -81,11 +91,11 @@ A deduplicação foi realizada em **3 etapas**:
 
 Maiores detalhes em: `results/tcc/conteudo/metodologia.tex` (Capítulo 3, Seção 3.4)
 
-## Conclusão
+## Conclusão sobre o snapshot histórico
 
-✅ **Os números estão corretos e verificados.**
+✅ **Os números do snapshot histórico estão corretos e verificados.**
 
-Não há inconsistência matemática ou metodológica. Todos os documentos, imagens e análises usam o valor correto: **2.517 duplicatas removidas**.
+Não há inconsistência matemática no snapshot histórico: aqueles documentos, imagens e análises usavam **2.517 duplicatas removidas**. Essa conclusão não se aplica às contagens vigentes; para o estado atual, deve-se usar a reconciliação de 31/08/2026.
 
 ---
 
