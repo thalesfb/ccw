@@ -41,16 +41,27 @@ merge:
 
 | PR | Checks observados | Revisões/comentários relevantes |
 |---|---|---|
-| #34 | `source-validation` falhou no check de whitespace; `latex-build` e `canonical-pdf-sync` passaram | Copilot não conseguiu revisar por limite de quota; não há comentário acionável dele |
-| #23 | `source-validation` falha em dois testes antigos; `latex-build` e `canonical-pdf-sync` passaram; branch conflitante | Nenhuma revisão submetida |
-| #20 | `source-validation` e `latex-build` passaram | Nenhuma revisão submetida |
-| #35 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram | Copilot apontou três problemas reais no baseline revertido; foram respondidos no PR e reservados para PRs científicos atômicos, pois #35 é exclusivamente o rollback |
+| #20 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Sem review técnica ou comentário acionável; a salvaguarda dos 17 estudos foi generalizada no commit `a0512df` |
+| #23 | `source-validation` falhou; `latex-build` e `canonical-pdf-sync` passaram; `UNSTABLE/MERGEABLE` | Sem review técnica ou comentário acionável; manter como contexto e extrair mudanças seletivamente |
+| #34 | `source-validation` falhou; `latex-build` e `canonical-pdf-sync` passaram; `UNSTABLE/MERGEABLE` | Copilot não conseguiu revisar por limite de quota; não há comentário acionável dele |
+| #35 | Fechada após a reescrita da `main`; rollback não é uma PR ativa | Os três apontamentos do Copilot foram transformados em correções/tests nas PRs científicas seguintes |
+| #36 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #37 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #38 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #39 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #40 | Todos os checks, incluindo `manuscript-validation` e `presentation-build`, passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #41 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #42 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #43 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #44 | `source-validation` e `latex-build` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
 
 Os três apontamentos do Copilot no PR #35 foram: correspondência de `AI` por
 substring em `selection.py`, o mesmo risco no `scoring.py`, e a divergência
-entre o recorte temporal documentado e a configuração. Eles não foram
-introduzidos no rollback puro; serão tratados no lote científico que suceder a
-reversão. Nenhum check verde substitui a revisão do conteúdo científico.
+entre o recorte temporal documentado e a configuração. Eles foram tratados nas
+correções do snapshot e nas regressões automatizadas das PRs #36 e #43. Os
+avisos de quota nas PRs posteriores significam que não houve revisão automática;
+não significam aprovação. Nenhum check verde substitui a revisão do conteúdo
+científico.
 
 ---
 
@@ -81,8 +92,8 @@ compatíveis, reaplicá-las sobre a base atual e abrir/atualizar um PR atômico.
 **Por quê:**
 - Formaliza governança documental e não sobrepõe materialmente o baseline
   reconciliado do PR #34.
-- A branch ainda contém uma verificação textual de “17 estudos incluídos”; isso
-  deve virar uma regra sobre o registro versionado atual, sem congelar o
+- O follow-up `a0512df` generalizou a verificação textual de “17 estudos
+  incluídos” para o conjunto retido no snapshot vigente, sem congelar o
   denominador histórico.
 - A documentação herdada também descreve a deduplicação como DOI/URL mais
   similaridade de títulos; isso precisa ser generalizado para a regra vigente,
