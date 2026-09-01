@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "snapshot_date": "2026-08-31",
-  "generated_at": "2026-09-01T16:30:47+00:00",
+  "generated_at": "2026-09-01T17:10:43+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -298,11 +298,6 @@
       "sha256": "1c8f3abba6a3d955c8973ac1d0e17973c08b9461a56da8b17662cc6f0903b07b"
     },
     {
-      "path": "research/data/reference_audit.csv",
-      "role": "audit separating included studies from theoretical and methodological references",
-      "sha256": "b61ac1a94677c4c38dd8a1321bb574c376353488cf8c336ed896a053c1ff68ac"
-    },
-    {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 16-record MMAT registry, separate from the historical 17-study appraisal",
       "sha256": "8307828f34b6436a598dba71e7a7a787b0ee54c607238efe18ce95f3d6fee19a"
@@ -390,7 +385,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "8ee3faedd1e704a437e0f630f99fc0c0dbeb623a4db665eb310dd657d0b1d106"
+      "sha256": "f02c141e1a20a61aadcb4b97348b5577b5e2a97c7936b3d2175557e9a6bd93bb"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
@@ -429,6 +424,12 @@
     {
       "path": "results/tcc/referencias_pedagogicas.bib",
       "role": "supplementary TCC bibliography with manual pedagogical and assessment references",
+      "owner": "manuscript PR",
+      "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
+    },
+    {
+      "path": "research/data/reference_audit.csv",
+      "role": "audit separating the complete TCC bibliography from pipeline-derived studies",
       "owner": "manuscript PR",
       "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
     },

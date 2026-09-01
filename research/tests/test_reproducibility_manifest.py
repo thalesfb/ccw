@@ -157,6 +157,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         "docs/RECONCILIACAO-BASELINE-2026-08-31.md",
         "results/tcc/referencias.bib",
         "results/tcc/referencias_pedagogicas.bib",
+        "research/data/reference_audit.csv",
         "results/tcc/main.pdf",
     }
     assert not artifact_paths.intersection(companion_paths)

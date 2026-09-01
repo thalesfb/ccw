@@ -52,6 +52,11 @@ COMPANION_DOCUMENTS: tuple[tuple[str, str, str], ...] = (
         "manuscript PR",
     ),
     (
+        "research/data/reference_audit.csv",
+        "audit separating the complete TCC bibliography from pipeline-derived studies",
+        "manuscript PR",
+    ),
+    (
         "results/tcc/main.pdf",
         "compiled TCC artifact",
         "manuscript PR and LaTeX CI",
@@ -82,10 +87,6 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     (
         "research/exports/references/included_papers.bib",
         "BibTeX containing only the 16 pipeline-derived retained records (15 provisional empirical candidates plus contextual protocol)",
-    ),
-    (
-        "research/data/reference_audit.csv",
-        "audit separating included studies from theoretical and methodological references",
     ),
     (
         "research/data/mmat_current_study_registry.csv",
