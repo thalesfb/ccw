@@ -133,8 +133,6 @@ class ReviewCriteria:
         Minimum publication year.
     year_max : int
         Maximum publication year.
-    cutoff_date : str
-        Publication cutoff date (ISO format YYYY-MM-DD).
     languages : list of str, optional
         Allowed languages (ISO codes or names).
     keywords : list of str, optional
@@ -148,8 +146,7 @@ class ReviewCriteria:
     """
 
     year_min: int = 2015
-    year_max: int = 2026
-    cutoff_date: str = "2026-08-31"
+    year_max: int = 2025
     languages: List[str] = None
     keywords: List[str] = None
     tech_terms: List[str] = None

@@ -113,9 +113,8 @@ class PRISMASelector:
         if re.search(r"(mathematics|matemática|math\b|algebra|geometry|calculus)", text, re.IGNORECASE):
             met_criteria.append("math_focus")
         
-        # 4. Computational techniques (AI uses \b to avoid substring false positives
-        #    e.g. "aims", "training", "Ghanaian" were incorrectly matching "ai")
-        if re.search(r"(machine learning|artificial intelligence|\bai\b|data mining|learning analytics|tutor|adaptive|personalized)", 
+        # 4. Computational techniques
+        if re.search(r"(machine learning|artificial intelligence|AI|data mining|analytics|tutor|adaptive|personalized)",
                     text, re.IGNORECASE):
             met_criteria.append("computational_techniques")
         
