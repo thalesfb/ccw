@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "snapshot_date": "2026-08-31",
-  "generated_at": "2026-09-01T21:22:23+00:00",
+  "generated_at": "2026-09-01T22:10:58+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -334,6 +334,11 @@
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
       "sha256": "f95a6003a2391c1a27a3af80f5be1291d1dcb0e7f6f326ec38fe7af28e47a18f"
+    },
+    {
+      "path": "research/data/current_eligibility_protocol.csv",
+      "role": "versioned adjudication gates for final scientific eligibility and override disposition",
+      "sha256": "0d17e642a55d37f6178cd783f8b1bfb09f997122802cac91a99ee94a53a2cfb0"
     },
     {
       "path": "research/data/manual_override_adjudication.csv",

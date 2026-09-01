@@ -20,6 +20,7 @@ from src.search_terms import generate_search_queries
 RESEARCH_ROOT = Path(__file__).resolve().parents[1]
 SUMMARY_PATH = RESEARCH_ROOT / "exports" / "reports" / "summary.json"
 PAPERS_PATH = RESEARCH_ROOT / "exports" / "analysis" / "papers.csv"
+PROTOCOL_PATH = RESEARCH_ROOT / "data" / "current_eligibility_protocol.csv"
 
 
 def test_canonical_search_strategy_remains_72_queries() -> None:
@@ -106,3 +107,18 @@ def test_current_export_has_exactly_the_operational_sixteen_ids() -> None:
         6921,
         6923,
     }
+
+
+def test_current_eligibility_protocol_makes_adjudication_gates_explicit() -> None:
+    with PROTOCOL_PATH.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    assert {row["criterion_id"] for row in rows} == {
+        "domain_centrality",
+        "computational_centrality",
+        "empirical_completion",
+        "mathematics_outcome_specificity",
+        "publication_and_source",
+    }
+    assert all(row["if_unresolved"] == "hold" for row in rows)
+    assert all(row["evidence_required"] for row in rows)

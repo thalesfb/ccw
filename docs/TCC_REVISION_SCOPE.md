@@ -27,6 +27,55 @@ O repositório contém uma customização LaTeX institucional criada em 2017. El
 
 Mudanças já aplicadas incluem palavras-chave separadas por ponto e vírgula, fontes autorais com ano, remoção de referência obsoleta à NBR 14724:2011 no arquivo principal, correção de espaçamento entre legenda e fonte e registro explícito da limitação do template legado.
 
+## Regra de adjudicação científica do snapshot vigente
+
+O snapshot de 31/08/2026 é uma representação operacional da execução e não
+converte automaticamente os 16 registros retidos em evidência empírica final.
+As regras abaixo devem ser aplicadas antes de qualquer afirmação conclusiva,
+reclassificação de um override ou fechamento do MMAT. Elas não reescrevem as
+contagens do fluxo PRISMA; documentam o gate científico que sucede o filtro
+automatizado.
+
+1. **Centralidade matemática:** matemática deve ser o domínio da intervenção,
+   da pergunta, da população ou do desfecho analisado. Matemática apenas como
+   covariável, preditor incidental ou menção contextual não satisfaz o critério.
+2. **Centralidade computacional:** a técnica ou o sistema deve exercer papel
+   computacional ativo e avaliado, como modelo, algoritmo, mineração de dados,
+   IA/ML, tutoria adaptativa/inteligente, analytics, avaliação automatizada ou
+   intervenção educacional mediada computacionalmente. A simples digitalização,
+   comunicação on-line, apresentação de slides ou menção a tecnologia não é
+   suficiente. Uma intervenção não-ML, como animação computacional, só pode ser
+   incluída quando o texto integral demonstrar esse papel e sua avaliação em
+   aprendizagem matemática.
+3. **Resultado empírico concluído:** a fonte deve apresentar método e resultados
+   analisáveis do estudo. Protocolos, propostas e relatórios de projeto sem
+   resultado empírico concluído podem permanecer na trilha de auditoria e no
+   mapeamento contextual, mas não sustentam síntese empírica nem aplicação do
+   MMAT como se fossem estudos concluídos.
+4. **Especificidade do desfecho:** resultados de matemática devem estar
+   separados ou ser interpretáveis separadamente. Um índice STEM composto só
+   satisfaz o escopo matemático se o texto permitir identificar e analisar o
+   componente de matemática; caso contrário, não deve sustentar uma conclusão
+   específica sobre aprendizagem matemática.
+5. **Tipo e fonte da publicação:** identidade, ano, tipo documental e status de
+   revisão por pares devem ser verificados independentemente do score. Artigos,
+   trabalhos de conferência e teses/dissertações não são intercambiáveis sem
+   registrar a categoria documental e a justificativa. Relatórios de projeto e
+   protocolos não se tornam artigos empíricos pelo fato de terem pontuação alta.
+   Se o requisito planejado de publicação revisada por pares for mantido, fontes
+   não revisadas por pares devem ser excluídas da síntese empírica ou marcadas
+   explicitamente como literatura cinzenta, nunca tratadas como equivalentes.
+
+Para cada um dos sete overrides, a decisão final deve registrar a fonte
+primária, o localizador, a regra aplicada e a disposição (`include`, `exclude`
+ou `hold`). Enquanto qualquer uma dessas informações estiver ausente, a
+disposição é provisória. O registro operacional de 16 IDs, a matriz de
+evidências e o ledger MMAT devem continuar distinguindo: (a) retenção
+operacional; (b) papel empírico ou contextual; e (c) decisão científica final.
+Essa regra é versionada também em
+`research/data/current_eligibility_protocol.csv` para permitir auditoria sem o
+SQLite.
+
 ## Contrato de validação
 
 Pull requests que alteram o TCC devem:
