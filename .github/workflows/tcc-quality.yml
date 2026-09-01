@@ -148,14 +148,24 @@ jobs:
 
   presentation-build:
     name: presentation-build
-    if: ${{ hashFiles('presentation/package-lock.json') != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Detect presentation source
+        id: presentation
+        shell: bash
+        run: |
+          if [ -f presentation/package-lock.json ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Node.js
+        if: steps.presentation.outputs.enabled == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -163,14 +173,17 @@ jobs:
           cache-dependency-path: presentation/package-lock.json
 
       - name: Install presentation dependencies
+        if: steps.presentation.outputs.enabled == 'true'
         working-directory: presentation
         run: npm ci
 
       - name: Validate presentation against current snapshot
+        if: steps.presentation.outputs.enabled == 'true'
         working-directory: presentation
         run: npm run validate
 
       - name: Build hostable Slidev presentation
+        if: steps.presentation.outputs.enabled == 'true'
         working-directory: presentation
         run: |
           repo_name="${GITHUB_REPOSITORY#*/}"
@@ -180,6 +193,7 @@ jobs:
           test -s dist/images/selection_funnel.png
 
       - name: Upload compiled presentation
+        if: steps.presentation.outputs.enabled == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: slidev-presentation
