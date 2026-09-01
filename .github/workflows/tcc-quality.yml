@@ -49,13 +49,12 @@ jobs:
           python -m compileall -q research/src
           python -m compileall -q prototype/tcc_prototype
 
-      - name: Check bibliography audit coverage
-        working-directory: research
-        run: python -m src.validation.bibliography_audit
-
       - name: Check generated MMAT table
         working-directory: research
         run: python -m src.analysis.mmat_tcc_table --check
+
+      - name: Check current MMAT reassessment table
+        run: python -m research.src.analysis.mmat_current_tcc_table --check
 
       - name: Check canonical MMAT CSV export
         run: cmp research/data/mmat_assessments.csv research/exports/analysis/mmat_assessment.csv
@@ -66,11 +65,16 @@ jobs:
         run: |
           set +e
           python -m pytest \
-            tests/test_bibliography_audit.py \
             tests/test_experiment_contract.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
-            tests/test_tcc_advisor_feedback.py \
+            tests/test_mmat_current.py \
+            tests/test_copilot_regressions.py \
+            tests/test_historical_protocol_manifest.py \
+            tests/test_dedup_logic.py \
+            tests/test_reproducibility_manifest.py \
+            tests/test_validate_exports.py \
+            tests/test_validate_exports_report_unit.py \
             -q --tb=short 2>&1 | tee advisor-tests.log
           status=${PIPESTATUS[0]}
           exit "$status"
@@ -92,6 +96,95 @@ jobs:
             research/advisor-tests.log
             prototype-tests.log
           if-no-files-found: warn
+          retention-days: 7
+
+  manuscript-validation:
+    name: manuscript-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect manuscript changes
+        id: manuscript
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed=true
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            changed=false
+            if git diff --name-only "${{ github.event.pull_request.base.sha }}...HEAD" | grep -q '^results/tcc/'; then
+              changed=true
+            fi
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        if: steps.manuscript.outputs.changed == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: research/requirements.txt
+
+      - name: Install research dependencies
+        if: steps.manuscript.outputs.changed == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r research/requirements.txt pytest
+
+      - name: Check bibliography audit coverage
+        if: steps.manuscript.outputs.changed == 'true'
+        working-directory: research
+        run: python -m src.validation.bibliography_audit
+
+      - name: Run manuscript regression tests
+        if: steps.manuscript.outputs.changed == 'true'
+        working-directory: research
+        run: python -m pytest tests/test_bibliography_audit.py tests/test_tcc_advisor_feedback.py -q --tb=short
+
+  presentation-build:
+    name: presentation-build
+    if: ${{ hashFiles('presentation/package-lock.json') != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: presentation/package-lock.json
+
+      - name: Install presentation dependencies
+        working-directory: presentation
+        run: npm ci
+
+      - name: Validate presentation against current snapshot
+        working-directory: presentation
+        run: npm run validate
+
+      - name: Build hostable Slidev presentation
+        working-directory: presentation
+        run: |
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          npm run build -- --out dist --base "/${repo_name}/presentation/" --router-mode hash
+          test -s dist/index.html
+          test -s dist/images/prisma_flow.png
+          test -s dist/images/selection_funnel.png
+
+      - name: Upload compiled presentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: slidev-presentation
+          path: presentation/dist
+          if-no-files-found: error
           retention-days: 7
 
   latex-build:
@@ -222,7 +315,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add results/tcc/main.pdf
-          git commit -m ":books: docs(tcc): refresh compiled PDF"
+          git commit -m "📚 docs(tcc): refresh compiled PDF"
           git push origin "HEAD:${{ github.head_ref }}"
           echo "updated=true" >> "$GITHUB_OUTPUT"
 

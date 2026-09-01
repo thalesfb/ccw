@@ -62,6 +62,24 @@ jobs:
           else
             echo "✅ Found $VIZ_COUNT visualization(s)"
           fi
+
+      - name: Set up Node.js for the presentation
+        if: hashFiles('presentation/package-lock.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: presentation/package-lock.json
+
+      - name: Build Slidev presentation
+        if: hashFiles('presentation/package-lock.json') != ''
+        working-directory: presentation
+        run: |
+          npm ci
+          npm run validate
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          npm run build -- --out dist --base "/${repo_name}/presentation/" --router-mode hash
+          test -s dist/index.html
       
       - name: Prepare Pages content
         run: |
@@ -82,6 +100,13 @@ jobs:
           cp -r results/ptc _site/results/
           if [ -d "results/tcc" ]; then
             cp -r results/tcc _site/results/
+          fi
+          if [ -d "presentation/dist" ]; then
+            mkdir -p _site/presentation
+            cp -r presentation/dist/. _site/presentation/
+            echo "✅ Copied compiled presentation to /presentation/"
+          else
+            echo "ℹ️ Slidev presentation is not present in this revision"
           fi
           echo "✅ Copied results/ directory"
           
