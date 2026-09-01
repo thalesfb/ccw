@@ -43,7 +43,11 @@ A entrada legada `Piaget1972` permanece marcada para substituição e não é us
 
 ### Estudos incluídos na revisão
 
-Os 17 registros incluídos permanecem na trilha da revisão sistemática. A normalização bibliográfica não altera inclusão, exclusão, contagens PRISMA, julgamentos MMAT nem o peso científico atribuído a cada estudo.
+O baseline atualizado contém 16 registros retidos. Dez estudos permanecem do conjunto anterior e seis registros foram incorporados após a correção do pipeline de scoring; os sete registros removidos não devem permanecer como referências de estudos incluídos. Entre os 16 registros atuais, 15 são classificados provisoriamente como empíricos, com o ID 6918 em hold por conflito temporal, e o ID 6921 é um protocolo/proposta retido apenas para contexto e rastreabilidade, fora da síntese empírica. A normalização bibliográfica segue separada das decisões de seleção, e não deve ser usada para inferir qualidade científica ou substituir a reaplicação do MMAT ao conjunto atualizado.
+
+A correspondência fechada entre os IDs incluídos no banco e as chaves citadas pelo manuscrito é: `1 → Math2021_001`, `2 → Implementation2025_000`, `3 → Multimodels2020_002`, `4 → Analysis2022_003`, `5 → Design2025_004`, `6 → Identifying2017_006`, `7 → Innovative2023_005`, `8 → Computational2017_008`, `9 → Machine2019_007`, `10 → Machine2024_009`, `6916 → Villegas2025_6916`, `6917 → Ozseven2026_6917`, `6918 → Kaser2025_6918`, `6920 → Echeveria2025_6920`, `6921 → Imperatrice2025_6921` e `6923 → Zeng2025_6923`. O conjunto citado na tabela de registros do manuscrito e o export `included_papers.bib` devem usar exatamente essas 16 chaves; a tabela de síntese empírica e as conclusões de evidência devem excluir o protocolo contextual 6921, conforme `research/data/current_synthesis_scope.csv`.
+
+As sete chaves históricas removidas — `Machine2022_010`, `Data2020_011`, `Enhancing2025_012`, `Authentic2024_013`, `Performance2023_014`, `Assessing2024_015` e `Analysis2021_016` — não fazem parte das bibliografias de estudos incluídos atuais. Elas só podem aparecer em documentação histórica de reconciliação, acompanhadas da indicação explícita de que foram removidas. Essa lista é a linhagem bibliográfica do PTC histórico; ela não deve ser tratada como mapeamento automático dos sete overrides do snapshot vigente, que são os IDs 14, 15, 6915, 6919, 6922, 6925 e 6926.
 
 As seguintes correções prioritárias foram aplicadas ao arquivo bibliográfico usado pelo TCC:
 
@@ -55,15 +59,16 @@ As seguintes correções prioritárias foram aplicadas ao arquivo bibliográfico
 - `Identifying2017_006`: volume, número, páginas e URL DOI;
 - `Machine2019_007`: anais IEEE EDUCON 2019, páginas e URL DOI;
 - `Computational2017_008`: classificação como tese de doutorado da Carnegie Mellon University;
-- `Machine2022_010`: nome completo dos anais, páginas e URL DOI;
-- `Data2020_011`: classificação como capítulo de livro da IntechOpen;
-- `Authentic2024_013`, `Performance2023_014` e `Analysis2021_016`: metadados editoriais verificáveis e URL DOI;
-- todas as URLs de Semantic Scholar e OpenAlex foram removidas do arquivo bibliográfico do TCC; a proveniência de descoberta permanece no pipeline de pesquisa, não na citação final.
+- `Villegas2025_6916`, `Ozseven2026_6917` e `Echeveria2025_6920`: registros adicionados ao baseline a partir do banco atualizado e revisados em fonte primária externa para o ledger MMAT preliminar;
+- `Kaser2025_6918`: registro adicionado ao baseline com identificador persistente preservado; o repositório oficial da ETH confirma a identidade e o DOI e data a tese de 2014, enquanto o snapshot operacional registra 2025. O texto integral não foi recuperado localmente, portanto a elegibilidade temporal e o MMAT permanecem em hold;
+- `Imperatrice2025_6921`: registro adicionado ao baseline sem venue ou identificador persistente no metadado local; o PDF externo foi revisado e descreve protocolo/proposta sem resultados empíricos concluídos, portanto não sustenta uma apreciação MMAT empírica nesta etapa;
+- `Zeng2025_6923`: registro adicionado ao baseline com identificador persistente preservado; o repositório e o programa oficial de dissertações do Teachers College corroboram título, autoria e ano de 2025, mas a fonte primária integral ainda não foi recuperada;
+- todas as URLs de Semantic Scholar e OpenAlex foram removidas dos dois artefatos bibliográficos de estudos incluídos; a proveniência de descoberta permanece no pipeline de pesquisa, não na citação final.
 
-Duas cautelas permanecem explícitas:
+As cautelas atuais permanecem explícitas:
 
 - `Innovative2023_005`: o DOI é canônico, mas ano/volume/número devem ser confirmados em fonte editorial antes de sustentar afirmação central;
-- `Assessing2024_015`: o DOI foi preservado, porém fontes secundárias apresentam metadados conflitantes; não foram feitas correções silenciosas de autoria ou paginação, e o estudo permanece inadequado como fonte central de eficácia.
+- os seis novos registros permanecem sob cautela editorial para afirmações centrais de eficácia, mesmo quando a fonte primária foi consultada: o ledger MMAT atual separa 6916, 6917 e 6920 como revisados externamente, 6918 como hold de fonte/período, 6921 como protocolo/proposta não aplicável ao MMAT empírico e 6923 como fonte integral ainda não recuperada. O CSV mantém `metadata_status=metadata_fix`, `use_status=editorial_caution` e `decision=retain_with_caution` para todos os seis; os dois registros com fonte externa corroborada agora estão marcados com `existence=verified`, mas isso não elimina a pendência de metadados, texto integral ou escopo. As mesmas cautelas foram registradas nas entradas BibTeX. Em particular, `Imperatrice2025_6921` não possui DOI ou venue no metadado local.
 
 ## Fontes primárias para decisões técnicas
 
@@ -119,9 +124,12 @@ A auditoria não declara todos os registros como perfeitos. Permanecem, de forma
 
 1. decidir se o Cochrane Handbook historicamente citado deve permanecer em 6.4 ou ser atualizado após comparação metodológica com edições posteriores;
 2. confirmar em fonte editorial os metadados ainda ambíguos de `Innovative2023_005`;
-3. manter `Assessing2024_015` sob cautela até que autoria, paginação e qualidade editorial possam ser validadas por fonte primária suficiente;
-4. revisar a edição bibliográfica de Vygotsky antes de enriquecer campos de editores/edição;
-5. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos.
+3. revisar a edição bibliográfica de Vygotsky antes de enriquecer campos de editores/edição;
+4. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos;
+5. concluir a reaplicação e a adjudicação do MMAT aos 15 registros empíricos
+   aplicáveis; o protocolo contextual 6921 permanece fora dessa avaliação. O
+   ledger vigente já contém decisões e evidências por critério, mas a tabela
+   histórica de 17 estudos não pode ser reutilizada.
 
 Essas pendências não autorizam remover os estudos da revisão nem reescrever resultados. Elas limitam o uso bibliográfico correspondente e devem ser reavaliadas quando o texto ou o pipeline dependerem delas.
 
