@@ -1,12 +1,13 @@
 # Recomendações para PRs Abertas — 2026-09-01
 
-> **Atualização após a auditoria do PR #34:** estas recomendações foram
+> **Atualização após a auditoria do PR #34 e o merge do PR #20:** estas recomendações foram
 > recalibradas com base no estado remoto dos PRs e no baseline científico
 > vigente. O PR #34 é contexto de reconciliação, não fonte de verdade para
 > absorção automática de alterações. O PR #23 não deve ser mesclado por
 > inteiro: suas mudanças precisam ser revisadas e, quando compatíveis,
-> reaplicadas em lotes atômicos sobre a base atual. O PR #20 pode ser avaliado
-> separadamente por tratar de governança documental e não sobrepor o baseline.
+> reaplicadas em lotes atômicos sobre a base atual. O PR #20 foi mesclado em
+> `main` em 01/09/2026; ele sai da fila de merge, mas sua alteração deve ser
+> coberta pela validação pós-merge da base atual.
 
 ## Decisão atual para os PRs sob auditoria
 
@@ -14,7 +15,7 @@
 |----|--------------------------|------------------------|
 | #34 | Baseline operacional, correções de pipeline, exports e manuscrito; diff amplo | Não mesclar como unidade única sem revisão final; usar como contexto da reconciliação |
 | #23 | Revisão editorial com sobreposição e conflito no estado remoto | Não mesclar integralmente; extrair somente mudanças compatíveis em PR atômico |
-| #20 | Governança documental, sem sobreposição material com o baseline, mas com pelo menos uma salvaguarda ainda escrita para os 17 estudos | Pode seguir em revisão independente após generalizar essa salvaguarda para o registro vigente; não deve alterar resultados ou referências derivadas |
+| #20 | Governança documental; follow-up `a0512df` generalizou a salvaguarda dos 17 estudos | **Mesclado em 01/09/2026**; não reabrir como dependência dos PRs científicos. Fazer apenas validação pós-merge, sem aceitar alterações que mudem resultados ou referências derivadas |
 
 Essa decisão preserva a separação entre três tipos de mudança: resultados
 derivados do pipeline, redação/metodologia e governança. Qualquer alteração
@@ -41,7 +42,7 @@ merge:
 
 | PR | Checks observados | Revisões/comentários relevantes |
 |---|---|---|
-| #20 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Sem review técnica ou comentário acionável; a salvaguarda dos 17 estudos foi generalizada no commit `a0512df` |
+| #20 | Checks anteriores ao merge (`source-validation`, `latex-build` e `canonical-pdf-sync`) passaram | **MERGED** em `main` no commit de integração `d3a3995`; a salvaguarda dos 17 estudos foi generalizada no commit `a0512df` |
 | #23 | `source-validation` falhou; `latex-build` e `canonical-pdf-sync` passaram; `UNSTABLE/MERGEABLE` | Sem review técnica ou comentário acionável; manter como contexto e extrair mudanças seletivamente |
 | #34 | `source-validation` falhou; `latex-build` e `canonical-pdf-sync` passaram; `UNSTABLE/MERGEABLE` | Copilot não conseguiu revisar por limite de quota; não há comentário acionável dele |
 | #35 | Fechada após a reescrita da `main`; rollback não é uma PR ativa | Os três apontamentos do Copilot foram transformados em correções/tests nas PRs científicas seguintes |
@@ -56,7 +57,7 @@ merge:
 | #44 | `source-validation` e `latex-build` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #45 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; registro de auditoria e ordem de revisão |
 | #46 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE`; head atual `9c83e1c` | Copilot indisponível por quota; matriz de evidência dos sete overrides, ainda sem adjudicação final; proveniência de 6922/6918 refinada |
-| #47 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; testes das expectativas do protocolo vigente |
+| #47 | Follow-up `ae7dfe1` publicado; novo ciclo de `source-validation` e `latex-build` estava `pending` na última consulta | Copilot indisponível por quota; testes e regra explícita das expectativas do protocolo vigente |
 
 Após esses follow-ups, uma integração descartável dos heads atuais de #36--#47
 passou em **87/87 testes**. O deck integrado também passou em `npm run validate`
@@ -104,14 +105,14 @@ continuar excluindo o commit `a91b439`, que já foi removido de `main`.
 
 ## Ordem de revisão para concluir o objetivo
 
-1. **Histórico:** manter `main` em `627a105`, confirmar que `a91b439` não é ancestral e preservar apenas a branch de recuperação.
+1. **Histórico:** manter `main` em `d3a3995` após o merge do #20, confirmar que `a91b439` não é ancestral e preservar apenas a branch de recuperação.
 2. **Fonte científica:** revisar #36 (snapshot, deduplicação DOI/URL, scoring, 23 candidatos, 7 overrides, 16 retidos, exports e reprodutibilidade sem SQLite).
 3. **Contrato documental:** revisar #37 (baseline atual versus histórico, duplicatas, percentuais, protocolo, planos e datas).
 4. **Evidência e protocolo:** revisar #43 (identidade canônica), #46 (evidência dos sete overrides/MMAT) e #47 (testes das expectativas do protocolo vigente). Nenhum desses PRs muda o corpus por si só.
 5. **Manuscrito:** revisar #38 (texto parte a parte, referências empíricas versus teóricas/manuais, citações e imagens preservadas).
 6. **Validação e apresentação:** revisar #40, depois #39 e #42 (workflow, build reproduzível, publicação clicável, narrativa e proveniência do Slidev/PTC).
 7. **Proveniência e governança:** revisar #44, #41 e #45, verificando que o estado dos PRs e os artefatos legados continuam descritos como contexto, não como fonte de verdade.
-8. **PRs anteriores:** revisar #20 separadamente; usar #23 apenas para extração editorial após a base científica; manter #34 por último como fonte de contexto/salvamento seletivo, nunca como unidade de merge.
+8. **PRs anteriores:** o #20 já foi mesclado e requer somente regressão pós-merge; usar #23 apenas para extração editorial após a base científica; manter #34 por último como fonte de contexto/salvamento seletivo, nunca como unidade de merge.
 9. **Gate científico final:** antes de qualquer conclusão, recuperar fontes primárias, adjudicar os sete overrides e fechar o MMAT dos 15 estudos empíricos aplicáveis; checks verdes não substituem essa decisão.
 
 ---
@@ -132,6 +133,15 @@ continuar excluindo o commit `a91b439`, que já foi removido de `main`.
 
 **Ação:** Não mesclar a branch inteira. Selecionar mudanças editoriais
 compatíveis, reaplicá-las sobre a base atual e abrir/atualizar um PR atômico.
+
+Observação bibliográfica: a comparação contra a `main` atual não mostra
+alteração dos arquivos `.bib` nem dos títulos bibliográficos. O termo
+`benchmark` foi traduzido dentro de uma tabela textual do manuscrito para
+“comparação de referência”; isso não é metadado bibliográfico, mas a extração
+deve preservar o sentido técnico e, se necessário, manter `benchmark` com uma
+explicação em português. Qualquer mudança em título de artigo, autores, DOI,
+venue ou demais campos da referência publicada deve ser rejeitada e corrigida
+na fonte bibliográfica, não incorporada como tradução editorial.
 
 ---
 
