@@ -48,15 +48,21 @@ merge:
 | #36 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #37 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #38 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
-| #39 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #39 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE`; head atual `f5b8221` | Copilot indisponível por quota; nenhum comentário técnico acionável; follow-up esclarece a proveniência das 72 consultas |
 | #40 | Todos os checks, incluindo `manuscript-validation` e `presentation-build`, passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #41 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #42 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
-| #43 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #43 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE`; head atual `6543a74` | Copilot indisponível por quota; nenhum comentário técnico acionável; follow-up sincroniza o hash do dedup e a escrita LF do manifesto |
 | #44 | `source-validation` e `latex-build` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #45 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; registro de auditoria e ordem de revisão |
-| #46 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; matriz de evidência dos sete overrides, ainda sem adjudicação final |
+| #46 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE`; head atual `9c83e1c` | Copilot indisponível por quota; matriz de evidência dos sete overrides, ainda sem adjudicação final; proveniência de 6922/6918 refinada |
 | #47 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; testes das expectativas do protocolo vigente |
+
+Após esses follow-ups, uma integração descartável dos heads atuais de #36--#47
+passou em **87/87 testes**. O deck integrado também passou em `npm run validate`
+e no build do Slidev, produzindo `index.html` e os assets `prisma_flow` e
+`selection_funnel`. Essa validação é evidência de compatibilidade técnica; não
+substitui a adjudicação científica dos estudos e overrides pendentes.
 
 Os três apontamentos do Copilot no PR #35 foram: correspondência de `AI` por
 substring em `selection.py`, o mesmo risco no `scoring.py`, e a divergência
