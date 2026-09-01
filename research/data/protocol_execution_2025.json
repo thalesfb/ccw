@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "status": "historical_reconstruction_not_current_baseline",
+  "scope": "systematic_literature_review_2025",
+  "current_baseline": {
+    "manifest": "research/exports/reports/reproducibility_manifest.json",
+    "identified": 11904,
+    "deterministic_identity_duplicates_removed": 27,
+    "screening": 11877,
+    "eligibility": 2486,
+    "included_operational": 16,
+    "note": "This historical protocol record must not be used as the current PRISMA baseline."
+  },
+  "evidence": {
+    "preserved_historical_summary": {
+      "path": "research/exports/reports/summary.json",
+      "generated_at": "09/12/2025 23:08",
+      "blob_sha": "004b33bc44961115556de7e144768726ea5d1ee9",
+      "reported_identified": 9431,
+      "reported_included": 17,
+      "notes": "The historical report is retained as provenance for earlier TCC/PRISMA text, not as the current source of truth."
+    },
+    "configured_summary_snapshot": {
+      "commit": "bb8169f83917cf9584e725f9508d909963bf4974",
+      "path": "research/exports/reports/summary.json",
+      "generated_at": "25/11/2025 02:30",
+      "year_range": "2015-2025",
+      "identified": 9431,
+      "included": 17,
+      "notes": "Versioned historical snapshot with explicit configuration."
+    },
+    "query_generator_snapshot": {
+      "commit": "7aa0cc90022d6fee20f437d346f1c4a6ecceaa42",
+      "path": "research/src/search_terms.py",
+      "canonical_query_count": 72,
+      "english_queries": 48,
+      "portuguese_queries": 24,
+      "notes": "This proves the versioned search strategy, not the exact number of HTTP requests issued."
+    },
+    "selection_implementation": {
+      "path": "research/src/processing/selection.py",
+      "notes": "The historical selector required year_range, math_focus and computational_techniques. Language, document type, peer review and full-text availability were not mandatory gates for every record."
+    },
+    "historical_deduplication_discrepancy": {
+      "reported_in_historical_documents": 2517,
+      "preserved_sqlite_results_summary_total_removed": 2494,
+      "status": "unresolved",
+      "notes": "The historical artifact needed to arbitrate these values was not preserved. Neither value is reused for the current flow."
+    }
+  },
+  "search_strategy": {
+    "canonical_query_count": 72,
+    "english_queries": 48,
+    "portuguese_queries": 24,
+    "query_count_evidence": "versioned_strategy_not_http_request_audit",
+    "languages": ["en", "pt"]
+  },
+  "eligibility": {
+    "year_min": 2015,
+    "year_max": 2025,
+    "relevance_threshold": 4.0,
+    "abstract_required": false
+  },
+  "operational_selection": {
+    "required_automated_criteria": [
+      "year_range",
+      "math_focus",
+      "computational_techniques"
+    ],
+    "language_is_detected_and_recorded": true,
+    "language_is_required_criterion": false,
+    "peer_review_document_type_filter": false,
+    "full_text_review_enforced_by_pipeline": false,
+    "automated_exclusion_checks": [
+      "abstract_too_short",
+      "no_methodology",
+      "off_topic",
+      "non_research"
+    ],
+    "document_types_observed_in_final_corpus": [
+      "journal_articles",
+      "conference_papers",
+      "doctoral_dissertation",
+      "book_chapter"
+    ]
+  },
+  "sources": {
+    "crossref": 2865,
+    "openalex": 1817,
+    "semantic_scholar": 1786,
+    "core": 446
+  },
+  "counts": {
+    "identified": 9431,
+    "duplicates_removed_reported": 2517,
+    "screening": 6914,
+    "eligibility": 1883,
+    "eligibility_excluded": 1866,
+    "included": 17
+  },
+  "temporal_evidence": {
+    "preserved_summary_min_year": 2015,
+    "preserved_summary_max_year": 2025,
+    "records_reported_for_2015": 312,
+    "included_studies_from_2015": 0
+  },
+  "limitations": {
+    "per_query_request_log_preserved": false,
+    "execution_database_versioned": false,
+    "historical_deduplication_artifact_preserved": false,
+    "peer_review_status_enforced_during_selection": false,
+    "language_restriction_enforced_as_mandatory_selector_rule": false,
+    "full_text_required_for_all_included_studies": false,
+    "interpretation": "The preserved artifacts support an audit of the historical reported corpus, search strategy and operational selector. They do not resolve the 2517-versus-2494 deduplication discrepancy, reconstruct every HTTP request, prove a universal peer-review or document-type filter, or prove that every included record received full-text review."
+  }
+}

@@ -1,0 +1,464 @@
+{
+  "schema_version": "1.1",
+  "snapshot_date": "2026-08-31",
+  "generated_at": "2026-09-01T17:10:43+00:00",
+  "database": {
+    "path": "research/systematic_review.sqlite",
+    "versioned": false,
+    "role": "local operational source for states and counts"
+  },
+  "protocol": {
+    "status": "current_snapshot_protocol",
+    "year_min": 2015,
+    "year_max": 2026,
+    "cutoff_date": "2026-08-31",
+    "languages": [
+      "en",
+      "pt"
+    ],
+    "abstract_required": false,
+    "relevance_threshold": 4.0,
+    "canonical_query_count": 72,
+    "query_generator": "research/src/search_terms.py",
+    "sources": [
+      "semantic_scholar",
+      "openalex",
+      "crossref",
+      "core"
+    ],
+    "source_count": 4,
+    "max_results_per_query": 10,
+    "interpretation": "These parameters describe the protocol contract for a fresh run. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
+  },
+  "snapshot": {
+    "counts": {
+      "total_records": 11904,
+      "selection_stage_counts": {
+        "screening": 9413,
+        "eligibility": 2475,
+        "included": 16
+      },
+      "prisma": {
+        "identification": 11904,
+        "duplicates_removed": 27,
+        "screening": 11877,
+        "screening_excluded": 9391,
+        "eligibility": 2486,
+        "eligibility_excluded": 2470,
+        "included": 16
+      }
+    },
+    "included_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      6916,
+      6917,
+      6918,
+      6920,
+      6921,
+      6923
+    ],
+    "deduplication_audit": {
+      "raw_rows": 11904,
+      "operationally_flagged_rows": 0,
+      "deterministic_identity_duplicate_rows": 27,
+      "deterministic_identity_duplicate_rows_by_identifier": {
+        "doi": 25,
+        "url": 2,
+        "persisted_flag": 0
+      },
+      "confirmed_semantic_duplicates": 0,
+      "doi": {
+        "non_empty_rows": 10682,
+        "distinct_values": 10657,
+        "repeated_groups": 25,
+        "repeated_rows": 50,
+        "excess_rows": 25
+      },
+      "url": {
+        "non_empty_rows": 11435,
+        "distinct_values": 11433,
+        "repeated_groups": 2,
+        "repeated_rows": 4,
+        "excess_rows": 2
+      },
+      "title": {
+        "non_empty_rows": 11903,
+        "distinct_values": 11646,
+        "repeated_groups": 177,
+        "repeated_rows": 434,
+        "excess_rows": 257
+      },
+      "title_only": {
+        "non_empty_rows": 11876,
+        "distinct_values": 11644,
+        "repeated_groups": 154,
+        "repeated_rows": 386,
+        "excess_rows": 232
+      },
+      "interpretation": "Repeated normalized DOI/URL identities are deterministic duplicate records for the current PRISMA flow. The raw title metric includes rows in those identity groups; title_only is recalculated after identity removal. Title-only matches remain candidates for semantic review and are not removed automatically."
+    },
+    "manual_overrides": [
+      {
+        "id": 14,
+        "doi": "10.56855/ijmme.v3i2.1299",
+        "title": "Enhancing Student Achievement in Circle Theorems: Integrating Computer Animation with the Jigsaw Cooperative Learning Model",
+        "year": 2025,
+        "relevance_score": 4.05,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit"
+      },
+      {
+        "id": 15,
+        "doi": "10.12973/ejmse.5.2.93",
+        "title": "Authentic Assessment for Motivating Student Learning and Teaching Effectiveness in Rural, High-Need Secondary Schools in Manitoba, Canada",
+        "year": 2024,
+        "relevance_score": 4.05,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit"
+      },
+      {
+        "id": 6915,
+        "doi": "10.1186/s40561-025-00415-z",
+        "title": "AI-driven predictive models for optimizing mathematics education technology: Enhancing decision-making through educational data mining and meta-analysis",
+        "year": 2025,
+        "relevance_score": 4.4,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit"
+      },
+      {
+        "id": 6919,
+        "doi": "10.3390/su18041900",
+        "title": "Exploring the Integration of Education for Sustainable Development into University Mathematics: Insights from SiC Thickness Measurement in Advanced Industrial Applications",
+        "year": 2026,
+        "relevance_score": 4.15,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit"
+      },
+      {
+        "id": 6922,
+        "doi": "10.34657/31156",
+        "title": "Sachbericht zum Verwendungsnachweis - Förderung \"Digitale Hochschulbildung\" des Bundesministeriums für Bildung und Forschung",
+        "year": 2025,
+        "relevance_score": 4.05,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit"
+      },
+      {
+        "id": 6925,
+        "doi": "10.1186/s40594-025-00590-y",
+        "title": "Predicting STEM competencies with machine learning: identifying key determinants among 522,802 adolescents",
+        "year": 2026,
+        "relevance_score": 4.0,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit"
+      },
+      {
+        "id": 6926,
+        "doi": "10.1016/j.aej.2025.03.095",
+        "title": "Methods and reliability study of moral education assessment in universities: A machine learning-based approach",
+        "year": 2025,
+        "relevance_score": 4.0,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit"
+      }
+    ],
+    "candidate_audit": {
+      "operational_candidates": 23,
+      "manual_overrides_recorded": 7,
+      "current_included": 16,
+      "interpretation": "The operational candidate count is the current included set plus the persisted manual-audit overrides. These overrides are not scientific exclusion findings until adjudicated, and are not an extra PRISMA stage."
+    },
+    "manual_override_adjudication": {
+      "path": "research/data/manual_override_adjudication.csv",
+      "row_count": 7,
+      "study_ids": [
+        14,
+        15,
+        6915,
+        6919,
+        6922,
+        6925,
+        6926
+      ],
+      "adjudication_status_counts": {
+        "proposed_pending_supervisor": 3,
+        "requires_full_text_adjudication": 4
+      },
+      "interpretation": "The ledger records evidence and proposed scope rationales for the persisted overrides; it does not replace supervisor adjudication."
+    }
+  },
+  "bibliography": {
+    "pipeline_derived_studies": "research/exports/references/included_papers.bib",
+    "complete_tcc_bibliography": [
+      "results/tcc/referencias.bib",
+      "results/tcc/referencias_pedagogicas.bib"
+    ],
+    "reference_audit": "research/data/reference_audit.csv",
+    "separation_rule": "The 16 included studies are derived from the review pipeline. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
+  },
+  "methodological_appraisal": {
+    "current_mmat_qa": {
+      "study_count": 16,
+      "study_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        6916,
+        6917,
+        6918,
+        6920,
+        6921,
+        6923
+      ],
+      "criterion_rows": 16,
+      "primary_source_rows": 16,
+      "synthesis_scope_rows": 16,
+      "empirical_evidence_rows": 15,
+      "contextual_protocol_rows": 1,
+      "historical_denominator": 17,
+      "current_denominator": 16,
+      "evidence_levels": {
+        "primary_full_text_reviewed_externally": 9,
+        "abstract_and_metadata_only": 5,
+        "abstract_only": 0,
+        "metadata_only": 1,
+        "protocol_or_proposal_not_applicable": 1
+      },
+      "primary_text_reviewed_rows": 9,
+      "source_or_period_hold_rows": 1,
+      "source_or_period_hold_ids": [
+        "6918"
+      ],
+      "non_ct_criterion_decisions": 61,
+      "all_preliminary": true,
+      "final_ready": false,
+      "blocking_reasons": [
+        "Primary full text, criterion-level locators and adjudication are not complete.",
+        "The preliminary ledger must not be interpreted as a quality score or ranking.",
+        "Only 9 of 16 current studies have externally reviewed full text recorded.",
+        "Supervisor adjudication is pending for at least one study.",
+        "At least one current record has an unresolved source/year eligibility hold (6918); it cannot support a final period-dependent synthesis."
+      ]
+    },
+    "interpretation": "The current MMAT ledger is a criterion-level preliminary record. A source/year hold or pending adjudication blocks any final quality claim."
+  },
+  "artifact_scope": "research_snapshot",
+  "artifacts": [
+    {
+      "path": "research/exports/analysis/papers.csv",
+      "role": "row-level versioned representation of the current snapshot",
+      "sha256": "98826fe23c84925c3c049558b097fa4f0fc0c3f07a77edb1ad0d64422ddaf6aa"
+    },
+    {
+      "path": "research/exports/analysis/papers.json",
+      "role": "JSON representation of the current snapshot",
+      "sha256": "954a033d924f46c595172c2a9857c3e88460ce85f1208d19cf23f96215403586"
+    },
+    {
+      "path": "research/exports/analysis/deduplication_identity_audit.csv",
+      "role": "row-level audit of the deterministic DOI/URL records removed from the PRISMA flow",
+      "sha256": "ad11fce48c8e254567dbf459cf00f8f2f3d71f70e15dfdf084db8219a996db4a"
+    },
+    {
+      "path": "research/exports/analysis/mmat_visualization.html",
+      "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
+      "sha256": "e5ac1b28c073e5ffd501a5cbe1e3666189222d83706f37e24a8d54e45fffc712"
+    },
+    {
+      "path": "research/exports/reports/summary.json",
+      "role": "PRISMA and derived summary statistics",
+      "sha256": "f6fceec71576a57981127296ed2a58916f1a1a250a45f0d18f4074cf2639ef76"
+    },
+    {
+      "path": "research/exports/references/included_papers.bib",
+      "role": "BibTeX containing only the 16 pipeline-derived retained records (15 provisional empirical candidates plus contextual protocol)",
+      "sha256": "1c8f3abba6a3d955c8973ac1d0e17973c08b9461a56da8b17662cc6f0903b07b"
+    },
+    {
+      "path": "research/data/mmat_current_study_registry.csv",
+      "role": "current 16-record MMAT registry, separate from the historical 17-study appraisal",
+      "sha256": "8307828f34b6436a598dba71e7a7a787b0ee54c607238efe18ce95f3d6fee19a"
+    },
+    {
+      "path": "research/data/mmat_primary_sources_manifest.csv",
+      "role": "source ledger for primary-source verification of current MMAT studies",
+      "sha256": "43a152dfd2d9ccb69c970b6a2cc67d1a38ae144cdff6726a30d61d3a0a2186e9"
+    },
+    {
+      "path": "research/data/mmat_reassessment_current.csv",
+      "role": "preliminary current MMAT ledger with S1/S2 and criterion-level CT responses",
+      "sha256": "650d7f08e658df05a5f89644103c744bf29c53927441b34615c3b59e240551c5"
+    },
+    {
+      "path": "research/data/current_synthesis_scope.csv",
+      "role": "explicit empirical/contextual role for each current retained record",
+      "sha256": "f95a6003a2391c1a27a3af80f5be1291d1dcb0e7f6f326ec38fe7af28e47a18f"
+    },
+    {
+      "path": "research/data/manual_override_adjudication.csv",
+      "role": "row-level evidence ledger for the seven manual candidate overrides",
+      "sha256": "8e7dd6cbf510f26690d8f942a5a99453c37691f972c13cc23a3f59ce5bf487e9"
+    },
+    {
+      "path": "research/data/protocol_execution_2025.json",
+      "role": "historical protocol reconstruction from the 2025 baseline; not the current PRISMA source of truth",
+      "sha256": "3196b70e1cdf1f43bef8e98ae7481045ca399e196c0b1181d7023c3d34d26026"
+    },
+    {
+      "path": "research/src/config.py",
+      "role": "versioned review configuration and criteria",
+      "sha256": "f6964db71bfb8691e75ed39be26f6f89bd387b7de548e33301d07ad5d465b0fb"
+    },
+    {
+      "path": "research/src/search_terms.py",
+      "role": "versioned canonical bilingual query generator",
+      "sha256": "58740ee8a2555e098d0f7e8136988762f9979b5985867fcf2656a47f3c0015ed"
+    },
+    {
+      "path": "research/src/processing/scoring.py",
+      "role": "versioned relevance-scoring implementation",
+      "sha256": "b2dd97e2500a4bd5d3ae60a977df38fb973db00e46a45103cbf6466442499126"
+    },
+    {
+      "path": "research/src/processing/selection.py",
+      "role": "versioned selection-stage implementation",
+      "sha256": "051bea6ff8712ad20724c94348f3c2790d2ab8ed6ca2d221213da4ed48531206"
+    },
+    {
+      "path": "research/src/processing/dedup.py",
+      "role": "versioned duplicate-candidate audit and deduplication implementation",
+      "sha256": "79bd374bf49f593ecbbbab0613b2dea195913d923ecb23aeba56cf35583071b4"
+    },
+    {
+      "path": "research/src/analysis/reports.py",
+      "role": "versioned report and summary generation implementation",
+      "sha256": "b6ca233e1d6f510c4c69d87c731991a1870a9f642a43e7a3a871a1f104f575ac"
+    },
+    {
+      "path": "research/src/analysis/visualizations.py",
+      "role": "versioned visualization generation implementation",
+      "sha256": "cb6752222740c40e2b62d7d7fbd043a023d6784c3d15637e327202de285ffec7"
+    },
+    {
+      "path": "research/src/analysis/deep_review_analysis.py",
+      "role": "versioned full-text analysis implementation",
+      "sha256": "3e7f66939f5943eee538c7cf5cd8987eafba202d17426c28086a22e92b67404e"
+    },
+    {
+      "path": "research/src/cli_audit.py",
+      "role": "manual-audit helper used to persist exclusions",
+      "sha256": "d09fc0e9e18f3be5ba37bcfdf89bba1dc0923759bdcfe723b15c0c08677c188b"
+    },
+    {
+      "path": "research/src/cli.py",
+      "role": "versioned command-line entry point for the research workflow",
+      "sha256": "11167c922e5acf1f5d88ce09e3257b97ade4bf46bf7a22287fb645c3f77748ff"
+    },
+    {
+      "path": "research/src/pipelines/validations.py",
+      "role": "versioned read-only cross-check of DB, exports and summary",
+      "sha256": "60d8be3af1d138c4bd2e1fb4d4f4237375b71fbea1aa945d7c2243c9f4fc761f"
+    },
+    {
+      "path": "research/src/validation/reproducibility.py",
+      "role": "versioned generator for this reproducibility manifest",
+      "sha256": "f02c141e1a20a61aadcb4b97348b5577b5e2a97c7936b3d2175557e9a6bd93bb"
+    },
+    {
+      "path": "research/src/analysis/mmat_current.py",
+      "role": "versioned validator for the current 16-record MMAT artifacts",
+      "sha256": "b8d82cc3d47df099f30a8888a11bee3c9bbbcbf96382bd4561c4a13fb60414cb"
+    },
+    {
+      "path": "research/src/analysis/mmat_current_tcc_table.py",
+      "role": "versioned renderer for the preliminary current MMAT table",
+      "sha256": "45e13e45cf7f8e58b42ea065b8191e41f89157cb79ec2232f6f364f80d58ce10"
+    },
+    {
+      "path": "research/exports/references/mmat_current_tcc_table.tex",
+      "role": "preliminary current 16-record MMAT table included by the TCC",
+      "sha256": "e7663cb172dca1cad78c0319f4978ac8d67d5eb2315c64b3e10ab9a95c2fb65e"
+    },
+    {
+      "path": "research/requirements.txt",
+      "role": "research runtime dependencies",
+      "sha256": "1af58902339cfc4cbf599d61105ffafe7a19143cea90ab04df5f938da144b9a5"
+    }
+  ],
+  "companion_documents": [
+    {
+      "path": "docs/RECONCILIACAO-BASELINE-2026-08-31.md",
+      "role": "human-readable reconciliation of current and historical baselines",
+      "owner": "documentation PR",
+      "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
+    },
+    {
+      "path": "results/tcc/referencias.bib",
+      "role": "main TCC bibliography, including pipeline-derived studies and manual references",
+      "owner": "manuscript PR",
+      "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
+    },
+    {
+      "path": "results/tcc/referencias_pedagogicas.bib",
+      "role": "supplementary TCC bibliography with manual pedagogical and assessment references",
+      "owner": "manuscript PR",
+      "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
+    },
+    {
+      "path": "research/data/reference_audit.csv",
+      "role": "audit separating the complete TCC bibliography from pipeline-derived studies",
+      "owner": "manuscript PR",
+      "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
+    },
+    {
+      "path": "results/tcc/main.pdf",
+      "role": "compiled TCC artifact",
+      "owner": "manuscript PR and LaTeX CI",
+      "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
+    }
+  ],
+  "reproduction": {
+    "verify_snapshot_without_database": [
+      "Compare artifact SHA-256 values with this manifest.",
+      "Read PRISMA counts from research/exports/reports/summary.json.",
+      "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
+      "Read the 16 pipeline-derived citations from research/exports/references/included_papers.bib.",
+      "Read proposed evidence and required adjudication actions from research/data/manual_override_adjudication.csv.",
+      "Read research/data/protocol_execution_2025.json only for historical protocol provenance; do not use it as the current baseline."
+    ],
+    "rebuild_from_local_database": [
+      "python -m research.src.cli --db /path/to/systematic_review.sqlite export",
+      "python -m research.src.cli --db /path/to/systematic_review.sqlite generate-manifest"
+    ],
+    "fresh_collection": "python -m research.src.cli run-pipeline --min-score 4.0",
+    "limitations": [
+      "External API responses, metadata and cache state can change on a fresh collection.",
+      "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
+      "The seven manual overrides have a separate evidence ledger, but their substantive individual rationales remain pending supervisor adjudication.",
+      "The current MMAT ledger is preliminary; source retrieval, criterion locators and supervisor adjudication remain required before quality synthesis."
+    ]
+  }
+}

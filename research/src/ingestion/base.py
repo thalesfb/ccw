@@ -37,7 +37,7 @@ class BaseAPIClient(ABC):
         # ✅ CORREÇÃO: Usar tabela cache do banco principal
         from ..database.manager import DatabaseManager
         self.db_manager = DatabaseManager()
-        
+
         # Cache em disco removido: usar apenas cache no banco.
         # Manter atributo para métodos que constroem paths virtuais para logs.
         self.cache_dir = Path("db_cache") / self.api_name
@@ -163,7 +163,7 @@ class BaseAPIClient(ABC):
             # ✅ CORREÇÃO: Usar tabela cache do banco principal
             import hashlib
             query_hash = hashlib.md5(f"{self.api_name}:{query}".encode()).hexdigest()
-            
+
             cached_data = self.db_manager.get_cached_results(query_hash, self.api_name)
             if cached_data:
                 logger.debug(
@@ -187,15 +187,15 @@ class BaseAPIClient(ABC):
             # ✅ CORREÇÃO: Usar tabela cache do banco principal
             import hashlib
             query_hash = hashlib.md5(f"{self.api_name}:{query}".encode()).hexdigest()
-            
+
             # Definir tempo de expiração baseado na API
             expires_hours = {
                 'semantic_scholar': 24 * 7,  # 7 dias
-                'openalex': 24 * 7,          # 7 dias 
+                'openalex': 24 * 7,          # 7 dias
                 'crossref': 24 * 14,         # 14 dias
                 'core': 24 * 3               # 3 dias
             }.get(self.api_name, 24)  # 1 dia padrão
-            
+
             self.db_manager.save_cache(
                 query_hash=query_hash,
                 query_text=query,
@@ -203,7 +203,7 @@ class BaseAPIClient(ABC):
                 results=results,
                 expires_in_hours=expires_hours
             )
-            
+
             logger.debug(
                 f"Saved {len(results)} results to database cache for query: {query}")
 
@@ -251,14 +251,21 @@ class BaseAPIClient(ABC):
                         status_code=response.status_code
                     )
                     return result
-                    
+
                 elif response.status_code == 429:
-                    # Rate limit exceeded - backoff exponencial
-                    retry_after = int(response.headers.get('Retry-After', self.rate_delay * (attempt + 2)))
-                    logger.warning(f"Rate limit exceeded (429). Waiting {retry_after}s before retry {attempt + 1}/{max_retries}")
+                    # Rate limit exceeded — exponential backoff with cap
+                    retry_after_header = response.headers.get("Retry-After")
+                    if retry_after_header and retry_after_header.isdigit():
+                        retry_after = int(retry_after_header)
+                    else:
+                        retry_after = min(self.rate_delay * (2 ** attempt), 120)
+                    logger.warning(
+                        f"Rate limit (429) from {self.api_name}. "
+                        f"Waiting {retry_after}s before retry {attempt + 1}/{max_retries}"
+                    )
                     time.sleep(retry_after)
                     continue
-                    
+
                 else:
                     # Log de erro HTTP
                     self._log_api_call(
@@ -281,7 +288,7 @@ class BaseAPIClient(ABC):
                     status_code=0,
                     error=e
                 )
-                
+
                 # Se for erro de rede temporário, tentar novamente
                 if attempt < max_retries - 1:
                     backoff = self.rate_delay * (attempt + 1)
@@ -291,7 +298,7 @@ class BaseAPIClient(ABC):
                 else:
                     logger.error(f"Request failed after {max_retries} attempts for {url}: {e}")
                     return None
-        
+
         return None
 
     def normalize_dataframe(self, results: List[Dict]) -> pd.DataFrame:

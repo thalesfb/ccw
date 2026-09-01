@@ -17,20 +17,20 @@ logger = logging.getLogger(__name__)
 
 class SemanticScholarClient(BaseAPIClient):
     """Cliente para buscar artigos no Semantic Scholar."""
-    
+
     BASE_URL = "https://api.semanticscholar.org/graph/v1"
-    
+
     def _get_rate_delay(self) -> float:
         """Retorna o delay configurado para Semantic Scholar."""
         return self.config.apis.semantic_scholar_rate_delay_s
-    
+
     def search(self, query: str, limit: int = 100) -> pd.DataFrame:
         """Busca artigos no Semantic Scholar.
-        
+
         Args:
             query: String de busca
             limit: Número máximo de resultados (máx 100 por página)
-            
+
         Returns:
             DataFrame com os resultados normalizados
         """
@@ -43,7 +43,17 @@ class SemanticScholarClient(BaseAPIClient):
             df["database"] = "semantic_scholar"
             df["query"] = query
             return df
-        
+
+        # Sem API key: Semantic Scholar impõe ~1 req/s; pular se sem chave
+        api_key = self.config.apis.semantic_scholar_api_key
+        if not api_key:
+            logger.warning(
+                "Semantic Scholar: no API key configured — "
+                "skipping to avoid 429 rate limits. "
+                "Set SEMANTIC_SCHOLAR_API_KEY in .env to enable."
+            )
+            return pd.DataFrame()
+
         # Campos a retornar
         fields = [
             "paperId", "title", "abstract", "year", "authors",
@@ -51,23 +61,23 @@ class SemanticScholarClient(BaseAPIClient):
             "influentialCitationCount", "isOpenAccess", "openAccessPdf",
             "externalIds", "url", "publicationDate"
         ]
-        
+
         # Parâmetros da busca
         params = {
             "query": query,
             "fields": ",".join(fields),
             "limit": min(limit, 100)  # Máximo 100 por página
         }
-        
+
         url = f"{self.BASE_URL}/paper/search"
         logger.info(f"Searching Semantic Scholar for: {query}")
-        
+
         response = self._make_request(url, params)
         if not response:
             return pd.DataFrame()
-        
+
         results = response.get("data", [])
-        
+
         # Paginação se necessário
         offset = len(results)
         while offset < limit and response.get("next"):
@@ -79,25 +89,25 @@ class SemanticScholarClient(BaseAPIClient):
                 offset += len(new_results)
             else:
                 break
-        
+
         # Salvar no cache
         self._save_to_cache(query, results)
-        
+
         # Normalizar e retornar
         normalized = [self._normalize_result(item) for item in results]
         df = self.normalize_dataframe(normalized)
         df["database"] = "semantic_scholar"
         df["query"] = query
-        
+
         logger.info(f"Found {len(df)} results from Semantic Scholar")
         return df
-    
+
     def _normalize_result(self, item: Dict[str, Any]) -> Dict[str, Any]:
         """Normaliza um resultado do Semantic Scholar.
-        
+
         Args:
             item: Item retornado pela API
-            
+
         Returns:
             Dicionário normalizado
         """
@@ -108,13 +118,13 @@ class SemanticScholarClient(BaseAPIClient):
         if not isinstance(item, dict):
             logger.warning(f"Received non-dict item: {type(item)}")
             return {}
-        
+
         # Extrair DOI se disponível
         doi = None
         external_ids = item.get("externalIds", {})
         if external_ids:
             doi = external_ids.get("DOI")
-        
+
         # Formatar autores
         authors = []
         for author in item.get("authors", []):
@@ -122,25 +132,25 @@ class SemanticScholarClient(BaseAPIClient):
             if name:
                 authors.append(name)
         authors_str = "; ".join(authors) if authors else None
-        
+
         # Formatar keywords/fields
         fields = item.get("fieldsOfStudy", [])
         # Garantir que fields é uma lista
         if not isinstance(fields, list):
             fields = []
         keywords = "; ".join(fields) if fields else None
-        
+
         # URL do artigo
         url = item.get("url")
         if not url and item.get("paperId"):
             url = f"https://www.semanticscholar.org/paper/{item['paperId']}"
-        
+
         # Verificar open access
         is_open_access = item.get("isOpenAccess", False)
         open_pdf = None
         if is_open_access and item.get("openAccessPdf"):
             open_pdf = item["openAccessPdf"].get("url")
-        
+
         return {
             "doi": doi,
             "title": item.get("title"),
@@ -168,12 +178,12 @@ def search_semantic_scholar(# The `query` parameter in the `search_semantic_scho
 # based on the provided input.
 query: str, config: AppConfig, limit: int = 100) -> pd.DataFrame:
     """Função conveniente para buscar no Semantic Scholar.
-    
+
     Args:
         query: String de busca
         config: Configuração da aplicação
         limit: Número máximo de resultados
-        
+
     Returns:
         DataFrame com os resultados
     """

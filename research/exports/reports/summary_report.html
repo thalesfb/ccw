@@ -6,143 +6,351 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório da Revisão Sistemática</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f5f5f5; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
         .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .navbar-title { color: white; font-size: 1.5rem; font-weight: 600; }
+        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
         .navbar-links { display: flex; gap: 1.5rem; }
         .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
         .navbar-links a:hover { background: rgba(255,255,255,0.2); }
         .navbar-links a.active { background: rgba(255,255,255,0.3); }
-        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 20px; text-align: center; }
-        .hero h1 { font-size: 2.5rem; margin: 0 0 1rem 0; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; }
-        .content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .card { background: white; border-radius: 8px; padding: 30px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; text-align: center; }
-        .stat-card h3 { font-size: 2.5rem; margin: 0; }
-        .stat-card p { margin: 10px 0 0 0; opacity: 0.9; }
-        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 20px; }
-        .chart-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-card img { width: 100%; height: auto; border-radius: 4px; }
-        .chart-card h3 { margin-top: 0; color: #333; }
-        h2 { color: #333; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
-        .footer { text-align: center; padding: 20px; margin-top: 40px; }
+        .content { margin: 40px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .section { margin: 30px 0; padding: 20px; border-left: 4px solid #4CAF50; background: #f9f9f9; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .chart-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .chart-card { text-align: center; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .chart-card img { width: 100%; max-width: 1200px; height: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .highlight { background-color: #fff3cd; padding: 10px; border-radius: 4px; }
+        .paper-item { background: white; padding: 14px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 10px; }
+        .paper-title { font-weight: 600; color: #2c3e50; }
+        .paper-meta { color: #7f8c8d; font-size: 0.95em; }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
+            <div class="navbar-title">📚 Revisão Sistemática</div>
             <div class="navbar-links">
-                <a href="summary_report.html" class="active">📈 Resumo</a>
-                <a href="papers_report_included.html">📄 Artigos Incluídos</a>
-                <a href="gap_analysis.html">🔍 Análise de Lacunas</a>
+                <a href="summary_report.html" class="active">🔍 Sumário</a>
+                <a href="papers_report_included.html">📄 Artigos</a>
+                <a href="gap_analysis.html">📊 Análise de Lacunas</a>
             </div>
         </div>
     </nav>
-    
-    <div class="hero">
-        <h1>Relatório da Revisão Sistemática</h1>
-        <p>Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</p>
-        <p style="font-size: 0.9rem; margin-top: 20px;">Gerado em: 09/12/2025 23:08</p>
-    </div>
-    
+
     <div class="content">
-        <div class="card">
-            <h2>📊 Estatísticas Gerais</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>9431</h3>
-                    <p>Total de Papers</p>
-                </div>
-                <div class="stat-card">
-                    <h3>17</h3>
-                    <p>Papers Incluídos</p>
-                </div>
-                <div class="stat-card">
-                    <h3>2015-2025</h3>
-                    <p>Intervalo de Anos</p>
-                </div>
-                <div class="stat-card">
-                    <h3>4</h3>
-                    <p>Bases de Dados</p>
-                </div>
+    <div class="header">
+        <h1>Relatório da Revisão Sistemática</h1>
+        <h2>Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</h2>
+        <p><em>Gerado em: 01/09/2026 07:08</em></p>
+    </div>
+
+    <div class="section">
+        <h2>📊 Estatísticas Gerais</h2>
+        <div class="stat-grid">
+            <div class="stat-card">
+                <h3>Total de Artigos</h3>
+                <h2 style="color: #4CAF50;">11904</h2>
             </div>
-        </div>
-        
-        <div class="card">
-            <h2>🔍 Fluxo PRISMA</h2>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <tr style="background: #f8f9fa;">
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Estágio</th>
-                    <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6;">Quantidade</th>
-                </tr>
-                <tr>
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📚 Identificação</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">9431</td>
-                </tr>
-                <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">🔍 Triagem (aprovados)</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">6914</td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na triagem</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">5031</td>
-                </tr>
-                <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Elegibilidade (aprovados)</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">1883</td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na elegibilidade</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">1866</td>
-                </tr>
-                <tr style="background: #d4edda;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6; font-weight: bold;">✅ Incluídos (final)</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; font-weight: bold; color: #28a745;">17</td>
-                </tr>
-            </table>
-        </div>
-        
-        <div class="card">
-            <h2>📈 Visualizações</h2>
-            <div class="chart-grid">
-                <div class="chart-card">
-                    <h3>Fluxo PRISMA</h3>
-                    <img src="../visualizations/prisma_flow.png" alt="PRISMA Flow">
-                </div>
-                <div class="chart-card">
-                    <h3>Funil de Seleção</h3>
-                    <img src="../visualizations/selection_funnel.png" alt="Selection Funnel">
-                </div>
-                <div class="chart-card">
-                    <h3>Distribuição por Ano</h3>
-                    <img src="../visualizations/papers_by_year.png" alt="Papers by Year">
-                </div>
-                <div class="chart-card">
-                    <h3>Técnicas Identificadas</h3>
-                    <img src="../visualizations/techniques_distribution.png" alt="Techniques">
-                </div>
-                <div class="chart-card">
-                    <h3>Cobertura por Base</h3>
-                    <img src="../visualizations/database_coverage.png" alt="Database Coverage">
-                </div>
-                <div class="chart-card">
-                    <h3>Distribuição de Relevância</h3>
-                    <img src="../visualizations/relevance_distribution.png" alt="Relevance Distribution">
-                </div>
+
+
+            <div class="stat-card">
+                <h3>Identificados</h3>
+                <h2 style="color: #2196F3;">11904</h2>
             </div>
+            <div class="stat-card">
+                <h3>Incluídos</h3>
+                <h2 style="color: #FF9800;">16</h2>
+            </div>
+
+
+
+            <div class="stat-card">
+                <h3>Score Médio</h3>
+                <h2 style="color: #9C27B0;">1.56</h2>
+            </div>
+
         </div>
     </div>
-    
-    <div class="footer" style="text-align:center;color:white;margin-top:40px;opacity:0.9;padding:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);">
-    <p><strong>Conclusion Course Work (CCW)</strong></p>
-    <p>Trabalho de Conclusão de Curso - Ciência da Computação</p>
-    <p>Instituto Federal Catarinense - Campus Videira</p>
-    <p>© 2025 Thales Ferreira | <a href="https://github.com/thalesfb/ccw" style="color:#fff;text-decoration:underline;">GitHub</a></p>
-</div>
+
+
+    <div class="section">
+        <h2>📐 Percentuais do fluxo PRISMA</h2>
+        <table>
+            <tr><th>Relação</th><th>Percentual</th></tr>
+            <tr><td>Excluídos na triagem / identificação</td><td>78.89%</td></tr>
+            <tr><td>Avançaram da triagem / identificação</td><td>20.88%</td></tr>
+            <tr><td>Excluídos na elegibilidade / elegibilidade</td><td>99.36%</td></tr>
+            <tr><td>Incluídos / elegibilidade</td><td>0.64%</td></tr>
+            <tr><td>Incluídos / identificação</td><td>0.13%</td></tr>
+        </table>
+    </div>
+
+
+
+    <div class="section">
+        <h2>🔎 Auditoria de identidade bibliográfica</h2>
+        <p>DOI/URL exatos são deduplicados como identidade de registro no fluxo PRISMA. A linha de título bruto inclui sobreposição com essas identidades; a linha de título-only mostra os candidatos restantes depois da remoção determinística. Nenhum título é removido automaticamente por igualdade textual.</p>
+        <table>
+            <tr><th>Indicador</th><th>Grupos</th><th>Linhas repetidas</th><th>Excedentes</th></tr>
+            <tr><td>DOI normalizado</td><td>25</td><td>50</td><td>25</td></tr>
+            <tr><td>URL exata</td><td>2</td><td>4</td><td>2</td></tr>
+            <tr><td>Título normalizado</td><td>177</td><td>434</td><td>257</td></tr>
+
+            <tr><td>Título-only após DOI/URL</td><td>154</td><td>386</td><td>232</td></tr>
+
+        </table>
+        <p><strong>Registros removidos por identidade DOI/URL:</strong> 27. <strong>Flags persistidas no snapshot:</strong> 0. <strong>Duplicatas semanticamente confirmadas por título:</strong> 0.</p>
+    </div>
+
+
+    <div class="section" style="border-left-color: #e67e22;">
+        <h2>🗂️ Contexto histórico da deduplicação</h2>
+        <p>A execução histórica documentava 9.431 registros, 2.517 duplicatas removidas,
+        6.914 registros únicos e 17 incluídos. O único log histórico preservado no
+        banco informa <code>total_removed=2494</code>; a execução que resolveria essa
+        divergência não está arquivada. Esses valores são mantidos como contexto
+        histórico e não são usados para calcular o fluxo atual: 11.904 registros
+        brutos, 27 redundâncias DOI/URL
+        removidas e 11877 registros na triagem.</p>
+    </div>
+
+
+
+
+    <div class="section">
+        <h2>📈 Visualizações</h2>
+        <div class="chart-grid">
+
+            <div class="chart-card">
+                <h3>Fluxo Prisma Flow</h3>
+                <img src="visualizations/prisma_flow.png" alt="prisma_flow">
+            </div>
+
+            <div class="chart-card">
+                <h3>Artigos Por Ano</h3>
+                <img src="visualizations/papers_by_year.png" alt="papers_by_year">
+            </div>
+
+            <div class="chart-card">
+                <h3>Distribuição De Técnicas</h3>
+                <img src="visualizations/techniques_distribution.png" alt="techniques_distribution">
+            </div>
+
+            <div class="chart-card">
+                <h3>Cobertura Por Base De Dados</h3>
+                <img src="visualizations/database_coverage.png" alt="database_coverage">
+            </div>
+
+            <div class="chart-card">
+                <h3>Distribuição De Relevância</h3>
+                <img src="visualizations/relevance_distribution.png" alt="relevance_distribution">
+            </div>
+
+            <div class="chart-card">
+                <h3>Funil De Seleção </h3>
+                <img src="visualizations/selection_funnel.png" alt="selection_funnel">
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="section">
+        <h2>✅ Artigos Incluídos (Top 16)</h2>
+
+        <div class="paper-item">
+            <div class="paper-title">The Implementation of Educational Data Mining in Predicting Students’ Academic Achievement in Mathematics at a Private Elementary School</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> H. Tjahyadi | <strong>Ano:</strong> 2025 | <strong>Venue:</strong> International Journal of Information and Education Technology
+                | <strong>DOI:</strong> 10.18178/ijiet.2025.15.1.2228
+                | <a href="https://www.semanticscholar.org/paper/0ce6836a1d14374ecb9bd5e3f36f970e98cb41ad" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Math proficiency prediction in computer-based international large-scale assessments using a multi-class machine learning model</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Aleksandar Pejic; P. S. Molcer; Kristian Gulači | <strong>Ano:</strong> 2021 | <strong>Venue:</strong> Symposium on Intelligent Systems and Informatics
+                | <strong>DOI:</strong> 10.1109/sisy52375.2021.9582522
+                | <a href="https://www.semanticscholar.org/paper/d23946361105e17d3234d3fc61af3496d84c2a25" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Adaptive intelligent tutoring systems for STEM education: analysis of the learning impact and effectiveness of personalized feedback</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> William Villegas-Ch; Diego Buenano-Fernandez; Alexandra Maldonado Navarro; Aracely Mera-Navarrete | <strong>Ano:</strong> 2025 | <strong>Venue:</strong> SpringerOpen
+                | <strong>DOI:</strong> 10.1186/s40561-025-00389-y
+                | <a href="https://doi.org/10.1186/s40561-025-00389-y" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Multi-models of Educational Data Mining for Predicting Student Performance in Mathematics: A Case Study on High Schools in Cambodia</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Phauk Sokkhey; Sin Navy; Ly Tong; Okazaki Takeo | <strong>Ano:</strong> 2020 | <strong>Venue:</strong> IEIE Transactions on Smart Processing and Computing
+                | <strong>DOI:</strong> 10.5573/ieiespc.2020.9.3.217
+                | <a href="https://openalex.org/W3038720994" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Analysis of Feature Selection and Data Mining Techniques to Predict Student Academic Performance</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Mukesh Kumar; Chetan Sharma; Shamneesh Sharma; Nidhi Nidhi; Nazrul Islam | <strong>Ano:</strong> 2022 | <strong>Venue:</strong> 2022 International Conference on Decision Aid Sciences and Applications (DASA)
+                | <strong>DOI:</strong> 10.1109/dasa54658.2022.9765236
+                | <a href="https://openalex.org/W4225307903" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">A Hybrid Neuro-Fuzzy and Machine Learning Model for Student Performance Prediction in Online Mathematics Education</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Beyza Esin Özseven; Turgut Özseven | <strong>Ano:</strong> 2026 | <strong>Venue:</strong> International Journal of Advanced Computer Science and Applications
+                | <strong>DOI:</strong> 10.14569/ijacsa.2026.0170516
+                | <a href="https://www.semanticscholar.org/paper/2145aef52bdf632d81edd19452a0bbbe1873a807" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Design of Personalized Learning Path Optimization Algorithm Based on Deep Learning</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Lei Zhang; Weihua Zhu; Ling Feng | <strong>Ano:</strong> 2025 | <strong>Venue:</strong> International Conferences on Computers, Information Processing and Advanced Education
+                | <strong>DOI:</strong> 10.1109/cipae66821.2025.00116
+                | <a href="https://www.semanticscholar.org/paper/131a6b2c5194fbe51f601d09d70b7bb1ec2970b5" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">An Innovative Model of Higher Mathematics Curriculum Education Incorporating Artificial Intelligence Technology</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Xiaohui Zhang | <strong>Ano:</strong> 2023 | <strong>Venue:</strong> Applied Mathematics and Nonlinear Sciences
+                | <strong>DOI:</strong> 10.2478/amns.2023.2.01524
+                | <a href="https://www.semanticscholar.org/paper/1bbee8ff1d91cb08257bb34a081df15a588df7f5" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Identifying the Classification Performances of Educational Data Mining Methods: A Case Study for TIMSS</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Serpil Kılıç Depren; Öyküm Esra Aşkın; Ersoy Öz | <strong>Ano:</strong> 2017 | <strong>Venue:</strong> Educational Sciences Theory & Practice
+                | <strong>DOI:</strong> 10.12738/estp.2017.5.0634
+                | <a href="https://openalex.org/W2744614829" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Machine Learning-based Predictive Analytics of Student Academic Performance in STEM Education</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Vladimir L. Uskov; Jeffrey P. Bakken; Adam Byerly; Ashok Shah | <strong>Ano:</strong> 2019 | <strong>Venue:</strong> N/A
+                | <strong>DOI:</strong> 10.1109/educon.2019.8725237
+                | <a href="https://openalex.org/W2946865664" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Computational Models of Human Learning: Applications for Tutor Development, Behavior Prediction, and Theory Testing</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Christopher J. MacLellan | <strong>Ano:</strong> 2017 | <strong>Venue:</strong> Research Showcase @ Carnegie Mellon University (Carnegie Mellon University)
+                | <strong>DOI:</strong> 10.1184/r1/6715271
+                | <a href="https://openalex.org/W2758976604" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Modeling and Optimizing Computer-Assisted Mathematics Learning in Children</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Käser Jacober, Tanja | <strong>Ano:</strong> 2025 | <strong>Venue:</strong> ETH-Zürich
+                | <strong>DOI:</strong> 10.3929/ethz-a-010265296
+                | <a href="https://doi.org/10.3929/ethz-a-010265296" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Machine learning methods as auxiliary tool for effective mathematics teaching</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Marina Milićević; Budimirka Marinović; Ljerka Jeftić | <strong>Ano:</strong> 2024 | <strong>Venue:</strong> Computer Applications in Engineering Education
+                | <strong>DOI:</strong> 10.1002/cae.22787
+                | <a href="https://doi.org/10.1002/cae.22787" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Modeling Students’ Mindset in Mathematics: A Data Mining Approach for Early Intervention</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Joshua M. Echeveria; Christal Joy Bajao; C. Godinez | <strong>Ano:</strong> 2025 | <strong>Venue:</strong> European Journal of Education and Pedagogy
+                | <strong>DOI:</strong> 10.24018/ejedu.2025.6.6.934
+                | <a href="https://www.semanticscholar.org/paper/fd7f5d1b954679042fd577dab7c54b12c0412489" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Beyond  the  traditional  classroom:  innovation  and  inclusion  in  math teaching with AI</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> R. C. Fabiola Imperatrice; Lucia Melchiorre; Domenico Lorusso; Domenico Santoro; Luca Grilli | <strong>Ano:</strong> 2025 | <strong>Venue:</strong> N/A
+
+
+            </div>
+        </div>
+
+        <div class="paper-item">
+            <div class="paper-title">Multimodal neurophysiological measurement of cognitive load during math problem solving in 4th graders</div>
+            <div class="paper-meta">
+                <strong>Autores:</strong> Zeng, Jialing | <strong>Ano:</strong> 2025 | <strong>Venue:</strong> N/A
+                | <strong>DOI:</strong> 10.7916/2q6y-bm58
+                | <a href="https://doi.org/10.7916/2q6y-bm58" target="_blank">Link</a>
+            </div>
+        </div>
+
+        <p><em>Lista limitada aos 50 primeiros. Consulte o relatório de artigos para a lista completa.</em></p>
+    </div>
+
+
+
+    <div class="section">
+        <h2>💻 Técnicas Computacionais</h2>
+        <table>
+            <tr><th>Técnica</th><th>Frequência</th></tr>
+
+            <tr><td>Não Especificado</td><td>6399</td></tr>
+
+            <tr><td>Assessment</td><td>1073</td></tr>
+
+            <tr><td>Ai/Artificial Intelligence</td><td>863</td></tr>
+
+            <tr><td>Machine Learning</td><td>771</td></tr>
+
+            <tr><td>Predictive Analytics</td><td>345</td></tr>
+
+            <tr><td>Machine Learning, Ai/Artificial Intelligence</td><td>305</td></tr>
+
+            <tr><td>Machine Learning, Predictive Analytics</td><td>288</td></tr>
+
+            <tr><td>Adaptive Learning</td><td>237</td></tr>
+
+            <tr><td>Learning Analytics</td><td>198</td></tr>
+
+            <tr><td>Ai/Artificial Intelligence, Assessment</td><td>169</td></tr>
+
+        </table>
+    </div>
+
+
+    <div class="section">
+        <h2>ℹ️ Informações do Processo</h2>
+        <div class="highlight">
+            <p><strong>Data de Geração:</strong> 01/09/2026 07:08</p>
+            <p><strong>Relato:</strong> Estruturado conforme as diretrizes PRISMA 2020</p>
+            <p><strong>Scoring:</strong> Baseado em relevância multi-critério</p>
+        </div>
+    </div>
+    </div>
 </body>
 </html>
-        

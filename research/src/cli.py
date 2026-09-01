@@ -21,6 +21,7 @@ from .pipeline.run import SystematicReviewPipeline
 from .analysis.deep_review_analysis import DeepReviewAnalyzer
 from .exports.bibtex import export_bibtex_by_category
 from .cli_audit import list_suspects, bulk_exclude, load_dois_from_csv
+from .validation.reproducibility import generate_manifest
 # Módulo de validações pode ter sido removido; importar de forma resiliente
 try:
     from .pipelines.validations import (
@@ -93,11 +94,11 @@ def cmd_import_csv(ns: argparse.Namespace) -> None:
 def cmd_stats(_: argparse.Namespace) -> None:
     cfg = load_config()
     stats = get_statistics(cfg)
-    
+
     print("📊 Estatísticas do Banco de Dados")
     print("=" * 40)
     print(f"Total de papers: {stats['total_papers']}")
-    
+
     if stats.get('by_stage'):
         print("\n📋 Por estágio de seleção:")
         label_map = {
@@ -108,17 +109,17 @@ def cmd_stats(_: argparse.Namespace) -> None:
         }
         for stage, count in stats['by_stage'].items():
             print(f"  {label_map.get(stage, stage)}: {count}")
-    
+
     if stats.get('by_database'):
         print("\n🗃️ Por base de dados:")
         for db, count in stats['by_database'].items():
             print(f"  {db}: {count}")
-    
+
     if stats.get('by_year'):
         print("\n📅 Por ano (últimos 10):")
         for year, count in stats['by_year'].items():
             print(f"  {year}: {count}")
-    
+
     if stats.get('cache'):
         cache_stats = stats['cache']
         print(f"\n💾 Cache: {cache_stats['total_entries']} entradas, {cache_stats['total_hits']} hits")
@@ -131,12 +132,12 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
     # Create DatabaseManager with explicit config to ensure DB path consistency
     db_manager = DatabaseManager(cfg)
     pipeline = SystematicReviewPipeline(cfg)
-    
+
     # Configurações personalizadas
     apis = getattr(ns, 'apis', ["semantic_scholar", "openalex", "crossref", "core"])
     limit_per_query = getattr(ns, 'limit_per_query', 50)
     min_score = getattr(ns, 'min_score', 4.0)
-    
+
     print(f"🔧 Configuração:")
     print(f"  APIs: {', '.join(apis)}")
     print(f"  Limite por query: {limit_per_query}")
@@ -163,7 +164,7 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
 
         # Garantir que papers foram salvos (run_full_pipeline já chama save_papers)
         print(f"💾 Papers processados e salvos no banco de dados: {len(pipeline.results)}")
-        
+
         # Persistir análises usando IDs reais dos papers salvos (usa db_manager criado acima)
         try:
             analysis_count = 0
@@ -212,7 +213,7 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
             print(f"📊 Salvou {analysis_count} análises no banco de dados")
         except Exception as e:
             print(f"⚠️ Erro ao salvar análises: {e}")
-        
+
         # ✅ CORREÇÃO: Log da execução do pipeline na tabela searches
         try:
             search_log = {
@@ -223,7 +224,7 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
                 'included_papers': len(pipeline.results[pipeline.results['selection_stage'] == 'included']),
                 'dedup_stats': getattr(pipeline.results, 'attrs', {}).get('dedup_stats', {})
             }
-            
+
             db_manager.save_search_log(
                 query_summary=f"Pipeline completo: {len(apis)} APIs, {limit_per_query} papers/query",
                 results_summary=search_log
@@ -231,7 +232,7 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
             print(f"📝 Log da execução salvo na tabela searches")
         except Exception as e:
             print(f"⚠️ Erro ao salvar log: {e}")
-        
+
         # Exportar resultados
         # Recarregar do banco para garantir consistência com a fonte de verdade
         try:
@@ -242,16 +243,16 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
             logger.warning(f"Falha ao recarregar dados do banco antes de exportar: {e}")
 
         export_files = pipeline.export_results(keep_analysis_artifacts=keep_artifacts)
-        
+
         print(f"\n✅ Pipeline concluído!")
         print(f"📄 Total processado: {len(pipeline.results)} papers")
-        
+
         if "selection_stage" in pipeline.results.columns:
             stage_counts = pipeline.results["selection_stage"].value_counts()
             print("\n📊 Resultados por estágio:")
             for stage, count in stage_counts.items():
                 print(f"  {stage}: {count}")
-        
+
         # Mostrar arquivos gerados
         if isinstance(export_files, dict):
             print(f"\n📁 Arquivos gerados:")
@@ -260,7 +261,7 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
                     print(f"  {file_type}: {len(path)} arquivos")
                 else:
                     print(f"  {file_type}: {path}")
-    
+
     except Exception as e:
         print(f"❌ Erro durante execução: {e}")
         logger.error(f"Pipeline failed: {e}", exc_info=True)
@@ -268,22 +269,22 @@ def cmd_run_pipeline(ns: argparse.Namespace) -> None:
 def cmd_export(ns: argparse.Namespace) -> None:
     cfg = load_config()
     df = read_papers(cfg)
-    
+
     if df.empty:
         print("❌ Nenhum paper encontrado no banco")
         return
-    
+
     # Full-text extraction integration (replaces separate deep-analysis command)
     fulltext_stats = None
     if hasattr(ns, 'fetch_fulltext') and ns.fetch_fulltext:
         print("\n🔬 Iniciando extração de texto completo...")
         only_missing = hasattr(ns, 'only_missing') and ns.only_missing
-        
+
         try:
             analyzer = DeepReviewAnalyzer(db_path=cfg.database.db_path, config=cfg)
             # Use standard exports directory structure
             analyzer.output_dir = Path(cfg.database.exports_dir)
-            
+
             # Carregar apenas papers únicos incluídos antes da extração
             try:
                 analyzer.load_included_papers()
@@ -293,15 +294,15 @@ def cmd_export(ns: argparse.Namespace) -> None:
 
             # Extract full texts (updates database and returns results)
             extraction_results = analyzer.fetch_full_text(only_missing=only_missing)
-            
+
             # Reload dataframe after extraction to get updated full_text field
             df = read_papers(cfg)
-            
+
             # Calculate statistics for report generation
             total = len(extraction_results)
             extracted = sum(1 for p in extraction_results if p.get('full_text'))
             coverage_pct = (extracted / total * 100) if total > 0 else 0
-            
+
             # Count failure reasons
             failure_counts = {}
             for paper in extraction_results:
@@ -309,10 +310,10 @@ def cmd_export(ns: argparse.Namespace) -> None:
                     reasons = paper.get('pdf_failure_reasons', ['unknown'])
                     for reason in reasons:
                         failure_counts[reason] = failure_counts.get(reason, 0) + 1
-            
+
             # Sort by frequency
             top_failures = sorted(failure_counts.items(), key=lambda x: x[1], reverse=True)[:5]
-            
+
             fulltext_stats = {
                 'total_papers': total,
                 'extracted': extracted,
@@ -321,35 +322,35 @@ def cmd_export(ns: argparse.Namespace) -> None:
                 'top_failures': top_failures,
                 'extraction_results': extraction_results
             }
-            
+
             print(f"✅ Extração concluída: {extracted}/{total} papers ({coverage_pct:.1f}%)")
-            
+
         except Exception as e:
             print(f"⚠️ Erro durante extração de texto completo: {e}")
             logger.error(f"Full-text extraction failed: {e}", exc_info=True)
-    
+
     from .exports.excel import export_complete_review
-    
+
     # Calcular estatísticas PRISMA para visualizações
     # IMPORTANTE: Deixar export_complete_review calcular as stats corretamente do DataFrame
     # O cli apenas passa None para stats, e a função export usa _compute_prisma_stats_from_df
     stats = None
-    
+
     # Debug: distribuição de estágios no DataFrame completo
     try:
         if "selection_stage" in df.columns:
             stage_dist = df["selection_stage"].value_counts().to_dict()
             logger.info(f"📊 Distribuição estágios: {stage_dist}")
-            
+
         if "status" in df.columns:
             status_dist = df["status"].value_counts().to_dict()
             logger.info(f"📋 Distribuição status: {status_dist}")
     except Exception as e:
         logger.debug(f"Could not compute stage distribution: {e}")
-    
+
     output_dir = Path(ns.output) if hasattr(ns, 'output') and ns.output else None
     files = export_complete_review(df, output_dir=output_dir, fulltext_stats=fulltext_stats)
-    
+
     print("📊 Exportação completa realizada:")
     for file_type, path in files.items():
         if isinstance(path, list):
@@ -369,7 +370,7 @@ def cmd_normalize_prisma(_: argparse.Namespace) -> None:
 def cmd_export_bibtex(ns: argparse.Namespace) -> None:
     """
     Exporta referências bibliográficas em formato BibTeX.
-    
+
     Gera múltiplos arquivos organizados por categoria:
     - all_papers.bib: Todos os papers
     - included_papers.bib: Apenas incluídos
@@ -378,26 +379,26 @@ def cmd_export_bibtex(ns: argparse.Namespace) -> None:
     """
     cfg = load_config()
     df = read_papers(cfg)
-    
+
     if df.empty:
         print("❌ Nenhum paper encontrado no banco")
         return
-    
+
     # Filtrar apenas incluídos se solicitado
     if hasattr(ns, 'included_only') and ns.included_only:
         if 'selection_stage' in df.columns:
             df = df[df['selection_stage'] == 'included']
             print(f"📋 Filtrando apenas papers incluídos: {len(df)} papers")
-    
+
     cfg = load_config()
     output_dir = Path(ns.output) if hasattr(ns, 'output') and ns.output else Path(cfg.database.exports_dir) / "references"
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     print(f"📚 Gerando arquivos BibTeX...")
     print(f"📁 Diretório de saída: {output_dir}")
-    
+
     files = export_bibtex_by_category(df, output_dir)
-    
+
     print(f"\n✅ Exportação BibTeX concluída!")
     print(f"📄 {len(files)} arquivos gerados:")
     for category, path in files.items():
@@ -408,12 +409,12 @@ def cmd_export_bibtex(ns: argparse.Namespace) -> None:
 def cmd_audit(ns: argparse.Namespace) -> None:
     """
     Executa auditoria cruzada DB → Exports → PTC.
-    
+
     Valida consistência entre:
     - SQLite DB (ground truth)
     - research/exports/ (CSV, BibTeX)
     - results/ptc/ (LaTeX documentado)
-    
+
     Gera relatórios em:
     - research/logs/audit_report.json
     - research/logs/audit_report.md
@@ -421,22 +422,22 @@ def cmd_audit(ns: argparse.Namespace) -> None:
     if compute_db_metrics is None:
         print("❌ Módulo cross_audit não disponível")
         return
-    
+
     cfg = load_config()
     if hasattr(ns, 'db') and ns.db:
         cfg.database.db_path = str(Path(ns.db).resolve())
-    
+
     db = DatabaseManager(cfg)
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     print("🔍 Executando auditoria cruzada...")
     print(f"📁 DB: {cfg.database.db_path}")
     print(f"📁 Logs: {LOGS_DIR}")
-    
+
     dbm = compute_db_metrics(db)
     exp = compute_export_metrics()
     ptc = parse_ptc_numbers(PTC_RESULTS)
-    
+
     # JSON report
     import json
     from dataclasses import asdict
@@ -447,30 +448,34 @@ def cmd_audit(ns: argparse.Namespace) -> None:
     }
     json_path = LOGS_DIR / "audit_report.json"
     json_path.write_text(json.dumps(json_report, indent=2, ensure_ascii=False), encoding="utf-8")
-    
+
     # Markdown report
     md = build_markdown(dbm, exp, ptc)
     md_path = LOGS_DIR / "audit_report.md"
     md_path.write_text(md, encoding="utf-8")
-    
+
     print(f"\n✅ Auditoria concluída!")
     print(f"📄 Relatórios gerados:")
     print(f"  - {json_path}")
     print(f"  - {md_path}")
-    
+
     # Print summary
     print(f"\n📊 Resumo:")
-    print(f"  DB: {dbm.total_identified} identificados, {dbm.included_unique} únicos incluídos")
+    print(
+        f"  DB: {dbm.total_identified} identificados, "
+        f"{dbm.included_unique} incluídos no estágio final "
+        "(sem flag operacional)"
+    )
     print(f"  Exports: {exp.bib_included_entries} BibTeX entries")
     print(f"  PTC: {'parsed OK' if ptc.parsed else 'não encontrado'}")
-    
+
     # Check consistency
     mismatches = []
     if dbm.included_unique != exp.bib_included_entries:
         mismatches.append(f"included_unique ({dbm.included_unique}) != bib_entries ({exp.bib_included_entries})")
     if exp.csv_included_unique and dbm.included_unique != exp.csv_included_unique:
         mismatches.append(f"included_unique ({dbm.included_unique}) != csv_included ({exp.csv_included_unique})")
-    
+
     if mismatches:
         print(f"\n⚠️  Inconsistências detectadas:")
         for m in mismatches:
@@ -593,6 +598,15 @@ def cmd_regenerate_summary(_: argparse.Namespace) -> None:
         print(f"❌ Erro ao regenerar summary.json: {e}")
 
 
+def cmd_generate_manifest(_: argparse.Namespace) -> None:
+    """Gera o manifesto versionado do snapshot sem versionar o SQLite."""
+    try:
+        output = generate_manifest()
+        print(f"✅ Manifesto de reprodutibilidade atualizado em: {output}")
+    except Exception as e:
+        print(f"❌ Erro ao gerar manifesto de reprodutibilidade: {e}")
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="ccw-rs",
@@ -621,9 +635,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     # Comando run-pipeline
     p_pipeline = sub.add_parser("run-pipeline", help="Executa o pipeline completo de revisão sistemática")
-    p_pipeline.add_argument("--min-score", type=float, default=4.0, 
+    p_pipeline.add_argument("--min-score", type=float, default=4.0,
                            help="Score mínimo de relevância (padrão: 4.0)")
-    p_pipeline.add_argument("--apis", nargs="+", 
+    p_pipeline.add_argument("--apis", nargs="+",
                            choices=["semantic_scholar", "openalex", "crossref", "core"],
                            default=["semantic_scholar", "openalex", "crossref", "core"],
                            help="APIs a usar na busca")
@@ -651,7 +665,7 @@ def build_parser() -> argparse.ArgumentParser:
     # Comando export-bibtex
     p_bib = sub.add_parser("export-bibtex", help="Exporta referências bibliográficas em formato BibTeX")
     p_bib.add_argument("-o", "--output", help="Diretório de saída (default: research/exports/references)")
-    p_bib.add_argument("--included-only", action="store_true", 
+    p_bib.add_argument("--included-only", action="store_true",
                        help="Exportar apenas papers incluídos")
     p_bib.set_defaults(func=cmd_export_bibtex)
 
@@ -699,6 +713,13 @@ def build_parser() -> argparse.ArgumentParser:
     # Comando regenerate-summary
     p_reg = sub.add_parser("regenerate-summary", help="Regenera research/exports/reports/summary.json a partir do DB")
     p_reg.set_defaults(func=cmd_regenerate_summary)
+
+    # Comando generate-manifest
+    p_manifest = sub.add_parser(
+        "generate-manifest",
+        help="Gera o manifesto do snapshot e hashes dos artefatos versionados",
+    )
+    p_manifest.set_defaults(func=cmd_generate_manifest)
 
     return p
 

@@ -1,87 +1,175 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais",
-  "generated_at": "09/12/2025 23:08",
+  "generated_at": "01/09/2026 07:08",
   "statistics": {
-    "total_papers": 9431,
+    "total_papers": 11904,
     "prisma": {
-      "raw_rows": 6914,
-      "distinct_doi": 6411,
-      "identification": 9431,
-      "duplicates_removed": 2517,
-      "screening": 6914,
-      "screening_excluded": 5031,
-      "eligibility": 1883,
-      "eligibility_excluded": 1866,
-      "included": 17,
+      "raw_rows": 11904,
+      "distinct_doi": 10657,
+      "identification": 11904,
+      "duplicates_removed": 27,
+      "screening": 11877,
+      "screening_excluded": 9391,
+      "eligibility": 2486,
+      "eligibility_excluded": 2470,
+      "included": 16,
+      "deduplication_audit": {
+        "raw_rows": 11904,
+        "operationally_flagged_rows": 0,
+        "deterministic_identity_duplicate_rows": 27,
+        "confirmed_semantic_duplicates": 0,
+        "doi": {
+          "non_empty_rows": 10682,
+          "distinct_values": 10657,
+          "repeated_groups": 25,
+          "repeated_rows": 50,
+          "excess_rows": 25
+        },
+        "url": {
+          "non_empty_rows": 11435,
+          "distinct_values": 11433,
+          "repeated_groups": 2,
+          "repeated_rows": 4,
+          "excess_rows": 2
+        },
+        "title": {
+          "non_empty_rows": 11903,
+          "distinct_values": 11646,
+          "repeated_groups": 177,
+          "repeated_rows": 434,
+          "excess_rows": 257
+        },
+        "title_only": {
+          "non_empty_rows": 11876,
+          "distinct_values": 11644,
+          "repeated_groups": 154,
+          "repeated_rows": 386,
+          "excess_rows": 232
+        },
+        "interpretation": "Exact normalized DOI/URL identity rows are removed deterministically from the PRISMA flow; normalized-title counts remain weaker candidates for semantic review because versioned records and unrelated works must remain distinct. The title metric includes identity-overlap rows; title_only is calculated after deterministic identity removal."
+      },
+      "stage_percentages": {
+        "screening_excluded_of_identification": 78.89,
+        "screening_advanced_of_identification": 20.88,
+        "eligibility_excluded_of_eligibility": 99.36,
+        "included_of_eligibility": 0.64,
+        "included_of_identification": 0.13
+      },
       "_audit": {
-        "raw_included_total": 17,
+        "raw_included_total": 16,
         "duplicates_marked_included": 0,
-        "unique_included": 17,
+        "included_without_operational_flag": 16,
         "expected_delta": 0,
         "actual_delta": 0
       }
     },
     "integrity": {
-      "raw_rows": 6914,
-      "distinct_doi": 6411,
-      "duplicates_removed": 2517,
-      "included_unique": 17
+      "raw_rows": 11904,
+      "distinct_doi": 10657,
+      "duplicates_removed": 27,
+      "included_without_operational_flag": 16,
+      "operationally_flagged_rows": 0,
+      "deterministic_identity_duplicate_rows": 27,
+      "confirmed_semantic_duplicates": 0
+    },
+    "deduplication_audit": {
+      "raw_rows": 11904,
+      "operationally_flagged_rows": 0,
+      "deterministic_identity_duplicate_rows": 27,
+      "confirmed_semantic_duplicates": 0,
+      "doi": {
+        "non_empty_rows": 10682,
+        "distinct_values": 10657,
+        "repeated_groups": 25,
+        "repeated_rows": 50,
+        "excess_rows": 25
+      },
+      "url": {
+        "non_empty_rows": 11435,
+        "distinct_values": 11433,
+        "repeated_groups": 2,
+        "repeated_rows": 4,
+        "excess_rows": 2
+      },
+      "title": {
+        "non_empty_rows": 11903,
+        "distinct_values": 11646,
+        "repeated_groups": 177,
+        "repeated_rows": 434,
+        "excess_rows": 257
+      },
+      "title_only": {
+        "non_empty_rows": 11876,
+        "distinct_values": 11644,
+        "repeated_groups": 154,
+        "repeated_rows": 386,
+        "excess_rows": 232
+      },
+      "interpretation": "Exact normalized DOI/URL identity rows are removed deterministically from the PRISMA flow; normalized-title counts remain weaker candidates for semantic review because versioned records and unrelated works must remain distinct. The title metric includes identity-overlap rows; title_only is calculated after deterministic identity removal."
+    },
+    "stage_percentages": {
+      "screening_excluded_of_identification": 78.89,
+      "screening_advanced_of_identification": 20.88,
+      "eligibility_excluded_of_eligibility": 99.36,
+      "included_of_eligibility": 0.64,
+      "included_of_identification": 0.13
     },
     "years": {
       "min": 2015,
-      "max": 2025,
-      "mean": 2020.9,
+      "max": 2026,
+      "mean": 2021.6,
       "distribution": {
-        "2024": 970,
-        "2023": 801,
-        "2020": 761,
-        "2025": 714,
-        "2022": 707,
-        "2021": 696,
-        "2019": 533,
-        "2017": 441,
-        "2018": 405,
-        "2016": 369,
-        "2015": 312
+        "2025": 1949,
+        "2024": 1489,
+        "2023": 1246,
+        "2020": 1100,
+        "2022": 1061,
+        "2021": 1030,
+        "2019": 791,
+        "2026": 707,
+        "2017": 698,
+        "2018": 587,
+        "2016": 541,
+        "2015": 424
       },
-      "out_of_range_count": 205
+      "out_of_range_count": 254
     },
     "databases": {
-      "crossref": 2865,
-      "openalex": 1817,
-      "semantic_scholar": 1786,
-      "core": 446
+      "crossref": 5049,
+      "openalex": 3057,
+      "semantic_scholar": 1931,
+      "core": 1840
     },
     "techniques": {
-      "Não especificado": 3791,
-      "Assessment": 628,
-      "AI/Artificial Intelligence": 477,
-      "Machine Learning": 461,
-      "Predictive Analytics": 194,
-      "Machine Learning, AI/Artificial Intelligence": 180,
-      "Machine Learning, Predictive Analytics": 155,
-      "Adaptive Learning": 148,
-      "Learning Analytics": 116,
-      "Intelligent Tutoring": 115
+      "Não especificado": 6399,
+      "Assessment": 1073,
+      "AI/Artificial Intelligence": 863,
+      "Machine Learning": 771,
+      "Predictive Analytics": 345,
+      "Machine Learning, AI/Artificial Intelligence": 305,
+      "Machine Learning, Predictive Analytics": 288,
+      "Adaptive Learning": 237,
+      "Learning Analytics": 198,
+      "AI/Artificial Intelligence, Assessment": 169
     },
     "relevance": {
       "min": 0.0,
       "max": 4.5,
-      "mean": 1.7,
-      "median": 1.65,
-      "std": 0.92,
+      "mean": 1.56,
+      "median": 1.45,
+      "std": 0.86,
       "high_relevance": 0,
-      "medium_relevance": 17,
-      "low_relevance": 6897
+      "medium_relevance": 24,
+      "low_relevance": 11853
     },
     "selection_stages": {
-      "Identificação": 9431,
-      "Triagem": 6914,
-      "Elegibilidade": 1883,
-      "Incluídos": 17,
-      "Excluídos na Triagem": 5031,
-      "Excluídos na Elegibilidade": 1866
+      "Identificação": 11904,
+      "Triagem": 11877,
+      "Elegibilidade": 2486,
+      "Incluídos": 16,
+      "Excluídos na Triagem": 9391,
+      "Excluídos na Elegibilidade": 2470
     }
   },
   "config": {},
@@ -103,6 +191,14 @@
       "url": "https://www.semanticscholar.org/paper/d23946361105e17d3234d3fc61af3496d84c2a25"
     },
     {
+      "title": "Adaptive intelligent tutoring systems for STEM education: analysis of the learning impact and effectiveness of personalized feedback",
+      "authors": "William Villegas-Ch; Diego Buenano-Fernandez; Alexandra Maldonado Navarro; Aracely Mera-Navarrete",
+      "year": 2025,
+      "venue": "SpringerOpen",
+      "doi": "10.1186/s40561-025-00389-y",
+      "url": "https://doi.org/10.1186/s40561-025-00389-y"
+    },
+    {
       "title": "Multi-models of Educational Data Mining for Predicting Student Performance in Mathematics: A Case Study on High Schools in Cambodia",
       "authors": "Phauk Sokkhey; Sin Navy; Ly Tong; Okazaki Takeo",
       "year": 2020,
@@ -117,6 +213,14 @@
       "venue": "2022 International Conference on Decision Aid Sciences and Applications (DASA)",
       "doi": "10.1109/dasa54658.2022.9765236",
       "url": "https://openalex.org/W4225307903"
+    },
+    {
+      "title": "A Hybrid Neuro-Fuzzy and Machine Learning Model for Student Performance Prediction in Online Mathematics Education",
+      "authors": "Beyza Esin Özseven; Turgut Özseven",
+      "year": 2026,
+      "venue": "International Journal of Advanced Computer Science and Applications",
+      "doi": "10.14569/ijacsa.2026.0170516",
+      "url": "https://www.semanticscholar.org/paper/2145aef52bdf632d81edd19452a0bbbe1873a807"
     },
     {
       "title": "Design of Personalized Learning Path Optimization Algorithm Based on Deep Learning",
@@ -159,6 +263,14 @@
       "url": "https://openalex.org/W2758976604"
     },
     {
+      "title": "Modeling and Optimizing Computer-Assisted Mathematics Learning in Children",
+      "authors": "Käser Jacober, Tanja",
+      "year": 2025,
+      "venue": "ETH-Zürich",
+      "doi": "10.3929/ethz-a-010265296",
+      "url": "https://doi.org/10.3929/ethz-a-010265296"
+    },
+    {
       "title": "Machine learning methods as auxiliary tool for effective mathematics teaching",
       "authors": "Marina Milićević; Budimirka Marinović; Ljerka Jeftić",
       "year": 2024,
@@ -167,60 +279,28 @@
       "url": "https://doi.org/10.1002/cae.22787"
     },
     {
-      "title": "A Machine Learning and Explainable AI Approach for Predicting Secondary School Student Performance",
-      "authors": "Khan Md Hasib; Farhana Rahman; Rashik Hasnat; Md. Golam Rabiul Alam",
-      "year": 2022,
-      "venue": "Computing and Communication Workshop and Conference",
-      "doi": "10.1109/ccwc54503.2022.9720806",
-      "url": "https://www.semanticscholar.org/paper/d8baeb876681111e245f523d4771218142884a38"
-    },
-    {
-      "title": "Data Mining for Student Performance Prediction in Education",
-      "authors": "Ferda Ünal",
-      "year": 2020,
-      "venue": "IntechOpen eBooks",
-      "doi": "10.5772/intechopen.91449",
-      "url": "https://openalex.org/W3015458685"
-    },
-    {
-      "title": "Enhancing Student Achievement in Circle Theorems: Integrating Computer Animation with the Jigsaw Cooperative Learning Model",
-      "authors": "Rahmat Opoku Nyantah; Nana Kena Frempong; Ernest Larbi",
+      "title": "Modeling Students’ Mindset in Mathematics: A Data Mining Approach for Early Intervention",
+      "authors": "Joshua M. Echeveria; Christal Joy Bajao; C. Godinez",
       "year": 2025,
-      "venue": "International Journal of Mathematics and Mathematics Education",
-      "doi": "10.56855/ijmme.v3i2.1299",
-      "url": "https://doi.org/10.56855/ijmme.v3i2.1299"
+      "venue": "European Journal of Education and Pedagogy",
+      "doi": "10.24018/ejedu.2025.6.6.934",
+      "url": "https://www.semanticscholar.org/paper/fd7f5d1b954679042fd577dab7c54b12c0412489"
     },
     {
-      "title": "Authentic Assessment for Motivating Student Learning and Teaching Effectiveness in Rural, High-Need Secondary Schools in Manitoba, Canada",
-      "authors": "Eric. K. Appiah-Odame",
-      "year": 2024,
-      "venue": "European Journal of Mathematics and Science Education",
-      "doi": "10.12973/ejmse.5.2.93",
-      "url": "https://www.semanticscholar.org/paper/6a34a705ae5cbfdcfcbe84314d5edd3693cf786f"
+      "title": "Beyond  the  traditional  classroom:  innovation  and  inclusion  in  math teaching with AI",
+      "authors": "R. C. Fabiola Imperatrice; Lucia Melchiorre; Domenico Lorusso; Domenico Santoro; Luca Grilli",
+      "year": 2025,
+      "venue": "N/A",
+      "doi": "",
+      "url": ""
     },
     {
-      "title": "Performance assessment: Improving metacognitive ability in mathematics learning",
-      "authors": "N. M. S. Mertasari; Ni Luh Putu Pranena Sastri; Ida Bagus Nyoman Pascima",
-      "year": 2023,
-      "venue": "Journal of Education and e-Learning Research",
-      "doi": "10.20448/jeelr.v10i4.5260",
-      "url": "https://www.semanticscholar.org/paper/18c8bdd1f25a4048e13f13067736719a96a57d58"
-    },
-    {
-      "title": "Assessing the Effectiveness of Adaptive Learning Systems in K-12 Education",
-      "authors": "Boby Chellanthara Jose; M. Ashok Kumar; T. UdayaBanu; M. Nagalakshmi",
-      "year": 2024,
-      "venue": "International Journal of Advanced IT Research and Development",
-      "doi": "10.69942/1920184/20240101/02",
-      "url": "https://www.semanticscholar.org/paper/b4cfe8f3adedc7ded70c91b5e95e6ea97bd842f9"
-    },
-    {
-      "title": "Analysis of Facebook in the Teaching-Learning Process about Mathematics Through Data Science",
-      "authors": "R. Salas-Rueda",
-      "year": 2021,
-      "venue": "Canadian Journal of Learning and Technology",
-      "doi": "10.21432/cjlt27895",
-      "url": "https://www.semanticscholar.org/paper/9d3dbb938e9df9e78449b2e3e4a3fd66d9101fe2"
+      "title": "Multimodal neurophysiological measurement of cognitive load during math problem solving in 4th graders",
+      "authors": "Zeng, Jialing",
+      "year": 2025,
+      "venue": "N/A",
+      "doi": "10.7916/2q6y-bm58",
+      "url": "https://doi.org/10.7916/2q6y-bm58"
     }
   ],
   "fulltext_stats": null

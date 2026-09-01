@@ -11,8 +11,10 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 # Termos técnicos para identificação (baseado no notebook)
-ML_TERMS = r"(machine learning|deep learning|data mining|neural network|svm|random forest|bayes|lstm|artificial intelligence|AI|predictive|classification|clustering)"
-LA_TERMS = r"(learning analytics|educational data mining|intelligent tutor|adaptive learning|personalized learning|student modeling|competenc|skill|assessment)"
+# AI uses \b to avoid substring false positives (e.g. "aims", "training", "Ghanaian")
+ML_TERMS = r"(machine learning|deep learning|data mining|neural network|svm|random forest|bayes|lstm|artificial intelligence|\bai\b|predictive|classification|clustering)"
+# assessment removed from LA_TERMS — it's too broad and catches educational papers without actual analytics/ML
+LA_TERMS = r"(learning analytics|educational data mining|intelligent tutor(?:ing)?|adaptive learning|personalized learning|student modeling|competenc(?:y|e) modeling)"
 EDU_MATH = r"(mathematics|matemática|algebra|geometry|geometria|calculus|cálculo|fractions?|fraç(ões|ao)|arithmetic|trigonometry)"
 
 # Tipos de estudo
@@ -197,7 +199,7 @@ def calculate_relevance_score(paper: Dict, config: Optional[Dict] = None) -> flo
             "quality": 0.1
         },
         "min_year": 2015,
-        "max_year": 2025
+        "max_year": 2026
     }
 
     config = config or default_config
@@ -354,7 +356,7 @@ def compute_relevance_scores(
         study_types.append(study_type)
         eval_methods_list.append(
             "; ".join(eval_methods) if eval_methods else None)
-        
+
         # ✅ CORREÇÃO: Não persistir análises aqui ainda (papers não existem)
         # As análises serão salvas após os papers serem inseridos no banco
         # try:
@@ -365,7 +367,7 @@ def compute_relevance_scores(
         #         'study_type': study_type,
         #         'eval_methods': eval_methods
         #     }
-        #     
+        #
         #     # Salvar na tabela analysis (usando hash como paper_id temporário)
         #     paper_id = hash(f"{paper_dict.get('title', '')}{paper_dict.get('doi', '')}") % 1000000
         #     db_manager.save_analysis(
@@ -460,7 +462,7 @@ class RelevanceScorer:
                 "quality": 0.1
             },
             "min_year": 2015,
-            "max_year": 2025
+            "max_year": 2026
         }
 
     def calculate_score(self, paper: Dict) -> float:

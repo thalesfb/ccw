@@ -142,17 +142,17 @@ class PublisherPDFResolver:
 
         self.openalex_cache[doi] = None
         return None
-    
+
     def _resolve_ejmse(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Resolve EJMSE (European Journal of Mathematics and Science Education) PDFs.
-        
+
         Pattern: https://pdf.ejmse.com/EJMSE_{volume}_{issue}_{start_page}.pdf
         DOI format: 10.12973/ejmse.{volume}.{issue}.{start_page}
         Example: 10.12973/ejmse.5.2.93 -> https://pdf.ejmse.com/EJMSE_5_2_93.pdf
         """
         if not doi.lower().startswith('10.12973/ejmse.'):
             return None
-        
+
         try:
             # Extract volume.issue.start_page from DOI
             parts = doi.split('.')
@@ -160,29 +160,29 @@ class PublisherPDFResolver:
                 volume = parts[3]
                 issue = parts[4]
                 start_page = parts[5] if len(parts) > 5 else parts[4]
-                
+
                 pdf_url = f"https://pdf.ejmse.com/EJMSE_{volume}_{issue}_{start_page}.pdf"
                 logger.debug(f"Publisher resolver (EJMSE) gerou URL {pdf_url}")
                 return pdf_url
         except (IndexError, ValueError) as e:
             logger.debug(f"EJMSE pattern extraction failed: {e}")
-        
+
         return None
-    
+
     def _resolve_pmj(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Resolve PMJ (Panamerican Mathematical Journal) PDFs.
-        
+
         Pattern: https://internationalpubls.com/index.php/pmj/article/download/{article_id}/{file_id}/{version}
         DOI format: 10.52783/pmj.v{volume}.i{issue}.{article_id}
         Example: 10.52783/pmj.v34.i2.919 -> Need to scrape article page for download IDs
         """
         if not doi.lower().startswith('10.52783/pmj.'):
             return None
-        
+
         try:
             # Extract article_id from DOI (last component)
             article_id = doi.split('.')[-1]
-            
+
             # Try common download URL pattern (file_id often = article_id + offset)
             # First attempt: direct download with common file_id patterns
             for file_id_offset in [0, 643-919, 1]:  # Based on observed pattern: 919/643
@@ -190,7 +190,7 @@ class PublisherPDFResolver:
                 for version in [1707, 1, 0]:  # Try common version numbers
                     pdf_url = f"https://internationalpubls.com/index.php/pmj/article/download/{article_id}/{file_id}/{version}"
                     logger.debug(f"Publisher resolver (PMJ) tentando URL {pdf_url}")
-                    
+
                     # Quick HEAD request to validate
                     try:
                         head_resp = self.session.head(pdf_url, timeout=10, allow_redirects=True)
@@ -203,29 +203,29 @@ class PublisherPDFResolver:
                         continue
         except (IndexError, ValueError) as e:
             logger.debug(f"PMJ pattern extraction failed: {e}")
-        
+
         return None
-    
+
     def _resolve_jestp(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Resolve JESTP/ESTP (Educational Sciences: Theory & Practice) PDFs.
-        
+
         Pattern: https://jestp.com/menuscript/index.php/estp/article/download/{article_id}/{file_id}/{version}
         DOI format: 10.12738/estp.{year}.{issue}.{article_id}
         Example: 10.12738/estp.2017.5.0634 -> https://jestp.com/menuscript/index.php/estp/article/download/426/381/754
         """
         if not doi.lower().startswith('10.12738/estp.'):
             return None
-        
+
         try:
             # Extract article_id from DOI (last component without leading zeros)
             article_id_raw = doi.split('.')[-1]
             article_id = str(int(article_id_raw))  # Remove leading zeros: 0634 -> 634
-            
+
             # Try common download URL patterns
             # Pattern observed: article_id in URL doesn't always match DOI suffix
             # Need to scrape the article landing page
             landing_url = f"https://jestp.com/menuscript/index.php/estp/article/view/{article_id}"
-            
+
             try:
                 response = self.session.get(landing_url, timeout=15)
                 if response.status_code == 200:
@@ -245,25 +245,25 @@ class PublisherPDFResolver:
                 logger.debug(f"JESTP landing page scrape failed: {e}")
         except (IndexError, ValueError) as e:
             logger.debug(f"JESTP pattern extraction failed: {e}")
-        
+
         return None
-    
+
     def _resolve_ieiespc(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Resolve IEIESPC (International Electronics and Informatics Engineering Society in Pacific) PDFs.
-        
+
         Pattern: Publisher website with specific download endpoints
         DOI format: 10.5573/ieiespc.{year}.{volume}.{issue}.{start_page}
         Example: 10.5573/ieiespc.2020.9.3.217
-        
+
         Note: This publisher often has PDFs cached by SemanticScholar as well.
         """
         if not doi.lower().startswith('10.5573/ieiespc.'):
             return None
-        
+
         try:
             # Try landing page scraping for download link
             landing_url = f"https://doi.org/{doi}"
-            
+
             response = self.session.get(landing_url, timeout=15, allow_redirects=True)
             if response.status_code == 200:
                 # Look for direct PDF download links
@@ -271,7 +271,7 @@ class PublisherPDFResolver:
                     re.compile(r'href="([^"]*\.pdf[^"]*)"', re.IGNORECASE),
                     re.compile(r'href="([^"]*download[^"]*pdf[^"]*)"', re.IGNORECASE),
                 ]
-                
+
                 for pattern in pdf_patterns:
                     matches = pattern.findall(response.text)
                     for match in matches:
@@ -281,30 +281,30 @@ class PublisherPDFResolver:
                             return absolute_url
         except requests.RequestException as e:
             logger.debug(f"IEIESPC landing page scrape failed: {e}")
-        
+
         return None
-    
+
     def _resolve_author_site(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Resolve PDFs hosted on author personal/institutional websites.
-        
+
         Uses author names and paper title to construct likely URLs.
         Example: CMU thesis 10.1184/r1/6715271.v1 -> https://chrismaclellan.com/media/publications/MacLellan-Camera-Ready.pdf
         """
         authors = paper.get('authors', '').strip()
         title = paper.get('title', '').strip()
-        
+
         if not authors or not title:
             return None
-        
+
         # Extract first author last name
         first_author = authors.split(';')[0].strip()
         # Try to get last name (assumes "First Last" or "F. Last" format)
         name_parts = first_author.split()
         if not name_parts:
             return None
-        
+
         last_name = name_parts[-1].strip().lower()
-        
+
         # Common academic site patterns
         domain_patterns = [
             f"https://{last_name}.com/media/publications/",
@@ -312,17 +312,17 @@ class PublisherPDFResolver:
             f"https://www.{last_name}.com/papers/",
             f"https://{last_name}.net/publications/",
         ]
-        
+
         # Try to construct filename from title (simple heuristic)
         # Remove common words, take first few significant words
         title_words = [w for w in title.replace('-', ' ').split() if len(w) > 3][:3]
         filename_base = '-'.join(title_words)
-        
+
         for domain in domain_patterns:
             for suffix in ['.pdf', '-Camera-Ready.pdf', '-Final.pdf', '-Preprint.pdf']:
                 pdf_url = f"{domain}{filename_base}{suffix}"
                 logger.debug(f"Publisher resolver (Author Site) tentando URL {pdf_url}")
-                
+
                 # Quick HEAD request to validate
                 try:
                     head_resp = self.session.head(pdf_url, timeout=10, allow_redirects=True)
@@ -333,28 +333,28 @@ class PublisherPDFResolver:
                             return pdf_url
                 except requests.RequestException:
                     continue
-        
+
         return None
-    
+
     def _resolve_semantic_scholar_cached(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Resolve PDFs cached by SemanticScholar.
-        
+
         SemanticScholar often has cached PDFs available even when the paper itself is paywalled.
         These are typically author preprints or versions hosted on institutional repositories.
         Example: 10.5573/ieiespc.2020.9.3.217 -> https://pdfs.semanticscholar.org/f929/f28e5c893999ec30a2435a5d6bc8b4fb070d.pdf
         """
         if doi in self.semantic_scholar_cache:
             return self.semantic_scholar_cache[doi]
-        
+
         # Try SemanticScholar API to get paper details including cached PDFs
         api_url = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}"
         params = {"fields": "openAccessPdf,isOpenAccess"}
-        
+
         try:
             response = self.session.get(api_url, params=params, timeout=15)
             if response.status_code == 200:
                 data = response.json()
-                
+
                 # Check for cached PDF
                 if data.get('isOpenAccess') and data.get('openAccessPdf'):
                     pdf_url = data['openAccessPdf'].get('url')
@@ -364,7 +364,7 @@ class PublisherPDFResolver:
                         return pdf_url
         except requests.RequestException as e:
             logger.debug(f"SemanticScholar cached PDF check failed: {e}")
-        
+
         self.semantic_scholar_cache[doi] = None
         return None
 
@@ -391,12 +391,12 @@ class PublisherPDFResolver:
                 logger.debug(f"Publisher resolver (DOI landing) encontrou {absolute}")
                 return absolute
         return None
-    
+
     def _resolve_researchgate(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Tenta encontrar paper no ResearchGate via DOI."""
         if not doi:
             return None
-        
+
         # ResearchGate search by DOI
         search_url = f"https://www.researchgate.net/search/publication?q={quote_plus(doi)}"
         try:
@@ -419,13 +419,13 @@ class PublisherPDFResolver:
         except requests.RequestException as e:
             logger.debug(f"ResearchGate search failed: {e}")
         return None
-    
+
     def _resolve_academia_edu(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Tenta encontrar paper no Academia.edu via título."""
         title = paper.get('title', '').strip()
         if not title:
             return None
-        
+
         # Academia.edu search by title
         search_url = f"https://www.academia.edu/search?q={quote_plus(title)}"
         try:
@@ -448,23 +448,23 @@ class PublisherPDFResolver:
         except requests.RequestException as e:
             logger.debug(f"Academia.edu search failed: {e}")
         return None
-    
+
     def _resolve_alternative_doi_services(self, doi: str, paper: Dict[str, Any]) -> Optional[str]:
         """Try alternative DOI resolution services as last resort.
-        
+
         Note: This includes services that may have legal implications in some jurisdictions.
         Enable only if you understand and accept the legal risks.
         """
         # Sci-Hub mirrors (use with caution - legal status varies by jurisdiction)
         # Disabled by default for legal compliance
         # Uncomment the following to enable (at your own risk):
-        
+
         # scihub_mirrors = [
         #     "https://sci-hub.se",
         #     "https://sci-hub.st",
         #     "https://sci-hub.ru",
         # ]
-        # 
+        #
         # for mirror in scihub_mirrors:
         #     try:
         #         scihub_url = f"{mirror}/{doi}"
@@ -479,16 +479,16 @@ class PublisherPDFResolver:
         #                 return pdf_url
         #     except requests.RequestException:
         #         continue
-        
+
         # Alternative: unpaywall.org direct API (legal and recommended)
         # This is already handled in _try_get_pdf_url via UnpaywallClient
-        
+
         return None
 
 
 class DeepReviewAnalyzer:
     """Analisador aprofundado de papers da revisão sistemática."""
-    
+
     def __init__(self, db_path: Optional[str] = None, config: Optional[AppConfig] = None):
         # Carregar configuração (ou reutilizar instância injetada)
         self.config = config or load_config()
@@ -502,27 +502,27 @@ class DeepReviewAnalyzer:
         # Diretório padrão de saída baseado em exports configurado (mantém compatibilidade com overrides posteriores)
         self.output_dir = Path(self.config.database.exports_dir) / "deep_analysis"
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Inicializar cliente Semantic Scholar para reutilizar infraestrutura (retry, rate limit, headers)
         self.semantic_client = SemanticScholarClient(self.config)
-        
+
         # Reutilizar a sessão HTTP robusta do cliente
         self.session = self.semantic_client.session
         self.publisher_resolver = PublisherPDFResolver(self.session)
-        
+
         # Configurar rate limiting para Unpaywall
         self.unpaywall_delay = 1.0  # segundos entre requests
         self.last_unpaywall_request = 0
 
         # Cliente Crossref para fallback de PDF
         self.crossref_client = CrossrefClient(self.config)
-        
+
         # Cliente CORE para fallback OA repository
         self.core_client = COREClient(self.config)
-        
+
         # HTML PDF scraper for landing pages
         self.html_scraper = HTMLPDFScraper(session=self.session)
-        
+
         # User agent rotation pool for avoiding blocks
         self.user_agents = [
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -534,14 +534,14 @@ class DeepReviewAnalyzer:
 
         # Overrides manuais de PDF (arquivo opcional)
         self.manual_pdf_overrides: Dict[str, str] = {}
-        
+
         # HTML cache directory for debugging
         self.html_cache_dir = self.output_dir / "html_cache"
         self.html_cache_dir.mkdir(exist_ok=True)
-        
+
         # Author contact tracking
         self.author_emails: Dict[str, List[str]] = {}  # doi -> [emails]
-        
+
         # Retry configuration for network errors
         self.max_retries = 3
         self.retry_backoff_base = 2  # exponential backoff: 2^attempt seconds
@@ -556,14 +556,14 @@ class DeepReviewAnalyzer:
                         logger.info(f"🔧 Overrides manuais de PDF carregados: {len(self.manual_pdf_overrides)} entradas")
             except Exception as e:
                 logger.warning(f"Não foi possível carregar overrides manuais de PDF: {e}")
-        
+
     def load_included_papers(self) -> List[Dict[str, Any]]:
         """
         Carrega os papers incluídos e não duplicados do banco.
         Usa GROUP BY doi para garantir apenas um registro por paper único.
         """
         logger.info("Carregando papers incluídos (não duplicados) do banco de dados...")
-        
+
         db_path = self.db_path
         if not db_path.exists():
             raise FileNotFoundError(f"Banco de dados não encontrado em {db_path}")
@@ -577,8 +577,8 @@ class DeepReviewAnalyzer:
                 FROM papers p
                 INNER JOIN (
                     SELECT doi, MAX(rowid) as max_rowid
-                    FROM papers 
-                    WHERE selection_stage = 'included' 
+                    FROM papers
+                    WHERE selection_stage = 'included'
                       AND (is_duplicate = 0 OR is_duplicate IS NULL)
                       AND doi IS NOT NULL
                       AND doi != ''
@@ -592,11 +592,11 @@ class DeepReviewAnalyzer:
             papers = [dict(row) for row in rows]
         finally:
             conn.close()
-        
+
         logger.info(f"✅ {len(papers)} papers únicos carregados (por DOI)")
         self.papers = papers
         return papers
-    
+
     def _try_get_pdf_url(self, paper: Dict[str, Any]) -> Optional[str]:
         """
         Tenta obter URL do PDF usando múltiplas estratégias:
@@ -607,7 +607,7 @@ class DeepReviewAnalyzer:
         4. Crossref link (campo link[] content-type application/pdf)
         5. Resolvedores específicos de publishers / DOI landing pages
         6. MCP Paper Search (se disponível)
-        
+
         Retorna None se nenhuma estratégia funcionar.
         """
         doi = paper.get('doi', '')
@@ -621,7 +621,7 @@ class DeepReviewAnalyzer:
             logger.info(f"📄 Usando override manual de PDF para '{title}': {override_url[:80]}...")
             paper['resolved_pdf_url'] = override_url
             return override_url
-        
+
         # Estratégia 1: Usar open_access_pdf do banco
         if paper.get('open_access_pdf'):
             url = paper['open_access_pdf']
@@ -632,7 +632,7 @@ class DeepReviewAnalyzer:
                 return url
             else:
                 failure_reasons.append('open_access_ieee_html')
-        
+
         # Estratégia 2: Buscar no Semantic Scholar usando infraestrutura existente
         if doi:
             try:
@@ -648,7 +648,7 @@ class DeepReviewAnalyzer:
             except Exception as e:
                 logger.debug(f"Semantic Scholar busca falhou: {e}")
                 failure_reasons.append('semantic_error')
-        
+
         # Estratégia 3: Tentar Unpaywall API com rate limiting (expandido para todas oa_locations)
         if doi:
             try:
@@ -706,7 +706,7 @@ class DeepReviewAnalyzer:
             except Exception as e:
                 logger.debug(f"Unpaywall falhou: {e}")
                 failure_reasons.append('unpaywall_error')
-        
+
         # Estratégia 4: Crossref link
         if doi:
             try:
@@ -720,7 +720,7 @@ class DeepReviewAnalyzer:
             except Exception as e:
                 logger.debug(f"Crossref falhou: {e}")
                 failure_reasons.append('crossref_error')
-        
+
         # Estratégia 5: CORE.ac.uk OA repository aggregator
         if doi:
             try:
@@ -734,7 +734,7 @@ class DeepReviewAnalyzer:
             except Exception as e:
                 logger.debug(f"CORE falhou: {e}")
                 failure_reasons.append('core_error')
-        
+
         # Estratégia 6: Resolvedores específicos de publisher / DOI
         publisher_pdf = self.publisher_resolver.resolve(paper)
         if publisher_pdf:
@@ -747,12 +747,12 @@ class DeepReviewAnalyzer:
                 return publisher_pdf
         else:
             failure_reasons.append('publisher_resolver_none')
-        
+
         # Nenhuma estratégia funcionou
         paper['pdf_failure_reasons'] = failure_reasons
         paper['resolved_pdf_url'] = None
         return None
-    
+
     def fetch_full_text(self, only_missing: bool = False) -> List[Dict[str, Any]]:
         """Baixa e extrai texto completo.
         Parametros:
@@ -762,7 +762,7 @@ class DeepReviewAnalyzer:
             logger.info("Iniciando extração apenas para artigos faltantes...")
         else:
             logger.info("Iniciando busca e extração de texto completo...")
-        
+
         # Garantir a presença da chave 'full_text' em todos os registros
         # Evita KeyError em consumidores que assumem a existência do campo
         for p in self.papers:
@@ -770,7 +770,7 @@ class DeepReviewAnalyzer:
                 p['full_text'] = None
 
         cache_file = self.output_dir / "full_texts_cache.json"
-        
+
         # Carregar cache existente, se houver
         if cache_file.exists():
             with open(cache_file, 'r', encoding='utf-8') as f:
@@ -782,7 +782,7 @@ class DeepReviewAnalyzer:
         for i, paper in enumerate(self.papers, 1):
             doi = paper.get('doi', paper.get('title', 'NO_ID'))
             title = paper.get('title', 'N/A')[:60]
-            
+
             # Pular se o texto já estiver no cache
             if doi in full_texts_cache:
                 logger.info(f"[{i}/{len(self.papers)}] ✓ Texto para '{title}' encontrado no cache.")
@@ -794,10 +794,10 @@ class DeepReviewAnalyzer:
                 continue
 
             logger.info(f"[{i}/{len(self.papers)}] Buscando PDF para '{title}'...")
-            
+
             # Tentar obter URL do PDF
             pdf_url = self._try_get_pdf_url(paper)
-            
+
             if not pdf_url:
                 logger.warning(f"❌ Nenhuma fonte de PDF disponível para '{title}'.")
                 # Garante chave presente mesmo em falha
@@ -909,7 +909,7 @@ class DeepReviewAnalyzer:
         # Salvar o cache atualizado
         with open(cache_file, 'w', encoding='utf-8') as f:
             json.dump(full_texts_cache, f, indent=2, ensure_ascii=False)
-        
+
         logger.info(f"Cache de textos completos salvo em: {cache_file}")
         logger.info(f"✅ Total extraído: {sum(1 for p in self.papers if p.get('full_text'))} de {len(self.papers)}")
         return self.papers
@@ -919,7 +919,7 @@ class DeepReviewAnalyzer:
         ua = self.user_agents[self.current_ua_index]
         self.current_ua_index = (self.current_ua_index + 1) % len(self.user_agents)
         return ua
-    
+
     def _exponential_backoff_retry(self, url: str, timeout: int = 25, max_attempts: int = None) -> Optional[requests.Response]:
         """Retry GET with exponential backoff; HEAD pré-checagem para PDF."""
         max_attempts = max_attempts or self.max_retries
@@ -970,34 +970,34 @@ class DeepReviewAnalyzer:
                 logger.debug(f"Request exception (no retry): {e}")
                 return None
         return None
-    
+
     def _cache_html_content(self, url: str, html_content: str) -> None:
         """Cache HTML content for debugging."""
         try:
             # Create safe filename from URL hash
             url_hash = hashlib.md5(url.encode()).hexdigest()[:16]
             cache_file = self.html_cache_dir / f"{url_hash}.html"
-            
+
             with open(cache_file, 'w', encoding='utf-8') as f:
                 f.write(f"<!-- URL: {url} -->\n")
                 f.write(html_content)
-            
+
             logger.debug(f"HTML cached: {cache_file.name}")
         except Exception as e:
             logger.debug(f"Failed to cache HTML: {e}")
-    
+
     def _extract_author_emails(self, paper: Dict[str, Any]) -> List[str]:
         """Extract author emails from paper metadata and full text."""
         emails = set()
         email_pattern = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
-        
+
         # From metadata authors field
         authors = paper.get('authors', [])
         if isinstance(authors, list):
             for author in authors:
                 if isinstance(author, dict) and 'email' in author:
                     emails.add(author['email'])
-        
+
         # From full text (common patterns near author names)
         full_text = paper.get('full_text', '')
         if full_text:
@@ -1005,16 +1005,16 @@ class DeepReviewAnalyzer:
             header_text = full_text[:3000]
             found_emails = email_pattern.findall(header_text)
             emails.update(found_emails)
-        
+
         return list(emails)
-    
+
     def _try_protocol_fallback(self, url: str, timeout: int = 25) -> Optional[requests.Response]:
         """Try HTTPS first, fallback to HTTP if connection fails, with exponential backoff.
-        
+
         Args:
             url: URL to fetch
             timeout: Request timeout in seconds
-            
+
         Returns:
             Response object if successful, None otherwise
         """
@@ -1022,7 +1022,7 @@ class DeepReviewAnalyzer:
         response = self._exponential_backoff_retry(url, timeout)
         if response:
             return response
-        
+
         # Try HTTP fallback if original was HTTPS
         if url.startswith('https://'):
             http_url = url.replace('https://', 'http://', 1)
@@ -1030,9 +1030,9 @@ class DeepReviewAnalyzer:
             response = self._exponential_backoff_retry(http_url, timeout)
             if response:
                 return response
-        
+
         return None
-        
+
         # DEPRECATED OLD IMPLEMENTATION - keeping for reference
         # Try original URL first, then protocol fallback
         for protocol_attempt in range(2):
@@ -1041,7 +1041,7 @@ class DeepReviewAnalyzer:
                 if protocol_attempt == 1 and url.startswith('https://'):
                     current_url = url.replace('https://', 'http://', 1)
                     logger.debug(f"Trying HTTP fallback: {current_url}")
-                
+
                 response = self.session.get(
                     current_url,
                     timeout=timeout,
@@ -1062,7 +1062,7 @@ class DeepReviewAnalyzer:
             except requests.HTTPError:
                 # Don't fallback on HTTP errors (404, 403, etc)
                 raise
-        
+
         return None
 
     def _extract_pdf_from_ieee_html(self, html: str) -> Optional[str]:
@@ -1085,14 +1085,14 @@ class DeepReviewAnalyzer:
     def generate_markdown_report(self) -> str:
         """Gera um relatório sobre a extração de texto completo."""
         logger.info("Gerando relatório Markdown...")
-        
+
         total_papers = len(self.papers)
         successful_extractions = sum(1 for p in self.papers if p.get('full_text'))
-        
+
         report = f"""# 📖 Relatório de Extração de Texto Completo
 
-**Data da geração**: {time.strftime('%d/%m/%Y %H:%M')}  
-**Total de papers únicos analisados**: {total_papers}  
+**Data da geração**: {time.strftime('%d/%m/%Y %H:%M')}
+**Total de papers únicos analisados**: {total_papers}
 **Textos completos extraídos com sucesso**: {successful_extractions} ({successful_extractions/total_papers:.1%})
 
 Este relatório resume o sucesso da extração automática de texto. Os textos completos
@@ -1100,13 +1100,13 @@ foram salvos em `full_texts_cache.json`.
 
 ---
 """
-        
+
         sorted_papers = sorted(
             self.papers,
             key=lambda x: (x.get('relevance_score', 0)),
             reverse=True
         )
-        
+
         for i, paper in enumerate(sorted_papers, 1):
             status = "✅ Sucesso" if paper.get('full_text') else "❌ Falha"
             pdf_link = paper.get('resolved_pdf_url') or paper.get('open_access_pdf') or 'N/A'
@@ -1128,7 +1128,7 @@ foram salvos em `full_texts_cache.json`.
         Enriquece os papers com metadados adicionais (presença de texto, keywords detectadas, etc.)
         """
         logger.info("Enriquecendo metadados dos papers...")
-        
+
         self.enriched_papers = []
         keywords_to_detect = [
             'machine learning', 'deep learning', 'neural network',
@@ -1136,7 +1136,7 @@ foram salvos em `full_texts_cache.json`.
             'regression', 'clustering', 'assessment', 'evaluation',
             'education', 'learning analytics', 'student performance'
         ]
-        
+
         for paper in self.papers:
             enriched = paper.copy()
 
@@ -1177,7 +1177,7 @@ foram salvos em `full_texts_cache.json`.
             enriched.pop('full_text', None)
 
             self.enriched_papers.append(enriched)
-        
+
         logger.info(f"✅ {len(self.enriched_papers)} papers enriquecidos com metadados")
 
     def _calculate_statistics(self) -> Dict[str, Any]:
@@ -1185,35 +1185,35 @@ foram salvos em `full_texts_cache.json`.
         Calcula estatísticas gerais sobre os papers analisados.
         """
         logger.info("Calculando estatísticas da análise...")
-        
+
         total_papers = len(self.papers)
         successful_extractions = sum(1 for p in self.papers if p.get('full_text'))
         extraction_rate = (successful_extractions / total_papers * 100) if total_papers > 0 else 0
-        
+
         # Estatísticas de ano
         years = [p.get('year') for p in self.papers if p.get('year')]
         year_range = f"{min(years)}-{max(years)}" if years else "N/A"
-        
+
         from collections import Counter
         years_distribution = Counter(years)
-        
+
         # Estatísticas de citações
         citations = [p.get('citationCount', 0) for p in self.papers if p.get('citationCount') is not None]
         avg_citations = sum(citations) / len(citations) if citations else 0
         max_citations = max(citations) if citations else 0
         total_citations = sum(citations)
-        
+
         # Top venues
         venues = [p.get('venue', 'Unknown') for p in self.papers if p.get('venue')]
         venue_counts = Counter(venues)
         top_venues = venue_counts.most_common(10)
-        
+
         # Técnicas detectadas
         all_keywords = []
         for p in self.enriched_papers:
             all_keywords.extend(p.get('detected_keywords', []))
         detected_techniques = Counter(all_keywords)
-        
+
         # Cobertura de abstracts (fallback)
         abstract_only = sum(1 for p in self.papers if not p.get('full_text') and p.get('abstract'))
 
@@ -1239,7 +1239,7 @@ foram salvos em `full_texts_cache.json`.
             'failure_reason_counts': dict(failure_counter),
             'generated_at': datetime.datetime.now().isoformat()
         }
-        
+
         logger.info(f"✅ Estatísticas calculadas: {extraction_rate:.1f}% taxa de extração")
         return stats
 
@@ -1248,7 +1248,7 @@ foram salvos em `full_texts_cache.json`.
         Gera relatório markdown completo da análise aprofundada.
         """
         logger.info("Gerando relatório de análise aprofundada...")
-        
+
         report = f"""# 📊 Relatório de Análise Aprofundada - Revisão Sistemática
 
 **Data de Geração**: {stats['generated_at']}
@@ -1265,24 +1265,24 @@ foram salvos em `full_texts_cache.json`.
 
 ### Distribuição por Ano
 
-"""        
+"""
         for year in sorted(stats['years_distribution'].keys()):
             count = stats['years_distribution'][year]
             report += f"- **{year}**: {count} papers\n"
-        
+
         report += "\n## 🔬 Técnicas e Abordagens Detectadas\n\n"
-        
+
         if stats['detected_techniques']:
             for technique, count in sorted(stats['detected_techniques'].items(), key=lambda x: x[1], reverse=True):
                 report += f"- **{technique}**: mencionado em {count} papers\n"
         else:
             report += "*Nenhuma técnica específica detectada nos textos extraídos.*\n"
-        
+
         report += "\n## 📚 Top 10 Venues/Journals\n\n"
-        
+
         for i, venue_info in enumerate(stats['top_venues'][:10], 1):
             report += f"{i}. **{venue_info['venue']}** - {venue_info['count']} papers\n"
-        
+
         # Seção de motivos de falha
         report += "\n## ⚠️ Motivos de Falha na Aquisição de PDF\n\n"
         if stats['failure_reason_counts']:
@@ -1292,14 +1292,14 @@ foram salvos em `full_texts_cache.json`.
             report += "*Nenhum motivo de falha registrado.*\n"
 
         report += "\n## 📄 Lista Completa de Papers Analisados\n\n"
-        
+
         # Ordenar papers por relevância (score) ou citações
         sorted_papers = sorted(
-            self.enriched_papers, 
+            self.enriched_papers,
             key=lambda p: (p.get('relevance_score', 0), p.get('citationCount', 0)),
             reverse=True
         )
-        
+
         for i, paper in enumerate(sorted_papers, 1):
             title = paper.get('title', 'N/A')
             authors = paper.get('authors', 'N/A')
@@ -1312,7 +1312,7 @@ foram salvos em `full_texts_cache.json`.
             keyword_source = paper.get('keyword_source', 'none')
             failure_reasons = ", ".join(paper.get('pdf_failure_reasons', [])) or "-"
             resolved_pdf = paper.get('resolved_pdf_url') or 'N/A'
-            
+
             report += f"""### {i}. {title}
 
 - **Autores**: {authors}
@@ -1330,7 +1330,7 @@ foram salvos em `full_texts_cache.json`.
 ---
 
 """
-        
+
         report += """## 🔍 Notas Metodológicas
 
 Esta análise foi realizada através do seguinte processo:
@@ -1349,29 +1349,29 @@ Esta análise foi realizada através do seguinte processo:
 
 *Relatório gerado automaticamente pela ferramenta de Análise Aprofundada*
 """
-        
+
         logger.info("✅ Relatório de análise aprofundada gerado")
         return report
-    
+
     def _generate_author_contact_file(self) -> None:
         """Gera arquivo JSON com informações para contato com autores de papers sem PDF."""
         failed_papers = [p for p in self.papers if not p.get('full_text')]
-        
+
         if not failed_papers:
             logger.info("Todos os papers têm texto completo, não há necessidade de contato com autores")
             return
-        
+
         contact_info = []
-        
+
         for paper in failed_papers:
             # Extract emails from paper
             emails = self._extract_author_emails(paper)
-            
+
             # Store in tracking dict
             doi = paper.get('doi', paper.get('title', 'UNKNOWN'))
             if emails:
                 self.author_emails[doi] = emails
-            
+
             # Build contact entry
             authors_list = paper.get('authors', [])
             if isinstance(authors_list, str):
@@ -1380,7 +1380,7 @@ Esta análise foi realizada através do seguinte processo:
                 authors_str = ", ".join([a.get('name', str(a)) if isinstance(a, dict) else str(a) for a in authors_list[:3]])
             else:
                 authors_str = "Unknown"
-            
+
             contact_entry = {
                 'title': paper.get('title', 'N/A'),
                 'authors': authors_str,
@@ -1393,21 +1393,21 @@ Esta análise foi realizada através do seguinte processo:
                 'email_template': self._generate_email_template(paper)
             }
             contact_info.append(contact_entry)
-        
+
         # Save to JSON
         contact_file = self.output_dir / "author_contact_info.json"
         with open(contact_file, 'w', encoding='utf-8') as f:
             json.dump(contact_info, f, ensure_ascii=False, indent=2)
-        
+
         logger.info(f"✅ Informações de contato com autores salvas em: {contact_file}")
         logger.info(f"📧 {len(failed_papers)} papers sem PDF, {sum(1 for c in contact_info if c['extracted_emails'])} com emails identificados")
-    
+
     def _generate_email_template(self, paper: Dict[str, Any]) -> str:
         """Gera template de email para solicitar PDF aos autores."""
         title = paper.get('title', 'N/A')
         doi = paper.get('doi', 'N/A')
         year = paper.get('year', 'N/A')
-        
+
         template = f"""Subject: Request for Full Text - {title[:60]}...
 
 Dear Authors,
@@ -1428,31 +1428,31 @@ Best regards,
 [Your Email]
 """
         return template
-    
+
     def _update_database_with_full_texts(self):
         """Atualiza o banco SQLite com os textos completos extraídos."""
         logger.info("Atualizando banco de dados com textos completos...")
-        
+
         conn = sqlite3.connect(str(self.db_path))
         try:
             cursor = conn.cursor()
             updated_count = 0
-            
+
             for paper in self.papers:
                 paper_id = paper.get('id')
                 full_text = paper.get('full_text')
                 text_length = paper.get('text_length', 0)
-                
+
                 if paper_id and full_text:
                     # Atualizar paper com texto completo
                     cursor.execute("""
-                        UPDATE papers 
+                        UPDATE papers
                         SET full_text = ?,
                             updated_at = CURRENT_TIMESTAMP
                         WHERE id = ?
                     """, (full_text, paper_id))
                     updated_count += 1
-            
+
             conn.commit()
             logger.info(f"✅ {updated_count} papers atualizados no banco com texto completo")
         except Exception as e:
@@ -1460,17 +1460,17 @@ Best regards,
             conn.rollback()
         finally:
             conn.close()
-    
+
     def _export_papers_json(self):
         """Exporta papers.json consolidado com textos completos integrados."""
         logger.info("Exportando papers.json consolidado...")
-        
+
         conn = sqlite3.connect(str(self.db_path))
         try:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute("""
-                SELECT * FROM papers 
-                ORDER BY 
+                SELECT * FROM papers
+                ORDER BY
                     CASE WHEN selection_stage = 'included' THEN 0 ELSE 1 END,
                     COALESCE(relevance_score, 0) DESC,
                     COALESCE(citation_count, 0) DESC
@@ -1480,15 +1480,25 @@ Best regards,
             cursor.close()
         finally:
             conn.close()
-        
-        # Exportar para papers.json
-        export_dir = Path(self.config.database.exports_dir) / "analysis"
+
+        # Exportar para papers.json. When tests or callers override output_dir,
+        # keep their fixture output isolated instead of overwriting the
+        # versioned canonical export in research/exports/analysis.
+        default_deep_analysis_dir = Path(self.config.database.exports_dir) / "deep_analysis"
+        configured_exports_dir = Path(self.config.database.exports_dir)
+        if self.output_dir.resolve() in {
+            default_deep_analysis_dir.resolve(),
+            configured_exports_dir.resolve(),
+        }:
+            export_dir = configured_exports_dir / "analysis"
+        else:
+            export_dir = self.output_dir
         export_dir.mkdir(parents=True, exist_ok=True)
-        
+
         papers_json_file = export_dir / "papers.json"
         with open(papers_json_file, 'w', encoding='utf-8') as f:
             json.dump(papers, f, ensure_ascii=False, indent=2)
-        
+
         logger.info(f"✅ Papers.json consolidado exportado: {papers_json_file}")
         logger.info(f"   Total de papers: {len(papers)}")
         logger.info(f"   Papers com texto completo: {sum(1 for p in papers if p.get('full_text'))}")
@@ -1500,63 +1510,63 @@ Best regards,
             (acelera iterações posteriores). Metadata e relatórios ainda são atualizados.
         """
         logger.info("=== INICIANDO ANÁLISE APROFUNDADA COMPLETA ===")
-        
+
         # 1. Carregar papers únicos
         self.load_included_papers()
-        
+
         if not self.papers:
             logger.warning("Nenhum paper encontrado para análise. Encerrando.")
             return {'total_papers': 0, 'message': 'Nenhum paper incluído foi encontrado.'}
-            
+
         # 2. Tenta baixar e extrair o texto completo (modo seletivo opcional)
         self.fetch_full_text(only_missing=only_missing)
-        
+
         # 3. Enriquecer metadados dos papers
         self._enrich_papers_metadata()
-        
+
         # 4. Calcular estatísticas
         stats = self._calculate_statistics()
-        
+
         # 5. Atualizar banco SQLite com textos completos
         self._update_database_with_full_texts()
-        
+
         # 6. Exportar papers.json consolidado
         self._export_papers_json()
-        
+
         # 7. Gerar relatórios
         extraction_report = self.generate_markdown_report()
         deep_analysis_report = self._generate_deep_analysis_report(stats)
-        
+
         # 8. Salvar arquivos
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Relatório de extração (original)
         extraction_report_file = self.output_dir / "FULL_TEXT_EXTRACTION_REPORT.md"
         with open(extraction_report_file, 'w', encoding='utf-8') as f:
             f.write(extraction_report)
         logger.info(f"✅ Relatório de extração salvo em: {extraction_report_file}")
-        
+
         # Relatório de análise aprofundada (novo)
         deep_analysis_file = self.output_dir / "DEEP_ANALYSIS_REPORT.md"
         with open(deep_analysis_file, 'w', encoding='utf-8') as f:
             f.write(deep_analysis_report)
         logger.info(f"✅ Relatório de análise aprofundada salvo em: {deep_analysis_file}")
-        
+
         # Cache de papers enriquecidos (novo)
         enriched_cache_file = self.output_dir / "enriched_papers_cache.json"
         with open(enriched_cache_file, 'w', encoding='utf-8') as f:
             json.dump(self.enriched_papers, f, ensure_ascii=False, indent=2)
         logger.info(f"✅ Cache de papers enriquecidos salvo em: {enriched_cache_file}")
-        
+
         # Resumo de análises (novo)
         analyses_summary_file = self.output_dir / "analyses_summary.json"
         with open(analyses_summary_file, 'w', encoding='utf-8') as f:
             json.dump(stats, f, ensure_ascii=False, indent=2)
         logger.info(f"✅ Resumo de análises salvo em: {analyses_summary_file}")
-        
+
         # Gerar arquivo de contato com autores para papers sem PDF
         self._generate_author_contact_file()
-        
+
         # Retornar resultados expandidos
         return {
             'total_papers': len(self.papers),
