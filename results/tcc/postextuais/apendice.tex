@@ -7,14 +7,14 @@ Este apêndice apresenta o checklist completo de aderência às 27 recomendaçõ
 
 \begin{longtable}{|p{0.5cm}|p{3.5cm}|p{6cm}|p{3cm}|}
 \hline
-\textbf{N\textordmasculine} & \textbf{Item PRISMA 2020} & \textbf{Descrição} & \textbf{Localização no PTC} \\
+\textbf{N\textordmasculine} & \textbf{Item PRISMA 2020} & \textbf{Descrição} & \textbf{Localização no TCC} \\
 \hline
 \endfirsthead
 
 \multicolumn{4}{c}%
 {\tablename\ \thetable\ -- Continuação da página anterior} \\
 \hline
-\textbf{N\textordmasculine} & \textbf{Item PRISMA 2020} & \textbf{Descrição} & \textbf{Localização no PTC} \\
+\textbf{N\textordmasculine} & \textbf{Item PRISMA 2020} & \textbf{Descrição} & \textbf{Localização no TCC} \\
 \hline
 \endhead
 
@@ -71,7 +71,7 @@ Este apêndice apresenta o checklist completo de aderência às 27 recomendaçõ
 13 & Características dos estudos & Apresentar características relevantes dos estudos incluídos & Cap. 4, Seção 4.2 \\
 \hline
 
-14 & Risco de viés nos estudos & Apresentar avaliações de risco de viés para cada estudo & Cap. 4, Tabela MMAT \\
+14 & Risco de viés nos estudos & Apresentar avaliações de risco de viés para cada estudo & Cap. 4, Seção Qualidade Metodológica (reaplicação preliminar registrada; adjudicação pendente) \\
 \hline
 
 15 & Resultados de estudos individuais & Apresentar resultados de cada estudo analisado & Cap. 4, Seção 4.3 \\
@@ -86,7 +86,7 @@ Este apêndice apresenta o checklist completo de aderência às 27 recomendaçõ
 17 & Viés de publicação & Avaliação de viés de publicação & Cap. 4, Seção Limitações (discutido qualitativamente) \\
 \hline
 
-18 & Certeza da evidência & Avaliação de certeza/qualidade da evidência & Cap. 4, Seção Qualidade Metodológica (MMAT) \\
+18 & Certeza da evidência & Avaliação de certeza/qualidade da evidência & Cap. 4, Seção Qualidade Metodológica (MMAT preliminar registrado; fontes e adjudicação pendentes) \\
 \hline
 
 %--- DISCUSSÃO ---
@@ -122,20 +122,26 @@ Este apêndice apresenta o checklist completo de aderência às 27 recomendaçõ
 \label{tab:prisma-checklist}
 \end{longtable}
 
+\section*{Nota sobre o baseline e o conjunto incluído}
+
+No baseline atual, o banco operacional contém 11.904 registros. A deduplicação determinística por DOI/URL retirou 27 registros redundantes; no fluxo PRISMA, 11.877 foram avaliados na triagem, 9.391 foram excluídos e 2.486 avançaram à elegibilidade. Nessa etapa, 2.470 foram excluídos e 16 registros foram retidos operacionalmente: 15 classificados provisoriamente como empíricos, com o 6918 em hold temporal, e o protocolo/proposta contextual 6921. A execução histórica tinha 17 incluídos; uma nova rodada encontrou 23 candidatos e registrou 7 overrides manuais, dos quais 4 ainda aguardam adjudicação de escopo, chegando aos 16 registros atuais. A mudança também envolve nova contagem de ingestão e correção do scoring, e não deve ser tratada como simples troca numérica.
+
+Os 15 registros empíricos são uma classificação provisória para fins de rastreabilidade. O ID 6918 está em hold porque a fonte oficial da ETH informa 2014, em conflito com o ano 2025 do snapshot; o ID 6921 permanece contextual e fora do MMAT empírico. A avaliação final depende da resolução dessas pendências, da recuperação das fontes e da adjudicação.
+
 \section*{Notas Explicativas}
 
 \textbf{Legenda:}
 \begin{itemize}
-    \item Itens com localização específica: totalmente atendidos no documento
+    \item Itens com localização específica: descritos no documento; o status de atendimento é indicado na tabela e pode ser parcial
     \item N/A: item não aplicável ao tipo/escopo desta revisão
 \end{itemize}
 
-\textbf{Status de conformidade: 27/27 itens atendidos.}
+\textbf{Status de conformidade: aderência parcial; não se declara 27/27 enquanto a avaliação metodológica do conjunto atualizado não for consolidada.}
 
-Todos os 27 itens do checklist PRISMA 2020 foram atendidos. Os itens 9, 14, 17, 18, 20 e 21, que na fase PTC estavam pendentes, foram completados na versão TCC com:
+O checklist registra o estado atual do relato. O método para a avaliação de risco de viés foi definido no item 9, e os itens 17, 20 e 21 foram tratados qualitativamente. A avaliação estudo a estudo do conjunto atual foi iniciada e registrada em ledger próprio: nove textos primários foram revisados externamente, cinco estudos permanecem em nível de abstract/metadados, um está em hold por conflito de ano e recuperação de fonte (ID 6918), e um protocolo/proposta sem resultado empírico concluído (ID 6921) foi marcado como não aplicável ao MMAT empírico. Por isso, os itens 14 e 18 permanecem provisórios até a conclusão das fontes e da adjudicação. Os itens 9, 14, 17, 18, 20 e 21, que na fase PTC estavam pendentes, foram tratados na versão TCC da seguinte forma:
 
 \begin{enumerate}
-    \item \textbf{Avaliação de qualidade metodológica (itens 9, 14, 18):} Aplicação do \textbf{Mixed Methods Appraisal Tool (MMAT)} versão 2018 \cite{MMAT2018} aos 17 estudos incluídos, com resultados detalhados no Cap. 4 (Tabela MMAT)
+    \item \textbf{Avaliação de qualidade metodológica (itens 9, 14, 18):} Definição do procedimento com o \textbf{Mixed Methods Appraisal Tool (MMAT)} versão 2018 \cite{MMAT2018} para os 15 registros empíricos retidos. O protocolo/proposta 6921 permanece separado como registro contextual e não aplicável ao MMAT empírico. A reavaliação preliminar está registrada em \path{research/data/mmat\_reassessment\_current.csv}; a tabela final permanece pendente de fontes primárias, localizadores por critério e adjudicação.
     \item \textbf{Viés de publicação (item 17):} Discussão qualitativa no Cap. 4, Seção Limitações da Revisão
     \item \textbf{Limitações da evidência e da revisão (itens 20, 21):} Seção dedicada no Cap. 4 com análise de limitações de processo e da evidência
 \end{enumerate}

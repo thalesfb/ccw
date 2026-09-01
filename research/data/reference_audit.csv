@@ -13,13 +13,12 @@ Identifying2017_006,included_study,verified,verified,verified,10.12738/estp.2017
 Machine2019_007,included_study,verified,verified,scope_limited,10.1109/EDUCON.2019.8725237,keep,EDUCON proceedings title pages and DOI URL normalized
 Computational2017_008,included_study,verified,verified,scope_limited,10.1184/R1/6715271,keep,Classified as Carnegie Mellon University doctoral dissertation
 Machine2024_009,included_study,verified,verified,scope_limited,10.1002/cae.22787,keep,Use as specific empirical evidence
-Machine2022_010,included_study,verified,verified,verified,10.1109/CCWC54503.2022.9720806,keep,Full conference title pages and DOI URL normalized
-Data2020_011,included_study,verified,verified,scope_limited,10.5772/intechopen.91449,keep,Classified as IntechOpen book chapter
-Enhancing2025_012,included_study,verified,verified,scope_limited,10.56855/ijmme.v3i2.1299,keep,Specific quasi-experimental evidence only
-Authentic2024_013,included_study,verified,verified,scope_limited,10.12973/ejmse.5.2.93,keep,Volume issue pages and DOI URL normalized; specific qualitative evidence only
-Performance2023_014,included_study,verified,verified,scope_limited,10.20448/jeelr.v10i4.5260,keep,Volume issue pages and DOI URL normalized; use for metacognitive result not general feedback definition
-Assessing2024_015,included_study,verified,metadata_fix,editorial_caution,10.69942/1920184/20240101/02,retain_with_caution,Canonical DOI URL applied; conflicting secondary metadata prevents silent author or pagination correction
-Analysis2021_016,included_study,verified,verified,scope_limited,10.21432/cjlt27895,keep,Author volume issue and DOI URL normalized; small contextual study and not a benchmark for the prototype
+Villegas2025_6916,included_study,unverified,metadata_fix,editorial_caution,10.1186/s40561-025-00389-y,retain_with_caution,Included in the current database snapshot; bibliographic metadata requires primary-source confirmation
+Ozseven2026_6917,included_study,unverified,metadata_fix,editorial_caution,10.14569/ijacsa.2026.0170516,retain_with_caution,Included in the current database snapshot; bibliographic metadata requires primary-source confirmation
+Kaser2025_6918,included_study,verified,metadata_fix,editorial_caution,10.3929/ethz-a-010265296,retain_with_caution,Official ETH repository confirms the thesis identity and DOI and dates it to 2014, conflicting with the 2025 year stored in the operational snapshot; retain only as a provisional operational record until temporal eligibility is adjudicated
+Echeveria2025_6920,included_study,unverified,metadata_fix,editorial_caution,10.24018/ejedu.2025.6.6.934,retain_with_caution,Included in the current database snapshot; bibliographic metadata requires primary-source confirmation
+Imperatrice2025_6921,included_study,unverified,metadata_fix,editorial_caution,,retain_with_caution,Included in the current database snapshot; venue and persistent identifier are absent from available metadata
+Zeng2025_6923,included_study,verified,metadata_fix,editorial_caution,10.7916/2q6y-bm58,retain_with_caution,Repository metadata and the official Teachers College 2025 dissertation program corroborate the work; the primary dissertation text remains unrecovered, so criterion-level use is provisional
 BNCC2018,pedagogy,verified,verified,verified,https://basenacionalcomum.mec.gov.br/,keep,Official MEC document and canonical institutional URL
 PISA2022,assessment,verified,verified,verified,10.1787/53f23881-en,keep,Use for proficiency descriptors and results
 SAEB2021,assessment,verified,metadata_fix,scope_limited,https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb,normalize,Distinguish report documentation and microdata release before using as a dataset citation

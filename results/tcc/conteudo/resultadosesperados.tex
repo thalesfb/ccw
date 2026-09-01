@@ -1,18 +1,20 @@
 \chapter{REVISÃO SISTEMÁTICA DA LITERATURA}
 \label{cap:revisao}
 
-Este capítulo apresenta os resultados da revisão sistemática desenvolvida no trabalho. O processo identificou 9.431 registros nas quatro fontes consultadas e incluiu 17 estudos na síntese narrativa. A pontuação usada na elegibilidade representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
+Este capítulo apresenta os resultados da revisão sistemática desenvolvida no trabalho. O processo identificou 11.904 registros nas quatro fontes consultadas e reteve 16 registros no snapshot operacional: 15 registros classificados provisoriamente como empíricos e um protocolo/proposta mantido apenas para mapeamento contextual e rastreabilidade. O registro 6918 permanece em \textit{hold}, pois a fonte oficial da ETH identifica a tese como publicação de 2014, enquanto o snapshot operacional registra 2025; ele não sustenta uma conclusão empírica final dependente do período da revisão até essa discrepância ser adjudicada. A pontuação usada na elegibilidade representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
+
+Esta versão resulta de uma reexecução e auditoria do pipeline, e não de uma simples troca numérica. A execução histórica registrava 17 estudos incluídos; a nova rodada identificou 23 candidatos no limiar operacional e registrou 7 overrides manuais após a revisão de pertinência, chegando aos 16 registros retidos atuais. Desses, 15 são classificados provisoriamente como empíricos, com o ID 6918 em hold temporal, e o ID 6921 é um protocolo/proposta contextual, fora da síntese empírica. Esses sete registros já estão contabilizados entre os 2.470 excluídos na elegibilidade após a deduplicação determinística; não constituem uma exclusão adicional ao fluxo PRISMA. Contudo, quatro overrides ainda exigem adjudicação de escopo e não devem ser apresentados como exclusões científicas finais. A mudança também está associada ao snapshot atualizado da base e à correção da lógica de scoring, cuja rastreabilidade deve ser lida junto do manifesto versionado, dos exports derivados e do registro explícito dos overrides manuais.
 
 \section{Fluxo de Seleção}
 
-A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Após a identificação, 2.517 duplicatas foram removidas, restando 6.914 registros únicos. A triagem e a avaliação de elegibilidade resultaram em 17 estudos incluídos.
+A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Os 11.904 registros brutos do banco consolidado passaram pela deduplicação determinística, que retirou 27 registros redundantes por DOI/URL. Assim, 11.877 registros foram avaliados na triagem; 9.391 foram excluídos e 2.486 avançaram para a elegibilidade. Nessa etapa, 2.470 foram excluídos, resultando em 16 registros retidos no snapshot operacional (15 provisoriamente empíricos e 1 protocolo contextual).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
 \caption{Fluxo de seleção da revisão sistemática.}
 \label{fig:prisma-flow}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{figure}
 
 A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de registros ao longo das etapas.
@@ -22,14 +24,14 @@ A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de regist
 \includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
 \caption{Funil de seleção dos estudos.}
 \label{fig:selection-funnel}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{figure}
 
 \section{Estatísticas Descritivas}
 
-A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A taxa de duplicatas evidencia a sobreposição entre as fontes e justifica a combinação de DOI e similaridade de títulos. A pequena proporção de estudos incluídos decorreu do escopo específico e da aplicação do limiar de relevância temática.
+A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A auditoria de identidade encontrou 25 grupos de DOI repetido (50 linhas, 25 excedentes), 2 grupos de URL repetida (4 linhas, 2 excedentes) e 177 grupos de título normalizado (434 linhas, 257 excedentes brutos). Depois da remoção DOI/URL, permanecem 154 grupos (386 linhas, 232 excedentes) apenas por título. Os 27 excedentes DOI/URL foram retirados como registros redundantes na reconstrução do fluxo, enquanto os candidatos apenas por título não foram removidos automaticamente. A flag persistida \texttt{is\_duplicate} permanece zerada no banco e é reportada como limitação de rastreabilidade, não como prova de unicidade. A pequena proporção de registros retidos decorreu do escopo específico, do filtro de relevância e da auditoria dos candidatos. O registro 6921 é mantido no conjunto operacional, mas não é tratado como evidência empírica nem como estudo aplicável ao MMAT; o 6918 permanece explicitamente em hold por conflito temporal.
 
-A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um acerto ocorreu quando uma consulta foi atendida com uma resposta previamente armazenada, sem nova requisição à API. Como essa proporção dependeu do histórico de execução, sua interpretação permaneceu vinculada aos contadores registrados em cada execução do sistema.
+A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um acerto ocorreu quando uma consulta foi atendida com uma resposta previamente armazenada, sem nova requisição à API. O contador de acertos é acumulado por entrada do cache, enquanto os eventos são registrados na auditoria; como essa proporção depende do histórico e da expiração das entradas, ela não representa quantidade de registros, qualidade ou evidência de inclusão.
 
 \begin{table}[H]
 \centering
@@ -39,47 +41,63 @@ A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um 
 \hline
 \textbf{Métrica} & \textbf{Valor} \\
 \hline
-Registros identificados & 9.431 \\
-Duplicatas removidas & 2.517 (26,6\%) \\
-Registros únicos & 6.914 \\
-Registros avaliados na elegibilidade & 1.883 \\
-Registros excluídos na elegibilidade & 1.866 \\
-Estudos incluídos & 17 \\
+Registros identificados (banco bruto) & 11.904 \\
+Remoções determinísticas por DOI/URL & 27 (0,23\%) \\
+Grupos DOI repetido (auditoria) & 25 (50 linhas; 25 excedentes) \\
+Grupos URL repetida (auditoria) & 2 (4 linhas; 2 excedentes) \\
+Grupos de título normalizado (bruto) & 177 (434 linhas; 257 excedentes) \\
+Grupos de título-only após DOI/URL & 154 (386 linhas; 232 excedentes) \\
+Registros no banco operacional & 11.904 \\
+Registros avaliados na triagem (após deduplicação) & 11.877 \\
+Registros excluídos na triagem & 9.391 \\
+Excluídos na triagem / identificação & 78,89\% \\
+Registros avaliados na elegibilidade & 2.486 \\
+Registros excluídos na elegibilidade & 2.470 \\
+Excluídos na elegibilidade / elegibilidade & 99,36\% \\
+Registros incluídos no snapshot operacional & 16 \\
+Estudos empíricos provisoriamente no escopo da síntese & 15 \\
+Protocolo/proposta retido para contexto, fora da síntese empírica & 1 \\
+Incluídos / elegibilidade & 0,64\% \\
+Incluídos / identificação & 0,13\% \\
+DOIs normalizados distintos & 10.657 \\
+Registros sem DOI & 1.222 \\
 Bases consultadas & 4 \\
 Consultas bilíngues & 72 (48 EN + 24 PT) \\
-Período de cobertura & 2016--2025 \\
+Período de cobertura & 2015--2026 \\
 \hline
 \end{tabular}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{table}
 
-A distribuição por fonte é apresentada na Figura~\ref{fig:database-coverage}. A contribuição de cada base foi complementar, e os totais brutos incluíram registros posteriormente reconhecidos como duplicatas.
+A distribuição por fonte é apresentada na Figura~\ref{fig:database-coverage}. A contribuição de cada base foi complementar. A visualização usa o corpus analítico de 11.877 registros após a remoção dos 27 registros redundantes por DOI/URL; os 11.904 registros brutos permanecem representados na etapa de identificação do fluxo PRISMA.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/database_coverage.png}
-\caption{Registros identificados por fonte científica.}
+\caption{Registros por fonte científica no corpus analítico após a deduplicação determinística (n = 11.877).}
 \label{fig:database-coverage}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{figure}
 
 \clearpage
-\section{Síntese dos Estudos Incluídos}
+\section{Síntese dos Registros Retidos e das Evidências Empíricas}
 
-Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos.
+Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos. O snapshot retém 16 registros, mas a síntese de evidências empíricas considera 15: o ID 6921 é um protocolo/proposta sem resultado empírico concluído e foi preservado somente como registro contextual. A avaliação MMAT vigente foi reaplicada de forma preliminar em nível documental aos 15 registros empíricos aplicáveis; o ID 6921 não é aplicável ao MMAT empírico. Nove textos primários foram revisados externamente, cinco registros permanecem apoiados em abstract/metadados e o ID 6918 está em hold por conflito de ano e recuperação da fonte. As conclusões de qualidade permanecem provisórias até a recuperação das fontes necessárias, a confirmação dos localizadores e a adjudicação pelo supervisor.
+
+Assim, os 15 registros empíricos são um escopo provisório, e não um conjunto final de evidências: o registro 6918 permanece fora de qualquer conclusão temporalmente dependente até a resolução do conflito entre o ano oficial (2014) e o ano armazenado no snapshot (2025). O registro 6923 tem identidade bibliográfica e ano corroborados, mas continua limitado à informação de resumo enquanto o texto integral não for recuperado.
 
 Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, características contextuais e registros de interação para estimar categorias ou escores. Outros estudos investigaram personalização, avaliação formativa, recursos pedagógicos ou modelos computacionais de aprendizagem. Essa diversidade ampliou o panorama da revisão, mas também impediu tratar todos os resultados como se medissem o mesmo fenômeno educacional.
 
 Acurácia elevada em uma base específica não demonstra automaticamente que a técnica produzirá o mesmo resultado em outra escola ou população. Da mesma forma, predição de desempenho não equivale a explicar como o estudante aprende matemática. Essas restrições foram incorporadas aos requisitos e aos critérios de avaliação da especificação apresentada no Capítulo~\ref{cap:prototipo}.
 
-Na Tabela~\ref{tab:sintese-17-estudos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT.
+Na Tabela~\ref{tab:sintese-estudos-incluidos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas relatadas pelos próprios estudos; a matriz MMAT documental correspondente está em \texttt{research/data/mmat\_reassessment\_current.csv}. Para registros cuja auditoria bibliográfica ainda exige confirmação em fonte primária, a descrição é provisória e se baseia nos metadados e/ou resumo disponíveis; os números reportados nessas linhas não constituem verificação independente do texto completo.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
 \setlength{\tabcolsep}{2pt}
 \renewcommand{\arraystretch}{0.92}
 \begin{longtable}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{7.2cm}}
-\caption{Síntese dos estudos incluídos.}\label{tab:sintese-17-estudos}\\
+\caption{Síntese dos registros retidos, com distinção do protocolo contextual.}\label{tab:sintese-estudos-incluidos}\\
 \hline
 \textbf{Autores/Ano} & \textbf{Tema} & \textbf{Abordagem} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Resultado reportado} \\
 \hline
@@ -94,47 +112,44 @@ Na Tabela~\ref{tab:sintese-17-estudos}, a coluna de resultado preserva o sentido
 \endfoot
 \hline
 \endlastfoot
-Tjahyadi (2025) & Predição de desempenho em matemática & EDM; ML & Predição & Desempenho & 75\% de acurácia no conjunto analisado \\
-Zhang et al. (2025) & Otimização de trajetórias & DL; RL; grafos de conhecimento & Personalização & Retorno de usuários & Ganhos de aprendizagem e redução de tempo reportados \\
-Nyantah et al. (2025) & Teoremas de círculo & Animação; aprendizagem cooperativa & Ensino de geometria & Testes estatísticos & Diferença favorável em relação ao ensino tradicional \\
-Milićević et al. (2024) & Apoio ao ensino de matemática & ML; analítica da aprendizagem & Predição e apoio & Desempenho & Heurísticas para classificação de sucesso acadêmico \\
-Jose et al. (2024) & Sistemas adaptativos K--12 & Aprendizagem adaptativa & Personalização & Métodos mistos & Ganhos e engajamento reportados \\
-Appiah-Odame (2024) & Avaliação autêntica & Abordagem qualitativa & Avaliação & Entrevistas & Benefícios e barreiras percebidos por professores \\
-Zhang (2023) & Matemática no ensino superior & ACO; CNN; CRF & Personalização & Testes estatísticos & Melhora de pós-teste reportada \\
-Mertasari et al. (2023) & Avaliação e metacognição & Avaliação de desempenho & Avaliação formativa & Testes estatísticos & Ganhos metacognitivos reportados \\
-Hasib et al. (2022) & Predição explicável & SVM; SMOTE; LIME & Predição & Desempenho & 96,89\% de acurácia no conjunto analisado \\
-Kumar et al. (2022) & Seleção de atributos & ML; mineração de dados & Predição de notas & Desempenho & Comparação entre cinco algoritmos \\
-Pejic et al. (2021) & Proficiência matemática no PISA & ML multiclasse & Predição de proficiência & Kappa; ROC-AUC & Resultados competitivos para RN e RF \\
-Salas-Rueda (2021) & Facebook no ensino de matemática financeira & Regressão; árvore; rede neural & Apoio ao ensino & Testes estatísticos & Associações entre recursos e resultados \\
-Sokkhey et al. (2020) & Desempenho no ensino médio & ML; RF & Predição & Desempenho & RF com melhor resultado entre os modelos comparados \\
-Ünal (2020) & Predição de desempenho & DT; RF; NB & Predição & Experimento computacional & Efetividade reportada em duas bases \\
-Uskov et al. (2019) & Analítica preditiva em STEM & Oito algoritmos de ML & Predição & Comparação de modelos & Recomendações baseadas no \textit{benchmark} \\
-MacLellan (2017) & Modelos computacionais de aprendizagem & Árvores; TRESTLE & Tutoria e autoria & Testes estatísticos & Melhor ajuste de modelos em múltiplos domínios \\
-Depren et al. (2017) & Classificação no TIMSS & LR; DT; BN; RN & Predição & Desempenho & Regressão logística superior no estudo \\
+Tjahyadi (2025) \cite{Implementation2025_000} & Predição de desempenho em matemática & EDM; ML; LA & Predição & Desempenho; estatística & Modelo de mineração de dados educacionais para desempenho acadêmico \\
+Pejic et al. (2021) \cite{Math2021_001} & Proficiência matemática & ML; avaliação & Predição de proficiência & Desempenho; estatística & Modelo multiclasses para estimar proficiência em avaliação internacional \\
+Villegas-Ch et al. (2025) \cite{Villegas2025_6916} & Tutoria inteligente em STEM & ML; tutoria; adaptação; IA & Feedback personalizado & Desempenho; estatística & O texto primário externo descreve a tutoria inteligente, o desenho de comparação e os resultados reportados; a interpretação permanece contextual e não demonstra eficácia geral \\
+Sokkhey et al. (2020) \cite{Multimodels2020_002} & Desempenho no ensino médio & ML; LA; predição & Predição & Desempenho; estatística & Comparação de modelos de mineração de dados educacionais \\
+Kumar et al. (2022) \cite{Analysis2022_003} & Seleção de atributos & Analítica da aprendizagem & Predição de desempenho & Desempenho & Análise de técnicas de seleção e mineração de dados \\
+Özseven e Özseven (2026) \cite{Ozseven2026_6917} & Desempenho em matemática on-line & ML; adaptação; avaliação & Predição & Desempenho & O texto primário externo descreve a estrutura híbrida com ANFIS, Random Forest e XGBoost; os resultados são específicos ao conjunto avaliado e não estabelecem superioridade fora dele \\
+Zhang et al. (2025) \cite{Design2025_004} & Otimização de trajetórias & DL; RL; grafos de conhecimento & Personalização & Retorno de usuários & O registro descreve otimização de trajetórias de aprendizagem personalizada; não deve ser usado como evidência isolada de efetividade \\
+Zhang (2023) \cite{Innovative2023_005} & Matemática no ensino superior & IA; adaptação; avaliação & Personalização & Estatística; feedback & O registro descreve modelo de educação curricular incorporando IA; metadados editoriais ainda requerem confirmação \\
+Depren et al. (2017) \cite{Identifying2017_006} & Classificação no TIMSS & LA; avaliação & Predição & Estatística; feedback & Comparação de desempenhos de métodos de mineração de dados educacionais \\
+Uskov et al. (2019) \cite{Machine2019_007} & Analítica preditiva em STEM & ML; LA; predição & Predição & Desempenho; estatística & Benchmark de algoritmos para predição de desempenho acadêmico \\
+MacLellan (2017) \cite{Computational2017_008} & Modelos computacionais de aprendizagem & Tutoria; avaliação; predição & Tutoria e modelagem & Estatística & Modelos computacionais para desenvolvimento de tutores e previsão de comportamento \\
+Käser Jacober (ano a confirmar) \cite{Kaser2025_6918} & Aprendizagem matemática assistida por computador & Tutoria; avaliação; predição & Personalização & O registro descreve sistema adaptativo baseado em modelo de habilidades matemáticas e estudos com usuários; o ano do snapshot conflita com o ano do repositório e a fonte integral ainda não foi recuperada \\
+Milićević et al. (2024) \cite{Machine2024_009} & Apoio ao ensino de matemática & ML; LA; predição & Predição e apoio & Desempenho & Métodos de aprendizado de máquina como ferramenta auxiliar ao ensino \\
+Echeveria et al. (2025) \cite{Echeveria2025_6920} & Mentalidade matemática & ML; LA; predição & Intervenção precoce & Desempenho & O texto primário externo informa acurácia de 98,8\% para a predição de mentalidades matemáticas; a perda de casos e a inconsistência do particionamento limitam a interpretação \\
+Imperatrice et al. (2025) \cite{Imperatrice2025_6921} & Ensino inclusivo de matemática & Adaptação; IA; avaliação & Personalização e inclusão & Protocolo/proposta & O PDF externo descreve uma proposta prospectiva de intervenção com IA, visualizações e avaliação prevista; não apresenta resultados empíricos concluídos \\
+Zeng (2025) \cite{Zeng2025_6923} & Carga cognitiva na resolução de problemas & ML; adaptação; IA & Reconhecimento de estados cognitivos & Estatística & O registro/resumo informa 77,21\% (regressão logística) e 75\% (SVM) para modelos multimodais; confirmação em fonte primária pendente \\
 \end{longtable}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{landscape}
 
 \section{Avaliação Metodológica com o MMAT}
 \label{sec:qualidade-estudos}
 
-O MMAT 2018 foi aplicado conforme o desenho metodológico de cada estudo \cite{MMAT2018}. As respostas S (``Sim''), N (``Não'') e ND (``Não é possível determinar'') foram mantidas por critério, sem média, ranking ou categoria geral. A avaliação foi realizada por um único revisor com base nos resumos, metadados e na descrição metodológica disponível; por isso, os julgamentos constituem uma apreciação estruturada e passível de revisão, não uma classificação definitiva dos artigos.
+O MMAT 2018 foi definido como instrumento de apreciação metodológica conforme o desenho de cada estudo \cite{MMAT2018}. As respostas Y (``Sim''), N (``Não'') e CT (``Não é possível determinar'') devem ser mantidas por critério, sem média, ranking ou categoria geral. A atualização do banco alterou o conjunto operacional de 17 para 16 registros, e os julgamentos disponíveis no arquivo histórico correspondem à versão anterior. A reaplicação do instrumento ao conjunto atual foi registrada em um ledger específico: nove textos primários foram revisados externamente, cinco registros empíricos receberam julgamentos provisórios baseados em abstract/metadados, um registro empírico permanece em hold por conflito de fonte e o protocolo/proposta 6921 foi marcado como não aplicável ao MMAT empírico. O instrumento não é reduzido a uma nota; a avaliação final permanece bloqueada até a recuperação das fontes restantes, a confirmação dos localizadores e a adjudicação pelo supervisor.
 
-A Tabela~\ref{tab:mmat-avaliacao} foi gerada automaticamente a partir do arquivo versionado \texttt{research/data/\allowbreak{}mmat\_assessments.csv}. Dessa forma, os critérios apresentados no TCC, no CSV exportado e no relatório HTML possuem uma fonte única e verificável.
+A tabela MMAT final deverá ser gerada automaticamente a partir dos artefatos versionados \texttt{research/data/\allowbreak{}mmat\_current\_study\_registry.csv}, \texttt{research/data/\allowbreak{}mmat\_primary\_sources\_manifest.csv}, \texttt{research/data/\allowbreak{}mmat\_reassessment\_current.csv} e \texttt{research/data/\allowbreak{}current\_synthesis\_scope.csv}, após a conclusão da reaplicação aos 15 registros empíricos atuais. O ledger atual já contém uma decisão e uma nota de evidência para cada critério dos 15 registros empíricos, além do registro contextual 6921 como não aplicável; contudo, enquanto houver registros sem texto primário revisado e sem adjudicação, ele não deve ser interpretado como avaliação completa do conjunto vigente.
 
-\begin{landscape}
-\fontsize{7.3}{7.8}\selectfont
-\setlength{\tabcolsep}{1.5pt}
-\renewcommand{\arraystretch}{0.88}
-\input{../../research/exports/references/mmat_tcc_table.tex}
-\fonte{Elaborado pelo autor (2026).}
-\end{landscape}
+Para tornar o estado atual auditável no próprio manuscrito, a Tabela~\ref{tab:mmat-reavaliacao-atual} apresenta a reavaliação documental preliminar dos 16 registros operacionais, distinguindo os 15 registros empíricos do protocolo 6921. Ela explicita a base da avaliação, conserva ``CT'' quando a fonte disponível não permite uma decisão e identifica o protocolo 6921 como não aplicável ao MMAT empírico. A tabela não atribui nota geral, não ordena os estudos e não substitui a adjudicação pelo supervisor.
 
-As limitações recorrentes envolveram descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Em vez de ordenar os estudos por uma nota, essas informações foram consideradas na força atribuída a cada evidência durante a síntese.
+\input{../../research/exports/references/mmat_current_tcc_table.tex}
+
+O arquivo histórico registra, para sua composição anterior, limitações como descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Essas observações não são uma avaliação MMAT dos 15 registros empíricos atuais. Após a reaplicação, as limitações deverão ser consideradas na força atribuída a cada evidência, sem ordenar os estudos por uma nota.
+
+a tabela histórica não é apresentada como resultado final; ela permanece apenas como registro da execução anterior e não deve ser usada para interpretar o conjunto vigente.
 
 \section{Tendências e Lacunas}
 
-A análise dos estudos indicou concentração em modelos preditivos supervisionados. Abordagens de explicabilidade, integração curricular, avaliação longitudinal e participação docente apareceram com menor frequência.
+A análise dos estudos indicou concentração em modelos preditivos e etiquetas de aprendizado de máquina. Abordagens de explicabilidade, integração curricular, avaliação longitudinal e participação docente apareceram com menor frequência nos metadados disponíveis; essa leitura deve ser confirmada na avaliação das fontes primárias, sem atribuir aos metadados uma força de evidência que eles não possuem.
 
 As principais lacunas identificadas foram:
 
@@ -151,13 +166,15 @@ As principais lacunas identificadas foram:
 
 A revisão foi realizada por um único pesquisador, com suporte automatizado para deduplicação, triagem e organização dos registros. Não houve dupla revisão independente. A elegibilidade de grande parte dos registros foi avaliada a partir de títulos, resumos e metadados, pois nem todos os textos completos estavam disponíveis.
 
+Embora a revisão por pares e a disponibilidade de texto completo tenham sido definidas como critérios planejados, a auditoria bibliográfica ainda classifica alguns registros atuais como cautela editorial, veículo ausente ou fonte institucional. Assim, o estado ``incluído'' representa o snapshot operacional atual e não confirma, por si só, a validação bibliográfica individual de cada estudo.
+
 O protocolo não foi registrado prospectivamente. Foram adotados princípios de planejamento compatíveis com o PRISMA-P, mas não se afirmou conformidade integral. O PRISMA 2020 foi utilizado para orientar o relato do processo.
 
 As fontes consultadas possuem cobertura predominantemente anglófona, e a busca foi limitada a português e inglês. A heterogeneidade dos desenhos, populações e métricas impediu uma síntese quantitativa conjunta. Além disso, a avaliação MMAT por revisor único está sujeita a divergências interpretativas.
 
 \section{Contribuições para a Especificação do Protótipo}
 
-A revisão forneceu a base empírica para a especificação do protótipo. A predominância de tarefas preditivas justificou a inclusão de modelos supervisionados entre as alternativas de modelagem, enquanto a heterogeneidade das bases impôs critérios explícitos de seleção e validação. As lacunas de explicabilidade, integração curricular, participação docente e reprodutibilidade foram convertidas em requisitos técnicos e pedagógicos.
+A revisão forneceu a base empírica para a especificação do protótipo. A recorrência de tarefas preditivas justificou a inclusão de modelos de aprendizado de máquina entre as alternativas de modelagem, enquanto a heterogeneidade das bases impôs critérios explícitos de seleção e validação. As lacunas de explicabilidade, integração curricular, participação docente e reprodutibilidade foram convertidas em requisitos técnicos e pedagógicos.
 
 Dessa forma, os resultados da revisão não foram tratados apenas como levantamento bibliográfico. Eles sustentaram as decisões consolidadas no Capítulo~\ref{cap:prototipo}, preservando a distinção entre evidências reportadas na literatura e resultados produzidos pelo próprio trabalho.
 
