@@ -77,9 +77,11 @@ artefato versionável.
 
 | PR | Resultado técnico | Interpretação |
 |---|---|---|
+| #16--#19 | `diff-check` limpo; arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | Nenhum bloqueio de encoding/line ending identificado |
 | #20 | `diff-check` limpo; 5 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | Não há bloqueio de encoding/line ending identificado |
-| #23 | `diff-check` limpo; 19 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | O bloqueio é funcional: dois testes do protocolo falham, não é um problema de codificação |
-| #34 | 238.628 diagnósticos efetivos de trailing whitespace em 14 arquivos; UTF-8 válido; 6 arquivos com CRLF/LF/CR misturados ou CR isolado | `source-validation` para antes dos testes. Os principais arquivos são exports `.bib/.csv`, `.gitignore`, dois HTML e código/LaTeX; o patch precisa de normalização isolada e revisão semântica |
+| #23 | `diff-check` limpo; 18 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | O bloqueio é funcional: dois testes do protocolo falham, não é um problema de codificação |
+| #34 | 238.628 diagnósticos de trailing whitespace e 1 de espaço antes de tabulação em 14 arquivos; UTF-8 válido; 5 arquivos com finais CRLF/LF/CR misturados e BOM em `papers.csv` | `source-validation` para antes dos testes. Os principais arquivos são exports `.bib/.csv`, `.gitignore`, dois HTML e código/LaTeX; o patch precisa de normalização isolada e revisão semântica |
+| #35 (fechada) | Não é PR ativa após a reescrita de `main`; não é candidata a merge | Seus problemas funcionais foram reavaliados nas PRs científicas posteriores |
 | #36--#47 | `diff-check` limpo; todos os arquivos textuais alterados válidos em UTF-8; sem BOM e sem finais mistos | Nenhum bloqueio técnico dessa classe foi encontrado |
 
 No #23, os erros concretos do check são `computational_techniques` sendo
