@@ -1,8 +1,9 @@
-"""Generate the MMAT criterion table included by the TCC.
+"""Generate the historical 17-study MMAT criterion table.
 
 The canonical source is ``research/data/mmat_assessments.csv``. This module
-keeps the landscape table reproducible and separate from the generic MMAT
-export produced by ``mmat_assessment.py``.
+keeps the historical landscape table reproducible and separate from the
+current 16-record reassessment in ``mmat_reassessment_current.csv``. It must
+not be presented as the current scientific appraisal.
 """
 
 from __future__ import annotations
@@ -51,7 +52,7 @@ def load_rows(path: Path = DATA_PATH) -> List[Dict[str, str]]:
     if missing:
         raise ValueError(f"Missing MMAT columns: {sorted(missing)}")
     if len(rows) != 17:
-        raise ValueError(f"Expected 17 MMAT rows, found {len(rows)}")
+        raise ValueError(f"Expected 17 historical MMAT rows, found {len(rows)}")
 
     for row in rows:
         if row["Design"] not in DESIGN_LABELS:
@@ -84,7 +85,8 @@ def _latex_escape(value: object) -> str:
 def render_table(rows: List[Dict[str, str]]) -> str:
     """Render the landscape longtable consumed by the TCC."""
     lines = [
-        "% Tabela MMAT 2018 gerada de research/data/mmat_assessments.csv",
+        "% Tabela MMAT 2018 histórica gerada de research/data/mmat_assessments.csv",
+        "% Não representa a avaliação vigente dos 16 registros (15 empíricos e 1 contextual).",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_tcc_table",
         r"\begin{longtable}{|p{2.8cm}|p{2.8cm}|ccccc|p{13.0cm}|}",
         r"\caption{Respostas aos critérios do MMAT 2018.}\label{tab:mmat-avaliacao}\\",

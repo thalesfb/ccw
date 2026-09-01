@@ -2,6 +2,15 @@
 
 Este diretório contém as **saídas geradas automaticamente** pelo pipeline de revisão sistemática. Todos os arquivos aqui são **gerados via CLI** e não devem ser editados manualmente.
 
+> **Baseline operacional vigente (31/08/2026):** 11.904 registros brutos no
+> banco; 27 registros redundantes foram removidos deterministicamente por DOI/URL
+> antes da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos,
+> 2.486 na elegibilidade, 2.470 excluídos nessa etapa e 16 registros retidos
+> (15 registros provisoriamente empíricos, com 6918 em hold por conflito temporal,
+> e o protocolo contextual 6921). A auditoria bruta encontrou 257 excedentes em
+> títulos normalizados; após a remoção DOI/URL, 232 excedentes permanecem apenas
+> por título como candidatos de auditoria.
+
 ---
 
 ## 📁 Estrutura de Diretórios
@@ -43,6 +52,7 @@ python -m research.src.cli export
 **Saídas**:
 - `analysis/papers_*.csv` - Dados tabulares
 - `analysis/papers_*.json` - Dados estruturados
+- `analysis/deduplication_identity_audit.csv` - Pares retidos/removidos por identidade DOI/URL
 - `reports/summary_report_*.html` - Relatório visual
 - `visualizations/*.png` - Gráficos PRISMA e temporais
 
@@ -102,10 +112,19 @@ python -m research.src.cli export-bibtex -o research/references
 
 ## 📚 Uso dos Arquivos BibTeX em LaTeX
 
-### 1. Copiar para o projeto TCC
+### 1. Usar no projeto TCC
 ```bash
-cp research/exports/references/included_papers.bib results/tcc/referencias.bib
+# Não sobrescreva a bibliografia completa do TCC.
+# Consulte included_papers.bib como a bibliografia derivada do pipeline.
 ```
+
+`included_papers.bib` contém somente os 16 registros retidos derivados do
+pipeline (15 registros provisoriamente empíricos, com 6918 em hold, e o
+protocolo contextual 6921). O
+TCC mantém separadamente referências metodológicas, pedagógicas, de avaliação
+e técnicas em `results/tcc/referencias.bib` e
+`results/tcc/referencias_pedagogicas.bib`. Essa separação é deliberada e está
+auditada em `research/data/reference_audit.csv`.
 
 ### 2. Usar no documento LaTeX
 ```latex
@@ -160,28 +179,32 @@ python -m research.src.cli deep-analysis
 
 | Métrica | Valor |
 |---------|-------|
-| Total de papers no banco | (see `research/systematic_review.db`) |
-| Papers incluídos | (see `research/exports/reports/summary_report_*.html`) |
-| Taxa de inclusão | (computed at export time) |
-| Período | 2015-2025 |
-| Média de citações | (see `research/exports/analysis/papers_*.csv`) |
-| Bases de dados | (see `research/exports/analysis/papers_*.csv`) |
+| Total de registros brutos no banco | 11.904 |
+| Remoções determinísticas por DOI/URL | 27 |
+| Registros avaliados na triagem | 11.877 |
+| Registros retidos | 16 (15 provisoriamente empíricos, 6918 em hold + 1 contextual) |
+| Taxa de inclusão | 0,13% (16/11.904) |
+| Período analítico configurado | 2015--2026 |
+| Excluídos na triagem | 9.391 (78,89% da identificação) |
+| Avançaram à elegibilidade | 2.486 (20,88% da identificação) |
+| Excluídos na elegibilidade | 2.470 (99,36% da elegibilidade) |
+| Bases de dados | Consulte `summary.json` e `papers.csv` |
 
-**Top 3 Técnicas**:
-1. Machine Learning + Neural Networks + Learning Analytics (32,6%)
-2. ML + LA + Statistical + Tree-based (18,6%)
-3. LA + Statistical + Tree + NN + ML (16,3%)
+As frequências temáticas devem ser lidas do `summary.json` do mesmo snapshot;
+não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 
 ---
 
 ## 🚀 Próximos Passos
 
-### Fase 1 (Revisão Sistemática) - ✅ COMPLETA
-- [x] Coleta de dados (12.533 papers)
-- [x] Screening e eligibility (PRISMA 2020)
-- [x] Seleção final (43 papers)
-- [x] Análise aprofundada via APIs
-- [x] Exportação BibTeX
+### Fase 1 (Revisão Sistemática) - 🟡 BASELINE OPERACIONAL CONGELADO
+- [x] Snapshot atual exportado (11.904 brutos; 11.877 após deduplicação; 16 registros retidos)
+- [x] Fluxo de triagem e elegibilidade reconciliado
+- [x] Auditoria de títulos candidatos separada da deduplicação determinística
+- [x] Exportação BibTeX dos 16 registros retidos do pipeline (15 provisoriamente empíricos, 6918 em hold + 1 contextual)
+- [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
+- [x] Reavaliação documental preliminar do MMAT aos 15 registros empíricos com evidência por critério
+- [ ] Recuperação das fontes restantes e adjudicação final do MMAT aos 15 registros empíricos
 
 ### Fase 2 (Desenvolvimento do Protótipo) - 📋 PLANEJADA
 - [ ] Definir arquitetura (ML + LA + XAI)
@@ -218,7 +241,7 @@ Recomenda-se fazer backup periódico de:
 
 ---
 
-**Autor**: Thales Ferreira  
-**Orientação**: Prof. Dr. Rafael Zanin, Prof. Dr. Manassés Ribeiro  
-**Projeto**: Revisão Sistemática - Machine Learning em Educação Matemática  
+**Autor**: Thales Ferreira
+**Orientação**: Prof. Dr. Rafael Zanin, Prof. Dr. Manassés Ribeiro
+**Projeto**: Revisão Sistemática - Machine Learning em Educação Matemática
 **Fase**: PTCC Fase 1 (Revisão Sistemática) ✅ CONCLUÍDA

@@ -6,6 +6,11 @@ import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+import matplotlib
+
+# Exports and CI run headlessly; selecting Agg avoids a dependency on Tcl/Tk
+# and makes the generated figures reproducible across developer machines.
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -22,24 +27,25 @@ sns.set_palette("husl")
 
 class ReviewVisualizer:
     """Gera visualizações para revisão sistemática."""
-    
+
     def __init__(self, output_dir: Optional[Path] = None):
         """Initialize visualizer.
-        
+
         Args:
             output_dir: Diretório para salvar gráficos
         """
-        config = load_config()
-        
+        self.config = load_config()
+        config = self.config
+
         if output_dir is None:
             output_dir = Path(config.database.exports_dir) / "visualizations"
-        
+
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Configurar estilo
         self._setup_style()
-    
+
     def _setup_style(self):
         """Configure matplotlib style for academic papers."""
         plt.rcParams.update({
@@ -57,201 +63,215 @@ class ReviewVisualizer:
             'axes.spines.top': False,
             'axes.spines.right': False,
         })
-    
+
     def prisma_flow_diagram(
         self,
         stats: Dict[str, int],
         save_path: Optional[Path] = None
     ) -> Path:
         """Create PRISMA flow diagram.
-        
+
         Args:
             stats: Dictionary with PRISMA statistics
             save_path: Path to save the diagram
-            
+
         Returns:
             Path to saved diagram
         """
         if save_path is None:
             save_path = self.output_dir / "prisma_flow.png"
-        
+
         fig, ax = plt.subplots(figsize=(10, 7))
         ax.set_xlim(0, 10)
-        ax.set_ylim(3.8, 10)
+        ax.set_ylim(3.2, 10)
         ax.axis('off')
-        
+
         # Colors
         box_color = '#E8F4FD'
         exclude_color = '#FFE6E6'
         text_color = '#2C3E50'
-        
+
         # Box dimensions
         box_width = 2.5
         box_height = 0.8
-        
+
         # Title
-        ax.text(5, 9.7, 'Fluxo PRISMA da Revisão Sistemática', 
+        ax.text(5, 9.7, 'Fluxo PRISMA da Revisão Sistemática',
                 ha='center', va='center', fontsize=16, fontweight='bold')
-        
+
         # PRISMA stats com lógica progressiva correta
         identification = int(stats.get('identification', 0))
         duplicates_removed = int(stats.get('duplicates_removed', 0))
         screening = int(stats.get('screening', 0))  # Registros únicos para triagem
-        
+
         # Passaram triagem -> foram para elegibilidade
-        eligibility = int(stats.get('eligibility', 0))  
-        
+        eligibility = int(stats.get('eligibility', 0))
+
         # Incluídos finais
         included = int(stats.get('included', 0))
-        
+
         # Excluídos são calculados como diferenças no fluxo progressivo
         screening_excluded = int(stats.get('screening_excluded', max(0, screening - eligibility)))
         eligibility_excluded = int(stats.get('eligibility_excluded', max(0, eligibility - included)))
+        dedup_audit = stats.get('deduplication_audit', {}) or {}
+        doi_excess = int((dedup_audit.get('doi', {}) or {}).get('excess_rows', 0))
+        url_excess = int((dedup_audit.get('url', {}) or {}).get('excess_rows', 0))
 
         logger.info(
             f"PRISMA stats used -> ident={identification}, dup_removed={duplicates_removed}, "
             f"screening={screening}, eligibility={eligibility}, included={included}, "
             f"screening_excl={screening_excluded}, eligibility_excl={eligibility_excluded}"
         )
-        
+
         # Main flow boxes seguindo PRISMA 2020
         boxes = [
             (5, 8.5, f"Registros identificados\nnas bases de dados\n(n = {identification:,})", box_color),
-            (5, 7.5, f"Duplicatas removidas\n(n = {duplicates_removed:,})", exclude_color),
-            (5, 6.5, f"Registros únicos\nselecionados para triagem\n(n = {screening:,})", box_color),
+            (5, 7.5, f"Remoções operacionais\nregistradas\n(n = {duplicates_removed:,})", exclude_color),
+            (5, 6.5, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
             (5, 5.5, f"Registros que passaram triagem\navaliados para elegibilidade\n(n = {eligibility:,})", box_color),
-            (5, 4.5, f"Estudos incluídos\nna síntese qualitativa\n(n = {included:,})", box_color),
+            (5, 4.5, f"Registros retidos\nno snapshot operacional\n(n = {included:,})", box_color),
         ]
-        
+
         # Exclusion boxes com contagens corretas de cada estágio
         exclusions = [
             (8, 6.5, f"Registros excluídos\nna triagem\n(n = {screening_excluded:,})", exclude_color),
-            (8, 5.5, f"Artigos excluídos\nna elegibilidade\n(n = {eligibility_excluded:,})", exclude_color),
+            (8, 5.5, f"Registros excluídos\nna elegibilidade\n(n = {eligibility_excluded:,})", exclude_color),
         ]
-        
+
         # Draw main flow boxes
         for x, y, text, color in boxes:
-            rect = Rectangle((x - box_width/2, y - box_height/2), 
-                           box_width, box_height, 
+            rect = Rectangle((x - box_width/2, y - box_height/2),
+                           box_width, box_height,
                            facecolor=color, edgecolor='black', linewidth=1)
             ax.add_patch(rect)
             ax.text(x, y, text, ha='center', va='center', fontsize=10, color=text_color)
-        
+
         # Draw exclusion boxes
         for x, y, text, color in exclusions:
-            rect = Rectangle((x - box_width/2, y - box_height/2), 
-                           box_width, box_height, 
+            rect = Rectangle((x - box_width/2, y - box_height/2),
+                           box_width, box_height,
                            facecolor=color, edgecolor='red', linewidth=1)
             ax.add_patch(rect)
             ax.text(x, y, text, ha='center', va='center', fontsize=9, color=text_color)
-        
+
+        ax.text(
+            5, 3.45,
+            f"Auditoria de identidade: {doi_excess} excedentes DOI + "
+            f"{url_excess} excedentes URL; títulos repetidos são candidatos",
+            ha='center', va='center', fontsize=8.5, color='#7f1d1d'
+        )
+
         # Draw arrows - fluxo progressivo correto
         arrow_props = dict(arrowstyle='->', lw=2, color='black')
-        
+
         # Main flow arrows (pula a caixa de duplicatas removidas que é informativa)
-        ax.annotate('', xy=(5, boxes[1][1] + box_height/2), 
-                   xytext=(5, boxes[0][1] - box_height/2), 
+        ax.annotate('', xy=(5, boxes[1][1] + box_height/2),
+                   xytext=(5, boxes[0][1] - box_height/2),
                    arrowprops=arrow_props)
-        ax.annotate('', xy=(5, boxes[2][1] + box_height/2), 
-                   xytext=(5, boxes[1][1] - box_height/2), 
+        ax.annotate('', xy=(5, boxes[2][1] + box_height/2),
+                   xytext=(5, boxes[1][1] - box_height/2),
                    arrowprops=arrow_props)
-        ax.annotate('', xy=(5, boxes[3][1] + box_height/2), 
-                   xytext=(5, boxes[2][1] - box_height/2), 
+        ax.annotate('', xy=(5, boxes[3][1] + box_height/2),
+                   xytext=(5, boxes[2][1] - box_height/2),
                    arrowprops=arrow_props)
-        ax.annotate('', xy=(5, boxes[4][1] + box_height/2), 
-                   xytext=(5, boxes[3][1] - box_height/2), 
+        ax.annotate('', xy=(5, boxes[4][1] + box_height/2),
+                   xytext=(5, boxes[3][1] - box_height/2),
                    arrowprops=arrow_props)
-        
+
         # Exclusion arrows
-        ax.annotate('', xy=(8 - box_width/2, 6.5), xytext=(5 + box_width/2, 6.5), 
+        ax.annotate('', xy=(8 - box_width/2, 6.5), xytext=(5 + box_width/2, 6.5),
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
-        ax.annotate('', xy=(8 - box_width/2, 5.5), xytext=(5 + box_width/2, 5.5), 
+        ax.annotate('', xy=(8 - box_width/2, 5.5), xytext=(5 + box_width/2, 5.5),
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
-        
+
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        
+
         logger.info(f"PRISMA flow diagram saved to {save_path}")
         return save_path
-    
+
     def papers_by_year(
         self,
         df: pd.DataFrame,
         save_path: Optional[Path] = None
     ) -> Path:
         """Create papers by year visualization.
-        
+
         Args:
             df: DataFrame with papers
             save_path: Path to save the plot
-            
+
         Returns:
             Path to saved plot
         """
         if save_path is None:
             save_path = self.output_dir / "papers_by_year.png"
-        
-        # Filter valid years
-        df_year = df[df['year'].notna() & (df['year'] > 2000)].copy()
-        
+
+        # Keep the chart aligned with the configured analytical period.  Raw
+        # outliers remain visible in summary statistics as out_of_range_count.
+        ymin = int(self.config.review.year_min)
+        ymax = int(self.config.review.year_max)
+        year_values = pd.to_numeric(df['year'], errors='coerce')
+        df_year = df[year_values.between(ymin, ymax, inclusive='both')].copy()
+
         if df_year.empty:
             logger.warning("No papers with valid years found")
             return save_path
-        
+
         # Create year distribution
         year_counts = df_year['year'].value_counts().sort_index()
-        
+
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-        
+
         # Bar chart
-        bars = ax1.bar(year_counts.index, year_counts.values, 
+        bars = ax1.bar(year_counts.index, year_counts.values,
                       color='steelblue', alpha=0.7, edgecolor='black')
         ax1.set_title('Distribuição de Artigos por Ano de Publicação')
         ax1.set_xlabel('Ano')
         ax1.set_ylabel('Número de Artigos')
         ax1.tick_params(axis='x', rotation=45)
-        
+
         # Add value labels on bars
         for bar, count in zip(bars, year_counts.values):
             height = bar.get_height()
             ax1.text(bar.get_x() + bar.get_width()/2., height + 0.1,
                     f'{count}', ha='center', va='bottom', fontsize=9)
-        
+
         # Cumulative chart
         cumulative = year_counts.cumsum()
-        ax2.plot(cumulative.index, cumulative.values, 
+        ax2.plot(cumulative.index, cumulative.values,
                 marker='o', linewidth=2, markersize=6, color='darkred')
         ax2.fill_between(cumulative.index, cumulative.values, alpha=0.3, color='darkred')
         ax2.set_title('Distribuição Cumulativa por Ano')
         ax2.set_xlabel('Ano')
         ax2.set_ylabel('Número Cumulativo de Artigos')
         ax2.tick_params(axis='x', rotation=45)
-        
+
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        
+
         logger.info(f"Papers by year chart saved to {save_path}")
         return save_path
-    
+
     def techniques_distribution(
         self,
         df: pd.DataFrame,
         save_path: Optional[Path] = None
     ) -> Path:
         """Create computational techniques distribution chart.
-        
+
         Args:
             df: DataFrame with papers
             save_path: Path to save the plot
-            
+
         Returns:
             Path to saved plot
         """
         if save_path is None:
             save_path = self.output_dir / "techniques_distribution.png"
-        
+
         # Extract techniques
         techniques_data = []
         for _, row in df.iterrows():
@@ -261,14 +281,14 @@ class ReviewVisualizer:
                     tech = tech.strip()
                     if tech:
                         techniques_data.append(tech)
-        
+
         if not techniques_data:
             logger.warning("No computational techniques found")
             return save_path
-        
+
         # Count techniques
         tech_counts = pd.Series(techniques_data).value_counts()
-        
+
         # Limit to top 20 techniques for better visualization
         if len(tech_counts) > 20:
             top_20 = tech_counts.head(20)
@@ -276,124 +296,124 @@ class ReviewVisualizer:
             # Create new series with top 20 + "Outras"
             tech_counts = pd.concat([top_20, pd.Series({'Outras': other_count})])
             logger.info(f"Limiting technique visualization to top 20 (+ 'Outras' category with {other_count} papers)")
-        
+
         # Create horizontal bar chart
         fig, ax = plt.subplots(figsize=(12, 8))
-        
+
         colors = plt.cm.Set3(range(len(tech_counts)))
         bars = ax.barh(range(len(tech_counts)), tech_counts.values, color=colors)
-        
+
         ax.set_yticks(range(len(tech_counts)))
         ax.set_yticklabels(tech_counts.index)
         ax.set_xlabel('Número de Artigos')
         ax.set_title('Distribuição de Técnicas Computacionais (Top 20)')
-        
+
         # Add value labels
         for i, (bar, count) in enumerate(zip(bars, tech_counts.values)):
             ax.text(bar.get_width() + 0.1, bar.get_y() + bar.get_height()/2,
                    f'{count}', ha='left', va='center', fontsize=10)
-        
+
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        
+
         logger.info(f"Techniques distribution chart saved to {save_path}")
         return save_path
-    
+
     def database_coverage(
         self,
         df: pd.DataFrame,
         save_path: Optional[Path] = None
     ) -> Path:
         """Create database coverage pie chart.
-        
+
         Args:
             df: DataFrame with papers
             save_path: Path to save the plot
-            
+
         Returns:
             Path to saved plot
         """
         if save_path is None:
             save_path = self.output_dir / "database_coverage.png"
-        
+
         if 'database' not in df.columns or df['database'].isna().all():
             logger.warning("No database information found")
             return save_path
-        
+
         # Count by database
         db_counts = df['database'].value_counts()
-        
+
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-        
+
         # Pie chart
         colors = plt.cm.Set2(range(len(db_counts)))
-        wedges, texts, autotexts = ax1.pie(db_counts.values, labels=db_counts.index, 
+        wedges, texts, autotexts = ax1.pie(db_counts.values, labels=db_counts.index,
                                           autopct='%1.1f%%', colors=colors, startangle=90)
-        ax1.set_title('Cobertura por Base de Dados')
-        
+        ax1.set_title(f'Cobertura da Base Analítica (n={len(df):,})')
+
         # Bar chart
         bars = ax2.bar(db_counts.index, db_counts.values, color=colors)
-        ax2.set_title('Número de Artigos por Base')
+        ax2.set_title(f'Registros por Base (n={len(df):,})')
         ax2.set_ylabel('Número de Artigos')
         ax2.tick_params(axis='x', rotation=45)
-        
+
         # Add value labels
         for bar, count in zip(bars, db_counts.values):
             height = bar.get_height()
             ax2.text(bar.get_x() + bar.get_width()/2., height + 0.1,
                     f'{count}', ha='center', va='bottom', fontsize=10)
-        
+
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        
+
         logger.info(f"Database coverage chart saved to {save_path}")
         return save_path
-    
+
     def relevance_score_distribution(
         self,
         df: pd.DataFrame,
         save_path: Optional[Path] = None
     ) -> Path:
         """Create relevance score distribution histogram.
-        
+
         Args:
             df: DataFrame with papers
             save_path: Path to save the plot
-            
+
         Returns:
             Path to saved plot
         """
         if save_path is None:
             save_path = self.output_dir / "relevance_distribution.png"
-        
+
         if 'relevance_score' not in df.columns or df['relevance_score'].isna().all():
             logger.warning("No relevance scores found")
             return save_path
-        
+
         scores = df['relevance_score'].dropna()
-        
+
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-        
+
         # Histogram
         ax1.hist(scores, bins=20, alpha=0.7, color='lightcoral', edgecolor='black')
-        ax1.axvline(scores.mean(), color='red', linestyle='--', 
+        ax1.axvline(scores.mean(), color='red', linestyle='--',
                    label=f'Média: {scores.mean():.2f}')
-        ax1.axvline(scores.median(), color='blue', linestyle='--', 
+        ax1.axvline(scores.median(), color='blue', linestyle='--',
                    label=f'Mediana: {scores.median():.2f}')
         ax1.set_xlabel('Score de Relevância')
         ax1.set_ylabel('Frequência')
         ax1.set_title('Distribuição dos Scores de Relevância')
         ax1.legend()
-        
+
         # Box plot
         ax2.boxplot(scores, vert=True, patch_artist=True,
                    boxprops=dict(facecolor='lightblue', alpha=0.7))
         ax2.set_ylabel('Score de Relevância')
         ax2.set_title('Box Plot dos Scores de Relevância')
         ax2.set_xticklabels(['Todos os Artigos'])
-        
+
         # Add statistics text
         stats_text = f"""Estatísticas:
 Min: {scores.min():.2f}
@@ -401,17 +421,17 @@ Max: {scores.max():.2f}
 Média: {scores.mean():.2f}
 Mediana: {scores.median():.2f}
 Desvio Padrão: {scores.std():.2f}"""
-        
-        ax2.text(0.02, 0.98, stats_text, transform=ax2.transAxes, 
+
+        ax2.text(0.02, 0.98, stats_text, transform=ax2.transAxes,
                 verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
-        
+
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        
+
         logger.info(f"Relevance distribution chart saved to {save_path}")
         return save_path
-    
+
     def selection_stages_funnel(
         self,
         df: pd.DataFrame,
@@ -419,12 +439,12 @@ Desvio Padrão: {scores.std():.2f}"""
         stats: Optional[Dict] = None
     ) -> Path:
         """Create selection stages funnel chart.
-        
+
         Args:
             df: DataFrame with papers
             save_path: Path to save the plot
             stats: Optional pre-calculated PRISMA statistics
-            
+
         Returns:
             Path to saved plot
         """
@@ -453,7 +473,7 @@ Desvio Padrão: {scores.std():.2f}"""
             included_count = int(stage_counts.get('included', 0))
             eligibility_only = int(stage_counts.get('eligibility', 0))
             screening_only = int(stage_counts.get('screening', 0))
-            
+
             # Total que chegou à elegibilidade = eligibility + included
             eligible_count = eligibility_only + included_count
             screened_count = screening_only if screening_only > 0 else ident_count
@@ -466,9 +486,9 @@ Desvio Padrão: {scores.std():.2f}"""
         # PRISMA funnel stages (sempre mostrar as 4 etapas)
         funnel_stages = [
             ('Identificação', max(0, ident_count), '#E8F4FD'),
-            ('Triagem', max(0, screened_count), '#B3E5FC'), 
+            ('Triagem', max(0, screened_count), '#B3E5FC'),
             ('Elegibilidade', max(0, eligible_count), '#81C784'),
-            ('Incluídos', max(0, included_count), '#4CAF50')
+            ('Registros retidos', max(0, included_count), '#4CAF50')
         ]
 
         stages = [name for name, _, _ in funnel_stages]
@@ -514,47 +534,47 @@ Desvio Padrão: {scores.std():.2f}"""
 
         logger.info(f"Selection funnel chart saved to {save_path}")
         return save_path
-    
+
     def generate_all_visualizations(
         self,
         df: pd.DataFrame,
         stats: Optional[Dict] = None
     ) -> List[Path]:
         """Generate all standard visualizations.
-        
+
         Args:
             df: DataFrame with papers
             stats: PRISMA statistics
-            
+
         Returns:
             List of paths to generated visualizations
         """
         logger.info("Generating all visualizations...")
-        
+
         generated_files = []
-        
+
         try:
             # PRISMA flow (requires stats)
             if stats:
                 generated_files.append(self.prisma_flow_diagram(stats))
-            
+
             # Papers by year
             generated_files.append(self.papers_by_year(df))
-            
+
             # Techniques distribution
             generated_files.append(self.techniques_distribution(df))
-            
+
             # Database coverage
             generated_files.append(self.database_coverage(df))
-            
+
             # Relevance scores
             generated_files.append(self.relevance_score_distribution(df))
-            
+
             # Selection funnel (pass stats if available)
             generated_files.append(self.selection_stages_funnel(df, stats=stats))
-            
+
         except Exception as e:
             logger.error(f"Error generating visualizations: {e}")
-        
+
         logger.info(f"Generated {len(generated_files)} visualizations in {self.output_dir}")
         return generated_files
