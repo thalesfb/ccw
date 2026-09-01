@@ -201,6 +201,24 @@
         "requires_full_text_adjudication": 4
       },
       "interpretation": "The ledger records evidence and proposed scope rationales for the persisted overrides; it does not replace supervisor adjudication."
+    },
+    "manual_override_evidence_matrix": {
+      "path": "research/data/manual_override_evidence_matrix.csv",
+      "row_count": 7,
+      "study_ids": [
+        14,
+        15,
+        6915,
+        6919,
+        6922,
+        6925,
+        6926
+      ],
+      "adjudication_status_counts": {
+        "proposed_pending_supervisor": 3,
+        "requires_full_text_adjudication": 4
+      },
+      "interpretation": "The matrix records source-supported scope signals and required actions. It is evidence for adjudication, not a final inclusion or exclusion decision."
     }
   },
   "bibliography": {
@@ -323,6 +341,11 @@
       "sha256": "8e7dd6cbf510f26690d8f942a5a99453c37691f972c13cc23a3f59ce5bf487e9"
     },
     {
+      "path": "research/data/manual_override_evidence_matrix.csv",
+      "role": "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
+      "sha256": "6d2404f400e0a67307d7b01f8cecccbe7a0e6b39f112e9fc0b62cb2aceaac268"
+    },
+    {
       "path": "research/data/protocol_execution_2025.json",
       "role": "historical protocol reconstruction from the 2025 baseline; not the current PRISMA source of truth",
       "sha256": "3196b70e1cdf1f43bef8e98ae7481045ca399e196c0b1181d7023c3d34d26026"
@@ -385,7 +408,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "11d94944671f90855e6f8c4d9dff9b4395d38f90d04b6ef8a7cec0d9395853d7"
+      "sha256": "eac3edcdee50a35b8c21671261d4174874b77cecd4e94f0506b7c513cd5c27fb"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
@@ -447,6 +470,7 @@
       "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
       "Read the 16 pipeline-derived citations from research/exports/references/included_papers.bib.",
       "Read proposed evidence and required adjudication actions from research/data/manual_override_adjudication.csv.",
+      "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; its recommendations remain pending supervisor adjudication.",
       "Read research/data/protocol_execution_2025.json only for historical protocol provenance; do not use it as the current baseline."
     ],
     "rebuild_from_local_database": [
