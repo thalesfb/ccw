@@ -65,7 +65,7 @@ A revisão deve confirmar, antes de merge:
 - existência e correção dos identificadores canônicos;
 - distinção entre descoberta bibliográfica e fonte canônica;
 - adequação das fontes que sustentam decisões técnicas;
-- ausência de mudança silenciosa nos 17 estudos incluídos;
+- ausência de mudança silenciosa no conjunto retido no snapshot vigente (atualmente 16 registros, com escopo e estado registrados nos artefatos versionados);
 - compatibilidade dos validadores com a compilação e os testes existentes.
 
 ### Etapa seguinte — revisar o lote 3
