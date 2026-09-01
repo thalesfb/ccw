@@ -54,6 +54,9 @@ merge:
 | #42 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #43 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
 | #44 | `source-validation` e `latex-build` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #45 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; registro de auditoria e ordem de revisão |
+| #46 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; matriz de evidência dos sete overrides, ainda sem adjudicação final |
+| #47 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; testes das expectativas do protocolo vigente |
 
 Os três apontamentos do Copilot no PR #35 foram: correspondência de `AI` por
 substring em `selection.py`, o mesmo risco no `scoring.py`, e a divergência
@@ -61,7 +64,9 @@ entre o recorte temporal documentado e a configuração. Eles foram tratados nas
 correções do snapshot e nas regressões automatizadas das PRs #36 e #43. Os
 avisos de quota nas PRs posteriores significam que não houve revisão automática;
 não significam aprovação. Nenhum check verde substitui a revisão do conteúdo
-científico.
+científico. Nos PRs #46 e #47, a mensagem do Copilot continua sendo apenas
+indisponibilidade por limite de quota; portanto, não há aprovação automatizada
+nem comentário técnico a incorporar.
 
 ## Auditoria técnica de encoding, whitespace e finais de linha (01/09/2026)
 
@@ -75,7 +80,7 @@ artefato versionável.
 | #20 | `diff-check` limpo; 5 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | Não há bloqueio de encoding/line ending identificado |
 | #23 | `diff-check` limpo; 19 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | O bloqueio é funcional: dois testes do protocolo falham, não é um problema de codificação |
 | #34 | 238.628 diagnósticos efetivos de trailing whitespace em 14 arquivos; UTF-8 válido; 6 arquivos com CRLF/LF/CR misturados ou CR isolado | `source-validation` para antes dos testes. Os principais arquivos são exports `.bib/.csv`, `.gitignore`, dois HTML e código/LaTeX; o patch precisa de normalização isolada e revisão semântica |
-| #36--#45 | `diff-check` limpo; todos os arquivos textuais alterados válidos em UTF-8; sem BOM e sem finais mistos | Nenhum bloqueio técnico dessa classe foi encontrado |
+| #36--#47 | `diff-check` limpo; todos os arquivos textuais alterados válidos em UTF-8; sem BOM e sem finais mistos | Nenhum bloqueio técnico dessa classe foi encontrado |
 
 No #23, os erros concretos do check são `computational_techniques` sendo
 acionado por uma correspondência de `AI` dentro de palavras comuns e a
@@ -94,11 +99,12 @@ continuar excluindo o commit `a91b439`, que já foi removido de `main`.
 1. **Histórico:** manter `main` em `627a105`, confirmar que `a91b439` não é ancestral e preservar apenas a branch de recuperação.
 2. **Fonte científica:** revisar #36 (snapshot, deduplicação DOI/URL, scoring, 23 candidatos, 7 overrides, 16 retidos, exports e reprodutibilidade sem SQLite).
 3. **Contrato documental:** revisar #37 (baseline atual versus histórico, duplicatas, percentuais, protocolo, planos e datas).
-4. **Manuscrito:** revisar #38 (texto parte a parte, referências empíricas versus teóricas/manuais, citações e imagens preservadas).
-5. **Validação e apresentação:** revisar #40, depois #39 e #42 (workflow, build reproduzível, publicação clicável, narrativa e proveniência do Slidev/PTC).
-6. **Correções especializadas:** revisar #43 (identidade canônica e título apenas exploratório), #44 (proveniência legada) e #41/#45 (contexto, governança e estado dos reviews).
-7. **PRs anteriores:** revisar #20 separadamente; usar #23 apenas para extração editorial após a base científica; manter #34 por último como fonte de contexto/salvamento seletivo, nunca como unidade de merge.
-8. **Gate científico final:** antes de qualquer conclusão, recuperar fontes primárias, adjudicar os sete overrides e fechar o MMAT dos 15 estudos empíricos aplicáveis; checks verdes não substituem essa decisão.
+4. **Evidência e protocolo:** revisar #43 (identidade canônica), #46 (evidência dos sete overrides/MMAT) e #47 (testes das expectativas do protocolo vigente). Nenhum desses PRs muda o corpus por si só.
+5. **Manuscrito:** revisar #38 (texto parte a parte, referências empíricas versus teóricas/manuais, citações e imagens preservadas).
+6. **Validação e apresentação:** revisar #40, depois #39 e #42 (workflow, build reproduzível, publicação clicável, narrativa e proveniência do Slidev/PTC).
+7. **Proveniência e governança:** revisar #44, #41 e #45, verificando que o estado dos PRs e os artefatos legados continuam descritos como contexto, não como fonte de verdade.
+8. **PRs anteriores:** revisar #20 separadamente; usar #23 apenas para extração editorial após a base científica; manter #34 por último como fonte de contexto/salvamento seletivo, nunca como unidade de merge.
+9. **Gate científico final:** antes de qualquer conclusão, recuperar fontes primárias, adjudicar os sete overrides e fechar o MMAT dos 15 estudos empíricos aplicáveis; checks verdes não substituem essa decisão.
 
 ---
 
