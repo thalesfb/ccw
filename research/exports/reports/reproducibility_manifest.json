@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "snapshot_date": "2026-08-31",
-  "generated_at": "2026-09-01T21:05:46+00:00",
+  "generated_at": "2026-09-01T21:22:23+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -323,7 +323,7 @@
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "43a152dfd2d9ccb69c970b6a2cc67d1a38ae144cdff6726a30d61d3a0a2186e9"
+      "sha256": "bdbd2a858ee9353935a3ae89104c4382dfe12742ec45746f8f77216b22f4c85a"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
@@ -343,7 +343,7 @@
     {
       "path": "research/data/manual_override_evidence_matrix.csv",
       "role": "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
-      "sha256": "6d2404f400e0a67307d7b01f8cecccbe7a0e6b39f112e9fc0b62cb2aceaac268"
+      "sha256": "5a9365990dc03782f4e2f38ec3d115ce5022d8483f1db3915602ccffbc2a0d3c"
     },
     {
       "path": "research/data/protocol_execution_2025.json",
