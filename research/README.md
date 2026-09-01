@@ -1,10 +1,12 @@
 # 📚 Revisão Sistemática da Literatura - CCW Research
 
+> **Baseline vigente (31/08/2026):** o banco consolidado contém 11.904 registros e 16 estudos incluídos. As seções de resultados históricos abaixo preservam os números de 9.431 registros e 17 incluídos como contexto; a fonte atual e a auditoria de DOI estão em [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](../docs/RECONCILIACAO-BASELINE-2026-08-31.md).
+
 ## 🎯 Visão Geral
 
-Sistema modular para revisão sistemática da literatura em educação matemática com técnicas computacionais, seguindo protocolo PRISMA.
+Sistema modular para revisão sistemática da literatura em educação matemática com técnicas computacionais, com relato orientado pelo PRISMA 2020.
 
-**Status atual**: ✅ Pipeline completo funcionando | 🧪 Testes validados (100% pass rate) | 📊 Visualizações PRISMA corretas
+**Status atual**: ✅ Snapshot vigente reconciliado | 🧪 Testes-alvo da reconciliação validados | 📊 Visualizações PRISMA corretas
 
 ---
 
@@ -69,7 +71,7 @@ research/
 │   └── reports/                  # Relatórios completos
 ├── cache/                        # Cache de APIs
 ├── logs/                         # Logs de execução
-└── systematic_review.db          # Banco SQLite principal
+└── systematic_review.sqlite      # Banco SQLite principal (fonte local não versionada)
 ```
 
 ---
@@ -87,7 +89,7 @@ research/
 
 ### Estratégia de Busca
 
-**108 queries bilíngues estruturadas** (72 inglês + 36 português) combinando:
+**72 queries bilíngues estruturadas** (48 inglês + 24 português) combinando:
 
 **Termos Primários** (6 termos - domínio educacional):
 
@@ -106,7 +108,7 @@ research/
 
 **✅ Inclusão**:
 
-- Artigos peer-reviewed (2015-2025)
+- Artigos peer-reviewed (2015-2026, como critério planejado)
 - Foco em técnicas computacionais + educação matemática
 - Metodologia e evidências empíricas claras
 - Idiomas: inglês ou português
@@ -123,7 +125,22 @@ research/
 O pipeline segue as fases padrão: Identificação → Deduplicação → Triagem →
 Elegibilidade → Inclusão.
 
-**Números atuais (25/11/2025)**:
+**Baseline vigente (31/08/2026)**:
+
+- **Identificação**: 11.904 registros no snapshot consolidado
+- **Triagem**: 11.904 avaliados; 9.413 excluídos; 2.491 avançaram
+- **Elegibilidade**: 2.491 avaliados; 2.475 excluídos; 16 incluídos
+- **Auditoria de candidatos**: 23 candidatos operacionais; 7 falsos positivos removidos manualmente
+- **Incluídos**: 16 estudos no conjunto usado pela síntese
+
+Os sete falsos positivos já estão contabilizados nas exclusões de elegibilidade.
+O resultado atual decorre de nova ingestão, correção do scoring e auditoria de
+pertinência; não é uma simples troca de 17 por 16. O SQLite permanece como
+fonte operacional local, ignorada pelo Git. Para reconstituir o snapshot sem
+distribuir o banco, use os exports versionados e
+`research/exports/reports/reproducibility_manifest.json`.
+
+**Baseline histórico (25/11/2025; não vigente)**:
 
 - **Identificação**: 9.431 registros coletados
 - **Duplicatas Removidas**: 2.517 (26,6%)
@@ -131,8 +148,9 @@ Elegibilidade → Inclusão.
 - **Elegibilidade**: 1.883 avaliados em profundidade (excluídos na elegibilidade: 1.866 / 99,1%)
 - **Incluídos**: 17 estudos (pontuação de relevância ≥ 4,0)
 
-Todos os contadores oficiais são derivados em tempo de execução a partir
-do banco de dados canônico `research/systematic_review.db`.
+Os contadores acima pertencem ao snapshot histórico. O baseline vigente é
+derivado do banco canônico `research/systematic_review.sqlite` e está
+reconciliado em `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
 
 Para obter os números atualizados execute:
 
@@ -141,8 +159,8 @@ Para obter os números atualizados execute:
 python -m research.src.cli stats
 
 # Ou consultar via SQL:
-sqlite3 research/systematic_review.db "SELECT COUNT(*) FROM papers;"
-sqlite3 research/systematic_review.db "SELECT COUNT(*) FROM papers WHERE selection_stage='included';"
+sqlite3 research/systematic_review.sqlite "SELECT COUNT(*) FROM papers;"
+sqlite3 research/systematic_review.sqlite "SELECT COUNT(*) FROM papers WHERE selection_stage='included';"
 ```
 
 Arquivos de exportação e relatórios em `research/exports/` contêm as versões
@@ -204,9 +222,19 @@ python -m research.src.cli verify-papers --csv research/exports/analysis/papers.
 # Regenera summary.json a partir do DB canônico
 python -m research.src.cli regenerate-summary
 
+# Gera o manifesto versionado do snapshot sem copiar o SQLite para o Git
+python -m research.src.cli generate-manifest
+
 # Diagnostica por que um paper foi incluído (busca por título)
 python -m research.src.cli diagnose-included --title "parte do título"
 ```
+
+O manifesto e os exports representam o snapshot sem distribuir o SQLite. O
+arquivo de referências derivadas do pipeline é
+`research/exports/references/included_papers.bib` e contém somente os 16
+estudos atuais. Referências pedagógicas, metodológicas, de avaliação e
+técnicas usadas na fundamentação permanecem na bibliografia completa do TCC;
+são externas ao conjunto da revisão e não entram na contagem PRISMA.
 
 Observação: os scripts antigos `tools/*.py` e `research/scripts/*.py` estão
 obsoletos e serão removidos em breve. Todos os fluxos foram centralizados no CLI.
@@ -328,7 +356,7 @@ Os relatórios HTML gerados agora incluem:
 
 ### Taxa de Sucesso Atual
 
-**Cobertura**: ~41% (7/17 papers incluídos)
+**Cobertura**: 0/16 textos completos no snapshot atual; a extração não foi concluída
 
 **Principais Causas de Falha**:
 - `connection_exhausted`: Timeout após múltiplas tentativas
@@ -361,7 +389,7 @@ pytest --cov=research.src --cov-report=html
 
 ### Suite de Testes
 
-**✅ test_prisma_stages.py** (9 testes, 100% pass):
+**✅ test_prisma_stages.py** (9 testes da validação PRISMA):
 
 - Critérios de inclusão/exclusão
 - Fases PRISMA (screening, eligibility, inclusion)
@@ -497,18 +525,18 @@ python -m research.src.cli run-pipeline
 ### Performance Atual
 
 - **Taxa de sucesso das APIs**: >95% (exceto CORE ~70%)
-- **Tempo de execução**: 30-60 minutos (108 queries × 4 APIs)
-- **Taxa de deduplicação**: ~40% (DOI+similaridade)
-- **Taxa de inclusão final**: ~0,25% (16 de 6.516)
-- **Cobertura temporal**: 2015-2025 (11 anos)
-- **Cache hit rate**: ~63% (268 hits / 425 entradas)
+- **Tempo de execução**: variável; depende das APIs, limites e cache
+- **Deduplicação operacional**: 0 remoções pela flag no snapshot; a auditoria encontrou 24 grupos de DOI repetido (48 linhas)
+- **Taxa de inclusão final**: ~0,13% (16 de 11.904)
+- **Cobertura temporal**: 2015-2026 (12 anos)
+- **Cache**: contadores acumulados e dependentes do histórico; não são uma métrica fixa de reprodutibilidade
 
 ### Qualidade dos Dados
 
-- **Papers com abstract**: >85%
-- **Papers com DOI**: >60%
-- **Papers com ano válido**: >95%
-- **Reprodutibilidade**: 100% via CLI + config
+- **Papers com abstract**: 11.885/11.904 (99,8%)
+- **Papers com DOI**: 10.682/11.904 (89,7%)
+- **Papers com ano válido**: 11.904/11.904 (100%)
+- **Reprodutibilidade**: o snapshot é representado por exports e manifesto versionados; nova coleta pode variar e as justificativas substantivas dos 7 overrides ainda requerem registro individual
 
 ---
 
@@ -516,17 +544,17 @@ python -m research.src.cli run-pipeline
 
 ### Entregáveis Prontos
 
-1. ✅ Base de dados estruturada (SQLite)
+1. ✅ Snapshot representado por exports versionados e manifesto de reprodutibilidade (o SQLite é local e não versionado)
 2. ✅ Análises estatísticas automatizadas
 3. ✅ Visualizações profissionais (PNG)
 4. ✅ Relatórios HTML completos
-5. ✅ Pipeline reprodutível e auditável
+5. ✅ Pipeline reexecutável e auditável
 
 ### Metodologia Científica
 
 - ✅ Protocolo PRISMA completo
 - ✅ Transparência total (código aberto)
-- ✅ Reprodutibilidade garantida
+- ✅ Reprodutibilidade do snapshot documentada por exports e manifesto
 - ✅ Auditabilidade via logs
 - ✅ Rastreabilidade de cada paper
 
@@ -565,5 +593,5 @@ python -m research.src.cli run-pipeline
 
 ---
 
-*📅 Última atualização: Outubro 2025*  
-*✅ Status: Sistema funcionando | Pipeline validado | Testes 100% pass*
+*📅 Última atualização: 31 de agosto de 2026*
+*✅ Status: Snapshot reconciliado | Validações-alvo aprovadas | MMAT dos 16 estudos ainda pendente*

@@ -1,11 +1,11 @@
 \chapter{RESULTADOS E DISCUSSÃO}
 \label{cap:resultados-discussao}
 
-Os resultados do trabalho foram organizados em quatro entregas complementares: a revisão sistemática da literatura, a avaliação metodológica dos estudos incluídos, a consolidação dos fundamentos pedagógicos e a especificação conceitual do protótipo. Esta seção integra essas entregas e discute como elas responderam ao problema de pesquisa e aos objetivos definidos.
+Os resultados do trabalho foram organizados em quatro entregas complementares: a revisão sistemática da literatura, a definição do procedimento de avaliação metodológica, a consolidação dos fundamentos pedagógicos e a especificação conceitual do protótipo. Esta seção integra essas entregas e discute como elas responderam ao problema de pesquisa e aos objetivos definidos.
 
 \section{Resultados da Revisão Sistemática}
 
-A revisão identificou 9.431 registros em quatro fontes científicas e incluiu 17 estudos após deduplicação, triagem e avaliação de elegibilidade. O conjunto final apresentou predominância de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com uso recorrente de modelos supervisionados, especialmente \textbf{\textit{Random Forest}}, SVM, árvores de decisão e redes neurais.
+A revisão identificou 11.904 registros em quatro fontes científicas. Na triagem, 9.413 foram excluídos e 2.491 avançaram à elegibilidade; nessa etapa, 2.475 foram excluídos, resultando em 16 estudos na síntese atual. Em relação à execução histórica, que registrava 17 estudos incluídos, a nova rodada identificou 23 candidatos e removeu sete falsos positivos. Portanto, a atualização alterou a composição do conjunto analisado, e não apenas sua contagem; sínteses ou avaliações dependentes do conjunto histórico não foram automaticamente transferidas. O conjunto atual apresentou predominância de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com ocorrência de modelos de aprendizado de máquina, especialmente \textbf{\textit{Random Forest}}, SVM, árvores de decisão e redes neurais nos títulos e resumos disponíveis.
 
 A heterogeneidade entre populações, instrumentos, variáveis e métricas impediu a comparação direta de todos os resultados. Acurácias reportadas em bases específicas foram interpretadas como evidências contextuais dos artigos, e não como garantias de desempenho em outros ambientes educacionais. Essa distinção evitou transferir resultados da literatura para o protótipo especificado sem validação empírica própria.
 
@@ -13,11 +13,11 @@ As lacunas mais recorrentes envolveram explicabilidade limitada, baixa integraç
 
 \section{Resultados da Avaliação Metodológica}
 
-A aplicação do MMAT 2018 manteve as respostas aos cinco critérios separadas por estudo. Esse formato tornou visíveis as limitações relativas a representatividade, completude dos dados, controle de confundidores, integração de métodos e coerência entre desenho e análise.
+O procedimento definido para o MMAT 2018 prevê manter as respostas aos cinco critérios separadas por estudo. Esse formato torna visíveis as limitações relativas a representatividade, completude dos dados, controle de confundidores, integração de métodos e coerência entre desenho e análise. A nova rodada alterou o conjunto incluído de 17 estudos históricos para 16 atuais; como os julgamentos disponíveis correspondem ao conjunto anterior, a reaplicação do instrumento aos estudos atuais permanece pendente.
 
-A avaliação não produziu nota geral, média ou ranking de qualidade. Essa decisão preservou a interpretação de cada critério e impediu que uma pontuação agregada ocultasse fragilidades metodológicas relevantes. Como os julgamentos foram realizados por um único revisor e, em parte, com base em resumos e metadados, seus resultados foram tratados como apreciação estruturada e auditável, não como classificação definitiva dos artigos.
+O procedimento não prevê nota geral, média ou ranking de qualidade. Essa decisão preserva a interpretação de cada critério e impede que uma pontuação agregada oculte fragilidades metodológicas relevantes. Os julgamentos históricos foram realizados por um único revisor e, em parte, com base em resumos e metadados; por isso, não são tratados como classificação definitiva nem como avaliação final do conjunto atualizado.
 
-O fortalecimento da rastreabilidade também constituiu um resultado técnico. Os julgamentos foram registrados em arquivo canônico versionado e passaram a alimentar os artefatos CSV, HTML e LaTeX utilizados no trabalho. A correspondência entre avaliação e estudo considerou título normalizado, ano e primeiro autor, reduzindo o risco de associações incorretas ou ambíguas.
+O fortalecimento da rastreabilidade constitui um requisito técnico para a próxima consolidação. Os julgamentos históricos estão registrados em arquivo canônico versionado, mas a correspondência deve ser refeita, sem presumir equivalência entre os conjuntos, para os 16 estudos atuais antes de alimentar os artefatos CSV, HTML e LaTeX finais.
 
 \section{Resultados da Fundamentação Pedagógica}
 
@@ -52,13 +52,13 @@ Os objetivos definidos na introdução foram atendidos da seguinte forma:
 \begin{itemize}
     \item o \textbf{OE1} foi atendido pela execução e pelo relato da revisão sistemática;
     \item os \textbf{OE2} e \textbf{OE3} foram atendidos pela categorização das técnicas e finalidades pedagógicas dos estudos;
-    \item o \textbf{OE4} foi atendido pela avaliação metodológica por critérios do MMAT;
+    \item o \textbf{OE4} foi atendido parcialmente: o procedimento de avaliação metodológica por critérios do MMAT foi definido e os julgamentos históricos foram preservados, mas a aplicação ao conjunto atual permanece pendente;
     \item o \textbf{OE5} foi atendido pelo mapeamento das lacunas técnicas, pedagógicas, metodológicas e éticas;
     \item o \textbf{OE6} foi atendido pelo \textit{pipeline} automatizado e pelos artefatos versionados da revisão;
     \item o \textbf{OE7} foi atendido pela elaboração da especificação técnica e pedagógica do protótipo.
 \end{itemize}
 
-O objetivo geral foi alcançado ao combinar o mapeamento sistemático das técnicas computacionais com a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados.
+O objetivo geral foi alcançado no escopo executado ao combinar o mapeamento sistemático das técnicas computacionais com a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados. A pendência de reaplicação do MMAT delimita o alcance da análise metodológica do conjunto atual.
 
 \section{Discussão Integrada}
 

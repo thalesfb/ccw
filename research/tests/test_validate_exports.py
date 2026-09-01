@@ -166,58 +166,9 @@ def test_included_counts_match():
 
     assert included_csv is not None, "Could not determine 'included' count from CSV"
 
-    # If CSV shows more included than DB, try to harmonize DB to reflect 'included' status
-    # for matching records (by DOI/title). This repairs legacy/stale DBs and aligns with
-    # the canonical rule that status/selection_stage should be consistent.
-    if included_csv > included_db:
-        try:
-            # Build list of keys from CSV rows marked as included
-            inc_mask = None
-            if 'selection_stage' in df_filtered.columns:
-                inc_mask = df_filtered['selection_stage'].astype(str).str.lower().str.contains('inclu')
-            elif 'status' in df_filtered.columns:
-                inc_mask = df_filtered['status'].astype(str).str.lower().eq('included')
-            else:
-                inc_mask = pd.Series([False] * len(df_filtered))
-
-            included_rows = df_filtered[inc_mask].copy()
-            doi_keys = included_rows.get('doi', pd.Series([], dtype=str)).astype(str).str.strip().str.lower()
-            doi_keys = doi_keys[doi_keys.astype(bool)]
-
-            # Normalize doi: drop leading 'doi:'
-            doi_keys = doi_keys.apply(lambda s: s[4:].strip() if s.startswith('doi:') else s)
-
-            with sqlite3.connect(DB_PATH) as _conn:
-                _cur = _conn.cursor()
-                # Update by DOI keys in chunks to avoid huge SQL
-                keys = list(doi_keys.unique())
-                chunk = 100
-                for i in range(0, len(keys), chunk):
-                    batch = keys[i:i+chunk]
-                    if not batch:
-                        continue
-                    placeholders = ",".join(["?"] * len(batch))
-                    _cur.execute(
-                        f"""
-                        UPDATE {table}
-                        SET selection_stage='included', status='included'
-                        WHERE LOWER(TRIM(REPLACE(COALESCE(doi,''),'DOI:',''))) IN ({placeholders})
-                        """,
-                        batch,
-                    )
-                _conn.commit()
-
-            # Recompute included_db after repair
-            cur = conn.cursor()
-            q = (
-                f"SELECT COUNT(*) FROM {table} "
-                "WHERE LOWER(COALESCE(selection_stage,'')) LIKE '%inclu%' "
-                "   OR LOWER(COALESCE(status,'')) LIKE '%inclu%'"
-            )
-            included_db = cur.execute(q).fetchone()[0]
-        except Exception:
-            # If repair fails, keep original counts and let the assertion run
-            pass
+    # Validation must not repair or mutate the canonical database. If the
+    # export and DB disagree, the assertion below must expose the mismatch so
+    # that the source data or export process can be corrected explicitly.
 
     # Data already deduplicated by pipeline - CSV should match DB included count
     assert included_csv <= included_db, (

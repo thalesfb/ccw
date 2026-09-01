@@ -403,7 +403,7 @@ def _compute_prisma_stats_from_df(
     """Compute PRISMA stats from DataFrame.
 
     PRISMA 2020 flow correto:
-    - identification: Total de registros coletados (incluindo duplicatas) - busca histórico
+    - identification: Total de registros presentes no snapshot exportado
     - duplicates_removed: Registros removidos por deduplicação
     - screening: Registros únicos disponíveis para triagem
     - screening_excluded: Registros excluídos NA TRIAGEM (selection_stage='screening')
@@ -411,8 +411,9 @@ def _compute_prisma_stats_from_df(
     - eligibility_excluded: Registros excluídos NA ELEGIBILIDADE (selection_stage='eligibility')
     - included: Registros finalmente incluídos (selection_stage='included')
     
-    IMPORTANTE: Usa histórico da tabela searches para identification (total original
-    coletado antes de deduplicação), pois o banco atual já está limpo.
+    O histórico da tabela searches só é usado quando sua contagem é compatível
+    com o DataFrame atual. Um registro histórico incompatível não pode ser
+    misturado ao snapshot vigente, pois produziria um fluxo PRISMA impossível.
     
     Args:
         df: DataFrame com papers (já deduplicados)
@@ -450,16 +451,53 @@ def _compute_prisma_stats_from_df(
         duplicate_mask = df['is_duplicate'].fillna(False).astype(bool)
         unique_df = df[~duplicate_mask].copy()
     else:
-        unique_df = df.copy()
+        # DataFrames externos podem não carregar a flag persistida. Neles,
+        # aplicar um fallback conservador por DOI normalizado e, somente para
+        # registros sem DOI, por título exatamente normalizado.
+        fallback_duplicate = pd.Series(False, index=df.index)
+        if 'doi' in df.columns:
+            normalized_doi = df['doi'].fillna('').astype(str).map(normalize_doi)
+            fallback_duplicate |= (
+                normalized_doi.ne('')
+                & normalized_doi.duplicated(keep='first')
+            )
+        if 'title' in df.columns:
+            normalized_title = (
+                df['title']
+                .fillna('')
+                .astype(str)
+                .str.strip()
+                .str.lower()
+                .str.replace(r'\\s+', ' ', regex=True)
+            )
+            no_doi = (
+                normalized_doi.eq('')
+                if 'doi' in df.columns
+                else pd.Series(True, index=df.index)
+            )
+            fallback_duplicate |= (
+                no_doi
+                & normalized_title.ne('')
+                & normalized_title.duplicated(keep='first')
+            )
+        unique_df = df[~fallback_duplicate].copy()
 
-    # PRISMA 2020: Identification deve ser o total ORIGINAL coletado (antes de dedup)
-    # Buscar do histórico da tabela searches
+    # O histórico só pode ser reutilizado quando fecha aritmeticamente com o
+    # snapshot atual. Caso contrário, trata-se de uma execução anterior ou de
+    # uma coleta diferente e deve permanecer apenas como informação de log.
     historical_initial, historical_removed = _get_historical_dedup_stats()
 
     # Contagem única efetiva após deduplicação
     screening_count = int(len(unique_df))
 
-    if historical_initial > 0:
+    historical_is_compatible = (
+        historical_initial > 0
+        and historical_removed >= 0
+        and historical_initial - historical_removed == screening_count
+        and historical_initial >= raw_rows
+    )
+
+    if historical_is_compatible:
         stats['identification'] = historical_initial
 
         computed_removed = max(0, historical_initial - screening_count)
@@ -478,13 +516,17 @@ def _compute_prisma_stats_from_df(
                 f"duplicates_removed={computed_removed}"
             )
     else:
-        # Fallback: usar contagem atual garantindo coerência com screening
+        # Usar a contagem atual garante que o fluxo seja aritmeticamente
+        # coerente com os registros efetivamente exportados.
         stats['identification'] = raw_rows
         stats['duplicates_removed'] = max(0, stats['identification'] - screening_count)
-        logger.warning(
-            "Histórico de dedup não encontrado - usando contagem atual do DataFrame. "
-            "PRISMA identification pode estar subestimado."
-        )
+        if historical_initial > 0:
+            logger.warning(
+                "Histórico de dedup incompatível com o snapshot atual; "
+                f"não será usado no PRISMA (historical={historical_initial}, "
+                f"removed={historical_removed}, current={raw_rows}, "
+                f"screening={screening_count})."
+            )
 
     stats['screening'] = screening_count  # Registros únicos disponíveis para triagem
 

@@ -871,7 +871,7 @@ class ReportGenerator:
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.identification }}</td>
                 </tr>
                 <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">🔍 Triagem (aprovados)</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">🔍 Triagem (registros avaliados)</td>
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.screening }}</td>
                 </tr>
                 <tr>
@@ -879,7 +879,7 @@ class ReportGenerator:
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.screening_excluded }}</td>
                 </tr>
                 <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Elegibilidade (aprovados)</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Registros que avançaram à elegibilidade</td>
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.eligibility }}</td>
                 </tr>
                 <tr>

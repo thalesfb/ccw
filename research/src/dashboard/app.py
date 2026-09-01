@@ -251,7 +251,7 @@ def show_analysis_tab(df):
         year_filter = st.slider(
             "Ano mínimo:",
             min_value=int(df['year'].min()) if 'year' in df.columns else 2010,
-            max_value=int(df['year'].max()) if 'year' in df.columns else 2025,
+            max_value=int(df['year'].max()) if 'year' in df.columns else 2026,
             value=int(df['year'].min()) if 'year' in df.columns else 2015
         )
 

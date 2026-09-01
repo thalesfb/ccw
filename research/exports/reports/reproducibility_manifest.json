@@ -1,0 +1,250 @@
+{
+  "schema_version": "1.0",
+  "snapshot_date": "2026-08-31",
+  "generated_at": "2026-08-31T20:57:34+00:00",
+  "database": {
+    "path": "research/systematic_review.sqlite",
+    "versioned": false,
+    "role": "local operational source for states and counts"
+  },
+  "snapshot": {
+    "counts": {
+      "total_records": 11904,
+      "selection_stage_counts": {
+        "screening": 9413,
+        "eligibility": 2475,
+        "included": 16
+      },
+      "prisma": {
+        "identification": 11904,
+        "screening": 11904,
+        "screening_excluded": 9413,
+        "eligibility": 2491,
+        "eligibility_excluded": 2475,
+        "included": 16
+      }
+    },
+    "included_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      6916,
+      6917,
+      6918,
+      6920,
+      6921,
+      6923
+    ],
+    "manual_overrides": [
+      {
+        "id": 14,
+        "doi": "10.56855/ijmme.v3i2.1299",
+        "title": "Enhancing Student Achievement in Circle Theorems: Integrating Computer Animation with the Jigsaw Cooperative Learning Model",
+        "year": 2025,
+        "relevance_score": 4.05,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit",
+        "rationale_status": "individual_rationale_pending"
+      },
+      {
+        "id": 15,
+        "doi": "10.12973/ejmse.5.2.93",
+        "title": "Authentic Assessment for Motivating Student Learning and Teaching Effectiveness in Rural, High-Need Secondary Schools in Manitoba, Canada",
+        "year": 2024,
+        "relevance_score": 4.05,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit",
+        "rationale_status": "individual_rationale_pending"
+      },
+      {
+        "id": 6915,
+        "doi": "10.1186/s40561-025-00415-z",
+        "title": "AI-driven predictive models for optimizing mathematics education technology: Enhancing decision-making through educational data mining and meta-analysis",
+        "year": 2025,
+        "relevance_score": 4.4,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit",
+        "rationale_status": "individual_rationale_pending"
+      },
+      {
+        "id": 6919,
+        "doi": "10.3390/su18041900",
+        "title": "Exploring the Integration of Education for Sustainable Development into University Mathematics: Insights from SiC Thickness Measurement in Advanced Industrial Applications",
+        "year": 2026,
+        "relevance_score": 4.15,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit",
+        "rationale_status": "individual_rationale_pending"
+      },
+      {
+        "id": 6922,
+        "doi": "10.34657/31156",
+        "title": "Sachbericht zum Verwendungsnachweis - Förderung \"Digitale Hochschulbildung\" des Bundesministeriums für Bildung und Forschung",
+        "year": 2025,
+        "relevance_score": 4.05,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit",
+        "rationale_status": "individual_rationale_pending"
+      },
+      {
+        "id": 6925,
+        "doi": "10.1186/s40594-025-00590-y",
+        "title": "Predicting STEM competencies with machine learning: identifying key determinants among 522,802 adolescents",
+        "year": 2026,
+        "relevance_score": 4.0,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit",
+        "rationale_status": "individual_rationale_pending"
+      },
+      {
+        "id": 6926,
+        "doi": "10.1016/j.aej.2025.03.095",
+        "title": "Methods and reliability study of moral education assessment in universities: A machine learning-based approach",
+        "year": 2025,
+        "relevance_score": 4.0,
+        "selection_stage": "eligibility",
+        "status": "excluded",
+        "exclusion_reason": "manual_exclusion_after_audit",
+        "rationale_status": "individual_rationale_pending"
+      }
+    ],
+    "candidate_audit": {
+      "operational_candidates": 23,
+      "false_positives_removed": 7,
+      "current_included": 16,
+      "interpretation": "The operational candidate count is the current included set plus the persisted manual-audit overrides. It is not an extra PRISMA stage."
+    }
+  },
+  "bibliography": {
+    "pipeline_derived_studies": "research/exports/references/included_papers.bib",
+    "complete_tcc_bibliography": [
+      "results/tcc/referencias.bib",
+      "results/tcc/referencias_pedagogicas.bib"
+    ],
+    "reference_audit": "research/data/reference_audit.csv",
+    "separation_rule": "The 16 included studies are derived from the review pipeline. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
+  },
+  "artifacts": [
+    {
+      "path": "research/exports/analysis/papers.csv",
+      "role": "row-level versioned representation of the current snapshot",
+      "sha256": "a7936e01a8b1335f395fe9955f4656107acd575797a5973497050f500371c1fe"
+    },
+    {
+      "path": "research/exports/analysis/papers.json",
+      "role": "JSON representation of the current snapshot",
+      "sha256": "491bd47df925f9f67043bfa6ea459f5d427eb0cac5d2c1f99f091cc3b9dd021c"
+    },
+    {
+      "path": "research/exports/reports/summary.json",
+      "role": "PRISMA and derived summary statistics",
+      "sha256": "d79490e86027ff0cbbea9e696c93762f4060a56063bbea5f63d4796061da24c9"
+    },
+    {
+      "path": "research/exports/references/included_papers.bib",
+      "role": "BibTeX containing only the 16 pipeline-derived included studies",
+      "sha256": "2cd8575f6f70bb719d3612585093cde7ac83d5c8a10ebaf5b4546744ecc47490"
+    },
+    {
+      "path": "research/data/reference_audit.csv",
+      "role": "audit separating included studies from theoretical and methodological references",
+      "sha256": "d4767545ecdbaf0232a198b5475380b06c7edb8d3b6930ed1234c249312c1a81"
+    },
+    {
+      "path": "docs/RECONCILIACAO-BASELINE-2026-08-31.md",
+      "role": "human-readable reconciliation of current and historical baselines",
+      "sha256": "29490a11f67f9dd28b28eafd352f358bcb922609960f18bb97f83e5b18ee2c41"
+    },
+    {
+      "path": "results/tcc/referencias.bib",
+      "role": "main TCC bibliography, including pipeline-derived studies and manual references",
+      "sha256": "a5b1523d61400cf45901cebcb5733dd1e3232e1fe6cf39cd456575b07ac19b44"
+    },
+    {
+      "path": "results/tcc/referencias_pedagogicas.bib",
+      "role": "supplementary TCC bibliography with manual pedagogical and assessment references",
+      "sha256": "399a42246bde5bedc5e91d2000f19837afb65caebe611f7054608ec509977797"
+    },
+    {
+      "path": "results/tcc/main.pdf",
+      "role": "compiled TCC artifact",
+      "sha256": "53245647e9fac3a2b0f1482b0caf30a06c74f5e9bb107d808eba21fea8e7a5bb"
+    },
+    {
+      "path": "research/src/config.py",
+      "role": "versioned review configuration and criteria",
+      "sha256": "4ece05aa7b3cd2a6385c02f56decf9214c11629615723e9992e8c1af94b04de8"
+    },
+    {
+      "path": "research/src/processing/scoring.py",
+      "role": "versioned relevance-scoring implementation",
+      "sha256": "04a04b0cd4d0a884d8a6b692b2565ec7b2b0d286545e79aaf250ea7fa7d16cab"
+    },
+    {
+      "path": "research/src/processing/selection.py",
+      "role": "versioned selection-stage implementation",
+      "sha256": "08499ffa1f866084fe07470b700a632483f269ba350d83576297188820d3cba5"
+    },
+    {
+      "path": "research/src/analysis/deep_review_analysis.py",
+      "role": "versioned full-text analysis implementation",
+      "sha256": "c2aedfcf2e5bbf7129cf362d75f216577cc44e2e4bd10eb4c0638c491d28a641"
+    },
+    {
+      "path": "research/src/cli_audit.py",
+      "role": "manual-audit helper used to persist exclusions",
+      "sha256": "dc025836b76ab547e82b613524d9f6434fbea61ec8e3af652588524d5c8bcf37"
+    },
+    {
+      "path": "research/src/cli.py",
+      "role": "versioned command-line entry point for the research workflow",
+      "sha256": "c709066103cb93f0e3afc1fd79e0d2828571638f44172ad3370a2e45dde4aa1e"
+    },
+    {
+      "path": "research/src/pipelines/validations.py",
+      "role": "versioned read-only cross-check of DB, exports and summary",
+      "sha256": "60d8be3af1d138c4bd2e1fb4d4f4237375b71fbea1aa945d7c2243c9f4fc761f"
+    },
+    {
+      "path": "research/src/validation/reproducibility.py",
+      "role": "versioned generator for this reproducibility manifest",
+      "sha256": "8af1a398cb349d57c907bf3183729953121774e0aed8ce457630ababbd9b0f75"
+    },
+    {
+      "path": "research/requirements.txt",
+      "role": "research runtime dependencies",
+      "sha256": "683308e73f190f5ef8efd5ac807b868b4ed3c4517119d3150d88de5267ac9596"
+    }
+  ],
+  "reproduction": {
+    "verify_snapshot_without_database": [
+      "Compare artifact SHA-256 values with this manifest.",
+      "Read PRISMA counts from research/exports/reports/summary.json.",
+      "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
+      "Read the 16 pipeline-derived citations from research/exports/references/included_papers.bib."
+    ],
+    "rebuild_from_local_database": [
+      "python -m research.src.cli --db /path/to/systematic_review.sqlite export",
+      "python -m research.src.cli --db /path/to/systematic_review.sqlite generate-manifest"
+    ],
+    "fresh_collection": "python -m research.src.cli run-pipeline --min-score 4.0",
+    "limitations": [
+      "External API responses, metadata and cache state can change on a fresh collection.",
+      "The seven manual overrides are recorded, but their substantive individual rationales remain pending.",
+      "The MMAT appraisal must be reapplied to the current 16 studies before quality synthesis."
+    ]
+  }
+}

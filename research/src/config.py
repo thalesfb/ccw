@@ -133,6 +133,8 @@ class ReviewCriteria:
         Minimum publication year.
     year_max : int
         Maximum publication year.
+    cutoff_date : str
+        Publication cutoff date (ISO format YYYY-MM-DD).
     languages : list of str, optional
         Allowed languages (ISO codes or names).
     keywords : list of str, optional
@@ -146,7 +148,8 @@ class ReviewCriteria:
     """
 
     year_min: int = 2015
-    year_max: int = 2025
+    year_max: int = 2026
+    cutoff_date: str = "2026-08-31"
     languages: List[str] = None
     keywords: List[str] = None
     tech_terms: List[str] = None
@@ -214,12 +217,12 @@ def load_config() -> AppConfig:
         Fully-populated application configuration.
     """
 
-    # Configurações das APIs do notebook original
+    # Configurações das APIs — rate delays lidos do .env (fallback: valores seguros)
     api_config = ApiConfig(
         semantic_scholar={
             "api_key": os.getenv("SEMANTIC_SCHOLAR_API_KEY", ""),
             "base_url": "https://api.semanticscholar.org/graph/v1/paper/search",
-            "rate_delay": 4.0,
+            "rate_delay": float(os.getenv("SEMANTIC_SCHOLAR_RATE_DELAY", "8.0")),
             "cache_dir": "cache/semantic_scholar/",
             "fields_expanded": [
                 "paperId", "title", "authors.name", "year", "venue", "url",
@@ -230,7 +233,7 @@ def load_config() -> AppConfig:
         open_alex={
             "email": os.getenv("USER_EMAIL"),
             "base_url": "https://api.openalex.org/works",
-            "rate_delay": 6.0,
+            "rate_delay": float(os.getenv("OPENALEX_RATE_DELAY", "6.0")),
             "cache_dir": "cache/open_alex/",
             "use_polite_pool": True,
             "fields_expanded": [
@@ -242,16 +245,16 @@ def load_config() -> AppConfig:
         crossref={
             "email": os.getenv("USER_EMAIL"),
             "base_url": "https://api.crossref.org/works",
-            "rate_delay": 4.0,
+            "rate_delay": float(os.getenv("CROSSREF_RATE_DELAY", "6.0")),
             "cache_dir": "cache/crossref/",
             "use_polite_pool": True
         },
         core={
             "api_key": os.getenv("CORE_API_KEY"),
-            "base_url": "https://api.core.ac.uk/v3/search/works",
-            "rate_delay": 6.0,
+            "base_url": "https://api.core.ac.uk/v3/search/outputs",
+            "rate_delay": float(os.getenv("CORE_RATE_DELAY", "8.0")),
             "cache_dir": "cache/core/",
-            "is_active": False  # Desabilitada no notebook original
+            "is_active": bool(os.getenv("CORE_API_KEY", "")),  # Auto-enable if key present
         }
     )
 
@@ -273,5 +276,8 @@ def load_config() -> AppConfig:
     return AppConfig(
         database=db_conf,
         apis=api_config,
-        criteria=ReviewCriteria(),
+        criteria=ReviewCriteria(
+            year_min=int(os.getenv("YEAR_MIN", "2015")),
+            year_max=int(os.getenv("YEAR_MAX", "2026")),
+        ),
     )

@@ -1481,8 +1481,18 @@ Best regards,
         finally:
             conn.close()
         
-        # Exportar para papers.json
-        export_dir = Path(self.config.database.exports_dir) / "analysis"
+        # Exportar para papers.json. When tests or callers override output_dir,
+        # keep their fixture output isolated instead of overwriting the
+        # versioned canonical export in research/exports/analysis.
+        default_deep_analysis_dir = Path(self.config.database.exports_dir) / "deep_analysis"
+        configured_exports_dir = Path(self.config.database.exports_dir)
+        if self.output_dir.resolve() in {
+            default_deep_analysis_dir.resolve(),
+            configured_exports_dir.resolve(),
+        }:
+            export_dir = configured_exports_dir / "analysis"
+        else:
+            export_dir = self.output_dir
         export_dir.mkdir(parents=True, exist_ok=True)
         
         papers_json_file = export_dir / "papers.json"

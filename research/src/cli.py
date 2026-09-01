@@ -21,6 +21,7 @@ from .pipeline.run import SystematicReviewPipeline
 from .analysis.deep_review_analysis import DeepReviewAnalyzer
 from .exports.bibtex import export_bibtex_by_category
 from .cli_audit import list_suspects, bulk_exclude, load_dois_from_csv
+from .validation.reproducibility import generate_manifest
 # Módulo de validações pode ter sido removido; importar de forma resiliente
 try:
     from .pipelines.validations import (
@@ -593,6 +594,15 @@ def cmd_regenerate_summary(_: argparse.Namespace) -> None:
         print(f"❌ Erro ao regenerar summary.json: {e}")
 
 
+def cmd_generate_manifest(_: argparse.Namespace) -> None:
+    """Gera o manifesto versionado do snapshot sem versionar o SQLite."""
+    try:
+        output = generate_manifest()
+        print(f"✅ Manifesto de reprodutibilidade atualizado em: {output}")
+    except Exception as e:
+        print(f"❌ Erro ao gerar manifesto de reprodutibilidade: {e}")
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="ccw-rs",
@@ -699,6 +709,13 @@ def build_parser() -> argparse.ArgumentParser:
     # Comando regenerate-summary
     p_reg = sub.add_parser("regenerate-summary", help="Regenera research/exports/reports/summary.json a partir do DB")
     p_reg.set_defaults(func=cmd_regenerate_summary)
+
+    # Comando generate-manifest
+    p_manifest = sub.add_parser(
+        "generate-manifest",
+        help="Gera o manifesto do snapshot e hashes dos artefatos versionados",
+    )
+    p_manifest.set_defaults(func=cmd_generate_manifest)
 
     return p
 
