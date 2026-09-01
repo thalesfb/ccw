@@ -650,8 +650,6 @@ def generate_manifest(
     }
 
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    with destination.open("w", encoding="utf-8", newline="\n") as manifest_file:
+        manifest_file.write(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     return destination
