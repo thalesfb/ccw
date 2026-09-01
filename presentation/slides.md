@@ -223,7 +223,7 @@ Português: "educacao", "ensino"            [2 termos]
 
 ### IDENTIFICAÇÃO
 ```
-11.904 registros no snapshot consolidado (72 queries × 4 APIs)
+11.904 registros no snapshot consolidado, coletados por 72 consultas canônicas distribuídas entre quatro APIs
 ```
 
 ### DEDUPLICAÇÃO & TRIAGEM
