@@ -7,109 +7,51 @@ A especificação não foi tratada como evidência de uma aplicação funcional.
 
 \section{Princípios de Projeto}
 
-A especificação adotou os seguintes princípios:
+A especificação foi orientada pelo princípio de que os resultados computacionais devem apoiar a decisão pedagógica sem substituir a atuação do professor. Para isso, distinguiu-se o desempenho observado da proficiência estimada, da competência e da própria aprendizagem, evitando que indicadores produzidos pelo sistema fossem interpretados como diagnósticos definitivos. As estimativas devem ser acompanhadas de explicações e de suas limitações, mantendo-se a revisão humana das recomendações produzidas.
 
-\begin{itemize}
-    \item apoiar a decisão pedagógica sem substituir o professor;
-    \item distinguir desempenho observado, proficiência estimada, competência e aprendizagem;
-    \item apresentar explicações e limitações associadas às estimativas;
-    \item preservar a revisão humana das recomendações;
-    \item proteger os dados educacionais e registrar sua finalidade de uso;
-    \item permitir a reprodução dos procedimentos de preparação, treinamento e avaliação;
-    \item evitar rótulos permanentes ou deterministas sobre os estudantes.
-\end{itemize}
+O projeto também pressupõe proteção dos dados educacionais, registro de sua finalidade de uso e possibilidade de reproduzir os procedimentos de preparação, treinamento e avaliação. Esses cuidados sustentam a rastreabilidade das decisões e reduzem o risco de que classificações transitórias sejam transformadas em rótulos permanentes ou deterministas sobre os estudantes.
 
 \section{Requisitos Funcionais}
 
-Foram definidos os seguintes requisitos funcionais para o protótipo:
+No plano funcional, o protótipo deve receber dados documentados e relacionados a objetivos curriculares, organizar evidências de desempenho por habilidade ou descritor e produzir estimativas de proficiência acompanhadas das incertezas e limitações pertinentes. Os resultados devem poder ser apresentados tanto de forma individual quanto agregada, de modo que o professor possa observar padrões da turma sem perder a possibilidade de examinar casos específicos.
 
-\begin{enumerate}
-    \item importar dados documentados e relacionados a objetivos curriculares;
-    \item organizar evidências de desempenho por habilidade ou descritor;
-    \item produzir estimativas de proficiência acompanhadas de incertezas e limitações;
-    \item apresentar resultados individuais e agregados ao professor;
-    \item explicar as variáveis relacionadas a cada estimativa;
-    \item permitir revisão humana das recomendações produzidas;
-    \item exportar dados, parâmetros e resultados para auditoria.
-\end{enumerate}
-
-A especificação também estabeleceu que indicadores computacionais não representam, isoladamente, diagnósticos de aprendizagem. Sua interpretação depende da natureza da atividade, da qualidade dos dados e do contexto pedagógico.
+A especificação também prevê que as variáveis relacionadas a cada estimativa sejam apresentadas de forma compreensível, que as recomendações permaneçam sujeitas à revisão humana e que dados, parâmetros e resultados possam ser exportados para auditoria. Esses requisitos reforçam que indicadores computacionais não representam, isoladamente, diagnósticos de aprendizagem, pois sua interpretação depende da natureza da atividade, da qualidade dos dados e do contexto pedagógico.
 
 \section{Requisitos Não Funcionais}
 
-Os requisitos não funcionais definidos foram:
+Os requisitos não funcionais concentram-se em reprodutibilidade, rastreabilidade, testabilidade, portabilidade, acessibilidade, privacidade e transparência. A reprodutibilidade exige o registro das versões dos dados, parâmetros, modelos e dependências; a rastreabilidade relaciona cada resultado à fonte de dados e à versão do experimento; e a testabilidade pressupõe separação clara entre ingestão, preparação, modelagem e apresentação. A portabilidade requer um ambiente documentado e reproduzível, enquanto a acessibilidade orienta a apresentação de informações compreensíveis para diferentes usuários.
 
-\begin{itemize}
-    \item \textbf{reprodutibilidade}: registro das versões dos dados, dos parâmetros, dos modelos e das dependências;
-    \item \textbf{rastreabilidade}: associação entre cada resultado, a fonte de dados e a versão do experimento;
-    \item \textbf{testabilidade}: separação entre componentes de ingestão, preparação, modelagem e apresentação;
-    \item \textbf{portabilidade}: execução em ambiente documentado e reproduzível;
-    \item \textbf{acessibilidade}: apresentação de informações compreensíveis e compatíveis com diferentes usuários;
-    \item \textbf{privacidade}: minimização dos dados pessoais e controle de finalidade e acesso;
-    \item \textbf{transparência}: comunicação das limitações dos modelos e das condições de validade das estimativas.
-\end{itemize}
+Privacidade e transparência complementam esses requisitos. O tratamento deve minimizar dados pessoais, controlar finalidade e acesso e comunicar as limitações dos modelos e as condições de validade das estimativas. Dessa forma, propriedades técnicas do sistema são vinculadas às responsabilidades pedagógicas e éticas discutidas na fundamentação.
 
 \section{Critérios para Fontes de Dados}
 
-A análise considerou microdados de avaliações educacionais, como SAEB e PISA, e dados sintéticos destinados à verificação do \textit{pipeline}. A comparação não selecionou uma base definitiva; ela estabeleceu os critérios que orientaram a especificação:
+A análise considerou microdados de avaliações educacionais, como SAEB e PISA, e dados sintéticos destinados à verificação do fluxo computacional. A comparação não selecionou uma base definitiva; em vez disso, estabeleceu critérios para uma escolha posterior fundamentada. A fonte candidata deve possuir condições de uso compatíveis com a pesquisa, documentação metodológica e dicionário de dados suficientes, unidade de análise coerente com o problema investigado e metadados que permitam compreender valores ausentes, transformações e limitações de coleta.
 
-\begin{itemize}
-    \item licença e condições de uso;
-    \item disponibilidade de dicionário de dados e documentação metodológica;
-    \item unidade de análise e relação com o problema de pesquisa;
-    \item qualidade dos metadados e tratamento de valores ausentes;
-    \item representatividade da população;
-    \item presença de variáveis relacionadas a desempenho e contexto;
-    \item possibilidade de associação com competências ou descritores curriculares;
-    \item riscos de identificação, discriminação ou uso indevido.
-\end{itemize}
-
-Dados sintéticos foram considerados adequados apenas para testar fluxos de processamento, interfaces e regras de validação. Eles não foram considerados evidência de desempenho educacional nem substitutos de uma base empírica.
+Também devem ser consideradas a representatividade da população, a presença de variáveis relacionadas a desempenho e contexto, a possibilidade de associação com competências ou descritores curriculares e os riscos de identificação, discriminação ou uso indevido. Dados sintéticos permanecem adequados para testar fluxos de processamento, interfaces e regras de validação, mas não constituem evidência de desempenho educacional nem substituem uma base empírica.
 
 \section{Alternativas de Modelagem}
 
-A revisão identificou uso recorrente de \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), árvores de decisão, regressão logística e redes neurais. Na especificação, \textit{Random Forest} e SVM também foram ancoradas em suas fontes metodológicas primárias \cite{Breiman2001,CortesVapnik1995}. Modelos supervisionados simples e interpretáveis foram mantidos como referências iniciais de comparação, condicionando o uso de modelos mais complexos à demonstração de ganho e à possibilidade de interpretação adequada.
+A revisão identificou uso recorrente de floresta aleatória (RF), máquinas de vetores de suporte (SVM), árvores de decisão, regressão logística e redes neurais. Na especificação, a floresta aleatória e a SVM foram também ancoradas em suas fontes metodológicas primárias \cite{Breiman2001,CortesVapnik1995}. Modelos supervisionados simples e interpretáveis foram mantidos como referências iniciais de comparação, condicionando o uso de modelos mais complexos à demonstração de ganho e à possibilidade de interpretação adequada.
 
-\textbf{\textit{Random Forest}} e SVM foram registrados como alternativas de modelagem, não como algoritmos definitivamente implementados. A escolha entre eles depende da base selecionada, da distribuição das classes, do tipo de variável, do custo computacional e dos requisitos de explicabilidade.
-
-Em uma implementação com scikit-learn, identificadores longos, como \texttt{RandomForest\allowbreak Classifier}, devem ser documentados sem comprometer a legibilidade do texto ou a reprodução do código.
+A floresta aleatória e a SVM foram registradas como alternativas de modelagem, e não como algoritmos definitivamente implementados. A escolha depende da base selecionada, da distribuição das classes, do tipo de variável, do custo computacional e dos requisitos de explicabilidade. Essa decisão evita transformar a frequência de uso observada na literatura em justificativa suficiente para adotar um modelo específico.
 
 \section{Protocolo de Avaliação}
 
-O protocolo de avaliação definido incluiu:
+O protocolo de avaliação prevê separação explícita entre conjuntos de treino, validação e teste e medidas para impedir vazamento de informação entre essas etapas. Os modelos candidatos devem ser comparados com referências simples e avaliados por métricas adequadas à tarefa, incluindo análise por classe, matriz de confusão, precisão, revocação e medida F1. A área sob a curva ROC e a calibração podem ser empregadas quando compatíveis com o problema \cite{Fawcett2006,NiculescuMizilCaruana2005}.
 
-\begin{enumerate}
-    \item separação explícita entre conjuntos de treino, validação e teste;
-    \item prevenção de vazamento de informação entre as etapas;
-    \item comparação com modelos de referência simples;
-    \item análise de métricas por classe, além de medidas agregadas;
-    \item uso de matriz de confusão, precisão, revocação e medida F1;
-    \item avaliação de área sob a curva ROC e calibração quando compatíveis com a tarefa \cite{Fawcett2006,NiculescuMizilCaruana2005};
-    \item análise de estabilidade das explicações e de possíveis diferenças entre grupos;
-    \item registro das limitações de generalização.
-\end{enumerate}
-
-A especificação distinguiu avaliação técnica de eficácia pedagógica. Métricas preditivas descrevem o comportamento do modelo em uma base; elas não demonstram, por si só, melhoria da aprendizagem ou adequação de uma intervenção escolar.
+A avaliação deve ainda examinar a estabilidade das explicações, possíveis diferenças de desempenho entre grupos e limitações de generalização. A especificação distingue avaliação técnica de eficácia pedagógica: métricas preditivas descrevem o comportamento de um modelo em determinada base, mas não demonstram, por si só, melhoria da aprendizagem ou adequação de uma intervenção escolar.
 
 \section{Explicabilidade e Participação Docente}
 
-SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. A especificação condicionou seu uso à estabilidade das explicações, ao custo computacional e à possibilidade de tradução dos resultados para uma linguagem curricular compreensível.
+SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. A especificação condiciona seu uso à estabilidade das explicações, ao custo computacional e à possibilidade de traduzir os resultados para uma linguagem curricular compreensível.
 
-O professor permaneceu como responsável por interpretar as evidências, relacioná-las ao contexto da turma e decidir intervenções. O protótipo foi especificado como instrumento de apoio, e não como mecanismo autônomo de classificação ou prescrição pedagógica.
+O professor permanece responsável por interpretar as evidências, relacioná-las ao contexto da turma e decidir intervenções. O protótipo foi especificado como instrumento de apoio e não como mecanismo autônomo de classificação ou prescrição pedagógica.
 
 \section{Arquitetura de Referência}
 
-A arquitetura conceitual foi organizada em cinco componentes:
+A arquitetura conceitual foi organizada em cinco componentes articulados. A \textbf{ingestão} realiza a leitura e a validação das fontes de dados; a \textbf{preparação} trata valores ausentes, codifica e transforma variáveis e registra essas operações; a \textbf{modelagem} treina e compara os modelos candidatos; a etapa de \textbf{avaliação e explicabilidade} calcula métricas, analisa erros e gera explicações; e a \textbf{apresentação} disponibiliza indicadores, contexto e limitações para análise docente.
 
-\begin{enumerate}
-    \item \textbf{ingestão}: leitura e validação das fontes de dados;
-    \item \textbf{preparação}: tratamento de valores ausentes, codificação, transformação e documentação das variáveis;
-    \item \textbf{modelagem}: treinamento e comparação dos modelos candidatos;
-    \item \textbf{avaliação e explicabilidade}: cálculo das métricas, análise dos erros e geração de explicações;
-    \item \textbf{apresentação}: disponibilização de indicadores e limitações para análise docente.
-\end{enumerate}
-
-A separação dos componentes favoreceu testabilidade, rastreabilidade e substituição controlada de técnicas. A arquitetura não impôs uma interface específica, podendo ser materializada como \textit{notebook}, aplicação local, API ou sistema web, desde que os requisitos de auditoria e interpretação fossem preservados.
+A separação desses componentes favorece testabilidade, rastreabilidade e substituição controlada de técnicas. A arquitetura não impõe uma interface específica e pode ser materializada como caderno computacional, aplicação local, interface de programação de aplicações ou sistema web, desde que os requisitos de auditoria e interpretação sejam preservados.
 
 \section{Resultado da Especificação}
 
