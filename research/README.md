@@ -1,6 +1,11 @@
 # 📚 Revisão Sistemática da Literatura - CCW Research
 
-> **Baseline vigente (31/08/2026):** o banco consolidado contém 11.904 registros e 16 registros retidos operacionalmente (15 classificados provisoriamente como empíricos, com 6918 em hold por conflito temporal, e o protocolo contextual 6921). As seções de resultados históricos abaixo preservam os números de 9.431 registros e 17 incluídos como contexto; a fonte atual e a auditoria de DOI estão em [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](../docs/RECONCILIACAO-BASELINE-2026-08-31.md).
+> **Baseline vigente (31/08/2026):** o banco consolidado contém 11.904
+> registros e 16 registros retidos operacionalmente (15 classificados
+> provisoriamente como empíricos, com 6918 em *hold* por conflito temporal, e
+> o protocolo contextual 6921). As seções históricas abaixo preservam os
+> números de 9.431 registros e 17 incluídos apenas como contexto; a fonte atual
+> está em [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](../docs/RECONCILIACAO-BASELINE-2026-08-31.md).
 
 O manifesto histórico [`research/data/protocol_execution_2025.json`](data/protocol_execution_2025.json), extraído do contexto do PR #23, preserva a estratégia e os limites da execução de 2025. Ele é evidência histórica, não a fonte de verdade do snapshot atual; em particular, registra a divergência não resolvida entre 2.517 duplicatas reportadas e `total_removed=2494` no artefato SQLite histórico.
 
@@ -134,8 +139,8 @@ registro no snapshot operacional.
 Revisão por pares, tipo documental, texto completo e evidência empírica
 continuam critérios de confirmação científica: a seleção operacional não os
 verificou individualmente para todos os 16 registros. Essa distinção explica
-por que o conjunto atual é chamado de operacional/provisório e por que o
-MMAT e a adjudicação dos overrides permanecem sob revisão.
+por que o conjunto atual é chamado de operacional/provisório e por que o MMAT
+e a adjudicação dos overrides permanecem sob revisão.
 
 **Critérios planejados de exclusão**:
 
@@ -154,30 +159,31 @@ Elegibilidade → Inclusão.
 - **Identificação**: 11.904 registros brutos no snapshot operacional
 - **Deduplicação determinística**: 27 registros removidos (25 DOI + 2 URL exata; um grupo de URL é misto quanto ao DOI)
 - **Triagem**: 11.877 avaliados; 9.391 excluídos; 2.486 avançaram
-- **Elegibilidade**: 2.486 avaliados; 2.470 excluídos; 16 incluídos
+- **Elegibilidade**: 2.486 avaliados; 2.470 excluídos; 16 retidos
 - **Auditoria de candidatos**: 23 candidatos operacionais; 7 overrides manuais registrados, dos quais 4 aguardam adjudicação de escopo
 - **Auditoria de identidade**: 25 excedentes DOI e 2 excedentes URL removidos deterministicamente; a auditoria bruta tem 257 excedentes em títulos, dos quais 232 permanecem apenas por título após a remoção DOI/URL e sem remoção automática
 - **Retidos**: 16 registros operacionais; 15 são provisoriamente empíricos (6918 em hold por conflito temporal) e o protocolo 6921 permanece contextual
 
 Os sete overrides manuais já estão contabilizados nas exclusões de elegibilidade,
-mas quatro ainda aguardam adjudicação científica de escopo.
-O resultado atual decorre de nova ingestão, correção do scoring e auditoria de
-pertinência; não é uma simples troca de 17 por 16. O SQLite permanece como
-fonte operacional local, ignorada pelo Git. Para reconstituir o snapshot sem
-distribuir o banco, use os exports versionados e
+mas quatro ainda aguardam adjudicação científica de escopo. O resultado atual
+decorre de nova ingestão, correção do scoring e auditoria de pertinência; não é
+uma simples troca de 17 por 16. O SQLite permanece como fonte operacional
+local, ignorada pelo Git. Para reconstituir o snapshot sem distribuir o banco,
+use os exports versionados e
 `research/exports/reports/reproducibility_manifest.json`.
 
 **Baseline histórico (25/11/2025; não vigente)**:
 
 - **Identificação**: 9.431 registros coletados
 - **Duplicatas Removidas**: 2.517 (26,6%)
-- **Screening**: 6.914 estudos únicos avaliados
+- **Screening**: 6.914 linhas preservadas
 - **Elegibilidade**: 1.883 avaliados em profundidade (excluídos na elegibilidade: 1.866 / 99,1%)
 - **Incluídos**: 17 estudos (pontuação de relevância ≥ 4,0)
 
-Os contadores acima pertencem ao snapshot histórico. O baseline vigente é
-derivado do banco canônico `research/systematic_review.sqlite` e está
-reconciliado em `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
+Os contadores históricos acima são preservados para rastreabilidade e não
+validam a execução atual. O manifesto histórico registra a divergência entre
+2.517 duplicatas documentadas e `total_removed=2494` no único resumo SQLite
+preservado da execução original.
 
 Para obter os números atualizados execute:
 
@@ -237,7 +243,7 @@ Use estes comandos em vez dos scripts avulsos em `tools/` e `research/scripts/`:
 # Auditoria cruzada DB → Exports → PTC (legado; ver observação abaixo)
 python -m research.src.cli audit
 
-# Valida DB ↔ CSV ↔ summary.json (salva JSON em research/logs)
+# Valida o snapshot publicado sem modificar o banco
 python -m research.src.cli validate-exports
 
 # Checagem ampla de exports, incluindo parsing dos relatórios HTML
@@ -256,23 +262,20 @@ python -m research.src.cli generate-manifest
 python -m research.src.cli diagnose-included --title "parte do título"
 ```
 
-> **Limitação conhecida:** o comando legado `audit` atualmente tenta importar
-> `research/src/scripts/cross_audit.py`, módulo que não está presente no
-> repositório, e pode terminar sem sinalizar a falha pelo código de saída. Ele
-> não é um critério de aceitação do snapshot vigente. Até sua correção em um PR
-> atômico próprio, use `validate-exports`, `check-exports`,
-> `verify-papers` e `generate-manifest`, que são os checks executados e
-> registrados nesta reconciliação.
+> atômico próprio, use `validate-exports`, `check-exports`, `verify-papers` e
+> `generate-manifest`, que são os checks executados e registrados nesta
+> reconciliação.
 
 O manifesto e os exports representam o snapshot sem distribuir o SQLite. O
 escopo de hashes do manifesto é o snapshot de pesquisa; a reconciliação
 editorial e os artefatos compilados do TCC aparecem como documentos
-acompanhantes, verificados pelos PRs que os possuem. O arquivo de referências derivadas do pipeline é
-`research/exports/references/included_papers.bib` e contém somente os 16
-registros retidos atuais (15 registros provisoriamente empíricos, com 6918 em hold, e o protocolo contextual 6921).
-Referências pedagógicas, metodológicas, de avaliação e técnicas usadas na
-fundamentação permanecem na bibliografia completa do TCC; são externas ao
-conjunto da revisão e não entram na contagem PRISMA.
+acompanhantes, verificados pelos PRs que os possuem. O arquivo de referências
+derivadas do pipeline é `research/exports/references/included_papers.bib` e
+contém somente os 16 registros retidos atuais (15 registros provisoriamente
+empíricos, com 6918 em hold, e o protocolo contextual 6921). Referências
+pedagógicas, metodológicas, de avaliação e técnicas usadas na fundamentação
+permanecem na bibliografia completa do TCC; são externas ao conjunto da revisão
+e não entram na contagem PRISMA.
 
 `check-exports` ainda pode listar grupos repetidos no banco bruto. Isso é
 esperado: a fonte SQLite local preserva as linhas de ingestão e não é
@@ -280,11 +283,12 @@ versionada. Para o fluxo PRISMA, a auditoria usa DOI normalizado (incluindo
 variações de caixa e pontuação), URL exata como chave independente e a união
 dessas identidades; um dos grupos de URL é misto quanto à presença de DOI.
 Por isso os números científicos vigentes são 25 grupos DOI, 2 grupos URL e 27
-linhas removidas no export analítico. O CSV exportado é a
-representação deduplicada usada nas etapas seguintes.
+linhas removidas no export analítico. O CSV exportado é a representação
+deduplicada usada nas etapas seguintes.
 
 Observação: os scripts antigos `tools/*.py` e `research/scripts/*.py` estão
-obsoletos e serão removidos em breve. Todos os fluxos foram centralizados no CLI.
+obsoletos e serão removidos em breve. Todos os fluxos foram centralizados no
+CLI.
 
 ### Uso Programático
 
@@ -404,11 +408,10 @@ Os relatórios HTML gerados agora incluem:
 
 ### Taxa de Sucesso Atual
 
-**Cobertura automatizada do pipeline**: 0/16 textos completos foram extraídos
-automaticamente no snapshot atual; essa métrica não representa a revisão externa
-de fontes primárias. O ledger MMAT registra nove textos primários examinados
-externamente e mantém os demais casos explicitamente como abstract/metadados,
-hold ou pendentes de recuperação/adjudicação.
+automaticamente no snapshot atual; essa métrica não representa a revisão
+externa de fontes primárias. O ledger MMAT registra nove textos primários
+examinados externamente e mantém os demais casos explicitamente como
+abstract/metadados, hold ou pendentes de recuperação/adjudicação.
 
 **Principais Causas de Falha**:
 - `connection_exhausted`: Timeout após múltiplas tentativas
