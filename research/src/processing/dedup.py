@@ -534,16 +534,22 @@ def deduplicate(
     df: pd.DataFrame,
     by_doi: bool = True,
     by_url: bool = True,
-    by_title: bool = True,
+    by_title: bool = False,
     title_threshold: float = 0.9
 ) -> pd.DataFrame:
-    """Aplica todos os métodos de deduplicação em sequência.
+    """Aplica deduplicação de identidade; título só com habilitação explícita.
+
+    O fluxo PRISMA canônico usa DOI/URL como identidade determinística. A
+    similaridade de título é apenas uma etapa exploratória de auditoria e não
+    deve remover registros por padrão, pois títulos parecidos não provam que
+    duas linhas representam a mesma publicação.
 
     Args:
         df: DataFrame com os artigos
         by_doi: Se deve deduplicar por DOI
         by_url: Se deve deduplicar por URL
-        by_title: Se deve deduplicar por similaridade de título
+        by_title: Se deve habilitar explicitamente a deduplicação exploratória
+            por similaridade de título (padrão: ``False``)
         title_threshold: Limiar para similaridade de título
 
     Returns:

@@ -6,6 +6,7 @@ from src.processing.dedup import (
     audit_duplicate_candidates,
     build_identity_audit_rows,
     deterministic_identity_duplicate_mask,
+    deduplicate,
     find_duplicates,
     normalize_doi,
 )
@@ -15,6 +16,34 @@ def test_normalize_doi_accepts_common_resolver_forms_and_citation_punctuation():
     assert normalize_doi(" DOI:10.1234/ABC. ") == "10.1234/abc"
     assert normalize_doi("https://doi.org/10.1234/ABC,") == "10.1234/abc"
     assert normalize_doi("https://dx.doi.org/10.1234/ABC;") == "10.1234/abc"
+
+
+def test_deduplicate_defaults_to_deterministic_identity_only():
+    df = pd.DataFrame(
+        {
+            'doi': ['', ''],
+            'url': ['', ''],
+            'title': ['A study of mathematics', 'A study of mathematics'],
+        }
+    )
+
+    result = deduplicate(df)
+
+    assert len(result) == 2
+
+
+def test_deduplicate_title_similarity_requires_explicit_opt_in():
+    df = pd.DataFrame(
+        {
+            'doi': ['', ''],
+            'url': ['', ''],
+            'title': ['A study of mathematics', 'A study of mathematics'],
+        }
+    )
+
+    result = deduplicate(df, by_title=True)
+
+    assert len(result) == 1
 
 def test_get_best_duplicates_no_duplicates():
     df = pd.DataFrame({
