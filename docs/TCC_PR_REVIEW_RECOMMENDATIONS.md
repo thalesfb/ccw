@@ -63,6 +63,43 @@ avisos de quota nas PRs posteriores significam que não houve revisão automáti
 não significam aprovação. Nenhum check verde substitui a revisão do conteúdo
 científico.
 
+## Auditoria técnica de encoding, whitespace e finais de linha (01/09/2026)
+
+A comparação foi feita no diff de cada PR contra sua base efetiva, usando
+`git diff --check` e decodificação UTF-8 estrita em memória. Isso verifica a
+saúde do patch sem converter o worktree do operador nem tratar o SQLite como
+artefato versionável.
+
+| PR | Resultado técnico | Interpretação |
+|---|---|---|
+| #20 | `diff-check` limpo; 5 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | Não há bloqueio de encoding/line ending identificado |
+| #23 | `diff-check` limpo; 19 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | O bloqueio é funcional: dois testes do protocolo falham, não é um problema de codificação |
+| #34 | 238.628 diagnósticos efetivos de trailing whitespace em 14 arquivos; UTF-8 válido; 6 arquivos com CRLF/LF/CR misturados ou CR isolado | `source-validation` para antes dos testes. Os principais arquivos são exports `.bib/.csv`, `.gitignore`, dois HTML e código/LaTeX; o patch precisa de normalização isolada e revisão semântica |
+| #36--#45 | `diff-check` limpo; todos os arquivos textuais alterados válidos em UTF-8; sem BOM e sem finais mistos | Nenhum bloqueio técnico dessa classe foi encontrado |
+
+No #23, os erros concretos do check são `computational_techniques` sendo
+acionado por uma correspondência de `AI` dentro de palavras comuns e a
+auditoria não encontrar os três registros preservados que o teste exige. O
+correto é extrair a correção já validada no #36, não mesclar a branch inteira.
+
+No #34, a saída inclui espaços finais intencionais de hard break Markdown,
+mas também conversões de linha e exports gerados em escala. Uma eventual
+recuperação deve: (1) preservar o conteúdo científico e as quebras semânticas;
+(2) normalizar os arquivos textuais para LF; (3) remover trailing whitespace
+não intencional; (4) reexecutar `git diff --check` e todos os testes; e (5)
+continuar excluindo o commit `a91b439`, que já foi removido de `main`.
+
+## Ordem de revisão para concluir o objetivo
+
+1. **Histórico:** manter `main` em `627a105`, confirmar que `a91b439` não é ancestral e preservar apenas a branch de recuperação.
+2. **Fonte científica:** revisar #36 (snapshot, deduplicação DOI/URL, scoring, 23 candidatos, 7 overrides, 16 retidos, exports e reprodutibilidade sem SQLite).
+3. **Contrato documental:** revisar #37 (baseline atual versus histórico, duplicatas, percentuais, protocolo, planos e datas).
+4. **Manuscrito:** revisar #38 (texto parte a parte, referências empíricas versus teóricas/manuais, citações e imagens preservadas).
+5. **Validação e apresentação:** revisar #40, depois #39 e #42 (workflow, build reproduzível, publicação clicável, narrativa e proveniência do Slidev/PTC).
+6. **Correções especializadas:** revisar #43 (identidade canônica e título apenas exploratório), #44 (proveniência legada) e #41/#45 (contexto, governança e estado dos reviews).
+7. **PRs anteriores:** revisar #20 separadamente; usar #23 apenas para extração editorial após a base científica; manter #34 por último como fonte de contexto/salvamento seletivo, nunca como unidade de merge.
+8. **Gate científico final:** antes de qualquer conclusão, recuperar fontes primárias, adjudicar os sete overrides e fechar o MMAT dos 15 estudos empíricos aplicáveis; checks verdes não substituem essa decisão.
+
 ---
 
 ## PR #23 — `docs/tcc-editorial-normative-revision`
