@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "snapshot_date": "2026-08-31",
-  "generated_at": "2026-09-01T21:05:46+00:00",
+  "generated_at": "2026-09-01T21:22:23+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -201,6 +201,24 @@
         "requires_full_text_adjudication": 4
       },
       "interpretation": "The ledger records evidence and proposed scope rationales for the persisted overrides; it does not replace supervisor adjudication."
+    },
+    "manual_override_evidence_matrix": {
+      "path": "research/data/manual_override_evidence_matrix.csv",
+      "row_count": 7,
+      "study_ids": [
+        14,
+        15,
+        6915,
+        6919,
+        6922,
+        6925,
+        6926
+      ],
+      "adjudication_status_counts": {
+        "proposed_pending_supervisor": 3,
+        "requires_full_text_adjudication": 4
+      },
+      "interpretation": "The matrix records source-supported scope signals and required actions. It is evidence for adjudication, not a final inclusion or exclusion decision."
     }
   },
   "bibliography": {
@@ -305,7 +323,7 @@
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "43a152dfd2d9ccb69c970b6a2cc67d1a38ae144cdff6726a30d61d3a0a2186e9"
+      "sha256": "bdbd2a858ee9353935a3ae89104c4382dfe12742ec45746f8f77216b22f4c85a"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
@@ -321,6 +339,11 @@
       "path": "research/data/manual_override_adjudication.csv",
       "role": "row-level evidence ledger for the seven manual candidate overrides",
       "sha256": "8e7dd6cbf510f26690d8f942a5a99453c37691f972c13cc23a3f59ce5bf487e9"
+    },
+    {
+      "path": "research/data/manual_override_evidence_matrix.csv",
+      "role": "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
+      "sha256": "5a9365990dc03782f4e2f38ec3d115ce5022d8483f1db3915602ccffbc2a0d3c"
     },
     {
       "path": "research/data/protocol_execution_2025.json",
@@ -385,7 +408,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "11d94944671f90855e6f8c4d9dff9b4395d38f90d04b6ef8a7cec0d9395853d7"
+      "sha256": "eac3edcdee50a35b8c21671261d4174874b77cecd4e94f0506b7c513cd5c27fb"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
@@ -447,6 +470,7 @@
       "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
       "Read the 16 pipeline-derived citations from research/exports/references/included_papers.bib.",
       "Read proposed evidence and required adjudication actions from research/data/manual_override_adjudication.csv.",
+      "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; its recommendations remain pending supervisor adjudication.",
       "Read research/data/protocol_execution_2025.json only for historical protocol provenance; do not use it as the current baseline."
     ],
     "rebuild_from_local_database": [

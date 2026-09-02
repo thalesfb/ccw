@@ -102,6 +102,13 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "proposed_pending_supervisor": 3,
         "requires_full_text_adjudication": 4,
     }
+    evidence_matrix = snapshot["manual_override_evidence_matrix"]
+    assert evidence_matrix["row_count"] == 7
+    assert evidence_matrix["study_ids"] == [14, 15, 6915, 6919, 6922, 6925, 6926]
+    assert evidence_matrix["adjudication_status_counts"] == {
+        "proposed_pending_supervisor": 3,
+        "requires_full_text_adjudication": 4,
+    }
     audit = snapshot["deduplication_audit"]
     assert audit["raw_rows"] == 11904
     assert audit["operationally_flagged_rows"] == 0
@@ -149,6 +156,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     assert "external to the pipeline study set" in bibliography["separation_rule"]
     artifact_paths = {artifact["path"] for artifact in manifest["artifacts"]}
     assert "research/data/protocol_execution_2025.json" in artifact_paths
+    assert "research/data/manual_override_evidence_matrix.csv" in artifact_paths
 
     companion_paths = {
         document["path"] for document in manifest["companion_documents"]

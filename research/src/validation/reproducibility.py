@@ -29,6 +29,7 @@ from ..search_terms import get_all_queries
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_OUTPUT = REPOSITORY_ROOT / "research" / "exports" / "reports" / "reproducibility_manifest.json"
 MANUAL_OVERRIDE_ADJUDICATION = "research/data/manual_override_adjudication.csv"
+MANUAL_OVERRIDE_EVIDENCE_MATRIX = "research/data/manual_override_evidence_matrix.csv"
 HISTORICAL_PROTOCOL_MANIFEST = "research/data/protocol_execution_2025.json"
 
 # The research PR must be verifiable on its own.  Manuscript, presentation and
@@ -107,6 +108,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     (
         MANUAL_OVERRIDE_ADJUDICATION,
         "row-level evidence ledger for the seven manual candidate overrides",
+    ),
+    (
+        MANUAL_OVERRIDE_EVIDENCE_MATRIX,
+        "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
     ),
     (
         HISTORICAL_PROTOCOL_MANIFEST,
@@ -560,6 +565,89 @@ def _validate_manual_override_adjudication(
     }
 
 
+def _validate_manual_override_evidence_matrix(
+    path: Path,
+    overrides: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Validate the evidence matrix without promoting proposed decisions.
+
+    The matrix is intentionally separate from the operational override ledger:
+    it records what the reviewed source supports, while ``adjudication_status``
+    keeps the supervisor's final scope decision outstanding.
+    """
+    required = {
+        "study_id",
+        "source_url",
+        "source_type",
+        "source_status",
+        "publication_type",
+        "population_or_context",
+        "computational_role",
+        "mathematics_relation",
+        "educational_outcome",
+        "evidence_locator",
+        "scope_assessment",
+        "recommendation",
+        "adjudication_status",
+        "checked_on",
+    }
+    with path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        missing = required.difference(reader.fieldnames or [])
+        if missing:
+            raise ValueError(
+                "manual override evidence matrix is missing columns: "
+                + ", ".join(sorted(missing))
+            )
+        rows = list(reader)
+
+    try:
+        study_ids = [int(row["study_id"]) for row in rows]
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("manual override evidence matrix contains an invalid study_id") from exc
+
+    expected_ids = {int(row["id"]) for row in overrides}
+    if len(study_ids) != len(set(study_ids)) or set(study_ids) != expected_ids:
+        raise ValueError(
+            "manual override evidence matrix IDs do not match persisted overrides: "
+            f"expected {sorted(expected_ids)}, got {sorted(study_ids)}"
+        )
+
+    text_fields = required - {"study_id"}
+    empty_fields = [
+        (row.get("study_id", ""), field)
+        for row in rows
+        for field in text_fields
+        if not (row.get(field) or "").strip()
+    ]
+    if empty_fields:
+        raise ValueError(f"manual override evidence matrix has empty fields: {empty_fields}")
+
+    allowed_statuses = {
+        "proposed_pending_supervisor",
+        "requires_full_text_adjudication",
+    }
+    status_values = {row.get("adjudication_status", "").strip() for row in rows}
+    invalid_statuses = status_values - allowed_statuses
+    if invalid_statuses:
+        raise ValueError(
+            "manual override evidence matrix has unsupported adjudication statuses: "
+            + ", ".join(sorted(invalid_statuses))
+        )
+
+    status_counts = Counter((row["adjudication_status"] or "").strip() for row in rows)
+    return {
+        "path": MANUAL_OVERRIDE_EVIDENCE_MATRIX,
+        "row_count": len(rows),
+        "study_ids": sorted(study_ids),
+        "adjudication_status_counts": dict(sorted(status_counts.items())),
+        "interpretation": (
+            "The matrix records source-supported scope signals and required actions. "
+            "It is evidence for adjudication, not a final inclusion or exclusion decision."
+        ),
+    }
+
+
 def generate_manifest(
     db_path: Path | None = None,
     output_path: Path | None = None,
@@ -578,6 +666,10 @@ def generate_manifest(
     snapshot = _database_snapshot(source_db)
     snapshot["manual_override_adjudication"] = _validate_manual_override_adjudication(
         root / MANUAL_OVERRIDE_ADJUDICATION,
+        snapshot["manual_overrides"],
+    )
+    snapshot["manual_override_evidence_matrix"] = _validate_manual_override_evidence_matrix(
+        root / MANUAL_OVERRIDE_EVIDENCE_MATRIX,
         snapshot["manual_overrides"],
     )
     mmat_qa = validate_current_artifacts()
@@ -633,6 +725,7 @@ def generate_manifest(
                 "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
                 "Read the 16 pipeline-derived citations from research/exports/references/included_papers.bib.",
                 "Read proposed evidence and required adjudication actions from research/data/manual_override_adjudication.csv.",
+                "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; its recommendations remain pending supervisor adjudication.",
                 "Read research/data/protocol_execution_2025.json only for historical protocol provenance; do not use it as the current baseline.",
             ],
             "rebuild_from_local_database": [
@@ -650,6 +743,10 @@ def generate_manifest(
     }
 
     destination.parent.mkdir(parents=True, exist_ok=True)
-    with destination.open("w", encoding="utf-8", newline="\n") as manifest_file:
-        manifest_file.write(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+    # Keep the committed manifest byte-stable across Windows and Linux.
+    # ``Path.write_text`` otherwise uses the host's default newline policy,
+    # which makes every CR in a Windows-generated JSON line appear as
+    # trailing whitespace to ``git diff --check``.
+    with destination.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     return destination
