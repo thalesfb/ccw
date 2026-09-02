@@ -1,12 +1,13 @@
 # Recomendações para PRs Abertas — 2026-09-01
 
-> **Atualização após a auditoria do PR #34:** estas recomendações foram
+> **Atualização após a auditoria do PR #34 e o merge do PR #20:** estas recomendações foram
 > recalibradas com base no estado remoto dos PRs e no baseline científico
 > vigente. O PR #34 é contexto de reconciliação, não fonte de verdade para
 > absorção automática de alterações. O PR #23 não deve ser mesclado por
 > inteiro: suas mudanças precisam ser revisadas e, quando compatíveis,
-> reaplicadas em lotes atômicos sobre a base atual. O PR #20 pode ser avaliado
-> separadamente por tratar de governança documental e não sobrepor o baseline.
+> reaplicadas em lotes atômicos sobre a base atual. O PR #20 foi mesclado em
+> `main` em 01/09/2026; ele sai da fila de merge, mas sua alteração deve ser
+> coberta pela validação pós-merge da base atual.
 
 ## Decisão atual para os PRs sob auditoria
 
@@ -14,7 +15,7 @@
 |----|--------------------------|------------------------|
 | #34 | Baseline operacional, correções de pipeline, exports e manuscrito; diff amplo | Não mesclar como unidade única sem revisão final; usar como contexto da reconciliação |
 | #23 | Revisão editorial com sobreposição e conflito no estado remoto | Não mesclar integralmente; extrair somente mudanças compatíveis em PR atômico |
-| #20 | Governança documental, sem sobreposição material com o baseline, mas com pelo menos uma salvaguarda ainda escrita para os 17 estudos | Pode seguir em revisão independente após generalizar essa salvaguarda para o registro vigente; não deve alterar resultados ou referências derivadas |
+| #20 | Governança documental; follow-up `a0512df` generalizou a salvaguarda dos 17 estudos | **Mesclado em 01/09/2026**; não reabrir como dependência dos PRs científicos. Fazer apenas validação pós-merge, sem aceitar alterações que mudem resultados ou referências derivadas |
 
 Essa decisão preserva a separação entre três tipos de mudança: resultados
 derivados do pipeline, redação/metodologia e governança. Qualquer alteração
@@ -41,16 +42,81 @@ merge:
 
 | PR | Checks observados | Revisões/comentários relevantes |
 |---|---|---|
-| #34 | `source-validation` falhou no check de whitespace; `latex-build` e `canonical-pdf-sync` passaram | Copilot não conseguiu revisar por limite de quota; não há comentário acionável dele |
-| #23 | `source-validation` falha em dois testes antigos; `latex-build` e `canonical-pdf-sync` passaram; branch conflitante | Nenhuma revisão submetida |
-| #20 | `source-validation` e `latex-build` passaram | Nenhuma revisão submetida |
-| #35 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram | Copilot apontou três problemas reais no baseline revertido; foram respondidos no PR e reservados para PRs científicos atômicos, pois #35 é exclusivamente o rollback |
+| #20 | Checks anteriores ao merge (`source-validation`, `latex-build` e `canonical-pdf-sync`) passaram | **MERGED** em `main` no commit de integração `d3a3995`; a salvaguarda dos 17 estudos foi generalizada no commit `a0512df` |
+| #23 | `source-validation` falhou; `latex-build` e `canonical-pdf-sync` passaram; `UNSTABLE/MERGEABLE` | Sem review técnica ou comentário acionável; manter como contexto e extrair mudanças seletivamente |
+| #34 | `source-validation` falhou; `latex-build` e `canonical-pdf-sync` passaram; `UNSTABLE/MERGEABLE` | Copilot não conseguiu revisar por limite de quota; não há comentário acionável dele |
+| #35 | Fechada após a reescrita da `main`; rollback não é uma PR ativa | Os três apontamentos do Copilot foram transformados em correções/tests nas PRs científicas seguintes |
+| #36 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #37 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; head `98ab8db`; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #38 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #39 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE`; head atual `f5b8221` | Copilot indisponível por quota; nenhum comentário técnico acionável; follow-up esclarece a proveniência das 72 consultas |
+| #40 | Todos os checks, incluindo `manuscript-validation` e `presentation-build`, passaram; `CLEAN/MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #41 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; head `59b3ca3`; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #42 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #43 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; `CLEAN/MERGEABLE`; head atual `6543a74` | Copilot indisponível por quota; nenhum comentário técnico acionável; follow-up sincroniza o hash do dedup e a escrita LF do manifesto |
+| #44 | `source-validation` e `latex-build` passaram; `MERGEABLE` | Copilot indisponível por quota; nenhum comentário técnico acionável |
+| #45 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; head `2bdc40d`; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; registro de auditoria e ordem de revisão |
+| #46 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; head `da6c0e1`; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; matriz de evidência dos sete overrides, ainda sem adjudicação final; proveniência de 6922/6918 refinada |
+| #47 | `source-validation`, `latex-build` e `canonical-pdf-sync` passaram; head `37326a0`; `CLEAN/MERGEABLE` após rebase | Copilot indisponível por quota; testes e regra explícita das expectativas do protocolo vigente |
+
+A integração descartável anterior dos heads de #36--#47 passou em **87/87
+testes**. Após a reancoragem do #37, os checks remotos de #37, #41, #42, #45,
+#46 e #47 também passaram individualmente; uma nova integração final deve
+repetir a bateria com os heads atuais. O deck integrado anterior também passou
+em `npm run validate` e no build do Slidev, produzindo `index.html` e os assets
+`prisma_flow` e `selection_funnel`. Essa validação é evidência de compatibilidade
+técnica; não substitui a adjudicação científica dos estudos e overrides
+pendentes.
 
 Os três apontamentos do Copilot no PR #35 foram: correspondência de `AI` por
 substring em `selection.py`, o mesmo risco no `scoring.py`, e a divergência
-entre o recorte temporal documentado e a configuração. Eles não foram
-introduzidos no rollback puro; serão tratados no lote científico que suceder a
-reversão. Nenhum check verde substitui a revisão do conteúdo científico.
+entre o recorte temporal documentado e a configuração. Eles foram tratados nas
+correções do snapshot e nas regressões automatizadas das PRs #36 e #43. Os
+avisos de quota nas PRs posteriores significam que não houve revisão automática;
+não significam aprovação. Nenhum check verde substitui a revisão do conteúdo
+científico. Nos PRs #46 e #47, a mensagem do Copilot continua sendo apenas
+indisponibilidade por limite de quota; portanto, não há aprovação automatizada
+nem comentário técnico a incorporar.
+
+## Auditoria técnica de encoding, whitespace e finais de linha (01/09/2026)
+
+A comparação foi feita no diff de cada PR contra sua base efetiva, usando
+`git diff --check` e decodificação UTF-8 estrita em memória. Isso verifica a
+saúde do patch sem converter o worktree do operador nem tratar o SQLite como
+artefato versionável.
+
+| PR | Resultado técnico | Interpretação |
+|---|---|---|
+| #16--#19 | `diff-check` limpo; arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | Nenhum bloqueio de encoding/line ending identificado |
+| #20 | `diff-check` limpo; 5 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | Não há bloqueio de encoding/line ending identificado |
+| #23 | `diff-check` limpo; 18 arquivos textuais válidos em UTF-8; sem BOM e sem finais mistos | O bloqueio é funcional: dois testes do protocolo falham, não é um problema de codificação |
+| #34 | 238.628 diagnósticos de trailing whitespace e 1 de espaço antes de tabulação em 14 arquivos; UTF-8 válido; 5 arquivos com finais CRLF/LF/CR misturados e BOM em `papers.csv` | `source-validation` para antes dos testes. Os principais arquivos são exports `.bib/.csv`, `.gitignore`, dois HTML e código/LaTeX; o patch precisa de normalização isolada e revisão semântica |
+| #35 (fechada) | Não é PR ativa após a reescrita de `main`; não é candidata a merge | Seus problemas funcionais foram reavaliados nas PRs científicas posteriores |
+| #36--#47 | `diff-check` limpo; todos os arquivos textuais alterados válidos em UTF-8; sem BOM e sem finais mistos | Nenhum bloqueio técnico dessa classe foi encontrado |
+
+No #23, os erros concretos do check são `computational_techniques` sendo
+acionado por uma correspondência de `AI` dentro de palavras comuns e a
+auditoria não encontrar os três registros preservados que o teste exige. O
+correto é extrair a correção já validada no #36, não mesclar a branch inteira.
+
+No #34, a saída inclui espaços finais intencionais de hard break Markdown,
+mas também conversões de linha e exports gerados em escala. Uma eventual
+recuperação deve: (1) preservar o conteúdo científico e as quebras semânticas;
+(2) normalizar os arquivos textuais para LF; (3) remover trailing whitespace
+não intencional; (4) reexecutar `git diff --check` e todos os testes; e (5)
+continuar excluindo o commit `a91b439`, que já foi removido de `main`.
+
+## Ordem de revisão para concluir o objetivo
+
+1. **Histórico:** manter `main` em `d3a3995` após o merge do #20, confirmar que `a91b439` não é ancestral e preservar apenas a branch de recuperação.
+2. **Fonte científica:** revisar #36 (snapshot, deduplicação DOI/URL, scoring, 23 candidatos, 7 overrides, 16 retidos, exports e reprodutibilidade sem SQLite).
+3. **Contrato documental:** revisar #37 (baseline atual versus histórico, duplicatas, percentuais, protocolo, planos e datas).
+4. **Evidência e protocolo:** revisar #43 (identidade canônica), #46 (evidência dos sete overrides/MMAT) e #47 (testes das expectativas do protocolo vigente). Nenhum desses PRs muda o corpus por si só.
+5. **Manuscrito:** revisar #38 (texto parte a parte, referências empíricas versus teóricas/manuais, citações e imagens preservadas).
+6. **Validação e apresentação:** revisar #40, depois #39 e #42 (workflow, build reproduzível, publicação clicável, narrativa e proveniência do Slidev/PTC).
+7. **Proveniência e governança:** revisar #44, #41 e #45, verificando que o estado dos PRs e os artefatos legados continuam descritos como contexto, não como fonte de verdade.
+8. **PRs anteriores:** o #20 já foi mesclado e requer somente regressão pós-merge; usar #23 apenas para extração editorial após a base científica; manter #34 por último como fonte de contexto/salvamento seletivo, nunca como unidade de merge.
+9. **Gate científico final:** antes de qualquer conclusão, recuperar fontes primárias, adjudicar os sete overrides e fechar o MMAT dos 15 estudos empíricos aplicáveis; checks verdes não substituem essa decisão.
 
 ---
 
@@ -71,6 +137,15 @@ reversão. Nenhum check verde substitui a revisão do conteúdo científico.
 **Ação:** Não mesclar a branch inteira. Selecionar mudanças editoriais
 compatíveis, reaplicá-las sobre a base atual e abrir/atualizar um PR atômico.
 
+Observação bibliográfica: a comparação contra a `main` atual não mostra
+alteração dos arquivos `.bib` nem dos títulos bibliográficos. O termo
+`benchmark` foi traduzido dentro de uma tabela textual do manuscrito para
+“comparação de referência”; isso não é metadado bibliográfico, mas a extração
+deve preservar o sentido técnico e, se necessário, manter `benchmark` com uma
+explicação em português. Qualquer mudança em título de artigo, autores, DOI,
+venue ou demais campos da referência publicada deve ser rejeitada e corrigida
+na fonte bibliográfica, não incorporada como tradução editorial.
+
 ---
 
 ## PR #20 — `agent/tcc-document-governance`
@@ -81,8 +156,8 @@ compatíveis, reaplicá-las sobre a base atual e abrir/atualizar um PR atômico.
 **Por quê:**
 - Formaliza governança documental e não sobrepõe materialmente o baseline
   reconciliado do PR #34.
-- A branch ainda contém uma verificação textual de “17 estudos incluídos”; isso
-  deve virar uma regra sobre o registro versionado atual, sem congelar o
+- O follow-up `a0512df` generalizou a verificação textual de “17 estudos
+  incluídos” para o conjunto retido no snapshot vigente, sem congelar o
   denominador histórico.
 - A documentação herdada também descreve a deduplicação como DOI/URL mais
   similaridade de títulos; isso precisa ser generalizado para a regra vigente,
