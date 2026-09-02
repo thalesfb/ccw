@@ -71,10 +71,14 @@ def test_protocol_is_retained_only_as_contextual_non_empirical_record() -> None:
     assert scope["6921"]["empirical_mmat_applicability"] == "not_applicable"
 
 
-def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
+def test_current_mmat_tcc_table_is_generated_from_the_current_dataset() -> None:
     assert CURRENT_TABLE.read_text(encoding="utf-8") == render_current_table(
         load_current_table_rows()
     )
-    assert "6918 & Kaser2025\\_6918 & N\u00e3o confirmado" in CURRENT_TABLE.read_text(
-        encoding="utf-8"
-    )
+    table = CURRENT_TABLE.read_text(encoding="utf-8")
+    assert "Käser Jacober (2014)" in table
+    assert "Kaser2025\\_6918" not in table
+    assert "\\textbf{ID}" not in table
+    assert "Käser Jacober (2014) \\cite{KaserJacober2014}" in table
+    assert "Não confirmado: fonte" not in table
+    assert "Provisório: fonte documental" in table

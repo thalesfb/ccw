@@ -198,6 +198,11 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" not in chapter
     assert "A avaliação documental foi aplicada aos 15 registros empíricos" in chapter
     assert "Tjahyadi (2025) & Quant." not in chapter
+    current_table = _read(MMAT_CURRENT_LATEX)
+    assert "\\textbf{ID}" not in current_table
+    assert "Chave do estudo" not in current_table
+    assert "Kaser2025_6918" not in current_table
+    assert "Käser Jacober (2014)" in current_table
 
 
 def test_scientific_text_does_not_expose_internal_reconciliation_history() -> None:
@@ -225,6 +230,8 @@ def test_scientific_text_does_not_expose_internal_reconciliation_history() -> No
         "reavaliação",
     ):
         assert forbidden not in lowered, f"Internal reconciliation term remains: {forbidden}"
+    for operational_id in ("id 1", "id 6916", "id 6917", "id 6918", "id 6920", "id 6921", "id 6923"):
+        assert operational_id not in lowered, f"Operational study identifier remains: {operational_id}"
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:

@@ -102,7 +102,7 @@ def test_priority_metadata_corrections_are_applied() -> None:
     assert "@phdthesis{Computational2017_008" in bibliography
     assert "@article{Villegas2025_6916" in bibliography
     assert "doi = {10.1186/s40561-025-00389-y}" in bibliography
-    assert "@phdthesis{Kaser2025_6918" in bibliography
+    assert "@phdthesis{KaserJacober2014" in bibliography
     assert "@misc{Imperatrice2025_6921" in bibliography
 
 
