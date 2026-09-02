@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional
 import pandas as pd
 
 from .base import BaseAPIClient
+from ..validation.temporal import is_within_review_period
 
 logger = logging.getLogger(__name__)
 
@@ -115,7 +116,12 @@ class OpenAlexClient(BaseAPIClient):
         try:
             # Verificar ano válido
             year = item.get("publication_year")
-            if not isinstance(year, int) or year < self.config.review.year_min:
+            if not is_within_review_period(
+                year,
+                year_min=self.config.review.year_min,
+                year_max=self.config.review.year_max,
+                cutoff_date=self.config.review.cutoff_date,
+            ):
                 return None
             
             # Extrair autores

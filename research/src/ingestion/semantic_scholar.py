@@ -8,6 +8,7 @@ from typing import Any, Dict, List, TYPE_CHECKING
 import pandas as pd
 
 from .base import BaseAPIClient
+from ..validation.temporal import is_within_review_period
 
 if TYPE_CHECKING:
     from ..config import AppConfig
@@ -95,6 +96,7 @@ class SemanticScholarClient(BaseAPIClient):
 
         # Normalizar e retornar
         normalized = [self._normalize_result(item) for item in results]
+        normalized = [r for r in normalized if r is not None]
         df = self.normalize_dataframe(normalized)
         df["database"] = "semantic_scholar"
         df["query"] = query
@@ -102,7 +104,7 @@ class SemanticScholarClient(BaseAPIClient):
         logger.info(f"Found {len(df)} results from Semantic Scholar")
         return df
 
-    def _normalize_result(self, item: Dict[str, Any]) -> Dict[str, Any]:
+    def _normalize_result(self, item: Dict[str, Any]) -> Dict[str, Any] | None:
         """Normaliza um resultado do Semantic Scholar.
 
         Args:
@@ -114,10 +116,19 @@ class SemanticScholarClient(BaseAPIClient):
         # Verificar se item é válido
         if item is None:
             logger.warning("Received None item in _normalize_result")
-            return {}
+            return None
         if not isinstance(item, dict):
             logger.warning(f"Received non-dict item: {type(item)}")
-            return {}
+            return None
+
+        if not is_within_review_period(
+            item.get("year"),
+            year_min=self.config.review.year_min,
+            year_max=self.config.review.year_max,
+            publication_date=item.get("publicationDate"),
+            cutoff_date=self.config.review.cutoff_date,
+        ):
+            return None
 
         # Extrair DOI se disponível
         doi = None

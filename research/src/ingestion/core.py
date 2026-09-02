@@ -11,6 +11,7 @@ import pandas as pd
 import requests
 
 from .base import BaseAPIClient
+from ..validation.temporal import is_within_review_period
 
 logger = logging.getLogger(__name__)
 
@@ -210,7 +211,12 @@ class COREClient(BaseAPIClient):
             else:
                 year = year_published or 0
 
-            if not year or year < self.config.review.year_min:
+            if not is_within_review_period(
+                year,
+                year_min=self.config.review.year_min,
+                year_max=self.config.review.year_max,
+                cutoff_date=self.config.review.cutoff_date,
+            ):
                 return None
 
             # Extrair autores

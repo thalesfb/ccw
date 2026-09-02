@@ -12,6 +12,7 @@ import requests
 from crossref.restful import Works
 
 from .base import BaseAPIClient
+from ..validation.temporal import is_within_review_period
 
 logger = logging.getLogger(__name__)
 
@@ -150,8 +151,6 @@ class CrossrefClient(BaseAPIClient):
         try:
             # Extrair ano de published-print ou published-online
             year = self._extract_year(item)
-            if not year or year < self.config.review.year_min:
-                return None
             
             # Extrair título (pode ser uma lista)
             title = self._extract_title(item)
@@ -180,6 +179,14 @@ class CrossrefClient(BaseAPIClient):
             
             # Extrair data de publicação
             pub_date = self._extract_publication_date(item)
+            if not is_within_review_period(
+                year,
+                year_min=self.config.review.year_min,
+                year_max=self.config.review.year_max,
+                publication_date=pub_date,
+                cutoff_date=self.config.review.cutoff_date,
+            ):
+                return None
             
             return {
                 "doi": doi,
