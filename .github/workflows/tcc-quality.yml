@@ -70,6 +70,7 @@ jobs:
             tests/test_experiment_contract.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
+            tests/test_temporal_scope.py \
             tests/test_tcc_advisor_feedback.py \
             -q --tb=short 2>&1 | tee advisor-tests.log
           status=${PIPESTATUS[0]}
