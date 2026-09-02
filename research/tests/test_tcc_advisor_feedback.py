@@ -16,6 +16,7 @@ TCC_ABSTRACT = TCC_ROOT / "pretextuais" / "resumo.tex"
 MMAT_DATA = REPO_ROOT / "research" / "data" / "mmat_assessments.csv"
 MMAT_EXPORT = REPO_ROOT / "research" / "exports" / "analysis" / "mmat_assessment.csv"
 MMAT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_tcc_table.tex"
+MMAT_CURRENT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_current_tcc_table.tex"
 
 
 def _read(path: Path) -> str:
@@ -68,7 +69,7 @@ def test_tcc_separates_planned_criteria_from_operational_gates() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
     assert "\\subsection{Critérios de Inclusão Planejados}" in methodology
     assert "\\subsection{Critérios de Exclusão Planejados}" in methodology
-    assert "Na execução efetiva do snapshot" in methodology
+    assert "Na aplicação do procedimento de seleção descrito neste trabalho" in methodology
     assert "\\texttt{year\\_range}" in methodology
     assert "\\texttt{math\\_focus}" in methodology
     assert "\\texttt{computational\\_techniques}" in methodology
@@ -195,22 +196,35 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
     assert "sem média, ranking ou categoria geral" in mmat_section
     assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" not in chapter
-    assert "reaplicação do instrumento ao conjunto atual" in chapter
-    assert "a tabela do ptc não é apresentada como resultado final" in chapter.lower()
+    assert "A avaliação documental foi aplicada aos 15 registros empíricos" in chapter
     assert "Tjahyadi (2025) & Quant." not in chapter
 
 
-def test_ptc_is_not_presented_as_a_published_pipeline_execution() -> None:
+def test_scientific_text_does_not_expose_internal_reconciliation_history() -> None:
     tcc_text = "\n".join(
         _read(path)
         for path in sorted(TCC_ROOT.rglob("*.tex"))
     )
     tcc_text += "\n" + _read(TCC_ROOT / "index.html")
+    tcc_text += "\n" + _read(MMAT_LATEX)
+    tcc_text += "\n" + _read(MMAT_CURRENT_LATEX)
     lowered = tcc_text.lower()
-    assert "ptc foi avaliado apenas como proposta não publicada" in lowered
-    assert "referência documental, não uma execução científica anterior" in lowered
-    assert "nova rodada" not in lowered
-    assert "execução histórica" not in lowered
+    for forbidden in (
+        "ptc",
+        "snapshot",
+        "override",
+        "ledger",
+        "nova rodada",
+        "execução histórica",
+        "reexecução",
+        "versão anterior",
+        "arquivo histórico",
+        "julgamentos históricos",
+        "adjudicação",
+        "execução futura",
+        "reavaliação",
+    ):
+        assert forbidden not in lowered, f"Internal reconciliation term remains: {forbidden}"
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:

@@ -122,17 +122,17 @@ transformado em um filtro automático ou verificado para todos os registros.
     \item Idiomas: inglês ou português.
 \end{enumerate}
 
-Na execução efetiva do snapshot, o seletor automatizado exigiu apenas os
+Na aplicação do procedimento de seleção descrito neste trabalho, o seletor automatizado exigiu apenas os
 critérios \texttt{year\_range}, \texttt{math\_focus} e
 \texttt{computational\_techniques}, além das heurísticas de triagem descritas
 adiante. A presença de abstract, o idioma, o
 tipo documental, a revisão por pares e a disponibilidade de texto completo
 foram registrados ou avaliados como evidência, mas não foram gates obrigatórios
-para todos os 16 registros. Por isso, a seleção vigente não deve ser usada para
+para todos os registros incluídos. Por isso, a seleção não deve ser usada para
 afirmar que esses requisitos foram verificados individualmente. O ID 6921 foi
-mantido no conjunto operacional para preservar a trilha de auditoria, mas, por
-ser protocolo/proposta sem resultado empírico concluído, foi separado como
-registro contextual e não integra a síntese de evidências empíricas.
+mantido entre os registros retidos, mas, por ser protocolo/proposta sem resultado
+empírico concluído, foi separado como registro contextual e não integra a síntese
+de evidências empíricas.
 
 \subsection{Critérios de Exclusão Planejados}
 
@@ -157,11 +157,11 @@ O fluxo de seleção dos estudos foi organizado segundo as etapas PRISMA:
 
 \subsection{Identificação}
 
-No snapshot operacional utilizado neste TCC, os artefatos da coleta automatizada nas quatro APIs totalizam \textbf{11.904 registros}. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}). A base \path{research/systematic_review.sqlite} foi adotada como fonte operacional local para os estados e contagens desta consolidação; ela não é um artefato versionado do repositório. O snapshot versionado é representado pelos exports, pelo manifesto de reprodutibilidade e pelos arquivos bibliográficos e de auditoria associados. Embora a flag persistida \texttt{is\_duplicate} esteja zerada, a reconstrução do fluxo identificou e removeu \textbf{27 registros} por identidade determinística (25 excedentes de DOI normalizado e 2 de URL exata; um grupo de URL é misto quanto à presença de DOI). Assim, \textbf{11.877 registros} seguiram para a triagem; títulos repetidos permanecem candidatos de auditoria e não são removidos automaticamente.
+As consultas automatizadas nas quatro APIs resultaram em \textbf{11.904 registros brutos}. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}). Antes da triagem, foram removidos \textbf{27 registros} por identidade determinística (25 excedentes de DOI normalizado e 2 de URL exata; um grupo de URL é misto quanto à presença de DOI). Assim, \textbf{11.877 registros} seguiram para a triagem. Títulos repetidos foram mantidos como candidatos à análise de identidade, pois a semelhança textual isolada não prova duplicidade bibliográfica.
 
 \subsection{Triagem}
 
-Na triagem, os registros foram avaliados por regras operacionais aplicadas aos metadados e aos resumos disponíveis. Os mecanismos de identificação de possíveis duplicatas são descritos na Seção de Deduplicação e não devem ser confundidos com as exclusões de triagem. Os motivos efetivamente persistidos no snapshot atual foram:
+Na triagem, os registros foram avaliados por regras operacionais aplicadas aos metadados e aos resumos disponíveis. Os mecanismos de identificação de possíveis duplicatas são descritos na Seção de Deduplicação e não devem ser confundidos com as exclusões de triagem. Os motivos registrados para as exclusões foram:
 \begin{itemize}
     \item \texttt{abstract\_too\_short}: 4.325 registros;
     \item \texttt{inclusion\_criteria\_not\_met}: 2.862 registros;
@@ -170,11 +170,13 @@ Na triagem, os registros foram avaliados por regras operacionais aplicadas aos m
     \item \texttt{off\_topic}: 42 registros.
 \end{itemize}
 
-Essas categorias somam 9.413 exclusões na triagem. Elas devem ser
-interpretadas como razões operacionais da execução, e não como uma avaliação
-de qualidade metodológica dos trabalhos.
+Essas categorias totalizam 9.413 ocorrências de motivos. Como 27 registros
+redundantes foram removidos antes da contagem do fluxo PRISMA, a contagem
+analítica de exclusões na triagem é 9.391. As categorias devem ser interpretadas
+como razões operacionais de seleção, e não como avaliação de qualidade
+metodológica dos trabalhos.
 
-No fluxo PRISMA após a deduplicação determinística, \textbf{11.877 registros} foram avaliados na triagem. \textbf{9.391 registros} foram excluídos nessa etapa, e \textbf{2.486 registros} avançaram para a análise de elegibilidade. Os números brutos persistidos no banco (9.413 registros na triagem e 2.475 na elegibilidade, além dos 16 incluídos) permanecem auditáveis, mas incluem os 27 registros redundantes retirados antes da contagem analítica. Quando uma identidade aparece em estágios distintos, o representante conserva o estágio mais avançado.
+No fluxo PRISMA após a deduplicação determinística, \textbf{11.877 registros} foram avaliados na triagem. \textbf{9.391 registros} foram excluídos nessa etapa, e \textbf{2.486 registros} avançaram para a análise de elegibilidade. Essas contagens representam registros únicos no fluxo analítico; as 9.413 ocorrências de motivos incluem os 27 registros redundantes retirados antes da contagem PRISMA.
 
 Em relação ao total identificado, 9.391 registros correspondem a 78,89\% de exclusões na triagem e 2.486 a 20,88\% de avanço. Entre os 2.486 registros avaliados na elegibilidade, 2.470 (99,36\%) foram excluídos e 16 (0,64\%) foram retidos. A taxa de retenção em relação aos 11.904 registros identificados foi de 0,13\%. Os denominadores são explicitados para evitar a interpretação dos números brutos de estágio como se fossem entradas independentes do fluxo.
 
@@ -190,26 +192,25 @@ Avaliação operacional dos registros mediante um sistema heurístico de pontua�
     \item \textbf{Indicadores de metadados} (peso 0,1): comprimento do resumo, presença de DOI e indicador simplificado de veículo.
 \end{enumerate}
 
-A implementação soma os componentes ponderados, limita o resultado ao intervalo de 0 a 10 e, no snapshot atual, produziu valores observados entre 0 e 4,5. O limiar operacional foi definido como pontuação de relevância maior ou igual a 4,0. DOI, citações e acesso aberto não funcionam como medida de qualidade científica nessa implementação: apenas a presença de DOI e um indicador simplificado de veículo entram no componente de metadados. Por isso, o limiar não garante elegibilidade metodológica, qualidade dos estudos ou validade dos resultados, e os candidatos ainda requereram auditoria de pertinência.
+A implementação soma os componentes ponderados, limita o resultado ao intervalo de 0 a 10 e produziu valores observados entre 0 e 4,5. O limiar operacional foi definido como pontuação de relevância maior ou igual a 4,0. DOI, citações e acesso aberto não funcionam como medida de qualidade científica nessa implementação: apenas a presença de DOI e um indicador simplificado de veículo entram no componente de metadados. Por isso, o limiar não garante elegibilidade metodológica, qualidade dos estudos ou validade dos resultados, e os candidatos foram submetidos à avaliação de pertinência.
 
-Nesta etapa foram excluídos \textbf{2.470 registros} (99,4\% dos 2.486 registros avaliados). No fluxo após a deduplicação, a distribuição foi de 2.463 registros com motivo \texttt{low\_relevance\_score} e sete registros com motivo \texttt{manual\_exclusion\_after\_audit}. A pontuação foi um filtro operacional de aderência temática; essa contagem não constitui avaliação de qualidade metodológica.
-
-No conjunto operacional vigente, foram registrados \textbf{23 candidatos} acima do limiar operacional e \textbf{7 overrides manuais}, permanecendo os \textbf{16 registros} do snapshot. O PTC foi avaliado apenas como proposta não publicada do TCC e registrava 17 estudos incluídos; esse número é uma referência documental, não uma execução científica anterior. Os sete overrides fazem parte dos 2.475 registros persistidos com estágio \texttt{eligibility} e status de exclusão; no fluxo após a deduplicação, permanecem dentro das 2.470 exclusões de elegibilidade. Portanto, não são sete exclusões adicionais a serem somadas ao fluxo PRISMA. Quatro deles ainda exigem adjudicação de fonte primária e escopo, e não devem ser descritos como exclusões científicas finais.
+Nesta etapa foram excluídos \textbf{2.470 registros} (99,4\% dos 2.486 registros avaliados) e 16 foram incluídos. A pontuação foi um filtro operacional de aderência temática; essa contagem não constitui avaliação de qualidade metodológica.
 
 \subsection{Inclusão}
 
-Após a auditoria de pertinência dos candidatos acima do limiar, foram retidos \textbf{16 registros} no snapshot operacional, representando uma taxa de retenção de aproximadamente \textbf{0,13\%} em relação ao total identificado (16/11.904). Desses registros, \textbf{15 são classificados provisoriamente como empíricos}, com o ID 6918 em hold por conflito temporal; o ID 6921 é um protocolo/proposta retido apenas para contexto e rastreabilidade, fora da síntese empírica. Portanto, o conjunto empírico ainda não sustenta conclusões finais dependentes do período da revisão.
+Após a avaliação de pertinência, foram incluídos \textbf{16 registros}, representando uma taxa de retenção de aproximadamente \textbf{0,13\%} em relação ao total identificado (16/11.904). Desses registros, \textbf{15 são classificados como empíricos} para a síntese, enquanto o ID 6921 é um protocolo/proposta retido para contexto, fora da síntese empírica. A interpretação do ID 6918 é limitada pela divergência entre o ano informado na fonte institucional e o ano registrado nos metadados, conforme discutido no capítulo de resultados.
 
 \section{Deduplicação}
 
-É necessário distinguir a deduplicação prevista por helpers do módulo de processamento da lógica documentada na consolidação atual. O módulo legado oferece rotinas destrutivas por DOI, URL e similaridade de título; nesta última, TF-IDF (\textit{Term Frequency--Inverse Document Frequency}) com n-gramas de caracteres é comparado pela similaridade do cosseno, que varia de 0 a 1, com limiar operacional de $0{,}9$. Essas rotinas não devem ser descritas como se tivessem sido aplicadas ao snapshot atual.
+A deduplicação foi realizada antes da contabilização do fluxo PRISMA. A identidade bibliográfica foi verificada por DOI normalizado e por URL exata normalizada. A similaridade de título foi usada apenas como diagnóstico complementar: TF-IDF (\textit{Term Frequency--Inverse Document Frequency}) com n-gramas de caracteres é comparado pela similaridade do cosseno, que varia de 0 a 1, com limiar operacional de $0{,}9$. A semelhança de título, isoladamente, não foi suficiente para remover um registro.
 
 \begin{enumerate}
-    \item \textbf{Por DOI}: a rotina destrutiva normaliza o DOI (minúsculas, formas comuns de resolvedor, remoção do prefixo ``doi:'' e pontuação editorial terminal) e mantém a primeira ocorrência;
-    \item \textbf{Por URL e similaridade de título}: as rotinas correspondentes podem remover repetições por URL e títulos com similaridade TF-IDF pelo cosseno $\geq 0{,}9$.
+    \item \textbf{Por DOI}: o DOI é normalizado (minúsculas, formas comuns de resolvedor, remoção do prefixo ``doi:'' e pontuação editorial terminal), e ocorrências com a mesma identidade são representadas uma única vez;
+    \item \textbf{Por URL}: a URL exata normalizada é usada como chave independente para identificar repetições;
+    \item \textbf{Por título}: a similaridade TF-IDF pelo cosseno $\geq 0{,}9$ indica um candidato à análise, mas não determina exclusão automática.
 \end{enumerate}
 
-Na execução canônica atual, o pipeline reconstrói a deduplicação por identidade antes de calcular o fluxo: mantém um representante por DOI normalizado e também usa a URL exata normalizada como chave independente quando ela se repete. Em cada componente de identidade, a fonte de metadados é escolhida por completude e a etapa PRISMA mais avançada é preservada separadamente, com sua origem registrada no audit CSV. Foram identificados 25 grupos de DOI repetido (50 linhas, 25 excedentes) e 2 grupos de URL repetida (4 linhas, 2 excedentes), totalizando 27 registros retirados da triagem. A auditoria bruta também encontrou 177 grupos de título normalizado (434 linhas, 257 excedentes); após a remoção DOI/URL, permanecem 154 grupos (386 linhas, 232 excedentes) apenas por título. Esses candidatos não foram removidos automaticamente por não provarem identidade bibliográfica. A flag persistida \texttt{is\_duplicate = 0} é registrada como limitação do banco, não como evidência de ausência de duplicatas.
+Foram identificados 25 grupos de DOI repetido (50 linhas, 25 excedentes) e 2 grupos de URL repetida (4 linhas, 2 excedentes), totalizando 27 registros redundantes retirados antes da triagem. A análise textual também encontrou 177 grupos de título normalizado (434 linhas, 257 excedentes); após a remoção por DOI/URL, permanecem 154 grupos (386 linhas, 232 excedentes) apenas por título. Esses candidatos não foram removidos automaticamente porque não provam identidade bibliográfica.
 
 \section{Infraestrutura Tecnológica}
 
@@ -228,52 +229,42 @@ O sistema implementa um \textit{cache} persistente na tabela \texttt{cache} do b
 
 \subsection{Reprodutibilidade}
 
-O \textit{pipeline} foi projetado para permitir reprodução mediante comandos CLI (\textit{Command Line Interface}), com parâmetros, código e artefatos derivados versionados. Há, contudo, dois níveis de reprodução. A reconstituição do snapshot desta consolidação usa os exports versionados \path{research/exports/analysis/papers.csv}, \path{research/exports/analysis/papers.json}, o resumo PRISMA, a bibliografia dos estudos incluídos, o audit CSV, o escopo explícito de síntese em \path{research/data/current\_synthesis\_scope.csv} e o manifesto \path{research/exports/reports/reproducibility_manifest.json}; nenhum desses artefatos exige distribuir o SQLite. Uma execução futura do código de coleta dependerá das respostas externas e do estado do cache, portanto poderá produzir metadados e contagens diferentes do snapshot versionado.
+O código, os parâmetros de busca, os exports tabulares, o resumo PRISMA, as
+bibliografias, os registros de auditoria e o manifesto de reprodutibilidade
+foram versionados no repositório. Esses artefatos permitem reconstituir as
+contagens e a composição reportadas sem distribuir o banco local. A variação
+das APIs e dos metadados externos é uma limitação da reprodutibilidade; por
+isso, as contagens reportadas devem ser interpretadas a partir dos artefatos
+versionados.
 
-O manifesto registra também os sete overrides aplicados após a auditoria de pertinência. Eles são necessários para reconstruir o conjunto vigente de 16 registros, pois a regra de pontuação, isoladamente, ainda selecionaria os 23 candidatos operacionais. O arquivo \path{research/data/manual_override_adjudication.csv} registra a evidência disponível, a avaliação de escopo e a ação necessária para cada caso. Quatro overrides exigem recuperação/inspeção da fonte primária e adjudicação de escopo; três têm uma razão proposta sujeita à confirmação do supervisor. As justificativas substantivas finais não devem ser inferidas a partir do score.
-
-Para reproduzir o pipeline em ambiente local, usando uma cópia do banco operacional quando disponível, podem ser usados:
-
-\begin{verbatim}
-# Verificar estatísticas de uma cópia local do banco operacional
-python -m research.src.cli \
-  --db /caminho/para/systematic_review.sqlite stats
-
-# Regenerar exports a partir da cópia local
-python -m research.src.cli \
-  --db /caminho/para/systematic_review.sqlite export
-
-# Atualizar o manifesto e seus hashes
-python -m research.src.cli \
-  --db /caminho/para/systematic_review.sqlite generate-manifest
-
-# Executar uma coleta futura (pode divergir do snapshot versionado)
-python -m research.src.cli run-pipeline --min-score 4.0
-
-\end{verbatim}
-
-Os parâmetros de configuração (limiares, APIs e termos de busca) estão documentados no repositório Git; credenciais e o banco operacional local permanecem fora do versionamento. A bibliografia completa do TCC é composta por \path{results/tcc/referencias.bib} e \path{results/tcc/referencias_pedagogicas.bib}. As referências de fundamentação teórica e metodológica não são contadas como estudos derivados do pipeline nem incluídas em \path{research/exports/references/included_papers.bib}.
+Os parâmetros de configuração, os instrumentos de avaliação e os artefatos
+derivados estão documentados no repositório. Credenciais e o banco operacional
+local permanecem fora do versionamento. A bibliografia completa do TCC é
+composta por \path{results/tcc/referencias.bib} e
+\path{results/tcc/referencias_pedagogicas.bib}. As referências de fundamentação
+teórica e metodológica não são contadas como estudos derivados da revisão nem
+incluídas na bibliografia dos estudos selecionados.
 
 \section{Avaliação da Qualidade Metodológica}
 
-Foi definido um procedimento de avaliação crítica de qualidade metodológica utilizando o \textit{Mixed Methods Appraisal Tool} (MMAT) versão 2018 \cite{MMAT2018}. O MMAT foi selecionado por sua capacidade de avaliar diferentes desenhos de estudo (qualitativos, quantitativos e mistos) de forma padronizada, adequando-se à heterogeneidade metodológica identificada nesta revisão. Como a atualização do banco alterou o conjunto incluído, os julgamentos MMAT disponíveis para a versão anterior não são apresentados como avaliação final do conjunto atual. A reavaliação documental foi executada em ledger separado para os 15 registros empíricos aplicáveis, enquanto o protocolo contextual 6921 permanece fora da avaliação empírica. Cada linha contém decisão e nota de evidência por critério; nove textos primários foram revisados externamente e a avaliação final permanece bloqueada para os demais pela recuperação das fontes, pelos localizadores e pela adjudicação.
+Foi definido um procedimento de avaliação crítica de qualidade metodológica utilizando o \textit{Mixed Methods Appraisal Tool} (MMAT) versão 2018 \cite{MMAT2018}. O MMAT foi selecionado por sua capacidade de avaliar diferentes desenhos de estudo (qualitativos, quantitativos e mistos) de forma padronizada, adequando-se à heterogeneidade metodológica identificada nesta revisão. A avaliação foi aplicada aos 15 registros empíricos; o protocolo contextual 6921 permanece fora da avaliação empírica. Cada estudo é descrito por decisões e justificativas para cada critério. Quando a fonte disponível não permite uma decisão segura, utiliza-se ``Não é possível determinar'', e essa limitação é considerada na interpretação dos resultados.
 
 O processo de avaliação foi especificado nas seguintes etapas:
 
 \begin{enumerate}
     \item \textbf{Perguntas de triagem do instrumento}: Antes dos critérios específicos, são registradas as perguntas S1 (existência de uma pergunta de pesquisa clara) e S2 (adequação dos dados coletados para respondê-la). Quando o resumo não permite decidir, a resposta é ``Não é possível determinar''.
 
-    \item \textbf{Classificação do desenho de estudo}: Os 15 registros empíricos aplicáveis foram categorizados conforme seu desenho metodológico (qualitativo, quantitativo randomizado, quantitativo não-randomizado, quantitativo descritivo ou métodos mistos). A classificação heurística do pipeline é apenas um ponto de partida e deve ser confirmada no texto primário; o protocolo 6921 permanece separado.
+    \item \textbf{Classificação do desenho de estudo}: Os 15 registros empíricos aplicáveis foram categorizados conforme seu desenho metodológico (qualitativo, quantitativo randomizado, quantitativo não-randomizado, quantitativo descritivo ou métodos mistos). A classificação inicial automatizada é apenas um ponto de partida e deve ser confirmada no texto primário; o protocolo 6921 permanece separado.
 
-    \item \textbf{Aplicação dos critérios MMAT}: Para cada registro empírico aplicável, são registrados 5 critérios de qualidade específicos ao seu desenho metodológico, respondendo ``Sim'', ``Não'' ou ``Não é possível determinar'' para cada critério. O ledger vigente contém os 15 registros empíricos e as notas de evidência e localizadores disponíveis; usa ``CT'' quando a fonte não permite decidir e não equivale a uma avaliação final enquanto houver registros sem texto primário ou sem adjudicação.
+    \item \textbf{Aplicação dos critérios MMAT}: Para cada registro empírico aplicável, são registrados 5 critérios de qualidade específicos ao seu desenho metodológico, respondendo ``Sim'', ``Não'' ou ``Não é possível determinar'' para cada critério. A tabela de avaliação reúne as evidências e os localizadores disponíveis; usa ``CT'' quando a fonte não permite decidir.
 
-    \item \textbf{Mapeamento dos critérios}: Nos estudos classificados como quantitativos descritivos, Q1 corresponde à adequação da estratégia de amostragem, Q2 à representatividade da amostra, Q3 à adequação das medições, Q4 ao risco de viés por não resposta e Q5 à adequação da análise estatística. Nos estudos quantitativos não randomizados, Q1 corresponde à representatividade dos participantes, Q2 à adequação das medições, Q3 à completude dos dados de desfecho, Q4 ao controle de confundidores e Q5 à adesão à intervenção ou exposição. A classificação do desenho e a resposta a cada critério permanecem sujeitas à confirmação no texto primário e à adjudicação.
+    \item \textbf{Mapeamento dos critérios}: Nos estudos classificados como quantitativos descritivos, Q1 corresponde à adequação da estratégia de amostragem, Q2 à representatividade da amostra, Q3 à adequação das medições, Q4 ao risco de viés por não resposta e Q5 à adequação da análise estatística. Nos estudos quantitativos não randomizados, Q1 corresponde à representatividade dos participantes, Q2 à adequação das medições, Q3 à completude dos dados de desfecho, Q4 ao controle de confundidores e Q5 à adesão à intervenção ou exposição. A classificação do desenho e a resposta a cada critério devem ser interpretadas à luz da fonte primária disponível.
 
     \item \textbf{Síntese da qualidade}: Conforme recomendação dos autores do MMAT, a qualidade metodológica deverá ser reportada descritivamente (contagem de critérios atendidos) sem cálculo de \textit{score} percentual, evitando simplificação excessiva de aspectos complexos de qualidade.
 \end{enumerate}
 
-A avaliação preliminar foi registrada por um único revisor, com base em nove textos primários externos e, nos demais casos, em resumos e metadados disponíveis. A versão final exigirá justificativa por critério, fonte e página/seção/tabela de suporte para todo o conjunto, além de adjudicação pelo supervisor. Estudos com baixa qualidade metodológica não serão excluídos automaticamente, mas terão suas limitações consideradas na síntese narrativa e discussão dos achados.
+A avaliação foi conduzida por um único revisor, com base em nove textos primários e, nos demais casos, em resumos e metadados disponíveis. As decisões sem apoio no texto integral são apresentadas como provisórias. Estudos com limitações metodológicas não foram excluídos automaticamente, mas tiveram essas limitações consideradas na síntese narrativa e na discussão dos achados.
 
-O estado da avaliação MMAT do conjunto vigente é registrado na Seção~\ref{sec:qualidade-estudos} e nos arquivos \path{research/data/mmat\_current\_study\_registry.csv}, \path{research/data/mmat\_primary\_sources\_manifest.csv} e \path{research/data/mmat\_reassessment\_current.csv}. A tabela do PTC com 17 estudos, pertencente a uma proposta não publicada, não é reutilizada como resultado atual.
+A avaliação por critério é apresentada na Seção~\ref{sec:qualidade-estudos}, com a indicação da base documental utilizada e das limitações de interpretação.
 
 %--------- FIM METODOLOGIA ------------

@@ -1,13 +1,11 @@
 \chapter{REVISÃO SISTEMÁTICA DA LITERATURA}
 \label{cap:revisao}
 
-Este capítulo apresenta os resultados da revisão sistemática desenvolvida no trabalho. O processo identificou 11.904 registros nas quatro fontes consultadas e reteve 16 registros no snapshot operacional: 15 registros classificados provisoriamente como empíricos e um protocolo/proposta mantido apenas para mapeamento contextual e rastreabilidade. O registro 6918 permanece em \textit{hold}, pois a fonte oficial da ETH identifica a tese como publicação de 2014, enquanto o snapshot operacional registra 2025; ele não sustenta uma conclusão empírica final dependente do período da revisão até essa discrepância ser adjudicada. A pontuação usada na elegibilidade representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
-
-Os artefatos do snapshot operacional vigente registram 23 candidatos acima do limiar e 7 overrides manuais após a revisão de pertinência, mantendo 16 registros retidos. Desses, 15 são classificados provisoriamente como empíricos, com o ID 6918 em hold temporal, e o ID 6921 é um protocolo/proposta contextual, fora da síntese empírica. O PTC foi avaliado apenas como proposta não publicada do TCC e registrava 17 estudos incluídos; esse número é uma referência documental, não uma execução científica anterior. A comparação entre os 17 registros da proposta e os 16 do snapshot atual é, portanto, exclusivamente documental. Os sete overrides já estão contabilizados entre os 2.470 excluídos na elegibilidade após a deduplicação determinística; não constituem uma exclusão adicional ao fluxo PRISMA. Contudo, quatro overrides ainda exigem adjudicação de escopo e não devem ser apresentados como exclusões científicas finais. A composição atual é rastreável pelo manifesto versionado, pelos exports derivados e pelo registro explícito dos overrides manuais.
+Este capítulo apresenta os resultados da revisão sistemática desenvolvida no trabalho. O processo identificou 11.904 registros nas quatro fontes consultadas e incluiu 16 registros: 15 classificados como empíricos e um protocolo/proposta mantido apenas para mapeamento contextual. O registro 6918 requer confirmação adicional, pois a fonte oficial da ETH identifica a tese como publicação de 2014, enquanto os metadados consultados registram 2025; ele não sustenta uma conclusão empírica final dependente do período da revisão até a resolução dessa divergência. A pontuação usada na elegibilidade representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
 
 \section{Fluxo de Seleção}
 
-A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Os 11.904 registros brutos do banco consolidado passaram pela deduplicação determinística, que retirou 27 registros redundantes por DOI/URL. Assim, 11.877 registros foram avaliados na triagem; 9.391 foram excluídos e 2.486 avançaram para a elegibilidade. Nessa etapa, 2.470 foram excluídos, resultando em 16 registros retidos no snapshot operacional (15 provisoriamente empíricos e 1 protocolo contextual).
+A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Os 11.904 registros brutos das quatro fontes consultadas passaram pela deduplicação determinística, que retirou 27 registros redundantes por DOI/URL. Assim, 11.877 registros foram avaliados na triagem; 9.391 foram excluídos e 2.486 avançaram para a elegibilidade. Nessa etapa, 2.470 foram excluídos e 16 foram incluídos, sendo 15 estudos empíricos e um protocolo contextual.
 
 \begin{figure}[H]
 \centering
@@ -29,7 +27,7 @@ A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de regist
 
 \section{Estatísticas Descritivas}
 
-A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A auditoria de identidade encontrou 25 grupos de DOI repetido (50 linhas, 25 excedentes), 2 grupos de URL repetida (4 linhas, 2 excedentes) e 177 grupos de título normalizado (434 linhas, 257 excedentes brutos). Depois da remoção DOI/URL, permanecem 154 grupos (386 linhas, 232 excedentes) apenas por título. Os 27 excedentes DOI/URL foram retirados como registros redundantes na reconstrução do fluxo, enquanto os candidatos apenas por título não foram removidos automaticamente. A flag persistida \texttt{is\_duplicate} permanece zerada no banco e é reportada como limitação de rastreabilidade, não como prova de unicidade. A pequena proporção de registros retidos decorreu do escopo específico, do filtro de relevância e da auditoria dos candidatos. O registro 6921 é mantido no conjunto operacional, mas não é tratado como evidência empírica nem como estudo aplicável ao MMAT; o 6918 permanece explicitamente em hold por conflito temporal.
+A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A análise de identidade encontrou 25 grupos de DOI repetido (50 linhas, 25 excedentes), 2 grupos de URL repetida (4 linhas, 2 excedentes) e 177 grupos de título normalizado (434 linhas, 257 excedentes). Depois da remoção por DOI/URL, permanecem 154 grupos (386 linhas, 232 excedentes) identificados apenas por título. Os 27 excedentes DOI/URL foram retirados como registros redundantes antes da triagem, enquanto os candidatos apenas por título não foram removidos automaticamente. A pequena proporção de registros incluídos decorreu do escopo específico e dos critérios de seleção. O registro 6921 é mantido como protocolo contextual, não como evidência empírica nem como estudo aplicável ao MMAT; o 6918 requer confirmação bibliográfica adicional.
 
 A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um acerto ocorreu quando uma consulta foi atendida com uma resposta previamente armazenada, sem nova requisição à API. O contador de acertos é acumulado por entrada do cache, enquanto os eventos são registrados na auditoria; como essa proporção depende do histórico e da expiração das entradas, ela não representa quantidade de registros, qualidade ou evidência de inclusão.
 
@@ -43,18 +41,17 @@ A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um 
 \hline
 Registros identificados (banco bruto) & 11.904 \\
 Remoções determinísticas por DOI/URL & 27 (0,23\%) \\
-Grupos DOI repetido (auditoria) & 25 (50 linhas; 25 excedentes) \\
-Grupos URL repetida (auditoria) & 2 (4 linhas; 2 excedentes) \\
+Grupos DOI repetido & 25 (50 linhas; 25 excedentes) \\
+Grupos URL repetida & 2 (4 linhas; 2 excedentes) \\
 Grupos de título normalizado (bruto) & 177 (434 linhas; 257 excedentes) \\
-Grupos de título-only após DOI/URL & 154 (386 linhas; 232 excedentes) \\
-Registros no banco operacional & 11.904 \\
+Grupos identificados apenas por título após DOI/URL & 154 (386 linhas; 232 excedentes) \\
 Registros avaliados na triagem (após deduplicação) & 11.877 \\
 Registros excluídos na triagem & 9.391 \\
 Excluídos na triagem / identificação & 78,89\% \\
 Registros avaliados na elegibilidade & 2.486 \\
 Registros excluídos na elegibilidade & 2.470 \\
 Excluídos na elegibilidade / elegibilidade & 99,36\% \\
-Registros incluídos no snapshot operacional & 16 \\
+Registros incluídos na revisão & 16 \\
 Estudos empíricos provisoriamente no escopo da síntese & 15 \\
 Protocolo/proposta retido para contexto, fora da síntese empírica & 1 \\
 Incluídos / elegibilidade & 0,64\% \\
@@ -82,15 +79,15 @@ A distribuição por fonte é apresentada na Figura~\ref{fig:database-coverage}.
 \clearpage
 \section{Síntese dos Registros Retidos e das Evidências Empíricas}
 
-Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos. O snapshot retém 16 registros, mas a síntese de evidências empíricas considera 15: o ID 6921 é um protocolo/proposta sem resultado empírico concluído e foi preservado somente como registro contextual. A avaliação MMAT vigente foi reaplicada de forma preliminar em nível documental aos 15 registros empíricos aplicáveis; o ID 6921 não é aplicável ao MMAT empírico. Nove textos primários foram revisados externamente, cinco registros permanecem apoiados em abstract/metadados e o ID 6918 está em hold por conflito de ano e recuperação da fonte. As conclusões de qualidade permanecem provisórias até a recuperação das fontes necessárias, a confirmação dos localizadores e a adjudicação pelo supervisor.
+Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos. Dos 16 registros incluídos, 15 são estudos empíricos e o ID 6921 é um protocolo/proposta sem resultado empírico concluído, preservado somente como registro contextual. A avaliação MMAT foi aplicada de forma preliminar em nível documental aos 15 registros empíricos; o ID 6921 não é aplicável ao MMAT empírico. Nove textos primários foram revisados, enquanto cinco registros permanecem apoiados em resumo ou metadados e o ID 6918 requer confirmação bibliográfica. As conclusões de qualidade devem considerar essas limitações das fontes.
 
-Assim, os 15 registros empíricos são um escopo provisório, e não um conjunto final de evidências: o registro 6918 permanece fora de qualquer conclusão temporalmente dependente até a resolução do conflito entre o ano oficial (2014) e o ano armazenado no snapshot (2025). O registro 6923 tem identidade bibliográfica e ano corroborados, mas continua limitado à informação de resumo enquanto o texto integral não for recuperado.
+Assim, os 15 registros empíricos são um escopo provisório, e não um conjunto final de evidências: o registro 6918 permanece fora de qualquer conclusão temporalmente dependente até a resolução do conflito entre o ano oficial (2014) e o ano registrado nos metadados (2025). O registro 6923 tem identidade bibliográfica e ano corroborados, mas continua limitado à informação de resumo enquanto o texto integral não for recuperado.
 
 Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, características contextuais e registros de interação para estimar categorias ou escores. Outros estudos investigaram personalização, avaliação formativa, recursos pedagógicos ou modelos computacionais de aprendizagem. Essa diversidade ampliou o panorama da revisão, mas também impediu tratar todos os resultados como se medissem o mesmo fenômeno educacional.
 
 Acurácia elevada em uma base específica não demonstra automaticamente que a técnica produzirá o mesmo resultado em outra escola ou população. Da mesma forma, predição de desempenho não equivale a explicar como o estudante aprende matemática. Essas restrições foram incorporadas aos requisitos e aos critérios de avaliação da especificação apresentada no Capítulo~\ref{cap:prototipo}.
 
-Na Tabela~\ref{tab:sintese-estudos-incluidos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas relatadas pelos próprios estudos; a matriz MMAT documental correspondente está em \texttt{research/data/mmat\_reassessment\_current.csv}. Para registros cuja auditoria bibliográfica ainda exige confirmação em fonte primária, a descrição é provisória e se baseia nos metadados e/ou resumo disponíveis; os números reportados nessas linhas não constituem verificação independente do texto completo.
+Na Tabela~\ref{tab:sintese-estudos-incluidos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas relatadas pelos próprios estudos. Para registros cuja identificação ainda exige confirmação em fonte primária, a descrição é provisória e se baseia nos metadados e/ou resumo disponíveis; os números reportados nessas linhas não constituem verificação independente do texto completo.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
@@ -123,7 +120,7 @@ Zhang (2023) \cite{Innovative2023_005} & Matemática no ensino superior & IA; ad
 Depren et al. (2017) \cite{Identifying2017_006} & Classificação no TIMSS & LA; avaliação & Predição & Estatística; feedback & Comparação de desempenhos de métodos de mineração de dados educacionais \\
 Uskov et al. (2019) \cite{Machine2019_007} & Analítica preditiva em STEM & ML; LA; predição & Predição & Desempenho; estatística & Benchmark de algoritmos para predição de desempenho acadêmico \\
 MacLellan (2017) \cite{Computational2017_008} & Modelos computacionais de aprendizagem & Tutoria; avaliação; predição & Tutoria e modelagem & Estatística & Modelos computacionais para desenvolvimento de tutores e previsão de comportamento \\
-Käser Jacober (ano a confirmar) \cite{Kaser2025_6918} & Aprendizagem matemática assistida por computador & Tutoria; avaliação; predição & Personalização & O registro descreve sistema adaptativo baseado em modelo de habilidades matemáticas e estudos com usuários; o ano do snapshot conflita com o ano do repositório e a fonte integral ainda não foi recuperada \\
+Käser Jacober (ano a confirmar) \cite{Kaser2025_6918} & Aprendizagem matemática assistida por computador & Tutoria; avaliação; predição & Personalização & O registro descreve sistema adaptativo baseado em modelo de habilidades matemáticas e estudos com usuários; o ano informado nos metadados difere do ano indicado pelo repositório, e a fonte integral ainda não foi recuperada \\
 Milićević et al. (2024) \cite{Machine2024_009} & Apoio ao ensino de matemática & ML; LA; predição & Predição e apoio & Desempenho & Métodos de aprendizado de máquina como ferramenta auxiliar ao ensino \\
 Echeveria et al. (2025) \cite{Echeveria2025_6920} & Mentalidade matemática & ML; LA; predição & Intervenção precoce & Desempenho & O texto primário externo informa acurácia de 98,8\% para a predição de mentalidades matemáticas; a perda de casos e a inconsistência do particionamento limitam a interpretação \\
 Imperatrice et al. (2025) \cite{Imperatrice2025_6921} & Ensino inclusivo de matemática & Adaptação; IA; avaliação & Personalização e inclusão & Protocolo/proposta & O PDF externo descreve uma proposta prospectiva de intervenção com IA, visualizações e avaliação prevista; não apresenta resultados empíricos concluídos \\
@@ -135,17 +132,15 @@ Zeng (2025) \cite{Zeng2025_6923} & Carga cognitiva na resolução de problemas &
 \section{Avaliação Metodológica com o MMAT}
 \label{sec:qualidade-estudos}
 
-O MMAT 2018 foi definido como instrumento de apreciação metodológica conforme o desenho de cada estudo \cite{MMAT2018}. As respostas Y (``Sim''), N (``Não'') e CT (``Não é possível determinar'') devem ser mantidas por critério, sem média, ranking ou categoria geral. A atualização do banco alterou o conjunto operacional de 17 para 16 registros, e os julgamentos disponíveis no arquivo histórico correspondem à versão anterior. A reaplicação do instrumento ao conjunto atual foi registrada em um ledger específico: nove textos primários foram revisados externamente, cinco registros empíricos receberam julgamentos provisórios baseados em abstract/metadados, um registro empírico permanece em hold por conflito de fonte e o protocolo/proposta 6921 foi marcado como não aplicável ao MMAT empírico. O instrumento não é reduzido a uma nota; a avaliação final permanece bloqueada até a recuperação das fontes restantes, a confirmação dos localizadores e a adjudicação pelo supervisor.
+O MMAT 2018 foi utilizado como instrumento de apreciação metodológica conforme o desenho de cada estudo \cite{MMAT2018}. As respostas Y (``Sim''), N (``Não'') e CT (``Não é possível determinar'') são mantidas por critério, sem média, ranking ou categoria geral. A avaliação documental foi aplicada aos 15 registros empíricos: nove textos primários foram revisados, cinco registros receberam julgamentos provisórios baseados em resumo ou metadados e o registro 6918 requer confirmação da fonte e do ano bibliográfico. O protocolo/proposta 6921 foi mantido fora da avaliação MMAT empírica. O instrumento não é reduzido a uma nota, e decisões sem apoio no texto integral devem ser interpretadas como provisórias.
 
-A tabela MMAT final deverá ser gerada automaticamente a partir dos artefatos versionados \texttt{research/data/\allowbreak{}mmat\_current\_study\_registry.csv}, \texttt{research/data/\allowbreak{}mmat\_primary\_sources\_manifest.csv}, \texttt{research/data/\allowbreak{}mmat\_reassessment\_current.csv} e \texttt{research/data/\allowbreak{}current\_synthesis\_scope.csv}, após a conclusão da reaplicação aos 15 registros empíricos atuais. O ledger atual já contém uma decisão e uma nota de evidência para cada critério dos 15 registros empíricos, além do registro contextual 6921 como não aplicável; contudo, enquanto houver registros sem texto primário revisado e sem adjudicação, ele não deve ser interpretado como avaliação completa do conjunto vigente.
+A tabela MMAT apresenta uma decisão por critério e a base documental utilizada para cada estudo. Quando a fonte disponível não permite decidir, conserva-se a categoria CT. A ausência de texto integral para parte dos registros limita a avaliação e impede que as decisões provisórias sejam interpretadas como uma medida global da qualidade da evidência.
 
-Para tornar o estado atual auditável no próprio manuscrito, a Tabela~\ref{tab:mmat-reavaliacao-atual} apresenta a reavaliação documental preliminar dos 16 registros operacionais, distinguindo os 15 registros empíricos do protocolo 6921. Ela explicita a base da avaliação, conserva ``CT'' quando a fonte disponível não permite uma decisão e identifica o protocolo 6921 como não aplicável ao MMAT empírico. A tabela não atribui nota geral, não ordena os estudos e não substitui a adjudicação pelo supervisor.
+Para tornar o procedimento transparente, a Tabela~\ref{tab:mmat-avaliacao-atual} apresenta a avaliação documental preliminar dos 16 registros incluídos, distinguindo os 15 registros empíricos do protocolo 6921. Ela explicita a base da avaliação, conserva ``CT'' quando a fonte disponível não permite uma decisão e identifica o protocolo 6921 como não aplicável ao MMAT empírico. A tabela não atribui nota geral nem ordena os estudos.
 
 \input{../../research/exports/references/mmat_current_tcc_table.tex}
 
-O arquivo histórico registra, para sua composição anterior, limitações como descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Essas observações não são uma avaliação MMAT dos 15 registros empíricos atuais. Após a reaplicação, as limitações deverão ser consideradas na força atribuída a cada evidência, sem ordenar os estudos por uma nota.
-
-a tabela do PTC não é apresentada como resultado final; ela pertence a uma proposta não publicada e permanece apenas como referência documental, não devendo ser usada para interpretar o conjunto vigente.
+As limitações identificadas nos estudos incluem descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Essas observações devem ser consideradas na força atribuída a cada evidência, sem ordenar os estudos por uma nota.
 
 \section{Tendências e Lacunas}
 
@@ -166,7 +161,7 @@ As principais lacunas identificadas foram:
 
 A revisão foi realizada por um único pesquisador, com suporte automatizado para deduplicação, triagem e organização dos registros. Não houve dupla revisão independente. A elegibilidade de grande parte dos registros foi avaliada a partir de títulos, resumos e metadados, pois nem todos os textos completos estavam disponíveis.
 
-Embora a revisão por pares e a disponibilidade de texto completo tenham sido definidas como critérios planejados, a auditoria bibliográfica ainda classifica alguns registros atuais como cautela editorial, veículo ausente ou fonte institucional. Assim, o estado ``incluído'' representa o snapshot operacional atual e não confirma, por si só, a validação bibliográfica individual de cada estudo.
+Embora a revisão por pares e a disponibilidade de texto completo tenham sido definidas como critérios planejados, alguns registros permanecem apoiados em metadados ou fontes institucionais. Assim, a inclusão na revisão não substitui a verificação bibliográfica individual de cada estudo.
 
 O protocolo não foi registrado prospectivamente. Foram adotados princípios de planejamento compatíveis com o PRISMA-P, mas não se afirmou conformidade integral. O PRISMA 2020 foi utilizado para orientar o relato do processo.
 

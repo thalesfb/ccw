@@ -1,7 +1,7 @@
-"""Render the current preliminary MMAT reassessment for the TCC.
+"""Render the current preliminary MMAT assessment for the TCC.
 
 The output is deliberately labelled preliminary.  It is generated from the
-current 16-record ledger and does not assign an overall quality score.
+current 16-record dataset and does not assign an overall quality score.
 """
 
 from __future__ import annotations
@@ -38,8 +38,8 @@ BASIS_LABELS = {
 STATUS_LABELS = {
     "provisional_primary_source_review": "Provisório: fonte primária",
     "provisional_abstract_plus_metadata": "Provisório: abstract/metadados",
-    "hold_source_verification": "Hold: verificar fonte",
-    "hold_empirical_status": "Hold: verificar empiricidade",
+    "hold_source_verification": "Não confirmado: fonte",
+    "hold_empirical_status": "Não aplicável: protocolo",
 }
 
 
@@ -78,12 +78,12 @@ def _latex_escape(value: object) -> str:
 def render_table(rows: list[dict[str, str]]) -> str:
     lines = [
         "% Tabela gerada de research/data/mmat_reassessment_current.csv",
-        "% Reavaliação documental preliminar; não representa score nem avaliação final.",
+        "% Avaliação metodológica documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
         r"\begin{landscape}",
         r"\scriptsize",
         r"\begin{longtable}{|p{0.75cm}|p{3.8cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
-        r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{tab:mmat-reavaliacao-atual}\\",
+        r"\caption{Avaliação metodológica documental preliminar dos estudos incluídos com o MMAT 2018.}\label{tab:mmat-avaliacao-atual}\\",
         r"\hline",
         r"\textbf{ID} & \textbf{Chave do estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
@@ -119,7 +119,7 @@ def render_table(rows: list[dict[str, str]]) -> str:
     lines.extend(
         [
             r"\end{longtable}",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação pelo supervisor permanece pendente. O ID 6921 foi retido apenas como protocolo/proposta contextual e não integra a síntese empírica nem uma avaliação MMAT empírica.",
+            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A coluna Base indica a fonte documental considerada, e a coluna Estado indica o caráter preliminar da decisão. O ID 6921 é um protocolo/proposta contextual e não integra a síntese empírica nem a avaliação MMAT empírica.",
             r"\end{landscape}",
         ]
     )
