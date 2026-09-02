@@ -68,13 +68,18 @@
 - Etapa 4.5: Revisao geral (italicos, terminologia, ABNT, numeros, referencias)
 - Etapa 5 parcial: Reestruturacao capitulos, pipeline MMAT historico, pretextuais, esqueletos
 
-### Pendente (apos desenvolvimento do prototipo)
+### Consolidação e pendências atuais
 
-- [ ] Conteudo real do Cap. Resultados e Discussao
-- [ ] Conteudo real do Cap. Conclusao
-- [ ] Textos pessoais (dedicatoria, agradecimentos)
-- [ ] Atualizar cronograma com datas reais
-- [ ] Revisao final completa
+As marcações abaixo distinguem redação/registro já realizado de decisões que
+dependem da orientação científica. “Concluído” não significa que uma síntese
+metodológica provisória tenha sido convertida em conclusão final.
+
+- [x] Conteúdo do Cap. Resultados e Discussão reconciliado com o snapshot atual; a síntese MMAT permanece provisória
+- [x] Conteúdo do Cap. Conclusão reconciliado com o conjunto vigente e suas limitações
+- [x] Cronograma atualizado com os períodos efetivamente registrados no TCC
+- [ ] Textos pessoais (dedicatória, agradecimentos e epígrafe)
+- [ ] Recuperação das fontes pendentes, confirmação dos localizadores e adjudicação final do MMAT/escopo
+- [ ] Revisão final completa após o gate científico da orientação
 
 ---
 
