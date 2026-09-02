@@ -413,7 +413,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "eac3edcdee50a35b8c21671261d4174874b77cecd4e94f0506b7c513cd5c27fb"
+      "sha256": "3398e5a0614ec291740a5b3548557b27c8f0343e98f14163a8098ad8029ae9e5"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
