@@ -157,7 +157,7 @@ O fluxo de seleção dos estudos foi organizado segundo as etapas PRISMA:
 
 \subsection{Identificação}
 
-Execução automatizada das consultas nas quatro APIs, resultando em \textbf{11.904 registros} no banco operacional consolidado. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}). A base \path{research/systematic_review.sqlite} foi adotada como fonte operacional local para os estados e contagens desta consolidação; ela não é um artefato versionado do repositório. O snapshot publicado é representado pelos exports versionados, pelo manifesto de reprodutibilidade e pelos arquivos bibliográficos e de auditoria associados. Embora a flag persistida \texttt{is\_duplicate} esteja zerada, a reconstrução do fluxo identificou e removeu \textbf{27 registros} por identidade determinística (25 excedentes de DOI normalizado e 2 de URL exata; um grupo de URL é misto quanto à presença de DOI). Assim, \textbf{11.877 registros} seguiram para a triagem; títulos repetidos permanecem candidatos de auditoria e não são removidos automaticamente.
+No snapshot operacional utilizado neste TCC, os artefatos da coleta automatizada nas quatro APIs totalizam \textbf{11.904 registros}. Cada registro inclui metadados bibliográficos (título, autores, ano, \textit{venue}, DOI/URL) e, quando disponível, resumo (\textit{abstract}). A base \path{research/systematic_review.sqlite} foi adotada como fonte operacional local para os estados e contagens desta consolidação; ela não é um artefato versionado do repositório. O snapshot versionado é representado pelos exports, pelo manifesto de reprodutibilidade e pelos arquivos bibliográficos e de auditoria associados. Embora a flag persistida \texttt{is\_duplicate} esteja zerada, a reconstrução do fluxo identificou e removeu \textbf{27 registros} por identidade determinística (25 excedentes de DOI normalizado e 2 de URL exata; um grupo de URL é misto quanto à presença de DOI). Assim, \textbf{11.877 registros} seguiram para a triagem; títulos repetidos permanecem candidatos de auditoria e não são removidos automaticamente.
 
 \subsection{Triagem}
 
@@ -194,7 +194,7 @@ A implementação soma os componentes ponderados, limita o resultado ao interval
 
 Nesta etapa foram excluídos \textbf{2.470 registros} (99,4\% dos 2.486 registros avaliados). No fluxo após a deduplicação, a distribuição foi de 2.463 registros com motivo \texttt{low\_relevance\_score} e sete registros com motivo \texttt{manual\_exclusion\_after\_audit}. A pontuação foi um filtro operacional de aderência temática; essa contagem não constitui avaliação de qualidade metodológica.
 
-Na reexecução e auditoria da rodada atual, foram identificados \textbf{23 candidatos} pelo limiar operacional. A revisão de pertinência registrou \textbf{7 overrides manuais}, permanecendo os \textbf{16 registros} do conjunto vigente. Essa reconciliação explica a diferença em relação à execução histórica, que registrava 17 incluídos: a nova rodada utilizou o snapshot atualizado e a lógica de scoring corrigida, não uma simples substituição numérica. Os sete overrides fazem parte dos 2.475 registros persistidos com estágio \texttt{eligibility} e status de exclusão; no fluxo após a deduplicação, permanecem dentro das 2.470 exclusões de elegibilidade. Portanto, não são sete exclusões adicionais a serem somadas ao fluxo PRISMA. Quatro deles ainda exigem adjudicação de fonte primária e escopo, e não devem ser descritos como exclusões científicas finais.
+No conjunto operacional vigente, foram registrados \textbf{23 candidatos} acima do limiar operacional e \textbf{7 overrides manuais}, permanecendo os \textbf{16 registros} do snapshot. O PTC foi avaliado apenas como proposta não publicada do TCC e registrava 17 estudos incluídos; esse número é uma referência documental, não uma execução científica anterior. Os sete overrides fazem parte dos 2.475 registros persistidos com estágio \texttt{eligibility} e status de exclusão; no fluxo após a deduplicação, permanecem dentro das 2.470 exclusões de elegibilidade. Portanto, não são sete exclusões adicionais a serem somadas ao fluxo PRISMA. Quatro deles ainda exigem adjudicação de fonte primária e escopo, e não devem ser descritos como exclusões científicas finais.
 
 \subsection{Inclusão}
 
@@ -202,7 +202,7 @@ Após a auditoria de pertinência dos candidatos acima do limiar, foram retidos 
 
 \section{Deduplicação}
 
-É necessário distinguir a deduplicação prevista por helpers do módulo de processamento da lógica efetivamente usada na reexecução. O módulo legado oferece rotinas destrutivas por DOI, URL e similaridade de título; nesta última, TF-IDF (\textit{Term Frequency--Inverse Document Frequency}) com n-gramas de caracteres é comparado pela similaridade do cosseno, que varia de 0 a 1, com limiar operacional de $0{,}9$. Essas rotinas não devem ser descritas como se tivessem sido aplicadas ao snapshot atual.
+É necessário distinguir a deduplicação prevista por helpers do módulo de processamento da lógica documentada na consolidação atual. O módulo legado oferece rotinas destrutivas por DOI, URL e similaridade de título; nesta última, TF-IDF (\textit{Term Frequency--Inverse Document Frequency}) com n-gramas de caracteres é comparado pela similaridade do cosseno, que varia de 0 a 1, com limiar operacional de $0{,}9$. Essas rotinas não devem ser descritas como se tivessem sido aplicadas ao snapshot atual.
 
 \begin{enumerate}
     \item \textbf{Por DOI}: a rotina destrutiva normaliza o DOI (minúsculas, formas comuns de resolvedor, remoção do prefixo ``doi:'' e pontuação editorial terminal) e mantém a primeira ocorrência;
@@ -228,11 +228,11 @@ O sistema implementa um \textit{cache} persistente na tabela \texttt{cache} do b
 
 \subsection{Reprodutibilidade}
 
-O \textit{pipeline} foi projetado para ser reexecutável mediante comandos CLI (\textit{Command Line Interface}), com parâmetros, código e artefatos derivados versionados. Há, contudo, dois níveis de reprodução. A reconstituição do snapshot desta consolidação usa os exports versionados \path{research/exports/analysis/papers.csv}, \path{research/exports/analysis/papers.json}, o resumo PRISMA, a bibliografia dos estudos incluídos, o audit CSV, o escopo explícito de síntese em \path{research/data/current\_synthesis\_scope.csv} e o manifesto \path{research/exports/reports/reproducibility_manifest.json}; nenhum desses artefatos exige distribuir o SQLite. A reexecução da coleta depende das respostas externas e do estado do cache, portanto pode produzir metadados e contagens diferentes.
+O \textit{pipeline} foi projetado para permitir reprodução mediante comandos CLI (\textit{Command Line Interface}), com parâmetros, código e artefatos derivados versionados. Há, contudo, dois níveis de reprodução. A reconstituição do snapshot desta consolidação usa os exports versionados \path{research/exports/analysis/papers.csv}, \path{research/exports/analysis/papers.json}, o resumo PRISMA, a bibliografia dos estudos incluídos, o audit CSV, o escopo explícito de síntese em \path{research/data/current\_synthesis\_scope.csv} e o manifesto \path{research/exports/reports/reproducibility_manifest.json}; nenhum desses artefatos exige distribuir o SQLite. Uma execução futura do código de coleta dependerá das respostas externas e do estado do cache, portanto poderá produzir metadados e contagens diferentes do snapshot versionado.
 
 O manifesto registra também os sete overrides aplicados após a auditoria de pertinência. Eles são necessários para reconstruir o conjunto vigente de 16 registros, pois a regra de pontuação, isoladamente, ainda selecionaria os 23 candidatos operacionais. O arquivo \path{research/data/manual_override_adjudication.csv} registra a evidência disponível, a avaliação de escopo e a ação necessária para cada caso. Quatro overrides exigem recuperação/inspeção da fonte primária e adjudicação de escopo; três têm uma razão proposta sujeita à confirmação do supervisor. As justificativas substantivas finais não devem ser inferidas a partir do score.
 
-Para reexecutar o pipeline em ambiente local, usando uma cópia do banco operacional quando disponível, podem ser usados:
+Para reproduzir o pipeline em ambiente local, usando uma cópia do banco operacional quando disponível, podem ser usados:
 
 \begin{verbatim}
 # Verificar estatísticas de uma cópia local do banco operacional
@@ -247,7 +247,7 @@ python -m research.src.cli \
 python -m research.src.cli \
   --db /caminho/para/systematic_review.sqlite generate-manifest
 
-# Executar nova coleta (pode divergir do snapshot publicado)
+# Executar uma coleta futura (pode divergir do snapshot versionado)
 python -m research.src.cli run-pipeline --min-score 4.0
 
 \end{verbatim}
@@ -274,6 +274,6 @@ O processo de avaliação foi especificado nas seguintes etapas:
 
 A avaliação preliminar foi registrada por um único revisor, com base em nove textos primários externos e, nos demais casos, em resumos e metadados disponíveis. A versão final exigirá justificativa por critério, fonte e página/seção/tabela de suporte para todo o conjunto, além de adjudicação pelo supervisor. Estudos com baixa qualidade metodológica não serão excluídos automaticamente, mas terão suas limitações consideradas na síntese narrativa e discussão dos achados.
 
-O estado da avaliação MMAT do conjunto atualizado é registrado na Seção~\ref{sec:qualidade-estudos} e nos arquivos \path{research/data/mmat\_current\_study\_registry.csv}, \path{research/data/mmat\_primary\_sources\_manifest.csv} e \path{research/data/mmat\_reassessment\_current.csv}. A tabela histórica de 17 estudos não é reutilizada como resultado atual.
+O estado da avaliação MMAT do conjunto vigente é registrado na Seção~\ref{sec:qualidade-estudos} e nos arquivos \path{research/data/mmat\_current\_study\_registry.csv}, \path{research/data/mmat\_primary\_sources\_manifest.csv} e \path{research/data/mmat\_reassessment\_current.csv}. A tabela do PTC com 17 estudos, pertencente a uma proposta não publicada, não é reutilizada como resultado atual.
 
 %--------- FIM METODOLOGIA ------------

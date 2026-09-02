@@ -196,8 +196,21 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "sem média, ranking ou categoria geral" in mmat_section
     assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" not in chapter
     assert "reaplicação do instrumento ao conjunto atual" in chapter
-    assert "a tabela histórica não é apresentada como resultado final" in chapter
+    assert "a tabela do ptc não é apresentada como resultado final" in chapter.lower()
     assert "Tjahyadi (2025) & Quant." not in chapter
+
+
+def test_ptc_is_not_presented_as_a_published_pipeline_execution() -> None:
+    tcc_text = "\n".join(
+        _read(path)
+        for path in sorted(TCC_ROOT.rglob("*.tex"))
+    )
+    tcc_text += "\n" + _read(TCC_ROOT / "index.html")
+    lowered = tcc_text.lower()
+    assert "ptc foi avaliado apenas como proposta não publicada" in lowered
+    assert "referência documental, não uma execução científica anterior" in lowered
+    assert "nova rodada" not in lowered
+    assert "execução histórica" not in lowered
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:
