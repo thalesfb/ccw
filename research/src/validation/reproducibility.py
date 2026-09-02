@@ -106,6 +106,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
         "explicit empirical/contextual role for each current retained record",
     ),
     (
+        "research/data/current_eligibility_protocol.csv",
+        "versioned adjudication gates for final scientific eligibility and override disposition",
+    ),
+    (
         MANUAL_OVERRIDE_ADJUDICATION,
         "row-level evidence ledger for the seven manual candidate overrides",
     ),
