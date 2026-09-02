@@ -1,0 +1,19 @@
+snapshot_date,source_artifact,metric,value,unit,scope_or_formula,status
+2026-08-31,research/exports/reports/summary.json,raw_identification,11904,records,before deterministic identity removal,observed
+2026-08-31,research/exports/reports/summary.json,deterministic_identity_duplicates,27,records,25 DOI excess + 2 URL excess,observed
+2026-08-31,research/exports/reports/summary.json,post_identity_screening_population,11877,records,11904 - 27,observed
+2026-08-31,research/exports/reports/summary.json,screening_excluded,9391,records,post-identity population excluded at screening,observed
+2026-08-31,research/exports/reports/summary.json,advanced_to_eligibility,2486,records,11877 - 9391,observed
+2026-08-31,research/exports/reports/summary.json,eligibility_excluded,2470,records,eligibility population excluded before inclusion,observed
+2026-08-31,research/exports/reports/summary.json,included,16,records,final operational included count,provisional
+2026-08-31,local research/systematic_review.sqlite,sqlite_screening_terminal,9413,records,selection_stage=screening and status=excluded,observed_local_only
+2026-08-31,local research/systematic_review.sqlite,sqlite_eligibility_terminal,2475,records,selection_stage=eligibility and status=excluded,observed_local_only
+2026-08-31,local research/systematic_review.sqlite,sqlite_included,16,records,selection_stage=included and status=included,observed_local_only
+2026-08-31,local research/systematic_review.sqlite,sqlite_total,11904,records,all persisted rows,observed_local_only
+2026-08-31,comparison,terminal_stage_delta_screening,22,records,SQLite 9413 - export 9391,reconciliation_required
+2026-08-31,comparison,terminal_stage_delta_eligibility,5,records,SQLite 2475 - export 2470,reconciliation_required
+2026-08-31,comparison,terminal_stage_delta_included,0,records,SQLite 16 - export 16,reconciled
+2026-08-31,research/exports/analysis/deduplication_identity_audit.csv,duplicate_ids_absent_from_export,27,records,all duplicate_id values absent from papers.csv,observed
+2026-08-31,research/exports/analysis/deduplication_identity_audit.csv,duplicate_stage_screening,21,records,duplicate_stage=screening,observed
+2026-08-31,research/exports/analysis/deduplication_identity_audit.csv,duplicate_stage_eligibility,6,records,duplicate_stage=eligibility,observed
+2026-08-31,comparison,independent_stage_change_id_8031,1,record,screening to eligibility between SQLite and export,reconciliation_required
