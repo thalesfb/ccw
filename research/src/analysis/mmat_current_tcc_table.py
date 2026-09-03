@@ -1,7 +1,7 @@
-"""Render the current preliminary MMAT reassessment for the TCC.
+"""Render the current preliminary MMAT assessment for the TCC.
 
 The output is deliberately labelled preliminary.  It is generated from the
-current 16-record ledger and does not assign an overall quality score.
+current 16-record dataset and does not assign an overall quality score.
 """
 
 from __future__ import annotations
@@ -38,8 +38,26 @@ BASIS_LABELS = {
 STATUS_LABELS = {
     "provisional_primary_source_review": "Provisório: fonte primária",
     "provisional_abstract_plus_metadata": "Provisório: abstract/metadados",
-    "hold_source_verification": "Hold: verificar fonte",
-    "hold_empirical_status": "Hold: verificar empiricidade",
+    "hold_source_verification": "Provisório: fonte documental",
+    "hold_empirical_status": "Não aplicável: protocolo",
+}
+STUDY_LABELS = {
+    "1": r"Pejic et al. (2021) \cite{Math2021_001}",
+    "2": r"Tjahyadi (2025) \cite{Implementation2025_000}",
+    "3": r"Sokkhey et al. (2020) \cite{Multimodels2020_002}",
+    "4": r"Kumar et al. (2022) \cite{Analysis2022_003}",
+    "5": r"Zhang et al. (2025) \cite{Design2025_004}",
+    "6": r"Depren et al. (2017) \cite{Identifying2017_006}",
+    "7": r"Zhang (2023) \cite{Innovative2023_005}",
+    "8": r"MacLellan (2017) \cite{Computational2017_008}",
+    "9": r"Uskov et al. (2019) \cite{Machine2019_007}",
+    "10": r"Milićević et al. (2024) \cite{Machine2024_009}",
+    "6916": r"Villegas-Ch et al. (2025) \cite{Villegas2025_6916}",
+    "6917": r"Özseven e Özseven (2026) \cite{Ozseven2026_6917}",
+    "6918": r"Käser Jacober (2014) \cite{KaserJacober2014}",
+    "6920": r"Echeveria et al. (2025) \cite{Echeveria2025_6920}",
+    "6921": r"Imperatrice et al. (2025) \cite{Imperatrice2025_6921}",
+    "6923": r"Zeng (2025) \cite{Zeng2025_6923}",
 }
 
 
@@ -78,27 +96,27 @@ def _latex_escape(value: object) -> str:
 def render_table(rows: list[dict[str, str]]) -> str:
     lines = [
         "% Tabela gerada de research/data/mmat_reassessment_current.csv",
-        "% Reavaliação documental preliminar; não representa score nem avaliação final.",
+        "% Avaliação metodológica documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
         r"\begin{landscape}",
         r"\scriptsize",
-        r"\begin{longtable}{|p{0.75cm}|p{3.8cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
-        r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{tab:mmat-reavaliacao-atual}\\",
+        r"\begin{longtable}{|p{4.55cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
+        r"\caption{Avaliação metodológica documental preliminar dos estudos incluídos com o MMAT 2018.}\label{tab:mmat-avaliacao-atual}\\",
         r"\hline",
-        r"\textbf{ID} & \textbf{Chave do estudo} & \textbf{Desenho} & "
+        r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
         r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} & \textbf{Estado} \\",
         r"\hline",
         r"\endfirsthead",
-        r"\multicolumn{12}{c}{\tablename\ \thetable\ -- Continuação}\\",
+        r"\multicolumn{11}{c}{\tablename\ \thetable\ -- Continuação}\\",
         r"\hline",
-        r"\textbf{ID} & \textbf{Chave do estudo} & \textbf{Desenho} & "
+        r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
         r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} & \textbf{Estado} \\",
         r"\hline",
         r"\endhead",
         r"\hline",
-        r"\multicolumn{12}{r}{\textit{Continua na próxima página}}\\",
+        r"\multicolumn{11}{r}{\textit{Continua na próxima página}}\\",
         r"\endfoot",
         r"\hline",
         r"\endlastfoot",
@@ -107,9 +125,11 @@ def render_table(rows: list[dict[str, str]]) -> str:
         design = row.get("design") or row.get("design_status") or "not_applicable"
         if row.get("assessment_status") == "hold_source_verification":
             design = "metadata_hold"
+        study_label = STUDY_LABELS.get(row["study_id"])
+        if study_label is None:
+            raise ValueError(f"No reader-facing label configured for study {row['study_id']}")
         values = [
-            row["study_id"],
-            _latex_escape(row["study_key"]),
+            study_label,
             _latex_escape(DESIGN_LABELS.get(design, design)),
             *[row[criterion] for criterion in CRITERIA],
             _latex_escape(BASIS_LABELS.get(row["assessment_basis"], row["assessment_basis"])),
@@ -119,7 +139,7 @@ def render_table(rows: list[dict[str, str]]) -> str:
     lines.extend(
         [
             r"\end{longtable}",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação pelo supervisor permanece pendente. O ID 6921 foi retido apenas como protocolo/proposta contextual e não integra a síntese empírica nem uma avaliação MMAT empírica.",
+            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A coluna Base indica a fonte documental considerada, e a coluna Estado indica o caráter preliminar da decisão. O protocolo/proposta contextual não integra a síntese empírica nem a avaliação MMAT empírica.",
             r"\end{landscape}",
         ]
     )

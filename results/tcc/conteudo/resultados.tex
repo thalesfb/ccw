@@ -1,11 +1,13 @@
 \chapter{RESULTADOS E DISCUSSÃO}
 \label{cap:resultados-discussao}
 
-Os resultados do trabalho foram organizados em quatro entregas complementares: a revisão sistemática da literatura, a avaliação metodológica dos estudos incluídos, a consolidação dos fundamentos pedagógicos e a especificação conceitual do protótipo. Esta seção integra essas entregas e discute como elas responderam ao problema de pesquisa e aos objetivos definidos.
+Os resultados do trabalho foram organizados em quatro entregas complementares: a revisão sistemática da literatura, a definição do procedimento de avaliação metodológica, a consolidação dos fundamentos pedagógicos e a especificação conceitual do protótipo. Esta seção integra essas entregas e discute como elas responderam ao problema de pesquisa e aos objetivos definidos.
 
 \section{Resultados da Revisão Sistemática}
 
-A revisão identificou 9.431 registros em quatro fontes científicas e incluiu 17 estudos após deduplicação, triagem e avaliação de elegibilidade. O conjunto final apresentou predominância de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com uso recorrente de modelos supervisionados, especialmente \textbf{\textit{Random Forest}}, SVM, árvores de decisão e redes neurais.
+A revisão identificou 11.904 registros brutos em quatro fontes científicas. Após a deduplicação determinística de 27 registros por DOI/URL, 11.877 foram avaliados na triagem; 9.391 foram excluídos e 2.486 avançaram à elegibilidade; nessa etapa, 2.470 foram excluídos, resultando em 16 registros incluídos. Desses, 15 registros foram classificados como empíricos para a síntese e um protocolo/proposta sobre ensino inclusivo de matemática \cite{Imperatrice2025_6921} foi mantido fora da síntese por não apresentar resultados empíricos concluídos. A interpretação de parte da evidência é limitada pela disponibilidade de textos integrais. O conjunto empírico apresentou predominância de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com ocorrência de modelos de aprendizado de máquina, especialmente \textbf{\textit{Random Forest}}, SVM, árvores de decisão e redes neurais nos títulos e resumos disponíveis.
+
+O quantitativo de 15 estudos empíricos deve ser interpretado como escopo provisório, pois parte das avaliações foi baseada em resumos ou metadados. O estudo de Zeng \cite{Zeng2025_6923} tem título, autoria e ano corroborados por fonte institucional, mas seu texto integral ainda não foi recuperado.
 
 A heterogeneidade entre populações, instrumentos, variáveis e métricas impediu a comparação direta de todos os resultados. Acurácias reportadas em bases específicas foram interpretadas como evidências contextuais dos artigos, e não como garantias de desempenho em outros ambientes educacionais. Essa distinção evitou transferir resultados da literatura para o protótipo especificado sem validação empírica própria.
 
@@ -13,11 +15,13 @@ As lacunas mais recorrentes envolveram explicabilidade limitada, baixa integraç
 
 \section{Resultados da Avaliação Metodológica}
 
-A aplicação do MMAT 2018 manteve as respostas aos cinco critérios separadas por estudo. Esse formato tornou visíveis as limitações relativas a representatividade, completude dos dados, controle de confundidores, integração de métodos e coerência entre desenho e análise.
+O procedimento definido para o MMAT 2018 prevê manter as respostas aos cinco critérios separadas por estudo. Esse formato torna visíveis as limitações relativas a representatividade, completude dos dados, controle de confundidores, integração de métodos e coerência entre desenho e análise. A avaliação foi aplicada aos 15 registros empíricos, enquanto o protocolo/proposta sobre ensino inclusivo de matemática \cite{Imperatrice2025_6921} permanece fora da avaliação MMAT empírica.
 
-A avaliação não produziu nota geral, média ou ranking de qualidade. Essa decisão preservou a interpretação de cada critério e impediu que uma pontuação agregada ocultasse fragilidades metodológicas relevantes. Como os julgamentos foram realizados por um único revisor e, em parte, com base em resumos e metadados, seus resultados foram tratados como apreciação estruturada e auditável, não como classificação definitiva dos artigos.
+A avaliação MMAT empírica aplica-se aos 15 estudos empíricos: nove foram examinados em texto primário e os demais permanecem apoiados em resumos e metadados. O protocolo/proposta sobre ensino inclusivo de matemática \cite{Imperatrice2025_6921} não é aplicável ao MMAT empírico. Trata-se de uma avaliação documental preliminar; decisões baseadas apenas em resumo ou metadados não equivalem à avaliação do texto integral.
 
-O fortalecimento da rastreabilidade também constituiu um resultado técnico. Os julgamentos foram registrados em arquivo canônico versionado e passaram a alimentar os artefatos CSV, HTML e LaTeX utilizados no trabalho. A correspondência entre avaliação e estudo considerou título normalizado, ano e primeiro autor, reduzindo o risco de associações incorretas ou ambíguas.
+O procedimento não prevê nota geral, média ou ranking de qualidade. Essa decisão preserva a interpretação de cada critério e impede que uma pontuação agregada oculte fragilidades metodológicas relevantes. A avaliação foi realizada por um único revisor e, em parte, com base em resumos e metadados; por isso, as decisões correspondentes são interpretadas com cautela.
+
+A rastreabilidade foi preservada pela apresentação das respostas por critério, da base documental utilizada e das limitações de cada avaliação. Essa organização permite distinguir evidências obtidas em texto integral daquelas baseadas apenas em resumo ou metadados.
 
 \section{Resultados da Fundamentação Pedagógica}
 
@@ -52,13 +56,13 @@ Os objetivos definidos na introdução foram atendidos da seguinte forma:
 \begin{itemize}
     \item o \textbf{OE1} foi atendido pela execução e pelo relato da revisão sistemática;
     \item os \textbf{OE2} e \textbf{OE3} foram atendidos pela categorização das técnicas e finalidades pedagógicas dos estudos;
-    \item o \textbf{OE4} foi atendido pela avaliação metodológica por critérios do MMAT;
+    \item o \textbf{OE4} foi atendido parcialmente: o procedimento de avaliação metodológica por critérios do MMAT foi definido e aplicado aos 15 registros empíricos, mas parte das decisões permanece limitada pela disponibilidade das fontes; o protocolo contextual permanece fora da avaliação empírica;
     \item o \textbf{OE5} foi atendido pelo mapeamento das lacunas técnicas, pedagógicas, metodológicas e éticas;
     \item o \textbf{OE6} foi atendido pelo \textit{pipeline} automatizado e pelos artefatos versionados da revisão;
     \item o \textbf{OE7} foi atendido pela elaboração da especificação técnica e pedagógica do protótipo.
 \end{itemize}
 
-O objetivo geral foi alcançado ao combinar o mapeamento sistemático das técnicas computacionais com a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados.
+O objetivo geral foi alcançado no escopo executado ao combinar o mapeamento sistemático das técnicas computacionais com a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados. A disponibilidade desigual das fontes e a avaliação por um único revisor delimitam o alcance da análise metodológica.
 
 \section{Discussão Integrada}
 

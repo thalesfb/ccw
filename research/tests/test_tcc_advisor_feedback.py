@@ -16,6 +16,7 @@ TCC_ABSTRACT = TCC_ROOT / "pretextuais" / "resumo.tex"
 MMAT_DATA = REPO_ROOT / "research" / "data" / "mmat_assessments.csv"
 MMAT_EXPORT = REPO_ROOT / "research" / "exports" / "analysis" / "mmat_assessment.csv"
 MMAT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_tcc_table.tex"
+MMAT_CURRENT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_current_tcc_table.tex"
 
 
 def _read(path: Path) -> str:
@@ -64,6 +65,18 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
         assert unsupported not in lowered
 
 
+def test_tcc_separates_planned_criteria_from_operational_gates() -> None:
+    methodology = _read(TCC_CONTENT / "metodologia.tex")
+    assert "\\subsection{Critérios de Inclusão Planejados}" in methodology
+    assert "\\subsection{Critérios de Exclusão Planejados}" in methodology
+    assert "Na aplicação do procedimento de seleção descrito neste trabalho" in methodology
+    assert "\\texttt{year\\_range}" in methodology
+    assert "\\texttt{math\\_focus}" in methodology
+    assert "\\texttt{computational\\_techniques}" in methodology
+    assert "não foram gates obrigatórios" in methodology
+    assert "\\subsection{Critérios de Inclusão}\n" not in methodology
+
+
 def test_tfidf_and_cosine_similarity_are_explained_before_use() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
     assert "TF-IDF" in methodology
@@ -76,7 +89,7 @@ def test_tfidf_and_cosine_similarity_are_explained_before_use() -> None:
 def test_interpretation_precedes_the_long_synthesis_table() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
     interpretation = chapter.index("Antes da tabela detalhada")
-    table = chapter.index(r"\label{tab:sintese-17-estudos}")
+    table = chapter.index(r"\label{tab:sintese-estudos-incluidos}")
     assert interpretation < table
 
 
@@ -182,8 +195,43 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     mmat_section = chapter[chapter.index("Avaliação Metodológica com o MMAT") :]
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
     assert "sem média, ranking ou categoria geral" in mmat_section
-    assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" in chapter
+    assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" not in chapter
+    assert "A avaliação documental foi aplicada aos 15 registros empíricos" in chapter
     assert "Tjahyadi (2025) & Quant." not in chapter
+    current_table = _read(MMAT_CURRENT_LATEX)
+    assert "\\textbf{ID}" not in current_table
+    assert "Chave do estudo" not in current_table
+    assert "Kaser2025_6918" not in current_table
+    assert "Käser Jacober (2014)" in current_table
+
+
+def test_scientific_text_does_not_expose_internal_reconciliation_history() -> None:
+    tcc_text = "\n".join(
+        _read(path)
+        for path in sorted(TCC_ROOT.rglob("*.tex"))
+    )
+    tcc_text += "\n" + _read(TCC_ROOT / "index.html")
+    tcc_text += "\n" + _read(MMAT_LATEX)
+    tcc_text += "\n" + _read(MMAT_CURRENT_LATEX)
+    lowered = tcc_text.lower()
+    for forbidden in (
+        "ptc",
+        "snapshot",
+        "override",
+        "ledger",
+        "nova rodada",
+        "execução histórica",
+        "reexecução",
+        "versão anterior",
+        "arquivo histórico",
+        "julgamentos históricos",
+        "adjudicação",
+        "execução futura",
+        "reavaliação",
+    ):
+        assert forbidden not in lowered, f"Internal reconciliation term remains: {forbidden}"
+    for operational_id in ("id 1", "id 6916", "id 6917", "id 6918", "id 6920", "id 6921", "id 6923"):
+        assert operational_id not in lowered, f"Operational study identifier remains: {operational_id}"
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:
