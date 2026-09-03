@@ -1,11 +1,12 @@
 # 📚 Revisão Sistemática da Literatura - CCW Research
 
-> **Baseline vigente (31/08/2026):** o banco consolidado contém 11.904
-> registros e 16 registros retidos operacionalmente (15 classificados
-> provisoriamente como empíricos, com 6918 em *hold* por conflito temporal, e
-> o protocolo contextual 6921). As seções históricas abaixo preservam os
-> números de 9.431 registros e 17 incluídos apenas como contexto; a fonte atual
-> está em [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](../docs/RECONCILIACAO-BASELINE-2026-08-31.md).
+> **População adjudicada atual (03/09/2026):** o snapshot versionado preserva
+> 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e
+> 11.877 registros na triagem. Após a adjudicação de escopo, são 18 registros
+> retidos (17 candidatos empíricos provisórios e o protocolo contextual 6921).
+> O registro 6918 foi corrigido para 2014 e excluído do recorte 2015--2026.
+> A baseline operacional de 31/08/2026 (16 retidos) e os números históricos de
+> 9.431 registros e 17 incluídos permanecem preservados para rastreabilidade.
 
 O manifesto histórico [`research/data/protocol_execution_2025.json`](data/protocol_execution_2025.json), extraído do contexto do PR #23, preserva a estratégia e os limites da execução de 2025. Ele é evidência histórica, não a fonte de verdade do snapshot atual; em particular, registra a divergência não resolvida entre 2.517 duplicatas reportadas e `total_removed=2494` no artefato SQLite histórico.
 
@@ -31,6 +32,9 @@ cp research/.env.example research/.env
 # 3. Executar pipeline completo
 python -m research.src.cli run-pipeline
 python -m research.src.cli export
+
+# Reproduzir a população adjudicada e seus relatórios sem SQLite
+python -m research.src.processing.adjudicated_snapshot
 
 # 4. Ver resultados
 # Os arquivos são gerados em research/exports/
@@ -138,7 +142,7 @@ registro no snapshot operacional.
 
 Revisão por pares, tipo documental, texto completo e evidência empírica
 continuam critérios de confirmação científica: a seleção operacional não os
-verificou individualmente para todos os 16 registros. Essa distinção explica
+verificou individualmente para todos os 18 registros. Essa distinção explica
 por que o conjunto atual é chamado de operacional/provisório e por que o MMAT
 e a adjudicação dos overrides permanecem sob revisão.
 
@@ -154,23 +158,34 @@ e a adjudicação dos overrides permanecem sob revisão.
 O pipeline segue as fases padrão: Identificação → Deduplicação → Triagem →
 Elegibilidade → Inclusão.
 
-**Baseline vigente (31/08/2026)**:
+**Baseline operacional anterior (31/08/2026; preservada como histórico)**:
 
 - **Identificação**: 11.904 registros brutos no snapshot operacional
 - **Deduplicação determinística**: 27 registros removidos (25 DOI + 2 URL exata; um grupo de URL é misto quanto ao DOI)
 - **Triagem**: 11.877 avaliados; 9.391 excluídos; 2.486 avançaram
-- **Elegibilidade**: 2.486 avaliados; 2.470 excluídos; 16 retidos
+- **Elegibilidade**: 2.486 avaliados; 2.470 excluídos; 16 retidos antes da adjudicação
 - **Auditoria de candidatos**: 23 candidatos operacionais; 7 overrides manuais registrados, dos quais 4 aguardam adjudicação de escopo
 - **Auditoria de identidade**: 25 excedentes DOI e 2 excedentes URL removidos deterministicamente; a auditoria bruta tem 257 excedentes em títulos, dos quais 232 permanecem apenas por título após a remoção DOI/URL e sem remoção automática
-- **Retidos**: 16 registros operacionais; 15 são provisoriamente empíricos (6918 em hold por conflito temporal) e o protocolo 6921 permanece contextual
+- **Retidos antes da adjudicação**: 16 registros operacionais; 15 eram provisoriamente empíricos (6918 em hold por conflito temporal) e o protocolo 6921 permanecia contextual
 
-Os sete overrides manuais já estão contabilizados nas exclusões de elegibilidade,
-mas quatro ainda aguardam adjudicação científica de escopo. O resultado atual
-decorre de nova ingestão, correção do scoring e auditoria de pertinência; não é
-uma simples troca de 17 por 16. O SQLite permanece como fonte operacional
-local, ignorada pelo Git. Para reconstituir o snapshot sem distribuir o banco,
-use os exports versionados e
-`research/exports/reports/reproducibility_manifest.json`.
+As oito decisões que alteram a população atual estão no ledger
+research/data/adjudicated_population_decisions.csv. Elas aplicam as regras de
+domínio, centralidade computacional, completude empírica, especificidade do
+desfecho e tipo documental. O efeito não é uma simples troca de 17 por 16:
+três registros foram recuperados para a população, um foi retirado por ano
+fora do recorte e os demais permaneceram excluídos por razões científicas
+explícitas. O SQLite permanece local e não versionado; para reconstituir o
+snapshot sem distribuir o banco, use os exports versionados e
+research/src/processing/adjudicated_snapshot.py.
+
+**População adjudicada atual (03/09/2026)**:
+
+- **Identificação**: 11.904 registros; 27 remoções determinísticas (25 DOI + 2 URL)
+- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 avançaram
+- **Elegibilidade**: 2.486 registros; 2.468 excluídos; 18 retidos
+- **Retidos**: 17 candidatos empíricos provisórios e o protocolo contextual 6921
+- **Percentuais**: 78,89% excluídos na triagem; 20,88% avançaram; 99,28% excluídos na elegibilidade; 0,72% incluídos da elegibilidade; 0,15% incluídos da identificação
+- **Identidade**: 25 excedentes DOI + 2 excedentes URL removidos; 257 excedentes de título continuam como candidatos de auditoria, dos quais 232 são apenas por título
 
 **Baseline histórico (25/11/2025; não vigente)**:
 
@@ -271,8 +286,8 @@ escopo de hashes do manifesto é o snapshot de pesquisa; a reconciliação
 editorial e os artefatos compilados do TCC aparecem como documentos
 acompanhantes, verificados pelos PRs que os possuem. O arquivo de referências
 derivadas do pipeline é `research/exports/references/included_papers.bib` e
-contém somente os 16 registros retidos atuais (15 registros provisoriamente
-empíricos, com 6918 em hold, e o protocolo contextual 6921). Referências
+contém somente os 18 registros retidos atuais (17 candidatos empíricos
+provisórios e o protocolo contextual 6921). Referências
 pedagógicas, metodológicas, de avaliação e técnicas usadas na fundamentação
 permanecem na bibliografia completa do TCC; são externas ao conjunto da revisão
 e não entram na contagem PRISMA.
@@ -593,7 +608,7 @@ python -m research.src.cli run-pipeline
 - **Taxa de sucesso das APIs**: >95% (exceto CORE ~70%)
 - **Tempo de execução**: variável; depende das APIs, limites e cache
 - **Deduplicação determinística**: 27 registros removidos no fluxo (25 excedentes por DOI + 2 por URL exata; um grupo de URL é misto quanto ao DOI); a flag persistida está zerada
-- **Taxa de inclusão final**: ~0,13% (16 de 11.904)
+- **Taxa de inclusão atual**: 0,15% (18 de 11.904)
 - **Cobertura temporal**: 2015-2026 (12 anos)
 - **Cache**: contadores acumulados e dependentes do histórico; não são uma métrica fixa de reprodutibilidade
 
@@ -601,8 +616,8 @@ python -m research.src.cli run-pipeline
 
 - **Papers com abstract**: 11.885/11.904 (99,8%)
 - **Papers com DOI**: 10.682/11.904 (89,7%)
-- **Papers com ano preenchido**: 11.904/11.904 (100%); 254 registros estão fora do intervalo analítico 2015--2026
-- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e ledger de overrides versionados; nova coleta pode variar e a adjudicação substantiva final dos 7 overrides ainda está pendente (4 exigem revisão primária/de escopo e 3 têm razão proposta)
+- **Papers com ano preenchido**: 11.904/11.904 (100%) no banco bruto; 255 registros do export versionado estão fora do intervalo analítico 2015--2026 após a correção de 6918 para 2014
+- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e ledgers de adjudicação versionados; nova coleta pode variar e a avaliação MMAT dos 17 candidatos empíricos continua provisória
 
 ---
 

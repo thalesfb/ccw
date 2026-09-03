@@ -34,24 +34,24 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
 def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     report = validate_current_artifacts()
 
-    assert report["current_denominator"] == 16
+    assert report["current_denominator"] == 18
     assert report["historical_denominator"] == 17
-    assert report["criterion_rows"] == 16
-    assert report["primary_source_rows"] == 16
-    assert report["synthesis_scope_rows"] == 16
-    assert report["empirical_evidence_rows"] == 15
+    assert report["criterion_rows"] == 18
+    assert report["primary_source_rows"] == 18
+    assert report["synthesis_scope_rows"] == 18
+    assert report["empirical_evidence_rows"] == 17
     assert report["contextual_protocol_rows"] == 1
     assert report["primary_text_reviewed_rows"] == 9
-    assert report["source_or_period_hold_rows"] == 1
-    assert report["source_or_period_hold_ids"] == ["6918"]
+    assert report["source_or_period_hold_rows"] == 0
+    assert report["source_or_period_hold_ids"] == []
     assert report["evidence_levels"]["primary_full_text_reviewed_externally"] == 9
-    assert report["evidence_levels"]["abstract_and_metadata_only"] == 5
-    assert report["evidence_levels"]["metadata_only"] == 1
+    assert report["evidence_levels"]["abstract_and_metadata_only"] == 8
+    assert report["evidence_levels"]["metadata_only"] == 0
     assert report["evidence_levels"]["protocol_or_proposal_not_applicable"] == 1
     assert report["non_ct_criterion_decisions"] > 0
     assert report["final_ready"] is False
     assert report["blocking_reasons"]
-    assert any("source/year eligibility hold" in reason for reason in report["blocking_reasons"])
+    assert not any("source/year eligibility hold" in reason for reason in report["blocking_reasons"])
 
 
 def test_current_mmat_evidence_matches_criterion_values() -> None:
@@ -75,6 +75,7 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
     assert CURRENT_TABLE.read_text(encoding="utf-8") == render_current_table(
         load_current_table_rows()
     )
-    assert "6918 & Kaser2025\\_6918 & N\u00e3o confirmado" in CURRENT_TABLE.read_text(
-        encoding="utf-8"
-    )
+    table = CURRENT_TABLE.read_text(encoding="utf-8")
+    assert "14 & Enhancing2025\\_012 & Quant. n\u00e3o rand." in table
+    assert "6919 & UniversityMathematics2026\\_6919 & M\u00e9todos mistos" in table
+    assert "6918 &" not in table

@@ -1,17 +1,19 @@
 snapshot_date,study_id,study_key,operational_inclusion,synthesis_role,empirical_mmat_applicability,disposition_note
-2026-08-31,1,Math2021_001,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,2,Implementation2025_000,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,3,Multimodels2020_002,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,4,Analysis2022_003,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,5,Design2025_004,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,6,Identifying2017_006,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,7,Innovative2023_005,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,8,Computational2017_008,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,9,Machine2019_007,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,10,Machine2024_009,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,6916,Villegas2025_6916,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,6917,Ozseven2026_6917,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,6918,Kaser2025_6918,retained_in_current_snapshot,empirical_evidence,applicable,Included operationally but held from final empirical interpretation; official ETH metadata dates the identified thesis to 2014 while the operational snapshot stores 2025, so temporal eligibility and primary-source appraisal require adjudication
-2026-08-31,6920,Echeveria2025_6920,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; final eligibility and MMAT adjudication remain provisional
-2026-08-31,6921,Imperatrice2025_6921,retained_in_current_snapshot,contextual_protocol,not_applicable,Protocol or proposal retained for contextual mapping and audit trace; excluded from empirical synthesis and empirical MMAT claims
-2026-08-31,6923,Zeng2025_6923,retained_in_current_snapshot,empirical_evidence,applicable,Included in the current evidence set; primary dissertation text remains unrecovered and MMAT is provisional
+2026-09-03,1,Math2021_001,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,2,Implementation2025_000,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,3,Multimodels2020_002,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,4,Analysis2022_003,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,5,Design2025_004,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6,Identifying2017_006,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,7,Innovative2023_005,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,8,Computational2017_008,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,9,Machine2019_007,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,10,Machine2024_009,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,14,Enhancing2025_012,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6915,He2025_6915,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6916,Villegas2025_6916,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6917,Ozseven2026_6917,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6919,UniversityMathematics2026_6919,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6920,Echeveria2025_6920,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6921,Imperatrice2025_6921,retained_in_current_snapshot,contextual_protocol,not_applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.
+2026-09-03,6923,Zeng2025_6923,retained_in_current_snapshot,empirical_evidence,applicable,Retained after the 2026-09-03 scope adjudication; final MMAT assessment remains provisional.

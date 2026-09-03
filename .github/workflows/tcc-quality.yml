@@ -53,6 +53,9 @@ jobs:
         working-directory: research
         run: python -m src.validation.versioned_snapshot
 
+      - name: Validate approved adjudication replay
+        run: python -m research.src.processing.adjudicated_snapshot --check
+
       - name: Check bibliography audit coverage
         working-directory: research
         run: python -m src.validation.bibliography_audit
@@ -76,6 +79,7 @@ jobs:
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
             tests/test_temporal_scope.py \
+            tests/test_adjudicated_snapshot.py \
             tests/test_tcc_advisor_feedback.py \
             tests/test_versioned_snapshot.py \
             -q --tb=short 2>&1 | tee advisor-tests.log

@@ -2,7 +2,7 @@
 
 PR #23 contained useful protocol checks, but its expectations were tied to the
 17-study historical snapshot.  These tests preserve the valid intent of those
-checks while asserting the reconciled 16-study snapshot and the corrected token
+checks while asserting the adjudicated 18-study snapshot and the corrected token
 boundaries in the selector/scoring implementation.
 """
 
@@ -65,21 +65,21 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     assert prisma["screening"] == 11877
     assert prisma["screening_excluded"] == 9391
     assert prisma["eligibility"] == 2486
-    assert prisma["eligibility_excluded"] == 2470
-    assert prisma["included"] == 16
+    assert prisma["eligibility_excluded"] == 2468
+    assert prisma["included"] == 18
     assert prisma["stage_percentages"] == {
         "screening_excluded_of_identification": 78.89,
         "screening_advanced_of_identification": 20.88,
-        "eligibility_excluded_of_eligibility": 99.36,
-        "included_of_eligibility": 0.64,
-        "included_of_identification": 0.13,
+        "eligibility_excluded_of_eligibility": 99.28,
+        "included_of_eligibility": 0.72,
+        "included_of_identification": 0.15,
     }
     assert prisma["deduplication_audit"]["doi"]["excess_rows"] == 25
     assert prisma["deduplication_audit"]["url"]["excess_rows"] == 2
     assert prisma["deduplication_audit"]["confirmed_semantic_duplicates"] == 0
 
 
-def test_current_export_has_exactly_the_operational_sixteen_ids() -> None:
+def test_current_export_has_exactly_the_adjudicated_eighteen_ids() -> None:
     with PAPERS_PATH.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
@@ -102,8 +102,10 @@ def test_current_export_has_exactly_the_operational_sixteen_ids() -> None:
         10,
         6916,
         6917,
-        6918,
+        14,
+        6915,
         6920,
+        6919,
         6921,
         6923,
     }

@@ -1,4 +1,4 @@
-"""Validation helpers for the current 16-record MMAT reassessment.
+"""Validation helpers for the current 18-record MMAT reassessment.
 
 The historical 17-row appraisal remains archived in
 ``mmat_assessments.csv``.  This module deliberately validates a separate
@@ -15,7 +15,7 @@ from typing import Any, Iterable
 
 
 CURRENT_STUDY_IDS: tuple[int, ...] = (
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 6916, 6917, 6918, 6920, 6921, 6923
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923
 )
 VALID_RESPONSES = {"Y", "N", "CT"}
 REQUIRED_CRITERIA = ("q1", "q2", "q3", "q4", "q5")
