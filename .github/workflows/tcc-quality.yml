@@ -49,6 +49,10 @@ jobs:
           python -m compileall -q research/src
           python -m compileall -q prototype/tcc_prototype
 
+      - name: Validate versioned research snapshot
+        working-directory: research
+        run: python -m src.validation.versioned_snapshot
+
       - name: Check bibliography audit coverage
         working-directory: research
         run: python -m src.validation.bibliography_audit
@@ -58,7 +62,8 @@ jobs:
         run: python -m src.analysis.mmat_tcc_table --check
 
       - name: Check canonical MMAT CSV export
-        run: cmp research/data/mmat_assessments.csv research/exports/analysis/mmat_assessment.csv
+        working-directory: research
+        run: cmp data/mmat_assessments.csv exports/analysis/mmat_assessment.csv
 
       - name: Run research regression tests
         working-directory: research
@@ -72,6 +77,7 @@ jobs:
             tests/test_mmat_artifacts.py \
             tests/test_temporal_scope.py \
             tests/test_tcc_advisor_feedback.py \
+            tests/test_versioned_snapshot.py \
             -q --tb=short 2>&1 | tee advisor-tests.log
           status=${PIPESTATUS[0]}
           exit "$status"
