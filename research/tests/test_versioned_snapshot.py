@@ -22,13 +22,13 @@ def _write_fixture(
 ) -> tuple[Path, Path, Path]:
     papers_path = root / "papers.csv"
     with papers_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=("id", "selection_stage"))
+        writer = csv.DictWriter(handle, fieldnames=("id", "selection_stage", "year"))
         writer.writeheader()
         writer.writerows(
             [
-                {"id": 303, "selection_stage": "screening"},
-                {"id": 202, "selection_stage": "eligibility"},
-                {"id": included_id, "selection_stage": "included"},
+                {"id": 303, "selection_stage": "screening", "year": 2020},
+                {"id": 202, "selection_stage": "eligibility", "year": 2021},
+                {"id": included_id, "selection_stage": "included", "year": 2022},
             ]
         )
 
@@ -38,6 +38,12 @@ def _write_fixture(
             {
                 "statistics": {
                     "total_papers": 4,
+                    "years": {
+                        "min": 2020,
+                        "max": 2022,
+                        "distribution": {"2020": 1, "2021": 1, "2022": 1},
+                        "out_of_range_count": 0,
+                    },
                     "prisma": {
                         "identification": 4,
                         "duplicates_removed": 1,
@@ -112,3 +118,42 @@ def test_scope_drift_is_rejected_against_papers(tmp_path: Path) -> None:
         assert "study IDs disagree" in str(exc)
     else:
         raise AssertionError("scope drift was accepted")
+
+
+def test_year_distribution_drift_is_rejected(tmp_path: Path) -> None:
+    paths = _write_fixture(tmp_path)
+    summary = json.loads(paths[1].read_text(encoding="utf-8"))
+    summary["statistics"]["years"]["distribution"]["2020"] = 2
+    paths[1].write_text(json.dumps(summary), encoding="utf-8")
+
+    try:
+        validate_versioned_snapshot(
+            papers_path=paths[0], summary_path=paths[1], scope_path=paths[2]
+        )
+    except ValueError as exc:
+        assert "year distribution" in str(exc)
+    else:
+        raise AssertionError("year distribution drift was accepted")
+
+
+def test_out_of_range_rows_are_accounted_for(tmp_path: Path) -> None:
+    paths = _write_fixture(tmp_path)
+    with paths[0].open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    rows[0]["year"] = "2019"
+    summary = json.loads(paths[1].read_text(encoding="utf-8"))
+    summary["statistics"]["years"]["distribution"]["2020"] = 0
+    paths[1].write_text(json.dumps(summary), encoding="utf-8")
+    with paths[0].open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=("id", "selection_stage", "year"))
+        writer.writeheader()
+        writer.writerows(rows)
+
+    try:
+        validate_versioned_snapshot(
+            papers_path=paths[0], summary_path=paths[1], scope_path=paths[2]
+        )
+    except ValueError as exc:
+        assert "out-of-range" in str(exc)
+    else:
+        raise AssertionError("out-of-range row drift was accepted")

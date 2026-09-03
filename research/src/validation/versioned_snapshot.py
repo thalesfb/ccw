@@ -20,7 +20,7 @@ PAPERS_PATH = RESEARCH_ROOT / "exports" / "analysis" / "papers.csv"
 SUMMARY_PATH = RESEARCH_ROOT / "exports" / "reports" / "summary.json"
 SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
 
-PAPERS_REQUIRED_FIELDS = ("id", "selection_stage")
+PAPERS_REQUIRED_FIELDS = ("id", "selection_stage", "year")
 SCOPE_REQUIRED_FIELDS = ("study_id",)
 PRISMA_FIELDS = (
     "identification",
@@ -116,6 +116,98 @@ def _prisma_counts(summary: dict[str, Any], path: Path) -> dict[str, int]:
     return counts
 
 
+def _temporal_accounting(
+    summary: dict[str, Any],
+    summary_path: Path,
+    papers: list[dict[str, str]],
+    papers_path: Path,
+) -> dict[str, Any]:
+    """Check that the reported year distribution accounts for every row.
+
+    The committed snapshot intentionally keeps rows outside the analytical
+    range in ``papers.csv`` while reporting them separately in
+    ``summary.json``. The range itself is represented by the distribution
+    keys, so this check remains valid when a future snapshot changes the
+    protocol dates.
+    """
+
+    statistics = summary.get("statistics")
+    _require(isinstance(statistics, dict), f"{summary_path} lacks statistics")
+    years = statistics.get("years")
+    _require(isinstance(years, dict), f"{summary_path} lacks statistics.years")
+    distribution = years.get("distribution")
+    _require(
+        isinstance(distribution, dict) and distribution,
+        f"{summary_path} has an invalid statistics.years.distribution",
+    )
+
+    reported_years: dict[int, int] = {}
+    for raw_year, count in distribution.items():
+        try:
+            year = int(raw_year)
+        except (TypeError, ValueError) as exc:
+            raise VersionedSnapshotError(
+                f"{summary_path} has an invalid year key: {raw_year!r}"
+            ) from exc
+        _require(
+            isinstance(count, int) and not isinstance(count, bool) and count >= 0,
+            f"{summary_path} has an invalid count for year {raw_year!r}: {count!r}",
+        )
+        reported_years[year] = count
+
+    minimum = years.get("min")
+    maximum = years.get("max")
+    _require(
+        isinstance(minimum, int) and not isinstance(minimum, bool)
+        and isinstance(maximum, int)
+        and not isinstance(maximum, bool)
+        and minimum == min(reported_years)
+        and maximum == max(reported_years),
+        f"{summary_path} year bounds disagree with the reported distribution",
+    )
+
+    observed_years: Counter[int] = Counter()
+    for row_number, row in enumerate(papers, start=2):
+        raw_year = row.get("year")
+        try:
+            observed_years[int(raw_year)] += 1
+        except (TypeError, ValueError) as exc:
+            raise VersionedSnapshotError(
+                f"{papers_path} has an invalid year at line {row_number}: "
+                f"{raw_year!r}"
+            ) from exc
+
+    observed_distribution = {
+        year: observed_years[year] for year in reported_years
+    }
+    _require(
+        observed_distribution == reported_years,
+        f"{papers_path} year distribution disagrees with {summary_path}",
+    )
+    observed_out_of_range = sum(
+        count for year, count in observed_years.items() if year not in reported_years
+    )
+    out_of_range = years.get("out_of_range_count")
+    _require(
+        isinstance(out_of_range, int)
+        and not isinstance(out_of_range, bool)
+        and out_of_range >= 0,
+        f"{summary_path} has an invalid statistics.years.out_of_range_count",
+    )
+    _require(
+        observed_out_of_range == out_of_range,
+        f"{papers_path} out-of-range year count disagrees with {summary_path}",
+    )
+    _require(
+        sum(reported_years.values()) + out_of_range == len(papers),
+        f"{summary_path} year accounting does not cover all paper rows",
+    )
+    return {
+        "distribution": dict(sorted(reported_years.items())),
+        "out_of_range_count": out_of_range,
+    }
+
+
 def validate_versioned_snapshot(
     *,
     papers_path: Path | str = PAPERS_PATH,
@@ -144,6 +236,7 @@ def validate_versioned_snapshot(
     )
     stage_counts = Counter(row["selection_stage"] for row in papers)
     prisma = _prisma_counts(summary, summary_path)
+    temporal = _temporal_accounting(summary, summary_path, papers, papers_path)
     expected_stage_counts = {
         "screening": prisma["screening_excluded"],
         "eligibility": prisma["eligibility_excluded"],
@@ -181,6 +274,7 @@ def validate_versioned_snapshot(
         "papers_stage_counts": dict(sorted(stage_counts.items())),
         "included_ids": included_ids,
         "summary_prisma": prisma,
+        "summary_years": temporal,
         "scope_rows": len(scope),
     }
 
