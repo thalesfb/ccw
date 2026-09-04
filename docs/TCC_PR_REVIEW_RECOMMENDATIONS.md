@@ -1,12 +1,12 @@
-# Recomendações para PRs Abertas — 2026-09-01
+# Recomendações para PRs Abertas — 2026-09-03
 
-> **Atualização após a auditoria do PR #34:** estas recomendações foram
+> **Atualização após o merge do PR #55:** estas recomendações foram
 > recalibradas com base no estado remoto dos PRs e no baseline científico
-> vigente. O PR #34 é contexto de reconciliação, não fonte de verdade para
+> vigente. O PR #55 congelou a população adjudicada de 18 registros. O PR #34 é contexto de reconciliação, não fonte de verdade para
 > absorção automática de alterações. O PR #23 não deve ser mesclado por
 > inteiro: suas mudanças precisam ser revisadas e, quando compatíveis,
-> reaplicadas em lotes atômicos sobre a base atual. O PR #20 pode ser avaliado
-> separadamente por tratar de governança documental e não sobrepor o baseline.
+> reaplicadas em lotes atômicos sobre a base atual. O PR #20 já foi mesclado;
+> seus princípios genéricos não alteram a fonte científica do snapshot.
 
 ## Decisão atual para os PRs sob auditoria
 
@@ -14,7 +14,8 @@
 |----|--------------------------|------------------------|
 | #34 | Baseline operacional, correções de pipeline, exports e manuscrito; diff amplo | Não mesclar como unidade única sem revisão final; usar como contexto da reconciliação |
 | #23 | Revisão editorial com sobreposição e conflito no estado remoto | Não mesclar integralmente; extrair somente mudanças compatíveis em PR atômico |
-| #20 | Governança documental, sem sobreposição material com o baseline, mas com pelo menos uma salvaguarda ainda escrita para os 17 estudos | Pode seguir em revisão independente após generalizar essa salvaguarda para o registro vigente; não deve alterar resultados ou referências derivadas |
+| #20 | Governança documental; já incorporado à `main` | Princípios genéricos podem ser reutilizados; não altera resultados ou referências derivadas |
+| #55 | População adjudicada e artefatos de pesquisa; incorporado à `main` | Fonte vigente para 18 registros, 27 remoções determinísticas e ledger de escopo |
 
 Essa decisão preserva a separação entre três tipos de mudança: resultados
 derivados do pipeline, redação/metodologia e governança. Qualquer alteração
@@ -30,7 +31,8 @@ falhas de `source-validation`, e #35 recebeu revisão automatizada do Copilot.
 > O contexto acima e as recomendações para os demais PRs abaixo preservam o
 > diagnóstico histórico de 30/08/2026. Para os PRs #20, #23 e #34, prevalece
 > a decisão atual registrada na seção anterior, baseada no estado remoto
-> consultado novamente em 01/09/2026.
+> consultado novamente após o merge do PR #55. O estado de checks e comentários
+> deve ser consultado novamente antes de qualquer merge.
 
 ## Checks e revisão automatizada verificados
 

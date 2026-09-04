@@ -2,9 +2,13 @@
 
 **Data:** 2026-08-30
 **Autor:** Thales Ferreira Batista
-**Status:** Histórico superseded pela reconciliação do baseline de 31/08/2026
+**Status:** Histórico superseded pela reconciliação da população adjudicada de 03/09/2026
 
-> **Nota:** as tabelas e recomendações abaixo preservam a análise temporal anterior, baseada em 9.431 registros e 17 incluídos. Elas não representam o fluxo vigente. A nova execução consolidou 11.904 registros, avaliou 23 candidatos e registrou 7 overrides manuais, mantendo 16 registros retidos operacionalmente; quatro overrides ainda aguardam adjudicação de escopo. Consulte `docs/RECONCILIACAO-BASELINE-2026-08-31.md` antes de reutilizar qualquer número ou recomendação.
+> **Nota:** as tabelas e recomendações abaixo preservam a análise temporal
+> anterior, baseada em 9.431 registros e 17 incluídos. Elas não representam o
+> fluxo vigente. A população atual está em
+> `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`; o ID 6918 foi
+> corrigido para 2014 e excluído do recorte 2015--2026.
 
 ---
 

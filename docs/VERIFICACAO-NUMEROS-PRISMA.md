@@ -1,10 +1,14 @@
 # Verificação dos Números PRISMA — Esclarecimento
 
-> **Aviso de versão:** esta verificação cobre o baseline histórico de 9.431 registros e 17 incluídos. A fonte atual, validada em 31/08/2026 e atualizada documentalmente em 01/09/2026, é `docs/RECONCILIACAO-BASELINE-2026-08-31.md` e registra 11.904 registros brutos, 27 remoções determinísticas e 16 registros retidos operacionalmente (15 registros provisoriamente empíricos, com 6918 em hold temporal, + 1 protocolo contextual).
+> **Aviso de versão:** esta verificação preserva o baseline histórico de 9.431
+> registros e 17 incluídos e a baseline operacional anterior de 31/08/2026.
+> A fonte vigente, após o PR #55, é
+> `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`, com 18 registros
+> retidos e o ID 6918 corrigido para 2014 e excluído do recorte.
 
-## Estado vigente (31/08/2026)
+## Estado do baseline operacional anterior (31/08/2026)
 
-O banco atual contém **11.904 registros brutos**. O fluxo verificado remove 27
+O snapshot operacional anterior continha **11.904 registros brutos**. O fluxo verificado remove 27
 registros redundantes por DOI/URL antes da triagem: **11.877** avaliados,
 **9.391** excluídos na triagem, **2.486** avançando à elegibilidade, **2.470**
 excluídos na elegibilidade e **16** registros retidos operacionalmente. Desses,

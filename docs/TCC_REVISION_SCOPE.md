@@ -29,8 +29,8 @@ Mudanças já aplicadas incluem palavras-chave separadas por ponto e vírgula, f
 
 ## Regra de adjudicação científica do snapshot vigente
 
-O snapshot de 31/08/2026 é uma representação operacional da execução e não
-converte automaticamente os 16 registros retidos em evidência empírica final.
+O snapshot versionado de 03/09/2026 é uma representação adjudicada do escopo e
+não converte automaticamente os 18 registros retidos em evidência empírica final.
 As regras abaixo devem ser aplicadas antes de qualquer afirmação conclusiva,
 reclassificação de um override ou fechamento do MMAT. Elas não reescrevem as
 contagens do fluxo PRISMA; documentam o gate científico que sucede o filtro
@@ -66,10 +66,10 @@ automatizado.
    não revisadas por pares devem ser excluídas da síntese empírica ou marcadas
    explicitamente como literatura cinzenta, nunca tratadas como equivalentes.
 
-Para cada um dos sete overrides, a decisão final deve registrar a fonte
+Para cada uma das oito decisões de escopo, o ledger deve registrar a fonte
 primária, o localizador, a regra aplicada e a disposição (`include`, `exclude`
-ou `hold`). Enquanto qualquer uma dessas informações estiver ausente, a
-disposição é provisória. O registro operacional de 16 IDs, a matriz de
+ou `hold`). Enquanto qualquer informação metodológica necessária estiver
+ausente, a avaliação de qualidade permanece provisória. O registro versionado de 18 IDs, a matriz de
 evidências e o ledger MMAT devem continuar distinguindo: (a) retenção
 operacional; (b) papel empírico ou contextual; e (c) decisão científica final.
 Essa regra é versionada também em
