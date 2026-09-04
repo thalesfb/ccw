@@ -556,7 +556,7 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "87ade45dd3d35ce4927c18a03745d29579ebe49299fdb4006e5cbcd6d8314b34"
+      "sha256": "9d62f6ac221b9d79d7644a3f7ba5c41c8226c54d08d1c995940ebe8dd6e657ba"
     },
     {
       "path": "research/src/analysis/visualizations.py",

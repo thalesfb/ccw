@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 
 from src.analysis.reports import ReportGenerator
@@ -220,3 +221,32 @@ def test_summary_json_export_does_not_replace_audited_html(tmp_path: Path) -> No
     assert "Auditoria de identidade bibliográfica" in html
     assert "Contexto histórico da deduplicação" in html
     assert "2.517 duplicatas removidas" in html
+
+
+def test_published_summary_images_use_paths_relative_to_the_report() -> None:
+    report_path = REPOSITORY_ROOT / "research" / "exports" / "reports" / "summary_report.html"
+    html = report_path.read_text(encoding="utf-8")
+    image_sources = re.findall(r'<img src="([^"]+)"', html)
+
+    assert len(image_sources) == 6
+    assert all(source.startswith("../visualizations/") for source in image_sources)
+    assert all(
+        (report_path.parent / source).resolve().exists() for source in image_sources
+    )
+    assert "Score médio operacional" in html
+    assert "não é qualidade metodológica" in html
+    assert "Registros Retidos" in html
+
+
+def test_public_pages_do_not_present_operational_scope_as_final_results() -> None:
+    root_html = (REPOSITORY_ROOT / "index.html").read_text(encoding="utf-8")
+    tcc_html = (REPOSITORY_ROOT / "results" / "tcc" / "index.html").read_text(
+        encoding="utf-8"
+    )
+
+    assert "15/15 tests passing" not in root_html
+    assert "Filtro operacional" in root_html
+    assert "não substitui a adjudicação científica final" in root_html
+    assert "números abaixo são explicitamente históricos" in tcc_html
+    assert "2.517" in tcc_html
+    assert "11.904" not in tcc_html

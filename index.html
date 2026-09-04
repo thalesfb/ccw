@@ -320,7 +320,7 @@
                         </div>
                         <div class="stat-card">
                             <span class="number">11.877</span>
-                            <span class="label">Registros após identidade</span>
+                            <span class="label">Registros após deduplicação determinística</span>
                         </div>
                         <div class="stat-card">
                             <span class="number">18</span>
@@ -339,7 +339,7 @@
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
                             <span class="number">0,15%</span>
-                            <span class="label">Taxa de inclusão / identificação</span>
+                            <span class="label">Taxa de retenção / identificação</span>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
                             <span class="number">n/d</span>
@@ -437,7 +437,7 @@
                     <li><strong>4 termos educacionais:</strong> "education", "learning", "educacao", "ensino"</li>
                     <li><strong>Estratégia:</strong> Combinações triplas com operador booleano AND (base_term AND tech_term AND edu_term)</li>
                     <li><strong>Distribuição:</strong> 48 consultas em inglês + 24 consultas em português</li>
-                    <li><strong>Critério de Inclusão:</strong> Pontuação de relevância ≥ 4.0 (escala 0–5)</li>
+                    <li><strong>Filtro operacional:</strong> pontuação de relevância ≥ 4,0 (escala 0–5); não substitui a adjudicação científica final</li>
                 </ul>
             </section>
             
@@ -446,19 +446,20 @@
                 
                 <h3>Objetivo Geral</h3>
                 <p>
-                    Mapear e analisar sistematicamente as aplicações de técnicas computacionais — 
-                    especialmente <strong>machine learning</strong>, <strong>learning analytics</strong> 
-                    e <strong>sistemas de tutoria inteligente</strong> — no contexto da educação matemática, 
-                    identificando tendências, lacunas de pesquisa e oportunidades para o desenvolvimento 
-                    de um modelo computacional (MVP) que auxilie professores na personalização do ensino 
-                    e no diagnóstico de competências.
+                    Mapear e analisar sistematicamente as aplicações de técnicas computacionais —
+                    especialmente <strong>machine learning</strong>, <strong>learning analytics</strong>
+                    e <strong>sistemas de tutoria inteligente</strong> — no contexto da educação matemática,
+                    identificando tendências, lacunas de pesquisa e requisitos para uma futura
+                    especificação técnica e pedagógica que apoie a interpretação docente e a
+                    personalização do ensino. A implementação e a validação experimental não são
+                    resultados vigentes nesta página.
                 </p>
                 
                 <h3>Objetivos Específicos</h3>
                 <ul>
                     <li>✅ <strong>OE1:</strong> Realizar revisão sistemática da literatura com relato orientado pela <strong>guideline PRISMA 2020</strong> para identificar estudos que apliquem técnicas computacionais na educação matemática (2015-2026)</li>
                     <li>✅ <strong>OE2:</strong> Identificar e categorizar as principais abordagens de IA (Machine Learning, Deep Learning, NLP, Educational Data Mining) aplicadas à educação matemática</li>
-                    <li>✅ <strong>OE3:</strong> Classificar as aplicações segundo suas finalidades pedagógicas: tutoria inteligente, diagnóstico, avaliação automatizada, personalização, predição e feedback adaptativo</li>
+                    <li>✅ <strong>OE3:</strong> Classificar as aplicações segundo as finalidades pedagógicas reportadas: tutoria inteligente, avaliação automatizada, personalização, predição e feedback adaptativo</li>
                     <li>✅ <strong>OE4:</strong> Analisar criticamente as metodologias de avaliação utilizadas para validar a eficácia de sistemas computacionais em contextos educacionais</li>
                     <li>✅ <strong>OE5:</strong> Mapear sistematicamente as lacunas de pesquisa, limitações técnicas e desafios reportados nos estudos incluídos</li>
                     <li>✅ <strong>OE6:</strong> Criar um pipeline automatizado e reproduzível para coleta, processamento e análise de literatura científica</li>
@@ -514,7 +515,7 @@
                     </div>
                     <div class="feature-card">
                         <h4>🧪 Pytest</h4>
-                        <p>Framework de testes automatizados (15/15 tests passing)</p>
+                        <p>Framework de testes automatizados e validações de consistência executadas no CI</p>
                     </div>
                     <div class="feature-card">
                         <h4>🚀 GitHub Actions</h4>
