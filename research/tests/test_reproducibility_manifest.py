@@ -37,7 +37,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     snapshot = manifest["snapshot"]
     counts = snapshot["counts"]
 
-    assert manifest["schema_version"] == "1.1"
+    assert manifest["schema_version"] == "1.2"
     assert manifest["database"]["versioned"] is False
     assert manifest["protocol"] == {
         "status": "current_snapshot_protocol",
@@ -59,10 +59,11 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         ),
     }
     assert counts["total_records"] == 11904
+    assert counts["versioned_rows"] == 11877
     assert counts["selection_stage_counts"] == {
-        "screening": 9413,
-        "eligibility": 2475,
-        "included": 16,
+        "screening": 9391,
+        "eligibility": 2468,
+        "included": 18,
     }
     assert counts["prisma"] == {
         "identification": 11904,
@@ -70,8 +71,8 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "screening": 11877,
         "screening_excluded": 9391,
         "eligibility": 2486,
-        "eligibility_excluded": 2470,
-        "included": 16,
+        "eligibility_excluded": 2468,
+        "included": 18,
     }
     assert snapshot["included_ids"] == [
         1,
@@ -84,15 +85,19 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         8,
         9,
         10,
+        14,
+        6915,
         6916,
         6917,
-        6918,
+        6919,
         6920,
         6921,
         6923,
     ]
     assert snapshot["candidate_audit"]["operational_candidates"] == 23
     assert snapshot["candidate_audit"]["manual_overrides_recorded"] == 7
+    assert snapshot["candidate_audit"]["metadata_corrections_recorded"] == 1
+    assert snapshot["candidate_audit"]["current_included"] == 18
     assert "false_positives_removed" not in snapshot["candidate_audit"]
     assert len(snapshot["manual_overrides"]) == 7
     override_ledger = snapshot["manual_override_adjudication"]
@@ -134,7 +139,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
 
     current_mmat = manifest["methodological_appraisal"]["current_mmat_qa"]
     assert current_mmat["final_ready"] is False
-    assert current_mmat["source_or_period_hold_ids"] == ["6918"]
+    assert current_mmat["source_or_period_hold_ids"] == []
     assert current_mmat["primary_text_reviewed_rows"] == 9
 
     assert manifest["artifact_scope"] == "research_snapshot"

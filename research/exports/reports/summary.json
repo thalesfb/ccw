@@ -1,7 +1,7 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais",
-  "generated_at": "01/09/2026 07:08",
+  "generated_at": "03/09/2026 11:46",
   "statistics": {
     "total_papers": 11904,
     "prisma": {
@@ -12,8 +12,8 @@
       "screening": 11877,
       "screening_excluded": 9391,
       "eligibility": 2486,
-      "eligibility_excluded": 2470,
-      "included": 16,
+      "eligibility_excluded": 2468,
+      "included": 18,
       "deduplication_audit": {
         "raw_rows": 11904,
         "operationally_flagged_rows": 0,
@@ -52,14 +52,14 @@
       "stage_percentages": {
         "screening_excluded_of_identification": 78.89,
         "screening_advanced_of_identification": 20.88,
-        "eligibility_excluded_of_eligibility": 99.36,
-        "included_of_eligibility": 0.64,
-        "included_of_identification": 0.13
+        "eligibility_excluded_of_eligibility": 99.28,
+        "included_of_eligibility": 0.72,
+        "included_of_identification": 0.15
       },
       "_audit": {
-        "raw_included_total": 16,
+        "raw_included_total": 18,
         "duplicates_marked_included": 0,
-        "included_without_operational_flag": 16,
+        "included_without_operational_flag": 18,
         "expected_delta": 0,
         "actual_delta": 0
       }
@@ -68,7 +68,7 @@
       "raw_rows": 11904,
       "distinct_doi": 10657,
       "duplicates_removed": 27,
-      "included_without_operational_flag": 16,
+      "included_without_operational_flag": 18,
       "operationally_flagged_rows": 0,
       "deterministic_identity_duplicate_rows": 27,
       "confirmed_semantic_duplicates": 0
@@ -111,16 +111,16 @@
     "stage_percentages": {
       "screening_excluded_of_identification": 78.89,
       "screening_advanced_of_identification": 20.88,
-      "eligibility_excluded_of_eligibility": 99.36,
-      "included_of_eligibility": 0.64,
-      "included_of_identification": 0.13
+      "eligibility_excluded_of_eligibility": 99.28,
+      "included_of_eligibility": 0.72,
+      "included_of_identification": 0.15
     },
     "years": {
       "min": 2015,
       "max": 2026,
       "mean": 2021.6,
       "distribution": {
-        "2025": 1949,
+        "2025": 1948,
         "2024": 1489,
         "2023": 1246,
         "2020": 1100,
@@ -133,7 +133,7 @@
         "2016": 541,
         "2015": 424
       },
-      "out_of_range_count": 254
+      "out_of_range_count": 255
     },
     "databases": {
       "crossref": 5049,
@@ -167,9 +167,9 @@
       "Identificação": 11904,
       "Triagem": 11877,
       "Elegibilidade": 2486,
-      "Incluídos": 16,
+      "Incluídos": 18,
       "Excluídos na Triagem": 9391,
-      "Excluídos na Elegibilidade": 2470
+      "Excluídos na Elegibilidade": 2468
     }
   },
   "config": {},
@@ -189,6 +189,14 @@
       "venue": "Symposium on Intelligent Systems and Informatics",
       "doi": "10.1109/sisy52375.2021.9582522",
       "url": "https://www.semanticscholar.org/paper/d23946361105e17d3234d3fc61af3496d84c2a25"
+    },
+    {
+      "title": "AI-driven predictive models for optimizing mathematics education technology: Enhancing decision-making through educational data mining and meta-analysis",
+      "authors": "Aneng He; Wenwen Yuan; Lai Soon Lee; Tian Tian",
+      "year": 2025,
+      "venue": "SpringerOpen",
+      "doi": "10.1186/s40561-025-00415-z",
+      "url": "https://doi.org/10.1186/s40561-025-00415-z"
     },
     {
       "title": "Adaptive intelligent tutoring systems for STEM education: analysis of the learning impact and effectiveness of personalized feedback",
@@ -250,7 +258,7 @@
       "title": "Machine Learning-based Predictive Analytics of Student Academic Performance in STEM Education",
       "authors": "Vladimir L. Uskov; Jeffrey P. Bakken; Adam Byerly; Ashok Shah",
       "year": 2019,
-      "venue": "N/A",
+      "venue": NaN,
       "doi": "10.1109/educon.2019.8725237",
       "url": "https://openalex.org/W2946865664"
     },
@@ -263,12 +271,12 @@
       "url": "https://openalex.org/W2758976604"
     },
     {
-      "title": "Modeling and Optimizing Computer-Assisted Mathematics Learning in Children",
-      "authors": "Käser Jacober, Tanja",
-      "year": 2025,
-      "venue": "ETH-Zürich",
-      "doi": "10.3929/ethz-a-010265296",
-      "url": "https://doi.org/10.3929/ethz-a-010265296"
+      "title": "Exploring the Integration of Education for Sustainable Development into University Mathematics: Insights from SiC Thickness Measurement in Advanced Industrial Applications",
+      "authors": "Chenxi Xia; Shaobo Xu; Yuhan Gong; Hongling Ding",
+      "year": 2026,
+      "venue": "Multidisciplinary Digital Publishing Institute",
+      "doi": "10.3390/su18041900",
+      "url": "https://doi.org/10.3390/su18041900"
     },
     {
       "title": "Machine learning methods as auxiliary tool for effective mathematics teaching",
@@ -287,18 +295,26 @@
       "url": "https://www.semanticscholar.org/paper/fd7f5d1b954679042fd577dab7c54b12c0412489"
     },
     {
+      "title": "Enhancing Student Achievement in Circle Theorems: Integrating Computer Animation with the Jigsaw Cooperative Learning Model",
+      "authors": "Rahmat Opoku Nyantah; Nana Kena Frempong; Ernest Larbi",
+      "year": 2025,
+      "venue": "International Journal of Mathematics and Mathematics Education",
+      "doi": "10.56855/ijmme.v3i2.1299",
+      "url": "https://doi.org/10.56855/ijmme.v3i2.1299"
+    },
+    {
       "title": "Beyond  the  traditional  classroom:  innovation  and  inclusion  in  math teaching with AI",
       "authors": "R. C. Fabiola Imperatrice; Lucia Melchiorre; Domenico Lorusso; Domenico Santoro; Luca Grilli",
       "year": 2025,
-      "venue": "N/A",
-      "doi": "",
+      "venue": NaN,
+      "doi": NaN,
       "url": ""
     },
     {
       "title": "Multimodal neurophysiological measurement of cognitive load during math problem solving in 4th graders",
       "authors": "Zeng, Jialing",
       "year": 2025,
-      "venue": "N/A",
+      "venue": NaN,
       "doi": "10.7916/2q6y-bm58",
       "url": "https://doi.org/10.7916/2q6y-bm58"
     }

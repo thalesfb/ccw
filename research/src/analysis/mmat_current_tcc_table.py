@@ -1,7 +1,7 @@
 """Render the current preliminary MMAT reassessment for the TCC.
 
 The output is deliberately labelled preliminary.  It is generated from the
-current 16-record ledger and does not assign an overall quality score.
+current 18-record ledger and does not assign an overall quality score.
 """
 
 from __future__ import annotations
@@ -46,7 +46,7 @@ STATUS_LABELS = {
 def load_rows(path: Path = DATA_PATH) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    expected_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 6916, 6917, 6918, 6920, 6921, 6923]
+    expected_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923]
     ids = [int(row["study_id"]) for row in rows]
     if ids != expected_ids:
         raise ValueError(f"Expected current MMAT IDs {expected_ids}; found {ids}")
@@ -119,7 +119,7 @@ def render_table(rows: list[dict[str, str]]) -> str:
     lines.extend(
         [
             r"\end{longtable}",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação pelo supervisor permanece pendente. O ID 6921 foi retido apenas como protocolo/proposta contextual e não integra a síntese empírica nem uma avaliação MMAT empírica.",
+            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação metodológica pelo supervisor permanece pendente. O ID 6921 foi retido apenas como protocolo/proposta contextual e não integra a síntese empírica nem uma avaliação MMAT empírica. O ID 6918 foi excluído do escopo atual por ano bibliográfico 2014, fora do período 2015--2026.",
             r"\end{landscape}",
         ]
     )

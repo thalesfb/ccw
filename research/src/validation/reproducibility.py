@@ -24,6 +24,7 @@ from ..processing.dedup import normalize_doi
 from ..analysis.mmat_current import validate_current_artifacts
 from ..config import load_config
 from ..search_terms import get_all_queries
+from .versioned_snapshot import validate_versioned_snapshot
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -87,11 +88,11 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/exports/references/included_papers.bib",
-        "BibTeX containing only the 16 pipeline-derived retained records (15 provisional empirical candidates plus contextual protocol)",
+        "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
     ),
     (
         "research/data/mmat_current_study_registry.csv",
-        "current 16-record MMAT registry, separate from the historical 17-study appraisal",
+        "current 18-record MMAT registry, separate from the historical 17-study appraisal",
     ),
     (
         "research/data/mmat_primary_sources_manifest.csv",
@@ -104,6 +105,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     (
         "research/data/current_synthesis_scope.csv",
         "explicit empirical/contextual role for each current retained record",
+    ),
+    (
+        "research/data/adjudicated_population_decisions.csv",
+        "approved row-level scope decisions used to derive the current population",
     ),
     (
         "research/data/current_eligibility_protocol.csv",
@@ -170,8 +175,12 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
         "versioned generator for this reproducibility manifest",
     ),
     (
+        "research/src/processing/adjudicated_snapshot.py",
+        "SQLite-independent transformation from the versioned row export and adjudication ledger",
+    ),
+    (
         "research/src/analysis/mmat_current.py",
-        "versioned validator for the current 16-record MMAT artifacts",
+        "versioned validator for the current 18-record MMAT artifacts",
     ),
     (
         "research/src/analysis/mmat_current_tcc_table.py",
@@ -179,7 +188,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/exports/references/mmat_current_tcc_table.tex",
-        "preliminary current 16-record MMAT table included by the TCC",
+        "preliminary current 18-record MMAT table included by the TCC",
     ),
     (
         "research/requirements.txt",
@@ -444,6 +453,88 @@ def _database_snapshot(db_path: Path) -> dict[str, Any]:
     }
 
 
+def _versioned_snapshot(root: Path) -> dict[str, Any]:
+    """Build the manifest snapshot from committed artifacts, not SQLite.
+
+    The local database still exists for operational diagnostics, but it does
+    not contain the supervisor-approved scope decisions.  The committed CSV,
+    summary and scope ledger are therefore the only valid source for the
+    current scientific population in this manifest.
+    """
+
+    facts = validate_versioned_snapshot(
+        papers_path=root / "research" / "exports" / "analysis" / "papers.csv",
+        summary_path=root / "research" / "exports" / "reports" / "summary.json",
+        scope_path=root / "research" / "data" / "current_synthesis_scope.csv",
+    )
+    summary_path = root / "research" / "exports" / "reports" / "summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    statistics = summary["statistics"]
+    prisma = statistics["prisma"]
+    decisions_path = root / "research" / "data" / "adjudicated_population_decisions.csv"
+    with decisions_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        decisions = list(csv.DictReader(handle))
+    overrides_path = root / MANUAL_OVERRIDE_ADJUDICATION
+    with overrides_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        override_rows = list(csv.DictReader(handle))
+    identity_audit = dict(statistics["deduplication_audit"])
+    identity_audit["deterministic_identity_duplicate_rows_by_identifier"] = {
+        "doi": int(identity_audit["doi"]["excess_rows"]),
+        "url": int(identity_audit["url"]["excess_rows"]),
+        "persisted_flag": int(identity_audit.get("operationally_flagged_rows", 0)),
+    }
+
+    return {
+        "counts": {
+            "total_records": int(prisma["identification"]),
+            "versioned_rows": facts["papers_rows"],
+            "selection_stage_counts": facts["papers_stage_counts"],
+            "prisma": {
+                key: int(prisma[key])
+                for key in (
+                    "identification",
+                    "duplicates_removed",
+                    "screening",
+                    "screening_excluded",
+                    "eligibility",
+                    "eligibility_excluded",
+                    "included",
+                )
+            },
+        },
+        "included_ids": facts["included_ids"],
+        "deduplication_audit": identity_audit,
+        "manual_overrides": [
+            {"id": int(row["study_id"])}
+            for row in override_rows
+        ],
+        "adjudicated_population_decisions": [
+            {
+                "study_id": int(row["study_id"]),
+                "final_disposition": row["final_disposition"],
+                "final_selection_stage": row["final_selection_stage"],
+                "final_year": int(row["final_year"]),
+                "decision_status": row["decision_status"],
+            }
+            for row in decisions
+        ],
+        "candidate_audit": {
+            "pre_adjudication_included": 16,
+            "operational_candidates": 23,
+            "manual_overrides_recorded": 7,
+            "metadata_corrections_recorded": 1,
+            "current_included": facts["summary_prisma"]["included"],
+            "interpretation": (
+                "The 23-record candidate universe is preserved as historical "
+                "context: 16 operationally retained records plus seven manual "
+                "overrides. The current 18-record population is derived by the "
+                "approved scope decisions and the 6918 year correction; it is "
+                "not a new collection or an additional PRISMA stage."
+            ),
+        },
+    }
+
+
 def _artifact_manifest(root: Path) -> list[dict[str, str]]:
     artifacts = []
     for relative_path, role in ARTIFACTS:
@@ -667,7 +758,11 @@ def generate_manifest(
     if not destination.is_absolute():
         destination = root / destination
 
-    snapshot = _database_snapshot(source_db)
+    # The database is retained as a local operational diagnostic.  The
+    # committed versioned artifacts are the source of truth for the current
+    # adjudicated population and must drive the manifest snapshot.
+    operational_snapshot = _database_snapshot(source_db)
+    snapshot = _versioned_snapshot(root)
     snapshot["manual_override_adjudication"] = _validate_manual_override_adjudication(
         root / MANUAL_OVERRIDE_ADJUDICATION,
         snapshot["manual_overrides"],
@@ -678,14 +773,16 @@ def generate_manifest(
     )
     mmat_qa = validate_current_artifacts()
     manifest = {
-        "schema_version": "1.1",
-        "snapshot_date": "2026-08-31",
+        "schema_version": "1.2",
+        "snapshot_date": "2026-09-03",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "database": {
             "path": "research/systematic_review.sqlite",
             "versioned": False,
-            "role": "local operational source for states and counts",
+            "role": "local operational source for raw states and diagnostics; "
+            "not the versioned source of the adjudicated population",
         },
+        "operational_database_snapshot": operational_snapshot,
         "protocol": _current_protocol(),
         "snapshot": snapshot,
         "bibliography": {
@@ -696,7 +793,7 @@ def generate_manifest(
             ],
             "reference_audit": "research/data/reference_audit.csv",
             "separation_rule": (
-                "The 16 included studies are derived from the review pipeline. "
+                "The 18 included studies are derived from the review pipeline. "
                 "Methodological, pedagogical, assessment and technical references "
                 "are external to the pipeline study set and remain in the complete TCC bibliography."
             ),
@@ -705,7 +802,7 @@ def generate_manifest(
             "current_mmat_qa": mmat_qa,
             "interpretation": (
                 "The current MMAT ledger is a criterion-level preliminary record. "
-                "A source/year hold or pending adjudication blocks any final quality claim."
+                "Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
             ),
         },
         "artifact_scope": "research_snapshot",
@@ -727,9 +824,10 @@ def generate_manifest(
                 "Compare artifact SHA-256 values with this manifest.",
                 "Read PRISMA counts from research/exports/reports/summary.json.",
                 "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
-                "Read the 16 pipeline-derived citations from research/exports/references/included_papers.bib.",
-                "Read proposed evidence and required adjudication actions from research/data/manual_override_adjudication.csv.",
-                "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; its recommendations remain pending supervisor adjudication.",
+                "Read the 18 pipeline-derived citations from research/exports/references/included_papers.bib.",
+                "Read the historical evidence ledger from research/data/manual_override_adjudication.csv.",
+                "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; the final population decision is recorded separately in research/data/adjudicated_population_decisions.csv.",
+                "Read the approved population decisions from research/data/adjudicated_population_decisions.csv and rerun research/src/processing/adjudicated_snapshot.py without SQLite.",
                 "Read research/data/protocol_execution_2025.json only for historical protocol provenance; do not use it as the current baseline.",
             ],
             "rebuild_from_local_database": [
@@ -740,8 +838,8 @@ def generate_manifest(
             "limitations": [
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
-                "The seven manual overrides have a separate evidence ledger, but their substantive individual rationales remain pending supervisor adjudication.",
-                "The current MMAT ledger is preliminary; source retrieval, criterion locators and supervisor adjudication remain required before quality synthesis.",
+                "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
+                "The current 18-record MMAT ledger is preliminary; source retrieval, criterion locators and supervisor adjudication remain required before quality synthesis.",
             ],
         },
     }

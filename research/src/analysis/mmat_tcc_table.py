@@ -2,7 +2,7 @@
 
 The canonical source is ``research/data/mmat_assessments.csv``. This module
 keeps the historical landscape table reproducible and separate from the
-current 16-record reassessment in ``mmat_reassessment_current.csv``. It must
+current 18-record reassessment in ``mmat_reassessment_current.csv``. It must
 not be presented as the current scientific appraisal.
 """
 
@@ -86,7 +86,7 @@ def render_table(rows: List[Dict[str, str]]) -> str:
     """Render the landscape longtable consumed by the TCC."""
     lines = [
         "% Tabela MMAT 2018 histórica gerada de research/data/mmat_assessments.csv",
-        "% Não representa a avaliação vigente dos 16 registros (15 empíricos e 1 contextual).",
+        "% Não representa a avaliação vigente dos 18 registros (17 empíricos e 1 contextual).",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_tcc_table",
         r"\begin{longtable}{|p{2.8cm}|p{2.8cm}|ccccc|p{13.0cm}|}",
         r"\caption{Respostas aos critérios do MMAT 2018.}\label{tab:mmat-avaliacao}\\",

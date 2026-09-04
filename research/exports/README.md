@@ -2,12 +2,13 @@
 
 Este diretório contém as **saídas geradas automaticamente** pelo pipeline de revisão sistemática. Todos os arquivos aqui são **gerados via CLI** e não devem ser editados manualmente.
 
-> **Baseline operacional vigente (31/08/2026):** 11.904 registros brutos no
-> banco; 27 registros redundantes foram removidos deterministicamente por DOI/URL
-> antes da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos,
-> 2.486 na elegibilidade, 2.470 excluídos nessa etapa e 16 registros retidos
-> (15 registros provisoriamente empíricos, com 6918 em hold por conflito temporal,
-> e o protocolo contextual 6921). A auditoria bruta encontrou 257 excedentes em
+> **População adjudicada atual (03/09/2026):** 11.904 registros identificados;
+> 27 registros redundantes foram removidos deterministicamente por DOI/URL antes
+> da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos, 2.486
+> na elegibilidade, 2.468 excluídos nessa etapa e 18 registros retidos (17
+> candidatos empíricos provisórios e o protocolo contextual 6921). O registro
+> 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A auditoria
+> bruta encontrou 257 excedentes em
 > títulos normalizados; após a remoção DOI/URL, 232 excedentes permanecem apenas
 > por título como candidatos de auditoria.
 
@@ -55,6 +56,13 @@ python -m research.src.cli export
 - `analysis/deduplication_identity_audit.csv` - Pares retidos/removidos por identidade DOI/URL
 - `reports/summary_report_*.html` - Relatório visual
 - `visualizations/*.png` - Gráficos PRISMA e temporais
+
+Para reproduzir a população adjudicada e os relatórios a partir dos artefatos
+versionados, sem SQLite, execute:
+
+```bash
+python -m research.src.processing.adjudicated_snapshot
+```
 
 ### 2. Análise Aprofundada
 Enriquece papers com APIs externas (Semantic Scholar) e gera análise temática:
@@ -118,8 +126,8 @@ python -m research.src.cli export-bibtex -o research/references
 # Consulte included_papers.bib como a bibliografia derivada do pipeline.
 ```
 
-`included_papers.bib` contém somente os 16 registros retidos derivados do
-pipeline (15 registros provisoriamente empíricos, com 6918 em hold, e o
+`included_papers.bib` contém somente os 18 registros retidos derivados do
+pipeline (17 candidatos empíricos provisórios e o
 protocolo contextual 6921). O
 TCC mantém separadamente referências metodológicas, pedagógicas, de avaliação
 e técnicas em `results/tcc/referencias.bib` e
@@ -182,12 +190,12 @@ python -m research.src.cli deep-analysis
 | Total de registros brutos no banco | 11.904 |
 | Remoções determinísticas por DOI/URL | 27 |
 | Registros avaliados na triagem | 11.877 |
-| Registros retidos | 16 (15 provisoriamente empíricos, 6918 em hold + 1 contextual) |
-| Taxa de inclusão | 0,13% (16/11.904) |
+| Registros retidos | 18 (17 provisoriamente empíricos + 1 contextual) |
+| Taxa de inclusão | 0,15% (18/11.904) |
 | Período analítico configurado | 2015--2026 |
 | Excluídos na triagem | 9.391 (78,89% da identificação) |
 | Avançaram à elegibilidade | 2.486 (20,88% da identificação) |
-| Excluídos na elegibilidade | 2.470 (99,36% da elegibilidade) |
+| Excluídos na elegibilidade | 2.468 (99,28% da elegibilidade) |
 | Bases de dados | Consulte `summary.json` e `papers.csv` |
 
 As frequências temáticas devem ser lidas do `summary.json` do mesmo snapshot;
@@ -198,10 +206,10 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 ## 🚀 Próximos Passos
 
 ### Fase 1 (Revisão Sistemática) - 🟡 BASELINE OPERACIONAL CONGELADO
-- [x] Snapshot atual exportado (11.904 brutos; 11.877 após deduplicação; 16 registros retidos)
+- [x] Snapshot atual exportado (11.904 identificados; 11.877 após deduplicação; 18 registros retidos)
 - [x] Fluxo de triagem e elegibilidade reconciliado
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
-- [x] Exportação BibTeX dos 16 registros retidos do pipeline (15 provisoriamente empíricos, 6918 em hold + 1 contextual)
+- [x] Exportação BibTeX dos 18 registros retidos do pipeline (17 candidatos empíricos provisórios + 1 contextual)
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
 - [x] Reavaliação documental preliminar do MMAT aos 15 registros empíricos com evidência por critério
 - [ ] Recuperação das fontes restantes e adjudicação final do MMAT aos 15 registros empíricos

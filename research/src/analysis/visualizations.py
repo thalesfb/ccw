@@ -129,7 +129,7 @@ class ReviewVisualizer:
             (5, 7.5, f"Remoções operacionais\nregistradas\n(n = {duplicates_removed:,})", exclude_color),
             (5, 6.5, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
             (5, 5.5, f"Registros que passaram triagem\navaliados para elegibilidade\n(n = {eligibility:,})", box_color),
-            (5, 4.5, f"Registros retidos\nno snapshot operacional\n(n = {included:,})", box_color),
+            (5, 4.5, f"Registros retidos\nna população adjudicada\n(n = {included:,})", box_color),
         ]
 
         # Exclusion boxes com contagens corretas de cada estágio
