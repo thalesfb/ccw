@@ -39,8 +39,13 @@ HISTORICAL_PROTOCOL_MANIFEST = "research/data/protocol_execution_2025.json"
 # research snapshot manifest to generate or validate.
 COMPANION_DOCUMENTS: tuple[tuple[str, str, str], ...] = (
     (
+        "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md",
+        "current adjudicated population reconciliation",
+        "documentation PR",
+    ),
+    (
         "docs/RECONCILIACAO-BASELINE-2026-08-31.md",
-        "human-readable reconciliation of current and historical baselines",
+        "historical operational baseline reconciliation",
         "documentation PR",
     ),
     (

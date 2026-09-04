@@ -167,6 +167,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         document["path"] for document in manifest["companion_documents"]
     }
     assert companion_paths == {
+        "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md",
         "docs/RECONCILIACAO-BASELINE-2026-08-31.md",
         "results/tcc/referencias.bib",
         "results/tcc/referencias_pedagogicas.bib",

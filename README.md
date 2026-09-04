@@ -2,7 +2,7 @@
 
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
-> **Baseline vigente (31/08/2026):** a fonte atual da revisão contém 11.904 registros e 16 registros retidos no snapshot operacional. Quinze registros são classificados provisoriamente como empíricos; o ID 6918 está em *hold* por conflito entre o ano oficial da fonte e o ano armazenado no snapshot, e o ID 6921 é um protocolo/proposta mantido somente para contexto e rastreabilidade, fora da síntese empírica. Os números históricos de 9.431 registros e 17 incluídos permanecem neste README apenas como contexto; para o fluxo atual, a reconciliação semântica e o alerta de DOI, consulte [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](docs/RECONCILIACAO-BASELINE-2026-08-31.md).
+> **População vigente (03/09/2026):** o snapshot versionado contém 11.904 registros identificados, 27 remoções determinísticas por DOI/URL, 11.877 registros na triagem e 18 registros retidos após a adjudicação de escopo. São 17 candidatos empíricos provisórios e o protocolo contextual 6921. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. Os números históricos de 9.431 registros e 17 incluídos permanecem apenas como contexto; a reconciliação vigente está em [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
 
 ## Sobre o Projeto
 
@@ -128,11 +128,11 @@ python -m research.src.cli export-bibtex
 
 **Saídas**:
 
-- `research/exports/references/included_papers.bib` - Registros bibliográficos retidos no snapshot vigente (16; 15 provisoriamente empíricos, com 6918 em hold, + 1 protocolo contextual)
+- `research/exports/references/included_papers.bib` - Registros bibliográficos derivados do snapshot vigente (18; 17 candidatos empíricos provisórios + 1 protocolo contextual)
 - `research/exports/references/high_relevance.bib` - Score ≥ 7.0
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
-O arquivo `included_papers.bib` contém somente os 16 registros derivados do
+O arquivo `included_papers.bib` contém somente os 18 registros derivados do
 pipeline. O protocolo 6921 é mantido para rastreabilidade, mas não sustenta
 afirmações empíricas. As referências de fundamentação pedagógica, avaliação,
 metodologia e técnica são mantidas separadamente na bibliografia completa do
@@ -176,23 +176,35 @@ pytest research/tests/test_performance_benchmark.py
 
 ### Fase 1: Revisão Sistemática — baseline reconciliado; MMAT preliminar registrado
 
-**Baseline vigente (31/08/2026):**
+**População vigente após adjudicação (03/09/2026):**
 
 | Etapa | Quantidade | Interpretação |
 |-------|------------|---------------|
-| Identificação | 11.904 | Registros brutos no snapshot operacional |
+| Identificação | 11.904 | Registros identificados no snapshot versionado |
 | Deduplicação | 27 removidos | 25 excedentes por DOI + 2 por URL exata (um grupo misto quanto ao DOI) |
 | Triagem | 11.877 → 2.486 | 9.391 excluídos na triagem |
-| Elegibilidade | 2.486 → 16 | 2.470 excluídos na elegibilidade |
-| Auditoria de candidatos | 23 → 16 | 7 overrides manuais; 4 aguardam adjudicação de escopo |
-| Incluídos | **16** | Snapshot operacional: 15 registros provisoriamente empíricos (6918 em hold) + 1 protocolo contextual |
+| Elegibilidade | 2.486 → 18 | 2.468 excluídos na elegibilidade |
+| Auditoria de candidatos | 23 → 18 | 8 decisões de escopo aprovadas; 3 recuperados, 1 excluído por período e 4 mantidos fora |
+| Retidos | **18** | 17 candidatos empíricos provisórios + 1 protocolo contextual |
 
-Os sete overrides manuais já estão contabilizados nas exclusões de elegibilidade, mas quatro ainda aguardam adjudicação científica de escopo. A alteração envolveu nova ingestão, correção do scoring e revisão de pertinência; não se trata de trocar apenas o número 17 por 16. A fonte de verdade e as ressalvas sobre DOI e MMAT estão em [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](docs/RECONCILIACAO-BASELINE-2026-08-31.md).
+Os sete overrides manuais e a correção temporal do ID 6918 estão registrados
+na população adjudicada. Quatro overrides permaneceram excluídos por escopo,
+enquanto três foram recuperados; a mudança envolveu também a correção do ano
+bibliográfico, a composição do conjunto e a separação entre síntese empírica e
+contextual. Não se trata de trocar apenas um número. A fonte de verdade e as
+ressalvas sobre DOI e MMAT estão em
+[`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
 
 O SQLite é um artefato operacional local e permanece ignorado pelo Git. A
-reconstituição auditável do snapshot é feita pelos exports versionados, pela
-bibliografia dos 16 registros retidos, pelo audit CSV e pelo manifesto de
-reprodutibilidade; uma nova coleta nas APIs pode produzir metadados diferentes.
+reconstituição auditável do snapshot é feita pelos exports versionados, pelo
+ledger de decisões, pela bibliografia dos 18 registros retidos e pelo manifesto
+de reprodutibilidade; uma nova coleta nas APIs pode produzir metadados
+diferentes.
+
+O detalhamento da transição entre a baseline anterior e a população vigente
+está em [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md). O documento
+`docs/RECONCILIACAO-BASELINE-2026-08-31.md` permanece como registro histórico
+da baseline operacional anterior.
 
 **Baseline histórico (documento de 27/11/2025; não vigente)**:
 
@@ -253,7 +265,7 @@ Julho–Novembro de 2026 pertence ao planejamento histórico.
 - [x] Completar protocolo de revisão sistemática
 - [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
 - [x] Realizar busca nas bases de dados (72 queries bilíngues × 4 APIs)
-- [x] Analisar e categorizar os artigos encontrados (16 incluídos no snapshot vigente; 17 no baseline histórico)
+- [x] Analisar e categorizar os artigos encontrados (18 registros retidos no snapshot vigente; 17 estudos no baseline histórico)
 - [x] Gerar relatórios e visualizações PRISMA
 - [x] Finalizar documentação acadêmica do PTC (LaTeX)
 - [ ] Definir, com a orientação, o cenário científico de continuidade

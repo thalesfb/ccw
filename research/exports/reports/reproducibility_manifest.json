@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-09-03T14:50:11+00:00",
+  "generated_at": "2026-09-04T02:45:33+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -471,7 +471,7 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "ab037eeb2ee5b27f16cc05d3f886af84d098b76c47269ca241dbb8ed3c2a98ba"
+      "sha256": "18972f0e7cc20e10beda55697a06a0c61f05fd420f238250ec425e657db41328"
     },
     {
       "path": "research/exports/reports/summary.json",
@@ -586,7 +586,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "6a3d3c498a1145d351759d422c971fa659028e4e6b3b992d570d7bd0416c561d"
+      "sha256": "c75f5c7ac89b90287829a27d5f0ed32422e2f4fdc90a2497deb50d1224300f13"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -616,8 +616,14 @@
   ],
   "companion_documents": [
     {
+      "path": "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md",
+      "role": "current adjudicated population reconciliation",
+      "owner": "documentation PR",
+      "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
+    },
+    {
       "path": "docs/RECONCILIACAO-BASELINE-2026-08-31.md",
-      "role": "human-readable reconciliation of current and historical baselines",
+      "role": "historical operational baseline reconciliation",
       "owner": "documentation PR",
       "verification": "Tracked and validated by the owning PR; not required to verify the research snapshot in this manifest."
     },
