@@ -1,5 +1,9 @@
 # Reconciliação das populações PRISMA
 
+> **Registro histórico — supersedido:** esta auditoria descreve a divergência
+> entre o SQLite e o export antes do congelamento da população adjudicada. Use
+> `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md` para o estado vigente.
+
 Status: auditoria de consistência. Este documento não altera a composição da revisão nem autoriza a atualização do TCC.
 
 ## Escopo e fontes

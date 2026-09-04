@@ -1,12 +1,17 @@
 # Reconciliação Atualizada do Baseline da Revisão Sistemática
 
+> **Escopo histórico — não vigente:** este documento preserva a baseline
+> operacional de 31/08/2026 antes da adjudicação de escopo. A população vigente
+> de 03/09/2026 está documentada em
+> [`RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
+
 **Snapshot:** 2026-08-31
 **Última atualização documental:** 2026-09-01
 **Fonte operacional local:** `research/systematic_review.sqlite` (não versionada)
 **Representação versionada do snapshot:** `research/exports/analysis/papers.csv` e `research/exports/analysis/papers.json`
 **Relatório derivado:** `research/exports/reports/summary.json`
 **Manifesto de reprodutibilidade:** `research/exports/reports/reproducibility_manifest.json`
-**Status:** baseline local validado; reavaliação preliminar do MMAT registrada; avaliação final pendente
+**Status:** baseline operacional histórica; supersedida pela população adjudicada do PR #55
 
 ## 1. Estado atual do banco
 

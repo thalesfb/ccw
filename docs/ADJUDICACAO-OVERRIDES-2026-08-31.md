@@ -1,7 +1,12 @@
 # Registro de adjudicação dos overrides do snapshot
 
-**Status:** decisão científica pendente; este documento não altera a população
-do snapshot, o TCC, o MMAT, a bibliografia ou as figuras.
+> **Registro histórico — decisão encerrada:** esta matriz preserva o estado
+> anterior à aprovação das decisões. A justificativa e a disposição vigente
+> estão em `docs/PROPOSTA-ADJUDICACAO-OVERRIDES-2026-09-03.md` e no ledger
+> `research/data/adjudicated_population_decisions.csv`.
+
+**Status:** registro histórico da decisão pendente em 31/08/2026; supersedido
+pela adjudicação implementada no PR #55.
 
 ## Finalidade
 

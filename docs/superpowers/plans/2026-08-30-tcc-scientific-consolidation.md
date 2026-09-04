@@ -1,7 +1,7 @@
 # Plano de consolidação científica do TCC
 
 **Data de origem:** 30/08/2026
-**Última atualização:** 01/09/2026
+**Última atualização:** 03/09/2026
 **Estado:** plano de decisão; não é cronograma vigente e não autoriza execução
 automática de um cenário científico.
 
@@ -14,30 +14,30 @@ não substitui a orientação acadêmica.
 
 ## Estado que fundamenta a decisão
 
-- O snapshot operacional atual contém 11.904 registros, 27 remoções
+- O snapshot versionado atual contém 11.904 registros, 27 remoções
   determinísticas por DOI/URL, 11.877 registros na triagem, 2.486 na
-  elegibilidade e 16 registros retidos.
-- A composição atual é 15 registros provisoriamente empíricos e o protocolo
-  contextual 6921. O registro 6918 permanece em *hold* por conflito entre o
-  ano do snapshot e o ano confirmado no repositório institucional.
-- A rodada que levou aos 16 registros auditou 23 candidatos e registrou sete
-  overrides manuais. Quatro ainda exigem fonte primária e adjudicação de
-  escopo; esses overrides não são apresentados como decisões científicas
-  finais.
+  elegibilidade e 18 registros retidos.
+- A composição atual é 17 candidatos provisoriamente empíricos e o protocolo
+  contextual 6921. O registro 6918 foi corrigido para 2014 e excluído por
+  estar fora do recorte 2015--2026.
+- A rodada operacional preservou 23 candidatos e registrou sete overrides
+  manuais. Oito decisões de escopo foram aprovadas e aplicadas no PR #55:
+  três recuperações, uma exclusão temporal e quatro exclusões por escopo ou
+  tipo documental.
 - A reaplicação documental do MMAT está registrada por critério, mas é
   preliminar: fontes primárias, localizadores e adjudicação pelo supervisor
   ainda não estão completos. O protocolo 6921 não recebe MMAT empírico.
 - As referências metodológicas, pedagógicas e teóricas permanecem na
   bibliografia completa do TCC. A bibliografia derivada do pipeline é um
-  conjunto separado e contém os 16 registros retidos para rastreabilidade.
+  conjunto separado e contém os 18 registros retidos para rastreabilidade.
 
 ## Gatilhos antes da execução
 
 1. Confirmar com a orientação se o trabalho seguirá como revisão/síntese e
    especificação, demonstração/prototipação baseada em artefatos existentes ou
    experimento/implementação própria.
-2. Resolver o estado científico dos quatro overrides pendentes e do registro
-   6918 antes de emitir síntese final dependente de elegibilidade ou período.
+2. Consolidar a interpretação científica dos 17 candidatos empíricos e manter
+   o registro 6918 fora da síntese por estar fora do recorte temporal.
 3. Completar a verificação das fontes primárias, localizadores e adjudicação do
    MMAT antes de produzir qualquer score, ranking ou conclusão comparativa de
    qualidade.

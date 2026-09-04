@@ -1,8 +1,13 @@
 # Auditoria Completa dos Números PRISMA — Verificação Detalhada
 
-## Estado vigente (31/08/2026)
+> **Escopo histórico — não vigente:** este arquivo preserva a auditoria da
+> baseline de 31/08/2026 antes da adjudicação de escopo. A referência pública
+> atual é `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`, que registra
+> 18 registros retidos.
 
-O banco atual contém **11.904 registros brutos**. Após a deduplicação
+## Estado do baseline operacional antes da adjudicação (31/08/2026)
+
+A baseline operacional anterior continha **11.904 registros brutos**. Após a deduplicação
 determinística de **27 registros por DOI/URL**, o fluxo conta **11.877** na
 triagem, **9.391** excluídos, **2.486** avançando à elegibilidade, **2.470**
 excluídos nessa etapa e **16** registros retidos operacionalmente. Desses, 15
@@ -14,18 +19,23 @@ Os IDs retidos são 1--10,
 
 A execução histórica tinha 17 estudos incluídos. Em uma nova rodada, foram identificados 23 candidatos e aplicados 7 overrides manuais, chegando aos 16 registros retidos operacionais. A diferença também envolve nova contagem de ingestão e correção do scoring; não é uma simples troca numérica. Para a interpretação, há 15 registros classificados provisoriamente como empíricos; o ID 6918 permanece em hold por conflito temporal, e o ID 6921 é contextual, sem resultados empíricos e sem aplicação do MMAT empírico. A reavaliação documental do MMAT aos registros aplicáveis foi registrada com decisões e evidências por critério; nove textos primários foram revisados externamente, enquanto fontes, localizadores, adjudicação e conclusão final permanecem pendentes. Quatro overrides (14, 6915, 6919 e 6925) exigem adjudicação de fonte primária/escopo; portanto, não são exclusões científicas finais.
 
-![Fluxo PRISMA do snapshot operacional atual](../research/exports/visualizations/prisma_flow.png)
+![Fluxo PRISMA do snapshot operacional anterior](../research/exports/visualizations/prisma_flow.png)
 
-![Funil de seleção do snapshot operacional atual](../research/exports/visualizations/selection_funnel.png)
+![Funil de seleção do snapshot operacional anterior](../research/exports/visualizations/selection_funnel.png)
 
-As figuras acima representam o snapshot operacional vigente. As remoções por DOI
+As figuras acima representavam o snapshot operacional anterior. As remoções por DOI
 ou URL são decisões determinísticas de identidade de registro. A auditoria bruta
 encontrou 257 excedentes em grupos de título; depois da remoção DOI/URL, 232
 excedentes permanecem apenas por título em auditoria e não alteram o fluxo sem
 disposição semântica rastreável.
 
 ## Baseline histórico auditado
-> **Aviso de versão:** este documento registra a auditoria do baseline histórico de 9.431 registros e 17 incluídos. Após a atualização do banco em 31/08/2026, a fonte atual é `docs/RECONCILIACAO-BASELINE-2026-08-31.md`, com 11.904 registros consolidados e 16 incluídos. Os valores abaixo devem ser lidos como histórico, não como contagens vigentes.
+> **Aviso de versão:** este documento registra a auditoria do baseline histórico
+> de 9.431 registros e 17 incluídos e do snapshot operacional anterior. Após a
+> adjudicação do PR #55, a fonte vigente é
+> `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`, com 18 registros
+> retidos. Os valores abaixo devem ser lidos como histórico, não como contagens
+> vigentes.
 
 **Data**: 29 de março de 2026
 **Projeto**: Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais
