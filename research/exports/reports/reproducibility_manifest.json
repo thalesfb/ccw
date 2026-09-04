@@ -8,6 +8,9 @@
     "role": "local operational source for raw states and diagnostics; not the versioned source of the adjudicated population"
   },
   "operational_database_snapshot": {
+    "status": "diagnostic_only",
+    "authoritative_snapshot": "snapshot",
+    "interpretation": "This block records the unversioned SQLite state available when the manifest was generated. It is diagnostic only and is not the current PRISMA baseline; use the versioned snapshot object and summary.json for the current adjudicated population.",
     "counts": {
       "total_records": 11904,
       "selection_stage_counts": {
@@ -586,7 +589,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "c75f5c7ac89b90287829a27d5f0ed32422e2f4fdc90a2497deb50d1224300f13"
+      "sha256": "e188567b2effa553efb2f7cd69fb8c47a05c938a689bf875e8ac6901dd57c47b"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",

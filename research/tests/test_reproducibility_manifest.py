@@ -40,6 +40,9 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
 
     assert manifest["schema_version"] == "1.2"
     assert manifest["database"]["versioned"] is False
+    assert manifest["operational_database_snapshot"]["status"] == "diagnostic_only"
+    assert manifest["operational_database_snapshot"]["authoritative_snapshot"] == "snapshot"
+    assert "not the current PRISMA baseline" in manifest["operational_database_snapshot"]["interpretation"]
     assert manifest["protocol"] == {
         "status": "current_snapshot_protocol",
         "year_min": 2015,
