@@ -67,13 +67,13 @@ Os critérios de inclusão e exclusão foram estruturados com apoio do modelo PI
 
 \subsection{Recorte Temporal}
 
-O período de 2016 a 2025 foi escolhido para representar dez anos de produção científica recente sobre técnicas computacionais aplicadas à educação. O recorte concentrou a análise em abordagens contemporâneas e compatíveis com a especificação desenvolvida no trabalho.
+O período de 2015 a 2026 foi definido para abranger a produção científica considerada no snapshot da revisão, com data de corte em 31 de agosto de 2026. O recorte concentrou a análise em abordagens compatíveis com a especificação desenvolvida no trabalho.
 
 \subsection{Critérios de Inclusão}
 
 \begin{enumerate}
     \item artigos completos revisados por pares;
-    \item publicações entre 2016 e 2025;
+    \item publicações entre 2015 e 2026;
     \item foco explícito em técnicas computacionais aplicadas ao ensino de matemática;
     \item apresentação de dados empíricos, metodologia ou evidência de desenvolvimento e avaliação de sistemas;
     \item texto em inglês ou português.
@@ -95,18 +95,13 @@ O processo de seleção foi documentado segundo as etapas de identificação, tr
 
 \subsection{Identificação}
 
-As 72 consultas executadas nas quatro APIs resultaram em 9.431 registros. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
+As 72 consultas definidas para as quatro APIs resultaram em 11.904 registros identificados. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
 
 \subsection{Deduplicação e Triagem}
 
-A deduplicação ocorreu antes da triagem e utilizou duas estratégias:
+A deduplicação utilizada no fluxo PRISMA foi determinística e baseada na identidade bibliográfica normalizada. Registros com o mesmo DOI normalizado ou com a mesma URL exata foram reunidos, preservando-se a representação escolhida para o fluxo; essa etapa removeu 27 linhas excedentes, sendo 25 identificadas por DOI e 2 por URL. A auditoria também calculou repetições de títulos normalizados. Contudo, os 232 excedentes restantes após a remoção por DOI/URL foram mantidos como candidatos à revisão semântica, pois títulos semelhantes ou idênticos podem corresponder a versões, erratas ou obras distintas. Portanto, não foram removidos automaticamente por título e não entram como duplicatas confirmadas no fluxo vigente.
 
-\begin{enumerate}
-    \item \textbf{Correspondência por DOI}: registros com o mesmo DOI foram reunidos, mantendo-se a versão com metadados mais completos;
-    \item \textbf{Similaridade de títulos}: os títulos foram convertidos em representações numéricas pela técnica TF-IDF (\textit{Term Frequency--Inverse Document Frequency}), que atribui maior importância aos termos que ajudam a distinguir um documento dos demais. Em seguida, foi calculada a similaridade do cosseno, medida que varia de 0 a 1 e indica o quanto duas representações apontam para direções semelhantes. Pares com valor superior a $0{,}9$ foram tratados como possíveis duplicatas, preservando-se o registro mais completo.
-\end{enumerate}
-
-A combinação dessas estratégias removeu 2.517 duplicatas, resultando em 6.914 registros únicos. Depois da aplicação dos filtros de idioma, período e completude mínima, 1.883 registros avançaram para a avaliação de elegibilidade.
+Após a deduplicação determinística, 11.877 registros foram submetidos à triagem. Desses, 9.391 foram excluídos na triagem e 2.486 avançaram para a avaliação de elegibilidade.
 
 \subsection{Elegibilidade}
 
@@ -119,9 +114,9 @@ A elegibilidade utilizou uma pontuação de \textbf{relevância temática}, dist
     \item disponibilidade de identificadores e informações bibliográficas.
 \end{enumerate}
 
-A pontuação variou de 0 a 10, e o limiar de inclusão foi definido em 4,0. Esse valor foi utilizado para priorizar estudos aderentes ao problema de pesquisa, mas não foi interpretado como medida de qualidade científica. A qualidade metodológica foi examinada separadamente com o MMAT 2018.
+A pontuação foi um indicador operacional de relevância temática, calculado por uma heurística multicritério. No snapshot vigente, os valores observados variaram de 0,0 a 4,5 e o limiar operacional foi 4,0. O limiar apoiou a priorização e a seleção operacional, mas não constituiu medida de qualidade científica nem substituiu a verificação de escopo, tipo documental e pertinência. A apreciação metodológica foi conduzida separadamente com o MMAT 2018.
 
-Dos 1.883 registros avaliados nessa etapa, 1.866 ficaram abaixo do limiar ou não atenderam aos critérios de elegibilidade. Ao final, 17 estudos foram incluídos na síntese narrativa.
+Dos 2.486 registros avaliados nessa etapa, 2.468 foram excluídos por não atenderem aos critérios operacionais de elegibilidade. Foram retidos 18 registros para a análise de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
 
 \section{Infraestrutura Tecnológica da Revisão}
 
@@ -133,26 +128,26 @@ O fluxo automatizado da revisão foi implementado em Python e utilizou:
     \item \textbf{SQLite}: armazenamento estruturado dos registros e das etapas de seleção;
     \item \textbf{Requests}: comunicação com as APIs;
     \item \textbf{Pandas}: manipulação e exportação de dados tabulares;
-    \item \textbf{scikit-learn}: representação TF-IDF e cálculo da similaridade do cosseno.
+    \item \textbf{scikit-learn}: apoio às análises computacionais auxiliares do fluxo.
 \end{itemize}
 
 Foi utilizado um \textit{cache} local, isto é, um armazenamento temporário de respostas previamente obtidas. Um acerto de cache ocorre quando uma nova solicitação pode ser atendida com um resultado já armazenado, sem consultar novamente a API externa. Como os contadores dependem do histórico e do momento de execução, a taxa de acertos não foi utilizada como indicador fixo do \textit{pipeline}; sua interpretação permaneceu vinculada às estatísticas da execução analisada.
 
 \subsection{Reprodutibilidade}
 
-O código, os parâmetros de busca e os critérios de seleção foram versionados no repositório. Os principais comandos utilizados foram:
+O código, os parâmetros de busca, os critérios de seleção e os artefatos derivados foram versionados no repositório. A reprodução do snapshot não depende da distribuição do banco SQLite: os registros, as decisões e as contagens podem ser verificados nos arquivos CSV, JSON e BibTeX versionados. Os principais comandos de verificação são:
 
 \begin{verbatim}
-python -m research.src.cli run-pipeline --min-score 4.0
-python -m research.src.cli stats
-python -m research.src.cli export
+python -m research.src.validation.versioned_snapshot
+python -m research.src.processing.adjudicated_snapshot --check
+python -m research.src.validation.bibliography_audit
 \end{verbatim}
 
 A disponibilização do código e dos artefatos favorece a auditoria do processo. Entretanto, a reprodução exata dos resultados também depende da disponibilidade das APIs e das alterações realizadas por cada fonte ao longo do tempo.
 
 \section{Avaliação da Qualidade Metodológica}
 
-Os 17 estudos incluídos foram avaliados com o \textit{Mixed Methods Appraisal Tool} (MMAT), versão 2018 \cite{MMAT2018}. O instrumento foi escolhido por oferecer conjuntos de critérios específicos para estudos qualitativos, quantitativos randomizados, quantitativos não randomizados, quantitativos descritivos e de métodos mistos.
+Os 17 candidatos empíricos provisórios foram submetidos a uma apreciação documental por critérios com o \textit{Mixed Methods Appraisal Tool} (MMAT), versão 2018 \cite{MMAT2018}. O protocolo ou proposta contextual retido não é uma evidência empírica e não se aplica à apreciação MMAT. O instrumento foi escolhido por oferecer conjuntos de critérios específicos para estudos qualitativos, quantitativos randomizados, quantitativos não randomizados, quantitativos descritivos e de métodos mistos.
 
 O processo compreendeu:
 
@@ -165,14 +160,14 @@ O processo compreendeu:
 
 As respostas não foram convertidas em pontuação geral, média, ranking ou categoria de qualidade. A apresentação por critério preserva quais aspectos metodológicos foram atendidos e quais permaneceram problemáticos ou insuficientemente descritos. Os estudos não foram excluídos em razão do MMAT; suas limitações foram consideradas na interpretação da síntese.
 
-A avaliação foi realizada por um único revisor com base nos resumos, metadados e informações metodológicas disponíveis. Essa condição limita a confiabilidade dos julgamentos e foi registrada como limitação da revisão. Os resultados por critério são apresentados na Seção~\ref{sec:qualidade-estudos}.
+A avaliação foi realizada por um único revisor. Nove registros tiveram o texto primário revisado externamente, oito foram apreciados com base em resumo e metadados e o registro contextual foi marcado como não aplicável. A recuperação de fontes, os localizadores dos critérios e a adjudicação pelo supervisor ainda não estão completos; por isso, os julgamentos são preliminares e foram registrados como limitação da revisão. Os resultados por critério são apresentados na Seção~\ref{sec:qualidade-estudos}.
 
 \section{Derivação da Especificação do Protótipo}
 
 A especificação do protótipo foi elaborada a partir da integração entre os resultados da revisão sistemática e os princípios pedagógicos discutidos na fundamentação teórica. O procedimento foi organizado em cinco etapas:
 
 \begin{enumerate}
-    \item consolidação das finalidades, técnicas e limitações identificadas nos 17 estudos;
+    \item consolidação das finalidades, técnicas e limitações identificadas nos 17 candidatos empíricos;
     \item agrupamento das lacunas em dimensões técnicas, pedagógicas, metodológicas e éticas;
     \item tradução dessas dimensões em requisitos funcionais e não funcionais;
     \item definição de critérios para fontes de dados, alternativas de modelagem, explicabilidade e avaliação;

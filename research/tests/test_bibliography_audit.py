@@ -100,7 +100,10 @@ def test_priority_metadata_corrections_are_applied() -> None:
     assert "author = {Hendra Tjahyadi and Krismon N. L. Tude}" in bibliography
     assert "booktitle = {2019 IEEE Global Engineering Education Conference (EDUCON)}" in bibliography
     assert "@phdthesis{Computational2017_008" in bibliography
-    assert "@incollection{Data2020_011" in bibliography
+    assert "@article{He2025_6915" in bibliography
+    assert "@article{Villegas2025_6916" in bibliography
+    assert "@misc{Imperatrice2025_6921" in bibliography
+    assert "@incollection{Data2020_011" not in bibliography
 
 
 def test_primary_technical_references_are_present_and_cited() -> None:

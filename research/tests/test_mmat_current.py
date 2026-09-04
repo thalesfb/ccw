@@ -76,6 +76,7 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
         load_current_table_rows()
     )
     table = CURRENT_TABLE.read_text(encoding="utf-8")
-    assert "14 & Enhancing2025\\_012 & Quant. n\u00e3o rand." in table
-    assert "6919 & UniversityMathematics2026\\_6919 & M\u00e9todos mistos" in table
-    assert "6918 &" not in table
+    assert "Nyantah et al. (2025) & Quant. n\u00e3o rand." in table
+    assert "Xia et al. (2026) & M\u00e9todos mistos" in table
+    assert "ID" not in table
+    assert "Enhancing2025" not in table

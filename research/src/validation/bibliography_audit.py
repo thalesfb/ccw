@@ -44,6 +44,7 @@ class AuditRow:
     use_status: str
     canonical_identifier: str
     decision: str
+    category: str = ""
 
 
 def extract_bib_keys(paths: Iterable[Path]) -> set[str]:
@@ -90,6 +91,7 @@ def read_audit(path: Path) -> dict[str, AuditRow]:
                 use_status=raw["use_status"].strip(),
                 canonical_identifier=raw["canonical_identifier"].strip(),
                 decision=raw["decision"].strip(),
+                category=raw.get("category", "").strip(),
             )
             rows[key] = row
     return rows
@@ -104,7 +106,8 @@ def validate_audit(bib_keys: set[str], rows: dict[str, AuditRow]) -> list[str]:
     for key in sorted(bib_keys - audited_keys):
         errors.append(f"bibliography key has no audit decision: {key}")
     for key in sorted(audited_keys - bib_keys):
-        errors.append(f"audit key is absent from bibliography files: {key}")
+        if rows[key].category != "historical_study":
+            errors.append(f"audit key is absent from bibliography files: {key}")
 
     for key, row in sorted(rows.items()):
         if row.existence not in ALLOWED_EXISTENCE:

@@ -6,16 +6,15 @@ import csv
 import re
 from pathlib import Path
 
-from src.analysis.mmat_tcc_table import load_rows, render_table
+from src.analysis.mmat_current_tcc_table import load_rows, render_table
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 TCC_ROOT = REPO_ROOT / "results" / "tcc"
 TCC_CONTENT = TCC_ROOT / "conteudo"
 TCC_ABSTRACT = TCC_ROOT / "pretextuais" / "resumo.tex"
-MMAT_DATA = REPO_ROOT / "research" / "data" / "mmat_assessments.csv"
-MMAT_EXPORT = REPO_ROOT / "research" / "exports" / "analysis" / "mmat_assessment.csv"
-MMAT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_tcc_table.tex"
+MMAT_DATA = REPO_ROOT / "research" / "data" / "mmat_reassessment_current.csv"
+MMAT_LATEX = REPO_ROOT / "research" / "exports" / "references" / "mmat_current_tcc_table.tex"
 
 
 def _read(path: Path) -> str:
@@ -64,19 +63,19 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
         assert unsupported not in lowered
 
 
-def test_tfidf_and_cosine_similarity_are_explained_before_use() -> None:
+def test_current_deduplication_description_matches_identity_audit() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
-    assert "TF-IDF" in methodology
-    assert "Term Frequency--Inverse Document Frequency" in methodology
-    assert "similaridade do cosseno" in methodology
-    assert "varia de 0 a 1" in methodology
-    assert "$0{,}9$" in methodology
+    assert "DOI normalizado" in methodology
+    assert "URL exata" in methodology
+    assert "27 linhas excedentes" in methodology
+    assert "232 excedentes" in methodology
+    assert "não foram removidos automaticamente por título" in methodology
 
 
 def test_interpretation_precedes_the_long_synthesis_table() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
     interpretation = chapter.index("Antes da tabela detalhada")
-    table = chapter.index(r"\label{tab:sintese-17-estudos}")
+    table = chapter.index(r"\label{tab:sintese-estudos-empiricos}")
     assert interpretation < table
 
 
@@ -160,29 +159,28 @@ def test_learning_concepts_and_teacher_role_are_explicit() -> None:
 
 
 def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
-    for path in (MMAT_DATA, MMAT_EXPORT):
+    for path in (MMAT_DATA,):
         with path.open("r", encoding="utf-8-sig", newline="") as handle:
             reader = csv.DictReader(handle)
             rows = list(reader)
-        assert len(rows) == 17
-        assert "Score" not in reader.fieldnames
-        assert "Quality" not in reader.fieldnames
-        assert {"Q1", "Q2", "Q3", "Q4", "Q5"} <= set(reader.fieldnames or [])
-        assert {"AssessmentBasis", "ReviewerRole", "Limitations"} <= set(
+        assert len(rows) == 18
+        assert "score" not in (reader.fieldnames or [])
+        assert "quality" not in (reader.fieldnames or [])
+        assert {"q1", "q2", "q3", "q4", "q5"} <= set(reader.fieldnames or [])
+        assert {"assessment_basis", "reviewer", "notes"} <= set(
             reader.fieldnames or []
         )
-        assert all(row["AssessmentBasis"].strip() for row in rows)
-        assert all(row["ReviewerRole"].strip() for row in rows)
-        assert all(row["Limitations"].strip() for row in rows)
+        assert all(row["assessment_basis"].strip() for row in rows)
+        assert all(row["reviewer"].strip() for row in rows)
+        assert all(row["notes"].strip() for row in rows)
 
-    assert MMAT_DATA.read_bytes() == MMAT_EXPORT.read_bytes()
     assert MMAT_LATEX.read_text(encoding="utf-8") == render_table(load_rows())
 
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
     mmat_section = chapter[chapter.index("Avaliação Metodológica com o MMAT") :]
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
     assert "sem média, ranking ou categoria geral" in mmat_section
-    assert r"\input{../../research/exports/references/mmat_tcc_table.tex}" in chapter
+    assert r"\input{../../research/exports/references/mmat_current_tcc_table.tex}" in chapter
     assert "Tjahyadi (2025) & Quant." not in chapter
 
 
