@@ -234,6 +234,9 @@ class ReportGenerator:
             papers_data.append(paper_data)
 
         # Create HTML content
+        # Keep the operational stage distinct from final scientific
+        # adjudication in the public report.  The current retained population
+        # includes provisional empirical candidates and one contextual record.
         html_content = self._create_papers_html(papers_data, stage)
 
         with open(report_path, 'w', encoding='utf-8') as f:
@@ -659,7 +662,7 @@ class ReportGenerator:
             <div class="navbar-title">📚 Revisão Sistemática</div>
             <div class="navbar-links">
                 <a href="summary_report.html" class="active">🔍 Sumário</a>
-                <a href="papers_report_included.html">📄 Artigos</a>
+                <a href="papers_report_included.html">📄 Registros Retidos</a>
                 <a href="gap_analysis.html">📊 Análise de Lacunas</a>
             </div>
         </div>
@@ -676,7 +679,7 @@ class ReportGenerator:
         <h2>📊 Estatísticas Gerais</h2>
         <div class="stat-grid">
             <div class="stat-card">
-                <h3>Total de Artigos</h3>
+                <h3>Registros identificados</h3>
                 <h2 style="color: #4CAF50;">{{ statistics.total_papers }}</h2>
             </div>
 
@@ -686,15 +689,16 @@ class ReportGenerator:
                 <h2 style="color: #2196F3;">{{ statistics.prisma.identification or 0 }}</h2>
             </div>
             <div class="stat-card">
-                <h3>Incluídos</h3>
+                <h3>Registros retidos</h3>
                 <h2 style="color: #FF9800;">{{ statistics.prisma.included or 0 }}</h2>
             </div>
             {% endif %}
 
             {% if statistics.relevance %}
             <div class="stat-card">
-                <h3>Score Médio</h3>
+                <h3>Score médio operacional</h3>
                 <h2 style="color: #9C27B0;">{{ statistics.relevance.mean }}</h2>
+                <p style="color: #7f8c8d; font-size: 0.9em;">Sobre os registros após a remoção determinística; não é qualidade metodológica.</p>
             </div>
             {% endif %}
         </div>
@@ -793,7 +797,7 @@ class ReportGenerator:
                     .replace('database coverage', 'Cobertura por Base de Dados')
                     .replace('relevance distribution', 'Distribuição de Relevância')
                     .title() }}</h3>
-                <img src="visualizations/{{ chart.path.name }}" alt="{{ chart.name }}">
+                <img src="../visualizations/{{ chart.path.name }}" alt="{{ chart.name }}">
             </div>
             {% endfor %}
         </div>
@@ -802,7 +806,8 @@ class ReportGenerator:
 
     {% if included_list %}
     <div class="section">
-        <h2>✅ Artigos Incluídos (Top {{ included_list|length }})</h2>
+        <h2>✅ Registros Retidos ({{ included_list|length }})</h2>
+        <p>Esta lista representa o estágio operacional retido no snapshot vigente. A população inclui candidatos empíricos provisórios e um protocolo contextual; consulte o relatório de registros para a interpretação individual.</p>
         {% for p in included_list %}
         <div class="paper-item">
             <div class="paper-title">{{ p.title }}</div>
@@ -813,13 +818,14 @@ class ReportGenerator:
             </div>
         </div>
         {% endfor %}
-        <p><em>Lista limitada aos 50 primeiros. Consulte o relatório de artigos para a lista completa.</em></p>
+        <p><em>Lista limitada aos 50 primeiros. Consulte o relatório de registros retidos para a lista completa.</em></p>
     </div>
     {% endif %}
 
     {% if statistics.techniques %}
     <div class="section">
-        <h2>💻 Técnicas Computacionais</h2>
+        <h2>💻 Técnicas Computacionais no snapshot</h2>
+        <p>Frequências calculadas sobre os registros após a remoção determinística (n={{ statistics.prisma.screening or 0 }}); as categorias podem se sobrepor e não representam apenas os registros retidos nem qualidade ou eficácia.</p>
         <table>
             <tr><th>Técnica</th><th>Frequência</th></tr>
             {% for technique, count in statistics.techniques.items() %}
@@ -834,7 +840,7 @@ class ReportGenerator:
         <div class="highlight">
             <p><strong>Data de Geração:</strong> {{ generated_at }}</p>
             <p><strong>Relato:</strong> Estruturado conforme as diretrizes PRISMA 2020</p>
-            <p><strong>Scoring:</strong> Baseado em relevância multi-critério</p>
+            <p><strong>Filtro operacional:</strong> score de relevância multi-critério; não substitui a adjudicação científica de escopo, elegibilidade ou qualidade.</p>
         </div>
     </div>
     </div>
@@ -927,7 +933,7 @@ class ReportGenerator:
             <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
             <div class="navbar-links">
                 <a href="summary_report.html" class="active">📈 Resumo</a>
-                <a href="papers_report_included.html">📄 Artigos Incluídos</a>
+                <a href="papers_report_included.html">📄 Registros Retidos</a>
                 <a href="gap_analysis.html">🔍 Análise de Lacunas</a>
             </div>
         </div>
@@ -1052,7 +1058,7 @@ class ReportGenerator:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Artigos - {{ stage.title() }}</title>
+    <title>{{ stage_label }}</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
         .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
@@ -1078,18 +1084,26 @@ class ReportGenerator:
              <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
              <div class="navbar-links">
                  <a href="summary_report.html">📈 Resumo</a>
-                 <a href="papers_report_included.html" class="active">📄 Artigos Incluídos</a>
+                 <a href="papers_report_included.html" class="active">📄 Registros Retidos</a>
                  <a href="gap_analysis.html">📊 Análise de Lacunas</a>
              </div>
          </div>
      </nav>    <div class="content">
-    <h1>Relatório de Artigos - {{ stage.title() }}</h1>
-    <p><em>{{ papers_data|length }} artigos encontrados</em></p>
+    <h1>{{ stage_label }}</h1>
+    <p><em>{{ papers_data|length }} registros retidos no snapshot vigente</em></p>
+    {% if stage == 'included' %}
+    <div class="paper-criteria" style="background:#fff3cd;border-left-color:#f0ad4e;">
+        <strong>Como interpretar:</strong> esta é a população retida pelo fluxo operacional.
+        Ela reúne candidatos empíricos provisórios e um protocolo contextual; não equivale,
+        por si só, à síntese científica final nem a uma classificação de qualidade metodológica.
+        O score exibido é operacional e os sinais registrados abaixo não substituem a adjudicação.
+    </div>
+    {% endif %}
 
     {% for paper in papers_data %}
     <div class="paper">
         {% if paper.relevance_score %}
-        <div class="score">Score: {{ paper.relevance_score }}</div>
+        <div class="score">Score operacional: {{ paper.relevance_score }}</div>
         {% endif %}
 
         <div class="paper-title">{{ paper.title or 'Título não disponível' }}</div>
@@ -1114,7 +1128,7 @@ class ReportGenerator:
 
         {% if paper.inclusion_criteria_met %}
         <div class="paper-criteria">
-            <strong>✅ Critérios de Inclusão Atendidos:</strong> {{ paper.inclusion_criteria_met }}
+            <strong>✅ Sinais/gates operacionais registrados:</strong> {{ paper.inclusion_criteria_met }}
         </div>
         {% endif %}
 
@@ -1158,7 +1172,13 @@ class ReportGenerator:
         """
 
         template = self.env.from_string(html_template)
-        return template.render(papers_data=papers_data, stage=stage, footer_html=self._footer_html())
+        stage_label = "Relatório de Registros Retidos" if stage == "included" else f"Relatório de Registros — {stage.title()}"
+        return template.render(
+            papers_data=papers_data,
+            stage=stage,
+            stage_label=stage_label,
+            footer_html=self._footer_html(),
+        )
 
     def _create_gap_analysis_html(self, gaps: Dict) -> str:
         """Create HTML content for gap analysis.
@@ -1198,7 +1218,7 @@ class ReportGenerator:
              <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
              <div class="navbar-links">
                  <a href="summary_report.html">📈 Resumo</a>
-                 <a href="papers_report_included.html">📄 Artigos Incluídos</a>
+                 <a href="papers_report_included.html">📄 Registros Retidos</a>
                  <a href="gap_analysis.html" class="active">📊 Análise de Lacunas</a>
              </div>
          </div>
