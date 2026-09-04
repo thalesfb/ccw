@@ -3,9 +3,9 @@
 > Documento vivo para agentes e pesquisador. Funciona como CLAUDE.md do projeto,
 > rastreador de melhorias baseado em feedback da banca, e guia de workflow.
 >
-> **Ultima atualizacao:** 2026-09-01
+> **Ultima atualizacao:** 2026-09-03
 
-> **Baseline vigente (31/08/2026):** a base consolidada contém 11.904 registros brutos. Após 27 remoções determinísticas por DOI/URL, 11.877 foram avaliados na triagem; 9.391 foram excluídos e 2.486 avançaram à elegibilidade. Nessa etapa, 2.470 foram excluídos e 16 registros permanecem retidos operacionalmente. A reexecução partiu de 23 candidatos e aplicou 7 overrides manuais, dos quais 4 ainda aguardam adjudicação de escopo; isso alterou a composição do conjunto e não representa uma simples substituição de 17 por 16. A reconciliação completa está em `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
+> **População vigente (03/09/2026):** a base versionada contém 11.904 registros identificados. Após 27 remoções determinísticas por DOI/URL, 11.877 foram avaliados na triagem; 9.391 foram excluídos e 2.486 avançaram à elegibilidade. Nessa etapa, 2.468 foram excluídos e 18 registros foram retidos: 17 candidatos empíricos provisórios e o protocolo contextual 6921. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A transição entre o conjunto operacional anterior e a população adjudicada está em `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`.
 
 ---
 
@@ -22,11 +22,11 @@
 
 | Fase | Descricao | Periodo | Status |
 |------|-----------|---------|--------|
-| Fase 1 | Revisao sistematica e reconciliacao do baseline | Mar-Nov 2025; reconciliação em 31/08/2026 | Operacionalmente concluída; gate científico pendente |
+| Fase 1 | Revisao sistematica e reconciliacao da população | Mar-Nov 2025; adjudicação em 03/09/2026 | População congelada; MMAT final pendente |
 | Fase 2 | Desenvolvimento do prototipo (TCC) | Sem prazo vigente | Aguardando decisão da orientação |
 | Fase 3 | Validacao experimental (TCC) | Sem prazo vigente | Não iniciada |
 
-**Revisao Sistematica vigente:** 11.904 registros brutos; 27 remoções determinísticas por DOI/URL; 11.877 avaliados na triagem; 9.391 excluídos; 2.486 avançaram à elegibilidade; 2.470 excluídos nessa etapa; **16 retidos operacionalmente**. Entre os registros atuais, 15 são provisoriamente empíricos e o 6921 é contextual; o 6918 permanece em hold temporal. As etiquetas do pipeline registram Machine Learning em 11/16 (68,8%) e Predictive Analytics em 9/16 (56,3%), com categorias sobrepostas; essas etiquetas descrevem o conteúdo bibliográfico e não qualidade metodológica.
+**Revisao Sistematica vigente:** 11.904 registros identificados; 27 remoções determinísticas por DOI/URL; 11.877 avaliados na triagem; 9.391 excluídos; 2.486 avançaram à elegibilidade; 2.468 excluídos nessa etapa; **18 retidos**. Entre os registros atuais, 17 são candidatos provisoriamente empíricos e o 6921 é contextual; o 6918 foi corrigido para 2014 e excluído por estar fora do recorte. As etiquetas do pipeline têm categorias sobrepostas e descrevem o conteúdo bibliográfico, não qualidade metodológica.
 
 ---
 
@@ -61,7 +61,7 @@
 ### Etapas concluidas
 
 - Etapa 1: Correcoes PRISMA
-- Etapa 2: procedimento MMAT definido; reavaliacao documental preliminar registrada para os 15 registros empíricos, com consolidacao e adjudicacao pendentes
+- Etapa 2: procedimento MMAT definido; reavaliacao documental preliminar registrada para os 17 candidatos empíricos, com consolidacao e adjudicacao pendentes
 - Etapa 2.5: Tempo verbal passado
 - Etapa 3: Fundamentacao ensino de matematica
 - Etapa 4: Capitulo do prototipo
@@ -111,7 +111,7 @@ results/tcc/
 
 ## 5. Pipeline MMAT (snapshot vigente e histórico)
 
-O modulo MMAT e standalone e o snapshot vigente possui um ledger de reavaliação por critério para os 16 registros retidos. A avaliação é preliminar: 15 registros são potencialmente empíricos, o 6921 é contextual, o 6918 está em hold temporal, e fontes, localizadores e adjudicação ainda precisam ser consolidados antes de qualquer síntese de qualidade metodológica ou afirmação de certeza da evidência.
+O modulo MMAT e standalone e o snapshot vigente possui um ledger de reavaliação por critério para os 18 registros retidos. A avaliação é preliminar: 17 registros são potencialmente empíricos, o 6921 é contextual, e fontes, localizadores e adjudicação ainda precisam ser consolidados antes de qualquer síntese de qualidade metodológica ou afirmação de certeza da evidência.
 
 ### Validar o snapshot vigente
 
@@ -128,11 +128,11 @@ denominador vigente.
 
 ### Saídas vigentes
 
-- `research/data/mmat_current_study_registry.csv` — registro dos 16 estudos atuais
+- `research/data/mmat_current_study_registry.csv` — registro dos 18 estudos atuais
 - `research/data/mmat_primary_sources_manifest.csv` — fontes e estados de acesso
 - `research/data/mmat_reassessment_current.csv` — respostas S1/S2 e Q1--Q5 por estudo
 - `research/exports/references/mmat_current_tcc_table.tex` — tabela LaTeX vigente
-- Banco SQLite operacional local (coluna `notes` com o histórico do MMAT); ele não é versionado nem necessário para verificar o snapshot publicado. O ledger vigente registra a reavaliação preliminar dos 16 registros, mas a conclusão final permanece pendente de fontes, localizadores e adjudicação
+- Banco SQLite operacional local (coluna `notes` com o histórico do MMAT); ele não é versionado nem necessário para verificar o snapshot publicado. O ledger vigente registra a reavaliação preliminar dos 18 registros, mas a conclusão final permanece pendente de fontes, localizadores e adjudicação
 
 ### Testes
 
@@ -140,14 +140,14 @@ denominador vigente.
 python -m pytest research/tests/test_mmat_current.py -q
 ```
 
-Os testes validam o ledger vigente de 16 registros, os cinco critérios por estudo e as respostas Y/N/CT. Isso não deve ser lido como conclusão final de qualidade: a reavaliação documental está registrada, mas ainda depende de consolidação de fontes, localizadores e adjudicação.
+Os testes validam o ledger vigente de 18 registros, os cinco critérios por estudo e as respostas Y/N/CT. Isso não deve ser lido como conclusão final de qualidade: a reavaliação documental está registrada, mas ainda depende de consolidação de fontes, localizadores e adjudicação.
 
 ### Estado dos artefatos MMAT
 
 | Snapshot | Estado | Uso permitido |
 |-------|-----|---------|
 | Histórico | 17 julgamentos por critério | somente auditoria e rastreabilidade histórica |
-| Vigente | 16 registros; reavaliação preliminar registrada; consolidação pendente | não emitir síntese MMAT final |
+| Vigente | 18 registros; reavaliação preliminar registrada; consolidação pendente | não emitir síntese MMAT final |
 
 Não há média ou ranking de qualidade reportado para o conjunto vigente.
 
@@ -172,7 +172,7 @@ Não há média ou ranking de qualidade reportado para o conjunto vigente.
 
 ### Numeros-chave (fonte unica de verdade)
 
-Total bruto: 11.904 | Duplicatas determinísticas removidas: 27 | Triagem: 11.877 avaliados, 9.391 excluídos, 2.486 avançaram | Elegibilidade: 2.486 avaliados, 2.470 excluídos, 16 retidos | Taxa final: ~0,13% | Consultas: 72 (48 EN + 24 PT) | Bases: 4 | Período: 2015-2026
+Total bruto: 11.904 | Duplicatas determinísticas removidas: 27 | Triagem: 11.877 avaliados, 9.391 excluídos, 2.486 avançaram | Elegibilidade: 2.486 avaliados, 2.468 excluídos, 18 retidos | Taxa final: 0,15% | Consultas: 72 (48 EN + 24 PT) | Bases: 4 | Período: 2015-2026
 
 ### Compilacao
 

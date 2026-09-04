@@ -1,33 +1,45 @@
 # RESUMO DO CONTEXTO ATUAL
 
-> **Atualização de 01/09/2026:** o baseline local da revisão foi atualizado e validado com 11.904 registros consolidados e 16 registros retidos operacionalmente (IDs 1--10, 6916, 6917, 6918, 6920, 6921 e 6923). Quinze registros são classificados provisoriamente como empíricos; o 6918 está em hold por conflito entre o ano oficial da fonte (2014) e o ano armazenado no snapshot (2025), e o ID 6921 é um protocolo/proposta mantido apenas para contexto e rastreabilidade. Este documento preserva abaixo o planejamento histórico; para as contagens vigentes, use `docs/RECONCILIACAO-BASELINE-2026-08-31.md`.
+> **Atualização de 03/09/2026:** o snapshot versionado foi reconciliado após a aprovação das decisões de escopo do PR #54 e a implementação do PR #55. São 11.904 registros identificados, 27 remoções determinísticas por DOI/URL, 11.877 na triagem e 18 registros retidos (17 candidatos empíricos provisórios e o protocolo contextual 6921). O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. Para as contagens vigentes e a trilha das decisões, use `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`.
 
-## Baseline vigente (31/08/2026)
+## População vigente (03/09/2026)
 
 O banco operacional contém **11.904 registros**. A deduplicação determinística
 retirou 27 registros redundantes por DOI/URL; no fluxo PRISMA, **11.877** foram
 avaliados na triagem, **9.391** foram excluídos e **2.486** avançaram à
-elegibilidade; nessa etapa, **2.470** foram excluídos, resultando em **16
-registros retidos operacionalmente**. Desses, 15 são provisoriamente classificados como empíricos, com o 6918 em hold temporal, e o ID 6921 é
-um protocolo/proposta contextual fora da síntese empírica. A lista atual é composta pelos IDs 1--10, 6916, 6917,
-6918, 6920, 6921 e 6923.
+elegibilidade; nessa etapa, **2.468** foram excluídos, resultando em **18
+registros retidos**. Desses, 17 são candidatos provisoriamente classificados
+como empíricos e o ID 6921 é um protocolo/proposta contextual fora da síntese
+empírica. O ID 6918 foi corrigido para 2014 e não pertence ao recorte atual. A
+lista vigente é composta pelos IDs 1--10, 14, 6915, 6916, 6917, 6919, 6920,
+6921 e 6923.
 
-A execução histórica tinha 17 estudos incluídos. Em uma nova rodada, foram identificados 23 candidatos e aplicados 7 overrides manuais, chegando aos 16 registros retidos operacionais. A mudança não é uma simples troca numérica: também envolve nova contagem de ingestão e correção do scoring. Quinze registros empíricos são provisórios; o 6918 permanece fora de conclusões temporais finais até a resolução do conflito de ano, e o ID 6921 é um protocolo/proposta retido apenas para contexto e não é aplicável ao MMAT empírico. A reavaliação documental do MMAT dos registros aplicáveis foi registrada com evidência por critério; nove textos primários foram revisados externamente, mas fontes restantes, localizadores e adjudicação ainda estão pendentes. Quatro overrides exigem recuperação/inspeção de fonte primária e adjudicação de escopo. Portanto, conclusões comparativas sobre qualidade metodológica ou certeza da evidência não devem ser tratadas como consolidadas.
+A execução histórica tinha 17 estudos incluídos. A população operacional posterior
+preservou 23 candidatos e sete overrides; oito decisões de escopo aprovadas foram
+aplicadas no PR #55, recuperando 14, 6915 e 6919, excluindo 6918 pelo período e
+mantendo quatro registros fora por escopo/documentação. A composição vigente é,
+portanto, de 17 candidatos empíricos provisórios e do protocolo contextual 6921.
+A reavaliação documental do MMAT está registrada por critério; nove textos
+primários foram revisados externamente, mas fontes restantes, localizadores e
+adjudicação metodológica ainda estão pendentes. Conclusões comparativas sobre
+qualidade metodológica ou certeza da evidência não devem ser tratadas como
+consolidadas.
 
 ### Plano vigente após a reconciliação
 
-O baseline de 16 está congelado como estado operacional, mas não como resultado
+O baseline de 18 está congelado como população versionada, mas não como resultado
 científico final. A auditoria de identidade separa 27 remoções determinísticas
 (25 excedentes por DOI e 2 por URL exata, com um grupo misto quanto à presença
 de DOI) de 232 candidatos restantes apenas por título normalizado (257 excedentes
-brutos, incluindo a sobreposição com identidades), que aguardam disposição semântica. A reavaliação MMAT foi registrada em
+brutos, incluindo a sobreposição com identidades), que aguardam disposição semântica. As decisões de escopo estão registradas em
+`research/data/adjudicated_population_decisions.csv`. A reavaliação MMAT foi registrada em
 `research/data/mmat_reassessment_current.csv`, com S1/S2, Q1--Q5 e evidência
 por critério. Nove estudos têm texto primário revisado externamente; o ledger
 continua preliminar até haver texto primário para todos os registros empíricos
 aplicáveis, localizadores
 por critério e adjudicação. Os próximos artefatos devem ser entregues em PRs atômicos, sem
 versionar o SQLite e sem misturar as referências teóricas com a bibliografia
-derivada do pipeline. A separação entre os 15 registros provisoriamente empíricos (com o 6918 em hold) e o protocolo
+derivada do pipeline. A separação entre os 17 registros provisoriamente empíricos e o protocolo
 contextual 6921 é mantida em `research/data/current_synthesis_scope.csv`.
 
 **Data do planejamento histórico:** 07/03/2026
@@ -47,8 +59,9 @@ contextual 6921 é mantida em `research/data/current_synthesis_scope.csv`.
 ✅ Fev 2026: PTC escrito e documentado
 ✅ Mar 2026: PTC DEFENDIDO E APROVADO
     ⚠️ Observação da banca: "PRISMA 2020 não é metodologia/protocolo de condução"
-✅ 31 Ago 2026: Baseline reexecutado e reconciliado (11.904 → 16 registros; 15 empíricos provisórios, 6918 em hold + 1 protocolo contextual)
-🟡 31 Ago--01 Set 2026: reavaliação documental MMAT registrada por critério; fontes restantes, localizadores e adjudicação final pendentes
+✅ 31 Ago 2026: Baseline operacional reexecutado e reconciliado (11.904 → 16 registros provisórios)
+✅ 03 Set 2026: População adjudicada congelada (11.904 → 27 → 11.877 → 2.486 → 18; 6918 corrigido para 2014)
+🟡 03 Set 2026: reavaliação documental MMAT alinhada aos 18 registros; fontes restantes, localizadores e adjudicação metodológica final pendentes
 ⏳ Próxima fase: cenário do protótipo e eventual validação aguardam decisão com a orientação
 ```
 
@@ -56,7 +69,7 @@ contextual 6921 é mantida em `research/data/current_synthesis_scope.csv`.
 
 | Fase | Nome | Status | Período | Entrega |
 |------|------|--------|---------|---------|
-| **Fase 1** | Revisão Sistemática | 🟡 **OPERACIONALMENTE CONCLUÍDA; GATE CIENTÍFICO PENDENTE** | Jan-Mar 2026 + reconciliação em 31/08/2026 | PTC defendido; MMAT preliminar |
+| **Fase 1** | Revisão Sistemática | 🟡 **POPULAÇÃO ADJUDICADA; MMAT FINAL PENDENTE** | Jan-Mar 2026 + adjudicação em 03/09/2026 | PTC defendido; MMAT preliminar |
 | **Fase 2** | Desenvolvimento Protótipo | ⏳ **A DEFINIR** | Sem prazo vigente | Decisão de escopo e MVP |
 | **Fase 3** | Validação Experimental | ⏳ **NÃO INICIADA** | Sem prazo vigente | Protocolo e resultados, se autorizados |
 
@@ -123,7 +136,7 @@ plano de trabalho originalmente proposto, mantido como histórico.
 **Tempo:** 10-12 horas
 **Prioridade:** MÉDIA (pode ser feito em paralelo ao desenvolvimento do protótipo)
 
-- [x] Registrar a reaplicação documental preliminar do MMAT 2018 aos 15 registros empíricos aplicáveis (o planejamento histórico mencionava 17; o protocolo 6921 permanece separado)
+- [x] Registrar a reaplicação documental preliminar do MMAT 2018 aos 17 candidatos empíricos aplicáveis (o protocolo 6921 permanece separado)
 - [x] Criar tabela de qualidade metodológica por critério
 - [x] Adicionar seção "Avaliação da Qualidade Metodológica" em metodologia.tex
 - [x] Adicionar seção "Limitações da Revisão" em conclusao.tex
@@ -176,7 +189,7 @@ Os percentuais abaixo registram uma projeção do planejamento anterior e não r
 
 **Foco:** Completar MMAT + seção de limitações
 
-- [ ] Completar e adjudicar o MMAT dos 15 registros empíricos aplicáveis (o plano histórico mencionava 17; 6921 é contextual)
+- [ ] Completar e adjudicar o MMAT dos 17 candidatos empíricos aplicáveis (6921 é contextual)
 - [ ] Criar tabela de qualidade
 - [ ] Escrever seção de limitações
 - [ ] Atualizar checklist PRISMA
@@ -244,7 +257,7 @@ Os percentuais abaixo registram uma projeção do planejamento anterior e não r
 
 ### O Que Está PRONTO ✅
 
-- ✅ Revisão sistemática: baseline histórico preservado (9.431 → 6.914 → 17 estudos) e baseline vigente validado (11.904 → 27 deduplicados → 11.877 → 9.391 excluídos na triagem → 2.486 → 2.470 excluídos na elegibilidade → 16 registros; 15 empíricos provisórios, com 6918 em hold + 1 contextual)
+- ✅ Revisão sistemática: baseline histórico preservado (9.431 → 6.914 → 17 estudos) e população vigente validada (11.904 → 27 identidades removidas → 11.877 → 9.391 excluídos na triagem → 2.486 → 2.468 excluídos na elegibilidade → 18 registros; 17 candidatos empíricos provisórios + 1 contextual)
 - ✅ Pipeline automatizado e reproduzível (GitHub)
 - ✅ Diagrama PRISMA flow
 - ✅ Síntese narrativa dos achados
@@ -259,7 +272,7 @@ Os percentuais abaixo registram uma projeção do planejamento anterior e não r
 ### O Que Está PENDENTE ⏳
 
 - ✅ Correções terminológicas incorporadas no manuscrito; revisão final do relato ainda necessária
-- ✅ Reavaliação documental preliminar do MMAT aos registros empíricos provisórios, com evidência por critério; 6918 permanece em hold temporal
+- ✅ Reavaliação documental preliminar do MMAT aos 17 candidatos empíricos provisórios, com evidência por critério; a adjudicação metodológica final permanece pendente
 - ⏳ Recuperação das fontes restantes e consolidação/adjudicação da tabela MMAT final
 - 🟡 Auditoria da integridade dos identificadores: 25 grupos DOI e 2 grupos URL tratados deterministicamente; 154 grupos de título-only (232 excedentes) permanecem candidatos à disposição semântica
 - ✅ Seção de limitações presente; revisão final condicionada ao gate científico
@@ -273,8 +286,8 @@ Os percentuais abaixo registram uma projeção do planejamento anterior e não r
 **Próximo ciclo vigente (sem prazo artificial):**
 
 1. Recuperar as fontes primárias restantes e registrar localizadores para cada critério MMAT aplicável;
-2. adjudicar os sete overrides e os julgamentos MMAT com o supervisor, mantendo o protocolo 6921 fora da síntese empírica;
-3. resolver o conflito temporal do ID 6918 e os grupos de título-only sem alterar o fluxo por inferência;
+2. consolidar os julgamentos MMAT com o supervisor, mantendo o protocolo 6921 fora da síntese empírica;
+3. acompanhar os grupos de título-only sem alterar o fluxo por inferência; o conflito temporal do ID 6918 já foi resolvido pela correção para 2014;
 4. atualizar o manuscrito e a apresentação somente com decisões já documentadas;
 5. abrir PRs atômicos, com checks locais e remotos verificados e comentários do Copilot avaliados.
 

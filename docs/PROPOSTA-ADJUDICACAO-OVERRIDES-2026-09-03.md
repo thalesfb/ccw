@@ -1,8 +1,12 @@
-# Proposta de adjudicação dos overrides
+# Adjudicação dos overrides da revisão sistemática
 
 **Data da proposta:** 03/09/2026
-**Status:** proposta científica para revisão; não altera o snapshot nem os
-artefatos derivados.
+**Status:** decisões aprovadas e implementadas no PR #55
+
+> Este documento preserva a justificativa que foi submetida à revisão. A fonte
+> normativa da população vigente é o ledger
+> `research/data/adjudicated_population_decisions.csv`; os artefatos derivados
+> foram regenerados após a aprovação.
 
 ## Objetivo
 
@@ -18,9 +22,9 @@ registros. Quando o texto completo não foi recuperado, a limitação permanece
 registrada e impede qualquer afirmação metodológica além do que a fonte
 permite verificar.
 
-## Decisões propostas
+## Decisões aplicadas
 
-| Registro | Disposição proposta | Fundamento de elegibilidade | Evidência verificável | Efeito provisório |
+| Registro | Disposição aplicada | Fundamento de elegibilidade | Evidência verificável | Efeito no snapshot |
 | --- | --- | --- | --- | --- |
 | 14 | `include` | Matemática é o domínio central; a animação computacional é uma intervenção educacional ativa e avaliada, ainda que não seja ML. | O registro publicador descreve estudo quase experimental sobre teoremas de círculo, grupos experimental e controle, pré/pós-teste e análise de Mann–Whitney. [Fonte publicadora](https://journals.eduped.org/index.php/IJMME/article/view/1299) | Adicionar à população empírica, com a técnica classificada como tecnologia educacional computacional. |
 | 15 | `exclude` | Não há técnica computacional aplicada e avaliada; referências a comunicação digital não satisfazem `computational_centrality`. | O PDF relata entrevistas semiestruturadas e vídeos de sala com professores de matemática e ciências, sem intervenção computacional avaliada. [PDF publicador](https://pdf.ejmse.com/EJMSE_5_2_93.pdf) | Permanecer fora da síntese empírica por escopo, não por score. |
@@ -33,8 +37,8 @@ permite verificar.
 
 ## Coerência com a população
 
-Se as sete disposições forem aprovadas sem alterações, o efeito aritmético
-esperado sobre o snapshot atual é:
+As decisões foram aprovadas e o efeito aritmético observado sobre o snapshot
+operacional anterior é:
 
 ```text
 16 registros retidos
@@ -43,12 +47,10 @@ esperado sobre o snapshot atual é:
 = 18 registros retidos após a regeneração
 ```
 
-Nesse cenário, a composição interpretável seria provisoriamente de 17
-registros empíricos e um registro contextual (6921). Esses valores são uma
-projeção da decisão, não uma atualização do PRISMA. O `papers.csv`, o
-`summary.json`, o MMAT, as referências, as figuras, o TCC e a apresentação só
-devem ser regenerados em uma etapa posterior, depois da aprovação desta matriz
-e do congelamento da população derivada.
+O resultado é provisoriamente composto por 17 registros empíricos e um registro
+contextual (6921). O `papers.csv`, o `summary.json`, o MMAT, as referências e as
+figuras foram regenerados no PR #55. O TCC e a apresentação permanecem em
+unidades posteriores e não são alterados por este documento.
 
 ## Limites da proposta
 

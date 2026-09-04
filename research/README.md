@@ -8,6 +8,10 @@
 > A baseline operacional de 31/08/2026 (16 retidos) e os números históricos de
 > 9.431 registros e 17 incluídos permanecem preservados para rastreabilidade.
 
+A reconciliação detalhada da população vigente, incluindo deduplicação, decisões
+de escopo e separação entre candidatos empíricos e contexto, está em
+[`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](../docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
+
 O manifesto histórico [`research/data/protocol_execution_2025.json`](data/protocol_execution_2025.json), extraído do contexto do PR #23, preserva a estratégia e os limites da execução de 2025. Ele é evidência histórica, não a fonte de verdade do snapshot atual; em particular, registra a divergência não resolvida entre 2.517 duplicatas reportadas e `total_removed=2494` no artefato SQLite histórico.
 
 ## 🎯 Visão Geral
@@ -171,7 +175,7 @@ Elegibilidade → Inclusão.
 As oito decisões que alteram a população atual estão no ledger
 research/data/adjudicated_population_decisions.csv. Elas aplicam as regras de
 domínio, centralidade computacional, completude empírica, especificidade do
-desfecho e tipo documental. O efeito não é uma simples troca de 17 por 16:
+desfecho e tipo documental. O efeito não é uma simples troca de 16 por 18:
 três registros foram recuperados para a população, um foi retirado por ano
 fora do recorte e os demais permaneceram excluídos por razões científicas
 explícitas. O SQLite permanece local e não versionado; para reconstituir o
