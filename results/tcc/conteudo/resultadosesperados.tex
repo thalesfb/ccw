@@ -1,18 +1,18 @@
 \chapter{REVISÃO SISTEMÁTICA DA LITERATURA}
 \label{cap:revisao}
 
-Este capítulo apresenta os resultados da revisão sistemática desenvolvida no trabalho. O processo identificou 9.431 registros nas quatro fontes consultadas e incluiu 17 estudos na síntese narrativa. A pontuação usada na elegibilidade representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
+Este capítulo apresenta os resultados da revisão sistemática desenvolvida no trabalho. O processo identificou 11.904 registros nas quatro fontes consultadas. Após a deduplicação determinística por identidade DOI/URL, 11.877 registros foram submetidos à triagem; 2.486 avançaram para a elegibilidade e 18 foram retidos operacionalmente. A população retida compreende 17 candidatos empíricos provisórios e 1 protocolo ou proposta contextual, que não integra a síntese de evidências. A pontuação operacional representou aderência temática ao problema de pesquisa; ela não foi interpretada como medida de qualidade científica.
 
 \section{Fluxo de Seleção}
 
-A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Após a identificação, 2.517 duplicatas foram removidas, restando 6.914 registros únicos. A triagem e a avaliação de elegibilidade resultaram em 17 estudos incluídos.
+A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Após a identificação, 27 linhas excedentes foram removidas por identidade bibliográfica determinística: 25 por DOI normalizado e 2 por URL exata. Restaram 11.877 registros para a triagem. A triagem excluiu 9.391 registros e encaminhou 2.486 para a elegibilidade; nessa etapa, 2.468 foram excluídos e 18 foram retidos operacionalmente.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
 \caption{Fluxo de seleção da revisão sistemática.}
 \label{fig:prisma-flow}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{figure}
 
 A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de registros ao longo das etapas.
@@ -22,12 +22,12 @@ A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de regist
 \includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
 \caption{Funil de seleção dos estudos.}
 \label{fig:selection-funnel}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{figure}
 
 \section{Estatísticas Descritivas}
 
-A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A taxa de duplicatas evidencia a sobreposição entre as fontes e justifica a combinação de DOI e similaridade de títulos. A pequena proporção de estudos incluídos decorreu do escopo específico e da aplicação do limiar de relevância temática.
+A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. A auditoria de identidade registra as remoções determinísticas que entram no fluxo PRISMA e mantém separadas as repetições observadas apenas por título. Depois da remoção por DOI/URL, permaneceram 232 excedentes em grupos de título normalizado, tratados como candidatos à revisão semântica e não como duplicatas confirmadas. A pequena proporção de registros retidos decorreu do escopo específico e da aplicação do filtro operacional de relevância temática, seguida da verificação de escopo.
 
 A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um acerto ocorreu quando uma consulta foi atendida com uma resposta previamente armazenada, sem nova requisição à API. Como essa proporção dependeu do histórico de execução, sua interpretação permaneceu vinculada aos contadores registrados em cada execução do sistema.
 
@@ -39,18 +39,21 @@ A taxa de acertos do \textit{cache} não foi apresentada como métrica fixa. Um 
 \hline
 \textbf{Métrica} & \textbf{Valor} \\
 \hline
-Registros identificados & 9.431 \\
-Duplicatas removidas & 2.517 (26,6\%) \\
-Registros únicos & 6.914 \\
-Registros avaliados na elegibilidade & 1.883 \\
-Registros excluídos na elegibilidade & 1.866 \\
-Estudos incluídos & 17 \\
+Registros identificados & 11.904 \\
+Remoções determinísticas por DOI/URL & 27 (0,23\%) \\
+Registros na triagem & 11.877 \\
+Excluídos na triagem & 9.391 (78,89\%) \\
+Registros na elegibilidade & 2.486 \\
+Excluídos na elegibilidade & 2.468 (99,28\%) \\
+Registros retidos operacionalmente & 18 \\
+Candidatos empíricos provisórios & 17 \\
+Protocolo/proposta contextual & 1 \\
 Bases consultadas & 4 \\
 Consultas bilíngues & 72 (48 EN + 24 PT) \\
-Período de cobertura & 2016--2025 \\
+Período de cobertura & 2015--2026 \\
 \hline
 \end{tabular}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{table}
 
 A distribuição por fonte é apresentada na Figura~\ref{fig:database-coverage}. A contribuição de cada base foi complementar, e os totais brutos incluíram registros posteriormente reconhecidos como duplicatas.
@@ -72,14 +75,14 @@ Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, ca
 
 Acurácia elevada em uma base específica não demonstra automaticamente que a técnica produzirá o mesmo resultado em outra escola ou população. Da mesma forma, predição de desempenho não equivale a explicar como o estudante aprende matemática. Essas restrições foram incorporadas aos requisitos e aos critérios de avaliação da especificação apresentada no Capítulo~\ref{cap:prototipo}.
 
-Na Tabela~\ref{tab:sintese-17-estudos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT.
+Na Tabela~\ref{tab:sintese-estudos-empiricos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT. Um protocolo ou proposta contextual foi retido para rastreabilidade do mapeamento, mas não possui resultado empírico concluído e, por isso, não aparece na tabela \cite{Imperatrice2025_6921}.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
 \setlength{\tabcolsep}{2pt}
 \renewcommand{\arraystretch}{0.92}
 \begin{longtable}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{7.2cm}}
-\caption{Síntese dos estudos incluídos.}\label{tab:sintese-17-estudos}\\
+\caption{Síntese dos candidatos empíricos provisórios retidos.}\label{tab:sintese-estudos-empiricos}\\
 \hline
 \textbf{Autores/Ano} & \textbf{Tema} & \textbf{Abordagem} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Resultado reportado} \\
 \hline
@@ -94,43 +97,43 @@ Na Tabela~\ref{tab:sintese-17-estudos}, a coluna de resultado preserva o sentido
 \endfoot
 \hline
 \endlastfoot
-Tjahyadi (2025) & Predição de desempenho em matemática & EDM; ML & Predição & Desempenho & 75\% de acurácia no conjunto analisado \\
-Zhang et al. (2025) & Otimização de trajetórias & DL; RL; grafos de conhecimento & Personalização & Retorno de usuários & Ganhos de aprendizagem e redução de tempo reportados \\
-Nyantah et al. (2025) & Teoremas de círculo & Animação; aprendizagem cooperativa & Ensino de geometria & Testes estatísticos & Diferença favorável em relação ao ensino tradicional \\
-Milićević et al. (2024) & Apoio ao ensino de matemática & ML; analítica da aprendizagem & Predição e apoio & Desempenho & Heurísticas para classificação de sucesso acadêmico \\
-Jose et al. (2024) & Sistemas adaptativos K--12 & Aprendizagem adaptativa & Personalização & Métodos mistos & Ganhos e engajamento reportados \\
-Appiah-Odame (2024) & Avaliação autêntica & Abordagem qualitativa & Avaliação & Entrevistas & Benefícios e barreiras percebidos por professores \\
-Zhang (2023) & Matemática no ensino superior & ACO; CNN; CRF & Personalização & Testes estatísticos & Melhora de pós-teste reportada \\
-Mertasari et al. (2023) & Avaliação e metacognição & Avaliação de desempenho & Avaliação formativa & Testes estatísticos & Ganhos metacognitivos reportados \\
-Hasib et al. (2022) & Predição explicável & SVM; SMOTE; LIME & Predição & Desempenho & 96,89\% de acurácia no conjunto analisado \\
-Kumar et al. (2022) & Seleção de atributos & ML; mineração de dados & Predição de notas & Desempenho & Comparação entre cinco algoritmos \\
-Pejic et al. (2021) & Proficiência matemática no PISA & ML multiclasse & Predição de proficiência & Kappa; ROC-AUC & Resultados competitivos para RN e RF \\
-Salas-Rueda (2021) & Facebook no ensino de matemática financeira & Regressão; árvore; rede neural & Apoio ao ensino & Testes estatísticos & Associações entre recursos e resultados \\
-Sokkhey et al. (2020) & Desempenho no ensino médio & ML; RF & Predição & Desempenho & RF com melhor resultado entre os modelos comparados \\
-Ünal (2020) & Predição de desempenho & DT; RF; NB & Predição & Experimento computacional & Efetividade reportada em duas bases \\
-Uskov et al. (2019) & Analítica preditiva em STEM & Oito algoritmos de ML & Predição & Comparação de modelos & Recomendações baseadas no \textit{benchmark} \\
-MacLellan (2017) & Modelos computacionais de aprendizagem & Árvores; TRESTLE & Tutoria e autoria & Testes estatísticos & Melhor ajuste de modelos em múltiplos domínios \\
-Depren et al. (2017) & Classificação no TIMSS & LR; DT; BN; RN & Predição & Desempenho & Regressão logística superior no estudo \\
+Tjahyadi~\cite{Implementation2025_000} (2025) & Predição de desempenho acadêmico em matemática & EDM; ML; classificadores & Predição & Acurácia & 75\% no conjunto de teste reportado \\
+Pejic et al.~\cite{Math2021_001} (2021) & Proficiência matemática no PISA & ML multiclasse; RN; RF & Predição de proficiência & Kappa; ROC-AUC & Comparação entre modelos de três classes \\
+He et al.~\cite{He2025_6915} (2025) & Tecnologia educacional para matemática & EDM; IA; modelos preditivos & Otimização e decisão & Modelagem; experimento controlado & O resumo reporta modelo preditivo e comparação com ensino tradicional \\
+Villegas-Ch et al.~\cite{Villegas2025_6916} (2025) & Tutoria inteligente em STEM & IA; aprendizagem adaptativa & Feedback personalizado & Desempenho; análise estatística & Sistema adaptativo avaliado no contexto descrito pelo estudo \\
+Sokkhey et al.~\cite{Multimodels2020_002} (2020) & Desempenho em matemática no ensino médio & EDM; ML; métodos estatísticos & Predição & Comparação de modelos & Estudo compara classes de métodos em dados escolares \\
+Kumar et al.~\cite{Analysis2022_003} (2022) & Seleção de atributos e mineração de dados & DT; JRip; NB; MLP; RF & Predição de desempenho & Acurácia; comparação & Comparação de abordagens em conjuntos educacionais \\
+Özseven et al.~\cite{Ozseven2026_6917} (2026) & Desempenho em matemática on-line & ML; modelo neurofuzzy & Predição & Desempenho preditivo & Estrutura híbrida para lidar com incerteza e generalização \\
+Zhang, Zhu e Feng~\cite{Design2025_004} (2025) & Trajetórias personalizadas de aprendizagem & DL; grafos de conhecimento; RL & Personalização & Dados de desempenho; experimento & Algoritmo ajusta trajetórias com estado do estudante e análise de sentimentos \\
+Xiaohui Zhang~\cite{Innovative2023_005} (2023) & Currículo de matemática superior apoiado por IA & ACO; CNN; CRF; grafo de conhecimento & Personalização & Análise estatística; feedback & Modelo de trajetória personalizada descrito e avaliado no estudo \\
+Depren et al.~\cite{Identifying2017_006} (2017) & Classificação no TIMSS & DT; rede bayesiana; regressão logística; RN & Predição & Classificação; desempenho & Comparação de métodos de mineração em dados do TIMSS \\
+Uskov et al.~\cite{Machine2019_007} (2019) & Analítica preditiva em STEM & Oito algoritmos de ML & Predição de desempenho & Benchmarking & Benchmark de algoritmos para desempenho acadêmico \\
+MacLellan~\cite{Computational2017_008} (2017) & Modelos computacionais da aprendizagem & Modelos de tutoria e comportamento & Tutoria; predição; teoria & Ajuste de modelos; dados humanos & Avaliação de modelos em tarefas de tutoria e comportamento \\
+Milićević et al.~\cite{Machine2024_009} (2024) & Apoio ao ensino de matemática & ML; árvore de decisão & Classificação de estudantes & Predição de desempenho & Heurística de classificação do sucesso matemático \\
+Xia et al.~\cite{UniversityMathematics2026_6919} (2026) & Matemática universitária e desenvolvimento sustentável & IA; ML; avaliação & Integração curricular & Aplicação educacional; avaliação & Estrutura integrada para relacionar matemática e aplicações industriais \\
+Echeveria et al.~\cite{Echeveria2025_6920} (2025) & Mentalidade matemática e intervenção precoce & EDM; NB; SVM; MLP & Classificação de mentalidade & Acurácia & Modelo de classificação com questionários e dados acadêmicos \\
+Nyantah et al.~\cite{Enhancing2025_012} (2025) & Teoremas de círculo & Animação computacional; aprendizagem cooperativa & Ensino de geometria & Quase-experimento & Comparação entre animação com jigsaw e ensino convencional \\
+Zeng~\cite{Zeng2025_6923} (2025) & Carga cognitiva na resolução de problemas matemáticos & EEG; rastreamento ocular; ML & Reconhecimento de estados cognitivos & Experimento intraindivíduos & Sinais multimodais e classificadores para reconhecer carga cognitiva \\
 \end{longtable}
-\fonte{Elaborado pelo autor (2025).}
+\fonte{Elaborado pelo autor (2026).}
 \end{landscape}
 
 \section{Avaliação Metodológica com o MMAT}
 \label{sec:qualidade-estudos}
 
-O MMAT 2018 foi aplicado conforme o desenho metodológico de cada estudo \cite{MMAT2018}. As respostas S (``Sim''), N (``Não'') e ND (``Não é possível determinar'') foram mantidas por critério, sem média, ranking ou categoria geral. A avaliação foi realizada por um único revisor com base nos resumos, metadados e na descrição metodológica disponível; por isso, os julgamentos constituem uma apreciação estruturada e passível de revisão, não uma classificação definitiva dos artigos.
+O MMAT 2018 foi utilizado conforme o desenho metodológico de cada estudo empírico \cite{MMAT2018}. As respostas S (``Sim''), N (``Não'') e ND (``Não é possível determinar'') foram mantidas por critério, sem média, ranking ou categoria geral. A apreciação foi realizada por um único revisor e permanece preliminar: parte dos registros foi examinada com base em resumo e metadados, e a adjudicação pelo supervisor e os localizadores dos critérios ainda precisam ser consolidados. Assim, os julgamentos constituem uma apreciação estruturada e passível de revisão, não uma classificação definitiva dos artigos.
 
-A Tabela~\ref{tab:mmat-avaliacao} foi gerada automaticamente a partir do arquivo versionado \texttt{research/data/\allowbreak{}mmat\_assessments.csv}. Dessa forma, os critérios apresentados no TCC, no CSV exportado e no relatório HTML possuem uma fonte única e verificável.
+A Tabela~\ref{tab:mmat-reavaliacao-atual} foi gerada automaticamente a partir do arquivo versionado \texttt{research/data/\allowbreak{}mmat\_reassessment\_current.csv}. Dessa forma, os critérios apresentados no TCC e no ledger atual possuem uma fonte única e verificável, separada da avaliação histórica.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
 \setlength{\tabcolsep}{1.5pt}
 \renewcommand{\arraystretch}{0.88}
-\input{../../research/exports/references/mmat_tcc_table.tex}
+\input{../../research/exports/references/mmat_current_tcc_table.tex}
 \fonte{Elaborado pelo autor (2026).}
 \end{landscape}
 
-As limitações recorrentes envolveram descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Em vez de ordenar os estudos por uma nota, essas informações foram consideradas na força atribuída a cada evidência durante a síntese.
+As limitações recorrentes envolveram descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Em vez de ordenar os estudos por uma nota, essas informações foram consideradas na interpretação da evidência, sem produzir uma classificação agregada de qualidade.
 
 \section{Tendências e Lacunas}
 
@@ -153,7 +156,7 @@ A revisão foi realizada por um único pesquisador, com suporte automatizado par
 
 O protocolo não foi registrado prospectivamente. Foram adotados princípios de planejamento compatíveis com o PRISMA-P, mas não se afirmou conformidade integral. O PRISMA 2020 foi utilizado para orientar o relato do processo.
 
-As fontes consultadas possuem cobertura predominantemente anglófona, e a busca foi limitada a português e inglês. A heterogeneidade dos desenhos, populações e métricas impediu uma síntese quantitativa conjunta. Além disso, a avaliação MMAT por revisor único está sujeita a divergências interpretativas.
+As fontes consultadas possuem cobertura predominantemente anglófona, e a busca foi limitada a português e inglês. A heterogeneidade dos desenhos, populações e métricas impediu uma síntese quantitativa conjunta. Não foi aplicado um teste formal de viés de publicação; a cobertura das fontes e a disponibilidade desigual dos textos completos podem ter influenciado o conjunto recuperado. Além disso, a apreciação MMAT por revisor único permanece preliminar e está sujeita a divergências interpretativas.
 
 \section{Contribuições para a Especificação do Protótipo}
 

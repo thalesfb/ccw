@@ -64,6 +64,10 @@ jobs:
         working-directory: research
         run: python -m src.analysis.mmat_tcc_table --check
 
+      - name: Check current MMAT table used by the TCC
+        working-directory: research
+        run: python -m src.analysis.mmat_current_tcc_table --check
+
       - name: Check canonical MMAT CSV export
         working-directory: research
         run: cmp data/mmat_assessments.csv exports/analysis/mmat_assessment.csv

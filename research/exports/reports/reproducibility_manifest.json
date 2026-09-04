@@ -601,12 +601,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "9e3151b0b12201ce7452d9f38be94ddb13defe18a1377a87f1884d6df0b2fff2"
+      "sha256": "051c4836a3f9b1e5975e738eefc64a32c67fbb2c00c1b775fc83ff0fd04f0857"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary current 18-record MMAT table included by the TCC",
-      "sha256": "f4c3c196e5bdd0368e9a962100e463827c06c5e2eea216b8ed928c157add7b2e"
+      "sha256": "df52523d1a14d1915896fbf2b80efb43094e8db04863e50f517127f2749065bc"
     },
     {
       "path": "research/requirements.txt",

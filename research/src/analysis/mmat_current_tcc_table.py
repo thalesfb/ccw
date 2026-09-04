@@ -14,6 +14,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_PATH = REPO_ROOT / "research" / "data" / "mmat_reassessment_current.csv"
+PAPERS_PATH = REPO_ROOT / "research" / "exports" / "analysis" / "papers.csv"
 OUTPUT_PATH = (
     REPO_ROOT / "research" / "exports" / "references" / "mmat_current_tcc_table.tex"
 )
@@ -59,6 +60,31 @@ def load_rows(path: Path = DATA_PATH) -> list[dict[str, str]]:
     return rows
 
 
+def load_study_labels(path: Path = PAPERS_PATH) -> dict[str, str]:
+    """Return reader-facing author/year labels for the current MMAT rows."""
+
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        records = list(csv.DictReader(handle))
+
+    labels: dict[str, str] = {}
+    for record in records:
+        study_id = str(record.get("id", "")).strip()
+        if not study_id or not record.get("year"):
+            continue
+        authors = str(record.get("authors", "")).strip()
+        first_author = authors.split(";")[0].strip()
+        if "," in first_author:
+            family_name = first_author.split(",", 1)[0].strip()
+        else:
+            family_name = first_author.split()[-1] if first_author else ""
+        if not family_name:
+            family_name = str(record.get("paper_id", study_id)).strip()
+        suffix = " et al." if ";" in authors else ""
+        labels[study_id] = f"{family_name}{suffix} ({record['year']})"
+
+    return labels
+
+
 def _latex_escape(value: object) -> str:
     replacements = {
         "\\": r"\textbackslash{}",
@@ -75,30 +101,31 @@ def _latex_escape(value: object) -> str:
     return "".join(replacements.get(char, char) for char in str(value))
 
 
-def render_table(rows: list[dict[str, str]]) -> str:
+def render_table(
+    rows: list[dict[str, str]], labels: dict[str, str] | None = None
+) -> str:
+    labels = labels or load_study_labels()
     lines = [
         "% Tabela gerada de research/data/mmat_reassessment_current.csv",
         "% Reavaliação documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
-        r"\begin{landscape}",
-        r"\scriptsize",
-        r"\begin{longtable}{|p{0.75cm}|p{3.8cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
+        r"\begin{longtable}{|p{3.9cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
         r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{tab:mmat-reavaliacao-atual}\\",
         r"\hline",
-        r"\textbf{ID} & \textbf{Chave do estudo} & \textbf{Desenho} & "
+        r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
         r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} & \textbf{Estado} \\",
         r"\hline",
         r"\endfirsthead",
-        r"\multicolumn{12}{c}{\tablename\ \thetable\ -- Continuação}\\",
+        r"\multicolumn{11}{c}{\tablename\ \thetable\ -- Continuação}\\",
         r"\hline",
-        r"\textbf{ID} & \textbf{Chave do estudo} & \textbf{Desenho} & "
+        r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
         r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} & \textbf{Estado} \\",
         r"\hline",
         r"\endhead",
         r"\hline",
-        r"\multicolumn{12}{r}{\textit{Continua na próxima página}}\\",
+        r"\multicolumn{11}{r}{\textit{Continua na próxima página}}\\",
         r"\endfoot",
         r"\hline",
         r"\endlastfoot",
@@ -108,8 +135,7 @@ def render_table(rows: list[dict[str, str]]) -> str:
         if row.get("assessment_status") == "hold_source_verification":
             design = "metadata_hold"
         values = [
-            row["study_id"],
-            _latex_escape(row["study_key"]),
+            _latex_escape(labels.get(row["study_id"], row["study_key"])),
             _latex_escape(DESIGN_LABELS.get(design, design)),
             *[row[criterion] for criterion in CRITERIA],
             _latex_escape(BASIS_LABELS.get(row["assessment_basis"], row["assessment_basis"])),
@@ -119,8 +145,7 @@ def render_table(rows: list[dict[str, str]]) -> str:
     lines.extend(
         [
             r"\end{longtable}",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação metodológica pelo supervisor permanece pendente. O ID 6921 foi retido apenas como protocolo/proposta contextual e não integra a síntese empírica nem uma avaliação MMAT empírica. O ID 6918 foi excluído do escopo atual por ano bibliográfico 2014, fora do período 2015--2026.",
-            r"\end{landscape}",
+            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação metodológica pelo supervisor permanece pendente. O protocolo ou proposta contextual retido não integra a síntese empírica nem uma avaliação MMAT empírica. Um registro bibliográfico fora do recorte temporal foi excluído do escopo atual.",
         ]
     )
     return "\n".join(lines) + "\n"
