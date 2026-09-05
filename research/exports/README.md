@@ -211,8 +211,8 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
 - [x] Exportação BibTeX dos 18 registros retidos do pipeline (17 candidatos empíricos provisórios + 1 contextual)
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
-- [x] Reavaliação documental preliminar do MMAT aos 15 registros empíricos com evidência por critério
-- [ ] Recuperação das fontes restantes e adjudicação final do MMAT aos 15 registros empíricos
+- [x] Reavaliação documental preliminar do MMAT aos 17 registros empíricos com evidência por critério
+- [ ] Recuperação das fontes restantes e adjudicação final do MMAT aos 17 registros empíricos
 
 ### Fase 2 (Desenvolvimento do Protótipo) - 📋 PLANEJADA
 - [ ] Definir arquitetura (ML + LA + XAI)

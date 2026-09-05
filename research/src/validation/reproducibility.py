@@ -767,6 +767,14 @@ def generate_manifest(
     # committed versioned artifacts are the source of truth for the current
     # adjudicated population and must drive the manifest snapshot.
     operational_snapshot = _database_snapshot(source_db)
+    operational_snapshot["status"] = "diagnostic_only"
+    operational_snapshot["authoritative_snapshot"] = "snapshot"
+    operational_snapshot["interpretation"] = (
+        "This block records the unversioned SQLite state available when the "
+        "manifest was generated. It is diagnostic only and is not the current "
+        "PRISMA baseline; use the versioned snapshot object and summary.json "
+        "for the current adjudicated population."
+    )
     snapshot = _versioned_snapshot(root)
     snapshot["manual_override_adjudication"] = _validate_manual_override_adjudication(
         root / MANUAL_OVERRIDE_ADJUDICATION,
