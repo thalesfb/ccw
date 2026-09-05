@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "canonical_source": "research/exports/visualizations",
+  "consumer_directories": {
+    "tcc": "results/tcc/images",
+    "presentation": "presentation/public/images"
+  },
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "sha256": "8b505ed32fc170560fdf7036d6a2472827898e2188227ced2bd064194bc69e8b",
+    "paths": [
+      "research/data/adjudicated_population_decisions.csv",
+      "research/data/current_eligibility_protocol.csv",
+      "research/data/current_synthesis_scope.csv",
+      "research/data/manual_override_adjudication.csv",
+      "research/data/manual_override_evidence_matrix.csv",
+      "research/data/metadata_provenance_audit.csv",
+      "research/data/mmat_assessments.csv",
+      "research/data/mmat_current_study_registry.csv",
+      "research/data/mmat_primary_sources_manifest.csv",
+      "research/data/mmat_reassessment_current.csv",
+      "research/data/prisma_population_reconciliation.csv",
+      "research/data/protocol_execution_2025.json",
+      "research/data/reference_audit.csv",
+      "research/exports/analysis/papers.csv",
+      "research/src/__init__.py",
+      "research/src/analysis/__init__.py",
+      "research/src/analysis/deep_review_analysis.py",
+      "research/src/analysis/html_pdf_scraper.py",
+      "research/src/analysis/mmat_assessment.py",
+      "research/src/analysis/mmat_current.py",
+      "research/src/analysis/mmat_current_tcc_table.py",
+      "research/src/analysis/mmat_tcc_table.py",
+      "research/src/analysis/reports.py",
+      "research/src/analysis/visualizations.py",
+      "research/src/cache/sqlite_cache.py",
+      "research/src/cli.py",
+      "research/src/cli_audit.py",
+      "research/src/config.py",
+      "research/src/dashboard/app.py",
+      "research/src/database/__init__.py",
+      "research/src/database/manager.py",
+      "research/src/database/schema.py",
+      "research/src/db.py",
+      "research/src/exports/__init__.py",
+      "research/src/exports/bibtex.py",
+      "research/src/exports/excel.py",
+      "research/src/ingestion/__init__.py",
+      "research/src/ingestion/base.py",
+      "research/src/ingestion/core.py",
+      "research/src/ingestion/crossref.py",
+      "research/src/ingestion/openalex.py",
+      "research/src/ingestion/robust_core.py",
+      "research/src/ingestion/semantic_scholar.py",
+      "research/src/logging_config.py",
+      "research/src/pipeline/__init__.py",
+      "research/src/pipeline/run.py",
+      "research/src/pipelines/__init__.py",
+      "research/src/pipelines/validations.py",
+      "research/src/processing/__init__.py",
+      "research/src/processing/adjudicated_snapshot.py",
+      "research/src/processing/dedup.py",
+      "research/src/processing/enrichment.py",
+      "research/src/processing/language_utils.py",
+      "research/src/processing/scoring.py",
+      "research/src/processing/selection.py",
+      "research/src/search_terms.py",
+      "research/src/validation/__init__.py",
+      "research/src/validation/bibliography_audit.py",
+      "research/src/validation/derived_assets.py",
+      "research/src/validation/reproducibility.py",
+      "research/src/validation/temporal.py",
+      "research/src/validation/versioned_snapshot.py"
+    ]
+  },
+  "assets": [
+    {
+      "name": "database_coverage.png",
+      "canonical_path": "research/exports/visualizations/database_coverage.png",
+      "canonical_sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22",
+      "copies": [
+        {
+          "consumer": "tcc",
+          "path": "results/tcc/images/database_coverage.png",
+          "sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22"
+        },
+        {
+          "consumer": "presentation",
+          "path": "presentation/public/images/database_coverage.png",
+          "sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22"
+        }
+      ]
+    },
+    {
+      "name": "papers_by_year.png",
+      "canonical_path": "research/exports/visualizations/papers_by_year.png",
+      "canonical_sha256": "13b6d84951c7ea364f48b445b9b195cda6cb302e416a66a21c88e244bc81b04f",
+      "copies": [
+        {
+          "consumer": "tcc",
+          "path": "results/tcc/images/papers_by_year.png",
+          "sha256": "13b6d84951c7ea364f48b445b9b195cda6cb302e416a66a21c88e244bc81b04f"
+        },
+        {
+          "consumer": "presentation",
+          "path": "presentation/public/images/papers_by_year.png",
+          "sha256": "13b6d84951c7ea364f48b445b9b195cda6cb302e416a66a21c88e244bc81b04f"
+        }
+      ]
+    },
+    {
+      "name": "prisma_flow.png",
+      "canonical_path": "research/exports/visualizations/prisma_flow.png",
+      "canonical_sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b",
+      "copies": [
+        {
+          "consumer": "tcc",
+          "path": "results/tcc/images/prisma_flow.png",
+          "sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b"
+        },
+        {
+          "consumer": "presentation",
+          "path": "presentation/public/images/prisma_flow.png",
+          "sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b"
+        }
+      ]
+    },
+    {
+      "name": "relevance_distribution.png",
+      "canonical_path": "research/exports/visualizations/relevance_distribution.png",
+      "canonical_sha256": "d8e3c34b939c5954904db2505096daa43956009fced3061762cf138a664e8a9b",
+      "copies": [
+        {
+          "consumer": "tcc",
+          "path": "results/tcc/images/relevance_distribution.png",
+          "sha256": "d8e3c34b939c5954904db2505096daa43956009fced3061762cf138a664e8a9b"
+        },
+        {
+          "consumer": "presentation",
+          "path": "presentation/public/images/relevance_distribution.png",
+          "sha256": "d8e3c34b939c5954904db2505096daa43956009fced3061762cf138a664e8a9b"
+        }
+      ]
+    },
+    {
+      "name": "selection_funnel.png",
+      "canonical_path": "research/exports/visualizations/selection_funnel.png",
+      "canonical_sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54",
+      "copies": [
+        {
+          "consumer": "tcc",
+          "path": "results/tcc/images/selection_funnel.png",
+          "sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54"
+        },
+        {
+          "consumer": "presentation",
+          "path": "presentation/public/images/selection_funnel.png",
+          "sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54"
+        }
+      ]
+    },
+    {
+      "name": "techniques_distribution.png",
+      "canonical_path": "research/exports/visualizations/techniques_distribution.png",
+      "canonical_sha256": "1b1340a8b33a3d7d987ffc99ed213e32a6db9936f21a6c70e9c8cec5a590633c",
+      "copies": [
+        {
+          "consumer": "tcc",
+          "path": "results/tcc/images/techniques_distribution.png",
+          "sha256": "1b1340a8b33a3d7d987ffc99ed213e32a6db9936f21a6c70e9c8cec5a590633c"
+        },
+        {
+          "consumer": "presentation",
+          "path": "presentation/public/images/techniques_distribution.png",
+          "sha256": "1b1340a8b33a3d7d987ffc99ed213e32a6db9936f21a6c70e9c8cec5a590633c"
+        }
+      ]
+    }
+  ]
+}

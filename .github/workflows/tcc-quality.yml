@@ -49,6 +49,9 @@ jobs:
           python -m compileall -q research/src
           python -m compileall -q prototype/tcc_prototype
 
+      - name: Validate derived visualization synchronization
+        run: python -m research.src.validation.derived_assets --check
+
       - name: Validate versioned research snapshot
         working-directory: research
         run: python -m src.validation.versioned_snapshot
