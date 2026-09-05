@@ -264,7 +264,8 @@ Julho–Novembro de 2026 pertence ao planejamento histórico.
 
 - [x] Completar protocolo de revisão sistemática
 - [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
-- [x] Realizar busca nas bases de dados (72 queries bilíngues × 4 APIs)
+- [x] Definir e versionar a estratégia canônica de busca (72 consultas bilíngues × 4 APIs)
+- [x] Consolidar o snapshot versionado da busca (11.904 registros identificados)
 - [x] Analisar e categorizar os artigos encontrados (18 registros retidos no snapshot vigente; 17 estudos no baseline histórico)
 - [x] Gerar relatórios e visualizações PRISMA
 - [x] Finalizar documentação acadêmica do PTC (LaTeX)
