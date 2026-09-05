@@ -63,6 +63,14 @@ jobs:
             echo "✅ Found $VIZ_COUNT visualization(s)"
           fi
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate derived visualization synchronization
+        run: python -m research.src.validation.derived_assets --check
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:

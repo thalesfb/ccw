@@ -72,6 +72,16 @@ Você pode executar o workflow manualmente:
 - Previne execuções concorrentes do workflow
 - Funciona em Ubuntu latest (runner do GitHub)
 
+Antes da publicação, o workflow também executa a validação independente de
+SQLite das visualizações derivadas. Ela exige que as seis imagens canônicas em
+`research/exports/visualizations/` sejam byte-idênticas às cópias do TCC e da
+apresentação e que o manifesto versionado esteja atualizado. O exportador local
+faz essa sincronização automaticamente; em caso de falha, execute:
+
+```bash
+python -m research.src.validation.derived_assets --sync
+```
+
 ### Troubleshooting
 
 **Erro: "Permission denied"**

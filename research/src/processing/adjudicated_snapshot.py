@@ -23,6 +23,7 @@ import pandas as pd
 from ..analysis.reports import ReportGenerator
 from ..analysis.visualizations import ReviewVisualizer
 from ..exports.excel import to_excel_with_filters
+from ..validation.derived_assets import sync_derived_assets
 
 
 RESEARCH_ROOT = Path(__file__).resolve().parents[2]
@@ -311,6 +312,7 @@ def _regenerate_reports(papers: pd.DataFrame, prisma: dict[str, Any]) -> None:
     generator.generate_gap_analysis(papers)
     VISUALIZATION_ROOT.mkdir(parents=True, exist_ok=True)
     ReviewVisualizer(VISUALIZATION_ROOT).generate_all_visualizations(papers, prisma)
+    sync_derived_assets()
 
 
 def regenerate() -> dict[str, Any]:

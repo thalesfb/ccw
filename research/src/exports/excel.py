@@ -25,6 +25,7 @@ from ..processing.dedup import (
     find_duplicates,
     normalize_doi,
 )
+from ..validation.derived_assets import sync_derived_assets
 
 logger = logging.getLogger(__name__)
 
@@ -887,6 +888,13 @@ def export_complete_review(
         visualizer = ReviewVisualizer(output_dir / "visualizations")
         chart_paths = visualizer.generate_all_visualizations(df_for_export, local_stats)
         exported_files["charts"] = chart_paths
+
+        # The canonical export is the only source allowed to update the
+        # downstream TCC and Slidev copies.  Custom output directories remain
+        # useful for experiments and must not overwrite published artifacts.
+        canonical_exports_dir = Path(__file__).resolve().parents[2] / "exports"
+        if output_dir.resolve() == canonical_exports_dir.resolve():
+            exported_files["derived_assets_manifest"] = sync_derived_assets()
 
         # 4. Reports (usa o snapshot exportado)
         report_generator = ReportGenerator(output_dir / "reports")

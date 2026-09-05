@@ -37,12 +37,23 @@ cp research/.env.example research/.env
 python -m research.src.cli run-pipeline
 python -m research.src.cli export
 
+# Verificar manualmente os derivados publicados (o export já faz esse sync)
+python -m research.src.validation.derived_assets --check
+
 # Reproduzir a população adjudicada e seus relatórios sem SQLite
 python -m research.src.processing.adjudicated_snapshot
 
 # 4. Ver resultados
 # Os arquivos são gerados em research/exports/
 ```
+
+O exportador sincroniza automaticamente as seis visualizações canônicas para
+`results/tcc/images/` e `presentation/public/images/`. O CI compara esses
+arquivos por SHA-256 e valida o manifesto versionado
+`research/exports/reports/derived_assets_manifest.json`. Se uma alteração no
+código ou nos dados versionados puder mudar os gráficos, execute
+`python -m research.src.validation.derived_assets --sync` após regenerar o
+export e versione as alterações produzidas.
 
 ---
 
