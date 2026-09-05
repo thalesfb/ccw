@@ -130,6 +130,7 @@ python -m research.src.cli export-bibtex
 **Saídas**:
 
 - `research/exports/references/included_papers.bib` - Registros bibliográficos derivados do snapshot vigente (18; 17 candidatos empíricos provisórios + 1 protocolo contextual)
+- `research/exports/references/high_relevance.bib` - Registros com score de relevância ≥ 7,0 quando gerado pelo CLI; não é um artefato versionado do snapshot vigente
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
 O arquivo `included_papers.bib` contém somente os 18 registros derivados do
