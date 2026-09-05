@@ -69,3 +69,12 @@ def test_validation_reports_changed_pipeline_source(tmp_path: Path) -> None:
     errors = validate_derived_assets(repository)
 
     assert any("source fingerprint is stale" in error for error in errors)
+
+
+def test_source_fingerprint_is_independent_of_line_endings(tmp_path: Path) -> None:
+    repository = _make_repository(tmp_path)
+    sync_derived_assets(repository)
+    source = repository / "research" / "src" / "pipeline.py"
+    source.write_bytes(b"PIPELINE_VERSION = 1\r\n")
+
+    assert validate_derived_assets(repository) == []

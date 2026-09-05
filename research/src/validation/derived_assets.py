@@ -52,7 +52,13 @@ def repository_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
-def _sha256(path: Path) -> str:
+def _sha256(path: Path, *, normalize_text: bool = False) -> str:
+    if normalize_text:
+        # Source fingerprints must be identical on Windows and Linux.  The
+        # generated PNGs continue to use the raw-byte hash below.
+        content = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        return hashlib.sha256(content).hexdigest()
+
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
@@ -97,7 +103,7 @@ def _source_fingerprint(repo_root: Path) -> dict[str, object]:
 
     for path in _iter_source_files(repo_root):
         relative = path.relative_to(repo_root).as_posix()
-        file_hash = _sha256(path)
+        file_hash = _sha256(path, normalize_text=True)
         paths.append(relative)
         digest.update(relative.encode("utf-8"))
         digest.update(b"\0")
