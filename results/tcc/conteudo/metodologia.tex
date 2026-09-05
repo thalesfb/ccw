@@ -45,7 +45,7 @@ A estratégia de busca combinou três camadas de termos: domínio matemático, t
     \item Português: \textit{educacao}, \textit{ensino}.
 \end{itemize}
 
-Foram executadas 72 consultas: 48 em inglês e 24 em português. Em cada consulta, um termo do domínio matemático foi combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Em notação simplificada, a estrutura foi: \textit{termo matemático} \texttt{AND} \textit{termo computacional} \texttt{AND} \textit{termo educacional}. Exemplos incluem:
+A estratégia canônica foi composta por 72 consultas: 48 em inglês e 24 em português. O conjunto dessas consultas está versionado nos artefatos do estudo; como não foi preservado um log histórico completo das requisições, esse número descreve a composição da estratégia, e não uma contagem retrospectiva de chamadas HTTP concluídas em cada API. Em cada consulta, um termo do domínio matemático foi combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Em notação simplificada, a estrutura foi: \textit{termo matemático} \texttt{AND} \textit{termo computacional} \texttt{AND} \textit{termo educacional}. Exemplos incluem:
 
 \begin{itemize}
     \item \texttt{"mathematics" AND "machine learning" AND "education"};
@@ -95,7 +95,7 @@ O processo de seleção foi documentado segundo as etapas de identificação, tr
 
 \subsection{Identificação}
 
-As 72 consultas definidas para as quatro APIs resultaram em 11.904 registros identificados. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
+O snapshot versionado preserva 11.904 registros identificados. A configuração canônica da busca contém 72 consultas para as quatro APIs; entretanto, a ausência de um log histórico completo impede reconstruir quantas requisições HTTP foram concluídas por consulta ou por API. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
 
 \subsection{Deduplicação e Triagem}
 
