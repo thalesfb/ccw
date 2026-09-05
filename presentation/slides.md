@@ -68,7 +68,7 @@ Como técnicas computacionais podem apoiar o diagnóstico e a personalização d
 
 <br>
 
-> Objetivo: mapear e analisar aplicações de *machine learning*, *learning analytics* e sistemas tutores inteligentes na educação matemática, identificando tendências, lacunas e requisitos para uma futura especificação técnica e pedagógica.
+> Objetivo: mapear e analisar aplicações de *machine learning*, *learning analytics* e sistemas tutores inteligentes na educação matemática, identificando tendências, lacunas e requisitos para uma especificação técnica e pedagógica de protótipo.
 
 ---
 layout: two-cols
@@ -264,8 +264,8 @@ O ledger atual é uma avaliação por critério, ainda preliminar. A recuperaç�
 
 1. Consolidar a recuperação das fontes e a adjudicação final do MMAT.
 2. Revisar as lacunas à luz dos 17 estudos empíricos provisórios.
-3. Especificar o protótipo somente após a decisão de escopo e orientação.
-4. Definir protocolo e autorização antes de qualquer validação experimental.
+3. Consolidar e revisar a especificação conceitual do protótipo à luz da adjudicação final.
+4. A validação experimental não integra o escopo atual; qualquer estudo futuro exigirá novo protocolo e autorização.
 
 <br>
 

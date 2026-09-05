@@ -276,15 +276,15 @@
             <p class="subtitle">Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</p>
             <div>
                 <span class="badge">✅ Fase 1: Revisão Sistemática</span>
-                <span class="badge progress">🚧 Fase 2: Desenvolvimento</span>
-                <span class="badge planned">📋 Fase 3: Avaliação</span>
+                <span class="badge">✅ Fase 2: Especificação conceitual</span>
+                <span class="badge planned">⛔ Fase 3: Fora do escopo</span>
             </div>
         </header>
         
         <nav>
             <a href="research/index.html">📊 Revisão Sistemática</a>
             <a href="presentation/">🎞️ Apresentação Slidev</a>
-            <a href="research/exports/analysis/mmat_visualization.html">🔬 MMAT (Qualidade)</a>
+            <a href="research/exports/analysis/mmat_visualization.html">🔬 MMAT histórico (referência)</a>
             <a href="https://github.com/thalesfb/ccw/blob/main/docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md">📊 Reconciliação vigente</a>
             <a href="results/ptc/index.html">📄 PTC</a>
             <a href="results/tcc/index.html">📝 TCC</a>
@@ -295,9 +295,10 @@
             <section class="section">
                 <h2>📖 Sobre o Projeto</h2>
                 <p>
-                    Este Trabalho de Conclusão de Curso desenvolve uma ferramenta tecnológica para auxiliar 
-                    professores de matemática na <strong>identificação automatizada de competências individuais</strong> 
-                    dos alunos, permitindo a criação de <strong>planos de ensino adaptativos e personalizados</strong>.
+                    Este Trabalho de Conclusão de Curso documenta uma revisão sistemática da literatura e a elaboração
+                    de uma <strong>especificação técnica e pedagógica de protótipo</strong> para apoiar a interpretação
+                    docente de evidências sobre competências matemáticas. A aplicação funcional e a validação
+                    experimental não integram o escopo desta versão.
                 </p>
                 <p>
                     <strong>Instituição:</strong> Instituto Federal Catarinense - Campus Videira<br>
@@ -313,7 +314,7 @@
                 <div class="stats-grid">
                         <div class="stat-card">
                             <span class="number">72</span>
-                            <span class="label">Consultas Bilíngues (48 EN + 24 PT)</span>
+                            <span class="label">Consultas canônicas (48 EN + 24 PT)</span>
                         </div>
                         <div class="stat-card">
                             <span class="number">11.904</span>
@@ -344,7 +345,7 @@
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
                             <span class="number">n/d</span>
-                            <span class="label">MMAT agregado</span>
+                            <span class="label">MMAT agregado (não calculado)</span>
                         </div>
                 </div>
                 
@@ -370,15 +371,15 @@
                     </div>
                     <div class="feature-card">
                         <h4>OpenAlex</h4>
-                        <p>Catálogo aberto com 250M+ obras acadêmicas e metadados estruturados</p>
+                        <p>Catálogo acadêmico aberto com metadados estruturados</p>
                     </div>
                     <div class="feature-card">
                         <h4>Crossref</h4>
-                        <p>Registro oficial de DOIs com 140M+ publicações acadêmicas</p>
+                        <p>Registro de metadados bibliográficos e identificadores DOI</p>
                     </div>
                     <div class="feature-card">
                         <h4>CORE</h4>
-                        <p>Agregador de repositórios acadêmicos com 200M+ artigos em acesso aberto</p>
+                        <p>Agregador de repositórios e publicações em acesso aberto</p>
                     </div>
                 </div>
                 
@@ -429,8 +430,9 @@
                 
                 <h3>🔑 Estratégia de Busca</h3>
                 <p>
-                    <strong>72 combinações únicas</strong> executadas através de 4 APIs acadêmicas, 
-                    cobrindo o período de <strong>2015–2026</strong>:
+                    A estratégia canônica contém <strong>72 combinações</strong> para as 4 APIs acadêmicas,
+                    cobrindo o período de <strong>2015–2026</strong>. A configuração está versionada; não há
+                    um log histórico completo para atribuir esse número a requisições HTTP concluídas por API:
                 </p>
                 <ul>
                     <li><strong>3 termos matemáticos:</strong> "mathematics", "math", "matemática"</li>
@@ -438,7 +440,7 @@
                     <li><strong>4 termos educacionais:</strong> "education", "learning", "educacao", "ensino"</li>
                     <li><strong>Estratégia:</strong> Combinações triplas com operador booleano AND (base_term AND tech_term AND edu_term)</li>
                     <li><strong>Distribuição:</strong> 48 consultas em inglês + 24 consultas em português</li>
-                    <li><strong>Filtro operacional:</strong> pontuação de relevância ≥ 4,0 (escala 0–5); não substitui a adjudicação científica final</li>
+                    <li><strong>Filtro operacional:</strong> limiar de relevância ≥ 4,0; os valores observados no snapshot variaram de 0,0 a 4,5 e o filtro não substitui a adjudicação científica final</li>
                 </ul>
             </section>
             
@@ -447,49 +449,46 @@
                 
                 <h3>Objetivo Geral</h3>
                 <p>
-                    Mapear e analisar sistematicamente as aplicações de técnicas computacionais —
-                    especialmente <strong>machine learning</strong>, <strong>learning analytics</strong>
-                    e <strong>sistemas de tutoria inteligente</strong> — no contexto da educação matemática,
-                    identificando tendências, lacunas de pesquisa e requisitos para uma futura
-                    especificação técnica e pedagógica que apoie a interpretação docente e a
-                    personalização do ensino. A implementação e a validação experimental não são
-                    resultados vigentes nesta página.
+                    Mapear e analisar sistematicamente as aplicações de técnicas computacionais no ensino de
+                    matemática e, a partir das evidências encontradas, elaborar uma especificação técnica e
+                    pedagógica de protótipo para apoio à interpretação de evidências sobre competências.
                 </p>
                 
                 <h3>Objetivos Específicos</h3>
                 <ul>
-                    <li>✅ <strong>OE1:</strong> Realizar revisão sistemática da literatura com relato orientado pela <strong>guideline PRISMA 2020</strong> para identificar estudos que apliquem técnicas computacionais na educação matemática (2015-2026)</li>
-                    <li>✅ <strong>OE2:</strong> Identificar e categorizar as principais abordagens de IA (Machine Learning, Deep Learning, NLP, Educational Data Mining) aplicadas à educação matemática</li>
-                    <li>✅ <strong>OE3:</strong> Classificar as aplicações segundo as finalidades pedagógicas reportadas: tutoria inteligente, avaliação automatizada, personalização, predição e feedback adaptativo</li>
-                    <li>✅ <strong>OE4:</strong> Analisar criticamente as metodologias de avaliação utilizadas para validar a eficácia de sistemas computacionais em contextos educacionais</li>
-                    <li>✅ <strong>OE5:</strong> Mapear sistematicamente as lacunas de pesquisa, limitações técnicas e desafios reportados nos estudos incluídos</li>
-                    <li>✅ <strong>OE6:</strong> Criar um pipeline automatizado e reproduzível para coleta, processamento e análise de literatura científica</li>
+                    <li>✅ <strong>OE1:</strong> Realizar uma revisão sistemática da literatura, com relato apoiado pelo <strong>PRISMA 2020</strong>, sobre estudos publicados entre 2015 e 2026</li>
+                    <li>✅ <strong>OE2:</strong> Identificar e categorizar as principais abordagens computacionais aplicadas ao ensino de matemática</li>
+                    <li>✅ <strong>OE3:</strong> Classificar as finalidades pedagógicas atribuídas às aplicações encontradas</li>
+                    <li>✅ <strong>OE4:</strong> Analisar criticamente as metodologias e limitações dos estudos incluídos</li>
+                    <li>✅ <strong>OE5:</strong> Mapear lacunas técnicas, pedagógicas, metodológicas e éticas</li>
+                    <li>✅ <strong>OE6:</strong> Manter um pipeline automatizado e auditável para coleta, processamento e exportação da revisão</li>
+                    <li>✅ <strong>OE7:</strong> Derivar requisitos funcionais e não funcionais, critérios de seleção de dados e modelos, um protocolo de avaliação e uma arquitetura de referência para o protótipo</li>
                 </ul>
                 
                 <h3>📅 Fases do Projeto</h3>
                 <div class="features-grid">
                     <div class="feature-card" style="border-left-color: #27ae60;">
-                        <h4>✅ Fase 1: Revisão Sistemática (PTC)</h4>
+                        <h4>✅ Fase 1: Revisão Sistemática</h4>
                         <p>
                             <strong>Status:</strong> População adjudicada; MMAT final pendente<br>
                             <strong>Período:</strong> coleta histórica; reconciliação em 03/09/2026<br>
                             <strong>Entrega:</strong> snapshot PRISMA com 18 registros retidos e MMAT preliminar
                         </p>
                     </div>
-                    <div class="feature-card" style="border-left-color: #f39c12;">
-                        <h4>🚧 Fase 2: Desenvolvimento do Protótipo (TCC)</h4>
+                    <div class="feature-card" style="border-left-color: #27ae60;">
+                        <h4>✅ Fase 2: Especificação conceitual do protótipo (TCC)</h4>
                         <p>
-                            <strong>Status:</strong> Aguardando decisão da orientação<br>
-                            <strong>Período:</strong> sem prazo vigente<br>
-                            <strong>Entrega:</strong> a definir após o gate científico
+                            <strong>Status:</strong> Produzida no escopo vigente<br>
+                            <strong>Período:</strong> versão consolidada em 2026<br>
+                            <strong>Entrega:</strong> requisitos, critérios, protocolo de avaliação e arquitetura de referência
                         </p>
                     </div>
                     <div class="feature-card" style="border-left-color: #95a5a6;">
-                        <h4>📋 Fase 3: Validação Experimental (TCC)</h4>
+                        <h4>⛔ Fase 3: Validação Experimental (fora do escopo)</h4>
                         <p>
-                            <strong>Status:</strong> Não iniciada<br>
-                            <strong>Período:</strong> sem prazo vigente<br>
-                            <strong>Entrega:</strong> somente após protocolo e autorização
+                            <strong>Status:</strong> Não integra esta versão<br>
+                            <strong>Período:</strong> não aplicável<br>
+                            <strong>Entrega:</strong> não há coleta com participantes nem métricas próprias
                         </p>
                     </div>
                 </div>
