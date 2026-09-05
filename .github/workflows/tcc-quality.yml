@@ -250,7 +250,8 @@ jobs:
             results/tcc \
             ':(exclude)results/tcc/main.pdf' \
             ':(exclude)results/tcc/index.html' \
-            ':(exclude)results/tcc/README.md'; then
+            ':(exclude)results/tcc/README.md' \
+            ':(exclude)results/tcc/presentation'; then
             stale=true
           fi
 
