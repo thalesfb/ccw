@@ -109,6 +109,35 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 
+  presentation-validation:
+    name: presentation-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: presentation/package-lock.json
+
+      - name: Install presentation dependencies
+        working-directory: presentation
+        run: npm ci
+
+      - name: Validate presentation content
+        working-directory: presentation
+        run: npm run validate
+
+      - name: Build presentation
+        working-directory: presentation
+        run: npm run build -- --base /ccw/presentation/
+
   latex-build:
     runs-on: ubuntu-latest
     timeout-minutes: 20

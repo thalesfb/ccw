@@ -62,6 +62,25 @@ jobs:
           else
             echo "✅ Found $VIZ_COUNT visualization(s)"
           fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: presentation/package-lock.json
+
+      - name: Install presentation dependencies
+        working-directory: presentation
+        run: npm ci
+
+      - name: Validate presentation content
+        working-directory: presentation
+        run: npm run validate
+
+      - name: Build presentation
+        working-directory: presentation
+        run: npm run build -- --base /ccw/presentation/
       
       - name: Prepare Pages content
         run: |
@@ -83,7 +102,10 @@ jobs:
           if [ -d "results/tcc" ]; then
             cp -r results/tcc _site/results/
           fi
+          test -d "presentation/dist"
+          cp -r presentation/dist _site/presentation
           echo "✅ Copied results/ directory"
+          echo "✅ Copied presentation/ directory"
           
           # Create .nojekyll to bypass Jekyll processing
           touch _site/.nojekyll

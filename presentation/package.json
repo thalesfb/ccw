@@ -1,0 +1,17 @@
+{
+  "name": "tcc-decision-deck",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export",
+    "validate": "node validate.mjs"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.19.1",
+    "@slidev/theme-default": "latest"
+  },
+  "devDependencies": {
+    "shiki": "^4.4.3"
+  }
+}
