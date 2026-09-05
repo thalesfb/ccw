@@ -72,6 +72,14 @@ def test_current_deduplication_description_matches_identity_audit() -> None:
     assert "não foram removidos automaticamente por título" in methodology
 
 
+def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> None:
+    methodology = _read(TCC_CONTENT / "metodologia.tex")
+    assert "A estratégia canônica foi composta por 72 consultas" in methodology
+    assert "não foi preservado um log histórico completo" in methodology
+    assert "Foram executadas 72 consultas" not in methodology
+    assert "resultaram em 11.904 registros identificados" not in methodology
+
+
 def test_interpretation_precedes_the_long_synthesis_table() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
     interpretation = chapter.index("Antes da tabela detalhada")
