@@ -9,12 +9,7 @@ A Base Nacional Comum Curricular (BNCC) associa o letramento matemático às cap
 
 Para evitar que medidas distintas fossem tratadas como equivalentes, este trabalho adotou definições operacionais. A avaliação educacional parte de observações produzidas por tarefas e respostas para realizar inferências sobre conhecimentos e habilidades; essas inferências dependem do modelo de cognição, dos instrumentos e dos procedimentos de mensuração empregados \cite{NRC2001}. Em avaliações como o PISA, a proficiência é estimada em uma escala e interpretada por níveis que descrevem o que os estudantes tipicamente conseguem realizar \cite{OECDPISA2022Framework}.
 
-\begin{description}
-    \item[Desempenho observado:] registro diretamente obtido em uma tarefa, como acerto, nota, número de tentativas, estratégia apresentada ou tempo de resolução \cite{NRC2001};
-    \item[Proficiência estimada:] inferência sobre a posição do estudante em uma escala de conhecimentos e habilidades, calculada a partir de um conjunto de evidências e de um modelo de mensuração \cite{NRC2001, OECDPISA2022Framework};
-    \item[Competência:] capacidade de mobilizar conhecimentos, procedimentos, estratégias e atitudes para enfrentar situações e resolver problemas \cite{BNCC2018};
-    \item[Aprendizagem:] processo de transformação construído ao longo do tempo, evidenciado por mudanças na compreensão, na autonomia, nas estratégias e na capacidade de aplicar conhecimentos em novos contextos \cite{Piaget1972EN, Vygotsky1978, Ausubel1968}.
-\end{description}
+\textbf{Desempenho observado} corresponde ao registro diretamente obtido em uma tarefa, como acerto, nota, número de tentativas, estratégia apresentada ou tempo de resolução \cite{NRC2001}. \textbf{Proficiência estimada} corresponde a uma inferência sobre a posição do estudante em uma escala de conhecimentos e habilidades, calculada a partir de um conjunto de evidências e de um modelo de mensuração \cite{NRC2001, OECDPISA2022Framework}. \textbf{Competência} refere-se à capacidade de mobilizar conhecimentos, procedimentos, estratégias e atitudes para enfrentar situações e resolver problemas \cite{BNCC2018}. Por sua vez, \textbf{aprendizagem} é entendida como um processo de transformação construído ao longo do tempo, evidenciado por mudanças na compreensão, na autonomia, nas estratégias e na capacidade de aplicar conhecimentos em novos contextos \cite{Piaget1972EN, Vygotsky1978, Ausubel1968}.
 
 Essas definições são relacionadas, mas não intercambiáveis. Um modelo computacional pode reconhecer padrões nos dados de desempenho e produzir estimativas de proficiência. Entretanto, não observa diretamente todos os processos cognitivos, sociais e afetivos envolvidos na aprendizagem. Suas saídas devem ser interpretadas como apoio à análise docente, e não como diagnóstico definitivo do estudante.
 
@@ -42,29 +37,13 @@ Uma previsão algorítmica, por si só, não constitui \textit{feedback} formati
 
 As tecnologias computacionais podem processar grandes volumes de registros, identificar regularidades e apresentar visualizações que auxiliem o acompanhamento de turmas. Seu valor educacional não decorre apenas da acurácia de um modelo, mas da qualidade dos dados, da interpretação das saídas e da forma como a informação é incorporada à prática docente.
 
-A adoção dessas tecnologias deve preservar alguns princípios:
-
-\begin{itemize}
-    \item o professor permanece responsável por interpretar evidências e decidir intervenções;
-    \item previsões devem apresentar incertezas e limitações;
-    \item dados socioeconômicos ou comportamentais não devem ser usados para naturalizar desigualdades;
-    \item estudantes não devem ser reduzidos a categorias fixas;
-    \item recomendações precisam estar alinhadas ao currículo e aos objetivos da atividade;
-    \item privacidade, consentimento e finalidade de uso dos dados devem ser considerados desde o planejamento.
-\end{itemize}
+A adoção dessas tecnologias deve preservar a responsabilidade do professor pela interpretação das evidências e pela decisão de intervenções. As previsões precisam apresentar incertezas e limitações, e dados socioeconômicos ou comportamentais não devem ser usados para naturalizar desigualdades ou reduzir estudantes a categorias fixas. As recomendações devem estar alinhadas ao currículo e aos objetivos da atividade, considerando privacidade, consentimento e finalidade de uso dos dados desde o planejamento.
 
 \section{Técnicas Computacionais na Educação}
 
 \subsection{\textbf{\textit{Machine Learning}} e Inteligência Artificial}
 
-O aprendizado de máquina, ou \textbf{\textit{machine learning}} (ML), é uma área da Inteligência Artificial que desenvolve modelos capazes de identificar padrões a partir de dados. Em contextos educacionais, os estudos analisados utilizaram esses modelos para:
-
-\begin{itemize}
-    \item estimar desempenho ou níveis de proficiência \cite{Multimodels2020_002, He2025_6915, Math2021_001};
-    \item classificar padrões de dificuldade;
-    \item identificar variáveis associadas aos resultados;
-    \item apoiar recomendações de conteúdos e atividades \cite{Design2025_004}.
-\end{itemize}
+O aprendizado de máquina, ou \textbf{\textit{machine learning}} (ML), é uma área da Inteligência Artificial que desenvolve modelos capazes de identificar padrões a partir de dados. Em contextos educacionais, os estudos analisados utilizaram esses modelos para estimar desempenho ou níveis de proficiência \cite{Multimodels2020_002, He2025_6915, Math2021_001}, classificar padrões de dificuldade, identificar variáveis associadas aos resultados e apoiar recomendações de conteúdos e atividades \cite{Design2025_004}.
 
 Árvores de decisão, \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), redes neurais e outros modelos possuem pressupostos e limitações diferentes. A escolha de um algoritmo deve ser comparada a referências simples, considerar o equilíbrio entre as classes e usar métricas adequadas ao problema, em vez de se apoiar apenas na maior acurácia observada.
 
@@ -84,31 +63,13 @@ A adaptação é pedagogicamente relevante quando os critérios de decisão são
 
 Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. As métricas mais comuns incluem acurácia, precisão, revocação (\textit{recall}), medida F1 e área sob a curva ROC \cite{Romero2020}. Essas métricas avaliam o comportamento do modelo; não medem diretamente a qualidade pedagógica da intervenção.
 
-No domínio educacional, também podem ser observados:
-
-\begin{itemize}
-    \item acertos e erros por habilidade;
-    \item tempo e número de tentativas;
-    \item progressão entre avaliações;
-    \item participação e conclusão de atividades;
-    \item explicações ou estratégias registradas pelo estudante.
-\end{itemize}
+No domínio educacional, também podem ser observados acertos e erros por habilidade, tempo e número de tentativas, progressão entre avaliações, participação e conclusão de atividades e explicações ou estratégias registradas pelo estudante.
 
 A interpretação deve considerar o instrumento, a população e a finalidade. Um modelo com bom desempenho médio pode apresentar erros sistemáticos para determinados grupos. Por isso, a avaliação técnica deve incluir análise por classe, validação em dados não utilizados no treinamento e investigação de possíveis vieses.
 
 \section{Requisitos Derivados da Fundamentação}
 
-A fundamentação teórica sustentou a definição dos seguintes requisitos para a especificação do protótipo:
-
-\begin{enumerate}
-    \item apresentar evidências de desempenho sem tratá-las como medida completa de aprendizagem;
-    \item relacionar indicadores aos descritores e objetivos curriculares;
-    \item oferecer explicações compreensíveis ao professor;
-    \item registrar incertezas e limitações do modelo;
-    \item permitir revisão humana das recomendações;
-    \item proteger os dados educacionais;
-    \item exigir avaliação técnica antes de qualquer afirmação de eficácia pedagógica.
-\end{enumerate}
+A fundamentação teórica sustentou requisitos para a especificação do protótipo: apresentar evidências de desempenho sem tratá-las como medida completa de aprendizagem; relacionar indicadores aos descritores e objetivos curriculares; oferecer explicações compreensíveis ao professor; registrar incertezas e limitações do modelo; permitir revisão humana das recomendações; proteger os dados educacionais; e exigir avaliação técnica antes de qualquer afirmação de eficácia pedagógica.
 
 Esses requisitos foram incorporados à especificação apresentada no Capítulo~\ref{cap:prototipo}. Dessa forma, a fundamentação não permaneceu apenas como discussão conceitual, mas orientou diretamente as decisões técnicas e pedagógicas consolidadas pelo trabalho.
 

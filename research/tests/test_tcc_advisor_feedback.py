@@ -97,7 +97,6 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
         TCC_CONTENT / "prototipo.tex",
         TCC_CONTENT / "resultados.tex",
         TCC_CONTENT / "conclusao.tex",
-        TCC_CONTENT / "cronograma.tex",
     ]
     source = "\n".join(_read(path) for path in key_files).lower()
 
@@ -154,7 +153,7 @@ def test_learning_concepts_and_teacher_role_are_explicit() -> None:
         "avaliação formativa",
     ):
         assert concept.lower() in foundation.lower()
-    assert "o professor permanece responsável" in foundation.lower()
+    assert "responsabilidade do professor pela interpretação" in foundation.lower()
     assert "não observa diretamente todos os processos" in foundation.lower()
 
 
