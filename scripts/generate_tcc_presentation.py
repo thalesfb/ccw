@@ -138,7 +138,7 @@ def add_text(
     size=18,
     color=SLATE,
     bold=False,
-    font="Aptos",
+    font="Arial",
     align=PP_ALIGN.LEFT,
     valign=MSO_ANCHOR.TOP,
     margin=0.06,
@@ -194,19 +194,19 @@ def add_rich_lines(
         paragraph.line_spacing = line_spacing
         if bullet:
             paragraph.text = "• "
-            paragraph.runs[0].font.name = "Aptos"
+            paragraph.runs[0].font.name = "Arial"
             paragraph.runs[0].font.size = Pt(size)
             paragraph.runs[0].font.color.rgb = label_color
         first = paragraph.add_run()
         first.text = label
-        first.font.name = "Aptos"
+        first.font.name = "Arial"
         first.font.size = Pt(size)
         first.font.bold = label_bold
         first.font.color.rgb = label_color
         if body:
             second = paragraph.add_run()
             second.text = body
-            second.font.name = "Aptos"
+            second.font.name = "Arial"
             second.font.size = Pt(size)
             second.font.color.rgb = color
     return box
@@ -227,65 +227,63 @@ def add_bullets(slide, items: Sequence[str], x, y, width, height, *, size=17, co
         paragraph.level = 0
         paragraph.space_after = Pt(spacing)
         paragraph.line_spacing = 1.08
-        paragraph.font.name = "Aptos"
+        paragraph.font.name = "Arial"
         paragraph.font.size = Pt(size)
         paragraph.font.color.rgb = color
     return box
 
 
+def add_ptc_grid(slide):
+    """Recreate the PTC cover's restrained mathematical-paper background."""
+    grid = RGBColor(225, 228, 232)
+    for index in range(1, 25):
+        x = Inches(index * 0.56)
+        add_shape(slide, MSO_SHAPE.RECTANGLE, x, Inches(0), Inches(0.008), SLIDE_HEIGHT, grid)
+    for index in range(1, 14):
+        y = Inches(index * 0.56)
+        add_shape(slide, MSO_SHAPE.RECTANGLE, Inches(0), y, SLIDE_WIDTH, Inches(0.008), grid)
+    formulas = [
+        ("∫ f(x) · dx", 0.35, 0.35, 1.9, 0.35, 22),
+        ("eⁿᵗ − m g(x)", 2.45, 0.2, 1.8, 0.35, 15),
+        ("P = {xᵢ} + (xᵢ − x̄)²", 9.35, 0.35, 3.3, 0.35, 15),
+        ("A = [ a₁  b₂ ; c₃  d₄ ]", 10.1, 1.05, 2.4, 0.45, 14),
+        ("R₀ = m eᵞ (μ₂ / 2)", 0.25, 5.85, 2.4, 0.35, 14),
+        ("y = (x + 1)ⁿ", 1.1, 6.7, 1.8, 0.35, 14),
+        ("n = −√(2x²)", 10.45, 5.95, 2.1, 0.35, 16),
+        ("sin(x) = kπ / n", 9.95, 6.7, 2.2, 0.35, 14),
+    ]
+    for text, x, y, width, height, size in formulas:
+        add_text(slide, text, Inches(x), Inches(y), Inches(width), Inches(height), size=size, color=RGBColor(190, 194, 199), font="Cambria Math")
+
+
 def add_title(slide, title: str, number: int):
-    add_shape(slide, MSO_SHAPE.RECTANGLE, Inches(0), Inches(0), SLIDE_WIDTH, Inches(0.12), BLUE)
     add_text(
         slide,
         title,
         Inches(0.55),
-        Inches(0.35),
+        Inches(0.28),
         Inches(11.7),
-        Inches(0.55),
-        size=27,
-        color=NAVY,
+        Inches(0.72),
+        size=30,
+        color=RGBColor(10, 10, 10),
         bold=True,
         name="tcc-title",
-    )
-    add_text(
-        slide,
-        f"TCC · Ensino Personalizado de Matemática  |  {number:02d}",
-        Inches(0.58),
-        Inches(7.12),
-        Inches(8.5),
-        Inches(0.2),
-        size=8.5,
-        color=MUTED,
-    )
-    add_text(
-        slide,
-        "IFC · Ciência da Computação · 2026",
-        Inches(9.35),
-        Inches(7.12),
-        Inches(3.4),
-        Inches(0.2),
-        size=8.5,
-        color=MUTED,
-        align=PP_ALIGN.RIGHT,
     )
 
 
 def add_callout(slide, title: str, body: str, x, y, width, height, *, fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=13.5):
-    card = add_shape(slide, MSO_SHAPE.ROUNDED_RECTANGLE, x, y, width, height, fill)
-    card.line.color.rgb = accent
-    card.line.width = Pt(1.25)
-    add_shape(slide, MSO_SHAPE.RECTANGLE, x, y, Inches(0.09), height, accent)
-    add_text(slide, title, x + Inches(0.18), y + Inches(0.1), width - Inches(0.3), Inches(0.35), size=title_size, color=accent, bold=True)
-    add_text(slide, body, x + Inches(0.18), y + Inches(0.48), width - Inches(0.3), height - Inches(0.55), size=body_size, color=SLATE)
+    card = add_shape(slide, MSO_SHAPE.RECTANGLE, x, y, width, height, WHITE)
+    add_shape(slide, MSO_SHAPE.RECTANGLE, x, y, Inches(0.065), height, accent)
+    add_text(slide, title, x + Inches(0.2), y + Inches(0.06), width - Inches(0.3), Inches(0.42), size=title_size, color=RGBColor(15, 15, 15), bold=True)
+    add_text(slide, body, x + Inches(0.2), y + Inches(0.5), width - Inches(0.3), height - Inches(0.57), size=body_size, color=RGBColor(35, 35, 35))
     return card
 
 
 def add_metric(slide, value: str, label: str, x, y, width, height, *, fill=PALE_BLUE, accent=BLUE, value_size=25, label_size=11.5):
-    card = add_shape(slide, MSO_SHAPE.ROUNDED_RECTANGLE, x, y, width, height, fill)
-    card.line.color.rgb = accent
-    card.line.width = Pt(1)
-    add_text(slide, value, x, y + Inches(0.16), width, Inches(0.48), size=value_size, color=accent, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, label, x + Inches(0.1), y + Inches(0.68), width - Inches(0.2), height - Inches(0.72), size=label_size, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
+    card = add_shape(slide, MSO_SHAPE.RECTANGLE, x, y, width, height, WHITE)
+    add_shape(slide, MSO_SHAPE.RECTANGLE, x, y, width, Inches(0.055), accent)
+    add_text(slide, value, x, y + Inches(0.13), width, Inches(0.48), size=value_size, color=RGBColor(15, 15, 15), bold=True, align=PP_ALIGN.CENTER)
+    add_text(slide, label, x + Inches(0.1), y + Inches(0.68), width - Inches(0.2), height - Inches(0.72), size=label_size, color=RGBColor(35, 35, 35), align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
     return card
 
 
@@ -328,19 +326,30 @@ def build_deck() -> Presentation:
     prs.slide_height = SLIDE_HEIGHT
     blank = prs.slide_layouts[6]
 
-    # 1 — Cover.  The narrative follows the PTC structure while making the
-    # current TCC scope explicit.
+    # 1 — Cover.  Recreate the PTC visual language with editable elements:
+    # mathematical-paper background, centered institutional identity and a
+    # strong teal title.  The historical NotebookLM raster is intentionally
+    # not reused because it contains obsolete content.
     slide = prs.slides.add_slide(blank)
     slide.background.fill.solid()
-    slide.background.fill.fore_color.rgb = NAVY
-    add_shape(slide, MSO_SHAPE.RECTANGLE, Inches(0), Inches(0), Inches(0.2), SLIDE_HEIGHT, BLUE)
-    add_shape(slide, MSO_SHAPE.RECTANGLE, Inches(0.2), Inches(6.8), Inches(13.13), Inches(0.7), TEAL)
-    add_text(slide, "TRABALHO DE CONCLUSÃO DE CURSO", Inches(0.82), Inches(0.7), Inches(6), Inches(0.25), size=12, color=TEAL, bold=True)
-    add_text(slide, "Ensino Personalizado\nde Matemática", Inches(0.8), Inches(1.35), Inches(8.3), Inches(1.45), size=36, color=WHITE, bold=True, name="tcc-title")
-    add_text(slide, "Oportunidades e Técnicas Computacionais", Inches(0.84), Inches(3.05), Inches(8.4), Inches(0.45), size=22, color=RGBColor(186, 230, 253), bold=True)
-    add_text(slide, "Revisão sistemática da literatura e especificação conceitual de protótipo", Inches(0.84), Inches(3.7), Inches(7.5), Inches(0.62), size=17, color=RGBColor(226, 232, 240))
-    add_text(slide, "Thales Ferreira Batista\nProf. Dr. Rafael Zanin · Orientador\nProf. Dr. Manassés Ribeiro · Coorientador", Inches(0.84), Inches(5.1), Inches(6.6), Inches(0.9), size=14, color=WHITE)
-    add_text(slide, "IFC · Videira\nSnapshot adjudicado: 03/09/2026 · recorte 2015–2026", Inches(8.95), Inches(5.25), Inches(3.35), Inches(0.62), size=11.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.RIGHT)
+    slide.background.fill.fore_color.rgb = WHITE
+    add_ptc_grid(slide)
+    # Minimal editable approximation of the IFC mark used in the PTC cover.
+    logo_x, logo_y = 6.08, 0.28
+    for row in range(4):
+        for col in range(3):
+            if row == 0 and col == 0:
+                fill = RGBColor(190, 45, 45)
+            else:
+                fill = RGBColor(44, 145, 74)
+            add_shape(slide, MSO_SHAPE.ROUNDED_RECTANGLE, Inches(logo_x + col * 0.18), Inches(logo_y + row * 0.18), Inches(0.13), Inches(0.13), fill)
+    add_text(slide, "INSTITUTO\nFEDERAL", Inches(5.35), Inches(1.02), Inches(2.65), Inches(0.46), size=12.5, color=RGBColor(20, 20, 20), bold=True, align=PP_ALIGN.CENTER)
+    add_text(slide, "Catarinense", Inches(5.35), Inches(1.48), Inches(2.65), Inches(0.25), size=11.5, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
+    add_text(slide, "Ensino Personalizado de Matemática:\nOportunidades e Técnicas Computacionais", Inches(0.65), Inches(2.0), Inches(12.05), Inches(1.15), size=32, color=RGBColor(11, 86, 108), bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
+    add_text(slide, "Revisão sistemática da literatura e especificação conceitual de protótipo", Inches(1.35), Inches(3.48), Inches(10.65), Inches(0.45), size=20, color=RGBColor(11, 86, 108), align=PP_ALIGN.CENTER)
+    add_text(slide, "Thales Ferreira Batista\nCiência da Computação", Inches(4.0), Inches(4.45), Inches(5.35), Inches(0.65), size=16, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
+    add_text(slide, "Orientador: Prof. Dr. Rafael Zanin\nCoorientador: Prof. Dr. Manassés Ribeiro", Inches(3.3), Inches(5.35), Inches(6.75), Inches(0.65), size=14, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
+    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nSnapshot adjudicado: 03/09/2026 · recorte temporal: 2015–2026", Inches(2.25), Inches(6.35), Inches(8.85), Inches(0.5), size=11.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
 
     # 2 — Problem.
     slide = new_slide(prs, EXPECTED_TITLES[1], 2)
