@@ -18,9 +18,9 @@ Os IDs retidos são 1--10,
 
 A execução histórica tinha 17 incluídos. Em uma nova rodada, foram identificados 23 candidatos e aplicados 7 overrides manuais, chegando aos 16 registros retidos operacionais. A diferença também envolve atualização da ingestão e correção do scoring; não é uma simples substituição numérica. A reavaliação documental do MMAT aos registros empíricos aplicáveis foi registrada com decisões e evidências por critério; nove textos primários foram revisados externamente, enquanto a confirmação das fontes, a adjudicação e a conclusão final permanecem pendentes. Quatro overrides ainda exigem adjudicação de fonte primária/escopo.
 
-![Fluxo PRISMA do snapshot operacional atual](../research/exports/visualizations/prisma_flow.png)
+![Fluxo PRISMA da baseline operacional anterior](assets/historical-2026-08-31/prisma_flow.png)
 
-![Funil de seleção do snapshot operacional atual](../research/exports/visualizations/selection_funnel.png)
+![Funil de seleção da baseline operacional anterior](assets/historical-2026-08-31/selection_funnel.png)
 
 ### Auditoria de identidade do snapshot atual
 
@@ -106,8 +106,8 @@ a coleta histórica.
 
 ### Visualizações (imagens/gráficos históricos)
 
-- `research/exports/visualizations/prisma_flow.png` — Diagrama PRISMA
-- `research/exports/visualizations/selection_funnel.png` — Funil de seleção
+- `docs/assets/historical-2026-08-31/prisma_flow.png` — Diagrama PRISMA da baseline anterior
+- `docs/assets/historical-2026-08-31/selection_funnel.png` — Funil de seleção da baseline anterior
 - `research/exports/analysis/mmat_visualization.html` — Visualização histórica do MMAT (17 estudos; não é o resultado atual)
 
 Os documentos legados estão consistentes entre si com 2.517 duplicatas, mas esse valor não é reproduzido pelo único registro histórico atualmente disponível na tabela `searches` do SQLite, que registra `total_removed=2494`. A divergência histórica requer o artefato arquivado da execução original.

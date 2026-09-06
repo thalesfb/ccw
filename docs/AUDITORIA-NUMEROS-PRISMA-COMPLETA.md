@@ -19,9 +19,9 @@ Os IDs retidos são 1--10,
 
 A execução histórica tinha 17 estudos incluídos. Em uma nova rodada, foram identificados 23 candidatos e aplicados 7 overrides manuais, chegando aos 16 registros retidos operacionais. A diferença também envolve nova contagem de ingestão e correção do scoring; não é uma simples troca numérica. Para a interpretação, há 15 registros classificados provisoriamente como empíricos; o ID 6918 permanece em hold por conflito temporal, e o ID 6921 é contextual, sem resultados empíricos e sem aplicação do MMAT empírico. A reavaliação documental do MMAT aos registros aplicáveis foi registrada com decisões e evidências por critério; nove textos primários foram revisados externamente, enquanto fontes, localizadores, adjudicação e conclusão final permanecem pendentes. Quatro overrides (14, 6915, 6919 e 6925) exigem adjudicação de fonte primária/escopo; portanto, não são exclusões científicas finais.
 
-![Fluxo PRISMA do snapshot operacional anterior](../research/exports/visualizations/prisma_flow.png)
+![Fluxo PRISMA do snapshot operacional anterior](assets/historical-2026-08-31/prisma_flow.png)
 
-![Funil de seleção do snapshot operacional anterior](../research/exports/visualizations/selection_funnel.png)
+![Funil de seleção do snapshot operacional anterior](assets/historical-2026-08-31/selection_funnel.png)
 
 As figuras acima representavam o snapshot operacional anterior. As remoções por DOI
 ou URL são decisões determinísticas de identidade de registro. A auditoria bruta
