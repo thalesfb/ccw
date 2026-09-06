@@ -205,7 +205,7 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 
 ## 🚀 Próximos Passos
 
-### Fase 1 (Revisão Sistemática) - 🟡 BASELINE OPERACIONAL CONGELADO
+### Fase 1 (Revisão Sistemática) - 🟡 SNAPSHOT ADJUDICADO
 - [x] Snapshot atual exportado (11.904 identificados; 11.877 após deduplicação; 18 registros retidos)
 - [x] Fluxo de triagem e elegibilidade reconciliado
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
@@ -214,19 +214,16 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 - [x] Reavaliação documental preliminar do MMAT aos 17 registros empíricos com evidência por critério
 - [ ] Recuperação das fontes restantes e adjudicação final do MMAT aos 17 registros empíricos
 
-### Fase 2 (Desenvolvimento do Protótipo) - 📋 PLANEJADA
-- [ ] Definir arquitetura (ML + LA + XAI)
-- [ ] Selecionar datasets (públicos ou IFC)
-- [ ] Implementar modelo preditivo
-- [ ] Dashboard para professores
-- [ ] Testes de usabilidade
+### Fase 2 (Especificação conceitual do Protótipo) - ✅ REGISTRADA NO TCC
+- [x] Derivar requisitos funcionais e não funcionais
+- [x] Definir critérios para fontes de dados e modelos
+- [x] Documentar protocolo de avaliação
+- [x] Documentar arquitetura de referência
+- Implementação funcional: fora do escopo do TCC vigente
 
-### Fase 3 (Validação Experimental) - 📋 PLANEJADA
-- [ ] Protocolo quasi-experimental
-- [ ] Coleta de dados (turmas IFC)
-- [ ] Análise estatística (pré/pós-teste)
-- [ ] Entrevistas qualitativas
-- [ ] Relatório final
+### Fase 3 (Validação Experimental) - ⛔ FORA DO ESCOPO ATUAL
+Esta versão não realiza validação experimental: não há coleta com participantes,
+testes em ambiente escolar ou métricas próprias de eficácia, usabilidade e aceitação.
 
 ---
 

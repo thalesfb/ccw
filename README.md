@@ -6,13 +6,13 @@
 
 ## Sobre o Projeto
 
-Este repositório contém o desenvolvimento de uma ferramenta tecnológica para auxiliar professores de matemática no ensino personalizado, através da identificação automatizada das competências individuais dos alunos.
+Este repositório documenta uma revisão sistemática da literatura e a elaboração de uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente de evidências sobre competências matemáticas. A especificação não corresponde a uma aplicação funcional nem a uma validação experimental realizada neste trabalho.
 
-![Raio-X da Inteligência Artificial na Educação Matemática](results/ptc/presentation/ensino_personalizado_de_matematica.jpeg)
+![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
 ### Tema
 
-Ensino personalizado de matemática através da identificação automatizada das competências individuais dos alunos usando técnicas computacionais.
+Aplicações de técnicas computacionais no ensino de matemática e elaboração de uma especificação conceitual de apoio à interpretação docente.
 
 ## Orientação
 
@@ -23,16 +23,17 @@ Ensino personalizado de matemática através da identificação automatizada das
 
 ### Objetivo Geral
 
-Mapear e analisar sistematicamente as aplicações de técnicas computacionais — especialmente **machine learning**, **learning analytics** e **sistemas de tutoria inteligente** — no contexto da educação matemática, identificando tendências, lacunas de pesquisa e oportunidades para o desenvolvimento de um modelo computacional (MVP) que auxilie professores na personalização do ensino e no diagnóstico de competências.
+Mapear e analisar sistematicamente as aplicações de técnicas computacionais no ensino de matemática e, a partir das evidências encontradas, elaborar uma especificação técnica e pedagógica de protótipo para apoio à interpretação de evidências sobre competências.
 
 ### Objetivos Específicos
 
-1. **OE1:** Realizar revisão sistemática da literatura com relato orientado pelo PRISMA 2020 para identificar estudos que apliquem técnicas computacionais na educação matemática (2015-2026).
-2. **OE2:** Identificar e categorizar as principais abordagens de IA (Machine Learning, Deep Learning, NLP, Educational Data Mining) aplicadas à educação matemática.
-3. **OE3:** Classificar as aplicações segundo suas finalidades pedagógicas: tutoria inteligente, diagnóstico, avaliação automatizada, personalização, predição e feedback adaptativo.
-4. **OE4:** Analisar criticamente as metodologias de avaliação utilizadas para validar a eficácia de sistemas computacionais em contextos educacionais.
-5. **OE5:** Mapear sistematicamente as lacunas de pesquisa, limitações técnicas e desafios reportados nos estudos incluídos.
-6. **OE6:** Criar um pipeline automatizado e reproduzível para coleta, processamento e análise de literatura científica.
+1. **OE1:** Realizar uma revisão sistemática da literatura, com relato apoiado pelo PRISMA 2020, sobre estudos publicados entre 2015 e 2026.
+2. **OE2:** Identificar e categorizar as principais abordagens computacionais aplicadas ao ensino de matemática.
+3. **OE3:** Classificar as finalidades pedagógicas atribuídas às aplicações encontradas.
+4. **OE4:** Analisar criticamente as metodologias e limitações dos estudos incluídos.
+5. **OE5:** Mapear lacunas técnicas, pedagógicas, metodológicas e éticas.
+6. **OE6:** Manter um pipeline automatizado e auditável para coleta, processamento e exportação da revisão.
+7. **OE7:** Derivar requisitos funcionais e não funcionais, critérios de seleção de dados e modelos, um protocolo de avaliação e uma arquitetura de referência para o protótipo.
 
 ## Estrutura do Repositório
 
@@ -48,8 +49,8 @@ Mapear e analisar sistematicamente as aplicações de técnicas computacionais �
 │   ├── cache/          # API response cache (SQLite)
 │   ├── exports/        # Analysis results (CSV, JSON, HTML)
 │   └── logs/           # Execution logs [gitignored]
-├── src/                # Phase 2: Main product (competency diagnosis tool - future)
-├── results/            # Phase 1 e 2: PTC e TCC artifacts (LaTeX, validation reports)
+├── src/                # Protótipo futuro; não implementado no TCC vigente
+├── results/            # Artefatos do PTC histórico e do TCC vigente
 ├── presentation/       # Fonte e build da apresentação Slidev
 ├── .gitignore          # Git exclusion patterns
 └── README.md           # Project documentation
@@ -129,7 +130,7 @@ python -m research.src.cli export-bibtex
 **Saídas**:
 
 - `research/exports/references/included_papers.bib` - Registros bibliográficos derivados do snapshot vigente (18; 17 candidatos empíricos provisórios + 1 protocolo contextual)
-- `research/exports/references/high_relevance.bib` - Score ≥ 7.0
+- `research/exports/references/high_relevance.bib` - Registros com score de relevância ≥ 7,0 quando gerado pelo CLI; não é um artefato versionado do snapshot vigente
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
 O arquivo `included_papers.bib` contém somente os 18 registros derivados do
@@ -174,7 +175,7 @@ pytest research/tests/test_performance_benchmark.py
 
 ## Status do Projeto
 
-### Fase 1: Revisão Sistemática — baseline reconciliado; MMAT preliminar registrado
+### Fase 1: Revisão Sistemática — snapshot adjudicado; MMAT preliminar registrado
 
 **População vigente após adjudicação (03/09/2026):**
 
@@ -238,38 +239,31 @@ da baseline operacional anterior.
 - **Termos Frequentes:** Machine Learning (58,8%), Assessment (52,9%), Predictive Analytics (47,1%), Adaptive Learning (35,3%)
 - **Desempenho dos Modelos:** Acurácias reportadas de 75% a 96,89%
 
-### Fase 2: Desenvolvimento do Protótipo 📋 AGUARDANDO DEFINIÇÃO
+### Fase 2: Especificação conceitual do protótipo — concluída no escopo do TCC
 
-**Período:** não há prazo vigente no snapshot de 31/08/2026; o intervalo
-Fevereiro–Julho de 2026 pertence ao planejamento histórico.
+O TCC vigente produziu uma especificação conceitual baseada na revisão e na
+fundamentação pedagógica. Foram consolidados requisitos, critérios para dados
+e modelos, um protocolo de avaliação e uma arquitetura de referência. Não foi
+desenvolvida uma aplicação funcional nem treinado um modelo definitivo.
 
-- [ ] Levantamento de requisitos funcionais e não-funcionais baseado na literatura
-- [ ] Definição de arquitetura de software e escolha de tecnologias
-- [ ] Implementação de algoritmos de ML para diagnóstico automatizado
-- [ ] Desenvolvimento de interface para professores e alunos
-- [ ] Integração com bases de dados educacionais
+### Fase 3: Validação experimental — fora do escopo atual
 
-### Fase 3: Validação Experimental 📋 AGUARDANDO DEFINIÇÃO
-
-**Período:** não há prazo vigente no snapshot de 31/08/2026; o intervalo
-Julho–Novembro de 2026 pertence ao planejamento histórico.
-
-- [ ] Planejamento de estudo experimental (design, amostra, instrumentos)
-- [ ] Coleta de dados em ambiente escolar controlado
-- [ ] Análise quantitativa e qualitativa dos resultados
-- [ ] Avaliação de eficácia, usabilidade e aceitação
-- [ ] Refinamento do protótipo com base nos resultados
+Esta versão do trabalho não realiza validação experimental. Não foram coletados
+dados com participantes, conduzidos testes em ambiente escolar ou produzidas
+métricas próprias de eficácia, usabilidade ou aceitação.
 
 ### Próximos Passos Imediatos
 
 - [x] Completar protocolo de revisão sistemática
 - [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
-- [x] Realizar busca nas bases de dados (72 queries bilíngues × 4 APIs)
-- [x] Analisar e categorizar os artigos encontrados (18 registros retidos no snapshot vigente; 17 estudos no baseline histórico)
+- [x] Definir e versionar a estratégia canônica de busca (72 consultas bilíngues × 4 APIs)
+- [x] Consolidar o snapshot versionado da busca (11.904 registros identificados)
+- [x] Analisar e categorizar os artigos encontrados (18 registros retidos no snapshot vigente; 17 candidatos empíricos provisórios e 1 protocolo contextual)
 - [x] Gerar relatórios e visualizações PRISMA
 - [x] Finalizar documentação acadêmica do PTC (LaTeX)
-- [ ] Definir, com a orientação, o cenário científico de continuidade
-- [ ] Desenvolver cronograma da Fase 2 somente após essa decisão
+- [ ] Concluir a recuperação de fontes, os localizadores e a adjudicação metodológica do MMAT
+- [ ] Realizar a revisão final do TCC com a orientação
+- [ ] Registrar eventuais trabalhos futuros separadamente, sem tratá-los como resultados do TCC vigente
 
 ## Autor
 
