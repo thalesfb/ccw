@@ -1,109 +1,90 @@
-# GitHub Actions Workflows
+# GitHub Actions: publicação e validação
 
-## 📄 `publish-reports.yml`
+## Publicação em GitHub Pages
 
-Workflow para publicação automática dos relatórios da revisão sistemática no GitHub Pages.
+O workflow [publish-reports.yml](publish-reports.yml), denominado **Deploy
+Reports to GitHub Pages**, executa após push na `main` ou por acionamento manual.
+Ele publica relatórios previamente gerados e versionados. Não consulta o
+SQLite nem executa uma nova coleta.
 
-### Quando é executado
+O job de preparação:
 
-- **Push** para branches `main` ou `develop`
-- **Manualmente** via GitHub Actions UI (workflow_dispatch)
+1. verifica os diretórios de relatórios e visualizações e os três relatórios
+   HTML obrigatórios;
+2. valida as seis imagens canônicas, suas cópias no TCC e na apresentação e o
+   manifesto de entradas versionadas;
+3. instala as dependências com `npm ci`, valida o conteúdo e compila o Slidev;
+4. monta `_site/` com as páginas, exports e resultados versionados;
+5. envia o artefato para o job de implantação em GitHub Pages.
 
-### O que faz
-
-1. **Checkout** do código
-2. **Setup Python 3.11** com cache de dependências
-3. **Instala** requirements.txt
-4. **Verifica** se existe banco de dados SQLite
-5. **Gera relatórios** executando `python -m research.src.cli export`
-6. **Prepara conteúdo** para GitHub Pages:
-   - Copia relatórios HTML mais recentes
-   - Copia visualizações PNG
-   - Cria página de navegação se necessário
-7. **Publica** no GitHub Pages
-
-### Arquivos publicados
-
-```
-docs/
-├── index.html              # Sumário executivo (ou página de navegação)
-├── papers.html             # Lista de artigos incluídos
-├── gap-analysis.html       # Análise de lacunas
-└── visualizations/
-    ├── prisma_flow.png
-    ├── selection_funnel.png
-    ├── papers_by_year.png
-    ├── techniques_distribution.png
-    ├── database_coverage.png
-    └── relevance_distribution.png
+```text
+_site/
+├── index.html
+├── research/
+│   ├── index.html
+│   └── exports/
+├── results/
+│   ├── ptc/
+│   └── tcc/
+└── presentation/
 ```
 
-### Permissões necessárias
+Os PDFs e o PPTX presentes em `results/` são copiados do repositório. A compilação
+LaTeX e a validação do PowerPoint pertencem ao workflow de qualidade; o deploy
+compila a apresentação Slidev.
 
-O workflow requer permissões especiais configuradas no repositório:
+## Preparação dos artefatos
 
-```yaml
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-```
-
-### Como habilitar GitHub Pages
-
-1. Vá em **Settings** → **Pages** no repositório
-2. Em **Source**, selecione **GitHub Actions**
-3. O workflow publicará automaticamente após o próximo push
-
-### Execução manual
-
-Você pode executar o workflow manualmente:
-
-1. Vá em **Actions** no GitHub
-2. Selecione **Publish Reports to GitHub Pages**
-3. Clique em **Run workflow**
-4. Escolha a branch e confirme
-
-### Observações
-
-- O workflow verifica se `research/systematic_review.db` existe antes de gerar relatórios
-- Se o banco não existir, apenas cria uma página de navegação básica
-- Usa cache do pip para acelerar instalação de dependências
-- Previne execuções concorrentes do workflow
-- Funciona em Ubuntu latest (runner do GitHub)
-
-Antes da publicação, o workflow também executa a validação independente de
-SQLite das visualizações derivadas. Ela exige que as seis imagens canônicas em
-`research/exports/visualizations/` sejam byte-idênticas às cópias do TCC e da
-apresentação e que o manifesto versionado esteja atualizado. O exportador local
-faz essa sincronização automaticamente; em caso de falha, execute:
+Para conferir a população publicada e as imagens sem distribuir o banco:
 
 ```bash
-python -m research.src.validation.derived_assets --sync
+python -m research.src.validation.versioned_snapshot
+python -m research.src.processing.adjudicated_snapshot --check
+python -m research.src.validation.derived_assets --check
 ```
 
-### Troubleshooting
+Quando necessário, regenere os relatórios a partir do snapshot adjudicado:
 
-**Erro: "Permission denied"**
-- Verifique se as permissões do workflow estão corretas no repositório
-- Vá em Settings → Actions → General → Workflow permissions
-- Marque "Read and write permissions"
+```bash
+python -m research.src.processing.adjudicated_snapshot
+```
 
-**Erro: "Database not found"**
-- Certifique-se de que `research/systematic_review.db` está commitado
-- Ou execute o pipeline antes: `python -m research.src.cli run-pipeline`
-- Ou faça commit do banco gerado localmente
+Revise e versione os artefatos produzidos em um PR. O SQLite permanece local;
+não deve ser comitado para viabilizar a publicação. Uma exportação de execução
+local precisa incorporar as decisões científicas aplicáveis antes de substituir
+o snapshot publicado.
 
-**Páginas não atualizam**
-- GitHub Pages pode levar alguns minutos para atualizar
-- Limpe o cache do navegador (Ctrl+Shift+R)
-- Verifique logs do workflow em Actions
+O comando `python -m research.src.validation.derived_assets --sync` copia as
+imagens canônicas para os consumidores e atualiza o manifesto. Ele não gera os
+gráficos: use-o após a regeneração e confira o resultado. O check de sincronização
+verifica hashes e entradas, mas não constitui validação científica do conteúdo
+das figuras.
 
-### Melhorias futuras
+## Qualidade do TCC
 
-- [ ] Adicionar geração de PDF dos relatórios
-- [ ] Criar arquivo sitemap.xml
-- [ ] Adicionar versionamento dos relatórios
-- [ ] Implementar comparação entre versões
-- [ ] Adicionar analytics (Google Analytics ou similar)
-- [ ] Criar RSS feed das atualizações
+O workflow [tcc-quality.yml](tcc-quality.yml) executa em PRs, push na `main` e
+acionamento manual. Ele verifica fontes Python, snapshot, adjudicação,
+bibliografia, tabelas MMAT, testes de pesquisa e protótipo, apresentação Slidev,
+PPTX e compilação LaTeX. Em PRs do próprio repositório, a etapa
+`canonical-pdf-sync` pode atualizar o PDF compilado na branch e solicitar nova
+validação.
+
+Checks aprovados demonstram as propriedades verificadas pelo código. A leitura
+das fontes primárias, o julgamento metodológico e a revisão do texto continuam
+necessários para aprovação acadêmica.
+
+## Configuração e diagnóstico
+
+Em **Settings → Pages**, selecione **GitHub Actions** como fonte de publicação.
+O workflow declara `contents: read`, `pages: write` e `id-token: write`. Para
+acionamento manual, abra **Actions → Deploy Reports to GitHub Pages → Run
+workflow** e selecione a referência desejada.
+
+- **Export ausente:** regenere, revise e versione o artefato exigido; o workflow
+  interrompe a publicação quando um relatório obrigatório falta.
+- **Imagem ou manifesto divergente:** regenere os gráficos a partir das entradas
+  corretas, sincronize as cópias e examine o diff antes de abrir o PR.
+- **Falha no Slidev:** reproduza `npm ci`, `npm run validate` e
+  `npm run build -- --base /ccw/presentation/` no diretório `presentation/`.
+- **Página desatualizada:** confira o commit e os logs do último deploy; a
+  aprovação do PR, isoladamente, não demonstra publicação bem-sucedida.

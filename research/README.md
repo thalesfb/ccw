@@ -199,7 +199,8 @@ research/src/processing/adjudicated_snapshot.py.
 - **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 avançaram
 - **Elegibilidade**: 2.486 registros; 2.468 excluídos; 18 retidos
 - **Retidos**: 17 candidatos empíricos provisórios e o protocolo contextual 6921
-- **Percentuais**: 78,89% excluídos na triagem; 20,88% avançaram; 99,28% excluídos na elegibilidade; 0,72% incluídos da elegibilidade; 0,15% incluídos da identificação
+- **Percentuais sobre os 11.904 identificados**: 78,89% excluídos na triagem; 20,88% avançaram para elegibilidade; 0,15% retidos ao final.
+- **Percentuais sobre os 2.486 avaliados na elegibilidade**: 99,28% excluídos; 0,72% retidos.
 - **Identidade**: 25 excedentes DOI + 2 excedentes URL removidos; 257 excedentes de título continuam como candidatos de auditoria, dos quais 232 são apenas por título
 
 **Baseline histórico (25/11/2025; não vigente)**:
@@ -215,7 +216,18 @@ validam a execução atual. O manifesto histórico registra a divergência entre
 2.517 duplicatas documentadas e `total_removed=2494` no único resumo SQLite
 preservado da execução original.
 
-Para obter os números atualizados execute:
+Para conferir o snapshot publicado, consulte
+`research/exports/reports/summary.json` e valide sua correspondência com o CSV
+e o registro de escopo:
+
+```bash
+python -m research.src.validation.versioned_snapshot
+python -m research.src.processing.adjudicated_snapshot --check
+```
+
+Para diagnóstico da execução no SQLite local, use os comandos abaixo. Essas
+contagens podem divergir do snapshot publicado quando o banco não incorpora as
+decisões adjudicadas; não devem substituir os números versionados no TCC:
 
 ```bash
 # Mostrar contagens PRISMA diretamente do banco

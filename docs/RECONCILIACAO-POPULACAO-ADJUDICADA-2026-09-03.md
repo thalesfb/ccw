@@ -23,13 +23,16 @@ de implementação que não sejam necessários ao relato científico.
 | Etapa | Entraram | Excluídos/removidos | Avançaram/retidos |
 | --- | ---: | ---: | ---: |
 | Identificação | 11.904 | 27 por identidade DOI/URL | 11.877 |
-| Triagem | 11.877 | 9.391 (78,89%) | 2.486 (20,88%) |
+| Triagem | 11.877 | 9.391 | 2.486 |
 | Elegibilidade | 2.486 | 2.468 (99,28%) | 18 (0,72%) |
 | Inclusão | 18 | — | 18 |
 
-A taxa de inclusão em relação à identificação é **0,15%**. As porcentagens
-usam o denominador indicado em cada etapa; não são porcentagens de qualidade
-metodológica.
+Dos **11.904 identificados**, 78,89% foram excluídos na triagem, 20,88%
+avançaram para elegibilidade e 0,15% foram retidos ao final. As duas primeiras
+taxas usam a identificação como denominador, e não os 11.877 que entraram na
+triagem. Na linha de elegibilidade da tabela, 99,28% e 0,72% usam os **2.486
+avaliados nessa etapa**. Essas taxas descrevem o fluxo de seleção, não a
+qualidade metodológica.
 
 ### Deduplicação
 
