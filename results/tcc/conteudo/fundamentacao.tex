@@ -43,7 +43,9 @@ A adoção dessas tecnologias deve preservar a responsabilidade do professor pel
 
 \subsection{\textbf{\textit{Machine Learning}} e Inteligência Artificial}
 
-O aprendizado de máquina, ou \textbf{\textit{machine learning}} (ML), é uma área da Inteligência Artificial que desenvolve modelos capazes de identificar padrões a partir de dados. Em contextos educacionais, os estudos analisados utilizaram esses modelos para estimar desempenho ou níveis de proficiência \cite{Multimodels2020_002, He2025_6915, Math2021_001}, classificar padrões de dificuldade, identificar variáveis associadas aos resultados e apoiar recomendações de conteúdos e atividades \cite{Design2025_004}.
+O aprendizado de máquina, ou \textbf{\textit{machine learning}} (ML), é uma área da Inteligência Artificial que desenvolve modelos capazes de identificar padrões a partir de dados. Em educação matemática, suas aplicações incluem a predição de desempenho acadêmico \cite{Multimodels2020_002} e a classificação de níveis de proficiência em avaliações educacionais \cite{Math2021_001}. Outra finalidade investigada é a otimização de trajetórias personalizadas de aprendizagem \cite{Design2025_004}.
+
+Uma tarefa distinta foi investigada por \citeonline{He2025_6915}: a modelagem preditiva de tamanhos de efeito de tecnologias educacionais para matemática, a partir de dados extraídos de publicações. Nesse componente do estudo, a unidade de análise é a evidência sobre intervenções, e não a proficiência de um estudante. Essa distinção entre alvo e unidade de análise deve orientar a interpretação das aplicações de ML e a escolha de dados para um sistema de apoio docente.
 
 Árvores de decisão, \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), redes neurais e outros modelos possuem pressupostos e limitações diferentes. A escolha de um algoritmo deve ser comparada a referências simples, considerar o equilíbrio entre as classes e usar métricas adequadas ao problema, em vez de se apoiar apenas na maior acurácia observada.
 
@@ -61,7 +63,7 @@ A adaptação é pedagogicamente relevante quando os critérios de decisão são
 
 \section{Avaliação Automatizada e Métricas}
 
-Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. As métricas mais comuns incluem acurácia, precisão, revocação (\textit{recall}), medida F1 e área sob a curva ROC \cite{Romero2020}. Essas métricas avaliam o comportamento do modelo; não medem diretamente a qualidade pedagógica da intervenção.
+Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. Em tarefas de classificação, podem ser empregadas acurácia, precisão, revocação (\textit{recall}), medida F1 e área sob a curva ROC \cite{Romero2020}. A escolha depende do alvo e da distribuição das classes; essas métricas não se aplicam indistintamente à predição de valores contínuos. Elas avaliam o comportamento do modelo e não medem diretamente a qualidade pedagógica da intervenção.
 
 No domínio educacional, também podem ser observados acertos e erros por habilidade, tempo e número de tentativas, progressão entre avaliações, participação e conclusão de atividades e explicações ou estratégias registradas pelo estudante.
 
