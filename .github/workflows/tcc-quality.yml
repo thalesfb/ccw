@@ -85,6 +85,8 @@ jobs:
             tests/test_experiment_contract.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
+            tests/test_mmat_current.py \
+            tests/test_mmat_source_integrity.py \
             tests/test_temporal_scope.py \
             tests/test_adjudicated_snapshot.py \
             tests/test_tcc_advisor_feedback.py \

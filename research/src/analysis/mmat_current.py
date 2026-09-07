@@ -18,6 +18,10 @@ CURRENT_STUDY_IDS: tuple[int, ...] = (
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923
 )
 VALID_RESPONSES = {"Y", "N", "CT"}
+VALID_DESIGNS = {
+    "qualitative", "quantitative_randomized", "quantitative_nonrandomized",
+    "quantitative_descriptive", "mixed_methods", "metadata_hold", "not_applicable",
+}
 REQUIRED_CRITERIA = ("q1", "q2", "q3", "q4", "q5")
 ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
 EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT)\s+.+$")
@@ -91,6 +95,13 @@ def load_current_reassessment(
                     f"Invalid {criterion} response for study {row.get('study_id')}: "
                     f"{row.get(criterion)!r}"
                 )
+        contextual_blank = (
+            row.get("design") == ""
+            and row.get("assessment_basis") == "protocol_or_proposal_not_applicable"
+            and row.get("design_status") == "not_applicable"
+        )
+        if row.get("design") not in VALID_DESIGNS and not contextual_blank:
+            raise ValueError(f"Invalid design for study {row.get('study_id')}: {row.get('design')!r}")
         evidence = [part.strip() for part in row.get("criterion_evidence", "").split(";")]
         if len(evidence) != len(ALL_CRITERIA) or not all(
             EVIDENCE_PATTERN.match(part) for part in evidence
@@ -194,9 +205,13 @@ def validate_current_artifacts(
     primary_sources = load_primary_sources(primary_sources_path)
     reassessment = load_current_reassessment(reassessment_path)
     synthesis_scope = load_current_synthesis_scope(synthesis_scope_path)
-    source_ids = {row["source_id"] for row in primary_sources}
-    if any(row["source_id"] not in source_ids for row in reassessment):
-        raise ValueError("Current MMAT reassessment references an unknown source")
+    source_ids = [row["source_id"] for row in primary_sources]
+    if len(source_ids) != len(set(source_ids)):
+        raise ValueError("Primary-source manifest contains duplicate source_id")
+    source_pairs = {(row["study_id"], row["source_id"]) for row in primary_sources}
+    for row in reassessment:
+        if (row["study_id"], row["source_id"]) not in source_pairs:
+            raise ValueError(f"Source {row['source_id']!r} does not belong to study {row['study_id']}")
     registry_by_id = {row["study_id"]: row for row in registry}
     scope_by_id = {row["study_id"]: row for row in synthesis_scope}
     for row in reassessment:
