@@ -11,6 +11,8 @@ import csv
 import difflib
 from pathlib import Path
 
+from .mmat_current import validate_current_artifacts
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DATA_PATH = REPO_ROOT / "research" / "data" / "mmat_reassessment_current.csv"
@@ -45,6 +47,7 @@ STATUS_LABELS = {
 
 
 def load_rows(path: Path = DATA_PATH) -> list[dict[str, str]]:
+    validate_current_artifacts(reassessment_path=path)
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
     expected_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923]
