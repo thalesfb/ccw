@@ -45,22 +45,23 @@ class: content-slide
 
 # Por que esta revisão?
 
-<div class="context-grid">
-  <div class="statement-card statement-card-dark">
-    <span class="card-label">PONTO DE PARTIDA</span>
-    <p>Turmas são heterogêneas. Professores precisam reconhecer necessidades de aprendizagem em tempo hábil.</p>
+<div class="problem-hero">
+  <div class="problem-lead">
+    <div class="visual-marker">01</div>
+    <span class="card-label">O DESAFIO</span>
+    <h2>Diagnóstico personalizado em larga escala</h2>
+    <p>Turmas são heterogêneas. Professores precisam reconhecer necessidades de aprendizagem em tempo hábil para orientar decisões pedagógicas.</p>
     <div class="hand-line">heterogeneidade<br>→ decisão pedagógica</div>
   </div>
-  <div class="context-stack">
-    <div class="statement-card">
-      <span class="card-label">QUESTÃO CENTRAL</span>
-      <h3>Como técnicas computacionais podem apoiar o diagnóstico e a personalização do ensino de matemática?</h3>
-    </div>
-    <div class="scope-note"><strong>Escopo da revisão</strong><br>Mapear evidências e lacunas. Não há protótipo validado nem estimativa agregada de eficácia.</div>
+  <div class="challenge-grid">
+    <div class="challenge-card challenge-blue"><span class="challenge-icon">◌</span><strong>Turmas heterogêneas</strong><span>Necessidades individuais não aparecem em uma média única.</span></div>
+    <div class="challenge-card challenge-green"><span class="challenge-icon">◷</span><strong>Tempo docente</strong><span>O diagnóstico manual precisa ser apoiado por evidências organizadas.</span></div>
+    <div class="challenge-card challenge-orange"><span class="challenge-icon">⌁</span><strong>Ensino genérico</strong><span>Uma mesma intervenção pode não servir a trajetórias diferentes.</span></div>
+    <div class="challenge-card challenge-red"><span class="challenge-icon">?</span><strong>Literatura fragmentada</strong><span>As aplicações estão dispersas entre técnicas, desenhos e contextos.</span></div>
   </div>
 </div>
 
-<div class="bottom-caption">Ensino personalizado começa com uma leitura melhor da aprendizagem.</div>
+<div class="scope-note"><strong>Questão central</strong> Como técnicas computacionais podem apoiar o diagnóstico e a personalização do ensino de matemática?<br><span>Escopo: mapear evidências e lacunas — não há protótipo validado nem estimativa agregada de eficácia.</span></div>
 
 ---
 layout: default
@@ -72,10 +73,10 @@ class: content-slide
 # Perguntas e objetivo
 
 <div class="rq-grid">
-  <div class="rq-card"><span>RQ1</span><p>Quais técnicas computacionais são aplicadas à educação matemática?</p></div>
-  <div class="rq-card"><span>RQ2</span><p>Como essas aplicações são avaliadas em contextos educacionais?</p></div>
-  <div class="rq-card"><span>RQ3</span><p>Quais lacunas, limitações e desafios são reportados?</p></div>
-  <div class="rq-card"><span>RQ4</span><p>Que direcionamentos podem apoiar ferramentas educacionais mais eficazes?</p></div>
+  <div class="rq-card rq-blue"><span>RQ1</span><div><strong>O quê?</strong><p>Quais técnicas computacionais são aplicadas à educação matemática?</p></div></div>
+  <div class="rq-card rq-green"><span>RQ2</span><div><strong>Como?</strong><p>Como essas aplicações são avaliadas em contextos educacionais?</p></div></div>
+  <div class="rq-card rq-orange"><span>RQ3</span><div><strong>O que falta?</strong><p>Quais lacunas, limitações e desafios são reportados?</p></div></div>
+  <div class="rq-card rq-red"><span>RQ4</span><div><strong>E agora?</strong><p>Que direcionamentos podem apoiar ferramentas educacionais mais eficazes?</p></div></div>
 </div>
 
 <div class="objective-band"><span class="band-label">OBJETIVO</span><p>Mapear e analisar aplicações de <em>machine learning</em>, <em>learning analytics</em> e sistemas tutores inteligentes na educação matemática, identificando tendências, lacunas e requisitos para uma especificação técnica e pedagógica de protótipo.</p></div>
@@ -89,43 +90,66 @@ class: content-slide
 
 # O que este trabalho entrega
 
-<div class="objectives-layout">
-  <div class="objective-general">
-    <span class="card-label">OBJETIVO GERAL</span>
-    <h2>Mapear aplicações computacionais no ensino de matemática e derivar uma especificação conceitual de protótipo para apoiar o professor.</h2>
-    <div class="hand-line">evidência → requisito</div>
-  </div>
-  <div class="objective-specifics">
-    <div><b>OE1</b><span>Revisar sistematicamente estudos de 2015 a 2026.</span></div>
-    <div><b>OE2</b><span>Categorizar abordagens computacionais.</span></div>
-    <div><b>OE3</b><span>Classificar finalidades pedagógicas.</span></div>
-    <div><b>OE4</b><span>Analisar metodologias e limitações.</span></div>
-    <div><b>OE5</b><span>Mapear lacunas técnicas, pedagógicas, metodológicas e éticas.</span></div>
-    <div><b>OE6</b><span>Manter pipeline automatizado e auditável.</span></div>
-    <div><b>OE7</b><span>Derivar requisitos, avaliação e arquitetura de referência.</span></div>
-  </div>
+<div class="objective-callout"><span class="card-label">OBJETIVO GERAL</span><p>Mapear aplicações computacionais no ensino de matemática e derivar uma especificação conceitual de protótipo para apoiar o professor.</p><div class="hand-line">evidência → requisito</div></div>
+
+<div class="objective-roadmap">
+  <div class="objective-step step-blue"><div><b>01</b><span>⌕</span></div><strong>Revisar</strong><p>Estudos de 2015 a 2026.</p></div>
+  <div class="objective-step step-green"><div><b>02</b><span>⌘</span></div><strong>Categorizar</strong><p>Abordagens computacionais.</p></div>
+  <div class="objective-step step-orange"><div><b>03</b><span>◆</span></div><strong>Classificar</strong><p>Finalidades pedagógicas.</p></div>
+  <div class="objective-step step-red"><div><b>04</b><span>✓</span></div><strong>Analisar</strong><p>Metodologias e limitações.</p></div>
+  <div class="objective-step step-blue"><div><b>05</b><span>⌁</span></div><strong>Mapear</strong><p>Lacunas técnicas e pedagógicas.</p></div>
+  <div class="objective-step step-green"><div><b>06</b><span>↻</span></div><strong>Auditar</strong><p>Pipeline e artefatos versionados.</p></div>
+  <div class="objective-step step-orange"><div><b>07</b><span>→</span></div><strong>Derivar</strong><p>Requisitos, avaliação e arquitetura.</p></div>
 </div>
+
+<div class="roadmap-caption">Busca <span>→</span> classificação <span>→</span> síntese <span>→</span> especificação</div>
 
 ---
 layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">04 / MÉTODO</div>
+<div class="slide-kicker">04 / BASE CONCEITUAL</div>
+
+# Quatro níveis de interpretação
+
+<div class="interpretation-ladder">
+  <div class="interpretation-level level-blue"><b>01</b><strong>Desempenho observado</strong><span>Acertos, notas, tentativas, estratégias ou tempo registrados em uma tarefa.</span></div>
+  <div class="interpretation-level level-green"><b>02</b><strong>Proficiência estimada</strong><span>Inferência produzida por um modelo a partir de várias evidências.</span></div>
+  <div class="interpretation-level level-orange"><b>03</b><strong>Competência</strong><span>Mobilização de conhecimentos, procedimentos e atitudes para resolver problemas.</span></div>
+  <div class="interpretation-level level-red"><b>04</b><strong>Aprendizagem</strong><span>Transformação construída ao longo do tempo, com compreensão, autonomia e transferência.</span></div>
+</div>
+
+<div class="concept-note"><strong>Regra de interpretação:</strong> uma saída computacional pode organizar evidências e produzir estimativas, mas não observa sozinha todos os processos cognitivos, sociais e afetivos da aprendizagem.</div>
+
+---
+layout: default
+class: content-slide
+---
+
+<div class="slide-kicker">06 / MÉTODO</div>
 
 # Protocolo e escopo
 
 <div class="method-layout">
   <div class="method-intro">
     <div class="number-stamp">PRISMA<br><b>2020</b></div>
-    <h2>Um recorte explícito para organizar a busca.</h2>
-    <p>O score organiza o processamento. Ele não substitui a adjudicação de escopo, a avaliação metodológica ou a leitura das fontes primárias.</p>
+    <h2>Uma busca em camadas, com escopo explícito.</h2>
+    <div class="search-visual" aria-label="Busca em três camadas: matemática, técnicas e educação">
+      <div class="search-ring search-ring-outer"><span>EDUCAÇÃO</span>
+        <div class="search-ring search-ring-middle"><span>TÉCNICAS</span>
+          <div class="search-ring search-ring-core"><span>MATEMÁTICA</span></div>
+        </div>
+      </div>
+    </div>
+    <p>O score organiza o processamento. Não substitui a adjudicação de escopo, a avaliação metodológica ou a leitura das fontes primárias.</p>
   </div>
   <div class="method-list">
     <div><span>RECORTE TEMPORAL</span><strong>2015–2026</strong></div>
     <div><span>IDIOMAS PLANEJADOS</span><strong>inglês e português</strong></div>
     <div><span>CONSULTAS CANÔNICAS</span><strong>72 <small>(48 EN + 24 PT)</small></strong></div>
     <div><span>FONTES</span><strong>Semantic Scholar · OpenAlex<br>Crossref · CORE</strong></div>
+    <div><span>ESTRUTURA</span><strong>PICOS <small>população · intervenção · comparação · desfecho · desenho</small></strong></div>
     <div><span>LITERATURA CINZENTA</span><strong>Teses e dissertações aceitas<br><small>sob os mesmos critérios</small></strong></div>
     <div><span>FILTRO OPERACIONAL</span><strong>score de relevância ≥ 4,0</strong></div>
   </div>
@@ -136,7 +160,7 @@ layout: default
 class: content-slide flow-slide
 ---
 
-<div class="slide-kicker">05 / SELEÇÃO</div>
+<div class="slide-kicker">07 / SELEÇÃO</div>
 
 # Do registro bruto à população retida
 
@@ -161,7 +185,7 @@ layout: center
 class: image-slide
 ---
 
-<div class="slide-kicker">06 / FLUXO</div>
+<div class="slide-kicker">08 / FLUXO</div>
 
 # Fluxo PRISMA dos dados da revisão
 
@@ -174,7 +198,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">07 / DEDUPLICAÇÃO</div>
+<div class="slide-kicker">09 / DEDUPLICAÇÃO</div>
 
 # O que a deduplicação significa
 
@@ -195,7 +219,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">08 / PANORAMA</div>
+<div class="slide-kicker">10 / PANORAMA</div>
 
 # Panorama descritivo dos dados da revisão
 
@@ -216,7 +240,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">09 / DISTRIBUIÇÃO</div>
+<div class="slide-kicker">11 / DISTRIBUIÇÃO</div>
 
 # Distribuição temporal e fontes
 
@@ -232,7 +256,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">10 / RELEVÂNCIA</div>
+<div class="slide-kicker">12 / RELEVÂNCIA</div>
 
 # Score de relevância: filtro operacional
 
@@ -251,13 +275,13 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">11 / RETENÇÃO</div>
+<div class="slide-kicker">13 / RETENÇÃO</div>
 
-# População retida e MMAT
+# População retida e síntese
 
 <div class="retained-layout">
   <div class="retained-stat"><strong>18</strong><span>registros nos dados da revisão</span><div class="stat-split"><b>17</b> candidatos empíricos provisórios <i></i> <b>1</b> protocolo contextual</div></div>
-  <div class="mmat-card"><div class="stamp-outline">MMAT<br><b>2018</b></div><div><h2>Leitura por critério</h2><p>O ledger atual é preliminar. Recuperação das fontes, localizadores e adjudicação final permanecem necessários.</p><p class="muted"><strong>Sem nota média.</strong> Sem ranking. Sem conclusão global de qualidade metodológica.</p></div></div>
+  <div class="mmat-card"><div class="stamp-outline">17<br><b>+ 1</b></div><div><h2>Dois estratos de leitura</h2><p>Os 17 candidatos empíricos sustentam a síntese. O protocolo ou proposta contextual permanece para rastreabilidade, sem resultado empírico.</p><p class="muted"><strong>Retenção operacional ≠ evidência homogênea.</strong></p></div></div>
 </div>
 
 ---
@@ -265,7 +289,48 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">12 / INTERPRETAÇÃO</div>
+<div class="slide-kicker">14 / MMAT</div>
+
+# Apreciação metodológica sem nota global
+
+<div class="mmat-overview">
+  <div class="mmat-principles"><span class="card-label">MMAT 2018</span><strong>Leitura por critério</strong><p>As respostas são registradas como <b>Sim</b>, <b>Não</b> ou <b>Não é possível determinar</b>, conforme o desenho de cada estudo.</p><div class="hand-line">transparência<br>antes do ranking</div></div>
+  <div class="mmat-criteria">
+    <div><b>S</b><strong>Sim</strong><span>Critério atendido segundo a evidência disponível.</span></div>
+    <div><b>N</b><strong>Não</strong><span>Critério não atendido na apreciação documental.</span></div>
+    <div><b>ND</b><strong>Indeterminado</strong><span>Informação insuficiente para concluir.</span></div>
+  </div>
+</div>
+
+<div class="scope-note"><strong>Estado da apreciação:</strong> nove registros tiveram texto primário revisado e oito foram apreciados com resumo/metadados. O trabalho foi conduzido por um único revisor; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
+
+---
+layout: default
+class: content-slide
+---
+
+<div class="slide-kicker">15 / SÍNTESE</div>
+
+# O que emerge nos 17 candidatos empíricos
+
+<div class="synthesis-layout">
+  <div class="synthesis-lead"><span class="card-label">PADRÃO DOMINANTE</span><strong>Predição e estimativa</strong><p>A síntese aponta recorrência de tarefas de predição de desempenho e estimativa de proficiência, com uso frequente de modelos supervisionados.</p><div class="hand-line">resultado ≠ aprendizagem</div></div>
+  <div class="synthesis-grid">
+    <div><span>FINALIDADE</span><strong>Predição de desempenho</strong><small>Reconhecer padrões em registros de avaliação.</small></div>
+    <div><span>FINALIDADE</span><strong>Estimativa de proficiência</strong><small>Inferir níveis a partir de evidências observadas.</small></div>
+    <div><span>MODELOS RECORRENTES</span><strong>RF, SVM e redes neurais</strong><small>Alternativas com pressupostos e explicabilidade distintos.</small></div>
+    <div><span>LEITURA CRÍTICA</span><strong>Comparabilidade limitada</strong><small>Populações, instrumentos, variáveis e métricas variam entre estudos.</small></div>
+  </div>
+</div>
+
+<div class="bottom-caption">A síntese organiza o estado da literatura; não estabelece ranking de modelos nem eficácia pedagógica geral.</div>
+
+---
+layout: default
+class: content-slide
+---
+
+<div class="slide-kicker">16 / INTERPRETAÇÃO</div>
 
 # O que podemos concluir — e o que não podemos
 
@@ -281,7 +346,65 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">13 / REPRODUTIBILIDADE</div>
+<div class="slide-kicker">17 / LACUNAS</div>
+
+# Lacunas documentadas
+
+<div class="gap-grid">
+  <div class="gap-card gap-blue"><span>01</span><strong>Explicabilidade</strong><p>Resultados precisam ser compreensíveis e acompanhados de incerteza.</p></div>
+  <div class="gap-card gap-green"><span>02</span><strong>Integração curricular</strong><p>Indicadores devem se relacionar a objetivos e descritores matemáticos.</p></div>
+  <div class="gap-card gap-orange"><span>03</span><strong>Participação docente</strong><p>A interpretação e a decisão pedagógica não podem ser automatizadas.</p></div>
+  <div class="gap-card gap-red"><span>04</span><strong>Equidade</strong><p>Erros sistemáticos entre grupos precisam ser investigados.</p></div>
+  <div class="gap-card gap-blue"><span>05</span><strong>Reprodutibilidade</strong><p>Dados, código, parâmetros e decisões devem permanecer rastreáveis.</p></div>
+  <div class="gap-card gap-green"><span>06</span><strong>Validação contextual</strong><p>Resultados dependem da população, do instrumento e do ambiente educacional.</p></div>
+</div>
+
+<div class="scope-note"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
+
+---
+layout: default
+class: content-slide
+---
+
+<div class="slide-kicker">18 / ESPECIFICAÇÃO</div>
+
+# Da evidência à especificação
+
+<div class="derivation-flow">
+  <div><span>01</span><strong>Evidências</strong><small>literatura + fundamentação</small></div><i>→</i>
+  <div><span>02</span><strong>Lacunas</strong><small>riscos e necessidades</small></div><i>→</i>
+  <div><span>03</span><strong>Requisitos</strong><small>funções e restrições</small></div><i>→</i>
+  <div><span>04</span><strong>Protocolo</strong><small>critérios de avaliação</small></div><i>→</i>
+  <div><span>05</span><strong>Arquitetura</strong><small>referência conceitual</small></div>
+</div>
+
+<div class="derivation-note"><strong>Entrega do TCC:</strong> uma especificação técnica e pedagógica auditável. O artefato não é uma aplicação funcional, não usa uma base definitiva e não possui validação com participantes.</div>
+
+---
+layout: default
+class: content-slide
+---
+
+<div class="slide-kicker">19 / ARQUITETURA</div>
+
+# Arquitetura de referência em cinco componentes
+
+<div class="architecture-stack">
+  <div class="architecture-layer layer-present"><b>05</b><strong>Apresentação</strong><span>indicadores, explicações e limitações para análise docente</span></div>
+  <div class="architecture-layer layer-eval"><b>04</b><strong>Avaliação e explicabilidade</strong><span>métricas, erros, incerteza e explicações</span></div>
+  <div class="architecture-layer layer-model"><b>03</b><strong>Modelagem</strong><span>treino e comparação de modelos candidatos</span></div>
+  <div class="architecture-layer layer-prep"><b>02</b><strong>Preparação</strong><span>ausentes, codificação, transformação e documentação</span></div>
+  <div class="architecture-layer layer-data"><b>01</b><strong>Ingestão</strong><span>leitura e validação das fontes de dados</span></div>
+</div>
+
+<div class="bottom-caption">A separação favorece testabilidade, rastreabilidade e substituição controlada de técnicas.</div>
+
+---
+layout: default
+class: content-slide
+---
+
+<div class="slide-kicker">20 / REPRODUTIBILIDADE</div>
 
 # Reprodutibilidade sem distribuir o SQLite
 
@@ -301,7 +424,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">14 / CONTINUIDADE</div>
+<div class="slide-kicker">21 / CONTINUIDADE</div>
 
 # Próximos passos científicos
 
