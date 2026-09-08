@@ -127,7 +127,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">06 / MÉTODO</div>
+<div class="slide-kicker">05 / MÉTODO</div>
 
 # Protocolo e escopo
 
@@ -160,7 +160,7 @@ layout: default
 class: content-slide flow-slide
 ---
 
-<div class="slide-kicker">07 / SELEÇÃO</div>
+<div class="slide-kicker">06 / SELEÇÃO</div>
 
 # Do registro bruto à população retida
 
@@ -185,7 +185,7 @@ layout: center
 class: image-slide
 ---
 
-<div class="slide-kicker">08 / FLUXO</div>
+<div class="slide-kicker">07 / FLUXO</div>
 
 # Fluxo PRISMA dos dados da revisão
 
@@ -198,7 +198,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">09 / DEDUPLICAÇÃO</div>
+<div class="slide-kicker">08 / DEDUPLICAÇÃO</div>
 
 # O que a deduplicação significa
 
@@ -219,7 +219,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">10 / PANORAMA</div>
+<div class="slide-kicker">09 / PANORAMA</div>
 
 # Panorama descritivo dos dados da revisão
 
@@ -240,7 +240,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">11 / DISTRIBUIÇÃO</div>
+<div class="slide-kicker">10 / DISTRIBUIÇÃO</div>
 
 # Distribuição temporal e fontes
 
@@ -256,7 +256,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">12 / RELEVÂNCIA</div>
+<div class="slide-kicker">11 / RELEVÂNCIA</div>
 
 # Score de relevância: filtro operacional
 
@@ -275,7 +275,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">13 / RETENÇÃO</div>
+<div class="slide-kicker">12 / RETENÇÃO</div>
 
 # População retida e síntese
 
@@ -289,7 +289,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">14 / MMAT</div>
+<div class="slide-kicker">13 / MMAT</div>
 
 # Apreciação metodológica sem nota global
 
@@ -309,7 +309,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">15 / SÍNTESE</div>
+<div class="slide-kicker">14 / SÍNTESE</div>
 
 # O que emerge nos 17 candidatos empíricos
 
@@ -330,7 +330,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">16 / INTERPRETAÇÃO</div>
+<div class="slide-kicker">15 / INTERPRETAÇÃO</div>
 
 # O que podemos concluir — e o que não podemos
 
@@ -346,7 +346,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">17 / LACUNAS</div>
+<div class="slide-kicker">16 / LACUNAS</div>
 
 # Lacunas documentadas
 
@@ -366,7 +366,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">18 / ESPECIFICAÇÃO</div>
+<div class="slide-kicker">17 / ESPECIFICAÇÃO</div>
 
 # Da evidência à especificação
 
@@ -385,7 +385,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">19 / ARQUITETURA</div>
+<div class="slide-kicker">18 / ARQUITETURA</div>
 
 # Arquitetura de referência em cinco componentes
 
@@ -404,7 +404,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">20 / REPRODUTIBILIDADE</div>
+<div class="slide-kicker">19 / REPRODUTIBILIDADE</div>
 
 # Reprodutibilidade sem distribuir o SQLite
 
@@ -424,7 +424,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">21 / CONTINUIDADE</div>
+<div class="slide-kicker">20 / CONTINUIDADE</div>
 
 # Próximos passos científicos
 
