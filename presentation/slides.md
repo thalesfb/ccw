@@ -17,22 +17,26 @@ transition: slide-left
 mdc: true
 ---
 
-<div class="cover-art cover-art-top">∫ f(x) dx · ∑ yᵢ · lim Δx→0</div>
-<div class="cover-art cover-art-left">y = mx + b<br>f(x) = x² + 2x</div>
-<div class="cover-art cover-art-right">2√(y² − x²)<br>∂f / ∂x</div>
+<div class="cover-art cover-art-top-left">∫ f(x) · dx = e<sup>nt</sup> = g(x)<br>f(x) = ∫ f′(x) dx</div>
+<div class="cover-art cover-art-top">∂² / ∂x² &nbsp;&nbsp; lim Δx→0</div>
+<div class="cover-art cover-art-top-right">P = {2, 1, 3} &nbsp; M = [a<sub>ij</sub>]<br>A = [a₁&nbsp; a₂&nbsp; a₃]</div>
+<div class="cover-art cover-art-left">x − z<br>────── · dx<br>2πr + 1</div>
+<div class="cover-art cover-art-right">A = [a₁&nbsp; a₂&nbsp; a₃]<br>△ ABC &nbsp;&nbsp; ∂f / ∂x</div>
+<div class="cover-art cover-art-bottom-left">R₀ = hθ<sup>2</sup> / 2<br>y = (x − 1)²</div>
 <div class="cover-art cover-art-bottom">∫∫ R f(x,y) dA</div>
+<div class="cover-art cover-art-bottom-right">n = −√(a²x²)<br>sin(x) = Δπ / n</div>
 
 <div class="ifc-mark" aria-label="Instituto Federal Catarinense">
-  <div class="ifc-symbol"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="ifc-symbol"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div><strong>INSTITUTO FEDERAL</strong><span>Catarinense</span></div>
 </div>
 
 <div class="cover-slide">
-  <h1>Ensino Personalizado de<br>Matemática:<br>Oportunidades e<br>Técnicas Computacionais</h1>
+  <h1>Ensino Personalizado de Matemática:<br>Oportunidades e Técnicas Computacionais</h1>
   <div class="cover-credits">
     <strong>Trabalho de Conclusão de Curso (TCC)</strong><br>
-    Acadêmico: Thales Ferreira Batista | Curso: Ciência da Computação<br>
-    Orientador: Dr. Rafael Zanin | Coorientador: Dr. Manassés Ribeiro
+    <span class="cover-author">Thales Ferreira Batista<br>Ciência da Computação</span>
+    <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
 
