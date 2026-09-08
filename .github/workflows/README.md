@@ -29,9 +29,32 @@ _site/
 └── presentation/
 ```
 
-Os PDFs e o PPTX presentes em `results/` são copiados do repositório. A compilação
-LaTeX e a validação do PowerPoint pertencem ao workflow de qualidade; o deploy
-compila a apresentação Slidev.
+O workflow separa fonte e exportação:
+
+- [`presentation/slides.md`](../../presentation/slides.md) é a fonte do deck
+  Slidev. O deploy compila essa fonte e publica `presentation/dist/` em
+  `/ccw/presentation/`.
+- O PPTX do TCC em
+  [`results/tcc/presentation/`](../../results/tcc/presentation/) e o material do
+  PTC em [`results/ptc/presentation/`](../../results/ptc/presentation/) são
+  artefatos versionados mantidos separadamente. O PTC é histórico e não é
+  fonte dos dados atuais.
+- O export PPTX é produzido e validado por
+  [`generate_tcc_presentation.py`](../../scripts/generate_tcc_presentation.py).
+  O storyboard TCC em
+  [`APRESENTACAO_TCC_SLIDES_CONTEUDO.md`](../../results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md)
+  é documentação de apoio: o gerador não lê storyboard nem arquivos TeX
+  automaticamente.
+- Slidev e gerador PPTX são fontes paralelas, sem sincronização automática.
+  Mudanças compartilhadas exigem revisão e validação dos dois decks.
+- O build Slidev não incorpora PPTX local: o arquivo só chega ao Pages porque o
+  job copia `results/ptc` e `results/tcc` para `_site/results/`.
+
+Por isso, `/ccw/presentation/` não é uma pasta de download do PPTX. Após merge e
+deploy bem-sucedido, os endereços públicos esperados são [Slidev](https://thalesfb.github.io/ccw/presentation/),
+[PPTX do TCC](https://thalesfb.github.io/ccw/results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx)
+e [PPTX histórico do PTC](https://thalesfb.github.io/ccw/results/ptc/presentation/ensino_personalizado_de_matematica.pptx).
+Os URLs não confirmam publicação antes de um deploy concluído.
 
 ## Preparação dos artefatos
 
