@@ -28,16 +28,12 @@ mdc: true
 </div>
 
 <div class="cover-slide">
-  <div class="cover-kicker">TRABALHO DE CONCLUSÃO DE CURSO · 2026</div>
-  <h1>Ensino Personalizado de<br>Matemática:</h1>
-  <h2>Oportunidades e Técnicas<br>Computacionais</h2>
-  <div class="cover-rule"></div>
-  <div class="cover-subtitle">Revisão Sistemática da Literatura<br><span>relato orientado pelo PRISMA 2020</span></div>
+  <h1>Ensino Personalizado de<br>Matemática:<br>Oportunidades e<br>Técnicas Computacionais</h1>
   <div class="cover-credits">
-    <strong>Thales Ferreira Batista</strong> · Ciência da Computação<br>
-    <span>Orientador: Dr. Rafael Zanin</span> · <span>Coorientador: Dr. Manassés Ribeiro</span>
+    <strong>Trabalho de Conclusão de Curso (TCC)</strong><br>
+    Acadêmico: Thales Ferreira Batista | Curso: Ciência da Computação<br>
+    Orientador: Dr. Rafael Zanin | Coorientador: Dr. Manassés Ribeiro
   </div>
-  <div class="cover-footer"><span>IFC — Videira</span><span>Dados da revisão: 03/09/2026 · recorte temporal: 2015–2026</span></div>
 </div>
 
 ---
@@ -89,7 +85,33 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">03 / MÉTODO</div>
+<div class="slide-kicker">03 / OBJETIVOS</div>
+
+# O que este trabalho entrega
+
+<div class="objectives-layout">
+  <div class="objective-general">
+    <span class="card-label">OBJETIVO GERAL</span>
+    <h2>Mapear aplicações computacionais no ensino de matemática e derivar uma especificação conceitual de protótipo para apoiar o professor.</h2>
+    <div class="hand-line">evidência → requisito</div>
+  </div>
+  <div class="objective-specifics">
+    <div><b>OE1</b><span>Revisar sistematicamente estudos de 2015 a 2026.</span></div>
+    <div><b>OE2</b><span>Categorizar abordagens computacionais.</span></div>
+    <div><b>OE3</b><span>Classificar finalidades pedagógicas.</span></div>
+    <div><b>OE4</b><span>Analisar metodologias e limitações.</span></div>
+    <div><b>OE5</b><span>Mapear lacunas técnicas, pedagógicas, metodológicas e éticas.</span></div>
+    <div><b>OE6</b><span>Manter pipeline automatizado e auditável.</span></div>
+    <div><b>OE7</b><span>Derivar requisitos, avaliação e arquitetura de referência.</span></div>
+  </div>
+</div>
+
+---
+layout: default
+class: content-slide
+---
+
+<div class="slide-kicker">04 / MÉTODO</div>
 
 # Protocolo e escopo
 
@@ -114,7 +136,7 @@ layout: default
 class: content-slide flow-slide
 ---
 
-<div class="slide-kicker">04 / SELEÇÃO</div>
+<div class="slide-kicker">05 / SELEÇÃO</div>
 
 # Do registro bruto à população retida
 
@@ -139,7 +161,7 @@ layout: center
 class: image-slide
 ---
 
-<div class="slide-kicker">05 / FLUXO</div>
+<div class="slide-kicker">06 / FLUXO</div>
 
 # Fluxo PRISMA dos dados da revisão
 
@@ -152,7 +174,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">06 / DEDUPLICAÇÃO</div>
+<div class="slide-kicker">07 / DEDUPLICAÇÃO</div>
 
 # O que a deduplicação significa
 
@@ -173,7 +195,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">07 / PANORAMA</div>
+<div class="slide-kicker">08 / PANORAMA</div>
 
 # Panorama descritivo dos dados da revisão
 
@@ -194,7 +216,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">08 / DISTRIBUIÇÃO</div>
+<div class="slide-kicker">09 / DISTRIBUIÇÃO</div>
 
 # Distribuição temporal e fontes
 
@@ -210,7 +232,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">09 / RELEVÂNCIA</div>
+<div class="slide-kicker">10 / RELEVÂNCIA</div>
 
 # Score de relevância: filtro operacional
 
@@ -229,7 +251,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">10 / RETENÇÃO</div>
+<div class="slide-kicker">11 / RETENÇÃO</div>
 
 # População retida e MMAT
 
@@ -243,7 +265,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">11 / INTERPRETAÇÃO</div>
+<div class="slide-kicker">12 / INTERPRETAÇÃO</div>
 
 # O que podemos concluir — e o que não podemos
 
@@ -259,7 +281,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">12 / REPRODUTIBILIDADE</div>
+<div class="slide-kicker">13 / REPRODUTIBILIDADE</div>
 
 # Reprodutibilidade sem distribuir o SQLite
 
@@ -279,7 +301,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">13 / CONTINUIDADE</div>
+<div class="slide-kicker">14 / CONTINUIDADE</div>
 
 # Próximos passos científicos
 
