@@ -20,6 +20,10 @@ for (const page of expectedPages) {
   const html = read(page);
   assert.match(html, /public-site\/assets\/site\.css/, `${page} must use the shared site stylesheet`);
   assert.match(html, /site-nav/, `${page} must expose the shared navigation`);
+  assert.match(html, /site-nav-desktop/, `${page} must expose the desktop navigation variant`);
+  assert.match(html, /class="site-menu"/, `${page} must expose the responsive disclosure menu`);
+  assert.match(html, /site-nav-mobile/, `${page} must expose the mobile navigation variant`);
+  assert.match(html, /aria-controls="site-primary-nav"/, `${page} must associate the menu toggle with its navigation`);
   assert.match(html, /Revisão sistemática/i, `${page} must link to the research area`);
 }
 
