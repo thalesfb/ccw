@@ -1,9 +1,12 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { deckValidationErrors } from './deck-standards.mjs'
 
 const presentationPath = resolve(import.meta.dirname, 'slides.md')
+const stylesPath = resolve(import.meta.dirname, 'styles', 'index.css')
 const summaryPath = resolve(import.meta.dirname, '..', 'research', 'exports', 'reports', 'summary.json')
 const slides = readFileSync(presentationPath, 'utf8')
+const css = readFileSync(stylesPath, 'utf8')
 const summaryText = readFileSync(summaryPath, 'utf8').replace(
   /:\s*(?:NaN|Infinity|-Infinity)(?=\s*[,}])/g,
   ': null',
@@ -70,11 +73,22 @@ const forbiddenClaims = [
 const missing = requiredStatements.filter((statement) => !slides.includes(statement))
 const missingTemplateMarkers = requiredTemplateMarkers.filter((marker) => !slides.includes(marker))
 const forbidden = forbiddenClaims.filter((statement) => slides.includes(statement))
+const repositoryUrl = 'https://github.com/thalesfb/ccw'
+const designErrors = deckValidationErrors({
+  slides,
+  css,
+  assetPaths: [
+    'public/branding/ifc-campus-videira-horizontal.png',
+    'public/branding/ccw-repository-qr.svg',
+  ].filter((path) => existsSync(resolve(import.meta.dirname, path))),
+  repositoryUrl,
+})
 
-if (missing.length || missingTemplateMarkers.length || forbidden.length) {
+if (missing.length || missingTemplateMarkers.length || forbidden.length || designErrors.length) {
   if (missing.length) console.error(`Missing current presentation statements: ${missing.join(', ')}`)
   if (missingTemplateMarkers.length) console.error(`Missing PTC template structures: ${missingTemplateMarkers.join(', ')}`)
   if (forbidden.length) console.error(`Forbidden historical/internal claims: ${forbidden.join(', ')}`)
+  if (designErrors.length) console.error(`Presentation design contract: ${designErrors.join(' | ')}`)
   process.exit(1)
 }
 

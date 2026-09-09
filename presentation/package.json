@@ -5,13 +5,16 @@
     "dev": "slidev --open",
     "build": "slidev build",
     "export": "slidev export",
-    "validate": "node validate.mjs"
+    "validate": "node validate.mjs",
+    "test": "node --test",
+    "generate:qr": "node scripts/generate-qr.mjs"
   },
   "dependencies": {
     "@slidev/cli": "^52.19.1",
     "@slidev/theme-default": "latest"
   },
   "devDependencies": {
-    "shiki": "^4.4.3"
+    "shiki": "^4.4.3",
+    "uqr": "^0.1.3"
   }
 }

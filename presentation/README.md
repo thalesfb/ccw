@@ -17,6 +17,23 @@ npm run validate
 npm run build -- --base /ccw/presentation/
 ```
 
+O deck segue a direção visual do template fornecido, mas o arquivo PPTX
+original é apenas referência local: a fonte de verdade continua sendo
+`slides.md`. A marca institucional vem do ativo oficial do IFC Campus Videira
+em `public/branding/`, e o QR do encerramento é regenerável com:
+
+```bash
+npm run generate:qr
+```
+
+As verificações editoriais, de identidade, QR, tipografia e contraste ficam em
+`deck-standards.mjs` e são executadas por:
+
+```bash
+npm test
+npm run validate
+```
+
 Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 `/ccw/presentation/`, sem exigir que o leitor execute comandos.
 
