@@ -17,14 +17,14 @@ transition: slide-left
 mdc: true
 ---
 
-<div class="cover-art cover-art-top-left">∫ f(x) · dx = e<sup>nt</sup> = g(x)<br>f(x) = ∫ f′(x) dx</div>
-<div class="cover-art cover-art-top">∂² / ∂x² &nbsp;&nbsp; lim Δx→0</div>
-<div class="cover-art cover-art-top-right">P = {2, 1, 3} &nbsp; M = [a<sub>ij</sub>]<br>A = [a₁&nbsp; a₂&nbsp; a₃]</div>
-<div class="cover-art cover-art-left">x − z<br>────── · dx<br>2πr + 1</div>
-<div class="cover-art cover-art-right">A = [a₁&nbsp; a₂&nbsp; a₃]<br>△ ABC &nbsp;&nbsp; ∂f / ∂x</div>
-<div class="cover-art cover-art-bottom-left">R₀ = hθ<sup>2</sup> / 2<br>y = (x − 1)²</div>
-<div class="cover-art cover-art-bottom">∫∫ R f(x,y) dA</div>
-<div class="cover-art cover-art-bottom-right">n = −√(a²x²)<br>sin(x) = Δπ / n</div>
+<div class="cover-art cover-art-top-left" aria-hidden="true">∫ f(x) · dx = e<sup>nt</sup> = g(x)<br>f(x) = ∫ f′(x) dx</div>
+<div class="cover-art cover-art-top" aria-hidden="true">∂² / ∂x² &nbsp;&nbsp; lim Δx→0</div>
+<div class="cover-art cover-art-top-right" aria-hidden="true">P = {2, 1, 3} &nbsp; M = [a<sub>ij</sub>]<br>A = [a₁&nbsp; a₂&nbsp; a₃]</div>
+<div class="cover-art cover-art-left" aria-hidden="true">x − z<br>────── · dx<br>2πr + 1</div>
+<div class="cover-art cover-art-right" aria-hidden="true">A = [a₁&nbsp; a₂&nbsp; a₃]<br>△ ABC &nbsp;&nbsp; ∂f / ∂x</div>
+<div class="cover-art cover-art-bottom-left" aria-hidden="true">R₀ = hθ<sup>2</sup> / 2<br>y = (x − 1)²</div>
+<div class="cover-art cover-art-bottom" aria-hidden="true">∫∫ R f(x,y) dA</div>
+<div class="cover-art cover-art-bottom-right" aria-hidden="true">n = −√(a²x²)<br>sin(x) = Δπ / n</div>
 
 <div class="ifc-mark" aria-label="Instituto Federal Catarinense — Campus Videira">
   <img class="ifc-logo" src="./public/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
@@ -478,11 +478,12 @@ layout: center
 class: closing-slide
 ---
 
-<div class="close-mark">∫</div>
+<div class="closing-slide-content">
+<div class="close-mark" aria-hidden="true">∫</div>
 
-# Obrigado
+<h1>Obrigado</h1>
 
-## Perguntas e discussão
+<h2>Perguntas e discussão</h2>
 
 <div class="close-rule"></div>
 <div class="close-repository">
@@ -491,3 +492,4 @@ class: closing-slide
 </div>
 <p class="close-title"><strong>Ensino Personalizado de Matemática</strong><br>Oportunidades e Técnicas Computacionais</p>
 <p class="close-sources">Fonte pública do TCC: <a href="https://thalesfb.github.io/ccw/results/tcc/main.pdf">thalesfb.github.io/ccw/results/tcc/main.pdf</a> · repositório: <a href="https://github.com/thalesfb/ccw">github.com/thalesfb/ccw</a></p>
+</div>
