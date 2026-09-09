@@ -3,7 +3,7 @@
 **Data:** 2026-09-09  
 **Escopo:** `index.html`, `research/index.html`, páginas públicas de resultados,
 artefatos MMAT e publicação GitHub Pages  
-**Status:** proposta para revisão antes da implementação
+**Status:** implementada neste PR, com validação pendente de revisão remota
 
 ## 1. Problema e objetivo
 

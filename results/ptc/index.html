@@ -1,227 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PTC - Proposta de Trabalho de Conclusão de Curso">
-    <meta name="author" content="Thales Ferreira">
-    <title>PTC - Ensino Personalizado de Matemática</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 900px;
-            width: 100%;
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-        }
-        
-        header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .pdf-viewer {
-            width: 100%;
-            height: 80vh;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin: 20px 0;
-        }
-        
-        .actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
-        }
-        
-        .btn-secondary {
-            background: #ecf0f1;
-            color: #2c3e50;
-        }
-        
-        .btn-secondary:hover {
-            background: #bdc3c7;
-            transform: translateY(-2px);
-        }
-        
-        .info-box {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-            margin: 20px 0;
-        }
-        
-        .info-box h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        .info-box p {
-            color: #555;
-            line-height: 1.6;
-        }
-        
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-        }
-        
-        footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5em;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .pdf-viewer {
-                height: 60vh;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Proposta de Trabalho de Conclusão de Curso — Ensino Personalizado de Matemática.">
+  <title>PTC · CCW</title>
+  <link rel="stylesheet" href="../../public-site/assets/site.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>📄 PTC - Proposta de Trabalho de Conclusão de Curso</h1>
-            <p>Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</p>
-        </header>
-        
-        <div class="content">
-            <div class="info-box">
-                <h3>ℹ️ Sobre o Documento</h3>
-                <p>
-                    Este documento histórico apresenta a proposta inicial do TCC, incluindo objetivos,
-                    metodologia PRISMA para revisão sistemática, e planejamento das fases 
-                    de desenvolvimento do projeto.
-                </p>
-            </div>
-
-            <div class="info-box" style="border-left-color: #e67e22;">
-                <h3>⚠️ Escopo e métricas</h3>
-                <p>
-                    O PDF abaixo preserva a proposta original e seus números de planejamento.
-                    Eles não representam o snapshot vigente da revisão sistemática. Para os dados
-                    atuais e sua reconciliação, consulte o
-                    <a href="https://github.com/thalesfb/ccw/blob/main/docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md">registro de reconciliação vigente</a>.
-                </p>
-            </div>
-            
-            <div class="actions">
-                <a href="main.pdf" class="btn btn-primary" download>
-                    📥 Baixar PDF
-                </a>
-                <a href="main.pdf" class="btn btn-primary" target="_blank">
-                    🔗 Abrir em Nova Aba
-                </a>
-                <a href="../../index.html" class="btn btn-secondary">
-                    🏠 Voltar ao Projeto
-                </a>
-                <a href="https://github.com/thalesfb/ccw" class="btn btn-secondary" target="_blank">
-                    💻 Ver no GitHub
-                </a>
-            </div>
-            
-            <div style="text-align: center; margin: 20px 0;">
-                <h2 style="color: #2c3e50; margin-bottom: 15px;">📖 Visualização do Documento</h2>
-            </div>
-            
-            <iframe 
-                src="main.pdf" 
-                class="pdf-viewer"
-                title="PTC - Proposta de Trabalho de Conclusão de Curso"
-            ></iframe>
-            
-            <div class="info-box" style="border-left-color: #27ae60;">
-                <h3>✅ Informações do Projeto</h3>
-                <p>
-                    <strong>Instituição:</strong> Instituto Federal Catarinense - Campus Videira<br>
-                    <strong>Curso:</strong> Ciência da Computação<br>
-                    <strong>Orientador:</strong> Prof. Dr. Rafael Zanin<br>
-                    <strong>Coorientador:</strong> Prof. Dr. Manassés Ribeiro<br>
-                    <strong>Acadêmico:</strong> Thales Ferreira
-                </p>
-            </div>
-        </div>
-        
-        <footer>
-            <p><strong>PTC - Proposta de TCC</strong></p>
-            <p>Instituto Federal Catarinense - Campus Videira</p>
-            <p>© 2026 Thales Ferreira | <a href="https://github.com/thalesfb/ccw">GitHub</a></p>
-        </footer>
+  <header class="site-header">
+    <div class="site-shell site-header-inner">
+      <a class="site-brand" href="../../" aria-label="CCW — voltar à visão geral">
+        <img src="../../public-site/assets/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
+        <span class="site-brand-copy"><strong>CCW</strong><small>Pesquisa versionada<br>Ciência da Computação</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="../../">Visão geral</a>
+        <a href="../../research/index.html">Revisão sistemática</a>
+        <a href="../../research/exports/analysis/mmat_current.html">MMAT atual</a>
+        <a href="../../presentation/">Apresentação</a>
+        <a href="./" aria-current="page">PTC</a>
+        <a href="../tcc/index.html">TCC</a>
+        <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <div class="site-shell">
+      <p class="breadcrumb"><a href="../../">Visão geral</a> / <strong>PTC</strong></p>
+      <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Documento histórico</span>
+        <h1 id="page-title">Proposta de Trabalho de Conclusão de Curso</h1>
+        <p class="lede">Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</p>
+        <div class="action-row">
+          <a class="btn btn-primary" href="main.pdf" download>Baixar PDF</a>
+          <a class="btn btn-secondary" href="main.pdf" target="_blank" rel="noopener">Abrir PDF em nova aba</a>
+          <a class="btn btn-secondary" href="../../">Voltar ao projeto</a>
+        </div>
+      </section>
+
+      <section class="section split-grid">
+        <article class="surface-card">
+          <span class="eyebrow">Contexto</span>
+          <h3>Sobre o documento</h3>
+          <p>Esta proposta apresenta os objetivos iniciais do TCC, a metodologia PRISMA para a revisão sistemática e o planejamento das fases de desenvolvimento.</p>
+        </article>
+        <article class="surface-card">
+          <span class="eyebrow">Leitura responsável</span>
+          <h3>Escopo e métricas</h3>
+          <p>O PDF preserva a proposta original e seus números de planejamento. Eles não representam o snapshot vigente da revisão.</p>
+          <p><a href="https://github.com/thalesfb/ccw/blob/main/docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md" target="_blank" rel="noopener">Consultar a reconciliação atual →</a></p>
+        </article>
+      </section>
+
+      <section class="section pdf-panel" aria-labelledby="pdf-title">
+        <h2 id="pdf-title">Visualização do documento</h2>
+        <iframe src="main.pdf" class="pdf-viewer" title="PTC — Proposta de Trabalho de Conclusão de Curso"></iframe>
+      </section>
+
+      <section class="section surface-card">
+        <span class="eyebrow">Identificação acadêmica</span>
+        <ul class="info-list">
+          <li><strong>Instituição:</strong> Instituto Federal Catarinense — Campus Videira</li>
+          <li><strong>Curso:</strong> Ciência da Computação</li>
+          <li><strong>Orientador:</strong> Prof. Dr. Rafael Zanin</li>
+          <li><strong>Coorientador:</strong> Prof. Dr. Manassés Ribeiro</li>
+          <li><strong>Acadêmico:</strong> Thales Ferreira Batista</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-shell site-footer-inner">
+      <p><strong>PTC · CCW</strong><br>Instituto Federal Catarinense — Campus Videira</p>
+      <p><a href="../../">Visão geral</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></p>
+    </div>
+  </footer>
 </body>
 </html>
