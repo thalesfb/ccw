@@ -37,12 +37,14 @@ não fazem parte do escopo executado.
 
 ## 5. Fundamentação — 1:10
 
-Uma distinção importante organiza a leitura: desempenho observado é o registro
-de uma tarefa; proficiência estimada é uma inferência em uma escala; competência
-envolve mobilizar conhecimentos e estratégias; aprendizagem é uma transformação
-ao longo do tempo. Esses conceitos se relacionam, mas não são equivalentes. Uma
-saída computacional deve, portanto, ser interpretada como evidência parcial e
-contextualizada pelo professor.
+Uma distinção importante organiza a leitura: o indicador de desempenho observado
+é o registro de uma tarefa; a probabilidade preditiva é uma saída condicionada ao
+modelo, aos dados e a um alvo definido; proficiência estimada é uma inferência em
+uma escala; competência envolve mobilizar conhecimentos e estratégias;
+aprendizagem é uma transformação ao longo do tempo. Esses conceitos se
+relacionam, mas não são equivalentes, e a probabilidade preditiva não demonstra,
+isoladamente, eficácia pedagógica. Uma saída computacional deve, portanto, ser
+interpretada como evidência parcial e contextualizada pelo professor.
 
 ## 6. Método — 1:10
 
@@ -99,7 +101,7 @@ de disponibilidade dos metadados.
 Dos 18 registros retidos operacionalmente, 17 são candidatos empíricos
 provisórios. Um registro é um protocolo ou proposta contextual e foi preservado
 para rastreabilidade, não para sustentar uma conclusão empírica. Entre os
-empíricos, o padrão dominante envolve predição de desempenho e estimativa de
+empíricos, a recorrência envolve predição de desempenho e estimativa de
 proficiência, com uso recorrente de modelos supervisionados. Isso descreve a
 literatura encontrada; não escolhe um algoritmo vencedor.
 
@@ -114,7 +116,7 @@ precisam ser consolidados. Portanto, não apresento um ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
 
-A revisão sustenta um mapa auditável das aplicações e de suas limitações. Ao
+A síntese preliminar sustenta um mapa auditável das aplicações e de suas limitações. Ao
 mesmo tempo, os estudos usam populações, instrumentos, variáveis e métricas
 diferentes. Isso impede comparar diretamente todas as acurácias e impede
 transferir o resultado de um artigo para outra escola. Predição de desempenho

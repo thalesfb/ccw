@@ -53,7 +53,8 @@ function escapeHtml(value) {
 function criterion(value) {
   const normalized = value.toLowerCase();
   const className = normalized === 'y' ? 'criterion-y' : normalized === 'n' ? 'criterion-n' : 'criterion-ct';
-  return `<span class="criterion ${className}" title="${escapeHtml(value)}">${escapeHtml(value)}</span>`;
+  const response = normalized === 'y' ? 'Sim' : normalized === 'n' ? 'Não' : 'Não é possível determinar';
+  return `<span class="criterion ${className}" title="Resposta: ${escapeHtml(response)}" aria-label="Resposta: ${escapeHtml(response)}">${escapeHtml(value)}</span>`;
 }
 
 function sourceStatus(row) {
@@ -61,6 +62,94 @@ function sourceStatus(row) {
   if (row.empirical_status === 'protocol_or_proposal_not_applicable') return '<span class="tag tag-red">protocolo contextual</span>';
   return '<span class="tag tag-amber">abstract/metadados</span>';
 }
+
+const MMAT_SCREENING_QUESTIONS = [
+  {
+    code: 'S1',
+    label: 'Há perguntas de pesquisa claras?',
+    original: 'Are there clear research questions?',
+  },
+  {
+    code: 'S2',
+    label: 'Os dados coletados permitem responder às perguntas de pesquisa?',
+    original: 'Do the collected data allow to address the research questions?',
+  },
+];
+
+const MMAT_CRITERIA_GROUPS = [
+  {
+    label: 'Estudos qualitativos',
+    questions: [
+      ['Q1', 'A abordagem qualitativa é apropriada para responder à pergunta de pesquisa?', 'Is the qualitative approach appropriate to answer the research question?'],
+      ['Q2', 'Os métodos de coleta de dados qualitativos são adequados para abordar a pergunta de pesquisa?', 'Are the qualitative data collection methods adequate to address the research question?'],
+      ['Q3', 'Os achados são adequadamente derivados dos dados?', 'Are the findings adequately derived from the data?'],
+      ['Q4', 'A interpretação dos resultados é suficientemente fundamentada nos dados?', 'Is the interpretation of results sufficiently substantiated by data?'],
+      ['Q5', 'Há coerência entre fontes de dados qualitativos, coleta, análise e interpretação?', 'Is there coherence between qualitative data sources, collection, analysis and interpretation?'],
+    ],
+  },
+  {
+    label: 'Estudos quantitativos randomizados',
+    questions: [
+      ['Q1', 'A randomização foi realizada de forma adequada?', 'Is randomization appropriately performed?'],
+      ['Q2', 'Os grupos são comparáveis no início do estudo?', 'Are the groups comparable at baseline?'],
+      ['Q3', 'Os dados de desfecho estão completos?', 'Are there complete outcome data?'],
+      ['Q4', 'Os avaliadores dos desfechos estavam cegos para a intervenção recebida?', 'Are outcome assessors blinded to the intervention provided?'],
+      ['Q5', 'Os participantes aderiram à intervenção designada?', 'Did the participants adhere to the assigned intervention?'],
+    ],
+  },
+  {
+    label: 'Estudos quantitativos não randomizados',
+    questions: [
+      ['Q1', 'Os participantes são representativos da população-alvo?', 'Are the participants representative of the target population?'],
+      ['Q2', 'As medições são apropriadas tanto para o desfecho quanto para a intervenção?', 'Are measurements appropriate regarding both the outcome and intervention?'],
+      ['Q3', 'Os dados de desfecho estão completos?', 'Are there complete outcome data?'],
+      ['Q4', 'Os fatores de confusão foram considerados no delineamento e na análise?', 'Are the confounders accounted for in the design and analysis?'],
+      ['Q5', 'A intervenção ou exposição ocorreu conforme planejado?', 'Did the intervention or exposure occur as intended?'],
+    ],
+  },
+  {
+    label: 'Estudos quantitativos descritivos',
+    questions: [
+      ['Q1', 'A estratégia de amostragem é pertinente à pergunta de pesquisa?', 'Is the sampling strategy relevant to address the research question?'],
+      ['Q2', 'A amostra é representativa da população-alvo?', 'Is the sample representative of the target population?'],
+      ['Q3', 'As medições são apropriadas?', 'Are the measurements appropriate?'],
+      ['Q4', 'O risco de viés de não resposta é baixo?', 'Is the risk of nonresponse bias low?'],
+      ['Q5', 'A análise estatística é apropriada para responder à pergunta de pesquisa?', 'Is the statistical analysis appropriate to answer the research question?'],
+    ],
+  },
+  {
+    label: 'Estudos de métodos mistos',
+    questions: [
+      ['Q1', 'Há justificativa adequada para usar um delineamento de métodos mistos?', 'Is there an adequate rationale for using a mixed methods design?'],
+      ['Q2', 'Os diferentes componentes do estudo foram efetivamente integrados?', 'Are the different components of the study effectively integrated?'],
+      ['Q3', 'Os resultados da integração foram interpretados adequadamente?', 'Are the outputs of the integration adequately interpreted?'],
+      ['Q4', 'As divergências entre os resultados quantitativos e qualitativos foram abordadas?', 'Are divergences between quantitative and qualitative results addressed?'],
+      ['Q5', 'Os componentes atendem aos critérios de qualidade de cada tradição?', 'Do the components adhere to the quality criteria of each tradition?'],
+    ],
+  },
+];
+
+function screeningQuestionCard(question) {
+  return `<article class="surface-card mmat-question-card">
+    <span class="question-code">${escapeHtml(question.code)}</span>
+    <h3>${escapeHtml(question.label)}</h3>
+    <p class="question-original" lang="en">${escapeHtml(question.original)}</p>
+  </article>`;
+}
+
+function criteriaGroup(group) {
+  const questions = group.questions.map(([code, label, original]) => `<li class="mmat-question-item">
+      <span class="question-code">${escapeHtml(code)}</span>
+      <div><strong>${escapeHtml(label)}</strong><span class="question-original" lang="en">${escapeHtml(original)}</span></div>
+    </li>`).join('');
+  return `<details class="mmat-question-group" open>
+    <summary>${escapeHtml(group.label)} <span>Q1–Q5</span></summary>
+    <ol class="mmat-question-list">${questions}</ol>
+  </details>`;
+}
+
+const screeningQuestions = MMAT_SCREENING_QUESTIONS.map(screeningQuestionCard).join('');
+const criteriaGroups = MMAT_CRITERIA_GROUPS.map(criteriaGroup).join('');
 
 const current = parseCsv(fs.readFileSync(currentPath, 'utf8'));
 const registry = parseCsv(fs.readFileSync(registryPath, 'utf8'));
@@ -100,7 +189,7 @@ const page = `<!doctype html>
         <img src="../../../public-site/assets/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
         <span class="site-brand-copy"><strong>CCW</strong><small>Pesquisa versionada<br>Ciência da Computação</small></span>
       </a>
-      <nav class="site-nav" aria-label="Navegação principal">
+      <nav class="site-nav site-nav-desktop" aria-label="Navegação principal">
         <a href="../../../">Visão geral</a>
         <a href="../../index.html">Revisão sistemática</a>
         <a href="./mmat_current.html" aria-current="page">MMAT atual</a>
@@ -109,6 +198,18 @@ const page = `<!doctype html>
         <a href="../../../results/tcc/index.html">TCC</a>
         <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a>
       </nav>
+      <details class="site-menu">
+        <summary class="site-menu-toggle" aria-label="Menu principal" aria-controls="site-primary-nav">Menu</summary>
+        <nav id="site-primary-nav" class="site-nav site-nav-mobile" aria-label="Navegação principal">
+          <a href="../../../">Visão geral</a>
+          <a href="../../index.html">Revisão sistemática</a>
+          <a href="./mmat_current.html" aria-current="page">MMAT atual</a>
+          <a href="../../../presentation/">Apresentação</a>
+          <a href="../../../results/ptc/index.html">PTC</a>
+          <a href="../../../results/tcc/index.html">TCC</a>
+          <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a>
+        </nav>
+      </details>
     </div>
   </header>
 
@@ -152,6 +253,25 @@ const page = `<!doctype html>
         </article>
       </section>
 
+      <section class="section" aria-labelledby="questions-title">
+        <div class="section-heading">
+          <h2 id="questions-title">Perguntas de triagem do MMAT 2018</h2>
+          <p>Estas duas perguntas são aplicadas a todos os estudos antes da apreciação específica do delineamento.</p>
+        </div>
+        <div class="mmat-screening-grid">${screeningQuestions}</div>
+        <div class="callout callout-blue mmat-question-note">
+          <div><strong>Como interpretar S1 e S2.</strong> Se a resposta for N ou CT em uma ou nas duas perguntas, a apreciação adicional pode não ser viável ou apropriada. Isso não é uma nota: é uma condição de leitura e transparência metodológica.</div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="criteria-title">
+        <div class="section-heading">
+          <h2 id="criteria-title">Critérios de apreciação por delineamento</h2>
+          <p>Os códigos Q1–Q5 mudam de formulação conforme o delineamento identificado para o estudo.</p>
+        </div>
+        <div class="mmat-criteria-groups">${criteriaGroups}</div>
+      </section>
+
       <section class="section" aria-labelledby="table-title">
         <div class="section-heading">
           <h2 id="table-title">Ledger atual</h2>
@@ -160,7 +280,7 @@ const page = `<!doctype html>
         <div class="table-wrap">
           <table class="mmat-table">
             <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível.</caption>
-            <thead><tr><th>ID</th><th>Registro</th><th>Fonte disponível</th><th>S1</th><th>S2</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th></tr></thead>
+            <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
         </div>
@@ -181,6 +301,7 @@ const page = `<!doctype html>
         <h3>Fontes versionadas</h3>
         <p><a href="../../../data/mmat_reassessment_current.csv">CSV do ledger atual</a> · <a href="../../../data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
         <p class="source-note">A página foi gerada a partir de <code>research/data/mmat_reassessment_current.csv</code> e <code>research/data/mmat_current_study_registry.csv</code>.</p>
+        <p class="source-note">As perguntas seguem o <a href="https://doi.org/10.3233/EFI-180221" target="_blank" rel="noopener">MMAT 2018</a>; a tradução em português é acompanhada pela formulação original em inglês para manter a rastreabilidade do instrumento.</p>
       </section>
     </div>
   </main>

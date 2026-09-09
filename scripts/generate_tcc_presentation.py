@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate and validate the editable PowerPoint presentation of the TCC.
+"""Generate and validate the parallel editable PowerPoint export of the TCC.
 
 The PTC presentation is used only as a narrative and visual reference.  This
 generator intentionally reads the current versioned visualizations and keeps
@@ -653,7 +653,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             for error in errors:
                 print(f"ERROR: {error}")
             return 1
-        print(f"OK: apresentação TCC válida ({len(EXPECTED_TITLES)} slides): {output}")
+        print(f"OK: export editável paralelo do TCC válido ({len(EXPECTED_TITLES)} slides): {output}")
         return 0
 
     generate(output)
