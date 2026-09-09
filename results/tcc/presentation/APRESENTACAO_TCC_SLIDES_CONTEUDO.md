@@ -32,7 +32,7 @@ pedagógica.
 
 ### 3. Objetivo geral
 
-Apresenta ação central, impacto e escopo. O objetivo é mapear e analisar
+Apresenta ação central, finalidade e escopo. O objetivo é mapear e analisar
 aplicações computacionais em educação matemática e identificar tendências,
 lacunas e oportunidades para uma especificação conceitual, sem apresentá-la
 como protótipo funcional ou avaliação de eficácia.
@@ -50,11 +50,14 @@ protocolo organiza identificação, seleção e relato. A lâmina também regist
 o limite interpretativo: desempenho observado não equivale automaticamente a
 aprendizagem.
 
-### 6. A base conceitual: quatro níveis de interpretação
+### 6. A base conceitual: níveis de interpretação
 
-Distingue desempenho observado, proficiência estimada, competência e
-aprendizagem. A mensagem central é que a revisão pode apoiar inferências sobre
-registros, mas não observa diretamente todos os processos da aprendizagem.
+Distingue o indicador de desempenho observado, a probabilidade preditiva
+condicionada ao modelo e aos dados, a proficiência estimada, a competência e a
+aprendizagem. A mensagem central é que uma probabilidade preditiva é uma saída
+para um alvo definido, não uma medida direta de proficiência, competência,
+aprendizagem ou eficácia; a revisão apoia inferências sobre registros, mas não
+observa diretamente todos os processos da aprendizagem.
 
 ### 7. Objetivos específicos
 
@@ -70,9 +73,12 @@ retrospectiva de chamadas HTTP.
 
 ### 9. Quatro fontes de indexação complementares
 
-Apresenta Semantic Scholar (1.931 registros), OpenAlex (3.057), Crossref
-(5.049) e CORE (1.840). Teses e dissertações permanecem elegíveis quando
-atendem aos mesmos critérios do protocolo.
+Apresenta a distribuição do snapshot após a remoção determinística: Semantic
+Scholar (1.931 registros), OpenAlex (3.057), Crossref (5.049) e CORE (1.840).
+Os valores somam 11.877 registros na triagem, não são contagens independentes
+de estudos retidos e não devem ser somados ao total identificado de 11.904.
+Teses e dissertações permanecem elegíveis quando atendem aos mesmos critérios
+do protocolo.
 
 ### 10. O funil da descoberta
 
@@ -93,15 +99,16 @@ Explica a diferença entre identidade bibliográfica e semelhança de título. A
 excedentes observados apenas por título permanecem candidatos à auditoria
 semântica e não foram tratados automaticamente como duplicatas.
 
-### 13. O volume de registros cresce no recorte observado
+### 13. A distribuição anual concentra registros nos anos recentes
 
 Incorpora a distribuição anual e contextualiza a concentração de registros nos
 anos mais recentes do recorte 2015–2026. A leitura é descritiva e não infere
 representatividade, causalidade ou qualidade.
 
-### 14. Técnicas encontradas no conjunto triado
+### 14. Técnicas observadas no conjunto pós-deduplicação
 
-Destaca 6.399 registros com técnica não especificada, 1.073 com assessment,
+Destaque, no conjunto pós-deduplicação (n=11.877), para 6.399 registros com
+técnica não especificada, 1.073 com assessment,
 863 com IA/inteligência artificial, 771 com machine learning e 345 com análise
 preditiva. As categorias podem se sobrepor e não medem qualidade, eficácia ou
 predominância entre os estudos retidos.
@@ -117,8 +124,9 @@ e não substitui a leitura das fontes primárias.
 Dos 18 registros retidos, 17 são candidatos empíricos provisórios e 1 é um
 protocolo ou proposta contextual. A síntese empírica considera os 17; o registro
 contextual permanece para rastreabilidade e não sustenta resultado empírico.
-Predominam tarefas de predição de desempenho e estimativa de proficiência, com
-recorrência de modelos supervisionados.
+A síntese empírica preliminar aponta recorrência de tarefas de predição de
+desempenho e estimativa de proficiência, com uso recorrente de modelos
+supervisionados.
 
 ### 17. Nosso filtro de qualidade: critérios, não uma nota global
 
@@ -131,8 +139,8 @@ consolidados.
 
 ### 18. O que emerge entre os candidatos empíricos
 
-Organiza o padrão dominante em torno de predição de desempenho e estimativa de
-proficiência, com recorrência de RF, SVM e redes neurais. A heterogeneidade de
+Organiza as recorrências em torno de predição de desempenho e estimativa de
+proficiência, com uso de RF, SVM e redes neurais. A heterogeneidade de
 populações, instrumentos, variáveis e métricas limita a comparabilidade entre
 estudos.
 

@@ -7,17 +7,11 @@ A especificação não foi tratada como evidência de uma aplicação funcional.
 
 \section{Princípios de Projeto}
 
-A especificação adotou os seguintes princípios:
+A especificação estabelece que o protótipo deverá apoiar a decisão pedagógica sem substituir o professor. Essa decisão de projeto implica distinguir, na representação e na interpretação dos resultados, o desempenho observado em uma atividade, a proficiência estimada por um modelo, a competência mobilizada em um contexto mais amplo e a aprendizagem como possível mudança ao longo do tempo. Esses conceitos não são intercambiáveis, e a passagem de um para outro não poderá ser presumida apenas pela produção de um indicador computacional.
 
-\begin{itemize}
-    \item apoiar a decisão pedagógica sem substituir o professor;
-    \item distinguir desempenho observado, proficiência estimada, competência e aprendizagem;
-    \item apresentar explicações e limitações associadas às estimativas;
-    \item preservar a revisão humana das recomendações;
-    \item proteger os dados educacionais e registrar sua finalidade de uso;
-    \item permitir a reprodução dos procedimentos de preparação, treinamento e avaliação;
-    \item evitar rótulos permanentes ou deterministas sobre os estudantes.
-\end{itemize}
+As estimativas deverão ser acompanhadas de explicações, limitações e condições de validade compreensíveis para seus destinatários. A revisão humana deverá permanecer integrada ao uso das recomendações, de modo que o professor possa confrontar as evidências com o contexto da turma e decidir se há fundamento para uma intervenção. Nesse sentido, a saída do protótipo será tratada como apoio à análise, e não como classificação definitiva ou prescrição pedagógica.
+
+A proteção dos dados educacionais constitui outro princípio da especificação. O uso deverá estar associado a uma finalidade explícita, com minimização dos dados pessoais e controle de acesso compatível com essa finalidade. Também deverá ser possível reproduzir e auditar os procedimentos de preparação, treinamento e avaliação por meio do registro das versões, dos parâmetros e das dependências relevantes. Por fim, a especificação rejeita rótulos permanentes ou deterministas sobre os estudantes, pois uma estimativa situada não deve ser convertida em atributo fixo da pessoa.
 
 \section{Requisitos Funcionais}
 
@@ -37,34 +31,19 @@ A especificação também estabeleceu que indicadores computacionais não repres
 
 \section{Requisitos Não Funcionais}
 
-Os requisitos não funcionais definidos foram:
+Os requisitos não funcionais especificam condições de qualidade e de governança que deverão ser satisfeitas por uma futura implementação. Eles não constituem evidência de que tais propriedades já tenham sido alcançadas. A reprodutibilidade deverá ser assegurada pelo registro das versões dos dados, dos parâmetros, dos modelos e das dependências. Complementarmente, a rastreabilidade deverá permitir associar cada resultado à fonte de dados utilizada e à versão do experimento que o produziu. Essa associação é necessária para que uma conclusão possa ser examinada sem perder sua procedência.
 
-\begin{itemize}
-    \item \textbf{reprodutibilidade}: registro das versões dos dados, dos parâmetros, dos modelos e das dependências;
-    \item \textbf{rastreabilidade}: associação entre cada resultado, a fonte de dados e a versão do experimento;
-    \item \textbf{testabilidade}: separação entre componentes de ingestão, preparação, modelagem e apresentação;
-    \item \textbf{portabilidade}: execução em ambiente documentado e reproduzível;
-    \item \textbf{acessibilidade}: apresentação de informações compreensíveis e compatíveis com diferentes usuários;
-    \item \textbf{privacidade}: minimização dos dados pessoais e controle de finalidade e acesso;
-    \item \textbf{transparência}: comunicação das limitações dos modelos e das condições de validade das estimativas.
-\end{itemize}
+A testabilidade deverá ser favorecida pela separação entre ingestão, preparação, modelagem, avaliação e apresentação. A portabilidade, por sua vez, exigirá um ambiente de execução documentado e passível de reprodução. Essas duas condições dizem respeito à possibilidade de verificar e repetir os procedimentos, e não à escolha de uma tecnologia ou de uma interface específica.
+
+Os requisitos também abrangem a relação do protótipo com seus usuários e com os dados tratados. A apresentação deverá ser acessível, compreensível e compatível com diferentes perfis de usuário. A privacidade deverá orientar a minimização de dados pessoais e o controle de finalidade e de acesso. Por fim, a transparência deverá exigir que as limitações dos modelos e as condições de validade das estimativas sejam comunicadas junto aos resultados, evitando que a forma de apresentação atribua uma certeza que o procedimento não sustenta.
 
 \section{Critérios para Fontes de Dados}
 
-A análise considerou microdados de avaliações educacionais, como SAEB e PISA, e dados sintéticos destinados à verificação do \textit{pipeline}. A comparação não selecionou uma base definitiva; ela estabeleceu os critérios que orientaram a especificação:
+A especificação toma como referência a possibilidade de trabalhar com microdados de avaliações educacionais, como SAEB e PISA, e com dados sintéticos destinados à verificação do \textit{pipeline}. Essa referência não representa a seleção de uma base definitiva. Trata-se de uma decisão metodológica preliminar, que mantém a escolha da fonte condicionada à documentação disponível, ao problema de pesquisa e às condições de execução que vierem a ser definidas.
 
-\begin{itemize}
-    \item licença e condições de uso;
-    \item disponibilidade de dicionário de dados e documentação metodológica;
-    \item unidade de análise e relação com o problema de pesquisa;
-    \item qualidade dos metadados e tratamento de valores ausentes;
-    \item representatividade da população;
-    \item presença de variáveis relacionadas a desempenho e contexto;
-    \item possibilidade de associação com competências ou descritores curriculares;
-    \item riscos de identificação, discriminação ou uso indevido.
-\end{itemize}
+A seleção de uma fonte deverá considerar, inicialmente, sua licença e suas condições de uso, bem como a existência de dicionário de dados e de documentação metodológica. Também deverá examinar a unidade de análise e sua relação com o problema de pesquisa, a qualidade dos metadados e o tratamento previsto para valores ausentes. A representatividade da população deverá ser analisada em relação ao contexto para o qual se pretende interpretar os resultados, sem ser presumida a partir da simples disponibilidade da base. Do mesmo modo, a presença de variáveis relacionadas ao desempenho e ao contexto educacional será relevante, mas não garantirá, por si só, que seja possível associá-las a competências ou descritores curriculares. Essa associação deverá ser demonstrada e delimitada pela documentação e pelo desenho da avaliação.
 
-Dados sintéticos foram considerados adequados apenas para testar fluxos de processamento, interfaces e regras de validação. Eles não foram considerados evidência de desempenho educacional nem substitutos de uma base empírica.
+Por fim, a análise da fonte deverá incluir os riscos de identificação, discriminação e uso indevido. Esses riscos são condições de governança da execução, e não apenas atributos técnicos do arquivo de dados. Dados sintéticos poderão ser usados para testar fluxos de processamento, interfaces e regras de validação. Entretanto, não constituirão evidência de desempenho educacional, de validade preditiva ou de eficácia pedagógica, nem substituirão uma base empírica quando a investigação exigir inferências sobre estudantes ou contextos reais.
 
 \section{Alternativas de Modelagem}
 
@@ -76,20 +55,13 @@ Em uma implementação com scikit-learn, identificadores longos, como \texttt{Ra
 
 \section{Protocolo de Avaliação}
 
-O protocolo de avaliação definido incluiu:
+O protocolo de avaliação constitui uma condição para a execução futura da modelagem e para a interpretação dos seus resultados. Ele deverá separar o que será observado no comportamento técnico dos modelos daquilo que exigiria evidência educacional adicional. Essa separação começa pela definição explícita dos conjuntos de treino, validação e teste e pela prevenção de vazamento de informação entre preparação, modelagem e avaliação. Os modelos candidatos deverão ser comparados com referências simples, para que qualquer ganho seja interpretado em relação a uma base de comparação, e as métricas deverão ser analisadas por classe, além das medidas agregadas, quando a tarefa permitir essa decomposição.
 
-\begin{enumerate}
-    \item separação explícita entre conjuntos de treino, validação e teste;
-    \item prevenção de vazamento de informação entre as etapas;
-    \item comparação com modelos de referência simples;
-    \item análise de métricas por classe, além de medidas agregadas;
-    \item uso de matriz de confusão, precisão, revocação e medida F1;
-    \item avaliação de área sob a curva ROC e calibração quando compatíveis com a tarefa \cite{Fawcett2006,NiculescuMizilCaruana2005};
-    \item análise de estabilidade das explicações e de possíveis diferenças entre grupos;
-    \item registro das limitações de generalização.
-\end{enumerate}
+Como descrição complementar dos erros e acertos, o protocolo prevê o uso de matriz de confusão, precisão, revocação e medida F1. A área sob a curva ROC e a calibração somente deverão ser calculadas quando forem compatíveis com a tarefa e com o tipo de saída produzido \cite{Fawcett2006,NiculescuMizilCaruana2005}. Também deverão ser examinadas a estabilidade das explicações e possíveis diferenças entre grupos, sem converter essas análises em conclusões causais não sustentadas pelo desenho do estudo. Por fim, a execução deverá registrar as limitações de generalização relacionadas à fonte de dados, à população observada e às condições de aplicação.
 
-A especificação distinguiu avaliação técnica de eficácia pedagógica. Métricas preditivas descrevem o comportamento do modelo em uma base; elas não demonstram, por si só, melhoria da aprendizagem ou adequação de uma intervenção escolar.
+O protocolo distingue desempenho observado, proficiência estimada, competência e aprendizagem. O desempenho observado corresponde aos registros produzidos nas atividades ou avaliações consideradas. A proficiência estimada é uma saída inferida a partir desses registros e das variáveis admitidas pelo modelo. Competência e aprendizagem, contudo, não serão tratadas como equivalentes automáticos dessas duas grandezas: sua análise depende do contexto educacional, do construto adotado e, no caso da aprendizagem, de evidência de mudança ao longo do tempo.
+
+Essa distinção também separa a avaliação técnica da eficácia pedagógica. As métricas preditivas descrevem o comportamento do modelo em uma base e sob determinadas condições de avaliação. Elas não demonstram, por si só, melhoria da aprendizagem, adequação de uma intervenção escolar ou alinhamento curricular validado. Tais conclusões exigiriam um desenho empírico próprio, com condições de comparação e observação educacional compatíveis com a pergunta investigada.
 
 \section{Explicabilidade e Participação Docente}
 
@@ -99,17 +71,11 @@ O professor permaneceu como responsável por interpretar as evidências, relacio
 
 \section{Arquitetura de Referência}
 
-A arquitetura conceitual foi organizada em cinco componentes:
+\textbf{Ingestão} corresponde à leitura das fontes, à validação inicial de seus formatos e à preservação das informações de procedência. Em seguida, a etapa de \textbf{preparação} deverá tratar valores ausentes, codificar e transformar variáveis e documentar as decisões tomadas sobre esses dados. A \textbf{modelagem} abrangerá o treinamento e a comparação dos modelos candidatos de acordo com a base selecionada e com o protocolo de avaliação.
 
-\begin{enumerate}
-    \item \textbf{ingestão}: leitura e validação das fontes de dados;
-    \item \textbf{preparação}: tratamento de valores ausentes, codificação, transformação e documentação das variáveis;
-    \item \textbf{modelagem}: treinamento e comparação dos modelos candidatos;
-    \item \textbf{avaliação e explicabilidade}: cálculo das métricas, análise dos erros e geração de explicações;
-    \item \textbf{apresentação}: disponibilização de indicadores e limitações para análise docente.
-\end{enumerate}
+A etapa de \textbf{avaliação e explicabilidade} deverá calcular as métricas, analisar os erros e gerar explicações cuja estabilidade e limitações serão examinadas. Por fim, a \textbf{apresentação} deverá disponibilizar indicadores, incertezas e limitações de modo compreensível para a análise docente. Essa arquitetura de referência organiza responsabilidades e pontos de verificação; não descreve um sistema funcional já disponível, nem fixa a tecnologia ou a forma de implantação.
 
-A separação dos componentes favoreceu testabilidade, rastreabilidade e substituição controlada de técnicas. A arquitetura não impôs uma interface específica, podendo ser materializada como \textit{notebook}, aplicação local, API ou sistema web, desde que os requisitos de auditoria e interpretação fossem preservados.
+A separação dos componentes deverá favorecer a testabilidade, a rastreabilidade e a substituição controlada de técnicas. Ela também permite localizar em qual etapa uma decisão, uma transformação ou uma limitação foi introduzida. A arquitetura não impõe uma interface específica e poderá ser materializada como \textit{notebook}, aplicação local, API ou sistema web. Qualquer dessas formas de execução deverá, entretanto, preservar os requisitos de auditoria, interpretação, privacidade e participação docente estabelecidos neste capítulo.
 
 \section{Resultado da Especificação}
 

@@ -5,7 +5,7 @@ Os resultados do trabalho foram organizados em quatro entregas complementares: a
 
 \section{Resultados da Revisão Sistemática}
 
-A revisão identificou 11.904 registros em quatro fontes científicas. Após a remoção determinística de identidades DOI/URL, a triagem e a avaliação de elegibilidade, 18 registros foram retidos operacionalmente: 17 candidatos empíricos provisórios e 1 protocolo ou proposta contextual. A síntese de evidências considerou apenas os candidatos empíricos e apresentou predominância de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com uso recorrente de modelos supervisionados, especialmente \textbf{\textit{Random Forest}}, SVM, árvores de decisão e redes neurais.
+A revisão identificou 11.904 registros em quatro fontes científicas. Após a remoção determinística de identidades DOI/URL, a triagem e a avaliação de elegibilidade, 18 registros foram retidos operacionalmente: 17 candidatos empíricos provisórios e 1 protocolo ou proposta contextual. A síntese empírica preliminar considerou apenas os candidatos empíricos e apontou recorrência de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com uso recorrente de modelos supervisionados, especialmente \textbf{\textit{Random Forest}}, SVM, árvores de decisão e redes neurais.
 
 A heterogeneidade entre populações, instrumentos, variáveis e métricas impediu a comparação direta de todos os resultados. Acurácias reportadas em bases específicas foram interpretadas como evidências contextuais dos artigos, e não como garantias de desempenho em outros ambientes educacionais. Essa distinção evitou transferir resultados da literatura para o protótipo especificado sem validação empírica própria.
 
@@ -21,7 +21,7 @@ O fortalecimento da rastreabilidade também constituiu um resultado técnico. Os
 
 \section{Resultados da Fundamentação Pedagógica}
 
-A fundamentação permitiu distinguir desempenho observado, proficiência estimada, competência e aprendizagem. Essa separação mostrou que notas, acertos, tentativas e tempos de resposta representam evidências parciais e dependentes do contexto, enquanto competência e aprendizagem exigem interpretação mais ampla e longitudinal.
+A fundamentação permitiu distinguir desempenho observado, proficiência estimada, competência e aprendizagem. Essa separação mostrou que notas, acertos, tentativas e tempos de resposta representam evidências parciais e dependentes do contexto, enquanto competência e aprendizagem exigem interpretação mais ampla e longitudinal. Na especificação, essa distinção também alcançou a probabilidade preditiva de um alvo definido: uma saída condicionada aos dados e ao modelo, distinta do indicador de desempenho observado e não equivalente, por si só, a proficiência, competência, aprendizagem ou eficácia pedagógica.
 
 Os referenciais sobre conhecimento prévio, mediação, resolução de problemas, avaliação formativa e \textit{feedback} reforçaram que a utilidade de uma ferramenta computacional depende da forma como seus resultados são interpretados e incorporados à prática docente. A tecnologia foi posicionada como apoio à decisão, mantendo o professor responsável por considerar fatores pedagógicos, sociais e contextuais que não são observados diretamente pelo modelo.
 
@@ -31,7 +31,7 @@ Esses resultados fundamentaram requisitos de explicabilidade, revisão humana, a
 
 A integração entre revisão e fundamentação resultou em uma especificação conceitual composta por princípios de projeto, requisitos funcionais e não funcionais, critérios de seleção de fontes de dados, alternativas de modelagem, protocolo de avaliação e arquitetura de referência.
 
-Entre os resultados consolidados destacaram-se a definição do protótipo como instrumento de apoio, sem substituição da interpretação docente, e a exigência de rastreabilidade entre dados, modelos, parâmetros e resultados. Também foram selecionados modelos supervisionados interpretáveis como alternativas iniciais de comparação, mantendo-se a separação entre avaliação técnica e alegações de eficácia pedagógica.
+Entre os resultados consolidados destacaram-se a definição do protótipo como instrumento de apoio, sem substituição da interpretação docente, e a exigência de rastreabilidade entre dados, modelos, parâmetros e resultados. Também foram especificados modelos supervisionados simples e interpretáveis como alternativas iniciais de comparação, mantendo-se a separação entre avaliação técnica e alegações de eficácia pedagógica.
 
 A especificação incorporou explicabilidade e análise de limitações ao fluxo de avaliação e organizou a arquitetura em componentes de ingestão, preparação, modelagem, avaliação, explicabilidade e apresentação. O uso de dados sintéticos foi delimitado a testes de fluxo, sem interpretação educacional.
 
@@ -39,16 +39,16 @@ A especificação constituiu um resultado final do trabalho porque transformou a
 
 \section{Atendimento aos Objetivos}
 
-Os objetivos definidos na introdução foram atendidos de forma integrada: o \textbf{OE1} pela execução e pelo relato da revisão sistemática; os \textbf{OE2} e \textbf{OE3} pela categorização das técnicas e finalidades pedagógicas dos estudos; o \textbf{OE4} pela avaliação metodológica por critérios do MMAT; o \textbf{OE5} pelo mapeamento das lacunas técnicas, pedagógicas, metodológicas e éticas; o \textbf{OE6} pelo \textit{pipeline} automatizado e pelos artefatos versionados da revisão; e o \textbf{OE7} pela elaboração da especificação técnica e pedagógica do protótipo.
+No escopo executado, os objetivos definidos na introdução foram atendidos de forma integrada: o \textbf{OE1} pela execução e pelo relato da revisão sistemática; os \textbf{OE2} e \textbf{OE3} pela categorização das técnicas e finalidades pedagógicas dos estudos; o \textbf{OE4} pela apreciação metodológica preliminar por critérios do MMAT; o \textbf{OE5} pelo mapeamento das lacunas técnicas, pedagógicas, metodológicas e éticas; o \textbf{OE6} pelo \textit{pipeline} automatizado e pelos artefatos versionados da revisão; e o \textbf{OE7} pela elaboração da especificação técnica e pedagógica do protótipo.
 
-O objetivo geral foi alcançado ao combinar o mapeamento sistemático das técnicas computacionais com a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados.
+No escopo executado, o objetivo geral foi alcançado ao combinar o mapeamento sistemático das técnicas computacionais com a derivação de uma especificação de protótipo coerente com as evidências e com os limites identificados.
 
 \section{Discussão Integrada}
 
 Os resultados demonstraram que a escolha de uma técnica computacional para o ensino de matemática não pode ser sustentada apenas pela frequência de uso ou pela maior acurácia reportada em um artigo. A decisão depende da qualidade e da representatividade dos dados, da finalidade pedagógica, da possibilidade de interpretação e das condições de aplicação.
 
-A predominância de modelos preditivos evidenciou maturidade técnica para tarefas de classificação e estimativa, mas também revelou uma tendência de reduzir fenômenos educacionais complexos a indicadores de desempenho. A especificação respondeu a esse risco ao separar explicitamente desempenho, proficiência, competência e aprendizagem e ao exigir participação docente na interpretação das saídas.
+A recorrência de modelos preditivos indicou que tarefas de classificação e estimativa foram frequentes na amostra, mas também revelou uma tendência de reduzir fenômenos educacionais complexos a indicadores de desempenho. A especificação respondeu a esse risco ao separar explicitamente desempenho, proficiência, competência e aprendizagem e ao exigir participação docente na interpretação das saídas.
 
-A principal contribuição do trabalho esteve, portanto, na articulação entre revisão sistemática, avaliação metodológica, fundamentação pedagógica e engenharia de requisitos. Essa articulação produziu uma base mais consistente para soluções educacionais do que a seleção isolada de um algoritmo ou a apresentação de resultados sem contexto.
+A principal contribuição do trabalho esteve, portanto, na articulação entre revisão sistemática, avaliação metodológica, fundamentação pedagógica e engenharia de requisitos. Essa articulação ofereceu uma base estruturada para decisões futuras sobre soluções educacionais, mantendo a seleção de algoritmos subordinada ao contexto, à avaliação e aos limites da evidência.
 
 %--------- FIM RESULTADOS E DISCUSSÃO ------------
