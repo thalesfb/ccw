@@ -39,81 +39,93 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
+<div class="cover-snapshot">Snapshot: 03/09/2026 · Data de corte: 31/08/2026</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-challenge-slide
 ---
 
 <div class="slide-kicker">01 / CONTEXTO</div>
 
-# Por que esta revisão?
+# O desafio fundamental:<br>diagnóstico personalizado com evidências
 
-<div class="problem-hero">
-  <div class="problem-lead">
-    <div class="visual-marker">01</div>
-    <span class="card-label">O DESAFIO</span>
-    <h2>Diagnóstico personalizado em larga escala</h2>
-    <p>Turmas são heterogêneas. Professores precisam reconhecer necessidades de aprendizagem em tempo hábil para orientar decisões pedagógicas.</p>
-    <div class="hand-line">heterogeneidade<br>→ decisão pedagógica</div>
+<div class="ptc-challenge-layout">
+  <div class="ptc-challenge-copy">
+    <p>Professores de matemática enfrentam uma dificuldade constante: interpretar, em tempo hábil e com precisão, as competências individuais em turmas heterogêneas.</p>
+    <p class="ptc-emphasis">O TCC organiza evidências sobre técnicas computacionais que podem apoiar essa interpretação, sem substituir a decisão pedagógica.</p>
   </div>
-  <div class="challenge-grid">
-    <div class="challenge-card challenge-blue"><span class="challenge-icon">◌</span><strong>Turmas heterogêneas</strong><span>Necessidades individuais não aparecem em uma média única.</span></div>
-    <div class="challenge-card challenge-green"><span class="challenge-icon">◷</span><strong>Tempo docente</strong><span>O diagnóstico manual precisa ser apoiado por evidências organizadas.</span></div>
-    <div class="challenge-card challenge-orange"><span class="challenge-icon">⌁</span><strong>Ensino genérico</strong><span>Uma mesma intervenção pode não servir a trajetórias diferentes.</span></div>
-    <div class="challenge-card challenge-red"><span class="challenge-icon">?</span><strong>Literatura fragmentada</strong><span>As aplicações estão dispersas entre técnicas, desenhos e contextos.</span></div>
+  <div class="ptc-challenge-list">
+    <div class="ptc-challenge-item ptc-blue"><span class="ptc-line-icon">◎</span><p><strong>Turmas heterogêneas:</strong> uma média única não revela trajetórias individuais.</p></div>
+    <div class="ptc-challenge-item ptc-amber"><span class="ptc-line-icon">◷</span><p><strong>Tempo docente:</strong> acompanhar evidências compete com o tempo de planejamento.</p></div>
+    <div class="ptc-challenge-item ptc-purple"><span class="ptc-line-icon">◈</span><p><strong>Ensino genérico:</strong> uma mesma intervenção pode não atender a necessidades distintas.</p></div>
+    <div class="ptc-challenge-item ptc-red"><span class="ptc-line-icon">⌘</span><p><strong>Literatura fragmentada:</strong> aplicações aparecem dispersas entre técnicas e contextos.</p></div>
   </div>
 </div>
 
-<div class="scope-note"><strong>Questão central</strong> Como técnicas computacionais podem apoiar o diagnóstico e a personalização do ensino de matemática?<br><span>Escopo: mapear evidências e lacunas — não há protótipo validado nem estimativa agregada de eficácia.</span></div>
-
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-objective-general-slide
 ---
 
-<div class="slide-kicker">02 / PERGUNTAS</div>
+<div class="slide-kicker">02 / OBJETIVOS</div>
 
-# Perguntas e objetivo
+# Objetivo geral
 
-<div class="rq-grid">
-  <div class="rq-card rq-blue"><span>RQ1</span><div><strong>O quê?</strong><p>Quais técnicas computacionais são aplicadas à educação matemática?</p></div></div>
-  <div class="rq-card rq-green"><span>RQ2</span><div><strong>Como?</strong><p>Como essas aplicações são avaliadas em contextos educacionais?</p></div></div>
-  <div class="rq-card rq-orange"><span>RQ3</span><div><strong>O que falta?</strong><p>Quais lacunas, limitações e desafios são reportados?</p></div></div>
-  <div class="rq-card rq-red"><span>RQ4</span><div><strong>E agora?</strong><p>Que direcionamentos podem apoiar ferramentas educacionais mais eficazes?</p></div></div>
+<div class="ptc-objective-layout">
+  <div class="ptc-objective-box ptc-action"><span>AÇÃO CENTRAL</span><p>Mapear e analisar sistematicamente aplicações de técnicas computacionais na educação matemática.</p></div>
+  <div class="ptc-objective-core">Mapear e analisar sistematicamente as aplicações de técnicas computacionais — especialmente <em>machine learning</em>, <em>learning analytics</em> e sistemas tutores inteligentes — no contexto da educação matemática, identificando tendências, lacunas e oportunidades.</div>
+  <div class="ptc-objective-box ptc-impact"><span>IMPACTO (PARA QUÊ?)</span><p>Fundamentar uma especificação conceitual, explicável e orientada ao apoio do professor.</p></div>
+  <div class="ptc-objective-box ptc-scope"><span>ESCOPO (O QUÊ?)</span><p>Revisão sistemática da literatura, com síntese de evidências e requisitos; não é protótipo funcional nem avaliação de eficácia.</p></div>
 </div>
 
-<div class="objective-band"><span class="band-label">OBJETIVO</span><p>Mapear e analisar aplicações de <em>machine learning</em>, <em>learning analytics</em> e sistemas tutores inteligentes na educação matemática, identificando tendências, lacunas e requisitos para uma especificação técnica e pedagógica de protótipo.</p></div>
-
 ---
 layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">03 / OBJETIVOS</div>
+<div class="slide-kicker">03 / PERGUNTAS</div>
 
-# O que este trabalho entrega
+# Quatro perguntas fundamentam a nossa<br>busca por clareza
 
-<div class="objective-callout"><span class="card-label">OBJETIVO GERAL</span><p>Mapear aplicações computacionais no ensino de matemática e derivar uma especificação conceitual de protótipo para apoiar o professor.</p><div class="hand-line">evidência → requisito</div></div>
-
-<div class="objective-roadmap">
-  <div class="objective-step step-blue"><div><b>01</b><span>⌕</span></div><strong>Revisar</strong><p>Estudos de 2015 a 2026.</p></div>
-  <div class="objective-step step-green"><div><b>02</b><span>⌘</span></div><strong>Categorizar</strong><p>Abordagens computacionais.</p></div>
-  <div class="objective-step step-orange"><div><b>03</b><span>◆</span></div><strong>Classificar</strong><p>Finalidades pedagógicas.</p></div>
-  <div class="objective-step step-red"><div><b>04</b><span>✓</span></div><strong>Analisar</strong><p>Metodologias e limitações.</p></div>
-  <div class="objective-step step-blue"><div><b>05</b><span>⌁</span></div><strong>Mapear</strong><p>Lacunas técnicas e pedagógicas.</p></div>
-  <div class="objective-step step-green"><div><b>06</b><span>↻</span></div><strong>Auditar</strong><p>Pipeline e artefatos versionados.</p></div>
-  <div class="objective-step step-orange"><div><b>07</b><span>→</span></div><strong>Derivar</strong><p>Requisitos, avaliação e arquitetura.</p></div>
+<div class="rq-grid ptc-question-grid">
+  <div class="rq-card rq-blue"><span>01</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="12" cy="14" r="6"/><circle cx="23" cy="11" r="4"/><path d="M7 19c-3 1-4 3-4 6m11-1c1-4 3-6 7-6 4 0 7 2 8 6M17 13l2-2m-3 7 3 1"/></svg></div><strong>Pergunta 1 (O quê?)</strong><p>Quais técnicas computacionais são aplicadas à educação matemática para identificar o estado da arte?</p></div></div>
+  <div class="rq-card rq-green"><span>02</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="15" r="9"/><path d="M14 10v6l4 3m7-6v10m4-6v6M24 23h7"/><path d="M23 12l2-3 2 2"/></svg></div><strong>Pergunta 2 (Como?)</strong><p>Como essas técnicas têm sido avaliadas em contextos educacionais reais?</p></div></div>
+  <div class="rq-card rq-orange"><span>03</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 8h9l3 3 3-3h7v8l-3 3 3 3v6h-8l-3-3-3 3H5v-8l3-3-3-3z"/><path d="M17 11v10m-5-5h10"/></svg></div><strong>Pergunta 3 (O que falta?)</strong><p>Quais lacunas, limitações e desafios precisam ser preenchidos por novas pesquisas?</p></div></div>
+  <div class="rq-card rq-red"><span>04</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="m16 16 7-6-4 8-7 4zM16 3v3m0 17v3M3 16h3m17 0h3"/></svg></div><strong>Pergunta 4 (E agora?)</strong><p>Quais direcionamentos podemos estabelecer para desenvolver ferramentas alinhadas à realidade?</p></div></div>
 </div>
 
-<div class="roadmap-caption">Busca <span>→</span> classificação <span>→</span> síntese <span>→</span> especificação</div>
+<div class="ptc-caption">Estas quatro perguntas orientam a análise dos achados do TCC.</div>
+
+---
+layout: default
+class: content-slide ptc-mission-slide
+---
+
+<div class="slide-kicker">04 / RIGOR</div>
+
+# Missão: mapear o terreno com rigor e transparência
+
+<div class="ptc-mission-layout">
+  <div class="ptc-mission-copy">
+    <p>Mapear sistematicamente aplicações de <strong>machine learning</strong>, <strong>learning analytics</strong> e sistemas tutores inteligentes em educação matemática para identificar tendências, lacunas e oportunidades.</p>
+    <div class="ptc-reading-lens"><span>LEITURA RESPONSÁVEL</span><strong>Desempenho observado ≠ aprendizagem</strong><p>Saídas computacionais organizam evidências e podem produzir estimativas; não observam sozinhas os processos cognitivos, sociais e afetivos.</p></div>
+  </div>
+  <div class="ptc-rigor-card">
+    <h2>A ferramenta de rigor</h2>
+    <div class="ptc-rigor-mark">PRISMA<br><b>2020</b></div>
+    <p><span>✓</span> Protocolo explícito para orientar identificação, seleção e relato.</p>
+    <p><span>✓</span> Decisões documentadas para favorecer transparência e rastreabilidade.</p>
+    <p><span>✓</span> Resultados apresentados com limites, sem ranking ou inferência de eficácia.</p>
+  </div>
+</div>
 
 ---
 layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">04 / BASE CONCEITUAL</div>
+<div class="slide-kicker">05 / BASE CONCEITUAL</div>
 
 # Quatro níveis de interpretação
 
@@ -128,72 +140,97 @@ class: content-slide
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-objectives-slide
 ---
 
-<div class="slide-kicker">05 / MÉTODO</div>
+<div class="slide-kicker">06 / OBJETIVOS ESPECÍFICOS</div>
 
-# Protocolo e escopo
+# Estruturando a execução em 7 objetivos específicos
 
-<div class="method-layout">
-  <div class="method-intro">
-    <div class="number-stamp">PRISMA<br><b>2020</b></div>
-    <h2>Uma busca em camadas, com escopo explícito.</h2>
-    <div class="search-visual" aria-label="Busca em três camadas: matemática, técnicas e educação">
-      <div class="search-ring search-ring-outer"><span>EDUCAÇÃO</span>
-        <div class="search-ring search-ring-middle"><span>TÉCNICAS</span>
-          <div class="search-ring search-ring-core"><span>MATEMÁTICA</span></div>
-        </div>
-      </div>
-    </div>
-    <p>O score organiza o processamento. Não substitui a adjudicação de escopo, a avaliação metodológica ou a leitura das fontes primárias.</p>
-  </div>
-  <div class="method-list">
-    <div><span>RECORTE TEMPORAL</span><strong>2015–2026</strong></div>
-    <div><span>IDIOMAS PLANEJADOS</span><strong>inglês e português</strong></div>
-    <div><span>CONSULTAS CANÔNICAS</span><strong>72 <small>(48 EN + 24 PT)</small></strong></div>
-    <div><span>FONTES</span><strong>Semantic Scholar · OpenAlex<br>Crossref · CORE</strong></div>
-    <div><span>ESTRUTURA</span><strong>PICOS <small>população · intervenção · comparação · desfecho · desenho</small></strong></div>
-    <div><span>LITERATURA CINZENTA</span><strong>Teses e dissertações aceitas<br><small>sob os mesmos critérios</small></strong></div>
-    <div><span>FILTRO OPERACIONAL</span><strong>score de relevância ≥ 4,0</strong></div>
-  </div>
+<div class="ptc-objective-roadmap">
+  <svg class="ptc-roadmap-streams" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 88 C150 20 180 156 330 88 S510 20 660 88 S840 156 1000 88"/><path d="M0 235 C150 170 180 300 330 235 S510 170 660 235 S840 300 1000 235"/><path d="M0 365 C150 300 180 420 330 365 S510 300 660 365 S840 420 1000 365"/></svg>
+  <div class="ptc-objective-step"><span>01</span><strong>Revisar</strong><p>Literatura de 2015–2026 conforme o protocolo.</p></div>
+  <div class="ptc-objective-step"><span>02</span><strong>Identificar</strong><p>Técnicas computacionais utilizadas.</p></div>
+  <div class="ptc-objective-step"><span>03</span><strong>Classificar</strong><p>Finalidades pedagógicas das aplicações.</p></div>
+  <div class="ptc-objective-step"><span>04</span><strong>Analisar</strong><p>Metodologias de avaliação e limitações.</p></div>
+  <div class="ptc-objective-step"><span>05</span><strong>Mapear</strong><p>Lacunas e desafios reportados.</p></div>
+  <div class="ptc-objective-step"><span>06</span><strong>Auditar</strong><p>Pipeline, decisões e artefatos versionados.</p></div>
+  <div class="ptc-objective-step"><span>07</span><strong>Derivar</strong><p>Requisitos, avaliação e arquitetura conceitual.</p></div>
 </div>
+
+<div class="ptc-caption">Juntos, estes objetivos conectam a busca, a síntese e a especificação do TCC.</div>
+
+---
+layout: default
+class: content-slide ptc-search-slide
+---
+
+<div class="slide-kicker">07 / MÉTODO</div>
+
+# Estratégia de busca: uma rede de captura em 3 camadas
+
+<div class="ptc-search-layout">
+  <div class="ptc-search-figure" aria-label="Busca em três camadas: matemática, técnicas e educação">
+    <div class="ptc-search-hex ptc-search-outer"><span>EDUCAÇÃO</span><div class="ptc-search-hex ptc-search-middle"><span>TÉCNICAS</span><div class="ptc-search-hex ptc-search-core"><b>MATEMÁTICA</b></div></div></div>
+  </div>
+  <div class="ptc-query-card"><strong>72 consultas<br>canônicas</strong><p>48 em inglês + 24 em português</p><small>Composição versionada; não é contagem retrospectiva de chamadas HTTP.</small></div>
+</div>
+
+<div class="ptc-query-line">Consulta = <b>“matemática”</b> AND <b>“técnica”</b> AND <b>“educação”</b></div>
+
+---
+layout: default
+class: content-slide ptc-sources-slide
+---
+
+<div class="slide-kicker">08 / FONTES</div>
+
+# Quatro fontes de indexação complementares
+
+<div class="ptc-source-grid">
+  <div><span class="ptc-source-icon">⌘</span><p><strong>Semantic Scholar</strong><br>Ciência da Computação e métricas de influência.<small>1.931 registros</small></p></div>
+  <div><span class="ptc-source-icon">▤</span><p><strong>OpenAlex</strong><br>Cobertura ampla e aberta da literatura.<small>3.057 registros</small></p></div>
+  <div><span class="ptc-source-icon">⛓</span><p><strong>Crossref</strong><br>Precisão de metadados e DOIs.<small>5.049 registros</small></p></div>
+  <div><span class="ptc-source-icon">⌑</span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.840 registros</small></p></div>
+</div>
+
+<div class="ptc-caption">Teses e dissertações também podem ser aceitas quando atendem aos mesmos critérios de elegibilidade.</div>
 
 ---
 layout: default
 class: content-slide flow-slide
 ---
 
-<div class="slide-kicker">06 / SELEÇÃO</div>
+<div class="slide-kicker">09 / SELEÇÃO</div>
 
-# Do registro bruto à população retida
+# O funil da descoberta: de 11.904 registros a 18 estudos retidos
 
-<div class="flow-board">
-  <div class="flow-row">
-    <div class="flow-card flow-blue"><strong>11.904</strong><span>identificados</span></div><div class="flow-arrow">→</div>
-    <div class="flow-card flow-teal"><strong>27</strong><span>remoções determinísticas<br>(25 DOI + 2 URL)</span></div><div class="flow-arrow">→</div>
-    <div class="flow-card flow-green"><strong>11.877</strong><span>na triagem</span></div>
+<div class="ptc-funnel-layout">
+  <div class="ptc-funnel">
+    <div class="ptc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
+    <div class="ptc-funnel-stage funnel-dedup"><span>Após identidade</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
+    <div class="ptc-funnel-stage funnel-screening"><span>Triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
+    <div class="ptc-funnel-stage funnel-inclusion"><span>Retenção</span><strong>18</strong><small>2.468 excluídos na elegibilidade</small></div>
   </div>
-  <div class="flow-row">
-    <div class="flow-card flow-amber"><strong>9.391</strong><span>excluídos na triagem</span></div><div class="flow-arrow">→</div>
-    <div class="flow-card flow-orange"><strong>2.486</strong><span>na elegibilidade</span></div><div class="flow-arrow">→</div>
-    <div class="flow-card flow-violet"><strong>2.468</strong><span>excluídos na elegibilidade</span></div>
+  <div class="ptc-funnel-notes">
+    <p><strong>Identidade:</strong> 25 DOI + 2 URL são removidos de forma determinística.</p>
+    <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
+    <p><strong>Conjunto retido:</strong> 17 candidatos empíricos provisórios + 1 protocolo contextual.</p>
   </div>
-  <div class="flow-final"><div class="flow-card flow-indigo"><strong>18</strong><span>retidos no conjunto analisado</span></div></div>
 </div>
 
-<div class="flow-note"><span class="note-mark">!</span> Identidade DOI/URL é tratada de forma determinística. Igualdade de título permanece como candidato à auditoria semântica, não como remoção automática.</div>
+<div class="ptc-funnel-caption"><strong>Taxa de retenção final: 0,15%.</strong> A baixa retenção descreve o filtro aplicado; não é medida de qualidade nem de eficácia pedagógica.</div>
 
 ---
 layout: center
-class: image-slide
+class: image-slide ptc-prisma-slide
 ---
 
-<div class="slide-kicker">07 / FLUXO</div>
+<div class="slide-kicker">10 / FLUXO</div>
 
-# Fluxo PRISMA dos dados da revisão
+<h1 class="sr-only">Fluxo PRISMA dos dados da revisão</h1>
 
-<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image" />
+<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image ptc-prisma-image" />
 
 <small class="source-note">Fonte versionada: `research/exports/visualizations/prisma_flow.png`.</small>
 
@@ -202,7 +239,7 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">08 / DEDUPLICAÇÃO</div>
+<div class="slide-kicker">11 / DEDUPLICAÇÃO</div>
 
 # O que a deduplicação significa
 
@@ -223,226 +260,218 @@ layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">09 / PANORAMA</div>
+<div class="slide-kicker">12 / PANORAMA</div>
 
-# Panorama descritivo dos dados da revisão
+# O volume de registros cresce no recorte observado
 
-<div class="metric-grid">
-  <div><strong>6.399</strong><span>técnica não especificada</span></div>
-  <div><strong>1.073</strong><span>assessment</span></div>
-  <div><strong>863</strong><span>IA / inteligência artificial</span></div>
-  <div><strong>771</strong><span>machine learning</span></div>
-  <div><strong>345</strong><span>análise preditiva</span></div>
+<div class="ptc-growth-layout">
+  <div class="ptc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano" /></div>
+  <div class="ptc-growth-copy"><h2>Uma literatura em expansão</h2><p>O snapshot reúne registros publicados entre 2015 e 2026. A concentração nos anos mais recentes torna o mapeamento atual e relevante para orientar novas perguntas.</p><small>Leitura descritiva do conjunto coletado; não infere representatividade, causalidade ou qualidade dos estudos.</small></div>
 </div>
 
-<div class="chart-frame"><img src="./public/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
-
-<small class="source-note">Frequências calculadas sobre os 11.877 registros após remoção determinística. Categorias podem se sobrepor e não representam apenas os 18 retidos, qualidade ou eficácia.</small>
+<div class="ptc-caption">Distribuição anual dos registros no recorte temporal do protocolo.</div>
 
 ---
 layout: default
 class: content-slide
 ---
 
-<div class="slide-kicker">10 / DISTRIBUIÇÃO</div>
+<div class="slide-kicker">13 / TÉCNICAS</div>
 
-# Distribuição temporal e fontes
+# Técnicas encontradas no conjunto triado
 
-<div class="two-images">
-  <div class="chart-panel"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano" /><small>Registros por ano nos dados versionados da revisão.</small></div>
-  <div class="chart-panel"><img src="./public/images/database_coverage.png" alt="Cobertura por base de dados" /><small>Registros associados às quatro fontes consultadas.</small></div>
+<div class="ptc-technique-layout">
+  <div class="ptc-technique-chart"><img src="./public/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
+  <div class="ptc-technique-copy"><div class="ptc-technique-stat"><strong>6.399</strong><span>técnica não especificada</span></div><p>As categorias descrevem os 11.877 registros após remoção determinística. Podem se sobrepor e não representam apenas os 18 retidos.</p><div class="ptc-technique-tags"><span>1.073 assessment</span><span>863 IA</span><span>771 ML</span><span>345 preditiva</span></div></div>
 </div>
 
-<div class="bottom-caption">Visualizações descritivas. Não inferem representatividade, qualidade ou efeito pedagógico.</div>
+<div class="ptc-caption">Frequências descritivas: não medem qualidade, eficácia ou predominância entre os estudos incluídos.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-score-slide
 ---
 
-<div class="slide-kicker">11 / RELEVÂNCIA</div>
+<div class="slide-kicker">14 / RELEVÂNCIA</div>
 
-# Score de relevância: filtro operacional
+# Um filtro operacional antes da leitura em profundidade
 
-<div class="score-layout">
-  <div class="score-chart"><img src="./public/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
-  <div class="score-copy">
-    <div class="score-badge">≥ 4,0</div>
-    <h2>Organiza o processamento.</h2>
-    <p>O score não é medida de qualidade metodológica. Não produz ranking. Não substitui a leitura das fontes primárias.</p>
-    <div class="caution-line"><span>!</span><strong>Filtro operacional ≠ conclusão científica</strong></div>
+<div class="ptc-score-layout">
+  <div class="ptc-score-visual"><img src="./public/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
+  <div class="ptc-score-copy">
+    <div class="ptc-score-threshold">≥ 4,0</div>
+    <h2>O score organiza o processamento.</h2>
+    <p>Ele prioriza a leitura dos registros, mas não mede qualidade metodológica, não produz ranking e não substitui a leitura das fontes primárias.</p>
+    <div class="ptc-guardrail"><span>!</span><strong>Filtro operacional ≠ conclusão científica</strong></div>
   </div>
 </div>
 
----
-layout: default
-class: content-slide
----
-
-<div class="slide-kicker">12 / RETENÇÃO</div>
-
-# População retida e síntese
-
-<div class="retained-layout">
-  <div class="retained-stat"><strong>18</strong><span>registros nos dados da revisão</span><div class="stat-split"><b>17</b> candidatos empíricos provisórios <i></i> <b>1</b> protocolo contextual</div></div>
-  <div class="mmat-card"><div class="stamp-outline">17<br><b>+ 1</b></div><div><h2>Dois estratos de leitura</h2><p>Os 17 candidatos empíricos sustentam a síntese. O protocolo ou proposta contextual permanece para rastreabilidade, sem resultado empírico.</p><p class="muted"><strong>Retenção operacional ≠ evidência homogênea.</strong></p></div></div>
-</div>
+<div class="ptc-caption">A pontuação é uma regra de processamento documentada, não uma conclusão sobre os estudos.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-retained-slide
 ---
 
-<div class="slide-kicker">13 / MMAT</div>
+<div class="slide-kicker">15 / RETENÇÃO</div>
 
-# Apreciação metodológica sem nota global
+# População retida: dois estratos de leitura
 
-<div class="mmat-overview">
-  <div class="mmat-principles"><span class="card-label">MMAT 2018</span><strong>Leitura por critério</strong><p>As respostas são registradas como <b>Sim</b>, <b>Não</b> ou <b>Não é possível determinar</b>, conforme o desenho de cada estudo.</p><div class="hand-line">transparência<br>antes do ranking</div></div>
-  <div class="mmat-criteria">
-    <div><b>S</b><strong>Sim</strong><span>Critério atendido segundo a evidência disponível.</span></div>
-    <div><b>N</b><strong>Não</strong><span>Critério não atendido na apreciação documental.</span></div>
-    <div><b>ND</b><strong>Indeterminado</strong><span>Informação insuficiente para concluir.</span></div>
+<div class="ptc-retained-layout">
+  <div class="ptc-retained-number"><strong>18</strong><span>registros retidos<br>na revisão</span><div class="ptc-retained-rule"></div><p>O conjunto final não é homogêneo.</p></div>
+  <div class="ptc-retained-copy">
+    <div class="ptc-retained-strata"><strong>17</strong><span>candidatos empíricos provisórios</span><strong>+</strong><strong>1</strong><span>protocolo contextual</span></div>
+    <h2>Dois estratos de leitura</h2>
+    <p>Os candidatos empíricos sustentam a síntese. O protocolo contextual permanece para rastreabilidade, sem resultado empírico.</p>
+    <div class="ptc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
   </div>
 </div>
 
-<div class="scope-note"><strong>Estado da apreciação:</strong> nove registros tiveram texto primário revisado e oito foram apreciados com resumo/metadados. O trabalho foi conduzido por um único revisor; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
+<div class="ptc-caption">A separação preserva a rastreabilidade sem apresentar o protocolo como evidência de eficácia.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-mmat-slide
 ---
 
-<div class="slide-kicker">14 / SÍNTESE</div>
+<div class="slide-kicker">16 / MMAT</div>
 
-# O que emerge nos 17 candidatos empíricos
+# Nosso filtro de qualidade: critérios, não uma nota global
 
-<div class="synthesis-layout">
-  <div class="synthesis-lead"><span class="card-label">PADRÃO DOMINANTE</span><strong>Predição e estimativa</strong><p>A síntese aponta recorrência de tarefas de predição de desempenho e estimativa de proficiência, com uso frequente de modelos supervisionados.</p><div class="hand-line">resultado ≠ aprendizagem</div></div>
-  <div class="synthesis-grid">
-    <div><span>FINALIDADE</span><strong>Predição de desempenho</strong><small>Reconhecer padrões em registros de avaliação.</small></div>
-    <div><span>FINALIDADE</span><strong>Estimativa de proficiência</strong><small>Inferir níveis a partir de evidências observadas.</small></div>
-    <div><span>MODELOS RECORRENTES</span><strong>RF, SVM e redes neurais</strong><small>Alternativas com pressupostos e explicabilidade distintos.</small></div>
-    <div><span>LEITURA CRÍTICA</span><strong>Comparabilidade limitada</strong><small>Populações, instrumentos, variáveis e métricas variam entre estudos.</small></div>
+<div class="ptc-mmat-layout">
+  <div class="ptc-mmat-visual" aria-hidden="true"><div class="ptc-mmat-scale">⚖</div><span>MMAT 2018</span><small>leitura por critério</small></div>
+  <div class="ptc-mmat-copy">
+    <h2>Apreciação por critério</h2>
+    <p>As respostas são registradas como <b>Sim</b>, <b>Não</b> ou <b>Não é possível determinar</b>, conforme o desenho de cada estudo.</p>
+    <div class="ptc-mmat-key">
+      <div><b>S</b><span><strong>Sim</strong> critério atendido segundo a evidência disponível.</span></div>
+      <div><b>N</b><span><strong>Não</strong> critério não atendido na apreciação documental.</span></div>
+      <div><b>ND</b><span><strong>Indeterminado</strong> informação insuficiente para concluir.</span></div>
+    </div>
   </div>
 </div>
 
-<div class="bottom-caption">A síntese organiza o estado da literatura; não estabelece ranking de modelos nem eficácia pedagógica geral.</div>
+<div class="ptc-mmat-result"><strong>Estado da apreciação:</strong> nove registros tiveram texto primário revisado e oito foram apreciados com resumo/metadados. A leitura foi conduzida por um único revisor; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-synthesis-slide
 ---
 
-<div class="slide-kicker">15 / INTERPRETAÇÃO</div>
+<div class="slide-kicker">17 / SÍNTESE</div>
 
-# O que podemos concluir — e o que não podemos
+# O que emerge entre os candidatos empíricos
 
-<div class="conclusion-grid">
-  <div class="conclusion-card can"><div class="conclusion-icon">✓</div><div><span>PODEMOS AFIRMAR</span><h2>Mapa auditável</h2><p>Os dados da revisão organizam aplicações encontradas, etapas de seleção e lacunas documentadas.</p></div></div>
-  <div class="conclusion-card cannot"><div class="conclusion-icon">×</div><div><span>AINDA NÃO PODEMOS AFIRMAR</span><h2>Eficácia geral</h2><p>Não há base para afirmar superioridade entre modelos ou protótipo validado em escolas.</p></div></div>
+<div class="ptc-synthesis-layout">
+  <div class="ptc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="ptc-orbit-ring ring-one"></div><div class="ptc-orbit-ring ring-two"></div><div class="ptc-orbit-ring ring-three"></div><strong>17</strong><span>candidatos<br>empíricos</span><i>evidências<br>relacionadas</i></div>
+  <div class="ptc-synthesis-copy">
+    <h2>Predição e estimativa aparecem como eixo recorrente.</h2>
+    <p>Os estudos organizam evidências de desempenho e inferem proficiência a partir de registros observados, frequentemente com modelos supervisionados.</p>
+    <div class="ptc-synthesis-points"><div><b>01</b><span><strong>Finalidade</strong> reconhecer padrões em registros de avaliação.</span></div><div><b>02</b><span><strong>Modelos</strong> RF, SVM e redes neurais aparecem como alternativas.</span></div><div><b>03</b><span><strong>Limite</strong> populações, instrumentos e métricas variam entre estudos.</span></div></div>
+  </div>
 </div>
 
-<div class="bottom-caption">Resultados individuais exigem leitura das fontes primárias: população, instrumento, métrica e desenho de avaliação.</div>
+<div class="ptc-caption">A síntese organiza o estado da literatura; não estabelece ranking de modelos nem eficácia pedagógica geral.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-boundary-slide
 ---
 
-<div class="slide-kicker">16 / LACUNAS</div>
+<div class="slide-kicker">18 / INTERPRETAÇÃO</div>
 
-# Lacunas documentadas
+# O que podemos concluir — e o que permanece aberto
 
-<div class="gap-grid">
-  <div class="gap-card gap-blue"><span>01</span><strong>Explicabilidade</strong><p>Resultados precisam ser compreensíveis e acompanhados de incerteza.</p></div>
-  <div class="gap-card gap-green"><span>02</span><strong>Integração curricular</strong><p>Indicadores devem se relacionar a objetivos e descritores matemáticos.</p></div>
-  <div class="gap-card gap-orange"><span>03</span><strong>Participação docente</strong><p>A interpretação e a decisão pedagógica não podem ser automatizadas.</p></div>
-  <div class="gap-card gap-red"><span>04</span><strong>Equidade</strong><p>Erros sistemáticos entre grupos precisam ser investigados.</p></div>
-  <div class="gap-card gap-blue"><span>05</span><strong>Reprodutibilidade</strong><p>Dados, código, parâmetros e decisões devem permanecer rastreáveis.</p></div>
-  <div class="gap-card gap-green"><span>06</span><strong>Validação contextual</strong><p>Resultados dependem da população, do instrumento e do ambiente educacional.</p></div>
+<div class="ptc-boundary-layout">
+  <div class="ptc-boundary-column boundary-yes"><div class="ptc-boundary-mark">✓</div><span>O TCC ENTREGA</span><h2>Um mapa auditável</h2><p>Aplicações encontradas, etapas de seleção, síntese interpretativa e lacunas documentadas.</p></div>
+  <div class="ptc-boundary-divider"></div>
+  <div class="ptc-boundary-column boundary-no"><div class="ptc-boundary-mark">?</div><span>O TCC NÃO ENTREGA</span><h2>Eficácia geral</h2><p>Não há base para afirmar superioridade entre modelos ou protótipo validado em escolas.</p></div>
 </div>
 
-<div class="scope-note"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
+<div class="ptc-boundary-foot"><strong>Leitura obrigatória:</strong> resultados individuais exigem população, instrumento, métrica e desenho de avaliação nas fontes primárias.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-gaps-slide
 ---
 
-<div class="slide-kicker">17 / ESPECIFICAÇÃO</div>
+<div class="slide-kicker">19 / LACUNAS</div>
 
-# Da evidência à especificação
+# As lacunas que orientam a especificação
 
-<div class="derivation-flow">
-  <div><span>01</span><strong>Evidências</strong><small>literatura + fundamentação</small></div><i>→</i>
-  <div><span>02</span><strong>Lacunas</strong><small>riscos e necessidades</small></div><i>→</i>
-  <div><span>03</span><strong>Requisitos</strong><small>funções e restrições</small></div><i>→</i>
-  <div><span>04</span><strong>Protocolo</strong><small>critérios de avaliação</small></div><i>→</i>
-  <div><span>05</span><strong>Arquitetura</strong><small>referência conceitual</small></div>
+<p class="ptc-gaps-intro">Seis lacunas documentadas são agrupadas em quatro eixos para conduzir a próxima decisão científica.</p>
+<div class="ptc-gaps-grid">
+  <div><b>1</b><h2>Explicabilidade</h2><p>Resultados compreensíveis, com incerteza e participação docente.</p></div>
+  <div><b>2</b><h2>Contexto curricular</h2><p>Indicadores relacionados a objetivos e descritores matemáticos.</p></div>
+  <div><b>3</b><h2>Validação real</h2><p>População, ambiente educacional e equidade precisam ser investigados.</p></div>
+  <div><b>4</b><h2>Reprodutibilidade</h2><p>Dados, código, parâmetros e decisões permanecem rastreáveis.</p></div>
 </div>
 
-<div class="derivation-note"><strong>Entrega do TCC:</strong> uma especificação técnica e pedagógica auditável. O artefato não é uma aplicação funcional, não usa uma base definitiva e não possui validação com participantes.</div>
+<div class="ptc-gaps-foot"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-specification-slide
 ---
 
-<div class="slide-kicker">18 / ARQUITETURA</div>
+<div class="slide-kicker">20 / ESPECIFICAÇÃO</div>
 
-# Arquitetura de referência em cinco componentes
+# Da evidência à especificação — sem saltar para a implementação
 
-<div class="architecture-stack">
-  <div class="architecture-layer layer-present"><b>05</b><strong>Apresentação</strong><span>indicadores, explicações e limitações para análise docente</span></div>
-  <div class="architecture-layer layer-eval"><b>04</b><strong>Avaliação e explicabilidade</strong><span>métricas, erros, incerteza e explicações</span></div>
-  <div class="architecture-layer layer-model"><b>03</b><strong>Modelagem</strong><span>treino e comparação de modelos candidatos</span></div>
-  <div class="architecture-layer layer-prep"><b>02</b><strong>Preparação</strong><span>ausentes, codificação, transformação e documentação</span></div>
-  <div class="architecture-layer layer-data"><b>01</b><strong>Ingestão</strong><span>leitura e validação das fontes de dados</span></div>
+<div class="ptc-spec-layout">
+  <div class="ptc-spec-path"><div><b>01</b><strong>Evidências</strong><span>literatura + fundamentação</span></div><i>→</i><div><b>02</b><strong>Lacunas</strong><span>riscos e necessidades</span></div><i>→</i><div><b>03</b><strong>Requisitos</strong><span>funções e restrições</span></div></div>
+  <div class="ptc-spec-delivery"><div class="ptc-paper-icon">▤</div><h2>Entrega do TCC</h2><p>Uma especificação técnica e pedagógica auditável, com protocolo e arquitetura de referência.</p><small>Não é aplicação funcional, não usa base definitiva e não possui validação com participantes.</small></div>
 </div>
 
-<div class="bottom-caption">A separação favorece testabilidade, rastreabilidade e substituição controlada de técnicas.</div>
+<div class="ptc-spec-caption">A evidência orienta requisitos; os requisitos orientam um futuro protocolo de avaliação.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-architecture-slide
 ---
 
-<div class="slide-kicker">19 / REPRODUTIBILIDADE</div>
+<div class="slide-kicker">21 / ARQUITETURA</div>
 
-# Reprodutibilidade sem distribuir o SQLite
+# Arquitetura de referência: da fonte à decisão docente
 
-<div class="artifact-grid">
-  <div><span class="artifact-icon">CSV</span><strong>CSV / JSON</strong><small>dados da revisão e ledgers de decisão</small></div>
-  <div><span class="artifact-icon">Bib</span><strong>BibTeX</strong><small>referências derivadas do pipeline</small></div>
-  <div><span class="artifact-icon">#</span><strong>Manifesto</strong><small>hashes e escopo dos artefatos</small></div>
-  <div><span class="artifact-icon">▧</span><strong>PNG / HTML</strong><small>relatórios e visualizações públicas</small></div>
+<div class="ptc-architecture-layout">
+  <div class="ptc-architecture-path"><div class="arch-node arch-data"><b>01</b><strong>Ingestão</strong><span>fontes</span></div><i>→</i><div class="arch-node arch-prep"><b>02</b><strong>Preparação</strong><span>dados documentados</span></div><i>→</i><div class="arch-node arch-model"><b>03</b><strong>Modelagem</strong><span>modelos candidatos</span></div><i>→</i><div class="arch-node arch-eval"><b>04</b><strong>Avaliação</strong><span>métricas e explicações</span></div><i>→</i><div class="arch-node arch-present"><b>05</b><strong>Apresentação</strong><span>decisão docente</span></div></div>
+  <div class="ptc-architecture-copy"><h2>Componentes separáveis</h2><p>A separação favorece testabilidade, rastreabilidade e substituição controlada de técnicas.</p><div class="ptc-architecture-note">A arquitetura é uma referência conceitual do TCC, não a descrição de um sistema implementado.</div></div>
 </div>
 
-<div class="path-list"><code>research/exports/analysis/papers.csv</code><code>research/exports/reports/summary.json</code><code>research/exports/reports/reproducibility_manifest.json</code></div>
-
-<div class="scope-note">A bibliografia derivada do pipeline permanece separada das referências teóricas, pedagógicas, metodológicas e técnicas usadas na fundamentação do TCC.</div>
+<div class="ptc-caption">A apresentação finaliza no apoio à análise docente; não automatiza a decisão pedagógica.</div>
 
 ---
 layout: default
-class: content-slide
+class: content-slide ptc-open-slide
 ---
 
-<div class="slide-kicker">20 / CONTINUIDADE</div>
+<div class="slide-kicker">22 / REPRODUTIBILIDADE</div>
+
+# Ciência aberta como trilha de auditoria
+
+<div class="ptc-open-layout">
+  <div class="ptc-open-visual"><div class="ptc-open-center">TCC</div><div class="ptc-open-artifact artifact-csv">CSV<br><small>dados</small></div><div class="ptc-open-artifact artifact-bib">BibTeX<br><small>fontes</small></div><div class="ptc-open-artifact artifact-manifest">#<br><small>hashes</small></div><div class="ptc-open-artifact artifact-report">PNG / HTML<br><small>relatórios</small></div></div>
+  <div class="ptc-open-copy"><h2>Reprodutibilidade sem distribuir o SQLite</h2><p>A trilha pública reúne dados derivados, referências e artefatos versionados, preservando a separação entre a bibliografia do pipeline e as referências teóricas do TCC.</p><div class="ptc-paths"><code>research/exports/analysis/papers.csv</code><code>research/exports/reports/summary.json</code><code>research/exports/reports/reproducibility_manifest.json</code></div></div>
+</div>
+
+<div class="ptc-caption">Referências teóricas, pedagógicas, metodológicas e técnicas permanecem separadas das referências derivadas do pipeline.</div>
+
+---
+layout: default
+class: content-slide ptc-next-slide
+---
+
+<div class="slide-kicker">23 / CONTINUIDADE</div>
 
 # Próximos passos científicos
 
-<div class="next-layout">
-  <div class="next-list">
-    <div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div>
-    <div><b>02</b><span>Revisar lacunas à luz dos 17 estudos empíricos provisórios.</span></div>
-    <div><b>03</b><span>Revisar especificação conceitual do protótipo à luz da adjudicação final.</span></div>
-    <div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div>
-  </div>
-  <div class="next-note"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da implementação</strong><i>∴</i></div>
+<div class="ptc-next-layout">
+  <div class="ptc-next-list"><div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div><div><b>02</b><span>Revisar lacunas à luz dos 17 estudos empíricos provisórios.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="ptc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 
-<div class="objective-band compact"><p>A revisão sistemática fundamenta próximas decisões; não substitui o protocolo do experimento.</p></div>
+<div class="ptc-caption">A revisão sistemática fundamenta próximas decisões; não substitui o protocolo do experimento.</div>
 
 ---
 layout: center
