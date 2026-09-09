@@ -25,16 +25,30 @@ const requiredStatements = [
   formatInteger(techniques['Assessment']),
   formatInteger(techniques['AI/Artificial Intelligence']),
   formatInteger(techniques['Machine Learning']),
+  formatInteger(summary.statistics.databases.semantic_scholar),
+  formatInteger(summary.statistics.databases.openalex),
+  formatInteger(summary.statistics.databases.crossref),
+  formatInteger(summary.statistics.databases.core),
   '17',
   '1',
   '2015–2026',
   '72',
   './public/images/prisma_flow.png',
   './public/images/selection_funnel.png',
-  './public/images/database_coverage.png',
   './public/images/papers_by_year.png',
   './public/images/techniques_distribution.png',
   './public/images/relevance_distribution.png',
+]
+
+const requiredTemplateMarkers = [
+  'ptc-challenge-layout',
+  'ptc-objective-layout',
+  'ptc-question-grid',
+  'ptc-mission-layout',
+  'ptc-objective-roadmap',
+  'ptc-search-layout',
+  'ptc-source-grid',
+  'ptc-funnel-layout',
 ]
 
 const forbiddenClaims = [
@@ -54,10 +68,12 @@ const forbiddenClaims = [
 ]
 
 const missing = requiredStatements.filter((statement) => !slides.includes(statement))
+const missingTemplateMarkers = requiredTemplateMarkers.filter((marker) => !slides.includes(marker))
 const forbidden = forbiddenClaims.filter((statement) => slides.includes(statement))
 
-if (missing.length || forbidden.length) {
+if (missing.length || missingTemplateMarkers.length || forbidden.length) {
   if (missing.length) console.error(`Missing current presentation statements: ${missing.join(', ')}`)
+  if (missingTemplateMarkers.length) console.error(`Missing PTC template structures: ${missingTemplateMarkers.join(', ')}`)
   if (forbidden.length) console.error(`Forbidden historical/internal claims: ${forbidden.join(', ')}`)
   process.exit(1)
 }

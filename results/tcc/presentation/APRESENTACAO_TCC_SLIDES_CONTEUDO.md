@@ -23,78 +23,96 @@ Subtítulo: oportunidades e técnicas computacionais. Apresenta a revisão
 sistemática e a especificação conceitual de protótipo, com autor, orientação,
 instituição, data do snapshot e recorte temporal.
 
-### 2. Por que esta revisão?
+### 2. O desafio fundamental: diagnóstico personalizado com evidências
 
-Turmas heterogêneas produzem evidências variadas sobre o desempenho. Técnicas
-computacionais podem organizar registros e revelar padrões, mas a interpretação
-permanece pedagógica e não pode ser substituída por uma saída algorítmica.
+Apresenta o problema em duas colunas: a heterogeneidade das turmas, o tempo
+docente, o risco de ensino genérico e a fragmentação da literatura. O TCC
+organiza evidências para apoiar a interpretação, sem substituir a decisão
+pedagógica.
 
-### 3. Perguntas e objetivo
+### 3. Objetivo geral
+
+Apresenta ação central, impacto e escopo. O objetivo é mapear e analisar
+aplicações computacionais em educação matemática e identificar tendências,
+lacunas e oportunidades para uma especificação conceitual, sem apresentá-la
+como protótipo funcional ou avaliação de eficácia.
+
+### 4. Quatro perguntas fundamentam a busca por clareza
 
 Apresenta quatro perguntas orientadoras sobre técnicas, avaliação, lacunas e
-direcionamentos para ferramentas de apoio, além do objetivo geral de mapear
-aplicações e derivar uma especificação conceitual.
+direcionamentos para ferramentas de apoio. Elas organizam a análise dos
+achados do TCC.
 
-### 4. O que este trabalho entrega
+### 5. Missão: mapear o terreno com rigor e transparência
 
-Resume OE1–OE7: revisão relatada com apoio do PRISMA 2020; categorização de
-abordagens e finalidades; análise metodológica; lacunas; pipeline auditável; e
-derivação da especificação de protótipo.
+Relaciona o propósito da revisão à diretriz PRISMA 2020, explicitando que o
+protocolo organiza identificação, seleção e relato. A lâmina também registra
+o limite interpretativo: desempenho observado não equivale automaticamente a
+aprendizagem.
 
-### 5. A base conceitual: quatro níveis de interpretação
+### 6. A base conceitual: quatro níveis de interpretação
 
 Distingue desempenho observado, proficiência estimada, competência e
 aprendizagem. A mensagem central é que a revisão pode apoiar inferências sobre
 registros, mas não observa diretamente todos os processos da aprendizagem.
 
-### 6. Protocolo e escopo
+### 7. Objetivos específicos
 
-Apresenta PRISMA 2020 como diretriz de relato, PICOS como apoio aos critérios,
-as quatro fontes consultadas, os idiomas e o recorte temporal. Registra que as
-72 consultas são a composição canônica versionada — 48 em inglês e 24 em
-português —, não uma contagem retrospectiva de chamadas HTTP, pois não há log
-histórico completo. Também explicita a aceitação de teses e dissertações sob os
-mesmos critérios e o uso do score como filtro operacional.
+Apresenta o percurso OE1–OE7 em fluxo visual: revisão, identificação,
+classificação, análise, mapeamento de lacunas, auditoria e derivação de
+requisitos, avaliação e arquitetura conceitual.
 
-### 7. Do registro bruto à população retida
+### 8. Estratégia de busca: três camadas
+
+Mostra as camadas matemática, técnicas e educação e as 72 consultas canônicas
+versionadas — 48 em inglês e 24 em português —. A composição não é contagem
+retrospectiva de chamadas HTTP.
+
+### 9. Quatro fontes de indexação complementares
+
+Apresenta Semantic Scholar (1.931 registros), OpenAlex (3.057), Crossref
+(5.049) e CORE (1.840). Teses e dissertações permanecem elegíveis quando
+atendem aos mesmos critérios do protocolo.
+
+### 10. O funil da descoberta
 
 Mostra as contagens do snapshot: 11.904 identificados; 27 remoções
 determinísticas por DOI/URL; 11.877 na triagem; 9.391 excluídos na triagem;
 2.486 na elegibilidade; 2.468 excluídos na elegibilidade; 18 retidos
 operacionalmente.
 
-### 8. Fluxo PRISMA do snapshot
+### 11. Fluxo PRISMA do snapshot
 
 Incorpora `research/exports/visualizations/prisma_flow.png`, que é a figura
 canônica sincronizada com os artefatos públicos.
 
-### 9. Deduplicação: o que foi confirmado
+### 12. Deduplicação: o que foi confirmado
 
 Explica a diferença entre identidade bibliográfica e semelhança de título. As
 27 remoções confirmadas são 25 por DOI normalizado e 2 por URL exata. Os 232
 excedentes observados apenas por título permanecem candidatos à auditoria
 semântica e não foram tratados automaticamente como duplicatas.
 
-### 10. Panorama descritivo dos dados da revisão
+### 13. O volume de registros cresce no recorte observado
 
-Incorpora a distribuição de técnicas. Destaca 6.399 registros com técnica não
-especificada, 1.073 com assessment, 863 com IA/inteligência artificial e 771
-com machine learning. As categorias podem se sobrepor e não medem qualidade,
-eficácia ou apenas os registros retidos.
+Incorpora a distribuição anual e contextualiza a concentração de registros nos
+anos mais recentes do recorte 2015–2026. A leitura é descritiva e não infere
+representatividade, causalidade ou qualidade.
 
-### 11. Distribuição temporal e fontes
+### 14. Técnicas encontradas no conjunto triado
 
-Apresenta a distribuição anual e a cobertura das quatro fontes. As figuras são
-descritivas; não sustentam inferências de representatividade, qualidade ou
-efeito pedagógico.
+Destaca 6.399 registros com técnica não especificada, 1.073 com assessment,
+863 com IA/inteligência artificial, 771 com machine learning e 345 com análise
+preditiva. As categorias podem se sobrepor e não medem qualidade, eficácia ou
+predominância entre os estudos retidos.
 
-### 12. Score de relevância: filtro operacional
+### 15. Um filtro operacional antes da leitura em profundidade
 
 Mostra a distribuição do score e o limiar operacional de 4,0. O score organiza
 o processamento, mas não é medida de qualidade metodológica, não produz ranking
 e não substitui a leitura das fontes primárias.
 
-### 13. População retida e síntese
+### 16. População retida: dois estratos de leitura
 
 Dos 18 registros retidos, 17 são candidatos empíricos provisórios e 1 é um
 protocolo ou proposta contextual. A síntese empírica considera os 17; o registro
@@ -102,7 +120,7 @@ contextual permanece para rastreabilidade e não sustenta resultado empírico.
 Predominam tarefas de predição de desempenho e estimativa de proficiência, com
 recorrência de modelos supervisionados.
 
-### 14. Apreciação metodológica sem nota global
+### 17. Nosso filtro de qualidade: critérios, não uma nota global
 
 O MMAT é apresentado por critério, conforme o desenho de cada estudo, usando
 Sim, Não ou Não é possível determinar. A apreciação é preliminar e feita por um
@@ -111,53 +129,55 @@ apreciados com resumo/metadados. Não há média, ranking ou categoria geral de
 qualidade; recuperação de fontes, localizadores e adjudicação ainda precisam ser
 consolidados.
 
-### 15. O que emerge nos 17 candidatos empíricos
+### 18. O que emerge entre os candidatos empíricos
 
 Organiza o padrão dominante em torno de predição de desempenho e estimativa de
 proficiência, com recorrência de RF, SVM e redes neurais. A heterogeneidade de
 populações, instrumentos, variáveis e métricas limita a comparabilidade entre
 estudos.
 
-### 16. O que podemos concluir — e o que não podemos
+### 19. O que podemos concluir — e o que permanece aberto
 
 O snapshot oferece um mapa auditável. A heterogeneidade de populações,
 instrumentos, variáveis e métricas impede comparar todos os resultados
 diretamente. Acurácia de um artigo não demonstra superioridade geral nem
 eficácia pedagógica transferível.
 
-### 17. Lacunas documentadas
+### 20. As lacunas que orientam a especificação
 
 Explicabilidade, integração curricular, participação docente, equidade,
 reprodutibilidade e validação em contextos diversos aparecem como lacunas. Elas
 são convertidas em requisitos de projeto, não apresentadas como evidência de
 que uma solução futura será eficaz.
 
-### 18. Da evidência à especificação
+### 21. Da evidência à especificação — sem saltar para a implementação
 
-Mostra a derivação: evidências da revisão e da fundamentação → lacunas →
-requisitos → critérios e protocolo → arquitetura de referência.
+Mostra a derivação visual: evidências da revisão e da fundamentação → lacunas →
+requisitos. A entrega é uma especificação técnica e pedagógica auditável, com
+protocolo e arquitetura de referência; não é aplicação funcional nem validação
+com participantes.
 
-### 19. Arquitetura de referência em cinco componentes
+### 22. Arquitetura de referência: da fonte à decisão docente
 
 Resume a arquitetura de referência em ingestão, preparação, modelagem,
 avaliação/explicabilidade e apresentação. A separação favorece testabilidade,
 rastreabilidade e substituição controlada de técnicas.
 
-### 20. Reprodutibilidade sem distribuir o SQLite
+### 23. Ciência aberta como trilha de auditoria
 
 Apresenta CSV/JSON, BibTeX, manifesto com hashes e relatórios PNG/HTML como
 artefatos públicos de reprodução. A bibliografia derivada do pipeline permanece
 separada das referências teóricas, pedagógicas, metodológicas e técnicas da
 fundamentação.
 
-### 21. Próximos passos científicos
+### 24. Próximos passos científicos
 
 Indica a consolidação da recuperação das fontes e da adjudicação do MMAT, a
 revisão das lacunas e da especificação conceitual e a necessidade de novo
 protocolo e autorização para qualquer validação experimental. A revisão
 sistematizada fundamenta decisões futuras, mas não substitui esse protocolo.
 
-### 22. Obrigado
+### 25. Obrigado
 
 Encerramento para perguntas e discussão, mantendo título, autor, instituição,
 snapshot e recorte temporal.

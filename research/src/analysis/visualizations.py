@@ -81,10 +81,16 @@ class ReviewVisualizer:
         if save_path is None:
             save_path = self.output_dir / "prisma_flow.png"
 
-        fig, ax = plt.subplots(figsize=(10, 7))
-        ax.set_xlim(0, 10)
-        ax.set_ylim(3.2, 10)
+        # Keep the generated asset in the same 16:9 canvas used by the
+        # presentation.  The previous 10:7 canvas plus tight bounding-box
+        # export introduced large margins when the image was placed on a
+        # widescreen slide.
+        fig, ax = plt.subplots(figsize=(16, 9))
+        ax.set_xlim(0, 16)
+        ax.set_ylim(0, 9)
         ax.axis('off')
+        fig.patch.set_facecolor('white')
+        ax.set_facecolor('white')
 
         # Colors
         box_color = '#E8F4FD'
@@ -92,12 +98,14 @@ class ReviewVisualizer:
         text_color = '#2C3E50'
 
         # Box dimensions
-        box_width = 2.5
-        box_height = 0.8
+        box_width = 4.25
+        box_height = 0.9
+        main_x = 5.35
+        exclusion_x = 11.9
 
         # Title
-        ax.text(5, 9.7, 'Fluxo PRISMA da Revisão Sistemática',
-                ha='center', va='center', fontsize=16, fontweight='bold')
+        ax.text(8, 8.55, 'Fluxo PRISMA da Revisão Sistemática',
+                ha='center', va='center', fontsize=21, fontweight='bold')
 
         # PRISMA stats com lógica progressiva correta
         identification = int(stats.get('identification', 0))
@@ -125,17 +133,17 @@ class ReviewVisualizer:
 
         # Main flow boxes seguindo PRISMA 2020
         boxes = [
-            (5, 8.5, f"Registros identificados\nnas bases de dados\n(n = {identification:,})", box_color),
-            (5, 7.5, f"Remoções operacionais\nregistradas\n(n = {duplicates_removed:,})", exclude_color),
-            (5, 6.5, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
-            (5, 5.5, f"Registros que passaram triagem\navaliados para elegibilidade\n(n = {eligibility:,})", box_color),
-            (5, 4.5, f"Registros retidos\nna população adjudicada\n(n = {included:,})", box_color),
+            (main_x, 7.45, f"Registros identificados\nnas bases de dados\n(n = {identification:,})", box_color),
+            (main_x, 6.25, f"Remoções operacionais\nregistradas\n(n = {duplicates_removed:,})", exclude_color),
+            (main_x, 5.05, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
+            (main_x, 3.85, f"Registros que passaram triagem\navaliados para elegibilidade\n(n = {eligibility:,})", box_color),
+            (main_x, 2.65, f"Registros retidos\nna população adjudicada\n(n = {included:,})", box_color),
         ]
 
         # Exclusion boxes com contagens corretas de cada estágio
         exclusions = [
-            (8, 6.5, f"Registros excluídos\nna triagem\n(n = {screening_excluded:,})", exclude_color),
-            (8, 5.5, f"Registros excluídos\nna elegibilidade\n(n = {eligibility_excluded:,})", exclude_color),
+            (exclusion_x, 5.05, f"Registros excluídos\nna triagem\n(n = {screening_excluded:,})", exclude_color),
+            (exclusion_x, 3.85, f"Registros excluídos\nna elegibilidade\n(n = {eligibility_excluded:,})", exclude_color),
         ]
 
         # Draw main flow boxes
@@ -144,7 +152,7 @@ class ReviewVisualizer:
                            box_width, box_height,
                            facecolor=color, edgecolor='black', linewidth=1)
             ax.add_patch(rect)
-            ax.text(x, y, text, ha='center', va='center', fontsize=10, color=text_color)
+            ax.text(x, y, text, ha='center', va='center', fontsize=12, color=text_color)
 
         # Draw exclusion boxes
         for x, y, text, color in exclusions:
@@ -152,40 +160,40 @@ class ReviewVisualizer:
                            box_width, box_height,
                            facecolor=color, edgecolor='red', linewidth=1)
             ax.add_patch(rect)
-            ax.text(x, y, text, ha='center', va='center', fontsize=9, color=text_color)
+            ax.text(x, y, text, ha='center', va='center', fontsize=11.5, color=text_color)
 
         ax.text(
-            5, 3.45,
+            8, 0.85,
             f"Auditoria de identidade: {doi_excess} excedentes DOI + "
             f"{url_excess} excedentes URL; títulos repetidos são candidatos",
-            ha='center', va='center', fontsize=8.5, color='#7f1d1d'
+            ha='center', va='center', fontsize=10.5, color='#7f1d1d'
         )
 
         # Draw arrows - fluxo progressivo correto
         arrow_props = dict(arrowstyle='->', lw=2, color='black')
 
         # Main flow arrows (pula a caixa de duplicatas removidas que é informativa)
-        ax.annotate('', xy=(5, boxes[1][1] + box_height/2),
-                   xytext=(5, boxes[0][1] - box_height/2),
+        ax.annotate('', xy=(main_x, boxes[1][1] + box_height/2),
+                   xytext=(main_x, boxes[0][1] - box_height/2),
                    arrowprops=arrow_props)
-        ax.annotate('', xy=(5, boxes[2][1] + box_height/2),
-                   xytext=(5, boxes[1][1] - box_height/2),
+        ax.annotate('', xy=(main_x, boxes[2][1] + box_height/2),
+                   xytext=(main_x, boxes[1][1] - box_height/2),
                    arrowprops=arrow_props)
-        ax.annotate('', xy=(5, boxes[3][1] + box_height/2),
-                   xytext=(5, boxes[2][1] - box_height/2),
+        ax.annotate('', xy=(main_x, boxes[3][1] + box_height/2),
+                   xytext=(main_x, boxes[2][1] - box_height/2),
                    arrowprops=arrow_props)
-        ax.annotate('', xy=(5, boxes[4][1] + box_height/2),
-                   xytext=(5, boxes[3][1] - box_height/2),
+        ax.annotate('', xy=(main_x, boxes[4][1] + box_height/2),
+                   xytext=(main_x, boxes[3][1] - box_height/2),
                    arrowprops=arrow_props)
 
         # Exclusion arrows
-        ax.annotate('', xy=(8 - box_width/2, 6.5), xytext=(5 + box_width/2, 6.5),
+        ax.annotate('', xy=(exclusion_x - box_width/2, 5.05), xytext=(main_x + box_width/2, 5.05),
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
-        ax.annotate('', xy=(8 - box_width/2, 5.5), xytext=(5 + box_width/2, 5.5),
+        ax.annotate('', xy=(exclusion_x - box_width/2, 3.85), xytext=(main_x + box_width/2, 3.85),
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
 
-        plt.tight_layout()
-        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+        plt.savefig(save_path, dpi=220, facecolor='white')
         plt.close()
 
         logger.info(f"PRISMA flow diagram saved to {save_path}")
