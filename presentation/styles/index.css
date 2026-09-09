@@ -391,6 +391,119 @@ small { font-size: 0.73rem; }
   .objective-step:nth-child(7) { grid-column: auto; }
 }
 
+/* Presentation guardrails: official identity, readable contrast, and QR handoff. */
+:root {
+  --ptc-ink: #1f2a37;
+  --ptc-muted: #4a4a4a;
+  --ptc-paper: #ffffff;
+  --ptc-blue: #315e9b;
+  --ptc-green: #2e806c;
+  --ptc-amber: #8a5c1a;
+  --ptc-red: #a53f39;
+}
+
+.slidev-layout,
+.slidev-layout:not(.cover-page) {
+  color: var(--ptc-ink);
+  font-family: 'Barlow', Arial, sans-serif;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout p,
+.slidev-layout strong,
+.slidev-layout span,
+.slidev-layout small,
+.slidev-layout a {
+  font-family: 'Asap', Arial, sans-serif;
+}
+
+.slidev-layout .ifc-mark {
+  width: 16rem;
+  height: auto;
+  align-items: center;
+}
+
+.ifc-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.slidev-layout .bottom-caption,
+.slidev-layout .source-note,
+.slidev-layout .ptc-caption,
+.slidev-layout .close-sources {
+  color: var(--ptc-muted);
+}
+
+.close-repository {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.85rem auto 1rem;
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--ptc-ink);
+  border-radius: 0.9rem;
+  background: var(--ptc-paper);
+  text-align: left;
+}
+
+.repo-qr {
+  display: block;
+  width: 6.6rem;
+  height: 6.6rem;
+  flex: 0 0 6.6rem;
+}
+
+.close-repository-copy strong,
+.close-repository-copy span {
+  display: block;
+}
+
+.close-repository-copy strong {
+  color: var(--ptc-ink);
+  font-size: 1.15rem;
+}
+
+.close-repository-copy span {
+  margin-top: 0.3rem;
+  color: var(--ptc-muted);
+  font-size: 0.82rem;
+}
+
+.close-sources a {
+  color: var(--ptc-blue);
+  font-weight: 700;
+}
+
+.note-mark,
+.caution-line span {
+  background: var(--ptc-amber);
+}
+
+.synthesis-grid > div:nth-child(3) span,
+.mmat-criteria > div:last-child b,
+.gap-orange > span,
+.derivation-flow > div:nth-of-type(3) span,
+.architecture-layer.layer-model b {
+  color: var(--ptc-amber);
+}
+
+/* The inherited template kept a handwritten fallback; force the approved deck fonts in the cascade. */
+.deck-font-guard,
+.slidev-layout::before,
+.cover-art,
+.hand-line,
+.next-note i,
+.close-mark,
+.problem-lead::after {
+  font-family: 'Asap', 'Barlow', Arial, sans-serif !important;
+}
+
 /* PTC fidelity pass 3: restore the actual slide grammar used by the reference deck. */
 .slidev-layout.ptc-challenge-slide > h1 {
   max-width: 51rem;

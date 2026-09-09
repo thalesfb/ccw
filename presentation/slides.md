@@ -26,9 +26,8 @@ mdc: true
 <div class="cover-art cover-art-bottom">∫∫ R f(x,y) dA</div>
 <div class="cover-art cover-art-bottom-right">n = −√(a²x²)<br>sin(x) = Δπ / n</div>
 
-<div class="ifc-mark" aria-label="Instituto Federal Catarinense">
-  <div class="ifc-symbol"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <div><strong>INSTITUTO FEDERAL</strong><span>Catarinense</span></div>
+<div class="ifc-mark" aria-label="Instituto Federal Catarinense — Campus Videira">
+  <img class="ifc-logo" src="./public/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
 </div>
 
 <div class="cover-slide">
@@ -485,5 +484,9 @@ class: closing-slide
 ## Perguntas e discussão
 
 <div class="close-rule"></div>
+<div class="close-repository">
+  <img class="repo-qr" src="./public/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">
+  <div class="close-repository-copy"><strong>Acesse o repositório</strong><span>código, dados e apresentação versionados</span></div>
+</div>
 <p class="close-title"><strong>Ensino Personalizado de Matemática</strong><br>Oportunidades e Técnicas Computacionais</p>
-<p class="close-sources">Fonte pública do TCC: <a href="https://thalesfb.github.io/ccw/results/tcc/main.pdf">thalesfb.github.io/ccw/results/tcc/main.pdf</a> · visualizações versionadas no repositório</p>
+<p class="close-sources">Fonte pública do TCC: <a href="https://thalesfb.github.io/ccw/results/tcc/main.pdf">thalesfb.github.io/ccw/results/tcc/main.pdf</a> · repositório: <a href="https://github.com/thalesfb/ccw">github.com/thalesfb/ccw</a></p>
