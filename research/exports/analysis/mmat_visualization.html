@@ -1,50 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MMAT 2018 - apreciação metodológica por critérios">
-  <title>MMAT 2018 — critérios dos estudos</title>
-  <style>
-    body{font-family:system-ui,sans-serif;margin:0;background:#f4f6f8;color:#1f2937}
-    header,main,footer{max-width:1200px;margin:auto;padding:24px}
-    header{background:#1f2937;color:white;max-width:none}
-    header div{max-width:1200px;margin:auto}
-    .notice{background:#fff;border-left:5px solid #2563eb;padding:18px;margin:24px 0}
-    .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
-    .card{background:white;padding:16px;border-radius:8px;text-align:center}
-    .card strong{display:block;font-size:1.8rem}
-    .table-wrap{overflow:auto;background:white;border-radius:8px}
-    table{width:100%;border-collapse:collapse;font-size:.9rem}
-    th,td{padding:10px;border-bottom:1px solid #e5e7eb;vertical-align:top}
-    th{background:#111827;color:white;position:sticky;top:0}
-    .Y{color:#166534;font-weight:700}.N{color:#991b1b;font-weight:700}.CT{color:#92400e;font-weight:700}
-    footer{font-size:.9rem;color:#4b5563}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Visualização histórica da apreciação MMAT 2018 por critérios.">
+  <title>MMAT histórico · CCW</title>
+  <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
 <body>
-<header><div><h1>MMAT 2018 — apreciação por critérios</h1><p>Visualização histórica: 17 estudos incluídos (não é a avaliação vigente)</p></div></header>
-<main>
-  <section class="notice">
-    <h2>Como interpretar</h2>
-    <p>O MMAT utiliza cinco critérios específicos para cada desenho metodológico. As respostas são mantidas separadas: <strong>Y</strong> (sim), <strong>N</strong> (não) e <strong>CT</strong> (não é possível determinar). Não são calculados nota geral, média, ranking ou categoria de qualidade, porque essas agregações ocultariam quais critérios apresentaram limitações.</p>
-    <p>Este arquivo preserva a avaliação histórica de 17 estudos, realizada por um único revisor com base no resumo, nos metadados e na descrição metodológica disponível. A população vigente contém 18 registros: 17 candidatos empíricos provisórios e o protocolo contextual 6921. A avaliação corrente, ainda preliminar, está em <code>research/data/mmat_reassessment_current.csv</code>; o protocolo não integra a avaliação MMAT empírica.</p>
-  </section>
-  <section>
-    <h2>Resumo por resposta</h2>
-    <div class="summary" id="summary"></div>
-  </section>
-  <section>
-    <h2>Estudos avaliados</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Estudo</th><th>Desenho</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Base da avaliação</th><th>Limitações</th></tr></thead>
-        <tbody id="rows"><tr><td colspan="9">Carregando dados...</td></tr></tbody>
-      </table>
+  <header class="site-header">
+    <div class="site-shell site-header-inner">
+      <a class="site-brand" href="../../../" aria-label="CCW — voltar à visão geral">
+        <img src="../../../public-site/assets/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
+        <span class="site-brand-copy"><strong>CCW</strong><small>Pesquisa versionada<br>Ciência da Computação</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="../../../">Visão geral</a>
+        <a href="../../index.html">Revisão sistemática</a>
+        <a href="mmat_current.html">MMAT atual</a>
+        <a href="../../../presentation/">Apresentação</a>
+        <a href="../../../results/ptc/index.html">PTC</a>
+        <a href="../../../results/tcc/index.html">TCC</a>
+        <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a>
+      </nav>
     </div>
-  </section>
-</main>
-<footer>Fonte histórica: <code>research/data/mmat_assessments.csv</code>. Não usar como resultado vigente.</footer>
+  </header>
+
+  <main>
+    <div class="site-shell">
+      <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão</a> / <strong>MMAT histórico</strong></p>
+      <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Proveniência · avaliação legada</span>
+        <h1 id="page-title">MMAT 2018 — visualização histórica</h1>
+        <p class="lede">Este arquivo preserva a apreciação histórica de 17 estudos. Não é o resultado vigente e não deve ser usado para interpretar o snapshot atual.</p>
+        <div class="action-row">
+          <a class="btn btn-primary" href="mmat_current.html">Abrir MMAT atual</a>
+          <a class="btn btn-secondary" href="../../index.html">Voltar à revisão</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="callout callout-blue">
+          <h3>Como interpretar</h3>
+          <p>O MMAT utiliza critérios específicos para cada desenho metodológico. As respostas são mantidas separadas: <strong>Y</strong> (sim), <strong>N</strong> (não) e <strong>CT</strong> (não é possível determinar).</p>
+          <p>Não são calculados nota geral, média, ranking ou categoria de qualidade. A população vigente contém 18 registros: 17 candidatos empíricos provisórios e o protocolo contextual 6921.</p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="summary-title">
+        <div class="section-heading"><h2 id="summary-title">Resumo por resposta</h2><p>Contagens da avaliação histórica, mantidas somente para comparação e rastreabilidade.</p></div>
+        <div class="data-strip" id="summary"></div>
+      </section>
+
+      <section class="section" aria-labelledby="studies-title">
+        <div class="section-heading"><h2 id="studies-title">Estudos avaliados</h2><p>Registro legado carregado do CSV histórico versionado.</p></div>
+        <div class="table-wrap">
+          <table class="mmat-table">
+            <thead><tr><th>Estudo</th><th>Desenho</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Base da avaliação</th><th>Limitações</th></tr></thead>
+            <tbody id="rows"><tr><td colspan="9">Carregando dados…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-shell site-footer-inner">
+      <p><strong>MMAT histórico · CCW</strong><br>Fonte: `mmat_assessment.csv`</p>
+      <p><a href="mmat_current.html">MMAT atual</a> · <a href="../../../">Visão geral</a></p>
+    </div>
+  </footer>
+
 <script>
 function parseCSV(text){
   const rows=[]; let row=[],field='',quoted=false;
@@ -62,23 +88,24 @@ function parseCSV(text){
   const headers=rows.shift();
   return rows.map(values=>Object.fromEntries(headers.map((h,i)=>[h,values[i]??''])));
 }
-function label(v){return v==='Y'?'S':v==='N'?'N':'ND'}
+function label(v){return v==='Y'?'Y':v==='N'?'N':'CT'}
+function criterionClass(v){return v==='Y'?'criterion-y':v==='N'?'criterion-n':'criterion-ct'}
 fetch('mmat_assessment.csv').then(r=>{if(!r.ok)throw new Error('CSV indisponível');return r.text()}).then(text=>{
   const data=parseCSV(text);
   const tbody=document.getElementById('rows');tbody.innerHTML='';
   data.forEach(s=>{
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td><strong>${s.Authors} (${s.Year})</strong><br>${s.Title}</td><td>${s.Design}</td>`+
-      ['Q1','Q2','Q3','Q4','Q5'].map(q=>`<td class="${s[q]}">${label(s[q])}</td>`).join('')+
+    tr.innerHTML=`<td><span class="study-title">${s.Authors} (${s.Year})</span><span class="study-meta">${s.Title}</span></td><td>${s.Design}</td>`+
+      ['Q1','Q2','Q3','Q4','Q5'].map(q=>`<td><span class="criterion ${criterionClass(s[q])}">${label(s[q])}</span></td>`).join('')+
       `<td>${s.AssessmentBasis}<br><small>${s.ReviewerRole}</small></td><td>${s.Limitations}</td>`;
     tbody.appendChild(tr);
   });
   const box=document.getElementById('summary');
   ['Y','N','CT'].forEach(v=>{
     const count=data.reduce((total,s)=>total+['Q1','Q2','Q3','Q4','Q5'].filter(q=>s[q]===v).length,0);
-    box.insertAdjacentHTML('beforeend',`<div class="card"><strong>${count}</strong>${label(v)}</div>`);
+    box.insertAdjacentHTML('beforeend',`<div class="metric-card"><span class="metric-value">${count}</span><span class="metric-label">${label(v)} nos critérios</span></div>`);
   });
-  box.insertAdjacentHTML('beforeend',`<div class="card"><strong>${data.length}</strong>estudos</div>`);
+  box.insertAdjacentHTML('beforeend',`<div class="metric-card"><span class="metric-value">${data.length}</span><span class="metric-label">estudos históricos</span></div>`);
 }).catch(error=>{document.getElementById('rows').innerHTML=`<tr><td colspan="9">${error.message}</td></tr>`});
 </script>
 </body>

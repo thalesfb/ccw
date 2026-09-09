@@ -1,279 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TCC - Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais">
-    <meta name="author" content="Thales Ferreira Batista">
-    <title>TCC - Ensino Personalizado de Matemática</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 900px;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-            margin-bottom: 15px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #f39c12;
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .pdf-viewer {
-            width: 100%;
-            height: 80vh;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-        }
-
-        .actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #ecf0f1;
-            color: #2c3e50;
-        }
-
-        .btn-secondary:hover {
-            background: #bdc3c7;
-            transform: translateY(-2px);
-        }
-
-        .info-box {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-            margin: 20px 0;
-        }
-
-        .info-box h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .info-box p,
-        .info-box ul {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .info-box ul {
-            list-style-position: inside;
-            margin-left: 10px;
-        }
-
-        .info-box li {
-            margin-bottom: 8px;
-        }
-
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-        }
-
-        footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5em;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            .pdf-viewer {
-                height: 60vh;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Trabalho de Conclusão de Curso — Ensino Personalizado de Matemática.">
+  <title>TCC · CCW</title>
+  <link rel="stylesheet" href="../../public-site/assets/site.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>TCC — Trabalho de Conclusão de Curso</h1>
-            <p>Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</p>
-            <span class="badge">Documento acadêmico versionado</span>
-        </header>
-
-        <div class="content">
-            <div class="info-box">
-                <h3>Sobre o documento</h3>
-                <p>
-                    Esta página apresenta o PDF canônico do Trabalho de Conclusão de Curso mantido
-                    na branch <code>main</code>. O trabalho consolida a revisão sistemática da
-                    literatura, a avaliação metodológica dos estudos incluídos e a especificação
-                    técnica e pedagógica do protótipo. A aplicação funcional e a validação
-                    experimental não integram o escopo desta versão do trabalho.
-                </p>
-            </div>
-
-            <div class="info-box" style="border-left-color: #e67e22;">
-                <h3>⚠️ Nota sobre a versão publicada</h3>
-                <p>
-                    O PDF atualmente publicado corresponde ao snapshot vigente da revisão. A população
-                    retida compreende 17 candidatos empíricos provisórios e 1 protocolo ou proposta
-                    contextual, sem confundir retenção operacional com síntese final de evidências.
-                    Consulte a <a href="https://github.com/thalesfb/ccw/blob/main/docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md">reconciliação vigente</a>
-                    para a definição dos números e dos limites de interpretação.
-                </p>
-            </div>
-
-            <div class="actions">
-                <a href="main.pdf" class="btn btn-primary" download>Baixar PDF</a>
-                <a href="main.pdf" class="btn btn-primary" target="_blank" rel="noopener">Abrir PDF em nova aba</a>
-                <a href="../../index.html" class="btn btn-secondary">Voltar ao projeto</a>
-                <a href="https://github.com/thalesfb/ccw" class="btn btn-secondary" target="_blank" rel="noopener">Ver no GitHub</a>
-            </div>
-
-            <div style="text-align: center; margin: 20px 0;">
-                <h2 style="color: #2c3e50; margin-bottom: 15px;">Visualização do documento</h2>
-            </div>
-
-            <iframe
-                src="main.pdf"
-                class="pdf-viewer"
-                title="TCC - Ensino Personalizado de Matemática"
-            ></iframe>
-
-            <div class="info-box" style="border-left-color: #27ae60;">
-                <h3>Escopo acadêmico consolidado</h3>
-                <ul>
-                    <li>fundamentação teórica sobre ensino de matemática, avaliação educacional e técnicas computacionais;</li>
-                    <li>metodologia e relato da revisão sistemática;</li>
-                    <li>síntese de 17 candidatos empíricos provisórios e apreciação metodológica por critérios do MMAT;</li>
-                    <li>especificação conceitual do protótipo, seus requisitos, limites e arquitetura de referência;</li>
-                    <li>discussão das contribuições e limitações compatíveis com a evidência efetivamente produzida.</li>
-                </ul>
-            </div>
-
-            <div class="info-box" style="border-left-color: #9b59b6;">
-                <h3>Rastreabilidade do snapshot publicado</h3>
-                <ul>
-                    <li><strong>11.904</strong> registros identificados nas quatro fontes científicas;</li>
-                    <li><strong>27</strong> identidades DOI/URL removidas deterministicamente;</li>
-                    <li><strong>11.877</strong> registros encaminhados à triagem;</li>
-                    <li><strong>2.486</strong> registros encaminhados à elegibilidade;</li>
-                    <li><strong>18</strong> registros retidos operacionalmente: 17 empíricos provisórios e 1 contextual.</li>
-                </ul>
-                <p>
-                    A apreciação MMAT é preliminar, preservada por critério e não é apresentada nesta
-                    página como escore agregado ou ranking de qualidade.
-                </p>
-            </div>
-
-            <div class="info-box" style="border-left-color: #e67e22;">
-                <h3>Limites de interpretação</h3>
-                <p>
-                    Compilação bem-sucedida, testes automatizados e resultados técnicos do pipeline
-                    não constituem, isoladamente, evidência de aprendizagem, eficácia pedagógica,
-                    causalidade ou validação em sala de aula. Essas conclusões exigiriam desenhos de
-                    estudo adicionais e evidência apropriada.
-                </p>
-            </div>
-
-            <div class="info-box" style="border-left-color: #e74c3c;">
-                <h3>Informações acadêmicas</h3>
-                <p>
-                    <strong>Instituição:</strong> Instituto Federal Catarinense — Campus Videira<br>
-                    <strong>Curso:</strong> Bacharelado em Ciência da Computação<br>
-                    <strong>Orientador:</strong> Prof. Dr. Rafael Zanin<br>
-                    <strong>Coorientador:</strong> Prof. Dr. Manassés Ribeiro<br>
-                    <strong>Acadêmico:</strong> Thales Ferreira Batista
-                </p>
-            </div>
-        </div>
-
-        <footer>
-            <p><strong>TCC — Trabalho de Conclusão de Curso</strong></p>
-            <p>Instituto Federal Catarinense — Campus Videira</p>
-            <p>© 2026 Thales Ferreira Batista | <a href="https://github.com/thalesfb/ccw">GitHub</a></p>
-        </footer>
+  <header class="site-header">
+    <div class="site-shell site-header-inner">
+      <a class="site-brand" href="../../" aria-label="CCW — voltar à visão geral">
+        <img src="../../public-site/assets/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
+        <span class="site-brand-copy"><strong>CCW</strong><small>Pesquisa versionada<br>Ciência da Computação</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="../../">Visão geral</a>
+        <a href="../../research/index.html">Revisão sistemática</a>
+        <a href="../../research/exports/analysis/mmat_current.html">MMAT atual</a>
+        <a href="../../presentation/">Apresentação</a>
+        <a href="../ptc/index.html">PTC</a>
+        <a href="./" aria-current="page">TCC</a>
+        <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <div class="site-shell">
+      <p class="breadcrumb"><a href="../../">Visão geral</a> / <strong>TCC</strong></p>
+      <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Documento acadêmico versionado</span>
+        <h1 id="page-title">Trabalho de Conclusão de Curso</h1>
+        <p class="lede">Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais</p>
+        <div class="action-row">
+          <a class="btn btn-primary" href="main.pdf" download>Baixar PDF</a>
+          <a class="btn btn-secondary" href="main.pdf" target="_blank" rel="noopener">Abrir PDF em nova aba</a>
+          <a class="btn btn-secondary" href="../../">Voltar ao projeto</a>
+        </div>
+      </section>
+
+      <section class="section split-grid">
+        <article class="surface-card">
+          <span class="eyebrow">Versão publicada</span>
+          <h3>Sobre o documento</h3>
+          <p>O TCC consolida a revisão sistemática, a apreciação metodológica dos estudos e a especificação técnica e pedagógica do protótipo. A aplicação funcional e a validação experimental estão fora do escopo desta versão.</p>
+        </article>
+        <article class="surface-card">
+          <span class="eyebrow">Snapshot vigente</span>
+          <h3>Como interpretar</h3>
+          <p>A população retida compreende 17 candidatos empíricos provisórios e 1 protocolo contextual. A apreciação MMAT é preliminar, por critério, e não é um escore agregado.</p>
+          <p><a href="../../research/exports/analysis/mmat_current.html">Consultar o MMAT atual →</a></p>
+        </article>
+      </section>
+
+      <section class="section pdf-panel" aria-labelledby="pdf-title">
+        <h2 id="pdf-title">Visualização do documento</h2>
+        <iframe src="main.pdf" class="pdf-viewer" title="TCC — Ensino Personalizado de Matemática"></iframe>
+      </section>
+
+      <section class="section split-grid">
+        <article class="surface-card">
+          <span class="eyebrow">Escopo consolidado</span>
+          <h3>O que o TCC entrega</h3>
+          <ul>
+            <li>fundamentação sobre ensino de matemática, avaliação e técnicas computacionais;</li>
+            <li>metodologia e relato da revisão sistemática;</li>
+            <li>síntese de candidatos empíricos e apreciação MMAT por critérios;</li>
+            <li>especificação conceitual, requisitos e arquitetura de referência.</li>
+          </ul>
+        </article>
+        <article class="surface-card">
+          <span class="eyebrow">Limites de interpretação</span>
+          <h3>O que não é afirmado</h3>
+          <ul>
+            <li>não há aplicação funcional publicada;</li>
+            <li>não há modelo definitivo treinado neste trabalho;</li>
+            <li>não há validação experimental em sala de aula;</li>
+            <li>resultados do pipeline não demonstram eficácia pedagógica.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section surface-card">
+        <span class="eyebrow">Identificação acadêmica</span>
+        <ul class="info-list">
+          <li><strong>Instituição:</strong> Instituto Federal Catarinense — Campus Videira</li>
+          <li><strong>Curso:</strong> Bacharelado em Ciência da Computação</li>
+          <li><strong>Orientador:</strong> Prof. Dr. Rafael Zanin</li>
+          <li><strong>Coorientador:</strong> Prof. Dr. Manassés Ribeiro</li>
+          <li><strong>Acadêmico:</strong> Thales Ferreira Batista</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-shell site-footer-inner">
+      <p><strong>TCC · CCW</strong><br>Instituto Federal Catarinense — Campus Videira</p>
+      <p><a href="../../">Visão geral</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></p>
+    </div>
+  </footer>
 </body>
 </html>

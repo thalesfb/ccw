@@ -1,82 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Revisão Sistemática - Técnicas Computacionais na Educação Matemática</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
-        .card { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
-        h1 { color: #333; font-size: 2.5rem; margin: 0 0 10px 0; text-align: center; }
-        .subtitle { color: #666; font-size: 1.2rem; text-align: center; margin-bottom: 40px; }
-        .link-grid { display: grid; gap: 20px; margin-top: 30px; }
-        .link-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 8px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
-        .link-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        .link-card .icon { font-size: 2rem; }
-        .link-card .content { flex: 1; margin-left: 20px; }
-        .link-card h2 { margin: 0; font-size: 1.4rem; }
-        .link-card p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9rem; }
-        footer { text-align: center; color: white; margin-top: 40px; opacity: 0.9; }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Relatórios e dados derivados da revisão sistemática sobre técnicas computacionais na educação matemática.">
+  <title>Revisão sistemática · CCW</title>
+  <link rel="stylesheet" href="../public-site/assets/site.css">
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h1>📊 Revisão Sistemática</h1>
-            <p class="subtitle">Técnicas Computacionais na Educação Matemática</p>
-            <div class="link-grid">
-                <a href="exports/reports/summary_report.html" class="link-card">
-                    <div class="icon">📈</div>
-                    <div class="content">
-                        <h2>Resumo Executivo</h2>
-                        <p>Estatísticas gerais, fluxo PRISMA e visualizações</p>
-                    </div>
-                </a>
-                
-                <a href="exports/reports/papers_report_included.html" class="link-card">
-                    <div class="icon">📄</div>
-                    <div class="content">
-                        <h2>Registros Retidos</h2>
-                        <p>População retida no snapshot vigente; inclui candidatos provisórios e protocolo contextual</p>
-                    </div>
-                </a>
-                
-                <a href="exports/reports/gap_analysis.html" class="link-card">
-                    <div class="icon">🔍</div>
-                    <div class="content">
-                        <h2>Análise de Lacunas</h2>
-                        <p>Identificação de gaps e oportunidades de pesquisa</p>
-                    </div>
-                </a>
-                
-                <a href="exports/analysis/papers.xlsx" class="link-card">
-                    <div class="icon">📊</div>
-                    <div class="content">
-                        <h2>Dados Brutos (Excel)</h2>
-                        <p>Planilha completa com todos os dados</p>
-                    </div>
-                </a>
-                
-                <a href="exports/reports/summary.json" class="link-card">
-                    <div class="icon">💾</div>
-                    <div class="content">
-                        <h2>Dados JSON</h2>
-                        <p>Estatísticas em formato JSON para integração</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <footer>
-            <p><strong>Conclusion Course Work (CCW)</strong></p>
-            <p>Trabalho de Conclusão de Curso - Ciência da Computação</p>
-            <p>Instituto Federal Catarinense - Campus Videira</p>
-            <p>© 2026 Thales Ferreira | <a href="https://github.com/thalesfb/ccw">GitHub</a></p>
-        </footer>
+  <header class="site-header">
+    <div class="site-shell site-header-inner">
+      <a class="site-brand" href="../" aria-label="CCW — voltar à visão geral">
+        <img src="../public-site/assets/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
+        <span class="site-brand-copy"><strong>CCW</strong><small>Pesquisa versionada<br>Ciência da Computação</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="../">Visão geral</a>
+        <a href="./" aria-current="page">Revisão sistemática</a>
+        <a href="exports/analysis/mmat_current.html">MMAT atual</a>
+        <a href="../presentation/">Apresentação</a>
+        <a href="../results/ptc/index.html">PTC</a>
+        <a href="../results/tcc/index.html">TCC</a>
+        <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <div class="site-shell">
+      <p class="breadcrumb"><a href="../">Visão geral</a> / <strong>Revisão sistemática</strong></p>
+      <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Fase 1 · snapshot adjudicado</span>
+        <h1 id="page-title">Revisão sistemática da literatura</h1>
+        <p class="lede">Relatórios, dados derivados e decisões documentadas sobre técnicas computacionais aplicadas à educação matemática.</p>
+        <div class="action-row">
+          <a class="btn btn-primary" href="exports/analysis/mmat_current.html">Abrir MMAT atual</a>
+          <a class="btn btn-secondary" href="../">Voltar à visão geral</a>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="reports-title">
+        <div class="section-heading">
+          <h2 id="reports-title">Artefatos de leitura</h2>
+          <p>Comece pelo resumo executivo ou consulte diretamente a população retida e as lacunas.</p>
+        </div>
+        <div class="report-grid">
+          <a class="report-card" href="exports/reports/summary_report.html">
+            <span class="report-type">Relatório principal</span>
+            <h3>Resumo executivo</h3>
+            <p>Estatísticas gerais, fluxo PRISMA e visualizações do snapshot publicado.</p>
+          </a>
+          <a class="report-card" href="exports/reports/papers_report_included.html">
+            <span class="report-type">População vigente</span>
+            <h3>Registros retidos</h3>
+            <p>Os 18 registros operacionais, com separação entre candidatos empíricos e protocolo contextual.</p>
+          </a>
+          <a class="report-card" href="exports/reports/gap_analysis.html">
+            <span class="report-type">Síntese crítica</span>
+            <h3>Análise de lacunas</h3>
+            <p>Limitações, oportunidades e questões que permanecem abertas para pesquisas futuras.</p>
+          </a>
+          <a class="report-card" href="exports/analysis/papers.xlsx">
+            <span class="report-type">Dados derivados</span>
+            <h3>Planilha de registros</h3>
+            <p>Arquivo tabular para inspeção e reuso dos dados exportados da revisão.</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="mmat-title">
+        <div class="callout callout-green notice">
+          <span class="notice-mark" aria-hidden="true">M</span>
+          <div>
+            <h3 id="mmat-title">MMAT 2018: apreciação preliminar por critérios</h3>
+            <p>O ledger atual cobre 18 registros, mas não produz uma nota global. Os critérios são apresentados com seus limites, fonte disponível e status de revisão.</p>
+            <a href="exports/analysis/mmat_current.html">Consultar a página MMAT atual →</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section split-grid" aria-label="Proveniência dos dados">
+        <article class="surface-card">
+          <span class="eyebrow">Rastreabilidade</span>
+          <h3>Snapshot e reconciliação</h3>
+          <p>O conjunto vigente foi reconciliado em 03/09/2026. A documentação de população explica as 27 remoções determinísticas, as decisões de escopo e a separação do protocolo 6921.</p>
+          <p><a href="https://github.com/thalesfb/ccw/blob/main/docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md" target="_blank" rel="noopener">Ler a reconciliação no GitHub →</a></p>
+        </article>
+        <article class="surface-card">
+          <span class="eyebrow">Formato aberto</span>
+          <h3>Dados para inspeção</h3>
+          <p>Além dos relatórios HTML, o repositório mantém CSV, JSON, imagens PRISMA e manifesto de reprodutibilidade para que cada número tenha uma origem verificável.</p>
+          <p><a href="exports/reports/summary.json">Abrir resumo JSON →</a></p>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="callout callout-blue">
+          <h3>Visualização histórica preservada</h3>
+          <p>A visualização legada do MMAT permanece disponível para proveniência e comparação, mas representa 17 estudos históricos e não o ledger atual.</p>
+          <p><a href="exports/analysis/mmat_visualization.html">Abrir visualização histórica →</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-shell site-footer-inner">
+      <p><strong>Revisão sistemática · CCW</strong><br>Snapshot de 03/09/2026</p>
+      <p><a href="../">Visão geral</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></p>
+    </div>
+  </footer>
 </body>
 </html>

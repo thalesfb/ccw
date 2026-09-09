@@ -78,6 +78,12 @@ jobs:
           cache: npm
           cache-dependency-path: presentation/package-lock.json
 
+      - name: Generate and validate current MMAT page
+        run: |
+          node scripts/generate-mmat-page.mjs
+          node scripts/site.test.mjs
+          test -f research/exports/analysis/mmat_current.html
+
       - name: Install presentation dependencies
         working-directory: presentation
         run: npm ci
@@ -97,6 +103,13 @@ jobs:
           
           # Copy main index.html (projeto principal)
           cp index.html _site/index.html
+
+          # Copy shared public-site assets and current MMAT source data
+          mkdir -p _site/public-site
+          cp -r public-site/assets _site/public-site/
+          mkdir -p _site/research/data
+          cp research/data/mmat_reassessment_current.csv _site/research/data/
+          cp research/data/mmat_current_study_registry.csv _site/research/data/
           
           # Create research directory structure  
           mkdir -p _site/research
