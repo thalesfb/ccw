@@ -3,8 +3,10 @@
 ## Publicação em GitHub Pages
 
 O workflow [publish-reports.yml](publish-reports.yml), denominado **Deploy
-Reports to GitHub Pages**, executa após push na `main` ou por acionamento manual.
-Ele publica relatórios previamente gerados e versionados. Não consulta o
+Reports to GitHub Pages**, executa após a conclusão bem-sucedida do workflow
+**TCC quality** na `main` ou por acionamento manual. Assim, a publicação espera
+os gates de qualidade, incluindo o build do LaTeX, antes de montar o site. Ele
+publica relatórios previamente gerados e versionados. Não consulta o
 SQLite nem executa uma nova coleta.
 
 O job de preparação:
