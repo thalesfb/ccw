@@ -7,6 +7,9 @@ const stylesPath = resolve(import.meta.dirname, 'styles', 'index.css')
 const summaryPath = resolve(import.meta.dirname, '..', 'research', 'exports', 'reports', 'summary.json')
 const slides = readFileSync(presentationPath, 'utf8')
 const css = readFileSync(stylesPath, 'utf8')
+const expectedSlideCount = 25
+const slideSeparatorCount = (slides.match(/^---\r?$/gm) || []).length
+const slideCount = slideSeparatorCount / 2
 const summaryText = readFileSync(summaryPath, 'utf8').replace(
   /:\s*(?:NaN|Infinity|-Infinity)(?=\s*[,}])/g,
   ': null',
@@ -84,7 +87,10 @@ const designErrors = deckValidationErrors({
   repositoryUrl,
 })
 
-if (missing.length || missingTemplateMarkers.length || forbidden.length || designErrors.length) {
+if (!Number.isInteger(slideCount) || slideCount !== expectedSlideCount) {
+  console.error(`Presentation slide count: expected ${expectedSlideCount}, found ${slideCount}`)
+}
+if (missing.length || missingTemplateMarkers.length || forbidden.length || designErrors.length || slideCount !== expectedSlideCount) {
   if (missing.length) console.error(`Missing current presentation statements: ${missing.join(', ')}`)
   if (missingTemplateMarkers.length) console.error(`Missing PTC template structures: ${missingTemplateMarkers.join(', ')}`)
   if (forbidden.length) console.error(`Forbidden historical/internal claims: ${forbidden.join(', ')}`)

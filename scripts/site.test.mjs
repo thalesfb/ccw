@@ -38,5 +38,15 @@ assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggreg
 assert.match(mmat, /visualização histórica/i, 'the current page must preserve historical provenance');
 assert.match(mmat, /18 registros/i, 'the current page must expose the current denominator');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
+assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
+assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
+assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');
+assert.match(mmat, /Are there clear research questions\?/i, 'the current page must preserve the original S1 wording');
+assert.match(mmat, /Critérios de apreciação por delineamento/i, 'the current page must expose design-specific criteria');
+assert.match(mmat, /MMAT 2018<\/a>/i, 'the current page must cite the MMAT 2018 source');
+assert.equal((mmat.match(/class="mmat-question-group"/g) || []).length, 5, 'the current page must expose all MMAT design groups');
+for (const criterion of ['Q1', 'Q2', 'Q3', 'Q4', 'Q5']) {
+  assert.match(mmat, new RegExp(`>${criterion}<`), `the current page must expose ${criterion}`);
+}
 
 console.log(`site contract passed: ${expectedPages.length} public pages`);

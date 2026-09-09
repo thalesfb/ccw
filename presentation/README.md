@@ -3,6 +3,7 @@
 Esta apresentação é uma demonstração pública e resumida do TCC. O conteúdo
 quantitativo é validado contra `research/exports/reports/summary.json`; as
 visualizações são cópias dos PNGs versionados em `research/exports/visualizations`.
+O deck vigente tem 25 slides; esse número é validado por `npm run validate`.
 
 O PPTX/PDF em `results/ptc/presentation/` foi consultado apenas como referência
 narrativa e visual. Ele contém uma apresentação histórica rasterizada e não é

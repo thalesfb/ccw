@@ -39,7 +39,7 @@ O workflow separa fonte e exportação:
   PTC em [`results/ptc/presentation/`](../../results/ptc/presentation/) são
   artefatos versionados mantidos separadamente. O PTC é histórico e não é
   fonte dos dados atuais.
-- O export PPTX é produzido e validado por
+- O export PPTX paralelo é produzido e validado por
   [`generate_tcc_presentation.py`](../../scripts/generate_tcc_presentation.py).
   O storyboard TCC em
   [`APRESENTACAO_TCC_SLIDES_CONTEUDO.md`](../../results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md)
@@ -47,6 +47,9 @@ O workflow separa fonte e exportação:
   automaticamente.
 - Slidev e gerador PPTX são fontes paralelas, sem sincronização automática.
   Mudanças compartilhadas exigem revisão e validação dos dois decks.
+- `presentation/validate.mjs` valida os 25 slides do deck vigente; o job
+  `tcc-editable-pptx-validation` valida separadamente o export editável paralelo
+  de 19 slides.
 - O build Slidev não incorpora PPTX local: o arquivo só chega ao Pages porque o
   job copia `results/ptc` e `results/tcc` para `_site/results/`.
 

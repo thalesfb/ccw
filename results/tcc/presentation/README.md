@@ -11,8 +11,11 @@ Os arquivos têm papéis diferentes e são mantidos em locais separados:
 - [`presentation/slides.md`](../../../presentation/slides.md) é a fonte
   independente do deck público Slidev. O build gerado fica em
   `presentation/dist/`.
+- O deck vigente do TCC tem 25 slides: essa contagem vale para `presentation/slides.md`
+  e para o storyboard `APRESENTACAO_TCC_SLIDES_CONTEUDO.md`.
 - [`ensino_personalizado_de_matematica_tcc.pptx`](ensino_personalizado_de_matematica_tcc.pptx)
-  é o export editável da apresentação do TCC. Não é fonte do deck Slidev.
+  é um export editável paralelo, atualmente com 19 slides. Ele não é a fonte do
+  deck Slidev e não deve ser usado para inferir a contagem do deck vigente.
 - [`APRESENTACAO_TCC_SLIDES_CONTEUDO.md`](APRESENTACAO_TCC_SLIDES_CONTEUDO.md)
   é o storyboard textual de apoio do export PPTX; [`ROTEIRO_FALAS_TCC.md`](ROTEIRO_FALAS_TCC.md)
   contém as falas sugeridas. O gerador não lê esses arquivos automaticamente.
@@ -25,8 +28,9 @@ Os arquivos têm papéis diferentes e são mantidos em locais separados:
   automaticamente.
 
 Slidev e o gerador PPTX são fontes paralelas, sem sincronização automática.
-Uma alteração em uma fonte pode deixar a outra desatualizada; revise e valide
-ambas quando o conteúdo compartilhado mudar.
+Uma alteração em uma fonte pode deixar a outra desatualizada; a contagem de 19
+slides do export editável é uma divergência conhecida que precisa ser resolvida
+antes de tratá-lo como export equivalente ao deck vigente de 25 slides.
 
 Após merge e deploy bem-sucedido, os endereços públicos são:
 
