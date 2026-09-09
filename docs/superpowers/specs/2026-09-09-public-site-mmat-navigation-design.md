@@ -1,8 +1,8 @@
 # Especificação — portal público, navegação e MMAT vigente
 
-**Data:** 2026-09-09  
+**Data:** 2026-09-09
 **Escopo:** `index.html`, `research/index.html`, páginas públicas de resultados,
-artefatos MMAT e publicação GitHub Pages  
+artefatos MMAT e publicação GitHub Pages
 **Status:** implementada neste PR, com validação pendente de revisão remota
 
 ## 1. Problema e objetivo
@@ -147,4 +147,3 @@ Antes de publicar:
 4. validar localmente e publicar atualização no PR aberto;
 5. revisar o site publicado e registrar eventuais pendências como issues, sem
    encerrar gates científicos ainda abertos.
-
