@@ -1120,3 +1120,51 @@ small { font-size: 0.73rem; }
   .ptc-gaps-grid > div { min-height: 10.5rem; }
   .closing-slide { padding-left: 2rem !important; padding-right: 2rem !important; }
 }
+
+/* Composição vertical: usar o palco disponível sem alterar os slides excepcionais. */
+.slidev-layout.content-slide:not(.ptc-objectives-slide) {
+  display: flex;
+  flex-direction: column;
+}
+
+.slidev-layout.content-slide:not(.ptc-objectives-slide) > :is(
+  .ptc-challenge-layout,
+  .ptc-objective-layout,
+  .ptc-question-grid,
+  .interpretation-ladder,
+  .ptc-mission-layout,
+  .ptc-search-layout,
+  .ptc-source-grid,
+  .ptc-funnel-layout,
+  .dedupe-layout,
+  .ptc-growth-layout,
+  .ptc-technique-layout,
+  .ptc-score-layout,
+  .ptc-retained-layout,
+  .ptc-mmat-layout,
+  .ptc-synthesis-layout,
+  .ptc-boundary-layout,
+  .ptc-gaps-grid,
+  .ptc-spec-layout,
+  .ptc-architecture-layout,
+  .ptc-open-layout,
+  .ptc-next-layout
+) {
+  flex: 1 1 auto;
+  min-height: 22rem;
+}
+
+.slidev-layout.content-slide:not(.ptc-objectives-slide) > .ptc-challenge-layout,
+.slidev-layout.content-slide:not(.ptc-objectives-slide) > .ptc-objective-layout {
+  align-items: center;
+}
+
+.slidev-layout.content-slide:not(.ptc-objectives-slide) > .interpretation-ladder {
+  align-content: center;
+}
+
+.slidev-layout.content-slide:not(.ptc-objectives-slide) > .ptc-question-grid,
+.slidev-layout.content-slide:not(.ptc-objectives-slide) > .ptc-source-grid,
+.slidev-layout.content-slide:not(.ptc-objectives-slide) > .ptc-gaps-grid {
+  align-content: stretch;
+}

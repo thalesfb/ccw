@@ -27,3 +27,9 @@ test('visual figures stay inside the presentation frame', () => {
 test('the objectives roadmap uses the available vertical stage', () => {
   assert.match(css, /\.slidev-layout\.ptc-objectives-slide\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;[^}]*justify-content:\s*center;/)
 })
+
+test('remaining content slides fill a shared vertical stage without touching the exceptions', () => {
+  assert.match(css, /\.slidev-layout\.content-slide:not\(\.ptc-objectives-slide\)\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;/)
+  assert.match(css, /\.slidev-layout\.content-slide:not\(\.ptc-objectives-slide\)\s*>\s*:is\([\s\S]*\.ptc-next-layout\s*\)\s*\{[\s\S]*flex:\s*1 1 auto;[\s\S]*min-height:\s*22rem;/)
+  assert.doesNotMatch(css, /\.slidev-layout\.ptc-prisma-slide\s*\{[^}]*flex:\s*1 1 auto;/)
+})
