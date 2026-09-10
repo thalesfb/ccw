@@ -254,6 +254,8 @@ p { margin: 0 0 14px; }
     box-shadow: var(--shadow);
     display: none;
     gap: 4px;
+    grid-template-columns: minmax(0, 1fr);
+    justify-content: stretch;
     max-height: min(420px, calc(100vh - 100px));
     overflow-y: auto;
     padding: 8px;
