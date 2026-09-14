@@ -355,7 +355,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 9 registros tiveram texto primário revisado e 8 foram apreciados com resumo/metadados. Um revisor conduziu a leitura; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> entre os 17 candidatos empíricos, 9 tiveram texto primário revisado e 8 foram apreciados com resumo/metadados. Um revisor conduziu a leitura; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
 
 ---
 layout: default

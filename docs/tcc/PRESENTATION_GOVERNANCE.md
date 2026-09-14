@@ -92,3 +92,10 @@ credenciais, logs brutos, transcrições de assistência, instruções internas 
 agentes ou conjecturas apresentadas como decisões. Quando uma pendência for
 relevante para a interpretação, ela deve ser descrita de forma neutra, com
 seu efeito sobre o alcance das conclusões.
+
+Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
+o código do pipeline está implementado, os testes sintéticos estão verdes, o
+experimento com dados reais permanece pendente e o MMAT é preliminar. No slide
+do MMAT, a contagem deve deixar explícito que nove dos 17 candidatos empíricos
+tiveram texto primário revisado e oito foram apreciados com resumo e
+metadados; o protocolo contextual não integra essa apreciação.

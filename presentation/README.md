@@ -7,8 +7,8 @@ O deck vigente tem 25 slides; esse número é validado por `npm run validate`.
 
 O PPTX/PDF em `results/ptc/presentation/` foi consultado apenas como referência
 narrativa e visual. Ele contém uma apresentação histórica rasterizada e não é
-fonte dos números atuais. O deck atual não reproduz afirmações históricas sobre
-9.431 registros, 2.517 duplicatas ou 17 incluídos.
+fonte dos números atuais. O deck atual não reproduz as contagens históricas
+da apresentação do PTC.
 
 ## Execução local
 

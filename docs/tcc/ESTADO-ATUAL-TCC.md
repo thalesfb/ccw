@@ -22,6 +22,12 @@ operacionalmente. A população retida está separada em 17 candidatos empírico
 provisórios e um protocolo ou proposta contextual, que não integra a síntese
 de evidências.
 
+O manifesto de reprodutibilidade registra a geração do snapshot em
+4 de setembro de 2026, às 02:45:33 UTC, e preserva os hashes dos exports e
+dos ledgers que sustentam essa contagem. A data do snapshot e a data de geração
+dos artefatos são informações de proveniência; não representam, por si só,
+uma nova rodada de coleta nas APIs.
+
 O ledger do MMAT 2018 preserva as duas perguntas de triagem, S1 e S2, e os
 critérios Q1--Q5 correspondentes ao delineamento de cada estudo. As respostas
 usam a legenda Y (sim), N (não) e CT (não é possível concluir com a evidência
@@ -56,6 +62,12 @@ de dados, seus termos de uso, o desfecho `correct_next`, os limiares mínimos e
 o protocolo de divisão; consolidar o deck canônico de 25 slides e distinguir
 qualquer exportação histórica de 19 slides; e concluir a recuperação das
 fontes primárias e a adjudicação do MMAT.
+
+Também permanece pendente uma matriz de rastreabilidade que associe cada
+requisito da especificação aos estudos e artefatos que o fundamentam. Até que
+essa matriz seja concluída, a ligação entre literatura e requisitos deve ser
+apresentada como derivação temática documentada, não como cobertura exaustiva
+de cada requisito por uma fonte individual.
 
 ## Possível execução futura com Google Colab
 
