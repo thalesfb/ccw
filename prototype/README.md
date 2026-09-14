@@ -2,6 +2,21 @@
 
 Este módulo implementa o pipeline reproduzível que transforma conjuntos educacionais autorizados em interações canônicas e executa o protocolo técnico de avaliação do TCC.
 
+## Estado para orientação
+
+O pipeline está implementado e coberto por 44 testes locais com dados
+sintéticos. Isso não equivale a uma execução empírica: ainda não há base real
+no repositório, os limiares de elegibilidade permanecem não congelados e não
+há resultado de eficácia pedagógica. A decisão sobre executar o protótipo deve
+ser tomada na reunião de orientação antes de qualquer treinamento.
+
+Se a execução for aprovada, o primeiro candidato é um notebook reprodutível no
+Google Colab, com os mesmos comandos e contratos desta pasta. O uso do runtime
+remoto, de eventual automação CLI ou de Colab Enterprise deverá ser confirmado
+na conta e no orçamento disponíveis. O notebook deve publicar somente
+manifestos, hashes, dados derivados permitidos e relatórios; arquivos brutos
+restritos ficam fora do Git.
+
 ## Princípios
 
 - o arquivo bruto nunca é modificado;
