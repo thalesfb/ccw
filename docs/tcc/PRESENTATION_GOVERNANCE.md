@@ -1,8 +1,9 @@
 # Governança da apresentação do TCC
 
-Este documento registra as decisões para a apresentação em `presentation/` e
-separa requisitos do pedido do usuário, instruções encontradas no arquivo
-PPTX de referência e critérios científicos ou institucionais verificáveis.
+Este documento define os critérios de produção e verificação da apresentação
+em `presentation/`. Ele separa a referência visual fornecida, os requisitos
+institucionais e os critérios científicos verificáveis, sem transformar
+decisões de implementação em afirmações acadêmicas.
 
 ## Escopo aprovado
 
@@ -76,26 +77,18 @@ O contrato automatizado em `presentation/deck-standards.mjs` verifica:
 O QR é gerado por `npm run generate:qr`, a partir da URL registrada no
 script, e o SVG gerado é um artefato local reproduzível.
 
-## Relação com as issues abertas
+## Limites de publicação
 
-Esta atualização atende a parte editorial e de rastreabilidade da decisão
-registrada nas issues, mas não encerra gates científicos ou de orientação:
+A apresentação publica somente o estado científico e técnico que possui
+evidência versionada. O rastreador de issues e o histórico de pull requests
+servem à proveniência da engenharia, mas não são fontes de resultados,
+aprovação acadêmica ou validação experimental. Reuniões, decisões pendentes,
+hipóteses de continuidade e tarefas de desenvolvimento devem aparecer no
+deck apenas quando forem necessárias para explicar o escopo e sempre com a
+distinção explícita entre realizado, demonstrado e proposto.
 
-- [#27](https://github.com/thalesfb/ccw/issues/27): deck preparado para reunião
-  de decisão sobre continuidade; a reunião ainda deve registrar o cenário e
-  a justificativa escolhidos.
-- [#24](https://github.com/thalesfb/ccw/issues/24): escopo, capítulos,
-  linguagem PRISMA e distinção entre realizado, demonstrado e proposto
-  continuam sujeitos à revisão científica.
-- [#25](https://github.com/thalesfb/ccw/issues/25): o título final depende da
-  decisão de escopo e não é resolvido por uma melhoria visual.
-- [#26](https://github.com/thalesfb/ccw/issues/26) e
-  [#29](https://github.com/thalesfb/ccw/issues/29): atualização de literatura,
-  protocolo e adjudicação não devem ser inferidos do deck.
-- [#28](https://github.com/thalesfb/ccw/issues/28) e
-  [#7](https://github.com/thalesfb/ccw/issues/7): harness e protótipo não são
-  declarados executados apenas porque aparecem como próximos passos.
-
-Assim, as issues permanecem abertas até que seus gates próprios tenham
-evidência e aprovação. A apresentação documenta a pendência em vez de
-transformá-la em resultado.
+Não devem ser publicados em documentos acadêmicos: caminhos locais,
+credenciais, logs brutos, transcrições de assistência, instruções internas de
+agentes ou conjecturas apresentadas como decisões. Quando uma pendência for
+relevante para a interpretação, ela deve ser descrita de forma neutra, com
+seu efeito sobre o alcance das conclusões.

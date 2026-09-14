@@ -15,6 +15,7 @@ Os documentos deste diretório não alteram, por si só, a classe LaTeX, o conte
 - [`PROJECT_INTEGRATION.md`](PROJECT_INTEGRATION.md): posicionamento da engenharia documental em relação à issue #7, ao merge do PR #6 e à sequência de revisão dos PRs científicos e técnicos.
 - [`PRESENTATION_GOVERNANCE.md`](PRESENTATION_GOVERNANCE.md): governança da apresentação Slidev do TCC, distinção entre o template de referência e requisitos do trabalho, identidade IFC, QR e critérios de legibilidade.
 - [`ESTADO-ATUAL-TCC.md`](ESTADO-ATUAL-TCC.md): estado público, limites interpretativos e decisões metodológicas pendentes da versão atual.
+- [`PUBLICATION_GOVERNANCE.md`](PUBLICATION_GOVERNANCE.md): critérios para separar relato acadêmico, proveniência técnica e fluxo público de desenvolvimento.
 - [`../adr/0001-preserve-ifc-institutional-formatting.md`](../adr/0001-preserve-ifc-institutional-formatting.md): registro da decisão arquitetural de não substituir automaticamente particularidades institucionais durante atualizações normativas.
 
 ## Princípios

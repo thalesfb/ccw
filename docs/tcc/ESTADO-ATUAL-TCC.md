@@ -9,6 +9,10 @@ transparência do repositório; não substitui o texto do TCC, o protocolo da
 revisão, a supervisão acadêmica ou qualquer aprovação necessária para uma
 execução experimental.
 
+Os critérios gerais para separar relato acadêmico, proveniência técnica e
+fluxo de desenvolvimento estão em
+[`PUBLICATION_GOVERNANCE.md`](PUBLICATION_GOVERNANCE.md).
+
 ## Revisão sistemática e MMAT
 
 O snapshot vigente da revisão tem data de corte em 31 de agosto de 2026. O
