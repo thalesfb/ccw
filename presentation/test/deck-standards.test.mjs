@@ -22,7 +22,7 @@ test('accepts a complete, accessible deck contract', () => {
       'S2 Os dados coletados permitem responder às perguntas de pesquisa?',
       'Y = Sim N = Não CT = Não é possível concluir',
     ].join('\n'),
-    css: ":root { --ptc-ink: #1f2a37; } body { font-family: 'Times New Roman', 'Nimbus Roman'; } h1 { font-family: 'Times New Roman'; }",
+    css: ":root { --tcc-ink: #1f2a37; } body { font-family: 'Times New Roman', 'Nimbus Roman'; } h1 { font-family: 'Times New Roman'; }",
     assetPaths: [
       'public/branding/ifc-campus-videira-horizontal.png',
       'public/branding/ccw-repository-qr.svg',

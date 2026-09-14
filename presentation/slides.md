@@ -42,40 +42,40 @@ mdc: true
 
 ---
 layout: default
-class: content-slide ptc-challenge-slide
+class: content-slide tcc-challenge-slide
 ---
 
 <div class="slide-kicker">01 / CONTEXTO</div>
 
 # O desafio: interpretar trajetórias<br>em turmas heterogêneas
 
-<div class="ptc-challenge-layout">
-  <div class="ptc-challenge-copy">
+<div class="tcc-challenge-layout">
+  <div class="tcc-challenge-copy">
     <p>Uma média de turma não mostra onde cada estudante está nem que evidência sustenta essa leitura.</p>
-    <p class="ptc-emphasis">O TCC organiza evidências sobre técnicas computacionais que podem apoiar essa interpretação, sem substituir a decisão pedagógica.</p>
+    <p class="tcc-emphasis">O TCC organiza evidências sobre técnicas computacionais que podem apoiar essa interpretação, sem substituir a decisão pedagógica.</p>
   </div>
-  <div class="ptc-challenge-list">
-    <div class="ptc-challenge-item ptc-blue"><span class="ptc-line-icon">◎</span><p><strong>Turmas heterogêneas:</strong> médias ocultam trajetórias individuais.</p></div>
-    <div class="ptc-challenge-item ptc-amber"><span class="ptc-line-icon">◷</span><p><strong>Tempo docente:</strong> evidências competem com o planejamento.</p></div>
-    <div class="ptc-challenge-item ptc-purple"><span class="ptc-line-icon">◈</span><p><strong>Ensino genérico:</strong> uma intervenção pode não atender necessidades distintas.</p></div>
-    <div class="ptc-challenge-item ptc-red"><span class="ptc-line-icon">⌘</span><p><strong>Literatura fragmentada:</strong> técnicas e contextos aparecem dispersos.</p></div>
+  <div class="tcc-challenge-list">
+    <div class="tcc-challenge-item tcc-blue"><span class="tcc-line-icon">◎</span><p><strong>Turmas heterogêneas:</strong> médias ocultam trajetórias individuais.</p></div>
+    <div class="tcc-challenge-item tcc-amber"><span class="tcc-line-icon">◷</span><p><strong>Tempo docente:</strong> evidências competem com o planejamento.</p></div>
+    <div class="tcc-challenge-item tcc-purple"><span class="tcc-line-icon">◈</span><p><strong>Ensino genérico:</strong> uma intervenção pode não atender necessidades distintas.</p></div>
+    <div class="tcc-challenge-item tcc-red"><span class="tcc-line-icon">⌘</span><p><strong>Literatura fragmentada:</strong> técnicas e contextos aparecem dispersos.</p></div>
   </div>
 </div>
 
 ---
 layout: default
-class: content-slide ptc-objective-general-slide
+class: content-slide tcc-objective-general-slide
 ---
 
 <div class="slide-kicker">02 / OBJETIVOS</div>
 
 # Objetivo geral
 
-<div class="ptc-objective-layout">
-  <div class="ptc-objective-box ptc-action"><span>OBJETO DA REVISÃO</span><p>Aplicações de técnicas computacionais na educação matemática.</p></div>
-  <div class="ptc-objective-core">Mapear e analisar sistematicamente essas aplicações — especialmente <em>machine learning</em>, <em>learning analytics</em> e sistemas tutores inteligentes — para identificar tendências, lacunas e oportunidades.</div>
-  <div class="ptc-objective-box ptc-impact"><span>IMPACTO (PARA QUÊ?)</span><p>Fundamentar uma especificação conceitual, explicável e orientada ao apoio do professor.</p></div>
-  <div class="ptc-objective-box ptc-scope"><span>ESCOPO</span><p>Revisão sistemática, síntese de evidências e requisitos. Não é protótipo funcional nem avaliação de eficácia.</p></div>
+<div class="tcc-objective-layout">
+  <div class="tcc-objective-box tcc-action"><span>OBJETO DA REVISÃO</span><p>Aplicações de técnicas computacionais na educação matemática.</p></div>
+  <div class="tcc-objective-core">Mapear e analisar sistematicamente essas aplicações — especialmente <em>machine learning</em>, <em>learning analytics</em> e sistemas tutores inteligentes — para identificar tendências, lacunas e oportunidades.</div>
+  <div class="tcc-objective-box tcc-impact"><span>IMPACTO (PARA QUÊ?)</span><p>Fundamentar uma especificação conceitual, explicável e orientada ao apoio do professor.</p></div>
+  <div class="tcc-objective-box tcc-scope"><span>ESCOPO</span><p>Revisão sistemática, síntese de evidências e requisitos. Não é protótipo funcional nem avaliação de eficácia.</p></div>
 </div>
 
 ---
@@ -87,32 +87,32 @@ class: content-slide
 
 # Quatro perguntas<br>organizam a investigação
 
-<div class="rq-grid ptc-question-grid">
-  <div class="rq-card rq-blue"><span>01</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="12" cy="14" r="6"/><circle cx="23" cy="11" r="4"/><path d="M7 19c-3 1-4 3-4 6m11-1c1-4 3-6 7-6 4 0 7 2 8 6M17 13l2-2m-3 7 3 1"/></svg></div><strong>Pergunta 1 (O quê?)</strong><p>Quais técnicas aparecem na educação matemática e em que contextos?</p></div></div>
-  <div class="rq-card rq-green"><span>02</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="15" r="9"/><path d="M14 10v6l4 3m7-6v10m4-6v6M24 23h7"/><path d="M23 12l2-3 2 2"/></svg></div><strong>Pergunta 2 (Como?)</strong><p>Como essas técnicas têm sido avaliadas em contextos educacionais reais?</p></div></div>
-  <div class="rq-card rq-orange"><span>03</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 8h9l3 3 3-3h7v8l-3 3 3 3v6h-8l-3-3-3 3H5v-8l3-3-3-3z"/><path d="M17 11v10m-5-5h10"/></svg></div><strong>Pergunta 3 (O que falta?)</strong><p>Quais lacunas, limitações e desafios permanecem?</p></div></div>
-  <div class="rq-card rq-red"><span>04</span><div><div class="ptc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="m16 16 7-6-4 8-7 4zM16 3v3m0 17v3M3 16h3m17 0h3"/></svg></div><strong>Pergunta 4 (E agora?)</strong><p>Que direcionamentos orientam ferramentas alinhadas à realidade?</p></div></div>
+<div class="rq-grid tcc-question-grid">
+  <div class="rq-card rq-blue"><span>01</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="12" cy="14" r="6"/><circle cx="23" cy="11" r="4"/><path d="M7 19c-3 1-4 3-4 6m11-1c1-4 3-6 7-6 4 0 7 2 8 6M17 13l2-2m-3 7 3 1"/></svg></div><strong>Pergunta 1 (O quê?)</strong><p>Quais técnicas aparecem na educação matemática e em que contextos?</p></div></div>
+  <div class="rq-card rq-green"><span>02</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="15" r="9"/><path d="M14 10v6l4 3m7-6v10m4-6v6M24 23h7"/><path d="M23 12l2-3 2 2"/></svg></div><strong>Pergunta 2 (Como?)</strong><p>Como essas técnicas têm sido avaliadas em contextos educacionais reais?</p></div></div>
+  <div class="rq-card rq-orange"><span>03</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 8h9l3 3 3-3h7v8l-3 3 3 3v6h-8l-3-3-3 3H5v-8l3-3-3-3z"/><path d="M17 11v10m-5-5h10"/></svg></div><strong>Pergunta 3 (O que falta?)</strong><p>Quais lacunas, limitações e desafios permanecem?</p></div></div>
+  <div class="rq-card rq-red"><span>04</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="m16 16 7-6-4 8-7 4zM16 3v3m0 17v3M3 16h3m17 0h3"/></svg></div><strong>Pergunta 4 (E agora?)</strong><p>Que direcionamentos orientam ferramentas alinhadas à realidade?</p></div></div>
 </div>
 
-<div class="ptc-caption">Estas quatro perguntas orientam a análise dos achados do TCC.</div>
+<div class="tcc-caption">Estas quatro perguntas orientam a análise dos achados do TCC.</div>
 
 ---
 layout: default
-class: content-slide ptc-mission-slide
+class: content-slide tcc-mission-slide
 ---
 
 <div class="slide-kicker">04 / RIGOR</div>
 
 # Rigor para mapear<br>sem extrapolar evidências
 
-<div class="ptc-mission-layout">
-  <div class="ptc-mission-copy">
+<div class="tcc-mission-layout">
+  <div class="tcc-mission-copy">
     <p>O TCC mapeia aplicações de <strong>machine learning</strong>, <strong>learning analytics</strong> e sistemas tutores inteligentes em educação matemática.</p>
-    <div class="ptc-reading-lens"><span>LEITURA RESPONSÁVEL</span><strong>Desempenho observado ≠ aprendizagem</strong><p>Uma saída computacional organiza registros e pode gerar estimativas; não observa, sozinha, os processos cognitivos, sociais e afetivos.</p></div>
+    <div class="tcc-reading-lens"><span>LEITURA RESPONSÁVEL</span><strong>Desempenho observado ≠ aprendizagem</strong><p>Uma saída computacional organiza registros e pode gerar estimativas; não observa, sozinha, os processos cognitivos, sociais e afetivos.</p></div>
   </div>
-  <div class="ptc-rigor-card">
+  <div class="tcc-rigor-card">
     <h2>A ferramenta de rigor</h2>
-    <div class="ptc-rigor-mark">PRISMA<br><b>2020</b></div>
+    <div class="tcc-rigor-mark">PRISMA<br><b>2020</b></div>
     <p><span>✓</span> Protocolo explícito para orientar identificação, seleção e relato.</p>
     <p><span>✓</span> Decisões documentadas para favorecer transparência e rastreabilidade.</p>
     <p><span>✓</span> Resultados apresentados com limites, sem ranking ou inferência de eficácia.</p>
@@ -140,61 +140,61 @@ class: content-slide
 
 ---
 layout: default
-class: content-slide ptc-objectives-slide
+class: content-slide tcc-objectives-slide
 ---
 
 <div class="slide-kicker">06 / OBJETIVOS ESPECÍFICOS</div>
 
 # A execução em 7 objetivos específicos
 
-<div class="ptc-objective-roadmap">
-  <svg class="ptc-roadmap-streams" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 88 C150 20 180 156 330 88 S510 20 660 88 S840 156 1000 88"/><path d="M0 235 C150 170 180 300 330 235 S510 170 660 235 S840 300 1000 235"/><path d="M0 365 C150 300 180 420 330 365 S510 300 660 365 S840 420 1000 365"/></svg>
-  <div class="ptc-objective-step"><span>01</span><strong>Revisar</strong><p>Literatura de 2015–2026, conforme o protocolo.</p></div>
-  <div class="ptc-objective-step"><span>02</span><strong>Identificar</strong><p>Técnicas computacionais utilizadas.</p></div>
-  <div class="ptc-objective-step"><span>03</span><strong>Classificar</strong><p>Finalidades pedagógicas.</p></div>
-  <div class="ptc-objective-step"><span>04</span><strong>Analisar</strong><p>Avaliação e limitações.</p></div>
-  <div class="ptc-objective-step"><span>05</span><strong>Mapear</strong><p>Lacunas e desafios.</p></div>
-  <div class="ptc-objective-step"><span>06</span><strong>Auditar</strong><p>Pipeline e artefatos versionados.</p></div>
-  <div class="ptc-objective-step"><span>07</span><strong>Derivar</strong><p>Requisitos e arquitetura conceitual.</p></div>
+<div class="tcc-objective-roadmap">
+  <svg class="tcc-roadmap-streams" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 88 C150 20 180 156 330 88 S510 20 660 88 S840 156 1000 88"/><path d="M0 235 C150 170 180 300 330 235 S510 170 660 235 S840 300 1000 235"/><path d="M0 365 C150 300 180 420 330 365 S510 300 660 365 S840 420 1000 365"/></svg>
+  <div class="tcc-objective-step"><span>01</span><strong>Revisar</strong><p>Literatura de 2015–2026, conforme o protocolo.</p></div>
+  <div class="tcc-objective-step"><span>02</span><strong>Identificar</strong><p>Técnicas computacionais utilizadas.</p></div>
+  <div class="tcc-objective-step"><span>03</span><strong>Classificar</strong><p>Finalidades pedagógicas.</p></div>
+  <div class="tcc-objective-step"><span>04</span><strong>Analisar</strong><p>Avaliação e limitações.</p></div>
+  <div class="tcc-objective-step"><span>05</span><strong>Mapear</strong><p>Lacunas e desafios.</p></div>
+  <div class="tcc-objective-step"><span>06</span><strong>Auditar</strong><p>Pipeline e artefatos versionados.</p></div>
+  <div class="tcc-objective-step"><span>07</span><strong>Derivar</strong><p>Requisitos e arquitetura conceitual.</p></div>
 </div>
 
-<div class="ptc-caption">Juntos, estes objetivos conectam a busca, a síntese e a especificação do TCC.</div>
+<div class="tcc-caption">Juntos, estes objetivos conectam a busca, a síntese e a especificação do TCC.</div>
 
 ---
 layout: default
-class: content-slide ptc-search-slide
+class: content-slide tcc-search-slide
 ---
 
 <div class="slide-kicker">07 / MÉTODO</div>
 
 # Busca em três camadas
 
-<div class="ptc-search-layout">
-  <div class="ptc-search-figure" aria-label="Busca em três camadas: matemática, técnicas e educação">
-    <div class="ptc-search-hex ptc-search-outer"><span>EDUCAÇÃO</span><div class="ptc-search-hex ptc-search-middle"><span>TÉCNICAS</span><div class="ptc-search-hex ptc-search-core"><b>MATEMÁTICA</b></div></div></div>
+<div class="tcc-search-layout">
+  <div class="tcc-search-figure" aria-label="Busca em três camadas: matemática, técnicas e educação">
+    <div class="tcc-search-hex tcc-search-outer"><span>EDUCAÇÃO</span><div class="tcc-search-hex tcc-search-middle"><span>TÉCNICAS</span><div class="tcc-search-hex tcc-search-core"><b>MATEMÁTICA</b></div></div></div>
   </div>
-  <div class="ptc-query-card"><strong>72 consultas<br>canônicas</strong><p>48 em inglês + 24 em português</p><small>Composição versionada; não é contagem retrospectiva de chamadas HTTP.</small></div>
+  <div class="tcc-query-card"><strong>72 consultas<br>canônicas</strong><p>48 em inglês + 24 em português</p><small>Composição versionada; não é contagem retrospectiva de chamadas HTTP.</small></div>
 </div>
 
-<div class="ptc-query-line">Consulta = <b>“matemática”</b> AND <b>“técnica”</b> AND <b>“educação”</b></div>
+<div class="tcc-query-line">Consulta = <b>“matemática”</b> AND <b>“técnica”</b> AND <b>“educação”</b></div>
 
 ---
 layout: default
-class: content-slide ptc-sources-slide
+class: content-slide tcc-sources-slide
 ---
 
 <div class="slide-kicker">08 / FONTES</div>
 
 # Quatro fontes de indexação complementares
 
-<div class="ptc-source-grid">
-  <div><span class="ptc-source-icon">⌘</span><p><strong>Semantic Scholar</strong><br>Ciência da Computação e métricas de influência.<small>1.931 registros</small></p></div>
-  <div><span class="ptc-source-icon">▤</span><p><strong>OpenAlex</strong><br>Cobertura ampla e aberta da literatura.<small>3.057 registros</small></p></div>
-  <div><span class="ptc-source-icon">⛓</span><p><strong>Crossref</strong><br>Precisão de metadados e DOIs.<small>5.049 registros</small></p></div>
-  <div><span class="ptc-source-icon">⌑</span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.840 registros</small></p></div>
+<div class="tcc-source-grid">
+  <div><span class="tcc-source-icon">⌘</span><p><strong>Semantic Scholar</strong><br>Ciência da Computação e métricas de influência.<small>1.931 registros</small></p></div>
+  <div><span class="tcc-source-icon">▤</span><p><strong>OpenAlex</strong><br>Cobertura ampla e aberta da literatura.<small>3.057 registros</small></p></div>
+  <div><span class="tcc-source-icon">⛓</span><p><strong>Crossref</strong><br>Precisão de metadados e DOIs.<small>5.049 registros</small></p></div>
+  <div><span class="tcc-source-icon">⌑</span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.840 registros</small></p></div>
 </div>
 
-<div class="ptc-caption">Teses e dissertações também podem ser aceitas quando atendem aos mesmos critérios de elegibilidade.</div>
+<div class="tcc-caption">Teses e dissertações também podem ser aceitas quando atendem aos mesmos critérios de elegibilidade.</div>
 
 ---
 layout: default
@@ -205,32 +205,32 @@ class: content-slide flow-slide
 
 # Da descoberta à retenção: 11.904 registros → 18 retidos
 
-<div class="ptc-funnel-layout">
-  <div class="ptc-funnel">
-    <div class="ptc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
-    <div class="ptc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
-    <div class="ptc-funnel-stage funnel-screening"><span>Triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
-    <div class="ptc-funnel-stage funnel-inclusion"><span>Retenção</span><strong>18</strong><small>2.468 excluídos na elegibilidade</small></div>
+<div class="tcc-funnel-layout">
+  <div class="tcc-funnel">
+    <div class="tcc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
+    <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
+    <div class="tcc-funnel-stage funnel-screening"><span>Triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
+    <div class="tcc-funnel-stage funnel-inclusion"><span>Retenção</span><strong>18</strong><small>2.468 excluídos na elegibilidade</small></div>
   </div>
-  <div class="ptc-funnel-notes">
+  <div class="tcc-funnel-notes">
     <p><strong>Identidade:</strong> 25 DOI + 2 URL são removidos de forma determinística.</p>
     <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
     <p><strong>Conjunto retido:</strong> 17 candidatos empíricos provisórios + 1 protocolo contextual.</p>
   </div>
 </div>
 
-<div class="ptc-funnel-caption"><strong>Taxa de retenção final: 0,15%.</strong> A baixa retenção descreve o filtro aplicado; não é medida de qualidade nem de eficácia pedagógica.</div>
+<div class="tcc-funnel-caption"><strong>Taxa de retenção final: 0,15%.</strong> A baixa retenção descreve o filtro aplicado; não é medida de qualidade nem de eficácia pedagógica.</div>
 
 ---
 layout: center
-class: image-slide ptc-prisma-slide
+class: image-slide tcc-prisma-slide
 ---
 
 <div class="slide-kicker">10 / FLUXO</div>
 
 <h1 class="sr-only">Fluxo PRISMA dos dados da revisão</h1>
 
-<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image ptc-prisma-image" />
+<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image tcc-prisma-image" />
 
 <small class="source-note">Fonte versionada: `research/exports/visualizations/prisma_flow.png`.</small>
 
@@ -264,12 +264,12 @@ class: content-slide
 
 # Distribuição anual no recorte observado
 
-<div class="ptc-growth-layout">
-  <div class="ptc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano" /></div>
-  <div class="ptc-growth-copy"><h2>O snapshot observado</h2><p>Os registros cobrem 2015–2026, com maior concentração nos anos recentes.</p><small>Leitura descritiva do conjunto coletado; não infere representatividade, causalidade ou qualidade dos estudos.</small></div>
+<div class="tcc-growth-layout">
+  <div class="tcc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano" /></div>
+  <div class="tcc-growth-copy"><h2>O snapshot observado</h2><p>Os registros cobrem 2015–2026, com maior concentração nos anos recentes.</p><small>Leitura descritiva do conjunto coletado; não infere representatividade, causalidade ou qualidade dos estudos.</small></div>
 </div>
 
-<div class="ptc-caption">Distribuição anual dos registros no recorte temporal do protocolo.</div>
+<div class="tcc-caption">Distribuição anual dos registros no recorte temporal do protocolo.</div>
 
 ---
 layout: default
@@ -280,74 +280,74 @@ class: content-slide
 
 # Técnicas: frequências do conjunto triado
 
-<div class="ptc-technique-layout">
-  <div class="ptc-technique-chart"><img src="./public/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
-  <div class="ptc-technique-copy"><div class="ptc-technique-stat"><strong>6.399</strong><span>técnica não especificada</span></div><p>As categorias descrevem os 11.877 registros após remoção determinística; podem se sobrepor e não representam somente os 18 retidos.</p><div class="ptc-technique-list"><div><span>assessment</span><b>1.073</b></div><div><span>IA</span><b>863</b></div><div><span>ML</span><b>771</b></div><div><span>preditiva</span><b>345</b></div></div></div>
+<div class="tcc-technique-layout">
+  <div class="tcc-technique-chart"><img src="./public/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
+  <div class="tcc-technique-copy"><div class="tcc-technique-stat"><strong>6.399</strong><span>técnica não especificada</span></div><p>As categorias descrevem os 11.877 registros após remoção determinística; podem se sobrepor e não representam somente os 18 retidos.</p><div class="tcc-technique-list"><div><span>assessment</span><b>1.073</b></div><div><span>IA</span><b>863</b></div><div><span>ML</span><b>771</b></div><div><span>preditiva</span><b>345</b></div></div></div>
 </div>
 
-<div class="ptc-caption">Frequências descritivas: não medem qualidade, eficácia ou predominância entre os estudos incluídos.</div>
+<div class="tcc-caption">Frequências descritivas: não medem qualidade, eficácia ou predominância entre os estudos incluídos.</div>
 
 ---
 layout: default
-class: content-slide ptc-score-slide
+class: content-slide tcc-score-slide
 ---
 
 <div class="slide-kicker">14 / RELEVÂNCIA</div>
 
 # Score: prioridade de leitura, não qualidade
 
-<div class="ptc-score-layout">
-  <div class="ptc-score-visual"><img src="./public/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
-  <div class="ptc-score-copy">
-    <div class="ptc-score-threshold">≥ 4,0</div>
+<div class="tcc-score-layout">
+  <div class="tcc-score-visual"><img src="./public/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
+  <div class="tcc-score-copy">
+    <div class="tcc-score-threshold">≥ 4,0</div>
     <h2>O score organiza o processamento.</h2>
     <p>Ele prioriza a leitura dos registros, mas não mede qualidade metodológica, não produz ranking e não substitui a leitura das fontes primárias.</p>
-    <div class="ptc-guardrail"><span>!</span><strong>Filtro operacional ≠ conclusão científica</strong></div>
+    <div class="tcc-guardrail"><span>!</span><strong>Filtro operacional ≠ conclusão científica</strong></div>
   </div>
 </div>
 
-<div class="ptc-caption">A pontuação é uma regra de processamento documentada, não uma conclusão sobre os estudos.</div>
+<div class="tcc-caption">A pontuação é uma regra de processamento documentada, não uma conclusão sobre os estudos.</div>
 
 ---
 layout: default
-class: content-slide ptc-retained-slide
+class: content-slide tcc-retained-slide
 ---
 
 <div class="slide-kicker">15 / RETENÇÃO</div>
 
 # Retenção: dois estratos de leitura
 
-<div class="ptc-retained-layout">
-  <div class="ptc-retained-number"><strong>18</strong><span>registros retidos<br>na revisão</span><div class="ptc-retained-rule"></div><p>O conjunto final não é homogêneo.</p></div>
-  <div class="ptc-retained-copy">
-    <div class="ptc-retained-strata"><strong>17</strong><span>candidatos empíricos provisórios</span><strong>+</strong><strong>1</strong><span>protocolo contextual</span></div>
+<div class="tcc-retained-layout">
+  <div class="tcc-retained-number"><strong>18</strong><span>registros retidos<br>na revisão</span><div class="tcc-retained-rule"></div><p>O conjunto final não é homogêneo.</p></div>
+  <div class="tcc-retained-copy">
+    <div class="tcc-retained-strata"><strong>17</strong><span>candidatos empíricos provisórios</span><strong>+</strong><strong>1</strong><span>protocolo contextual</span></div>
     <h2>Dois estratos de leitura</h2>
     <p>Os candidatos empíricos sustentam a síntese. O protocolo contextual permanece para rastreabilidade, sem resultado empírico.</p>
-    <div class="ptc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
+    <div class="tcc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
   </div>
 </div>
 
-<div class="ptc-caption">A separação preserva a rastreabilidade sem apresentar o protocolo como evidência de eficácia.</div>
+<div class="tcc-caption">A separação preserva a rastreabilidade sem apresentar o protocolo como evidência de eficácia.</div>
 
 ---
 layout: default
-class: content-slide ptc-mmat-slide
+class: content-slide tcc-mmat-slide
 ---
 
 <div class="slide-kicker">16 / MMAT</div>
 
 # MMAT preliminar: critérios, não nota global
 
-<div class="ptc-mmat-layout">
-  <div class="ptc-mmat-visual" aria-hidden="true"><div class="ptc-mmat-scale">⚖</div><span>MMAT 2018</span><small>leitura por critério</small></div>
-  <div class="ptc-mmat-copy">
+<div class="tcc-mmat-layout">
+  <div class="tcc-mmat-visual" aria-hidden="true"><div class="tcc-mmat-scale">⚖</div><span>MMAT 2018</span><small>leitura por critério</small></div>
+  <div class="tcc-mmat-copy">
     <h2>Apreciação por critério</h2>
     <p>Antes dos critérios específicos, o MMAT registra duas perguntas de triagem. Depois, as respostas são codificadas por delineamento e evidência disponível.</p>
-    <div class="ptc-mmat-screening" aria-label="Perguntas de triagem do MMAT 2018">
+    <div class="tcc-mmat-screening" aria-label="Perguntas de triagem do MMAT 2018">
       <div><b>S1</b><span>Há perguntas de pesquisa claras?</span></div>
       <div><b>S2</b><span>Os dados coletados permitem responder às perguntas de pesquisa?</span></div>
     </div>
-    <div class="ptc-mmat-key">
+    <div class="tcc-mmat-key">
       <div><b>Y</b><span><strong>Y = Sim</strong> critério atendido segundo a evidência disponível.</span></div>
       <div><b>N</b><span><strong>N = Não</strong> critério não atendido na apreciação documental.</span></div>
       <div><b>CT</b><span><strong>CT = Não é possível concluir</strong> informação insuficiente para concluir.</span></div>
@@ -355,127 +355,127 @@ class: content-slide ptc-mmat-slide
   </div>
 </div>
 
-<div class="ptc-mmat-result"><strong>Estado preliminar:</strong> 9 registros tiveram texto primário revisado e 8 foram apreciados com resumo/metadados. Um revisor conduziu a leitura; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 9 registros tiveram texto primário revisado e 8 foram apreciados com resumo/metadados. Um revisor conduziu a leitura; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
 
 ---
 layout: default
-class: content-slide ptc-synthesis-slide
+class: content-slide tcc-synthesis-slide
 ---
 
 <div class="slide-kicker">17 / SÍNTESE</div>
 
 # Síntese provisória dos candidatos empíricos
 
-<div class="ptc-synthesis-layout">
-  <div class="ptc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="ptc-orbit-ring ring-one"></div><div class="ptc-orbit-ring ring-two"></div><div class="ptc-orbit-ring ring-three"></div><strong>17</strong><span>candidatos<br>empíricos</span><i>evidências<br>relacionadas</i></div>
-  <div class="ptc-synthesis-copy">
+<div class="tcc-synthesis-layout">
+  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>17</strong><span>candidatos<br>empíricos</span><i>evidências<br>relacionadas</i></div>
+  <div class="tcc-synthesis-copy">
     <h2>Predição e estimativa aparecem como eixo recorrente.</h2>
     <p>Os estudos organizam evidências de desempenho e inferem proficiência a partir de registros observados, frequentemente com modelos supervisionados.</p>
-    <div class="ptc-synthesis-points"><div><b>01</b><span><strong>Finalidade</strong> reconhecer padrões em registros de avaliação.</span></div><div><b>02</b><span><strong>Modelos</strong> RF, SVM e redes neurais aparecem como alternativas.</span></div><div><b>03</b><span><strong>Limite</strong> populações, instrumentos e métricas variam entre estudos.</span></div></div>
+    <div class="tcc-synthesis-points"><div><b>01</b><span><strong>Finalidade</strong> reconhecer padrões em registros de avaliação.</span></div><div><b>02</b><span><strong>Modelos</strong> RF, SVM e redes neurais aparecem como alternativas.</span></div><div><b>03</b><span><strong>Limite</strong> populações, instrumentos e métricas variam entre estudos.</span></div></div>
   </div>
 </div>
 
-<div class="ptc-caption">A síntese organiza o estado da literatura; não estabelece ranking de modelos nem eficácia pedagógica geral.</div>
+<div class="tcc-caption">A síntese organiza o estado da literatura; não estabelece ranking de modelos nem eficácia pedagógica geral.</div>
 
 ---
 layout: default
-class: content-slide ptc-boundary-slide
+class: content-slide tcc-boundary-slide
 ---
 
 <div class="slide-kicker">18 / INTERPRETAÇÃO</div>
 
 # Limites da leitura: entrega e fronteira
 
-<div class="ptc-boundary-layout">
-  <div class="ptc-boundary-column boundary-yes"><div class="ptc-boundary-mark">✓</div><span>O TCC ENTREGA</span><h2>Um mapa auditável</h2><p>Aplicações encontradas, etapas de seleção, síntese interpretativa e lacunas documentadas.</p></div>
-  <div class="ptc-boundary-divider"></div>
-  <div class="ptc-boundary-column boundary-no"><div class="ptc-boundary-mark">?</div><span>O TCC NÃO ENTREGA</span><h2>Eficácia geral</h2><p>Não há base para afirmar superioridade entre modelos ou protótipo validado em escolas.</p></div>
+<div class="tcc-boundary-layout">
+  <div class="tcc-boundary-column boundary-yes"><div class="tcc-boundary-mark">✓</div><span>O TCC ENTREGA</span><h2>Um mapa auditável</h2><p>Aplicações encontradas, etapas de seleção, síntese interpretativa e lacunas documentadas.</p></div>
+  <div class="tcc-boundary-divider"></div>
+  <div class="tcc-boundary-column boundary-no"><div class="tcc-boundary-mark">?</div><span>O TCC NÃO ENTREGA</span><h2>Eficácia geral</h2><p>Não há base para afirmar superioridade entre modelos ou protótipo validado em escolas.</p></div>
 </div>
 
-<div class="ptc-boundary-foot"><strong>Leitura obrigatória:</strong> resultados individuais exigem população, instrumento, métrica e desenho de avaliação nas fontes primárias.</div>
+<div class="tcc-boundary-foot"><strong>Leitura obrigatória:</strong> resultados individuais exigem população, instrumento, métrica e desenho de avaliação nas fontes primárias.</div>
 
 ---
 layout: default
-class: content-slide ptc-gaps-slide
+class: content-slide tcc-gaps-slide
 ---
 
 <div class="slide-kicker">19 / LACUNAS</div>
 
 # Lacunas que orientam a especificação
 
-<p class="ptc-gaps-intro">Seis lacunas documentadas são agrupadas em quatro eixos para conduzir a próxima decisão científica.</p>
-<div class="ptc-gaps-grid">
+<p class="tcc-gaps-intro">Seis lacunas documentadas são agrupadas em quatro eixos para conduzir a próxima decisão científica.</p>
+<div class="tcc-gaps-grid">
   <div><b>1</b><h2>Explicabilidade</h2><p>Resultados compreensíveis, com incerteza e participação docente.</p></div>
   <div><b>2</b><h2>Contexto curricular</h2><p>Indicadores relacionados a objetivos e descritores matemáticos.</p></div>
   <div><b>3</b><h2>Validação real</h2><p>População, ambiente educacional e equidade precisam ser investigados.</p></div>
   <div><b>4</b><h2>Reprodutibilidade</h2><p>Dados, código, parâmetros e decisões permanecem rastreáveis.</p></div>
 </div>
 
-<div class="ptc-gaps-foot"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
+<div class="tcc-gaps-foot"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
 
 ---
 layout: default
-class: content-slide ptc-specification-slide
+class: content-slide tcc-specification-slide
 ---
 
 <div class="slide-kicker">20 / ESPECIFICAÇÃO</div>
 
 # Especificação conceitual: da evidência aos requisitos
 
-<div class="ptc-spec-layout">
-  <div class="ptc-spec-path"><div><b>01</b><strong>Evidências</strong><span>literatura + fundamentação</span></div><i>→</i><div><b>02</b><strong>Lacunas</strong><span>riscos e necessidades</span></div><i>→</i><div><b>03</b><strong>Requisitos</strong><span>funções e restrições</span></div></div>
-  <div class="ptc-spec-delivery"><div class="ptc-paper-icon">▤</div><h2>Entrega do TCC</h2><p>Uma especificação técnica e pedagógica auditável, com protocolo e arquitetura de referência.</p><small>Não é aplicação funcional, não usa base definitiva e não possui validação com participantes.</small></div>
+<div class="tcc-spec-layout">
+  <div class="tcc-spec-path"><div><b>01</b><strong>Evidências</strong><span>literatura + fundamentação</span></div><i>→</i><div><b>02</b><strong>Lacunas</strong><span>riscos e necessidades</span></div><i>→</i><div><b>03</b><strong>Requisitos</strong><span>funções e restrições</span></div></div>
+  <div class="tcc-spec-delivery"><div class="tcc-paper-icon">▤</div><h2>Entrega do TCC</h2><p>Uma especificação técnica e pedagógica auditável, com protocolo e arquitetura de referência.</p><small>Não é aplicação funcional, não usa base definitiva e não possui validação com participantes.</small></div>
 </div>
 
-<div class="ptc-spec-caption">A evidência orienta requisitos; os requisitos orientam um futuro protocolo de avaliação.</div>
+<div class="tcc-spec-caption">A evidência orienta requisitos; os requisitos orientam um futuro protocolo de avaliação.</div>
 
 ---
 layout: default
-class: content-slide ptc-architecture-slide
+class: content-slide tcc-architecture-slide
 ---
 
 <div class="slide-kicker">21 / ARQUITETURA</div>
 
 # Arquitetura conceitual de referência
 
-<div class="ptc-architecture-layout">
-  <div class="ptc-architecture-path"><div class="arch-node arch-data"><b>01</b><strong>Ingestão</strong><span>fontes</span></div><i>→</i><div class="arch-node arch-prep"><b>02</b><strong>Preparação</strong><span>dados documentados</span></div><i>→</i><div class="arch-node arch-model"><b>03</b><strong>Modelagem</strong><span>modelos candidatos</span></div><i>→</i><div class="arch-node arch-eval"><b>04</b><strong>Avaliação</strong><span>métricas e explicações</span></div><i>→</i><div class="arch-node arch-present"><b>05</b><strong>Apresentação</strong><span>decisão docente</span></div></div>
-  <div class="ptc-architecture-copy"><h2>Componentes separáveis</h2><p>A separação favorece testabilidade, rastreabilidade e substituição controlada de técnicas.</p><div class="ptc-architecture-note">A arquitetura é uma referência conceitual do TCC, não a descrição de um sistema implementado.</div></div>
+<div class="tcc-architecture-layout">
+  <div class="tcc-architecture-path"><div class="arch-node arch-data"><b>01</b><strong>Ingestão</strong><span>fontes</span></div><i>→</i><div class="arch-node arch-prep"><b>02</b><strong>Preparação</strong><span>dados documentados</span></div><i>→</i><div class="arch-node arch-model"><b>03</b><strong>Modelagem</strong><span>modelos candidatos</span></div><i>→</i><div class="arch-node arch-eval"><b>04</b><strong>Avaliação</strong><span>métricas e explicações</span></div><i>→</i><div class="arch-node arch-present"><b>05</b><strong>Apresentação</strong><span>decisão docente</span></div></div>
+  <div class="tcc-architecture-copy"><h2>Componentes separáveis</h2><p>A separação favorece testabilidade, rastreabilidade e substituição controlada de técnicas.</p><div class="tcc-architecture-note">A arquitetura é uma referência conceitual do TCC, não a descrição de um sistema implementado.</div></div>
 </div>
 
-<div class="ptc-caption">A apresentação finaliza no apoio à análise docente; não automatiza a decisão pedagógica.</div>
+<div class="tcc-caption">A apresentação finaliza no apoio à análise docente; não automatiza a decisão pedagógica.</div>
 
 ---
 layout: default
-class: content-slide ptc-open-slide
+class: content-slide tcc-open-slide
 ---
 
 <div class="slide-kicker">22 / REPRODUTIBILIDADE</div>
 
 # Reprodutibilidade: uma trilha de auditoria
 
-<div class="ptc-open-layout">
-  <div class="ptc-open-visual"><div class="ptc-open-center">TCC</div><div class="ptc-open-artifact artifact-csv">CSV<br><small>dados</small></div><div class="ptc-open-artifact artifact-bib">BibTeX<br><small>fontes</small></div><div class="ptc-open-artifact artifact-manifest">#<br><small>hashes</small></div><div class="ptc-open-artifact artifact-report">PNG / HTML<br><small>relatórios</small></div></div>
-  <div class="ptc-open-copy"><h2>Reprodutibilidade sem distribuir o SQLite</h2><p>A trilha pública reúne dados derivados, referências e artefatos versionados, preservando a separação entre a bibliografia do pipeline e as referências teóricas do TCC.</p><div class="ptc-paths"><code>research/exports/analysis/papers.csv</code><code>research/exports/reports/summary.json</code><code>research/exports/reports/reproducibility_manifest.json</code></div></div>
+<div class="tcc-open-layout">
+  <div class="tcc-open-visual"><div class="tcc-open-center">TCC</div><div class="tcc-open-artifact artifact-csv">CSV<br><small>dados</small></div><div class="tcc-open-artifact artifact-bib">BibTeX<br><small>fontes</small></div><div class="tcc-open-artifact artifact-manifest">#<br><small>hashes</small></div><div class="tcc-open-artifact artifact-report">PNG / HTML<br><small>relatórios</small></div></div>
+  <div class="tcc-open-copy"><h2>Reprodutibilidade sem distribuir o SQLite</h2><p>A trilha pública reúne dados derivados, referências e artefatos versionados, preservando a separação entre a bibliografia do pipeline e as referências teóricas do TCC.</p><div class="tcc-paths"><code>research/exports/analysis/papers.csv</code><code>research/exports/reports/summary.json</code><code>research/exports/reports/reproducibility_manifest.json</code></div></div>
 </div>
 
-<div class="ptc-caption">Referências teóricas, pedagógicas, metodológicas e técnicas permanecem separadas das referências derivadas do pipeline.</div>
+<div class="tcc-caption">Referências teóricas, pedagógicas, metodológicas e técnicas permanecem separadas das referências derivadas do pipeline.</div>
 
 ---
 layout: default
-class: content-slide ptc-next-slide
+class: content-slide tcc-next-slide
 ---
 
 <div class="slide-kicker">23 / CONTINUIDADE</div>
 
 # Próximos passos — antes de qualquer experimento
 
-<div class="ptc-next-layout">
-  <div class="ptc-next-list"><div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div><div><b>02</b><span>Revisar lacunas à luz dos 17 estudos empíricos provisórios.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
-  <div class="ptc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
+<div class="tcc-next-layout">
+  <div class="tcc-next-list"><div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div><div><b>02</b><span>Revisar lacunas à luz dos 17 estudos empíricos provisórios.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="tcc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 
-<div class="ptc-caption">A revisão sistemática fundamenta próximas decisões; não substitui o protocolo do experimento.</div>
+<div class="tcc-caption">A revisão sistemática fundamenta próximas decisões; não substitui o protocolo do experimento.</div>
 
 ---
 layout: center

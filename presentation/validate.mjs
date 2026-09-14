@@ -47,14 +47,14 @@ const requiredStatements = [
 ]
 
 const requiredTemplateMarkers = [
-  'ptc-challenge-layout',
-  'ptc-objective-layout',
-  'ptc-question-grid',
-  'ptc-mission-layout',
-  'ptc-objective-roadmap',
-  'ptc-search-layout',
-  'ptc-source-grid',
-  'ptc-funnel-layout',
+  'tcc-challenge-layout',
+  'tcc-objective-layout',
+  'tcc-question-grid',
+  'tcc-mission-layout',
+  'tcc-objective-roadmap',
+  'tcc-search-layout',
+  'tcc-source-grid',
+  'tcc-funnel-layout',
 ]
 
 const forbiddenClaims = [
@@ -92,7 +92,7 @@ if (!Number.isInteger(slideCount) || slideCount !== expectedSlideCount) {
 }
 if (missing.length || missingTemplateMarkers.length || forbidden.length || designErrors.length || slideCount !== expectedSlideCount) {
   if (missing.length) console.error(`Missing current presentation statements: ${missing.join(', ')}`)
-  if (missingTemplateMarkers.length) console.error(`Missing PTC template structures: ${missingTemplateMarkers.join(', ')}`)
+  if (missingTemplateMarkers.length) console.error(`Missing TCC template structures: ${missingTemplateMarkers.join(', ')}`)
   if (forbidden.length) console.error(`Forbidden historical/internal claims: ${forbidden.join(', ')}`)
   if (designErrors.length) console.error(`Presentation design contract: ${designErrors.join(' | ')}`)
   process.exit(1)

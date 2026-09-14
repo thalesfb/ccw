@@ -1,4 +1,4 @@
-# Governança da apresentação do PTC
+# Governança da apresentação do TCC
 
 Este documento registra as decisões para a apresentação em `presentation/` e
 separa requisitos do pedido do usuário, instruções encontradas no arquivo
@@ -19,26 +19,31 @@ PPTX de referência e critérios científicos ou institucionais verificáveis.
 
 ## Template fornecido: instrução versus requisito
 
-O arquivo local
-`C:\Users\user\Downloads\Ensino Personalizado de Matemática_ Oportunidades e Técnicas Computacionais_template.pptx`
-foi inspecionado como referência visual e tipográfica. Ele contém 55 slides,
+O arquivo de template fornecido externamente foi inspecionado como referência
+visual e tipográfica. Ele contém 55 slides,
 incluindo exemplos, slides de instrução do fornecedor, referências de fonte e
 slides descartáveis.
 
 As seguintes propriedades foram aproveitadas como direção visual:
 
 - proporção 16:9;
-- famílias Asap e Barlow;
+- composição tipográfica e editorial do material de referência, sem tratá-la
+  como a fonte do manuscrito;
 - composição editorial com cartões, divisões claras e espaço negativo;
 - paleta de referência registrada no slide “Fonts & colors used”.
 
 As instruções “Instructions for use”, a exigência condicional de manter um
 slide de créditos e a recomendação de atribuição dependente do tipo de conta
 Slidesgo são instruções de licenciamento/uso do fornecedor. Elas não são
-normas do IFC, requisitos científicos do PTC nem autorização para publicar o
+normas do IFC, requisitos científicos do TCC nem autorização para publicar o
 arquivo original. Por isso, o PPTX não é fonte dos números atuais, não é
 versionado no repositório e qualquer crédito deve ser decidido conforme a
 licença efetivamente obtida.
+
+O deck do TCC preserva a composição editorial e a proporção 16:9, mas usa a
+família Times New Roman/Nimbus Roman/Times para manter continuidade com o
+manuscrito. As classes do código usam o prefixo `tcc-`; o material do PTC é
+apenas referência histórica e não é a identidade semântica do deck atual.
 
 ## Identidade institucional
 
@@ -63,7 +68,7 @@ O contrato automatizado em `presentation/deck-standards.mjs` verifica:
 
 - presença da marca institucional e do QR;
 - destino e texto alternativo do QR;
-- permanência das famílias Asap/Barlow;
+- uso da família Times New Roman/Nimbus Roman/Times, compatível com o TCC;
 - remoção visual de uma marca IFC desenhada manualmente;
 - contraste mínimo WCAG AA de 4,5:1 para texto normal e 3:1 para texto
   grande, conforme [WCAG 2.2, critério 1.4.3](https://www.w3.org/TR/WCAG22/#contrast-minimum).
