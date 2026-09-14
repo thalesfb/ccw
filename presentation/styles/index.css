@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700;800&display=swap');
-
 :root {
   --ink: #101010;
   --muted: #545454;
@@ -716,6 +714,10 @@ small { font-size: 0.73rem; }
 .ptc-mmat-copy { padding-left: 0.5rem; }
 .ptc-mmat-copy h2 { font-size: 2.05rem; }
 .ptc-mmat-copy > p { max-width: 28rem; margin-top: 0.7rem; font: 1.08rem/1.18 'Asap', sans-serif; }
+.ptc-mmat-screening { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.7rem; }
+.ptc-mmat-screening > div { min-height: 3.35rem; padding: 0.5rem 0.6rem; border-left: 0.28rem solid #2d707e; background: #f3f8fa; }
+.ptc-mmat-screening b { display: block; color: #2d707e; font: 800 0.78rem/1 'Asap', sans-serif; letter-spacing: 0.08em; }
+.ptc-mmat-screening span { display: block; margin-top: 0.3rem; color: #222 !important; font: 0.82rem/1.08 'Asap', sans-serif; }
 .ptc-mmat-key { margin-top: 1rem; border-top: 1px solid #2d707e; }
 .ptc-mmat-key > div { display: grid; grid-template-columns: 3.3rem 1fr; gap: 0.65rem; align-items: center; padding: 0.58rem 0; border-bottom: 1px solid #d6d6d6; }
 .ptc-mmat-key > div > b { color: #2d707e !important; font: 800 1.7rem/1 'Asap', sans-serif; }
@@ -1119,6 +1121,52 @@ small { font-size: 0.73rem; }
   .ptc-question-grid .rq-card { min-height: 13.8rem; }
   .ptc-gaps-grid > div { min-height: 10.5rem; }
   .closing-slide { padding-left: 2rem !important; padding-right: 2rem !important; }
+  .ptc-mmat-screening { grid-template-columns: 1fr; }
+}
+
+/* Orientação: a composição do template permanece, mas a tipografia acompanha o TCC. */
+:root {
+  --template-navy: #0e2a47;
+  --template-muted: #536676;
+  --template-teal: #0097a7;
+  --template-line: #d7e0e6;
+}
+
+.slidev-layout,
+.slidev-layout * {
+  font-family: 'Times New Roman', 'Nimbus Roman', Times, serif !important;
+}
+
+.slidev-layout:not(.cover-page) {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: var(--template-navy);
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout.content-slide > h1,
+.slidev-layout.image-slide > h1 {
+  color: var(--template-navy) !important;
+}
+
+.slidev-layout .slide-kicker,
+.slidev-layout .ptc-caption,
+.slidev-layout .source-note,
+.slidev-layout .close-sources {
+  color: var(--template-muted) !important;
+}
+
+.slidev-layout .deck-font-guard,
+.slidev-layout::before,
+.slidev-layout::after,
+.slidev-layout .cover-art,
+.slidev-layout .hand-line,
+.slidev-layout .next-note i,
+.slidev-layout .close-mark,
+.slidev-layout .problem-lead::after {
+  font-family: 'Times New Roman', 'Nimbus Roman', Times, serif !important;
 }
 
 /* Composição vertical: usar o palco disponível sem alterar os slides excepcionais. */

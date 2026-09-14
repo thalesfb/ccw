@@ -27,6 +27,18 @@ em `public/branding/`, e o QR do encerramento é regenerável com:
 npm run generate:qr
 ```
 
+O template fornecido foi auditado como referência visual: formato widescreen,
+composição editorial clara, fundo claro e azul institucional. A apresentação
+preserva essa gramática e usa a família Times compatível com o TCC
+(Times New Roman/Nimbus Roman) para manter continuidade tipográfica com o
+manuscrito. Isso não torna o PPTX de 19 slides equivalente ao deck canônico de
+25 slides.
+
+O slide MMAT exibe agora as perguntas de triagem S1 e S2 e a legenda vigente
+Y/N/CT, em vez de esconder essas perguntas sob uma abreviação. A fonte
+científica continua sendo o ledger versionado; a apresentação não cria um
+escore agregado.
+
 As verificações editoriais, de identidade, QR, tipografia e contraste ficam em
 `deck-standards.mjs` e são executadas por:
 

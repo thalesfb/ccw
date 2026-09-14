@@ -47,10 +47,23 @@ export function deckValidationErrors({ slides, css, assetPaths, repositoryUrl })
   if (!slides.includes('QR code que abre o repositório público')) {
     errors.push('The repository QR image must have an explanatory alternative text.')
   }
-  if (!css.includes("'Asap'") || !css.includes("'Barlow'")) {
-    errors.push('The deck must keep the Asap/Barlow typography defined by the supplied template.')
+  const requiredMmatStatements = [
+    'S1',
+    'S2',
+    'Há perguntas de pesquisa claras?',
+    'Os dados coletados permitem responder às perguntas de pesquisa?',
+  ]
+  const missingMmatStatements = requiredMmatStatements.filter((statement) => !slides.includes(statement))
+  if (missingMmatStatements.length) {
+    errors.push(`The MMAT slide must expose S1 and S2 screening questions: ${missingMmatStatements.join(', ')}.`)
   }
-  const hasDecorativeFontGuard = css.includes('.deck-font-guard') && css.includes("font-family: 'Asap', 'Barlow'")
+  if (!slides.includes('Y = Sim') || !slides.includes('N = Não') || !slides.includes('CT = Não é possível concluir')) {
+    errors.push('The MMAT slide must use the current Y/N/CT response legend.')
+  }
+  if (!css.includes("'Times New Roman'") || !css.includes("'Nimbus Roman'")) {
+    errors.push('The deck must keep the Times-compatible typography used by the TCC.')
+  }
+  const hasDecorativeFontGuard = css.includes('.deck-font-guard') && css.includes("font-family: 'Times New Roman', 'Nimbus Roman'")
   if (slides.includes('ifc-symbol') || (css.includes('Comic Sans MS') && !hasDecorativeFontGuard)) {
     errors.push('The deck must not recreate the IFC mark or use unapproved decorative typography.')
   }
@@ -58,7 +71,10 @@ export function deckValidationErrors({ slides, css, assetPaths, repositoryUrl })
   const requiredContrastPairs = [
     ['#1f2a37', '#ffffff', 'primary text on paper'],
     ['#4a4a4a', '#ffffff', 'secondary text on paper'],
+    ['#0e2a47', '#ffffff', 'template navy text on paper'],
+    ['#536676', '#ffffff', 'template muted text on paper'],
     ['#ffffff', '#1f2a37', 'inverse text on dark cards'],
+    ['#ffffff', '#0e2a47', 'inverse text on template navy'],
     ['#ffffff', '#315e9b', 'inverse text on blue accents'],
     ['#ffffff', '#8a5c1a', 'inverse text on amber badges'],
   ]

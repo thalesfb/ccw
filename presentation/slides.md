@@ -4,8 +4,8 @@ layout: default
 class: cover-page
 colorSchema: light
 fonts:
-  sans: Barlow
-  serif: Asap
+  sans: Times New Roman
+  serif: Times New Roman
 title: "Ensino Personalizado de Matemática"
 info: "Revisão Sistemática da Literatura — dados da revisão"
 author: "Thales Ferreira Batista"
@@ -342,11 +342,15 @@ class: content-slide ptc-mmat-slide
   <div class="ptc-mmat-visual" aria-hidden="true"><div class="ptc-mmat-scale">⚖</div><span>MMAT 2018</span><small>leitura por critério</small></div>
   <div class="ptc-mmat-copy">
     <h2>Apreciação por critério</h2>
-    <p>As respostas são registradas como <b>Sim</b>, <b>Não</b> ou <b>Não é possível determinar</b>, conforme o desenho de cada estudo.</p>
+    <p>Antes dos critérios específicos, o MMAT registra duas perguntas de triagem. Depois, as respostas são codificadas por delineamento e evidência disponível.</p>
+    <div class="ptc-mmat-screening" aria-label="Perguntas de triagem do MMAT 2018">
+      <div><b>S1</b><span>Há perguntas de pesquisa claras?</span></div>
+      <div><b>S2</b><span>Os dados coletados permitem responder às perguntas de pesquisa?</span></div>
+    </div>
     <div class="ptc-mmat-key">
-      <div><b>S</b><span><strong>Sim</strong> critério atendido segundo a evidência disponível.</span></div>
-      <div><b>N</b><span><strong>Não</strong> critério não atendido na apreciação documental.</span></div>
-      <div><b>ND</b><span><strong>Indeterminado</strong> informação insuficiente para concluir.</span></div>
+      <div><b>Y</b><span><strong>Y = Sim</strong> critério atendido segundo a evidência disponível.</span></div>
+      <div><b>N</b><span><strong>N = Não</strong> critério não atendido na apreciação documental.</span></div>
+      <div><b>CT</b><span><strong>CT = Não é possível concluir</strong> informação insuficiente para concluir.</span></div>
     </div>
   </div>
 </div>
