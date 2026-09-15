@@ -3,7 +3,7 @@
 
 \section{Protocolo e Relato da Revisão Sistemática}
 
-Este trabalho empregou uma Revisão Sistemática da Literatura para identificar e analisar técnicas computacionais aplicadas ao ensino de matemática. A condução foi fundamentada em princípios metodológicos consolidados do \textit{Cochrane Handbook for Systematic Reviews of Interventions} \cite{CochraneHandbook} e do \textit{Institute of Medicine} (IOM).
+Este trabalho empregou uma Revisão Sistemática da Literatura para identificar e analisar técnicas computacionais aplicadas ao ensino de matemática. O \textit{Cochrane Handbook for Systematic Reviews of Interventions} \cite{CochraneHandbook} e referências do \textit{Institute of Medicine} (IOM) foram consultados como referências gerais de transparência e sistematicidade. Essa consulta não implica adoção integral de um protocolo Cochrane ou de um modelo formal do IOM.
 
 O PRISMA 2020 (\textit{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}) foi utilizado como diretriz de relato da revisão \cite{PRISMA2020}. Sua função neste trabalho foi orientar a comunicação transparente da pergunta de pesquisa, das fontes consultadas, dos critérios de elegibilidade, do processo de seleção e dos resultados. Portanto, o PRISMA 2020 foi tratado como uma diretriz para relatar a revisão, e não como um método de busca, um instrumento de avaliação da qualidade ou uma garantia automática de ausência de viés.
 
@@ -38,7 +38,8 @@ A estratégia de busca combinou três camadas de termos: domínio matemático, t
 
 \textbf{Camada 2 -- técnicas computacionais}:
 \begin{itemize}
-    \item \textit{adaptive}, \textit{personalized}, \textit{tutoring}, \textit{analytics}, \textit{mining}, \textit{machine learning}, \textit{artificial intelligence}, \textit{assessment}, \textit{student modeling}, \textit{predictive} e termos equivalentes em português.
+    \item Inglês: \textit{adaptive}, \textit{personalized}, \textit{tutoring}, \textit{analytics}, \textit{mining}, \textit{machine learning}, \textit{ai}, \textit{assessment}, \textit{student modeling}, \textit{predictive}, \textit{intelligent tutor} e \textit{artificial intelligence};
+    \item Português: \textit{adaptivo}, \textit{personalizado}, \textit{tutor}, \textit{analitica}, \textit{mineração}, \textit{aprendizado de máquina}, \textit{ia}, \textit{avaliação}, \textit{modelagem do aluno}, \textit{preditivo}, \textit{tutor inteligente} e \textit{inteligência artificial}.
 \end{itemize}
 
 \textbf{Camada 3 -- contexto educacional}:
@@ -52,7 +53,7 @@ A estratégia canônica foi composta por 72 consultas: 48 em inglês e 24 em por
 \begin{itemize}
     \item \texttt{"mathematics" AND "machine learning" AND "education"};
     \item \texttt{"math" AND "intelligent tutor" AND "learning"};
-    \item \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}ao"}.
+    \item \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}\~ao"}.
 \end{itemize}
 
 \section{Critérios de Seleção}
@@ -95,11 +96,11 @@ Teses e dissertações são elegíveis como literatura cinzenta e estão sujeita
 
 \section{Processo de Seleção}
 
-O processo de seleção foi documentado segundo as etapas de identificação, triagem, elegibilidade e inclusão apresentadas pelo fluxo PRISMA 2020.
+O processo de seleção foi documentado segundo as etapas de identificação, triagem, elegibilidade operacional e retenção apresentadas pelo fluxo PRISMA 2020. Neste trabalho, a etapa denominada elegibilidade no fluxo corresponde a uma priorização operacional baseada em metadados, resumo e critérios documentais; ela não deve ser confundida com uma confirmação universal de elegibilidade em texto completo.
 
 \subsection{Identificação}
 
-O snapshot versionado preserva 11.904 registros identificados. A configuração canônica da busca contém 72 consultas para as quatro APIs; entretanto, a ausência de um log histórico completo impede reconstruir quantas requisições HTTP foram concluídas por consulta ou por API. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
+O snapshot versionado preserva 11.904 registros identificados. A configuração canônica da busca contém 72 consultas para as quatro APIs; entretanto, a ausência de um log histórico completo impede reconstruir quantas requisições HTTP foram concluídas por consulta ou por API. O pipeline foi configurado com limite de até 50 resultados por consulta e por API, parâmetro operacional que deve ser considerado na interpretação da cobertura. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
 
 O snapshot científico adotado neste texto tem data de corte em 31 de agosto de 2026. O manifesto de reprodutibilidade registra sua geração em 4 de setembro de 2026, às 02:45:33 UTC, e associa hashes aos artefatos utilizados. Essas datas descrevem a proveniência da exportação e não devem ser confundidas com a data de redação ou de publicação do TCC.
 
@@ -107,11 +108,11 @@ O snapshot científico adotado neste texto tem data de corte em 31 de agosto de 
 
 A deduplicação utilizada no fluxo PRISMA foi determinística e baseada na identidade bibliográfica normalizada. Registros com o mesmo DOI normalizado ou com a mesma URL exata foram reunidos, preservando-se a representação escolhida para o fluxo; essa etapa removeu 27 linhas excedentes, sendo 25 identificadas por DOI e 2 por URL. A auditoria também calculou repetições de títulos normalizados. Contudo, os 232 excedentes restantes após a remoção por DOI/URL foram mantidos como candidatos à revisão semântica, pois títulos semelhantes ou idênticos podem corresponder a versões, erratas ou obras distintas. Portanto, não foram removidos automaticamente por título e não entram como duplicatas confirmadas no fluxo vigente.
 
-Após a deduplicação determinística, 11.877 registros foram submetidos à triagem. Desses, 9.391 foram excluídos na triagem e 2.486 avançaram para a avaliação de elegibilidade.
+Após a deduplicação determinística, 11.877 registros foram submetidos à triagem. Desses, 9.391 foram excluídos na triagem e 2.486 avançaram para a etapa de priorização operacional reportada no fluxo como elegibilidade.
 
-\subsection{Elegibilidade}
+\subsection{Priorização operacional e elegibilidade documental}
 
-A elegibilidade utilizou uma pontuação de \textbf{relevância temática}, distinta da avaliação de qualidade metodológica. A heurística considerou:
+A etapa de priorização operacional utilizou uma pontuação de \textbf{relevância temática}, distinta da avaliação de qualidade metodológica. A heurística considerou:
 
 \begin{enumerate}
     \item presença e relevância de técnicas computacionais;
@@ -120,11 +121,11 @@ A elegibilidade utilizou uma pontuação de \textbf{relevância temática}, dist
     \item disponibilidade de identificadores e informações bibliográficas.
 \end{enumerate}
 
-A pontuação foi um indicador operacional de relevância temática, calculado por uma heurística multicritério. No snapshot vigente, os valores observados variaram de 0,0 a 4,5 e o limiar operacional foi 4,0. O limiar apoiou a priorização e a seleção operacional, mas não constituiu medida de qualidade científica nem substituiu a verificação de escopo, tipo documental e pertinência. A apreciação metodológica foi conduzida separadamente com o MMAT 2018.
+A pontuação foi um indicador operacional de relevância temática, calculado por uma heurística multicritério aplicada aos metadados e aos resumos disponíveis. No snapshot vigente, os valores observados variaram de 0,0 a 4,5 e o limiar operacional foi 4,0. O limiar apoiou a priorização e a seleção operacional, mas não constituiu medida de qualidade científica nem substituiu a verificação de escopo, tipo documental e pertinência. A apreciação metodológica foi conduzida separadamente com o MMAT 2018.
 
-O valor 4,0 deve ser interpretado como um parâmetro de triagem do pipeline, e não como um ponto de corte validado para relevância científica. A elegibilidade final também dependeu dos critérios documentais de decisão registrados em \path{research/data/current_eligibility_protocol.csv}. O snapshot vigente não inclui uma análise de sensibilidade do conjunto retido a diferentes limiares; portanto, não se atribui ao valor 4,0 estabilidade estatística ou capacidade de representar sozinho o universo da literatura.
+O valor 4,0 deve ser interpretado como um parâmetro de triagem do pipeline, e não como um ponto de corte validado para relevância científica. A retenção operacional também dependeu dos critérios documentais de decisão registrados em \path{research/data/current_eligibility_protocol.csv}. Como a confirmação em texto completo não foi concluída para todos os registros, o conjunto retido deve ser descrito como provisório. O snapshot vigente não inclui uma análise de sensibilidade do conjunto retido a diferentes limiares; portanto, não se atribui ao valor 4,0 estabilidade estatística ou capacidade de representar sozinho o universo da literatura.
 
-Dos 2.486 registros avaliados nessa etapa, 2.468 foram excluídos por não atenderem aos critérios operacionais de elegibilidade. Foram retidos 18 registros para a análise de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
+Dos 2.486 registros avaliados nessa etapa, 2.468 foram excluídos por não atenderem aos critérios operacionais de priorização e escopo. Foram retidos 18 registros para a análise de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
 
 \section{Infraestrutura Tecnológica da Revisão}
 
@@ -157,7 +158,7 @@ O arquivo \path{research/exports/reports/reproducibility_manifest.json} funciona
 
 \section{Avaliação da Qualidade Metodológica}
 
-Os 17 candidatos empíricos provisórios foram submetidos a uma apreciação documental por critérios com o \textit{Mixed Methods Appraisal Tool} (MMAT), versão 2018 \cite{MMAT2018}. O protocolo ou proposta contextual retido não é uma evidência empírica e não se aplica à apreciação MMAT. O instrumento foi escolhido por oferecer conjuntos de critérios específicos para estudos qualitativos, quantitativos randomizados, quantitativos não randomizados, quantitativos descritivos e de métodos mistos.
+Os 17 candidatos empíricos provisórios foram submetidos a uma apreciação documental por critérios com o \textit{Mixed Methods Appraisal Tool} (MMAT), versão 2018 \cite{MMAT2018}. O protocolo ou proposta contextual retido não é uma evidência empírica e não se aplica à apreciação MMAT. O instrumento foi escolhido por oferecer conjuntos de critérios específicos para estudos qualitativos, quantitativos randomizados, quantitativos não randomizados, quantitativos descritivos e de métodos mistos; sua aplicação nesta versão é preliminar e limitada pela disponibilidade desigual dos textos primários.
 
 Antes da apreciação específica, foram registradas as duas perguntas de triagem
 do instrumento: S1, ``Há perguntas de pesquisa claras?'', e S2, ``Os dados

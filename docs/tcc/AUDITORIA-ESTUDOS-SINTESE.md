@@ -1,0 +1,32 @@
+# Auditoria dos estudos retidos na síntese do TCC
+
+Este registro documenta o papel que cada estudo pode sustentar no TCC. Ele foi elaborado a partir de `research/data/current_synthesis_scope.csv` e `research/data/reference_audit.csv`, cujo snapshot vigente é de 3 de setembro de 2026. Não substitui a leitura dos textos primários, o MMAT ou a decisão de escopo do orientador.
+
+A classificação abaixo separa quatro funções: **central**, quando o estudo sustenta diretamente uma afirmação da síntese; **específica**, quando sustenta apenas o resultado ou contexto que relata; **contextual**, quando informa uma decisão de projeto ou uma lacuna, sem sustentar eficácia; e **tangencial**, quando sua relação com o problema é indireta e não deve fundamentar conclusões centrais.
+
+| Estudo | Papel atual e contribuição que pode sustentar | Limite de interpretação e ação necessária |
+| --- | --- | --- |
+| `Math2021_001` | Evidência específica sobre predição/classificação em dados educacionais de matemática. | A apreciação é limitada ao resumo/metadados; não usar métricas ou generalizações como evidência central antes da recuperação do texto primário. |
+| `Implementation2025_000` | Estudo empírico diretamente relacionado a mineração de dados educacionais e predição de desempenho em matemática. | Pode ocupar posição central, mas a acurácia deve ser apresentada como resultado reportado pelo estudo, não como eficácia transferível. MMAT ainda é preliminar. |
+| `Multimodels2020_002` | Comparação de modelos para desempenho em matemática; contribui para justificar comparação entre modelos candidatos. | A comparação não estabelece superioridade universal nem validade em outra população. Manter a dependência do contexto e do desenho. |
+| `Analysis2022_003` | Contribui para discutir seleção de atributos e mineração de dados aplicada ao domínio matemático. | Usar como evidência específica do procedimento relatado; não converter seleção de atributos em explicação causal da aprendizagem. |
+| `Design2025_004` | Contribui como contexto para trajetórias personalizadas e representação do estado do estudante. | Metadados e cautela editorial limitam afirmações de eficácia; não usar como prova isolada de que personalização melhora aprendizagem. |
+| `Identifying2017_006` | Estudo específico de classificação com dados educacionais, útil para discutir identificação de padrões de desempenho. | A contribuição deve permanecer situada na população, instrumento e desfecho do artigo. Não extrapolar para diagnóstico geral. |
+| `Innovative2023_005` | Contribui para o contexto de aplicação de IA no ensino superior de matemática. | Metadados e ano/edição ainda exigem confirmação na fonte publicadora antes de uso central. |
+| `Computational2017_008` | Contribui conceitualmente para modelos computacionais de tutoria e para a especificação de alternativas. | É literatura de tese e não deve ser apresentada como validação empírica comparável aos estudos avaliativos. |
+| `Machine2019_007` | Contribui para o panorama de técnicas de aprendizado de máquina em educação STEM. | A base documental é limitada e há risco de confundir revisão/survey com estudo empírico; não citar métricas específicas sem texto primário. |
+| `Machine2024_009` | Contribui com evidência específica sobre uso de aprendizado de máquina como apoio ao ensino de matemática. | O texto disponível é limitado; evitar generalização e registrar a necessidade de recuperação do texto completo. |
+| `Enhancing2025_012` | Oferece contexto específico sobre recurso computacional e aprendizagem cooperativa em geometria. | O vínculo com o núcleo de modelagem computacional é indireto; tratar como evidência pedagógica contextual, não como prova de desempenho de ML. |
+| `He2025_6915` | Contribui como estudo publicado sobre modelos preditivos e decisões em tecnologia educacional matemática. | As 423 publicações analisadas pelo artigo não são 423 estudos adicionais desta síntese. Usar o artigo como uma unidade e explicitar sua função secundária/meta-analítica. |
+| `Villegas2025_6916` | Estudo diretamente relacionado a tutoria inteligente, adaptação e feedback personalizado. | Pode sustentar uma discussão central do desenho, condicionada à leitura metodológica e ao MMAT; a referência foi normalizada para *Smart Learning Environments*. |
+| `Ozseven2026_6917` | Contribui com evidência específica sobre modelagem híbrida/neuro-fuzzy em educação matemática. | A confirmação editorial e a apreciação metodológica ainda são preliminares; não apresentar o modelo como alternativa validada para o protótipo. |
+| `UniversityMathematics2026_6919` | Contribui para contexto de aplicação de matemática universitária e sustentabilidade. | A relação com personalização e diagnóstico computacional é tangencial; reavaliar sua permanência na síntese central após decisão do orientador. |
+| `Echeveria2025_6920` | Contribui com um caso específico de classificação relacionado a mentalidade matemática e intervenção precoce. | Manter cautela editorial e metodológica; não transformar o resultado de classificação em medida geral de aprendizagem. |
+| `Imperatrice2025_6921` | Protocolo/proposta contextual útil para rastreabilidade do mapeamento. | Não é evidência empírica, não integra a síntese de eficácia e não recebe MMAT empírico. Deve permanecer explicitamente separado dos 17 candidatos empíricos. |
+| `Zeng2025_6923` | Contribui para discutir sinais multimodais, carga cognitiva e requisitos de dados/interação. | A relação com ensino personalizado é indireta e a apreciação é limitada; usar somente como contexto de instrumentação e lacuna. |
+
+## Regra de uso no texto e na apresentação
+
+Nenhum estudo desta lista, isoladamente, sustenta eficácia educacional geral, superioridade de algoritmo ou validade de um protótipo ainda não executado em base real. Afirmações quantitativas devem permanecer atribuídas ao artigo que as reportou e acompanhadas da população, do desfecho e da limitação documental correspondente. A composição de 18 registros é uma retenção operacional: 17 candidatos empíricos provisórios e 1 registro contextual.
+
+Antes de uma versão final, devem ser consolidados a recuperação dos textos primários, os localizadores de evidência, a confirmação dos metadados pendentes e a adjudicação do MMAT. Até lá, o vocabulário correto é “candidato empírico provisório”, “resultado reportado” e “evidência disponível”, e não “estudo validado” ou “eficácia demonstrada”.
