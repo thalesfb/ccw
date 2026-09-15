@@ -463,7 +463,7 @@ def build_deck() -> Presentation:
     slide = new_slide(prs, EXPECTED_TITLES[10], 11)
     add_image_contain(slide, ROOT / "research" / "exports" / "visualizations" / "papers_by_year.png", Inches(0.6), Inches(1.25), Inches(6.0), Inches(2.7))
     add_image_contain(slide, ROOT / "research" / "exports" / "visualizations" / "database_coverage.png", Inches(6.75), Inches(1.25), Inches(6.0), Inches(2.7))
-    add_callout(slide, "Período", "O snapshot foi delimitado a 2015–2026, com data de corte em 31 de agosto de 2026.", Inches(0.85), Inches(4.35), Inches(5.65), Inches(1.15), fill=PALE_BLUE, accent=BLUE, title_size=15, body_size=13.5)
+    add_callout(slide, "Período", "O snapshot foi delimitado a 2015–2026, com data de corte em 31 de agosto de 2026. Como 2026 é parcial, sua barra não deve ser comparada diretamente com anos completos.", Inches(0.85), Inches(4.35), Inches(5.65), Inches(1.15), fill=PALE_BLUE, accent=BLUE, title_size=15, body_size=13.5)
     add_callout(slide, "Fontes", "As quatro fontes foram complementares; os totais brutos incluem registros posteriormente reconhecidos como duplicatas.", Inches(6.95), Inches(4.35), Inches(5.55), Inches(1.15), fill=PALE_TEAL, accent=TEAL, title_size=15, body_size=13.5)
     add_text(slide, "Visualizações descritivas: não inferem representatividade, qualidade ou efeito pedagógico.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.3), size=13, color=MUTED, align=PP_ALIGN.CENTER)
 
