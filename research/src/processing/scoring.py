@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import logging
 import re
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
+
+from .language_utils import detect_language_from_fields
 
 logger = logging.getLogger(__name__)
 
@@ -74,15 +76,25 @@ def is_relevant_paper(paper: Dict, year_min: int, langs: List[str],
 
     text_to_check = (str(paper.get('title', '')) + " " + str(paper.get('abstract', ''))).lower()
 
-    # Language heuristic (simple)
+    # Use the canonical detector when it can produce a result. Do not infer
+    # language from isolated stop words, which can produce false positives
+    # (especially for short titles). Unknown language is retained for the
+    # downstream PRISMASelector, which has the complete fallback policy.
     if text_to_check and langs:
-        lang_detected = False
-        if any(w in text_to_check for w in ['the', 'a', 'is', 'in', 'of', 'and']):
-            if 'en' in langs:
-                lang_detected = True
-        if any(w in text_to_check for w in ['o', 'a', 'é', 'em', 'de', 'e']):
-            if 'pt' in langs:
-                lang_detected = True
+        detected_language = detect_language_from_fields(
+            title=str(paper.get("title", "")),
+            abstract=str(paper.get("abstract", "")),
+            keywords=str(paper.get("keywords", "")),
+        )
+        supported_languages = set()
+        for language in langs:
+            normalized = str(language).lower()
+            if normalized in {"en", "english"}:
+                supported_languages.add("en")
+            elif normalized in {"pt", "pt-br", "portuguese", "português"}:
+                supported_languages.add("pt")
+        if detected_language and detected_language not in supported_languages:
+            return False, f"Idioma não suportado: {detected_language}"
 
     # Keywords preference or EDU_MATH regex fallback
     if keywords:
@@ -246,13 +258,13 @@ def calculate_relevance_score(paper: Dict, config: Optional[Dict] = None) -> flo
 
     score += tech_score * weights["technical_relevance"]
 
-    # 3. Methodology quality
-    methodology_score = 0.0
+    # 3. Methodology proxy for operational relevance, not study quality
+    methodology_proxy_score = 0.0
     study_type = identify_study_type(text)
     eval_methods = identify_eval_methods(text)
 
     # Study type scoring
-    study_type_scores = {
+    study_type_proxy_scores = {
         "experimental": 3.0,
         "quasi-experimental": 2.5,
         "case study": 2.0,
@@ -263,12 +275,12 @@ def calculate_relevance_score(paper: Dict, config: Optional[Dict] = None) -> flo
     }
 
     if study_type:
-        methodology_score += study_type_scores.get(study_type, 1.0)
+        methodology_proxy_score += study_type_proxy_scores.get(study_type, 1.0)
 
     # Evaluation methods scoring
-    methodology_score += len(eval_methods) * 0.5
+    methodology_proxy_score += len(eval_methods) * 0.5
 
-    score += methodology_score * weights["methodology"]
+    score += methodology_proxy_score * weights["methodology"]
 
     # 4. Recency
     recency_score = 0.0
