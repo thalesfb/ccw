@@ -1,5 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { contrastRatio, deckValidationErrors, meetsWcagAA } from '../deck-standards.mjs'
 
 test('calculates the WCAG contrast ratio for black and white', () => {
@@ -82,4 +84,11 @@ test('reports an MMAT deck that hides S1/S2 or uses an ambiguous legend', () => 
 
   assert.equal(errors.some((error) => error.includes('S1 and S2')), true)
   assert.equal(errors.some((error) => error.includes('Y/N/CT')), true)
+})
+
+test('centers the question icons in a fixed visual box', () => {
+  const css = readFileSync(resolve(import.meta.dirname, '..', 'styles', 'index.css'), 'utf8')
+
+  assert.match(css, /\.tcc-q-icon\s*\{[^}]*justify-content:\s*center;/s)
+  assert.match(css, /\.tcc-q-icon\s+svg\s*\{[^}]*display:\s*block;[^}]*flex:\s*0\s+0\s+auto;/s)
 })
