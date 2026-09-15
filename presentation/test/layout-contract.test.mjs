@@ -33,3 +33,19 @@ test('remaining content slides fill a shared vertical stage without touching the
   assert.match(css, /\.slidev-layout\.content-slide:not\(\.tcc-objectives-slide\)\s*>\s*:is\([\s\S]*\.tcc-next-layout\s*\)\s*\{[\s\S]*flex:\s*1 1 auto;[\s\S]*min-height:\s*22rem;/)
   assert.doesNotMatch(css, /\.slidev-layout\.tcc-prisma-slide\s*\{[^}]*flex:\s*1 1 auto;/)
 })
+
+test('key narrative slides use the shared inline SVG icon system', () => {
+  assert.doesNotMatch(slides, /class="tcc-line-icon">[◎◷◈⌘]/)
+  assert.doesNotMatch(slides, /class="tcc-source-icon">[⌘▤⛓⌑]/)
+  assert.match(slides, /class="tcc-line-icon"[^>]*>[\s\S]*?<svg\s+viewBox="0 0 32 32"/)
+  assert.match(slides, /class="tcc-q-icon"[^>]*>[\s\S]*?<svg\s+viewBox="0 0 32 32"/)
+  assert.match(slides, /class="tcc-source-icon"[^>]*>[\s\S]*?<svg\s+viewBox="0 0 32 32"/)
+  assert.match(css, /\.tcc-line-icon svg[\s\S]*stroke-linecap:\s*round/)
+  assert.match(css, /\.tcc-source-icon svg[\s\S]*stroke-linejoin:\s*round/)
+})
+
+test('the annual snapshot labels 2026 as a partial observation', () => {
+  assert.match(slides, /2026\*/)
+  assert.match(slides, /31\/08\/2026/)
+  assert.match(slides, /ano parcial|snapshot parcial/i)
+})

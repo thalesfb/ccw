@@ -55,10 +55,10 @@ class: content-slide tcc-challenge-slide
     <p class="tcc-emphasis">O TCC organiza evidências sobre técnicas computacionais que podem apoiar essa interpretação, sem substituir a decisão pedagógica.</p>
   </div>
   <div class="tcc-challenge-list">
-    <div class="tcc-challenge-item tcc-blue"><span class="tcc-line-icon">◎</span><p><strong>Turmas heterogêneas:</strong> médias ocultam trajetórias individuais.</p></div>
-    <div class="tcc-challenge-item tcc-amber"><span class="tcc-line-icon">◷</span><p><strong>Tempo docente:</strong> evidências competem com o planejamento.</p></div>
-    <div class="tcc-challenge-item tcc-purple"><span class="tcc-line-icon">◈</span><p><strong>Ensino genérico:</strong> uma intervenção pode não atender necessidades distintas.</p></div>
-    <div class="tcc-challenge-item tcc-red"><span class="tcc-line-icon">⌘</span><p><strong>Literatura fragmentada:</strong> técnicas e contextos aparecem dispersos.</p></div>
+    <div class="tcc-challenge-item tcc-blue"><span class="tcc-line-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="11" cy="11" r="3.6"/><circle cx="21" cy="12" r="3"/><path d="M4.5 25c.8-4.1 3.1-6.2 6.5-6.2s5.7 2.1 6.5 6.2M17 20c.9-2.3 2.7-3.6 5.1-3.6 2.5 0 4.4 1.5 5.3 4.4"/></svg></span><p><strong>Turmas heterogêneas:</strong> médias ocultam trajetórias individuais.</p></div>
+    <div class="tcc-challenge-item tcc-amber"><span class="tcc-line-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 9v7l4.8 3M6.5 6.5l2.4 2.4m14.2-2.4-2.4 2.4"/></svg></span><p><strong>Tempo docente:</strong> evidências competem com o planejamento.</p></div>
+    <div class="tcc-challenge-item tcc-purple"><span class="tcc-line-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m4 10 12-6 12 6-12 6zM4 16l12 6 12-6M4 22l12 6 12-6"/></svg></span><p><strong>Ensino genérico:</strong> uma intervenção pode não atender necessidades distintas.</p></div>
+    <div class="tcc-challenge-item tcc-red"><span class="tcc-line-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 5h13a4 4 0 0 1 4 4v18H10a4 4 0 0 0-4 4zM23 27h3a2 2 0 0 0 2-2V9a4 4 0 0 0-4-4"/><path d="M10 11h8m-8 5h8m-8 5h5"/></svg></span><p><strong>Literatura fragmentada:</strong> técnicas e contextos aparecem dispersos.</p></div>
   </div>
 </div>
 
@@ -88,9 +88,9 @@ class: content-slide
 # Quatro perguntas<br>organizam a investigação
 
 <div class="rq-grid tcc-question-grid">
-  <div class="rq-card rq-blue"><span>01</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="12" cy="14" r="6"/><circle cx="23" cy="11" r="4"/><path d="M7 19c-3 1-4 3-4 6m11-1c1-4 3-6 7-6 4 0 7 2 8 6M17 13l2-2m-3 7 3 1"/></svg></div><strong>Pergunta 1 (O quê?)</strong><p>Quais técnicas aparecem na educação matemática e em que contextos?</p></div></div>
-  <div class="rq-card rq-green"><span>02</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="14" cy="15" r="9"/><path d="M14 10v6l4 3m7-6v10m4-6v6M24 23h7"/><path d="M23 12l2-3 2 2"/></svg></div><strong>Pergunta 2 (Como?)</strong><p>Como essas técnicas têm sido avaliadas em contextos educacionais reais?</p></div></div>
-  <div class="rq-card rq-orange"><span>03</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 8h9l3 3 3-3h7v8l-3 3 3 3v6h-8l-3-3-3 3H5v-8l3-3-3-3z"/><path d="M17 11v10m-5-5h10"/></svg></div><strong>Pergunta 3 (O que falta?)</strong><p>Quais lacunas, limitações e desafios permanecem?</p></div></div>
+  <div class="rq-card rq-blue"><span>01</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="13" cy="13" r="7"/><path d="m18.5 18.5 7 7M10 13h6m-3-3v6"/></svg></div><strong>Pergunta 1 (O quê?)</strong><p>Quais técnicas aparecem na educação matemática e em que contextos?</p></div></div>
+  <div class="rq-card rq-green"><span>02</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 25h22M7 22V9m0 13 6-7 5 4 7-10"/><path d="m22 8 3-1v3"/></svg></div><strong>Pergunta 2 (Como?)</strong><p>Como essas técnicas têm sido avaliadas em contextos educacionais reais?</p></div></div>
+  <div class="rq-card rq-orange"><span>03</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m16 4 13 24H3z"/><path d="M16 11v8m0 5h.01"/></svg></div><strong>Pergunta 3 (O que falta?)</strong><p>Quais lacunas, limitações e desafios permanecem?</p></div></div>
   <div class="rq-card rq-red"><span>04</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="m16 16 7-6-4 8-7 4zM16 3v3m0 17v3M3 16h3m17 0h3"/></svg></div><strong>Pergunta 4 (E agora?)</strong><p>Que direcionamentos orientam ferramentas alinhadas à realidade?</p></div></div>
 </div>
 
@@ -188,10 +188,10 @@ class: content-slide tcc-sources-slide
 # Quatro fontes de indexação complementares
 
 <div class="tcc-source-grid">
-  <div><span class="tcc-source-icon">⌘</span><p><strong>Semantic Scholar</strong><br>Ciência da Computação e métricas de influência.<small>1.931 registros</small></p></div>
-  <div><span class="tcc-source-icon">▤</span><p><strong>OpenAlex</strong><br>Cobertura ampla e aberta da literatura.<small>3.057 registros</small></p></div>
-  <div><span class="tcc-source-icon">⛓</span><p><strong>Crossref</strong><br>Precisão de metadados e DOIs.<small>5.049 registros</small></p></div>
-  <div><span class="tcc-source-icon">⌑</span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.840 registros</small></p></div>
+  <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="8" cy="16" r="3"/><circle cx="24" cy="9" r="3"/><circle cx="24" cy="23" r="3"/><path d="m10.8 14.8 10.4-4.6m-10.4 7 10.4 4.6"/></svg></span><p><strong>Semantic Scholar</strong><br>Ciência da Computação e métricas de influência.<small>1.931 registros</small></p></div>
+  <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="8" rx="10" ry="4"/><path d="M6 8v14c0 2.2 4.5 4 10 4s10-1.8 10-4V8M6 15c0 2.2 4.5 4 10 4s10-1.8 10-4"/></svg></span><p><strong>OpenAlex</strong><br>Cobertura ampla e aberta da literatura.<small>3.057 registros</small></p></div>
+  <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 20 9 23a5 5 0 0 1-7-7l4-4a5 5 0 0 1 7 0m7-4 3-3a5 5 0 0 1 7 7l-4 4a5 5 0 0 1-7 0M11 21l10-10"/></svg></span><p><strong>Crossref</strong><br>Precisão de metadados e DOIs.<small>5.049 registros</small></p></div>
+  <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 7h9a4 4 0 0 1 3 1.4A4 4 0 0 1 19 7h9v19h-9a4 4 0 0 0-3 1.4 4 4 0 0 0-3-1.4H4zM16 9v18"/><path d="M8 12h5m-5 4h5m6-4h5m-5 4h5"/></svg></span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.840 registros</small></p></div>
 </div>
 
 <div class="tcc-caption">Teses e dissertações também podem ser aceitas quando atendem aos mesmos critérios de elegibilidade.</div>
@@ -265,11 +265,11 @@ class: content-slide
 # Distribuição anual no recorte observado
 
 <div class="tcc-growth-layout">
-  <div class="tcc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano" /></div>
-  <div class="tcc-growth-copy"><h2>O snapshot observado</h2><p>Os registros cobrem 2015–2026, com maior concentração nos anos recentes.</p><small>Leitura descritiva do conjunto coletado; não infere representatividade, causalidade ou qualidade dos estudos.</small></div>
+  <div class="tcc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano; 2026 é um ano parcial até 31 de agosto" /></div>
+  <div class="tcc-growth-copy"><h2>O snapshot observado</h2><p>Os registros cobrem 2015–2026. O pico de 2025 não deve ser comparado diretamente com 2026, pois o último ano está incompleto.</p><small>2026* = publicações identificadas até 31/08/2026. A leitura é descritiva do conjunto recuperado; não estima a produção mundial, representatividade ou qualidade.</small></div>
 </div>
 
-<div class="tcc-caption">Distribuição anual dos registros no recorte temporal do protocolo.</div>
+<div class="tcc-caption">Distribuição anual dos registros no recorte temporal do protocolo. *2026 é um ano parcial no snapshot.</div>
 
 ---
 layout: default

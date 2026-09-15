@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "bf737a5eb98899ed87cfd012772f2fa920ca4fa798b9dccdf8624e7f0c4bb412",
+    "sha256": "484d8fd9d63b62762c798323196b1d6656867a96457d62f35804214f8d3c46d0",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/current_eligibility_protocol.csv",
@@ -94,17 +94,17 @@
     {
       "name": "papers_by_year.png",
       "canonical_path": "research/exports/visualizations/papers_by_year.png",
-      "canonical_sha256": "13b6d84951c7ea364f48b445b9b195cda6cb302e416a66a21c88e244bc81b04f",
+      "canonical_sha256": "01bef1a755c23532f7a3ae47be48ddd1eeeb7e25ab0b91de31e65c09c46a981a",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/papers_by_year.png",
-          "sha256": "13b6d84951c7ea364f48b445b9b195cda6cb302e416a66a21c88e244bc81b04f"
+          "sha256": "01bef1a755c23532f7a3ae47be48ddd1eeeb7e25ab0b91de31e65c09c46a981a"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/papers_by_year.png",
-          "sha256": "13b6d84951c7ea364f48b445b9b195cda6cb302e416a66a21c88e244bc81b04f"
+          "sha256": "01bef1a755c23532f7a3ae47be48ddd1eeeb7e25ab0b91de31e65c09c46a981a"
         }
       ]
     },
