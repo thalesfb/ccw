@@ -80,11 +80,11 @@ def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> N
     assert "resultaram em 11.904 registros identificados" not in methodology
 
 
-def test_interpretation_precedes_the_long_synthesis_table() -> None:
+def test_interpretation_precedes_the_long_synthesis_quadro() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
-    interpretation = chapter.index("Antes da tabela detalhada")
-    table = chapter.index(r"\label{tab:sintese-estudos-empiricos}")
-    assert interpretation < table
+    interpretation = chapter.index("Antes do quadro detalhado")
+    quadro = chapter.index(r"\label{qua:sintese-estudos-empiricos}")
+    assert interpretation < quadro
 
 
 def test_long_python_identifier_is_breakable() -> None:

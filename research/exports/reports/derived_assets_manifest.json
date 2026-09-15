@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "484d8fd9d63b62762c798323196b1d6656867a96457d62f35804214f8d3c46d0",
+    "sha256": "ea5f70411709213e82037abcedf74833c79c1e8e850538e193b2784abb8402e9",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/current_eligibility_protocol.csv",

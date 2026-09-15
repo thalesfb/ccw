@@ -109,18 +109,20 @@ def render_table(
 ) -> str:
     labels = labels or load_study_labels()
     lines = [
-        "% Tabela gerada de research/data/mmat_reassessment_current.csv",
+        "% Quadro gerado de research/data/mmat_reassessment_current.csv",
         "% Reavaliação documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
+        r"\begingroup",
+        r"\def\LTcaptype{quadro}",
         r"\begin{longtable}{|p{3.9cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
-        r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{tab:mmat-reavaliacao-atual}\\",
+        r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{qua:mmat-reavaliacao-atual}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
         r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} & \textbf{Estado} \\",
         r"\hline",
         r"\endfirsthead",
-        r"\multicolumn{11}{c}{\tablename\ \thetable\ -- Continuação}\\",
+        r"\multicolumn{11}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
@@ -148,6 +150,7 @@ def render_table(
     lines.extend(
         [
             r"\end{longtable}",
+            r"\endgroup",
             r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação metodológica pelo supervisor permanece pendente. O protocolo ou proposta contextual retido não integra a síntese empírica nem uma avaliação MMAT empírica. Um registro bibliográfico fora do recorte temporal foi excluído do escopo atual.",
         ]
     )
