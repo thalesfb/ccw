@@ -11,6 +11,13 @@ pendentes estão resumidos em [`docs/tcc/ESTADO-ATUAL-TCC.md`](docs/tcc/ESTADO-A
 
 Este repositório documenta uma revisão sistemática da literatura e a elaboração de uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente de evidências sobre competências matemáticas. A especificação não corresponde a uma aplicação funcional nem a uma validação experimental realizada neste trabalho.
 
+![Visão geral atualizada do projeto, da revisão sistemática à especificação conceitual](results/tcc/images/project_overview_current.png)
+
+> Esta síntese visual apresenta o escopo e os números do snapshot vigente. A fonte
+> de verdade continua sendo a documentação versionada da reconciliação e os
+> artefatos derivados do pipeline; a imagem não substitui tabelas, referências ou
+> o relato metodológico do TCC.
+
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
 ### Tema
