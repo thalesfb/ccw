@@ -1,8 +1,9 @@
-# Governança da apresentação do PTC
+# Governança da apresentação do TCC
 
-Este documento registra as decisões para a apresentação em `presentation/` e
-separa requisitos do pedido do usuário, instruções encontradas no arquivo
-PPTX de referência e critérios científicos ou institucionais verificáveis.
+Este documento define os critérios de produção e verificação da apresentação
+em `presentation/`. Ele separa a referência visual fornecida, os requisitos
+institucionais e os critérios científicos verificáveis, sem transformar
+decisões de implementação em afirmações acadêmicas.
 
 ## Escopo aprovado
 
@@ -19,26 +20,31 @@ PPTX de referência e critérios científicos ou institucionais verificáveis.
 
 ## Template fornecido: instrução versus requisito
 
-O arquivo local
-`C:\Users\user\Downloads\Ensino Personalizado de Matemática_ Oportunidades e Técnicas Computacionais_template.pptx`
-foi inspecionado como referência visual e tipográfica. Ele contém 55 slides,
+O arquivo de template fornecido externamente foi inspecionado como referência
+visual e tipográfica. Ele contém 55 slides,
 incluindo exemplos, slides de instrução do fornecedor, referências de fonte e
 slides descartáveis.
 
 As seguintes propriedades foram aproveitadas como direção visual:
 
 - proporção 16:9;
-- famílias Asap e Barlow;
+- composição tipográfica e editorial do material de referência, sem tratá-la
+  como a fonte do manuscrito;
 - composição editorial com cartões, divisões claras e espaço negativo;
 - paleta de referência registrada no slide “Fonts & colors used”.
 
 As instruções “Instructions for use”, a exigência condicional de manter um
 slide de créditos e a recomendação de atribuição dependente do tipo de conta
 Slidesgo são instruções de licenciamento/uso do fornecedor. Elas não são
-normas do IFC, requisitos científicos do PTC nem autorização para publicar o
+normas do IFC, requisitos científicos do TCC nem autorização para publicar o
 arquivo original. Por isso, o PPTX não é fonte dos números atuais, não é
 versionado no repositório e qualquer crédito deve ser decidido conforme a
 licença efetivamente obtida.
+
+O deck do TCC preserva a composição editorial e a proporção 16:9, mas usa a
+família Times New Roman/Nimbus Roman/Times para manter continuidade com o
+manuscrito. As classes do código usam o prefixo `tcc-`; o material do PTC é
+apenas referência histórica e não é a identidade semântica do deck atual.
 
 ## Identidade institucional
 
@@ -63,7 +69,7 @@ O contrato automatizado em `presentation/deck-standards.mjs` verifica:
 
 - presença da marca institucional e do QR;
 - destino e texto alternativo do QR;
-- permanência das famílias Asap/Barlow;
+- uso da família Times New Roman/Nimbus Roman/Times, compatível com o TCC;
 - remoção visual de uma marca IFC desenhada manualmente;
 - contraste mínimo WCAG AA de 4,5:1 para texto normal e 3:1 para texto
   grande, conforme [WCAG 2.2, critério 1.4.3](https://www.w3.org/TR/WCAG22/#contrast-minimum).
@@ -71,26 +77,25 @@ O contrato automatizado em `presentation/deck-standards.mjs` verifica:
 O QR é gerado por `npm run generate:qr`, a partir da URL registrada no
 script, e o SVG gerado é um artefato local reproduzível.
 
-## Relação com as issues abertas
+## Limites de publicação
 
-Esta atualização atende a parte editorial e de rastreabilidade da decisão
-registrada nas issues, mas não encerra gates científicos ou de orientação:
+A apresentação publica somente o estado científico e técnico que possui
+evidência versionada. O rastreador de issues e o histórico de pull requests
+servem à proveniência da engenharia, mas não são fontes de resultados,
+aprovação acadêmica ou validação experimental. Reuniões, decisões pendentes,
+hipóteses de continuidade e tarefas de desenvolvimento devem aparecer no
+deck apenas quando forem necessárias para explicar o escopo e sempre com a
+distinção explícita entre realizado, demonstrado e proposto.
 
-- [#27](https://github.com/thalesfb/ccw/issues/27): deck preparado para reunião
-  de decisão sobre continuidade; a reunião ainda deve registrar o cenário e
-  a justificativa escolhidos.
-- [#24](https://github.com/thalesfb/ccw/issues/24): escopo, capítulos,
-  linguagem PRISMA e distinção entre realizado, demonstrado e proposto
-  continuam sujeitos à revisão científica.
-- [#25](https://github.com/thalesfb/ccw/issues/25): o título final depende da
-  decisão de escopo e não é resolvido por uma melhoria visual.
-- [#26](https://github.com/thalesfb/ccw/issues/26) e
-  [#29](https://github.com/thalesfb/ccw/issues/29): atualização de literatura,
-  protocolo e adjudicação não devem ser inferidos do deck.
-- [#28](https://github.com/thalesfb/ccw/issues/28) e
-  [#7](https://github.com/thalesfb/ccw/issues/7): harness e protótipo não são
-  declarados executados apenas porque aparecem como próximos passos.
+Não devem ser publicados em documentos acadêmicos: caminhos locais,
+credenciais, logs brutos, transcrições de assistência, instruções internas de
+agentes ou conjecturas apresentadas como decisões. Quando uma pendência for
+relevante para a interpretação, ela deve ser descrita de forma neutra, com
+seu efeito sobre o alcance das conclusões.
 
-Assim, as issues permanecem abertas até que seus gates próprios tenham
-evidência e aprovação. A apresentação documenta a pendência em vez de
-transformá-la em resultado.
+Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
+o código do pipeline está implementado, os testes sintéticos estão verdes, o
+experimento com dados reais permanece pendente e o MMAT é preliminar. No slide
+do MMAT, a contagem deve deixar explícito que nove dos 17 candidatos empíricos
+tiveram texto primário revisado e oito foram apreciados com resumo e
+metadados; o protocolo contextual não integra essa apreciação.

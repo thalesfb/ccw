@@ -4,6 +4,9 @@
 
 > **População vigente (03/09/2026):** o snapshot versionado contém 11.904 registros identificados, 27 remoções determinísticas por DOI/URL, 11.877 registros na triagem e 18 registros retidos após a adjudicação de escopo. São 17 candidatos empíricos provisórios e o protocolo contextual 6921. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. Os números históricos de 9.431 registros e 17 incluídos permanecem apenas como contexto; a reconciliação vigente está em [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
 
+O estado público, os limites interpretativos e as decisões metodológicas ainda
+pendentes estão resumidos em [`docs/tcc/ESTADO-ATUAL-TCC.md`](docs/tcc/ESTADO-ATUAL-TCC.md).
+
 ## Sobre o Projeto
 
 Este repositório documenta uma revisão sistemática da literatura e a elaboração de uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente de evidências sobre competências matemáticas. A especificação não corresponde a uma aplicação funcional nem a uma validação experimental realizada neste trabalho.
@@ -38,7 +41,7 @@ Mapear e analisar sistematicamente as aplicações de técnicas computacionais n
 ## Estrutura do Repositório
 
 ```bash
-├── .github/            # Copilot workflow guidelines and prompts
+├── .github/            # Automação e validação do repositório
 ├── docs/               # Academic documentation (constitution, regulations)
 ├── research/           # Phase 1: Systematic literature review module
 │   ├── src/            # Pipeline modules (ingestion, processing, analysis)
@@ -260,7 +263,7 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 - [x] Consolidar o snapshot versionado da busca (11.904 registros identificados)
 - [x] Analisar e categorizar os artigos encontrados (18 registros retidos no snapshot vigente; 17 candidatos empíricos provisórios e 1 protocolo contextual)
 - [x] Gerar relatórios e visualizações PRISMA
-- [x] Finalizar documentação acadêmica do PTC (LaTeX)
+- [x] Finalizar documentação acadêmica do TCC (LaTeX)
 - [ ] Concluir a recuperação de fontes, os localizadores e a adjudicação metodológica do MMAT
 - [ ] Realizar a revisão final do TCC com a orientação
 - [ ] Registrar eventuais trabalhos futuros separadamente, sem tratá-los como resultados do TCC vigente
