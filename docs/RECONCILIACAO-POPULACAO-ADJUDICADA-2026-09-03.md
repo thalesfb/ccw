@@ -4,6 +4,7 @@
 **Commit de consolidação:** `5d72bf6` (PR #55)
 **Fonte versionada:** `research/exports/analysis/papers.csv`, `summary.json` e
 `research/data/current_synthesis_scope.csv`
+**Auditoria de identidade:** `research/exports/analysis/deduplication_identity_audit.csv`
 **Ledger de decisões:** `research/data/adjudicated_population_decisions.csv`
 
 ## Escopo deste documento
@@ -18,13 +19,19 @@ O manuscrito do TCC ainda é uma unidade de trabalho separada. Este documento
 não autoriza inserir no TCC o histórico de PRs, discussões internas ou detalhes
 de implementação que não sejam necessários ao relato científico.
 
+O arquivo `research/data/prisma_population_reconciliation.csv` não é a fonte do
+snapshot vigente. Ele preserva uma reconciliação histórica datada de
+31/08/2026, com a população operacional anterior de 16 registros. Para os
+valores atuais, devem ser usados o `summary.json`, o `papers.csv`, o escopo de
+síntese e a auditoria de identidade indicados acima.
+
 ## Fluxo PRISMA vigente
 
 | Etapa | Entraram | Excluídos/removidos | Avançaram/retidos |
 | --- | ---: | ---: | ---: |
 | Identificação | 11.904 | 27 por identidade DOI/URL | 11.877 |
 | Triagem | 11.877 | 9.391 | 2.486 |
-| Elegibilidade | 2.486 | 2.468 (99,28%) | 18 (0,72%) |
+| Priorização operacional (etapa reportada como elegibilidade) | 2.486 | 2.468 (99,28%) | 18 (0,72%) |
 | Inclusão | 18 | — | 18 |
 
 Dos **11.904 identificados**, 78,89% foram excluídos na triagem, 20,88%
@@ -45,7 +52,10 @@ A auditoria atual não é uma contagem zero. As 27 remoções determinísticas s
 Há ainda 177 grupos de título normalizado, com 257 excedentes brutos. Depois da
 remoção DOI/URL, 232 excedentes permanecem apenas por título. Eles são
 candidatos à auditoria semântica e não foram removidos automaticamente, porque
-títulos iguais podem representar versões, erratas ou obras distintas.
+títulos iguais podem representar versões, erratas ou obras distintas. Os 257
+excedentes brutos incluem as 27 linhas já removidas por identidade; por isso,
+não se deve somar 27 e 232 nem subtrair 232 do fluxo PRISMA. Até o snapshot
+vigente, não há duplicatas semânticas confirmadas.
 
 ## Como 16 registros se tornaram 18
 
