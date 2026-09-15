@@ -1060,7 +1060,13 @@ FUNCTION {compose.url}
 }
 FUNCTION {format.url}
 { url empty$ 'skip$
-    {url compose.url output new.sentence }
+    {url #1 #16 substring$ "https://doi.org/" =
+    {"\url{" url * "}" * "DOI: " swap$ * output new.sentence}
+       {url #1 #18 substring$ "http://dx.doi.org/" =
+          {"\url{" url * "}" * "DOI: " swap$ * output new.sentence}
+          {url compose.url output new.sentence}
+        if$}
+     if$}
   if$
  urlaccessdate duplicate$ empty$ 'skip$
     { bbl.url.accessdate swap$ *}
@@ -2101,7 +2107,7 @@ FUNCTION {set.default.abnt.variables}
   "$Revision: v<VERSION> $" extract.cvs.key 'abnt.bst.revision :=
   #0 'abnt.and.type     :=     % #0 "e"; #1 "&"
   "\emph" 'abnt.emphasize :=
-  #0 'abnt.cite.style :=       %default norm version for NBR10520
+  #1 'abnt.cite.style :=       %NBR 10520:2023: (Author, YEAR)
                                %#0 \cite=(AUTHOR, YEAR)
 			       %#1 \cite=(Author, YEAR)
   #0 'abnt.experimental :=
