@@ -5,25 +5,25 @@ Este capítulo apresenta os resultados da revisão sistemática desenvolvida no 
 
 \section{Fluxo de Seleção}
 
-A Figura~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Após a identificação, 27 linhas excedentes foram removidas por identidade bibliográfica determinística: 25 por DOI normalizado e 2 por URL exata. Restaram 11.877 registros para a triagem. A triagem excluiu 9.391 registros e encaminhou 2.486 para a elegibilidade; nessa etapa, 2.468 foram excluídos e 18 foram retidos operacionalmente.
+O Fluxograma~\ref{fig:prisma-flow} apresenta o fluxo de seleção relatado segundo o PRISMA 2020. Após a identificação, 27 linhas excedentes foram removidas por identidade bibliográfica determinística: 25 por DOI normalizado e 2 por URL exata. Restaram 11.877 registros para a triagem. A triagem excluiu 9.391 registros e encaminhou 2.486 para a elegibilidade; nessa etapa, 2.468 foram excluídos e 18 foram retidos operacionalmente.
 
-\begin{figure}[H]
+\begin{fluxograma}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/prisma_flow.png}
 \caption{Fluxo de seleção da revisão sistemática.}
 \label{fig:prisma-flow}
 \fonte{Elaborado pelo autor (2026).}
-\end{figure}
+\end{fluxograma}
 
-A Figura~\ref{fig:selection-funnel} representa a redução do conjunto de registros ao longo das etapas.
+O Gráfico~\ref{fig:selection-funnel} representa a redução do conjunto de registros ao longo das etapas.
 
-\begin{figure}[H]
+\begin{grafico}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
 \caption{Funil de seleção dos estudos.}
 \label{fig:selection-funnel}
 \fonte{Elaborado pelo autor (2026).}
-\end{figure}
+\end{grafico}
 
 \section{Estatísticas Descritivas}
 
@@ -56,38 +56,40 @@ Período de cobertura & 2015--2026 \\
 \fonte{Elaborado pelo autor (2026).}
 \end{table}
 
-A distribuição por fonte é apresentada na Figura~\ref{fig:database-coverage}. A contribuição de cada base foi complementar, e os totais brutos incluíram registros posteriormente reconhecidos como duplicatas.
+A distribuição por fonte é apresentada no Gráfico~\ref{fig:database-coverage}. A contribuição de cada base foi complementar, e os totais brutos incluíram registros posteriormente reconhecidos como duplicatas.
 
-\begin{figure}[H]
+\begin{grafico}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{images/database_coverage.png}
 \caption{Registros identificados por fonte científica.}
 \label{fig:database-coverage}
 \fonte{Elaborado pelo autor (2025).}
-\end{figure}
+\end{grafico}
 
 \clearpage
 \section{Síntese dos Estudos Incluídos}
 
-Antes da tabela detalhada, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos.
+Antes do quadro detalhado, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos.
 
 Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, características contextuais e registros de interação para estimar categorias ou escores. Outros estudos investigaram personalização, avaliação formativa, recursos pedagógicos ou modelos computacionais de aprendizagem. Essa diversidade ampliou o panorama da revisão, mas também impediu tratar todos os resultados como se medissem o mesmo fenômeno educacional.
 
 Acurácia elevada em uma base específica não demonstra automaticamente que a técnica produzirá o mesmo resultado em outra escola ou população. Da mesma forma, predição de desempenho não equivale a explicar como o estudante aprende matemática. Essas restrições foram incorporadas aos requisitos e aos critérios de avaliação da especificação apresentada no Capítulo~\ref{cap:prototipo}.
 
-Na Tabela~\ref{tab:sintese-estudos-empiricos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT. Um protocolo ou proposta contextual foi retido para rastreabilidade do mapeamento, mas não possui resultado empírico concluído e, por isso, não aparece na tabela \cite{Imperatrice2025_6921}.
+No Quadro~\ref{qua:sintese-estudos-empiricos}, a coluna de resultado preserva o sentido do achado reportado por cada artigo, sem formar um ranking entre estudos. A leitura deve considerar conjuntamente o desenho, a finalidade, a população analisada e as limitações metodológicas apresentadas posteriormente pelo MMAT. Um protocolo ou proposta contextual foi retido para rastreabilidade do mapeamento, mas não possui resultado empírico concluído e, por isso, não aparece no quadro \cite{Imperatrice2025_6921}.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
 \setlength{\tabcolsep}{2pt}
 \renewcommand{\arraystretch}{0.92}
+\begingroup
+\def\LTcaptype{quadro}
 \begin{longtable}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{7.2cm}}
-\caption{Síntese dos candidatos empíricos provisórios retidos.}\label{tab:sintese-estudos-empiricos}\\
+\caption{Síntese dos candidatos empíricos provisórios retidos.}\label{qua:sintese-estudos-empiricos}\\
 \hline
 \textbf{Autores/Ano} & \textbf{Tema} & \textbf{Abordagem} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Resultado reportado} \\
 \hline
 \endfirsthead
-\multicolumn{6}{c}{\tablename\ \thetable\ -- Continuação}\\
+\multicolumn{6}{c}{\quadroname\ \thequadro\ -- Continuação}\\
 \hline
 \textbf{Autores/Ano} & \textbf{Tema} & \textbf{Abordagem} & \textbf{Finalidade} & \textbf{Avaliação} & \textbf{Resultado reportado} \\
 \hline
@@ -116,6 +118,7 @@ Nyantah et al.~\cite{Enhancing2025_012} (2025) & Teoremas de círculo & Animaç�
 Zeng~\cite{Zeng2025_6923} (2025) & Carga cognitiva na resolução de problemas matemáticos & EEG; rastreamento ocular; ML & Reconhecimento de estados cognitivos & Experimento intraindivíduos & Sinais multimodais e classificadores para reconhecer carga cognitiva \\
 \end{longtable}
 \fonte{Elaborado pelo autor (2026).}
+\endgroup
 \end{landscape}
 
 \section{Avaliação Metodológica com o MMAT}
@@ -123,7 +126,7 @@ Zeng~\cite{Zeng2025_6923} (2025) & Carga cognitiva na resolução de problemas m
 
 O MMAT 2018 foi utilizado conforme o desenho metodológico de cada estudo empírico \cite{MMAT2018}. O ledger registra primeiro as perguntas de triagem S1 (``Há perguntas de pesquisa claras?'') e S2 (``Os dados coletados permitem responder às perguntas de pesquisa?'') e, em seguida, os critérios Q1--Q5 do delineamento identificado. As respostas são codificadas como Y (``Sim''), N (``Não'') ou CT (``Não é possível concluir com a evidência disponível''), sem média, ranking ou categoria geral. A apreciação foi realizada por um único revisor e permanece preliminar: parte dos registros foi examinada com base em resumo e metadados, e a adjudicação pelo supervisor e os localizadores dos critérios ainda precisam ser consolidados. Assim, os julgamentos constituem uma apreciação estruturada e passível de revisão, não uma classificação definitiva dos artigos.
 
-A Tabela~\ref{tab:mmat-reavaliacao-atual} foi gerada automaticamente a partir do arquivo versionado \path{research/data/mmat_reassessment_current.csv}. Dessa forma, os critérios apresentados no TCC e no ledger atual possuem uma fonte única e verificável, separada da avaliação histórica.
+O Quadro~\ref{qua:mmat-reavaliacao-atual} foi gerado automaticamente a partir do arquivo versionado \path{research/data/mmat_reassessment_current.csv}. Dessa forma, os critérios apresentados no TCC e no ledger atual possuem uma fonte única e verificável, separada da avaliação histórica.
 
 \begin{landscape}
 \fontsize{7.3}{7.8}\selectfont
