@@ -209,8 +209,8 @@ class: content-slide flow-slide
   <div class="tcc-funnel">
     <div class="tcc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
     <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
-    <div class="tcc-funnel-stage funnel-screening"><span>Triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
-    <div class="tcc-funnel-stage funnel-inclusion"><span>Retenção</span><strong>18</strong><small>2.468 excluídos na elegibilidade</small></div>
+    <div class="tcc-funnel-stage funnel-screening"><span>Após triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
+    <div class="tcc-funnel-stage funnel-inclusion"><span>Retenção operacional</span><strong>18</strong><small>2.468 excluídos na priorização</small></div>
   </div>
   <div class="tcc-funnel-notes">
     <p><strong>Identidade:</strong> 25 DOI + 2 URL são removidos de forma determinística.</p>
@@ -278,7 +278,7 @@ class: content-slide
 
 <div class="slide-kicker">13 / TÉCNICAS</div>
 
-# Técnicas: frequências do conjunto triado
+# Técnicas: frequências do conjunto pós-deduplicação
 
 <div class="tcc-technique-layout">
   <div class="tcc-technique-chart"><img src="./public/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
