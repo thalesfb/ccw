@@ -238,7 +238,10 @@ class PRISMASelector:
         df: pd.DataFrame,
         min_relevance_score: float = 4.0
     ) -> pd.DataFrame:
-        """Apply eligibility phase (full-text review).
+        """Apply operational eligibility prioritization.
+
+        This phase applies the relevance threshold to records that passed the
+        lexical/metadata screening. It is not, by itself, a full-text review.
 
         Args:
             df: DataFrame with papers from screening phase
