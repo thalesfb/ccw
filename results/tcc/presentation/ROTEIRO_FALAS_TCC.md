@@ -90,11 +90,13 @@ qualidade e não medem eficácia.
 
 ## 11. Tempo e fontes — 0:50
 
-As distribuições por ano e por fonte ajudam a caracterizar o snapshot. Elas
-mostram como o conjunto foi recuperado, mas não permitem concluir que uma base
-é mais representativa ou que a produção científica esteja distribuída de forma
-uniforme. A cobertura está condicionada às fontes, aos idiomas e às condições
-de disponibilidade dos metadados.
+As distribuições por ano e por fonte ajudam a caracterizar o snapshot. O ano de
+2026 é parcial, com coleta até 31 de agosto, então a barra menor não representa
+uma queda anual da produção científica e não deve ser comparada diretamente com
+anos completos. As figuras mostram como o conjunto foi recuperado, mas não
+permitem concluir que uma base é mais representativa ou que a produção
+científica esteja distribuída de forma uniforme. A cobertura está condicionada
+às fontes, aos idiomas e às condições de disponibilidade dos metadados.
 
 ## 12. População retida — 1:05
 

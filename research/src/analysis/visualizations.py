@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -232,12 +233,22 @@ class ReviewVisualizer:
 
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
 
-        # Bar chart
+        # Bar chart. The final configured year can be a partial observation
+        # when the review cutoff falls before December; make that distinction
+        # visible instead of presenting a partial year as a completed one.
+        cutoff_date = str(getattr(self.config.review, 'cutoff_date', '') or '')
+        cutoff_year = int(cutoff_date[:4]) if cutoff_date[:4].isdigit() else None
+        partial_year = cutoff_year == ymax and len(cutoff_date) == 10
+        bar_colors = ['#7ea6c4'] * len(year_counts)
+        bar_hatches = [''] * len(year_counts)
+        if partial_year:
+            bar_colors[-1] = '#d99a45'
+            bar_hatches[-1] = '///'
         bars = ax1.bar(year_counts.index, year_counts.values,
-                      color='steelblue', alpha=0.7, edgecolor='black')
-        ax1.set_title('Distribuição de Artigos por Ano de Publicação')
-        ax1.set_xlabel('Ano')
-        ax1.set_ylabel('Número de Artigos')
+                      color=bar_colors, hatch=bar_hatches, alpha=0.85, edgecolor='#334155')
+        ax1.set_title('Distribuição de registros por ano de publicação')
+        ax1.set_xlabel('Ano de publicação')
+        ax1.set_ylabel('Número de registros')
         ax1.tick_params(axis='x', rotation=45)
 
         # Add value labels on bars
@@ -251,12 +262,25 @@ class ReviewVisualizer:
         ax2.plot(cumulative.index, cumulative.values,
                 marker='o', linewidth=2, markersize=6, color='darkred')
         ax2.fill_between(cumulative.index, cumulative.values, alpha=0.3, color='darkred')
-        ax2.set_title('Distribuição Cumulativa por Ano')
-        ax2.set_xlabel('Ano')
-        ax2.set_ylabel('Número Cumulativo de Artigos')
+        ax2.set_title('Distribuição cumulativa por ano')
+        ax2.set_xlabel('Ano de publicação')
+        ax2.set_ylabel('Número cumulativo de registros')
         ax2.tick_params(axis='x', rotation=45)
 
-        plt.tight_layout()
+        if partial_year:
+            cutoff_display = datetime.strptime(cutoff_date, '%Y-%m-%d').strftime('%d/%m/%Y')
+            fig.text(
+                0.5,
+                0.01,
+                f'* {ymax}: ano parcial; coleta até {cutoff_display}.',
+                ha='center',
+                va='bottom',
+                fontsize=10,
+                color='#8a5c1a',
+            )
+            plt.tight_layout(rect=(0, 0.045, 1, 1))
+        else:
+            plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
 

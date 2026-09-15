@@ -102,7 +102,9 @@ semântica e não foram tratados automaticamente como duplicatas.
 ### 13. A distribuição anual concentra registros nos anos recentes
 
 Incorpora a distribuição anual e contextualiza a concentração de registros nos
-anos mais recentes do recorte 2015–2026. A leitura é descritiva e não infere
+anos mais recentes do recorte 2015–2026. O ano de 2026 é parcial, com coleta até
+31/08/2026; por isso, sua barra não deve ser comparada diretamente com anos
+completos. A leitura é descritiva e não infere produção mundial,
 representatividade, causalidade ou qualidade.
 
 ### 14. Técnicas observadas no conjunto pós-deduplicação
