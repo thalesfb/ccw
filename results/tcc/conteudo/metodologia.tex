@@ -122,7 +122,7 @@ A elegibilidade utilizou uma pontuação de \textbf{relevância temática}, dist
 
 A pontuação foi um indicador operacional de relevância temática, calculado por uma heurística multicritério. No snapshot vigente, os valores observados variaram de 0,0 a 4,5 e o limiar operacional foi 4,0. O limiar apoiou a priorização e a seleção operacional, mas não constituiu medida de qualidade científica nem substituiu a verificação de escopo, tipo documental e pertinência. A apreciação metodológica foi conduzida separadamente com o MMAT 2018.
 
-O valor 4,0 deve ser interpretado como um parâmetro de triagem do pipeline, e não como um ponto de corte validado para relevância científica. A elegibilidade final também dependeu dos critérios documentais de decisão registrados em \texttt{research/data/current\_eligibility\_protocol.csv}. O snapshot vigente não inclui uma análise de sensibilidade do conjunto retido a diferentes limiares; portanto, não se atribui ao valor 4,0 estabilidade estatística ou capacidade de representar sozinho o universo da literatura.
+O valor 4,0 deve ser interpretado como um parâmetro de triagem do pipeline, e não como um ponto de corte validado para relevância científica. A elegibilidade final também dependeu dos critérios documentais de decisão registrados em \path{research/data/current_eligibility_protocol.csv}. O snapshot vigente não inclui uma análise de sensibilidade do conjunto retido a diferentes limiares; portanto, não se atribui ao valor 4,0 estabilidade estatística ou capacidade de representar sozinho o universo da literatura.
 
 Dos 2.486 registros avaliados nessa etapa, 2.468 foram excluídos por não atenderem aos critérios operacionais de elegibilidade. Foram retidos 18 registros para a análise de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
 
@@ -153,7 +153,7 @@ python -m research.src.validation.bibliography_audit
 
 A disponibilização do código e dos artefatos favorece a auditoria do processo. Entretanto, a reprodução exata dos resultados também depende da disponibilidade das APIs e das alterações realizadas por cada fonte ao longo do tempo.
 
-O arquivo \texttt{research/exports/reports/reproducibility\_manifest.json} funciona como índice de proveniência do snapshot: registra a data de geração, os hashes SHA-256 dos exports, o ledger corrente do MMAT, o manifesto de fontes primárias e os comandos de reconstrução. Essa estrutura permite verificar a versão publicada sem distribuir o banco SQLite operacional e torna explícita a diferença entre uma reprodução do snapshot e uma nova coleta nas APIs.
+O arquivo \path{research/exports/reports/reproducibility_manifest.json} funciona como índice de proveniência do snapshot: registra a data de geração, os hashes SHA-256 dos exports, o ledger corrente do MMAT, o manifesto de fontes primárias e os comandos de reconstrução. Essa estrutura permite verificar a versão publicada sem distribuir o banco SQLite operacional e torna explícita a diferença entre uma reprodução do snapshot e uma nova coleta nas APIs.
 
 \section{Avaliação da Qualidade Metodológica}
 

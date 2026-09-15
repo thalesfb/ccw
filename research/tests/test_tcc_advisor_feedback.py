@@ -95,6 +95,16 @@ def test_long_python_identifier_is_breakable() -> None:
     assert r"\nolinkurl{RandomForestClassifier}" not in source
 
 
+def test_repository_paths_are_breakable_in_tcc_prose() -> None:
+    source = _all_tex()
+    for path in (
+        "research/data/current_eligibility_protocol.csv",
+        "research/exports/reports/reproducibility_manifest.json",
+        "research/data/mmat_reassessment_current.csv",
+    ):
+        assert rf"\path{{{path}}}" in source
+
+
 def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     key_files = [
         TCC_ABSTRACT,
