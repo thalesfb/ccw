@@ -82,6 +82,7 @@ jobs:
           set +e
           python -m pytest \
             tests/test_bibliography_audit.py \
+            tests/test_tcc_normalization.py \
             tests/test_experiment_contract.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \
