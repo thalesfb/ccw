@@ -132,6 +132,9 @@ O Quadro~\ref{qua:mmat-reavaliacao-atual} foi gerado automaticamente a partir do
 \fontsize{10}{11.5}\selectfont
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.15}
+% Reserva a abertura antes de longtable criar a âncora da legenda.
+% Sem espaço, o destino pode ficar na página anterior no TeX Live.
+\Needspace{8\baselineskip}
 \input{../../research/exports/references/mmat_current_tcc_table.tex}
 \fonte{Elaborado pelo autor (2026).}
 \endgroup

@@ -115,6 +115,12 @@ organização evita a quebra de página obrigatória causada pelo ambiente de
 paisagem; a compilação ainda pode quebrar o quadro entre páginas quando o
 espaço disponível se esgota.
 
+A abertura do quadro MMAT reserva espaço para a identificação, o cabeçalho
+e as primeiras linhas antes de criar seu destino no PDF. A reserva é
+condicional: não impõe uma página nova quando há espaço suficiente. Isso
+evita que o texto do quadro avance enquanto a âncora da lista permanece
+na página anterior, divergência detectada pelo verificador no TeX Live.
+
 Uma observação interrogativa exige uma resposta, não uma marcação automática
 de conclusão. A devolutiva individual deve indicar o que mudou, onde a mudança
 pode ser verificada e, quando houver adaptação, sua justificativa e o limite
