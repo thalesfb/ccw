@@ -128,3 +128,63 @@ da confirmação. Pergunta, objetivos e interpretações científicas não são
 considerados aprovados somente porque o artefato compilou ou os testes
 passaram. Comentários e respostas pessoais permanecem nos arquivos privados,
 separados desta descrição pública do processo de revisão.
+
+## Recuperação local de evidências científicas
+
+O módulo `research.src.validation.evidence_retrieval` oferece recuperação lexical
+por SQLite FTS5, reutilizando o extrator de páginas do projeto. Não chama modelos,
+serviços de embeddings ou APIs. O índice operacional deve permanecer no cache
+ignorado, separado do banco da coleta e das decisões versionadas do corpus.
+Cada trecho conserva ID do estudo, papel documental, página física, posição no
+texto e hashes do PDF, da página e do trecho. A indexação rejeita passagens que
+não correspondam à página original; a consulta verifica alteração da fonte.
+
+A lista permitida deve ser derivada do escopo canônico. Consultas empíricas
+excluem protocolos contextuais por padrão. O ranqueamento BM25 indica relevância
+lexical, não qualidade, validade ou suporte científico. Ausência de resultado
+não demonstra ausência do conceito no documento, especialmente em PDFs sem
+texto extraível ou em consultas cujos termos não coexistam no mesmo trecho.
+
+No uso científico, os vínculos de referência e papel devem ser complementados
+pelos hashes dos PDFs registrados no manifesto revisado. Assim, a substituição
+da fonte seguida de nova extração também exige revisão do manifesto. O modo
+genérico, sem esses vínculos, não confirma identidade documental. Os hashes
+identificam bytes; não demonstram autoria, autenticidade editorial ou validade.
+
+Os manifestos públicos registram somente procedência, localizadores e decisões
+de revisão explicitamente delimitadas. Texto integral, banco SQLite e feedback
+pessoal não são distribuídos. O estado `SUPPORTED` significa suporte documental
+à afirmação atribuída sob os limites registrados, não validação do artigo,
+avaliação independente humana ou conclusão do MMAT.
+
+Após obter licitamente os PDFs correspondentes aos hashes do manifesto, o uso
+local pode ser reproduzido a partir da raiz do repositório:
+
+```python
+import csv
+import json
+from pathlib import Path
+from research.src.validation.evidence_retrieval import EvidenceIndex, extract_chunks
+
+scope = list(csv.DictReader(Path("research/data/current_synthesis_scope.csv").open(encoding="utf-8")))
+registry = {row["study_id"]: {"bib_key": row["study_key"],
+            "synthesis_role": row["synthesis_role"]} for row in scope}
+manifest = json.loads(Path("research/data/evidence_sources_current.json").read_text(encoding="utf-8"))
+for record in manifest["sources"]:
+    if record.get("sha256"):
+        registry[record["study_id"]]["sha256"] = record["sha256"]
+allowed_ids = set(registry)
+source = {"study_id": "2", "bib_key": "Implementation2025_000",
+          "synthesis_role": "empirical_evidence",
+          "source_url": "https://www.ijiet.org/vol15/IJIET-V15N1-2228.pdf"}
+with EvidenceIndex(Path("research/.cache/evidence/index.sqlite"), allowed_ids=allowed_ids,
+                   source_registry=registry) as index:
+    index.add(extract_chunks(Path("research/.cache/evidence/study-2.pdf"), source))
+    passages = index.search("hybrid sampling", study_ids={"2"})
+```
+
+O relatório `research/exports/analysis/evidence_retrieval_evaluation.json`
+contém nove casos fixos com fonte, páginas esperadas, resultados e hashes.
+Essa avaliação limitada verifica localização e fronteiras de escopo; não mede
+recall semântico do corpus nem substitui a leitura crítica. Os testes novos
+executam sem rede e integram a validação de fontes do CI.

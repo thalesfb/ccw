@@ -18,7 +18,9 @@ Esta revisão registra as decisões de redação relativas ao foco da especifica
 
 O PDF da BNCC consultado possui 600 páginas e SHA-256 `ad623d7b33986a4e87e1441a4e675064cd30db3650b86a75caefa476e802272b`. A numeração impressa foi distinguida da posição física no arquivo. O texto do NRC foi conferido no leitor integral da editora, sem atribuir a essa consulta um hash de PDF não obtido.
 
-A pergunta e o objetivo geral foram centrados na proposição de uma especificação técnica e pedagógica para apoiar a interpretação docente de evidências de desempenho. Os quatro objetivos específicos distinguem categorização da literatura, identificação de limitações e lacunas, formulação da especificação e proposição do protocolo. A revisão sistemática e o pipeline permanecem meios metodológicos e contribuições documentais.
+A pergunta e o objetivo geral preservam a proposição de uma especificação técnica e pedagógica para apoiar a interpretação docente de evidências de aprendizagem. Essa finalidade não afirma que o artefato já tenha mensurado aprendizagem: os registros de desempenho e as saídas preditivas são evidências cuja interpretação permanece condicionada ao construto, ao contexto e ao acompanhamento temporal. Os quatro objetivos específicos distinguem categorização da literatura, identificação de limitações e lacunas, formulação da especificação e proposição do protocolo. A revisão sistemática e o pipeline permanecem meios metodológicos e contribuições documentais.
+
+Na conferência de 8 de outubro de 2026, os requisitos funcionais e o protocolo foram alinhados a essa distinção: uma probabilidade preditiva não é denominada proficiência sem modelo de mensuração, escala e evidências de validade para a interpretação pretendida. Isso corrige uma ambiguidade interna da especificação sem modificar os objetivos aprovados nem afirmar eficácia educacional própria.
 
 O atendimento ao objetivo de propor o protocolo corresponde à definição de procedimentos, não à realização de experimentos. A conclusão preserva a ausência de validação empírica educacional própria e a condição preliminar da síntese e do MMAT.
 

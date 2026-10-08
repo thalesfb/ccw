@@ -93,6 +93,9 @@ jobs:
             tests/test_tcc_advisor_feedback.py \
             tests/test_tcc_visual_classification.py \
             tests/test_pdf_feedback.py \
+            tests/test_evidence_retrieval.py \
+            tests/test_claim_evidence_artifacts.py \
+            tests/test_tcc_evidence_limits.py \
             tests/test_tcc_editorial_feedback.py \
             tests/test_tcc_objective_alignment.py \
             tests/test_editorial_visualizations.py \

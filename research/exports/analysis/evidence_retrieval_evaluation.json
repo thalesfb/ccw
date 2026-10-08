@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "method": "SQLite FTS5, quoted AND tokens, BM25",
+  "purpose": "Locator and scope checks; not semantic support assessment",
+  "cases": [
+    {
+      "case_id": "R1",
+      "study_id": "2",
+      "query": "hybrid sampling",
+      "expected_physical_pages": [
+        7
+      ],
+      "retrieved_physical_pages": [
+        1,
+        7,
+        8
+      ],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R2",
+      "study_id": "2",
+      "query": "resampling training set",
+      "expected_physical_pages": [
+        3
+      ],
+      "retrieved_physical_pages": [
+        3,
+        4,
+        6
+      ],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R3",
+      "study_id": "6915",
+      "query": "eight senior classes",
+      "expected_physical_pages": [
+        32
+      ],
+      "retrieved_physical_pages": [
+        32,
+        34
+      ],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R4",
+      "study_id": "6916",
+      "query": "six week experimental period",
+      "expected_physical_pages": [
+        14
+      ],
+      "retrieved_physical_pages": [
+        14
+      ],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R5",
+      "study_id": "14",
+      "query": "baseline pretest",
+      "expected_physical_pages": [
+        15
+      ],
+      "retrieved_physical_pages": [
+        15
+      ],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R6",
+      "study_id": "2",
+      "query": "quantum chromodynamics",
+      "expected_physical_pages": [],
+      "retrieved_physical_pages": [],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R7",
+      "study_id": "6921",
+      "query": "pilot study",
+      "expected_physical_pages": [],
+      "retrieved_physical_pages": [],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R8",
+      "study_id": "excluded",
+      "query": "mathematics",
+      "expected_physical_pages": [],
+      "retrieved_physical_pages": [],
+      "roles": [
+        "empirical_evidence"
+      ],
+      "passed": true,
+      "k": 5
+    },
+    {
+      "case_id": "R9",
+      "study_id": "6921",
+      "query": "pilot study",
+      "expected_physical_pages": [
+        1
+      ],
+      "retrieved_physical_pages": [
+        1,
+        7
+      ],
+      "roles": [
+        "contextual_protocol"
+      ],
+      "passed": true,
+      "k": 5
+    }
+  ],
+  "source_hashes": {
+    "2": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
+    "6": "c861251a34879d25a6318721a0022b9efa0e500bace8c4ea6fbb00adfce7c672",
+    "8": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23",
+    "14": "d95e78c4a32c3a929a0429b97e672b49aa1a13bd3ffdb3f081a3ac610caadc0c",
+    "6915": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+    "6916": "e1e6dd886d1e4e6d42e7da3e1b366505bab06365015d57ea15fa4a37b39cbfcc",
+    "6917": "8b7c283a6cac47b6c961294abe2461b8cd7d64dc6ea4d7b99600829c4431dd8d",
+    "6920": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9",
+    "6921": "942936526014622e74e8c1e916b9b28bf96206bc6a9d4d99cb728161e08e8068"
+  },
+  "scope_sha256": "16022eee4d0134b6f3a84df70e4cdcdfe29890295c7c9f9e0879b38be34b1022",
+  "sqlite_version": "3.50.4",
+  "code_hashes": {
+    "research/src/validation/evidence_retrieval.py": "7942956bef33b468333b629837f27835a82c3039387791b1ca69a19a705694c4",
+    "research/src/validation/pdf_feedback.py": "189219f5913f2163a3e42762a34ee038a421a86b55ea00882ff692c569d8c740"
+  }
+}

@@ -7,11 +7,13 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "d3290377e3a6040f3ec7b3a2e9bdb6d1e1c50fcbe474488bbecd2a8eb3c48d30",
+    "sha256": "3b96e16cc00bec7db492c3b45b71e19c9607f5e24e3f56f8e077ee256f1c7fcf",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
+      "research/data/claim_evidence_current.json",
       "research/data/current_eligibility_protocol.csv",
       "research/data/current_synthesis_scope.csv",
+      "research/data/evidence_sources_current.json",
       "research/data/manual_override_adjudication.csv",
       "research/data/manual_override_evidence_matrix.csv",
       "research/data/metadata_provenance_audit.csv",
@@ -68,6 +70,7 @@
       "research/src/validation/__init__.py",
       "research/src/validation/bibliography_audit.py",
       "research/src/validation/derived_assets.py",
+      "research/src/validation/evidence_retrieval.py",
       "research/src/validation/pdf_feedback.py",
       "research/src/validation/reproducibility.py",
       "research/src/validation/temporal.py",

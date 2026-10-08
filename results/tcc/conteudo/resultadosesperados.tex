@@ -102,7 +102,7 @@ No Quadro~\ref{qua:sintese-estudos-empiricos}, a coluna de resultado preserva o 
 \endlastfoot
 \citeonline{Implementation2025_000} & Predição de desempenho acadêmico em matemática.\newline Finalidade: Predição & EDM; ML; classificadores & Acurácia & 75\% no conjunto de teste reportado \\
 \citeonline{Math2021_001} & Proficiência matemática no PISA.\newline Finalidade: Predição de proficiência & ML multiclasse; RN; RF & Kappa; ROC-AUC & Comparação entre modelos de três classes \\
-\citeonline{He2025_6915} & Tecnologia educacional para matemática.\newline Finalidade: Otimização e decisão & EDM; IA; modelos preditivos & Modelagem; experimento controlado & O resumo reporta modelo preditivo e comparação com ensino tradicional \\
+\citeonline{He2025_6915} & Tecnologia educacional para matemática.\newline Finalidade: Otimização e decisão & EDM; IA; modelos preditivos & Meta-análise; modelagem; comparação escolar & Predição de tamanhos de efeito e aplicação em oito turmas \\
 \citeonline{Villegas2025_6916} & Tutoria inteligente em STEM.\newline Finalidade: Feedback personalizado & IA; aprendizagem adaptativa & Desempenho; análise estatística & Sistema adaptativo avaliado no contexto descrito pelo estudo \\
 \citeonline{Multimodels2020_002} & Desempenho em matemática no ensino médio.\newline Finalidade: Predição & EDM; ML; métodos estatísticos & Comparação de modelos & Estudo compara classes de métodos em dados escolares \\
 \citeonline{Analysis2022_003} & Seleção de atributos e mineração de dados.\newline Finalidade: Predição de desempenho & DT; JRip; NB; MLP; RF & Acurácia; comparação & Comparação de abordagens em conjuntos educacionais \\
@@ -120,6 +120,14 @@ No Quadro~\ref{qua:sintese-estudos-empiricos}, a coluna de resultado preserva o 
 \end{longtable}
 \fonte{Elaborado pelo autor (2026).}
 \endgroup
+
+Os resultados quantitativos requerem leitura junto aos seus denominadores e às métricas por classe. Em \citeonline[pp.~155--156, 160]{Implementation2025_000}, o alvo é a categoria da nota escolar de matemática, em uma amostra de 280 estudantes de uma escola privada. Os autores descrevem uma divisão de 70\% para treinamento e 30\% para teste e reportam 75\% de acurácia de teste para a combinação de SMOTE e RUSBoost. Na mesma comparação, a revocação da classe de baixo desempenho é de 43\%. Portanto, a acurácia agregada não caracteriza uniformemente a identificação das três classes, nem demonstra ganho de aprendizagem decorrente de uma intervenção.
+
+Em \citeonline[pp.~1, 16, 31--35]{He2025_6915}, devem ser distinguidos três componentes: a síntese meta-analítica de 423 publicações, a predição de tamanhos de efeito e a aplicação escolar em oito turmas. As publicações utilizadas pelos autores não foram incorporadas como novos registros desta revisão. O alvo da modelagem é o tamanho de efeito de uma intervenção, não a proficiência individual. Na comparação escolar, os autores descrevem quatro professores, com um deles responsável pelas duas turmas de controle e os demais pelas turmas experimentais. Essa distribuição limita a separação entre efeitos da intervenção e do contexto docente; os resultados situados não sustentam eficácia universal nem uma regra geral de personalização.
+
+Também foram identificados limites de relato e de comparação. \citeonline[pp.~14, 22]{Villegas2025_6916} descrevem um período experimental de seis semanas, mas apresentam resultados até a oitava semana, sem conciliar essas durações nos trechos examinados. Essa inconsistência impede adotar um cronograma único na síntese. Em \citeonline[p.~105]{Enhancing2025_012}, o grupo com animação e aprendizagem cooperativa já apresentava desempenho superior no pré-teste. A diferença posterior não permite atribuir isoladamente à animação o resultado da intervenção combinada. Esses limites devem acompanhar a discussão das contribuições, em vez de serem ocultados pela apresentação de resultados favoráveis.
+
+A definição do alvo também restringe o uso dos resultados. Em \citeonline[pp.~66, 69--70]{Echeveria2025_6920}, as categorias de mentalidade matemática são construídas com dados de questionários, e oito itens da escala de mentalidade permanecem entre os preditores selecionados. Essa sobreposição exige cautela ao interpretar a classificação como diagnóstico independente: o modelo pode reproduzir categorias derivadas dos próprios indicadores de entrada. O artigo contribui para discutir definição de rótulos e seleção de atributos, mas não demonstra, por esse resultado, mudança na aprendizagem ou efeito de uma intervenção precoce.
 
 \section{Avaliação Metodológica com o MMAT}
 \label{sec:qualidade-estudos}
@@ -140,6 +148,8 @@ O Quadro~\ref{qua:mmat-reavaliacao-atual} foi gerado automaticamente a partir do
 \endgroup
 
 As limitações recorrentes envolveram descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Em vez de ordenar os estudos por uma nota, essas informações foram consideradas na interpretação da evidência, sem produzir uma classificação agregada de qualidade.
+
+A recuperação adicional de fontes não implica aprovação dos julgamentos anteriores. No caso de \citeonline{He2025_6915}, a combinação de componentes meta-analítico, preditivo e escolar exige delimitar a unidade de apreciação antes de consolidar os critérios do MMAT. O ledger mantém uma classificação provisória como quantitativo descritivo, enquanto parte de suas justificativas menciona confundimento e implementação da intervenção, próprios de outra categoria do instrumento. Essa divergência não foi resolvida por uma reclassificação automática: os julgamentos desse registro permanecem pendentes de revisão do delineamento e adjudicação.
 
 \section{Tendências e Lacunas}
 
