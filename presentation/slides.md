@@ -74,7 +74,7 @@ class: content-slide tcc-objective-general-slide
 
 <div class="tcc-objective-layout">
   <div class="tcc-objective-box tcc-action"><span>OBJETO DA REVISÃO</span><p>Aplicações de técnicas computacionais na educação matemática.</p></div>
-  <div class="tcc-objective-core">Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente de evidências de desempenho em matemática, fundamentada no mapeamento e na análise da literatura científica.</div>
+  <div class="tcc-objective-core">Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.</div>
   <div class="tcc-objective-box tcc-impact"><span>IMPACTO (PARA QUÊ?)</span><p>Fundamentar uma especificação conceitual, explicável e orientada ao apoio do professor.</p></div>
   <div class="tcc-objective-box tcc-scope"><span>ESCOPO</span><p>Revisão sistemática, síntese de evidências e requisitos. Não é protótipo funcional nem avaliação de eficácia.</p></div>
 </div>
@@ -108,7 +108,7 @@ class: content-slide tcc-mission-slide
 
 <div class="tcc-mission-layout">
   <div class="tcc-mission-copy">
-    <p>O TCC propõe uma <strong>especificação técnica e pedagógica</strong> para apoiar a interpretação docente de evidências de desempenho em matemática, fundamentada na revisão da literatura.</p>
+    <p>O TCC propõe uma <strong>especificação técnica e pedagógica</strong> para apoiar a interpretação docente da aprendizagem matemática, fundamentada na revisão da literatura.</p>
     <div class="tcc-reading-lens"><span>LEITURA RESPONSÁVEL</span><strong>Desempenho observado ≠ aprendizagem</strong><p>Uma saída computacional organiza registros e pode gerar estimativas; não observa, sozinha, os processos cognitivos, sociais e afetivos.</p></div>
   </div>
   <div class="tcc-rigor-card">

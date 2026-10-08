@@ -361,8 +361,8 @@ def build_deck() -> Presentation:
 
     # 3 — Question and objective.
     slide = new_slide(prs, EXPECTED_TITLES[2], 3)
-    add_callout(slide, "Problema de pesquisa", "Como estruturar uma especificação técnica e pedagógica para apoiar a interpretação docente de evidências de desempenho em matemática, com base na literatura e nos limites das inferências sobre competências e aprendizagem?", Inches(0.75), Inches(1.25), Inches(7.2), Inches(2.1), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=16)
-    add_callout(slide, "Objetivo geral", "Propor uma especificação técnica e pedagógica para apoiar a interpretação docente de evidências de desempenho em matemática, fundamentada na literatura científica.", Inches(8.25), Inches(1.25), Inches(4.3), Inches(2.1), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=16)
+    add_callout(slide, "Problema de pesquisa", "Como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura?", Inches(0.75), Inches(1.25), Inches(7.2), Inches(2.1), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=16)
+    add_callout(slide, "Objetivo geral", "Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.", Inches(8.25), Inches(1.25), Inches(4.3), Inches(2.1), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=16)
     add_text(slide, "Perguntas orientadoras", Inches(0.78), Inches(4.15), Inches(4.2), Inches(0.35), size=18, color=NAVY, bold=True)
     add_bullets(slide, [
         "Quais técnicas são aplicadas à educação matemática?",
