@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "265445b266f8ee0afaa2920e107cb9147b0e1c6bd0cf60fc7e6afbe8b89841d3",
+    "sha256": "d3290377e3a6040f3ec7b3a2e9bdb6d1e1c50fcbe474488bbecd2a8eb3c48d30",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/current_eligibility_protocol.csv",
@@ -78,17 +78,17 @@
     {
       "name": "database_coverage.png",
       "canonical_path": "research/exports/visualizations/database_coverage.png",
-      "canonical_sha256": "724e7241b4028332ef1584635370a2b9b55249011f3ce33433969d9b5427e2ff",
+      "canonical_sha256": "adc6909606b4fb01a48ef71f096c5d958138f2718c143648ee48425d8d75d3d3",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/database_coverage.png",
-          "sha256": "724e7241b4028332ef1584635370a2b9b55249011f3ce33433969d9b5427e2ff"
+          "sha256": "adc6909606b4fb01a48ef71f096c5d958138f2718c143648ee48425d8d75d3d3"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/database_coverage.png",
-          "sha256": "724e7241b4028332ef1584635370a2b9b55249011f3ce33433969d9b5427e2ff"
+          "sha256": "adc6909606b4fb01a48ef71f096c5d958138f2718c143648ee48425d8d75d3d3"
         }
       ]
     },
@@ -112,17 +112,17 @@
     {
       "name": "prisma_flow.png",
       "canonical_path": "research/exports/visualizations/prisma_flow.png",
-      "canonical_sha256": "d26b8b23f7c2aab55608c7d17c131fac6150fed0e1c6fa0a9162fe02cd3e67f2",
+      "canonical_sha256": "2ec51188f7e37954d60b72f597d519dec6098e01174428cb5309af2c668d23fc",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/prisma_flow.png",
-          "sha256": "d26b8b23f7c2aab55608c7d17c131fac6150fed0e1c6fa0a9162fe02cd3e67f2"
+          "sha256": "2ec51188f7e37954d60b72f597d519dec6098e01174428cb5309af2c668d23fc"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/prisma_flow.png",
-          "sha256": "d26b8b23f7c2aab55608c7d17c131fac6150fed0e1c6fa0a9162fe02cd3e67f2"
+          "sha256": "2ec51188f7e37954d60b72f597d519dec6098e01174428cb5309af2c668d23fc"
         }
       ]
     },

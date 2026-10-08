@@ -98,8 +98,27 @@ institucional. Essa comparação não certifica todos os elementos do template
 nem dispensa a conferência das demais normas vigentes.
 
 Na organização editorial, a justificativa concentra relevância e contribuição;
-os procedimentos permanecem na metodologia. A delimitação permanece na
-introdução para explicitar o escopo antes dos resultados, e a explicação sobre
-literatura cinzenta foi integrada aos critérios. Essas escolhas preservam a
-transparência metodológica e são submetidas à revisão acadêmica, sem pressupor
-aprovação institucional ou do orientador.
+o antigo parágrafo metodológico foi retirado. A delimitação detalhada foi
+deslocada para a metodologia, preservando na introdução somente uma remissão
+ao escopo documental. A explicação sobre literatura cinzenta foi reduzida a
+uma frase nos critérios, sem mudar os tipos documentais elegíveis. A imagem
+do PRISMA é identificada como Figura na lista de ilustrações, e a cobertura
+por fonte é apresentada em uma única pizza com quantidades e percentuais.
+Essas mudanças de apresentação não alteram as decisões de seleção nem os
+julgamentos MMAT.
+
+A síntese empírica é um quadro em retrato, com continuação automática e fonte
+de dez pontos. Tema e finalidade compartilham uma coluna, sem retirar as
+informações anteriormente apresentadas. A identificação do estudo, a
+abordagem, a avaliação e o resultado reportado permanecem explícitos. Essa
+organização evita a quebra de página obrigatória causada pelo ambiente de
+paisagem; a compilação ainda pode quebrar o quadro entre páginas quando o
+espaço disponível se esgota.
+
+Uma observação interrogativa exige uma resposta, não uma marcação automática
+de conclusão. A devolutiva individual deve indicar o que mudou, onde a mudança
+pode ser verificada e, quando houver adaptação, sua justificativa e o limite
+da confirmação. Pergunta, objetivos e interpretações científicas não são
+considerados aprovados somente porque o artefato compilou ou os testes
+passaram. Comentários e respostas pessoais permanecem nos arquivos privados,
+separados desta descrição pública do processo de revisão.

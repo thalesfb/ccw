@@ -17,7 +17,7 @@ class ObjectiveAlignmentTests(unittest.TestCase):
                              ["OE1", "OE2", "OE3", "OE4"], name)
         intro = (CONTENT / "introducao.tex").read_text(encoding="utf-8")
         objectives = intro.split(r"\subsection{Objetivos Específicos}", 1)[1].split(
-            r"\section{Delimitação do Trabalho}", 1
+            r"\section{Estrutura do Trabalho}", 1
         )[0]
         self.assertNotIn(r"\begin{itemize}", objectives)
         self.assertIn("metodológicas", objectives)

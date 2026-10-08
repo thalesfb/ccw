@@ -20,7 +20,7 @@ def test_review_section_uses_semantic_float_types_and_labels() -> None:
     repository_root = Path(__file__).resolve().parents[2]
     review = _read(repository_root, "results/tcc/conteudo/resultadosesperados.tex")
 
-    assert review.count("\\begin{fluxograma}") == 1
+    assert review.count("\\begin{figure}") == 1
     assert review.count("\\begin{grafico}") == 2
     assert review.count("\\begin{table}") == 1
     assert "\\label{qua:sintese-estudos-empiricos}" in review

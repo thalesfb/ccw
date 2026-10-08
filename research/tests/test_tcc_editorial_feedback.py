@@ -24,7 +24,7 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_illustration_captions_precede_images(self):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        blocks = re.findall(r"\\begin\{(?:grafico|fluxograma)\}.*?\\end\{(?:grafico|fluxograma)\}", review, re.S)
+        blocks = re.findall(r"\\begin\{(?:grafico|figure)\}.*?\\end\{(?:grafico|figure)\}", review, re.S)
         self.assertEqual(len(blocks), 3)
         for block in blocks:
             self.assertLess(block.index(r"\caption"), block.index(r"\includegraphics"))
