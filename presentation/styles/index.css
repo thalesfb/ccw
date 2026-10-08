@@ -558,14 +558,12 @@ small { font-size: 0.73rem; }
 .tcc-rigor-card p span { display: grid; place-items: center; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: #23b96b; color: #fff; font-weight: 800; }
 
 .slidev-layout.tcc-objectives-slide > h1 { color: #111; font-size: 2.42rem; letter-spacing: -0.05em; }
-.tcc-objective-roadmap { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.05rem 1.25rem; min-height: 22.4rem; margin-top: 0.2rem; padding: 0.35rem 0.15rem 0; }
+.tcc-objective-roadmap { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.05rem 1.25rem; min-height: 22.4rem; margin-top: 0.2rem; padding: 0.35rem 0.15rem 0; }
 .tcc-roadmap-streams { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; opacity: 0.78; pointer-events: none; }
 .tcc-roadmap-streams path { fill: none; stroke: #d2bd91; stroke-width: 4; vector-effect: non-scaling-stroke; }
 .tcc-roadmap-streams path:nth-child(2) { stroke: #3d9a85; }
 .tcc-roadmap-streams path:nth-child(3) { stroke: #2b6fa1; }
 .tcc-objective-step { position: relative; z-index: 1; display: grid; grid-template-columns: 2.25rem 1fr; grid-template-rows: auto 1fr; column-gap: 0.62rem; min-height: 5.75rem; padding: 0.85rem 0.95rem; border: 2px solid #d1c19e; border-radius: 0.92rem; background: #fcfbf5; box-shadow: 0 0.3rem 0.5rem rgba(86, 70, 42, 0.2); }
-.tcc-objective-step:nth-child(7) { grid-column: 3; grid-row: 2; }
-.tcc-objective-step:nth-child(8) { grid-column: 2; grid-row: 3; }
 .tcc-objective-step span { grid-row: 1 / span 2; color: #3e8f7d; font: 800 1.8rem/1 'Asap', sans-serif; }
 .tcc-objective-step strong { color: #111; font: 800 1.02rem/1.05 'Asap', sans-serif; }
 .tcc-objective-step p { margin-top: 0.28rem; color: #37414b; font-size: 0.76rem; line-height: 1.1; }
@@ -954,14 +952,14 @@ small { font-size: 0.73rem; }
 .tcc-objective-roadmap { gap: 0.7rem 0.9rem; min-height: 0; padding-top: 0.15rem; }
 .tcc-roadmap-streams { opacity: 0.24; }
 .tcc-objective-step {
-  min-height: 4.8rem;
-  padding: 0.65rem 0.75rem;
+  min-height: 8rem;
+  padding: 1rem;
   border-radius: 0;
   box-shadow: none;
 }
 .tcc-objective-step span { font-size: 1.55rem; }
-.tcc-objective-step strong { font-size: 0.96rem; }
-.tcc-objective-step p { font-size: 0.72rem; line-height: 1.08; }
+.tcc-objective-step strong { font-size: 1.2rem; }
+.tcc-objective-step p { font-size: 1rem; line-height: 1.2; }
 
 .tcc-search-layout { gap: 1rem; margin-top: 0; }
 .tcc-search-figure { min-height: 16.7rem; }

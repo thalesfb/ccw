@@ -11,31 +11,23 @@ A relevância deste trabalho decorreu de duas necessidades complementares. A pri
 
 Para professores, uma síntese crítica auxilia na compreensão das abordagens investigadas, dos resultados reportados e das limitações metodológicas recorrentes. Para estudantes e instituições, a pesquisa contribui ao explicitar que desempenho observado, proficiência estimada, competência e aprendizagem são conceitos relacionados, porém não equivalentes. Na especificação, também foi prevista a distinção entre a probabilidade preditiva de um alvo definido --- uma saída condicionada ao modelo e aos dados disponíveis --- e o indicador de desempenho observado. Nenhuma dessas saídas, isoladamente, equivale a proficiência, competência, aprendizagem ou eficácia pedagógica.
 
-Do ponto de vista acadêmico, a revisão sistemática documentou as estratégias de busca, a seleção dos estudos e a avaliação de suas limitações metodológicas. O relato foi estruturado com apoio do PRISMA 2020 \cite{PRISMA2020}, enquanto os candidatos empíricos retidos foram apreciados preliminarmente pelo MMAT 2018 \cite{MMAT2018}. A síntese da revisão e a fundamentação pedagógica sustentaram a definição dos requisitos, dos critérios de dados e modelagem, do protocolo de avaliação e da arquitetura de referência apresentados neste trabalho.
+Do ponto de vista acadêmico, a contribuição consiste em articular a análise crítica da literatura à elaboração de requisitos técnicos e pedagógicos, mantendo explícitos os limites das evidências disponíveis. Os procedimentos de busca, seleção e apreciação metodológica são descritos no Capítulo~\ref{cap:metodologia}.
 
 \section{Problema de Pesquisa}
 
-Diante desse contexto, o trabalho respondeu ao seguinte problema de pesquisa:
-
-Como identificar e sintetizar, por meio de revisão sistemática da literatura, as principais técnicas computacionais aplicadas ao ensino de matemática e converter essas evidências em uma especificação de protótipo que apoie o professor na interpretação de evidências sobre competências e dificuldades dos estudantes?
+Diante desse contexto, o trabalho respondeu ao seguinte problema de pesquisa: como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente de evidências de desempenho em matemática, com base nas técnicas computacionais identificadas na literatura e nos limites das inferências sobre competências e aprendizagem?
 
 \section{Objetivos}
 
 \subsection{Objetivo Geral}
 
-Mapear e analisar sistematicamente as aplicações de técnicas computacionais no ensino de matemática e, a partir das evidências encontradas, elaborar uma especificação técnica e pedagógica de protótipo para apoio à interpretação de evidências sobre competências.
+Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente de evidências de desempenho em matemática, fundamentada no mapeamento e na análise da literatura científica.
 
 \subsection{Objetivos Específicos}
 
-\begin{itemize}
-    \item \textbf{OE1}: realizar uma revisão sistemática da literatura, com relato apoiado pelo PRISMA 2020, sobre estudos publicados entre 2015 e 2026;
-    \item \textbf{OE2}: identificar e categorizar as principais abordagens computacionais aplicadas ao ensino de matemática;
-    \item \textbf{OE3}: classificar as finalidades pedagógicas atribuídas às aplicações encontradas;
-    \item \textbf{OE4}: analisar criticamente as metodologias e limitações dos estudos incluídos;
-    \item \textbf{OE5}: mapear lacunas técnicas, pedagógicas, metodológicas e éticas;
-    \item \textbf{OE6}: manter um \textit{pipeline} automatizado e auditável para coleta, processamento e exportação da revisão;
-    \item \textbf{OE7}: derivar requisitos funcionais e não funcionais, critérios de seleção de dados e modelos, um protocolo de avaliação e uma arquitetura de referência para o protótipo.
-\end{itemize}
+O \textbf{OE1} consiste em categorizar as abordagens e técnicas computacionais e as finalidades pedagógicas descritas na literatura mapeada. O \textbf{OE2} consiste em identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas no material examinado. O \textbf{OE3} consiste em formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência. O \textbf{OE4} consiste em propor um protocolo para orientar a avaliação futura do protótipo, contemplando aspectos técnicos e de adequação pedagógica, sem antecipar resultados experimentais.
+
+A revisão sistemática, com relato apoiado pelo PRISMA 2020, a apreciação preliminar pelo MMAT e o \textit{pipeline}, entendido como a sequência automatizada de etapas de processamento, constituíram os meios metodológicos para atender a esses objetivos. Sua descrição e seus artefatos foram preservados, assim como o recorte de publicações de 2015 a 2026.
 
 \section{Delimitação do Trabalho}
 
@@ -45,6 +37,6 @@ O desenvolvimento de uma aplicação funcional, o treinamento de modelos com uma
 
 \section{Estrutura do Trabalho}
 
-O documento está organizado em sete capítulos. O Capítulo 1 apresenta o contexto, a justificativa, o problema, os objetivos e a delimitação do trabalho. O Capítulo 2 discute aprendizagem matemática, avaliação, técnicas computacionais e limites das inferências baseadas em dados. O Capítulo 3 descreve a revisão sistemática, a estratégia de busca, os critérios de seleção, o processo de deduplicação, o PRISMA, o MMAT e o procedimento de derivação da especificação. O Capítulo 4 apresenta o fluxo de seleção, a síntese dos estudos, a avaliação por critérios e as lacunas identificadas. O Capítulo 5 consolida os princípios, requisitos, critérios de dados e modelagem, protocolo de avaliação e arquitetura de referência do protótipo. O Capítulo 6 integra os resultados da revisão, da apreciação metodológica, da fundamentação e da especificação. Por fim, o Capítulo 7 sintetiza as contribuições, as limitações e as possibilidades de continuidade da pesquisa.
+O documento está organizado em sete capítulos. O Capítulo~\ref{cap:introducao} apresenta o contexto, a justificativa, o problema, os objetivos e a delimitação do trabalho. O Capítulo~\ref{cap:fundamentacao} discute aprendizagem matemática, avaliação, técnicas computacionais e limites das inferências baseadas em dados. O Capítulo~\ref{cap:metodologia} descreve a revisão sistemática, a estratégia de busca, os critérios de seleção, o processo de deduplicação, o PRISMA, o MMAT e o procedimento de derivação da especificação. O Capítulo~\ref{cap:revisao} apresenta o fluxo de seleção, a síntese dos estudos, a avaliação por critérios e as lacunas identificadas. O Capítulo~\ref{cap:prototipo} consolida os princípios, requisitos, critérios de dados e modelagem, protocolo de avaliação e arquitetura de referência do protótipo. O Capítulo~\ref{cap:resultados-discussao} integra os resultados da revisão, da apreciação metodológica, da fundamentação e da especificação. Por fim, o Capítulo~\ref{cap:conclusao} sintetiza as contribuições, as limitações e as possibilidades de continuidade da pesquisa.
 
 %--------- FIM INTRODUÇÃO------------

@@ -361,8 +361,8 @@ def build_deck() -> Presentation:
 
     # 3 — Question and objective.
     slide = new_slide(prs, EXPECTED_TITLES[2], 3)
-    add_callout(slide, "Problema de pesquisa", "Como identificar e sintetizar, por meio de revisão sistemática, as principais técnicas computacionais aplicadas ao ensino de matemática e converter essas evidências em uma especificação de protótipo que apoie o professor?", Inches(0.75), Inches(1.25), Inches(7.2), Inches(2.1), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=16)
-    add_callout(slide, "Objetivo geral", "Mapear e analisar sistematicamente as aplicações e elaborar uma especificação técnica e pedagógica para apoiar a interpretação de evidências sobre competências.", Inches(8.25), Inches(1.25), Inches(4.3), Inches(2.1), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=16)
+    add_callout(slide, "Problema de pesquisa", "Como estruturar uma especificação técnica e pedagógica para apoiar a interpretação docente de evidências de desempenho em matemática, com base na literatura e nos limites das inferências sobre competências e aprendizagem?", Inches(0.75), Inches(1.25), Inches(7.2), Inches(2.1), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=16)
+    add_callout(slide, "Objetivo geral", "Propor uma especificação técnica e pedagógica para apoiar a interpretação docente de evidências de desempenho em matemática, fundamentada na literatura científica.", Inches(8.25), Inches(1.25), Inches(4.3), Inches(2.1), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=16)
     add_text(slide, "Perguntas orientadoras", Inches(0.78), Inches(4.15), Inches(4.2), Inches(0.35), size=18, color=NAVY, bold=True)
     add_bullets(slide, [
         "Quais técnicas são aplicadas à educação matemática?",
@@ -374,21 +374,18 @@ def build_deck() -> Presentation:
     # 4 — Objectives.
     slide = new_slide(prs, EXPECTED_TITLES[3], 4)
     left = [
-        ("OE1", "Revisão sistemática, relatada com apoio do PRISMA 2020, sobre estudos de 2015–2026."),
-        ("OE2", "Identificação e categorização das abordagens computacionais."),
-        ("OE3", "Classificação das finalidades pedagógicas das aplicações."),
-        ("OE4", "Análise crítica das metodologias e limitações dos estudos."),
+        ("OE1", "Categorizar técnicas computacionais e finalidades pedagógicas na literatura mapeada."),
+        ("OE2", "Identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas."),
     ]
     right = [
-        ("OE5", "Mapeamento de lacunas técnicas, pedagógicas, metodológicas e éticas."),
-        ("OE6", "Manutenção de um pipeline automatizado e auditável para coleta, processamento e exportação."),
-        ("OE7", "Derivação de requisitos, critérios de dados e modelos, protocolo de avaliação e arquitetura de referência."),
+        ("OE3", "Formular requisitos, critérios de dados e modelos e arquitetura de referência para o protótipo."),
+        ("OE4", "Propor um protocolo para avaliação futura dos aspectos técnicos e de adequação pedagógica."),
     ]
     for index, (code, body) in enumerate(left):
-        add_callout(slide, code, body, Inches(0.75), Inches(1.25 + index * 1.25), Inches(5.65), Inches(0.95), fill=PALE_BLUE, accent=BLUE, title_size=15, body_size=13.5)
+        add_callout(slide, code, body, Inches(0.75), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_BLUE, accent=BLUE, title_size=19, body_size=18)
     for index, (code, body) in enumerate(right):
-        add_callout(slide, code, body, Inches(6.9), Inches(1.25 + index * 1.55), Inches(5.65), Inches(1.25), fill=PALE_TEAL, accent=TEAL, title_size=15, body_size=13.5)
-    add_text(slide, "A apresentação distingue objetivos executados de atividades que permanecem fora do escopo, como implementação funcional e validação com participantes.", Inches(1.0), Inches(6.45), Inches(11.25), Inches(0.42), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+        add_callout(slide, code, body, Inches(6.9), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_TEAL, accent=TEAL, title_size=19, body_size=18)
+    add_text(slide, "Revisão, MMAT preliminar e pipeline são meios metodológicos. Propor o protocolo não equivale a executá-lo nem comprova eficácia pedagógica.", Inches(1.0), Inches(6.2), Inches(11.25), Inches(0.65), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 5 — Theoretical foundation.
     slide = new_slide(prs, EXPECTED_TITLES[4], 5)
@@ -396,8 +393,8 @@ def build_deck() -> Presentation:
     cards = [
         ("Desempenho\nobservado", "Registro de uma tarefa: acerto, nota, tentativa, estratégia ou tempo.", BLUE, PALE_BLUE),
         ("Proficiência\nestimada", "Inferência sobre uma escala de conhecimentos e habilidades.", TEAL, PALE_TEAL),
-        ("Competência", "Mobilização integrada de conhecimentos, procedimentos, estratégias e atitudes.", VIOLET, PALE_VIOLET),
-        ("Aprendizagem", "Transformação construída ao longo do tempo, com compreensão, autonomia e transferência.", AMBER, PALE_AMBER),
+        ("Competência", "Mobilização de conhecimentos, habilidades, atitudes e valores para resolver demandas.", VIOLET, PALE_VIOLET),
+        ("Aprendizagem", "Neste TCC: mudanças no que o estudante sabe e consegue fazer ao longo do tempo.", AMBER, PALE_AMBER),
     ]
     for index, (title, body, accent, fill) in enumerate(cards):
         x = Inches(0.72 + index * 3.12)

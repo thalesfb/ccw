@@ -100,6 +100,7 @@ def _latex_escape(value: object) -> str:
         "}": r"\}",
         "~": r"\textasciitilde{}",
         "^": r"\textasciicircum{}",
+        "/": r"/\allowbreak{}",
     }
     return "".join(replacements.get(char, char) for char in str(value))
 
@@ -114,7 +115,12 @@ def render_table(
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
         r"\begingroup",
         r"\def\LTcaptype{quadro}",
-        r"\begin{longtable}{|p{3.9cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
+        r"\setlength{\tabcolsep}{2pt}",
+        r"\setlength{\LTcapwidth}{\textwidth}",
+        r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|"
+        r">{\raggedright\arraybackslash}p{1.9cm}|ccccccc|"
+        r">{\raggedright\arraybackslash}p{2.3cm}|"
+        r">{\raggedright\arraybackslash}p{2.8cm}|}",
         r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{qua:mmat-reavaliacao-atual}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
@@ -151,7 +157,7 @@ def render_table(
         [
             r"\end{longtable}",
             r"\endgroup",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação metodológica pelo supervisor permanece pendente. O protocolo ou proposta contextual retido não integra a síntese empírica nem uma avaliação MMAT empírica. Um registro bibliográfico fora do recorte temporal foi excluído do escopo atual.",
+            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base documental e o estado de cada julgamento são preliminares. O registro contextual não recebe apreciação MMAT empírica.",
         ]
     )
     return "\n".join(lines) + "\n"

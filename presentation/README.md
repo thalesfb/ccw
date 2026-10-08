@@ -34,6 +34,12 @@ preserva essa gramática e usa a família Times compatível com o TCC
 manuscrito. Isso não torna o PPTX de 19 slides equivalente ao deck canônico de
 25 slides.
 
+A tipografia usa fontes locais, com `fonts.provider: none`, para não solicitar
+Times New Roman a um provedor de fontes web. A configuração segue a
+[documentação de fontes do Slidev](https://sli.dev/custom/config-fonts#providers).
+Os fallbacks Times/Nimbus Roman continuam definidos no CSS; disponibilidade
+tipográfica e legibilidade devem ser verificadas no ambiente de exportação.
+
 O slide MMAT exibe agora as perguntas de triagem S1 e S2 e a legenda vigente
 Y/N/CT, em vez de esconder essas perguntas sob uma abreviação. A fonte
 científica continua sendo o ledger versionado; a apresentação não cria um

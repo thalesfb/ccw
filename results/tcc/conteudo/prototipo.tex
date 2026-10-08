@@ -45,7 +45,7 @@ A revisão identificou uso recorrente de \textbf{\textit{Random Forest}}, máqui
 
 \textbf{\textit{Random Forest}} e SVM foram registrados como alternativas de modelagem, não como algoritmos definitivamente implementados. A escolha entre eles depende da base selecionada, da distribuição das classes, do tipo de variável, do custo computacional e dos requisitos de explicabilidade.
 
-Em uma implementação com scikit-learn, identificadores longos, como \texttt{RandomForest\allowbreak Classifier}, devem ser documentados sem comprometer a legibilidade do texto ou a reprodução do código.
+Em uma implementação com scikit-learn, identificadores longos devem ser documentados sem comprometer a legibilidade do texto ou a reprodução do código. O nome \texttt{RandomForest\allowbreak Classifier}, por exemplo, identifica uma classe de implementação, não uma técnica adicional.
 
 \section{Protocolo de Avaliação}
 
@@ -57,6 +57,8 @@ O protocolo distingue desempenho observado, proficiência estimada, competência
 
 Essa distinção também separa a avaliação técnica da eficácia pedagógica. As métricas preditivas descrevem o comportamento do modelo em uma base e sob determinadas condições de avaliação. Elas não demonstram, por si só, melhoria da aprendizagem, adequação de uma intervenção escolar ou alinhamento curricular validado. Tais conclusões exigiriam um desenho empírico próprio, com condições de comparação e observação educacional compatíveis com a pergunta investigada.
 
+Para examinar a adequação pedagógica da especificação, o protocolo prevê uma revisão documental por docentes da área de matemática. Essa revisão deverá considerar a correspondência dos requisitos com o referencial curricular pertinente ao nível de ensino, a clareza das explicações e das incertezas apresentadas, a possibilidade de interpretação contextualizada e a preservação da decisão docente. Cada julgamento deverá registrar o requisito examinado, a evidência documental, a justificativa, as limitações e os ajustes necessários. Trata-se de um procedimento proposto, que não foi executado neste trabalho; mesmo sua execução não substituiria um estudo empírico de eficácia educacional.
+
 \section{Explicabilidade e Participação Docente}
 
 SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. A especificação condicionou seu uso à estabilidade das explicações, ao custo computacional e à possibilidade de tradução dos resultados para uma linguagem curricular compreensível.
@@ -65,9 +67,9 @@ O professor permaneceu como responsável por interpretar as evidências, relacio
 
 \section{Arquitetura de Referência}
 
-\textbf{Ingestão} corresponde à leitura das fontes, à validação inicial de seus formatos e à preservação das informações de procedência. Em seguida, a etapa de \textbf{preparação} deverá tratar valores ausentes, codificar e transformar variáveis e documentar as decisões tomadas sobre esses dados. A \textbf{modelagem} abrangerá o treinamento e a comparação dos modelos candidatos de acordo com a base selecionada e com o protocolo de avaliação.
+A ingestão corresponde à leitura das fontes, à validação inicial de seus formatos e à preservação das informações de procedência. Em seguida, a etapa de preparação deverá tratar valores ausentes, codificar e transformar variáveis e documentar as decisões tomadas sobre esses dados. A modelagem abrangerá o treinamento e a comparação dos modelos candidatos de acordo com a base selecionada e com o protocolo de avaliação.
 
-A etapa de \textbf{avaliação e explicabilidade} deverá calcular as métricas, analisar os erros e gerar explicações cuja estabilidade e limitações serão examinadas. Por fim, a \textbf{apresentação} deverá disponibilizar indicadores, incertezas e limitações de modo compreensível para a análise docente. Essa arquitetura de referência organiza responsabilidades e pontos de verificação; não descreve um sistema funcional já disponível, nem fixa a tecnologia ou a forma de implantação.
+A etapa de avaliação e explicabilidade deverá calcular as métricas, analisar os erros e gerar explicações cuja estabilidade e limitações serão examinadas. Por fim, a apresentação deverá disponibilizar indicadores, incertezas e limitações de modo compreensível para a análise docente. Essa arquitetura de referência organiza responsabilidades e pontos de verificação; não descreve um sistema funcional já disponível, nem fixa a tecnologia ou a forma de implantação.
 
 A separação dos componentes deverá favorecer a testabilidade, a rastreabilidade e a substituição controlada de técnicas. Ela também permite localizar em qual etapa uma decisão, uma transformação ou uma limitação foi introduzida. A arquitetura não impõe uma interface específica e poderá ser materializada como \textit{notebook}, aplicação local, API ou sistema web. Qualquer dessas formas de execução deverá, entretanto, preservar os requisitos de auditoria, interpretação, privacidade e participação docente estabelecidos neste capítulo.
 
@@ -75,6 +77,6 @@ A separação dos componentes deverá favorecer a testabilidade, a rastreabilida
 
 O resultado deste capítulo foi um artefato de especificação que conectou as evidências da revisão às decisões de projeto. Foram definidos o propósito do protótipo, seus limites, os requisitos mínimos, os critérios de seleção de dados e modelos, o protocolo de avaliação e a arquitetura de referência.
 
-Essa entrega permitiu concluir o objetivo de transformar a literatura analisada em uma base técnica e pedagógica estruturada, sem confundir uma especificação validada documentalmente com uma implementação funcional ou com evidência de eficácia em sala de aula.
+Essa entrega consolidou uma base técnica e pedagógica estruturada, fundamentada no material examinado. Ela não se confunde com uma especificação submetida à revisão docente prevista no protocolo, uma implementação funcional ou uma evidência de eficácia em sala de aula.
 
 %--------- FIM ESPECIFICAÇÃO DO PROTÓTIPO ------------

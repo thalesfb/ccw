@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "71076239031fdee52f396ece9d768a6f6aadc86c000be5b06057d39396024787",
+    "sha256": "265445b266f8ee0afaa2920e107cb9147b0e1c6bd0cf60fc7e6afbe8b89841d3",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/current_eligibility_protocol.csv",
@@ -68,6 +68,7 @@
       "research/src/validation/__init__.py",
       "research/src/validation/bibliography_audit.py",
       "research/src/validation/derived_assets.py",
+      "research/src/validation/pdf_feedback.py",
       "research/src/validation/reproducibility.py",
       "research/src/validation/temporal.py",
       "research/src/validation/versioned_snapshot.py"
@@ -77,17 +78,17 @@
     {
       "name": "database_coverage.png",
       "canonical_path": "research/exports/visualizations/database_coverage.png",
-      "canonical_sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22",
+      "canonical_sha256": "724e7241b4028332ef1584635370a2b9b55249011f3ce33433969d9b5427e2ff",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/database_coverage.png",
-          "sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22"
+          "sha256": "724e7241b4028332ef1584635370a2b9b55249011f3ce33433969d9b5427e2ff"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/database_coverage.png",
-          "sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22"
+          "sha256": "724e7241b4028332ef1584635370a2b9b55249011f3ce33433969d9b5427e2ff"
         }
       ]
     },
@@ -111,17 +112,17 @@
     {
       "name": "prisma_flow.png",
       "canonical_path": "research/exports/visualizations/prisma_flow.png",
-      "canonical_sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b",
+      "canonical_sha256": "d26b8b23f7c2aab55608c7d17c131fac6150fed0e1c6fa0a9162fe02cd3e67f2",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/prisma_flow.png",
-          "sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b"
+          "sha256": "d26b8b23f7c2aab55608c7d17c131fac6150fed0e1c6fa0a9162fe02cd3e67f2"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/prisma_flow.png",
-          "sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b"
+          "sha256": "d26b8b23f7c2aab55608c7d17c131fac6150fed0e1c6fa0a9162fe02cd3e67f2"
         }
       ]
     },
@@ -145,17 +146,17 @@
     {
       "name": "selection_funnel.png",
       "canonical_path": "research/exports/visualizations/selection_funnel.png",
-      "canonical_sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54",
+      "canonical_sha256": "956a6e9da8dd07dd96169aecc92165c599e0d4bbac8c6093235f21b2958994dc",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/selection_funnel.png",
-          "sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54"
+          "sha256": "956a6e9da8dd07dd96169aecc92165c599e0d4bbac8c6093235f21b2958994dc"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/selection_funnel.png",
-          "sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54"
+          "sha256": "956a6e9da8dd07dd96169aecc92165c599e0d4bbac8c6093235f21b2958994dc"
         }
       ]
     },

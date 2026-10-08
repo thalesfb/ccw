@@ -31,15 +31,16 @@ O Cochrane Handbook permanece explicitamente versionado como 6.4 no arquivo bibl
 
 ### Fundamentação pedagógica
 
-BNCC, National Research Council, OCDE/PISA, Piaget, Vygotsky, Ausubel, Wood, Bruner e Ross, Black e Wiliam e Hattie e Timperley permanecem na fundamentação com as seguintes restrições:
+BNCC, National Research Council, OCDE/PISA, Vygotsky, Ausubel, Wood, Bruner e Ross, Black e Wiliam e Hattie e Timperley permanecem na fundamentação com as seguintes restrições:
 
-- Piaget fundamenta construção ativa do conhecimento, mas não deve receber sozinho todas as implicações didáticas específicas da educação matemática;
 - Vygotsky fundamenta a Zona de Desenvolvimento Proximal;
 - `scaffolding` deve ser atribuído a Wood, Bruner e Ross;
 - o framework do PISA fundamenta construtos e desenho da avaliação; os descritores dos níveis devem usar também o relatório de resultados;
 - desempenho observado, proficiência estimada, competência e aprendizagem permanecem conceitos relacionados, porém não intercambiáveis.
 
-A entrada legada `Piaget1972` permanece marcada para substituição e não é usada pelo texto atual, que cita `Piaget1972EN`. A entrada de Vygotsky ainda requer conferência da edição citada antes de qualquer enriquecimento de metadados. A citação do SAEB deve distinguir documentação de resultados e eventual uso de microdados quando o projeto chegar à governança de dados.
+Piaget foi retirado da redação ativa para delimitar o foco da fundamentação. Essa decisão editorial não declara incompatibilidade universal entre teorias, não transfere suas afirmações a outros autores e não modifica os estudos empíricos da revisão. As entradas `Piaget1972` e `Piaget1972EN` permanecem na proveniência bibliográfica; a segunda está marcada como `unused` e `retain_unused` no ledger. A entrada de Vygotsky ainda requer conferência da edição citada antes de qualquer enriquecimento de metadados. A citação do SAEB deve distinguir documentação de resultados e eventual uso de microdados quando o projeto chegar à governança de dados.
+
+A abertura da fundamentação passou a usar o documento curricular da BNCC para caracterizar os saberes matemáticos e o NRC (2001) para delimitar observação e inferência em avaliação. A definição operacional de aprendizagem e as aplicações desses conceitos aos requisitos são escolhas explicitadas neste TCC, não citações substitutas de Piaget. A consulta dirigida a fontes primárias está registrada em `docs/TCC_PEDAGOGICAL_CLAIM_REVIEW.md`; ela não equivale à conclusão da auditoria de todas as afirmações.
 
 ### Estudos incluídos na revisão
 

@@ -104,10 +104,6 @@ class ReviewVisualizer:
         main_x = 5.35
         exclusion_x = 11.9
 
-        # Title
-        ax.text(8, 8.55, 'Fluxo PRISMA da Revisão Sistemática',
-                ha='center', va='center', fontsize=21, fontweight='bold')
-
         # PRISMA stats com lógica progressiva correta
         identification = int(stats.get('identification', 0))
         duplicates_removed = int(stats.get('duplicates_removed', 0))
@@ -138,7 +134,7 @@ class ReviewVisualizer:
             (main_x, 6.25, f"Remoções operacionais\nregistradas\n(n = {duplicates_removed:,})", exclude_color),
             (main_x, 5.05, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
             (main_x, 3.85, f"Registros que passaram triagem\navaliados para elegibilidade\n(n = {eligibility:,})", box_color),
-            (main_x, 2.65, f"Registros retidos\nna população adjudicada\n(n = {included:,})", box_color),
+            (main_x, 2.65, f"Registros retidos\nno corpus provisório\n(n = {included:,})", box_color),
         ]
 
         # Exclusion boxes com contagens corretas de cada estágio
@@ -357,7 +353,7 @@ class ReviewVisualizer:
         df: pd.DataFrame,
         save_path: Optional[Path] = None
     ) -> Path:
-        """Create database coverage pie chart.
+        """Show provenance of the analytical snapshot in one counted bar chart.
 
         Args:
             df: DataFrame with papers
@@ -376,27 +372,23 @@ class ReviewVisualizer:
         # Count by database
         db_counts = df['database'].value_counts()
 
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-
-        # Pie chart
-        colors = plt.cm.Set2(range(len(db_counts)))
-        wedges, texts, autotexts = ax1.pie(db_counts.values, labels=db_counts.index,
-                                          autopct='%1.1f%%', colors=colors, startangle=90)
-        ax1.set_title(f'Cobertura da Base Analítica (n={len(df):,})')
-
-        # Bar chart
-        bars = ax2.bar(db_counts.index, db_counts.values, color=colors)
-        ax2.set_title(f'Registros por Base (n={len(df):,})')
-        ax2.set_ylabel('Número de Artigos')
-        ax2.tick_params(axis='x', rotation=45)
-
-        # Add value labels
+        fig, ax = plt.subplots(figsize=(11, 5))
+        bars = ax.barh(db_counts.index, db_counts.values, color='#246b55')
+        ax.invert_yaxis()
+        ax.set_xlabel('Número de registros após deduplicação DOI/URL')
+        ax.set_xlim(0, db_counts.max() * 1.32)
         for bar, count in zip(bars, db_counts.values):
-            height = bar.get_height()
-            ax2.text(bar.get_x() + bar.get_width()/2., height + 0.1,
-                    f'{count}', ha='center', va='bottom', fontsize=10)
-
-        plt.tight_layout()
+            percentage = f'{100 * count / len(df):.1f}'.replace('.', ',')
+            ax.text(count + db_counts.max() * 0.02,
+                    bar.get_y() + bar.get_height() / 2,
+                    f'{count:,}'.replace(',', '.') + f' ({percentage}%)',
+                    va='center', fontsize=11)
+        missing = len(df) - int(db_counts.sum())
+        scope = f'Snapshot após deduplicação DOI/URL: n={len(df):,}'.replace(',', '.')
+        if missing:
+            scope += f'; sem fonte registrada: {missing}'
+        fig.text(0.5, 0.02, scope, ha='center', fontsize=10)
+        plt.tight_layout(rect=(0, 0.06, 1, 1))
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
 
@@ -541,8 +533,7 @@ Desvio Padrão: {scores.std():.2f}"""
 
         ax.set_yticks(y_positions)
         ax.set_yticklabels(labels)
-        ax.set_xlabel('Número de Artigos')
-        ax.set_title('Funil de Seleção PRISMA')
+        ax.set_xlabel('Número de registros')
 
         # Add value labels
         counts_max = max(counts) if counts else 1
