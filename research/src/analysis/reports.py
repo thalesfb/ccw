@@ -42,7 +42,7 @@ def _normalise_external_url(value: object) -> str:
 
 def _normalise_html_whitespace(value: str) -> str:
     """Keep generated HTML stable and free of whitespace-only line changes."""
-    return "\n".join(line.rstrip() for line in value.splitlines()) + "\n"
+    return "\n".join(line.rstrip() for line in value.splitlines()).rstrip() + "\n"
 
 class ReportGenerator:
     """Gera relatórios completos da revisão sistemática."""

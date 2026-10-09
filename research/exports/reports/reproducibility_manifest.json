@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-10-09T07:04:24+00:00",
+  "generated_at": "2026-10-09T07:15:56+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -474,7 +474,7 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "7abe2ff9775432880055f6d562a2467000007b09f55efc2a7d18e83aa2bfc328"
+      "sha256": "a117f23be923c280c9643784e27610df470cdecf36dd7f03d28b0593624e7af5"
     },
     {
       "path": "research/src/analysis/visualizations.py",

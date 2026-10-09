@@ -221,6 +221,7 @@ def test_summary_json_export_does_not_replace_audited_html(tmp_path: Path) -> No
     generator._generate_json_summary(report_data)
     html = (tmp_path / "reports" / "summary_report.html").read_text(encoding="utf-8")
 
+    assert not html.endswith("\n\n")
     assert "Percentuais das etapas operacionais" in html
     assert "Auditoria de identidade bibliográfica" in html
     assert "Contexto histórico da deduplicação" in html
