@@ -33,6 +33,32 @@ def test_source_manifest_preserves_every_canonical_study_without_private_paths()
             assert 'pending' in row['identity_status']
 
 
+def test_research_dependency_matches_recorded_pdf_extractor_version():
+    manifest = load('research/data/evidence_sources_current.json')
+    requirements = (ROOT / 'research/requirements.txt').read_text(encoding='utf-8')
+    expected = f"pypdf=={manifest['extraction_settings']['pypdf_version']}"
+
+    assert expected in requirements.splitlines()
+
+
+def test_optional_font_decoder_is_recorded_and_pinned_for_replay():
+    manifest = load('research/data/evidence_sources_current.json')
+    replay_validation = manifest.get('replay_validation', {})
+    environment = replay_validation.get('environment', {})
+    requirements = (ROOT / 'research/requirements.txt').read_text(encoding='utf-8')
+
+    assert environment.get('pypdf_version') == manifest['extraction_settings']['pypdf_version']
+    assert environment.get('fonttools_version')
+    assert f"pypdf=={environment['pypdf_version']}" in requirements.splitlines()
+    assert f"fonttools=={environment['fonttools_version']}" in requirements.splitlines()
+
+    recovered = [source for source in manifest['sources']
+                 if source['status'] == 'recovered_identity_candidate']
+    assert replay_validation['checked_source_count'] == len(recovered)
+    assert replay_validation['checked_chunk_count'] == sum(source['chunks'] for source in recovered)
+    assert replay_validation['integrity_failures'] == 0
+
+
 def test_reviewed_claims_preserve_manuscript_context_and_source_locators():
     sources = {row['study_id']: row for row in load('research/data/evidence_sources_current.json')['sources']}
     ledger = load('research/data/claim_evidence_current.json')
@@ -49,6 +75,15 @@ def test_reviewed_claims_preserve_manuscript_context_and_source_locators():
         assert all(1 <= page <= source['page_count'] for page in claim['physical_pages'])
         assert claim['counterevidence_checked'] and claim['support_boundary']
         assert claim['human_adjudication'] == 'pending'
+
+
+def test_maclellan_synthesis_is_bound_to_both_primary_analyses():
+    claims = [claim for claim in load('research/data/claim_evidence_current.json')['claims']
+              if claim['source_id'] == 'PS-8']
+    assert len(claims) == 2
+    assert {tuple(claim['physical_pages']) for claim in claims} == {(60, 64), (72,)}
+    assert all(claim['support_status'] == 'SUPPORTED' for claim in claims)
+    assert all(claim['human_adjudication'] == 'pending' for claim in claims)
 
 
 def test_small_retrieval_evaluation_is_not_a_quality_score():

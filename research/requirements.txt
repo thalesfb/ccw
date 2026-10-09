@@ -34,7 +34,9 @@ lxml==5.3.0
 # streamlit==1.40.2
 # plotly==5.24.1
 networkx
-pypdf
+# Reproducible text extraction stack recorded in evidence_sources_current.json.
+pypdf==6.19.0
+fonttools==4.66.1
 
 # Editable TCC presentation generation and validation
 python-pptx==1.0.2

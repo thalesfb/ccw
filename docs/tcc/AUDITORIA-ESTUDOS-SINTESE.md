@@ -51,7 +51,7 @@ e o índice SQLite permanecem em cache operacional não versionado.
 | `Design2025_004` | Texto integral não recuperado. Otimização de trajetórias é finalidade reportada, não ganho de aprendizagem confirmado. |
 | `Identifying2017_006` | PDF, 20 páginas. Estudo de classificação com TIMSS 2011 na Turquia. O resultado depende do alvo, da população e da métrica; não equivale à validação de diagnóstico longitudinal. A classificação reportada não torna confiança do estudante uma causa demonstrada do desempenho. |
 | `Innovative2023_005` | Texto integral não recuperado. Mantêm-se as pendências de metadados editoriais e de pertinência já registradas. |
-| `Computational2017_008` | PDF, 108 páginas. Páginas físicas 60 e 64 (impressas 44 e 48): simulações em tarefas de frações com registros preexistentes do DataShop para 79 estudantes; os efeitos instrucionais são previstos qualitativamente, não como escores absolutos. Na p. 48, a tese reporta, para dois modelos mistos binomiais, AIC 9.512,8/9.521,3, BIC 9.566,7/9.575,2 e teste de razão de verossimilhança χ²(0) = 8,49, p < 0,01. A auditoria não reavaliou a inferência porque não dispõe das especificações completas dos modelos nem do código original; registra o resultado como reportado, sem tratá-lo como evidência estatística validada ou declará-lo inválido. Página física 72 (impressa 56): análise distinta de equações com 71 estudantes e 10.052 passos disponíveis, dos quais 4.568 passos de ações próprias foram analisados em razão das diferenças entre tarefas. A tese contribui como referência conceitual e metodológica situada, não como evidência de eficácia universal de tutoria. A revisão integral de todos os componentes continua pendente. |
+| `Computational2017_008` | PDF, 108 páginas. Páginas físicas 60 e 64 (impressas 44 e 48): simulações em tarefas de frações com registros preexistentes do DataShop para 79 estudantes; os efeitos instrucionais são previstos qualitativamente, não como escores absolutos. Na p. 48, a tese reporta, para dois modelos mistos binomiais, AIC 9.512,8/9.521,3, BIC 9.566,7/9.575,2 e teste de razão de verossimilhança χ²(0) = 8,49, p < 0,01. A auditoria não reavaliou a inferência porque não dispõe das especificações completas dos modelos nem do código original; registra o resultado como reportado, sem tratá-lo como evidência estatística validada ou declará-lo inválido. Página física 72 (impressa 56): análise distinta de equações com 71 estudantes e 10.052 passos disponíveis; 4.568 passos em que os estudantes executaram as próprias ações formaram o subconjunto analisado, enquanto tarefas de estratégia em que o tutor realizava as transformações ficaram fora desse recorte. A tese contribui como referência conceitual e metodológica situada, não como evidência de eficácia universal de tutoria. A revisão integral de todos os componentes continua pendente. |
 | `Machine2019_007` | Texto integral não recuperado. A entrada bibliográfica e os metadados identificam um trabalho nos anais do EDUCON 2019, não uma comprovação do delineamento. A natureza da investigação e os resultados continuam exigindo conferência; não usar como resultado experimental independente. |
 | `Machine2024_009` | Texto integral não recuperado; falha de acesso ao endereço registrado. Não conferir precisão, desenho ou transferibilidade somente por título e resumo. |
 | `Enhancing2025_012` | PDF, 22 páginas. Página física 15 (impressa 105): diferença entre grupos já no pré-teste. Sustenta discussão de animação com aprendizagem cooperativa, não seleção de algoritmo ML nem efeito isolado da animação. |
@@ -63,7 +63,16 @@ e o índice SQLite permanecem em cache operacional não versionado.
 | `Imperatrice2025_6921` | PDF, 8 páginas. Página física 1 apresenta um piloto futuro; permanece protocolo contextual, fora da síntese empírica e da apreciação MMAT empírica. |
 | `Zeng2025_6923` | Texto integral não recuperado. Permanece contexto de instrumentação multimodal; não confirmar reconhecimento de carga cognitiva como diagnóstico geral de aprendizagem. |
 
-Os seis registros de afirmação–evidência em
+Uma reexecução de integridade dos nove PDFs recuperados conferiu 434 trechos
+com `pypdf` 6.19.0 e `fontTools` 4.66.1, sem divergências entre conteúdo,
+página física e hashes. A versão histórica de `fontTools` não havia sido
+registrada no manifesto original; portanto, essa combinação é identificada
+como ambiente de reprodução verificado, não como confirmação retrospectiva da
+instalação usada na extração inicial. O resultado comprova a rastreabilidade
+técnica nesta configuração, mas não resolve a confirmação editorial das fontes
+nem substitui a apreciação científica humana.
+
+Os oito registros de afirmação–evidência em
 `research/data/claim_evidence_current.json` cobrem somente as afirmações
 explicitamente confrontadas nesta rodada. O estado `SUPPORTED` documenta o
 suporte ao relato atribuído, não certifica a validade do artigo. Não representa

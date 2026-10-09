@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "review_date": "2026-10-08",
-  "scope": "Six explicitly reviewed claims; not whole-manuscript certification",
+  "scope": "Eight explicitly reviewed claims; not whole-manuscript certification",
   "status_meaning": "SUPPORTED means the attributed statement is documented, not that the primary study is validated.",
   "claims": [
     {
       "claim_id": "C-RSL-01",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "0ec3b6ec266e248c984a605435a0059cfeb16effacc7122b7af29b670b4aa6b2",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
       "claim_text": "Os autores descrevem uma divisão de 70\\% para treinamento e 30\\% para teste e reportam 75\\% de acurácia de teste para a combinação de SMOTE e RUSBoost.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -39,7 +39,7 @@
     {
       "claim_id": "C-RSL-02",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "0ec3b6ec266e248c984a605435a0059cfeb16effacc7122b7af29b670b4aa6b2",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
       "claim_text": "Na mesma comparação, a revocação da classe de baixo desempenho é de 43\\%.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -66,7 +66,7 @@
     {
       "claim_id": "C-RSL-03",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "0ec3b6ec266e248c984a605435a0059cfeb16effacc7122b7af29b670b4aa6b2",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
       "claim_text": "O alvo da modelagem é o tamanho de efeito de uma intervenção, não a proficiência individual.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -103,7 +103,7 @@
     {
       "claim_id": "C-RSL-04",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "0ec3b6ec266e248c984a605435a0059cfeb16effacc7122b7af29b670b4aa6b2",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
       "claim_text": "Essa inconsistência impede adotar um cronograma único na síntese.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -133,7 +133,7 @@
     {
       "claim_id": "C-RSL-05",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "0ec3b6ec266e248c984a605435a0059cfeb16effacc7122b7af29b670b4aa6b2",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
       "claim_text": "o grupo com animação e aprendizagem cooperativa já apresentava desempenho superior no pré-teste.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -158,7 +158,7 @@
     {
       "claim_id": "C-RSL-06",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "0ec3b6ec266e248c984a605435a0059cfeb16effacc7122b7af29b670b4aa6b2",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
       "claim_text": "oito itens da escala de mentalidade permanecem entre os preditores selecionados.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -186,6 +186,59 @@
       "human_adjudication": "pending",
       "counterevidence_checked": true,
       "support_boundary": "The predictors overlap with the instruments used to construct labels; independent diagnostic validity is not established by classification accuracy."
+    },
+    {
+      "claim_id": "C-RSL-07",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
+      "claim_text": "Nas tarefas de frações, compara simulações com registros de tutoria previamente coletados no DataShop para 79 estudantes e prevê qualitativamente efeitos de sequenciamentos instrucionais, não escores absolutos de desempenho no tutor ou em pós-teste.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Computational2017_008"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "1ef8b640218c42816e1bdc64",
+        "a2e6b9a02df11fe17d21a21c"
+      ],
+      "source_hashes": {
+        "1ef8b640218c42816e1bdc64": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23",
+        "a2e6b9a02df11fe17d21a21c": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23"
+      },
+      "source_id": "PS-8",
+      "physical_pages": [
+        60,
+        64
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The thesis reuses prior DataShop records and predicts qualitative effects; it does not establish absolute performance scores, learning gains, or efficacy of this TCC prototype."
+    },
+    {
+      "claim_id": "C-RSL-08",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "5205e05173dee821ab198f67c4099fda5c2674d91112099f9479461c862e7aed",
+      "claim_text": "Em análise distinta sobre resolução de equações, descreve dados de 71 estudantes e 10.052 passos; a análise utiliza 4.568 passos nos quais os estudantes executaram as próprias ações, enquanto tarefas de estratégia em que o tutor realizava as transformações ficam fora desse recorte.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Computational2017_008"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "d1e6f920ef2710ca6e028056"
+      ],
+      "source_hashes": {
+        "d1e6f920ef2710ca6e028056": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23"
+      },
+      "source_id": "PS-8",
+      "physical_pages": [
+        72
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The analyzed steps are a selected subset where students acted themselves, not the full 10,052-step record or a separate prospective intervention."
     }
   ]
 }

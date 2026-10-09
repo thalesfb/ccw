@@ -9,6 +9,15 @@
     "chunk_size": 3000,
     "page_numbering": "physical_one_based"
   },
+  "replay_validation": {
+    "environment": {
+      "pypdf_version": "6.19.0",
+      "fonttools_version": "4.66.1"
+    },
+    "checked_source_count": 9,
+    "checked_chunk_count": 434,
+    "integrity_failures": 0
+  },
   "code_hashes": {
     "research/src/validation/evidence_retrieval.py": "7942956bef33b468333b629837f27835a82c3039387791b1ca69a19a705694c4",
     "research/src/validation/pdf_feedback.py": "189219f5913f2163a3e42762a34ee038a421a86b55ea00882ff692c569d8c740"

@@ -30,6 +30,7 @@ def test_maclellan_synthesis_preserves_data_reuse_and_qualitative_scope():
     assert 'qualitativamente' in row
     assert 'escores absolutos' in row
     assert 'não constitui avaliação prospectiva' in synthesis
+    assert 'executaram as próprias ações' in synthesis
     assert r'\chi^{2}(0)' not in synthesis
 
 
