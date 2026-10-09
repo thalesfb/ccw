@@ -79,21 +79,21 @@ Os critérios de exclusão compreenderam metodologia insuficientemente descrita 
 
 \section{Processo de Seleção}
 
-O processo de seleção foi documentado segundo as etapas de identificação, triagem, elegibilidade operacional e retenção apresentadas pelo fluxo PRISMA 2020. Neste trabalho, a etapa denominada elegibilidade no fluxo corresponde a uma priorização operacional baseada em metadados, resumo e critérios documentais; ela não deve ser confundida com uma confirmação universal de elegibilidade em texto completo.
+O relato do processo considera os itens aplicáveis do PRISMA 2020, mas o fluxograma desta revisão é uma representação operacional própria, não o diagrama PRISMA completo. Após a triagem, o pipeline aplicou uma priorização heurística baseada em metadados e resumos. Essa etapa não corresponde à avaliação de elegibilidade de relatórios recuperados; por isso, seus resultados são descritos como priorização operacional e retenção provisória, sem afirmar inclusão final universal.
 
 \subsection{Identificação}
 
 O snapshot versionado preserva 11.904 registros identificados. A configuração canônica da busca contém 72 consultas para as quatro APIs; entretanto, a ausência de um log histórico completo impede reconstruir quantas requisições HTTP foram concluídas por consulta ou por API. O pipeline foi configurado com limite de até 50 resultados por consulta e por API, parâmetro operacional que deve ser considerado na interpretação da cobertura. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
 
-O snapshot científico adotado neste texto tem data de corte em 31 de agosto de 2026. O manifesto de reprodutibilidade registra sua geração em 4 de setembro de 2026, às 02:45:33 UTC, e associa hashes aos artefatos utilizados. Essas datas descrevem a proveniência da exportação e não devem ser confundidas com a data de redação ou de publicação do TCC.
+O corte temporal declarado da busca foi 31 de agosto de 2026. A adjudicação de escopo da população foi concluída em 3 de setembro de 2026; o manifesto de reprodutibilidade registra a geração dos artefatos em 4 de setembro de 2026, às 02:45:33 UTC. As datas correspondem, respectivamente, ao limite temporal da busca, à consolidação de escopo e à geração do snapshot. Como não foram preservados logs por consulta e por API, não é possível reconstruir o instante de cada requisição nem afirmar que todas as fontes foram consultadas exatamente na data de corte; essa limitação restringe o detalhamento da data de última busca por fonte.
 
 \subsection{Deduplicação e Triagem}
 
 A deduplicação utilizada no fluxo PRISMA foi determinística e baseada na identidade bibliográfica normalizada. Registros com o mesmo DOI normalizado ou com a mesma URL exata foram reunidos, preservando-se a representação escolhida para o fluxo; essa etapa removeu 27 linhas excedentes, sendo 25 identificadas por DOI e 2 por URL. A auditoria também calculou repetições de títulos normalizados. Contudo, os 232 excedentes restantes após a remoção por DOI/URL foram mantidos como candidatos à revisão semântica, pois títulos semelhantes ou idênticos podem corresponder a versões, erratas ou obras distintas. Portanto, não foram removidos automaticamente por título e não entram como duplicatas confirmadas no fluxo vigente.
 
-Após a deduplicação determinística, 11.877 registros foram submetidos à triagem. Desses, 9.391 foram excluídos na triagem e 2.486 avançaram para a etapa de priorização operacional reportada no fluxo como elegibilidade.
+Após a deduplicação determinística, 11.877 registros foram submetidos à triagem. Desses, 9.391 foram excluídos e 2.486 avançaram para a priorização operacional. Essa etapa não equivale à avaliação de elegibilidade de relatórios em texto completo.
 
-\subsection{Priorização operacional e elegibilidade documental}
+\subsection{Priorização operacional e verificação de escopo}
 
 A etapa de priorização operacional utilizou uma pontuação de relevância temática, distinta da avaliação de qualidade metodológica. A heurística considerou a presença e a relevância de técnicas computacionais, a aderência explícita ao ensino de matemática, a completude dos metadados e do resumo e a disponibilidade de identificadores e informações bibliográficas.
 
@@ -101,7 +101,7 @@ A pontuação foi um indicador operacional de relevância temática, calculado p
 
 O valor 4,0 deve ser interpretado como um parâmetro de triagem do pipeline, e não como um ponto de corte validado para relevância científica. A retenção operacional também dependeu dos critérios documentais de decisão registrados em \path{research/data/current_eligibility_protocol.csv}. Como a confirmação em texto completo não foi concluída para todos os registros, o conjunto retido deve ser descrito como provisório. O snapshot vigente não inclui uma análise de sensibilidade do conjunto retido a diferentes limiares; portanto, não se atribui ao valor 4,0 estabilidade estatística ou capacidade de representar sozinho o universo da literatura.
 
-Dos 2.486 registros avaliados nessa etapa, 2.468 foram excluídos por não atenderem aos critérios operacionais de priorização e escopo. Foram retidos 18 registros para a análise de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
+Dos 2.486 registros submetidos a essa etapa, 2.468 foram excluídos pela heurística de priorização e pelas regras operacionais de escopo. Foram retidos 18 registros para adjudicação de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
 
 \section{Infraestrutura Tecnológica da Revisão}
 
@@ -136,7 +136,9 @@ descrição das limitações identificadas em cada estudo.
 
 As respostas não foram convertidas em pontuação geral, média, ranking ou categoria de qualidade. A apresentação por critério preserva quais aspectos metodológicos foram atendidos e quais permaneceram problemáticos ou insuficientemente descritos. Os estudos não foram excluídos em razão do MMAT; suas limitações foram consideradas na interpretação da síntese.
 
-A avaliação foi realizada por um único revisor. Nove registros tiveram o texto primário revisado externamente, oito foram apreciados com base em resumo e metadados e o registro contextual foi marcado como não aplicável. A recuperação de fontes, os localizadores dos critérios e a adjudicação pelo supervisor ainda não estão completos; por isso, os julgamentos são preliminares e foram registrados como limitação da revisão. A aplicação das perguntas de triagem e dos critérios aos estudos, com seus resultados por célula, é apresentada na Seção~\ref{sec:qualidade-estudos}.
+A avaliação foi realizada por um único revisor, embora o guia do MMAT recomende a participação independente de pelo menos dois avaliadores. Doze registros empíricos tiveram o texto primário consultado externamente, cinco foram apreciados com base em resumos e metadados e o registro contextual foi marcado como não aplicável. Nove textos estão arquivados; três foram consultados externamente, sem cópia no repositório: dois em páginas editoriais e um em cópia pública do texto integral, com identidade bibliográfica conferida pelo DOI. O ledger registra as fontes e os localizadores examinados. A verificação independente dos julgamentos e a adjudicação pelo supervisor ainda não estão completas; por isso, as respostas permanecem preliminares e não constituem uma síntese final de qualidade. A aplicação das perguntas de triagem e dos critérios aos estudos, com seus resultados por célula, é apresentada na Seção~\ref{sec:qualidade-estudos}.
+
+Para \citeonline[pp.~101--105]{Enhancing2025_012}, o texto primário apresenta afirmações incompatíveis sobre a alocação das escolas: uma seção descreve distribuição aleatória, enquanto outra caracteriza o estudo como quase-experimental sem alocação aleatória. Como a definição da categoria MMAT altera quais critérios Q1--Q5 são aplicáveis, a categoria desse estudo permanece pendente e essas cinco respostas foram mantidas como CT, sem inferir falha metodológica a partir da inconsistência documental.
 
 O ledger de fontes primárias preserva, para cada registro, o identificador da fonte, a data de acesso, o tipo de fonte, a situação de recuperação e a base documental da apreciação. Quando apenas resumo e metadados estavam disponíveis, a insuficiência de acesso foi tratada como limitação da evidência e não como uma resposta negativa automática aos critérios. Essa distinção impede que a ausência do texto completo seja confundida com demonstração de falha metodológica do estudo.
 

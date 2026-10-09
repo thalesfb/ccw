@@ -60,16 +60,20 @@ contagem de chamadas HTTP concluídas.
 
 O snapshot começa com 11.904 registros. Foram removidas 27 linhas por identidade
 bibliográfica determinística, chegando a 11.877 na triagem. A triagem excluiu
-9.391 registros e encaminhou 2.486 para elegibilidade. Nessa etapa, 2.468 foram
-excluídos e 18 foram retidos operacionalmente. Cada número representa uma etapa
-distinta, por isso não devemos substituir o fluxo por uma única porcentagem.
+9.391 registros e submeteu 2.486 à priorização operacional baseada em metadados
+e resumos. Nessa etapa, 2.468 foram excluídos e 18 foram retidos
+provisoriamente para adjudicação de escopo. Essa priorização não corresponde à
+avaliação de elegibilidade de relatórios em texto completo. Cada número descreve
+uma etapa distinta, por isso não devemos substituir o fluxo por uma única
+porcentagem.
 
-## 8. PRISMA — 0:45
+## 8. Fluxo operacional — 0:45
 
 Esta figura é a representação visual do mesmo fluxo. Ela está versionada junto
 dos artefatos de pesquisa e foi incorporada diretamente à apresentação. O
 objetivo é permitir que o leitor acompanhe a transição entre identificação,
-deduplicação, triagem, elegibilidade e retenção.
+deduplicação, triagem, priorização operacional e retenção provisória; a figura
+é própria e não reproduz todas as etapas do diagrama PRISMA 2020.
 
 ## 9. Deduplicação — 1:05
 
@@ -112,9 +116,10 @@ literatura encontrada; não escolhe um algoritmo vencedor.
 O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
 respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
 uma pontuação agregada. A avaliação é preliminar e foi feita por um único
-revisor. Nove registros tiveram texto primário revisado e oito dependeram de
-resumo e metadados. A recuperação das fontes, os localizadores e a adjudicação
-precisam ser consolidados. Portanto, não apresento um ranking de qualidade.
+revisor. Doze registros tiveram texto primário consultado — nove fontes
+arquivadas e três examinadas externamente, sem cópia no repositório — e cinco
+dependeram de resumo e metadados. A verificação independente e a adjudicação ainda
+precisam ser consolidadas. Portanto, não apresento um ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
 

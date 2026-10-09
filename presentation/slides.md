@@ -216,7 +216,7 @@ class: content-slide flow-slide
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Taxa de retenção final: 0,15%.</strong> A baixa retenção descreve o filtro aplicado; não é medida de qualidade nem de eficácia pedagógica.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Os 2.486 registros foram priorizados por metadados e resumos; a etapa não equivale à avaliação de elegibilidade de relatórios em texto completo. A retenção não é medida de qualidade nem de eficácia pedagógica.</div>
 
 ---
 layout: center
@@ -225,9 +225,9 @@ class: image-slide tcc-prisma-slide
 
 <div class="slide-kicker">10 / FLUXO</div>
 
-<h1 class="sr-only">Fluxo PRISMA dos dados da revisão</h1>
+<h1 class="sr-only">Representação operacional do processo de seleção, com referência ao PRISMA 2020</h1>
 
-<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image tcc-prisma-image" />
+<img src="./public/images/prisma_flow.png" alt="Representação operacional do processo de seleção; não corresponde ao diagrama PRISMA completo" class="feature-image prisma-image tcc-prisma-image" />
 
 <small class="source-note">Fonte versionada: `research/exports/visualizations/prisma_flow.png`.</small>
 
@@ -352,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> entre os 17 candidatos empíricos, 9 tiveram texto primário revisado e 8 foram apreciados com resumo/metadados. Um revisor conduziu a leitura; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> entre os 17 candidatos empíricos, 12 tiveram texto primário consultado (9 fontes arquivadas e 3 examinadas externamente) e 5 foram apreciados com resumos/metadados. Um único revisor conduziu a leitura; verificação independente e adjudicação ainda pendem.</div>
 
 ---
 layout: default

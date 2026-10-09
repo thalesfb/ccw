@@ -30,6 +30,7 @@ DESIGN_LABELS = {
     "mixed_methods": "Métodos mistos",
     "metadata_hold": "Não confirmado",
     "not_applicable": "Não aplicável",
+    "design_pending": "Pendente",
 }
 BASIS_LABELS = {
     "primary_full_text_reviewed_externally": "Texto primário externo",

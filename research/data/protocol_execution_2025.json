@@ -1,15 +1,18 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "status": "historical_reconstruction_not_current_baseline",
   "scope": "systematic_literature_review_2025",
-  "current_baseline": {
-    "manifest": "research/exports/reports/reproducibility_manifest.json",
+  "pre_adjudication_snapshot": {
+    "snapshot_date": "2026-08-31",
+    "adjudicated_snapshot_date": "2026-09-03",
+    "source_artifact": "research/data/prisma_population_reconciliation.csv",
     "identified": 11904,
     "deterministic_identity_duplicates_removed": 27,
     "screening": 11877,
     "eligibility": 2486,
     "included_operational": 16,
-    "note": "This historical protocol record must not be used as the current PRISMA baseline."
+    "superseded_by": "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md",
+    "note": "Pre-adjudication operational snapshot; do not use as the current PRISMA baseline."
   },
   "evidence": {
     "preserved_historical_summary": {

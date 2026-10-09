@@ -1,169 +1,84 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-09-04T02:45:33+00:00",
+  "generated_at": "2026-10-09T07:04:24+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
     "role": "local operational source for raw states and diagnostics; not the versioned source of the adjudicated population"
   },
   "operational_database_snapshot": {
-    "status": "diagnostic_only",
-    "authoritative_snapshot": "snapshot",
-    "interpretation": "This block records the unversioned SQLite state available when the manifest was generated. It is diagnostic only and is not the current PRISMA baseline; use the versioned snapshot object and summary.json for the current adjudicated population.",
     "counts": {
-      "total_records": 11904,
+      "total_records": 4527,
       "selection_stage_counts": {
-        "screening": 9413,
-        "eligibility": 2475,
-        "included": 16
+        "screening": 4250,
+        "eligibility": 275,
+        "included": 2
       },
       "prisma": {
-        "identification": 11904,
-        "duplicates_removed": 27,
-        "screening": 11877,
-        "screening_excluded": 9391,
-        "eligibility": 2486,
-        "eligibility_excluded": 2470,
-        "included": 16
+        "identification": 4527,
+        "duplicates_removed": 0,
+        "screening": 4527,
+        "screening_excluded": 4250,
+        "eligibility": 277,
+        "eligibility_excluded": 275,
+        "included": 2
       }
     },
     "included_ids": [
       1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      6916,
-      6917,
-      6918,
-      6920,
-      6921,
-      6923
+      2
     ],
     "deduplication_audit": {
-      "raw_rows": 11904,
+      "raw_rows": 4527,
       "operationally_flagged_rows": 0,
-      "deterministic_identity_duplicate_rows": 27,
+      "deterministic_identity_duplicate_rows": 0,
       "deterministic_identity_duplicate_rows_by_identifier": {
-        "doi": 25,
-        "url": 2,
+        "doi": 0,
+        "url": 0,
         "persisted_flag": 0
       },
       "confirmed_semantic_duplicates": 0,
       "doi": {
-        "non_empty_rows": 10682,
-        "distinct_values": 10657,
-        "repeated_groups": 25,
-        "repeated_rows": 50,
-        "excess_rows": 25
+        "non_empty_rows": 4196,
+        "distinct_values": 4196,
+        "repeated_groups": 0,
+        "repeated_rows": 0,
+        "excess_rows": 0
       },
       "url": {
-        "non_empty_rows": 11435,
-        "distinct_values": 11433,
-        "repeated_groups": 2,
-        "repeated_rows": 4,
-        "excess_rows": 2
+        "non_empty_rows": 4527,
+        "distinct_values": 4527,
+        "repeated_groups": 0,
+        "repeated_rows": 0,
+        "excess_rows": 0
       },
       "title": {
-        "non_empty_rows": 11903,
-        "distinct_values": 11646,
-        "repeated_groups": 177,
-        "repeated_rows": 434,
-        "excess_rows": 257
+        "non_empty_rows": 4527,
+        "distinct_values": 4442,
+        "repeated_groups": 55,
+        "repeated_rows": 140,
+        "excess_rows": 85
       },
       "title_only": {
-        "non_empty_rows": 11876,
-        "distinct_values": 11644,
-        "repeated_groups": 154,
-        "repeated_rows": 386,
-        "excess_rows": 232
+        "non_empty_rows": 4527,
+        "distinct_values": 4442,
+        "repeated_groups": 55,
+        "repeated_rows": 140,
+        "excess_rows": 85
       },
       "interpretation": "Repeated normalized DOI/URL identities are deterministic duplicate records for the current PRISMA flow. The raw title metric includes rows in those identity groups; title_only is recalculated after identity removal. Title-only matches remain candidates for semantic review and are not removed automatically."
     },
-    "manual_overrides": [
-      {
-        "id": 14,
-        "doi": "10.56855/ijmme.v3i2.1299",
-        "title": "Enhancing Student Achievement in Circle Theorems: Integrating Computer Animation with the Jigsaw Cooperative Learning Model",
-        "year": 2025,
-        "relevance_score": 4.05,
-        "selection_stage": "eligibility",
-        "status": "excluded",
-        "exclusion_reason": "manual_exclusion_after_audit"
-      },
-      {
-        "id": 15,
-        "doi": "10.12973/ejmse.5.2.93",
-        "title": "Authentic Assessment for Motivating Student Learning and Teaching Effectiveness in Rural, High-Need Secondary Schools in Manitoba, Canada",
-        "year": 2024,
-        "relevance_score": 4.05,
-        "selection_stage": "eligibility",
-        "status": "excluded",
-        "exclusion_reason": "manual_exclusion_after_audit"
-      },
-      {
-        "id": 6915,
-        "doi": "10.1186/s40561-025-00415-z",
-        "title": "AI-driven predictive models for optimizing mathematics education technology: Enhancing decision-making through educational data mining and meta-analysis",
-        "year": 2025,
-        "relevance_score": 4.4,
-        "selection_stage": "eligibility",
-        "status": "excluded",
-        "exclusion_reason": "manual_exclusion_after_audit"
-      },
-      {
-        "id": 6919,
-        "doi": "10.3390/su18041900",
-        "title": "Exploring the Integration of Education for Sustainable Development into University Mathematics: Insights from SiC Thickness Measurement in Advanced Industrial Applications",
-        "year": 2026,
-        "relevance_score": 4.15,
-        "selection_stage": "eligibility",
-        "status": "excluded",
-        "exclusion_reason": "manual_exclusion_after_audit"
-      },
-      {
-        "id": 6922,
-        "doi": "10.34657/31156",
-        "title": "Sachbericht zum Verwendungsnachweis - Förderung \"Digitale Hochschulbildung\" des Bundesministeriums für Bildung und Forschung",
-        "year": 2025,
-        "relevance_score": 4.05,
-        "selection_stage": "eligibility",
-        "status": "excluded",
-        "exclusion_reason": "manual_exclusion_after_audit"
-      },
-      {
-        "id": 6925,
-        "doi": "10.1186/s40594-025-00590-y",
-        "title": "Predicting STEM competencies with machine learning: identifying key determinants among 522,802 adolescents",
-        "year": 2026,
-        "relevance_score": 4.0,
-        "selection_stage": "eligibility",
-        "status": "excluded",
-        "exclusion_reason": "manual_exclusion_after_audit"
-      },
-      {
-        "id": 6926,
-        "doi": "10.1016/j.aej.2025.03.095",
-        "title": "Methods and reliability study of moral education assessment in universities: A machine learning-based approach",
-        "year": 2025,
-        "relevance_score": 4.0,
-        "selection_stage": "eligibility",
-        "status": "excluded",
-        "exclusion_reason": "manual_exclusion_after_audit"
-      }
-    ],
+    "manual_overrides": [],
     "candidate_audit": {
-      "operational_candidates": 23,
-      "manual_overrides_recorded": 7,
-      "current_included": 16,
+      "operational_candidates": 2,
+      "manual_overrides_recorded": 0,
+      "current_included": 2,
       "interpretation": "The operational candidate count is the current included set plus the persisted manual-audit overrides. These overrides are not scientific exclusion findings until adjudicated, and are not an extra PRISMA stage."
-    }
+    },
+    "status": "diagnostic_only",
+    "authoritative_snapshot": "snapshot",
+    "interpretation": "This block records the unversioned SQLite state available when the manifest was generated. It is diagnostic only and is not the current PRISMA baseline; use the versioned snapshot object and summary.json for the current adjudicated population."
   },
   "protocol": {
     "status": "current_snapshot_protocol",
@@ -387,8 +302,8 @@
         6926
       ],
       "adjudication_status_counts": {
-        "proposed_pending_supervisor": 3,
-        "requires_full_text_adjudication": 4
+        "proposed_pending_supervisor": 4,
+        "requires_full_text_adjudication": 3
       },
       "interpretation": "The matrix records source-supported scope signals and required actions. It is evidence for adjudication, not a final inclusion or exclusion decision."
     }
@@ -433,22 +348,22 @@
       "historical_denominator": 17,
       "current_denominator": 18,
       "evidence_levels": {
-        "primary_full_text_reviewed_externally": 9,
-        "abstract_and_metadata_only": 8,
+        "primary_full_text_reviewed_externally": 12,
+        "abstract_and_metadata_only": 5,
         "abstract_only": 0,
         "metadata_only": 0,
         "protocol_or_proposal_not_applicable": 1
       },
-      "primary_text_reviewed_rows": 9,
+      "primary_text_reviewed_rows": 12,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 65,
+      "non_ct_criterion_decisions": 69,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
         "Primary full text, criterion-level locators and adjudication are not complete.",
         "The preliminary ledger must not be interpreted as a quality score or ranking.",
-        "Only 9 of 18 current studies have externally reviewed full text recorded.",
+        "Only 12 of 18 current studies have externally reviewed full text recorded.",
         "Supervisor adjudication is pending for at least one study."
       ]
     },
@@ -459,12 +374,12 @@
     {
       "path": "research/exports/analysis/papers.csv",
       "role": "row-level versioned representation of the current snapshot",
-      "sha256": "63ba980a164837704ad82952735bd0e21763774babcc1aa3ad0757ecf3587a7e"
+      "sha256": "5c4b88c5d624fbf043265231ff77bc37c2b77301a7cc6cb83a01ba2b5085552a"
     },
     {
       "path": "research/exports/analysis/papers.json",
       "role": "JSON representation of the current snapshot",
-      "sha256": "bb766f6da8cba02e01e5678fb3b81eef5f8d695a1d2ac0e49caaff22b401d0af"
+      "sha256": "66d65a78816dae792d08d90cb93a382eaa3e2aabd225ee90526f74701e1c0b28"
     },
     {
       "path": "research/exports/analysis/deduplication_identity_audit.csv",
@@ -474,7 +389,7 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "18972f0e7cc20e10beda55697a06a0c61f05fd420f238250ec425e657db41328"
+      "sha256": "a500458a0370f5340c4f09ae31fb52e2973b66cf8adfdd19874fbdd690e96792"
     },
     {
       "path": "research/exports/reports/summary.json",
@@ -484,32 +399,32 @@
     {
       "path": "research/exports/references/included_papers.bib",
       "role": "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
-      "sha256": "c5ff18de7db922466202f0dc04da90ed14099ba0b669c64e7c16040c9a1058d6"
+      "sha256": "4bde67908854ef752f0b6557d6f908937ba46fce274ddbfa3ae9a02ca3a034b0"
     },
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "4ddd89cd575252e4001650fc2c0f27211dd09358a338bb242428da5f4fa6490d"
+      "sha256": "2d6a52d7d58d1a9e4bacba59e7b7750d5fce6273480073cba073ecc9724dbded"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "1937f1101e81cfa201bb2db5ac38333f8fc2a20daa5c9e5bb772f17097c8df76"
+      "sha256": "035dd39b6b83ac50c5e93fe15c863c6872c6a7948dbc057d3c545d99ae801183"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "preliminary current MMAT ledger with S1/S2 and criterion-level CT responses",
-      "sha256": "4d63466f9d45a312123aaa6bee9b1abdd051113ecd9bf534c486985bc6c855a9"
+      "sha256": "e3885db637944248ed4a1e030e5c3054810e943e58cd2393e1092ea02a067882"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
-      "sha256": "16022eee4d0134b6f3a84df70e4cdcdfe29890295c7c9f9e0879b38be34b1022"
+      "sha256": "4b0e070a9350a09850c2286c15df8247a25931731e8cb3077ee6bd99bc7027f4"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
       "role": "approved row-level scope decisions used to derive the current population",
-      "sha256": "ab41e695e7e68d818fbc1d299aad52eb488ce7e2f2646bb930fc09b062cd8f19"
+      "sha256": "525daf503ef9f62a939e3176337fe2833d49044c9549d4e49ea91ead42813b78"
     },
     {
       "path": "research/data/current_eligibility_protocol.csv",
@@ -524,12 +439,12 @@
     {
       "path": "research/data/manual_override_evidence_matrix.csv",
       "role": "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
-      "sha256": "7662c9084e1fd3a918cb80cec6e6ff3a44d535b8f994d0256abd2ae260b99ae0"
+      "sha256": "a56a15efe741e385ccc5ec045c1b63429b7d51504e871ccf8608a57b419e1387"
     },
     {
       "path": "research/data/protocol_execution_2025.json",
       "role": "historical protocol reconstruction from the 2025 baseline; not the current PRISMA source of truth",
-      "sha256": "60f6ca778093d788e197ac820a92bee7a16be30bcc18e86f4f0a3b3ed0e728d4"
+      "sha256": "dafd29c4a17e8c8ed65e3dcdfa2843fa74c673fd39ef401993cae4c23c7aa0a4"
     },
     {
       "path": "research/src/config.py",
@@ -544,12 +459,12 @@
     {
       "path": "research/src/processing/scoring.py",
       "role": "versioned relevance-scoring implementation",
-      "sha256": "69ff5021c3bcefe27e5889216d39c7080c7eae18f21c7955395cb8bf33ec9ce0"
+      "sha256": "454b9acbf302900c96922369329bf8854e49efe901beaabd8b858d5a6b1a05fd"
     },
     {
       "path": "research/src/processing/selection.py",
       "role": "versioned selection-stage implementation",
-      "sha256": "d9c1142c884ee1115be40ef1b3cbd381655aa8a95041f1678c89afbd5de58eb3"
+      "sha256": "bec5bbf20ec59a1dca231e3a55dcb2dc6ded57d25fddaf027438e748d072564e"
     },
     {
       "path": "research/src/processing/dedup.py",
@@ -559,12 +474,12 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "9d62f6ac221b9d79d7644a3f7ba5c41c8226c54d08d1c995940ebe8dd6e657ba"
+      "sha256": "7abe2ff9775432880055f6d562a2467000007b09f55efc2a7d18e83aa2bfc328"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "1da6264412b88daee40cafe6e5c6564cc3c325ca9116020b71b8a8972b88e733"
+      "sha256": "d1f2bbf3a72edc74f49b50ca5a5e5098472fdf64103bebe8c28801bae7472c54"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
@@ -589,32 +504,32 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "e188567b2effa553efb2f7cd69fb8c47a05c938a689bf875e8ac6901dd57c47b"
+      "sha256": "18e2563d0ba189d17b0db59e03faae9c1a6c2e65a2fd151e9834a9a4a5275245"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
       "role": "SQLite-independent transformation from the versioned row export and adjudication ledger",
-      "sha256": "4e31cfecf1563a9f267ffe6f5ed509cdd2624dcf58abc588af7fd59548412b23"
+      "sha256": "7dd21cef923bbbab162090a86ba31f5b3d961ee73ee27f0d5910c58e919a92a4"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "versioned validator for the current 18-record MMAT artifacts",
-      "sha256": "712f592d2d82da20ec44ddf0663509a9eea0a66222eaf9ad70888e224470516a"
+      "sha256": "06f0a7ac0993d80a837b24c354b776d0a71f375115ccf30b291b6a82545c2e93"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "051c4836a3f9b1e5975e738eefc64a32c67fbb2c00c1b775fc83ff0fd04f0857"
+      "sha256": "3b2f500a969dc4ab671ca86b8d93222d6f7accdd4e929a25bab2e96b0c2d0410"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary current 18-record MMAT table included by the TCC",
-      "sha256": "df52523d1a14d1915896fbf2b80efb43094e8db04863e50f517127f2749065bc"
+      "sha256": "0c91e2ad14b89d20d99cc07634f61e4cb03ee7d533d0549438e5d3eaf5464ed3"
     },
     {
       "path": "research/requirements.txt",
       "role": "research runtime dependencies",
-      "sha256": "683308e73f190f5ef8efd5ac807b868b4ed3c4517119d3150d88de5267ac9596"
+      "sha256": "6f924bba200f92663998cf8a622e6d1119868491bf8698ef1cea27cb72397fc3"
     }
   ],
   "companion_documents": [

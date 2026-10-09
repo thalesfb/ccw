@@ -84,13 +84,15 @@ do protocolo.
 
 Mostra as contagens do snapshot: 11.904 identificados; 27 remoções
 determinísticas por DOI/URL; 11.877 na triagem; 9.391 excluídos na triagem;
-2.486 na elegibilidade; 2.468 excluídos na elegibilidade; 18 retidos
-operacionalmente.
+2.486 submetidos à priorização operacional; 2.468 excluídos nessa etapa; 18
+retidos provisoriamente para adjudicação de escopo. A priorização usa metadados
+e resumos e não corresponde à avaliação de elegibilidade em texto completo.
 
-### 11. Fluxo PRISMA do snapshot
+### 11. Fluxo operacional (referência PRISMA 2020)
 
-Incorpora `research/exports/visualizations/prisma_flow.png`, que é a figura
-canônica sincronizada com os artefatos públicos.
+Incorpora `research/exports/visualizations/prisma_flow.png`, figura operacional
+própria, com referência ao PRISMA 2020, sincronizada com os artefatos públicos;
+ela não reproduz o diagrama PRISMA completo.
 
 ### 12. Deduplicação: o que foi confirmado
 
@@ -134,7 +136,7 @@ supervisionados.
 
 O MMAT é apresentado por critério, conforme o desenho de cada estudo, usando
 Sim, Não ou Não é possível determinar. A apreciação é preliminar e feita por um
-único revisor: nove registros tiveram texto primário revisado e oito foram
+único revisor: doze registros tiveram texto primário consultado e cinco foram
 apreciados com resumo/metadados. Não há média, ranking ou categoria geral de
 qualidade; recuperação de fontes, localizadores e adjudicação ainda precisam ser
 consolidados.

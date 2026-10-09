@@ -96,6 +96,9 @@ def test_prisma_labels_remain_readable_at_a_16_cm_print_width(tmp_path):
             box = matching_boxes[0]
             assert box.x0 <= label_box.x0 <= label_box.x1 <= box.x1
             assert box.y0 <= label_box.y0 <= label_box.y1 <= box.y1
+        labels = " ".join(text.get_text() for text in axes.texts)
+        assert "não equivale à elegibilidade" in labels
+        assert "elegibilidade no fluxo" not in labels
     plt.close(figure)
 
 
@@ -117,4 +120,7 @@ def test_flow_and_funnel_do_not_duplicate_external_captions(tmp_path):
         assert figure.axes[0].get_title() == ""
         assert figure.axes[0].get_xlabel() == "Número de registros"
         assert [bar.get_width() for bar in figure.axes[0].patches] == [100, 90, 20, 3]
+        stage_labels = [label.get_text() for label in figure.axes[0].get_yticklabels()]
+        assert "Priorização operacional\n(n=20)" in stage_labels
+        assert all("Elegibilidade" not in label for label in stage_labels)
     plt.close(figure)

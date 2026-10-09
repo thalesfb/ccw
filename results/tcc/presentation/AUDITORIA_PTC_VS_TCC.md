@@ -62,8 +62,9 @@ validação escolar, 94,1% de resultados positivos e 92% de cache. Esses número
 interpretações não são usados no TCC atual.
 
 O snapshot atual registra 11.904 identificados, 27 remoções determinísticas por
-DOI/URL, 11.877 na triagem, 2.486 na elegibilidade e 18 retidos
-operacionalmente. A população retida é composta por 17 candidatos empíricos
+DOI/URL, 11.877 na triagem, 2.486 submetidos à priorização operacional e 18
+retidos provisoriamente. A priorização utiliza metadados e resumos; não equivale
+à avaliação de elegibilidade de relatórios em texto completo. A população retida é composta por 17 candidatos empíricos
 provisórios e um protocolo/proposta contextual. A deduplicação por título não é
 tratada como confirmação automática; e o MMAT permanece preliminar, por
 critério e sem ranking.

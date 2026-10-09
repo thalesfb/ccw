@@ -62,7 +62,7 @@ EXPECTED_TITLES = [
     "A base conceitual: quatro níveis de interpretação",
     "Desenho metodológico",
     "Do registro bruto à população retida",
-    "Fluxo PRISMA do snapshot",
+    "Fluxo operacional do processo de seleção",
     "Deduplicação: o que foi confirmado",
     "Panorama descritivo do snapshot",
     "Distribuição temporal e fontes",
@@ -425,19 +425,19 @@ def build_deck() -> Presentation:
         ("27", "remoções por identidade\n25 DOI + 2 URL", TEAL, PALE_TEAL),
         ("11.877", "registros na triagem", GREEN, PALE_GREEN),
         ("9.391", "excluídos na triagem", AMBER, PALE_AMBER),
-        ("2.486", "na elegibilidade", ORANGE, RGBColor(255, 247, 237)),
-        ("2.468", "excluídos na elegibilidade", VIOLET, PALE_VIOLET),
+        ("2.486", "submetidos à priorização", ORANGE, RGBColor(255, 247, 237)),
+        ("2.468", "excluídos nessa etapa", VIOLET, PALE_VIOLET),
         ("18", "retidos operacionalmente", INDIGO, RGBColor(238, 242, 255)),
     ]
     positions = [(0.75, 1.6), (3.15, 1.6), (5.55, 1.6), (7.95, 1.6), (1.95, 4.15), (4.35, 4.15), (6.75, 4.15)]
     for (value, label, accent, fill), (x, y) in zip(metrics, positions):
         add_metric(slide, value, label, Inches(x), Inches(y), Inches(2.0), Inches(1.5), fill=fill, accent=accent, value_size=24, label_size=10.5)
-    add_text(slide, "A remoção determinística por DOI/URL precede a triagem. Igualdade de título permaneceu como candidato à auditoria semântica.", Inches(1.1), Inches(6.2), Inches(11.0), Inches(0.35), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "A priorização dos 2.486 registros usa metadados/resumos e não equivale à elegibilidade em texto completo; títulos repetidos seguem para auditoria semântica.", Inches(0.85), Inches(6.15), Inches(11.6), Inches(0.45), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
 
-    # 8 — PRISMA image.
+    # 8 — Operational selection-flow image, informed by PRISMA 2020.
     slide = new_slide(prs, EXPECTED_TITLES[7], 8)
     add_image_contain(slide, ROOT / "research" / "exports" / "visualizations" / "prisma_flow.png", Inches(0.9), Inches(1.05), Inches(11.55), Inches(5.7))
-    add_text(slide, "Figura versionada e sincronizada com os artefatos públicos do pipeline.", Inches(1.0), Inches(6.75), Inches(11.25), Inches(0.25), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "Representação operacional própria; não reproduz todas as etapas do diagrama PRISMA 2020.", Inches(1.0), Inches(6.75), Inches(11.25), Inches(0.25), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 9 — Deduplication.
     slide = new_slide(prs, EXPECTED_TITLES[8], 9)
@@ -480,7 +480,7 @@ def build_deck() -> Presentation:
     add_text(slide, "avaliação por critério\nsem nota global", Inches(1.05), Inches(2.35), Inches(2.7), Inches(0.85), size=19, color=RGBColor(186, 230, 253), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Instrumento aplicado conforme o desenho metodológico de cada estudo empírico.", Inches(1.1), Inches(4.15), Inches(2.6), Inches(0.75), size=13.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
-    add_callout(slide, "Estado atual", "Apreciação preliminar por um único revisor: nove registros com texto primário revisado e oito com base em resumo/metadados.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=14)
+    add_callout(slide, "Estado atual", "Apreciação preliminar por um revisor: 12 textos primários consultados (9 arquivados e 3 externos) e 5 avaliações com resumo/metadados.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=14)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_text(slide, "O MMAT organiza a leitura das limitações; não transforma uma apreciação preliminar em classificação definitiva.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 

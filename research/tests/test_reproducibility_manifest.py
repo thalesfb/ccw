@@ -115,8 +115,8 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert evidence_matrix["row_count"] == 7
     assert evidence_matrix["study_ids"] == [14, 15, 6915, 6919, 6922, 6925, 6926]
     assert evidence_matrix["adjudication_status_counts"] == {
-        "proposed_pending_supervisor": 3,
-        "requires_full_text_adjudication": 4,
+        "proposed_pending_supervisor": 4,
+        "requires_full_text_adjudication": 3,
     }
     audit = snapshot["deduplication_audit"]
     assert audit["raw_rows"] == 11904
@@ -144,7 +144,8 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     current_mmat = manifest["methodological_appraisal"]["current_mmat_qa"]
     assert current_mmat["final_ready"] is False
     assert current_mmat["source_or_period_hold_ids"] == []
-    assert current_mmat["primary_text_reviewed_rows"] == 9
+    assert current_mmat["primary_text_reviewed_rows"] == 12
+    assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 5
 
     assert manifest["artifact_scope"] == "research_snapshot"
     for artifact in manifest["artifacts"]:
@@ -220,10 +221,13 @@ def test_summary_json_export_does_not_replace_audited_html(tmp_path: Path) -> No
     generator._generate_json_summary(report_data)
     html = (tmp_path / "reports" / "summary_report.html").read_text(encoding="utf-8")
 
-    assert "Percentuais do fluxo PRISMA" in html
+    assert "Percentuais das etapas operacionais" in html
     assert "Auditoria de identidade bibliográfica" in html
     assert "Contexto histórico da deduplicação" in html
     assert "2.517 duplicatas removidas" in html
+    assert "Excluídos na priorização operacional" in html
+    assert "não equivale à avaliação de elegibilidade de relatórios" in html
+    assert "Elegibilidade" not in html
 
 
 def test_published_summary_images_use_paths_relative_to_the_report() -> None:
@@ -239,6 +243,10 @@ def test_published_summary_images_use_paths_relative_to_the_report() -> None:
     assert "Score médio operacional" in html
     assert "não é qualidade metodológica" in html
     assert "Registros Retidos" in html
+    assert "Percentuais das etapas operacionais" in html
+    assert "não corresponde ao diagrama PRISMA 2020 completo" in html
+    assert "Excluídos na elegibilidade / elegibilidade" not in html
+    assert "Estruturado conforme as diretrizes PRISMA 2020" not in html
 
 
 def test_public_pages_do_not_present_operational_scope_as_final_results() -> None:
@@ -250,6 +258,8 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "15/15 tests passing" not in root_html
     assert "Filtro operacional" in root_html
     assert "não substitui a adjudicação científica final" in root_html
-    assert "números abaixo são explicitamente históricos" in tcc_html
-    assert "2.517" in tcc_html
+    assert "submetidos à priorização operacional" in root_html
+    assert "encaminhados à elegibilidade" not in root_html
+    assert "17 candidatos empíricos provisórios e 1 protocolo contextual" in tcc_html
+    assert "A apreciação MMAT é preliminar" in tcc_html
     assert "11.904" not in tcc_html

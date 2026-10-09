@@ -111,7 +111,8 @@ class ReviewVisualizer:
         duplicates_removed = int(stats.get('duplicates_removed', 0))
         screening = int(stats.get('screening', 0))  # Registros únicos para triagem
 
-        # Passaram triagem -> foram para elegibilidade
+        # Stage value comes from the legacy pipeline field ``eligibility``;
+        # the current scientific report describes it as operational prioritization.
         eligibility = int(stats.get('eligibility', 0))
 
         # Incluídos finais
@@ -134,12 +135,12 @@ class ReviewVisualizer:
             f"screening_excl={screening_excluded}, eligibility_excl={eligibility_excluded}"
         )
 
-        # Main flow boxes seguindo PRISMA 2020
+        # Project-specific operational flow; it is not the full PRISMA diagram.
         boxes = [
             (main_x, 8.0, f"Registros identificados\nnas bases de dados\n(n = {identification:,})", box_color),
             (main_x, 6.55, f"Remoções por identidade\nDOI/URL\n(n = {duplicates_removed:,})", exclude_color),
             (main_x, 5.1, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
-            (main_x, 3.65, f"Priorização operacional\n(elegibilidade no fluxo)\n(n = {eligibility:,})", box_color),
+            (main_x, 3.65, f"Priorização operacional\n(não equivale à elegibilidade)\n(n = {eligibility:,})", box_color),
             (main_x, 2.2, f"Registros retidos\nno corpus provisório\n(n = {included:,})", box_color),
         ]
 
@@ -492,7 +493,7 @@ Desvio Padrão: {scores.std():.2f}"""
         if stats:
             ident_count = int(stats.get('identification', len(df)))
             screened_count = int(stats.get('screening', ident_count))
-            # eligible_count: quantos PASSARAM eligibility (não foram excluídos)
+            # Count of records retained by the operational prioritization stage.
             eligible_count = int(stats.get('eligibility', 0))
             included_count = int(stats.get('included', 0))
             logger.info(
@@ -507,7 +508,8 @@ Desvio Padrão: {scores.std():.2f}"""
             eligibility_only = int(stage_counts.get('eligibility', 0))
             screening_only = int(stage_counts.get('screening', 0))
 
-            # Total que chegou à elegibilidade = eligibility + included
+            # The legacy ``eligibility`` stage plus included records forms the
+            # count submitted to operational prioritization.
             eligible_count = eligibility_only + included_count
             screened_count = screening_only if screening_only > 0 else ident_count
 
@@ -520,7 +522,7 @@ Desvio Padrão: {scores.std():.2f}"""
         funnel_stages = [
             ('Identificação', max(0, ident_count), '#E8F4FD'),
             ('Triagem', max(0, screened_count), '#B3E5FC'),
-            ('Elegibilidade', max(0, eligible_count), '#81C784'),
+            ('Priorização operacional', max(0, eligible_count), '#81C784'),
             ('Registros retidos', max(0, included_count), '#4CAF50')
         ]
 

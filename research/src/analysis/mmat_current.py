@@ -21,6 +21,7 @@ VALID_RESPONSES = {"Y", "N", "CT"}
 VALID_DESIGNS = {
     "qualitative", "quantitative_randomized", "quantitative_nonrandomized",
     "quantitative_descriptive", "mixed_methods", "metadata_hold", "not_applicable",
+    "design_pending",
 }
 REQUIRED_CRITERIA = ("q1", "q2", "q3", "q4", "q5")
 ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
@@ -139,6 +140,17 @@ def load_current_reassessment(
                 "A final MMAT assessment requires a separate evidence and "
                 "adjudication gate"
             )
+        if row.get("design") == "design_pending":
+            if row.get("design_status") != "allocation_conflict_pending":
+                raise ValueError(
+                    f"Study {row.get('study_id')} has an unresolved MMAT design "
+                    "without a documented allocation conflict"
+                )
+            if any(row.get(criterion) != "CT" for criterion in REQUIRED_CRITERIA):
+                raise ValueError(
+                    f"Study {row.get('study_id')} has an unresolved MMAT design "
+                    "but category-specific criteria were rated"
+                )
     return rows
 
 
