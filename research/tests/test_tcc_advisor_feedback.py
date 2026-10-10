@@ -82,9 +82,10 @@ def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> N
 
 def test_interpretation_precedes_the_long_synthesis_quadro() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
-    interpretation = chapter.index("Antes do quadro detalhado")
+    interpretation = chapter.index("No Quadro~\\ref{qua:sintese-estudos-empiricos}")
     quadro = chapter.index(r"\label{qua:sintese-estudos-empiricos}")
     assert interpretation < quadro
+    assert "A leitura deve considerar conjuntamente o desenho" in chapter[interpretation:quadro]
 
 
 def test_long_python_identifier_is_breakable() -> None:

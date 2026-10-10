@@ -123,7 +123,7 @@ Mostra a distribuição do score e o limiar operacional de 4,0. O score organiza
 o processamento, mas não é medida de qualidade metodológica, não produz ranking
 e não substitui a leitura das fontes primárias.
 
-### 16. População retida: dois estratos de leitura
+### 16. Conjunto retido: dois estratos de leitura
 
 Dos 18 registros retidos, 17 são candidatos empíricos provisórios e 1 é um
 protocolo ou proposta contextual. A síntese empírica considera os 17; o registro
@@ -155,12 +155,18 @@ instrumentos, variáveis e métricas impede comparar todos os resultados
 diretamente. Acurácia de um artigo não demonstra superioridade geral nem
 eficácia pedagógica transferível.
 
-### 20. As lacunas que orientam a especificação
+### 20. Limitações identificadas nos estudos consultados
 
-Explicabilidade, integração curricular, participação docente, equidade,
-reprodutibilidade e validação em contextos diversos aparecem como lacunas. Elas
-são convertidas em requisitos de projeto, não apresentadas como evidência de
-que uma solução futura será eficaz.
+Apresenta quatro exemplos localizados, com páginas: divergência de
+denominadores e possível confundimento entre docente e condição em He et al.
+(2025, pp. 1, 16, 31–35); duração experimental não conciliada em Villegas-Ch
+et al. (2025, pp. 14, 22); descrições incompatíveis de alocação, diferença no
+pré-teste e intervenção combinada em Nyantah et al. (2025, pp. 101–105); e
+sobreposição entre itens usados para construir categorias e preditores em
+Echeveria et al. (2025, pp. 66, 69–70). São exemplos dos textos consultados,
+não estimativa de frequência da literatura. A cobertura é de 12 textos
+primários entre 17 candidatos; os cinco restantes foram apreciados por
+resumo/metadados, e o MMAT segue preliminar, por revisor único.
 
 ### 21. Da evidência à especificação — sem saltar para a implementação
 

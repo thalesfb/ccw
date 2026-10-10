@@ -5,25 +5,15 @@ Este capítulo apresenta os resultados da revisão sistemática desenvolvida no 
 
 \section{Fluxo de Seleção}
 
-A Figura~\ref{fig:prisma-flow} apresenta uma representação operacional do processo de seleção, elaborada com referência ao PRISMA 2020. Ela não reproduz todas as etapas do diagrama padrão do PRISMA 2020: a priorização heurística dos 2.486 registros não equivale à avaliação de elegibilidade de relatórios recuperados. Após a identificação, 27 linhas excedentes foram removidas por identidade bibliográfica determinística: 25 por DOI normalizado e 2 por URL exata. Restaram 11.877 registros para a triagem. A triagem excluiu 9.391 registros e encaminhou 2.486 para a priorização operacional; nessa etapa, 2.468 foram excluídos e 18 foram retidos provisoriamente para adjudicação de escopo. A recuperação e a apreciação de textos primários foram desiguais entre os candidatos empíricos, conforme detalhado na Metodologia; portanto, a retenção não representa inclusão final universal.
+O Fluxograma~\ref{fig:prisma-flow} apresenta uma representação operacional do processo de seleção, elaborada com referência ao PRISMA 2020. Ele não reproduz todas as etapas do diagrama padrão do PRISMA 2020: a priorização heurística dos 2.486 registros não equivale à avaliação de elegibilidade de relatórios recuperados. Após a identificação, 27 linhas excedentes foram removidas por identidade bibliográfica determinística: 25 por DOI normalizado e 2 por URL exata. Restaram 11.877 registros para a triagem. A triagem excluiu 9.391 registros e encaminhou 2.486 para a priorização operacional; nessa etapa, 2.468 foram excluídos e 18 foram retidos provisoriamente para adjudicação de escopo. A recuperação e a apreciação de textos primários foram desiguais entre os candidatos empíricos, conforme detalhado na Metodologia; portanto, a retenção não representa inclusão final universal.
 
-\begin{figure}[H]
+\begin{fluxograma}[H]
 \centering
 \caption{Fluxo de seleção da revisão sistemática.}
 \label{fig:prisma-flow}
 \includegraphics[width=\textwidth]{images/prisma_flow.png}
 \fonte{Elaborado pelo autor (2026).}
-\end{figure}
-
-O Gráfico~\ref{fig:selection-funnel} representa a redução do conjunto de registros ao longo das etapas.
-
-\begin{grafico}[H]
-\centering
-\caption{Funil de seleção dos estudos.}
-\label{fig:selection-funnel}
-\includegraphics[width=0.85\textwidth]{images/selection_funnel.png}
-\fonte{Elaborado pelo autor (2026).}
-\end{grafico}
+\end{fluxograma}
 
 \section{Estatísticas Descritivas}
 
@@ -70,7 +60,7 @@ A distribuição por fonte é apresentada no Gráfico~\ref{fig:database-coverage
 
 \section{Síntese dos Estudos Incluídos}
 
-Antes do quadro detalhado, três padrões orientam sua leitura. Primeiro, houve predominância de estudos voltados à predição de desempenho ou à classificação de proficiência. Segundo, diferentes algoritmos foram empregados, com recorrência de \textbf{\textit{Random Forest}}, SVM e redes neurais. Terceiro, os resultados não são diretamente comparáveis em todos os casos, pois os estudos utilizaram populações, instrumentos, variáveis e desenhos metodológicos distintos.
+Entre os candidatos analisados, foram identificadas tarefas de predição de desempenho e de classificação ou estimativa de proficiência. Os estudos empregaram métodos diversos, incluindo \textit{Random Forest}, SVM, árvores de decisão e redes neurais. Seus resultados não são diretamente comparáveis em todos os casos, pois foram produzidos com populações, instrumentos, variáveis e desenhos metodológicos distintos.
 
 Os trabalhos preditivos utilizaram combinações de notas, respostas a itens, características contextuais e registros de interação para estimar categorias ou escores. Outros estudos investigaram personalização, avaliação formativa, recursos pedagógicos ou modelos computacionais de aprendizagem. Essa diversidade ampliou o panorama da revisão, mas também impediu tratar todos os resultados como se medissem o mesmo fenômeno educacional.
 
@@ -145,27 +135,30 @@ O Quadro~\ref{qua:mmat-reavaliacao-atual} foi gerado automaticamente a partir do
 \begingroup
 \fontsize{10}{11.5}\selectfont
 \setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{1.15}
+\renewcommand{\arraystretch}{1.0}
 % Reserva a abertura antes de longtable criar a âncora da legenda.
 % Sem espaço, o destino pode ficar na página anterior no TeX Live.
-\Needspace{8\baselineskip}
+\Needspace{18\baselineskip}
 \input{../../research/exports/references/mmat_current_tcc_table.tex}
 \fonte{Elaborado pelo autor (2026).}
 \endgroup
 
-As limitações recorrentes envolveram descrição incompleta dos dados, controle insuficiente de variáveis de confusão e representatividade restrita. Em vez de ordenar os estudos por uma nota, essas informações foram consideradas na interpretação da evidência, sem produzir uma classificação agregada de qualidade.
+Os julgamentos preliminares por critério registraram limitações relativas à descrição dos dados, ao controle de variáveis de confusão e à representatividade. Como a avaliação foi conduzida por um único revisor e a disponibilidade de textos primários foi desigual, esses registros não foram convertidos em uma estimativa de frequência nem em classificação agregada de qualidade.
 
 A recuperação adicional de fontes não implica aprovação dos julgamentos anteriores. No caso de \citeonline{He2025_6915}, a combinação de componentes meta-analítico, preditivo e escolar exige delimitar a unidade de apreciação antes de consolidar os critérios do MMAT. O ledger mantém uma classificação provisória como quantitativo descritivo, enquanto parte de suas justificativas menciona confundimento e implementação da intervenção, próprios de outra categoria do instrumento. Essa divergência não foi resolvida por uma reclassificação automática: os julgamentos desse registro permanecem pendentes de revisão do delineamento e adjudicação.
 
 \section{Tendências e Lacunas}
+\label{sec:tendencias-lacunas}
 
-As observações desta seção consideram somente os 17 candidatos empíricos provisórios; o protocolo ou proposta contextual foi mantido para rastreabilidade e não integra a síntese de evidências. A leitura é descritiva e foi limitada pela disponibilidade desigual das fontes: doze registros tiveram o texto primário consultado e cinco foram apreciados com base em resumo e metadados. Portanto, os padrões abaixo não constituem uma contagem exaustiva de frequência, uma comparação de eficácia ou uma afirmação de que a literatura apresenta evidência homogênea.
+As observações desta seção consideram somente os 17 candidatos empíricos provisórios; o protocolo ou proposta contextual foi mantido para rastreabilidade e não integra a síntese de evidências. A leitura é descritiva e foi limitada pela disponibilidade desigual das fontes: doze registros tiveram o texto primário consultado e cinco foram apreciados com base em resumo e metadados. Os exemplos a seguir localizam limitações em estudos específicos; essa cobertura não permite estimar a frequência das limitações na literatura, comparar a eficácia das intervenções ou afirmar que o conjunto apresenta evidência homogênea.
 
-No conjunto retido, a leitura dos resumos, metadados e textos primários disponíveis sugere concentração em modelos supervisionados voltados à predição de desempenho ou à classificação e estimativa de proficiência. Explicabilidade, integração curricular, avaliação longitudinal e participação docente aparecem menos desenvolvidas ou menos descritas no material examinado. Esses achados devem ser lidos como lacunas de investigação, descrição ou articulação pedagógica no recorte analisado, e não como ausências demonstradas em toda a área.
+Em \citeonline[pp.~1, 16, 31--35]{He2025_6915}, a descrição da aplicação escolar informa oito turmas com 45 estudantes por turma, enquanto o artigo declara amostra total de 90. O texto consultado não reconcilia esses denominadores. Os autores também descrevem quatro professores, com um responsável pelas duas turmas de controle e os demais pelas turmas experimentais; não foi identificado ajuste para esse possível confundimento entre docente e condição nas páginas examinadas. Essas inconsistências dificultam reconstituir a unidade de análise e exigem cautela na interpretação dos resultados, sem que o denominador possa ser corrigido por inferência.
 
-As lacunas observadas no recorte dizem respeito, primeiro, à validação e à transferibilidade limitadas nos contextos escolares representados, o que restringe a generalização para outras populações. Também foi limitado o relato de como os indicadores computacionais se relacionam à aprendizagem matemática. Não foram localizadas, de forma sistemática, análises de equidade e de possíveis vieses no material examinado, enquanto a disponibilidade de dados, código e condições de reprodução não foi verificada uniformemente entre os registros. Por fim, houve relato limitado da integração entre resultados dos modelos e decisões pedagógicas, e não foi localizado, de maneira uniforme, alinhamento explícito com referenciais curriculares brasileiros.
+Em \citeonline[pp.~14, 22]{Villegas2025_6916}, a seção de métodos descreve seis semanas de experimento, enquanto os resultados se estendem até a oitava semana, sem conciliação nos trechos consultados. Essa diferença impede adotar um cronograma único para comparar ou sintetizar o estudo. Já \citeonline[pp.~101--105]{Enhancing2025_012} apresenta descrições incompatíveis sobre a alocação das escolas: um trecho informa distribuição aleatória, e outro caracteriza o desenho como quase-experimental sem alocação aleatória. O artigo também relata diferença entre os grupos no pré-teste (U=6714; p<0,001; tamanho de efeito=0,346), e a intervenção combina animação computacional e aprendizagem cooperativa. Em conjunto, esses elementos limitam a atribuição do resultado a um componente isolado e recomendam que a comparação seja interpretada considerando a diferença inicial e a intervenção combinada.
 
-O relatório automatizado de lacunas disponível nos artefatos versionados emprega uma taxonomia diferente e não apresenta uma matriz de codificação que permita estimar a frequência dos itens acima. Por isso, esta seção não atribui percentuais ou frequências às lacunas, nem converte a visualização em evidência quantitativa.
+Em \citeonline[pp.~66, 69--70]{Echeveria2025_6920}, oito itens da escala de mentalidade matemática utilizados para formar as categorias também permanecem entre os preditores selecionados. O relato não estabelece, por si só, validade diagnóstica independente da classificação; por isso, o resultado não sustenta inferência de mudança na aprendizagem nem de efeito de uma intervenção precoce.
+
+Esses casos sugerem requisitos de relato e avaliação para a especificação: explicitar denominadores, unidades de análise, alocação, medidas iniciais, duração e relação entre rótulos e preditores. Eles são exemplos localizados, não uma estimativa de prevalência nem uma avaliação definitiva dos estudos. Temas mais amplos — como equidade, participação docente, integração curricular e reprodutibilidade — não foram codificados de modo comparável para todos os registros; neste trabalho, permanecem questões e requisitos propostos para investigação, e não ausências demonstradas em toda a literatura ou em cada estudo retido.
 
 \section{Limitações e Contribuições da Revisão}
 
@@ -175,7 +168,7 @@ O protocolo não foi registrado prospectivamente. Foram adotados princípios de 
 
 As fontes consultadas possuem cobertura predominantemente anglófona, e a busca foi limitada a português e inglês. A heterogeneidade dos desenhos, populações e métricas impediu uma síntese quantitativa conjunta. Não foi aplicado um teste formal de viés de publicação; a cobertura das fontes e a disponibilidade desigual dos textos completos podem ter influenciado o conjunto recuperado. Além disso, a apreciação MMAT por revisor único permanece preliminar e está sujeita a divergências interpretativas.
 
-Considerados esses limites, a revisão forneceu as evidências disponíveis para a especificação do protótipo. A predominância de tarefas preditivas justificou a inclusão de modelos supervisionados entre as alternativas de modelagem, enquanto a heterogeneidade das bases impôs critérios explícitos de seleção e validação. As lacunas de explicabilidade, integração curricular, participação docente e reprodutibilidade foram convertidas em requisitos técnicos e pedagógicos.
+Considerados esses limites, a revisão forneceu a base documental disponível para a especificação do protótipo. A presença de tarefas preditivas entre os candidatos analisados justificou considerar modelos supervisionados como alternativas, enquanto a heterogeneidade das bases fundamentou critérios de seleção e validação. Requisitos de explicabilidade, integração curricular, participação docente e reprodutibilidade foram propostos a partir da leitura temática e da fundamentação pedagógica; como esses aspectos não foram codificados de modo comparável em todos os registros, não são apresentados como lacunas comprovadas em cada estudo ou em toda a literatura.
 
 Dessa forma, os resultados da revisão não foram tratados apenas como levantamento bibliográfico. Eles sustentaram as decisões consolidadas no Capítulo~\ref{cap:prototipo}, preservando a distinção entre evidências reportadas na literatura e resultados produzidos pelo próprio trabalho.
 

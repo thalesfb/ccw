@@ -396,19 +396,19 @@ layout: default
 class: content-slide tcc-gaps-slide
 ---
 
-<div class="slide-kicker">19 / LACUNAS</div>
+<div class="slide-kicker">19 / EVIDÊNCIAS E LIMITES</div>
 
-# Lacunas que orientam a especificação
+# Limitações identificadas nos estudos consultados
 
-<p class="tcc-gaps-intro">Seis lacunas documentadas são agrupadas em quatro eixos para conduzir a próxima decisão científica.</p>
+<p class="tcc-gaps-intro">Quatro exemplos localizados nos textos primários; não são uma contagem de frequência nem uma afirmação sobre toda a literatura.</p>
 <div class="tcc-gaps-grid">
-  <div><b>1</b><h2>Explicabilidade</h2><p>Resultados compreensíveis, com incerteza e participação docente.</p></div>
-  <div><b>2</b><h2>Contexto curricular</h2><p>Indicadores relacionados a objetivos e descritores matemáticos.</p></div>
-  <div><b>3</b><h2>Validação real</h2><p>População, ambiente educacional e equidade precisam ser investigados.</p></div>
-  <div><b>4</b><h2>Reprodutibilidade</h2><p>Dados, código, parâmetros e decisões permanecem rastreáveis.</p></div>
+  <div><h2>He et al. (2025)<small>pp. 1, 16, 31–35</small></h2><p><strong>Relato:</strong> oito turmas de 45 estudantes, mas amostra declarada n=90; a distribuição de docentes entre condições também é desigual.</p><p><strong>Implicação:</strong> denominador, unidade de análise e possível confundimento exigem cautela.</p></div>
+  <div><h2>Villegas-Ch et al. (2025)<small>pp. 14, 22</small></h2><p><strong>Relato:</strong> métodos descrevem seis semanas; os resultados chegam à oitava, sem conciliação nos trechos consultados.</p><p><strong>Implicação:</strong> não se deve impor duração única à síntese.</p></div>
+  <div><h2>Nyantah et al. (2025)<small>pp. 101–105</small></h2><p><strong>Relato:</strong> alocação descrita de modo incompatível; há diferença no pré-teste e a intervenção combina animação e jigsaw.</p><p><strong>Implicação:</strong> não atribuir o resultado à animação isoladamente.</p></div>
+  <div><h2>Echeveria et al. (2025)<small>pp. 66, 69–70</small></h2><p><strong>Relato:</strong> oito itens usados para formar categorias também aparecem entre os preditores selecionados.</p><p><strong>Implicação:</strong> a classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> 12 de 17 textos primários foram consultados; cinco candidatos foram apreciados por resumo/metadados. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
 
 ---
 layout: default

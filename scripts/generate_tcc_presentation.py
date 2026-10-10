@@ -61,15 +61,15 @@ EXPECTED_TITLES = [
     "Objetivos específicos",
     "A base conceitual: quatro níveis de interpretação",
     "Desenho metodológico",
-    "Do registro bruto à população retida",
+    "Do registro bruto ao conjunto retido provisoriamente",
     "Fluxo operacional do processo de seleção",
     "Deduplicação: o que foi confirmado",
     "Panorama descritivo do snapshot",
     "Distribuição temporal e fontes",
-    "População retida e síntese empírica",
+    "Conjunto retido e síntese empírica",
     "Apreciação metodológica pelo MMAT 2018",
     "O que a síntese sustenta",
-    "Lacunas documentadas",
+    "Limitações localizadas nos estudos consultados",
     "Da evidência à especificação",
     "Especificação conceitual do protótipo",
     "Contribuições e limites",
@@ -492,21 +492,19 @@ def build_deck() -> Presentation:
     add_callout(slide, "Implicação", "Avaliação técnica, explicabilidade, contexto curricular e interpretação docente precisam acompanhar qualquer uso futuro.", Inches(6.8), Inches(3.65), Inches(5.75), Inches(1.55), fill=PALE_VIOLET, accent=VIOLET, title_size=17, body_size=15)
     add_text(slide, "Desempenho reportado em um artigo não equivale a evidência geral de eficácia pedagógica.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=15, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
 
-    # 15 — Gaps.
+    # 15 — Study-specific limitations.
     slide = new_slide(prs, EXPECTED_TITLES[14], 15)
-    gaps = [
-        ("Explicabilidade", "Pouca clareza sobre como as saídas chegam à interpretação pedagógica.", BLUE, PALE_BLUE),
-        ("Currículo", "Alinhamento explícito com referenciais curriculares aparece de forma limitada.", TEAL, PALE_TEAL),
-        ("Participação docente", "Decisões de projeto nem sempre incorporam o professor como intérprete.", VIOLET, PALE_VIOLET),
-        ("Equidade", "Análises de possíveis vieses e diferenças entre grupos são escassas.", AMBER, PALE_AMBER),
-        ("Reprodutibilidade", "Dados, códigos e detalhes de preparação nem sempre estão disponíveis.", ORANGE, RGBColor(255, 247, 237)),
-        ("Contexto", "Validações permanecem restritas a populações e cenários específicos.", INDIGO, RGBColor(238, 242, 255)),
+    study_limits = [
+        ("He et al. (2025)", "Oito turmas de 45 estudantes são descritas, mas a amostra declarada é n=90; docentes também se distribuem de modo desigual entre condições (pp. 1, 16, 31–35). Isso exige cautela com denominadores e possível confundimento.", BLUE, PALE_BLUE),
+        ("Villegas-Ch et al. (2025)", "Os métodos descrevem seis semanas, mas os resultados chegam à oitava, sem conciliação nos trechos consultados (pp. 14, 22). Não se deve impor duração única à síntese.", TEAL, PALE_TEAL),
+        ("Nyantah et al. (2025)", "A alocação é descrita de modo incompatível; há diferença no pré-teste e a intervenção combina animação e jigsaw (pp. 101–105). O resultado não deve ser atribuído à animação isoladamente.", VIOLET, PALE_VIOLET),
+        ("Echeveria et al. (2025)", "Oito itens usados para formar categorias também aparecem entre os preditores selecionados (pp. 66, 69–70). A classificação não estabelece diagnóstico independente.", AMBER, PALE_AMBER),
     ]
-    for index, (title, body, accent, fill) in enumerate(gaps):
-        x = Inches(0.75 + (index % 3) * 4.1)
-        y = Inches(1.25 + (index // 3) * 2.0)
-        add_callout(slide, title, body, x, y, Inches(3.65), Inches(1.55), fill=fill, accent=accent, title_size=15, body_size=13.5)
-    add_text(slide, "Essas lacunas foram tratadas como requisitos de projeto — não como prova de que uma solução futura será eficaz.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+    for index, (title, body, accent, fill) in enumerate(study_limits):
+        x = Inches(0.75 + (index % 2) * 6.05)
+        y = Inches(1.2 + (index // 2) * 2.15)
+        add_callout(slide, title, body, x, y, Inches(5.75), Inches(1.9), fill=fill, accent=accent, title_size=16, body_size=13)
+    add_text(slide, "Exemplos localizados, não estimam a frequência da literatura. Cobertura: 12 de 17 textos primários; os demais foram apreciados por resumo/metadados. MMAT preliminar, por revisor único.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=13, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
 
     # 16 — From evidence to specification.
     slide = new_slide(prs, EXPECTED_TITLES[15], 16)
@@ -594,6 +592,18 @@ def validate_presentation(path: Path) -> list[str]:
         normalized_expected = expected_title.replace("\n", " ")
         if normalized_expected not in title_text:
             errors.append(f"título do slide {index + 1} inesperado: {title_text!r}")
+
+    gap_slide_text = slide_text(prs.slides[14]) if len(prs.slides) > 14 else ""
+    for marker in (
+        "He et al. (2025)",
+        "Villegas-Ch et al. (2025)",
+        "Nyantah et al. (2025)",
+        "Echeveria et al. (2025)",
+        "12 de 17 textos primários",
+        "não estimam a frequência da literatura",
+    ):
+        if marker not in gap_slide_text:
+            errors.append(f"limitação por estudo ausente no slide 15: {marker}")
 
     expected_images = {
         "prisma_flow.png",

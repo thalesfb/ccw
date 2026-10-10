@@ -7,7 +7,7 @@ A especificação não foi tratada como evidência de uma aplicação funcional.
 
 O repositório também contém uma implementação técnica do pipeline do protótipo, acompanhada por testes sintéticos automatizados. Essa implementação demonstra propriedades de processamento e de proteção contra falhas previstas no código, mas não equivale a uma execução com dados educacionais reais, a uma validação de eficácia preditiva ou a uma avaliação de aprendizagem. O capítulo, portanto, descreve a especificação que orienta uma futura execução e mantém essa implementação técnica separada de qualquer alegação de resultado educacional.
 
-\section{Princípios de Projeto}
+\section{Princípios e Requisitos}
 
 A especificação estabelece que o protótipo deverá apoiar a decisão pedagógica sem substituir o professor. Essa decisão de projeto implica distinguir, na representação e na interpretação dos resultados, o desempenho observado em uma atividade, a proficiência estimada por um modelo, a competência mobilizada em um contexto mais amplo e a aprendizagem como possível mudança ao longo do tempo. Esses conceitos não são intercambiáveis, e a passagem de um para outro não poderá ser presumida apenas pela produção de um indicador computacional.
 
@@ -15,39 +15,31 @@ As estimativas deverão ser acompanhadas de explicações, limitações e condi�
 
 A proteção dos dados educacionais constitui outro princípio da especificação. O uso deverá estar associado a uma finalidade explícita, com minimização dos dados pessoais e controle de acesso compatível com essa finalidade. Também deverá ser possível reproduzir e auditar os procedimentos de preparação, treinamento e avaliação por meio do registro das versões, dos parâmetros e das dependências relevantes. Por fim, a especificação rejeita rótulos permanentes ou deterministas sobre os estudantes, pois uma estimativa situada não deve ser convertida em atributo fixo da pessoa.
 
-\section{Requisitos Funcionais}
-
-Os requisitos funcionais descrevem as capacidades que uma futura implementação deverá oferecer para apoiar a interpretação docente de evidências educacionais. Inicialmente, o protótipo deverá importar dados documentados e relacionados a objetivos curriculares, preservando os metadados necessários à leitura de sua procedência. A partir desses dados, deverá organizar evidências de desempenho por habilidade ou descritor, de modo que a análise mantenha relação explícita com o contexto curricular em que os registros foram produzidos.
+No plano funcional, a futura implementação deverá importar dados documentados e relacionados a objetivos curriculares, preservando os metadados necessários à leitura de sua procedência. A partir desses dados, deverá organizar evidências de desempenho por habilidade ou descritor, de modo que a análise mantenha relação explícita com o contexto curricular em que os registros foram produzidos.
 
 Na etapa de análise, o protótipo deverá produzir estimativas para um alvo educacional explicitamente definido, acompanhadas de incertezas e limitações, e apresentar resultados individuais e agregados ao professor. Uma probabilidade preditiva de acerto ou de pertencimento a uma classe de desempenho não será denominada proficiência apenas por resultar de um modelo computacional. A interpretação como proficiência exigirá um modelo de mensuração, uma escala e evidências de validade para o uso pretendido, em consonância com a distinção entre observação e inferência discutida por \citeonline[pp.~42--44]{NRC2001}. Essas saídas deverão ser acompanhadas de uma explicação das variáveis relacionadas a cada estimativa, sem serem apresentadas como diagnósticos completos de aprendizagem. O fluxo também deverá permitir revisão humana das recomendações produzidas, para que o professor possa confrontar as evidências computacionais com a situação da turma e decidir sobre sua pertinência pedagógica. Por fim, deverá exportar dados, parâmetros e resultados para auditoria, assegurando que as decisões de processamento e as saídas apresentadas possam ser examinadas posteriormente.
 
 A especificação também estabeleceu que indicadores computacionais não representam, isoladamente, diagnósticos de aprendizagem. Sua interpretação depende da natureza da atividade, da qualidade dos dados e do contexto pedagógico.
 
-\section{Requisitos Não Funcionais}
-
-Os requisitos não funcionais especificam condições de qualidade e de governança que deverão ser satisfeitas por uma futura implementação. Eles não constituem evidência de que tais propriedades já tenham sido alcançadas. A reprodutibilidade deverá ser assegurada pelo registro das versões dos dados, dos parâmetros, dos modelos e das dependências. Complementarmente, a rastreabilidade deverá permitir associar cada resultado à fonte de dados utilizada e à versão do experimento que o produziu. Essa associação é necessária para que uma conclusão possa ser examinada sem perder sua procedência.
+No plano não funcional, as condições de qualidade e de governança deverão ser satisfeitas por uma futura implementação; sua especificação não constitui evidência de que tais propriedades já tenham sido alcançadas. A reprodutibilidade deverá ser assegurada pelo registro das versões dos dados, dos parâmetros, dos modelos e das dependências. Complementarmente, a rastreabilidade deverá permitir associar cada resultado à fonte de dados utilizada e à versão do experimento que o produziu. Essa associação é necessária para que uma conclusão possa ser examinada sem perder sua procedência.
 
 A testabilidade deverá ser favorecida pela separação entre ingestão, preparação, modelagem, avaliação e apresentação. A portabilidade, por sua vez, exigirá um ambiente de execução documentado e passível de reprodução. Essas duas condições dizem respeito à possibilidade de verificar e repetir os procedimentos, e não à escolha de uma tecnologia ou de uma interface específica.
 
 Os requisitos também abrangem a relação do protótipo com seus usuários e com os dados tratados. A apresentação deverá ser acessível, compreensível e compatível com diferentes perfis de usuário. A privacidade deverá orientar a minimização de dados pessoais e o controle de finalidade e de acesso. Por fim, a transparência deverá exigir que as limitações dos modelos e as condições de validade das estimativas sejam comunicadas junto aos resultados, evitando que a forma de apresentação atribua uma certeza que o procedimento não sustenta.
 
-\section{Critérios para Fontes de Dados}
-
-A especificação toma como referência a possibilidade de trabalhar com microdados de avaliações educacionais, como SAEB e PISA, e com dados sintéticos destinados à verificação do \textit{pipeline}. Essa referência não representa a seleção de uma base definitiva. Trata-se de uma decisão metodológica preliminar, que mantém a escolha da fonte condicionada à documentação disponível, ao problema de pesquisa e às condições de execução que vierem a ser definidas.
+A escolha de fontes de dados permanece condicionada à documentação disponível, ao problema de pesquisa e às condições de execução que vierem a ser definidas. A especificação considera a possibilidade de trabalhar com microdados de avaliações educacionais, como SAEB e PISA, e com dados sintéticos destinados à verificação do \textit{pipeline}; essa possibilidade não representa a seleção de uma base definitiva.
 
 A seleção de uma fonte deverá considerar, inicialmente, sua licença e suas condições de uso, bem como a existência de dicionário de dados e de documentação metodológica. Também deverá examinar a unidade de análise e sua relação com o problema de pesquisa, a qualidade dos metadados e o tratamento previsto para valores ausentes. A representatividade da população deverá ser analisada em relação ao contexto para o qual se pretende interpretar os resultados, sem ser presumida a partir da simples disponibilidade da base. Do mesmo modo, a presença de variáveis relacionadas ao desempenho e ao contexto educacional será relevante, mas não garantirá, por si só, que seja possível associá-las a competências ou descritores curriculares. Essa associação deverá ser demonstrada e delimitada pela documentação e pelo desenho da avaliação.
 
 Por fim, a análise da fonte deverá incluir os riscos de identificação, discriminação e uso indevido. Esses riscos são condições de governança da execução, e não apenas atributos técnicos do arquivo de dados. Dados sintéticos poderão ser usados para testar fluxos de processamento, interfaces e regras de validação. Entretanto, não constituirão evidência de desempenho educacional, de validade preditiva ou de eficácia pedagógica, nem substituirão uma base empírica quando a investigação exigir inferências sobre estudantes ou contextos reais.
 
-\section{Alternativas de Modelagem}
+Quanto à modelagem, a revisão identificou uso de \textit{Random Forest}, máquinas de vetores de suporte (SVM), árvores de decisão, regressão logística e redes neurais. Na especificação, \textit{Random Forest} e SVM também foram ancoradas em suas fontes metodológicas primárias \cite{Breiman2001,CortesVapnik1995}. Modelos supervisionados simples e interpretáveis foram mantidos como referências iniciais de comparação, condicionando o uso de modelos mais complexos à demonstração de ganho e à possibilidade de interpretação adequada.
 
-A revisão identificou uso recorrente de \textbf{\textit{Random Forest}}, máquinas de vetores de suporte (SVM), árvores de decisão, regressão logística e redes neurais. Na especificação, \textit{Random Forest} e SVM também foram ancoradas em suas fontes metodológicas primárias \cite{Breiman2001,CortesVapnik1995}. Modelos supervisionados simples e interpretáveis foram mantidos como referências iniciais de comparação, condicionando o uso de modelos mais complexos à demonstração de ganho e à possibilidade de interpretação adequada.
-
-\textbf{\textit{Random Forest}} e SVM foram registrados como alternativas de modelagem, não como algoritmos definitivamente implementados. A escolha entre eles depende da base selecionada, da distribuição das classes, do tipo de variável, do custo computacional e dos requisitos de explicabilidade.
+\textit{Random Forest} e SVM foram registrados como alternativas de modelagem, não como algoritmos definitivamente implementados. A escolha entre eles depende da base selecionada, da distribuição das classes, do tipo de variável, do custo computacional e dos requisitos de explicabilidade.
 
 Em uma implementação com scikit-learn, identificadores longos devem ser documentados sem comprometer a legibilidade do texto ou a reprodução do código. O nome \texttt{RandomForest\allowbreak Classifier}, por exemplo, identifica uma classe de implementação, não uma técnica adicional.
 
-\section{Protocolo de Avaliação}
+\section{Dados, Modelagem e Avaliação}
 
 O protocolo de avaliação constitui uma condição para a execução futura da modelagem e para a interpretação dos seus resultados. Ele deverá separar o que será observado no comportamento técnico dos modelos daquilo que exigiria evidência educacional adicional. Essa separação começa pela definição explícita dos conjuntos de treino, validação e teste e pela prevenção de vazamento de informação entre preparação, modelagem e avaliação. Os modelos candidatos deverão ser comparados com referências simples, para que qualquer ganho seja interpretado em relação a uma base de comparação, e as métricas deverão ser analisadas por classe, além das medidas agregadas, quando a tarefa permitir essa decomposição.
 
@@ -59,11 +51,7 @@ Essa distinção também separa a avaliação técnica da eficácia pedagógica.
 
 Para examinar a adequação pedagógica da especificação, o protocolo prevê uma revisão documental por docentes da área de matemática. Essa revisão deverá considerar a correspondência dos requisitos com o referencial curricular pertinente ao nível de ensino, a clareza das explicações e das incertezas apresentadas, a possibilidade de interpretação contextualizada e a preservação da decisão docente. Cada julgamento deverá registrar o requisito examinado, a evidência documental, a justificativa, as limitações e os ajustes necessários. Trata-se de um procedimento proposto, que não foi executado neste trabalho; mesmo sua execução não substituiria um estudo empírico de eficácia educacional.
 
-\section{Explicabilidade e Participação Docente}
-
-SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. A especificação condicionou seu uso à estabilidade das explicações, ao custo computacional e à possibilidade de tradução dos resultados para uma linguagem curricular compreensível.
-
-O professor permaneceu como responsável por interpretar as evidências, relacioná-las ao contexto da turma e decidir intervenções. O protótipo foi especificado como instrumento de apoio, e não como mecanismo autônomo de classificação ou prescrição pedagógica.
+Como parte da avaliação e da revisão humana, SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. Seu uso deverá considerar a estabilidade das explicações, o custo computacional e a possibilidade de tradução dos resultados para uma linguagem curricular compreensível. O professor permanece responsável por interpretar as evidências, relacioná-las ao contexto da turma e decidir intervenções; o protótipo é instrumento de apoio, não mecanismo autônomo de classificação ou prescrição pedagógica.
 
 \section{Arquitetura de Referência}
 
@@ -73,10 +61,6 @@ A etapa de avaliação e explicabilidade deverá calcular as métricas, analisar
 
 A separação dos componentes deverá favorecer a testabilidade, a rastreabilidade e a substituição controlada de técnicas. Ela também permite localizar em qual etapa uma decisão, uma transformação ou uma limitação foi introduzida. A arquitetura não impõe uma interface específica e poderá ser materializada como \textit{notebook}, aplicação local, API ou sistema web. Qualquer dessas formas de execução deverá, entretanto, preservar os requisitos de auditoria, interpretação, privacidade e participação docente estabelecidos neste capítulo.
 
-\section{Resultado da Especificação}
-
-O resultado deste capítulo foi um artefato de especificação que conectou as evidências da revisão às decisões de projeto. Foram definidos o propósito do protótipo, seus limites, os requisitos mínimos, os critérios de seleção de dados e modelos, o protocolo de avaliação e a arquitetura de referência.
-
-Essa entrega consolidou uma base técnica e pedagógica estruturada, fundamentada no material examinado. Ela não se confunde com uma especificação submetida à revisão docente prevista no protocolo, uma implementação funcional ou uma evidência de eficácia em sala de aula.
+Em síntese, este capítulo consolida uma especificação técnica e pedagógica que conecta as evidências da revisão às decisões de projeto, abrangendo propósito, limites, requisitos, critérios para dados e modelos, protocolo de avaliação e arquitetura de referência. Essa entrega é fundamentada no material examinado, mas não se confunde com uma especificação submetida à revisão docente prevista no protocolo, com uma aplicação educacional validada ou com evidência de eficácia em sala de aula.
 
 %--------- FIM ESPECIFICAÇÃO DO PROTÓTIPO ------------

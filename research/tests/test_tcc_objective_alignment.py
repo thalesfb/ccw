@@ -11,11 +11,14 @@ CONTENT = ROOT / "results/tcc/conteudo"
 
 class ObjectiveAlignmentTests(unittest.TestCase):
     def test_intro_and_results_reference_only_four_unique_objectives(self):
-        for name in ("introducao.tex", "resultados.tex"):
-            source = (CONTENT / name).read_text(encoding="utf-8")
-            self.assertEqual(re.findall(r"\\textbf\{(OE\d+)\}", source),
-                             ["OE1", "OE2", "OE3", "OE4"], name)
         intro = (CONTENT / "introducao.tex").read_text(encoding="utf-8")
+        results = (CONTENT / "resultados.tex").read_text(encoding="utf-8")
+        self.assertEqual(re.findall(r"\\textbf\{(OE\d+)\}", intro),
+                         ["OE1", "OE2", "OE3", "OE4"])
+        self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
+        for phrase in ("primeiro objetivo específico foi atendido", "O segundo foi atendido",
+                       "O terceiro foi atendido", "O quarto foi atendido"):
+            self.assertIn(phrase, results)
         objectives = intro.split(r"\subsection{Objetivos Específicos}", 1)[1].split(
             r"\section{Estrutura do Trabalho}", 1
         )[0]
@@ -58,8 +61,8 @@ class ObjectiveAlignmentTests(unittest.TestCase):
     def test_protocol_covers_the_proposed_pedagogical_review(self):
         source = (CONTENT / "prototipo.tex").read_text(encoding="utf-8")
         self.assertNotIn("especificação validada documentalmente", source)
-        protocol = source.split(r"\section{Protocolo de Avaliação}", 1)[1].split(
-            r"\section", 1
+        protocol = source.split(r"\section{Dados, Modelagem e Avaliação}", 1)[1].split(
+            r"\section{Arquitetura de Referência}", 1
         )[0]
         for phrase in ("revisão documental por docentes", "nível de ensino",
                        "evidência documental", "não foi executado",

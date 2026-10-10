@@ -1,14 +1,24 @@
 # Apresentação Slidev do TCC
 
-Esta apresentação é uma demonstração pública e resumida do TCC. O conteúdo
-quantitativo é validado contra `research/exports/reports/summary.json`; as
-visualizações são cópias dos PNGs versionados em `research/exports/visualizations`.
-O deck vigente tem 25 slides; esse número é validado por `npm run validate`.
+## Arquivo da defesa
 
-O PPTX/PDF em `results/ptc/presentation/` foi consultado apenas como referência
-narrativa e visual. Ele contém uma apresentação histórica rasterizada e não é
-fonte dos números atuais. O deck atual não reproduz as contagens históricas
-da apresentação do PTC.
+`slides.md` é o deck canônico da defesa: contém 25 slides, incluindo a capa, e
+é a fonte usada para compilar a apresentação pública. `results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md`
+é o storyboard de 25 slides que documenta sua progressão; não é a fonte de
+renderização.
+
+O arquivo `results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx`
+é um export editável paralelo de 19 slides, gerado por outro script. Ele não é
+o arquivo da defesa, não é exportado de `slides.md` e não permanece sincronizado
+automaticamente. Para apresentar o TCC, use o deck Slidev.
+
+O material em `results/ptc/presentation/` é uma terceira apresentação,
+histórica, referente ao PTC. Serve apenas como referência narrativa e visual,
+nunca como fonte dos números atuais do TCC.
+
+O conteúdo quantitativo do deck canônico é validado contra
+`research/exports/reports/summary.json`; as visualizações são cópias dos PNGs
+versionados em `research/exports/visualizations`.
 
 ## Execução local
 
@@ -28,11 +38,10 @@ npm run generate:qr
 ```
 
 O template fornecido foi auditado como referência visual: formato widescreen,
-composição editorial clara, fundo claro e azul institucional. A apresentação
+composição editorial clara, fundo claro e azul institucional. O deck Slidev
 preserva essa gramática e usa a família Times compatível com o TCC
 (Times New Roman/Nimbus Roman) para manter continuidade tipográfica com o
-manuscrito. Isso não torna o PPTX de 19 slides equivalente ao deck canônico de
-25 slides.
+manuscrito.
 
 A tipografia usa fontes locais, com `fonts.provider: none`, para não solicitar
 Times New Roman a um provedor de fontes web. A configuração segue a

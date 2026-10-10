@@ -1219,3 +1219,58 @@ small { font-size: 0.73rem; }
 .slidev-layout.content-slide:not(.tcc-objectives-slide) > .tcc-gaps-grid {
   align-content: stretch;
 }
+
+/* The evidence slide uses study-specific examples, not broad unmeasured axes. */
+.tcc-gaps-slide > .tcc-gaps-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 0.75rem;
+  margin-top: 0.55rem;
+  border: 0;
+}
+
+.tcc-gaps-slide .tcc-gaps-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-height: 0;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #cfd8d3;
+  border-left: 0.24rem solid #267653;
+  background: #f8faf9;
+}
+
+.tcc-gaps-slide .tcc-gaps-grid h2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 0.55rem;
+  margin: 0;
+  color: #102a22 !important;
+  font-size: 0.98rem;
+  line-height: 1.1;
+  text-transform: none;
+}
+
+.tcc-gaps-slide .tcc-gaps-grid h2 small {
+  color: #53645c !important;
+  font: 600 0.68rem/1.1 'Asap', sans-serif;
+  text-transform: none;
+}
+
+.tcc-gaps-slide .tcc-gaps-grid p {
+  margin: 0;
+  color: #25332c !important;
+  font: 0.78rem/1.18 'Asap', sans-serif;
+}
+
+.tcc-gaps-slide .tcc-gaps-grid strong {
+  color: #102a22 !important;
+}
+
+.tcc-gaps-slide .tcc-gaps-foot {
+  margin-top: 0.55rem;
+  color: #35443d !important;
+  font: 0.76rem/1.18 'Asap', sans-serif;
+}

@@ -102,7 +102,7 @@ permitem concluir que uma base é mais representativa ou que a produção
 científica esteja distribuída de forma uniforme. A cobertura está condicionada
 às fontes, aos idiomas e às condições de disponibilidade dos metadados.
 
-## 12. População retida — 1:05
+## 12. Conjunto retido — 1:05
 
 Dos 18 registros retidos operacionalmente, 17 são candidatos empíricos
 provisórios. Um registro é um protocolo ou proposta contextual e foi preservado
@@ -129,13 +129,22 @@ diferentes. Isso impede comparar diretamente todas as acurácias e impede
 transferir o resultado de um artigo para outra escola. Predição de desempenho
 também não é sinônimo de aprendizagem.
 
-## 15. Lacunas — 0:55
+## 15. Limitações localizadas nos estudos — 0:55
 
-As lacunas mais relevantes estão na explicabilidade, no alinhamento curricular,
-na participação docente, na análise de equidade, na reprodutibilidade e na
-validação em diferentes contextos. Elas orientam decisões da especificação. Uma
-lacuna não é uma prova automática de ineficácia; é um sinal de que uma solução
-futura precisaria tornar essas condições explícitas e avaliáveis.
+Apresento quatro exemplos e os localizadores: He et al. (2025, pp. 1, 16,
+31–35) descrevem oito turmas de 45 estudantes, mas declaram amostra total de
+90, além de uma distribuição desigual de docentes entre condições; Villegas-Ch
+et al. (2025, pp. 14, 22) não conciliam seis semanas de método com resultados
+até a oitava; Nyantah et al. (2025, pp. 101–105) apresentam versões
+incompatíveis sobre alocação, diferença no pré-teste e intervenção combinada;
+Echeveria et al. (2025, pp. 66, 69–70) usam itens da escala tanto para formar
+categorias quanto entre preditores. Esses pontos afetam denominadores,
+comparabilidade, atribuição do resultado e interpretação diagnóstica de cada
+estudo. São exemplos localizados, não estimativa da frequência na literatura.
+Somente 12 dos 17 textos primários foram consultados; o MMAT permanece
+preliminar e feito por um único revisor. Outros requisitos, como equidade e
+alinhamento curricular, não foram codificados de modo comparável e permanecem
+questões para investigação, não ausências demonstradas no corpus.
 
 ## 16. Derivação — 0:55
 
