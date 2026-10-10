@@ -51,3 +51,8 @@ def test_prisma_support_declaration_is_generic_and_locatable():
     assert r'\ref{sec:apoio-pesquisa}' in support_row
     assert 'Não apresentado' not in support_row
     assert 'ChatGPT' not in methodology
+    assert 'O autor declara não haver conflitos de interesse relacionados a esta pesquisa.' in methodology
+    interest_row = next(line for line in appendix.splitlines() if line.startswith('26 &'))
+    assert 'Localizado' in interest_row
+    assert r'\ref{sec:apoio-pesquisa}' in interest_row
+    assert 'não se presume sua ausência' not in interest_row
