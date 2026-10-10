@@ -91,6 +91,7 @@ jobs:
             tests/test_temporal_scope.py \
             tests/test_adjudicated_snapshot.py \
             tests/test_tcc_advisor_feedback.py \
+            tests/test_he_article_reporting_caution.py \
             tests/test_tcc_visual_classification.py \
             tests/test_pdf_feedback.py \
             tests/test_evidence_retrieval.py \
