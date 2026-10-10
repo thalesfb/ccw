@@ -44,15 +44,15 @@ assert.match(mobileNavLinkStyles, /width:\s*100%;/, 'mobile navigation links mus
 assert.match(mobileNavLinkStyles, /justify-content:\s*flex-start;/, 'mobile navigation link text must align from the left edge');
 assert.match(mobileNavLinkStyles, /text-align:\s*left;/, 'mobile navigation labels must be left aligned');
 
-const prototype = read('results/tcc/conteudo/prototipo.tex');
+const prototype = read('results/tcc/conteudo/prototipo.tex').replace(/\s+/g, ' ');
 const functionalRequirements = prototype
-  .split('\\section{Requisitos Funcionais}', 2)[1]
-  .split('\\section{Requisitos Não Funcionais}', 2)[0];
-assert.doesNotMatch(functionalRequirements, /\\begin\{enumerate\}|\\item\s/, 'section 5.2 must be continuous academic prose');
-assert.match(functionalRequirements, /Os requisitos funcionais descrevem/i, 'section 5.2 must introduce the functional scope in prose');
-assert.match(functionalRequirements, /importar dados.*objetivos curriculares/i, 'section 5.2 must preserve the data-import requirement');
-assert.match(functionalRequirements, /revisão humana.*recomendações/i, 'section 5.2 must preserve human review');
-assert.match(functionalRequirements, /exportar dados.*auditoria/i, 'section 5.2 must preserve audit export');
+  .split('\\section{Princípios e Requisitos}', 2)[1]
+  ?.split('\\section{Arquitetura de Referência}', 2)[0];
+assert.ok(functionalRequirements, 'the consolidated principles and requirements section must exist');
+assert.doesNotMatch(functionalRequirements, /\\begin\{enumerate\}|\\item\s/, 'the consolidated requirements must be continuous academic prose');
+assert.match(functionalRequirements, /No plano funcional, a futura implementação deverá importar dados documentados e relacionados a objetivos curriculares/i, 'the consolidated section must preserve the data-import requirement');
+assert.match(functionalRequirements, /deverá permitir revisão humana das recomendações produzidas/i, 'the consolidated section must preserve human review');
+assert.match(functionalRequirements, /deverá exportar dados, parâmetros e resultados para auditoria/i, 'the consolidated section must preserve audit export');
 
 const mmat = read('research/exports/analysis/mmat_current.html');
 assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggregate scoring');
