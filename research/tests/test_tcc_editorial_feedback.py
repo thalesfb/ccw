@@ -1,5 +1,6 @@
 """Deterministic editorial regressions, not certification of scientific claims."""
 
+import csv
 import re
 import unittest
 from pathlib import Path
@@ -217,6 +218,25 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn(r"\textbf{Estado}", table)
         self.assertIn("julgamentos empíricos são preliminares e aguardam adjudicação", table)
         self.assertIn(r"\renewcommand{\arraystretch}{1.0}", mmat)
+
+    def test_he_mmat_interpretation_matches_the_provisional_ledger_design(self):
+        with (ROOT / "research/data/mmat_reassessment_current.csv").open(
+            encoding="utf-8-sig", newline=""
+        ) as handle:
+            he = next(row for row in csv.DictReader(handle) if row["study_id"] == "6915")
+        self.assertEqual(he["design"], "quantitative_nonrandomized")
+
+        review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+        mmat = review.split(r"\section{Avaliação Metodológica com o MMAT}", 1)[1].split(
+            r"\section{Tendências e Lacunas}", 1
+        )[0]
+        self.assertIn("componente escolar", mmat)
+        self.assertIn("quantitativo não randomizado", mmat)
+        self.assertIn("controle de confundidores", mmat)
+        self.assertIn("administração da intervenção", mmat)
+        self.assertIn("adjudicação independente", mmat)
+        self.assertNotIn("quantitativo descritivo", mmat)
+        self.assertNotIn("próprios de outra categoria", mmat)
 
     def test_reader_facing_technical_terms_have_context_not_only_acronyms(self):
         intro = (TCC / "conteudo/introducao.tex").read_text(encoding="utf-8")
