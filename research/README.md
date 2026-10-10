@@ -170,15 +170,19 @@ e a adjudicação dos overrides permanecem sob revisão.
 
 ### Fluxo PRISMA
 
-O pipeline segue as fases padrão: Identificação → Deduplicação → Triagem →
-Elegibilidade → Inclusão.
+O fluxo operacional documentado é: identificação → remoção determinística de
+registros com identidade repetida → triagem → priorização operacional →
+adjudicação de escopo. A priorização operacional não corresponde à avaliação
+de elegibilidade de relatórios em texto completo do PRISMA 2020; por isso, as
+contagens vigentes abaixo não são apresentadas como se reproduzissem esse
+fluxo padrão.
 
-**Baseline operacional anterior (31/08/2026; preservada como histórico)**:
+**Snapshot operacional pré-adjudicação (31/08/2026; histórico)**:
 
 - **Identificação**: 11.904 registros brutos no snapshot operacional
 - **Deduplicação determinística**: 27 registros removidos (25 DOI + 2 URL exata; um grupo de URL é misto quanto ao DOI)
-- **Triagem**: 11.877 avaliados; 9.391 excluídos; 2.486 avançaram
-- **Elegibilidade**: 2.486 avaliados; 2.470 excluídos; 16 retidos antes da adjudicação
+- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 encaminhados à priorização operacional
+- **Priorização operacional pré-adjudicação**: 2.486 registros; 2.470 excluídos; 16 retidos antes da adjudicação
 - **Auditoria de candidatos**: 23 candidatos operacionais; 7 overrides manuais registrados, dos quais 4 aguardam adjudicação de escopo
 - **Auditoria de identidade**: 25 excedentes DOI e 2 excedentes URL removidos deterministicamente; a auditoria bruta tem 257 excedentes em títulos, dos quais 232 permanecem apenas por título após a remoção DOI/URL e sem remoção automática
 - **Retidos antes da adjudicação**: 16 registros operacionais; 15 eram provisoriamente empíricos (6918 em hold por conflito temporal) e o protocolo 6921 permanecia contextual
@@ -196,11 +200,11 @@ research/src/processing/adjudicated_snapshot.py.
 **População adjudicada atual (03/09/2026)**:
 
 - **Identificação**: 11.904 registros; 27 remoções determinísticas (25 DOI + 2 URL)
-- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 avançaram
-- **Elegibilidade**: 2.486 registros; 2.468 excluídos; 18 retidos
+- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 encaminhados à priorização operacional
+- **Priorização operacional**: 2.486 registros; 2.468 excluídos; 18 retidos
 - **Retidos**: 17 candidatos empíricos provisórios e o protocolo contextual 6921
-- **Percentuais sobre os 11.904 identificados**: 78,89% excluídos na triagem; 20,88% avançaram para elegibilidade; 0,15% retidos ao final.
-- **Percentuais sobre os 2.486 avaliados na elegibilidade**: 99,28% excluídos; 0,72% retidos.
+- **Percentuais sobre os 11.904 identificados**: 78,89% excluídos na triagem; 20,88% encaminhados à priorização operacional; 0,15% retidos ao final.
+- **Percentuais sobre os 2.486 submetidos à priorização operacional**: 99,28% excluídos nessa etapa; 0,72% retidos.
 - **Identidade**: 25 excedentes DOI + 2 excedentes URL removidos; 257 excedentes de título continuam como candidatos de auditoria, dos quais 232 são apenas por título
 
 **Baseline histórico (25/11/2025; não vigente)**:
@@ -214,7 +218,9 @@ research/src/processing/adjudicated_snapshot.py.
 Os contadores históricos acima são preservados para rastreabilidade e não
 validam a execução atual. O manifesto histórico registra a divergência entre
 2.517 duplicatas documentadas e `total_removed=2494` no único resumo SQLite
-preservado da execução original.
+preservado da execução original. Os rótulos de etapas desse relato de 2025 são
+mantidos como reconstrução histórica e não devem ser transferidos para o fluxo
+operacional vigente.
 
 Para conferir o snapshot publicado, consulte
 `research/exports/reports/summary.json` e valide sua correspondência com o CSV
@@ -636,7 +642,7 @@ python -m research.src.cli run-pipeline
 - **Tempo de execução**: variável; depende das APIs, limites e cache
 - **Deduplicação determinística**: 27 registros removidos no fluxo (25 excedentes por DOI + 2 por URL exata; um grupo de URL é misto quanto ao DOI); a flag persistida está zerada
 - **Taxa de inclusão atual**: 0,15% (18 de 11.904)
-- **Cobertura temporal**: 2015-2026 (12 anos)
+- **Recorte temporal**: 2015–2026, com 2026 parcial e corte da busca em 31/08/2026
 - **Cache**: contadores acumulados e dependentes do histórico; não são uma métrica fixa de reprodutibilidade
 
 ### Qualidade dos Dados

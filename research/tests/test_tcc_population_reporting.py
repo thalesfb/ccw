@@ -31,6 +31,22 @@ def test_tcc_population_percentages_name_their_denominators() -> None:
     assert "99,28\\% dos 2.486 registros submetidos à priorização operacional" in results
 
 
+def test_research_readme_uses_operational_prioritization_and_explicit_denominators() -> None:
+    readme = (ROOT / "research/README.md").read_text(encoding="utf-8")
+    current = readme.split("**População adjudicada atual (03/09/2026)**:", 1)[1].split(
+        "**Baseline histórico", 1
+    )[0]
+
+    assert "2.486 submetidos à priorização operacional" in current
+    assert "20,88% encaminhados à priorização operacional" in current
+    assert "99,28% excluídos" in current
+    assert "0,72% retidos" in current
+    assert "elegibilidade" not in current.lower()
+    assert "Para diagnóstico da execução no SQLite local" in readme
+    assert "não devem substituir os números versionados no TCC" in readme
+    assert "Para obter os números atualizados" not in readme
+
+
 def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
     results = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
