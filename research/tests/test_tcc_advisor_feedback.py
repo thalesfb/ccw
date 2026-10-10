@@ -82,9 +82,10 @@ def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> N
 
 def test_interpretation_precedes_the_long_synthesis_quadro() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
-    interpretation = chapter.index("Antes do quadro detalhado")
+    interpretation = chapter.index("No Quadro~\\ref{qua:sintese-estudos-empiricos}")
     quadro = chapter.index(r"\label{qua:sintese-estudos-empiricos}")
     assert interpretation < quadro
+    assert "A leitura deve considerar conjuntamente o desenho" in chapter[interpretation:quadro]
 
 
 def test_long_python_identifier_is_breakable() -> None:
@@ -151,7 +152,8 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     conclusion = _read(TCC_CONTENT / "conclusao.tex")
     abstract = _read(TCC_ABSTRACT)
 
-    assert "O escopo executado compreendeu" in introduction
+    assert "O escopo executado compreendeu" in _read(TCC_CONTENT / "metodologia.tex")
+    assert "A delimitação dos procedimentos executados" in introduction
     assert "especificação conceitual do protótipo" in prototype
     assert "não foi tratada como evidência de uma aplicação funcional" in prototype
     assert "O objetivo geral foi alcançado" in results

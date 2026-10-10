@@ -98,22 +98,21 @@ class ReviewVisualizer:
         exclude_color = '#FFE6E6'
         text_color = '#2C3E50'
 
-        # Box dimensions
-        box_width = 4.25
-        box_height = 0.9
-        main_x = 5.35
-        exclusion_x = 11.9
-
-        # Title
-        ax.text(8, 8.55, 'Fluxo PRISMA da Revisão Sistemática',
-                ha='center', va='center', fontsize=21, fontweight='bold')
+        # The same asset is printed at 16 cm width: 26 pt on this 16-inch
+        # canvas becomes just over 10 pt in the manuscript. Fill the canvas
+        # with the nodes instead of shrinking slide-sized labels into it.
+        box_width = 7.0
+        box_height = 1.3
+        main_x = 4.0
+        exclusion_x = 12.0
 
         # PRISMA stats com lógica progressiva correta
         identification = int(stats.get('identification', 0))
         duplicates_removed = int(stats.get('duplicates_removed', 0))
         screening = int(stats.get('screening', 0))  # Registros únicos para triagem
 
-        # Passaram triagem -> foram para elegibilidade
+        # Stage value comes from the legacy pipeline field ``eligibility``;
+        # the current scientific report describes it as operational prioritization.
         eligibility = int(stats.get('eligibility', 0))
 
         # Incluídos finais
@@ -123,8 +122,12 @@ class ReviewVisualizer:
         screening_excluded = int(stats.get('screening_excluded', max(0, screening - eligibility)))
         eligibility_excluded = int(stats.get('eligibility_excluded', max(0, eligibility - included)))
         dedup_audit = stats.get('deduplication_audit', {}) or {}
-        doi_excess = int((dedup_audit.get('doi', {}) or {}).get('excess_rows', 0))
-        url_excess = int((dedup_audit.get('url', {}) or {}).get('excess_rows', 0))
+        doi_excess = (dedup_audit.get('doi', {}) or {}).get('excess_rows')
+        url_excess = (dedup_audit.get('url', {}) or {}).get('excess_rows')
+        audit_label = "Detalhamento DOI/URL indisponível."
+        if doi_excess is not None and url_excess is not None:
+            audit_label = (f"Auditoria de identidade: {int(doi_excess)} excedentes DOI + "
+                           f"{int(url_excess)} excedentes URL.")
 
         logger.info(
             f"PRISMA stats used -> ident={identification}, dup_removed={duplicates_removed}, "
@@ -132,19 +135,19 @@ class ReviewVisualizer:
             f"screening_excl={screening_excluded}, eligibility_excl={eligibility_excluded}"
         )
 
-        # Main flow boxes seguindo PRISMA 2020
+        # Project-specific operational flow; it is not the full PRISMA diagram.
         boxes = [
-            (main_x, 7.45, f"Registros identificados\nnas bases de dados\n(n = {identification:,})", box_color),
-            (main_x, 6.25, f"Remoções operacionais\nregistradas\n(n = {duplicates_removed:,})", exclude_color),
-            (main_x, 5.05, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
-            (main_x, 3.85, f"Registros que passaram triagem\navaliados para elegibilidade\n(n = {eligibility:,})", box_color),
-            (main_x, 2.65, f"Registros retidos\nna população adjudicada\n(n = {included:,})", box_color),
+            (main_x, 8.0, f"Registros identificados\nnas bases de dados\n(n = {identification:,})", box_color),
+            (main_x, 6.55, f"Remoções por identidade\nDOI/URL\n(n = {duplicates_removed:,})", exclude_color),
+            (main_x, 5.1, f"Registros do snapshot\navaliados na triagem\n(n = {screening:,})", box_color),
+            (main_x, 3.65, f"Priorização operacional\n(não equivale à elegibilidade)\n(n = {eligibility:,})", box_color),
+            (main_x, 2.2, f"Registros retidos\nno corpus provisório\n(n = {included:,})", box_color),
         ]
 
         # Exclusion boxes com contagens corretas de cada estágio
         exclusions = [
-            (exclusion_x, 5.05, f"Registros excluídos\nna triagem\n(n = {screening_excluded:,})", exclude_color),
-            (exclusion_x, 3.85, f"Registros excluídos\nna elegibilidade\n(n = {eligibility_excluded:,})", exclude_color),
+            (exclusion_x, 5.1, f"Registros excluídos\nna triagem\n(n = {screening_excluded:,})", exclude_color),
+            (exclusion_x, 3.65, f"Registros excluídos\nna priorização operacional\n(n = {eligibility_excluded:,})", exclude_color),
         ]
 
         # Draw main flow boxes
@@ -153,7 +156,8 @@ class ReviewVisualizer:
                            box_width, box_height,
                            facecolor=color, edgecolor='black', linewidth=1)
             ax.add_patch(rect)
-            ax.text(x, y, text, ha='center', va='center', fontsize=12, color=text_color)
+            ax.text(x, y, text, ha='center', va='center', fontsize=26,
+                    linespacing=1.05, color=text_color)
 
         # Draw exclusion boxes
         for x, y, text, color in exclusions:
@@ -161,13 +165,13 @@ class ReviewVisualizer:
                            box_width, box_height,
                            facecolor=color, edgecolor='red', linewidth=1)
             ax.add_patch(rect)
-            ax.text(x, y, text, ha='center', va='center', fontsize=11.5, color=text_color)
+            ax.text(x, y, text, ha='center', va='center', fontsize=26,
+                    linespacing=1.05, color=text_color)
 
         ax.text(
-            8, 0.85,
-            f"Auditoria de identidade: {doi_excess} excedentes DOI + "
-            f"{url_excess} excedentes URL; títulos repetidos são candidatos",
-            ha='center', va='center', fontsize=10.5, color='#7f1d1d'
+            8, 0.65,
+            audit_label + "\nRepetições apenas por título permanecem para revisão.",
+            ha='center', va='center', fontsize=26, linespacing=1.05, color='#7f1d1d'
         )
 
         # Draw arrows - fluxo progressivo correto
@@ -188,9 +192,9 @@ class ReviewVisualizer:
                    arrowprops=arrow_props)
 
         # Exclusion arrows
-        ax.annotate('', xy=(exclusion_x - box_width/2, 5.05), xytext=(main_x + box_width/2, 5.05),
+        ax.annotate('', xy=(exclusion_x - box_width/2, 5.1), xytext=(main_x + box_width/2, 5.1),
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
-        ax.annotate('', xy=(exclusion_x - box_width/2, 3.85), xytext=(main_x + box_width/2, 3.85),
+        ax.annotate('', xy=(exclusion_x - box_width/2, 3.65), xytext=(main_x + box_width/2, 3.65),
                    arrowprops=dict(arrowstyle='->', lw=1.5, color='red'))
 
         plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
@@ -357,7 +361,7 @@ class ReviewVisualizer:
         df: pd.DataFrame,
         save_path: Optional[Path] = None
     ) -> Path:
-        """Create database coverage pie chart.
+        """Show snapshot provenance in one pie with exact counts and percentages.
 
         Args:
             df: DataFrame with papers
@@ -369,34 +373,32 @@ class ReviewVisualizer:
         if save_path is None:
             save_path = self.output_dir / "database_coverage.png"
 
-        if 'database' not in df.columns or df['database'].isna().all():
-            logger.warning("No database information found")
+        if df.empty:
+            logger.warning("No records available for database coverage")
             return save_path
 
         # Count by database
-        db_counts = df['database'].value_counts()
+        db_counts = (df['database'].value_counts() if 'database' in df.columns
+                     else pd.Series(dtype='int64'))
 
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-
-        # Pie chart
-        colors = plt.cm.Set2(range(len(db_counts)))
-        wedges, texts, autotexts = ax1.pie(db_counts.values, labels=db_counts.index,
-                                          autopct='%1.1f%%', colors=colors, startangle=90)
-        ax1.set_title(f'Cobertura da Base Analítica (n={len(df):,})')
-
-        # Bar chart
-        bars = ax2.bar(db_counts.index, db_counts.values, color=colors)
-        ax2.set_title(f'Registros por Base (n={len(df):,})')
-        ax2.set_ylabel('Número de Artigos')
-        ax2.tick_params(axis='x', rotation=45)
-
-        # Add value labels
-        for bar, count in zip(bars, db_counts.values):
-            height = bar.get_height()
-            ax2.text(bar.get_x() + bar.get_width()/2., height + 0.1,
-                    f'{count}', ha='center', va='bottom', fontsize=10)
-
-        plt.tight_layout()
+        missing = len(df) - int(db_counts.sum())
+        if missing:
+            db_counts.loc['Sem fonte registrada'] = db_counts.get('Sem fonte registrada', 0) + missing
+        labels = []
+        for database, count in db_counts.items():
+            percentage = f'{100 * count / len(df):.1f}'.replace('.', ',')
+            quantity = f'{count:,}'.replace(',', '.')
+            labels.append(f'{database}\n{quantity} ({percentage}%)')
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.pie(db_counts.values, labels=labels, startangle=90,
+               colors=['#246b55', '#75a993', '#aac5df', '#d1b477', '#d3d3d3'],
+               textprops={'fontsize': 16}, wedgeprops={'edgecolor': 'white', 'linewidth': 1.5})
+        ax.set_aspect('equal')
+        scope = f'Snapshot após deduplicação DOI/URL: n={len(df):,}'.replace(',', '.')
+        if missing:
+            scope += f'; sem fonte registrada: {missing}'
+        fig.text(0.5, 0.02, scope, ha='center', fontsize=14)
+        plt.tight_layout(rect=(0, 0.06, 1, 1))
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
 
@@ -491,7 +493,7 @@ Desvio Padrão: {scores.std():.2f}"""
         if stats:
             ident_count = int(stats.get('identification', len(df)))
             screened_count = int(stats.get('screening', ident_count))
-            # eligible_count: quantos PASSARAM eligibility (não foram excluídos)
+            # Count of records retained by the operational prioritization stage.
             eligible_count = int(stats.get('eligibility', 0))
             included_count = int(stats.get('included', 0))
             logger.info(
@@ -506,7 +508,8 @@ Desvio Padrão: {scores.std():.2f}"""
             eligibility_only = int(stage_counts.get('eligibility', 0))
             screening_only = int(stage_counts.get('screening', 0))
 
-            # Total que chegou à elegibilidade = eligibility + included
+            # The legacy ``eligibility`` stage plus included records forms the
+            # count submitted to operational prioritization.
             eligible_count = eligibility_only + included_count
             screened_count = screening_only if screening_only > 0 else ident_count
 
@@ -519,7 +522,7 @@ Desvio Padrão: {scores.std():.2f}"""
         funnel_stages = [
             ('Identificação', max(0, ident_count), '#E8F4FD'),
             ('Triagem', max(0, screened_count), '#B3E5FC'),
-            ('Elegibilidade', max(0, eligible_count), '#81C784'),
+            ('Priorização operacional', max(0, eligible_count), '#81C784'),
             ('Registros retidos', max(0, included_count), '#4CAF50')
         ]
 
@@ -541,8 +544,7 @@ Desvio Padrão: {scores.std():.2f}"""
 
         ax.set_yticks(y_positions)
         ax.set_yticklabels(labels)
-        ax.set_xlabel('Número de Artigos')
-        ax.set_title('Funil de Seleção PRISMA')
+        ax.set_xlabel('Número de registros')
 
         # Add value labels
         counts_max = max(counts) if counts else 1

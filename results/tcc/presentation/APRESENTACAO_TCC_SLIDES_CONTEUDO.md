@@ -84,13 +84,15 @@ do protocolo.
 
 Mostra as contagens do snapshot: 11.904 identificados; 27 remoções
 determinísticas por DOI/URL; 11.877 na triagem; 9.391 excluídos na triagem;
-2.486 na elegibilidade; 2.468 excluídos na elegibilidade; 18 retidos
-operacionalmente.
+2.486 submetidos à priorização operacional; 2.468 excluídos nessa etapa; 18
+retidos provisoriamente para adjudicação de escopo. A priorização usa metadados
+e resumos e não corresponde à avaliação de elegibilidade em texto completo.
 
-### 11. Fluxo PRISMA do snapshot
+### 11. Fluxo operacional (referência PRISMA 2020)
 
-Incorpora `research/exports/visualizations/prisma_flow.png`, que é a figura
-canônica sincronizada com os artefatos públicos.
+Incorpora `research/exports/visualizations/prisma_flow.png`, figura operacional
+própria, com referência ao PRISMA 2020, sincronizada com os artefatos públicos;
+ela não reproduz o diagrama PRISMA completo.
 
 ### 12. Deduplicação: o que foi confirmado
 
@@ -121,7 +123,7 @@ Mostra a distribuição do score e o limiar operacional de 4,0. O score organiza
 o processamento, mas não é medida de qualidade metodológica, não produz ranking
 e não substitui a leitura das fontes primárias.
 
-### 16. População retida: dois estratos de leitura
+### 16. Conjunto retido: dois estratos de leitura
 
 Dos 18 registros retidos, 17 são candidatos empíricos provisórios e 1 é um
 protocolo ou proposta contextual. A síntese empírica considera os 17; o registro
@@ -134,7 +136,7 @@ supervisionados.
 
 O MMAT é apresentado por critério, conforme o desenho de cada estudo, usando
 Sim, Não ou Não é possível determinar. A apreciação é preliminar e feita por um
-único revisor: nove registros tiveram texto primário revisado e oito foram
+único revisor: doze registros tiveram texto primário consultado e cinco foram
 apreciados com resumo/metadados. Não há média, ranking ou categoria geral de
 qualidade; recuperação de fontes, localizadores e adjudicação ainda precisam ser
 consolidados.
@@ -153,12 +155,18 @@ instrumentos, variáveis e métricas impede comparar todos os resultados
 diretamente. Acurácia de um artigo não demonstra superioridade geral nem
 eficácia pedagógica transferível.
 
-### 20. As lacunas que orientam a especificação
+### 20. Limitações identificadas nos estudos consultados
 
-Explicabilidade, integração curricular, participação docente, equidade,
-reprodutibilidade e validação em contextos diversos aparecem como lacunas. Elas
-são convertidas em requisitos de projeto, não apresentadas como evidência de
-que uma solução futura será eficaz.
+Apresenta quatro exemplos localizados, com páginas: divergência de
+denominadores e possível confundimento entre docente e condição em He et al.
+(2025, pp. 1, 16, 31–35); duração experimental não conciliada em Villegas-Ch
+et al. (2025, pp. 14, 22); descrições incompatíveis de alocação, diferença no
+pré-teste e intervenção combinada em Nyantah et al. (2025, pp. 101–105); e
+sobreposição entre itens usados para construir categorias e preditores em
+Echeveria et al. (2025, pp. 66, 69–70). São exemplos dos textos consultados,
+não estimativa de frequência da literatura. A cobertura é de 12 textos
+primários entre 17 candidatos; os cinco restantes foram apreciados por
+resumo/metadados, e o MMAT segue preliminar, por revisor único.
 
 ### 21. Da evidência à especificação — sem saltar para a implementação
 

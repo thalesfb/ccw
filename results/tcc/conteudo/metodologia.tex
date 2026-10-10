@@ -5,144 +5,109 @@
 
 Este trabalho empregou uma Revisão Sistemática da Literatura para identificar e analisar técnicas computacionais aplicadas ao ensino de matemática. O \textit{Cochrane Handbook for Systematic Reviews of Interventions} \cite{CochraneHandbook} e referências do \textit{Institute of Medicine} (IOM) foram consultados como referências gerais de transparência e sistematicidade. Essa consulta não implica adoção integral de um protocolo Cochrane ou de um modelo formal do IOM.
 
+O escopo executado compreendeu a revisão sistemática da literatura, a apreciação metodológica preliminar dos candidatos empíricos retidos e a elaboração de uma especificação conceitual de protótipo. Essa especificação consolidou princípios pedagógicos, requisitos, critérios para seleção de fontes de dados e modelos, procedimentos de avaliação e uma arquitetura de referência.
+
+O desenvolvimento de uma aplicação funcional, o treinamento de modelos com uma base definitiva e a validação com participantes não integraram o escopo empírico desta pesquisa. Por essa razão, o trabalho não atribuiu ao protótipo métricas próprias de acurácia nem alegou eficácia pedagógica. Essa delimitação preservou a correspondência entre as afirmações apresentadas e os artefatos efetivamente produzidos.
+
 O PRISMA 2020 (\textit{Preferred Reporting Items for Systematic Reviews and Meta-Analyses}) foi utilizado como diretriz de relato da revisão \cite{PRISMA2020}. Sua função neste trabalho foi orientar a comunicação transparente da pergunta de pesquisa, das fontes consultadas, dos critérios de elegibilidade, do processo de seleção e dos resultados. Portanto, o PRISMA 2020 foi tratado como uma diretriz para relatar a revisão, e não como um método de busca, um instrumento de avaliação da qualidade ou uma garantia automática de ausência de viés.
 
 O PRISMA-P 2015 (\textit{Preferred Reporting Items for Systematic Review and Meta-Analysis Protocols}) possui finalidade distinta: orientar o desenvolvimento e o relato de protocolos de revisões sistemáticas \cite{PRISMAP2015}. A revisão não foi registrada prospectivamente e, por isso, não se afirma conformidade integral com o PRISMA-P. Antes da execução, foram definidos a questão de pesquisa, os critérios de elegibilidade, a estratégia de busca, o processo de seleção e a forma de síntese. Esses elementos correspondem a princípios presentes no PRISMA-P, mas seu uso foi parcial e deve ser interpretado considerando a ausência de registro prospectivo. O checklist de relato PRISMA 2020 encontra-se no Apêndice~\ref{apendice:prisma-checklist}.
 
-O checklist PRISMA 2020 foi preenchido retrospectivamente, depois da consolidação do snapshot e da conferência dos artefatos versionados. Ele documenta como a revisão foi relatada; não constitui registro prospectivo do protocolo nem substitui a descrição das decisões efetivamente tomadas durante a execução.
+O checklist PRISMA 2020 foi preenchido retrospectivamente, depois da consolidação do snapshot e da conferência dos artefatos versionados. Neste trabalho, snapshot designa a versão congelada dos registros e das decisões utilizada na análise, distinguindo-a de uma nova coleta. O checklist documenta como a revisão foi relatada; não constitui registro prospectivo do protocolo nem substitui a descrição das decisões efetivamente tomadas durante a execução.
 
 \section{Estratégia de Busca}
 
-\subsection{Bases de Dados e APIs}
+A coleta de dados foi realizada por meio de interfaces de programação de aplicações (APIs), que permitem consultar serviços externos de forma automatizada. Foram utilizadas quatro fontes científicas complementares: Semantic Scholar, fonte multidisciplinar; OpenAlex, catálogo acadêmico aberto; Crossref, fonte de metadados bibliográficos e identificadores DOI; e CORE, agregador de publicações disponibilizadas em acesso aberto.
 
-A coleta de dados foi realizada por meio de interfaces de programação de aplicações (APIs), que permitem consultar serviços externos de forma automatizada. Foram utilizadas quatro fontes científicas complementares:
+O uso de múltiplas fontes foi adotado para ampliar a cobertura da busca e reduzir a dependência de uma única base. Essa escolha não demonstra exaustividade da recuperação. Também exigiu uma etapa de normalização, pois o mesmo estudo poderia ser recuperado com diferenças de título, autores ou demais metadados.
 
-\begin{enumerate}
-    \item \textbf{Semantic Scholar}: fonte multidisciplinar com ampla cobertura em Ciência da Computação;
-    \item \textbf{OpenAlex}: catálogo acadêmico aberto e abrangente;
-    \item \textbf{Crossref}: fonte de metadados bibliográficos e identificadores DOI;
-    \item \textbf{CORE}: agregador de publicações disponibilizadas em acesso aberto.
-\end{enumerate}
+A estratégia de busca combinou três camadas de termos: domínio matemático, técnica computacional e contexto educacional, sintetizadas no Quadro~\ref{qua:camadas-busca}. O operador booleano \texttt{AND} foi utilizado para exigir a presença conjunta dessas dimensões. As grafias dos termos foram preservadas conforme a configuração executada, inclusive as formas sem acentuação.
 
-O uso de múltiplas fontes ampliou a cobertura da busca e reduziu a dependência de uma única base. Também exigiu uma etapa de normalização, pois o mesmo estudo poderia ser recuperado com diferenças de título, autores ou demais metadados.
+\begin{quadro}[htbp]
+\centering
+\caption{Camadas da estratégia de busca bilíngue.}
+\label{qua:camadas-busca}
+\small
+\begin{tabularx}{\textwidth}{|p{2.4cm}|X|X|}
+\hline
+\textbf{Dimensão} & \textbf{Inglês} & \textbf{Português} \\
+\hline
+Domínio matemático & mathematics; math & matemática \\
+\hline
+Técnicas computacionais & adaptive; personalized; tutoring; analytics; mining; machine learning; ai; assessment; student modeling; predictive; intelligent tutor; artificial intelligence & adaptivo; personalizado; tutor; analitica; mineração; aprendizado de máquina; ia; avaliação; modelagem do aluno; preditivo; tutor inteligente; inteligência artificial \\
+\hline
+Contexto educacional & education; learning & educacao; ensino \\
+\hline
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{quadro}
 
-\subsection{Estratégia de Busca Bilíngue}
-
-A estratégia de busca combinou três camadas de termos: domínio matemático, técnica computacional e contexto educacional. O operador booleano \texttt{AND} foi utilizado para exigir a presença conjunta dessas dimensões.
-
-\textbf{Camada 1 -- domínio matemático}:
-\begin{itemize}
-    \item Inglês: \textit{mathematics}, \textit{math};
-    \item Português: \textit{matemática}.
-\end{itemize}
-
-\textbf{Camada 2 -- técnicas computacionais}:
-\begin{itemize}
-    \item Inglês: \textit{adaptive}, \textit{personalized}, \textit{tutoring}, \textit{analytics}, \textit{mining}, \textit{machine learning}, \textit{ai}, \textit{assessment}, \textit{student modeling}, \textit{predictive}, \textit{intelligent tutor} e \textit{artificial intelligence};
-    \item Português: \textit{adaptivo}, \textit{personalizado}, \textit{tutor}, \textit{analitica}, \textit{mineração}, \textit{aprendizado de máquina}, \textit{ia}, \textit{avaliação}, \textit{modelagem do aluno}, \textit{preditivo}, \textit{tutor inteligente} e \textit{inteligência artificial}.
-\end{itemize}
-
-\textbf{Camada 3 -- contexto educacional}:
-\begin{itemize}
-    \item Inglês: \textit{education}, \textit{learning};
-    \item Português: \textit{educacao}, \textit{ensino}.
-\end{itemize}
-
-A estratégia canônica foi composta por 72 consultas: 48 em inglês e 24 em português. O conjunto dessas consultas está versionado nos artefatos do estudo; como não foi preservado um log histórico completo das requisições, esse número descreve a composição da estratégia, e não uma contagem retrospectiva de chamadas HTTP concluídas em cada API. Em cada consulta, um termo do domínio matemático foi combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Em notação simplificada, a estrutura foi: \textit{termo matemático} \texttt{AND} \textit{termo computacional} \texttt{AND} \textit{termo educacional}. Exemplos incluem:
-
-\begin{itemize}
-    \item \texttt{"mathematics" AND "machine learning" AND "education"};
-    \item \texttt{"math" AND "intelligent tutor" AND "learning"};
-    \item \texttt{"matemática" AND "aprendizado de máquina" AND "educa\c{c}\~ao"}.
-\end{itemize}
+A estratégia canônica foi composta por 72 consultas: 48 em inglês e 24 em português. O conjunto dessas consultas está versionado nos artefatos do estudo; como não foi preservado um log histórico completo das requisições, esse número descreve a composição da estratégia, e não uma contagem retrospectiva de chamadas HTTP concluídas em cada API. Em cada consulta, um termo do domínio matemático foi combinado, pelo operador \texttt{AND}, com um termo computacional e um termo educacional. Por exemplo, a combinação em inglês foi \texttt{mathematics AND machine learning AND education}; em português, \texttt{matemática AND aprendizado de máquina AND educacao}. Esses exemplos ilustram a composição dos termos e não substituem as consultas versionadas.
 
 \section{Critérios de Seleção}
 
-Os critérios de inclusão e exclusão foram estruturados com apoio do modelo PICOS:
+Os critérios de inclusão e exclusão foram organizados com apoio do PICOS, apresentado no Quadro~\ref{qua:picos}. Trata-se de uma adaptação ao mapeamento de técnicas computacionais na educação matemática: o capítulo 3 do \textit{Cochrane Handbook}, seções 3.2 e 3.3, articula população, intervenção, comparação e resultados (PICO) à especificação dos desenhos de estudo \cite{CochraneChapter3}. Neste trabalho, a letra S explicita essa última dimensão. A adaptação não implica execução de uma revisão Cochrane de efeitos de intervenções nem torna obrigatório um comparador para todos os estudos computacionais.
 
-\begin{itemize}
-    \item \textbf{P (\textit{Population})}: estudantes de matemática em qualquer nível educacional;
-    \item \textbf{I (\textit{Intervention})}: aplicação de técnicas computacionais, como aprendizado de máquina, inteligência artificial, analítica da aprendizagem e sistemas tutores inteligentes;
-    \item \textbf{C (\textit{Comparison})}: abordagens pedagógicas alternativas ou tradicionais, quando disponíveis;
-    \item \textbf{O (\textit{Outcomes})}: desempenho acadêmico, diagnóstico de competências, avaliação ou personalização do ensino;
-    \item \textbf{S (\textit{Study Design})}: estudos empíricos com descrição metodológica e evidências aplicadas.
-\end{itemize}
-
-\subsection{Recorte Temporal}
+\begin{quadro}[htbp]
+\centering
+\caption{Dimensões PICOS adaptadas ao escopo da revisão.}
+\label{qua:picos}
+\small
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\textbf{Dimensão} & \textbf{Aplicação ao trabalho} \\
+\hline
+P -- População & Estudantes de matemática em qualquer nível educacional. \\
+\hline
+I -- Intervenção & Aplicação de técnicas computacionais, como aprendizado de máquina, inteligência artificial, analítica da aprendizagem e sistemas tutores inteligentes. \\
+\hline
+C -- Comparação & Abordagens pedagógicas alternativas ou tradicionais, quando disponíveis. \\
+\hline
+O -- Resultados & Desempenho acadêmico, diagnóstico de competências, avaliação ou personalização do ensino, conforme a finalidade declarada no estudo. \\
+\hline
+S -- Desenho de estudo & Estudos empíricos com descrição metodológica e evidências aplicadas. \\
+\hline
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{quadro}
 
 O período de 2015 a 2026 foi definido para abranger a produção científica considerada no snapshot da revisão, com data de corte em 31 de agosto de 2026. O recorte concentrou a análise em abordagens compatíveis com a especificação desenvolvida no trabalho.
 
-\subsection{Critérios de Inclusão}
+Os critérios de inclusão abrangeram artigos completos revisados por pares, teses de doutorado ou dissertações de mestrado, publicados nesse período, com foco explícito em técnicas computacionais aplicadas ao ensino de matemática. Exigiu-se a apresentação de dados empíricos, metodologia ou evidência de desenvolvimento e avaliação de sistemas, em texto redigido em inglês ou português. Teses e dissertações foram consideradas como literatura cinzenta, sob os mesmos critérios de elegibilidade.
 
-\begin{enumerate}
-    \item artigos completos revisados por pares, teses de doutorado ou dissertações de mestrado;
-    \item publicações entre 2015 e 2026;
-    \item foco explícito em técnicas computacionais aplicadas ao ensino de matemática;
-    \item apresentação de dados empíricos, metodologia ou evidência de desenvolvimento e avaliação de sistemas;
-    \item texto em inglês ou português.
-\end{enumerate}
-
-Teses e dissertações são elegíveis como literatura cinzenta e estão sujeitas aos mesmos critérios de pertinência temática, período, idioma e evidência exigidos dos artigos. O tipo documental não constitui, por si só, evidência de qualidade metodológica. A apreciação metodológica considera o desenho de cada estudo; o acesso incompleto ao texto limita os julgamentos que podem ser sustentados.
-
-\subsection{Critérios de Exclusão}
-
-\begin{enumerate}
-    \item metodologia insuficientemente descrita para responder à questão da revisão;
-    \item foco apenas indireto no ensino ou na aprendizagem de matemática;
-    \item publicações teóricas sem evidências empíricas compatíveis com o escopo;
-    \item editoriais, comentários, erratas e relatórios internos que não correspondam aos tipos documentais elegíveis;
-    \item idiomas diferentes de inglês e português.
-\end{enumerate}
+Os critérios de exclusão compreenderam metodologia insuficientemente descrita para responder à questão da revisão, foco apenas indireto no ensino ou na aprendizagem de matemática e publicações teóricas sem evidências empíricas compatíveis com o escopo. Também foram considerados inelegíveis editoriais, comentários, erratas e relatórios internos que não correspondessem aos tipos documentais elegíveis, além de textos em idiomas diferentes de inglês e português.
 
 \section{Processo de Seleção}
 
-O processo de seleção foi documentado segundo as etapas de identificação, triagem, elegibilidade operacional e retenção apresentadas pelo fluxo PRISMA 2020. Neste trabalho, a etapa denominada elegibilidade no fluxo corresponde a uma priorização operacional baseada em metadados, resumo e critérios documentais; ela não deve ser confundida com uma confirmação universal de elegibilidade em texto completo.
+O relato do processo considera os itens aplicáveis do PRISMA 2020, mas o fluxograma desta revisão é uma representação operacional própria, não o diagrama PRISMA completo. Após a triagem, o pipeline aplicou uma priorização heurística baseada em metadados e resumos. Essa etapa não corresponde à avaliação de elegibilidade de relatórios recuperados; por isso, seus resultados são descritos como priorização operacional e retenção provisória, sem afirmar inclusão final universal.
 
 \subsection{Identificação}
 
 O snapshot versionado preserva 11.904 registros identificados. A configuração canônica da busca contém 72 consultas para as quatro APIs; entretanto, a ausência de um log histórico completo impede reconstruir quantas requisições HTTP foram concluídas por consulta ou por API. O pipeline foi configurado com limite de até 50 resultados por consulta e por API, parâmetro operacional que deve ser considerado na interpretação da cobertura. Cada registro armazenou, quando disponível, título, autores, ano, veículo de publicação, DOI ou endereço eletrônico e resumo.
 
-O snapshot científico adotado neste texto tem data de corte em 31 de agosto de 2026. O manifesto de reprodutibilidade registra sua geração em 4 de setembro de 2026, às 02:45:33 UTC, e associa hashes aos artefatos utilizados. Essas datas descrevem a proveniência da exportação e não devem ser confundidas com a data de redação ou de publicação do TCC.
+O corte temporal declarado da busca foi 31 de agosto de 2026. A adjudicação de escopo da população foi concluída em 3 de setembro de 2026; o manifesto de reprodutibilidade registra a geração dos artefatos em 4 de setembro de 2026, às 02:45:33 UTC. As datas correspondem, respectivamente, ao limite temporal da busca, à consolidação de escopo e à geração do snapshot. Como não foram preservados logs por consulta e por API, não é possível reconstruir o instante de cada requisição nem afirmar que todas as fontes foram consultadas exatamente na data de corte; essa limitação restringe o detalhamento da data de última busca por fonte.
 
 \subsection{Deduplicação e Triagem}
 
 A deduplicação utilizada no fluxo PRISMA foi determinística e baseada na identidade bibliográfica normalizada. Registros com o mesmo DOI normalizado ou com a mesma URL exata foram reunidos, preservando-se a representação escolhida para o fluxo; essa etapa removeu 27 linhas excedentes, sendo 25 identificadas por DOI e 2 por URL. A auditoria também calculou repetições de títulos normalizados. Contudo, os 232 excedentes restantes após a remoção por DOI/URL foram mantidos como candidatos à revisão semântica, pois títulos semelhantes ou idênticos podem corresponder a versões, erratas ou obras distintas. Portanto, não foram removidos automaticamente por título e não entram como duplicatas confirmadas no fluxo vigente.
 
-Após a deduplicação determinística, 11.877 registros foram submetidos à triagem. Desses, 9.391 foram excluídos na triagem e 2.486 avançaram para a etapa de priorização operacional reportada no fluxo como elegibilidade.
+Após a deduplicação determinística, 11.877 registros foram submetidos à triagem. Desses, 9.391 foram excluídos e 2.486 avançaram para a priorização operacional. Essa etapa não equivale à avaliação de elegibilidade de relatórios em texto completo.
 
-\subsection{Priorização operacional e elegibilidade documental}
+\subsection{Priorização operacional e verificação de escopo}
 
-A etapa de priorização operacional utilizou uma pontuação de \textbf{relevância temática}, distinta da avaliação de qualidade metodológica. A heurística considerou:
-
-\begin{enumerate}
-    \item presença e relevância de técnicas computacionais;
-    \item aderência explícita ao ensino de matemática;
-    \item completude dos metadados e do resumo;
-    \item disponibilidade de identificadores e informações bibliográficas.
-\end{enumerate}
+A etapa de priorização operacional utilizou uma pontuação de relevância temática, distinta da avaliação de qualidade metodológica. A heurística considerou a presença e a relevância de técnicas computacionais, a aderência explícita ao ensino de matemática, a completude dos metadados e do resumo e a disponibilidade de identificadores e informações bibliográficas.
 
 A pontuação foi um indicador operacional de relevância temática, calculado por uma heurística multicritério aplicada aos metadados e aos resumos disponíveis. No snapshot vigente, os valores observados variaram de 0,0 a 4,5 e o limiar operacional foi 4,0. O limiar apoiou a priorização e a seleção operacional, mas não constituiu medida de qualidade científica nem substituiu a verificação de escopo, tipo documental e pertinência. A apreciação metodológica foi conduzida separadamente com o MMAT 2018.
 
 O valor 4,0 deve ser interpretado como um parâmetro de triagem do pipeline, e não como um ponto de corte validado para relevância científica. A retenção operacional também dependeu dos critérios documentais de decisão registrados em \path{research/data/current_eligibility_protocol.csv}. Como a confirmação em texto completo não foi concluída para todos os registros, o conjunto retido deve ser descrito como provisório. O snapshot vigente não inclui uma análise de sensibilidade do conjunto retido a diferentes limiares; portanto, não se atribui ao valor 4,0 estabilidade estatística ou capacidade de representar sozinho o universo da literatura.
 
-Dos 2.486 registros avaliados nessa etapa, 2.468 foram excluídos por não atenderem aos critérios operacionais de priorização e escopo. Foram retidos 18 registros para a análise de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
+Dos 2.486 registros submetidos a essa etapa, 2.468 foram excluídos pela heurística de priorização e pelas regras operacionais de escopo. Foram retidos 18 registros para adjudicação de escopo; 17 correspondem a candidatos empíricos provisórios e 1 corresponde a um protocolo ou proposta contextual. Apenas os 17 candidatos empíricos integram a síntese de evidências e a apreciação MMAT aplicável.
 
 \section{Infraestrutura Tecnológica da Revisão}
 
-\subsection{Pipeline Automatizado}
-
-O fluxo automatizado da revisão foi implementado em Python e utilizou:
-
-\begin{itemize}
-    \item \textbf{SQLite}: armazenamento estruturado dos registros e das etapas de seleção;
-    \item \textbf{Requests}: comunicação com as APIs;
-    \item \textbf{Pandas}: manipulação e exportação de dados tabulares;
-    \item \textbf{scikit-learn}: apoio às análises computacionais auxiliares do fluxo.
-\end{itemize}
+O fluxo automatizado da revisão foi implementado em Python. O SQLite foi utilizado para o armazenamento estruturado dos registros e das etapas de seleção; Requests, para comunicação com as APIs; Pandas, para manipulação e exportação de dados tabulares; e scikit-learn, como apoio às análises computacionais auxiliares do fluxo.
 
 Foi utilizado um \textit{cache} local, isto é, um armazenamento temporário de respostas previamente obtidas. Um acerto de cache ocorre quando uma nova solicitação pode ser atendida com um resultado já armazenado, sem consultar novamente a API externa. Como os contadores dependem do histórico e do momento de execução, a taxa de acertos não foi utilizada como indicador fixo do \textit{pipeline}; sua interpretação permaneceu vinculada às estatísticas da execução analisada.
-
-\subsection{Reprodutibilidade}
 
 O código, os parâmetros de busca, os critérios de seleção e os artefatos derivados foram versionados no repositório. A reprodução do snapshot não depende da distribuição do banco SQLite: os registros, as decisões e as contagens podem ser verificados nos arquivos CSV, JSON e BibTeX versionados. Os principais comandos de verificação são:
 
@@ -171,7 +136,9 @@ descrição das limitações identificadas em cada estudo.
 
 As respostas não foram convertidas em pontuação geral, média, ranking ou categoria de qualidade. A apresentação por critério preserva quais aspectos metodológicos foram atendidos e quais permaneceram problemáticos ou insuficientemente descritos. Os estudos não foram excluídos em razão do MMAT; suas limitações foram consideradas na interpretação da síntese.
 
-A avaliação foi realizada por um único revisor. Nove registros tiveram o texto primário revisado externamente, oito foram apreciados com base em resumo e metadados e o registro contextual foi marcado como não aplicável. A recuperação de fontes, os localizadores dos critérios e a adjudicação pelo supervisor ainda não estão completos; por isso, os julgamentos são preliminares e foram registrados como limitação da revisão. As perguntas S1 e S2 e os critérios Q1--Q5 são apresentados na Seção~\ref{sec:qualidade-estudos}.
+A avaliação foi realizada por um único revisor, embora o guia do MMAT recomende a participação independente de pelo menos dois avaliadores. Doze registros empíricos tiveram o texto primário consultado externamente, cinco foram apreciados com base em resumos e metadados e o registro contextual foi marcado como não aplicável. Nove textos estão arquivados; três foram consultados externamente, sem cópia no repositório: dois em páginas editoriais e um em cópia pública do texto integral, com identidade bibliográfica conferida pelo DOI. O ledger registra as fontes e os localizadores examinados. A verificação independente dos julgamentos e a adjudicação pelo supervisor ainda não estão completas; por isso, as respostas permanecem preliminares e não constituem uma síntese final de qualidade. A aplicação das perguntas de triagem e dos critérios aos estudos, com seus resultados por célula, é apresentada na Seção~\ref{sec:qualidade-estudos}.
+
+Para \citeonline[pp.~101--105]{Enhancing2025_012}, o texto primário apresenta afirmações incompatíveis sobre a alocação das escolas: uma seção descreve distribuição aleatória, enquanto outra caracteriza o estudo como quase-experimental sem alocação aleatória. Como a definição da categoria MMAT altera quais critérios Q1--Q5 são aplicáveis, a categoria desse estudo permanece pendente e essas cinco respostas foram mantidas como CT, sem inferir falha metodológica a partir da inconsistência documental.
 
 O ledger de fontes primárias preserva, para cada registro, o identificador da fonte, a data de acesso, o tipo de fonte, a situação de recuperação e a base documental da apreciação. Quando apenas resumo e metadados estavam disponíveis, a insuficiência de acesso foi tratada como limitação da evidência e não como uma resposta negativa automática aos critérios. Essa distinção impede que a ausência do texto completo seja confundida com demonstração de falha metodológica do estudo.
 
@@ -189,5 +156,10 @@ organizou os requisitos em uma arquitetura conceitual de referência.
 As decisões foram registradas como especificação, e não como evidência de uma implementação funcional. Esse procedimento permitiu transformar os achados da literatura em um artefato técnico e pedagógico coerente com o escopo executado e com as limitações explicitadas no trabalho.
 
 Na versão vigente, a rastreabilidade entre a revisão e a especificação está consolidada no nível das dimensões e dos requisitos descritos no capítulo. Uma matriz completa que associe cada requisito aos identificadores dos estudos que o sustentam ainda não foi concluída. Por isso, a especificação deve ser interpretada como uma derivação temática documentada, e não como uma atribuição exaustiva de cada requisito a uma fonte individual.
+
+\section{Apoio à Pesquisa}
+\label{sec:apoio-pesquisa}
+
+A pesquisa foi conduzida pelo autor com recursos próprios, sem financiamento externo. Não houve entidade financiadora externa com participação no delineamento, na seleção dos estudos, na análise ou na decisão de disponibilização dos resultados. O autor declara não haver conflitos de interesse relacionados a esta pesquisa.
 
 %--------- FIM METODOLOGIA ------------

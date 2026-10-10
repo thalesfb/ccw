@@ -299,7 +299,7 @@ const page = `<!doctype html>
       <section class="section surface-card">
         <span class="eyebrow">Proveniência</span>
         <h3>Fontes versionadas</h3>
-        <p><a href="../../../data/mmat_reassessment_current.csv">CSV do ledger atual</a> · <a href="../../../data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
+        <p><a href="../../../research/data/mmat_reassessment_current.csv">CSV do ledger atual</a> · <a href="../../../research/data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../../../research/data/mmat_primary_sources_manifest.csv">manifesto de fontes primárias</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
         <p class="source-note">A página foi gerada a partir de <code>research/data/mmat_reassessment_current.csv</code> e <code>research/data/mmat_current_study_registry.csv</code>.</p>
         <p class="source-note">As perguntas seguem o <a href="https://doi.org/10.3233/EFI-180221" target="_blank" rel="noopener">MMAT 2018</a>; a tradução em português é acompanhada pela formulação original em inglês para manter a rastreabilidade do instrumento.</p>
       </section>

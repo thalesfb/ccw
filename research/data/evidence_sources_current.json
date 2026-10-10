@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-08",
+  "scope_sha256": "16022eee4d0134b6f3a84df70e4cdcdfe29890295c7c9f9e0879b38be34b1022",
+  "text_hash_normalization": "UTF-8 with LF line endings",
+  "base_commit": "af920535759ce66f8075843919deb275ee91dcf6",
+  "extraction_settings": {
+    "pypdf_version": "6.19.0",
+    "chunk_size": 3000,
+    "page_numbering": "physical_one_based"
+  },
+  "replay_validation": {
+    "environment": {
+      "pypdf_version": "6.19.0",
+      "fonttools_version": "4.66.1"
+    },
+    "checked_source_count": 9,
+    "checked_chunk_count": 434,
+    "integrity_failures": 0
+  },
+  "code_hashes": {
+    "research/src/validation/evidence_retrieval.py": "7942956bef33b468333b629837f27835a82c3039387791b1ca69a19a705694c4",
+    "research/src/validation/pdf_feedback.py": "189219f5913f2163a3e42762a34ee038a421a86b55ea00882ff692c569d8c740"
+  },
+  "scope_unchanged": true,
+  "sources": [
+    {
+      "study_id": "1",
+      "bib_key": "Math2021_001",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.1109/SISY52375.2021.9582522",
+      "status": "not_recovered",
+      "failure_category": "ValueError"
+    },
+    {
+      "study_id": "2",
+      "bib_key": "Implementation2025_000",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.ijiet.org/vol15/IJIET-V15N1-2228.pdf",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://www.ijiet.org/vol15/IJIET-V15N1-2228.pdf",
+      "sha256": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
+      "page_count": 10,
+      "chunks": 20,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "3",
+      "bib_key": "Multimodels2020_002",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.researchgate.net/publication/342670436_Multi-models_of_Educational_Data_Mining_for_Predicting_Student_Performance_in_Mathematics_A_Case_Study_on_High_Schools_in_Cambodia",
+      "status": "not_recovered",
+      "failure_category": "HTTPError"
+    },
+    {
+      "study_id": "4",
+      "bib_key": "Analysis2022_003",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.researchgate.net/publication/359520060_Analysis_of_Feature_Selection_and_Data_Mining_Techniques_to_Predict_Student_Academic_Performance",
+      "status": "not_recovered",
+      "failure_category": "HTTPError"
+    },
+    {
+      "study_id": "5",
+      "bib_key": "Design2025_004",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.1109/CIPAE66821.2025.00116",
+      "status": "not_recovered",
+      "failure_category": "ValueError"
+    },
+    {
+      "study_id": "6",
+      "bib_key": "Identifying2017_006",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://jestp.com/menuscript/index.php/estp/article/download/426/381/754",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://jestp.com/menuscript/index.php/estp/article/download/426/381/754",
+      "sha256": "c861251a34879d25a6318721a0022b9efa0e500bace8c4ea6fbb00adfce7c672",
+      "page_count": 20,
+      "chunks": 25,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "7",
+      "bib_key": "Innovative2023_005",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://amns.sciendo.com/pdf/10.2478/amns.2023.2.01524",
+      "status": "not_recovered",
+      "failure_category": "ValueError"
+    },
+    {
+      "study_id": "8",
+      "bib_key": "Computational2017_008",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://chrismaclellan.com/media/publications/MacLellan-Camera-Ready.pdf",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://chrismaclellan.com/media/publications/MacLellan-Camera-Ready.pdf",
+      "sha256": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23",
+      "page_count": 108,
+      "chunks": 149,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "9",
+      "bib_key": "Machine2019_007",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.1109/EDUCON.2019.8725237",
+      "status": "not_recovered",
+      "failure_category": "ValueError"
+    },
+    {
+      "study_id": "10",
+      "bib_key": "Machine2024_009",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.1002/cae.22787",
+      "status": "not_recovered",
+      "failure_category": "HTTPError"
+    },
+    {
+      "study_id": "14",
+      "bib_key": "Enhancing2025_012",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://journals.eduped.org/index.php/IJMME/article/view/1299",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://journals.eduped.org/index.php/IJMME/article/download/1299/945",
+      "sha256": "d95e78c4a32c3a929a0429b97e672b49aa1a13bd3ffdb3f081a3ac610caadc0c",
+      "page_count": 22,
+      "chunks": 39,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "6915",
+      "bib_key": "He2025_6915",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://link.springer.com/article/10.1186/s40561-025-00415-z",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://link.springer.com/content/pdf/10.1186/s40561-025-00415-z.pdf",
+      "sha256": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+      "page_count": 42,
+      "chunks": 70,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "6916",
+      "bib_key": "Villegas2025_6916",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://link.springer.com/article/10.1186/s40561-025-00389-y",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://link.springer.com/content/pdf/10.1186/s40561-025-00389-y.pdf",
+      "sha256": "e1e6dd886d1e4e6d42e7da3e1b366505bab06365015d57ea15fa4a37b39cbfcc",
+      "page_count": 31,
+      "chunks": 50,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "6917",
+      "bib_key": "Ozseven2026_6917",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://thesai.org/Downloads/Volume17No5/Paper_16-A_Hybrid_Neuro_Fuzzy_and_Machine_Learning_Model.pdf",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://thesai.org/Downloads/Volume17No5/Paper_16-A_Hybrid_Neuro_Fuzzy_and_Machine_Learning_Model.pdf",
+      "sha256": "8b7c283a6cac47b6c961294abe2461b8cd7d64dc6ea4d7b99600829c4431dd8d",
+      "page_count": 17,
+      "chunks": 38,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "6919",
+      "bib_key": "UniversityMathematics2026_6919",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.mdpi.com/2071-1050/18/4/1900",
+      "status": "not_recovered",
+      "failure_category": "HTTPError"
+    },
+    {
+      "study_id": "6920",
+      "bib_key": "Echeveria2025_6920",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.eu-opensci.org/index.php/ejedu/article/download/30934/6690/33249",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://eu-opensci.org/index.php/ejedu/article/download/30934/6690/33249",
+      "sha256": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9",
+      "page_count": 13,
+      "chunks": 28,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "6921",
+      "bib_key": "Imperatrice2025_6921",
+      "synthesis_role": "contextual_protocol",
+      "source_url": "https://www.inclusiveteaching.it/index.php/inclusiveteaching/article/download/449/422/3083",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://www.inclusiveteaching.it/index.php/inclusiveteaching/article/download/449/422/3083",
+      "sha256": "942936526014622e74e8c1e916b9b28bf96206bc6a9d4d99cb728161e08e8068",
+      "page_count": 8,
+      "chunks": 15,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
+    },
+    {
+      "study_id": "6923",
+      "bib_key": "Zeng2025_6923",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.7916/2q6y-bm58",
+      "status": "not_recovered",
+      "failure_category": "ValueError"
+    }
+  ],
+  "limitations": [
+    "Recovery is not MMAT approval or proof of scientific support.",
+    "Full texts and the operational database are not distributed."
+  ]
+}

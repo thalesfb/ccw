@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-08",
+  "scope": "Eight explicitly reviewed claims; not whole-manuscript certification",
+  "status_meaning": "SUPPORTED means the attributed statement is documented, not that the primary study is validated.",
+  "claims": [
+    {
+      "claim_id": "C-RSL-01",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "Os autores descrevem uma divisão de 70\\% para treinamento e 30\\% para teste e reportam 75\\% de acurácia de teste para a combinação de SMOTE e RUSBoost.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Implementation2025_000"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "875cbf6a24dafb386e9bc7a2",
+        "a9d3814f20071694f6e20df9",
+        "281ab88ee25653067cad4527",
+        "c8eaf3c2e3f025596a99a8a2"
+      ],
+      "source_hashes": {
+        "875cbf6a24dafb386e9bc7a2": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
+        "a9d3814f20071694f6e20df9": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
+        "281ab88ee25653067cad4527": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
+        "c8eaf3c2e3f025596a99a8a2": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94"
+      },
+      "source_id": "PS-2",
+      "physical_pages": [
+        3,
+        7
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The reported holdout accuracy is not an intervention effect or proficiency scale."
+    },
+    {
+      "claim_id": "C-RSL-02",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "Na mesma comparação, a revocação da classe de baixo desempenho é de 43\\%.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Implementation2025_000"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "281ab88ee25653067cad4527",
+        "c8eaf3c2e3f025596a99a8a2"
+      ],
+      "source_hashes": {
+        "281ab88ee25653067cad4527": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
+        "c8eaf3c2e3f025596a99a8a2": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94"
+      },
+      "source_id": "PS-2",
+      "physical_pages": [
+        7
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "Class-specific recall limits interpretation of the favorable aggregate accuracy."
+    },
+    {
+      "claim_id": "C-RSL-03",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "O alvo da modelagem é o tamanho de efeito de uma intervenção, não a proficiência individual.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "He2025_6915"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "7f04e77ab1f127069a1b1273",
+        "f2b440560432dcac6a5ad64b",
+        "9caf3dcc2dfe6ba0dd4329ee",
+        "41436681c851706d8e2e9f05",
+        "06fc1f336a6dc717b648367a",
+        "69b725ae801c7fec4803df1c"
+      ],
+      "source_hashes": {
+        "7f04e77ab1f127069a1b1273": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+        "f2b440560432dcac6a5ad64b": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+        "9caf3dcc2dfe6ba0dd4329ee": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+        "41436681c851706d8e2e9f05": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+        "06fc1f336a6dc717b648367a": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+        "69b725ae801c7fec4803df1c": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29"
+      },
+      "source_id": "PS-6915",
+      "physical_pages": [
+        1,
+        31,
+        32
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The school comparison is a distinct component and does not turn the regression target into individual proficiency."
+    },
+    {
+      "claim_id": "C-RSL-04",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "Essa inconsistência impede adotar um cronograma único na síntese.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Villegas2025_6916"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "8edd6598a60cd7b68e9fa84d",
+        "5a4459f097cf723e137c5ef7",
+        "818a77a414e12a39b30e3426"
+      ],
+      "source_hashes": {
+        "8edd6598a60cd7b68e9fa84d": "e1e6dd886d1e4e6d42e7da3e1b366505bab06365015d57ea15fa4a37b39cbfcc",
+        "5a4459f097cf723e137c5ef7": "e1e6dd886d1e4e6d42e7da3e1b366505bab06365015d57ea15fa4a37b39cbfcc",
+        "818a77a414e12a39b30e3426": "e1e6dd886d1e4e6d42e7da3e1b366505bab06365015d57ea15fa4a37b39cbfcc"
+      },
+      "source_id": "PS-6916",
+      "physical_pages": [
+        14,
+        22
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "Six-week methods and results through week eight are not reconciled in the inspected passages."
+    },
+    {
+      "claim_id": "C-RSL-05",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "o próprio artigo relata diferença entre os grupos no pré-teste (U=6714; p<0,001; tamanho de efeito=0,346).",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Enhancing2025_012"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "93ad21349e0af75383b61a3a"
+      ],
+      "source_hashes": {
+        "93ad21349e0af75383b61a3a": "d95e78c4a32c3a929a0429b97e672b49aa1a13bd3ffdb3f081a3ac610caadc0c"
+      },
+      "source_id": "PS-14",
+      "physical_pages": [
+        15
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The baseline difference prevents reading the posttest comparison as an isolated animation effect."
+    },
+    {
+      "claim_id": "C-RSL-06",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "oito itens da escala de mentalidade permanecem entre os preditores selecionados.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Echeveria2025_6920"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "c2122332c08d295ed7e5f7d6",
+        "050bac9c0558f558d9681e26",
+        "a728a4ed491e95bc09f64007",
+        "60c8ead9640bd54a72f6fc6d"
+      ],
+      "source_hashes": {
+        "c2122332c08d295ed7e5f7d6": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9",
+        "050bac9c0558f558d9681e26": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9",
+        "a728a4ed491e95bc09f64007": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9",
+        "60c8ead9640bd54a72f6fc6d": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9"
+      },
+      "source_id": "PS-6920",
+      "physical_pages": [
+        7,
+        8
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The predictors overlap with the instruments used to construct labels; independent diagnostic validity is not established by classification accuracy."
+    },
+    {
+      "claim_id": "C-RSL-07",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "Nas tarefas de frações, compara simulações com registros de tutoria previamente coletados no DataShop para 79 estudantes e prevê qualitativamente efeitos de sequenciamentos instrucionais, não escores absolutos de desempenho no tutor ou em pós-teste.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Computational2017_008"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "1ef8b640218c42816e1bdc64",
+        "a2e6b9a02df11fe17d21a21c"
+      ],
+      "source_hashes": {
+        "1ef8b640218c42816e1bdc64": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23",
+        "a2e6b9a02df11fe17d21a21c": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23"
+      },
+      "source_id": "PS-8",
+      "physical_pages": [
+        60,
+        64
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The thesis reuses prior DataShop records and predicts qualitative effects; it does not establish absolute performance scores, learning gains, or efficacy of this TCC prototype."
+    },
+    {
+      "claim_id": "C-RSL-08",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "c2a53a0790db7c25276b6388758b74d61db50a396f1ed7c505b1ac7f6804af90",
+      "claim_text": "Em análise distinta sobre resolução de equações, descreve dados de 71 estudantes e 10.052 passos; a análise utiliza 4.568 passos nos quais os estudantes executaram as próprias ações, enquanto tarefas de estratégia em que o tutor realizava as transformações ficam fora desse recorte.",
+      "claim_type": "empirical_result",
+      "citation_keys": [
+        "Computational2017_008"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "d1e6f920ef2710ca6e028056"
+      ],
+      "source_hashes": {
+        "d1e6f920ef2710ca6e028056": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23"
+      },
+      "source_id": "PS-8",
+      "physical_pages": [
+        72
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "The analyzed steps are a selected subset where students acted themselves, not the full 10,052-step record or a separate prospective intervention."
+    }
+  ]
+}

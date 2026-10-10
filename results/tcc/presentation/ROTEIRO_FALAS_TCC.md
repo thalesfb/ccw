@@ -60,16 +60,20 @@ contagem de chamadas HTTP concluídas.
 
 O snapshot começa com 11.904 registros. Foram removidas 27 linhas por identidade
 bibliográfica determinística, chegando a 11.877 na triagem. A triagem excluiu
-9.391 registros e encaminhou 2.486 para elegibilidade. Nessa etapa, 2.468 foram
-excluídos e 18 foram retidos operacionalmente. Cada número representa uma etapa
-distinta, por isso não devemos substituir o fluxo por uma única porcentagem.
+9.391 registros e submeteu 2.486 à priorização operacional baseada em metadados
+e resumos. Nessa etapa, 2.468 foram excluídos e 18 foram retidos
+provisoriamente para adjudicação de escopo. Essa priorização não corresponde à
+avaliação de elegibilidade de relatórios em texto completo. Cada número descreve
+uma etapa distinta, por isso não devemos substituir o fluxo por uma única
+porcentagem.
 
-## 8. PRISMA — 0:45
+## 8. Fluxo operacional — 0:45
 
 Esta figura é a representação visual do mesmo fluxo. Ela está versionada junto
 dos artefatos de pesquisa e foi incorporada diretamente à apresentação. O
 objetivo é permitir que o leitor acompanhe a transição entre identificação,
-deduplicação, triagem, elegibilidade e retenção.
+deduplicação, triagem, priorização operacional e retenção provisória; a figura
+é própria e não reproduz todas as etapas do diagrama PRISMA 2020.
 
 ## 9. Deduplicação — 1:05
 
@@ -98,7 +102,7 @@ permitem concluir que uma base é mais representativa ou que a produção
 científica esteja distribuída de forma uniforme. A cobertura está condicionada
 às fontes, aos idiomas e às condições de disponibilidade dos metadados.
 
-## 12. População retida — 1:05
+## 12. Conjunto retido — 1:05
 
 Dos 18 registros retidos operacionalmente, 17 são candidatos empíricos
 provisórios. Um registro é um protocolo ou proposta contextual e foi preservado
@@ -112,9 +116,10 @@ literatura encontrada; não escolhe um algoritmo vencedor.
 O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
 respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
 uma pontuação agregada. A avaliação é preliminar e foi feita por um único
-revisor. Nove registros tiveram texto primário revisado e oito dependeram de
-resumo e metadados. A recuperação das fontes, os localizadores e a adjudicação
-precisam ser consolidados. Portanto, não apresento um ranking de qualidade.
+revisor. Doze registros tiveram texto primário consultado — nove fontes
+arquivadas e três examinadas externamente, sem cópia no repositório — e cinco
+dependeram de resumo e metadados. A verificação independente e a adjudicação ainda
+precisam ser consolidadas. Portanto, não apresento um ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
 
@@ -124,13 +129,22 @@ diferentes. Isso impede comparar diretamente todas as acurácias e impede
 transferir o resultado de um artigo para outra escola. Predição de desempenho
 também não é sinônimo de aprendizagem.
 
-## 15. Lacunas — 0:55
+## 15. Limitações localizadas nos estudos — 0:55
 
-As lacunas mais relevantes estão na explicabilidade, no alinhamento curricular,
-na participação docente, na análise de equidade, na reprodutibilidade e na
-validação em diferentes contextos. Elas orientam decisões da especificação. Uma
-lacuna não é uma prova automática de ineficácia; é um sinal de que uma solução
-futura precisaria tornar essas condições explícitas e avaliáveis.
+Apresento quatro exemplos e os localizadores: He et al. (2025, pp. 1, 16,
+31–35) descrevem oito turmas de 45 estudantes, mas declaram amostra total de
+90, além de uma distribuição desigual de docentes entre condições; Villegas-Ch
+et al. (2025, pp. 14, 22) não conciliam seis semanas de método com resultados
+até a oitava; Nyantah et al. (2025, pp. 101–105) apresentam versões
+incompatíveis sobre alocação, diferença no pré-teste e intervenção combinada;
+Echeveria et al. (2025, pp. 66, 69–70) usam itens da escala tanto para formar
+categorias quanto entre preditores. Esses pontos afetam denominadores,
+comparabilidade, atribuição do resultado e interpretação diagnóstica de cada
+estudo. São exemplos localizados, não estimativa da frequência na literatura.
+Somente 12 dos 17 textos primários foram consultados; o MMAT permanece
+preliminar e feito por um único revisor. Outros requisitos, como equidade e
+alinhamento curricular, não foram codificados de modo comparável e permanecem
+questões para investigação, não ausências demonstradas no corpus.
 
 ## 16. Derivação — 0:55
 

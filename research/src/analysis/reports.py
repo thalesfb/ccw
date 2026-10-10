@@ -42,7 +42,7 @@ def _normalise_external_url(value: object) -> str:
 
 def _normalise_html_whitespace(value: str) -> str:
     """Keep generated HTML stable and free of whitespace-only line changes."""
-    return "\n".join(line.rstrip() for line in value.splitlines()) + "\n"
+    return "\n".join(line.rstrip() for line in value.splitlines()).rstrip() + "\n"
 
 class ReportGenerator:
     """Gera relatórios completos da revisão sistemática."""
@@ -487,10 +487,10 @@ class ReportGenerator:
             report_stats['selection_stages'] = {
                 'Identificação': identification,
                 'Triagem': screening_remaining,
-                'Elegibilidade': eligibility_remaining,
+                'Priorização operacional': eligibility_remaining,
                 'Incluídos': included,
                 'Excluídos na Triagem': screening_excluded,
-                'Excluídos na Elegibilidade': eligibility_excluded,
+                'Excluídos na priorização operacional': eligibility_excluded,
             }
 
         return report_stats
@@ -706,15 +706,16 @@ class ReportGenerator:
 
     {% if statistics.stage_percentages %}
     <div class="section">
-        <h2>📐 Percentuais do fluxo PRISMA</h2>
+        <h2>📐 Percentuais das etapas operacionais</h2>
         <table>
             <tr><th>Relação</th><th>Percentual</th></tr>
             <tr><td>Excluídos na triagem / identificação</td><td>{{ statistics.stage_percentages.screening_excluded_of_identification }}%</td></tr>
             <tr><td>Avançaram da triagem / identificação</td><td>{{ statistics.stage_percentages.screening_advanced_of_identification }}%</td></tr>
-            <tr><td>Excluídos na elegibilidade / elegibilidade</td><td>{{ statistics.stage_percentages.eligibility_excluded_of_eligibility }}%</td></tr>
-            <tr><td>Incluídos / elegibilidade</td><td>{{ statistics.stage_percentages.included_of_eligibility }}%</td></tr>
+            <tr><td>Excluídos na priorização operacional / submetidos à priorização</td><td>{{ statistics.stage_percentages.eligibility_excluded_of_eligibility }}%</td></tr>
+            <tr><td>Retidos operacionalmente / submetidos à priorização</td><td>{{ statistics.stage_percentages.included_of_eligibility }}%</td></tr>
             <tr><td>Incluídos / identificação</td><td>{{ statistics.stage_percentages.included_of_identification }}%</td></tr>
         </table>
+        <p>Os percentuais da etapa de priorização descrevem a aplicação heurística sobre metadados e resumos; não representam avaliação de elegibilidade de relatórios em texto completo nem inclusão final no PRISMA 2020.</p>
     </div>
     {% endif %}
 
@@ -789,15 +790,14 @@ class ReportGenerator:
             <div class="chart-card">
                 <h3>{{ chart.name
                     .replace('_', ' ')
-                    .replace('prisma', 'Fluxo PRISMA')
                     .replace('selection', 'Funil de Seleção')
                     .replace('funnel', '')
                     .replace('papers by year', 'Artigos por Ano')
                     .replace('techniques distribution', 'Distribuição de Técnicas')
                     .replace('database coverage', 'Cobertura por Base de Dados')
                     .replace('relevance distribution', 'Distribuição de Relevância')
-                    .title() }}</h3>
-                <img src="../visualizations/{{ chart.path.name }}" alt="{{ chart.name }}">
+                    .title() if chart.name != 'prisma_flow' else 'Fluxo operacional (referência ao PRISMA 2020)' }}</h3>
+                <img src="../visualizations/{{ chart.path.name }}" alt="{{ 'Representação operacional da seleção; não corresponde ao diagrama PRISMA 2020 completo' if chart.name == 'prisma_flow' else chart.name }}">
             </div>
             {% endfor %}
         </div>
@@ -839,8 +839,8 @@ class ReportGenerator:
         <h2>ℹ️ Informações do Processo</h2>
         <div class="highlight">
             <p><strong>Data de Geração:</strong> {{ generated_at }}</p>
-            <p><strong>Relato:</strong> Estruturado conforme as diretrizes PRISMA 2020</p>
-            <p><strong>Filtro operacional:</strong> score de relevância multi-critério; não substitui a adjudicação científica de escopo, elegibilidade ou qualidade.</p>
+            <p><strong>Relato:</strong> PRISMA 2020 foi usado como diretriz; consulte o checklist para itens e desvios documentados.</p>
+            <p><strong>Filtro operacional:</strong> escore de relevância multicritério sobre metadados e resumos; não equivale à avaliação de elegibilidade de relatórios em texto completo nem substitui a adjudicação científica da população retida.</p>
         </div>
     </div>
     </div>
@@ -969,7 +969,7 @@ class ReportGenerator:
         </div>
 
         <div class="card">
-            <h2>🔍 Fluxo PRISMA</h2>
+            <h2>🔍 Fluxo operacional da revisão</h2>
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                 <tr style="background: #f8f9fa;">
                     <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Estágio</th>
@@ -988,11 +988,11 @@ class ReportGenerator:
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.screening_excluded }}</td>
                 </tr>
                 <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Registros que avançaram à elegibilidade</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Registros submetidos à priorização operacional</td>
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.eligibility }}</td>
                 </tr>
                 <tr>
-                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na elegibilidade</td>
+                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na priorização operacional</td>
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.eligibility_excluded }}</td>
                 </tr>
                 <tr style="background: #d4edda;">
@@ -1000,14 +1000,15 @@ class ReportGenerator:
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; font-weight: bold; color: #28a745;">{{ prisma.included }}</td>
                 </tr>
             </table>
+            <p>Esta representação operacional é própria do projeto e não reproduz todas as etapas do diagrama PRISMA 2020; a priorização utiliza metadados e resumos e não equivale à avaliação de elegibilidade em texto completo.</p>
         </div>
 
         <div class="card">
             <h2>📈 Visualizações</h2>
             <div class="chart-grid">
                 <div class="chart-card">
-                    <h3>Fluxo PRISMA</h3>
-                    <img src="../visualizations/prisma_flow.png" alt="PRISMA Flow">
+                    <h3>Fluxo operacional (referência PRISMA 2020)</h3>
+                    <img src="../visualizations/prisma_flow.png" alt="Representação operacional do processo de seleção; não é o diagrama PRISMA completo">
                 </div>
                 <div class="chart-card">
                     <h3>Funil de Seleção</h3>

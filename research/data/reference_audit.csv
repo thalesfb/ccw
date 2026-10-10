@@ -2,6 +2,9 @@ key,category,existence,metadata_status,use_status,canonical_identifier,decision,
 PRISMA2020,methodology,verified,verified,verified,10.1136/bmj.n71,keep,Use as reporting guideline
 PRISMAP2015,methodology,verified,verified,scope_limited,10.1186/2046-4053-4-1,keep,Use for protocol principles and disclose no prospective registration
 CochraneHandbook,methodology,verified,update_version,scope_limited,https://training.cochrane.org/handbook,keep,Version 6.4 remains pinned because it is the historically recorded version; newer upstream versions require deliberate methodological review rather than silent replacement
+CochraneChapter3,methodology,verified,verified,scope_limited,https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-03,keep,Chapter 3 sections 3.2 and 3.3 support PICO plus study design adapted for this mapping; citation does not replace the historical protocol version or add corpus records
+James2021,technology,verified,verified,scope_limited,10.1007/978-1-0716-1418-1,keep,Second edition supports explanatory definitions of model families and predictive evaluation; not an included study or evidence of educational efficacy
+Lafferty2001,technology,verified,verified,scope_limited,https://www.cis.upenn.edu/~danroth/Teaching/CS598-05/Papers/crf.pdf,keep,Primary paper abstract and section 3 support the explanatory CRF definition; ICML 2001 pages 282-289 checked against ML Anthology; not an included empirical study
 MMAT2018,methodology,verified,verified,verified,10.3233/EFI-180221,keep,Peer-reviewed MMAT 2018 article is the bibliographic source; operational manual remains a methodological aid
 Implementation2025_000,included_study,verified,verified,scope_limited,10.18178/ijiet.2025.15.1.2228,keep,Second author volume issue pages and DOI URL verified against journal record
 Math2021_001,included_study,verified,verified,verified,10.1109/SISY52375.2021.9582522,keep,Conference title pages and DOI URL normalized
@@ -39,7 +42,7 @@ Yan2021,pedagogy,verified,verified,unused,10.1007/s10648-020-09572-8,retain_unus
 Romero2020,technology,verified,verified,verified,10.1002/widm.1355,keep,Core EDM and Learning Analytics survey
 Mousavinasab2021,technology,verified,verified,verified,10.1080/10494820.2018.1558257,keep,ITS characteristics applications and evaluation
 Zawacki2019,technology,verified,verified,scope_limited,10.1186/s41239-019-0171-0,keep,Higher education review and contextual limitation
-Piaget1972EN,pedagogy,verified,verified,scope_limited,9780710072962,keep,Construction of knowledge not every mathematics teaching implication
+Piaget1972EN,pedagogy,verified,verified,unused,9780710072962,retain_unused,Removed from the active theoretical framing as an editorial scope decision; historical metadata retained without implying theoretical incompatibility or changing the empirical corpus
 WoodBrunerRoss1976,pedagogy,verified,verified,verified,10.1111/j.1469-7610.1976.tb00381.x,keep,Canonical scaffolding source
 BlackWiliam1998,pedagogy,verified,verified,verified,10.1080/0969595980050102,keep,Formative assessment
 HattieTimperley2007,pedagogy,verified,verified,verified,10.3102/003465430298487,keep,Feedback framework

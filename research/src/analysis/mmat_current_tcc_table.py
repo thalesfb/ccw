@@ -30,6 +30,7 @@ DESIGN_LABELS = {
     "mixed_methods": "Métodos mistos",
     "metadata_hold": "Não confirmado",
     "not_applicable": "Não aplicável",
+    "design_pending": "Pendente",
 }
 BASIS_LABELS = {
     "primary_full_text_reviewed_externally": "Texto primário externo",
@@ -38,14 +39,6 @@ BASIS_LABELS = {
     "metadata_only": "Metadados",
     "protocol_or_proposal_not_applicable": "Protocolo/proposta",
 }
-STATUS_LABELS = {
-    "provisional_primary_source_review": "Provisório: fonte primária",
-    "provisional_abstract_plus_metadata": "Provisório: abstract/metadados",
-    "hold_source_verification": "Hold: verificar fonte",
-    "hold_empirical_status": "Hold: verificar empiricidade",
-}
-
-
 def load_rows(path: Path = DATA_PATH) -> list[dict[str, str]]:
     validate_current_artifacts(reassessment_path=path)
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
@@ -100,6 +93,7 @@ def _latex_escape(value: object) -> str:
         "}": r"\}",
         "~": r"\textasciitilde{}",
         "^": r"\textasciicircum{}",
+        "/": r"/\allowbreak{}",
     }
     return "".join(replacements.get(char, char) for char in str(value))
 
@@ -114,23 +108,27 @@ def render_table(
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
         r"\begingroup",
         r"\def\LTcaptype{quadro}",
-        r"\begin{longtable}{|p{3.9cm}|p{2.0cm}|ccccccc|p{3.0cm}|p{3.5cm}|}",
+        r"\setlength{\tabcolsep}{2pt}",
+        r"\setlength{\LTcapwidth}{\textwidth}",
+        r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|"
+        r">{\raggedright\arraybackslash}p{2.5cm}|ccccccc|"
+        r">{\raggedright\arraybackslash}p{3.6cm}|}",
         r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{qua:mmat-reavaliacao-atual}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
-        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} & \textbf{Estado} \\",
+        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} \\",
         r"\hline",
         r"\endfirsthead",
-        r"\multicolumn{11}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
+        r"\multicolumn{10}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
-        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} & \textbf{Estado} \\",
+        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} \\",
         r"\hline",
         r"\endhead",
         r"\hline",
-        r"\multicolumn{11}{r}{\textit{Continua na próxima página}}\\",
+        r"\multicolumn{10}{r}{\textit{Continua na próxima página}}\\",
         r"\endfoot",
         r"\hline",
         r"\endlastfoot",
@@ -144,14 +142,13 @@ def render_table(
             _latex_escape(DESIGN_LABELS.get(design, design)),
             *[row[criterion] for criterion in CRITERIA],
             _latex_escape(BASIS_LABELS.get(row["assessment_basis"], row["assessment_basis"])),
-            _latex_escape(STATUS_LABELS.get(row["assessment_status"], row["assessment_status"])),
         ]
         lines.append(" & ".join(values) + r" \\")
     lines.extend(
         [
             r"\end{longtable}",
             r"\endgroup",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível determinar. A base e o estado são os registrados no ledger na data do snapshot; a adjudicação metodológica pelo supervisor permanece pendente. O protocolo ou proposta contextual retido não integra a síntese empírica nem uma avaliação MMAT empírica. Um registro bibliográfico fora do recorte temporal foi excluído do escopo atual.",
+            r"\textit{Nota:} Y = sim; N = não; CT = não é possível concluir com a evidência disponível. Todos os julgamentos empíricos são preliminares e aguardam adjudicação. O registro de protocolo ou proposta é contextual e não recebe apreciação MMAT empírica.",
         ]
     )
     return "\n".join(lines) + "\n"

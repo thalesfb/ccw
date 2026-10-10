@@ -1,36 +1,31 @@
-# Apresentação PowerPoint do TCC
+# Export PowerPoint editável paralelo do TCC
 
-Este diretório contém a apresentação editável do Trabalho de Conclusão de
-Curso **Ensino Personalizado de Matemática: Oportunidades e Técnicas
-Computacionais**.
+Este diretório contém um artefato editável auxiliar, não a apresentação que
+será usada na defesa do TCC **Ensino Personalizado de Matemática:
+Oportunidades e Técnicas Computacionais**.
 
-## Fonte, exportação e material histórico
+## Papéis dos artefatos
 
-Os arquivos têm papéis diferentes e são mantidos em locais separados:
-
-- [`presentation/slides.md`](../../../presentation/slides.md) é a fonte
-  independente do deck público Slidev. O build gerado fica em
+- [`presentation/slides.md`](../../../presentation/slides.md) é a fonte do deck
+  canônico Slidev da defesa, com 25 slides. O build público fica em
   `presentation/dist/`.
-- O deck vigente do TCC tem 25 slides: essa contagem vale para `presentation/slides.md`
-  e para o storyboard `APRESENTACAO_TCC_SLIDES_CONTEUDO.md`.
-- [`ensino_personalizado_de_matematica_tcc.pptx`](ensino_personalizado_de_matematica_tcc.pptx)
-  é um export editável paralelo, atualmente com 19 slides. Ele não é a fonte do
-  deck Slidev e não deve ser usado para inferir a contagem do deck vigente.
 - [`APRESENTACAO_TCC_SLIDES_CONTEUDO.md`](APRESENTACAO_TCC_SLIDES_CONTEUDO.md)
-  é o storyboard textual de apoio do export PPTX; [`ROTEIRO_FALAS_TCC.md`](ROTEIRO_FALAS_TCC.md)
-  contém as falas sugeridas. O gerador não lê esses arquivos automaticamente.
+  é o storyboard de conteúdo de 25 slides associado ao deck Slidev; não é lido
+  automaticamente pelo compilador.
+- [`ensino_personalizado_de_matematica_tcc.pptx`](ensino_personalizado_de_matematica_tcc.pptx)
+  é um export editável paralelo, com 19 slides, gerado independentemente. Não
+  é o arquivo da defesa, não é derivado de `slides.md` e não é sincronizado com
+  o deck canônico. A diferença de contagem é intencional entre artefatos com
+  papéis distintos, não uma paridade de exportação pendente.
+- [`ROTEIRO_FALAS_TCC.md`](ROTEIRO_FALAS_TCC.md) contém falas de apoio para o
+  export editável de 19 slides; não substitui um roteiro alinhado ao deck
+  Slidev.
 - [`material de apresentação do PTC histórico`](../../../results/ptc/presentation/APRESENTACAO_SLIDES_CONTEUDO.md)
-  registra trabalho anterior. Serve para contexto narrativo e visual, não para
-  números ou afirmações do TCC vigente.
+  é uma terceira apresentação, de uma etapa anterior. Serve como contexto
+  narrativo e visual, nunca como fonte dos números do TCC vigente.
 - [`generate_tcc_presentation.py`](../../../scripts/generate_tcc_presentation.py)
-  define conteúdo e layout do PPTX no próprio código, incorpora imagens
-  versionadas e valida o arquivo. Não lê o storyboard nem arquivos TeX
-  automaticamente.
-
-Slidev e o gerador PPTX são fontes paralelas, sem sincronização automática.
-Uma alteração em uma fonte pode deixar a outra desatualizada; a contagem de 19
-slides do export editável é uma divergência conhecida que precisa ser resolvida
-antes de tratá-lo como export equivalente ao deck vigente de 25 slides.
+  define o conteúdo e o layout do PPTX paralelo. Não lê o storyboard, o roteiro
+  de falas nem os arquivos TeX.
 
 Após merge e deploy bem-sucedido, os endereços públicos são:
 
@@ -41,7 +36,7 @@ Após merge e deploy bem-sucedido, os endereços públicos são:
 Esses URLs descrevem o destino do artefato publicado; não confirmam que o
 deploy já ocorreu.
 
-## Regeneração e validação
+## Regeneração e validação do export paralelo
 
 Executados a partir da raiz do repositório:
 
@@ -50,10 +45,10 @@ python scripts/generate_tcc_presentation.py
 python scripts/generate_tcc_presentation.py --check
 ```
 
-O validador verifica o número e os títulos dos slides, os marcadores do
-snapshot atual, a ausência de números históricos do PTC e a incorporação das
-visualizações canônicas. O workflow `tcc-quality` também executa essa
-validação em pull requests.
+O validador verifica os 19 slides do export, seus títulos, marcadores do
+snapshot atual, exemplos de limitações vinculados a estudos, ausência de
+números históricos do PTC e incorporação das visualizações canônicas. O
+workflow `tcc-quality` também executa essa validação em pull requests.
 
 ## Proveniência do conteúdo
 

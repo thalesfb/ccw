@@ -61,15 +61,15 @@ EXPECTED_TITLES = [
     "Objetivos específicos",
     "A base conceitual: quatro níveis de interpretação",
     "Desenho metodológico",
-    "Do registro bruto à população retida",
-    "Fluxo PRISMA do snapshot",
+    "Do registro bruto ao conjunto retido provisoriamente",
+    "Fluxo operacional do processo de seleção",
     "Deduplicação: o que foi confirmado",
     "Panorama descritivo do snapshot",
     "Distribuição temporal e fontes",
-    "População retida e síntese empírica",
+    "Conjunto retido e síntese empírica",
     "Apreciação metodológica pelo MMAT 2018",
     "O que a síntese sustenta",
-    "Lacunas documentadas",
+    "Limitações localizadas nos estudos consultados",
     "Da evidência à especificação",
     "Especificação conceitual do protótipo",
     "Contribuições e limites",
@@ -361,8 +361,8 @@ def build_deck() -> Presentation:
 
     # 3 — Question and objective.
     slide = new_slide(prs, EXPECTED_TITLES[2], 3)
-    add_callout(slide, "Problema de pesquisa", "Como identificar e sintetizar, por meio de revisão sistemática, as principais técnicas computacionais aplicadas ao ensino de matemática e converter essas evidências em uma especificação de protótipo que apoie o professor?", Inches(0.75), Inches(1.25), Inches(7.2), Inches(2.1), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=16)
-    add_callout(slide, "Objetivo geral", "Mapear e analisar sistematicamente as aplicações e elaborar uma especificação técnica e pedagógica para apoiar a interpretação de evidências sobre competências.", Inches(8.25), Inches(1.25), Inches(4.3), Inches(2.1), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=16)
+    add_callout(slide, "Problema de pesquisa", "Como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura?", Inches(0.75), Inches(1.25), Inches(7.2), Inches(2.1), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=16)
+    add_callout(slide, "Objetivo geral", "Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.", Inches(8.25), Inches(1.25), Inches(4.3), Inches(2.1), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=16)
     add_text(slide, "Perguntas orientadoras", Inches(0.78), Inches(4.15), Inches(4.2), Inches(0.35), size=18, color=NAVY, bold=True)
     add_bullets(slide, [
         "Quais técnicas são aplicadas à educação matemática?",
@@ -374,21 +374,18 @@ def build_deck() -> Presentation:
     # 4 — Objectives.
     slide = new_slide(prs, EXPECTED_TITLES[3], 4)
     left = [
-        ("OE1", "Revisão sistemática, relatada com apoio do PRISMA 2020, sobre estudos de 2015–2026."),
-        ("OE2", "Identificação e categorização das abordagens computacionais."),
-        ("OE3", "Classificação das finalidades pedagógicas das aplicações."),
-        ("OE4", "Análise crítica das metodologias e limitações dos estudos."),
+        ("OE1", "Categorizar técnicas computacionais e finalidades pedagógicas na literatura mapeada."),
+        ("OE2", "Identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas."),
     ]
     right = [
-        ("OE5", "Mapeamento de lacunas técnicas, pedagógicas, metodológicas e éticas."),
-        ("OE6", "Manutenção de um pipeline automatizado e auditável para coleta, processamento e exportação."),
-        ("OE7", "Derivação de requisitos, critérios de dados e modelos, protocolo de avaliação e arquitetura de referência."),
+        ("OE3", "Formular requisitos, critérios de dados e modelos e arquitetura de referência para o protótipo."),
+        ("OE4", "Propor um protocolo para avaliação futura dos aspectos técnicos e de adequação pedagógica."),
     ]
     for index, (code, body) in enumerate(left):
-        add_callout(slide, code, body, Inches(0.75), Inches(1.25 + index * 1.25), Inches(5.65), Inches(0.95), fill=PALE_BLUE, accent=BLUE, title_size=15, body_size=13.5)
+        add_callout(slide, code, body, Inches(0.75), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_BLUE, accent=BLUE, title_size=19, body_size=18)
     for index, (code, body) in enumerate(right):
-        add_callout(slide, code, body, Inches(6.9), Inches(1.25 + index * 1.55), Inches(5.65), Inches(1.25), fill=PALE_TEAL, accent=TEAL, title_size=15, body_size=13.5)
-    add_text(slide, "A apresentação distingue objetivos executados de atividades que permanecem fora do escopo, como implementação funcional e validação com participantes.", Inches(1.0), Inches(6.45), Inches(11.25), Inches(0.42), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+        add_callout(slide, code, body, Inches(6.9), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_TEAL, accent=TEAL, title_size=19, body_size=18)
+    add_text(slide, "Revisão, MMAT preliminar e pipeline são meios metodológicos. Propor o protocolo não equivale a executá-lo nem comprova eficácia pedagógica.", Inches(1.0), Inches(6.2), Inches(11.25), Inches(0.65), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 5 — Theoretical foundation.
     slide = new_slide(prs, EXPECTED_TITLES[4], 5)
@@ -396,8 +393,8 @@ def build_deck() -> Presentation:
     cards = [
         ("Desempenho\nobservado", "Registro de uma tarefa: acerto, nota, tentativa, estratégia ou tempo.", BLUE, PALE_BLUE),
         ("Proficiência\nestimada", "Inferência sobre uma escala de conhecimentos e habilidades.", TEAL, PALE_TEAL),
-        ("Competência", "Mobilização integrada de conhecimentos, procedimentos, estratégias e atitudes.", VIOLET, PALE_VIOLET),
-        ("Aprendizagem", "Transformação construída ao longo do tempo, com compreensão, autonomia e transferência.", AMBER, PALE_AMBER),
+        ("Competência", "Mobilização de conhecimentos, habilidades, atitudes e valores para resolver demandas.", VIOLET, PALE_VIOLET),
+        ("Aprendizagem", "Neste TCC: mudanças no que o estudante sabe e consegue fazer ao longo do tempo.", AMBER, PALE_AMBER),
     ]
     for index, (title, body, accent, fill) in enumerate(cards):
         x = Inches(0.72 + index * 3.12)
@@ -428,19 +425,19 @@ def build_deck() -> Presentation:
         ("27", "remoções por identidade\n25 DOI + 2 URL", TEAL, PALE_TEAL),
         ("11.877", "registros na triagem", GREEN, PALE_GREEN),
         ("9.391", "excluídos na triagem", AMBER, PALE_AMBER),
-        ("2.486", "na elegibilidade", ORANGE, RGBColor(255, 247, 237)),
-        ("2.468", "excluídos na elegibilidade", VIOLET, PALE_VIOLET),
+        ("2.486", "submetidos à priorização", ORANGE, RGBColor(255, 247, 237)),
+        ("2.468", "excluídos nessa etapa", VIOLET, PALE_VIOLET),
         ("18", "retidos operacionalmente", INDIGO, RGBColor(238, 242, 255)),
     ]
     positions = [(0.75, 1.6), (3.15, 1.6), (5.55, 1.6), (7.95, 1.6), (1.95, 4.15), (4.35, 4.15), (6.75, 4.15)]
     for (value, label, accent, fill), (x, y) in zip(metrics, positions):
         add_metric(slide, value, label, Inches(x), Inches(y), Inches(2.0), Inches(1.5), fill=fill, accent=accent, value_size=24, label_size=10.5)
-    add_text(slide, "A remoção determinística por DOI/URL precede a triagem. Igualdade de título permaneceu como candidato à auditoria semântica.", Inches(1.1), Inches(6.2), Inches(11.0), Inches(0.35), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "A priorização dos 2.486 registros usa metadados/resumos e não equivale à elegibilidade em texto completo; títulos repetidos seguem para auditoria semântica.", Inches(0.85), Inches(6.15), Inches(11.6), Inches(0.45), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
 
-    # 8 — PRISMA image.
+    # 8 — Operational selection-flow image, informed by PRISMA 2020.
     slide = new_slide(prs, EXPECTED_TITLES[7], 8)
     add_image_contain(slide, ROOT / "research" / "exports" / "visualizations" / "prisma_flow.png", Inches(0.9), Inches(1.05), Inches(11.55), Inches(5.7))
-    add_text(slide, "Figura versionada e sincronizada com os artefatos públicos do pipeline.", Inches(1.0), Inches(6.75), Inches(11.25), Inches(0.25), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "Representação operacional própria; não reproduz todas as etapas do diagrama PRISMA 2020.", Inches(1.0), Inches(6.75), Inches(11.25), Inches(0.25), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 9 — Deduplication.
     slide = new_slide(prs, EXPECTED_TITLES[8], 9)
@@ -483,7 +480,7 @@ def build_deck() -> Presentation:
     add_text(slide, "avaliação por critério\nsem nota global", Inches(1.05), Inches(2.35), Inches(2.7), Inches(0.85), size=19, color=RGBColor(186, 230, 253), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Instrumento aplicado conforme o desenho metodológico de cada estudo empírico.", Inches(1.1), Inches(4.15), Inches(2.6), Inches(0.75), size=13.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
-    add_callout(slide, "Estado atual", "Apreciação preliminar por um único revisor: nove registros com texto primário revisado e oito com base em resumo/metadados.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=14)
+    add_callout(slide, "Estado atual", "Apreciação preliminar por um revisor: 12 textos primários consultados (9 arquivados e 3 externos) e 5 avaliações com resumo/metadados.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=14)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_text(slide, "O MMAT organiza a leitura das limitações; não transforma uma apreciação preliminar em classificação definitiva.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
@@ -495,21 +492,19 @@ def build_deck() -> Presentation:
     add_callout(slide, "Implicação", "Avaliação técnica, explicabilidade, contexto curricular e interpretação docente precisam acompanhar qualquer uso futuro.", Inches(6.8), Inches(3.65), Inches(5.75), Inches(1.55), fill=PALE_VIOLET, accent=VIOLET, title_size=17, body_size=15)
     add_text(slide, "Desempenho reportado em um artigo não equivale a evidência geral de eficácia pedagógica.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=15, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
 
-    # 15 — Gaps.
+    # 15 — Study-specific limitations.
     slide = new_slide(prs, EXPECTED_TITLES[14], 15)
-    gaps = [
-        ("Explicabilidade", "Pouca clareza sobre como as saídas chegam à interpretação pedagógica.", BLUE, PALE_BLUE),
-        ("Currículo", "Alinhamento explícito com referenciais curriculares aparece de forma limitada.", TEAL, PALE_TEAL),
-        ("Participação docente", "Decisões de projeto nem sempre incorporam o professor como intérprete.", VIOLET, PALE_VIOLET),
-        ("Equidade", "Análises de possíveis vieses e diferenças entre grupos são escassas.", AMBER, PALE_AMBER),
-        ("Reprodutibilidade", "Dados, códigos e detalhes de preparação nem sempre estão disponíveis.", ORANGE, RGBColor(255, 247, 237)),
-        ("Contexto", "Validações permanecem restritas a populações e cenários específicos.", INDIGO, RGBColor(238, 242, 255)),
+    study_limits = [
+        ("He et al. (2025)", "Oito turmas de 45 estudantes são descritas, mas a amostra declarada é n=90; docentes também se distribuem de modo desigual entre condições (pp. 1, 16, 31–35). Isso exige cautela com denominadores e possível confundimento.", BLUE, PALE_BLUE),
+        ("Villegas-Ch et al. (2025)", "Os métodos descrevem seis semanas, mas os resultados chegam à oitava, sem conciliação nos trechos consultados (pp. 14, 22). Não se deve impor duração única à síntese.", TEAL, PALE_TEAL),
+        ("Nyantah et al. (2025)", "A alocação é descrita de modo incompatível; há diferença no pré-teste e a intervenção combina animação e jigsaw (pp. 101–105). O resultado não deve ser atribuído à animação isoladamente.", VIOLET, PALE_VIOLET),
+        ("Echeveria et al. (2025)", "Oito itens usados para formar categorias também aparecem entre os preditores selecionados (pp. 66, 69–70). A classificação não estabelece diagnóstico independente.", AMBER, PALE_AMBER),
     ]
-    for index, (title, body, accent, fill) in enumerate(gaps):
-        x = Inches(0.75 + (index % 3) * 4.1)
-        y = Inches(1.25 + (index // 3) * 2.0)
-        add_callout(slide, title, body, x, y, Inches(3.65), Inches(1.55), fill=fill, accent=accent, title_size=15, body_size=13.5)
-    add_text(slide, "Essas lacunas foram tratadas como requisitos de projeto — não como prova de que uma solução futura será eficaz.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+    for index, (title, body, accent, fill) in enumerate(study_limits):
+        x = Inches(0.75 + (index % 2) * 6.05)
+        y = Inches(1.2 + (index // 2) * 2.15)
+        add_callout(slide, title, body, x, y, Inches(5.75), Inches(1.9), fill=fill, accent=accent, title_size=16, body_size=13)
+    add_text(slide, "Exemplos localizados, não estimam a frequência da literatura. Cobertura: 12 de 17 textos primários; os demais foram apreciados por resumo/metadados. MMAT preliminar, por revisor único.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=13, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
 
     # 16 — From evidence to specification.
     slide = new_slide(prs, EXPECTED_TITLES[15], 16)
@@ -597,6 +592,18 @@ def validate_presentation(path: Path) -> list[str]:
         normalized_expected = expected_title.replace("\n", " ")
         if normalized_expected not in title_text:
             errors.append(f"título do slide {index + 1} inesperado: {title_text!r}")
+
+    gap_slide_text = slide_text(prs.slides[14]) if len(prs.slides) > 14 else ""
+    for marker in (
+        "He et al. (2025)",
+        "Villegas-Ch et al. (2025)",
+        "Nyantah et al. (2025)",
+        "Echeveria et al. (2025)",
+        "12 de 17 textos primários",
+        "não estimam a frequência da literatura",
+    ):
+        if marker not in gap_slide_text:
+            errors.append(f"limitação por estudo ausente no slide 15: {marker}")
 
     expected_images = {
         "prisma_flow.png",

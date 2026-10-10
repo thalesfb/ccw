@@ -92,6 +92,15 @@ jobs:
             tests/test_adjudicated_snapshot.py \
             tests/test_tcc_advisor_feedback.py \
             tests/test_tcc_visual_classification.py \
+            tests/test_pdf_feedback.py \
+            tests/test_evidence_retrieval.py \
+            tests/test_claim_evidence_artifacts.py \
+            tests/test_tcc_evidence_limits.py \
+            tests/test_tcc_editorial_feedback.py \
+            tests/test_tcc_objective_alignment.py \
+            tests/test_editorial_visualizations.py \
+            tests/test_compile_tcc.py \
+            tests/test_validate_tcc_pdf.py \
             tests/test_versioned_snapshot.py \
             -q --tb=short 2>&1 | tee advisor-tests.log
           status=${PIPESTATUS[0]}
@@ -200,6 +209,14 @@ jobs:
             texlive-latex-extra \
             texlive-plain-generic
 
+      - name: Set up Python for document consistency checks
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PDF inspection dependency
+        run: python -m pip install --disable-pip-version-check "pypdf==6.10.0"
+
       - name: Prepare legacy IFC template paths
         working-directory: results/tcc
         run: |
@@ -207,13 +224,10 @@ jobs:
           ln -sfn abnetx2 abntex2
 
       - name: Compile TCC
-        working-directory: results/tcc
-        run: |
-          if ! latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex > build.log 2>&1; then
-            echo "LaTeX compilation failed. Last 120 lines:"
-            tail -n 120 build.log
-            exit 1
-          fi
+        run: python scripts/compile_tcc.py --output results/tcc/main.pdf --diagnostics .tcc-build/aux
+
+      - name: Verify compiled front matter and page destinations
+        run: python scripts/validate_tcc_pdf.py --pdf results/tcc/main.pdf --aux .tcc-build/aux
 
       - name: Upload LaTeX diagnostics
         if: always()

@@ -6,6 +6,7 @@ colorSchema: light
 fonts:
   sans: Times New Roman
   serif: Times New Roman
+  provider: none
 title: "Ensino Personalizado de Matemática"
 info: "Revisão Sistemática da Literatura — dados da revisão"
 author: "Thales Ferreira Batista"
@@ -73,7 +74,7 @@ class: content-slide tcc-objective-general-slide
 
 <div class="tcc-objective-layout">
   <div class="tcc-objective-box tcc-action"><span>OBJETO DA REVISÃO</span><p>Aplicações de técnicas computacionais na educação matemática.</p></div>
-  <div class="tcc-objective-core">Mapear e analisar sistematicamente essas aplicações — especialmente <em>machine learning</em>, <em>learning analytics</em> e sistemas tutores inteligentes — para identificar tendências, lacunas e oportunidades.</div>
+  <div class="tcc-objective-core">Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.</div>
   <div class="tcc-objective-box tcc-impact"><span>IMPACTO (PARA QUÊ?)</span><p>Fundamentar uma especificação conceitual, explicável e orientada ao apoio do professor.</p></div>
   <div class="tcc-objective-box tcc-scope"><span>ESCOPO</span><p>Revisão sistemática, síntese de evidências e requisitos. Não é protótipo funcional nem avaliação de eficácia.</p></div>
 </div>
@@ -85,7 +86,7 @@ class: content-slide
 
 <div class="slide-kicker">03 / PERGUNTAS</div>
 
-# Quatro perguntas<br>organizam a investigação
+# Quatro perguntas orientam<br>a análise da literatura
 
 <div class="rq-grid tcc-question-grid">
   <div class="rq-card rq-blue"><span>01</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="13" cy="13" r="7"/><path d="m18.5 18.5 7 7M10 13h6m-3-3v6"/></svg></div><strong>Pergunta 1 (O quê?)</strong><p>Quais técnicas aparecem na educação matemática e em que contextos?</p></div></div>
@@ -107,13 +108,13 @@ class: content-slide tcc-mission-slide
 
 <div class="tcc-mission-layout">
   <div class="tcc-mission-copy">
-    <p>O TCC mapeia aplicações de <strong>machine learning</strong>, <strong>learning analytics</strong> e sistemas tutores inteligentes em educação matemática.</p>
+    <p>O TCC propõe uma <strong>especificação técnica e pedagógica</strong> para apoiar a interpretação docente da aprendizagem matemática, fundamentada na revisão da literatura.</p>
     <div class="tcc-reading-lens"><span>LEITURA RESPONSÁVEL</span><strong>Desempenho observado ≠ aprendizagem</strong><p>Uma saída computacional organiza registros e pode gerar estimativas; não observa, sozinha, os processos cognitivos, sociais e afetivos.</p></div>
   </div>
   <div class="tcc-rigor-card">
     <h2>A ferramenta de rigor</h2>
     <div class="tcc-rigor-mark">PRISMA<br><b>2020</b></div>
-    <p><span>✓</span> Protocolo explícito para orientar identificação, seleção e relato.</p>
+    <p><span>✓</span> Diretriz de relato para tornar identificação e seleção transparentes.</p>
     <p><span>✓</span> Decisões documentadas para favorecer transparência e rastreabilidade.</p>
     <p><span>✓</span> Resultados apresentados com limites, sem ranking ou inferência de eficácia.</p>
   </div>
@@ -131,9 +132,9 @@ class: content-slide
 <div class="interpretation-ladder">
   <div class="interpretation-level level-blue"><b>01</b><strong>Desempenho observado</strong><span>Acertos, notas, tentativas, estratégias ou tempo registrados em uma tarefa.</span></div>
   <div class="interpretation-level level-purple"><b>02</b><strong>Probabilidade preditiva</strong><span>Saída condicionada ao modelo, aos dados e a um alvo definido; não é proficiência.</span></div>
-  <div class="interpretation-level level-green"><b>03</b><strong>Proficiência estimada</strong><span>Inferência produzida por um modelo a partir de várias evidências.</span></div>
-  <div class="interpretation-level level-orange"><b>04</b><strong>Competência</strong><span>Mobilização de conhecimentos, procedimentos e atitudes para resolver problemas.</span></div>
-  <div class="interpretation-level level-red"><b>05</b><strong>Aprendizagem</strong><span>Transformação construída ao longo do tempo, com compreensão, autonomia e transferência.</span></div>
+  <div class="interpretation-level level-green"><b>03</b><strong>Proficiência estimada</strong><span>Posição inferida em uma escala, dependente do modelo de mensuração.</span></div>
+  <div class="interpretation-level level-orange"><b>04</b><strong>Competência</strong><span>Mobilização de conhecimentos, habilidades, atitudes e valores para resolver demandas.</span></div>
+  <div class="interpretation-level level-red"><b>05</b><strong>Aprendizagem</strong><span>Neste TCC: mudanças no que o estudante sabe e consegue fazer ao longo do tempo.</span></div>
 </div>
 
 <div class="concept-note"><strong>Regra de interpretação:</strong> uma saída computacional pode organizar evidências e produzir estimativas, mas não observa sozinha todos os processos cognitivos, sociais e afetivos da aprendizagem, nem demonstra eficácia pedagógica.</div>
@@ -145,20 +146,16 @@ class: content-slide tcc-objectives-slide
 
 <div class="slide-kicker">06 / OBJETIVOS ESPECÍFICOS</div>
 
-# A execução em 7 objetivos específicos
+# Quatro objetivos para a especificação
 
 <div class="tcc-objective-roadmap">
-  <svg class="tcc-roadmap-streams" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 88 C150 20 180 156 330 88 S510 20 660 88 S840 156 1000 88"/><path d="M0 235 C150 170 180 300 330 235 S510 170 660 235 S840 300 1000 235"/><path d="M0 365 C150 300 180 420 330 365 S510 300 660 365 S840 420 1000 365"/></svg>
-  <div class="tcc-objective-step"><span>01</span><strong>Revisar</strong><p>Literatura de 2015–2026, conforme o protocolo.</p></div>
-  <div class="tcc-objective-step"><span>02</span><strong>Identificar</strong><p>Técnicas computacionais utilizadas.</p></div>
-  <div class="tcc-objective-step"><span>03</span><strong>Classificar</strong><p>Finalidades pedagógicas.</p></div>
-  <div class="tcc-objective-step"><span>04</span><strong>Analisar</strong><p>Avaliação e limitações.</p></div>
-  <div class="tcc-objective-step"><span>05</span><strong>Mapear</strong><p>Lacunas e desafios.</p></div>
-  <div class="tcc-objective-step"><span>06</span><strong>Auditar</strong><p>Pipeline e artefatos versionados.</p></div>
-  <div class="tcc-objective-step"><span>07</span><strong>Derivar</strong><p>Requisitos e arquitetura conceitual.</p></div>
+  <div class="tcc-objective-step"><span>01</span><strong>Categorizar</strong><p>Técnicas computacionais e finalidades pedagógicas na literatura mapeada.</p></div>
+  <div class="tcc-objective-step"><span>02</span><strong>Identificar limites</strong><p>Limitações e lacunas técnicas, pedagógicas, metodológicas e éticas.</p></div>
+  <div class="tcc-objective-step"><span>03</span><strong>Formular a especificação</strong><p>Requisitos, critérios de dados e modelos e arquitetura de referência.</p></div>
+  <div class="tcc-objective-step"><span>04</span><strong>Propor a avaliação</strong><p>Protocolo para avaliação futura; sem resultados experimentais próprios.</p></div>
 </div>
 
-<div class="tcc-caption">Juntos, estes objetivos conectam a busca, a síntese e a especificação do TCC.</div>
+<div class="tcc-caption">Revisão de 2015–2026, MMAT preliminar e pipeline auditável são meios metodológicos. Propor o protocolo não equivale a executá-lo.</div>
 
 ---
 layout: default
@@ -219,7 +216,7 @@ class: content-slide flow-slide
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Taxa de retenção final: 0,15%.</strong> A baixa retenção descreve o filtro aplicado; não é medida de qualidade nem de eficácia pedagógica.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Os 2.486 registros foram priorizados por metadados e resumos; a etapa não equivale à avaliação de elegibilidade de relatórios em texto completo. A retenção não é medida de qualidade nem de eficácia pedagógica.</div>
 
 ---
 layout: center
@@ -228,9 +225,9 @@ class: image-slide tcc-prisma-slide
 
 <div class="slide-kicker">10 / FLUXO</div>
 
-<h1 class="sr-only">Fluxo PRISMA dos dados da revisão</h1>
+<h1 class="sr-only">Representação operacional do processo de seleção, com referência ao PRISMA 2020</h1>
 
-<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image tcc-prisma-image" />
+<img src="./public/images/prisma_flow.png" alt="Representação operacional do processo de seleção; não corresponde ao diagrama PRISMA completo" class="feature-image prisma-image tcc-prisma-image" />
 
 <small class="source-note">Fonte versionada: `research/exports/visualizations/prisma_flow.png`.</small>
 
@@ -355,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> entre os 17 candidatos empíricos, 9 tiveram texto primário revisado e 8 foram apreciados com resumo/metadados. Um revisor conduziu a leitura; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> entre os 17 candidatos empíricos, 12 tiveram texto primário consultado (9 fontes arquivadas e 3 examinadas externamente) e 5 foram apreciados com resumos/metadados. Um único revisor conduziu a leitura; verificação independente e adjudicação ainda pendem.</div>
 
 ---
 layout: default
@@ -399,19 +396,19 @@ layout: default
 class: content-slide tcc-gaps-slide
 ---
 
-<div class="slide-kicker">19 / LACUNAS</div>
+<div class="slide-kicker">19 / EVIDÊNCIAS E LIMITES</div>
 
-# Lacunas que orientam a especificação
+# Limitações identificadas nos estudos consultados
 
-<p class="tcc-gaps-intro">Seis lacunas documentadas são agrupadas em quatro eixos para conduzir a próxima decisão científica.</p>
+<p class="tcc-gaps-intro">Quatro exemplos localizados nos textos primários; não são uma contagem de frequência nem uma afirmação sobre toda a literatura.</p>
 <div class="tcc-gaps-grid">
-  <div><b>1</b><h2>Explicabilidade</h2><p>Resultados compreensíveis, com incerteza e participação docente.</p></div>
-  <div><b>2</b><h2>Contexto curricular</h2><p>Indicadores relacionados a objetivos e descritores matemáticos.</p></div>
-  <div><b>3</b><h2>Validação real</h2><p>População, ambiente educacional e equidade precisam ser investigados.</p></div>
-  <div><b>4</b><h2>Reprodutibilidade</h2><p>Dados, código, parâmetros e decisões permanecem rastreáveis.</p></div>
+  <div><h2>He et al. (2025)<small>pp. 1, 16, 31–35</small></h2><p><strong>Relato:</strong> oito turmas de 45 estudantes, mas amostra declarada n=90; a distribuição de docentes entre condições também é desigual.</p><p><strong>Implicação:</strong> denominador, unidade de análise e possível confundimento exigem cautela.</p></div>
+  <div><h2>Villegas-Ch et al. (2025)<small>pp. 14, 22</small></h2><p><strong>Relato:</strong> métodos descrevem seis semanas; os resultados chegam à oitava, sem conciliação nos trechos consultados.</p><p><strong>Implicação:</strong> não se deve impor duração única à síntese.</p></div>
+  <div><h2>Nyantah et al. (2025)<small>pp. 101–105</small></h2><p><strong>Relato:</strong> alocação descrita de modo incompatível; há diferença no pré-teste e a intervenção combina animação e jigsaw.</p><p><strong>Implicação:</strong> não atribuir o resultado à animação isoladamente.</p></div>
+  <div><h2>Echeveria et al. (2025)<small>pp. 66, 69–70</small></h2><p><strong>Relato:</strong> oito itens usados para formar categorias também aparecem entre os preditores selecionados.</p><p><strong>Implicação:</strong> a classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> 12 de 17 textos primários foram consultados; cinco candidatos foram apreciados por resumo/metadados. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
 
 ---
 layout: default
