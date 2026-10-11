@@ -54,7 +54,7 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
         ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md"
     ).read_text(encoding="utf-8")
 
-    assert "Doze registros empíricos tiveram o texto primário consultado externamente, cinco" in methodology
+    assert "Entre os 17 candidatos empíricos, 12 tiveram o texto primário consultado e cinco" in methodology
     assert "doze registros tiveram o texto primário consultado e cinco foram" in results
     assert "doze registros tiveram texto primário consultado e cinco foram" in presentation
     assert "nove registros tiveram" not in results.lower()
