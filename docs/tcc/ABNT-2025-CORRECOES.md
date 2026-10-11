@@ -1,6 +1,6 @@
 # Correções normativas aplicadas ao TCC
 
-**Estado:** revisão atualizada em 10 de outubro de 2026; adequação institucional parcial.
+**Estado:** adequação institucional parcial.
 
 Este registro documenta somente correções verificáveis na camada de apresentação do
 TCC. Ele não declara conformidade integral com a ABNT nem substitui a conferência
@@ -84,6 +84,15 @@ orientações. A Coordenação, a Biblioteca ou a orientação deve confirmar qu
 modelo prevalece para o depósito final. As listas de ilustrações, quadros e
 tabelas permanecem separadas. A classe LaTeX continua sendo uma adaptação local;
 esta comparação não equivale a uma certificação de conformidade.
+
+Os pacotes de TC tradicional e de desenvolvimento de software disponibilizados
+na página do curso como modelos de 2026 incluem a classe `abntex2-IFC.cls` com
+identificação interna de 2016 e comentário à NBR 6027:2012. Assim, o ano no
+rótulo do pacote não comprova, por si só, que a classe tenha sido atualizada
+integralmente segundo edições posteriores da ABNT. A classe usada nesta versão
+do TCC também preserva a identificação legada; as adaptações de citações e
+referências não substituem a atualização integral da classe. A divergência sobre
+os elementos pré-textuais continua pendente de confirmação institucional.
 
 A folha de aprovação deste PDF é um modelo sem assinaturas e não comprova a
 aprovação do trabalho. Para o depósito final, ela deverá ser substituída ou

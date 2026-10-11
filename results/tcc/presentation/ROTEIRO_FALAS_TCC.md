@@ -116,10 +116,12 @@ literatura encontrada; não escolhe um algoritmo vencedor.
 O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
 respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
 uma pontuação agregada. A avaliação é preliminar e foi feita por um único
-revisor. Doze registros tiveram texto primário consultado — nove fontes
-arquivadas e três examinadas externamente, sem cópia no repositório — e cinco
-dependeram de resumo e metadados. A verificação independente e a adjudicação ainda
-precisam ser consolidadas. Portanto, não apresento um ranking de qualidade.
+revisor. Entre os 17 candidatos empíricos, 12 tiveram texto primário consultado
+e cinco foram apreciados somente com resumo e metadados. As cópias integrais não
+são distribuídas neste repositório público. O manifesto registra as fontes e as
+datas de acesso; o ledger identifica a base documental e os localizadores. A
+verificação independente e a adjudicação ainda precisam ser consolidadas.
+Portanto, não apresento um ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
 

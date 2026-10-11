@@ -66,6 +66,10 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
     assert rows[1]["q2"] == "N"
     assert registry["6923"]["empirical_status"] == "empirical_abstract_only"
     assert registry["6923"]["design_status"] == "abstract_based"
+    study_6923 = next(row for row in rows if row["study_id"] == "6923")
+    assert study_6923["assessment_basis"] == "abstract_and_metadata_only"
+    assert study_6923["q2"] == "CT"
+    assert "does not provide enough detail" in study_6923["criterion_evidence"].lower()
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:

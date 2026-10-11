@@ -62,6 +62,10 @@ assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current
 assert.match(mmat, /<span class="metric-value">12<\/span><span class="metric-label">textos primários revisados<\/span>/, 'the current page must report all externally reviewed primary texts');
 assert.match(mmat, /<span class="metric-value">5<\/span><span class="metric-label">resumos\/metadados<\/span>/, 'the current page must report assessments based on abstracts and metadata in Portuguese');
 assert.doesNotMatch(mmat, /abstracts?\/metadados/i, 'the current page should use Portuguese for source-availability labels');
+const zengRow = mmat.match(/<tr>\s*<td>6923<\/td>[\s\S]*?<\/tr>/)?.[0];
+assert.ok(zengRow, 'study 6923 must be present in the current MMAT table');
+const zengRatings = [...zengRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
+assert.equal(zengRatings[3], 'Não é possível determinar', 'abstract-only study 6923 must not claim confirmed appropriateness of measurement');
 assert.match(mmat, /<td>6919<\/td>[\s\S]{0,1200}texto primário revisado/, 'study 6919 must be identified as externally reviewed in the current table');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');

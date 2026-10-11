@@ -202,6 +202,14 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert r"\input{../../research/exports/references/mmat_current_tcc_table.tex}" in chapter
     assert "Tjahyadi (2025) & Quant." not in chapter
 
+    methodology = _read(TCC_CONTENT / "metodologia.tex")
+    speaker_notes = _read(TCC_ROOT / "presentation" / "ROTEIRO_FALAS_TCC.md")
+    for text in (methodology, speaker_notes):
+        assert "Nove textos estão arquivados" not in text
+        assert "nove fontes" not in text
+    assert r"\citeonline{Zeng2025_6923}" in methodology
+    assert "Q2 foi registrado como CT" in methodology
+
 
 def test_author_created_sources_use_the_standard_year_form() -> None:
     invalid: list[str] = []
