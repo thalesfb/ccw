@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "a3e6c943e68f428d4e05febdb2d8053eac9bb5b02934c3d148dfd5802fa5d7c4",
+    "sha256": "36cf7b87dbb7cd1f96390469c0e19b0695753362e0ca569d4fcd477997ecb034",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/claim_evidence_current.json",
