@@ -17,3 +17,13 @@ def test_list_parser_handles_nested_titles_and_ignores_font_directives():
 
 def test_normalization_handles_pdf_line_breaks_case_and_accents():
     assert gate.normalize("CONTRIBUIÇÕES\nPEDAGÓGICAS") == gate.normalize("Contribuições Pedagógicas")
+
+
+def test_quadro_count_includes_separate_mixed_methods_appraisal(tmp_path):
+    entries = [
+        rf"\contentsline {{quadro}}{{\numberline {{{index}}}{{Quadro {index}.}}}}{{{index}}}{{quadro.{index}}}"
+        for index in range(1, 7)
+    ]
+    (tmp_path / "main.loq").write_text("\n".join(entries), encoding="utf-8")
+
+    assert gate.validate_quadro_count(tmp_path) == 6

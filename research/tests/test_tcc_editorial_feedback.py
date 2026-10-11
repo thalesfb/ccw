@@ -40,9 +40,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         )[0]
         for citation in (
             r"\citeonline[pp.~1, 16, 31--35]{He2025_6915}",
-            r"\citeonline[pp.~14, 22]{Villegas2025_6916}",
+            r"\citeonline[pp.~1, 14, 22]{Villegas2025_6916}",
             r"\citeonline[pp.~101--105]{Enhancing2025_012}",
-            r"\citeonline[pp.~66, 69--70]{Echeveria2025_6920}",
+            r"\citeonline[pp.~65, 69--70]{Echeveria2025_6920}",
         ):
             self.assertIn(citation, gaps)
         self.assertIn("doze registros tiveram o texto primário consultado", gaps)
@@ -56,14 +56,45 @@ class EditorialFeedbackTests(unittest.TestCase):
         )[0]
         for author, locator in (
             ("He et al. (2025)", "pp. 1, 16, 31–35"),
-            ("Villegas-Ch et al. (2025)", "pp. 14, 22"),
+            ("Villegas-Ch et al. (2025)", "pp. 1, 14, 22"),
             ("Nyantah et al. (2025)", "pp. 101–105"),
-            ("Echeveria et al. (2025)", "pp. 66, 69–70"),
+            ("Echeveria et al. (2025)", "pp. 65, 69–70"),
         ):
             self.assertIn(author, gap_slide)
             self.assertIn(locator, gap_slide)
         self.assertIn("12 de 17 textos primários", gap_slide)
         self.assertIn("não estimativa de prevalência", gap_slide)
+
+    def test_temporal_and_sample_frames_are_reported_without_false_reconciliation(self):
+        review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+        gaps = review.split(r"\section{Tendências e Lacunas}", 1)[1].split(
+            r"\section{Limitações e Contribuições da Revisão}", 1
+        )[0]
+        self.assertIn("um semestre acadêmico", gaps)
+        self.assertIn("período experimental de seis semanas", gaps)
+        self.assertIn("subanálise de programação", gaps)
+        self.assertIn("oitava semana", gaps)
+        self.assertIn("não reconcilia essas janelas temporais", gaps)
+        self.assertNotIn("os resultados se estendem até a oitava semana", gaps)
+        self.assertIn("2023--2024", gaps)
+        self.assertIn("2022--2023", gaps)
+        self.assertIn("sem esclarecer se são coortes distintas", gaps)
+
+        audit = (ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md").read_text(encoding="utf-8")
+        self.assertIn("semestre", audit)
+        self.assertIn("2023--2024 e 2022--2023", audit)
+        self.assertIn("candidato contextual", audit)
+        self.assertIn("não fica demonstrada pelo resumo", audit)
+        results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+        self.assertIn("texto integral não recuperado, contexto matemático não confirmado", results)
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        self.assertIn("12 tiveram texto primário consultado por fontes externas", slides)
+        self.assertIn("cópias integrais não estão arquivadas no repositório público", slides)
+        results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+        self.assertIn("texto integral não recuperado, contexto matemático não confirmado", results)
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        self.assertIn("12 tiveram texto primário consultado por fontes externas", slides)
+        self.assertIn("cópias integrais não estão arquivadas no repositório público", slides)
 
     def test_defense_deck_and_parallel_pptx_are_distinguished(self):
         slidev_readme = (ROOT / "presentation/README.md").read_text(encoding="utf-8")
@@ -129,9 +160,9 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_abstract_reports_operational_selection_and_limits_gap_claims(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
-        self.assertIn("2.486 para a priorização operacional", abstract)
+        self.assertIn("2.486 para priorização operacional baseada em metadados", abstract)
         self.assertIn("12 tiveram textos primários consultados", abstract)
-        self.assertIn("a cobertura não permite estimar a frequência", abstract)
+        self.assertIn("sem estimar sua frequência", abstract)
         self.assertNotIn("2.486 para a elegibilidade", abstract)
         self.assertNotIn("lacunas relacionadas à explicabilidade", abstract)
 

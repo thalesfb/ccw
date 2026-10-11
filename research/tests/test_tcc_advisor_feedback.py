@@ -156,9 +156,10 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     assert "A delimitação dos procedimentos executados" in introduction
     assert "especificação conceitual do protótipo" in prototype
     assert "não foi tratada como evidência de uma aplicação funcional" in prototype
-    assert "O objetivo geral foi alcançado" in results
+    assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "Este trabalho investigou" in conclusion
-    assert "Como contribuições, o trabalho produziu" in abstract
+    assert "Este trabalho elaborou uma especificação técnica e pedagógica" in abstract
+    assert "O protocolo foi proposto sem execução empírica própria" in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:
@@ -225,8 +226,8 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology
     assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
     assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
-    assert "a apreciação dos componentes qualitativo e quantitativo ainda não foi registrada" in normalized_methodology.lower()
-    assert "para o estudo 6919, q1--q5 representam somente a categoria de métodos mistos" in MMAT_LATEX.read_text(encoding="utf-8").lower()
+    assert "seus componentes qualitativos e quantitativos são apreciados separadamente" in normalized_methodology.lower()
+    assert "para os estudos 6916, 6919 e 6920, q1--q5 representam a categoria de métodos mistos" in MMAT_LATEX.read_text(encoding="utf-8").lower()
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:

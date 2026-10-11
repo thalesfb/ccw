@@ -17,7 +17,7 @@ from typing import Any, Iterable
 CURRENT_STUDY_IDS: tuple[int, ...] = (
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923
 )
-VALID_RESPONSES = {"Y", "N", "CT"}
+VALID_RESPONSES = {"Y", "N", "CT", "N/A"}
 VALID_DESIGNS = {
     "qualitative", "quantitative_randomized", "quantitative_nonrandomized",
     "quantitative_descriptive", "mixed_methods", "metadata_hold", "not_applicable",
@@ -29,9 +29,21 @@ PENDING_DESIGN_STATUSES = {
     "allocation_sequence_unreported_pending",
     "unit_of_appraisal_pending",
 }
+VALID_DESIGN_STATUSES = {
+    "abstract_based",
+    "allocation_conflict_pending",
+    "allocation_sequence_unreported_pending",
+    "allocation_unreported_pending",
+    "design_reassessed_provisional",
+    "design_reassessed_provisional_with_allocation_conflict",
+    "metadata_hold",
+    "not_applicable",
+    "unit_of_appraisal_pending",
+}
 REQUIRED_CRITERIA = ("q1", "q2", "q3", "q4", "q5")
+COMPONENT_CRITERIA = ("c1", "c2", "c3", "c4", "c5")
 ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
-EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT)\s+.+$")
+EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT|N/A)\s+.+$")
 VALID_ASSESSMENT_BASES = {
     "primary_full_text_reviewed_externally",
     "abstract_and_metadata_only",
@@ -48,6 +60,7 @@ REGISTRY_PATH = DATA_ROOT / "mmat_current_study_registry.csv"
 PRIMARY_SOURCES_PATH = DATA_ROOT / "mmat_primary_sources_manifest.csv"
 REASSESSMENT_PATH = DATA_ROOT / "mmat_reassessment_current.csv"
 SYNTHESIS_SCOPE_PATH = DATA_ROOT / "current_synthesis_scope.csv"
+COMPONENT_REASSESSMENT_PATH = DATA_ROOT / "mmat_component_reassessment_current.csv"
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:
@@ -104,6 +117,11 @@ def load_current_reassessment(
                 )
         if row.get("design") not in VALID_DESIGNS:
             raise ValueError(f"Invalid design for study {row.get('study_id')}: {row.get('design')!r}")
+        if row.get("design_status") not in VALID_DESIGN_STATUSES:
+            raise ValueError(
+                f"Invalid design status for study {row.get('study_id')}: "
+                f"{row.get('design_status')!r}"
+            )
         evidence = [part.strip() for part in row.get("criterion_evidence", "").split(";")]
         if len(evidence) != len(ALL_CRITERIA) or not all(
             EVIDENCE_PATTERN.match(part) for part in evidence
@@ -125,10 +143,26 @@ def load_current_reassessment(
             raise ValueError(
                 f"Study {row.get('study_id')} lacks source or assessment basis"
             )
+        for field in ("reviewer", "review_date", "adjudication_status", "assessment_status"):
+            if not row.get(field, "").strip():
+                raise ValueError(
+                    f"Study {row.get('study_id')} lacks review provenance field {field}"
+                )
         if row["assessment_basis"] not in VALID_ASSESSMENT_BASES:
             raise ValueError(
                 f"Study {row.get('study_id')} uses an unknown assessment basis: "
                 f"{row['assessment_basis']!r}"
+            )
+        protocol_record = row["assessment_basis"] == "protocol_or_proposal_not_applicable"
+        has_not_applicable_response = any(row[criterion] == "N/A" for criterion in ALL_CRITERIA)
+        if protocol_record and not all(row[criterion] == "N/A" for criterion in ALL_CRITERIA):
+            raise ValueError(
+                f"Protocol/proposal {row.get('study_id')} must mark every empirical MMAT "
+                "criterion as not applicable"
+            )
+        if not protocol_record and has_not_applicable_response:
+            raise ValueError(
+                f"Study {row.get('study_id')} uses N/A outside a protocol/proposal record"
             )
         if row["assessment_basis"] == "protocol_or_proposal_not_applicable":
             if row.get("design_status") != "not_applicable":
@@ -164,6 +198,45 @@ def load_current_reassessment(
                 f"Study {row.get('study_id')} has an unresolved appraisal unit; "
                 "screening responses must remain unresolved"
             )
+    return rows
+
+
+def load_component_reassessments(
+    path: Path | str = COMPONENT_REASSESSMENT_PATH,
+) -> list[dict[str, str]]:
+    """Load provisional MMAT appraisals for components of mixed-methods studies."""
+    rows = _read_csv(Path(path))
+    expected = {
+        ("6916", "quantitative", "quantitative_nonrandomized"),
+        ("6916", "qualitative", "qualitative"),
+        ("6919", "quantitative", "quantitative_nonrandomized"),
+        ("6919", "qualitative", "qualitative"),
+        ("6920", "quantitative", "quantitative_descriptive"),
+        ("6920", "qualitative", "qualitative"),
+    }
+    observed = {
+        (row.get("study_id", ""), row.get("component", ""), row.get("design", ""))
+        for row in rows
+    }
+    if len(rows) != len(expected) or observed != expected:
+        raise ValueError("Mixed-methods component reassessment must contain the six expected component rows")
+    for row in rows:
+        for criterion in COMPONENT_CRITERIA:
+            if row.get(criterion) not in {"Y", "N", "CT"}:
+                raise ValueError(
+                    f"Invalid {criterion} component response for study {row.get('study_id')}"
+                )
+            if not row.get(f"evidence_{criterion}"):
+                raise ValueError(
+                    f"Missing {criterion} component rationale for study {row.get('study_id')}"
+                )
+        if not row.get("source_id") or not row.get("source_locator"):
+            raise ValueError(f"Component appraisal for study {row.get('study_id')} lacks source location")
+        if row.get("review_status") != "provisional_single_reviewer":
+            raise ValueError("Mixed-methods component appraisals must remain provisional")
+    main_rows = {row["study_id"]: row for row in load_current_reassessment()}
+    if any(main_rows[row["study_id"]]["design"] != "mixed_methods" for row in rows):
+        raise ValueError("Component-level appraisals are allowed only for mixed-methods studies")
     return rows
 
 
@@ -229,6 +302,7 @@ def validate_current_artifacts(
     registry = load_current_registry(registry_path)
     primary_sources = load_primary_sources(primary_sources_path)
     reassessment = load_current_reassessment(reassessment_path)
+    component_reassessment = load_component_reassessments()
     synthesis_scope = load_current_synthesis_scope(synthesis_scope_path)
     source_ids = [row["source_id"] for row in primary_sources]
     if len(source_ids) != len(set(source_ids)):
@@ -333,6 +407,7 @@ def validate_current_artifacts(
         "study_count": len(registry),
         "study_ids": list(CURRENT_STUDY_IDS),
         "criterion_rows": len(reassessment),
+        "component_criterion_rows": len(component_reassessment),
         "primary_source_rows": len(primary_sources),
         "synthesis_scope_rows": len(synthesis_scope),
         "empirical_evidence_rows": sum(

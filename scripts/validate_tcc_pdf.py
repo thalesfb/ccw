@@ -24,6 +24,16 @@ def list_entries(text: str) -> list[tuple[str, str]]:
     return re.findall(r"\\contentsline\s*\{[^}]+\}\{.*\}\{(\d+)\}\{([^}]+)\}", text)
 
 
+def validate_quadro_count(auxiliaries: Path) -> int:
+    entries = list_entries((auxiliaries / "main.loq").read_text(encoding="utf-8"))
+    if len(entries) != 6:
+        raise ValueError(
+            "Expected six quadros: search strategy, PICOS, study synthesis, "
+            "MMAT study appraisal, mixed-method components and PRISMA checklist"
+        )
+    return len(entries)
+
+
 def validate(pdf: Path, auxiliaries: Path) -> dict:
     reader = PdfReader(pdf)
     destinations = reader.named_destinations
@@ -54,8 +64,7 @@ def validate(pdf: Path, auxiliaries: Path) -> dict:
             if not re.search(rf"(?m)^\s*{re.escape(printed)}\s*$", pages[index]):
                 raise ValueError(f"{suffix}: {anchor} lists {printed}, but PDF page {index + 1} disagrees")
             checked.append({"list": suffix, "printed_page": int(printed), "physical_page": index + 1})
-    if len(list_entries((auxiliaries / "main.loq").read_text(encoding="utf-8"))) != 5:
-        raise ValueError("Expected five quadros: search, PICOS, synthesis, MMAT and PRISMA checklist")
+    validate_quadro_count(auxiliaries)
     if not any(name.startswith("cite.") for name in destinations):
         raise ValueError("Missing citation destinations")
     return {"pages": len(pages), "checked_entries": len(checked), "front_matter": checked}

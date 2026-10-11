@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const currentPath = path.join(root, 'research', 'data', 'mmat_reassessment_current.csv');
+const componentPath = path.join(root, 'research', 'data', 'mmat_component_reassessment_current.csv');
 const registryPath = path.join(root, 'research', 'data', 'mmat_current_study_registry.csv');
 const outputPath = path.join(root, 'research', 'exports', 'analysis', 'mmat_current.html');
 
@@ -52,8 +53,8 @@ function escapeHtml(value) {
 
 function criterion(value) {
   const normalized = value.toLowerCase();
-  const className = normalized === 'y' ? 'criterion-y' : normalized === 'n' ? 'criterion-n' : 'criterion-ct';
-  const response = normalized === 'y' ? 'Sim' : normalized === 'n' ? 'Não' : 'Não é possível determinar';
+  const className = normalized === 'y' ? 'criterion-y' : normalized === 'n' ? 'criterion-n' : normalized === 'n/a' ? 'criterion-na' : 'criterion-ct';
+  const response = normalized === 'y' ? 'Sim' : normalized === 'n' ? 'Não' : normalized === 'n/a' ? 'Não se aplica' : 'Não é possível determinar';
   return `<span class="criterion ${className}" title="Resposta: ${escapeHtml(response)}" aria-label="Resposta: ${escapeHtml(response)}">${escapeHtml(value)}</span>`;
 }
 
@@ -174,6 +175,7 @@ const criterionQuestionsByDesign = new Map(MMAT_CRITERIA_GROUPS.map((group) => [
 ]));
 
 const current = parseCsv(fs.readFileSync(currentPath, 'utf8'));
+const componentReassessments = parseCsv(fs.readFileSync(componentPath, 'utf8'));
 const registry = parseCsv(fs.readFileSync(registryPath, 'utf8'));
 const registryById = new Map(registry.map((row) => [row.study_id, row]));
 const latestSnapshot = current.map((row) => row.snapshot_date).sort().at(-1);
@@ -184,11 +186,34 @@ const empirical = current.filter((row) => row.empirical_status !== 'protocol_or_
 const primaryReviewed = current.filter((row) => row.assessment_basis === 'primary_full_text_reviewed_externally');
 const abstractOnly = current.filter((row) => row.assessment_basis === 'abstract_and_metadata_only');
 const mixedMethodsStudies = current.filter((row) => row.design === 'mixed_methods');
+const componentDesignLabels = {
+  qualitative: 'Qualitativo',
+  quantitative_nonrandomized: 'Quantitativo não randomizado',
+  quantitative_descriptive: 'Quantitativo descritivo',
+};
+const componentCriterionPrefixes = {
+  qualitative: '1',
+  quantitative_nonrandomized: '3',
+  quantitative_descriptive: '4',
+};
+function componentAppraisalDetails(studyId) {
+  const assessments = componentReassessments.filter((row) => row.study_id === studyId);
+  if (!assessments.length) return '';
+  const rows = assessments.map((assessment) => {
+    const prefix = componentCriterionPrefixes[assessment.design];
+    const criteria = ['c1', 'c2', 'c3', 'c4', 'c5'].map((criterionKey, index) => {
+      const code = `${prefix}.${index + 1}`;
+      return `<li class="mmat-evidence-item"><div class="mmat-evidence-heading"><span class="question-code">${code}</span><strong>${escapeHtml(assessment[criterionKey])}</strong>${criterion(assessment[criterionKey])}</div><p>${escapeHtml(assessment[`evidence_${criterionKey}`])}</p></li>`;
+    }).join('');
+    return `<tr><th scope="row">${escapeHtml(componentDesignLabels[assessment.design])}</th><td colspan="2"><ul class="mmat-evidence-grid">${criteria}</ul><p class="source-note"><strong>Fonte:</strong> ${escapeHtml(assessment.source_id)}; <strong>localizador:</strong> ${escapeHtml(assessment.source_locator)}.</p></td></tr>`;
+  }).join('');
+  return `<section class="component-assessment" aria-label="Avaliação dos componentes do estudo ${escapeHtml(studyId)}"><h4>Avaliação dos componentes (provisória)</h4><p>Além dos critérios mistos exibidos na linha principal, o MMAT requer apreciação dos componentes qualitativo e quantitativo com categorias apropriadas. Estes julgamentos são de revisor único e aguardam adjudicação independente.</p><table class="mmat-table"><thead><tr><th scope="col">Categoria</th><th scope="col">Critérios, justificativas e fonte</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+}
 const mixedMethodsNote = mixedMethodsStudies.length
   ? `<section class="section" aria-labelledby="mixed-methods-limit-title">
         <div class="callout callout-blue">
           <h2 id="mixed-methods-limit-title">Limite da apreciação de métodos mistos</h2>
-          <p>O guia MMAT recomenda avaliar os componentes qualitativo e quantitativo com as categorias adequadas, além dos critérios da categoria de métodos mistos. Para o(s) registro(s) ${mixedMethodsStudies.map((row) => escapeHtml(row.study_id)).join(', ')}, este snapshot apresenta Q1–Q5 da categoria mista, mas os componentes qualitativo e quantitativo ainda não foram avaliados. A apreciação desses registros permanece incompleta; isso não constitui uma avaliação negativa dos estudos.</p>
+          <p>O guia MMAT recomenda avaliar os componentes qualitativo e quantitativo com as categorias adequadas, além dos critérios da categoria de métodos mistos. Para os registros ${mixedMethodsStudies.map((row) => escapeHtml(row.study_id)).join(', ')}, este snapshot apresenta Q1–Q5 da categoria mista e, em cada ficha, uma apreciação preliminar separada dos componentes. Como há um único revisor e a adjudicação independente continua pendente, essas avaliações ainda não são finais; isso não constitui uma avaliação negativa dos estudos.</p>
           <p><a href="https://mixedmethodsappraisaltoolpublic.pbworks.com/w/page/71030694/FAQ" target="_blank" rel="noopener">Orientação dos desenvolvedores do MMAT sobre estudos de métodos mistos</a></p>
         </div>
       </section>`
@@ -201,7 +226,9 @@ function criterionEvidenceDetails(row) {
     ...MMAT_SCREENING_QUESTIONS.map(({ code, label }) => ({ code, label })),
     ...['Q1', 'Q2', 'Q3', 'Q4', 'Q5'].map((code) => ({
       code,
-      label: designQuestions?.get(code) ?? 'Pergunta específica não determinada porque o delineamento permanece pendente.',
+      label: row.empirical_status === 'protocol_or_proposal_not_applicable'
+        ? 'Não aplicável: protocolo contextual sem resultados empíricos concluídos.'
+        : designQuestions?.get(code) ?? 'Pergunta específica não determinada porque o delineamento permanece pendente.',
     })),
   ];
   const items = allQuestions.map(({ code, label }) => `<li class="mmat-evidence-item">
@@ -216,6 +243,7 @@ function criterionEvidenceDetails(row) {
         <summary>Ver perguntas, justificativas e localização da evidência</summary>
         <ul class="mmat-evidence-grid">${items}</ul>
         <p class="source-note"><strong>ID da fonte:</strong> ${source} (consulte o manifesto de fontes primárias); <strong>seções/páginas registradas:</strong> ${locator}; <strong>data da apreciação:</strong> ${escapeHtml(formatDate(row.review_date))}.</p>
+        ${componentAppraisalDetails(row.study_id)}
       </details>
     </td>
   </tr>`;
@@ -224,7 +252,11 @@ function criterionEvidenceDetails(row) {
 const rows = current.map((row) => {
   const study = registryById.get(row.study_id) ?? {};
   const title = study.title || row.study_key;
-  const type = row.empirical_status === 'protocol_or_proposal_not_applicable' ? 'fora da síntese empírica' : row.design || 'design não informado';
+  const type = row.empirical_status === 'protocol_or_proposal_not_applicable'
+    ? 'fora da síntese empírica'
+    : row.study_id === '6915'
+      ? `${row.design} · componente escolar`
+      : row.design || 'design não informado';
   return `<tr>
     <td>${escapeHtml(row.study_id)}</td>
     <td><span class="study-title">${escapeHtml(title)}</span><span class="study-meta">${escapeHtml(row.study_key)} · ${escapeHtml(type)}</span></td>
@@ -306,7 +338,7 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Leitura metodológica</span>
           <h3>Critérios, não uma nota</h3>
-          <p>O ledger preserva S1 e S2 como perguntas de triagem e Q1–Q5 como critérios de apreciação. Cada célula usa <strong>Y</strong> (sim), <strong>N</strong> (não) ou <strong>CT</strong> (não é possível concluir com a fonte disponível).</p>
+          <p>O ledger preserva S1 e S2 como perguntas de triagem e Q1–Q5 como critérios de apreciação. As células usam <strong>Y</strong> (sim), <strong>N</strong> (não), <strong>CT</strong> (não é possível concluir) e <strong>N/A</strong> (não aplicável ao protocolo contextual).</p>
         </article>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
@@ -320,7 +352,7 @@ const page = `<!doctype html>
       <section class="section" aria-labelledby="questions-title">
         <div class="section-heading">
           <h2 id="questions-title">Perguntas de triagem do MMAT 2018</h2>
-          <p>Estas duas perguntas são aplicadas a todos os estudos antes da apreciação específica do delineamento.</p>
+          <p>As perguntas de triagem S1 e S2 são aplicadas aos 17 candidatos empíricos submetidos ao MMAT. O protocolo contextual 6921 é não empírico e recebe N/A; por isso, não integra a triagem nem o denominador.</p>
         </div>
         <div class="mmat-screening-grid">${screeningQuestions}</div>
         <div class="callout callout-blue mmat-question-note">
@@ -343,7 +375,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
@@ -355,7 +387,7 @@ const page = `<!doctype html>
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
             <h3 id="pending-title">Pendências antes da consolidação</h3>
-            <p>Consultar as justificativas e localizadores disponíveis em cada registro, completar a evidência ainda insuficiente e concluir a adjudicação com a orientação. O protocolo 6921 continua fora da síntese empírica.</p>
+            <p>Completar os localizadores por critério, recuperar os textos primários ainda ausentes e concluir a adjudicação independente com a orientação. O protocolo 6921 continua fora da síntese empírica.</p>
           </div>
         </div>
       </section>
@@ -363,8 +395,8 @@ const page = `<!doctype html>
       <section class="section surface-card">
         <span class="eyebrow">Proveniência</span>
         <h3>Fontes versionadas</h3>
-        <p><a href="../../../research/data/mmat_reassessment_current.csv">CSV do ledger atual</a> · <a href="../../../research/data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../../../research/data/mmat_primary_sources_manifest.csv">manifesto de fontes primárias</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
-        <p class="source-note">A página foi gerada a partir de <code>research/data/mmat_reassessment_current.csv</code> e <code>research/data/mmat_current_study_registry.csv</code>.</p>
+        <p><a href="../../../research/data/mmat_reassessment_current.csv">CSV do ledger atual</a> · <a href="../../../research/data/mmat_component_reassessment_current.csv">CSV da apreciação por componentes</a> · <a href="../../../research/data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../../../research/data/mmat_primary_sources_manifest.csv">manifesto de fontes primárias</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
+        <p class="source-note">A página foi gerada a partir dos ledgers versionados da apreciação MMAT e do registro dos estudos.</p>
         <p class="source-note">As perguntas seguem o <a href="https://doi.org/10.3233/EFI-180221" target="_blank" rel="noopener">MMAT 2018</a>; a tradução em português é acompanhada pela formulação original em inglês para manter a rastreabilidade do instrumento.</p>
       </section>
     </div>

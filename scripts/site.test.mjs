@@ -69,11 +69,29 @@ assert.equal(zengRatings[3], 'Não é possível determinar', 'abstract-only stud
 const echeveriaRow = mmat.match(/<tr>\s*<td>6920<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(echeveriaRow, 'study 6920 must be present in the current MMAT table');
 const echeveriaRatings = [...echeveriaRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
-assert.equal(echeveriaRatings[4], 'Não é possível determinar', 'study 6920 must not claim measurement appropriateness without recorded evidence');
+assert.equal(echeveriaRatings[4], 'Não é possível determinar', 'mixed-methods Q3 must not use a quantitative-component defect as evidence about interpretation of integrated outputs');
+assert.equal(echeveriaRatings[5], 'Não é possível determinar', 'mixed-methods Q4 must remain indeterminate without direct evidence about divergences');
+const universityRow = mmat.match(/<tr>\s*<td>6919<\/td>[\s\S]*?<\/tr>/)?.[0];
+assert.ok(universityRow, 'mixed-methods study 6919 must be present in the current MMAT table');
+const universityRatings = [...universityRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
+assert.equal(universityRatings[5], 'Não é possível determinar', 'study 6919 must not treat a difference between initial challenges and outcomes as evidence that quantitative/qualitative divergence was addressed');
+const protocolRow = mmat.match(/<tr>\s*<td>6921<\/td>[\s\S]*?<\/tr>/)?.[0];
+assert.ok(protocolRow, 'contextual protocol 6921 must be present in the current MMAT table');
+assert.doesNotMatch(protocolRow, />CT</, 'a protocol must not be presented as an indeterminate empirical MMAT appraisal');
+assert.equal([...protocolRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].length, 7, 'protocol screening and appraisal cells must remain explicit');
+assert.equal([...protocolRow.matchAll(/aria-label="Resposta: Não se aplica"/g)].length, 7, 'all protocol criteria must be visibly marked not applicable');
+for (const studyId of ['6916', '6919', '6920']) {
+  const mixedRow = mmat.match(new RegExp(`<tr>\\s*<td>${studyId}<\\/td>[\\s\\S]*?<\\/tr>[\\s\\S]*?<tr class="mmat-evidence-row">[\\s\\S]*?<\\/tr>`))?.[0];
+  assert.ok(mixedRow, `mixed-methods study ${studyId} must expose its evidence row`);
+  assert.match(mixedRow, /Avaliação dos componentes/, `mixed-methods study ${studyId} must disclose component appraisals`);
+  assert.match(mixedRow, /qualitativo|quantitativo/i, `mixed-methods study ${studyId} must identify component types`);
+}
 assert.match(mmat, /<td>6919<\/td>[\s\S]{0,1200}texto primário revisado/, 'study 6919 must be identified as externally reviewed in the current table');
+assert.match(mmat, /He2025_6915 · quantitative_nonrandomized · componente escolar/, 'study 6915 must identify the classroom component as its appraisal unit');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
 assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');
+assert.match(mmat, /As perguntas de triagem S1 e S2 são aplicadas aos 17 candidatos empíricos submetidos ao MMAT\. O protocolo contextual 6921 é não empírico e recebe N\/A; por isso, não integra a triagem nem o denominador\./i, 'the current page must distinguish empirical candidates from the contextual protocol');
 assert.match(mmat, /Are there clear research questions\?/i, 'the current page must preserve the original S1 wording');
 assert.match(mmat, /Critérios de apreciação por delineamento/i, 'the current page must expose design-specific criteria');
 assert.match(mmat, /MMAT 2018<\/a>/i, 'the current page must cite the MMAT 2018 source');
@@ -86,6 +104,9 @@ assert.equal((mmat.match(/class="mmat-evidence"/g) || []).length, 18, 'every MMA
 assert.match(mmat, /Ver perguntas, justificativas e localização da evidência/i, 'the evidence disclosure must be clearly labeled');
 assert.match(mmat, /academic and demographic measures/i, 'the current page must expose the evidence note for study 2 Q3');
 assert.match(mmat, /sufficient to judge measurement appropriateness/i, 'the current page must explain why study 2 Q3 remains indeterminate');
+assert.match(mmat, /class="question-code">3\.1</, 'non-randomized quantitative components must use MMAT category 3');
+assert.doesNotMatch(mmat, /class="question-code">2\.1</, 'non-randomized quantitative components must not use randomized category 2');
+assert.equal((mmat.match(/Não aplicável: protocolo contextual sem resultados empíricos concluídos\./g) || []).length, 5, 'all protocol MMAT criteria must explain why N/A applies');
 for (const criterion of ['Q1', 'Q2', 'Q3', 'Q4', 'Q5']) {
   assert.match(mmat, new RegExp(`>${criterion}<`), `the current page must expose ${criterion}`);
 }

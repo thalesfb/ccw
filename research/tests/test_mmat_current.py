@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from src.analysis.mmat_current import (
+    load_component_reassessments,
     CURRENT_STUDY_IDS,
     load_current_registry,
     load_primary_sources,
@@ -33,6 +34,24 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
     assert [int(row["study_id"]) for row in synthesis_scope] == list(CURRENT_STUDY_IDS)
     assert all(row["mmat_status"] != "final" for row in registry)
     assert all(row["assessment_status"] != "final" for row in reassessment)
+    assert all(row["reviewer"] == "single_reviewer" for row in reassessment)
+    assert all(row["adjudication_status"] == "supervisor_review_pending" for row in reassessment)
+
+
+def test_current_mmat_rejects_missing_review_provenance(monkeypatch) -> None:
+    from src.analysis import mmat_current as current
+
+    original_read = current._read_csv
+
+    def read(path):
+        rows = original_read(path)
+        if path == current.REASSESSMENT_PATH:
+            rows[0]["reviewer"] = ""
+        return rows
+
+    monkeypatch.setattr(current, "_read_csv", read)
+    with pytest.raises(ValueError, match="reviewer"):
+        current.load_current_reassessment()
 
 
 def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
@@ -78,7 +97,7 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
 def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
 
-    for study_id in ("1", "2", "3", "4", "6", "9", "10", "6917", "6920"):
+    for study_id in ("1", "2", "3", "4", "6", "9", "10", "6917"):
         study = rows[study_id]
         assert study["q3"] == "CT"
         if study_id in {"1", "9", "10"}:
@@ -86,28 +105,41 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
             assert "Q3=CT measurement appropriateness cannot be determined from abstract" in (
                 study["criterion_evidence"]
             )
-        if study_id in {"2", "3", "6", "6917", "6920"}:
+        if study_id in {"2", "3", "6", "6917"}:
             assert "Q3=CT" in study["criterion_evidence"]
             assert "measurement appropriateness" in study["criterion_evidence"]
     assert (
         "Q3=CT grades demographics and predictors are identified but measurement "
         "appropriateness is not established"
     ) in rows["4"]["criterion_evidence"]
+    component = next(
+        row for row in load_component_reassessments()
+        if row["study_id"] == "6920" and row["component"] == "quantitative"
+    )
+    assert component["c3"] == "N"
+    assert "independent measurement of the target" in component["evidence_c3"]
 
 
 def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
     assert rows["6"]["q1"] == "CT"
-    assert (
-        "identification of timss data does not by itself establish the relevance "
-        "of the sampling strategy"
-    ) in rows["6"]["criterion_evidence"].lower()
+    assert "relevance of the sampling procedure" in rows["6"]["criterion_evidence"].lower()
 
-    for study_id in ("2", "6920"):
-        assert rows[study_id]["q2"] == "CT"
-        assert "target population" in rows[study_id]["criterion_evidence"].lower()
+    assert rows["2"]["q2"] == "CT"
+    assert "target population" in rows["2"]["criterion_evidence"].lower()
+    assert rows["6920"]["q2"] == "Y"
+    assert rows["6920"]["q3"] == "CT"
+    assert "integrated outputs" in rows["6920"]["criterion_evidence"].lower()
+    assert "target-predictor overlap is a quantitative component concern" in rows["6920"]["criterion_evidence"].lower()
+    assert "divergences between quantitative and qualitative results" in rows["6920"]["criterion_evidence"].lower()
+    component = next(
+        row for row in load_component_reassessments()
+        if row["study_id"] == "6920" and row["component"] == "quantitative"
+    )
+    assert component["c2"] == "CT"
     assert rows["6920"]["q4"] == "CT"
-    assert "nonresponse bias cannot be determined" in rows["6920"]["criterion_evidence"].lower()
+    assert "without clarifying cohort provenance" in component["evidence_c4"].lower()
+    assert "whether missing cases create nonresponse bias" in component["evidence_c4"].lower()
 
 
 def test_unreported_allocation_and_appraisal_unit_keep_design_pending() -> None:
@@ -165,7 +197,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         )
         assert match, f"Study {study_id} missing from generated MMAT page"
         answers = re.findall(
-            r'<span class="criterion [^"]*"[^>]*>(Y|N|CT)</span>',
+            r'<span class="criterion [^"]*"[^>]*>(Y|N|CT|N/A)</span>',
             match.group(1),
         )
         expected = [rows[study_id][criterion] for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5")]
@@ -174,7 +206,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         assert meta, f"Study {study_id} HTML design label missing"
         assert meta.group(1).startswith(f"{rows[study_id]['study_key']} · ")
 
-    assert "os componentes qualitativo e quantitativo ainda não foram avaliados" in html.lower()
+    assert "uma apreciação preliminar separada dos componentes" in html.lower()
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:
@@ -197,15 +229,14 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
     assert "4.1.1" in rows["6919"]["page_or_section"]
     assert "4.4.8" in rows["6919"]["page_or_section"]
     assert "2021" in rows["6919"]["notes"] and "2025" in rows["6919"]["notes"]
-    assert "current appraisal record does not identify a specific machine-learning algorithm" in (
+    assert "no specific machine-learning algorithm was identified in the examined passages" in (
         rows["6919"]["notes"].lower()
     )
-    assert "not evidence that the article contains none" in rows["6919"]["notes"].lower()
-    assert (
-        "component-level appraisal under the qualitative and quantitative categories "
-        "has not been recorded"
-    ) in rows["6919"]["notes"].lower()
-    assert "mmat appraisal is incomplete" in rows["6919"]["notes"].lower()
+    assert "not evidence that the paper contains none" in rows["6919"]["notes"].lower()
+    assert "component-level appraisal is recorded separately" in rows["6919"]["notes"].lower()
+    assert "component-level appraisal is recorded separately and remains provisional" in (
+        rows["6919"]["notes"].lower()
+    )
     assert sources["6919"]["source_type"] == "full_text_mirror"
     assert "researchgate.net/publication/400728111" in sources["6919"]["source_url"]
     assert "10.3390/su18041900" in sources["6919"]["verification_note"]
@@ -216,7 +247,7 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
     assert "random" in rows["14"]["notes"].lower()
     assert "45" in rows["6915"]["notes"] and "90" in rows["6915"]["notes"]
     assert [rows["6915"][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5")] == [
-        "N", "Y", "CT", "N", "Y"
+        "CT", "Y", "CT", "N", "Y"
     ]
     assert rows["6915"]["q4"] == "N"
     assert "Nyantah et al. (2025) & Pendente & Y & Y & CT & CT & CT & CT & CT" in (
@@ -230,11 +261,12 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
     )
 
     mixed_evidence = rows["6919"]["criterion_evidence"].lower()
-    assert "q1=ct adequate rationale for mixed methods" in mixed_evidence
-    assert "q2=ct integration of the components" in mixed_evidence
-    assert "q3=ct interpretation of integrated findings" in mixed_evidence
-    assert "q4=ct divergences or inconsistencies" in mixed_evidence
-    assert "q5=ct quality criteria for both traditions" in mixed_evidence
+    assert "q1=y the article states a rationale for a mixed-methods approach" in mixed_evidence
+    assert "q2=y quantitative and qualitative components are integrated" in mixed_evidence
+    assert "q3=n the interpretation extends to longer-term gains" in mixed_evidence
+    assert rows["6919"]["q4"] == "CT"
+    assert "q4=ct the reviewed sections do not establish whether quantitative and qualitative findings diverge" in mixed_evidence
+    assert "q5=n the quality of both components" in mixed_evidence
 
 
 def test_unresolved_mmat_design_cannot_receive_category_specific_ratings(monkeypatch) -> None:
@@ -301,6 +333,62 @@ def test_protocol_is_retained_only_as_contextual_non_empirical_record() -> None:
     assert scope["6921"]["synthesis_role"] == "contextual_protocol"
     assert scope["6921"]["empirical_mmat_applicability"] == "not_applicable"
     assert reassessment["6921"]["design"] == "not_applicable"
+    assert all(reassessment["6921"][criterion] == "N/A" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
+
+
+def test_mmat_appraisal_corrects_unfounded_analysis_and_sampling_decisions() -> None:
+    records = {row["study_id"]: row for row in load_current_reassessment()}
+    assert records["3"]["q5"] == "CT"
+    assert records["6"]["q5"] == "CT"
+    assert records["6917"]["q1"] == "CT"
+    assert records["6917"]["q2"] == "CT"
+
+
+def test_design_status_records_appraisal_state_not_source_review_provenance() -> None:
+    rows = {row["study_id"]: row for row in load_current_reassessment()}
+    for study_id in ("2", "3", "4", "6", "6915", "6917"):
+        assert rows[study_id]["design_status"] == "design_reassessed_provisional"
+    assert all(
+        row["design_status"] not in {
+            "primary_text_reviewed_external",
+            "primary_full_text_reviewed_provisional",
+        }
+        for row in rows.values()
+    )
+
+
+def test_unknown_design_status_is_rejected(monkeypatch) -> None:
+    from src.analysis import mmat_current as current
+
+    original_read = current._read_csv
+
+    def read(path):
+        rows = original_read(path)
+        if path == current.REASSESSMENT_PATH:
+            rows[0]["design_status"] = "primary_text_reviewed_external"
+        return rows
+
+    monkeypatch.setattr(current, "_read_csv", read)
+    with pytest.raises(ValueError, match="Invalid design status"):
+        current.load_current_reassessment()
+
+
+def test_nonrandomized_adherence_rating_uses_intervention_delivery_evidence() -> None:
+    study = next(row for row in load_current_reassessment() if row["study_id"] == "6915")
+    assert study["q5"] == "Y"
+    q5_evidence = study["criterion_evidence"].split(";")[-1].lower()
+    assert "18 teaching periods" in q5_evidence
+    assert "instructional plan" in q5_evidence
+    assert "train validation test split" not in q5_evidence
+
+
+def test_mixed_methods_studies_have_separate_component_appraisals() -> None:
+    records = {row["study_id"]: row for row in load_current_reassessment()}
+    assert {study_id for study_id, row in records.items() if row["design"] == "mixed_methods"} == {"6916", "6919", "6920"}
+    components = load_component_reassessments()
+    assert len(components) == 6
+    assert {row["study_id"] for row in components} == {"6916", "6919", "6920"}
+    assert all(row["review_status"] == "provisional_single_reviewer" for row in components)
 
 
 def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
@@ -310,6 +398,9 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
     table = CURRENT_TABLE.read_text(encoding="utf-8")
     assert "Nyantah et al. (2025) & Pendente" in table
     assert "Xia et al. (2026) & M\u00e9todos mistos" in table
+    assert "3.1 (CT):" in table
+    assert "2.1 (CT):" not in table
+    assert "3.1--3.5 (quantitativo não randomizado)" in table
     assert "ID" not in table
     assert "Enhancing2025" not in table
 

@@ -106,6 +106,19 @@ def test_priority_metadata_corrections_are_applied() -> None:
     assert "@incollection{Data2020_011" not in bibliography
 
 
+def test_innovative_model_uses_publisher_issue_metadata() -> None:
+    repository_root = Path(__file__).resolve().parents[2]
+    bibliography = (repository_root / "results/tcc/referencias.bib").read_text(
+        encoding="utf-8"
+    )
+    article = bibliography.split("@article{Innovative2023_005,", 1)[1].split("\n}", 1)[0]
+
+    assert "year = {2024}" in article
+    assert "volume = {9}" in article
+    assert "number = {1}" in article
+    assert "pages = {1--16}" in article
+
+
 def test_primary_technical_references_are_present_and_cited() -> None:
     repository_root = Path(__file__).resolve().parents[2]
     bib_paths = [

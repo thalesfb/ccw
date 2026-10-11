@@ -12,7 +12,7 @@ Math2021_001,included_study,verified,verified,verified,10.1109/SISY52375.2021.95
 Multimodels2020_002,included_study,verified,verified,scope_limited,10.5573/IEIESPC.2020.9.3.217,keep,Journal metadata and DOI URL normalized
 Analysis2022_003,included_study,verified,verified,scope_limited,10.1109/DASA54658.2022.9765236,keep,Conference metadata pages and DOI URL normalized
 Design2025_004,included_study,verified,verified,editorial_caution,10.1109/CIPAE66821.2025.00116,retain_with_caution,Conference metadata normalized; do not use as sole evidence for effectiveness
-Innovative2023_005,included_study,verified,metadata_fix,editorial_caution,10.2478/amns.2023.2.01524,retain_with_caution,Canonical DOI URL applied; publication-year and issue metadata still require publisher-level confirmation before central use
+Innovative2023_005,included_study,verified,verified,editorial_caution,10.2478/amns.2023.2.01524,retain_with_caution,"Publisher confirms volume 9, issue 1 (2024), pp. 1–16; article available online on 18 December 2023. TCC bibliography uses the issue year. Retain with caution for causal/effectiveness claims."
 Identifying2017_006,included_study,verified,verified,verified,10.12738/estp.2017.5.0634,keep,Volume issue pages and DOI URL normalized
 Machine2019_007,included_study,verified,verified,scope_limited,10.1109/EDUCON.2019.8725237,keep,EDUCON proceedings title pages and DOI URL normalized
 Computational2017_008,included_study,verified,verified,scope_limited,10.1184/R1/6715271,keep,Classified as Carnegie Mellon University doctoral dissertation
