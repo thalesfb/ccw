@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-10-09T07:15:56+00:00",
+  "generated_at": "2026-10-11T01:18:02+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -357,7 +357,7 @@
       "primary_text_reviewed_rows": 12,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 69,
+      "non_ct_criterion_decisions": 63,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
@@ -404,17 +404,17 @@
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "2d6a52d7d58d1a9e4bacba59e7b7750d5fce6273480073cba073ecc9724dbded"
+      "sha256": "c64c1ba42f434116ce0745597325db93b9b732e2e9cad3040b131068dd7f14c1"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "035dd39b6b83ac50c5e93fe15c863c6872c6a7948dbc057d3c545d99ae801183"
+      "sha256": "427fab532a788fe1c1d666e086d247dfda24c76012ee19a15e0ce64ef6cff3db"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "preliminary current MMAT ledger with S1/S2 and criterion-level CT responses",
-      "sha256": "e3885db637944248ed4a1e030e5c3054810e943e58cd2393e1092ea02a067882"
+      "sha256": "f7c6aff89b3aef8aa2cd4dc11119a3e484949a80152ed8d681ce123f45e6e22a"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
@@ -439,12 +439,12 @@
     {
       "path": "research/data/manual_override_evidence_matrix.csv",
       "role": "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
-      "sha256": "a56a15efe741e385ccc5ec045c1b63429b7d51504e871ccf8608a57b419e1387"
+      "sha256": "3f4d2fe799043fb02d9d7b54c43650a8bb816c34516596c7a16462b39500b1c9"
     },
     {
       "path": "research/data/protocol_execution_2025.json",
       "role": "historical protocol reconstruction from the 2025 baseline; not the current PRISMA source of truth",
-      "sha256": "dafd29c4a17e8c8ed65e3dcdfa2843fa74c673fd39ef401993cae4c23c7aa0a4"
+      "sha256": "341c47e756f9e4e2dac9d63b1026b77ef1c99ec564bd3d7eb12c958995772ca0"
     },
     {
       "path": "research/src/config.py",
@@ -469,17 +469,17 @@
     {
       "path": "research/src/processing/dedup.py",
       "role": "versioned duplicate-candidate audit and deduplication implementation",
-      "sha256": "5804224279667908c83ab3198363bf2f5a3199d00199219ff94d5c3a90ffb8cc"
+      "sha256": "dd5bb0a6315ca44247da6f0edc9f0ae6f1cd73c2ed8d90c2e4c20e14b503a152"
     },
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "a117f23be923c280c9643784e27610df470cdecf36dd7f03d28b0593624e7af5"
+      "sha256": "91a93b861f99babb2ed773a721d1676a415783c393a42b7e3ce1c5e8e6f1fc93"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "d1f2bbf3a72edc74f49b50ca5a5e5098472fdf64103bebe8c28801bae7472c54"
+      "sha256": "78195fdb952182bb41ebf4e9ef4941fa4fbf5446ba375cbfb087ceb632fc7800"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
@@ -514,22 +514,22 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "versioned validator for the current 18-record MMAT artifacts",
-      "sha256": "06f0a7ac0993d80a837b24c354b776d0a71f375115ccf30b291b6a82545c2e93"
+      "sha256": "a568e483114f9ccb445b5710911294b6dbd2e72f913c1f1934ce833e6e307bd8"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "3b2f500a969dc4ab671ca86b8d93222d6f7accdd4e929a25bab2e96b0c2d0410"
+      "sha256": "2bb2951ba48456936de2953801293c5b4070f0efb0d651c9563ea698e0e9a924"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary current 18-record MMAT table included by the TCC",
-      "sha256": "0c91e2ad14b89d20d99cc07634f61e4cb03ee7d533d0549438e5d3eaf5464ed3"
+      "sha256": "d863336f178b53062b3c83331b94d84b393ad2e6ef2e8f5f488dfb322d4ca504"
     },
     {
       "path": "research/requirements.txt",
       "role": "research runtime dependencies",
-      "sha256": "6f924bba200f92663998cf8a622e6d1119868491bf8698ef1cea27cb72397fc3"
+      "sha256": "04b7209dcf3a445bb77216abe3ee4eaf4453d591fcd72e4b809c9cebec3c3b21"
     }
   ],
   "companion_documents": [
