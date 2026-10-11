@@ -55,6 +55,7 @@ assert.match(functionalRequirements, /deverá permitir revisão humana das recom
 assert.match(functionalRequirements, /deverá exportar dados, parâmetros e resultados para auditoria/i, 'the consolidated section must preserve audit export');
 
 const mmat = read('research/exports/analysis/mmat_current.html');
+assert.doesNotMatch(mmat, /^[\t ]+$/m, 'generated MMAT page must not contain whitespace-only lines');
 assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggregate scoring');
 assert.match(mmat, /visualização histórica/i, 'the current page must preserve historical provenance');
 assert.match(mmat, /18 registros/i, 'the current page must expose the current denominator');

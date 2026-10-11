@@ -411,5 +411,6 @@ const page = `<!doctype html>
 </body>
 </html>`;
 
-fs.writeFileSync(outputPath, page, 'utf8');
+const normalizedPage = page.replace(/^[\t ]+$/gm, '');
+fs.writeFileSync(outputPath, normalizedPage, 'utf8');
 console.log(`generated ${path.relative(root, outputPath)} from ${current.length} current MMAT records`);
