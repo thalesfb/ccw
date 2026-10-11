@@ -47,6 +47,7 @@ Piaget1972EN,pedagogy,verified,verified,unused,9780710072962,retain_unused,Remov
 WoodBrunerRoss1976,pedagogy,verified,verified,verified,10.1111/j.1469-7610.1976.tb00381.x,keep,Canonical scaffolding source
 BlackWiliam1998,pedagogy,verified,verified,verified,10.1080/0969595980050102,keep,Formative assessment
 HattieTimperley2007,pedagogy,verified,verified,verified,10.3102/003465430298487,keep,Feedback framework
+LGPD2018,privacy,verified,verified,scope_limited,https://planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm,keep,Official consolidated text cited only for proposed personal-data safeguards; this is not a legal compliance determination
 NRC2001,assessment,verified,verified,verified,10.17226/10019,keep,Assessment inference and evidence-centered reasoning
 OECDPISA2022Framework,assessment,verified,verified,scope_limited,10.1787/dfe0bf9c-en,keep,Framework and constructs; use results report for level descriptors
 Breiman2001,technology,verified,verified,verified,10.1023/A:1010933404324,keep,Primary Random Forest source
