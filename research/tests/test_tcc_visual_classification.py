@@ -41,6 +41,11 @@ def test_generated_mmat_export_is_a_quadro_and_is_self_describing() -> None:
     assert "\\label{qua:mmat-reavaliacao-atual}" in export
     assert "\\quadroname\\ \\thequadro" in export
     assert "\\label{tab:mmat-reavaliacao-atual}" not in export
+    assert "S1 e S2 são perguntas de triagem" in export
+    assert "Q1--Q5 correspondem aos critérios" in export
+    assert "\\ref{sec:qualidade-estudos}" in export
+    assert "Quant. = quantitativo" in export
+    assert "Base = fonte documental consultada" in export
 
 
 def test_prisma_appendix_classifies_checklist_as_quadro() -> None:

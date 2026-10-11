@@ -60,7 +60,7 @@ function criterion(value) {
 function sourceStatus(row) {
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') return '<span class="tag tag-green">texto primário revisado</span>';
   if (row.empirical_status === 'protocol_or_proposal_not_applicable') return '<span class="tag tag-red">protocolo contextual</span>';
-  return '<span class="tag tag-amber">abstract/metadados</span>';
+  return '<span class="tag tag-amber">resumo/metadados</span>';
 }
 
 const MMAT_SCREENING_QUESTIONS = [
@@ -236,7 +236,7 @@ const page = `<!doctype html>
           <div class="metric-card"><span class="metric-value">${empirical.length}</span><span class="metric-label">candidatos empíricos</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
           <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">textos primários revisados</span></div>
-          <div class="metric-card"><span class="metric-value">${abstractOnly.length}</span><span class="metric-label">abstracts/metadados</span></div>
+          <div class="metric-card"><span class="metric-value">${abstractOnly.length}</span><span class="metric-label">resumos/metadados</span></div>
         </div>
       </section>
 
@@ -249,7 +249,7 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
           <h3>${primaryReviewed.length} textos revisados externamente</h3>
-          <p>${abstractOnly.length} registros ainda dependem de fonte primária ou têm somente abstract/metadados disponíveis. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
+          <p>${abstractOnly.length} registros ainda dependem da consulta à fonte primária; por ora, foram apreciados com base em resumos e metadados. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
         </article>
       </section>
 

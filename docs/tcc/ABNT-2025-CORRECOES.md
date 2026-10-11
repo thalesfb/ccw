@@ -1,6 +1,6 @@
 # Correções normativas aplicadas ao TCC
 
-**Estado:** aplicado no PR de revisão normativa de 15 de setembro de 2026.
+**Estado:** revisão atualizada em 10 de outubro de 2026; adequação institucional parcial.
 
 Este registro documenta somente correções verificáveis na camada de apresentação do
 TCC. Ele não declara conformidade integral com a ABNT nem substitui a conferência
@@ -64,12 +64,37 @@ repositório; o acesso institucional do IFC deve ser usado para a conferência
 final. Esta é uma linha de base documentada, não uma certificação de vigência
 obtida diretamente de todo o catálogo ABNT.
 
-## Validação institucional pendente
+## Comparação com o template institucional
 
-A ficha catalográfica, a folha de aprovação assinada, o logotipo institucional e
-outras particularidades do modelo IFC continuam dependendo de validação da
-Coordenação, da biblioteca e da orientação. A classe institucional legada não foi
-substituída integralmente neste PR.
+Em 10 de outubro de 2026, a apresentação pré-textual foi comparada com o template
+de monografia disponibilizado pelo [Sistema Integrado de Bibliotecas do IFC](https://biblioteca.ifc.edu.br/tcc/)
+e com a versão de monografia indicada pela [Biblioteca do Campus Videira](https://videira.ifc.edu.br/biblioteca/trabalhos-de-conclusao-de-curso-tccs/).
+Essa página identifica o modelo de monografia de novembro de 2022 e informa que
+as páginas iniciais devem seguir o modelo institucional.
+
+Também foi consultado o modelo LaTeX tradicional específico do curso de Ciência
+da Computação, disponibilizado pela página de defesas de TC do [Campus
+Videira](https://videira.ifc.edu.br/ciencia-da-computacao/defesas-de-tc/). A
+versão publicada como modelo 2026 usa o brasão da República na capa e não insere
+logotipo na folha de rosto. Isso diverge do template geral do SIBI, que orienta
+o uso da logomarca institucional nas duas páginas. Como os modelos oficiais
+apontam soluções distintas, esta revisão preserva a estrutura local baseada no
+modelo específico do curso e não declara resolvida a precedência entre as
+orientações. A Coordenação, a Biblioteca ou a orientação deve confirmar qual
+modelo prevalece para o depósito final. As listas de ilustrações, quadros e
+tabelas permanecem separadas. A classe LaTeX continua sendo uma adaptação local;
+esta comparação não equivale a uma certificação de conformidade.
+
+A folha de aprovação deste PDF é um modelo sem assinaturas e não comprova a
+aprovação do trabalho. Para o depósito final, ela deverá ser substituída ou
+complementada conforme o procedimento vigente do IFC, incluindo as assinaturas
+eletrônicas requeridas. O termo de autorização para publicação também não integra
+esta versão de orientação. Os formulários finais, a ficha catalográfica quando
+aplicável e eventuais particularidades do curso devem ser confirmados com a
+Coordenação e a Biblioteca. O template institucional ainda referencia edições
+anteriores de algumas normas; por isso, sua identidade visual e seus elementos
+institucionais foram considerados em conjunto com a linha de base normativa
+atual acima, sem replicar automaticamente instruções normativas antigas.
 
 ## Fontes públicas de conferência
 

@@ -60,7 +60,8 @@ assert.match(mmat, /visualização histórica/i, 'the current page must preserve
 assert.match(mmat, /18 registros/i, 'the current page must expose the current denominator');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
 assert.match(mmat, /<span class="metric-value">12<\/span><span class="metric-label">textos primários revisados<\/span>/, 'the current page must report all externally reviewed primary texts');
-assert.match(mmat, /<span class="metric-value">5<\/span><span class="metric-label">abstracts\/metadados<\/span>/, 'the current page must report the remaining abstract-only assessments');
+assert.match(mmat, /<span class="metric-value">5<\/span><span class="metric-label">resumos\/metadados<\/span>/, 'the current page must report assessments based on abstracts and metadata in Portuguese');
+assert.doesNotMatch(mmat, /abstracts?\/metadados/i, 'the current page should use Portuguese for source-availability labels');
 assert.match(mmat, /<td>6919<\/td>[\s\S]{0,1200}texto primário revisado/, 'study 6919 must be identified as externally reviewed in the current table');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');

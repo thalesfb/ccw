@@ -138,7 +138,7 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_technical_term_is_defined_without_unclear_translation(self):
         theory = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
         self.assertNotIn("andaimento", theory)
-        self.assertIn("suporte temporário", theory)
+        self.assertIn("apoio pedagógico temporário", theory)
         self.assertIn("WoodBrunerRoss1976", theory)
 
     def test_research_question_follows_colon_in_same_paragraph(self):

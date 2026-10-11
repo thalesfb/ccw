@@ -34,8 +34,8 @@ DESIGN_LABELS = {
 }
 BASIS_LABELS = {
     "primary_full_text_reviewed_externally": "Texto primário externo",
-    "abstract_and_metadata_only": "Abstract/metadados",
-    "abstract_only": "Abstract",
+    "abstract_and_metadata_only": "Resumo/metadados",
+    "abstract_only": "Resumo",
     "metadata_only": "Metadados",
     "protocol_or_proposal_not_applicable": "Protocolo/proposta",
 }
@@ -148,7 +148,7 @@ def render_table(
         [
             r"\end{longtable}",
             r"\endgroup",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível concluir com a evidência disponível. Todos os julgamentos empíricos são preliminares e aguardam adjudicação. O registro de protocolo ou proposta é contextual e não recebe apreciação MMAT empírica.",
+            r"\textit{Nota:} Y = sim; N = não; CT = não é possível concluir com a evidência disponível. Quant. = quantitativo; rand. = randomizado; Base = fonte documental consultada. S1 e S2 são perguntas de triagem; Q1--Q5 correspondem aos critérios específicos do delineamento, detalhados na Seção~\ref{sec:qualidade-estudos}. Todos os julgamentos empíricos são preliminares e aguardam adjudicação. O registro de protocolo ou proposta é contextual e não recebe apreciação MMAT empírica.",
         ]
     )
     return "\n".join(lines) + "\n"
