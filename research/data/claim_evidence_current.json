@@ -7,7 +7,7 @@
     {
       "claim_id": "C-RSL-01",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
       "claim_text": "Os autores descrevem uma divisão de 70\\% para treinamento e 30\\% para teste e reportam 75\\% de acurácia de teste para a combinação de SMOTE e RUSBoost.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -39,7 +39,7 @@
     {
       "claim_id": "C-RSL-02",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
       "claim_text": "Na mesma comparação, a revocação da classe de baixo desempenho é de 43\\%.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -66,8 +66,8 @@
     {
       "claim_id": "C-RSL-03",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
-      "claim_text": "O alvo da modelagem é o tamanho de efeito de uma intervenção, não a proficiência individual.",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
+      "claim_text": "o alvo da modelagem foi o tamanho de efeito de uma intervenção, não a proficiência individual.",
       "claim_type": "empirical_result",
       "citation_keys": [
         "He2025_6915"
@@ -103,8 +103,8 @@
     {
       "claim_id": "C-RSL-04",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
-      "claim_text": "Essa inconsistência impede adotar um cronograma único na síntese.",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
+      "claim_text": "Essa diferença impede adotar um cronograma único para comparar ou sintetizar o estudo.",
       "claim_type": "empirical_result",
       "citation_keys": [
         "Villegas2025_6916"
@@ -133,8 +133,8 @@
     {
       "claim_id": "C-RSL-05",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
-      "claim_text": "o próprio artigo relata diferença entre os grupos no pré-teste (U=6714; p<0,001; tamanho de efeito=0,346).",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
+      "claim_text": "O artigo também relata diferença entre os grupos no pré-teste (U=6714; p<0,001; tamanho de efeito=0,346)",
       "claim_type": "empirical_result",
       "citation_keys": [
         "Enhancing2025_012"
@@ -158,8 +158,8 @@
     {
       "claim_id": "C-RSL-06",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
-      "claim_text": "oito itens da escala de mentalidade permanecem entre os preditores selecionados.",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
+      "claim_text": "oito itens da escala de mentalidade matemática utilizados para formar as categorias também permanecem entre os preditores selecionados.",
       "claim_type": "empirical_result",
       "citation_keys": [
         "Echeveria2025_6920"
@@ -190,7 +190,7 @@
     {
       "claim_id": "C-RSL-07",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
       "claim_text": "Nas tarefas de frações, compara simulações com registros de tutoria previamente coletados no DataShop para 79 estudantes e prevê qualitativamente efeitos de sequenciamentos instrucionais, não escores absolutos de desempenho no tutor ou em pós-teste.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -218,7 +218,7 @@
     {
       "claim_id": "C-RSL-08",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "b853bceb30a4eb417533bf26c5fe427df853e19d1fb1c1c11b2b7d64a86b531f",
+      "manuscript_sha256": "4cf589ce864374a7aa58ac3ec4b0c6ffca4dd6e5ab057791575eb11fe4f0e58a",
       "claim_text": "Em análise distinta sobre resolução de equações, descreve dados de 71 estudantes e 10.052 passos; a análise utiliza 4.568 passos nos quais os estudantes executaram as próprias ações, enquanto tarefas de estratégia em que o tutor realizava as transformações ficam fora desse recorte.",
       "claim_type": "empirical_result",
       "citation_keys": [
