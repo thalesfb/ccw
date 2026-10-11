@@ -144,13 +144,19 @@ def render_table(
             _latex_escape(BASIS_LABELS.get(row["assessment_basis"], row["assessment_basis"])),
         ]
         lines.append(" & ".join(values) + r" \\")
-    lines.extend(
-        [
-            r"\end{longtable}",
-            r"\endgroup",
-            r"\textit{Nota:} Y = sim; N = não; CT = não é possível concluir com a evidência disponível. Quant. = quantitativo; rand. = randomizado; Base = fonte documental consultada. S1 e S2 são perguntas de triagem; Q1--Q5 correspondem aos critérios específicos do delineamento, detalhados na Seção~\ref{sec:qualidade-estudos}. Todos os julgamentos empíricos são preliminares e aguardam adjudicação. O registro de protocolo ou proposta é contextual e não recebe apreciação MMAT empírica.",
-        ]
+    note = (
+        r"\textit{Nota:} Y = sim; N = não; CT = não é possível concluir com a evidência disponível. "
+        r"Quant. = quantitativo; rand. = randomizado; Base = fonte documental consultada. "
+        r"S1 e S2 são perguntas de triagem; Q1--Q5 correspondem aos critérios específicos do delineamento, "
+        r"detalhados na Seção~\ref{sec:qualidade-estudos}. Todos os julgamentos empíricos são preliminares "
+        r"e aguardam adjudicação. O registro de protocolo ou proposta é contextual e não recebe apreciação MMAT empírica."
     )
+    if any(row.get("design") == "mixed_methods" for row in rows):
+        note += (
+            r" Para o estudo 6919, Q1--Q5 representam somente a categoria de métodos mistos; "
+            r"a avaliação dos componentes qualitativo e quantitativo permanece pendente."
+        )
+    lines.extend([r"\end{longtable}", r"\endgroup", note])
     return "\n".join(lines) + "\n"
 
 

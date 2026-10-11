@@ -23,6 +23,12 @@ VALID_DESIGNS = {
     "quantitative_descriptive", "mixed_methods", "metadata_hold", "not_applicable",
     "design_pending",
 }
+PENDING_DESIGN_STATUSES = {
+    "allocation_conflict_pending",
+    "allocation_unreported_pending",
+    "allocation_sequence_unreported_pending",
+    "unit_of_appraisal_pending",
+}
 REQUIRED_CRITERIA = ("q1", "q2", "q3", "q4", "q5")
 ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
 EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT)\s+.+$")
@@ -96,12 +102,7 @@ def load_current_reassessment(
                     f"Invalid {criterion} response for study {row.get('study_id')}: "
                     f"{row.get(criterion)!r}"
                 )
-        contextual_blank = (
-            row.get("design") == ""
-            and row.get("assessment_basis") == "protocol_or_proposal_not_applicable"
-            and row.get("design_status") == "not_applicable"
-        )
-        if row.get("design") not in VALID_DESIGNS and not contextual_blank:
+        if row.get("design") not in VALID_DESIGNS:
             raise ValueError(f"Invalid design for study {row.get('study_id')}: {row.get('design')!r}")
         evidence = [part.strip() for part in row.get("criterion_evidence", "").split(";")]
         if len(evidence) != len(ALL_CRITERIA) or not all(
@@ -141,16 +142,28 @@ def load_current_reassessment(
                 "adjudication gate"
             )
         if row.get("design") == "design_pending":
-            if row.get("design_status") != "allocation_conflict_pending":
+            if row.get("design_status") not in PENDING_DESIGN_STATUSES:
                 raise ValueError(
                     f"Study {row.get('study_id')} has an unresolved MMAT design "
-                    "without a documented allocation conflict"
+                    "without a documented pending-design rationale"
                 )
             if any(row.get(criterion) != "CT" for criterion in REQUIRED_CRITERIA):
                 raise ValueError(
                     f"Study {row.get('study_id')} has an unresolved MMAT design "
                     "but category-specific criteria were rated"
                 )
+        elif row.get("design_status") in PENDING_DESIGN_STATUSES:
+            raise ValueError(
+                f"Study {row.get('study_id')} has a pending design status but "
+                "requires a pending MMAT design"
+            )
+        if row.get("design_status") == "unit_of_appraisal_pending" and any(
+            row.get(criterion) != "CT" for criterion in ("s1", "s2")
+        ):
+            raise ValueError(
+                f"Study {row.get('study_id')} has an unresolved appraisal unit; "
+                "screening responses must remain unresolved"
+            )
     return rows
 
 

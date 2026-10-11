@@ -66,6 +66,10 @@ const zengRow = mmat.match(/<tr>\s*<td>6923<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(zengRow, 'study 6923 must be present in the current MMAT table');
 const zengRatings = [...zengRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
 assert.equal(zengRatings[3], 'Não é possível determinar', 'abstract-only study 6923 must not claim confirmed appropriateness of measurement');
+const echeveriaRow = mmat.match(/<tr>\s*<td>6920<\/td>[\s\S]*?<\/tr>/)?.[0];
+assert.ok(echeveriaRow, 'study 6920 must be present in the current MMAT table');
+const echeveriaRatings = [...echeveriaRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
+assert.equal(echeveriaRatings[4], 'Não é possível determinar', 'study 6920 must not claim measurement appropriateness without recorded evidence');
 assert.match(mmat, /<td>6919<\/td>[\s\S]{0,1200}texto primário revisado/, 'study 6919 must be identified as externally reviewed in the current table');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
@@ -76,6 +80,12 @@ assert.match(mmat, /MMAT 2018<\/a>/i, 'the current page must cite the MMAT 2018 
 assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_current_study_registry\.csv"/, 'the current page must link to the versioned registry at its published path');
 assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_primary_sources_manifest\.csv"/, 'the current page must expose the primary-source provenance manifest');
 assert.equal((mmat.match(/class="mmat-question-group"/g) || []).length, 5, 'the current page must expose all MMAT design groups');
+assert.match(mmat, /Snapshot do corpus: 03\/09\/2026/i, 'the current page must distinguish the corpus snapshot date');
+assert.match(mmat, /Última apreciação registrada no ledger: 11\/10\/2026/i, 'the current page must expose the latest appraisal date');
+assert.equal((mmat.match(/class="mmat-evidence"/g) || []).length, 18, 'every MMAT record must expose criterion evidence details');
+assert.match(mmat, /Ver perguntas, justificativas e localização da evidência/i, 'the evidence disclosure must be clearly labeled');
+assert.match(mmat, /academic and demographic measures/i, 'the current page must expose the evidence note for study 2 Q3');
+assert.match(mmat, /sufficient to judge measurement appropriateness/i, 'the current page must explain why study 2 Q3 remains indeterminate');
 for (const criterion of ['Q1', 'Q2', 'Q3', 'Q4', 'Q5']) {
   assert.match(mmat, new RegExp(`>${criterion}<`), `the current page must expose ${criterion}`);
 }

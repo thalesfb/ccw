@@ -23,13 +23,13 @@ Ausubel destacou que novas informações são aprendidas de forma significativa 
 
 A avaliação formativa utiliza evidências produzidas durante o processo de aprendizagem para orientar decisões sobre as próximas ações de ensino e estudo \cite{BlackWiliam1998}. A efetividade do \textit{feedback} depende de seu foco, de sua clareza e da forma como ajuda o estudante a compreender os objetivos, avaliar seu estado atual e identificar ações para avançar \cite{HattieTimperley2007}. Na síntese desta revisão, os resultados de avaliação reportados pelos estudos empíricos não foram interpretados por este trabalho como equivalentes a uma teoria de aprendizagem ou como prova geral de eficácia pedagógica.
 
-Uma previsão algorítmica, por si só, não constitui \textit{feedback} formativo. Para cumprir essa função, a saída precisa ser traduzida em informação compreensível, contextualizada e pedagogicamente acionável, preservando a possibilidade de interpretação e intervenção do professor.
+Como critério conceitual deste trabalho, uma previsão algorítmica, por si só, não é tratada como \textit{feedback} formativo: para exercer essa função, ela precisa ser convertida em informação compreensível e útil para decidir os próximos passos de aprendizagem, de modo que professor e estudante possam interpretar o retorno e agir sobre ele \cite{HattieTimperley2007}. Esse critério orienta a discussão do protótipo e não constitui resultado empírico desta revisão.
 
 \section{Tecnologia como Apoio à Decisão Pedagógica}
 
-As tecnologias computacionais podem processar grandes volumes de registros, identificar regularidades e apresentar visualizações que auxiliem o acompanhamento de turmas. Seu valor educacional não decorre apenas da acurácia de um modelo, mas da qualidade dos dados, da interpretação das saídas e da forma como a informação é incorporada à prática docente.
+As tecnologias computacionais podem analisar registros educacionais, identificar padrões e apresentar informações para apoiar o acompanhamento de turmas \cite{Romero2020}. Seu valor para a avaliação depende também da qualidade das evidências, da validade das inferências e do contexto de uso; por isso, os resultados não devem ser estendidos além do que os dados sustentam \cite{NRC2001}.
 
-A adoção dessas tecnologias deve preservar a responsabilidade do professor pela interpretação das evidências e pela decisão de intervenções. As previsões precisam apresentar incertezas e limitações, e dados socioeconômicos ou comportamentais não devem ser usados para naturalizar desigualdades ou reduzir estudantes a categorias fixas. As recomendações devem estar alinhadas ao currículo e aos objetivos da atividade, considerando privacidade, consentimento e finalidade de uso dos dados desde o planejamento.
+Nesta especificação, as tecnologias são propostas como apoio à decisão, preservando a responsabilidade do professor pela interpretação pedagógica; as previsões devem explicitar suas incertezas e limitações. Também são princípios de projeto o alinhamento das recomendações ao currículo e a prevenção de interpretações que naturalizem desigualdades ou convertam estudantes em categorias fixas, em consonância com a exigência de validade e equidade das inferências educacionais \cite{NRC2001}. Para eventual uso de dados pessoais, a especificação prevê finalidade explícita, minimização e análise da base legal aplicável, sem presumir que o consentimento seja sempre a base adequada \cite{LGPD2018}. Esses pontos são requisitos propostos para uma implementação futura, não resultados empíricos desta revisão.
 
 \section{Técnicas Computacionais na Educação}
 
@@ -47,11 +47,11 @@ A \textbf{\textit{Learning Analytics}} (LA), ou analítica da aprendizagem, envo
 
 ML, LA e EDM não são sinônimos. ML designa uma família de métodos de aprendizado a partir de dados, enquanto LA e EDM delimitam campos de investigação e aplicação na educação. Ambos podem empregar ML, estatística e visualização, com sobreposição de métodos e finalidades; a distinção não constitui uma separação rígida entre ferramentas. Neste trabalho, essa relação organiza a leitura das técnicas e de seus usos pedagógicos \cite{Romero2020}.
 
-Essas áreas podem produzir painéis, alertas e modelos de conhecimento, mas a existência de uma correlação não prova uma relação causal. Um padrão de acesso ou tempo de resposta pode refletir diferentes condições, como conhecimento prévio, familiaridade com a interface, acessibilidade ou disponibilidade de conexão.
+No escopo desta especificação, associações entre acesso, tempo de resposta e desempenho serão tratadas como padrões observados, não como explicações causais. Conhecimento prévio, familiaridade com a interface, acessibilidade e disponibilidade de conexão são hipóteses contextuais que poderão orientar análises futuras; seus efeitos não foram estimados neste trabalho \cite{NRC2001}.
 
 Sistemas Tutores Inteligentes procuram adaptar a interação ao estado estimado do estudante. A literatura descreve esses sistemas por características como representação do estudante, mecanismos de adaptação, estratégias de orientação e formas de interação \cite{Mousavinasab2021}. Sistemas adaptativos também podem selecionar conteúdos ou ajustar a dificuldade conforme os registros de interação \cite{Xie2019}.
 
-A adaptação é pedagogicamente relevante quando os critérios de decisão são compreensíveis e quando o estudante continua exposto a desafios que promovam autonomia. Uma personalização excessiva ou baseada em dados incompletos pode limitar oportunidades de aprendizagem e reforçar classificações anteriores.
+Como princípio de projeto, uma regra adaptativa deverá ser compreensível ao professor e preservar oportunidades de exploração e autonomia. A possibilidade de que uma personalização excessiva ou baseada em dados incompletos limite essas oportunidades é tratada aqui como risco a avaliar, e não como efeito demonstrado pelos estudos reunidos.
 
 Os métodos computacionais devem ser distinguidos das estratégias didáticas que podem acompanhar seu uso. O termo \textit{jigsaw}, empregado na síntese do estudo sobre geometria, identifica uma modalidade de aprendizagem cooperativa: participantes estudam partes do conteúdo em grupos de especialistas e compartilham essa aprendizagem com seu grupo de origem.\footnote{Descrição do procedimento no site oficial \textit{The Jigsaw Classroom}, etapas 3--8: \url{https://www.jigsaw.org/}. Acesso em: 7 out. 2026.} Essa explicação esclarece o termo, sem afirmar que todas as condições do procedimento foram verificadas no estudo retido.
 
@@ -65,7 +65,7 @@ A curva ROC relaciona a taxa de casos positivos corretamente reconhecidos à tax
 
 No domínio educacional, também podem ser observados acertos e erros por habilidade, tempo e número de tentativas, progressão entre avaliações, participação e conclusão de atividades e explicações ou estratégias registradas pelo estudante.
 
-A interpretação deve considerar o instrumento, a população e a finalidade. Um modelo com bom desempenho médio pode apresentar erros sistemáticos para determinados grupos. Por isso, a avaliação técnica deve incluir análise por classe, validação em dados não utilizados no treinamento e investigação de possíveis vieses.
+A interpretação deve considerar o instrumento, a população e a finalidade. Um bom desempenho médio não demonstra, por si só, validade equivalente das inferências entre grupos; por isso, a avaliação proposta inclui análise por classe, validação em dados não utilizados no treinamento e investigação de possíveis diferenças de erro, quando os dados permitirem \cite{NRC2001}. Esse procedimento é uma salvaguarda planejada, não um resultado medido nesta pesquisa.
 
 \section{Requisitos Derivados da Fundamentação}
 

@@ -18,6 +18,7 @@ import pytest
 
 CURRENT_TABLE = Path(__file__).resolve().parents[1] / "exports" / "references" / "mmat_current_tcc_table.tex"
 EVIDENCE_MATRIX = Path(__file__).resolve().parents[1] / "data" / "manual_override_evidence_matrix.csv"
+CURRENT_HTML = Path(__file__).resolve().parents[1] / "exports" / "analysis" / "mmat_current.html"
 
 
 def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
@@ -63,13 +64,117 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
 
     assert all(row["criterion_evidence"].count(";") == 6 for row in rows)
     assert rows[1]["assessment_status"] == "provisional_primary_source_review"
-    assert rows[1]["q2"] == "N"
+    assert rows[1]["q2"] == "CT"
     assert registry["6923"]["empirical_status"] == "empirical_abstract_only"
     assert registry["6923"]["design_status"] == "abstract_based"
     study_6923 = next(row for row in rows if row["study_id"] == "6923")
     assert study_6923["assessment_basis"] == "abstract_and_metadata_only"
     assert study_6923["q2"] == "CT"
-    assert "does not provide enough detail" in study_6923["criterion_evidence"].lower()
+    assert "q2=ct criterion applicability cannot be determined while the mmat design category is pending" in (
+        study_6923["criterion_evidence"].lower()
+    )
+
+
+def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -> None:
+    rows = {row["study_id"]: row for row in load_current_reassessment()}
+
+    for study_id in ("1", "2", "3", "4", "6", "9", "10", "6917", "6920"):
+        study = rows[study_id]
+        assert study["q3"] == "CT"
+        if study_id in {"1", "9", "10"}:
+            assert study["assessment_basis"] == "abstract_and_metadata_only"
+            assert "Q3=CT measurement appropriateness cannot be determined from abstract" in (
+                study["criterion_evidence"]
+            )
+        if study_id in {"2", "3", "6", "6917", "6920"}:
+            assert "Q3=CT" in study["criterion_evidence"]
+            assert "measurement appropriateness" in study["criterion_evidence"]
+    assert (
+        "Q3=CT grades demographics and predictors are identified but measurement "
+        "appropriateness is not established"
+    ) in rows["4"]["criterion_evidence"]
+
+
+def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
+    rows = {row["study_id"]: row for row in load_current_reassessment()}
+    assert rows["6"]["q1"] == "CT"
+    assert (
+        "identification of timss data does not by itself establish the relevance "
+        "of the sampling strategy"
+    ) in rows["6"]["criterion_evidence"].lower()
+
+    for study_id in ("2", "6920"):
+        assert rows[study_id]["q2"] == "CT"
+        assert "target population" in rows[study_id]["criterion_evidence"].lower()
+    assert rows["6920"]["q4"] == "CT"
+    assert "nonresponse bias cannot be determined" in rows["6920"]["criterion_evidence"].lower()
+
+
+def test_unreported_allocation_and_appraisal_unit_keep_design_pending() -> None:
+    rows = {row["study_id"]: row for row in load_current_reassessment()}
+    expected_statuses = {
+        "5": "allocation_unreported_pending",
+        "7": "allocation_unreported_pending",
+        "8": "unit_of_appraisal_pending",
+        "14": "allocation_conflict_pending",
+        "6923": "allocation_sequence_unreported_pending",
+    }
+
+    for study_id, design_status in expected_statuses.items():
+        study = rows[study_id]
+        assert study["design"] == "design_pending"
+        assert study["design_status"] == design_status
+        assert all(study[criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+
+    for study_id in ("5", "7", "6923"):
+        study = rows[study_id]
+        for criterion in ("q1", "q2", "q3", "q4", "q5"):
+            assert (
+                f"{criterion.upper()}=CT criterion applicability cannot be determined "
+                "while the MMAT design category is pending"
+            ) in study["criterion_evidence"]
+
+
+def test_appraisal_unit_pending_keeps_screening_responses_unresolved() -> None:
+    study = {row["study_id"]: row for row in load_current_reassessment()}["8"]
+    assert study["design"] == "design_pending"
+    assert study["design_status"] == "unit_of_appraisal_pending"
+    assert study["s1"] == study["s2"] == "CT"
+    assert "unit of appraisal" in study["criterion_evidence"].lower()
+
+
+def test_nonrandomized_outcome_completeness_and_confounding_are_not_overstated() -> None:
+    study = {row["study_id"]: row for row in load_current_reassessment()}["7"]
+    assert study["design"] == "design_pending"
+    assert study["design_status"] == "allocation_unreported_pending"
+    assert all(study[criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert "allocation procedure" in study["notes"].lower()
+
+
+def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
+    import re
+
+    html = CURRENT_HTML.read_text(encoding="utf-8")
+    rows = {row["study_id"]: row for row in load_current_reassessment()}
+
+    for study_id in rows:
+        match = re.search(
+            rf"<tr>\s*<td>{re.escape(study_id)}</td>(.*?)</tr>",
+            html,
+            flags=re.DOTALL,
+        )
+        assert match, f"Study {study_id} missing from generated MMAT page"
+        answers = re.findall(
+            r'<span class="criterion [^"]*"[^>]*>(Y|N|CT)</span>',
+            match.group(1),
+        )
+        expected = [rows[study_id][criterion] for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5")]
+        assert answers == expected, f"Study {study_id} HTML cells differ from the MMAT ledger"
+        meta = re.search(r'<span class="study-meta">([^<]+)</span>', match.group(1))
+        assert meta, f"Study {study_id} HTML design label missing"
+        assert meta.group(1).startswith(f"{rows[study_id]['study_key']} · ")
+
+    assert "os componentes qualitativo e quantitativo ainda não foram avaliados" in html.lower()
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:
@@ -87,12 +192,20 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
 
     assert rows["6919"]["design"] == "mixed_methods"
     assert rows["6919"]["snapshot_date"] == "2026-09-03"
-    assert rows["6919"]["review_date"] == "2026-10-09"
+    assert rows["6919"]["review_date"] == "2026-10-11"
     assert rows["6919"]["empirical_status"] == "empirical_confirmed_external"
     assert "4.1.1" in rows["6919"]["page_or_section"]
     assert "4.4.8" in rows["6919"]["page_or_section"]
     assert "2021" in rows["6919"]["notes"] and "2025" in rows["6919"]["notes"]
-    assert "machine learning" not in rows["6919"]["notes"].lower()
+    assert "current appraisal record does not identify a specific machine-learning algorithm" in (
+        rows["6919"]["notes"].lower()
+    )
+    assert "not evidence that the article contains none" in rows["6919"]["notes"].lower()
+    assert (
+        "component-level appraisal under the qualitative and quantitative categories "
+        "has not been recorded"
+    ) in rows["6919"]["notes"].lower()
+    assert "mmat appraisal is incomplete" in rows["6919"]["notes"].lower()
     assert sources["6919"]["source_type"] == "full_text_mirror"
     assert "researchgate.net/publication/400728111" in sources["6919"]["source_url"]
     assert "10.3390/su18041900" in sources["6919"]["verification_note"]
@@ -109,6 +222,19 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
     assert "Nyantah et al. (2025) & Pendente & Y & Y & CT & CT & CT & CT & CT" in (
         CURRENT_TABLE.read_text(encoding="utf-8")
     )
+
+    assert rows["7"]["q5"] == "CT"
+    assert rows["7"]["design"] == "design_pending"
+    assert "criterion applicability cannot be determined while the mmat design category is pending" in (
+        rows["7"]["criterion_evidence"].lower()
+    )
+
+    mixed_evidence = rows["6919"]["criterion_evidence"].lower()
+    assert "q1=ct adequate rationale for mixed methods" in mixed_evidence
+    assert "q2=ct integration of the components" in mixed_evidence
+    assert "q3=ct interpretation of integrated findings" in mixed_evidence
+    assert "q4=ct divergences or inconsistencies" in mixed_evidence
+    assert "q5=ct quality criteria for both traditions" in mixed_evidence
 
 
 def test_unresolved_mmat_design_cannot_receive_category_specific_ratings(monkeypatch) -> None:
@@ -131,10 +257,50 @@ def test_unresolved_mmat_design_cannot_receive_category_specific_ratings(monkeyp
         current.validate_current_artifacts()
 
 
+def test_pending_design_status_cannot_be_attached_to_a_classified_design(monkeypatch) -> None:
+    from src.analysis import mmat_current as current
+
+    original_read = current._read_csv
+
+    def read(path):
+        rows = original_read(path)
+        if path == current.REASSESSMENT_PATH:
+            row = next(item for item in rows if item["study_id"] == "7")
+            row["design"] = "quantitative_nonrandomized"
+            row["design_status"] = "allocation_unreported_pending"
+        return rows
+
+    monkeypatch.setattr(current, "_read_csv", read)
+    with pytest.raises(ValueError, match="requires a pending MMAT design"):
+        current.validate_current_artifacts()
+
+
+def test_pending_appraisal_unit_requires_unresolved_screening_responses(monkeypatch) -> None:
+    from src.analysis import mmat_current as current
+
+    original_read = current._read_csv
+
+    def read(path):
+        rows = original_read(path)
+        if path == current.REASSESSMENT_PATH:
+            row = next(item for item in rows if item["study_id"] == "8")
+            row["s1"] = "Y"
+            row["criterion_evidence"] = row["criterion_evidence"].replace(
+                "S1=CT", "S1=Y"
+            )
+        return rows
+
+    monkeypatch.setattr(current, "_read_csv", read)
+    with pytest.raises(ValueError, match="screening responses must remain unresolved"):
+        current.validate_current_artifacts()
+
+
 def test_protocol_is_retained_only_as_contextual_non_empirical_record() -> None:
     scope = {row["study_id"]: row for row in load_current_synthesis_scope()}
+    reassessment = {row["study_id"]: row for row in load_current_reassessment()}
     assert scope["6921"]["synthesis_role"] == "contextual_protocol"
     assert scope["6921"]["empirical_mmat_applicability"] == "not_applicable"
+    assert reassessment["6921"]["design"] == "not_applicable"
 
 
 def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
@@ -159,5 +325,7 @@ def test_study_6919_scope_evidence_reflects_the_latest_primary_text_review() -> 
     assert "4.1.1" in study["evidence_locator"]
     assert "4.4.8" in study["evidence_locator"]
     assert "2021" in study["population_or_context"] and "2025" in study["population_or_context"]
-    assert "no specific ML algorithm identified" in study["computational_role"]
+    assert "ledger records no named ML algorithm in the examined passages" in (
+        study["computational_role"]
+    )
     assert study["adjudication_status"] == "proposed_pending_supervisor"

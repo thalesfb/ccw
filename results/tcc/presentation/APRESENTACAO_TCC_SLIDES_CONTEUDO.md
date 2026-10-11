@@ -10,10 +10,10 @@
 - **Snapshot:** 03/09/2026
 - **Recorte temporal:** 2015–2026, com data de corte em 31/08/2026
 
-O roteiro segue a progressão usada na apresentação do PTC — problema, método,
-resultados, implicações e encerramento —, mas o conteúdo abaixo é derivado do
-TCC e do snapshot atual. O deck não reproduz números históricos nem transforma
-o protótipo conceitual em aplicação implementada.
+O roteiro organiza a exposição do TCC em problema, método, resultados,
+implicações e encerramento. O conteúdo abaixo é derivado do manuscrito e do
+snapshot atual. O deck não reproduz números históricos nem transforma o
+protótipo conceitual em aplicação implementada.
 
 ## Sequência dos slides
 

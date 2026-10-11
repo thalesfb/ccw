@@ -175,6 +175,11 @@ def test_learning_concepts_and_teacher_role_are_explicit() -> None:
         assert concept.lower() in foundation.lower()
     assert "responsabilidade do professor pela interpretação" in foundation.lower()
     assert "não observa diretamente todos os processos" in foundation.lower()
+    assert r"\cite{Romero2020}" in _read(TCC_CONTENT / "introducao.tex")
+    assert r"\cite{NRC2001}" in foundation
+    assert r"\cite{LGPD2018}" in foundation
+    assert "não foram estimados neste trabalho" in foundation
+    assert "não como efeito demonstrado pelos estudos reunidos" in foundation
 
 
 def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
@@ -196,6 +201,9 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert MMAT_LATEX.read_text(encoding="utf-8") == render_table(load_rows())
 
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
+    assert "Síntese do relato consultado" in chapter
+    assert "não constitui uma medida harmonizada de efeito" in chapter
+    assert "Resultado reportado" not in chapter
     mmat_section = chapter[chapter.index("Avaliação Metodológica com o MMAT") :]
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
     assert "sem média, ranking ou categoria geral" in mmat_section
@@ -203,12 +211,22 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "Tjahyadi (2025) & Quant." not in chapter
 
     methodology = _read(TCC_CONTENT / "metodologia.tex")
+    normalized_methodology = " ".join(methodology.split())
+    assert "Institute of Medicine" not in methodology
+    assert "referências do" not in methodology
     speaker_notes = _read(TCC_ROOT / "presentation" / "ROTEIRO_FALAS_TCC.md")
     for text in (methodology, speaker_notes):
         assert "Nove textos estão arquivados" not in text
         assert "nove fontes" not in text
     assert r"\citeonline{Zeng2025_6923}" in methodology
-    assert "Q2 foi registrado como CT" in methodology
+    assert "Q1--Q5 permanecem como CT" in methodology
+    assert "ferramentas de ia generativa apoiaram a revisão de consistência" in methodology.lower()
+    assert "não foi contabilizado como avaliação independente" in methodology
+    assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology
+    assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
+    assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
+    assert "a apreciação dos componentes qualitativo e quantitativo ainda não foi registrada" in normalized_methodology.lower()
+    assert "para o estudo 6919, q1--q5 representam somente a categoria de métodos mistos" in MMAT_LATEX.read_text(encoding="utf-8").lower()
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:

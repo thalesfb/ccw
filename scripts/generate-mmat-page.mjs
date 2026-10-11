@@ -63,6 +63,19 @@ function sourceStatus(row) {
   return '<span class="tag tag-amber">resumo/metadados</span>';
 }
 
+function parseCriterionEvidence(value = '') {
+  return new Map(value.split(';').flatMap((entry) => {
+    const separator = entry.indexOf('=');
+    if (separator < 1) return [];
+    const rationale = entry.slice(separator + 1).trim().replace(/^(?:Y|N|CT)\s+/i, '');
+    return [[entry.slice(0, separator).trim().toUpperCase(), rationale]];
+  }));
+}
+
+function formatDate(value) {
+  return value ? value.split('-').reverse().join('/') : 'não registrada';
+}
+
 const MMAT_SCREENING_QUESTIONS = [
   {
     code: 'S1',
@@ -78,6 +91,7 @@ const MMAT_SCREENING_QUESTIONS = [
 
 const MMAT_CRITERIA_GROUPS = [
   {
+    design: 'qualitative',
     label: 'Estudos qualitativos',
     questions: [
       ['Q1', 'A abordagem qualitativa é apropriada para responder à pergunta de pesquisa?', 'Is the qualitative approach appropriate to answer the research question?'],
@@ -88,6 +102,7 @@ const MMAT_CRITERIA_GROUPS = [
     ],
   },
   {
+    design: 'quantitative_randomized',
     label: 'Estudos quantitativos randomizados',
     questions: [
       ['Q1', 'A randomização foi realizada de forma adequada?', 'Is randomization appropriately performed?'],
@@ -98,6 +113,7 @@ const MMAT_CRITERIA_GROUPS = [
     ],
   },
   {
+    design: 'quantitative_nonrandomized',
     label: 'Estudos quantitativos não randomizados',
     questions: [
       ['Q1', 'Os participantes são representativos da população-alvo?', 'Are the participants representative of the target population?'],
@@ -108,6 +124,7 @@ const MMAT_CRITERIA_GROUPS = [
     ],
   },
   {
+    design: 'quantitative_descriptive',
     label: 'Estudos quantitativos descritivos',
     questions: [
       ['Q1', 'A estratégia de amostragem é pertinente à pergunta de pesquisa?', 'Is the sampling strategy relevant to address the research question?'],
@@ -118,6 +135,7 @@ const MMAT_CRITERIA_GROUPS = [
     ],
   },
   {
+    design: 'mixed_methods',
     label: 'Estudos de métodos mistos',
     questions: [
       ['Q1', 'Há justificativa adequada para usar um delineamento de métodos mistos?', 'Is there an adequate rationale for using a mixed methods design?'],
@@ -150,15 +168,58 @@ function criteriaGroup(group) {
 
 const screeningQuestions = MMAT_SCREENING_QUESTIONS.map(screeningQuestionCard).join('');
 const criteriaGroups = MMAT_CRITERIA_GROUPS.map(criteriaGroup).join('');
+const criterionQuestionsByDesign = new Map(MMAT_CRITERIA_GROUPS.map((group) => [
+  group.design,
+  new Map(group.questions.map(([code, label]) => [code, label])),
+]));
 
 const current = parseCsv(fs.readFileSync(currentPath, 'utf8'));
 const registry = parseCsv(fs.readFileSync(registryPath, 'utf8'));
 const registryById = new Map(registry.map((row) => [row.study_id, row]));
 const latestSnapshot = current.map((row) => row.snapshot_date).sort().at(-1);
 const latestSnapshotLabel = latestSnapshot.split('-').reverse().join('/');
+const latestReviewDate = current.map((row) => row.review_date).filter(Boolean).sort().at(-1);
+const latestReviewDateLabel = formatDate(latestReviewDate);
 const empirical = current.filter((row) => row.empirical_status !== 'protocol_or_proposal_not_applicable');
 const primaryReviewed = current.filter((row) => row.assessment_basis === 'primary_full_text_reviewed_externally');
 const abstractOnly = current.filter((row) => row.assessment_basis === 'abstract_and_metadata_only');
+const mixedMethodsStudies = current.filter((row) => row.design === 'mixed_methods');
+const mixedMethodsNote = mixedMethodsStudies.length
+  ? `<section class="section" aria-labelledby="mixed-methods-limit-title">
+        <div class="callout callout-blue">
+          <h2 id="mixed-methods-limit-title">Limite da apreciação de métodos mistos</h2>
+          <p>O guia MMAT recomenda avaliar os componentes qualitativo e quantitativo com as categorias adequadas, além dos critérios da categoria de métodos mistos. Para o(s) registro(s) ${mixedMethodsStudies.map((row) => escapeHtml(row.study_id)).join(', ')}, este snapshot apresenta Q1–Q5 da categoria mista, mas os componentes qualitativo e quantitativo ainda não foram avaliados. A apreciação desses registros permanece incompleta; isso não constitui uma avaliação negativa dos estudos.</p>
+          <p><a href="https://mixedmethodsappraisaltoolpublic.pbworks.com/w/page/71030694/FAQ" target="_blank" rel="noopener">Orientação dos desenvolvedores do MMAT sobre estudos de métodos mistos</a></p>
+        </div>
+      </section>`
+  : '';
+
+function criterionEvidenceDetails(row) {
+  const evidence = parseCriterionEvidence(row.criterion_evidence);
+  const designQuestions = criterionQuestionsByDesign.get(row.design);
+  const allQuestions = [
+    ...MMAT_SCREENING_QUESTIONS.map(({ code, label }) => ({ code, label })),
+    ...['Q1', 'Q2', 'Q3', 'Q4', 'Q5'].map((code) => ({
+      code,
+      label: designQuestions?.get(code) ?? 'Pergunta específica não determinada porque o delineamento permanece pendente.',
+    })),
+  ];
+  const items = allQuestions.map(({ code, label }) => `<li class="mmat-evidence-item">
+      <div class="mmat-evidence-heading"><span class="question-code">${escapeHtml(code)}</span><strong>${escapeHtml(label)}</strong>${criterion(row[code.toLowerCase()])}</div>
+      <p>${escapeHtml(evidence.get(code) || 'Justificativa não registrada no ledger.')}</p>
+    </li>`).join('');
+  const source = row.source_id ? `<code>${escapeHtml(row.source_id)}</code>` : 'não identificada';
+  const locator = row.page_or_section ? escapeHtml(row.page_or_section) : 'não registrado';
+  return `<tr class="mmat-evidence-row">
+    <td colspan="10">
+      <details class="mmat-evidence">
+        <summary>Ver perguntas, justificativas e localização da evidência</summary>
+        <ul class="mmat-evidence-grid">${items}</ul>
+        <p class="source-note"><strong>ID da fonte:</strong> ${source} (consulte o manifesto de fontes primárias); <strong>seções/páginas registradas:</strong> ${locator}; <strong>data da apreciação:</strong> ${escapeHtml(formatDate(row.review_date))}.</p>
+      </details>
+    </td>
+  </tr>`;
+}
 
 const rows = current.map((row) => {
   const study = registryById.get(row.study_id) ?? {};
@@ -170,7 +231,7 @@ const rows = current.map((row) => {
     <td>${sourceStatus(row)}</td>
     <td>${criterion(row.s1)}</td><td>${criterion(row.s2)}</td>
     <td>${criterion(row.q1)}</td><td>${criterion(row.q2)}</td><td>${criterion(row.q3)}</td><td>${criterion(row.q4)}</td><td>${criterion(row.q5)}</td>
-  </tr>`;
+  </tr>${criterionEvidenceDetails(row)}`;
 }).join('\n');
 
 const page = `<!doctype html>
@@ -178,7 +239,7 @@ const page = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Apreciação preliminar por critérios do MMAT 2018 para o snapshot vigente do CCW.">
+  <meta name="description" content="Apreciação preliminar por critérios do MMAT 2018, com data do corpus, justificativas e localizadores.">
   <title>MMAT atual · CCW</title>
   <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
@@ -217,9 +278,10 @@ const page = `<!doctype html>
     <div class="site-shell">
       <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão</a> / <strong>MMAT atual</strong></p>
       <section class="page-hero" aria-labelledby="page-title">
-        <span class="eyebrow">MMAT 2018 · snapshot vigente de ${latestSnapshotLabel}</span>
+        <span class="eyebrow">MMAT 2018 · apreciação preliminar</span>
         <h1 id="page-title">Apreciação preliminar por critérios</h1>
         <p class="lede">A leitura atual registra evidências e limites para cada critério. Ela não é uma nota global, um percentual ou um ranking de qualidade.</p>
+        <p class="source-note">Snapshot do corpus: ${latestSnapshotLabel}. Última apreciação registrada no ledger: ${latestReviewDateLabel}.</p>
         <div class="action-row">
           <a class="btn btn-primary" href="../../index.html">Voltar à revisão</a>
           <a class="btn btn-secondary" href="mmat_visualization.html">Visualização histórica — 17 estudos</a>
@@ -252,6 +314,8 @@ const page = `<!doctype html>
           <p>${abstractOnly.length} registros ainda dependem da consulta à fonte primária; por ora, foram apreciados com base em resumos e metadados. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
         </article>
       </section>
+
+      ${mixedMethodsNote}
 
       <section class="section" aria-labelledby="questions-title">
         <div class="section-heading">
@@ -291,7 +355,7 @@ const page = `<!doctype html>
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
             <h3 id="pending-title">Pendências antes da consolidação</h3>
-            <p>Recuperar fontes primárias restantes, registrar localizadores para os julgamentos e concluir a adjudicação com a orientação. O protocolo 6921 continua fora da síntese empírica.</p>
+            <p>Consultar as justificativas e localizadores disponíveis em cada registro, completar a evidência ainda insuficiente e concluir a adjudicação com a orientação. O protocolo 6921 continua fora da síntese empírica.</p>
           </div>
         </div>
       </section>
