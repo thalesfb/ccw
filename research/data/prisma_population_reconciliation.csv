@@ -17,3 +17,17 @@ snapshot_date,source_artifact,metric,value,unit,scope_or_formula,status
 2026-08-31,research/exports/analysis/deduplication_identity_audit.csv,duplicate_stage_screening,21,records,duplicate_stage=screening,observed
 2026-08-31,research/exports/analysis/deduplication_identity_audit.csv,duplicate_stage_eligibility,6,records,duplicate_stage=eligibility,observed
 2026-08-31,comparison,independent_stage_change_id_8031,1,record,screening to eligibility between SQLite and export,reconciliation_required
+2026-10-12,research/exports/reports/summary.json,raw_identification,11904,records,immutable published search snapshot,confirmed
+2026-10-12,research/exports/reports/summary.json,deterministic_identity_duplicates,27,records,exact normalized DOI/URL identity removals; title-only similarities remain candidates,confirmed
+2026-10-12,research/exports/analysis/papers.csv,records_after_deduplication,11877,records,11904 identified minus 27 identity duplicates,confirmed
+2026-10-12,research/exports/analysis/papers.csv,initial_screening_excluded,9391,records,terminal screening-stage exclusions,confirmed
+2026-10-12,research/exports/analysis/papers.csv,records_entering_operational_prioritization,2486,records,11877 after deduplication minus 9391 initial-screen exclusions,confirmed
+2026-10-12,research/exports/analysis/papers.csv,operational_prioritization_excluded,2468,records,heuristic threshold only; not full-text eligibility,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,shortlisted_for_manual_review,18,records,2486 prioritized minus 2468 threshold exclusions,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,abstract_scope_exclusion,1,record,Machine2019_007 excluded at abstract stage because reported courses are CS/CIS rather than mathematics,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,reports_sought,17,reports,18 shortlisted minus one abstract-stage scope exclusion,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,reports_not_retrieved,4,reports,Math2021_001; Design2025_004; Machine2024_009; Zeng2025_6923,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,reports_assessed_at_full_text,13,reports,17 sought minus 4 not retrieved,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,full_text_scope_exclusions,1,report,one non-empirical protocol/proposal; study 6919 retained under the written broad protocol,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,empirical_studies_included,12,studies,13 full-text reports assessed minus one protocol exclusion,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,current_mmat_empirical_denominator,12,studies,12 included empirical studies; no aggregate score; preliminary single-reviewer appraisal,confirmed

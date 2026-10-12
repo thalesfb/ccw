@@ -14,10 +14,18 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
-CURRENT_STUDY_IDS: tuple[int, ...] = (
+CURRENT_RECORD_IDS: tuple[int, ...] = (
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923
 )
-VALID_RESPONSES = {"Y", "N", "CT", "N/A"}
+CURRENT_MMAT_STUDY_IDS: tuple[int, ...] = (
+    2, 3, 4, 6, 7, 8, 14, 6915, 6916, 6917, 6919, 6920
+)
+# Compatibility alias: historical callers use this for the 18-record ledger.
+CURRENT_STUDY_IDS = CURRENT_RECORD_IDS
+CONTEXT_ONLY_STUDY_IDS = (9,)
+PENDING_FULL_TEXT_STUDY_IDS = (1, 5, 10, 6923)
+CONTEXTUAL_PROTOCOL_STUDY_IDS = (6921,)
+VALID_RESPONSES = {"", "Y", "N", "CT", "N/A"}
 VALID_DESIGNS = {
     "qualitative", "quantitative_randomized", "quantitative_nonrandomized",
     "quantitative_descriptive", "mixed_methods", "metadata_hold", "not_applicable",
@@ -28,6 +36,7 @@ PENDING_DESIGN_STATUSES = {
     "allocation_unreported_pending",
     "allocation_sequence_unreported_pending",
     "unit_of_appraisal_pending",
+    "primary_text_not_retrieved_pending",
 }
 VALID_DESIGN_STATUSES = {
     "abstract_based",
@@ -38,6 +47,7 @@ VALID_DESIGN_STATUSES = {
     "design_reassessed_provisional_with_allocation_conflict",
     "metadata_hold",
     "not_applicable",
+    "primary_text_not_retrieved_pending",
     "unit_of_appraisal_pending",
 }
 REQUIRED_CRITERIA = ("q1", "q2", "q3", "q4", "q5")
@@ -46,6 +56,7 @@ ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
 EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT|N/A)\s+.+$")
 VALID_ASSESSMENT_BASES = {
     "primary_full_text_reviewed_externally",
+    "pending_full_text_not_appraised",
     "abstract_and_metadata_only",
     "abstract_only",
     "metadata_only",
@@ -79,7 +90,7 @@ def load_current_registry(path: Path | str = REGISTRY_PATH) -> list[dict[str, st
     """Load the exact current-study registry and reject historical leakage."""
     rows = _read_csv(Path(path))
     ids = _ids(rows)
-    expected = list(CURRENT_STUDY_IDS)
+    expected = list(CURRENT_RECORD_IDS)
     if sorted(ids) != expected or len(ids) != len(set(ids)):
         raise ValueError(
             f"Current MMAT registry must contain exactly {expected}; got {ids}"
@@ -96,19 +107,25 @@ def load_current_reassessment(
 ) -> list[dict[str, str]]:
     """Load the current criterion-level preliminary ledger.
 
-    ``CT`` is allowed and expected while primary full text and locators are
-    unavailable.  The function does not convert this preliminary ledger into a
-    final quality judgment.
+    Blank criterion cells are required when a primary full text was not
+    retrieved or a record was excluded during abstract screening. Those
+    records have not received an MMAT appraisal. ``CT`` is reserved for
+    criteria that were actually considered but cannot be determined from the
+    consulted source.
     """
     rows = _read_csv(Path(path))
     ids = _ids(rows)
-    expected = list(CURRENT_STUDY_IDS)
+    expected = list(CURRENT_RECORD_IDS)
     if sorted(ids) != expected or len(ids) != len(set(ids)):
         raise ValueError(
             f"Current MMAT reassessment must contain exactly {expected}; got {ids}"
         )
 
     for row in rows:
+        source_pending = row["study_id"] in {
+            str(value) for value in PENDING_FULL_TEXT_STUDY_IDS
+        }
+        not_appraised = source_pending or row.get("assessment_basis") == "abstract_and_metadata_only"
         for criterion in ALL_CRITERIA:
             if row.get(criterion, "") not in VALID_RESPONSES:
                 raise ValueError(
@@ -122,23 +139,38 @@ def load_current_reassessment(
                 f"Invalid design status for study {row.get('study_id')}: "
                 f"{row.get('design_status')!r}"
             )
-        evidence = [part.strip() for part in row.get("criterion_evidence", "").split(";")]
-        if len(evidence) != len(ALL_CRITERIA) or not all(
-            EVIDENCE_PATTERN.match(part) for part in evidence
-        ):
-            raise ValueError(
-                f"Study {row.get('study_id')} lacks one evidence note per MMAT criterion"
-            )
-        evidence_values = {
-            match.group(1).lower(): match.group(2)
-            for part in evidence
-            if (match := EVIDENCE_PATTERN.match(part))
-        }
-        if any(evidence_values.get(key) != row.get(key) for key in ALL_CRITERIA):
-            raise ValueError(
-                f"Study {row.get('study_id')} has criterion values that disagree "
-                "with criterion_evidence"
-            )
+        if not_appraised:
+            if any(row.get(criterion, "").strip() for criterion in ALL_CRITERIA):
+                raise ValueError(
+                    f"Study {row['study_id']} must not contain MMAT responses "
+                    "without an eligible appraisal source"
+                )
+            if row.get("criterion_evidence", "").strip():
+                raise ValueError(
+                    f"Study {row['study_id']} must not contain criterion-level MMAT "
+                    "evidence without an eligible appraisal source"
+                )
+        else:
+            evidence = [
+                part.strip()
+                for part in row.get("criterion_evidence", "").split(";")
+            ]
+            if len(evidence) != len(ALL_CRITERIA) or not all(
+                EVIDENCE_PATTERN.match(part) for part in evidence
+            ):
+                raise ValueError(
+                    f"Study {row.get('study_id')} lacks one evidence note per MMAT criterion"
+                )
+            evidence_values = {
+                match.group(1).lower(): match.group(2)
+                for part in evidence
+                if (match := EVIDENCE_PATTERN.match(part))
+            }
+            if any(evidence_values.get(key) != row.get(key) for key in ALL_CRITERIA):
+                raise ValueError(
+                    f"Study {row.get('study_id')} has criterion values that disagree "
+                    "with criterion_evidence"
+                )
         if not row.get("source_id") or not row.get("assessment_basis"):
             raise ValueError(
                 f"Study {row.get('study_id')} lacks source or assessment basis"
@@ -170,6 +202,12 @@ def load_current_reassessment(
                     f"Study {row.get('study_id')} marks a protocol/proposal as "
                     "applicable to an empirical design"
                 )
+        if row["study_id"] in {str(value) for value in PENDING_FULL_TEXT_STUDY_IDS}:
+            if row.get("assessment_basis") != "pending_full_text_not_appraised":
+                raise ValueError(
+                    f"Study {row['study_id']} cannot be treated as appraised before "
+                    "its primary full text is retrieved"
+                )
         if row.get("assessment_status") == "final":
             raise ValueError(
                 "A final MMAT assessment requires a separate evidence and "
@@ -181,7 +219,9 @@ def load_current_reassessment(
                     f"Study {row.get('study_id')} has an unresolved MMAT design "
                     "without a documented pending-design rationale"
                 )
-            if any(row.get(criterion) != "CT" for criterion in REQUIRED_CRITERIA):
+            if not source_pending and any(
+                row.get(criterion) != "CT" for criterion in REQUIRED_CRITERIA
+            ):
                 raise ValueError(
                     f"Study {row.get('study_id')} has an unresolved MMAT design "
                     "but category-specific criteria were rated"
@@ -191,6 +231,18 @@ def load_current_reassessment(
                 f"Study {row.get('study_id')} has a pending design status but "
                 "requires a pending MMAT design"
             )
+        if row["study_id"] in {str(value) for value in PENDING_FULL_TEXT_STUDY_IDS}:
+            if (
+                row.get("design") != "design_pending"
+                or row.get("design_status") != "primary_text_not_retrieved_pending"
+                or row.get("assessment_status") != "hold_source_verification"
+                or any(row.get(criterion, "") for criterion in ALL_CRITERIA)
+                or row.get("criterion_evidence", "").strip()
+            ):
+                raise ValueError(
+                    f"Study {row['study_id']} lacks the explicit no-appraisal hold "
+                    "required while primary full text is unavailable"
+                )
         if row.get("design_status") == "unit_of_appraisal_pending" and any(
             row.get(criterion) != "CT" for criterion in ("s1", "s2")
         ):
@@ -246,7 +298,7 @@ def load_primary_sources(
     """Load one source-ledger row for every current study."""
     rows = _read_csv(Path(path))
     ids = _ids(rows)
-    expected = list(CURRENT_STUDY_IDS)
+    expected = list(CURRENT_RECORD_IDS)
     if sorted(ids) != expected or len(ids) != len(set(ids)):
         raise ValueError(
             f"Primary-source manifest must contain exactly {expected}; got {ids}"
@@ -263,32 +315,54 @@ def load_current_synthesis_scope(
     """Load the explicit role of every operationally retained current record."""
     rows = _read_csv(Path(path))
     ids = _ids(rows)
-    expected = list(CURRENT_STUDY_IDS)
+    expected = list(CURRENT_RECORD_IDS)
     if sorted(ids) != expected or len(ids) != len(set(ids)):
         raise ValueError(
             f"Current synthesis scope must contain exactly {expected}; got {ids}"
         )
+    expected_dispositions = {
+        **{
+            study_id: (
+                "included_empirical_core", "empirical_evidence", "applicable",
+                "included", "included",
+            )
+            for study_id in CURRENT_MMAT_STUDY_IDS
+        },
+        9: (
+            "context_only", "contextual_study", "context_only",
+            "abstract_screening", "excluded",
+        ),
+        **{
+            study_id: (
+                "awaiting_full_text", "pending_full_text", "pending_full_text",
+                "not_retrieved", "not_retrieved",
+            )
+            for study_id in PENDING_FULL_TEXT_STUDY_IDS
+        },
+        6921: (
+            "protocol_context_only", "contextual_protocol", "not_applicable",
+            "eligibility", "excluded",
+        ),
+    }
     for row in rows:
-        if row.get("operational_inclusion") != "retained_in_current_snapshot":
+        study_id = int(row["study_id"])
+        expected_disposition = expected_dispositions[study_id]
+        observed = (
+            row.get("record_status"), row.get("synthesis_role"),
+            row.get("empirical_mmat_applicability"), row.get("selection_stage"),
+            row.get("selection_status"),
+        )
+        if observed != expected_disposition:
             raise ValueError(
-                f"Study {row.get('study_id')} lacks an explicit operational inclusion"
+                f"Study {study_id} has scope disposition {observed!r}; "
+                f"expected {expected_disposition!r}"
             )
-        role = row.get("synthesis_role")
-        applicability = row.get("empirical_mmat_applicability")
-        if role not in {"empirical_evidence", "contextual_protocol"}:
-            raise ValueError(f"Unknown synthesis role for study {row.get('study_id')}")
-        if applicability not in {"applicable", "not_applicable"}:
-            raise ValueError(
-                f"Unknown empirical MMAT applicability for study {row.get('study_id')}"
-            )
-        if role == "contextual_protocol" and applicability != "not_applicable":
-            raise ValueError(
-                f"Contextual protocol {row.get('study_id')} cannot be MMAT-applicable"
-            )
-        if role == "empirical_evidence" and applicability != "applicable":
-            raise ValueError(
-                f"Empirical study {row.get('study_id')} must be MMAT-applicable"
-            )
+        if row.get("candidate_set_membership") != "shortlisted_record":
+            raise ValueError(f"Study {study_id} is not explicitly identified as shortlisted")
+        if not row.get("selection_reason", "").strip():
+            raise ValueError(f"Study {study_id} lacks a selection rationale")
+        if not row.get("source_id", "").strip() or not row.get("evidence_locator", "").strip():
+            raise ValueError(f"Study {study_id} lacks a source-linked scope decision")
     return rows
 
 
@@ -335,10 +409,11 @@ def validate_current_artifacts(
             if (
                 registry_row.get("empirical_status") != "empirical_abstract_only"
                 or registry_row.get("design_status") != "abstract_based"
+                or row.get("assessment_status") != "not_assessed_after_abstract_exclusion"
             ):
                 raise ValueError(
-                    f"Study {row['study_id']} has an abstract-based MMAT ledger "
-                    "that disagrees with the current registry"
+                    f"Study {row['study_id']} has an abstract-excluded record that "
+                    "must remain unassessed"
                 )
         if basis == "metadata_only":
             if registry_row.get("design_status") != "metadata_hold":
@@ -353,6 +428,28 @@ def validate_current_artifacts(
                     "that disagrees with the current registry"
                 )
     source_by_id = {row["source_id"]: row for row in primary_sources}
+    scope_by_id = {row["study_id"]: row for row in synthesis_scope}
+    reassessment_by_id = {row["study_id"]: row for row in reassessment}
+    for study_id in PENDING_FULL_TEXT_STUDY_IDS:
+        scope_row = scope_by_id[str(study_id)]
+        assessment_row = reassessment_by_id[str(study_id)]
+        source_row = source_by_id[assessment_row["source_id"]]
+        if (
+            scope_row["record_status"] != "awaiting_full_text"
+            or source_row.get("full_text_status") != "not_retrieved"
+            or assessment_row["assessment_basis"] != "pending_full_text_not_appraised"
+            or assessment_row["assessment_status"] != "hold_source_verification"
+        ):
+            raise ValueError(
+                f"Study {study_id} must remain pending until its primary full text is retrieved"
+            )
+    core_reassessment = [
+        reassessment_by_id[str(study_id)] for study_id in CURRENT_MMAT_STUDY_IDS
+    ]
+    protocol_reassessment = [
+        reassessment_by_id[str(study_id)] for study_id in CONTEXTUAL_PROTOCOL_STUDY_IDS
+    ]
+    scored_population = [*core_reassessment, *protocol_reassessment]
     evidence_levels = {
         "primary_full_text_reviewed_externally": 0,
         "abstract_and_metadata_only": 0,
@@ -360,12 +457,12 @@ def validate_current_artifacts(
         "metadata_only": 0,
         "protocol_or_proposal_not_applicable": 0,
     }
-    for row in reassessment:
+    for row in scored_population:
         basis = row.get("assessment_basis", "")
         if basis in evidence_levels:
             evidence_levels[basis] += 1
     primary_text_rows = [
-        row for row in reassessment
+        row for row in core_reassessment
         if row.get("assessment_basis") == "primary_full_text_reviewed_externally"
     ]
     for row in primary_text_rows:
@@ -376,27 +473,31 @@ def validate_current_artifacts(
                 "matching source-manifest status"
             )
     source_or_period_hold_rows = [
-        row for row in reassessment
+        row for row in core_reassessment
         if row.get("assessment_status") == "hold_source_verification"
         or registry_by_id[row["study_id"]].get("source_status")
         in SOURCE_OR_PERIOD_HOLD_STATUSES
     ]
     non_ct = sum(
         row[criterion] != "CT"
-        for row in reassessment
+        for row in core_reassessment
         for criterion in ALL_CRITERIA
     )
     blocking_reasons = [
-        "Primary full text, criterion-level locators and adjudication are not complete.",
+        "The 12-study empirical MMAT remains provisional; criterion locators and adjudication are incomplete.",
         "The preliminary ledger must not be interpreted as a quality score or ranking.",
     ]
-    if len(primary_text_rows) != len(reassessment):
+    if len(primary_text_rows) != len(CURRENT_MMAT_STUDY_IDS):
         blocking_reasons.append(
-            f"Only {len(primary_text_rows)} of {len(reassessment)} current studies have "
-            "externally reviewed full text recorded."
+            f"Only {len(primary_text_rows)} of {len(CURRENT_MMAT_STUDY_IDS)} empirical-core "
+            "studies have externally reviewed full text recorded."
         )
-    if any(row.get("adjudication_status") != "supervisor_reviewed" for row in reassessment):
+    if any(row.get("adjudication_status") != "supervisor_reviewed" for row in core_reassessment):
         blocking_reasons.append("Supervisor adjudication is pending for at least one study.")
+    if len(PENDING_FULL_TEXT_STUDY_IDS):
+        blocking_reasons.append(
+            "Four shortlisted empirical records remain pending primary full text and are excluded from the MMAT denominator."
+        )
     if source_or_period_hold_rows:
         held_ids = ", ".join(row["study_id"] for row in source_or_period_hold_rows)
         blocking_reasons.append(
@@ -405,20 +506,36 @@ def validate_current_artifacts(
         )
     return {
         "study_count": len(registry),
-        "study_ids": list(CURRENT_STUDY_IDS),
-        "criterion_rows": len(reassessment),
-        "component_criterion_rows": len(component_reassessment),
+        "study_ids": list(CURRENT_RECORD_IDS),
+        "mmat_study_ids": list(CURRENT_MMAT_STUDY_IDS),
+        "criterion_rows": len(core_reassessment),
+        "assessment_registry_rows": len(reassessment),
+        "component_criterion_rows": sum(
+            row["study_id"] in {str(study_id) for study_id in CURRENT_MMAT_STUDY_IDS}
+            for row in component_reassessment
+        ),
+        "component_assessment_registry_rows": len(component_reassessment),
         "primary_source_rows": len(primary_sources),
         "synthesis_scope_rows": len(synthesis_scope),
         "empirical_evidence_rows": sum(
-            row["synthesis_role"] == "empirical_evidence" for row in synthesis_scope
+            row["record_status"] == "included_empirical_core" for row in synthesis_scope
+        ),
+        "contextual_study_rows": sum(
+            row["record_status"] == "context_only" for row in synthesis_scope
+        ),
+        "awaiting_full_text_rows": sum(
+            row["record_status"] == "awaiting_full_text" for row in synthesis_scope
         ),
         "contextual_protocol_rows": sum(
             row["synthesis_role"] == "contextual_protocol" for row in synthesis_scope
         ),
         "historical_denominator": 17,
-        "current_denominator": len(CURRENT_STUDY_IDS),
+        "current_denominator": len(CURRENT_MMAT_STUDY_IDS),
         "evidence_levels": evidence_levels,
+        "record_evidence_levels": {
+            basis: sum(row.get("assessment_basis") == basis for row in reassessment)
+            for basis in (*evidence_levels, "pending_full_text_not_appraised")
+        },
         "primary_text_reviewed_rows": len(primary_text_rows),
         "source_or_period_hold_rows": len(source_or_period_hold_rows),
         "source_or_period_hold_ids": [row["study_id"] for row in source_or_period_hold_rows],

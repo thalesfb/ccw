@@ -13,13 +13,14 @@ def test_selection_percentages_refer_to_records_not_a_study_population() -> None
 
     assert "parcela dos registros inicialmente identificados" in review
     assert "parcela da população inicialmente identificada" not in review
-    assert "O corpus retido compreende 17 candidatos empíricos provisórios" in review
+    assert "12 estudos compõem o núcleo empírico incluído" in review
+    assert "17 candidatos empíricos provisórios" not in review
     assert "A população retida compreende" not in review
 
 
 def test_study_specific_limitations_are_concentrated_in_the_gaps_section() -> None:
     review = (TCC / "conteudo" / "resultadosesperados.tex").read_text(encoding="utf-8")
-    synthesis = review.split(r"\section{Síntese dos Estudos Incluídos}", 1)[1].split(
+    synthesis = review.split(r"\section{Caracterização dos Registros Shortlistados}", 1)[1].split(
         r"\section{Avaliação Metodológica com o MMAT}", 1
     )[0]
     gaps = review.split(r"\section{Tendências e Lacunas}", 1)[1].split(
@@ -27,7 +28,7 @@ def test_study_specific_limitations_are_concentrated_in_the_gaps_section() -> No
     )[0]
 
     detailed_caveats = (
-        "45 estudantes por turma",
+        "oito turmas com 45 estudantes cada",
         "seis semanas",
         "oito itens da escala de mentalidade matemática",
     )
@@ -67,7 +68,7 @@ def test_mmat_does_not_infer_sampling_or_analysis_from_topic_relevance_alone() -
     with ledger_path.open(encoding="utf-8-sig", newline="") as source:
         rows = {row["study_id"]: row for row in csv.DictReader(source)}
 
-    for study_id in ("1", "3", "4", "9", "10"):
+    for study_id in ("3", "4"):
         assert rows[study_id]["q1"] == "CT"
         evidence = next(
             item for item in rows[study_id]["criterion_evidence"].split(";")
@@ -75,17 +76,15 @@ def test_mmat_does_not_infer_sampling_or_analysis_from_topic_relevance_alone() -
         )
         assert "sampling" in evidence.lower() or "selection" in evidence.lower()
 
-    assert rows["9"]["q5"] == "CT"
-    q5_evidence = next(
-        item for item in rows["9"]["criterion_evidence"].split(";")
-        if item.startswith("Q5=")
-    )
-    assert "analysis" in q5_evidence.lower()
+    for study_id in ("1", "5", "10", "6923", "9"):
+        assert all(rows[study_id][criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
+        assert rows[study_id]["criterion_evidence"] == ""
+    assert rows["9"]["assessment_status"] == "not_assessed_after_abstract_exclusion"
 
     methodology = " ".join(
         (TCC / "conteudo" / "metodologia.tex")
         .read_text(encoding="utf-8")
         .split()
     )
-    assert "a pertinência temática do conjunto de dados não foi considerada suficiente" in methodology
+    assert "A pertinência temática de um estudo não substitui nenhum critério metodológico." in methodology
     assert r"\cite{MMATGuide2018}" in methodology

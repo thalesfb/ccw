@@ -1,6 +1,6 @@
 # Estado atual e limites da versão do TCC
 
-**Atualização:** 10 de outubro de 2026
+**Atualização:** 12 de outubro de 2026
 
 Este registro público descreve o estado verificável da versão atual do
 Trabalho de Conclusão de Curso e separa resultados produzidos, validações
@@ -15,30 +15,32 @@ fluxo de desenvolvimento estão em
 
 ## Revisão sistemática e MMAT
 
-O snapshot vigente da revisão tem data de corte em 31 de agosto de 2026. O
-fluxo de seleção registra 11.904 registros identificados, 11.877 após
-remoções determinísticas e 2.486 submetidos à priorização operacional; nessa
-etapa, 2.468 foram excluídos e 18 foram retidos provisoriamente para
-adjudicação de escopo. O conjunto retido está separado em 17 candidatos
-empíricos provisórios e um protocolo ou proposta contextual, que não integra
-a síntese de evidências. A priorização não equivale à avaliação de
-elegibilidade de textos completos.
+O snapshot de busca tem data de corte em 31 de agosto de 2026. O fluxo registra
+11.904 registros identificados, 11.877 após remoções determinísticas e 2.486
+submetidos à priorização operacional; 2.468 não avançaram dessa etapa e 18
+registros formaram a shortlist. Um registro foi excluído após resumo; dos 17
+relatórios procurados, quatro não foram recuperados e 13 foram avaliados em
+texto completo. Um foi excluído após essa avaliação por ser protocolo sem
+resultados concluídos. Os 12 restantes formam o núcleo empírico. O estudo 6919
+foi mantido conforme o protocolo escrito, que não exige personalização como
+condição de elegibilidade. A priorização operacional não equivale à
+elegibilidade.
 
-O manifesto de reprodutibilidade registra a geração do snapshot em
-4 de setembro de 2026, às 02:45:33 UTC, e preserva os hashes dos exports e
-dos ledgers que sustentam essa contagem. A data do snapshot e a data de geração
-dos artefatos são informações de proveniência; não representam, por si só,
-uma nova rodada de coleta nas APIs.
+O manifesto distingue as datas de referência: identifica o snapshot como
+3 de setembro de 2026, registra a atualização do escopo em 12 de outubro de
+2026 e foi gerado novamente nessa última data. A atualização preserva hashes
+dos exports e dos ledgers versionados; não representa nova consulta às APIs
+nem altera o corte temporal da busca.
 
-O ledger do MMAT 2018 preserva as duas perguntas de triagem, S1 e S2, e os
-critérios Q1--Q5 correspondentes ao delineamento de cada estudo. As respostas
-usam a legenda Y (sim), N (não) e CT (não é possível concluir com a evidência
-disponível). Doze textos primários foram consultados; cinco candidatos foram
-apreciados com base em resumo ou metadados. Como a avaliação foi conduzida por
-um único revisor e a recuperação de fontes, os localizadores e a adjudicação
-humana independente ainda não estão completos, o MMAT permanece uma apreciação
-documental preliminar por critério. Não há escore agregado, ranking ou
-conclusão de eficácia.
+O ledger do MMAT 2018 preserva S1 e S2 como perguntas de triagem e Q1--Q5 como
+critérios específicos do delineamento. Os 12 estudos do núcleo foram
+apreciados com base nos textos integrais consultados. Quatro registros não
+tiveram texto recuperado e não receberam apreciação MMAT; seus campos de
+critério ficam sem resposta, não como CT. O registro excluído após resumo e o
+protocolo sem resultados concluídos estão fora do denominador. Como a avaliação foi
+conduzida por um único revisor e a adjudicação humana independente permanece
+pendente, o MMAT é preliminar e por critério. Não há escore agregado, ranking
+ou conclusão de eficácia.
 
 ## Implementação e escopo experimental
 
@@ -78,29 +80,15 @@ essa matriz seja concluída, a ligação entre literatura e requisitos deve ser
 apresentada como derivação temática documentada, não como cobertura exaustiva
 de cada requisito por uma fonte individual.
 
-## Possível execução futura com Google Colab
+## Execução experimental e computação externa
 
-O Google Colab é um ambiente de notebooks Python executados no navegador.
-Benefícios, unidades de computação, GPUs, TPUs e execução em segundo plano
-dependem do plano e da conta efetivamente associados ao serviço; não são
-tratados como infraestrutura disponível para esta pesquisa. A possibilidade
-de uso é apenas uma alternativa futura e não foi empregada nesta versão.
-
-Depois de aprovada a execução, as alternativas podem ser comparadas entre o
-Colab web, um runtime local compatível com Jupyter e, se houver governança
-própria de projeto, orçamento e identidade, o Colab Enterprise/Vertex AI.
-Qualquer notebook futuro deverá registrar versão da fonte, data de acesso,
-hashes dos artefatos, configuração, divisão, métricas, avisos e relatório.
-Dados brutos restritos não devem ser commitados nem publicados, e métricas
-preditivas não devem ser apresentadas como aprendizagem ou eficácia
-pedagógica.
-
-Fontes oficiais sobre o serviço:
-
-- [Google One — benefícios do Google AI Pro e Colab](https://support.google.com/googleone/answer/14534406?hl=en)
-- [Google Colab — perguntas frequentes e limites dos planos](https://research.google.com/colaboratory/faq.html)
-- [Google Colab — runtimes locais](https://research.google.com/colaboratory/local-runtimes.html)
-- [Google Cloud — runtimes do Colab Enterprise](https://docs.cloud.google.com/vertex-ai/docs/colab/create-runtime)
+A execução experimental do protótipo permanece condicionada à decisão da
+orientação e à definição de um protocolo próprio. O Google Colab foi registrado
+somente como alternativa tecnológica futura; não foi utilizado nesta versão e
+nenhum benefício de conta ou disponibilidade de acelerador foi presumido. Esta
+versão não relata treinamento em dados reais, validação experimental nem efeito
+pedagógico do protótipo. Qualquer estudo futuro requer aprovação metodológica,
+governança dos dados e registro reprodutível de procedimentos e resultados.
 
 ## Limite interpretativo da versão
 

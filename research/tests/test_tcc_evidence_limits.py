@@ -27,10 +27,13 @@ def test_maclellan_synthesis_preserves_data_reuse_and_qualitative_scope():
     row = synthesis.split(r'\citeonline{Computational2017_008}', 1)[1].split(r'\\', 1)[0]
     assert '79 estudantes' in synthesis
     assert '4.568' in synthesis
-    assert 'qualitativamente' in row
-    assert 'escores absolutos' in row
+    assert 'qualitativa' in row
+    assert 'escores absolutos' in synthesis
     assert 'não constitui avaliação prospectiva' in synthesis
     assert 'executaram as próprias ações' in synthesis
+    assert 'inclui os passos de estratégia em que o estudante escolhe a transformação' in synthesis
+    assert 'ficam fora somente os passos em que o tutor executa os cálculos' in synthesis
+    assert 'tarefas de estratégia em que o tutor realizava as transformações ficam fora desse recorte' not in synthesis
     assert r'\chi^{2}(0)' not in synthesis
 
 

@@ -2,11 +2,13 @@
 
 Este diretório contém as **saídas geradas automaticamente** pelo pipeline de revisão sistemática. Todos os arquivos aqui são **gerados via CLI** e não devem ser editados manualmente.
 
-> **População adjudicada atual (03/09/2026):** 11.904 registros identificados;
+> **Snapshot de busca (03/09/2026), com escopo atualizado em 12/10/2026:**
+> 11.904 registros identificados;
 > 27 registros redundantes foram removidos deterministicamente por DOI/URL antes
 > da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos, 2.486
-> na elegibilidade, 2.468 excluídos nessa etapa e 18 registros retidos (17
-> candidatos empíricos provisórios e o protocolo contextual 6921). O registro
+> submetidos à priorização operacional; 2.468 não avançaram nessa etapa e 18
+> formaram a shortlist. Na elegibilidade, 17 relatórios foram procurados, 4 não
+> recuperados, 13 avaliados em texto completo, 1 protocolo excluído e 12 incluídos. O registro
 > 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A auditoria
 > bruta encontrou 257 excedentes em
 > títulos normalizados; após a remoção DOI/URL, 232 excedentes permanecem apenas
@@ -126,9 +128,10 @@ python -m research.src.cli export-bibtex -o research/references
 # Consulte included_papers.bib como a bibliografia derivada do pipeline.
 ```
 
-`included_papers.bib` contém somente os 18 registros retidos derivados do
-pipeline (17 candidatos empíricos provisórios e o
-protocolo contextual 6921). O
+`included_papers.bib` contém os 18 registros shortlistados derivados do
+pipeline, não 18 estudos incluídos. O núcleo empírico tem 12 estudos; quatro
+relatórios não foram recuperados, um registro foi excluído após resumo e dois
+após texto completo. O
 TCC mantém separadamente referências metodológicas, pedagógicas, de avaliação
 e técnicas em `results/tcc/referencias.bib` e
 `results/tcc/referencias_pedagogicas.bib`. Essa separação é deliberada e está
@@ -206,13 +209,14 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 ## 🚀 Próximos Passos
 
 ### Fase 1 (Revisão Sistemática) - 🟡 SNAPSHOT ADJUDICADO
-- [x] Snapshot atual exportado (11.904 identificados; 11.877 após deduplicação; 18 registros retidos)
+- [x] Snapshot de busca exportado (11.904 identificados; 11.877 após deduplicação; 18 registros shortlistados; 12 incluídos após elegibilidade)
 - [x] Fluxo de triagem e elegibilidade reconciliado
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
-- [x] Exportação BibTeX dos 18 registros retidos do pipeline (17 candidatos empíricos provisórios + 1 contextual)
+- [x] Exportação BibTeX dos 18 registros shortlistados do pipeline; status de elegibilidade e inclusão são mantidos separadamente no ledger
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
-- [x] Reavaliação documental preliminar do MMAT aos 17 registros empíricos com evidência por critério
-- [ ] Recuperação das fontes restantes e adjudicação final do MMAT aos 17 registros empíricos
+- [x] Reavaliação documental preliminar do MMAT aos 12 estudos empíricos incluídos, com evidência por critério
+- [ ] Recuperar os quatro textos integrais pendentes; sem aplicar MMAT a resumo ou metadados
+- [ ] Adjudicar independentemente os 11 julgamentos MMAT do núcleo empírico
 
 ### Fase 2 (Especificação conceitual do Protótipo) - ✅ REGISTRADA NO TCC
 - [x] Derivar requisitos funcionais e não funcionais

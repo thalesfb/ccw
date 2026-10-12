@@ -73,6 +73,10 @@ def test_repository_audit_covers_all_tcc_bibliography_keys() -> None:
     rows = read_audit(research_root / "data/reference_audit.csv")
 
     assert validate_audit(bib_keys, rows) == []
+    assert rows["Machine2019_007"].category == "contextual_study"
+    assert rows["UniversityMathematics2026_6919"].category == "included_study"
+    assert rows["Imperatrice2025_6921"].category == "contextual_protocol"
+    assert rows["Zeng2025_6923"].category == "awaiting_full_text"
 
 
 def test_repository_bibliography_does_not_use_indexers_as_urls() -> None:
@@ -102,7 +106,7 @@ def test_priority_metadata_corrections_are_applied() -> None:
     assert "@phdthesis{Computational2017_008" in bibliography
     assert "@article{He2025_6915" in bibliography
     assert "@article{Villegas2025_6916" in bibliography
-    assert "@misc{Imperatrice2025_6921" in bibliography
+    assert "@article{Imperatrice2025_6921" in bibliography
     assert "@incollection{Data2020_011" not in bibliography
 
 

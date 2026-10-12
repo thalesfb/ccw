@@ -15,8 +15,8 @@ from pathlib import Path
 
 from .pdf_feedback import extract_feedback
 
-ROLES = {'empirical_evidence', 'contextual_protocol', 'pedagogy', 'methodology',
-         'normative', 'technical'}
+ROLES = {'empirical_evidence', 'contextual_study', 'pending_full_text',
+         'contextual_protocol', 'pedagogy', 'methodology', 'normative', 'technical'}
 STATUSES = {'SUPPORTED', 'PARTIALLY_SUPPORTED', 'CONTRADICTED',
             'INSUFFICIENT_EVIDENCE', 'NOT_APPLICABLE'}
 

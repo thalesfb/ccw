@@ -52,16 +52,38 @@ function escapeHtml(value) {
 }
 
 function criterion(value) {
-  const normalized = value.toLowerCase();
+  const answer = String(value ?? '').trim();
+  if (!answer) {
+    return '<span class="criterion criterion-pending" title="Não avaliado" aria-label="Não avaliado">—</span>';
+  }
+  const normalized = answer.toLowerCase();
   const className = normalized === 'y' ? 'criterion-y' : normalized === 'n' ? 'criterion-n' : normalized === 'n/a' ? 'criterion-na' : 'criterion-ct';
   const response = normalized === 'y' ? 'Sim' : normalized === 'n' ? 'Não' : normalized === 'n/a' ? 'Não se aplica' : 'Não é possível determinar';
-  return `<span class="criterion ${className}" title="Resposta: ${escapeHtml(response)}" aria-label="Resposta: ${escapeHtml(response)}">${escapeHtml(value)}</span>`;
+  return `<span class="criterion ${className}" title="Resposta: ${escapeHtml(response)}" aria-label="Resposta: ${escapeHtml(response)}">${escapeHtml(answer)}</span>`;
 }
 
 function sourceStatus(row) {
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') return '<span class="tag tag-green">texto primário revisado</span>';
   if (row.empirical_status === 'protocol_or_proposal_not_applicable') return '<span class="tag tag-red">protocolo contextual</span>';
+  if (row.assessment_basis === 'pending_full_text_not_appraised') return '<span class="tag tag-amber">texto integral pendente; MMAT não aplicado</span>';
+  if (row.assessment_basis === 'abstract_and_metadata_only') return '<span class="tag tag-amber">excluído após resumo; MMAT não aplicado</span>';
   return '<span class="tag tag-amber">resumo/metadados</span>';
+}
+
+function sourceAndAppraisalStatus(row) {
+  if (row.assessment_basis === 'pending_full_text_not_appraised') {
+    return 'Texto integral pendente; nenhum critério MMAT foi aplicado.';
+  }
+  if (row.assessment_basis === 'abstract_and_metadata_only') {
+    return 'Registro excluído após resumo; MMAT não aplicado.';
+  }
+  if (row.empirical_status === 'protocol_or_proposal_not_applicable') {
+    return 'Protocolo sem resultados empíricos concluídos; MMAT não aplicável.';
+  }
+  if (row.assessment_basis === 'primary_full_text_reviewed_externally') {
+    return 'Texto integral consultado; apreciação MMAT preliminar.';
+  }
+  return 'Situação da fonte ou apreciação requer confirmação.';
 }
 
 function parseCriterionEvidence(value = '') {
@@ -185,6 +207,10 @@ const latestReviewDateLabel = formatDate(latestReviewDate);
 const empirical = current.filter((row) => row.empirical_status !== 'protocol_or_proposal_not_applicable');
 const primaryReviewed = current.filter((row) => row.assessment_basis === 'primary_full_text_reviewed_externally');
 const abstractOnly = current.filter((row) => row.assessment_basis === 'abstract_and_metadata_only');
+const pendingFullText = current.filter((row) => row.assessment_basis === 'pending_full_text_not_appraised');
+const abstractExclusionSummary = abstractOnly.length === 1
+  ? 'Um registro foi excluído após a triagem do resumo e não recebeu MMAT.'
+  : `${abstractOnly.length} registros foram excluídos após a triagem do resumo e não receberam MMAT.`;
 const mixedMethodsStudies = current.filter((row) => row.design === 'mixed_methods');
 const componentDesignLabels = {
   qualitative: 'Qualitativo',
@@ -222,6 +248,11 @@ const mixedMethodsNote = mixedMethodsStudies.length
 function criterionEvidenceDetails(row) {
   const evidence = parseCriterionEvidence(row.criterion_evidence);
   const designQuestions = criterionQuestionsByDesign.get(row.design);
+  const missingEvidence = row.assessment_basis === 'pending_full_text_not_appraised'
+    ? 'Texto integral não recuperado; MMAT não aplicado.'
+    : row.assessment_basis === 'abstract_and_metadata_only'
+      ? 'Registro excluído após a triagem do resumo; MMAT não aplicado.'
+      : 'Justificativa não registrada no ledger.';
   const allQuestions = [
     ...MMAT_SCREENING_QUESTIONS.map(({ code, label }) => ({ code, label })),
     ...['Q1', 'Q2', 'Q3', 'Q4', 'Q5'].map((code) => ({
@@ -233,7 +264,7 @@ function criterionEvidenceDetails(row) {
   ];
   const items = allQuestions.map(({ code, label }) => `<li class="mmat-evidence-item">
       <div class="mmat-evidence-heading"><span class="question-code">${escapeHtml(code)}</span><strong>${escapeHtml(label)}</strong>${criterion(row[code.toLowerCase()])}</div>
-      <p>${escapeHtml(evidence.get(code) || 'Justificativa não registrada no ledger.')}</p>
+      <p>${escapeHtml(evidence.get(code) || missingEvidence)}</p>
     </li>`).join('');
   const source = row.source_id ? `<code>${escapeHtml(row.source_id)}</code>` : 'não identificada';
   const locator = row.page_or_section ? escapeHtml(row.page_or_section) : 'não registrado';
@@ -242,7 +273,7 @@ function criterionEvidenceDetails(row) {
       <details class="mmat-evidence">
         <summary>Ver perguntas, justificativas e localização da evidência</summary>
         <ul class="mmat-evidence-grid">${items}</ul>
-        <p class="source-note"><strong>ID da fonte:</strong> ${source} (consulte o manifesto de fontes primárias); <strong>seções/páginas registradas:</strong> ${locator}; <strong>data da apreciação:</strong> ${escapeHtml(formatDate(row.review_date))}.</p>
+        <p class="source-note"><strong>Situação da fonte e da apreciação:</strong> ${escapeHtml(sourceAndAppraisalStatus(row))} <strong>ID da fonte:</strong> ${source} (consulte o manifesto de fontes primárias); <strong>seções/páginas registradas:</strong> ${locator}; <strong>data da apreciação:</strong> ${escapeHtml(formatDate(row.review_date))}.</p>
         ${componentAppraisalDetails(row.study_id)}
       </details>
     </td>
@@ -327,7 +358,7 @@ const page = `<!doctype html>
         </div>
         <div class="data-strip">
           <div class="metric-card"><span class="metric-value">${current.length}</span><span class="metric-label">registros no ledger</span></div>
-          <div class="metric-card"><span class="metric-value">${empirical.length}</span><span class="metric-label">candidatos empíricos</span></div>
+          <div class="metric-card"><span class="metric-value">${empirical.length}</span><span class="metric-label">registros empíricos shortlistados</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
           <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">textos primários revisados</span></div>
           <div class="metric-card"><span class="metric-value">${abstractOnly.length}</span><span class="metric-label">resumos/metadados</span></div>
@@ -342,7 +373,7 @@ const page = `<!doctype html>
         </article>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
-          <h3>${primaryReviewed.length} textos revisados externamente</h3>
+          <h3>${primaryReviewed.length} textos integrais no núcleo empírico</h3>
           <p>${abstractOnly.length} registros ainda dependem da consulta à fonte primária; por ora, foram apreciados com base em resumos e metadados. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
         </article>
       </section>
@@ -352,7 +383,7 @@ const page = `<!doctype html>
       <section class="section" aria-labelledby="questions-title">
         <div class="section-heading">
           <h2 id="questions-title">Perguntas de triagem do MMAT 2018</h2>
-          <p>As perguntas de triagem S1 e S2 são aplicadas aos 17 candidatos empíricos submetidos ao MMAT. O protocolo contextual 6921 é não empírico e recebe N/A; por isso, não integra a triagem nem o denominador.</p>
+          <p>No snapshot atual, S1 e S2 estão preenchidas para ${primaryReviewed.length} estudos empíricos incluídos com texto integral consultado. ${pendingFullText.length} registros aguardam texto integral e não recebem apreciação MMAT. ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e permanece fora do denominador empírico.</p>
         </div>
         <div class="mmat-screening-grid">${screeningQuestions}</div>
         <div class="callout callout-blue mmat-question-note">
@@ -375,7 +406,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável · — = não avaliado; nenhum critério MMAT foi aplicado aos registros sem texto integral.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
@@ -387,7 +418,7 @@ const page = `<!doctype html>
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
             <h3 id="pending-title">Pendências antes da consolidação</h3>
-            <p>Completar os localizadores por critério, recuperar os textos primários ainda ausentes e concluir a adjudicação independente com a orientação. O protocolo 6921 continua fora da síntese empírica.</p>
+            <p>Completar os localizadores por critério, recuperar os ${pendingFullText.length} textos primários pendentes e concluir a adjudicação independente com a orientação. O protocolo 6921 continua fora da síntese empírica.</p>
           </div>
         </div>
       </section>

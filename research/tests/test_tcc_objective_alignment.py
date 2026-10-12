@@ -16,8 +16,8 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         self.assertEqual(re.findall(r"\\textbf\{(OE\d+)\}", intro),
                          ["OE1", "OE2", "OE3", "OE4"])
         self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
-        for phrase in ("primeiro objetivo específico foi atendido", "O segundo foi atendido",
-                       "O terceiro foi atendido", "O quarto foi atendido"):
+        for phrase in ("o primeiro objetivo específico foi desenvolvido", "O segundo foi desenvolvido",
+                       "O terceiro foi operacionalizado", "O quarto resultou na proposição"):
             self.assertIn(phrase, results)
         objectives = intro.split(r"\subsection{Objetivos Específicos}", 1)[1].split(
             r"\section{Estrutura do Trabalho}", 1
@@ -56,7 +56,8 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         )[0]
         self.assertIn("proposição", alignment)
         self.assertIn("não", alignment)
-        self.assertRegex(alignment, r"não foi validad[oa] empiricamente")
+        self.assertIn("sem execução de experimento ou demonstração de eficácia pedagógica", alignment)
+        self.assertIn("não equivalem a uma síntese final do corpus", alignment)
 
     def test_protocol_covers_the_proposed_pedagogical_review(self):
         source = (CONTENT / "prototipo.tex").read_text(encoding="utf-8")

@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 from pathlib import Path
 
 from src.analysis.reports import ReportGenerator
+from src.validation.reproducibility import _sha256 as _artifact_sha256
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
@@ -20,17 +20,18 @@ MANIFEST_PATH = (
 )
 
 
-def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def _manifest() -> dict:
     assert MANIFEST_PATH.exists(), f"Missing manifest: {MANIFEST_PATH}"
     return json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def test_reproducibility_hash_is_stable_across_text_line_endings(tmp_path: Path) -> None:
+    windows_text = tmp_path / "windows.csv"
+    unix_text = tmp_path / "unix.csv"
+    windows_text.write_bytes(b"study_id,status\r\n1,Y\r\n")
+    unix_text.write_bytes(b"study_id,status\n1,Y\n")
+
+    assert _artifact_sha256(windows_text) == _artifact_sha256(unix_text)
 
 
 def test_manifest_describes_current_snapshot_without_sqlite() -> None:
@@ -38,7 +39,8 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     snapshot = manifest["snapshot"]
     counts = snapshot["counts"]
 
-    assert manifest["schema_version"] == "1.2"
+    assert manifest["schema_version"] == "1.3"
+    assert manifest["scope_updated_at"] == "2026-10-12"
     assert manifest["database"]["versioned"] is False
     assert manifest["operational_database_snapshot"]["status"] == "diagnostic_only"
     assert manifest["operational_database_snapshot"]["authoritative_snapshot"] == "snapshot"
@@ -66,42 +68,52 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert counts["versioned_rows"] == 11877
     assert counts["selection_stage_counts"] == {
         "screening": 9391,
-        "eligibility": 2468,
-        "included": 18,
+        "prioritization": 2468,
+        "abstract_screening": 1,
+        "not_retrieved": 4,
+        "eligibility": 1,
+        "included": 12,
     }
     assert counts["prisma"] == {
         "identification": 11904,
         "duplicates_removed": 27,
         "screening": 11877,
         "screening_excluded": 9391,
-        "eligibility": 2486,
-        "eligibility_excluded": 2468,
-        "included": 18,
+        "prioritization": 2486,
+        "prioritization_excluded": 2468,
+        "shortlisted": 18,
+        "abstract_screening_excluded": 1,
+        "reports_sought": 17,
+        "reports_not_retrieved": 4,
+        "eligibility": 13,
+        "eligibility_excluded": 1,
+        "included": 12,
     }
     assert snapshot["included_ids"] == [
-        1,
         2,
         3,
         4,
-        5,
         6,
         7,
         8,
-        9,
-        10,
         14,
         6915,
         6916,
         6917,
         6919,
         6920,
-        6921,
-        6923,
     ]
+    assert snapshot["scope_record_status_counts"] == {
+        "awaiting_full_text": 4,
+        "context_only": 1,
+        "included_empirical_core": 12,
+        "protocol_context_only": 1,
+    }
     assert snapshot["candidate_audit"]["operational_candidates"] == 23
     assert snapshot["candidate_audit"]["manual_overrides_recorded"] == 7
     assert snapshot["candidate_audit"]["metadata_corrections_recorded"] == 1
-    assert snapshot["candidate_audit"]["current_included"] == 18
+    assert snapshot["candidate_audit"]["current_included"] == 12
+    assert snapshot["candidate_audit"]["shortlisted_records"] == 18
     assert "false_positives_removed" not in snapshot["candidate_audit"]
     assert len(snapshot["manual_overrides"]) == 7
     override_ledger = snapshot["manual_override_adjudication"]
@@ -145,7 +157,11 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     assert current_mmat["final_ready"] is False
     assert current_mmat["source_or_period_hold_ids"] == []
     assert current_mmat["primary_text_reviewed_rows"] == 12
-    assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 5
+    assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 12
+    assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 0
+    assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 12
+    assert current_mmat["record_evidence_levels"]["abstract_and_metadata_only"] == 1
+    assert current_mmat["record_evidence_levels"]["pending_full_text_not_appraised"] == 4
 
     assert manifest["artifact_scope"] == "research_snapshot"
     for artifact in manifest["artifacts"]:
@@ -153,7 +169,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         assert not relative_path.lower().endswith((".sqlite", ".db"))
         path = REPOSITORY_ROOT / relative_path
         assert path.exists(), f"Missing manifest artifact: {relative_path}"
-        assert _sha256(path) == artifact["sha256"], (
+        assert _artifact_sha256(path) == artifact["sha256"], (
             f"Hash drift detected for {relative_path}; regenerate the manifest"
         )
 
@@ -163,7 +179,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         "results/tcc/referencias.bib",
         "results/tcc/referencias_pedagogicas.bib",
     ]
-    assert "external to the pipeline study set" in bibliography["separation_rule"]
+    assert "only 12 are currently included in the empirical core" in bibliography["separation_rule"]
     artifact_paths = {artifact["path"] for artifact in manifest["artifacts"]}
     assert "research/data/protocol_execution_2025.json" in artifact_paths
     assert "research/data/manual_override_evidence_matrix.csv" in artifact_paths
@@ -261,6 +277,6 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "não substitui a adjudicação científica final" in root_html
     assert "submetidos à priorização operacional" in root_html
     assert "encaminhados à elegibilidade" not in root_html
-    assert "17 candidatos empíricos provisórios e 1 protocolo contextual" in tcc_html
-    assert "A apreciação MMAT é preliminar" in tcc_html
+    assert "Dos 18 registros shortlistados, 12 compõem o núcleo empírico" in tcc_html
+    assert "A apreciação dos 12 incluídos é preliminar" in tcc_html
     assert "11.904" not in tcc_html

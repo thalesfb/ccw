@@ -11,6 +11,12 @@ selecionadas, seus vínculos bibliográficos, localizadores de página, hashes e
 limites de suporte. O conjunto é parcial e não representa uma auditoria de
 todas as afirmações do texto.
 
+O manifesto de extração de evidências valida nove PDFs e 434 fragmentos. Seu
+fingerprint de escopo é anterior ao CSV atual: os 18 IDs e papéis reconciliam,
+mas o pacote de extração ainda não foi reproduzido com o fingerprint vigente.
+Essa diferença permanece explícita no manifesto; ela não transforma os
+fragmentos existentes em suporte para afirmações que não foram avaliadas.
+
 O estado `SUPPORTED` indica que a passagem localizada documenta a afirmação
 atribuída dentro do limite registrado. Não certifica a validade do estudo, não
 transforma um resultado específico em evidência geral e não equivale a uma
@@ -26,10 +32,13 @@ acadêmico independente.
 
 ## Cobertura e limites metodológicos
 
-O conjunto da revisão contém 17 candidatos empíricos provisórios. Foram
-consultados 12 dos 17 textos primários; os cinco candidatos restantes foram
-apreciados com base em resumos e metadados. A apreciação MMAT permanece preliminar, por
-critério e conduzida por um único revisor. Não há escore agregado ou ranking.
+A shortlist contém 18 registros. Um foi excluído após a triagem do resumo;
+para os 17 relatórios procurados, quatro textos integrais não foram recuperados
+e 13 foram avaliados em texto completo. Um protocolo sem resultados concluídos
+foi excluído após essa avaliação; os outros 12 estudos empíricos integram o
+núcleo incluído. O MMAT dos 12 permanece preliminar, por critério e conduzido
+por um único revisor. Os quatro textos não recuperados não receberam MMAT; não
+há escore agregado ou ranking.
 
 Essas condições limitam a força e a abrangência das conclusões. Uma busca sem
 resultado não demonstra ausência de um conceito na fonte, e exemplos

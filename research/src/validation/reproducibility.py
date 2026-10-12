@@ -32,6 +32,7 @@ DEFAULT_OUTPUT = REPOSITORY_ROOT / "research" / "exports" / "reports" / "reprodu
 MANUAL_OVERRIDE_ADJUDICATION = "research/data/manual_override_adjudication.csv"
 MANUAL_OVERRIDE_EVIDENCE_MATRIX = "research/data/manual_override_evidence_matrix.csv"
 HISTORICAL_PROTOCOL_MANIFEST = "research/data/protocol_execution_2025.json"
+TEXT_ARTIFACT_SUFFIXES = {".bib", ".csv", ".html", ".json", ".py", ".tex", ".txt"}
 
 # The research PR must be verifiable on its own.  Manuscript, presentation and
 # editorial documents are companion deliverables owned by their respective
@@ -93,7 +94,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/exports/references/included_papers.bib",
-        "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
+        "BibTeX inventory of 18 pipeline-shortlisted records, separated from the 12 empirical-core inclusions",
     ),
     (
         "research/data/mmat_current_study_registry.csv",
@@ -203,6 +204,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
 
 
 def _sha256(path: Path) -> str:
+    if path.suffix.lower() in TEXT_ARTIFACT_SUFFIXES:
+        content = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        return hashlib.sha256(content).hexdigest()
+
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
@@ -482,6 +487,10 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
     overrides_path = root / MANUAL_OVERRIDE_ADJUDICATION
     with overrides_path.open("r", encoding="utf-8-sig", newline="") as handle:
         override_rows = list(csv.DictReader(handle))
+    scope_path = root / "research" / "data" / "current_synthesis_scope.csv"
+    with scope_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        scope_rows = list(csv.DictReader(handle))
+    scope_counts = Counter(row["record_status"] for row in scope_rows)
     identity_audit = dict(statistics["deduplication_audit"])
     identity_audit["deterministic_identity_duplicate_rows_by_identifier"] = {
         "doi": int(identity_audit["doi"]["excess_rows"]),
@@ -501,6 +510,12 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
                     "duplicates_removed",
                     "screening",
                     "screening_excluded",
+                    "prioritization",
+                    "prioritization_excluded",
+                    "shortlisted",
+                    "abstract_screening_excluded",
+                    "reports_sought",
+                    "reports_not_retrieved",
                     "eligibility",
                     "eligibility_excluded",
                     "included",
@@ -508,6 +523,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
             },
         },
         "included_ids": facts["included_ids"],
+        "scope_record_status_counts": dict(sorted(scope_counts.items())),
         "deduplication_audit": identity_audit,
         "manual_overrides": [
             {"id": int(row["study_id"])}
@@ -529,12 +545,14 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
             "manual_overrides_recorded": 7,
             "metadata_corrections_recorded": 1,
             "current_included": facts["summary_prisma"]["included"],
+            "shortlisted_records": facts["summary_prisma"]["shortlisted"],
             "interpretation": (
                 "The 23-record candidate universe is preserved as historical "
                 "context: 16 operationally retained records plus seven manual "
-                "overrides. The current 18-record population is derived by the "
-                "approved scope decisions and the 6918 year correction; it is "
-                "not a new collection or an additional PRISMA stage."
+                "overrides. The current 18-record shortlist is divided into the "
+                "12-study empirical core, one abstract-stage exclusion, four full-text "
+                "reports not retrieved, and one full-text-excluded protocol. The 18 are not 18 "
+                "included empirical studies or an additional PRISMA stage."
             ),
         },
     }
@@ -786,8 +804,9 @@ def generate_manifest(
     )
     mmat_qa = validate_current_artifacts()
     manifest = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "snapshot_date": "2026-09-03",
+        "scope_updated_at": "2026-10-12",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "database": {
             "path": "research/systematic_review.sqlite",
@@ -806,7 +825,8 @@ def generate_manifest(
             ],
             "reference_audit": "research/data/reference_audit.csv",
             "separation_rule": (
-                "The 18 included studies are derived from the review pipeline. "
+                "The BibTeX inventory contains 18 pipeline-shortlisted records; "
+                "only 12 are currently included in the empirical core. "
                 "Methodological, pedagogical, assessment and technical references "
                 "are external to the pipeline study set and remain in the complete TCC bibliography."
             ),
@@ -837,7 +857,7 @@ def generate_manifest(
                 "Compare artifact SHA-256 values with this manifest.",
                 "Read PRISMA counts from research/exports/reports/summary.json.",
                 "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
-                "Read the 18 pipeline-derived citations from research/exports/references/included_papers.bib.",
+                "Read the 18 shortlisted pipeline-derived citations from research/exports/references/included_papers.bib; confirm empirical inclusion in research/data/current_synthesis_scope.csv.",
                 "Read the historical evidence ledger from research/data/manual_override_adjudication.csv.",
                 "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; the final population decision is recorded separately in research/data/adjudicated_population_decisions.csv.",
                 "Read the approved population decisions from research/data/adjudicated_population_decisions.csv and rerun research/src/processing/adjudicated_snapshot.py without SQLite.",
@@ -852,7 +872,7 @@ def generate_manifest(
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-                "The current 18-record MMAT ledger is preliminary; source retrieval, criterion locators and supervisor adjudication remain required before quality synthesis.",
+                "The current empirical MMAT denominator is 12. Four shortlisted reports were not retrieved and have no MMAT appraisal; one record was excluded after abstract screening and one protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis.",
             ],
         },
     }

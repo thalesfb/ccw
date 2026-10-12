@@ -1,7 +1,8 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-10-11T07:09:07+00:00",
+  "scope_updated_at": "2026-10-12",
+  "generated_at": "2026-10-12T22:23:02+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -108,8 +109,11 @@
       "total_records": 11904,
       "versioned_rows": 11877,
       "selection_stage_counts": {
-        "eligibility": 2468,
-        "included": 18,
+        "abstract_screening": 1,
+        "eligibility": 1,
+        "included": 12,
+        "not_retrieved": 4,
+        "prioritization": 2468,
         "screening": 9391
       },
       "prisma": {
@@ -117,31 +121,37 @@
         "duplicates_removed": 27,
         "screening": 11877,
         "screening_excluded": 9391,
-        "eligibility": 2486,
-        "eligibility_excluded": 2468,
-        "included": 18
+        "prioritization": 2486,
+        "prioritization_excluded": 2468,
+        "shortlisted": 18,
+        "abstract_screening_excluded": 1,
+        "reports_sought": 17,
+        "reports_not_retrieved": 4,
+        "eligibility": 13,
+        "eligibility_excluded": 1,
+        "included": 12
       }
     },
     "included_ids": [
-      1,
       2,
       3,
       4,
-      5,
       6,
       7,
       8,
-      9,
-      10,
       14,
       6915,
       6916,
       6917,
       6919,
-      6920,
-      6921,
-      6923
+      6920
     ],
+    "scope_record_status_counts": {
+      "awaiting_full_text": 4,
+      "context_only": 1,
+      "included_empirical_core": 12,
+      "protocol_context_only": 1
+    },
     "deduplication_audit": {
       "raw_rows": 11904,
       "operationally_flagged_rows": 0,
@@ -268,8 +278,9 @@
       "operational_candidates": 23,
       "manual_overrides_recorded": 7,
       "metadata_corrections_recorded": 1,
-      "current_included": 18,
-      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The current 18-record population is derived by the approved scope decisions and the 6918 year correction; it is not a new collection or an additional PRISMA stage."
+      "current_included": 12,
+      "shortlisted_records": 18,
+      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The current 18-record shortlist is divided into the 12-study empirical core, one abstract-stage exclusion, four full-text reports not retrieved, and one full-text-excluded protocol. The 18 are not 18 included empirical studies or an additional PRISMA stage."
     },
     "manual_override_adjudication": {
       "path": "research/data/manual_override_adjudication.csv",
@@ -315,7 +326,7 @@
       "results/tcc/referencias_pedagogicas.bib"
     ],
     "reference_audit": "research/data/reference_audit.csv",
-    "separation_rule": "The 18 included studies are derived from the review pipeline. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
+    "separation_rule": "The BibTeX inventory contains 18 pipeline-shortlisted records; only 12 are currently included in the empirical core. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
   },
   "methodological_appraisal": {
     "current_mmat_qa": {
@@ -340,31 +351,58 @@
         6921,
         6923
       ],
-      "criterion_rows": 18,
+      "mmat_study_ids": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        14,
+        6915,
+        6916,
+        6917,
+        6919,
+        6920
+      ],
+      "criterion_rows": 12,
+      "assessment_registry_rows": 18,
+      "component_criterion_rows": 6,
+      "component_assessment_registry_rows": 6,
       "primary_source_rows": 18,
       "synthesis_scope_rows": 18,
-      "empirical_evidence_rows": 17,
+      "empirical_evidence_rows": 12,
+      "contextual_study_rows": 1,
+      "awaiting_full_text_rows": 4,
       "contextual_protocol_rows": 1,
       "historical_denominator": 17,
-      "current_denominator": 18,
+      "current_denominator": 12,
       "evidence_levels": {
         "primary_full_text_reviewed_externally": 12,
-        "abstract_and_metadata_only": 5,
+        "abstract_and_metadata_only": 0,
         "abstract_only": 0,
         "metadata_only": 0,
         "protocol_or_proposal_not_applicable": 1
       },
+      "record_evidence_levels": {
+        "primary_full_text_reviewed_externally": 12,
+        "abstract_and_metadata_only": 1,
+        "abstract_only": 0,
+        "metadata_only": 0,
+        "protocol_or_proposal_not_applicable": 1,
+        "pending_full_text_not_appraised": 4
+      },
       "primary_text_reviewed_rows": 12,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 45,
+      "non_ct_criterion_decisions": 37,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
-        "Primary full text, criterion-level locators and adjudication are not complete.",
+        "The 12-study empirical MMAT remains provisional; criterion locators and adjudication are incomplete.",
         "The preliminary ledger must not be interpreted as a quality score or ranking.",
-        "Only 12 of 18 current studies have externally reviewed full text recorded.",
-        "Supervisor adjudication is pending for at least one study."
+        "Supervisor adjudication is pending for at least one study.",
+        "Four shortlisted empirical records remain pending primary full text and are excluded from the MMAT denominator."
       ]
     },
     "interpretation": "The current MMAT ledger is a criterion-level preliminary record. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
@@ -374,162 +412,162 @@
     {
       "path": "research/exports/analysis/papers.csv",
       "role": "row-level versioned representation of the current snapshot",
-      "sha256": "5c4b88c5d624fbf043265231ff77bc37c2b77301a7cc6cb83a01ba2b5085552a"
+      "sha256": "a5dbbd74a47e01bf0f959b17ac17309c019283ffd91bff5e6d7ff32159e8c57a"
     },
     {
       "path": "research/exports/analysis/papers.json",
       "role": "JSON representation of the current snapshot",
-      "sha256": "66d65a78816dae792d08d90cb93a382eaa3e2aabd225ee90526f74701e1c0b28"
+      "sha256": "7df93879d133fb271cd8a0cd72a9f1ce00cd93cd1a754c13da0f1958cafcf5a7"
     },
     {
       "path": "research/exports/analysis/deduplication_identity_audit.csv",
       "role": "row-level audit of the deterministic DOI/URL records removed from the PRISMA flow",
-      "sha256": "d43db9af7bad65cf827c17d3a4ecf6c9e6a60a3205acf46c6a62439e1275c98a"
+      "sha256": "ad11fce48c8e254567dbf459cf00f8f2f3d71f70e15dfdf084db8219a996db4a"
     },
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "a500458a0370f5340c4f09ae31fb52e2973b66cf8adfdd19874fbdd690e96792"
+      "sha256": "40c31a1c68a33885b4809f4334605832add0ae318b14e623baab672cb48abf39"
     },
     {
       "path": "research/exports/reports/summary.json",
       "role": "PRISMA and derived summary statistics",
-      "sha256": "136224a3f210984ec1b0ca20779679493c452c17612498d371c03c590d1b46e6"
+      "sha256": "a472685d114e864423a845cfbfb363d80de42adb25ae4e1491921ba5ed64d652"
     },
     {
       "path": "research/exports/references/included_papers.bib",
-      "role": "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
-      "sha256": "4bde67908854ef752f0b6557d6f908937ba46fce274ddbfa3ae9a02ca3a034b0"
+      "role": "BibTeX inventory of 18 pipeline-shortlisted records, separated from the 12 empirical-core inclusions",
+      "sha256": "37e4d47d1042df453bbd7b43e7b0fc940773783fb74894331446e1aee5289acd"
     },
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "c64c1ba42f434116ce0745597325db93b9b732e2e9cad3040b131068dd7f14c1"
+      "sha256": "401e411d0dc36d058cdc489154a9a087777a0c441284b60b2028b0d459c7865e"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "427fab532a788fe1c1d666e086d247dfda24c76012ee19a15e0ce64ef6cff3db"
+      "sha256": "d432fe31ca457eac6adb707cff1a85d30fe1b10cdb9ef840e892f503f62694b7"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "preliminary current MMAT ledger with S1/S2 and criterion-level CT responses",
-      "sha256": "5690f383b1ee3b6cae63083a6168e7a9b793f916f429e5764cd01edf731c83be"
+      "sha256": "4ff9077f74a0df62b80dde629acfe5afca3de164390b6f34be81d52a6a0be5c1"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
-      "sha256": "4b0e070a9350a09850c2286c15df8247a25931731e8cb3077ee6bd99bc7027f4"
+      "sha256": "c4e9066cbdc44ecff26d9daa7190f039720805ada001ee0cfbf0d8e8e9c0cbc8"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
       "role": "approved row-level scope decisions used to derive the current population",
-      "sha256": "525daf503ef9f62a939e3176337fe2833d49044c9549d4e49ea91ead42813b78"
+      "sha256": "ab41e695e7e68d818fbc1d299aad52eb488ce7e2f2646bb930fc09b062cd8f19"
     },
     {
       "path": "research/data/current_eligibility_protocol.csv",
       "role": "versioned adjudication gates for final scientific eligibility and override disposition",
-      "sha256": "40df20f82a756148d4fb8f374fbda77f8bb1a4ab47f3fa8e1f411edcf9491d3e"
+      "sha256": "0d17e642a55d37f6178cd783f8b1bfb09f997122802cac91a99ee94a53a2cfb0"
     },
     {
       "path": "research/data/manual_override_adjudication.csv",
       "role": "row-level evidence ledger for the seven manual candidate overrides",
-      "sha256": "5d92482ba3b49c5e6af6ed0086f1598d2cdc736262e054982cc78899a8a26bae"
+      "sha256": "8e7dd6cbf510f26690d8f942a5a99453c37691f972c13cc23a3f59ce5bf487e9"
     },
     {
       "path": "research/data/manual_override_evidence_matrix.csv",
       "role": "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
-      "sha256": "24948dfc2e26c60ee206f012ece000f55099d3aef7a06b97798307265bd1c5e0"
+      "sha256": "3149823fcb78352c0062163d1451f88adfb4842bfe5938354b942d19c60235a3"
     },
     {
       "path": "research/data/protocol_execution_2025.json",
       "role": "historical protocol reconstruction from the 2025 baseline; not the current PRISMA source of truth",
-      "sha256": "341c47e756f9e4e2dac9d63b1026b77ef1c99ec564bd3d7eb12c958995772ca0"
+      "sha256": "3545160ce2d8e8fd76e464b08ebc6a459a3cdc9b5cdda9645bc8aa89fedf5133"
     },
     {
       "path": "research/src/config.py",
       "role": "versioned review configuration and criteria",
-      "sha256": "9ae83a581ff35fa3ae9e46915e6b1058e79b2f7702093959ec61fca7d0648e69"
+      "sha256": "f6964db71bfb8691e75ed39be26f6f89bd387b7de548e33301d07ad5d465b0fb"
     },
     {
       "path": "research/src/search_terms.py",
       "role": "versioned canonical bilingual query generator",
-      "sha256": "f01c07411e7511070c93c23db07996d6307078f793599dd4e01910c31482286d"
+      "sha256": "58740ee8a2555e098d0f7e8136988762f9979b5985867fcf2656a47f3c0015ed"
     },
     {
       "path": "research/src/processing/scoring.py",
       "role": "versioned relevance-scoring implementation",
-      "sha256": "454b9acbf302900c96922369329bf8854e49efe901beaabd8b858d5a6b1a05fd"
+      "sha256": "7c0a54aded5d34f9f373637a2fa0a97b8c0b984636b38d92b8939594e6a523cb"
     },
     {
       "path": "research/src/processing/selection.py",
       "role": "versioned selection-stage implementation",
-      "sha256": "bec5bbf20ec59a1dca231e3a55dcb2dc6ded57d25fddaf027438e748d072564e"
+      "sha256": "3b0f0c2841fc038d417b480c24d8dd7c066fd5ec1e06b1651f34c0eaa584946e"
     },
     {
       "path": "research/src/processing/dedup.py",
       "role": "versioned duplicate-candidate audit and deduplication implementation",
-      "sha256": "dd5bb0a6315ca44247da6f0edc9f0ae6f1cd73c2ed8d90c2e4c20e14b503a152"
+      "sha256": "48a8affa80ac106f15808bf5a767699238984355ed4036d9bcc211529100c348"
     },
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "91a93b861f99babb2ed773a721d1676a415783c393a42b7e3ce1c5e8e6f1fc93"
+      "sha256": "6e44b9b1911be67e79350c765cb4441f2a73190e2baba09f2e7e0af341e3e0a5"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "78195fdb952182bb41ebf4e9ef4941fa4fbf5446ba375cbfb087ceb632fc7800"
+      "sha256": "3db73b44fd231fa0f8234316b8d86cca4396f9128a8857a1a0e7fb17a8904892"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
       "role": "versioned full-text analysis implementation",
-      "sha256": "49a87a15da462d0224cc3ee77dbe269ed25f4c04d147a8821589c10b040459cf"
+      "sha256": "3e7f66939f5943eee538c7cf5cd8987eafba202d17426c28086a22e92b67404e"
     },
     {
       "path": "research/src/cli_audit.py",
       "role": "manual-audit helper used to persist exclusions",
-      "sha256": "dc025836b76ab547e82b613524d9f6434fbea61ec8e3af652588524d5c8bcf37"
+      "sha256": "d09fc0e9e18f3be5ba37bcfdf89bba1dc0923759bdcfe723b15c0c08677c188b"
     },
     {
       "path": "research/src/cli.py",
       "role": "versioned command-line entry point for the research workflow",
-      "sha256": "c46e8c4db35ab4ea689ce881263d5bccc77ac2c008f1fd54d9ef9f5903ed3701"
+      "sha256": "11167c922e5acf1f5d88ce09e3257b97ade4bf46bf7a22287fb645c3f77748ff"
     },
     {
       "path": "research/src/pipelines/validations.py",
       "role": "versioned read-only cross-check of DB, exports and summary",
-      "sha256": "b707bd4c927bb2434c2018fd6bb9a4c0028ae74026e8be02166cca20ab7aa5c9"
+      "sha256": "60d8be3af1d138c4bd2e1fb4d4f4237375b71fbea1aa945d7c2243c9f4fc761f"
     },
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "18e2563d0ba189d17b0db59e03faae9c1a6c2e65a2fd151e9834a9a4a5275245"
+      "sha256": "451d49391af8f16759bdf29d4d204875ef9f4250160accdc1426782c9bd91efe"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
       "role": "SQLite-independent transformation from the versioned row export and adjudication ledger",
-      "sha256": "7dd21cef923bbbab162090a86ba31f5b3d961ee73ee27f0d5910c58e919a92a4"
+      "sha256": "c1a15a5c90a784488e04553e606c1a7c34df20af95e5e69c00db3ccb83b6070b"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "versioned validator for the current 18-record MMAT artifacts",
-      "sha256": "932bce5ca8db175832c73d52fc26ceef4281b7ece379357970331957eb4a0cc0"
+      "sha256": "5720d2fa82d876b808f5f3868ca4a1f4d579da3fed0811850672aaff01871b05"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "ec75034d61e4315729d7985ad883c3bc3b969eb63189fdbb8462f01b74122e6a"
+      "sha256": "94efc6e4265b5b082904d08ae1b8d986f16bd2578180537710f8337f04a9e588"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary current 18-record MMAT table included by the TCC",
-      "sha256": "cc2652e2bbf1d512e6e0f31b5200e225d93c887e0ea005652b41ce0900dad1c7"
+      "sha256": "f0ac574ebc03545ba4e8f25c577d0979e69ed5ea7b91de225aad8ab30c7ab5fb"
     },
     {
       "path": "research/requirements.txt",
       "role": "research runtime dependencies",
-      "sha256": "04b7209dcf3a445bb77216abe3ee4eaf4453d591fcd72e4b809c9cebec3c3b21"
+      "sha256": "1a3c6473511514e418386a070abd98ff2191735dea4586ee301f8ad93d283590"
     }
   ],
   "companion_documents": [
@@ -575,7 +613,7 @@
       "Compare artifact SHA-256 values with this manifest.",
       "Read PRISMA counts from research/exports/reports/summary.json.",
       "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
-      "Read the 18 pipeline-derived citations from research/exports/references/included_papers.bib.",
+      "Read the 18 shortlisted pipeline-derived citations from research/exports/references/included_papers.bib; confirm empirical inclusion in research/data/current_synthesis_scope.csv.",
       "Read the historical evidence ledger from research/data/manual_override_adjudication.csv.",
       "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; the final population decision is recorded separately in research/data/adjudicated_population_decisions.csv.",
       "Read the approved population decisions from research/data/adjudicated_population_decisions.csv and rerun research/src/processing/adjudicated_snapshot.py without SQLite.",
@@ -590,7 +628,7 @@
       "External API responses, metadata and cache state can change on a fresh collection.",
       "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The current 18-record MMAT ledger is preliminary; source retrieval, criterion locators and supervisor adjudication remain required before quality synthesis."
+      "The current empirical MMAT denominator is 12. Four shortlisted reports were not retrieved and have no MMAT appraisal; one record was excluded after abstract screening and one protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis."
     ]
   }
 }

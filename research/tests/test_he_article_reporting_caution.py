@@ -19,7 +19,7 @@ def test_he_classroom_analysis_reports_cluster_level_uncertainty_cautiously():
     he_end = evidence_section.index("\n\n", he_start)
     he_section = evidence_section[he_start:he_end].lower()
 
-    assert "45 estudantes por turma" in he_section
+    assert "oito turmas com 45 estudantes cada" in he_section
     assert "amostra total de 90" in he_section
     assert "agrupamento" in he_section
     assert "não é possível, portanto, reconstruir a unidade analítica" in he_section

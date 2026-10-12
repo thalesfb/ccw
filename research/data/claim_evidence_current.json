@@ -7,7 +7,7 @@
     {
       "claim_id": "C-RSL-01",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
       "claim_text": "Os autores descrevem uma divisão de 70\\% para treinamento e 30\\% para teste e reportam 75\\% de acurácia de teste para a combinação de SMOTE e RUSBoost.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -26,7 +26,7 @@
         "281ab88ee25653067cad4527": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
         "c8eaf3c2e3f025596a99a8a2": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94"
       },
-      "source_id": "PS-2",
+      "source_id": "PS-002",
       "physical_pages": [
         3,
         7
@@ -39,7 +39,7 @@
     {
       "claim_id": "C-RSL-02",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
       "claim_text": "Na mesma comparação, a revocação da classe de baixo desempenho é de 43\\%.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -54,7 +54,7 @@
         "281ab88ee25653067cad4527": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
         "c8eaf3c2e3f025596a99a8a2": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94"
       },
-      "source_id": "PS-2",
+      "source_id": "PS-002",
       "physical_pages": [
         7
       ],
@@ -66,7 +66,7 @@
     {
       "claim_id": "C-RSL-03",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
       "claim_text": "o alvo da modelagem foi o tamanho de efeito de uma intervenção, não a proficiência individual.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -103,7 +103,7 @@
     {
       "claim_id": "C-RSL-04",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
       "claim_text": "os resultados apresentam, na subanálise de programação, progresso até a oitava semana para estudantes com alta interação.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -133,8 +133,8 @@
     {
       "claim_id": "C-RSL-05",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
-      "claim_text": "O artigo também relata diferença entre os grupos no pré-teste (U=6714; p<0,001; tamanho de efeito=0,346)",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
+      "claim_text": "Na Tabela~3 (p.~105; página física 15), os autores reportam diferença estatisticamente significativa entre os grupos já no pré-teste ($U=6714$, $Z=4{,}839$, $p<0{,}001$, tamanho de efeito=0{,}346)",
       "claim_type": "empirical_result",
       "citation_keys": [
         "Enhancing2025_012"
@@ -146,19 +146,20 @@
       "source_hashes": {
         "93ad21349e0af75383b61a3a": "d95e78c4a32c3a929a0429b97e672b49aa1a13bd3ffdb3f081a3ac610caadc0c"
       },
-      "source_id": "PS-14",
+      "source_id": "PS-014",
+      "evidence_locator": "Publisher PDF, Table 3, printed p. 105 (physical PDF p. 15), Pretest row: n=196, U=6714, Z=4.839, p<0.001, effect size=0.346",
       "physical_pages": [
         15
       ],
       "reviewer": "agent_assisted_primary_source_review",
       "human_adjudication": "pending",
       "counterevidence_checked": true,
-      "support_boundary": "The baseline difference prevents reading the posttest comparison as an isolated animation effect."
+      "support_boundary": "A significant pretest imbalance and the combined animation-plus-Jigsaw intervention prevent attribution of posttest differences to animation alone."
     },
     {
       "claim_id": "C-RSL-06",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
       "claim_text": "oito itens da escala de mentalidade matemática utilizados para formar as categorias também permanecem entre os preditores selecionados.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -190,7 +191,7 @@
     {
       "claim_id": "C-RSL-07",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
       "claim_text": "Nas tarefas de frações, compara simulações com registros de tutoria previamente coletados no DataShop para 79 estudantes e prevê qualitativamente efeitos de sequenciamentos instrucionais, não escores absolutos de desempenho no tutor ou em pós-teste.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -205,7 +206,7 @@
         "1ef8b640218c42816e1bdc64": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23",
         "a2e6b9a02df11fe17d21a21c": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23"
       },
-      "source_id": "PS-8",
+      "source_id": "PS-008",
       "physical_pages": [
         60,
         64
@@ -218,8 +219,8 @@
     {
       "claim_id": "C-RSL-08",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "94d360e36d5df316368eef215312327234bceb87ca054c67751c117db2ec66b3",
-      "claim_text": "Em análise distinta sobre resolução de equações, descreve dados de 71 estudantes e 10.052 passos; a análise utiliza 4.568 passos nos quais os estudantes executaram as próprias ações, enquanto tarefas de estratégia em que o tutor realizava as transformações ficam fora desse recorte.",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
+      "claim_text": "a análise utiliza 4.568 passos nos quais os estudantes executaram as próprias ações, A nota 5 esclarece que o subconjunto inclui os passos de estratégia em que o estudante escolhe a transformação; ficam fora somente os passos em que o tutor executa os cálculos",
       "claim_type": "empirical_result",
       "citation_keys": [
         "Computational2017_008"
@@ -231,14 +232,15 @@
       "source_hashes": {
         "d1e6f920ef2710ca6e028056": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23"
       },
-      "source_id": "PS-8",
+      "source_id": "PS-008",
+      "evidence_locator": "Thesis, printed p. 56 (physical PDF p. 72), note 5: 4,568 analyzed steps include student-selected strategy steps and exclude calculations executed by the tutor",
       "physical_pages": [
         72
       ],
       "reviewer": "agent_assisted_primary_source_review",
       "human_adjudication": "pending",
       "counterevidence_checked": true,
-      "support_boundary": "The analyzed steps are a selected subset where students acted themselves, not the full 10,052-step record or a separate prospective intervention."
+      "support_boundary": "The 4,568 steps are a selected subset of the 10,052-step record; note 5 includes student-selected strategy steps and excludes calculations executed by the tutor. This is not a separate prospective intervention."
     }
   ]
 }

@@ -20,6 +20,10 @@ def test_source_manifest_preserves_every_canonical_study_without_private_paths()
     assert len(sources) == len(manifest['sources']) == 18
     assert sources.keys() == scope.keys()
     assert manifest['scope_sha256'] == hashlib.sha256(path.read_text(encoding='utf-8').encode()).hexdigest()
+    assert manifest['schema_version'] == 2
+    assert manifest['retrieval_scope_sha256'] != manifest['scope_sha256']
+    assert manifest['scope_unchanged'] is False
+    assert 'not been replayed' in manifest['scope_drift_explanation']
     assert manifest['extraction_settings']['chunk_size'] == 3000
     for relative, expected in manifest['code_hashes'].items():
         assert expected == hashlib.sha256((ROOT / relative).read_text(encoding='utf-8').encode()).hexdigest()
@@ -61,13 +65,20 @@ def test_optional_font_decoder_is_recorded_and_pinned_for_replay():
 
 def test_reviewed_claims_preserve_manuscript_context_and_source_locators():
     sources = {row['study_id']: row for row in load('research/data/evidence_sources_current.json')['sources']}
+    primary_manifest = ROOT / 'research/data/mmat_primary_sources_manifest.csv'
+    primary_sources = {
+        row['source_id']: row
+        for row in csv.DictReader(primary_manifest.read_text(encoding='utf-8-sig').splitlines())
+    }
     ledger = load('research/data/claim_evidence_current.json')
     assert ledger['claims']
     for claim in ledger['claims']:
         text = (ROOT / claim['tcc_file']).read_text(encoding='utf-8')
         assert claim['claim_text'] in text
         assert claim['manuscript_sha256'] == hashlib.sha256(text.encode()).hexdigest()
-        source = sources[claim['source_id'].removeprefix('PS-')]
+        source_id = claim['source_id']
+        assert source_id in primary_sources
+        source = sources[primary_sources[source_id]['study_id']]
         assert claim['citation_keys'] == [source['bib_key']]
         assert claim['evidence_chunks']
         assert set(claim['evidence_chunks']) == claim['source_hashes'].keys()
@@ -76,10 +87,23 @@ def test_reviewed_claims_preserve_manuscript_context_and_source_locators():
         assert claim['counterevidence_checked'] and claim['support_boundary']
         assert claim['human_adjudication'] == 'pending'
 
+    nyantah_claim = next(claim for claim in ledger['claims'] if claim['source_id'] == 'PS-014')
+    assert nyantah_claim['evidence_locator'] == (
+        'Publisher PDF, Table 3, printed p. 105 (physical PDF p. 15), '
+        'Pretest row: n=196, U=6714, Z=4.839, p<0.001, effect size=0.346'
+    )
+    assert 'pretest imbalance' in nyantah_claim['support_boundary']
+
+    maclellan_claim = next(claim for claim in ledger['claims'] if claim['claim_id'] == 'C-RSL-08')
+    assert maclellan_claim['evidence_locator'] == (
+        'Thesis, printed p. 56 (physical PDF p. 72), note 5: 4,568 analyzed steps '
+        'include student-selected strategy steps and exclude calculations executed by the tutor'
+    )
+
 
 def test_maclellan_synthesis_is_bound_to_both_primary_analyses():
     claims = [claim for claim in load('research/data/claim_evidence_current.json')['claims']
-              if claim['source_id'] == 'PS-8']
+              if claim['source_id'] == 'PS-008']
     assert len(claims) == 2
     assert {tuple(claim['physical_pages']) for claim in claims} == {(60, 64), (72,)}
     assert all(claim['support_status'] == 'SUPPORTED' for claim in claims)

@@ -1,7 +1,8 @@
 """Render the current preliminary MMAT reassessment for the TCC.
 
 The output is deliberately labelled preliminary.  It is generated from the
-current 18-record ledger and does not assign an overall quality score.
+18-record audit ledger, but the empirical table denominator is restricted to
+the 12 included empirical studies and does not assign an overall quality score.
 """
 
 from __future__ import annotations
@@ -11,7 +12,11 @@ import csv
 import difflib
 from pathlib import Path
 
-from .mmat_current import load_component_reassessments, validate_current_artifacts
+from .mmat_current import (
+    CURRENT_MMAT_STUDY_IDS,
+    load_component_reassessments,
+    validate_current_artifacts,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -36,6 +41,7 @@ DESIGN_LABELS = {
 }
 BASIS_LABELS = {
     "primary_full_text_reviewed_externally": "Texto primário externo",
+    "pending_full_text_not_appraised": "Texto pendente; sem MMAT",
     "abstract_and_metadata_only": "Resumo/metadados",
     "abstract_only": "Resumo",
     "metadata_only": "Metadados",
@@ -45,10 +51,13 @@ def load_rows(path: Path = DATA_PATH) -> list[dict[str, str]]:
     validate_current_artifacts(reassessment_path=path)
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    expected_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923]
+    record_ids = [int(row["study_id"]) for row in rows]
+    if record_ids != [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923]:
+        raise ValueError(f"Unexpected 18-record MMAT audit ledger IDs: {record_ids}")
+    rows = [row for row in rows if int(row["study_id"]) in CURRENT_MMAT_STUDY_IDS]
     ids = [int(row["study_id"]) for row in rows]
-    if ids != expected_ids:
-        raise ValueError(f"Expected current MMAT IDs {expected_ids}; found {ids}")
+    if ids != list(CURRENT_MMAT_STUDY_IDS):
+        raise ValueError(f"Expected empirical MMAT IDs {list(CURRENT_MMAT_STUDY_IDS)}; found {ids}")
     for row in rows:
         if row.get("assessment_status") == "final":
             raise ValueError("The current TCC table cannot render final MMAT claims")
@@ -103,7 +112,8 @@ def _latex_escape(value: object) -> str:
 def load_component_rows(path: Path = COMPONENT_DATA_PATH) -> list[dict[str, str]]:
     load_component_reassessments(path)
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
-        return list(csv.DictReader(handle))
+        rows = list(csv.DictReader(handle))
+    return [row for row in rows if int(row["study_id"]) in CURRENT_MMAT_STUDY_IDS]
 
 
 def render_component_table(
@@ -183,7 +193,7 @@ def render_table(
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|"
         r">{\raggedright\arraybackslash}p{2.5cm}|ccccccc|"
         r">{\raggedright\arraybackslash}p{3.6cm}|}",
-        r"\caption{Reavaliação documental preliminar dos estudos atuais com o MMAT 2018.}\label{qua:mmat-reavaliacao-atual}\\",
+        r"\caption{Reavaliação documental preliminar dos 12 estudos empíricos incluídos com o MMAT 2018.}\label{qua:mmat-reavaliacao-atual}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
@@ -218,7 +228,8 @@ def render_table(
         ]
         lines.append(" & ".join(values) + r" \\")
     note = (
-        r"\textit{Nota:} Y = sim; N = não; CT = não é possível concluir com a evidência disponível; N/A = não aplicável. "
+        r"\textit{Nota:} O denominador empírico é de 12 estudos incluídos; um registro foi excluído após a triagem do resumo, quatro aguardam texto integral e um protocolo sem resultados concluídos foi excluído após texto completo. "
+        r"Y = sim; N = não; CT = não é possível concluir com a evidência disponível; N/A = não aplicável. "
         r"Quant. = quantitativo; rand. = randomizado; Base = fonte documental consultada. "
         r"S1 e S2 são perguntas de triagem; Q1--Q5 correspondem aos critérios específicos do delineamento, "
         r"detalhados na Seção~\ref{sec:qualidade-estudos}. Todos os julgamentos empíricos são preliminares "

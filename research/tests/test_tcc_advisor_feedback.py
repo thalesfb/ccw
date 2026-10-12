@@ -82,7 +82,7 @@ def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> N
 
 def test_interpretation_precedes_the_long_synthesis_quadro() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
-    interpretation = chapter.index("No Quadro~\\ref{qua:sintese-estudos-empiricos}")
+    interpretation = chapter.index("O Quadro~\\ref{qua:sintese-estudos-empiricos}")
     quadro = chapter.index(r"\label{qua:sintese-estudos-empiricos}")
     assert interpretation < quadro
     assert "A leitura deve considerar conjuntamente o desenho" in chapter[interpretation:quadro]
@@ -159,7 +159,7 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "Este trabalho investigou" in conclusion
     assert "Este trabalho elaborou uma especificação técnica e pedagógica" in abstract
-    assert "O protocolo foi proposto sem execução empírica própria" in abstract
+    assert "O protocolo não foi executado empiricamente" in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:
@@ -202,8 +202,8 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert MMAT_LATEX.read_text(encoding="utf-8") == render_table(load_rows())
 
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
-    assert "Síntese do relato consultado" in chapter
-    assert "não constitui uma medida harmonizada de efeito" in chapter
+    assert r"O Quadro~\ref{qua:sintese-estudos-empiricos}" in chapter
+    assert "não apresenta medida harmonizada de efeito" in chapter
     assert "Resultado reportado" not in chapter
     mmat_section = chapter[chapter.index("Avaliação Metodológica com o MMAT") :]
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
@@ -220,7 +220,8 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         assert "Nove textos estão arquivados" not in text
         assert "nove fontes" not in text
     assert r"\citeonline{Zeng2025_6923}" in methodology
-    assert "Q1--Q5 permanecem como CT" in methodology
+    assert "Q1--Q5 permanecem sem resposta" in methodology
+    assert "essas cinco respostas foram mantidas como CT" in methodology
     assert "ferramentas de ia generativa apoiaram a revisão de consistência" in methodology.lower()
     assert "não foi contabilizado como avaliação independente" in methodology
     assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology

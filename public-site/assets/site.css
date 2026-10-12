@@ -191,6 +191,7 @@ p { margin: 0 0 14px; }
 .criterion-n { background: #f8dadd; color: #8c1f2a; }
 .criterion-ct { background: #f9e9c7; color: #70470d; }
 .criterion-na { background: #e8ecea; color: #344641; }
+.criterion-pending { background: #eef2f0; color: #344641; }
 .mmat-evidence { border-top: 1px solid var(--line); }
 .mmat-evidence summary { color: var(--blue); cursor: pointer; font: 600 .88rem/1.4 "Asap", sans-serif; padding: 10px 0; }
 .mmat-evidence summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
