@@ -67,8 +67,9 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 
 ## Limites científicos
 
-- os 18 registros retidos incluem 17 candidatos empíricos provisórios e um
-  protocolo contextual;
+- dos 18 registros shortlistados, 12 estudos empíricos foram incluídos, quatro
+  relatórios não foram recuperados, um registro foi excluído após resumo e um
+  protocolo sem resultados concluídos foi excluído após texto completo;
 - o MMAT atual é preliminar e não produz nota média ou ranking;
 - as frequências técnicas são descritivas sobre o snapshot após deduplicação,
   não uma síntese de eficácia;

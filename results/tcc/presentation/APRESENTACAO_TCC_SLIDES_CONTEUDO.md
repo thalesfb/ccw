@@ -3,11 +3,11 @@
 ## Identidade
 
 - **Título:** Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais
-- **Formato:** PowerPoint editável, 16:9
+- **Papel:** storyboard de conteúdo para o deck canônico Slidev de 25 slides; não é o export PPTX editável paralelo de 19 slides
 - **Autor:** Thales Ferreira Batista
 - **Orientação:** Prof. Dr. Rafael Zanin; Prof. Dr. Manassés Ribeiro
 - **Instituição:** IFC — Campus Videira
-- **Snapshot:** 03/09/2026
+- **Atualização da síntese e do escopo:** 12/10/2026
 - **Recorte temporal:** 2015–2026, com data de corte em 31/08/2026
 
 O roteiro organiza a exposição do TCC em problema, método, resultados,
@@ -92,7 +92,12 @@ e resumos e não corresponde à avaliação de elegibilidade em texto completo.
 
 Incorpora `research/exports/visualizations/prisma_flow.png`, figura operacional
 própria, com referência ao PRISMA 2020, sincronizada com os artefatos públicos;
-ela não reproduz o diagrama PRISMA completo.
+ela não reproduz o diagrama PRISMA completo. Dos 18 registros shortlistados,
+um foi excluído após a triagem do resumo; 17 relatórios foram procurados, quatro
+não foram recuperados e 13 foram avaliados em texto completo. Um protocolo sem
+resultados concluídos foi excluído; os outros 12 estudos empíricos integram o
+núcleo incluído. A priorização operacional anterior não é apresentada como
+etapa PRISMA de elegibilidade.
 
 ### 12. Deduplicação: o que foi confirmado
 
@@ -125,23 +130,23 @@ e não substitui a leitura das fontes primárias.
 
 ### 16. Conjunto retido: dois estratos de leitura
 
-Dos 18 registros retidos, 17 são candidatos empíricos provisórios e 1 é um
-protocolo ou proposta contextual. A síntese empírica considera os 17; o registro
-contextual permanece para rastreabilidade e não sustenta resultado empírico.
-A síntese empírica preliminar aponta recorrência de tarefas de predição de
-desempenho e estimativa de proficiência, com uso recorrente de modelos
-supervisionados.
+Dos 18 registros shortlistados, 12 integram o núcleo empírico. Um foi excluído
+após a triagem do resumo; quatro textos integrais não foram recuperados; um
+protocolo sem resultados concluídos foi excluído após texto completo. A síntese
+empírica aponta recorrência de predição de desempenho e estimativa de
+proficiência, além de uma experiência que integra Transformada de Fourier ao
+ensino universitário de matemática. Nesse caso, coortes separadas por quatro
+anos limitam a inferência e não isolam o efeito da IA.
 
-### 17. Nosso filtro de qualidade: critérios, não uma nota global
+### 17. Apreciação metodológica preliminar: critérios, não uma nota global
 
-O MMAT é apresentado por critério, conforme o desenho de cada estudo, usando
-Sim, Não ou Não é possível determinar. A apreciação é preliminar e feita por um
-único revisor: doze registros tiveram texto primário consultado e cinco foram
-apreciados com resumo/metadados. Não há média, ranking ou categoria geral de
-qualidade; recuperação de fontes, localizadores e adjudicação ainda precisam ser
-consolidados.
+O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
+12 estudos incluídos tiveram texto integral consultado e foram avaliados por
+um único revisor; quatro registros aguardam texto integral e não receberam
+MMAT, enquanto um foi excluído após resumo. A apreciação é preliminar e aguarda
+adjudicação independente e consolidação dos localizadores.
 
-### 18. O que emerge entre os candidatos empíricos
+### 18. O que emerge entre os estudos incluídos
 
 Organiza as recorrências em torno de predição de desempenho e estimativa de
 proficiência, com uso de RF, SVM e redes neurais. A heterogeneidade de
@@ -164,9 +169,11 @@ et al. (2025, pp. 14, 22); descrições incompatíveis de alocação, diferença
 pré-teste e intervenção combinada em Nyantah et al. (2025, pp. 101–105); e
 sobreposição entre itens usados para construir categorias e preditores em
 Echeveria et al. (2025, pp. 66, 69–70). São exemplos dos textos consultados,
-não estimativa de frequência da literatura. A cobertura é de 12 textos
-primários entre 17 candidatos; os cinco restantes foram apreciados por
-resumo/metadados, e o MMAT segue preliminar, por revisor único.
+não estimativa de frequência da literatura. Os exemplos são casos localizados
+nos textos integrais dos estudos incluídos. Quatro registros
+continuam pendentes sem apreciação MMAT; um foi excluído após resumo, um após
+texto completo por escopo e um é protocolo sem resultados concluídos. A revisão
+segue preliminar, por revisor único.
 
 ### 21. Da evidência à especificação — sem saltar para a implementação
 

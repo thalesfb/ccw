@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Snapshot: 03/09/2026 · Data de corte: 31/08/2026</div>
+<div class="cover-snapshot">Revisão atualizada: 12/10/2026 · Corte da busca: 31/08/2026</div>
 
 ---
 layout: default
@@ -207,16 +207,16 @@ class: content-slide flow-slide
     <div class="tcc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
     <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
     <div class="tcc-funnel-stage funnel-screening"><span>Após triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
-    <div class="tcc-funnel-stage funnel-inclusion"><span>Retenção operacional</span><strong>18</strong><small>2.468 excluídos na priorização</small></div>
+    <div class="tcc-funnel-stage funnel-inclusion"><span>Shortlist operacional</span><strong>18</strong><small>2.468 não avançaram na priorização</small></div>
   </div>
   <div class="tcc-funnel-notes">
     <p><strong>Identidade:</strong> 25 DOI + 2 URL são removidos de forma determinística.</p>
     <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
-    <p><strong>Conjunto retido:</strong> 17 candidatos empíricos provisórios + 1 protocolo contextual.</p>
+    <p><strong>Desfecho da shortlist:</strong> 12 estudos incluídos; 4 textos pendentes; 1 exclusão após resumo; 1 protocolo excluído.</p>
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Os 2.486 registros foram priorizados por metadados e resumos; a etapa não equivale à avaliação de elegibilidade de relatórios em texto completo. A retenção não é medida de qualidade nem de eficácia pedagógica.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Os 2.486 registros foram priorizados por metadados e resumos; a etapa não equivale à avaliação de elegibilidade de relatórios em texto completo. Os 18 da shortlist ainda passaram por triagem de resumo e, para 13, avaliação em texto completo.</div>
 
 ---
 layout: center
@@ -312,14 +312,14 @@ class: content-slide tcc-retained-slide
 
 <div class="slide-kicker">15 / RETENÇÃO</div>
 
-# Retenção: dois estratos de leitura
+# Composição dos 18 registros shortlistados
 
 <div class="tcc-retained-layout">
-  <div class="tcc-retained-number"><strong>18</strong><span>registros retidos<br>na revisão</span><div class="tcc-retained-rule"></div><p>O conjunto final não é homogêneo.</p></div>
+  <div class="tcc-retained-number"><strong>18</strong><span>registros shortlistados<br>para adjudicação</span><div class="tcc-retained-rule"></div><p>Shortlist não é inclusão final.</p></div>
   <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata"><strong>17</strong><span>candidatos empíricos provisórios</span><strong>+</strong><strong>1</strong><span>protocolo contextual</span></div>
-    <h2>Dois estratos de leitura</h2>
-    <p>Os candidatos empíricos sustentam a síntese. O protocolo contextual permanece para rastreabilidade, sem resultado empírico.</p>
+    <div class="tcc-retained-strata"><strong>12</strong><span>estudos empíricos incluídos</span><strong>+</strong><strong>4</strong><span>textos integrais pendentes</span></div>
+    <h2>Desfechos da seleção</h2>
+    <p>Um registro foi excluído após o resumo e um protocolo sem resultados concluídos após texto completo. Os quatro relatórios não recuperados não receberam MMAT.</p>
     <div class="tcc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
   </div>
 </div>
@@ -352,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> entre os 17 candidatos empíricos, 12 tiveram texto primário consultado por fontes externas; as cópias integrais não estão arquivadas no repositório público. Outros 5 foram apreciados com resumos/metadados. Um único revisor conduziu a leitura; verificação independente e adjudicação ainda pendem.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 12 estudos empíricos incluídos tiveram seus textos integrais consultados e receberam MMAT por um único revisor. Quatro relatórios não foram recuperados e não receberam MMAT; um registro foi excluído após resumo e um protocolo foi excluído após texto completo. A apreciação permanece preliminar, sem escore agregado, e aguarda adjudicação independente.</div>
 
 ---
 layout: default
@@ -361,10 +361,10 @@ class: content-slide tcc-synthesis-slide
 
 <div class="slide-kicker">17 / SÍNTESE</div>
 
-# Síntese provisória dos candidatos empíricos
+# Síntese dos estudos empíricos incluídos
 
 <div class="tcc-synthesis-layout">
-  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>17</strong><span>candidatos<br>empíricos</span><i>evidências<br>relacionadas</i></div>
+  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>12</strong><span>estudos<br>incluídos</span><i>evidências<br>relacionadas</i></div>
   <div class="tcc-synthesis-copy">
     <h2>Predição e estimativa aparecem como eixo recorrente.</h2>
     <p>Os estudos organizam evidências de desempenho e inferem proficiência a partir de registros observados, frequentemente com modelos supervisionados.</p>
@@ -403,12 +403,12 @@ class: content-slide tcc-gaps-slide
 <p class="tcc-gaps-intro">Quatro exemplos localizados nos textos primários; não são uma contagem de frequência nem uma afirmação sobre toda a literatura.</p>
 <div class="tcc-gaps-grid">
   <div><h2>He et al. (2025)<small>pp. 1, 16, 31–35</small></h2><p><strong>Relato:</strong> oito turmas × 45 = 360, mas amostra declarada n=90; docentes também se distribuem de modo desigual entre condições.</p><p><strong>Implicação:</strong> denominador, unidade de análise e confundimento exigem cautela.</p></div>
-  <div><h2>Villegas-Ch et al. (2025)<small>pp. 1, 14, 22</small></h2><p><strong>Relato:</strong> introdução menciona um semestre; métodos, seis semanas; a subanálise de programação chega à semana 8.</p><p><strong>Implicação:</strong> não atribuir semana 8 à matemática nem inferir duração única.</p></div>
+  <div><h2>Villegas-Ch et al. (2025)<small>pp. 2, 14, 22</small></h2><p><strong>Relato:</strong> introdução menciona um semestre; métodos, seis semanas; a subanálise de programação chega à semana 8.</p><p><strong>Implicação:</strong> não atribuir semana 8 à matemática nem inferir duração única.</p></div>
   <div><h2>Nyantah et al. (2025)<small>pp. 101–105</small></h2><p><strong>Relato:</strong> alocação descrita de modo incompatível; há diferença no pré-teste e a intervenção combina animação e jigsaw.</p><p><strong>Implicação:</strong> não atribuir o resultado à animação isoladamente.</p></div>
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> 12 de 17 textos primários foram consultados; cinco candidatos foram apreciados por resumo/metadados. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> os 12 estudos incluídos tiveram texto integral consultado; quatro relatórios não foram recuperados e não receberam MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
 
 ---
 layout: default
@@ -468,7 +468,7 @@ class: content-slide tcc-next-slide
 # Próximos passos — antes de qualquer experimento
 
 <div class="tcc-next-layout">
-  <div class="tcc-next-list"><div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div><div><b>02</b><span>Revisar lacunas à luz dos 17 estudos empíricos provisórios.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="tcc-next-list"><div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div><div><b>02</b><span>Revisar lacunas após a adjudicação dos 12 estudos e a recuperação dos quatro textos pendentes.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
   <div class="tcc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 

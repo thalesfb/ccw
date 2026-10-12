@@ -4,6 +4,10 @@ Tempo sugerido: aproximadamente 18–20 minutos, deixando espaço para perguntas
 O texto é um guia oral; a redação científica completa permanece em
 `results/tcc/`.
 
+Este roteiro acompanha o export PPTX editável paralelo, com 19 slides. Ele não
+corresponde ao deck canônico Slidev da defesa, que contém 25 slides; use o
+roteiro apenas com a versão de 19 slides.
+
 ## 1. Capa — 0:30
 
 Este trabalho investiga o uso de técnicas computacionais no ensino de
@@ -104,24 +108,24 @@ científica esteja distribuída de forma uniforme. A cobertura está condicionad
 
 ## 12. Conjunto retido — 1:05
 
-Dos 18 registros retidos operacionalmente, 17 são candidatos empíricos
-provisórios. Um registro é um protocolo ou proposta contextual e foi preservado
-para rastreabilidade, não para sustentar uma conclusão empírica. Entre os
-empíricos, a recorrência envolve predição de desempenho e estimativa de
-proficiência, com uso recorrente de modelos supervisionados. Isso descreve a
-literatura encontrada; não escolhe um algoritmo vencedor.
+Dos 18 registros shortlistados, 12 integram o núcleo empírico. Um foi excluído
+após a triagem do resumo; quatro textos integrais não foram recuperados; um
+protocolo sem resultados concluídos foi excluído após texto completo. A síntese
+e a apreciação MMAT consideram os 12 estudos incluídos. A recorrência envolve
+predição de desempenho e estimativa de proficiência; um estudo também integra
+Transformada de Fourier ao ensino universitário de matemática, mas compara
+coortes separadas por quatro anos e não isola o efeito da IA.
 
 ## 13. MMAT — 1:10
 
-O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
-respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
-uma pontuação agregada. A avaliação é preliminar e foi feita por um único
-revisor. Entre os 17 candidatos empíricos, 12 tiveram texto primário consultado
-e cinco foram apreciados somente com resumo e metadados. As cópias integrais não
-são distribuídas neste repositório público. O manifesto registra as fontes e as
-datas de acesso; o ledger identifica a base documental e os localizadores. A
-verificação independente e a adjudicação ainda precisam ser consolidadas.
-Portanto, não apresento um ranking de qualidade.
+O MMAT 2018 foi aplicado por critério aos 12 estudos incluídos, conforme o
+delineamento, sem pontuação agregada. A avaliação é preliminar e foi feita por
+um único revisor. Quatro registros aguardam texto integral e não receberam
+MMAT; suas células ficam sem resposta, não como CT. Um registro foi excluído
+após resumo e não integra o denominador. O manifesto registra fontes e datas de
+acesso, e o ledger identifica a base documental e os localizadores. A
+adjudicação independente ainda precisa ser concluída; portanto, não apresento
+um ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
 
@@ -143,10 +147,12 @@ Echeveria et al. (2025, pp. 66, 69–70) usam itens da escala tanto para formar
 categorias quanto entre preditores. Esses pontos afetam denominadores,
 comparabilidade, atribuição do resultado e interpretação diagnóstica de cada
 estudo. São exemplos localizados, não estimativa da frequência na literatura.
-Somente 12 dos 17 textos primários foram consultados; o MMAT permanece
-preliminar e feito por um único revisor. Outros requisitos, como equidade e
-alinhamento curricular, não foram codificados de modo comparável e permanecem
-questões para investigação, não ausências demonstradas no corpus.
+Os exemplos provêm dos 12 estudos incluídos e seus textos integrais consultados.
+Quatro registros seguem pendentes sem MMAT; um foi excluído após resumo e um
+protocolo após texto completo por não apresentar resultados concluídos. O
+MMAT permanece preliminar e feito por um único revisor. Outros requisitos, como
+equidade e alinhamento curricular, não foram codificados de modo comparável e
+permanecem questões para investigação, não ausências demonstradas no corpus.
 
 ## 16. Derivação — 0:55
 

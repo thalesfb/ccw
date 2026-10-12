@@ -349,7 +349,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Revisão sistemática da literatura e especificação conceitual de protótipo", Inches(1.35), Inches(3.48), Inches(10.65), Inches(0.45), size=20, color=RGBColor(11, 86, 108), align=PP_ALIGN.CENTER)
     add_text(slide, "Thales Ferreira Batista\nCiência da Computação", Inches(4.0), Inches(4.45), Inches(5.35), Inches(0.65), size=16, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
     add_text(slide, "Orientador: Prof. Dr. Rafael Zanin\nCoorientador: Prof. Dr. Manassés Ribeiro", Inches(3.3), Inches(5.35), Inches(6.75), Inches(0.65), size=14, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
-    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nSnapshot adjudicado: 03/09/2026 · recorte temporal: 2015–2026", Inches(2.25), Inches(6.35), Inches(8.85), Inches(0.5), size=11.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
+    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nRevisão atualizada: 12/10/2026 · corte da busca: 31/08/2026", Inches(2.25), Inches(6.35), Inches(8.85), Inches(0.5), size=11.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
 
     # 2 — Problem.
     slide = new_slide(prs, EXPECTED_TITLES[1], 2)
@@ -467,9 +467,9 @@ def build_deck() -> Presentation:
     # 12 — Retained population.
     slide = new_slide(prs, EXPECTED_TITLES[11], 12)
     add_metric(slide, "18", "registros retidos operacionalmente", Inches(0.85), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_BLUE, accent=INDIGO, value_size=29, label_size=12)
-    add_metric(slide, "17", "candidatos empíricos provisórios", Inches(4.95), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_TEAL, accent=TEAL, value_size=29, label_size=12)
-    add_metric(slide, "1", "protocolo ou proposta contextual", Inches(9.05), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_AMBER, accent=AMBER, value_size=29, label_size=12)
-    add_callout(slide, "O que entra na síntese", "A síntese de evidências e a apreciação MMAT aplicável consideram os 17 candidatos empíricos. O protocolo/proposta contextual foi mantido para rastreabilidade do mapeamento, mas não sustenta resultado empírico concluído.", Inches(0.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=14.5)
+    add_metric(slide, "12", "estudos empíricos incluídos", Inches(4.95), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_TEAL, accent=TEAL, value_size=29, label_size=12)
+    add_metric(slide, "4", "textos integrais pendentes", Inches(9.05), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_AMBER, accent=AMBER, value_size=29, label_size=12)
+    add_callout(slide, "Desfecho da seleção", "Dos 18 registros shortlistados, 12 estudos empíricos foram incluídos, quatro relatórios não foram recuperados, um registro foi excluído após o resumo e um protocolo sem resultados concluídos foi excluído após texto completo. Os quatro pendentes não receberam MMAT.", Inches(0.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=14.5)
     add_callout(slide, "Padrão observado", "Predomínio de aplicações voltadas à predição de desempenho e à estimativa de proficiência, com recorrência de modelos supervisionados como Random Forest, SVM, árvores de decisão e redes neurais.", Inches(6.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=14.5)
     add_text(slide, "Os resultados de artigos individuais permanecem condicionados à população, ao instrumento, à métrica e ao desenho de cada estudo.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=13.5, color=MUTED, align=PP_ALIGN.CENTER)
 
@@ -480,7 +480,7 @@ def build_deck() -> Presentation:
     add_text(slide, "avaliação por critério\nsem nota global", Inches(1.05), Inches(2.35), Inches(2.7), Inches(0.85), size=19, color=RGBColor(186, 230, 253), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Instrumento aplicado conforme o desenho metodológico de cada estudo empírico.", Inches(1.1), Inches(4.15), Inches(2.6), Inches(0.75), size=13.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
-    add_callout(slide, "Estado atual", "Apreciação preliminar por um revisor: 12 textos primários consultados (9 arquivados e 3 externos) e 5 avaliações com resumo/metadados.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=14)
+    add_callout(slide, "Estado atual", "MMAT preliminar em 12 estudos incluídos, com texto integral consultado, por revisor único. Quatro textos não recuperados não receberam MMAT; um registro foi excluído após resumo e um protocolo após texto completo.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=13)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_text(slide, "O MMAT organiza a leitura das limitações; não transforma uma apreciação preliminar em classificação definitiva.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
@@ -504,7 +504,7 @@ def build_deck() -> Presentation:
         x = Inches(0.75 + (index % 2) * 6.05)
         y = Inches(1.2 + (index // 2) * 2.15)
         add_callout(slide, title, body, x, y, Inches(5.75), Inches(1.9), fill=fill, accent=accent, title_size=16, body_size=13)
-    add_text(slide, "Exemplos localizados, não estimam a frequência da literatura. Cobertura: 12 de 17 textos primários; os demais foram apreciados por resumo/metadados. MMAT preliminar, por revisor único.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=13, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
+    add_text(slide, "Exemplos localizados, não estimam a frequência da literatura. O núcleo inclui 12 estudos avaliados por texto integral; quatro relatórios não recuperados não receberam MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. A apreciação é preliminar e por revisor único.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=12.5, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
 
     # 16 — From evidence to specification.
     slide = new_slide(prs, EXPECTED_TITLES[15], 16)
@@ -551,7 +551,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Obrigado", Inches(0.7), Inches(1.75), Inches(11.9), Inches(0.8), size=42, color=WHITE, bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
     add_text(slide, "Perguntas e discussão", Inches(1.0), Inches(2.8), Inches(11.3), Inches(0.45), size=23, color=RGBColor(186, 230, 253), align=PP_ALIGN.CENTER)
     add_text(slide, "Ensino Personalizado de Matemática\nOportunidades e Técnicas Computacionais", Inches(1.2), Inches(4.35), Inches(10.9), Inches(0.8), size=20, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nSnapshot adjudicado: 03/09/2026 · recorte temporal: 2015–2026", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
+    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nRevisão atualizada: 12/10/2026 · corte da busca: 31/08/2026", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
 
     return prs
 
@@ -599,7 +599,9 @@ def validate_presentation(path: Path) -> list[str]:
         "Villegas-Ch et al. (2025)",
         "Nyantah et al. (2025)",
         "Echeveria et al. (2025)",
-        "12 de 17 textos primários",
+        "12 estudos incluídos",
+        "quatro relatórios não recuperados",
+        "não receberam MMAT",
         "não estimam a frequência da literatura",
     ):
         if marker not in gap_slide_text:
