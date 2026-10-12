@@ -139,6 +139,7 @@ def render_component_table(
         r"\fontsize{8.5}{10}\selectfont",
         r"\setlength{\tabcolsep}{2pt}",
         r"\renewcommand{\arraystretch}{1.15}",
+        r"\Needspace{18\baselineskip}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|ccccc|>{\raggedright\arraybackslash}p{6.1cm}|}",
         r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos em estudos de métodos mistos.}\label{qua:mmat-componentes}\\",
         r"\hline",

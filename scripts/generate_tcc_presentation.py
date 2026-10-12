@@ -110,6 +110,10 @@ FORBIDDEN_HISTORICAL_MARKERS = (
     "6923",
 )
 
+FORBIDDEN_STALE_EVIDENCE_CLAIMS = (
+    "parte da apreciação baseada em resumo/metadados",
+)
+
 
 def rgb(value: RGBColor) -> RGBColor:
     return value
@@ -504,7 +508,7 @@ def build_deck() -> Presentation:
         x = Inches(0.75 + (index % 2) * 6.05)
         y = Inches(1.2 + (index // 2) * 2.15)
         add_callout(slide, title, body, x, y, Inches(5.75), Inches(1.9), fill=fill, accent=accent, title_size=16, body_size=13)
-    add_text(slide, "Exemplos localizados, não estimam a frequência da literatura. O núcleo inclui 12 estudos avaliados por texto integral; quatro relatórios não recuperados não receberam MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. A apreciação é preliminar e por revisor único.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=12.5, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
+    add_text(slide, "Estes exemplos localizados não estimam a frequência da literatura. O núcleo tem 12 estudos incluídos, avaliados em texto integral por um revisor; quatro relatórios não recuperados não receberam MMAT. Um registro foi excluído após resumo e um protocolo após texto completo.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=12.5, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
 
     # 16 — From evidence to specification.
     slide = new_slide(prs, EXPECTED_TITLES[15], 16)
@@ -539,7 +543,7 @@ def build_deck() -> Presentation:
     # 18 — Contributions and limitations.
     slide = new_slide(prs, EXPECTED_TITLES[17], 18)
     add_callout(slide, "Contribuições", "• síntese estruturada da literatura\n• pipeline automatizado e versionado\n• separação entre relevância e avaliação metodológica\n• especificação técnica e pedagógica auditável", Inches(0.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_GREEN, accent=GREEN, title_size=18, body_size=15)
-    add_callout(slide, "Limites assumidos", "• um único pesquisador\n• parte da apreciação baseada em resumo/metadados\n• fontes e idiomas delimitados\n• MMAT preliminar\n• sem aplicação funcional ou eficácia pedagógica própria", Inches(6.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_AMBER, accent=AMBER, title_size=18, body_size=15)
+    add_callout(slide, "Limites assumidos", "• um único pesquisador\n• quatro textos integrais pendentes, sem MMAT\n• fontes e idiomas delimitados\n• MMAT preliminar nos 12 estudos incluídos\n• sem aplicação funcional ou eficácia pedagógica própria", Inches(6.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_AMBER, accent=AMBER, title_size=18, body_size=15)
     add_text(slide, "Conclusão", Inches(0.85), Inches(5.05), Inches(2.0), Inches(0.35), size=19, color=NAVY, bold=True)
     add_text(slide, "O trabalho respondeu ao escopo ao articular revisão sistemática, fundamentação pedagógica, apreciação metodológica e especificação conceitual — mantendo o professor no centro da interpretação.", Inches(0.85), Inches(5.55), Inches(11.45), Inches(0.7), size=19, color=SLATE, bold=True, align=PP_ALIGN.CENTER)
 
@@ -583,6 +587,9 @@ def validate_presentation(path: Path) -> list[str]:
     for marker in FORBIDDEN_HISTORICAL_MARKERS:
         if marker in all_text:
             errors.append(f"marcador histórico/operacional proibido encontrado: {marker}")
+    for marker in FORBIDDEN_STALE_EVIDENCE_CLAIMS:
+        if marker.casefold() in all_text.casefold():
+            errors.append(f"alegação de cobertura MMAT desatualizada: {marker}")
 
     for index, expected_title in enumerate(EXPECTED_TITLES):
         if index >= len(prs.slides):
