@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "review_date": "2026-10-08",
-  "scope": "Eight explicitly reviewed claims; not whole-manuscript certification",
+  "review_date": "2026-10-12",
+  "scope": "Nine explicitly reviewed claims; not whole-manuscript certification",
   "status_meaning": "SUPPORTED means the attributed statement is documented, not that the primary study is validated.",
   "claims": [
     {
@@ -241,6 +241,32 @@
       "human_adjudication": "pending",
       "counterevidence_checked": true,
       "support_boundary": "The 4,568 steps are a selected subset of the 10,052-step record; note 5 includes student-selected strategy steps and excludes calculations executed by the tutor. This is not a separate prospective intervention."
+    },
+    {
+      "claim_id": "C-RSL-09",
+      "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
+      "manuscript_sha256": "eaf35e8ff6824ac8297d4e159ccb2edee88a1179b48ade21f9b3a701b088bbda",
+      "claim_text": "Desempenho em matemática on-line.\\newline Finalidade: Predição",
+      "claim_type": "study_characterization",
+      "citation_keys": [
+        "Ozseven2026_6917"
+      ],
+      "support_status": "SUPPORTED",
+      "evidence_chunks": [
+        "fa50c775fb8d9aca66df8a05"
+      ],
+      "source_hashes": {
+        "fa50c775fb8d9aca66df8a05": "8b7c283a6cac47b6c961294abe2461b8cd7d64dc6ea4d7b99600829c4431dd8d"
+      },
+      "source_id": "PS-6917",
+      "evidence_locator": "Publisher PDF, abstract, printed p. 146 (physical PDF p. 1): ANFIS, Random Forest and XGBoost use ASSISTments data to estimate continuous success and support binary success/failure classification.",
+      "physical_pages": [
+        1
+      ],
+      "reviewer": "agent_assisted_primary_source_review",
+      "human_adjudication": "pending",
+      "counterevidence_checked": true,
+      "support_boundary": "This documents the model and task as reported by the article; it does not establish learning gains, causal efficacy, or generalization beyond the ASSISTments dataset."
     }
   ]
 }

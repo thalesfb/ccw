@@ -30,8 +30,27 @@ for (const page of expectedPages) {
 const homepage = read('index.html');
 assert.match(homepage, /MMAT atual/i, 'the homepage must promote the current MMAT page');
 assert.doesNotMatch(homepage, /MMAT histórico \(referência\)/i, 'the homepage must not present the historical page as current');
+assert.match(homepage, /12 estudos empíricos incluídos/i, 'the homepage must report the current empirical denominator');
+assert.match(homepage, /4 textos integrais pendentes[^<]*sem MMAT/i, 'the homepage must distinguish unretrieved reports from appraised studies');
+assert.match(homepage, /1 registro excluído após resumo/i, 'the homepage must disclose the abstract-stage exclusion');
+assert.match(homepage, /1 protocolo excluído após texto completo/i, 'the homepage must disclose the protocol exclusion');
+assert.doesNotMatch(homepage, /17 candidatos empíricos provisórios/i, 'the homepage must not classify the abstract-stage exclusion as an empirical candidate');
+assert.match(homepage, /adjudicação inicial/i, 'the homepage must label the September date as the initial adjudication');
+assert.match(homepage, /escopo reconciliado em 12 out\. 2026/i, 'the homepage must distinguish the current scope reconciliation date');
 assert.match(homepage, /ifc-campus-videira-horizontal\.png/, 'the homepage must use the official IFC mark');
 assert.doesNotMatch(homepage, /linear-gradient|Segoe UI.*Tahoma/i, 'the homepage must not retain the legacy visual system');
+
+const researchLanding = read('research/index.html');
+assert.match(researchLanding, /12 estudos empíricos incluídos/i, 'the research landing page must report the current empirical denominator');
+assert.match(researchLanding, /4 textos integrais pendentes[^<]*sem MMAT/i, 'the research landing page must distinguish unretrieved reports from appraised studies');
+assert.match(researchLanding, /1 registro excluído após resumo/i, 'the research landing page must disclose the abstract-stage exclusion');
+assert.match(researchLanding, /1 protocolo excluído após texto completo/i, 'the research landing page must disclose the protocol exclusion');
+assert.doesNotMatch(researchLanding, /17 candidatos empíricos provisórios/i, 'the research landing page must not overstate the empirical candidate count');
+
+const historicalMmat = read('research/exports/analysis/mmat_visualization.html');
+assert.match(historicalMmat, /visualização histórica[^<]*17 registros/i, 'the legacy MMAT visualization must identify its historical 17-study denominator');
+assert.match(historicalMmat, /12 estudos empíricos incluídos/i, 'the legacy MMAT visualization must point readers to current scope counts');
+assert.doesNotMatch(historicalMmat, /população vigente contém 18 registros: 17 candidatos empíricos/i, 'the legacy MMAT visualization must not describe its historical denominator as current');
 
 const siteCss = read('public-site/assets/site.css');
 const responsiveSiteCss = siteCss.slice(siteCss.indexOf('@media (max-width: 1099px)'));

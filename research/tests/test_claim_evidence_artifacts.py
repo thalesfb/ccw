@@ -110,6 +110,23 @@ def test_maclellan_synthesis_is_bound_to_both_primary_analyses():
     assert all(claim['human_adjudication'] == 'pending' for claim in claims)
 
 
+def test_ozseven_prediction_characterization_is_bound_to_the_matching_primary_pdf():
+    ledger = load('research/data/claim_evidence_current.json')
+    claim = next(row for row in ledger['claims'] if row['source_id'] == 'PS-6917')
+
+    assert ledger['scope'].startswith('Nine explicitly reviewed claims')
+    assert claim['claim_id'] == 'C-RSL-09'
+    assert claim['claim_text'] == 'Desempenho em matemática on-line.\\newline Finalidade: Predição'
+    assert claim['citation_keys'] == ['Ozseven2026_6917']
+    assert claim['evidence_locator'].startswith('Publisher PDF, abstract, printed p. 146')
+    assert claim['physical_pages'] == [1]
+    assert claim['support_boundary'] == (
+        'This documents the model and task as reported by the article; it does not establish '
+        'learning gains, causal efficacy, or generalization beyond the ASSISTments dataset.'
+    )
+    assert claim['human_adjudication'] == 'pending'
+
+
 def test_small_retrieval_evaluation_is_not_a_quality_score():
     report = load('research/exports/analysis/evidence_retrieval_evaluation.json')
     assert len(report['cases']) == 9

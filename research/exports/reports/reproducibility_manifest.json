@@ -427,7 +427,7 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "40c31a1c68a33885b4809f4334605832add0ae318b14e623baab672cb48abf39"
+      "sha256": "4bddf9d5ca15379fc669eaf736f3455da6f96c0d81824e855811578c54e6b407"
     },
     {
       "path": "research/exports/reports/summary.json",

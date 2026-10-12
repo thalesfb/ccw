@@ -104,3 +104,18 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     assert "nove registros com texto primário revisado e oito" not in pptx_source
     assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard
     assert "encaminhou 2.486 para elegibilidade" not in speaker_notes
+
+
+def test_background_distinguishes_abstract_only_records_from_verified_full_text_evidence() -> None:
+    introduction = (ROOT / "results/tcc/conteudo/introducao.tex").read_text(encoding="utf-8")
+    foundations = (ROOT / "results/tcc/conteudo/fundamentacao.tex").read_text(encoding="utf-8")
+
+    assert "excluído na triagem do resumo" in introduction
+    assert "somente como contexto bibliográfico" in introduction
+    assert "resumo indexado" in introduction
+    assert "texto integral permanece pendente" in introduction
+    assert "não é tratado como resultado verificado" in introduction
+    assert "resumos indexados de" in foundations
+    assert "textos integrais desses dois registros não foram recuperados" in foundations
+    assert "não sustentam resultados verificados" in foundations
+    assert "foram investigadas tarefas de predição de desempenho escolar" not in introduction
