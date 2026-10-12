@@ -6,6 +6,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const currentPath = path.join(root, 'research', 'data', 'mmat_reassessment_current.csv');
 const componentPath = path.join(root, 'research', 'data', 'mmat_component_reassessment_current.csv');
 const registryPath = path.join(root, 'research', 'data', 'mmat_current_study_registry.csv');
+const scopePath = path.join(root, 'research', 'data', 'current_synthesis_scope.csv');
+const reproducibilityManifestPath = path.join(root, 'research', 'exports', 'reports', 'reproducibility_manifest.json');
 const outputPath = path.join(root, 'research', 'exports', 'analysis', 'mmat_current.html');
 
 function parseCsv(text) {
@@ -199,9 +201,13 @@ const criterionQuestionsByDesign = new Map(MMAT_CRITERIA_GROUPS.map((group) => [
 const current = parseCsv(fs.readFileSync(currentPath, 'utf8'));
 const componentReassessments = parseCsv(fs.readFileSync(componentPath, 'utf8'));
 const registry = parseCsv(fs.readFileSync(registryPath, 'utf8'));
+const currentScope = parseCsv(fs.readFileSync(scopePath, 'utf8'));
+const reproducibilityManifest = JSON.parse(fs.readFileSync(reproducibilityManifestPath, 'utf8'));
 const registryById = new Map(registry.map((row) => [row.study_id, row]));
-const latestSnapshot = current.map((row) => row.snapshot_date).sort().at(-1);
-const latestSnapshotLabel = latestSnapshot.split('-').reverse().join('/');
+const searchCutoffLabel = formatDate(reproducibilityManifest.protocol.cutoff_date);
+const adjudicatedSnapshotLabel = formatDate(reproducibilityManifest.snapshot_date);
+const latestScopeReconciliation = currentScope.map((row) => row.snapshot_date).sort().at(-1);
+const latestScopeReconciliationLabel = formatDate(latestScopeReconciliation);
 const latestReviewDate = current.map((row) => row.review_date).filter(Boolean).sort().at(-1);
 const latestReviewDateLabel = formatDate(latestReviewDate);
 const empirical = current.filter((row) => row.empirical_status !== 'protocol_or_proposal_not_applicable');
@@ -211,6 +217,9 @@ const pendingFullText = current.filter((row) => row.assessment_basis === 'pendin
 const abstractExclusionSummary = abstractOnly.length === 1
   ? 'Um registro foi excluído após a triagem do resumo e não recebeu MMAT.'
   : `${abstractOnly.length} registros foram excluídos após a triagem do resumo e não receberam MMAT.`;
+const pendingFullTextSummary = pendingFullText.length === 1
+  ? 'Um texto integral ainda não foi recuperado e não recebeu apreciação MMAT.'
+  : `${pendingFullText.length} textos integrais ainda não foram recuperados e não receberam apreciação MMAT.`;
 const mixedMethodsStudies = current.filter((row) => row.design === 'mixed_methods');
 const componentDesignLabels = {
   qualitative: 'Qualitativo',
@@ -344,7 +353,7 @@ const page = `<!doctype html>
         <span class="eyebrow">MMAT 2018 · apreciação preliminar</span>
         <h1 id="page-title">Apreciação preliminar por critérios</h1>
         <p class="lede">A leitura atual registra evidências e limites para cada critério. Ela não é uma nota global, um percentual ou um ranking de qualidade.</p>
-        <p class="source-note">Snapshot do corpus: ${latestSnapshotLabel}. Última apreciação registrada no ledger: ${latestReviewDateLabel}.</p>
+        <p class="source-note">Data de corte da busca: ${searchCutoffLabel}. Snapshot adjudicado em ${adjudicatedSnapshotLabel}. Escopo MMAT atual reconciliado em ${latestScopeReconciliationLabel}; apreciações registradas até ${latestReviewDateLabel}.</p>
         <div class="action-row">
           <a class="btn btn-primary" href="../../index.html">Voltar à revisão</a>
           <a class="btn btn-secondary" href="mmat_visualization.html">Visualização histórica — 17 estudos</a>
@@ -361,7 +370,7 @@ const page = `<!doctype html>
           <div class="metric-card"><span class="metric-value">${empirical.length}</span><span class="metric-label">registros empíricos shortlistados</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
           <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">textos primários revisados</span></div>
-          <div class="metric-card"><span class="metric-value">${abstractOnly.length}</span><span class="metric-label">resumos/metadados</span></div>
+          <div class="metric-card"><span class="metric-value">${pendingFullText.length}</span><span class="metric-label">textos integrais pendentes</span></div>
         </div>
       </section>
 
@@ -374,7 +383,7 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
           <h3>${primaryReviewed.length} textos integrais no núcleo empírico</h3>
-          <p>${abstractOnly.length} registros ainda dependem da consulta à fonte primária; por ora, foram apreciados com base em resumos e metadados. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
+          <p>${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 permanece no ledger como contexto e fora do denominador empírico. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
         </article>
       </section>
 
