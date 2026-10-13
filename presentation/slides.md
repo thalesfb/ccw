@@ -352,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 12 estudos empíricos incluídos tiveram seus textos integrais consultados e receberam MMAT por um único revisor. Quatro relatórios não foram recuperados e não receberam MMAT; um registro foi excluído após resumo e um protocolo foi excluído após texto completo. A apreciação permanece preliminar, sem escore agregado, e aguarda adjudicação independente.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> os 12 estudos incluídos têm texto integral consultado; a apreciação é preliminar e por revisor único. No estudo 7, delineamento e Q1–Q5 seguem pendentes; no estudo 8, S1/S2 e Q1–Q5 aguardam definição da unidade de avaliação. Quatro textos não foram recuperados e não receberam MMAT; um registro foi excluído após resumo e um protocolo sem resultados após texto completo. Sem escore agregado; falta adjudicação independente.</div>
 
 ---
 layout: default

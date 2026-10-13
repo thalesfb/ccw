@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import pandas as pd
 
+from src.exports.excel import export_for_analysis, remove_legacy_mmat_from_notes
 from src.processing.adjudicated_snapshot import (
     EXPECTED_DECISION_IDS,
     PAPERS_PATH,
     apply_adjudications,
     apply_current_adjudications,
+    apply_current_scope_adjudications,
     load_decisions,
 )
 
@@ -67,3 +69,73 @@ def test_current_scope_has_reconciled_prisma_stages_and_empirical_core() -> None
     )
     assert replayed.loc[replayed["id"] == 6921, "selection_stage"].item() == "eligibility"
     assert replayed.loc[replayed["id"].isin([1, 5, 10, 6923]), "selection_stage"].eq("not_retrieved").all()
+
+
+def test_current_scope_removes_superseded_mmat_fields_without_losing_other_notes() -> None:
+    papers = pd.DataFrame(
+        [
+            {
+                "id": 1,
+                "selection_stage": "included",
+                "status": "included",
+                "exclusion_reason": "",
+                "notes": '{"mmat_score": 4, "mmat_quality": "Alta", "keep": "context"}',
+            },
+            {
+                "id": 99,
+                "selection_stage": "screening",
+                "status": "retained",
+                "exclusion_reason": "",
+                "notes": 'scope note; {"mmat_criteria": {"Q1": "Y"}, "keep": true}',
+            },
+        ]
+    )
+    scope = [
+        {
+            "study_id": "1",
+            "selection_stage": "included",
+            "selection_status": "included",
+            "selection_reason": "",
+            "record_status": "included_empirical_core",
+        }
+    ]
+
+    updated = apply_current_scope_adjudications(papers, scope)
+
+    assert all("mmat_" not in note for note in updated["notes"])
+    assert '"keep": "context"' in updated.loc[updated["id"] == 1, "notes"].item()
+    assert '"keep": true' in updated.loc[updated["id"] == 99, "notes"].item()
+
+
+def test_public_export_notes_remove_only_superseded_mmat_fields() -> None:
+    papers = pd.DataFrame(
+        {
+            "notes": [
+                '{"mmat_score": 5, "mmat_quality": "Alta", "keep": true}',
+                'scope note; {"mmat_criteria": {"Q1": "Y"}, "keep": "yes"}',
+                "ordinary note without appraisal metadata",
+            ]
+        }
+    )
+
+    clean = remove_legacy_mmat_from_notes(papers)
+
+    assert all("mmat_" not in note for note in clean["notes"])
+    assert '"keep": true' in clean.loc[0, "notes"]
+    assert '"keep": "yes"' in clean.loc[1, "notes"]
+    assert clean.loc[2, "notes"] == papers.loc[2, "notes"]
+
+
+def test_analysis_export_strips_legacy_mmat_without_mutating_input(tmp_path) -> None:
+    papers = pd.DataFrame(
+        {
+            "id": [1],
+            "notes": ['{"mmat_score": 3, "keep": "source note"}'],
+        }
+    )
+
+    files = export_for_analysis(papers, tmp_path, formats=["csv", "json"])
+
+    assert '"mmat_score"' not in files["csv"].read_text(encoding="utf-8-sig")
+    assert '"mmat_score"' not in files["json"].read_text(encoding="utf-8")
+    assert '"mmat_score"' in papers.loc[0, "notes"]

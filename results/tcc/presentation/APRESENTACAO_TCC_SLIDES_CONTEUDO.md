@@ -141,10 +141,12 @@ anos limitam a inferência e não isolam o efeito da IA.
 ### 17. Apreciação metodológica preliminar: critérios, não uma nota global
 
 O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
-12 estudos incluídos tiveram texto integral consultado e foram avaliados por
-um único revisor; quatro registros aguardam texto integral e não receberam
-MMAT, enquanto um foi excluído após resumo. A apreciação é preliminar e aguarda
-adjudicação independente e consolidação dos localizadores.
+12 estudos incluídos tiveram texto integral consultado; a apreciação preliminar
+foi registrada por um único revisor. No estudo 7, o delineamento e Q1--Q5
+permanecem pendentes porque o procedimento de alocação não foi localizado. No
+estudo 8, S1/S2 e Q1--Q5 aguardam a definição da unidade de avaliação. Quatro
+registros continuam sem texto integral e sem MMAT; um foi excluído após resumo.
+A apreciação aguarda adjudicação independente e consolidação dos localizadores.
 
 ### 18. O que emerge entre os estudos incluídos
 

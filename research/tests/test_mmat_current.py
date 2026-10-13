@@ -16,12 +16,15 @@ from src.analysis.mmat_current_tcc_table import render_table as render_current_t
 
 from pathlib import Path
 import csv
+import json
 import pytest
 
 
 CURRENT_TABLE = Path(__file__).resolve().parents[1] / "exports" / "references" / "mmat_current_tcc_table.tex"
 EVIDENCE_MATRIX = Path(__file__).resolve().parents[1] / "data" / "manual_override_evidence_matrix.csv"
 CURRENT_HTML = Path(__file__).resolve().parents[1] / "exports" / "analysis" / "mmat_current.html"
+PAPERS_CSV = Path(__file__).resolve().parents[1] / "exports" / "analysis" / "papers.csv"
+PAPERS_JSON = Path(__file__).resolve().parents[1] / "exports" / "analysis" / "papers.json"
 
 
 def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
@@ -216,7 +219,11 @@ def test_appraisal_unit_pending_keeps_screening_responses_unresolved() -> None:
     assert study["design"] == "design_pending"
     assert study["design_status"] == "unit_of_appraisal_pending"
     assert study["s1"] == study["s2"] == "CT"
-    assert "unit of appraisal" in study["criterion_evidence"].lower()
+    assert "unit of appraisal" in study["notes"].lower()
+    assert "79 students" in study["notes"]
+    assert "10,052 available steps" in study["notes"]
+    assert "4,568-step subset of student-executed actions" in study["notes"]
+    assert "pre-existing" in study["notes"]
 
 
 def test_nonrandomized_outcome_completeness_and_confounding_are_not_overstated() -> None:
@@ -225,6 +232,20 @@ def test_nonrandomized_outcome_completeness_and_confounding_are_not_overstated()
     assert study["design_status"] == "allocation_unreported_pending"
     assert all(study[criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
     assert "allocation procedure" in study["notes"].lower()
+
+
+def test_study_7_full_text_sample_and_allocation_evidence_are_preserved() -> None:
+    study = {row["study_id"]: row for row in load_current_reassessment()}["7"]
+    source = {row["study_id"]: row for row in load_primary_sources()}["7"]
+
+    assert study["review_date"] == "2026-10-12"
+    assert "120 students" in study["notes"]
+    assert "50 experimental" in study["notes"]
+    assert "52 control" in study["notes"]
+    assert "p=.583" in study["notes"]
+    assert "does not establish equivalence" in study["notes"]
+    assert "researchgate.net" in source["verification_note"].lower()
+    assert "CC BY 4.0" in source["verification_note"]
 
 
 def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
@@ -261,6 +282,28 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "17 candidatos empíricos submetidos ao mmat" not in html.lower()
     assert "12 estudos empíricos incluídos" in html.lower()
 
+    for study_id, expected_text in {
+        "7": ("120 estudantes", "50 no grupo experimental", "52 no grupo controle", "p=.583"),
+        "8": ("79 estudantes", "10.052 passos", "4.568 passos", "unidade de avaliação"),
+    }.items():
+        row = re.search(
+            rf"<tr>\s*<td>{re.escape(study_id)}</td>(.*?)</tr>",
+            html,
+            flags=re.DOTALL,
+        )
+        assert row
+        evidence_row = re.search(
+            r'<tr class="mmat-evidence-row">(.*?)</tr>',
+            html[row.end():],
+            flags=re.DOTALL,
+        )
+        assert evidence_row
+        source_note = re.search(r'<p class="source-note">(.*?)</p>', evidence_row.group(1), re.DOTALL)
+        assert source_note
+        normalized_note = re.sub(r"<[^>]+>", " ", source_note.group(1)).lower()
+        for text in expected_text:
+            assert text.lower() in normalized_note
+
     for study_id in ("1", "5", "10", "6923"):
         row = re.search(
             rf"<tr>\s*<td>{re.escape(study_id)}</td>(.*?)</tr>",
@@ -289,6 +332,44 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert abstract_excluded
     assert "excluído após resumo; mmat não aplicado" in abstract_excluded.group(1).lower()
     assert "criterion-ct" not in abstract_excluded.group(1)
+
+
+def test_general_paper_exports_do_not_publish_superseded_mmat_payloads() -> None:
+    with PAPERS_CSV.open(encoding="utf-8-sig", newline="") as handle:
+        csv_notes = [row["notes"] for row in csv.DictReader(handle)]
+    json_notes = [row.get("notes", "") for row in json.loads(PAPERS_JSON.read_text(encoding="utf-8"))]
+
+    assert all('"mmat_' not in note for note in csv_notes + json_notes if isinstance(note, str))
+
+    readme = " ".join(
+        (PAPERS_CSV.parents[1] / "README.md").read_text(encoding="utf-8").lower().split()
+    )
+    assert "ledger atual" in readme
+    assert "não representam a avaliação vigente" in readme
+
+
+def test_defense_material_preserves_pending_mmat_decisions() -> None:
+    root = Path(__file__).resolve().parents[2]
+    slides = " ".join((root / "presentation/slides.md").read_text(encoding="utf-8").lower().split())
+    storyboard = " ".join(
+        (root / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md")
+        .read_text(encoding="utf-8")
+        .lower()
+        .split()
+    )
+    speaker_notes = " ".join(
+        (root / "results/tcc/presentation/ROTEIRO_FALAS_TCC.md")
+        .read_text(encoding="utf-8")
+        .lower()
+        .split()
+    )
+
+    assert "no estudo 7, delineamento e q1–q5 seguem pendentes" in slides
+    assert "no estudo 8, s1/s2 e q1–q5 aguardam definição da unidade de avaliação" in slides
+    assert "o procedimento de alocação não foi localizado" in storyboard
+    assert "aguardam a definição da unidade de avaliação" in storyboard
+    assert "sem classificá-lo como randomizado ou não randomizado" in speaker_notes
+    assert "s1/s2 e q1--q5 permanecem ct até adjudicação" in speaker_notes
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:

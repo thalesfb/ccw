@@ -1,6 +1,6 @@
 # 📊 Exports - Saídas da Revisão Sistemática
 
-Este diretório contém as **saídas geradas automaticamente** pelo pipeline de revisão sistemática. Todos os arquivos aqui são **gerados via CLI** e não devem ser editados manualmente.
+Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e relatórios do pipeline são regeneráveis via CLI e não devem ser editados manualmente; páginas metodológicas versionadas devem permanecer coerentes com seus ledgers de origem.
 
 > **Snapshot de busca (03/09/2026), com escopo atualizado em 12/10/2026:**
 > 11.904 registros identificados;
@@ -13,6 +13,14 @@ Este diretório contém as **saídas geradas automaticamente** pelo pipeline de 
 > bruta encontrou 257 excedentes em
 > títulos normalizados; após a remoção DOI/URL, 232 excedentes permanecem apenas
 > por título como candidatos de auditoria.
+
+**Fonte vigente para MMAT:** a apreciação atual, por critério e sem score agregado,
+está no [ledger atual](../data/mmat_reassessment_current.csv) e na página
+[MMAT atual](analysis/mmat_current.html). Os exports gerais `analysis/papers.csv`,
+`analysis/papers.json` e planilhas não são fonte de apreciação MMAT. A tabela
+[legada](../data/mmat_assessments.csv) e a página [MMAT histórico](analysis/mmat_visualization.html)
+foram preservadas para rastreabilidade; seus julgamentos e scores não representam
+a avaliação vigente e não devem ser usados para interpretar os 18 registros shortlistados.
 
 ---
 

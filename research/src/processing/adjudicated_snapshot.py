@@ -24,7 +24,7 @@ import pandas as pd
 from ..analysis.reports import ReportGenerator
 from ..analysis.visualizations import ReviewVisualizer
 from ..analysis.mmat_current import CURRENT_MMAT_STUDY_IDS, load_current_synthesis_scope
-from ..exports.excel import to_excel_with_filters
+from ..exports.excel import remove_legacy_mmat_from_notes, to_excel_with_filters
 from ..validation.derived_assets import sync_derived_assets
 
 
@@ -198,7 +198,7 @@ def apply_current_scope_adjudications(
     historical decision layer.
     """
     scope = scope or load_current_synthesis_scope()
-    result = papers.copy()
+    result = remove_legacy_mmat_from_notes(papers)
     result["id"] = pd.to_numeric(result["id"], errors="raise").astype(int)
     by_id = {int(row["id"]): index for index, row in result.iterrows()}
     expected_ids = {int(row["study_id"]) for row in scope}

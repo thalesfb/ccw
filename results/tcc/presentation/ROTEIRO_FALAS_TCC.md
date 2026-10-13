@@ -118,13 +118,16 @@ coortes separadas por quatro anos e não isola o efeito da IA.
 
 ## 13. MMAT — 1:10
 
-O MMAT 2018 foi aplicado por critério aos 12 estudos incluídos, conforme o
-delineamento, sem pontuação agregada. A avaliação é preliminar e foi feita por
-um único revisor. Quatro registros aguardam texto integral e não receberam
-MMAT; suas células ficam sem resposta, não como CT. Um registro foi excluído
-após resumo e não integra o denominador. O manifesto registra fontes e datas de
-acesso, e o ledger identifica a base documental e os localizadores. A
-adjudicação independente ainda precisa ser concluída; portanto, não apresento
+A apreciação preliminar orientada pelo MMAT 2018 considera os 12 estudos
+incluídos e foi registrada por um único revisor, sem pontuação agregada. No
+estudo 7, não localizamos o procedimento de alocação; por isso, o delineamento
+e Q1--Q5 continuam pendentes, sem classificá-lo como randomizado ou não
+randomizado. No estudo 8, tarefas e dados humanos distintos impedem fixar uma
+única unidade de avaliação; S1/S2 e Q1--Q5 permanecem CT até adjudicação. Os
+quatro textos não recuperados não receberam MMAT e suas células ficam sem
+resposta, não como CT. Um registro foi excluído após resumo e não integra o
+denominador. O manifesto registra fontes e datas; o ledger, a base documental
+e os localizadores. Falta a adjudicação independente; portanto, não apresento
 um ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
