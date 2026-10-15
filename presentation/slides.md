@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Revisão atualizada: 12/10/2026 · Corte da busca: 31/08/2026</div>
+<div class="cover-snapshot">Revisão atualizada: 14/10/2026 · Corte da busca: 31/08/2026</div>
 
 ---
 layout: default
@@ -200,23 +200,23 @@ class: content-slide flow-slide
 
 <div class="slide-kicker">09 / SELEÇÃO</div>
 
-# Da descoberta à retenção: 11.904 registros → 18 retidos
+# Da busca à seleção preliminar: 11.904 registros → 18 em avaliação de escopo
 
 <div class="tcc-funnel-layout">
   <div class="tcc-funnel">
     <div class="tcc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
     <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
     <div class="tcc-funnel-stage funnel-screening"><span>Após triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
-    <div class="tcc-funnel-stage funnel-inclusion"><span>Shortlist operacional</span><strong>18</strong><small>2.468 não avançaram na priorização</small></div>
+    <div class="tcc-funnel-stage funnel-inclusion"><span>Lista preliminar</span><strong>18</strong><small>2.468 não avançaram na priorização</small></div>
   </div>
   <div class="tcc-funnel-notes">
     <p><strong>Identidade:</strong> 25 DOI + 2 URL são removidos de forma determinística.</p>
     <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
-    <p><strong>Desfecho da shortlist:</strong> 12 estudos incluídos; 4 textos pendentes; 1 exclusão após resumo; 1 protocolo excluído.</p>
+    <p><strong>Desfecho da seleção:</strong> 15 registros empíricos mantidos provisoriamente; 1 relatório não recuperado; 1 exclusão após resumo; 1 protocolo excluído após texto completo.</p>
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Os 2.486 registros foram priorizados por metadados e resumos; a etapa não equivale à avaliação de elegibilidade de relatórios em texto completo. Os 18 da shortlist ainda passaram por triagem de resumo e, para 13, avaliação em texto completo.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> A priorização dos 2.486 registros baseou-se em metadados e resumos e não equivale à avaliação de elegibilidade em texto completo. Dos 18 registros selecionados, um foi excluído após a triagem do resumo; entre os 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo. Um protocolo foi excluído após essa avaliação; os 15 restantes compõem provisoriamente o núcleo empírico.</div>
 
 ---
 layout: center
@@ -263,10 +263,10 @@ class: content-slide
 
 <div class="tcc-growth-layout">
   <div class="tcc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano; 2026 é um ano parcial até 31 de agosto" /></div>
-  <div class="tcc-growth-copy"><h2>O snapshot observado</h2><p>Os registros cobrem 2015–2026. O pico de 2025 não deve ser comparado diretamente com 2026, pois o último ano está incompleto.</p><small>2026* = publicações identificadas até 31/08/2026. A leitura é descritiva do conjunto recuperado; não estima a produção mundial, representatividade ou qualidade.</small></div>
+<div class="tcc-growth-copy"><h2>O recorte observado</h2><p>Os registros cobrem 2015–2026. O pico de 2025 não deve ser comparado diretamente com 2026, pois o último ano está incompleto.</p><small>2026* = publicações identificadas até 31/08/2026. A leitura é descritiva do conjunto recuperado; não estima a produção mundial, representatividade ou qualidade.</small></div>
 </div>
 
-<div class="tcc-caption">Distribuição anual dos registros no recorte temporal do protocolo. *2026 é um ano parcial no snapshot.</div>
+<div class="tcc-caption">Distribuição anual dos registros no recorte temporal do protocolo. *2026 é um ano parcial no conjunto analisado.</div>
 
 ---
 layout: default
@@ -312,14 +312,14 @@ class: content-slide tcc-retained-slide
 
 <div class="slide-kicker">15 / RETENÇÃO</div>
 
-# Composição dos 18 registros shortlistados
+# Composição dos 18 registros selecionados preliminarmente
 
 <div class="tcc-retained-layout">
-  <div class="tcc-retained-number"><strong>18</strong><span>registros shortlistados<br>para adjudicação</span><div class="tcc-retained-rule"></div><p>Shortlist não é inclusão final.</p></div>
+  <div class="tcc-retained-number"><strong>18</strong><span>registros selecionados<br>para avaliação de escopo</span><div class="tcc-retained-rule"></div><p>Seleção preliminar não é inclusão final.</p></div>
   <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata"><strong>12</strong><span>estudos empíricos incluídos</span><strong>+</strong><strong>4</strong><span>textos integrais pendentes</span></div>
+    <div class="tcc-retained-strata"><strong>15</strong><span>registros empíricos mantidos provisoriamente</span><strong>+</strong><strong>1</strong><span>relatório sem texto integral recuperado</span></div>
     <h2>Desfechos da seleção</h2>
-    <p>Um registro foi excluído após o resumo e um protocolo sem resultados concluídos após texto completo. Os quatro relatórios não recuperados não receberam MMAT.</p>
+    <p>Um registro foi excluído após o resumo; dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo. Um protocolo foi excluído após essa avaliação. O relatório não recuperado não recebeu MMAT.</p>
     <div class="tcc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
   </div>
 </div>
@@ -352,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> os 12 estudos incluídos têm texto integral consultado; a apreciação é preliminar e por revisor único. No estudo 7, delineamento e Q1–Q5 seguem pendentes; no estudo 8, S1/S2 e Q1–Q5 aguardam definição da unidade de avaliação. Quatro textos não foram recuperados e não receberam MMAT; um registro foi excluído após resumo e um protocolo sem resultados após texto completo. Sem escore agregado; falta adjudicação independente.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros permanecem provisoriamente no núcleo empírico; a apreciação MMAT abrange 14 e é de revisor único. No estudo 7, delineamento e Q1–Q5 seguem pendentes; o estudo 8 permanece no fluxo PRISMA e no corpus, sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise. Suas bases distintas não devem ser somadas. Um texto não foi recuperado e também não recebeu MMAT; um registro foi excluído após resumo e um protocolo sem resultados após texto completo. Sem escore agregado; falta adjudicação independente.</div>
 
 ---
 layout: default
@@ -408,7 +408,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> os 12 estudos incluídos tiveram texto integral consultado; quatro relatórios não foram recuperados e não receberam MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> 15 registros empíricos permanecem provisoriamente no núcleo após consulta ao texto integral; a apreciação MMAT abrange 14, com o estudo 8 suspenso até adjudicação de elegibilidade e unidade de análise. Um relatório não foi recuperado e também não recebeu MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
 
 ---
 layout: default
@@ -468,7 +468,7 @@ class: content-slide tcc-next-slide
 # Próximos passos — antes de qualquer experimento
 
 <div class="tcc-next-layout">
-  <div class="tcc-next-list"><div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div><div><b>02</b><span>Revisar lacunas após a adjudicação dos 12 estudos e a recuperação dos quatro textos pendentes.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Adjudicar a elegibilidade e a unidade de análise do estudo 8, além dos julgamentos dos 14 MMAT e do texto pendente.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
   <div class="tcc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 

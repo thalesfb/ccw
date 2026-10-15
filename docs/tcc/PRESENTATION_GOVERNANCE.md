@@ -11,9 +11,9 @@ decisões de implementação em afirmações acadêmicas.
 - Os números devem continuar reconciliados com
   `research/exports/reports/summary.json`.
 - O estado científico apresentado é o snapshot atual: 18 registros shortlistados,
-  dos quais 12 integram o núcleo empírico, 4 aguardam texto integral, 1 foi
-  excluído após resumo e 1 protocolo foi excluído após texto completo por não
-  apresentar resultados concluídos.
+  dos quais 15 integram provisoriamente o núcleo empírico, 1 aguarda texto
+  integral, 1 foi excluído após resumo e 1 protocolo foi excluído após texto
+  completo por não apresentar resultados concluídos.
 - A apresentação não deve prometer eficácia, validação experimental ou um
   protótipo executado quando a evidência correspondente ainda não existe.
 - O encerramento deve oferecer o repositório por QR code, com destino
@@ -96,9 +96,12 @@ seu efeito sobre o alcance das conclusões.
 Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
 o código do pipeline está implementado, os testes sintéticos estão verdes, o
 experimento com dados reais permanece pendente e o MMAT é preliminar. O
-denominador MMAT é de 12 estudos empíricos incluídos e examinados em texto
-integral. Quatro registros aguardam o texto integral e não receberam respostas
-MMAT; um registro foi excluído após resumo e um protocolo sem resultados
-concluídos foi excluído após texto completo. O estudo 6919 foi mantido conforme
+corpus mantém provisoriamente 15 estudos empíricos, mas a apreciação MMAT
+atual abrange 14. O estudo 8 permanece no fluxo PRISMA e no corpus sem
+respostas MMAT até adjudicação humana de sua elegibilidade e unidade de
+apreciação; suas bases distintas não devem ser somadas. O registro 6923
+aguarda o texto integral e não recebeu respostas MMAT; um registro foi
+excluído após resumo e um protocolo sem resultados concluídos foi excluído
+após texto completo. O estudo 6919 foi mantido conforme
 o protocolo escrito, que não exige personalização como condição de elegibilidade.
 Alguns textos consultados externamente não estão arquivados no repositório público.

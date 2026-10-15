@@ -62,7 +62,7 @@ contagem de chamadas HTTP concluídas.
 
 ## 7. Contagens — 1:10
 
-O snapshot começa com 11.904 registros. Foram removidas 27 linhas por identidade
+O recorte versionado começa com 11.904 registros. Foram removidas 27 linhas por identidade
 bibliográfica determinística, chegando a 11.877 na triagem. A triagem excluiu
 9.391 registros e submeteu 2.486 à priorização operacional baseada em metadados
 e resumos. Nessa etapa, 2.468 foram excluídos e 18 foram retidos
@@ -98,7 +98,7 @@ qualidade e não medem eficácia.
 
 ## 11. Tempo e fontes — 0:50
 
-As distribuições por ano e por fonte ajudam a caracterizar o snapshot. O ano de
+As distribuições por ano e por fonte ajudam a caracterizar o recorte versionado. O ano de
 2026 é parcial, com coleta até 31 de agosto, então a barra menor não representa
 uma queda anual da produção científica e não deve ser comparada diretamente com
 anos completos. As figuras mostram como o conjunto foi recuperado, mas não
@@ -108,25 +108,29 @@ científica esteja distribuída de forma uniforme. A cobertura está condicionad
 
 ## 12. Conjunto retido — 1:05
 
-Dos 18 registros shortlistados, 12 integram o núcleo empírico. Um foi excluído
-após a triagem do resumo; quatro textos integrais não foram recuperados; um
-protocolo sem resultados concluídos foi excluído após texto completo. A síntese
-e a apreciação MMAT consideram os 12 estudos incluídos. A recorrência envolve
+Dos 18 registros selecionados preliminarmente, 15 permanecem provisoriamente no núcleo
+empírico. Um foi excluído após a triagem do resumo; um texto integral não foi
+recuperado; um protocolo sem resultados concluídos foi excluído após texto
+completo. A síntese mantém os 15 registros, enquanto a apreciação MMAT atual
+abrange 14. O estudo 8 segue sem respostas até adjudicação de sua
+elegibilidade e unidade de análise; suas bases distintas não devem ser somadas.
+A recorrência envolve
 predição de desempenho e estimativa de proficiência; um estudo também integra
 Transformada de Fourier ao ensino universitário de matemática, mas compara
 coortes separadas por quatro anos e não isola o efeito da IA.
 
 ## 13. MMAT — 1:10
 
-A apreciação preliminar orientada pelo MMAT 2018 considera os 12 estudos
-incluídos e foi registrada por um único revisor, sem pontuação agregada. No
+A apreciação preliminar orientada pelo MMAT 2018 abrange 14 dos 15 registros
+empíricos mantidos provisoriamente e foi registrada por um único revisor, sem
+pontuação agregada. No
 estudo 7, não localizamos o procedimento de alocação; por isso, o delineamento
 e Q1--Q5 continuam pendentes, sem classificá-lo como randomizado ou não
 randomizado. No estudo 8, tarefas e dados humanos distintos impedem fixar uma
-única unidade de avaliação; S1/S2 e Q1--Q5 permanecem CT até adjudicação. Os
-quatro textos não recuperados não receberam MMAT e suas células ficam sem
+unidade de apreciação; nenhum critério MMAT recebeu resposta até a adjudicação. Os
+o texto não recuperado não recebeu MMAT e suas células ficam sem
 resposta, não como CT. Um registro foi excluído após resumo e não integra o
-denominador. O manifesto registra fontes e datas; o ledger, a base documental
+denominador. O manifesto registra fontes e datas; o registro de avaliação, a base documental
 e os localizadores. Falta a adjudicação independente; portanto, não apresento
 um ranking de qualidade.
 
@@ -150,8 +154,8 @@ Echeveria et al. (2025, pp. 66, 69–70) usam itens da escala tanto para formar
 categorias quanto entre preditores. Esses pontos afetam denominadores,
 comparabilidade, atribuição do resultado e interpretação diagnóstica de cada
 estudo. São exemplos localizados, não estimativa da frequência na literatura.
-Os exemplos provêm dos 12 estudos incluídos e seus textos integrais consultados.
-Quatro registros seguem pendentes sem MMAT; um foi excluído após resumo e um
+Os exemplos provêm dos 15 estudos mantidos provisoriamente e com texto integral consultado.
+Um registro segue pendente sem MMAT; um foi excluído após resumo e um
 protocolo após texto completo por não apresentar resultados concluídos. O
 MMAT permanece preliminar e feito por um único revisor. Outros requisitos, como
 equidade e alinhamento curricular, não foram codificados de modo comparável e

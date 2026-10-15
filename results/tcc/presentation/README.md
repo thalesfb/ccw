@@ -46,7 +46,7 @@ python scripts/generate_tcc_presentation.py --check
 ```
 
 O validador verifica os 19 slides do export, seus títulos, marcadores do
-snapshot atual, exemplos de limitações vinculados a estudos, ausência de
+recorte versionado atual, exemplos de limitações vinculados a estudos, ausência de
 números históricos do PTC e incorporação das visualizações canônicas. O
 workflow `tcc-quality` também executa essa validação em pull requests.
 

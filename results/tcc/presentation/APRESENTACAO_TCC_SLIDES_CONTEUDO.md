@@ -12,7 +12,7 @@
 
 O roteiro organiza a exposição do TCC em problema, método, resultados,
 implicações e encerramento. O conteúdo abaixo é derivado do manuscrito e do
-snapshot atual. O deck não reproduz números históricos nem transforma o
+recorte versionado atual. O deck não reproduz números históricos nem transforma o
 protótipo conceitual em aplicação implementada.
 
 ## Sequência dos slides
@@ -21,7 +21,7 @@ protótipo conceitual em aplicação implementada.
 
 Subtítulo: oportunidades e técnicas computacionais. Apresenta a revisão
 sistemática e a especificação conceitual de protótipo, com autor, orientação,
-instituição, data do snapshot e recorte temporal.
+instituição, data do recorte versionado e período considerado.
 
 ### 2. O desafio fundamental: diagnóstico personalizado com evidências
 
@@ -73,7 +73,7 @@ retrospectiva de chamadas HTTP.
 
 ### 9. Quatro fontes de indexação complementares
 
-Apresenta a distribuição do snapshot após a remoção determinística: Semantic
+Apresenta a distribuição do recorte versionado após a remoção determinística: Semantic
 Scholar (1.931 registros), OpenAlex (3.057), Crossref (5.049) e CORE (1.840).
 Os valores somam 11.877 registros na triagem, não são contagens independentes
 de estudos retidos e não devem ser somados ao total identificado de 11.904.
@@ -82,7 +82,7 @@ do protocolo.
 
 ### 10. O funil da descoberta
 
-Mostra as contagens do snapshot: 11.904 identificados; 27 remoções
+Mostra as contagens do recorte versionado: 11.904 identificados; 27 remoções
 determinísticas por DOI/URL; 11.877 na triagem; 9.391 excluídos na triagem;
 2.486 submetidos à priorização operacional; 2.468 excluídos nessa etapa; 18
 retidos provisoriamente para adjudicação de escopo. A priorização usa metadados
@@ -92,10 +92,10 @@ e resumos e não corresponde à avaliação de elegibilidade em texto completo.
 
 Incorpora `research/exports/visualizations/prisma_flow.png`, figura operacional
 própria, com referência ao PRISMA 2020, sincronizada com os artefatos públicos;
-ela não reproduz o diagrama PRISMA completo. Dos 18 registros shortlistados,
-um foi excluído após a triagem do resumo; 17 relatórios foram procurados, quatro
-não foram recuperados e 13 foram avaliados em texto completo. Um protocolo sem
-resultados concluídos foi excluído; os outros 12 estudos empíricos integram o
+ela não reproduz o diagrama PRISMA completo. Dos 18 registros selecionados preliminarmente,
+um foi excluído após a triagem do resumo; 17 relatórios foram procurados, um
+não foi recuperado e 16 foram avaliados em texto completo. Um protocolo sem
+resultados concluídos foi excluído; os outros 15 estudos empíricos integram o
 núcleo incluído. A priorização operacional anterior não é apresentada como
 etapa PRISMA de elegibilidade.
 
@@ -130,8 +130,8 @@ e não substitui a leitura das fontes primárias.
 
 ### 16. Conjunto retido: dois estratos de leitura
 
-Dos 18 registros shortlistados, 12 integram o núcleo empírico. Um foi excluído
-após a triagem do resumo; quatro textos integrais não foram recuperados; um
+Dos 18 registros selecionados preliminarmente, 15 integram provisoriamente o núcleo empírico. Um foi excluído
+após a triagem do resumo; um texto integral não foi recuperado; um
 protocolo sem resultados concluídos foi excluído após texto completo. A síntese
 empírica aponta recorrência de predição de desempenho e estimativa de
 proficiência, além de uma experiência que integra Transformada de Fourier ao
@@ -141,12 +141,14 @@ anos limitam a inferência e não isolam o efeito da IA.
 ### 17. Apreciação metodológica preliminar: critérios, não uma nota global
 
 O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
-12 estudos incluídos tiveram texto integral consultado; a apreciação preliminar
-foi registrada por um único revisor. No estudo 7, o delineamento e Q1--Q5
-permanecem pendentes porque o procedimento de alocação não foi localizado. No
-estudo 8, S1/S2 e Q1--Q5 aguardam a definição da unidade de avaliação. Quatro
-registros continuam sem texto integral e sem MMAT; um foi excluído após resumo.
-A apreciação aguarda adjudicação independente e consolidação dos localizadores.
+15 registros empíricos permanecem provisoriamente no núcleo, com texto integral
+consultado; a apreciação preliminar abrange 14 e foi registrada por um único
+revisor. No estudo 7, o delineamento e Q1--Q5 permanecem pendentes porque o
+procedimento de alocação não foi localizado. O estudo 8 permanece no fluxo
+PRISMA e no corpus, sem respostas MMAT até adjudicação de elegibilidade e
+unidade de análise; suas bases distintas não devem ser somadas. Um registro
+continua sem texto integral e sem MMAT; um foi excluído após resumo. A
+apreciação aguarda adjudicação independente e consolidação dos localizadores.
 
 ### 18. O que emerge entre os estudos incluídos
 
@@ -157,7 +159,7 @@ estudos.
 
 ### 19. O que podemos concluir — e o que permanece aberto
 
-O snapshot oferece um mapa auditável. A heterogeneidade de populações,
+O recorte versionado oferece um mapa auditável. A heterogeneidade de populações,
 instrumentos, variáveis e métricas impede comparar todos os resultados
 diretamente. Acurácia de um artigo não demonstra superioridade geral nem
 eficácia pedagógica transferível.
@@ -172,8 +174,8 @@ pré-teste e intervenção combinada em Nyantah et al. (2025, pp. 101–105); e
 sobreposição entre itens usados para construir categorias e preditores em
 Echeveria et al. (2025, pp. 66, 69–70). São exemplos dos textos consultados,
 não estimativa de frequência da literatura. Os exemplos são casos localizados
-nos textos integrais dos estudos incluídos. Quatro registros
-continuam pendentes sem apreciação MMAT; um foi excluído após resumo, um após
+nos textos integrais dos estudos incluídos. Um registro
+continua pendente sem apreciação MMAT; um foi excluído após resumo, um após
 texto completo por escopo e um é protocolo sem resultados concluídos. A revisão
 segue preliminar, por revisor único.
 
@@ -207,7 +209,7 @@ sistematizada fundamenta decisões futuras, mas não substitui esse protocolo.
 ### 25. Obrigado
 
 Encerramento para perguntas e discussão, mantendo título, autor, instituição,
-snapshot e recorte temporal.
+recorte versionado e período considerado.
 
 ## Regra de referência
 
@@ -215,4 +217,4 @@ O deck não usa IDs operacionais de artigos como se fossem citações para o
 leitor. Quando uma fonte é necessária na exposição, ela deve ser identificada
 por autor e ano ou pela referência bibliográfica correspondente no TCC. As
 referências teóricas e pedagógicas permanecem externas ao conjunto derivado do
-pipeline e não são removidas por uma atualização do snapshot.
+fluxo automatizado e não são removidas por uma atualização do recorte versionado.
