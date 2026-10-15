@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Revisão atualizada: 14/10/2026 · Corte da busca: 31/08/2026</div>
+<div class="cover-snapshot">Versão revisada: 15/10/2026 · Corte da busca: 31/08/2026</div>
 
 ---
 layout: default
@@ -352,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros permanecem provisoriamente no núcleo empírico; a apreciação MMAT abrange 14 e é de revisor único. No estudo 7, delineamento e Q1–Q5 seguem pendentes; o estudo 8 permanece no fluxo PRISMA e no corpus, sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise. Suas bases distintas não devem ser somadas. Um texto não foi recuperado e também não recebeu MMAT; um registro foi excluído após resumo e um protocolo sem resultados após texto completo. Sem escore agregado; falta adjudicação independente.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros permanecem provisoriamente no núcleo empírico; S1/S2 foram respondidas em 14 e os critérios da categoria em 11, por revisor único. Nos estudos 5, 7 e 14, Q1–Q5 não foram avaliados até definir o delineamento; o estudo 8 permanece no fluxo PRISMA e no corpus, sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise. Suas bases distintas não devem ser somadas. Um texto não foi recuperado e também não recebeu MMAT; um registro foi excluído após resumo e um protocolo sem resultados após texto completo. Sem escore agregado; falta adjudicação independente.</div>
 
 ---
 layout: default
@@ -364,7 +364,7 @@ class: content-slide tcc-synthesis-slide
 # Síntese dos estudos empíricos incluídos
 
 <div class="tcc-synthesis-layout">
-  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>12</strong><span>estudos<br>incluídos</span><i>evidências<br>relacionadas</i></div>
+  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>15</strong><span>estudos<br>provisórios</span><i>evidências<br>relacionadas</i></div>
   <div class="tcc-synthesis-copy">
     <h2>Predição e estimativa aparecem como eixo recorrente.</h2>
     <p>Os estudos organizam evidências de desempenho e inferem proficiência a partir de registros observados, frequentemente com modelos supervisionados.</p>
@@ -408,7 +408,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> 15 registros empíricos permanecem provisoriamente no núcleo após consulta ao texto integral; a apreciação MMAT abrange 14, com o estudo 8 suspenso até adjudicação de elegibilidade e unidade de análise. Um relatório não foi recuperado e também não recebeu MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> 15 registros empíricos permanecem provisoriamente no núcleo após consulta ao texto integral; há 14 triagens S1/S2 e 11 apreciações por categoria, com o estudo 8 suspenso até adjudicação de elegibilidade e unidade de análise. Um relatório não foi recuperado e também não recebeu MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
 
 ---
 layout: default
@@ -468,7 +468,7 @@ class: content-slide tcc-next-slide
 # Próximos passos — antes de qualquer experimento
 
 <div class="tcc-next-layout">
-  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Adjudicar a elegibilidade e a unidade de análise do estudo 8, além dos julgamentos dos 14 MMAT e do texto pendente.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Adjudicar a elegibilidade e a unidade de análise do estudo 8, além das 14 triagens e 11 apreciações por categoria e do texto pendente.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
   <div class="tcc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 

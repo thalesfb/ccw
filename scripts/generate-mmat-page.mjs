@@ -66,6 +66,7 @@ function criterion(value) {
 
 function sourceStatus(row, scope) {
   if (scope?.empirical_mmat_applicability === 'pending_unit_adjudication') return '<span class="tag tag-amber">MMAT suspenso; unidade de análise pendente</span>';
+  if (row.design === 'design_pending' && row.s1) return '<span class="tag tag-amber">texto primário revisado; categoria MMAT pendente</span>';
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') return '<span class="tag tag-green">texto primário revisado</span>';
   if (row.empirical_status === 'protocol_or_proposal_not_applicable') return '<span class="tag tag-red">protocolo contextual</span>';
   if (row.assessment_basis === 'pending_full_text_not_appraised') return '<span class="tag tag-amber">texto integral pendente; MMAT não aplicado</span>';
@@ -87,6 +88,7 @@ function sourceAndAppraisalStatus(row, scope) {
     return 'Protocolo sem resultados empíricos concluídos; MMAT não aplicável.';
   }
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') {
+    if (row.design === 'design_pending') return 'Texto integral consultado; S1/S2 respondidas. Q1–Q5 não avaliados enquanto a categoria MMAT aguarda adjudicação; células vazias não significam CT.';
     return 'Texto integral consultado; apreciação MMAT preliminar.';
   }
   return 'Situação da fonte ou apreciação requer confirmação.';
@@ -215,7 +217,6 @@ const latestScopeReconciliation = currentScope.map((row) => row.snapshot_date).s
 const latestScopeReconciliationLabel = formatDate(latestScopeReconciliation);
 const latestReviewDate = current.map((row) => row.review_date).filter(Boolean).sort().at(-1);
 const latestReviewDateLabel = formatDate(latestReviewDate);
-const empirical = current.filter((row) => row.empirical_status !== 'protocol_or_proposal_not_applicable');
 const primaryReviewed = current.filter((row) => row.assessment_basis === 'primary_full_text_reviewed_externally');
 const empiricalCore = currentScope.filter((row) => row.record_status === 'included_empirical_core');
 const mmatAppraisedIds = new Set(currentScope
@@ -223,6 +224,8 @@ const mmatAppraisedIds = new Set(currentScope
   .map((row) => row.study_id));
 const unitHoldRows = currentScope.filter((row) => row.empirical_mmat_applicability === 'pending_unit_adjudication');
 const mmatAppraised = current.filter((row) => mmatAppraisedIds.has(row.study_id));
+const categoryPending = mmatAppraised.filter((row) => row.design === 'design_pending');
+const categoryAppraised = mmatAppraised.filter((row) => row.design !== 'design_pending');
 const abstractOnly = current.filter((row) => row.assessment_basis === 'abstract_and_metadata_only');
 const pendingFullText = current.filter((row) => row.assessment_basis === 'pending_full_text_not_appraised');
 const abstractExclusionSummary = abstractOnly.length === 1
@@ -292,7 +295,7 @@ function criterionEvidenceDetails(row, scope) {
   ];
   const items = allQuestions.map(({ code, label }) => `<li class="mmat-evidence-item">
       <div class="mmat-evidence-heading"><span class="question-code">${escapeHtml(code)}</span><strong>${escapeHtml(label)}</strong>${criterion(row[code.toLowerCase()])}</div>
-      <p>${escapeHtml(evidence.get(code) || missingEvidence)}</p>
+      <p>${escapeHtml(evidence.get(code) || (row.design === 'design_pending' && row.s1 && code.startsWith('Q') ? 'Critério não avaliado: a categoria MMAT ainda não foi definida. Não se trata de resposta CT.' : missingEvidence))}</p>
     </li>`).join('');
   const source = row.source_id ? `<code>${escapeHtml(row.source_id)}</code>` : 'não identificada';
   const locator = row.page_or_section ? escapeHtml(row.page_or_section) : 'não registrado';
@@ -396,10 +399,11 @@ const page = `<!doctype html>
         </div>
         <div class="data-strip">
           <div class="metric-card"><span class="metric-value">${current.length}</span><span class="metric-label">itens no registro de apreciação</span></div>
-          <div class="metric-card"><span class="metric-value">${empirical.length}</span><span class="metric-label">estudos empíricos mantidos provisoriamente</span></div>
+          <div class="metric-card"><span class="metric-value">${empiricalCore.length}</span><span class="metric-label">estudos empíricos mantidos provisoriamente</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
           <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">textos primários revisados</span></div>
-          <div class="metric-card"><span class="metric-value">${mmatAppraised.length}</span><span class="metric-label">estudos com apreciação MMAT preliminar</span></div>
+          <div class="metric-card"><span class="metric-value">${mmatAppraised.length}</span><span class="metric-label">estudos com triagem MMAT (S1/S2)</span></div>
+          <div class="metric-card"><span class="metric-value">${categoryAppraised.length}</span><span class="metric-label">estudos com critérios por categoria apreciados</span></div>
           <div class="metric-card"><span class="metric-value">${pendingFullText.length}</span><span class="metric-label">${pendingFullTextLabel}</span></div>
         </div>
       </section>
@@ -413,7 +417,7 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
           <h3>${primaryReviewed.length} textos integrais no núcleo empírico</h3>
-          <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm apreciação MMAT preliminar. ${unitHoldRows.length} registro (${unitHoldRows.map((row) => escapeHtml(row.study_id)).join(', ')}) permanece no corpus e no fluxo PRISMA sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise; não se somam suas bases distintas. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
+          <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm S1/S2 respondidas; ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. Em ${categoryPending.length} estudos (${categoryPending.map((row) => escapeHtml(row.study_id)).join(', ')}), Q1–Q5 permanecem não avaliados até definir o delineamento, sem resposta CT. ${unitHoldRows.length} registro (${unitHoldRows.map((row) => escapeHtml(row.study_id)).join(', ')}) permanece no corpus e no fluxo PRISMA sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise; não se somam suas bases distintas. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
         </article>
       </section>
 
@@ -422,7 +426,7 @@ const page = `<!doctype html>
       <section class="section" aria-labelledby="questions-title">
         <div class="section-heading">
           <h2 id="questions-title">Perguntas de triagem do MMAT 2018</h2>
-          <p>No recorte atual, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos com apreciação MMAT. ${unitHoldRows.length} registro com texto consultado está temporariamente sem respostas enquanto se define a unidade de apreciação; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e não integra o corpus empírico.</p>
+          <p>No recorte atual, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos. Q1–Q5 foram apreciados em ${categoryAppraised.length}; ${categoryPending.length} aguardam definição da categoria. ${unitHoldRows.length} registro com texto consultado está temporariamente sem respostas enquanto se define a unidade de apreciação; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e não integra o corpus empírico.</p>
         </div>
         <div class="mmat-screening-grid">${screeningQuestions}</div>
         <div class="callout callout-blue mmat-question-note">
@@ -445,7 +449,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável · — = não avaliado. Os registros sem texto integral e o estudo 8 (unidade de análise pendente) não receberam respostas MMAT.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável · — = não avaliado. Nos estudos 5, 7 e 14, apenas S1/S2 foram respondidas; Q1–Q5 aguardam definição da categoria. Os registros sem texto integral e o estudo 8 (unidade de análise pendente) não receberam respostas MMAT.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>

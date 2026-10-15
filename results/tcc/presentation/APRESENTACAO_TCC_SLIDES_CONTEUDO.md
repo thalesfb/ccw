@@ -142,9 +142,9 @@ anos limitam a inferência e não isolam o efeito da IA.
 
 O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
 15 registros empíricos permanecem provisoriamente no núcleo, com texto integral
-consultado; a apreciação preliminar abrange 14 e foi registrada por um único
-revisor. No estudo 7, o delineamento e Q1--Q5 permanecem pendentes porque o
-procedimento de alocação não foi localizado. O estudo 8 permanece no fluxo
+consultado; 14 têm triagem S1/S2 e 11 têm apreciação por categoria, registradas
+por um único revisor. Nos estudos 5, 7 e 14, Q1--Q5 permanecem sem resposta
+até a definição do delineamento, sem serem codificados como CT. O estudo 8 permanece no fluxo
 PRISMA e no corpus, sem respostas MMAT até adjudicação de elegibilidade e
 unidade de análise; suas bases distintas não devem ser somadas. Um registro
 continua sem texto integral e sem MMAT; um foi excluído após resumo. A
@@ -168,15 +168,15 @@ eficácia pedagógica transferível.
 
 Apresenta quatro exemplos localizados, com páginas: divergência de
 denominadores e possível confundimento entre docente e condição em He et al.
-(2025, pp. 1, 16, 31–35); duração experimental não conciliada em Villegas-Ch
-et al. (2025, pp. 14, 22); descrições incompatíveis de alocação, diferença no
+(2025, pp. 1, 16, 31–35); seis semanas nos métodos e resultado na oitava semana na subanálise de
+programação em Villegas-Ch et al. (2025, pp. 14, 22); descrições incompatíveis de alocação, diferença no
 pré-teste e intervenção combinada em Nyantah et al. (2025, pp. 101–105); e
 sobreposição entre itens usados para construir categorias e preditores em
 Echeveria et al. (2025, pp. 66, 69–70). São exemplos dos textos consultados,
 não estimativa de frequência da literatura. Os exemplos são casos localizados
 nos textos integrais dos estudos incluídos. Um registro
-continua pendente sem apreciação MMAT; um foi excluído após resumo, um após
-texto completo por escopo e um é protocolo sem resultados concluídos. A revisão
+continua sem texto integral e sem apreciação MMAT; um foi excluído após resumo
+e um protocolo sem resultados concluídos foi excluído após texto completo. A revisão
 segue preliminar, por revisor único.
 
 ### 21. Da evidência à especificação — sem saltar para a implementação

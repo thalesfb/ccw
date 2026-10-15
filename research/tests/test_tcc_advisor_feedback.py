@@ -231,7 +231,7 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         assert "nove fontes" not in text
     assert r"\citeonline{Zeng2025_6923}" in methodology
     assert "Q1--Q5 permanecem sem resposta" in methodology
-    assert "essas cinco respostas foram mantidas como CT" in methodology
+    assert "esses cinco critérios não foram apreciados e permanecem sem resposta, em vez de CT" in methodology
     assert "ferramentas de ia generativa apoiaram a revisão de consistência" in methodology.lower()
     assert "não foi contabilizado como avaliação independente" in methodology
     assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology

@@ -118,18 +118,18 @@ class EditorialFeedbackTests(unittest.TestCase):
         note = note_path.read_text(encoding="utf-8")
         normalized_note = " ".join(note.split())
         self.assertIn("15 registros permanecem provisoriamente no núcleo empírico", normalized_note)
-        self.assertIn("abrange 14 desses registros", normalized_note)
+        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", normalized_note)
         self.assertIn("SUPPORTED", normalized_note)
         self.assertIn("adjudicação humana", normalized_note.lower())
-        self.assertIn("as oito afirmações têm adjudicação humana", normalized_note)
+        self.assertIn("as nove afirmações têm adjudicação humana", normalized_note)
         self.assertNotIn("feedback/private", normalized_note)
         self.assertNotIn("compile_tcc.py", normalized_note)
         self.assertFalse((ROOT / "docs/TCC_FEEDBACK_WORKFLOW.md").exists())
 
     def test_public_status_and_defense_artifacts_are_currently_distinguished(self):
         status = (ROOT / "docs/tcc/ESTADO-ATUAL-TCC.md").read_text(encoding="utf-8")
-        self.assertIn("14 de outubro de 2026", status)
-        self.assertIn("14 têm apreciação MMAT preliminar", status)
+        self.assertIn("15 de outubro de 2026", status)
+        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", status)
         self.assertIn("Slidev em 25 slides", status)
         self.assertIn("19 slides", status)
         self.assertIn("exportação paralela", status)
@@ -137,10 +137,10 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("MCP", status)
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
-        self.assertIn("Revisão atualizada: 14/10/2026", slides)
+        self.assertIn("Versão revisada: 15/10/2026", slides)
         self.assertNotIn("Snapshot: 03/09/2026", slides)
         self.assertNotIn("Snapshot adjudicado: 03/09/2026", pptx_source)
-        self.assertIn("Revisão atualizada: 14/10/2026", pptx_source)
+        self.assertIn("Versão revisada: 15/10/2026", pptx_source)
         self.assertIn("não recebeu MMAT", pptx_source)
         self.assertNotIn("não receberam MMAT", pptx_source)
 
@@ -172,7 +172,7 @@ class EditorialFeedbackTests(unittest.TestCase):
 
         governance = " ".join((ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md").read_text(encoding="utf-8").split())
         self.assertIn("corpus mantém provisoriamente 15 estudos empíricos", governance)
-        self.assertIn("apreciação MMAT atual abrange 14", governance)
+        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", governance)
         self.assertIn("1 aguarda texto integral", governance)
         self.assertIn("um registro foi excluído após resumo", governance)
         self.assertNotIn("cinco foram apreciados", governance)
@@ -190,7 +190,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("cinco candidatos foram apreciados por resumo/metadados", slides)
         self.assertNotIn("17 estudos empíricos provisórios", slides)
         self.assertIn("Adjudicar a elegibilidade e a unidade de análise do estudo 8", slides)
-        self.assertIn("julgamentos dos 14 MMAT e do texto pendente", slides)
+        self.assertIn("14 triagens e 11 apreciações por categoria e do texto pendente", slides)
 
     def test_study_specific_quantitative_claims_have_primary_source_locators(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
@@ -214,7 +214,8 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_recovered_studies_are_cited_with_precise_units_and_boundaries(self):
         foundation = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
-        self.assertIn("classifica estudantes em três níveis de proficiência matemática", foundation)
+        self.assertIn("classifica estudantes em três categorias operacionais de desempenho", foundation)
+        self.assertIn("sem equivalência demonstrada com os níveis oficiais", foundation)
         self.assertIn("50 estudantes do primeiro ano de Engenharia Industrial, observados entre 2017 e 2021", foundation)
 
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
@@ -250,7 +251,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         discussion = (TCC / "conteudo/resultados.tex").read_text(encoding="utf-8")
         self.assertNotIn("lacunas mais recorrentes", discussion.lower())
         self.assertIn("Os textos integrais dos 15 registros empíricos mantidos provisoriamente foram consultados", discussion)
-        self.assertIn("14 receberam respostas MMAT preliminares", discussion)
+        self.assertIn("14 receberam respostas S1/S2 e 11 tiveram os critérios específicos da categoria apreciados", discussion)
         self.assertNotIn("parte deles se baseou em resumos e metadados", discussion)
         self.assertNotIn(r"\textbf{OE", discussion)
         self.assertIn(r"\ref{sec:tendencias-lacunas}", discussion)
@@ -264,7 +265,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
         self.assertIn("2.486 para priorização operacional", abstract)
         self.assertIn("15 registros empíricos mantidos provisoriamente", abstract)
-        self.assertIn("abrange 14 desses registros", abstract)
+        self.assertIn("14 desses registros receberam respostas S1/S2 e 11 tiveram os critérios da categoria apreciados", abstract)
         self.assertIn("A dissertação não recuperada também não recebeu apreciação MMAT", abstract)
         self.assertIn("sem estimar sua frequência", abstract)
         self.assertNotIn("2.486 para a elegibilidade", abstract)

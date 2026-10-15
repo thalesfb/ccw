@@ -855,7 +855,9 @@ def generate_manifest(
         "methodological_appraisal": {
             "current_mmat_qa": mmat_qa,
             "interpretation": (
-                f"The current MMAT ledger is a criterion-level preliminary record for {mmat_denominator} studies. "
+                f"The current MMAT ledger records S1/S2 screening for {mmat_denominator} studies and "
+                f"category-specific appraisal for {mmat_qa['category_appraised_rows']}; "
+                "three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. "
                 f"{prisma_counts['included']} records remain provisionally in the empirical corpus; study 8 has no MMAT responses "
                 "pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. "
                 f"MMAT has not been applied to the {unretrieved_report_label}. "
@@ -896,7 +898,7 @@ def generate_manifest(
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-                f"The current empirical MMAT denominator is {mmat_denominator}, while {prisma_counts['included']} records remain provisionally included in the empirical corpus. Study 8 has no MMAT responses pending human adjudication of eligibility and appraisal unit; do not combine its distinct datasets. No MMAT appraisal was assigned to the {unretrieved_report_label}. One record was excluded after abstract screening and one protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis.",
+                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have category-specific appraisals and three await design adjudication with Q1-Q5 unassessed. {prisma_counts['included']} records remain provisionally included in the empirical corpus. Study 8 has no MMAT responses pending human adjudication of eligibility and appraisal unit; do not combine its distinct datasets. No MMAT appraisal was assigned to the {unretrieved_report_label}. One record was excluded after abstract screening and one protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis.",
             ],
         },
     }

@@ -2,7 +2,7 @@
 
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
-> **População vigente (03/09/2026):** o snapshot versionado contém 11.904 registros identificados, 27 remoções determinísticas por DOI/URL, 11.877 registros na triagem e 18 registros retidos após a adjudicação de escopo. São 17 candidatos empíricos provisórios e o protocolo contextual 6921. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. Os números históricos de 9.431 registros e 17 incluídos permanecem apenas como contexto; a reconciliação vigente está em [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
+> **População vigente (03/09/2026):** o snapshot versionado contém 11.904 registros identificados, 27 remoções determinísticas por DOI/URL, 11.877 registros na triagem e 18 registros na lista preliminar: 15 estudos empíricos mantidos provisoriamente, 1 excluído após resumo, 1 texto integral não recuperado e 1 protocolo excluído após texto completo. No MMAT, há 14 triagens S1/S2 e 11 apreciações por categoria. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. Os números históricos de 9.431 registros e 17 incluídos permanecem apenas como contexto; a reconciliação vigente está em [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
 
 O estado público, os limites interpretativos e as decisões metodológicas ainda
 pendentes estão resumidos em [`docs/tcc/ESTADO-ATUAL-TCC.md`](docs/tcc/ESTADO-ATUAL-TCC.md).
@@ -139,7 +139,7 @@ python -m research.src.cli export-bibtex
 
 **Saídas**:
 
-- `research/exports/references/included_papers.bib` - Registros bibliográficos derivados do snapshot vigente (18; 17 candidatos empíricos provisórios + 1 protocolo contextual)
+- `research/exports/references/included_papers.bib` - Registros bibliográficos derivados do snapshot vigente (18 na lista preliminar; consultar a disposição atual de cada registro no manifesto de escopo)
 - `research/exports/references/high_relevance.bib` - Registros com score de relevância ≥ 7,0 quando gerado pelo CLI; não é um artefato versionado do snapshot vigente
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
@@ -196,7 +196,7 @@ pytest research/tests/test_performance_benchmark.py
 | Triagem | 11.877 → 2.486 | 9.391 excluídos na triagem |
 | Elegibilidade | 2.486 → 18 | 2.468 excluídos na elegibilidade |
 | Auditoria de candidatos | 23 → 18 | 8 decisões de escopo aprovadas; 3 recuperados, 1 excluído por período e 4 mantidos fora |
-| Retidos | **18** | 17 candidatos empíricos provisórios + 1 protocolo contextual |
+| Lista preliminar | **18** | 15 empíricos provisórios; 1 exclusão após resumo; 1 não recuperado; 1 protocolo excluído |
 
 Os sete overrides manuais e a correção temporal do ID 6918 estão registrados
 na população adjudicada. Quatro overrides permaneceram excluídos por escopo,
@@ -208,7 +208,7 @@ ressalvas sobre DOI e MMAT estão em
 
 O SQLite é um artefato operacional local e permanece ignorado pelo Git. A
 reconstituição auditável do snapshot é feita pelos exports versionados, pelo
-ledger de decisões, pela bibliografia dos 18 registros retidos e pelo manifesto
+ledger de decisões, pela bibliografia dos 18 registros selecionados preliminarmente e pelo manifesto
 de reprodutibilidade; uma nova coleta nas APIs pode produzir metadados
 diferentes.
 
@@ -268,7 +268,7 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 - [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
 - [x] Definir e versionar a estratégia canônica de busca (72 consultas bilíngues × 4 APIs)
 - [x] Consolidar o snapshot versionado da busca (11.904 registros identificados)
-- [x] Analisar e categorizar os artigos encontrados (18 registros retidos no snapshot vigente; 17 candidatos empíricos provisórios e 1 protocolo contextual)
+- [x] Registrar a disposição dos 18 selecionados preliminarmente (15 empíricos provisórios, 1 exclusão após resumo, 1 não recuperado e 1 protocolo excluído)
 - [x] Gerar relatórios e visualizações PRISMA
 - [x] Finalizar documentação acadêmica do TCC (LaTeX)
 - [ ] Concluir a recuperação de fontes, os localizadores e a adjudicação metodológica do MMAT

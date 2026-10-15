@@ -111,8 +111,8 @@ científica esteja distribuída de forma uniforme. A cobertura está condicionad
 Dos 18 registros selecionados preliminarmente, 15 permanecem provisoriamente no núcleo
 empírico. Um foi excluído após a triagem do resumo; um texto integral não foi
 recuperado; um protocolo sem resultados concluídos foi excluído após texto
-completo. A síntese mantém os 15 registros, enquanto a apreciação MMAT atual
-abrange 14. O estudo 8 segue sem respostas até adjudicação de sua
+completo. A síntese mantém os 15 registros: 14 têm S1/S2 respondidas e 11 têm
+apreciação dos critérios da categoria. O estudo 8 segue sem respostas até adjudicação de sua
 elegibilidade e unidade de análise; suas bases distintas não devem ser somadas.
 A recorrência envolve
 predição de desempenho e estimativa de proficiência; um estudo também integra
@@ -121,14 +121,15 @@ coortes separadas por quatro anos e não isola o efeito da IA.
 
 ## 13. MMAT — 1:10
 
-A apreciação preliminar orientada pelo MMAT 2018 abrange 14 dos 15 registros
-empíricos mantidos provisoriamente e foi registrada por um único revisor, sem
+A triagem S1/S2 do MMAT 2018 abrange 14 dos 15 registros empíricos mantidos
+provisoriamente; 11 têm apreciação por categoria e três aguardam definição do
+delineamento, com Q1--Q5 sem resposta, não CT. O registro é de revisor único e não tem
 pontuação agregada. No
 estudo 7, não localizamos o procedimento de alocação; por isso, o delineamento
 e Q1--Q5 continuam pendentes, sem classificá-lo como randomizado ou não
 randomizado. No estudo 8, tarefas e dados humanos distintos impedem fixar uma
-unidade de apreciação; nenhum critério MMAT recebeu resposta até a adjudicação. Os
-o texto não recuperado não recebeu MMAT e suas células ficam sem
+unidade de apreciação; nenhum critério MMAT recebeu resposta até a adjudicação.
+O texto não recuperado não recebeu MMAT e suas células ficam sem
 resposta, não como CT. Um registro foi excluído após resumo e não integra o
 denominador. O manifesto registra fontes e datas; o registro de avaliação, a base documental
 e os localizadores. Falta a adjudicação independente; portanto, não apresento
@@ -147,8 +148,8 @@ também não é sinônimo de aprendizagem.
 Apresento quatro exemplos e os localizadores: He et al. (2025, pp. 1, 16,
 31–35) descrevem oito turmas de 45 estudantes, mas declaram amostra total de
 90, além de uma distribuição desigual de docentes entre condições; Villegas-Ch
-et al. (2025, pp. 14, 22) não conciliam seis semanas de método com resultados
-até a oitava; Nyantah et al. (2025, pp. 101–105) apresentam versões
+et al. (2025, pp. 14, 22) descrevem seis semanas nos métodos e resultados
+na oitava semana na subanálise de programação; Nyantah et al. (2025, pp. 101–105) apresentam versões
 incompatíveis sobre alocação, diferença no pré-teste e intervenção combinada;
 Echeveria et al. (2025, pp. 66, 69–70) usam itens da escala tanto para formar
 categorias quanto entre preditores. Esses pontos afetam denominadores,

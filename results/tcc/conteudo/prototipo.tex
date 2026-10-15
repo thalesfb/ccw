@@ -8,6 +8,7 @@ A especificação não foi tratada como evidência de uma aplicação funcional.
 O repositório também contém uma implementação técnica do pipeline do protótipo, acompanhada por testes sintéticos automatizados. Essa implementação demonstra propriedades de processamento e de proteção contra falhas previstas no código, mas não equivale a uma execução com dados educacionais reais, a uma validação de eficácia preditiva ou a uma avaliação de aprendizagem. O capítulo, portanto, descreve a especificação que orienta uma futura execução e mantém essa implementação técnica separada de qualquer alegação de resultado educacional.
 
 \section{Princípios e Requisitos}
+\label{sec:principios-requisitos}
 
 A especificação estabelece que o protótipo deverá apoiar a decisão pedagógica sem substituir o professor. Essa decisão de projeto implica distinguir, na representação e na interpretação dos resultados, o desempenho observado em uma atividade, a proficiência estimada por um modelo, a competência mobilizada em um contexto mais amplo e a aprendizagem como possível mudança ao longo do tempo. Esses conceitos não são intercambiáveis, e a passagem de um para outro não poderá ser presumida apenas pela produção de um indicador computacional.
 
@@ -40,6 +41,7 @@ Quanto à modelagem, a revisão identificou uso de \textit{Random Forest}, máqu
 Em uma implementação com scikit-learn, identificadores longos devem ser documentados sem comprometer a legibilidade do texto ou a reprodução do código. O nome \texttt{RandomForest\allowbreak Classifier}, por exemplo, identifica uma classe de implementação, não uma técnica adicional.
 
 \section{Dados, Modelagem e Avaliação}
+\label{sec:protocolo-avaliacao}
 
 O protocolo de avaliação constitui uma condição para a execução futura da modelagem e para a interpretação dos seus resultados. Ele deverá separar o que será observado no comportamento técnico dos modelos daquilo que exigiria evidência educacional adicional. Essa separação começa pela definição explícita dos conjuntos de treino, validação e teste e pela prevenção de vazamento de informação entre preparação, modelagem e avaliação. Os modelos candidatos deverão ser comparados com referências simples, para que qualquer ganho seja interpretado em relação a uma base de comparação, e as métricas deverão ser analisadas por classe, além das medidas agregadas, quando a tarefa permitir essa decomposição.
 
@@ -54,12 +56,15 @@ Para examinar a adequação pedagógica da especificação, o protocolo prevê u
 Como parte da avaliação e da revisão humana, SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. Seu uso deverá considerar a estabilidade das explicações, o custo computacional e a possibilidade de tradução dos resultados para uma linguagem curricular compreensível. O professor permanece responsável por interpretar as evidências, relacioná-las ao contexto da turma e decidir intervenções; o protótipo é instrumento de apoio, não mecanismo autônomo de classificação ou prescrição pedagógica.
 
 \section{Arquitetura de Referência}
+\label{sec:arquitetura-prototipo}
 
 A ingestão corresponde à leitura das fontes, à validação inicial de seus formatos e à preservação das informações de procedência. Em seguida, a etapa de preparação deverá tratar valores ausentes, codificar e transformar variáveis e documentar as decisões tomadas sobre esses dados. A modelagem abrangerá o treinamento e a comparação dos modelos candidatos de acordo com a base selecionada e com o protocolo de avaliação.
 
 A etapa de avaliação e explicabilidade deverá calcular as métricas, analisar os erros e gerar explicações cuja estabilidade e limitações serão examinadas. Por fim, a apresentação deverá disponibilizar indicadores, incertezas e limitações de modo compreensível para a análise docente. Essa arquitetura de referência organiza responsabilidades e pontos de verificação; não descreve um sistema funcional já disponível, nem fixa a tecnologia ou a forma de implantação.
 
 A separação dos componentes deverá favorecer a testabilidade, a rastreabilidade e a substituição controlada de técnicas. Ela também permite localizar em qual etapa uma decisão, uma transformação ou uma limitação foi introduzida. A arquitetura não impõe uma interface específica e poderá ser materializada como \textit{notebook}, aplicação local, API ou sistema web. Qualquer dessas formas de execução deverá, entretanto, preservar os requisitos de auditoria, interpretação, privacidade e participação docente estabelecidos neste capítulo.
+
+\input{conteudo/rastreabilidade-requisitos}
 
 Em síntese, este capítulo consolida uma especificação técnica e pedagógica que conecta as evidências da revisão às decisões de projeto, abrangendo propósito, limites, requisitos, critérios para dados e modelos, protocolo de avaliação e arquitetura de referência. Essa entrega é fundamentada no material examinado, mas não se confunde com uma especificação submetida à revisão docente prevista no protocolo, com uma aplicação educacional validada ou com evidência de eficácia em sala de aula.
 

@@ -24,6 +24,8 @@ PENDING_UNIT_ADJUDICATION_STUDY_IDS: tuple[int, ...] = (8,)
 CURRENT_MMAT_STUDY_IDS: tuple[int, ...] = (
     1, 2, 3, 4, 5, 6, 7, 10, 14, 6915, 6916, 6917, 6919, 6920
 )
+# This compatibility denominator counts S1/S2 screening records, not complete
+# category-specific appraisals; QA reports those populations separately.
 # Compatibility alias: historical callers use this for the 18-record ledger.
 CURRENT_STUDY_IDS = CURRENT_RECORD_IDS
 CONTEXT_ONLY_STUDY_IDS = (9,)
@@ -148,6 +150,17 @@ def load_current_reassessment(
                 f"Invalid design status for study {row.get('study_id')}: "
                 f"{row.get('design_status')!r}"
             )
+        if row.get("design") != "design_pending" and row.get("design_status") in PENDING_DESIGN_STATUSES:
+            raise ValueError(
+                f"Study {row.get('study_id')} has a pending design status but "
+                "requires a pending MMAT design"
+            )
+        category_pending = row.get("design") == "design_pending" and not not_appraised
+        if category_pending and any(row.get(key, "").strip() for key in REQUIRED_CRITERIA):
+            raise ValueError(
+                f"Study {row['study_id']} has an unresolved MMAT design; "
+                "category-specific criteria must remain unappraised, not CT"
+            )
         if not_appraised:
             if any(row.get(criterion, "").strip() for criterion in ALL_CRITERIA):
                 raise ValueError(
@@ -164,7 +177,8 @@ def load_current_reassessment(
                 part.strip()
                 for part in row.get("criterion_evidence", "").split(";")
             ]
-            if len(evidence) != len(ALL_CRITERIA) or not all(
+            appraised_criteria = ("s1", "s2") if category_pending else ALL_CRITERIA
+            if len(evidence) != len(appraised_criteria) or not all(
                 EVIDENCE_PATTERN.match(part) for part in evidence
             ):
                 raise ValueError(
@@ -175,7 +189,9 @@ def load_current_reassessment(
                 for part in evidence
                 if (match := EVIDENCE_PATTERN.match(part))
             }
-            if any(evidence_values.get(key) != row.get(key) for key in ALL_CRITERIA):
+            if set(evidence_values) != set(appraised_criteria) or any(
+                evidence_values.get(key) != row.get(key) for key in appraised_criteria
+            ):
                 raise ValueError(
                     f"Study {row.get('study_id')} has criterion values that disagree "
                     "with criterion_evidence"
@@ -229,17 +245,12 @@ def load_current_reassessment(
                     "without a documented pending-design rationale"
                 )
             if not source_pending and not unit_pending and any(
-                row.get(criterion) != "CT" for criterion in REQUIRED_CRITERIA
+                row.get(criterion, "").strip() for criterion in REQUIRED_CRITERIA
             ):
                 raise ValueError(
                     f"Study {row.get('study_id')} has an unresolved MMAT design "
                     "but category-specific criteria were rated"
                 )
-        elif row.get("design_status") in PENDING_DESIGN_STATUSES:
-            raise ValueError(
-                f"Study {row.get('study_id')} has a pending design status but "
-                "requires a pending MMAT design"
-            )
         if row["study_id"] in {str(value) for value in PENDING_FULL_TEXT_STUDY_IDS}:
             if (
                 row.get("design") != "design_pending"
@@ -499,13 +510,16 @@ def validate_current_artifacts(
         in SOURCE_OR_PERIOD_HOLD_STATUSES
     ]
     non_ct = sum(
-        row[criterion] != "CT"
+        row[criterion] in {"Y", "N"}
         for row in core_reassessment
         for criterion in ALL_CRITERIA
     )
+    category_pending_rows = [row for row in core_reassessment if row["design"] == "design_pending"]
+    category_appraised_rows = [row for row in core_reassessment if row["design"] != "design_pending"]
     blocking_reasons = [
-        "The empirical corpus retains 15 studies provisionally, but MMAT appraisal currently covers 14; the denominator is not a final eligibility decision.",
-        "The preliminary 14-study ledger must not be interpreted as a quality score or ranking.",
+        "The empirical corpus retains 15 studies provisionally; 14 have MMAT screening responses and 11 have category-specific appraisals. These counts are not final eligibility decisions.",
+        "Three screened studies await MMAT design adjudication; their Q1-Q5 cells are unappraised, not CT.",
+        "The preliminary ledger must not be interpreted as a quality score or ranking.",
         "Study 8 has no MMAT responses pending human adjudication of scope and unit of appraisal; its distinct datasets must not be combined.",
     ]
     if len(primary_text_rows) != len(CURRENT_MMAT_STUDY_IDS):
@@ -532,7 +546,10 @@ def validate_current_artifacts(
         "mmat_study_ids": list(CURRENT_MMAT_STUDY_IDS),
         "mmat_unit_hold_ids": [row["study_id"] for row in unit_hold_rows],
         "mmat_unit_hold_rows": len(unit_hold_rows),
-        "criterion_rows": len(core_reassessment),
+        "criterion_rows": len(category_appraised_rows),
+        "screening_rows": len(core_reassessment),
+        "category_appraised_rows": len(category_appraised_rows),
+        "category_pending_ids": [row["study_id"] for row in category_pending_rows],
         "assessment_registry_rows": len(reassessment),
         "component_criterion_rows": sum(
             row["study_id"] in {str(study_id) for study_id in CURRENT_MMAT_STUDY_IDS}
@@ -555,6 +572,7 @@ def validate_current_artifacts(
         ),
         "historical_denominator": 17,
         "current_denominator": len(CURRENT_MMAT_STUDY_IDS),
+        "denominator_meaning": "S1/S2 screening records; use category_appraised_rows for Q1-Q5 coverage",
         "evidence_levels": evidence_levels,
         "record_evidence_levels": {
             basis: sum(row.get("assessment_basis") == basis for row in reassessment)

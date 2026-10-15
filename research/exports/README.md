@@ -223,9 +223,9 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
 - [x] Exportação BibTeX dos 18 registros shortlistados do pipeline; status de elegibilidade e inclusão são mantidos separadamente no ledger
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
-- [x] Reavaliação documental preliminar por critério do MMAT em 14 dos 15 registros empíricos mantidos provisoriamente; estudo 8 sem respostas até adjudicação de escopo/unidade
+- [x] Triagem S1/S2 do MMAT em 14 e apreciação dos critérios da categoria em 11 dos 15 registros empíricos mantidos provisoriamente; estudo 8 sem respostas até adjudicação de escopo/unidade
 - [ ] Obter o texto integral do registro 6923 quando houver acesso legítimo; sem aplicar MMAT a resumo ou metadados
-- [ ] Adjudicar independentemente os 14 julgamentos MMAT do núcleo empírico
+- [ ] Adjudicar independentemente as 14 triagens, os 11 conjuntos de critérios e as três categorias pendentes do MMAT do núcleo empírico
 
 ### Fase 2 (Especificação conceitual do Protótipo) - ✅ REGISTRADA NO TCC
 - [x] Derivar requisitos funcionais e não funcionais

@@ -66,7 +66,7 @@ def load_rows(path: Path = DATA_PATH) -> list[dict[str, str]]:
         if row.get("assessment_status") == "final":
             raise ValueError("The current TCC table cannot render final MMAT claims")
         for criterion in CRITERIA:
-            if row.get(criterion) not in {"Y", "N", "CT", "N/A"}:
+            if row.get(criterion) not in {"", "Y", "N", "CT", "N/A"}:
                 raise ValueError(f"Invalid {criterion} value for study {row.get('study_id')}")
     return rows
 
@@ -198,7 +198,7 @@ def render_table(
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|"
         r">{\raggedright\arraybackslash}p{2.5cm}|ccccccc|"
         r">{\raggedright\arraybackslash}p{3.6cm}|}",
-        rf"\caption{{Apreciação documental preliminar pelo MMAT 2018 de {len(rows)} estudos empíricos do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
+        rf"\caption{{Triagem e apreciação documental preliminar pelo MMAT 2018 de {len(rows)} estudos empíricos do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
@@ -228,7 +228,7 @@ def render_table(
         values = [
             _latex_escape(labels.get(row["study_id"], row["study_key"])),
             _latex_escape(design_label),
-            *[row[criterion] for criterion in CRITERIA],
+            *[row[criterion] or "---" for criterion in CRITERIA],
             _latex_escape(BASIS_LABELS.get(row["assessment_basis"], row["assessment_basis"])),
         ]
         lines.append(" & ".join(values) + r" \\")
@@ -247,6 +247,7 @@ def render_table(
         r"\end{longtable}",
         r"\endgroup",
         r"\fonte{Elaborado pelo autor (2026).}",
+        r"\textit{Cobertura:} S1/S2 respondidas para 14 estudos; Q1--Q5 apreciados para 11. Nos três estudos com categoria pendente, --- significa não avaliado, não CT.",
         note,
     ])
     component_table = render_component_table(load_component_rows(), labels)

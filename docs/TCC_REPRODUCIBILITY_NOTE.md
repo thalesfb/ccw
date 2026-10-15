@@ -6,7 +6,7 @@ das fontes primárias.
 
 ## Afirmações rastreadas
 
-`research/data/claim_evidence_current.json` registra oito afirmações
+`research/data/claim_evidence_current.json` registra nove afirmações
 selecionadas, seus vínculos bibliográficos, localizadores de página, hashes e
 limites de suporte. O conjunto é parcial e não representa uma auditoria de
 todas as afirmações do texto.
@@ -26,7 +26,7 @@ final.
 
 Os hashes identificam os bytes examinados e permitem detectar mudanças na
 fonte. Não demonstram autoria, autenticidade editorial, validade metodológica
-ou correção científica. Nesta versão, as oito afirmações têm adjudicação humana
+ou correção científica. Nesta versão, as nove afirmações têm adjudicação humana
 marcada como `pending`; o rastreamento de fontes não substitui julgamento
 acadêmico independente.
 
@@ -36,8 +36,9 @@ A shortlist contém 18 registros. Um foi excluído após a triagem do resumo;
 dos 17 relatórios procurados, um texto integral não foi recuperado e 16 foram
 avaliados em texto completo. Um protocolo sem resultados concluídos foi
 excluído após essa avaliação; 15 registros permanecem provisoriamente no núcleo
-empírico. A apreciação MMAT preliminar, por critério e conduzida por um único
-revisor, abrange 14 desses registros. O estudo 8 continua no fluxo PRISMA e no
+empírico. No MMAT preliminar, de revisor único, 14 têm triagem S1/S2 e 11 têm
+apreciação dos critérios da categoria. Nos estudos 5, 7 e 14, Q1--Q5 aguardam
+definição do delineamento, sem resposta CT. O estudo 8 continua no fluxo PRISMA e no
 corpus, mas não recebeu respostas MMAT enquanto sua elegibilidade e unidade de
 apreciação aguardam adjudicação humana; suas bases distintas não devem ser
 somadas. A dissertação 6923, único texto não recuperado, também não recebeu

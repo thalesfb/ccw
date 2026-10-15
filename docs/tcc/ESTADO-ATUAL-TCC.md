@@ -1,6 +1,6 @@
 # Estado atual e limites da versão do TCC
 
-**Atualização:** 14 de outubro de 2026
+**Atualização:** 15 de outubro de 2026
 
 Este registro público descreve o estado verificável da versão atual do
 Trabalho de Conclusão de Curso e separa resultados produzidos, validações
@@ -38,13 +38,15 @@ PRISMA.
 O manifesto distingue as datas de referência: a busca tem corte em 31 de agosto
 de 2026, a adjudicação inicial do escopo ocorreu em 3 de setembro e a
 reconciliação do escopo foi atualizada em 14 de outubro de 2026. O arquivo foi
-gerado novamente nessa última data e preserva verificadores de integridade dos
+regenerado para esta revisão e preserva verificadores de integridade dos
 artefatos versionados; a atualização não representa nova consulta às APIs nem
 altera o corte temporal da busca.
 
 O registro de avaliação MMAT 2018 preserva S1 e S2 como perguntas de triagem e Q1--Q5 como
 critérios específicos do delineamento. Dos 15 registros empíricos mantidos
-provisoriamente, 14 têm apreciação MMAT preliminar. O estudo 8 permanece no
+provisoriamente, 14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria.
+Nos estudos 5, 7 e 14, Q1--Q5 permanecem sem resposta até definir o delineamento;
+não foram codificados como CT. O estudo 8 permanece no
 fluxo PRISMA e no núcleo provisório, sem respostas MMAT até adjudicar sua
 elegibilidade e unidade de apreciação; suas bases distintas não devem ser
 somadas. O registro 6923 sem texto integral também não recebeu apreciação; suas
@@ -71,12 +73,14 @@ divisão dos dados e critérios de avaliação.
 
 ## Decisões metodológicas pendentes
 
-As próximas decisões relevantes são: confirmar se o trabalho permanecerá como
-revisão sistemática acompanhada de especificação conceitual ou se incluirá um
-estudo computacional exploratório separado; aprovar, caso aplicável, a fonte
-de dados, seus termos de uso, o desfecho `correct_next`, os limiares mínimos e
-o protocolo de divisão; concluir a recuperação das fontes primárias e a
-adjudicação humana do MMAT; e decidir se haverá execução experimental própria.
+O escopo desta entrega foi confirmado como revisão crítica da literatura e
+especificação conceitual, sem exigir treinamento ou validação educacional do
+protótipo. Permanecem a adjudicação da elegibilidade e unidade do estudo 8,
+das três categorias MMAT pendentes e dos julgamentos registrados; a recuperação
+do único relatório indisponível, se houver acesso legítimo; e a avaliação do
+impacto dos filtros automatizados sobre a cobertura da revisão. Uma execução
+computacional futura dependerá de decisão e protocolo próprios, incluindo
+fonte, termos de uso, desfecho, limiares e divisão dos dados.
 
 A apresentação de defesa canônica é `presentation/slides.md`, compilada com
 Slidev em 25 slides. O PPTX editável em
@@ -86,11 +90,13 @@ Slidev nem permanece sincronizada com ele. O material em
 `results/ptc/presentation/` corresponde à apresentação histórica do PTC, não à
 defesa do TCC.
 
-Também permanece pendente uma matriz de rastreabilidade que associe cada
-requisito da especificação aos estudos e artefatos que o fundamentam. Até que
-essa matriz seja concluída, a ligação entre literatura e requisitos deve ser
-apresentada como derivação temática documentada, não como cobertura exaustiva
-de cada requisito por uma fonte individual.
+O capítulo da especificação passou a incluir um quadro de rastreabilidade
+com 26 grupos de requisitos, distinguindo observações dos estudos, fundamentos
+teóricos ou normativos e decisões autorais. Os vínculos e limites declarados
+não equivalem a validação do artefato nem a conferência independente integral
+das referências. Os filtros de resumo curto/ausente e termos metodológicos
+também passaram a ser descritos com contagens e limitações no manuscrito;
+reproduzir essas contagens não comprova recuperação exaustiva da literatura.
 
 ## Execução experimental e computação externa
 
@@ -105,6 +111,6 @@ governança dos dados e registro reprodutível de procedimentos e resultados.
 ## Limite interpretativo da versão
 
 O estado atual pode ser resumido como **código implementado, testes
-sintéticos verdes, experimento real pendente e MMAT preliminar**. A
+sintéticos verdes, entrega documental, experimento futuro fora do escopo e MMAT preliminar**. A
 apresentação e o manuscrito devem comunicar esse limite sem transformar
 resultados operacionais em evidência de eficácia educacional.

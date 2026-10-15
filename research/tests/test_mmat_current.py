@@ -84,7 +84,7 @@ def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
 
     assert report["current_denominator"] == 14
     assert report["historical_denominator"] == 17
-    assert report["criterion_rows"] == 14
+    assert report["criterion_rows"] == 11
     assert report["assessment_registry_rows"] == 18
     assert report["primary_source_rows"] == 18
     assert report["synthesis_scope_rows"] == 18
@@ -130,7 +130,7 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
     registry = {row["study_id"]: row for row in load_current_registry()}
 
     assert all(
-        row["criterion_evidence"].count(";") == 6
+        row["criterion_evidence"].count(";") == (1 if row["design"] == "design_pending" else 6)
         for row in rows
         if row["study_id"] not in {"8", "9", "6923"}
     )
@@ -147,7 +147,7 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
     assert "early stopping" in current_by_id["1"]["notes"].lower()
     assert current_by_id["1"]["q5"] == "CT"
     assert current_by_id["5"]["design_status"] == "allocation_unreported_pending"
-    assert all(current_by_id["5"][criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert all(current_by_id["5"][criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
     assert "allocation" in current_by_id["5"]["notes"].lower()
     assert "cited study [17]" in current_by_id["10"]["notes"]
     assert current_by_id["10"]["q5"] == "CT"
@@ -175,7 +175,7 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
         assert study["assessment_basis"] == "primary_full_text_reviewed_externally"
         assert study["assessment_status"] == "provisional_primary_source_review"
         assert study["adjudication_status"] == "supervisor_review_pending"
-        assert study["criterion_evidence"].count(";") == 6
+        assert study["criterion_evidence"].count(";") == (1 if study["design"] == "design_pending" else 6)
         assert study["page_or_section"]
     assert rows["6923"]["assessment_basis"] == "pending_full_text_not_appraised"
     assert rows["6923"]["assessment_status"] == "hold_source_verification"
@@ -230,15 +230,13 @@ def test_unreported_allocation_and_appraisal_unit_keep_design_pending() -> None:
             assert all(study[criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
             assert study["criterion_evidence"] == ""
         else:
-            assert all(study[criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+            assert all(study[criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
 
     for study_id in ("7",):
         study = rows[study_id]
         for criterion in ("q1", "q2", "q3", "q4", "q5"):
-            assert (
-                f"{criterion.upper()}=CT criterion applicability cannot be determined "
-                "while the MMAT design category is pending"
-            ) in study["criterion_evidence"]
+            assert not study[criterion]
+            assert f"{criterion.upper()}=" not in study["criterion_evidence"]
 
 
 def test_appraisal_unit_pending_is_not_mmat_appraised_but_stays_in_empirical_scope() -> None:
@@ -263,7 +261,7 @@ def test_nonrandomized_outcome_completeness_and_confounding_are_not_overstated()
     study = {row["study_id"]: row for row in load_current_reassessment()}["7"]
     assert study["design"] == "design_pending"
     assert study["design_status"] == "allocation_unreported_pending"
-    assert all(study[criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert all(study[criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
     assert "allocation procedure" in study["notes"].lower()
 
 
@@ -271,7 +269,7 @@ def test_study_7_full_text_sample_and_allocation_evidence_are_preserved() -> Non
     study = {row["study_id"]: row for row in load_current_reassessment()}["7"]
     source = {row["study_id"]: row for row in load_primary_sources()}["7"]
 
-    assert study["review_date"] == "2026-10-12"
+    assert study["review_date"] == "2026-10-15"
     assert "120 students" in study["notes"]
     assert "50 experimental" in study["notes"]
     assert "52 control" in study["notes"]
@@ -314,7 +312,8 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "há perguntas de pesquisa claras?" in html.lower()
     assert "17 candidatos empíricos submetidos ao mmat" not in html.lower()
     assert "15 registros empíricos incluídos provisoriamente" in html.lower()
-    assert "14 têm apreciação mmat preliminar" in html.lower()
+    assert "14 têm s1/s2 respondidas" in html.lower()
+    assert "11 têm apreciação preliminar dos critérios da categoria" in html.lower()
 
     for study_id, expected_text in {
         "7": ("120 students", "50 experimental", "52 control", "p=.583"),
@@ -396,9 +395,9 @@ def test_defense_material_preserves_pending_mmat_decisions() -> None:
         .split()
     )
 
-    assert "no estudo 7, delineamento e q1–q5 seguem pendentes" in slides
+    assert "nos estudos 5, 7 e 14, q1–q5 não foram avaliados até definir o delineamento" in slides
     assert "o estudo 8 permanece no fluxo prisma e no corpus, sem respostas mmat" in slides
-    assert "o procedimento de alocação não foi localizado" in storyboard
+    assert "q1--q5 permanecem sem resposta até a definição do delineamento" in storyboard
     assert "sem respostas mmat até adjudicação de elegibilidade e unidade de análise" in storyboard
     assert "sem classificá-lo como randomizado ou não randomizado" in speaker_notes
     assert "nenhum critério mmat recebeu resposta até a adjudicação" in speaker_notes
@@ -446,22 +445,20 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
 
     assert rows["14"]["design"] == "design_pending"
     assert rows["14"]["design_status"] == "allocation_conflict_pending"
-    assert all(rows["14"][criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert all(rows["14"][criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
     assert "random" in rows["14"]["notes"].lower()
     assert "45" in rows["6915"]["notes"] and "90" in rows["6915"]["notes"]
     assert [rows["6915"][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5")] == [
         "CT", "Y", "CT", "N", "Y"
     ]
     assert rows["6915"]["q4"] == "N"
-    assert "Nyantah et al. (2025) & Pendente & Y & Y & CT & CT & CT & CT & CT" in (
+    assert "Nyantah et al. (2025) & Pendente & Y & Y & --- & --- & --- & --- & ---" in (
         CURRENT_TABLE.read_text(encoding="utf-8")
     )
 
-    assert rows["7"]["q5"] == "CT"
+    assert rows["7"]["q5"] == ""
     assert rows["7"]["design"] == "design_pending"
-    assert "criterion applicability cannot be determined while the mmat design category is pending" in (
-        rows["7"]["criterion_evidence"].lower()
-    )
+    assert "Q5=" not in rows["7"]["criterion_evidence"]
 
     mixed_evidence = rows["6919"]["criterion_evidence"].lower()
     assert "q1=y the article states a rationale for a mixed-methods approach" in mixed_evidence
