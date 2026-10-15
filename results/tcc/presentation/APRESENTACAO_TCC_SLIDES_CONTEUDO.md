@@ -152,8 +152,9 @@ apreciação aguarda adjudicação independente e consolidação dos localizador
 
 ### 18. O que emerge entre os estudos incluídos
 
-Organiza as recorrências em torno de predição de desempenho e estimativa de
-proficiência, com uso de RF, SVM e redes neurais. A heterogeneidade de
+Apresenta exemplos de classificação e predição de resultados matemáticos,
+com RF, SVM e redes neurais como alternativas observadas. Categorias de desempenho
+não equivalem automaticamente a níveis de proficiência validados. A heterogeneidade de
 populações, instrumentos, variáveis e métricas limita a comparabilidade entre
 estudos.
 

@@ -39,11 +39,11 @@ const requiredStatements = [
   '1',
   '2015–2026',
   '72',
-  './public/images/prisma_flow.png',
-  './public/images/selection_funnel.png',
-  './public/images/papers_by_year.png',
-  './public/images/techniques_distribution.png',
-  './public/images/relevance_distribution.png',
+  '/images/prisma_flow.png',
+  '/images/selection_funnel.png',
+  '/images/papers_by_year.png',
+  '/images/techniques_distribution.png',
+  '/images/relevance_distribution.png',
 ]
 
 const requiredTemplateMarkers = [

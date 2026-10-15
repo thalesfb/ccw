@@ -38,6 +38,9 @@ def test_synthesis_slide_matches_the_provisional_corpus_not_an_undefined_subset(
     )
     assert metric and int(metric[1]) == retained
     assert "provis" in metric[2]
+    synthesis = slides.split("17 / SÍNTESE", 1)[1].split("\n---", 1)[0]
+    assert "inferem proficiência" not in synthesis
+    assert "categorias operacionais de desempenho" in synthesis.casefold()
 
 
 def test_pending_design_keeps_screening_but_does_not_rate_undefined_criteria():

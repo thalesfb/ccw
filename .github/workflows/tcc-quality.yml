@@ -150,6 +150,10 @@ jobs:
         working-directory: presentation
         run: npm ci
 
+      - name: Test presentation contracts
+        working-directory: presentation
+        run: npm test
+
       - name: Validate presentation content
         working-directory: presentation
         run: npm run validate

@@ -17,8 +17,8 @@ test('requires AA contrast for normal text and allows the large-text threshold',
 test('accepts a complete, accessible deck contract', () => {
   const errors = deckValidationErrors({
     slides: [
-      '<img src="./public/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">',
-      '<img src="./public/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">',
+      '<img src="/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">',
+      '<img src="/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">',
       'https://github.com/thalesfb/ccw',
       'S1 Há perguntas de pesquisa claras?',
       'S2 Os dados coletados permitem responder às perguntas de pesquisa?',
@@ -52,8 +52,8 @@ test('reports missing identity, QR, typography, and decorative-font safeguards',
 test('requires the MMAT screening questions and current response legend in the deck', () => {
   const errors = deckValidationErrors({
     slides: [
-      '<img src="./public/branding/ifc-campus-videira-horizontal.png">',
-      '<img src="./public/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público">',
+      '<img src="/branding/ifc-campus-videira-horizontal.png">',
+      '<img src="/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público">',
       'https://github.com/thalesfb/ccw',
       'S1',
       'S2',
@@ -91,4 +91,17 @@ test('centers the question icons in a fixed visual box', () => {
 
   assert.match(css, /\.tcc-q-icon\s*\{[^}]*justify-content:\s*center;/s)
   assert.match(css, /\.tcc-q-icon\s+svg\s*\{[^}]*display:\s*block;[^}]*flex:\s*0\s+0\s+auto;/s)
+})
+
+test('references public images from the public root for subpath deployment', () => {
+  const slides = readFileSync(resolve(import.meta.dirname, '..', 'slides.md'), 'utf8')
+  assert.doesNotMatch(slides, /src=["']\.\/public\//)
+  assert.match(slides, /src="\/branding\/ifc-campus-videira-horizontal\.png"/)
+  assert.match(slides, /src="\/branding\/ccw-repository-qr\.svg"/)
+  const css = readFileSync(resolve(import.meta.dirname, '..', 'styles', 'index.css'), 'utf8')
+  assert.deepEqual(deckValidationErrors({
+    slides, css,
+    assetPaths: ['public/branding/ifc-campus-videira-horizontal.png', 'public/branding/ccw-repository-qr.svg'],
+    repositoryUrl: 'https://github.com/thalesfb/ccw',
+  }), [])
 })

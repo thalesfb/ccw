@@ -114,8 +114,8 @@ recuperado; um protocolo sem resultados concluídos foi excluído após texto
 completo. A síntese mantém os 15 registros: 14 têm S1/S2 respondidas e 11 têm
 apreciação dos critérios da categoria. O estudo 8 segue sem respostas até adjudicação de sua
 elegibilidade e unidade de análise; suas bases distintas não devem ser somadas.
-A recorrência envolve
-predição de desempenho e estimativa de proficiência; um estudo também integra
+Entre os estudos consultados, há classificação e
+predição de resultados matemáticos; um estudo também integra
 Transformada de Fourier ao ensino universitário de matemática, mas compara
 coortes separadas por quatro anos e não isola o efeito da IA.
 
