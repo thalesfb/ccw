@@ -116,7 +116,7 @@ class ReviewVisualizer:
                 (main_y[2], f"Excluídos pelo limiar de priorização\n(n = {int(stats['prioritization_excluded']):,}; etapa operacional)"),
                 (main_y[3], f"Excluído após leitura do resumo\n(n = {int(stats['abstract_screening_excluded']):,})"),
                 (main_y[4], f"Texto integral não recuperado\n(n = {int(stats['reports_not_retrieved']):,})"),
-                (main_y[5], f"Excluídos após texto integral\n(n = {int(stats['eligibility_excluded']):,}: estudo contextual e protocolo)"),
+                (main_y[5], f"Protocolo sem resultados concluídos\n(n = {int(stats['eligibility_excluded']):,})"),
             ]
             for y, label in exclusion_rows:
                 ax.add_patch(Rectangle(
@@ -141,7 +141,7 @@ class ReviewVisualizer:
             ax.text(
                 8, 0.35,
                 "A priorização é heurística operacional, não decisão de elegibilidade. "
-                "Os 4 textos não recuperados não são contados como exclusões após leitura integral.",
+                "Textos integrais não recuperados não são contados como exclusões após leitura integral.",
                 ha="center", va="center", fontsize=9, color="#475569",
             )
             plt.subplots_adjust(left=0.02, right=0.98, top=0.98, bottom=0.04)

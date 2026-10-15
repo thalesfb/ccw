@@ -31,3 +31,11 @@ snapshot_date,source_artifact,metric,value,unit,scope_or_formula,status
 2026-10-12,research/data/current_synthesis_scope.csv,full_text_scope_exclusions,1,report,one non-empirical protocol/proposal; study 6919 retained under the written broad protocol,confirmed
 2026-10-12,research/data/current_synthesis_scope.csv,empirical_studies_included,12,studies,13 full-text reports assessed minus one protocol exclusion,confirmed
 2026-10-12,research/data/current_synthesis_scope.csv,current_mmat_empirical_denominator,12,studies,12 included empirical studies; no aggregate score; preliminary single-reviewer appraisal,confirmed
+2026-10-13,research/data/current_synthesis_scope.csv,empirical_studies_included,12,studies,12 records remain provisionally included in the empirical corpus and PRISMA flow pending human scope adjudication for study 8,confirmed
+2026-10-13,research/data/mmat_reassessment_current.csv,current_mmat_empirical_denominator,11,studies,11 of 12 provisionally included empirical records currently have MMAT responses; study 8 is held without appraisal until scope and unit are adjudicated; no aggregate score,confirmed
+2026-10-14,research/data/current_synthesis_scope.csv,reports_not_retrieved,1,report,Zeng2025_6923 remains unavailable; the full texts for studies 1, 5, and 10 were recovered and assessed,confirmed
+2026-10-14,research/data/current_synthesis_scope.csv,reports_sought,17,reports,18 shortlisted records minus one abstract-stage exclusion,confirmed
+2026-10-14,research/data/current_synthesis_scope.csv,reports_assessed_at_full_text,16,reports,17 sought minus 1 not retrieved,confirmed
+2026-10-14,research/data/current_synthesis_scope.csv,full_text_scope_exclusions,1,report,one protocol/proposal without completed empirical results,confirmed
+2026-10-14,research/data/current_synthesis_scope.csv,empirical_studies_included,15,studies,16 full-text reports assessed minus one protocol exclusion; study 8 remains provisional pending human scope adjudication,confirmed
+2026-10-14,research/data/mmat_reassessment_current.csv,current_mmat_empirical_denominator,14,studies,14 provisional MMAT criterion appraisals among 15 provisionally included empirical records; study 8 remains without responses pending human adjudication; no aggregate score,confirmed

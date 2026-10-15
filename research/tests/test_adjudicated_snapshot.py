@@ -47,8 +47,8 @@ def test_current_scope_has_reconciled_prisma_stages_and_empirical_core() -> None
     assert replayed["selection_stage"].value_counts().to_dict() == {
         "screening": 9391,
         "prioritization": 2468,
-        "included": 12,
-        "not_retrieved": 4,
+        "included": 15,
+        "not_retrieved": 1,
         "eligibility": 1,
         "abstract_screening": 1,
     }
@@ -57,7 +57,7 @@ def test_current_scope_has_reconciled_prisma_stages_and_empirical_core() -> None
         .astype(int)
         .tolist()
     )
-    assert included_ids == [2, 3, 4, 6, 7, 8, 14, 6915, 6916, 6917, 6919, 6920]
+    assert included_ids == [1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 6915, 6916, 6917, 6919, 6920]
     assert replayed.loc[replayed["id"] == 9, "selection_stage"].item() == "abstract_screening"
     row_6919 = replayed.loc[replayed["id"] == 6919].iloc[0]
     assert row_6919["selection_stage"] == "included"
@@ -68,7 +68,8 @@ def test_current_scope_has_reconciled_prisma_stages_and_empirical_core() -> None
         "Adjudicação de escopo 2026-10-12 (included_empirical_core);"
     )
     assert replayed.loc[replayed["id"] == 6921, "selection_stage"].item() == "eligibility"
-    assert replayed.loc[replayed["id"].isin([1, 5, 10, 6923]), "selection_stage"].eq("not_retrieved").all()
+    assert replayed.loc[replayed["id"].isin([1, 5, 10]), "selection_stage"].eq("included").all()
+    assert replayed.loc[replayed["id"] == 6923, "selection_stage"].item() == "not_retrieved"
 
 
 def test_current_scope_removes_superseded_mmat_fields_without_losing_other_notes() -> None:

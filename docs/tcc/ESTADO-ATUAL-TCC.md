@@ -1,6 +1,6 @@
 # Estado atual e limites da versão do TCC
 
-**Atualização:** 12 de outubro de 2026
+**Atualização:** 14 de outubro de 2026
 
 Este registro público descreve o estado verificável da versão atual do
 Trabalho de Conclusão de Curso e separa resultados produzidos, validações
@@ -15,32 +15,44 @@ fluxo de desenvolvimento estão em
 
 ## Revisão sistemática e MMAT
 
-O snapshot de busca tem data de corte em 31 de agosto de 2026. O fluxo registra
+O recorte da busca tem data de corte em 31 de agosto de 2026. O fluxo registra
 11.904 registros identificados, 11.877 após remoções determinísticas e 2.486
 submetidos à priorização operacional; 2.468 não avançaram dessa etapa e 18
-registros formaram a shortlist. Um registro foi excluído após resumo; dos 17
-relatórios procurados, quatro não foram recuperados e 13 foram avaliados em
-texto completo. Um foi excluído após essa avaliação por ser protocolo sem
-resultados concluídos. Os 12 restantes formam o núcleo empírico. O estudo 6919
-foi mantido conforme o protocolo escrito, que não exige personalização como
-condição de elegibilidade. A priorização operacional não equivale à
-elegibilidade.
+registros formaram a lista preliminar. Um registro foi excluído após resumo; dos 17
+relatórios procurados, um não foi recuperado e 16 foram avaliados em texto
+completo. Um foi excluído após essa avaliação por ser protocolo sem resultados
+concluídos. Os 15 restantes formam provisoriamente o núcleo empírico, sujeitos
+à adjudicação pendente do estudo 8. Os textos integrais dos estudos 1, 5 e 10
+foram consultados e seus papéis foram delimitados como predição/avaliação
+matemática (1 e 10) e proposta de personalização (5). A priorização operacional
+não equivale à elegibilidade.
 
-O manifesto distingue as datas de referência: identifica o snapshot como
-3 de setembro de 2026, registra a atualização do escopo em 12 de outubro de
-2026 e foi gerado novamente nessa última data. A atualização preserva hashes
-dos exports e dos ledgers versionados; não representa nova consulta às APIs
-nem altera o corte temporal da busca.
+O único texto integral ainda não recuperado é a dissertação de
+[Zeng (2025), registro 6923](https://doi.org/10.7916/2q6y-bm58). Consulta ao
+Columbia Academic Commons registrada no manifesto de fontes em 13 de outubro de
+2026 informou que os arquivos estarão disponíveis a partir de 16 de maio de
+2027. O resumo público não substitui o texto primário: a elegibilidade e a
+apreciação MMAT desse registro permanecem pendentes, sem alteração das contagens
+PRISMA.
 
-O ledger do MMAT 2018 preserva S1 e S2 como perguntas de triagem e Q1--Q5 como
-critérios específicos do delineamento. Os 12 estudos do núcleo foram
-apreciados com base nos textos integrais consultados. Quatro registros não
-tiveram texto recuperado e não receberam apreciação MMAT; seus campos de
-critério ficam sem resposta, não como CT. O registro excluído após resumo e o
-protocolo sem resultados concluídos estão fora do denominador. Como a avaliação foi
-conduzida por um único revisor e a adjudicação humana independente permanece
-pendente, o MMAT é preliminar e por critério. Não há escore agregado, ranking
-ou conclusão de eficácia.
+O manifesto distingue as datas de referência: a busca tem corte em 31 de agosto
+de 2026, a adjudicação inicial do escopo ocorreu em 3 de setembro e a
+reconciliação do escopo foi atualizada em 14 de outubro de 2026. O arquivo foi
+gerado novamente nessa última data e preserva verificadores de integridade dos
+artefatos versionados; a atualização não representa nova consulta às APIs nem
+altera o corte temporal da busca.
+
+O registro de avaliação MMAT 2018 preserva S1 e S2 como perguntas de triagem e Q1--Q5 como
+critérios específicos do delineamento. Dos 15 registros empíricos mantidos
+provisoriamente, 14 têm apreciação MMAT preliminar. O estudo 8 permanece no
+fluxo PRISMA e no núcleo provisório, sem respostas MMAT até adjudicar sua
+elegibilidade e unidade de apreciação; suas bases distintas não devem ser
+somadas. O registro 6923 sem texto integral também não recebeu apreciação; suas
+células permanecem sem resposta, não como CT. O registro
+excluído após resumo e o protocolo sem resultados concluídos estão fora do
+denominador MMAT. Como a avaliação foi conduzida por um único revisor e a
+adjudicação humana independente permanece pendente, o MMAT é preliminar e por
+critério. Não há escore agregado, ranking ou conclusão de eficácia.
 
 ## Implementação e escopo experimental
 

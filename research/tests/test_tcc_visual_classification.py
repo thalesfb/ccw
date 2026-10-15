@@ -49,12 +49,10 @@ def test_generated_mmat_export_is_a_quadro_and_is_self_describing() -> None:
 
     component_caption = r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos"
     component_caption_index = export.index(component_caption)
-    reserve_index = export.rfind(r"\Needspace{18\baselineskip}", 0, component_caption_index)
     previous_table_end = export.rfind(r"\end{longtable}", 0, component_caption_index)
     component_table_start = export.rfind(r"\begin{longtable}", 0, component_caption_index)
-    assert previous_table_end < reserve_index < component_table_start, (
-        "the components quadro caption must start after enough space is reserved on the page"
-    )
+    assert previous_table_end < component_table_start < component_caption_index
+    assert r"\Needspace{18\baselineskip}" not in export
 
 
 def test_prisma_appendix_classifies_checklist_as_quadro() -> None:

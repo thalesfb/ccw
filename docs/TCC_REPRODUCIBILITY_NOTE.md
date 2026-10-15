@@ -33,12 +33,15 @@ acadêmico independente.
 ## Cobertura e limites metodológicos
 
 A shortlist contém 18 registros. Um foi excluído após a triagem do resumo;
-para os 17 relatórios procurados, quatro textos integrais não foram recuperados
-e 13 foram avaliados em texto completo. Um protocolo sem resultados concluídos
-foi excluído após essa avaliação; os outros 12 estudos empíricos integram o
-núcleo incluído. O MMAT dos 12 permanece preliminar, por critério e conduzido
-por um único revisor. Os quatro textos não recuperados não receberam MMAT; não
-há escore agregado ou ranking.
+dos 17 relatórios procurados, um texto integral não foi recuperado e 16 foram
+avaliados em texto completo. Um protocolo sem resultados concluídos foi
+excluído após essa avaliação; 15 registros permanecem provisoriamente no núcleo
+empírico. A apreciação MMAT preliminar, por critério e conduzida por um único
+revisor, abrange 14 desses registros. O estudo 8 continua no fluxo PRISMA e no
+corpus, mas não recebeu respostas MMAT enquanto sua elegibilidade e unidade de
+apreciação aguardam adjudicação humana; suas bases distintas não devem ser
+somadas. A dissertação 6923, único texto não recuperado, também não recebeu
+MMAT. Não há escore agregado ou ranking.
 
 Essas condições limitam a força e a abrangência das conclusões. Uma busca sem
 resultado não demonstra ausência de um conceito na fonte, e exemplos

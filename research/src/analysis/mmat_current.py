@@ -17,13 +17,17 @@ from typing import Any, Iterable
 CURRENT_RECORD_IDS: tuple[int, ...] = (
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923
 )
+CURRENT_EMPIRICAL_STUDY_IDS: tuple[int, ...] = (
+    1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 6915, 6916, 6917, 6919, 6920
+)
+PENDING_UNIT_ADJUDICATION_STUDY_IDS: tuple[int, ...] = (8,)
 CURRENT_MMAT_STUDY_IDS: tuple[int, ...] = (
-    2, 3, 4, 6, 7, 8, 14, 6915, 6916, 6917, 6919, 6920
+    1, 2, 3, 4, 5, 6, 7, 10, 14, 6915, 6916, 6917, 6919, 6920
 )
 # Compatibility alias: historical callers use this for the 18-record ledger.
 CURRENT_STUDY_IDS = CURRENT_RECORD_IDS
 CONTEXT_ONLY_STUDY_IDS = (9,)
-PENDING_FULL_TEXT_STUDY_IDS = (1, 5, 10, 6923)
+PENDING_FULL_TEXT_STUDY_IDS = (6923,)
 CONTEXTUAL_PROTOCOL_STUDY_IDS = (6921,)
 VALID_RESPONSES = {"", "Y", "N", "CT", "N/A"}
 VALID_DESIGNS = {
@@ -125,7 +129,12 @@ def load_current_reassessment(
         source_pending = row["study_id"] in {
             str(value) for value in PENDING_FULL_TEXT_STUDY_IDS
         }
-        not_appraised = source_pending or row.get("assessment_basis") == "abstract_and_metadata_only"
+        unit_pending = row.get("design_status") == "unit_of_appraisal_pending"
+        not_appraised = (
+            source_pending
+            or row.get("assessment_basis") == "abstract_and_metadata_only"
+            or unit_pending
+        )
         for criterion in ALL_CRITERIA:
             if row.get(criterion, "") not in VALID_RESPONSES:
                 raise ValueError(
@@ -143,7 +152,7 @@ def load_current_reassessment(
             if any(row.get(criterion, "").strip() for criterion in ALL_CRITERIA):
                 raise ValueError(
                     f"Study {row['study_id']} must not contain MMAT responses "
-                    "without an eligible appraisal source"
+                    "when no MMAT appraisal was undertaken"
                 )
             if row.get("criterion_evidence", "").strip():
                 raise ValueError(
@@ -219,7 +228,7 @@ def load_current_reassessment(
                     f"Study {row.get('study_id')} has an unresolved MMAT design "
                     "without a documented pending-design rationale"
                 )
-            if not source_pending and any(
+            if not source_pending and not unit_pending and any(
                 row.get(criterion) != "CT" for criterion in REQUIRED_CRITERIA
             ):
                 raise ValueError(
@@ -243,12 +252,16 @@ def load_current_reassessment(
                     f"Study {row['study_id']} lacks the explicit no-appraisal hold "
                     "required while primary full text is unavailable"
                 )
-        if row.get("design_status") == "unit_of_appraisal_pending" and any(
-            row.get(criterion) != "CT" for criterion in ("s1", "s2")
+        if unit_pending and (
+            row.get("assessment_status") != "hold_unit_of_appraisal"
+            or row.get("assessment_basis") != "primary_full_text_reviewed_externally"
+            or row.get("design") != "design_pending"
+            or any(row.get(criterion, "").strip() for criterion in ALL_CRITERIA)
+            or row.get("criterion_evidence", "").strip()
         ):
             raise ValueError(
                 f"Study {row.get('study_id')} has an unresolved appraisal unit; "
-                "screening responses must remain unresolved"
+                "it must remain explicitly held with no MMAT responses"
             )
     return rows
 
@@ -323,10 +336,13 @@ def load_current_synthesis_scope(
     expected_dispositions = {
         **{
             study_id: (
-                "included_empirical_core", "empirical_evidence", "applicable",
+                "included_empirical_core", "empirical_evidence",
+                "pending_unit_adjudication"
+                if study_id in PENDING_UNIT_ADJUDICATION_STUDY_IDS
+                else "applicable",
                 "included", "included",
             )
-            for study_id in CURRENT_MMAT_STUDY_IDS
+            for study_id in CURRENT_EMPIRICAL_STUDY_IDS
         },
         9: (
             "context_only", "contextual_study", "context_only",
@@ -446,6 +462,10 @@ def validate_current_artifacts(
     core_reassessment = [
         reassessment_by_id[str(study_id)] for study_id in CURRENT_MMAT_STUDY_IDS
     ]
+    unit_hold_rows = [
+        reassessment_by_id[str(study_id)]
+        for study_id in PENDING_UNIT_ADJUDICATION_STUDY_IDS
+    ]
     protocol_reassessment = [
         reassessment_by_id[str(study_id)] for study_id in CONTEXTUAL_PROTOCOL_STUDY_IDS
     ]
@@ -484,8 +504,9 @@ def validate_current_artifacts(
         for criterion in ALL_CRITERIA
     )
     blocking_reasons = [
-        "The 12-study empirical MMAT remains provisional; criterion locators and adjudication are incomplete.",
-        "The preliminary ledger must not be interpreted as a quality score or ranking.",
+        "The empirical corpus retains 15 studies provisionally, but MMAT appraisal currently covers 14; the denominator is not a final eligibility decision.",
+        "The preliminary 14-study ledger must not be interpreted as a quality score or ranking.",
+        "Study 8 has no MMAT responses pending human adjudication of scope and unit of appraisal; its distinct datasets must not be combined.",
     ]
     if len(primary_text_rows) != len(CURRENT_MMAT_STUDY_IDS):
         blocking_reasons.append(
@@ -496,7 +517,7 @@ def validate_current_artifacts(
         blocking_reasons.append("Supervisor adjudication is pending for at least one study.")
     if len(PENDING_FULL_TEXT_STUDY_IDS):
         blocking_reasons.append(
-            "Four shortlisted empirical records remain pending primary full text and are excluded from the MMAT denominator."
+            "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
         )
     if source_or_period_hold_rows:
         held_ids = ", ".join(row["study_id"] for row in source_or_period_hold_rows)
@@ -507,7 +528,10 @@ def validate_current_artifacts(
     return {
         "study_count": len(registry),
         "study_ids": list(CURRENT_RECORD_IDS),
+        "included_empirical_study_ids": list(CURRENT_EMPIRICAL_STUDY_IDS),
         "mmat_study_ids": list(CURRENT_MMAT_STUDY_IDS),
+        "mmat_unit_hold_ids": [row["study_id"] for row in unit_hold_rows],
+        "mmat_unit_hold_rows": len(unit_hold_rows),
         "criterion_rows": len(core_reassessment),
         "assessment_registry_rows": len(reassessment),
         "component_criterion_rows": sum(

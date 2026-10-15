@@ -1,8 +1,10 @@
 """Render the current preliminary MMAT reassessment for the TCC.
 
-The output is deliberately labelled preliminary.  It is generated from the
-18-record audit ledger, but the empirical table denominator is restricted to
-the 12 included empirical studies and does not assign an overall quality score.
+The output is deliberately labelled preliminary. It is generated from the
+18-record audit ledger. Twelve records remain provisionally included in the
+empirical corpus, while the MMAT table contains only the 11 studies currently
+appraised; study 8 is held until its appraisal unit is adjudicated. No overall
+quality score is assigned.
 """
 
 from __future__ import annotations
@@ -14,6 +16,8 @@ from pathlib import Path
 
 from .mmat_current import (
     CURRENT_MMAT_STUDY_IDS,
+    CURRENT_EMPIRICAL_STUDY_IDS,
+    PENDING_FULL_TEXT_STUDY_IDS,
     load_component_reassessments,
     validate_current_artifacts,
 )
@@ -139,7 +143,6 @@ def render_component_table(
         r"\fontsize{8.5}{10}\selectfont",
         r"\setlength{\tabcolsep}{2pt}",
         r"\renewcommand{\arraystretch}{1.15}",
-        r"\Needspace{18\baselineskip}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|ccccc|>{\raggedright\arraybackslash}p{6.1cm}|}",
         r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos em estudos de métodos mistos.}\label{qua:mmat-componentes}\\",
         r"\hline",
@@ -173,6 +176,7 @@ def render_component_table(
         lines.append(" & ".join(values) + r" \\")
     lines.extend([
         r"\end{longtable}",
+        r"\fonte{Elaborado pelo autor (2026).}",
         r"\textit{Nota:} C1--C5 correspondem aos cinco critérios da categoria indicada; os códigos específicos são 1.1--1.5 (qualitativo), 3.1--3.5 (quantitativo não randomizado) e 4.1--4.5 (quantitativo descritivo). Y = sim; N = não; CT = não é possível concluir com a evidência disponível. As apreciações são preliminares, de revisor único, sem pontuação global, e aguardam adjudicação humana independente.",
         r"\endgroup",
     ])
@@ -194,7 +198,7 @@ def render_table(
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|"
         r">{\raggedright\arraybackslash}p{2.5cm}|ccccccc|"
         r">{\raggedright\arraybackslash}p{3.6cm}|}",
-        r"\caption{Reavaliação documental preliminar dos 12 estudos empíricos incluídos com o MMAT 2018.}\label{qua:mmat-reavaliacao-atual}\\",
+        rf"\caption{{Apreciação documental preliminar pelo MMAT 2018 de {len(rows)} estudos empíricos do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
@@ -229,23 +233,21 @@ def render_table(
         ]
         lines.append(" & ".join(values) + r" \\")
     note = (
-        r"\textit{Nota:} O denominador empírico é de 12 estudos incluídos; um registro foi excluído após a triagem do resumo, quatro aguardam texto integral e um protocolo sem resultados concluídos foi excluído após texto completo. "
-        r"Y = sim; N = não; CT = não é possível concluir com a evidência disponível; N/A = não aplicável. "
-        r"Quant. = quantitativo; rand. = randomizado; Base = fonte documental consultada. "
-        r"S1 e S2 são perguntas de triagem; Q1--Q5 correspondem aos critérios específicos do delineamento, "
-        r"detalhados na Seção~\ref{sec:qualidade-estudos}. Todos os julgamentos empíricos são preliminares "
-            r"e aguardam adjudicação. O registro de protocolo ou proposta é contextual, recebe N/A em todas as células e não integra o denominador empírico."
+        r"\textit{Nota:} Apreciação preliminar, revisor único, sem escore agregado. "
+        r"S1 e S2 são perguntas de triagem. "
+        r"Q1--Q5 correspondem aos critérios MMAT da categoria; "
+        r"para os estudos 6916, 6919 e 6920, Q1--Q5 representam a categoria de métodos mistos. "
+        r"Y/N/CT/N/A = sim/não/não é possível concluir/não aplicável. "
+        r"Quant. = quantitativo; rand. = randomizado. "
+        r"Base = fonte documental consultada. "
+        r"Ver metodologia na Seção~\ref{sec:qualidade-estudos}. "
+        rf"Denominador: {len(rows)} estudos."
     )
-    if any(row.get("design") == "mixed_methods" for row in rows):
-        note += (
-            r" Para os estudos 6916, 6919 e 6920, Q1--Q5 representam a categoria de métodos mistos; "
-            r"a avaliação dos componentes qualitativos e quantitativos é apresentada no quadro complementar."
-        )
     lines.extend([
         r"\end{longtable}",
         r"\endgroup",
-        note,
         r"\fonte{Elaborado pelo autor (2026).}",
+        note,
     ])
     component_table = render_component_table(load_component_rows(), labels)
     if component_table:

@@ -1134,7 +1134,7 @@ class ReportGenerator:
          </div>
      </nav>    <div class="content">
     <h1>{{ stage_label }}</h1>
-    <p><em>{{ papers_data|length }} registros retidos no snapshot vigente</em></p>
+    <p><em>{{ papers_data|length }} registros marcados como retidos no export operacional do pipeline; este estágio não substitui o ledger vigente de elegibilidade do TCC.</em></p>
     {% if stage == 'included' %}
     <div class="paper-criteria" style="background:#fff3cd;border-left-color:#f0ad4e;">
         <strong>Como interpretar:</strong> esta é a população retida pelo fluxo operacional.

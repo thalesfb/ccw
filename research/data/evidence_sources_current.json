@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "review_date": "2026-10-12",
-  "scope_sha256": "c4e9066cbdc44ecff26d9daa7190f039720805ada001ee0cfbf0d8e8e9c0cbc8",
+  "review_date": "2026-10-14",
+  "scope_sha256": "bf264217cdc6f4cff51967c756976f2fb12e3bfbc72fba887d256d994512d29f",
   "retrieval_scope_sha256": "f76dfbd371f570075943a57ed28f00769df5b982bef63db2ac321893fe359add",
-  "scope_drift_explanation": "The current synthesis scope and the scope fingerprint recorded for the last evidence extraction differ. All 18 record IDs and synthesis roles reconcile, but the extraction bundle has not been replayed against the current scope fingerprint; scope_unchanged remains false.",
+  "scope_drift_explanation": "The 18-record current synthesis scope is synchronized by ID and role. The extraction bundle replays 12 locally indexed source files; the remaining full-text sources in the empirical synthesis have not been replayed in this bundle. Its retrieval-scope fingerprint therefore differs, and scope_unchanged remains false.",
   "text_hash_normalization": "UTF-8 with LF line endings",
   "base_commit": "af920535759ce66f8075843919deb275ee91dcf6",
   "extraction_settings": {
@@ -16,8 +16,8 @@
       "pypdf_version": "6.19.0",
       "fonttools_version": "4.66.1"
     },
-    "checked_source_count": 9,
-    "checked_chunk_count": 434,
+    "checked_source_count": 12,
+    "checked_chunk_count": 484,
     "integrity_failures": 0
   },
   "code_hashes": {
@@ -29,10 +29,14 @@
     {
       "study_id": "1",
       "bib_key": "Math2021_001",
-      "synthesis_role": "pending_full_text",
+      "synthesis_role": "empirical_evidence",
       "source_url": "https://doi.org/10.1109/SISY52375.2021.9582522",
-      "status": "not_recovered",
-      "failure_category": "ValueError"
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://doi.org/10.1109/SISY52375.2021.9582522",
+      "sha256": "22cc1315a9e6ffa2a6f80ec134904b46d966881314a7c4a31dae9d3bdfe97042",
+      "page_count": 6,
+      "chunks": 15,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
     },
     {
       "study_id": "2",
@@ -65,10 +69,14 @@
     {
       "study_id": "5",
       "bib_key": "Design2025_004",
-      "synthesis_role": "pending_full_text",
+      "synthesis_role": "empirical_evidence",
       "source_url": "https://doi.org/10.1109/CIPAE66821.2025.00116",
-      "status": "not_recovered",
-      "failure_category": "ValueError"
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://doi.org/10.1109/CIPAE66821.2025.00116",
+      "sha256": "563f6e3cceb34edf5ebd0663cee6c4de21e2bd16fdaece0ed0d212ec18aa9241",
+      "page_count": 6,
+      "chunks": 14,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
     },
     {
       "study_id": "6",
@@ -113,10 +121,14 @@
     {
       "study_id": "10",
       "bib_key": "Machine2024_009",
-      "synthesis_role": "pending_full_text",
+      "synthesis_role": "empirical_evidence",
       "source_url": "https://doi.org/10.1002/cae.22787",
-      "status": "not_recovered",
-      "failure_category": "HTTPError"
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://doi.org/10.1002/cae.22787",
+      "sha256": "8775601a7408ce1db41aa25ab543cc9e9b56b71bdb124cc7fc138efa4c31137b",
+      "page_count": 10,
+      "chunks": 21,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending"
     },
     {
       "study_id": "14",

@@ -40,7 +40,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     counts = snapshot["counts"]
 
     assert manifest["schema_version"] == "1.3"
-    assert manifest["scope_updated_at"] == "2026-10-12"
+    assert manifest["scope_updated_at"] == "2026-10-14"
     assert manifest["database"]["versioned"] is False
     assert manifest["operational_database_snapshot"]["status"] == "diagnostic_only"
     assert manifest["operational_database_snapshot"]["authoritative_snapshot"] == "snapshot"
@@ -70,9 +70,9 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "screening": 9391,
         "prioritization": 2468,
         "abstract_screening": 1,
-        "not_retrieved": 4,
+        "not_retrieved": 1,
         "eligibility": 1,
-        "included": 12,
+        "included": 15,
     }
     assert counts["prisma"] == {
         "identification": 11904,
@@ -84,18 +84,21 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "shortlisted": 18,
         "abstract_screening_excluded": 1,
         "reports_sought": 17,
-        "reports_not_retrieved": 4,
-        "eligibility": 13,
+        "reports_not_retrieved": 1,
+        "eligibility": 16,
         "eligibility_excluded": 1,
-        "included": 12,
+        "included": 15,
     }
     assert snapshot["included_ids"] == [
+        1,
         2,
         3,
         4,
+        5,
         6,
         7,
         8,
+        10,
         14,
         6915,
         6916,
@@ -104,17 +107,38 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         6920,
     ]
     assert snapshot["scope_record_status_counts"] == {
-        "awaiting_full_text": 4,
+        "awaiting_full_text": 1,
         "context_only": 1,
-        "included_empirical_core": 12,
+        "included_empirical_core": 15,
         "protocol_context_only": 1,
     }
     assert snapshot["candidate_audit"]["operational_candidates"] == 23
     assert snapshot["candidate_audit"]["manual_overrides_recorded"] == 7
     assert snapshot["candidate_audit"]["metadata_corrections_recorded"] == 1
-    assert snapshot["candidate_audit"]["current_included"] == 12
+    assert snapshot["candidate_audit"]["current_included"] == 15
     assert snapshot["candidate_audit"]["shortlisted_records"] == 18
+    interpretation = snapshot["candidate_audit"]["interpretation"]
+    assert "15 empirical studies" in interpretation
+    assert "1 full-text report not retrieved" in interpretation
+    assert "four full-text reports not retrieved" not in interpretation
     assert "false_positives_removed" not in snapshot["candidate_audit"]
+
+    assert "18 records in the preliminary list" in manifest["bibliography"]["separation_rule"]
+    assert "15 are currently included" in manifest["bibliography"]["separation_rule"]
+    appraisal = manifest["methodological_appraisal"]["interpretation"]
+    assert "preliminary record for 14 studies" in appraisal
+    assert "15 records remain provisionally" in appraisal
+    assert "11 studies" not in appraisal
+
+    mmat_limitation = next(
+        item
+        for item in manifest["reproduction"]["limitations"]
+        if "empirical MMAT denominator" in item
+    )
+    assert "14" in mmat_limitation
+    assert "15" in mmat_limitation
+    assert "1 unretrieved shortlisted report" in mmat_limitation
+    assert "four shortlisted reports were not retrieved" not in mmat_limitation
     assert len(snapshot["manual_overrides"]) == 7
     override_ledger = snapshot["manual_override_adjudication"]
     assert override_ledger["row_count"] == 7
@@ -156,12 +180,16 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     current_mmat = manifest["methodological_appraisal"]["current_mmat_qa"]
     assert current_mmat["final_ready"] is False
     assert current_mmat["source_or_period_hold_ids"] == []
-    assert current_mmat["primary_text_reviewed_rows"] == 12
-    assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 12
+    assert current_mmat["current_denominator"] == 14
+    assert current_mmat["criterion_rows"] == 14
+    assert current_mmat["included_empirical_study_ids"][-1] == 6920
+    assert current_mmat["mmat_unit_hold_ids"] == ["8"]
+    assert current_mmat["primary_text_reviewed_rows"] == 14
+    assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
     assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 0
-    assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 12
+    assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 15
     assert current_mmat["record_evidence_levels"]["abstract_and_metadata_only"] == 1
-    assert current_mmat["record_evidence_levels"]["pending_full_text_not_appraised"] == 4
+    assert current_mmat["record_evidence_levels"]["pending_full_text_not_appraised"] == 1
 
     assert manifest["artifact_scope"] == "research_snapshot"
     for artifact in manifest["artifacts"]:
@@ -179,7 +207,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         "results/tcc/referencias.bib",
         "results/tcc/referencias_pedagogicas.bib",
     ]
-    assert "only 12 are currently included in the empirical core" in bibliography["separation_rule"]
+    assert "15 are currently included in the empirical core" in bibliography["separation_rule"]
     artifact_paths = {artifact["path"] for artifact in manifest["artifacts"]}
     assert "research/data/protocol_execution_2025.json" in artifact_paths
     assert "research/data/manual_override_evidence_matrix.csv" in artifact_paths
@@ -277,6 +305,6 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "não substitui a adjudicação científica final" in root_html
     assert "submetidos à priorização operacional" in root_html
     assert "encaminhados à elegibilidade" not in root_html
-    assert "Dos 18 registros shortlistados, 12 compõem o núcleo empírico" in tcc_html
-    assert "A apreciação dos 12 incluídos é preliminar" in tcc_html
+    assert "Dos 18 registros selecionados preliminarmente, 15 permanecem provisoriamente no núcleo empírico" in tcc_html
+    assert "a apreciação MMAT preliminar abrange 14" in tcc_html
     assert "11.904" not in tcc_html

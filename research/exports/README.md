@@ -2,13 +2,14 @@
 
 Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e relatórios do pipeline são regeneráveis via CLI e não devem ser editados manualmente; páginas metodológicas versionadas devem permanecer coerentes com seus ledgers de origem.
 
-> **Snapshot de busca (03/09/2026), com escopo atualizado em 12/10/2026:**
+> **Snapshot de busca (03/09/2026), com escopo atualizado em 14/10/2026:**
 > 11.904 registros identificados;
 > 27 registros redundantes foram removidos deterministicamente por DOI/URL antes
 > da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos, 2.486
 > submetidos à priorização operacional; 2.468 não avançaram nessa etapa e 18
-> formaram a shortlist. Na elegibilidade, 17 relatórios foram procurados, 4 não
-> recuperados, 13 avaliados em texto completo, 1 protocolo excluído e 12 incluídos. O registro
+> formaram a shortlist. Na elegibilidade, 17 relatórios foram procurados, 1 não
+> foi recuperado, 16 foram avaliados em texto completo, 1 protocolo foi excluído
+> e 15 registros empíricos foram mantidos provisoriamente. O registro
 > 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A auditoria
 > bruta encontrou 257 excedentes em
 > títulos normalizados; após a remoção DOI/URL, 232 excedentes permanecem apenas
@@ -137,9 +138,9 @@ python -m research.src.cli export-bibtex -o research/references
 ```
 
 `included_papers.bib` contém os 18 registros shortlistados derivados do
-pipeline, não 18 estudos incluídos. O núcleo empírico tem 12 estudos; quatro
-relatórios não foram recuperados, um registro foi excluído após resumo e dois
-após texto completo. O
+pipeline, não 18 estudos incluídos. O núcleo empírico tem 15 estudos
+provisórios; um relatório não foi recuperado, um registro foi excluído após
+resumo e um protocolo foi excluído após texto completo. O
 TCC mantém separadamente referências metodológicas, pedagógicas, de avaliação
 e técnicas em `results/tcc/referencias.bib` e
 `results/tcc/referencias_pedagogicas.bib`. Essa separação é deliberada e está
@@ -201,8 +202,8 @@ python -m research.src.cli deep-analysis
 | Total de registros brutos no banco | 11.904 |
 | Remoções determinísticas por DOI/URL | 27 |
 | Registros avaliados na triagem | 11.877 |
-| Registros retidos | 18 (17 provisoriamente empíricos + 1 contextual) |
-| Taxa de inclusão | 0,15% (18/11.904) |
+| Registros shortlistados | 18 (15 incluídos provisoriamente, 1 não recuperado, 1 excluído após resumo e 1 protocolo excluído) |
+| Taxa de inclusão empírica provisória | 0,13% (15/11.904) |
 | Período analítico configurado | 2015--2026 |
 | Excluídos na triagem | 9.391 (78,89% da identificação) |
 | Avançaram à elegibilidade | 2.486 (20,88% da identificação) |
@@ -217,14 +218,14 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 ## 🚀 Próximos Passos
 
 ### Fase 1 (Revisão Sistemática) - 🟡 SNAPSHOT ADJUDICADO
-- [x] Snapshot de busca exportado (11.904 identificados; 11.877 após deduplicação; 18 registros shortlistados; 12 incluídos após elegibilidade)
+- [x] Snapshot de busca exportado (11.904 identificados; 11.877 após deduplicação; 18 registros shortlistados; 15 incluídos provisoriamente após elegibilidade)
 - [x] Fluxo de triagem e elegibilidade reconciliado
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
 - [x] Exportação BibTeX dos 18 registros shortlistados do pipeline; status de elegibilidade e inclusão são mantidos separadamente no ledger
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
-- [x] Reavaliação documental preliminar do MMAT aos 12 estudos empíricos incluídos, com evidência por critério
-- [ ] Recuperar os quatro textos integrais pendentes; sem aplicar MMAT a resumo ou metadados
-- [ ] Adjudicar independentemente os 11 julgamentos MMAT do núcleo empírico
+- [x] Reavaliação documental preliminar por critério do MMAT em 14 dos 15 registros empíricos mantidos provisoriamente; estudo 8 sem respostas até adjudicação de escopo/unidade
+- [ ] Obter o texto integral do registro 6923 quando houver acesso legítimo; sem aplicar MMAT a resumo ou metadados
+- [ ] Adjudicar independentemente os 14 julgamentos MMAT do núcleo empírico
 
 ### Fase 2 (Especificação conceitual do Protótipo) - ✅ REGISTRADA NO TCC
 - [x] Derivar requisitos funcionais e não funcionais

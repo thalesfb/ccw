@@ -74,10 +74,10 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     assert prisma["shortlisted"] == 18
     assert prisma["abstract_screening_excluded"] == 1
     assert prisma["reports_sought"] == 17
-    assert prisma["reports_not_retrieved"] == 4
-    assert prisma["eligibility"] == 13
+    assert prisma["reports_not_retrieved"] == 1
+    assert prisma["eligibility"] == 16
     assert prisma["eligibility_excluded"] == 1
-    assert prisma["included"] == 12
+    assert prisma["included"] == 15
     assert prisma["stage_percentages"] == {
         "screening_excluded_of_identification": 78.89,
         "screening_advanced_of_identification": 20.88,
@@ -86,12 +86,12 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
         "prioritization_excluded_of_prioritization": 99.28,
         "shortlisted_of_prioritization": 0.72,
         "abstract_screening_excluded_of_shortlist": 5.56,
-        "reports_not_retrieved_of_reports_sought": 23.53,
-        "full_text_excluded_of_assessed": 7.69,
-        "included_of_assessed": 92.31,
-        "eligibility_excluded_of_eligibility": 7.69,
-        "included_of_eligibility": 92.31,
-        "included_of_identification": 0.1,
+        "reports_not_retrieved_of_reports_sought": 5.88,
+        "full_text_excluded_of_assessed": 6.25,
+        "included_of_assessed": 93.75,
+        "eligibility_excluded_of_eligibility": 6.25,
+        "included_of_eligibility": 93.75,
+        "included_of_identification": 0.13,
     }
     assert prisma["deduplication_audit"]["doi"]["excess_rows"] == 25
     assert prisma["deduplication_audit"]["url"]["excess_rows"] == 2
@@ -102,18 +102,24 @@ def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> 
     with PRISMA_RECONCILIATION_PATH.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
-    current = {
+    flow = {
         row["metric"]: int(row["value"])
         for row in rows
-        if row["snapshot_date"] == "2026-10-12"
+        if row["snapshot_date"] == "2026-10-14"
+    }
+    latest_scope = {
+        row["metric"]: int(row["value"])
+        for row in rows
+        if row["snapshot_date"] == "2026-10-14"
     }
 
-    assert current["reports_sought"] == 17
-    assert current["reports_not_retrieved"] == 4
-    assert current["reports_assessed_at_full_text"] == 13
-    assert current["full_text_scope_exclusions"] == 1
-    assert current["empirical_studies_included"] == 12
-    assert current["current_mmat_empirical_denominator"] == 12
+    assert flow["reports_sought"] == 17
+    assert flow["reports_not_retrieved"] == 1
+    assert flow["reports_assessed_at_full_text"] == 16
+    assert flow["full_text_scope_exclusions"] == 1
+    assert flow["empirical_studies_included"] == 15
+    assert latest_scope["empirical_studies_included"] == 15
+    assert latest_scope["current_mmat_empirical_denominator"] == 14
 
 
 def test_current_export_has_exactly_the_adjudicated_empirical_core_ids() -> None:
@@ -127,12 +133,15 @@ def test_current_export_has_exactly_the_adjudicated_empirical_core_ids() -> None
     }
 
     assert included_ids == {
+        1,
         2,
         3,
         4,
+        5,
         6,
         7,
         8,
+        10,
         14,
         6915,
         6916,
@@ -202,14 +211,9 @@ def test_tcc_review_table_distinguishes_all_shortlisted_records_by_stage() -> No
         line for line in table.splitlines()
         if line.startswith(r"\citeonline") and "Pendente:" in line
     ]
-    assert len(pending_rows) == 4
+    assert len(pending_rows) == 1
     assert all("MMAT não aplicado" in line for line in pending_rows)
-    for reference_key in {
-        "Math2021_001",
-        "Design2025_004",
-        "Machine2024_009",
-        "Zeng2025_6923",
-    }:
+    for reference_key in {"Zeng2025_6923"}:
         assert any(
             f"\\citeonline{{{reference_key}}}" in line for line in pending_rows
         )

@@ -23,7 +23,11 @@ import pandas as pd
 
 from ..analysis.reports import ReportGenerator
 from ..analysis.visualizations import ReviewVisualizer
-from ..analysis.mmat_current import CURRENT_MMAT_STUDY_IDS, load_current_synthesis_scope
+from ..analysis.mmat_current import (
+    CURRENT_EMPIRICAL_STUDY_IDS,
+    load_current_synthesis_scope,
+    load_primary_sources,
+)
 from ..exports.excel import remove_legacy_mmat_from_notes, to_excel_with_filters
 from ..validation.derived_assets import sync_derived_assets
 
@@ -201,6 +205,7 @@ def apply_current_scope_adjudications(
     result = remove_legacy_mmat_from_notes(papers)
     result["id"] = pd.to_numeric(result["id"], errors="raise").astype(int)
     by_id = {int(row["id"]): index for index, row in result.iterrows()}
+    source_by_id = {row["study_id"]: row for row in load_primary_sources()}
     expected_ids = {int(row["study_id"]) for row in scope}
     if not expected_ids.issubset(by_id):
         raise ValueError(
@@ -227,17 +232,27 @@ def apply_current_scope_adjudications(
         )
         candidate_state = ("included", "included")
         final_state = (decision["selection_stage"], decision["selection_status"])
-        if current not in {candidate_state, final_state}:
+        recovered_from_not_retrieved = (
+            current == ("not_retrieved", "not_retrieved")
+            and final_state == ("included", "included")
+            and source_by_id.get(str(study_id), {}).get("full_text_status")
+            == "externally_reviewed_not_archived"
+        )
+        if current not in {candidate_state, final_state} and not recovered_from_not_retrieved:
             raise ValueError(
                 f"Study {study_id} has unexpected state {current!r}; expected "
-                f"the shortlisted state or current decision {final_state!r}"
+                f"the shortlisted state, a verified recovered-text transition, or "
+                f"current decision {final_state!r}"
             )
         result.at[index, "selection_stage"] = final_state[0]
         result.at[index, "status"] = final_state[1]
         result.at[index, "exclusion_reason"] = (
             "" if final_state[1] == "included" else decision["selection_reason"]
         )
-        note = f"Adjudicação de escopo 2026-10-12 ({decision['record_status']});"
+        note = (
+            f"Adjudicação de escopo {decision.get('snapshot_date', '2026-10-12')} "
+            f"({decision['record_status']});"
+        )
         existing = _normalise_text(result.at[index, "notes"])
         existing = re.sub(
             r"(?:Adjudicação de escopo \d{4}-\d{2}-\d{2} \([^)]*\)|"
@@ -474,12 +489,12 @@ def main() -> None:
         "stage_counts": {
             "abstract_screening": 1,
             "eligibility": 1,
-            "included": 12,
-            "not_retrieved": 4,
+            "included": 15,
+            "not_retrieved": 1,
             "prioritization": 2468,
             "screening": 9391,
         },
-        "included_ids": list(CURRENT_MMAT_STUDY_IDS),
+        "included_ids": list(CURRENT_EMPIRICAL_STUDY_IDS),
     }
     if facts["papers_rows"] != expected["papers_rows"]:
         raise SystemExit(f"Unexpected row count: {facts['papers_rows']}")

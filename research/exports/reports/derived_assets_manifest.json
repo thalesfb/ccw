@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "5eebde4d0e4c9840d8e82cdc65d0e133c83de6d4f7c48972ed302d9155250121",
+    "sha256": "f62f546a7a932802e244b87c3cff96d2ccbd9146cc2673e8a5f92ec567365ec9",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/claim_evidence_current.json",
@@ -116,17 +116,17 @@
     {
       "name": "prisma_flow.png",
       "canonical_path": "research/exports/visualizations/prisma_flow.png",
-      "canonical_sha256": "c94916185f2e4f0868a28f0f2e6b9c176e9c85212b4195a3ca09036d71c0adc7",
+      "canonical_sha256": "24838371def825b114e1b79f612944752e4968e0e7bb369572829267de17c2c7",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/prisma_flow.png",
-          "sha256": "c94916185f2e4f0868a28f0f2e6b9c176e9c85212b4195a3ca09036d71c0adc7"
+          "sha256": "24838371def825b114e1b79f612944752e4968e0e7bb369572829267de17c2c7"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/prisma_flow.png",
-          "sha256": "c94916185f2e4f0868a28f0f2e6b9c176e9c85212b4195a3ca09036d71c0adc7"
+          "sha256": "24838371def825b114e1b79f612944752e4968e0e7bb369572829267de17c2c7"
         }
       ]
     },
@@ -150,17 +150,17 @@
     {
       "name": "selection_funnel.png",
       "canonical_path": "research/exports/visualizations/selection_funnel.png",
-      "canonical_sha256": "a0b18bb15719c12f751b5296d2839f1010cebec955f7c7f8f192f7e2dcd2fbb8",
+      "canonical_sha256": "c009b67e8a0ec14c4f260c6cfa853f9faa7da51b4e5d4be07fcb0b42a0f2f65f",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/selection_funnel.png",
-          "sha256": "a0b18bb15719c12f751b5296d2839f1010cebec955f7c7f8f192f7e2dcd2fbb8"
+          "sha256": "c009b67e8a0ec14c4f260c6cfa853f9faa7da51b4e5d4be07fcb0b42a0f2f65f"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/selection_funnel.png",
-          "sha256": "a0b18bb15719c12f751b5296d2839f1010cebec955f7c7f8f192f7e2dcd2fbb8"
+          "sha256": "c009b67e8a0ec14c4f260c6cfa853f9faa7da51b4e5d4be07fcb0b42a0f2f65f"
         }
       ]
     },

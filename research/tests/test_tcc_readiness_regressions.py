@@ -13,14 +13,14 @@ def test_selection_percentages_refer_to_records_not_a_study_population() -> None
 
     assert "parcela dos registros inicialmente identificados" in review
     assert "parcela da população inicialmente identificada" not in review
-    assert "12 estudos compõem o núcleo empírico incluído" in review
+    assert "15 estudos compõem provisoriamente o núcleo empírico incluído" in review
     assert "17 candidatos empíricos provisórios" not in review
     assert "A população retida compreende" not in review
 
 
 def test_study_specific_limitations_are_concentrated_in_the_gaps_section() -> None:
     review = (TCC / "conteudo" / "resultadosesperados.tex").read_text(encoding="utf-8")
-    synthesis = review.split(r"\section{Caracterização dos Registros Shortlistados}", 1)[1].split(
+    synthesis = review.split(r"\section{Caracterização dos Registros Selecionados Preliminarmente}", 1)[1].split(
         r"\section{Avaliação Metodológica com o MMAT}", 1
     )[0]
     gaps = review.split(r"\section{Tendências e Lacunas}", 1)[1].split(
@@ -76,7 +76,13 @@ def test_mmat_does_not_infer_sampling_or_analysis_from_topic_relevance_alone() -
         )
         assert "sampling" in evidence.lower() or "selection" in evidence.lower()
 
-    for study_id in ("1", "5", "10", "6923", "9"):
+    assert rows["1"]["s1"] == "Y" and rows["1"]["s2"] == "Y"
+    assert rows["1"]["q1"] == "Y"
+    assert rows["5"]["assessment_status"] == "provisional_primary_source_review"
+    assert rows["5"]["design_status"] == "allocation_unreported_pending"
+    assert all(rows["5"][criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert rows["10"]["s1"] == "Y" and rows["10"]["s2"] == "Y"
+    for study_id in ("6923", "9"):
         assert all(rows[study_id][criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
         assert rows[study_id]["criterion_evidence"] == ""
     assert rows["9"]["assessment_status"] == "not_assessed_after_abstract_exclusion"

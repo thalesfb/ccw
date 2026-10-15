@@ -56,6 +56,19 @@ conformidade institucional. A conferência visual do PDF e a validação pelo ca
 da biblioteca continuam necessárias, especialmente quanto aos elementos de
 aprovação e catalogação.
 
+Quanto ao alinhamento, a seção 5.8 exige que identificação, título, fonte,
+legenda e notas acompanhem as margens da ilustração; não prescreve, por si só,
+centralização nem alinhamento à esquerda. O template específico do curso para
+TC tradicional (2026) configura as legendas com `\captionstyle[\raggedright]{}`;
+essa configuração foi adotada no TCC como escolha do modelo institucional, não
+como exigência atribuída à ABNT.
+
+A NBR 10520:2023, seção 6.1.6, exige letras minúsculas após o ano para distinguir
+documentos da mesma autoria publicados no mesmo ano. Como o TCC cita duas obras
+de Brasil de 2018 — a BNCC e a LGPD —, a chamada `Brasil (2018a)` não deve ser
+reduzida a `Brasil (2018)`; o sufixo evita ambiguidade e segue a ordem das
+referências.
+
 Foram consultadas as cópias institucionais da
 [NBR 14724 corrigida](https://vigilanciasanitaria.prefeitura.rio/wp-content/uploads/sites/84/2025/10/ABNT-NBR-14724-2025-informacao-e-documentacao-trabalho-academico.pdf)
 e da [NBR 6023:2025](https://www.fho.edu.br/assets/documentos/FHO_Biblioteca_Referencia_ABNT_6023_2025.pdf).
@@ -66,7 +79,7 @@ obtida diretamente de todo o catálogo ABNT.
 
 ## Comparação com o template institucional
 
-Em 11 de outubro de 2026, foram reconsultadas as páginas do [Sistema Integrado de
+Em 14 de outubro de 2026, foram reconsultadas as páginas do [Sistema Integrado de
 Bibliotecas do IFC](https://biblioteca.ifc.edu.br/tcc/), da [Biblioteca do Campus
 Videira](https://videira.ifc.edu.br/biblioteca/trabalhos-de-conclusao-de-curso-tccs/)
 e do [curso de Ciência da Computação](https://videira.ifc.edu.br/ciencia-da-computacao/defesas-de-tc/).
@@ -76,23 +89,27 @@ Campus Videira ainda lista modelos de monografia de novembro de 2022. Já a pág
 do curso lista pacotes LaTeX de 2026 para TC tradicional e desenvolvimento de
 software.
 
-Os links desses pacotes de 2026 levam ao Google Drive e, nesta conferência,
-solicitaram autenticação; portanto, seus arquivos internos não foram comparados
-com a classe local. O que é verificável no repositório é que
-`results/tcc/abntex2-IFC.cls` se identifica como adaptação de 2016, inclui o
-brasão da República na capa e não inclui imagem na redefinição de
-`\imprimirfolhaderosto`; o arquivo também mantém comentário relativo à NBR
-6027:2012. Esses fatos descrevem a implementação local e não comprovam o conteúdo
-do pacote oficial de 2026.
+O item do curso identifica o primeiro pacote como ``TC – Trabalho de Conclusão
+de Curso – TRADICIONAL'' e aponta para ``modelo-latex-ifc-TCC-Tradicional-2026.zip''.
+O pacote tradicional foi comparado localmente em 14 de outubro de 2026. Seu
+`config_inicial.tex` usa `\hangcaption` e `\captionstyle[\raggedright]{}`; o TCC
+foi alinhado nesse ponto, sem substituir em bloco as adaptações e revisões já
+incorporadas. A cópia local não foi comparada criptograficamente com o arquivo
+remoto do Drive, cuja visualização solicita login. O pacote de desenvolvimento
+também aponta para o Drive e não foi inspecionado. No pacote tradicional, a classe
+usa o brasão da República na capa e não insere imagem na folha de rosto; a classe
+local também mantém comentário relativo à NBR 6027:2012. Esses fatos descrevem os
+arquivos examinados, mas não certificam conformidade integral.
 
-Há, assim, uma divergência observável entre a implementação local e a orientação
-geral publicada pelo SIBI, mas não foi possível determinar se o pacote específico
-do curso estabelece uma exceção ou atualização aplicável. A estrutura da capa e
-da folha de rosto permanece sem alteração até que o pacote possa ser inspecionado
-ou a Coordenação, a Biblioteca ou a orientação confirme qual instrução prevalece
-para o depósito. As listas de ilustrações, quadros e tabelas permanecem
-separadas. A classe LaTeX continua sendo uma adaptação local; esta comparação não
-certifica conformidade institucional ou normativa integral.
+Permanece uma divergência entre a orientação geral publicada pelo SIBI — logo do
+IFC na capa e na folha de rosto — e o pacote específico do curso, que apresenta
+brasão na capa e não inclui imagem na folha de rosto. A inspeção do pacote não
+determina, por si só, se ele substitui ou atualiza a instrução geral para o
+depósito. Conforme decisão pendente, a capa e a folha de rosto não foram alteradas;
+a Coordenação, a Biblioteca ou a orientação deve confirmar qual instrução
+prevalece. As listas de ilustrações, quadros e tabelas permanecem separadas. A
+classe LaTeX local continua sendo uma adaptação; esta comparação não certifica
+conformidade institucional ou normativa integral.
 
 A folha de aprovação deste PDF é um modelo sem assinaturas e não comprova a
 aprovação do trabalho. Para o depósito final, ela deverá ser substituída ou
@@ -101,12 +118,10 @@ eletrônicas requeridas. O termo de autorização para publicação também não
 esta versão de orientação. Os formulários finais, a ficha catalográfica quando
 aplicável e eventuais particularidades do curso devem ser confirmados com a
 Coordenação e a Biblioteca. A classe LaTeX local contém comentários relativos a
-edições anteriores de normas, mas isso não demonstra o conteúdo dos pacotes de
-2026 listados pelo curso. Como esses arquivos não puderam ser inspecionados,
-nenhuma conclusão sobre sua identidade visual, seus requisitos institucionais ou
-sua compatibilidade normativa é atribuída a eles. As decisões de capa e folha de
-rosto permanecem pendentes de verificação direta do pacote ou confirmação
-institucional.
+edições anteriores de normas; a inspeção do pacote tradicional de 2026 não valida
+automaticamente todos os seus usos nem os requisitos do pacote de desenvolvimento
+de software, que não foi inspecionado. As decisões de capa e folha de rosto
+permanecem pendentes de confirmação institucional.
 
 ## Fontes públicas de conferência
 

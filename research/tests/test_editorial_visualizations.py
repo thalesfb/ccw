@@ -102,6 +102,31 @@ def test_prisma_labels_remain_readable_at_a_16_cm_print_width(tmp_path):
     plt.close(figure)
 
 
+def test_prisma_full_text_exclusion_label_does_not_group_two_records_as_one(tmp_path):
+    visualizer = ReviewVisualizer(tmp_path)
+    stats = {
+        "identification": 11904,
+        "duplicates_removed": 27,
+        "screening": 11877,
+        "screening_excluded": 9391,
+        "prioritization": 2486,
+        "prioritization_excluded": 2468,
+        "shortlisted": 18,
+        "abstract_screening_excluded": 1,
+        "reports_sought": 17,
+        "reports_not_retrieved": 1,
+        "eligibility": 16,
+        "eligibility_excluded": 1,
+        "included": 15,
+    }
+    with patch.object(plt, "close"):
+        visualizer.prisma_flow_diagram(stats)
+        labels = " ".join(text.get_text() for text in plt.gcf().axes[0].texts)
+
+    assert "Protocolo sem resultados concluídos" in labels
+    assert "estudo contextual e protocolo" not in labels
+
+
 def test_flow_and_funnel_do_not_duplicate_external_captions(tmp_path):
     visualizer = ReviewVisualizer(tmp_path)
     stats = {"identification": 100, "duplicates_removed": 10, "screening": 90,
