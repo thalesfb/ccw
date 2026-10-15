@@ -202,6 +202,16 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert MMAT_LATEX.read_text(encoding="utf-8") == render_table(load_rows())
 
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
+    study8_row = next(
+        (
+            line
+            for line in chapter.splitlines()
+            if r"\citeonline{Computational2017_008}" in line
+        ),
+        "",
+    )
+    assert "Mantido provisoriamente no fluxo de síntese" in study8_row
+    assert "elegibilidade como estudo empírico e a unidade de apreciação MMAT aguardam adjudicação humana" in study8_row
     assert r"O Quadro~\ref{qua:sintese-estudos-empiricos}" in chapter
     assert "não apresenta medida harmonizada de efeito" in chapter
     assert "Resultado reportado" not in chapter
