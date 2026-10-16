@@ -24,9 +24,27 @@ versionados em `research/exports/visualizations`.
 
 ```bash
 npm ci
+npm test
 npm run validate
 npm run build -- --base /ccw/presentation/
 ```
+
+Execute esses comandos dentro de `presentation/`. Use npm com o
+`package-lock.json` versionado; não misture instalações npm e pnpm no mesmo
+`node_modules`. O comando [`npm ci`](https://docs.npmjs.com/cli/v11/commands/npm-ci/)
+reinstala as versões do arquivo de dependências sem reescrevê-lo.
+
+Se o navegador registrar `Failed to patch FloatingVue` ao iniciar o deck,
+reinstale com `npm ci` e repita os testes e a compilação antes de alterar
+dependências. Uma instalação local com versões divergentes da CLI, do cliente
+e da integração de tooltips reproduziu essa falha; a instalação limpa do
+arquivo de dependências e a recompilação eliminaram o erro observado.
+`test/tooltip-runtime.test.mjs` exercita a inicialização real da integração
+desktop usada pelo cliente Slidev e rejeita erros capturados no console.
+Esse teste não monta o deck nem substitui a verificação no navegador: após
+recompilar, recarregue a página e confira console, navegação, imagens e QR.
+Se o erro persistir com a instalação limpa, preserve a mensagem e investigue
+a compatibilidade das dependências, sem ocultar o erro nem desativar tooltips.
 
 O deck segue a direção visual do template fornecido, mas o arquivo PPTX
 original é apenas referência local: a fonte de verdade continua sendo
