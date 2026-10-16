@@ -46,6 +46,21 @@ recompilar, recarregue a página e confira console, navegação, imagens e QR.
 Se o erro persistir com a instalação limpa, preserve a mensagem e investigue
 a compatibilidade das dependências, sem ocultar o erro nem desativar tooltips.
 
+## Verificação visual em janelas menores
+
+O Slidev usa um [canvas de largura fixa e proporção definida](https://sli.dev/custom/#slides-deck-configs),
+redimensionado para caber na janela. A composição dos slides não deve mudar
+para uma coluna por causa da largura externa do navegador; essa mudança faz
+o conteúdo ultrapassar o palco, inclusive nas miniaturas do apresentador.
+
+Após alterar os estilos, confira o build em janelas de 1280 × 720 e
+860 × 1004 pixels. No slide MMAT, S1/S2 e a legenda Y/N/CT devem ficar
+inteiramente acima do rodapé de estado preliminar e dentro do slide.
+Confira também as demais rotas, os gráficos, o menu e o encerramento com QR.
+O tamanho da janela deve alterar a escala, não a ordem ou o número de colunas
+da composição. Esses critérios exigem inspeção no navegador; os testes Node
+não verificam posicionamento visual.
+
 O deck segue a direção visual do template fornecido, mas o arquivo PPTX
 original é apenas referência local: a fonte de verdade continua sendo
 `slides.md`. A marca institucional vem do ativo oficial do IFC Campus Videira
