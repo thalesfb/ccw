@@ -1,11 +1,13 @@
 # Registro da revisão do TCC
 
-A revisão é acompanhada pela issue #5 e pelo PR #6.
+O registro inicial remete à issue #5 e ao PR #6, já encerrados. O estado científico
+vigente deve ser lido junto aos artefatos versionados e às limitações abaixo,
+não inferido somente do fechamento daquela etapa editorial.
 
 ## Decisões aplicadas
 
-- A revisão sistemática da literatura é a etapa de pesquisa concluída.
-- A seleção de tecnologias e bases, a implementação e a validação experimental permanecem como etapas posteriores.
+- O pipeline de busca e seleção possui um snapshot versionado, mas a apreciação metodológica e a verificação documental permanecem preliminares. A execução do pipeline não equivale à conclusão científica integral da revisão.
+- Há implementação técnica adicional e testes sintéticos no repositório. A escolha de uma base definitiva, o desenvolvimento da aplicação educacional, o treinamento correspondente e a validação com participantes permanecem etapas posteriores.
 - Trechos prospectivos herdados do PTC foram corrigidos quando descreviam procedimentos já realizados.
 - Alegações sem artefatos reproduzíveis sobre protótipo, experimentos, validação escolar e defesa foram removidas.
 - O PRISMA 2020 é apresentado como diretriz de relato.
@@ -26,6 +28,11 @@ A normalização deve observar, em conjunto:
 O repositório contém uma customização LaTeX institucional criada em 2017. Ela foi mantida para evitar uma troca silenciosa que alterasse capa, folha de rosto, paginação e demais elementos institucionais sem uma comparação controlada. O documento agora compila automaticamente e o PDF é disponibilizado como artefato do CI. Antes da entrega definitiva, o resultado renderizado deve ser comparado com o modelo LaTeX de TC aplicável ao enquadramento definido pelo curso e com os elementos institucionais obrigatórios.
 
 Mudanças já aplicadas incluem palavras-chave separadas por ponto e vírgula, fontes autorais com ano, remoção de referência obsoleta à NBR 14724:2011 no arquivo principal, correção de espaçamento entre legenda e fonte e registro explícito da limitação do template legado.
+
+A linha de base normativa e os limites de sua conferência estão registrados em
+`docs/tcc/ABNT-2025-CORRECOES.md`. Esse registro considera a versão corrigida de
+01.04.2025 da NBR 14724:2024 e a NBR 6023:2025, sem declarar certificação integral
+da biblioteca ou da instituição.
 
 ## Regra de adjudicação científica do snapshot vigente
 
@@ -103,4 +110,9 @@ Os testes do retorno do orientador verificam, entre outros pontos:
 
 ## Etapa posterior
 
-Depois da consolidação desta revisão, a pesquisa deverá comparar fontes de dados candidatas, definir o problema computacional, estabelecer modelos de referência, selecionar a arquitetura mínima e implementar um protótipo reproduzível. Nenhuma tecnologia ou modelo será considerado escolhido apenas por ter aparecido com maior frequência na literatura.
+Depois da consolidação científica desta revisão, a pesquisa deverá comparar
+fontes de dados candidatas, delimitar a tarefa empírica e validar os modelos e a
+aplicação educacional a partir da especificação e da implementação técnica já
+disponíveis. Nenhuma tecnologia ou modelo será considerado escolhido apenas
+por ter aparecido com maior frequência na literatura. Os testes sintéticos não
+demonstram desempenho em dados reais nem eficácia pedagógica.

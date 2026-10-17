@@ -2,9 +2,9 @@
 
 ## 1. Finalidade do documento
 
-Este documento registra as decisões científicas aprovadas para orientar a implementação do protótipo associado ao Trabalho de Conclusão de Curso. Sua função é reduzir ambiguidades entre o problema educacional, a tarefa estatística, a saída computacional e a interpretação pedagógica.
+Este documento preserva uma formulação histórica de decisões para uma possível implementação do protótipo associado ao Trabalho de Conclusão de Curso. Não autoriza implementação, treinamento ou avaliação com participantes. O escopo vigente é a revisão crítica da literatura e a especificação conceitual, conforme `docs/tcc/ESTADO-ATUAL-TCC.md` e o manuscrito.
 
-As decisões aqui registradas constituem uma linha de base de pesquisa. Alterações posteriores deverão ser justificadas por evidências provenientes da literatura, das características da base de dados ou dos resultados experimentais reproduzíveis.
+As hipóteses, saídas ordinais e condições experimentais descritas a seguir não constituem um contrato de execução vigente. O contrato técnico disponível em `prototype/config/experiment.json` mantém decisões empíricas bloqueadas ou desabilitadas; sua existência e os testes sintéticos não comprovam validação com dados reais. Uma eventual atualização dependerá de decisão posterior, fontes verificadas, dados autorizados e revisão metodológica.
 
 ## 2. Problema de pesquisa operacional
 
@@ -181,7 +181,7 @@ Resultados somente poderão ser incorporados ao texto do TCC depois de reproduzi
 
 ## 14. Estado da decisão
 
-**Status:** aprovado para implementação.
+**Status:** formulação histórica; implementação e experimentos condicionados a decisão posterior. O protocolo do OE4 avalia a especificação conceitual e não exige a execução desta contingência.
 
 **Dependência:** PR nº 6, que estabelece a fundamentação teórica, a revisão sistemática e a especificação conceitual inicial.
 

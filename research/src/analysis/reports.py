@@ -42,7 +42,7 @@ def _normalise_external_url(value: object) -> str:
 
 def _normalise_html_whitespace(value: str) -> str:
     """Keep generated HTML stable and free of whitespace-only line changes."""
-    return "\n".join(line.rstrip() for line in value.splitlines()) + "\n"
+    return "\n".join(line.rstrip() for line in value.splitlines()).rstrip() + "\n"
 
 class ReportGenerator:
     """Gera relatórios completos da revisão sistemática."""
@@ -484,14 +484,30 @@ class ReportGenerator:
             screening_remaining = int(prisma_stats.get('screening', identification - screening_excluded))
             eligibility_remaining = int(prisma_stats.get('eligibility', screening_remaining - eligibility_excluded))
 
-            report_stats['selection_stages'] = {
-                'Identificação': identification,
-                'Triagem': screening_remaining,
-                'Elegibilidade': eligibility_remaining,
-                'Incluídos': included,
-                'Excluídos na Triagem': screening_excluded,
-                'Excluídos na Elegibilidade': eligibility_excluded,
-            }
+            if 'reports_sought' in prisma_stats:
+                report_stats['selection_stages'] = {
+                    'Identificação': identification,
+                    'Registros após deduplicação': screening_remaining,
+                    'Excluídos na triagem inicial': screening_excluded,
+                    'Registros enviados à priorização operacional': int(prisma_stats['prioritization']),
+                    'Excluídos pelo limiar operacional': int(prisma_stats['prioritization_excluded']),
+                    'Selecionados para leitura de resumo': int(prisma_stats['shortlisted']),
+                    'Excluídos após leitura de resumo': int(prisma_stats['abstract_screening_excluded']),
+                    'Relatórios buscados': int(prisma_stats['reports_sought']),
+                    'Relatórios não recuperados': int(prisma_stats['reports_not_retrieved']),
+                    'Textos integrais avaliados': eligibility,
+                    'Excluídos após texto integral': eligibility_excluded,
+                    'Incluídos na síntese empírica': included,
+                }
+            else:
+                report_stats['selection_stages'] = {
+                    'Identificação': identification,
+                    'Triagem': screening_remaining,
+                    'Priorização operacional': eligibility_remaining,
+                    'Incluídos': included,
+                    'Excluídos na Triagem': screening_excluded,
+                    'Excluídos na priorização operacional': eligibility_excluded,
+                }
 
         return report_stats
 
@@ -706,15 +722,26 @@ class ReportGenerator:
 
     {% if statistics.stage_percentages %}
     <div class="section">
-        <h2>📐 Percentuais do fluxo PRISMA</h2>
+        <h2>📐 Percentuais das etapas operacionais</h2>
         <table>
             <tr><th>Relação</th><th>Percentual</th></tr>
+            {% if statistics.prisma.reports_sought is defined %}
+            <tr><td>Excluídos na triagem inicial / registros após deduplicação</td><td>{{ statistics.stage_percentages.screening_excluded_of_screened_records }}%</td></tr>
+            <tr><td>Enviados à priorização operacional / registros após deduplicação</td><td>{{ statistics.stage_percentages.prioritization_passed_of_screened_records }}%</td></tr>
+            <tr><td>Excluídos pelo limiar / registros priorizados</td><td>{{ statistics.stage_percentages.prioritization_excluded_of_prioritization }}%</td></tr>
+            <tr><td>Excluídos após resumo / shortlist</td><td>{{ statistics.stage_percentages.abstract_screening_excluded_of_shortlist }}%</td></tr>
+            <tr><td>Relatórios não recuperados / relatórios buscados</td><td>{{ statistics.stage_percentages.reports_not_retrieved_of_reports_sought }}%</td></tr>
+            <tr><td>Excluídos após texto integral / textos avaliados</td><td>{{ statistics.stage_percentages.full_text_excluded_of_assessed }}%</td></tr>
+            <tr><td>Incluídos na síntese / textos avaliados</td><td>{{ statistics.stage_percentages.included_of_assessed }}%</td></tr>
+            {% else %}
             <tr><td>Excluídos na triagem / identificação</td><td>{{ statistics.stage_percentages.screening_excluded_of_identification }}%</td></tr>
             <tr><td>Avançaram da triagem / identificação</td><td>{{ statistics.stage_percentages.screening_advanced_of_identification }}%</td></tr>
-            <tr><td>Excluídos na elegibilidade / elegibilidade</td><td>{{ statistics.stage_percentages.eligibility_excluded_of_eligibility }}%</td></tr>
-            <tr><td>Incluídos / elegibilidade</td><td>{{ statistics.stage_percentages.included_of_eligibility }}%</td></tr>
+            <tr><td>Excluídos na priorização operacional / submetidos à priorização</td><td>{{ statistics.stage_percentages.eligibility_excluded_of_eligibility }}%</td></tr>
+            <tr><td>Retidos operacionalmente / submetidos à priorização</td><td>{{ statistics.stage_percentages.included_of_eligibility }}%</td></tr>
+            {% endif %}
             <tr><td>Incluídos / identificação</td><td>{{ statistics.stage_percentages.included_of_identification }}%</td></tr>
         </table>
+        <p>O limiar de priorização é operacional e não substitui os critérios de elegibilidade. A etapa de texto integral considera apenas relatórios recuperados; registros não recuperados permanecem separados e não são tratados como exclusões após leitura integral.</p>
     </div>
     {% endif %}
 
@@ -789,15 +816,14 @@ class ReportGenerator:
             <div class="chart-card">
                 <h3>{{ chart.name
                     .replace('_', ' ')
-                    .replace('prisma', 'Fluxo PRISMA')
                     .replace('selection', 'Funil de Seleção')
                     .replace('funnel', '')
                     .replace('papers by year', 'Artigos por Ano')
                     .replace('techniques distribution', 'Distribuição de Técnicas')
                     .replace('database coverage', 'Cobertura por Base de Dados')
                     .replace('relevance distribution', 'Distribuição de Relevância')
-                    .title() }}</h3>
-                <img src="../visualizations/{{ chart.path.name }}" alt="{{ chart.name }}">
+                    .title() if chart.name != 'prisma_flow' else 'Fluxo operacional (referência ao PRISMA 2020)' }}</h3>
+                <img src="../visualizations/{{ chart.path.name }}" alt="{{ 'Representação operacional da seleção; não corresponde ao diagrama PRISMA 2020 completo' if chart.name == 'prisma_flow' else chart.name }}">
             </div>
             {% endfor %}
         </div>
@@ -839,8 +865,8 @@ class ReportGenerator:
         <h2>ℹ️ Informações do Processo</h2>
         <div class="highlight">
             <p><strong>Data de Geração:</strong> {{ generated_at }}</p>
-            <p><strong>Relato:</strong> Estruturado conforme as diretrizes PRISMA 2020</p>
-            <p><strong>Filtro operacional:</strong> score de relevância multi-critério; não substitui a adjudicação científica de escopo, elegibilidade ou qualidade.</p>
+            <p><strong>Relato:</strong> PRISMA 2020 foi usado como diretriz; consulte o checklist para itens e desvios documentados.</p>
+            <p><strong>Filtro operacional:</strong> escore de relevância multicritério sobre metadados e resumos; não equivale à avaliação de elegibilidade de relatórios em texto completo nem substitui a adjudicação científica da população retida.</p>
         </div>
     </div>
     </div>
@@ -969,8 +995,24 @@ class ReportGenerator:
         </div>
 
         <div class="card">
-            <h2>🔍 Fluxo PRISMA</h2>
+            <h2>🔍 Fluxo operacional da revisão</h2>
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                {% if prisma.reports_sought is defined %}
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Registros após deduplicação submetidos à triagem</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.screening }}</td>
+                </tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos na triagem inicial</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.screening_excluded }}</td></tr>
+                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Enviados à priorização operacional (não é elegibilidade)</td><td style="padding: 12px; text-align: right;">{{ prisma.prioritization }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos pelo limiar operacional</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.prioritization_excluded }}</td></tr>
+                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Selecionados para leitura de resumo</td><td style="padding: 12px; text-align: right;">{{ prisma.shortlisted }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após resumo</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.abstract_screening_excluded }}</td></tr>
+                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios buscados para recuperação</td><td style="padding: 12px; text-align: right;">{{ prisma.reports_sought }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Textos integrais não recuperados</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.reports_not_retrieved }}</td></tr>
+                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Textos integrais avaliados</td><td style="padding: 12px; text-align: right;">{{ prisma.eligibility }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após texto integral</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.eligibility_excluded }}</td></tr>
+                <tr style="background: #d4edda;"><td style="padding: 12px; font-weight: bold;">Incluídos na síntese empírica</td><td style="padding: 12px; text-align: right; font-weight: bold; color: #28a745;">{{ prisma.included }}</td></tr>
+                {% else %}
                 <tr style="background: #f8f9fa;">
                     <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Estágio</th>
                     <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6;">Quantidade</th>
@@ -988,26 +1030,28 @@ class ReportGenerator:
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.screening_excluded }}</td>
                 </tr>
                 <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Registros que avançaram à elegibilidade</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Registros submetidos à priorização operacional</td>
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.eligibility }}</td>
                 </tr>
                 <tr>
-                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na elegibilidade</td>
+                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na priorização operacional</td>
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.eligibility_excluded }}</td>
                 </tr>
                 <tr style="background: #d4edda;">
                     <td style="padding: 12px; border-bottom: 1px solid #dee2e6; font-weight: bold;">✅ Incluídos (final)</td>
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; font-weight: bold; color: #28a745;">{{ prisma.included }}</td>
                 </tr>
+                {% endif %}
             </table>
+            <p>A priorização utiliza metadados e resumos e não equivale à avaliação de elegibilidade em texto completo. Relatórios não recuperados são informados separadamente e não são contados como exclusões após texto integral.</p>
         </div>
 
         <div class="card">
             <h2>📈 Visualizações</h2>
             <div class="chart-grid">
                 <div class="chart-card">
-                    <h3>Fluxo PRISMA</h3>
-                    <img src="../visualizations/prisma_flow.png" alt="PRISMA Flow">
+                    <h3>Fluxo operacional (referência PRISMA 2020)</h3>
+                    <img src="../visualizations/prisma_flow.png" alt="Representação operacional do processo de seleção; não é o diagrama PRISMA completo">
                 </div>
                 <div class="chart-card">
                     <h3>Funil de Seleção</h3>
@@ -1090,7 +1134,7 @@ class ReportGenerator:
          </div>
      </nav>    <div class="content">
     <h1>{{ stage_label }}</h1>
-    <p><em>{{ papers_data|length }} registros retidos no snapshot vigente</em></p>
+    <p><em>{{ papers_data|length }} registros marcados como retidos no export operacional do pipeline; este estágio não substitui o ledger vigente de elegibilidade do TCC.</em></p>
     {% if stage == 'included' %}
     <div class="paper-criteria" style="background:#fff3cd;border-left-color:#f0ad4e;">
         <strong>Como interpretar:</strong> esta é a população retida pelo fluxo operacional.
