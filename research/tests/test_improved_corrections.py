@@ -6,6 +6,7 @@ Script de teste para validar as correções implementadas.
 import sys
 from pathlib import Path
 import argparse
+import pytest
 
 # Adicionar o diretório raiz do projeto (research) ao path
 
@@ -45,6 +46,7 @@ def test_search_terms():
         print(f"     {i+1}. {query}")
 
 
+@pytest.mark.integration
 def test_pipeline(limit_queries: int = None):
     """Testa o pipeline melhorado."""
     print("🚀 Testando pipeline melhorado...")
