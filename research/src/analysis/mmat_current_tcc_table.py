@@ -248,7 +248,7 @@ def render_table(
     lines.extend([
         r"\end{longtable}",
         r"\fonte{Elaborado pelo autor (2026).}",
-        r"\textit{Cobertura:} S1/S2 respondidas para 14 estudos; Q1--Q5 apreciados para 11. Nos três estudos com categoria pendente, --- significa não avaliado, não CT.",
+        r"\textit{Cobertura:} S1/S2 respondidas para 14 registros; Q1--Q5 apreciados para 11. Nos três registros com categoria pendente, --- significa não avaliado, não CT.",
         note,
         r"\endgroup",
     ])

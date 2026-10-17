@@ -143,9 +143,10 @@ anos limitam a inferência e não isolam o efeito da IA.
 ### 17. Apreciação metodológica preliminar: critérios, não uma nota global
 
 O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
-15 registros empíricos permanecem provisoriamente no núcleo, com texto integral
-consultado; 14 têm triagem S1/S2 e 11 têm apreciação por categoria, registradas
-por um único revisor. Nos estudos 5, 7 e 14, Q1--Q5 permanecem sem resposta
+15 registros permanecem provisoriamente no núcleo empírico, com consultas
+documentais declaradas; 14 têm triagem S1/S2 e 11 têm apreciação por categoria.
+São registros preliminares produzidos com apoio de IA, não comprovação de
+leitura humana integral ou apreciação independente. Nos estudos 5, 7 e 14, Q1--Q5 permanecem sem resposta
 até a definição do delineamento, sem serem codificados como CT. O estudo 8 permanece no fluxo
 PRISMA e no corpus, sem respostas MMAT até adjudicação de elegibilidade e
 unidade de análise; suas bases distintas não devem ser somadas. Um registro

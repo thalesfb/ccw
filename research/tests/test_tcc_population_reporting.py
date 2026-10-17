@@ -131,7 +131,6 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     storyboard = (
         ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md"
     ).read_text(encoding="utf-8")
-    speaker_notes = (ROOT / "results/tcc/presentation/ROTEIRO_FALAS_TCC.md").read_text(encoding="utf-8")
 
     assert "triagem e a avaliação de elegibilidade, 18 registros" not in results
     assert "priorização operacional" in results
@@ -139,7 +138,8 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     assert "9 tiveram texto primário revisado e 8 foram" not in slides
     assert "nove registros com texto primário revisado e oito" not in pptx_source
     assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard
-    assert "encaminhou 2.486 para elegibilidade" not in speaker_notes
+    assert "encaminhou 2.486 para elegibilidade" not in storyboard
+    assert "registros → 18 em avaliação de escopo" in slides
 
 
 def test_background_distinguishes_abstract_only_records_from_verified_full_text_evidence() -> None:

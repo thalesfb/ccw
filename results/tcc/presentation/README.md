@@ -17,15 +17,19 @@ Oportunidades e Técnicas Computacionais**.
   é o arquivo da defesa, não é derivado de `slides.md` e não é sincronizado com
   o deck canônico. A diferença de contagem é intencional entre artefatos com
   papéis distintos, não uma paridade de exportação pendente.
-- [`ROTEIRO_FALAS_TCC.md`](ROTEIRO_FALAS_TCC.md) contém falas de apoio para o
-  export editável de 19 slides; não substitui um roteiro alinhado ao deck
-  Slidev.
+- [`ROTEIRO_FALAS_TCC.md`](ROTEIRO_FALAS_TCC.md) é um roteiro histórico do
+  export paralelo, fora do escopo e da validação da versão semifinal atual;
+  não deve ser usado como fonte do deck Slidev vigente.
 - [`material de apresentação do PTC histórico`](../../../results/ptc/presentation/APRESENTACAO_SLIDES_CONTEUDO.md)
   é uma terceira apresentação, de uma etapa anterior. Serve como contexto
   narrativo e visual, nunca como fonte dos números do TCC vigente.
 - [`generate_tcc_presentation.py`](../../../scripts/generate_tcc_presentation.py)
   define o conteúdo e o layout do PPTX paralelo. Não lê o storyboard, o roteiro
   de falas nem os arquivos TeX.
+
+A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
+após a revisão dos PRs e a validação da orientação, com base no conteúdo
+aprovado.
 
 Após merge e deploy bem-sucedido, os endereços públicos são:
 

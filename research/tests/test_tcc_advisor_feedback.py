@@ -225,8 +225,9 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     normalized_methodology = " ".join(methodology.split())
     assert "Institute of Medicine" not in methodology
     assert "referências do" not in methodology
-    speaker_notes = _read(TCC_ROOT / "presentation" / "ROTEIRO_FALAS_TCC.md")
-    for text in (methodology, speaker_notes):
+    storyboard = _read(TCC_ROOT / "presentation" / "APRESENTACAO_TCC_SLIDES_CONTEUDO.md")
+    slides = _read(REPO_ROOT / "presentation" / "slides.md")
+    for text in (methodology, storyboard, slides):
         assert "Nove textos estão arquivados" not in text
         assert "nove fontes" not in text
     assert r"\citeonline{Zeng2025_6923}" in methodology
@@ -239,7 +240,10 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
     assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
     assert "seus componentes qualitativos e quantitativos são apreciados separadamente" in normalized_methodology.lower()
-    assert "para os estudos 6916, 6919 e 6920, q1--q5 representam a categoria de métodos mistos" in MMAT_LATEX.read_text(encoding="utf-8").lower()
+    mmat_table = MMAT_LATEX.read_text(encoding="utf-8")
+    assert "Q1--Q5 correspondem aos critérios MMAT da categoria" in mmat_table
+    for author in ("Villegas-Ch et al. (2025)", "Xia et al. (2026)", "Echeveria et al. (2025)"):
+        assert f"{author} & Métodos mistos &" in mmat_table
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:

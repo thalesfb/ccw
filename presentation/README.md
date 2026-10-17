@@ -12,6 +12,11 @@ O arquivo `results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx`
 o arquivo da defesa, não é exportado de `slides.md` e não permanece sincronizado
 automaticamente. Para apresentar o TCC, use o deck Slidev.
 
+A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
+após a revisão dos PRs e a validação da orientação, com base no conteúdo
+aprovado. O roteiro histórico do export paralelo não é fonte do deck vigente
+nem evidência de sua atualização.
+
 O material em `results/ptc/presentation/` é uma terceira apresentação,
 histórica, referente ao PTC. Serve apenas como referência narrativa e visual,
 nunca como fonte dos números atuais do TCC.
@@ -112,7 +117,7 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 
 ## Limites científicos
 
-- dos 18 registros shortlistados, 15 estudos empíricos foram mantidos
+- dos 18 registros shortlistados, 15 registros foram mantidos no núcleo empírico
   provisoriamente, um relatório não foi recuperado, um registro foi excluído
   após resumo e um protocolo sem resultados concluídos foi excluído após texto
   completo;

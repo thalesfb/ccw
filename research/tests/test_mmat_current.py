@@ -404,19 +404,10 @@ def test_defense_material_preserves_pending_mmat_decisions() -> None:
         .lower()
         .split()
     )
-    speaker_notes = " ".join(
-        (root / "results/tcc/presentation/ROTEIRO_FALAS_TCC.md")
-        .read_text(encoding="utf-8")
-        .lower()
-        .split()
-    )
-
     assert "estudos 5, 7 e 14: categoria indefinida, q1–q5 sem resposta" in slides
     assert "estudo 8: elegibilidade e unidade pendentes, sem respostas" in slides
     assert "q1--q5 permanecem sem resposta até a definição do delineamento" in storyboard
     assert "sem respostas mmat até adjudicação de elegibilidade e unidade de análise" in storyboard
-    assert "sem classificá-lo como randomizado ou não randomizado" in speaker_notes
-    assert "nenhum critério mmat recebeu resposta até a adjudicação" in speaker_notes
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:

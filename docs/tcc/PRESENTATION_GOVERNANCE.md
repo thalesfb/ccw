@@ -20,6 +20,13 @@ decisões de implementação em afirmações acadêmicas.
   canônico `https://github.com/thalesfb/ccw`, texto alternativo e uma área
   visual legível para leitura em projeção.
 
+## Roteiro de fala: etapa posterior
+
+A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
+após a revisão dos PRs e a validação da orientação, com base no conteúdo
+aprovado. O roteiro histórico do export paralelo não integra os contratos de
+atualidade científica do deck; estes conferem o storyboard e o Slidev.
+
 ## Template fornecido: instrução versus requisito
 
 O arquivo de template fornecido externamente foi inspecionado como referência
@@ -96,7 +103,7 @@ seu efeito sobre o alcance das conclusões.
 Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
 o código do pipeline está implementado, os testes sintéticos estão verdes, o
 experimento com dados reais é continuidade fora do escopo documental desta entrega,
-e o MMAT é preliminar. O corpus mantém provisoriamente 15 estudos empíricos:
+e o MMAT é preliminar. O núcleo empírico mantém provisoriamente 15 registros:
 14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria. Nos estudos
 5, 7 e 14, Q1--Q5 aguardam definição do delineamento, sem resposta CT.
 O estudo 8 permanece no fluxo PRISMA e no corpus sem

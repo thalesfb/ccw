@@ -104,7 +104,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         slidev_readme = (ROOT / "presentation/README.md").read_text(encoding="utf-8")
         pptx_readme = (TCC / "presentation/README.md").read_text(encoding="utf-8")
         storyboard = (TCC / "presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md").read_text(encoding="utf-8")
-        speaker_notes = (TCC / "presentation/ROTEIRO_FALAS_TCC.md").read_text(encoding="utf-8")
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         normalized_pptx_readme = re.sub(r"\s+", " ", pptx_readme.lower())
         self.assertIn("deck canônico da defesa", slidev_readme.lower())
         self.assertIn("25 slides", slidev_readme)
@@ -112,7 +112,17 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("19 slides", pptx_readme)
         self.assertIn("não é o arquivo da defesa", normalized_pptx_readme)
         self.assertEqual(len(re.findall(r"^### \d+\.", storyboard, re.M)), 25)
-        self.assertEqual(len(re.findall(r"^## \d+\.", speaker_notes, re.M)), 19)
+        self.assertEqual(len(re.findall(r"^layout: \w+$", slides, re.M)), 25)
+
+    def test_speech_is_deferred_until_content_approval(self):
+        for path in (
+            ROOT / "presentation/README.md",
+            TCC / "presentation/README.md",
+            ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md",
+        ):
+            document = " ".join(path.read_text(encoding="utf-8").lower().split())
+            self.assertIn("a fala não integra esta revisão semifinal", document)
+            self.assertIn("após a revisão dos prs e a validação da orientação", document)
 
     def test_public_evidence_note_states_scope_without_private_workflow(self):
         note_path = ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md"
@@ -172,7 +182,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         )
 
         governance = " ".join((ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md").read_text(encoding="utf-8").split())
-        self.assertIn("corpus mantém provisoriamente 15 estudos empíricos", governance)
+        self.assertIn("núcleo empírico mantém provisoriamente 15 registros", governance)
         self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", governance)
         self.assertIn("1 aguarda texto integral", governance)
         self.assertIn("um registro foi excluído após resumo", governance)

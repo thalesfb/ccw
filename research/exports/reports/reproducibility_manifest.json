@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-14",
-  "generated_at": "2026-10-16T23:54:33+00:00",
+  "generated_at": "2026-10-17T03:38:22+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -598,12 +598,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "fd683334e06eaa5fbc949fff7745ff7b6d63c0fae8b683a5259018421aa677f7"
+      "sha256": "8f7ef817e238559b166b56ac4714304a65e7ffd02dffc7dc3d96e2b85375df8e"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "351af94e2edaed9598ccd62dd9d43441c593d69ff808d96acc944e74089a7ffe"
+      "sha256": "2e14102f5e278e4a5a20da2ebb628a933e8316c84eb665a32f884b8a7c7ae283"
     },
     {
       "path": "research/requirements.txt",
