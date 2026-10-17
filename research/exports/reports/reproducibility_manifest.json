@@ -469,22 +469,22 @@
     {
       "path": "research/exports/analysis/deduplication_identity_audit.csv",
       "role": "row-level audit of the deterministic DOI/URL records removed from the PRISMA flow",
-      "sha256": "d43db9af7bad65cf827c17d3a4ecf6c9e6a60a3205acf46c6a62439e1275c98a"
+      "sha256": "ad11fce48c8e254567dbf459cf00f8f2f3d71f70e15dfdf084db8219a996db4a"
     },
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "18972f0e7cc20e10beda55697a06a0c61f05fd420f238250ec425e657db41328"
+      "sha256": "40c31a1c68a33885b4809f4334605832add0ae318b14e623baab672cb48abf39"
     },
     {
       "path": "research/exports/reports/summary.json",
       "role": "PRISMA and derived summary statistics",
-      "sha256": "136224a3f210984ec1b0ca20779679493c452c17612498d371c03c590d1b46e6"
+      "sha256": "0afb7b7474eab73f4db6ef290087e79338b5aacd0d797df852824236c667336c"
     },
     {
       "path": "research/exports/references/included_papers.bib",
       "role": "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
-      "sha256": "c5ff18de7db922466202f0dc04da90ed14099ba0b669c64e7c16040c9a1058d6"
+      "sha256": "37e4d47d1042df453bbd7b43e7b0fc940773783fb74894331446e1aee5289acd"
     },
     {
       "path": "research/data/mmat_current_study_registry.csv",
@@ -514,107 +514,107 @@
     {
       "path": "research/data/current_eligibility_protocol.csv",
       "role": "versioned adjudication gates for final scientific eligibility and override disposition",
-      "sha256": "40df20f82a756148d4fb8f374fbda77f8bb1a4ab47f3fa8e1f411edcf9491d3e"
+      "sha256": "0d17e642a55d37f6178cd783f8b1bfb09f997122802cac91a99ee94a53a2cfb0"
     },
     {
       "path": "research/data/manual_override_adjudication.csv",
       "role": "row-level evidence ledger for the seven manual candidate overrides",
-      "sha256": "5d92482ba3b49c5e6af6ed0086f1598d2cdc736262e054982cc78899a8a26bae"
+      "sha256": "8e7dd6cbf510f26690d8f942a5a99453c37691f972c13cc23a3f59ce5bf487e9"
     },
     {
       "path": "research/data/manual_override_evidence_matrix.csv",
       "role": "structured evidence matrix for scope and publication-type adjudication of the seven manual overrides",
-      "sha256": "7662c9084e1fd3a918cb80cec6e6ff3a44d535b8f994d0256abd2ae260b99ae0"
+      "sha256": "5a9365990dc03782f4e2f38ec3d115ce5022d8483f1db3915602ccffbc2a0d3c"
     },
     {
       "path": "research/data/protocol_execution_2025.json",
       "role": "historical protocol reconstruction from the 2025 baseline; not the current PRISMA source of truth",
-      "sha256": "60f6ca778093d788e197ac820a92bee7a16be30bcc18e86f4f0a3b3ed0e728d4"
+      "sha256": "3196b70e1cdf1f43bef8e98ae7481045ca399e196c0b1181d7023c3d34d26026"
     },
     {
       "path": "research/src/config.py",
       "role": "versioned review configuration and criteria",
-      "sha256": "9ae83a581ff35fa3ae9e46915e6b1058e79b2f7702093959ec61fca7d0648e69"
+      "sha256": "f6964db71bfb8691e75ed39be26f6f89bd387b7de548e33301d07ad5d465b0fb"
     },
     {
       "path": "research/src/search_terms.py",
       "role": "versioned canonical bilingual query generator",
-      "sha256": "f01c07411e7511070c93c23db07996d6307078f793599dd4e01910c31482286d"
+      "sha256": "58740ee8a2555e098d0f7e8136988762f9979b5985867fcf2656a47f3c0015ed"
     },
     {
       "path": "research/src/processing/scoring.py",
       "role": "versioned relevance-scoring implementation",
-      "sha256": "69ff5021c3bcefe27e5889216d39c7080c7eae18f21c7955395cb8bf33ec9ce0"
+      "sha256": "7c0a54aded5d34f9f373637a2fa0a97b8c0b984636b38d92b8939594e6a523cb"
     },
     {
       "path": "research/src/processing/selection.py",
       "role": "versioned selection-stage implementation",
-      "sha256": "d9c1142c884ee1115be40ef1b3cbd381655aa8a95041f1678c89afbd5de58eb3"
+      "sha256": "3b0f0c2841fc038d417b480c24d8dd7c066fd5ec1e06b1651f34c0eaa584946e"
     },
     {
       "path": "research/src/processing/dedup.py",
       "role": "versioned duplicate-candidate audit and deduplication implementation",
-      "sha256": "5804224279667908c83ab3198363bf2f5a3199d00199219ff94d5c3a90ffb8cc"
+      "sha256": "9315e29ebb5a1128ee46aa42e0293b29860b6fec8a84cb962e7c4672b0405bbe"
     },
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "9d62f6ac221b9d79d7644a3f7ba5c41c8226c54d08d1c995940ebe8dd6e657ba"
+      "sha256": "4fbe7c8f8672310b242c7f929bfbb14a0d0057629011469c21cdb54f6d192156"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "1da6264412b88daee40cafe6e5c6564cc3c325ca9116020b71b8a8972b88e733"
+      "sha256": "d25d5ce192da7f510d967d91ac61b061a1c9ef4c36abd2de7e104dddf1fd3ee9"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
       "role": "versioned full-text analysis implementation",
-      "sha256": "49a87a15da462d0224cc3ee77dbe269ed25f4c04d147a8821589c10b040459cf"
+      "sha256": "3e7f66939f5943eee538c7cf5cd8987eafba202d17426c28086a22e92b67404e"
     },
     {
       "path": "research/src/cli_audit.py",
       "role": "manual-audit helper used to persist exclusions",
-      "sha256": "dc025836b76ab547e82b613524d9f6434fbea61ec8e3af652588524d5c8bcf37"
+      "sha256": "d09fc0e9e18f3be5ba37bcfdf89bba1dc0923759bdcfe723b15c0c08677c188b"
     },
     {
       "path": "research/src/cli.py",
       "role": "versioned command-line entry point for the research workflow",
-      "sha256": "c46e8c4db35ab4ea689ce881263d5bccc77ac2c008f1fd54d9ef9f5903ed3701"
+      "sha256": "11167c922e5acf1f5d88ce09e3257b97ade4bf46bf7a22287fb645c3f77748ff"
     },
     {
       "path": "research/src/pipelines/validations.py",
       "role": "versioned read-only cross-check of DB, exports and summary",
-      "sha256": "b707bd4c927bb2434c2018fd6bb9a4c0028ae74026e8be02166cca20ab7aa5c9"
+      "sha256": "60d8be3af1d138c4bd2e1fb4d4f4237375b71fbea1aa945d7c2243c9f4fc761f"
     },
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "e188567b2effa553efb2f7cd69fb8c47a05c938a689bf875e8ac6901dd57c47b"
+      "sha256": "c0ebd1ac0084ec413cc5bb4b48594f8261a6ec8c3a23271e81e823fcf77b317b"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
       "role": "SQLite-independent transformation from the versioned row export and adjudication ledger",
-      "sha256": "4e31cfecf1563a9f267ffe6f5ed509cdd2624dcf58abc588af7fd59548412b23"
+      "sha256": "28d70eecf6bf847b28dce9dc3e303d8a22445960baaf246612979fc2ea77d182"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "versioned validator for the current 18-record MMAT artifacts",
-      "sha256": "712f592d2d82da20ec44ddf0663509a9eea0a66222eaf9ad70888e224470516a"
+      "sha256": "8221784e72712f4fa2c1c77ee2988daf480392c276fed27712afb49944a3794c"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "051c4836a3f9b1e5975e738eefc64a32c67fbb2c00c1b775fc83ff0fd04f0857"
+      "sha256": "10e03584d21d0f0b8281f46c5e08797e838cbee871052cf0589eaa43bd76c894"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary current 18-record MMAT table included by the TCC",
-      "sha256": "df52523d1a14d1915896fbf2b80efb43094e8db04863e50f517127f2749065bc"
+      "sha256": "8aeecb1c945aa0cd83088e7349de08aa22ffaa639ea0e2c2836942936a9fedbf"
     },
     {
       "path": "research/requirements.txt",
       "role": "research runtime dependencies",
-      "sha256": "683308e73f190f5ef8efd5ac807b868b4ed3c4517119d3150d88de5267ac9596"
+      "sha256": "1a3c6473511514e418386a070abd98ff2191735dea4586ee301f8ad93d283590"
     }
   ],
   "companion_documents": [

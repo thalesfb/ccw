@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 from pathlib import Path
 
 from src.analysis.reports import ReportGenerator
+from src.validation.reproducibility import _sha256 as _artifact_sha256
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
@@ -20,12 +20,13 @@ MANIFEST_PATH = (
 )
 
 
-def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+def test_reproducibility_hash_is_stable_across_text_line_endings(tmp_path: Path) -> None:
+    windows_text = tmp_path / "windows.csv"
+    unix_text = tmp_path / "unix.csv"
+    windows_text.write_bytes(b"study_id,status\r\n1,Y\r\n")
+    unix_text.write_bytes(b"study_id,status\n1,Y\n")
+
+    assert _artifact_sha256(windows_text) == _artifact_sha256(unix_text)
 
 
 def _manifest() -> dict:
@@ -152,7 +153,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         assert not relative_path.lower().endswith((".sqlite", ".db"))
         path = REPOSITORY_ROOT / relative_path
         assert path.exists(), f"Missing manifest artifact: {relative_path}"
-        assert _sha256(path) == artifact["sha256"], (
+        assert _artifact_sha256(path) == artifact["sha256"], (
             f"Hash drift detected for {relative_path}; regenerate the manifest"
         )
 
