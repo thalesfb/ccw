@@ -401,8 +401,8 @@ const page = `<!doctype html>
           <div class="metric-card"><span class="metric-value">${current.length}</span><span class="metric-label">itens no registro de apreciação</span></div>
           <div class="metric-card"><span class="metric-value">${empiricalCore.length}</span><span class="metric-label">estudos empíricos mantidos provisoriamente</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
-          <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">textos primários revisados</span></div>
-          <div class="metric-card"><span class="metric-value">${mmatAppraised.length}</span><span class="metric-label">estudos com triagem MMAT (S1/S2)</span></div>
+          <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">consultas documentais declaradas</span></div>
+          <div class="metric-card"><span class="metric-value">${mmatAppraised.length}</span><span class="metric-label">registros com triagem MMAT (S1/S2)</span></div>
           <div class="metric-card"><span class="metric-value">${categoryAppraised.length}</span><span class="metric-label">estudos com critérios por categoria apreciados</span></div>
           <div class="metric-card"><span class="metric-value">${pendingFullText.length}</span><span class="metric-label">${pendingFullTextLabel}</span></div>
         </div>
@@ -416,8 +416,8 @@ const page = `<!doctype html>
         </article>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
-          <h3>${primaryReviewed.length} textos integrais no núcleo empírico</h3>
-          <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm S1/S2 respondidas; ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. Em ${categoryPending.length} estudos (${categoryPending.map((row) => escapeHtml(row.study_id)).join(', ')}), Q1–Q5 permanecem não avaliados até definir o delineamento, sem resposta CT. ${unitHoldRows.length} registro (${unitHoldRows.map((row) => escapeHtml(row.study_id)).join(', ')}) permanece no corpus e no fluxo PRISMA sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise; não se somam suas bases distintas. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. A revisão foi registrada por um único revisor e a adjudicação metodológica final permanece pendente.</p>
+          <h3>${primaryReviewed.length} registros com consulta documental declarada</h3>
+          <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm S1/S2 respondidas; ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. Em ${categoryPending.length} estudos (${categoryPending.map((row) => escapeHtml(row.study_id)).join(', ')}), Q1–Q5 permanecem não avaliados até definir o delineamento, sem resposta CT. ${unitHoldRows.length} registro (${unitHoldRows.map((row) => escapeHtml(row.study_id)).join(', ')}) permanece no corpus e no fluxo PRISMA sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise; não se somam suas bases distintas. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. Os julgamentos documentais receberam apoio automatizado; o rótulo histórico de revisor único não comprova leitura humana integral. A conferência humana por fonte e critério e a adjudicação metodológica permanecem pendentes.</p>
         </article>
       </section>
 
@@ -461,7 +461,7 @@ const page = `<!doctype html>
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
             <h3 id="pending-title">Pendências antes da consolidação</h3>
-            <p>Completar os localizadores por critério, recuperar os ${pendingFullText.length} textos primários pendentes, adjudicar a elegibilidade e unidade de análise do estudo 8 e concluir a adjudicação independente com a orientação. O protocolo 6921 continua fora da síntese empírica.</p>
+            <p>Completar os localizadores por critério, recuperar o relatório pendente no fluxo (${pendingFullText.length}), revalidar as demais fontes ainda não examináveis nesta auditoria e adjudicar a elegibilidade e unidade de análise do estudo 8. As consultas históricas declaradas não certificam leitura humana; a matriz de cobertura distingue acesso e leitura efetivamente registrados. O protocolo 6921 continua fora da síntese empírica.</p>
           </div>
         </div>
       </section>
@@ -470,7 +470,8 @@ const page = `<!doctype html>
         <span class="eyebrow">Proveniência</span>
         <h3>Fontes versionadas</h3>
         <p><a href="../../../research/data/mmat_reassessment_current.csv">Arquivo CSV da apreciação atual</a> · <a href="../../../research/data/mmat_component_reassessment_current.csv">CSV da apreciação por componentes</a> · <a href="../../../research/data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../../../research/data/mmat_primary_sources_manifest.csv">manifesto de fontes primárias</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
-        <p class="source-note">A página foi gerada a partir dos dados versionados da apreciação MMAT e do registro dos estudos.</p>
+        <p><a href="../../../research/data/study_contribution_current.json">Matriz de cobertura das fontes e contribuição dos 18 registros</a></p>
+        <p class="source-note">A página foi gerada a partir dos dados versionados da apreciação MMAT e do registro dos estudos. A matriz complementar informa páginas, limites da leitura documental e conferência humana pendente, sem distribuir os textos primários.</p>
         <p class="source-note">As perguntas seguem o <a href="https://doi.org/10.3233/EFI-180221" target="_blank" rel="noopener">MMAT 2018</a>; a tradução em português é acompanhada pela formulação original em inglês para manter a rastreabilidade do instrumento.</p>
       </section>
     </div>

@@ -24,7 +24,8 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         )[0]
         self.assertNotIn(r"\begin{itemize}", objectives)
         self.assertIn("metodológicas", objectives)
-        self.assertIn("avaliação futura", objectives)
+        self.assertIn("viabilidade e a coerência da especificação conceitual", objectives)
+        self.assertIn("não equivale à realização da avaliação", objectives)
 
     def test_piaget_is_not_cited_in_active_manuscript(self):
         source = "\n".join(path.read_text(encoding="utf-8")
@@ -56,13 +57,14 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         )[0]
         self.assertIn("proposição", alignment)
         self.assertIn("não", alignment)
-        self.assertIn("sem execução de experimento ou demonstração de eficácia pedagógica", alignment)
+        self.assertIn("Sua aplicação não foi realizada", alignment)
+        self.assertIn("contingência separada", alignment)
         self.assertIn("não equivalem a uma síntese final do corpus", alignment)
 
     def test_protocol_covers_the_proposed_pedagogical_review(self):
         source = (CONTENT / "prototipo.tex").read_text(encoding="utf-8")
         self.assertNotIn("especificação validada documentalmente", source)
-        protocol = source.split(r"\section{Dados, Modelagem e Avaliação}", 1)[1].split(
+        protocol = source.split(r"\section{Protocolo de Avaliação da Especificação Conceitual}", 1)[1].split(
             r"\section{Arquitetura de Referência}", 1
         )[0]
         for phrase in ("revisão documental por docentes", "nível de ensino",

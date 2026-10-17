@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-14",
-  "generated_at": "2026-10-15T20:27:29+00:00",
+  "generated_at": "2026-10-16T23:54:33+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -10,19 +10,19 @@
   },
   "operational_database_snapshot": {
     "counts": {
-      "total_records": 4527,
+      "total_records": 4791,
       "selection_stage_counts": {
-        "screening": 4250,
-        "eligibility": 275,
+        "screening": 4484,
+        "eligibility": 305,
         "included": 2
       },
       "prisma": {
-        "identification": 4527,
-        "duplicates_removed": 0,
-        "screening": 4527,
-        "screening_excluded": 4250,
-        "eligibility": 277,
-        "eligibility_excluded": 275,
+        "identification": 4791,
+        "duplicates_removed": 1,
+        "screening": 4790,
+        "screening_excluded": 4483,
+        "eligibility": 307,
+        "eligibility_excluded": 305,
         "included": 2
       }
     },
@@ -31,42 +31,42 @@
       2
     ],
     "deduplication_audit": {
-      "raw_rows": 4527,
+      "raw_rows": 4791,
       "operationally_flagged_rows": 0,
-      "deterministic_identity_duplicate_rows": 0,
+      "deterministic_identity_duplicate_rows": 1,
       "deterministic_identity_duplicate_rows_by_identifier": {
         "doi": 0,
-        "url": 0,
+        "url": 1,
         "persisted_flag": 0
       },
       "confirmed_semantic_duplicates": 0,
       "doi": {
-        "non_empty_rows": 4196,
-        "distinct_values": 4196,
+        "non_empty_rows": 4420,
+        "distinct_values": 4420,
         "repeated_groups": 0,
         "repeated_rows": 0,
         "excess_rows": 0
       },
       "url": {
-        "non_empty_rows": 4527,
-        "distinct_values": 4527,
-        "repeated_groups": 0,
-        "repeated_rows": 0,
-        "excess_rows": 0
+        "non_empty_rows": 4791,
+        "distinct_values": 4790,
+        "repeated_groups": 1,
+        "repeated_rows": 2,
+        "excess_rows": 1
       },
       "title": {
-        "non_empty_rows": 4527,
-        "distinct_values": 4442,
-        "repeated_groups": 55,
-        "repeated_rows": 140,
-        "excess_rows": 85
+        "non_empty_rows": 4791,
+        "distinct_values": 4697,
+        "repeated_groups": 62,
+        "repeated_rows": 156,
+        "excess_rows": 94
       },
       "title_only": {
-        "non_empty_rows": 4527,
-        "distinct_values": 4442,
-        "repeated_groups": 55,
-        "repeated_rows": 140,
-        "excess_rows": 85
+        "non_empty_rows": 4790,
+        "distinct_values": 4697,
+        "repeated_groups": 61,
+        "repeated_rows": 154,
+        "excess_rows": 93
       },
       "interpretation": "Repeated normalized DOI/URL identities are deterministic duplicate records for the current PRISMA flow. The raw title metric includes rows in those identity groups; title_only is recalculated after identity removal. Title-only matches remain candidates for semantic review and are not removed automatically."
     },
@@ -441,7 +441,7 @@
         "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
       ]
     },
-    "interpretation": "The current MMAT ledger records S1/S2 screening for 14 studies and category-specific appraisal for 11; three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. 15 records remain provisionally in the empirical corpus; study 8 has no MMAT responses pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
+    "interpretation": "The current MMAT ledger records S1/S2 screening for 14 studies and category-specific appraisal for 11; three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. 15 records remain provisionally in the empirical corpus; study 8 has no MMAT responses pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. Historical reviewer labels do not establish completed human reading or appraisal; human verification remains pending."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
@@ -468,17 +468,17 @@
     {
       "path": "research/exports/reports/summary.json",
       "role": "PRISMA and derived summary statistics",
-      "sha256": "e7049d52de60bddca0750c5543dbeb9ed13fa02b4e6ce6aed3fea23d6f4c0bb6"
+      "sha256": "22dd49adb7bcda73bc83b2b06d6e3182fb7b5557aca23294fd9933c6bb4a011b"
     },
     {
       "path": "research/exports/references/included_papers.bib",
-      "role": "BibTeX inventory of 18 pipeline-shortlisted records, separated from the 12 empirical-core inclusions",
+      "role": "BibTeX inventory of preliminary candidate records, distinct from the provisional empirical core",
       "sha256": "37e4d47d1042df453bbd7b43e7b0fc940773783fb74894331446e1aee5289acd"
     },
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "fcdf86ee539a3b7dbe27190fc93dae950a22430c2cf2bc02344a8dd7f7ce576c"
+      "sha256": "44e878c0870d897160415212e9ecfed7665849d4a33dd126a1529a0954066d43"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
@@ -494,6 +494,11 @@
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
       "sha256": "bf264217cdc6f4cff51967c756976f2fb12e3bfbc72fba887d256d994512d29f"
+    },
+    {
+      "path": "research/data/study_contribution_current.json",
+      "role": "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
+      "sha256": "8ce7b3e76335a366a6b128fb8e23f75f223f597772964cb36994690b1cfffe10"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
@@ -553,7 +558,7 @@
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "6f579111f0f1b1b77adb8c05a5a37d9386209002ef93aefb5bf75cdb5fd36627"
+      "sha256": "b4b91f9c1eb687c4cdccbdd236e795f16db56bfe79dbafaf82e519f1ec58f39c"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
@@ -578,7 +583,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "85eaa41ddeb24f0e7c5337463a03c1523ef2ffd21261da9b2055f4b42988f501"
+      "sha256": "b521a0cc4558256f8d721b1b684b36c3761076c1ce94e0e12bcf441606340aa5"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -587,18 +592,18 @@
     },
     {
       "path": "research/src/analysis/mmat_current.py",
-      "role": "validator separating the 12 provisional empirical inclusions from the 11-study MMAT appraisal scope",
+      "role": "validator separating provisional retention, screening responses and category-specific MMAT coverage",
       "sha256": "d49cfa83ee1438886bf2eca27552df071f724631bab4e19c007aed85f45cbc57"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "17b96904968ac2def075e76d07a6bacd3bd44a9312fe023cfdf07113dc7254c6"
+      "sha256": "fd683334e06eaa5fbc949fff7745ff7b6d63c0fae8b683a5259018421aa677f7"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
-      "role": "preliminary MMAT table for 11 assessed empirical studies; the corpus retains 12 provisionally",
-      "sha256": "384dcc686bf0e33f9a352814a4ac959d555b37cdb70c3123096a25c0209b44d1"
+      "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
+      "sha256": "351af94e2edaed9598ccd62dd9d43441c593d69ff808d96acc944e74089a7ffe"
     },
     {
       "path": "research/requirements.txt",

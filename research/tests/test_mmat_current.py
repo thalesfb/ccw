@@ -63,6 +63,21 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
     assert excluded_after_abstract["adjudication_status"] == "not_applicable_scope_exclusion"
 
 
+def test_registry_preserves_the_same_pending_design_states_as_the_ledger() -> None:
+    registry = {row["study_id"]: row for row in load_current_registry()}
+    ledger = {row["study_id"]: row for row in load_current_reassessment()}
+    retained_ids = {str(study_id) for study_id in CURRENT_EMPIRICAL_STUDY_IDS}
+    pending = {
+        study_id for study_id, row in ledger.items()
+        if study_id in retained_ids and row["design"] == "design_pending"
+    }
+
+    assert pending == {"5", "7", "8", "14"}
+    for study_id in pending:
+        assert registry[study_id]["design_status"] == ledger[study_id]["design_status"]
+        assert all(not ledger[study_id][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5"))
+
+
 def test_current_mmat_rejects_missing_review_provenance(monkeypatch) -> None:
     from src.analysis import mmat_current as current
 
@@ -306,7 +321,8 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         assert meta.group(1).startswith(f"{rows[study_id]['study_key']} · ")
 
     assert "uma apreciação preliminar separada dos componentes" in html.lower()
-    assert "15 textos integrais no núcleo empírico" in html.lower()
+    assert "15 registros com consulta documental declarada" in html.lower()
+    assert "não comprova leitura humana integral" in html.lower()
     assert "nenhum critério recebeu resposta" in html.lower()
     assert "perguntas de triagem do mmat 2018" in html.lower()
     assert "há perguntas de pesquisa claras?" in html.lower()
@@ -395,8 +411,8 @@ def test_defense_material_preserves_pending_mmat_decisions() -> None:
         .split()
     )
 
-    assert "nos estudos 5, 7 e 14, q1–q5 não foram avaliados até definir o delineamento" in slides
-    assert "o estudo 8 permanece no fluxo prisma e no corpus, sem respostas mmat" in slides
+    assert "estudos 5, 7 e 14: categoria indefinida, q1–q5 sem resposta" in slides
+    assert "estudo 8: elegibilidade e unidade pendentes, sem respostas" in slides
     assert "q1--q5 permanecem sem resposta até a definição do delineamento" in storyboard
     assert "sem respostas mmat até adjudicação de elegibilidade e unidade de análise" in storyboard
     assert "sem classificá-lo como randomizado ou não randomizado" in speaker_notes
@@ -548,7 +564,7 @@ def test_all_18_records_have_explicit_empirical_scope_and_text_status() -> None:
     }
 
 
-def test_current_mmat_table_contains_only_the_14_appraised_empirical_studies() -> None:
+def test_current_mmat_table_contains_only_records_with_screening_responses() -> None:
     rows = load_current_table_rows()
     ids = [row["study_id"] for row in rows]
     assert len(ids) == 14
@@ -556,19 +572,19 @@ def test_current_mmat_table_contains_only_the_14_appraised_empirical_studies() -
     assert not {"8", "9", "6921", "6923"}.intersection(ids)
     assert "6919" in ids
     rendered = render_current_table(rows)
-    assert "14 estudos empíricos" in rendered
-    assert "Denominador: 14 estudos" in rendered
+    assert "14 registros do corpus" in rendered
+    assert "Denominador: 14 registros" in rendered
     assert "S1 e S2 são perguntas de triagem." in rendered
     assert "Q1--Q5 correspondem aos critérios MMAT da categoria;" in rendered
-    assert "para os estudos 6916, 6919 e 6920, Q1--Q5 representam a categoria de métodos mistos." in rendered
+    assert rendered.index(r"\fonte{Elaborado pelo autor (2026).}") < rendered.index(r"\endgroup")
     assert "Quant. = quantitativo; rand. = randomizado." in rendered
-    assert "Base = fonte documental consultada." in rendered
+    assert "Base = fonte consultada." in rendered
     note = rendered.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
     assert len(note) <= 450
     tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
     prose = tcc_results.read_text(encoding="utf-8")
-    assert "O estudo 8 permanece no fluxo PRISMA e no corpus" in prose
-    assert "elegibilidade e unidade de apreciação aguardam adjudicação humana" in prose
+    assert "O estudo 8 permanece no fluxo e no núcleo sem respostas" in prose
+    assert "adjudicação de sua elegibilidade e unidade de apreciação" in prose
 
 
 def test_public_mmat_page_marks_study_8_as_unassessed_due_to_unit_hold() -> None:

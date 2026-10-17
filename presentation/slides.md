@@ -152,10 +152,10 @@ class: content-slide tcc-objectives-slide
   <div class="tcc-objective-step"><span>01</span><strong>Categorizar</strong><p>Técnicas computacionais e finalidades pedagógicas na literatura mapeada.</p></div>
   <div class="tcc-objective-step"><span>02</span><strong>Identificar limites</strong><p>Limitações e lacunas técnicas, pedagógicas, metodológicas e éticas.</p></div>
   <div class="tcc-objective-step"><span>03</span><strong>Formular a especificação</strong><p>Requisitos, critérios de dados e modelos e arquitetura de referência.</p></div>
-  <div class="tcc-objective-step"><span>04</span><strong>Propor a avaliação</strong><p>Protocolo para avaliação futura; sem resultados experimentais próprios.</p></div>
+  <div class="tcc-objective-step"><span>04</span><strong>Propor a avaliação</strong><p>Viabilidade e coerência da especificação conceitual; aplicação ainda pendente.</p></div>
 </div>
 
-<div class="tcc-caption">Revisão de 2015–2026, MMAT preliminar e pipeline auditável são meios metodológicos. Propor o protocolo não equivale a executá-lo.</div>
+<div class="tcc-caption">Revisão de 2015–2026, MMAT preliminar e pipeline auditável são meios. O protocolo proposto avalia a especificação conceitual; sua aplicação está pendente.</div>
 
 ---
 layout: default
@@ -216,7 +216,7 @@ class: content-slide flow-slide
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> A priorização dos 2.486 registros baseou-se em metadados e resumos e não equivale à avaliação de elegibilidade em texto completo. Dos 18 registros selecionados, um foi excluído após a triagem do resumo; entre os 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo. Um protocolo foi excluído após essa avaliação; os 15 restantes compõem provisoriamente o núcleo empírico.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Priorização por metadados e resumos não equivale à elegibilidade em texto completo. Após uma exclusão no resumo: 17 relatórios procurados, 1 não recuperado e 16 declarados avaliados; excluído 1 protocolo, restam 15 registros provisórios.</div>
 
 ---
 layout: center
@@ -317,7 +317,7 @@ class: content-slide tcc-retained-slide
 <div class="tcc-retained-layout">
   <div class="tcc-retained-number"><strong>18</strong><span>registros selecionados<br>para avaliação de escopo</span><div class="tcc-retained-rule"></div><p>Seleção preliminar não é inclusão final.</p></div>
   <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata"><strong>15</strong><span>registros empíricos mantidos provisoriamente</span><strong>+</strong><strong>1</strong><span>relatório sem texto integral recuperado</span></div>
+    <div class="tcc-retained-strata" aria-label="Quatro destinos dos 18 registros: 15 mais 1 mais 1 mais 1"><strong>15</strong><span>registros empíricos provisórios</span><strong>1</strong><span>relatório não recuperado</span><strong>1</strong><span>exclusão após resumo</span><strong>1</strong><span>protocolo excluído após texto completo</span></div>
     <h2>Desfechos da seleção</h2>
     <p>Um registro foi excluído após o resumo; dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo. Um protocolo foi excluído após essa avaliação. O relatório não recuperado não recebeu MMAT.</p>
     <div class="tcc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
@@ -352,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros permanecem provisoriamente no núcleo empírico; S1/S2 foram respondidas em 14 e os critérios da categoria em 11, por revisor único. Nos estudos 5, 7 e 14, Q1–Q5 não foram avaliados até definir o delineamento; o estudo 8 permanece no fluxo PRISMA e no corpus, sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise. Suas bases distintas não devem ser somadas. Um texto não foi recuperado e também não recebeu MMAT; um registro foi excluído após resumo e um protocolo sem resultados após texto completo. Sem escore agregado; falta adjudicação independente.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros provisórios. O ledger contém S1/S2 para 14 e critérios de categoria para 11; a validação humana está pendente. Estudos 5, 7 e 14: categoria indefinida, Q1–Q5 sem resposta. Estudo 8: elegibilidade e unidade pendentes, sem respostas. Texto não recuperado: sem apreciação. Sem escore agregado.</div>
 
 ---
 layout: default
@@ -408,7 +408,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> 15 registros empíricos permanecem provisoriamente no núcleo após consulta ao texto integral; há 14 triagens S1/S2 e 11 apreciações por categoria, com o estudo 8 suspenso até adjudicação de elegibilidade e unidade de análise. Um relatório não foi recuperado e também não recebeu MMAT. Um registro foi excluído após resumo e um protocolo após texto completo. Exemplos localizados, não estimativa de prevalência; MMAT preliminar por revisor único.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros provisórios, não estimativa de prevalência. O MMAT contém 14 triagens S1/S2 e 11 conjuntos de critérios de categoria, ainda sujeitos à conferência humana. O estudo 8 aguarda adjudicação de elegibilidade e unidade; o relatório não recuperado não recebeu apreciação.</div>
 
 ---
 layout: default

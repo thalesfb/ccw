@@ -32,10 +32,10 @@ pedagógica.
 
 ### 3. Objetivo geral
 
-Apresenta ação central, finalidade e escopo. O objetivo é mapear e analisar
-aplicações computacionais em educação matemática e identificar tendências,
-lacunas e oportunidades para uma especificação conceitual, sem apresentá-la
-como protótipo funcional ou avaliação de eficácia.
+Apresenta ação central, finalidade e escopo: propor uma especificação técnica e
+pedagógica para apoiar a interpretação docente da aprendizagem matemática,
+fundamentada no mapeamento e na análise da literatura, sem apresentá-la como
+protótipo funcional ou avaliação de eficácia.
 
 ### 4. Quatro perguntas fundamentam a busca por clareza
 
@@ -61,9 +61,11 @@ observa diretamente todos os processos da aprendizagem.
 
 ### 7. Objetivos específicos
 
-Apresenta o percurso OE1–OE7 em fluxo visual: revisão, identificação,
-classificação, análise, mapeamento de lacunas, auditoria e derivação de
-requisitos, avaliação e arquitetura conceitual.
+Apresenta quatro objetivos: categorizar técnicas e finalidades pedagógicas;
+identificar limitações e lacunas; formular a especificação; propor um protocolo
+de avaliação da viabilidade e da coerência da especificação conceitual. Sua
+aplicação ainda está pendente. Uma eventual avaliação empírica do protótipo
+constitui contingência separada.
 
 ### 8. Estratégia de busca: três camadas
 
@@ -178,14 +180,16 @@ não estimativa de frequência da literatura. Os exemplos são casos localizados
 nos textos integrais dos estudos incluídos. Um registro
 continua sem texto integral e sem apreciação MMAT; um foi excluído após resumo
 e um protocolo sem resultados concluídos foi excluído após texto completo. A revisão
-segue preliminar, por revisor único.
+segue documental e preliminar, com conferência humana por fonte e critério pendente.
 
 ### 21. Da evidência à especificação — sem saltar para a implementação
 
 Mostra a derivação visual: evidências da revisão e da fundamentação → lacunas →
 requisitos. A entrega é uma especificação técnica e pedagógica auditável, com
-protocolo e arquitetura de referência; não é aplicação funcional nem validação
-com participantes.
+protocolo para avaliar sua viabilidade e coerência e arquitetura de referência.
+A aplicação desse protocolo está pendente; não é aplicação funcional nem
+validação com participantes. Experimento de eventual protótipo é contingência
+separada, dependente de decisão posterior.
 
 ### 22. Arquitetura de referência: da fonte à decisão docente
 
@@ -202,10 +206,10 @@ fundamentação.
 
 ### 24. Próximos passos científicos
 
-Indica a consolidação da recuperação das fontes e da adjudicação do MMAT, a
-revisão das lacunas e da especificação conceitual e a necessidade de novo
-protocolo e autorização para qualquer validação experimental. A revisão
-sistematizada fundamenta decisões futuras, mas não substitui esse protocolo.
+Indica a recuperação e conferência humana das fontes, a adjudicação do MMAT e
+a aplicação do protocolo de avaliação da especificação conceitual. Qualquer
+desenvolvimento e validação experimental de um protótipo constituem contingência
+separada e exigirão decisão, protocolo e autorização próprios.
 
 ### 25. Obrigado
 

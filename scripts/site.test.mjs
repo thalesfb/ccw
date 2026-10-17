@@ -82,8 +82,8 @@ assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggreg
 assert.match(mmat, /visualização histórica/i, 'the current page must preserve historical provenance');
 assert.match(mmat, /O registro de apreciação reúne 18 itens/i, 'the current page must expose the current scope in reader-facing language');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
-assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">textos primários revisados<\/span>/, 'the current page must report all externally reviewed primary texts');
-assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">estudos com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish MMAT-appraised studies from empirical inclusion');
+assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">consultas documentais declaradas<\/span>/, 'historical consultation labels must not certify completed human reading');
+assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
 assert.match(mmat, /<span class="metric-value">1<\/span><span class="metric-label">texto integral pendente<\/span>/, 'the current page must report shortlisted full texts that remain unretrieved');
 assert.match(mmat, /Um texto integral ainda não foi recuperado e não recebeu apreciação MMAT\. Um registro foi excluído após a triagem do resumo e não recebeu MMAT\./, 'the evidence summary must distinguish the unretrieved full text from the abstract-stage exclusion');
 assert.doesNotMatch(mmat, /abstracts?\/metadados/i, 'the current page should use Portuguese for source-availability labels');

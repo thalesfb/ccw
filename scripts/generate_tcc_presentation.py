@@ -383,13 +383,13 @@ def build_deck() -> Presentation:
     ]
     right = [
         ("OE3", "Formular requisitos, critérios de dados e modelos e arquitetura de referência para o protótipo."),
-        ("OE4", "Propor um protocolo para avaliação futura dos aspectos técnicos e de adequação pedagógica."),
+        ("OE4", "Propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual; aplicação pendente."),
     ]
     for index, (code, body) in enumerate(left):
         add_callout(slide, code, body, Inches(0.75), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_BLUE, accent=BLUE, title_size=19, body_size=18)
     for index, (code, body) in enumerate(right):
         add_callout(slide, code, body, Inches(6.9), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_TEAL, accent=TEAL, title_size=19, body_size=18)
-    add_text(slide, "Revisão, MMAT preliminar e pipeline são meios metodológicos. Propor o protocolo não equivale a executá-lo nem comprova eficácia pedagógica.", Inches(1.0), Inches(6.2), Inches(11.25), Inches(0.65), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "Revisão, MMAT preliminar e pipeline são meios. O protocolo proposto avalia a especificação conceitual; aplicação pendente. Experimento do protótipo é contingência.", Inches(1.0), Inches(6.2), Inches(11.25), Inches(0.65), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 5 — Theoretical foundation.
     slide = new_slide(prs, EXPECTED_TITLES[4], 5)
@@ -484,7 +484,7 @@ def build_deck() -> Presentation:
     add_text(slide, "avaliação por critério\nsem nota global", Inches(1.05), Inches(2.35), Inches(2.7), Inches(0.85), size=19, color=RGBColor(186, 230, 253), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Instrumento aplicado conforme o desenho metodológico de cada estudo empírico.", Inches(1.1), Inches(4.15), Inches(2.6), Inches(0.75), size=13.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
-    add_callout(slide, "Estado atual", "15 empíricos provisórios. S1/S2: 14; Q1–Q5: 11. Estudos 5, 7 e 14 aguardam categoria; estudo 8 aguarda unidade. Um texto não recuperado, sem MMAT. Julgamentos de revisor único.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=13)
+    add_callout(slide, "Estado atual", "15 registros provisórios. S1/S2: 14; Q1–Q5: 11. Estudos 5, 7 e 14 aguardam categoria; estudo 8 aguarda unidade. Um texto não recuperado, sem MMAT. Conferência humana pendente.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=13)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_text(slide, "O MMAT organiza a leitura das limitações; não transforma uma apreciação preliminar em classificação definitiva.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 

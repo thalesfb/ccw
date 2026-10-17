@@ -1,10 +1,10 @@
 """Render the current preliminary MMAT reassessment for the TCC.
 
 The output is deliberately labelled preliminary. It is generated from the
-18-record audit ledger. Twelve records remain provisionally included in the
-empirical corpus, while the MMAT table contains only the 11 studies currently
-appraised; study 8 is held until its appraisal unit is adjudicated. No overall
-quality score is assigned.
+audit ledger, with separate screening and category-specific response coverage.
+Study 8 is held until its eligibility and appraisal unit are adjudicated.
+Historical reviewer labels do not establish completed human appraisal.
+No overall quality score is assigned.
 """
 
 from __future__ import annotations
@@ -139,8 +139,9 @@ def render_component_table(
     lines = [
         "% Quadro gerado de research/data/mmat_component_reassessment_current.csv",
         r"\begingroup",
+        r"\SingleSpacing",
         r"\def\LTcaptype{quadro}",
-        r"\fontsize{8.5}{10}\selectfont",
+        r"\fontsize{10}{11.5}\selectfont",
         r"\setlength{\tabcolsep}{2pt}",
         r"\renewcommand{\arraystretch}{1.15}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|ccccc|>{\raggedright\arraybackslash}p{6.1cm}|}",
@@ -177,7 +178,7 @@ def render_component_table(
     lines.extend([
         r"\end{longtable}",
         r"\fonte{Elaborado pelo autor (2026).}",
-        r"\textit{Nota:} C1--C5 correspondem aos cinco critérios da categoria indicada; os códigos específicos são 1.1--1.5 (qualitativo), 3.1--3.5 (quantitativo não randomizado) e 4.1--4.5 (quantitativo descritivo). Y = sim; N = não; CT = não é possível concluir com a evidência disponível. As apreciações são preliminares, de revisor único, sem pontuação global, e aguardam adjudicação humana independente.",
+        r"\textit{Nota:} C1--C5 correspondem aos cinco critérios da categoria indicada: 1.1--1.5 (qualitativo), 3.1--3.5 (quantitativo não randomizado) e 4.1--4.5 (quantitativo descritivo). Y = sim; N = não; CT = não é possível concluir. Os registros documentais são provisórios, sem pontuação global; a conferência humana permanece pendente.",
         r"\endgroup",
     ])
     return "\n".join(lines)
@@ -192,13 +193,15 @@ def render_table(
         "% Reavaliação documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
         r"\begingroup",
+        r"\SingleSpacing",
+        r"\fontsize{10}{11.5}\selectfont",
         r"\def\LTcaptype{quadro}",
         r"\setlength{\tabcolsep}{2pt}",
         r"\setlength{\LTcapwidth}{\textwidth}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|"
         r">{\raggedright\arraybackslash}p{2.5cm}|ccccccc|"
         r">{\raggedright\arraybackslash}p{3.6cm}|}",
-        rf"\caption{{Triagem e apreciação documental preliminar pelo MMAT 2018 de {len(rows)} estudos empíricos do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
+        rf"\caption{{Triagem e respostas documentais preliminares ao MMAT 2018 de {len(rows)} registros do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
@@ -233,22 +236,21 @@ def render_table(
         ]
         lines.append(" & ".join(values) + r" \\")
     note = (
-        r"\textit{Nota:} Apreciação preliminar, revisor único, sem escore agregado. "
+        r"\textit{Nota:} Registros provisórios, conferência humana pendente, sem escore agregado. "
         r"S1 e S2 são perguntas de triagem. "
         r"Q1--Q5 correspondem aos critérios MMAT da categoria; "
-        r"para os estudos 6916, 6919 e 6920, Q1--Q5 representam a categoria de métodos mistos. "
         r"Y/N/CT/N/A = sim/não/não é possível concluir/não aplicável. "
         r"Quant. = quantitativo; rand. = randomizado. "
-        r"Base = fonte documental consultada. "
-        r"Ver metodologia na Seção~\ref{sec:qualidade-estudos}. "
-        rf"Denominador: {len(rows)} estudos."
+        r"Base = fonte consultada. "
+        r"Ver Seção~\ref{sec:qualidade-estudos}. "
+        rf"Denominador: {len(rows)} registros."
     )
     lines.extend([
         r"\end{longtable}",
-        r"\endgroup",
         r"\fonte{Elaborado pelo autor (2026).}",
         r"\textit{Cobertura:} S1/S2 respondidas para 14 estudos; Q1--Q5 apreciados para 11. Nos três estudos com categoria pendente, --- significa não avaliado, não CT.",
         note,
+        r"\endgroup",
     ])
     component_table = render_component_table(load_component_rows(), labels)
     if component_table:

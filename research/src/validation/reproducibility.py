@@ -94,7 +94,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/exports/references/included_papers.bib",
-        "BibTeX inventory of 18 pipeline-shortlisted records, separated from the 12 empirical-core inclusions",
+        "BibTeX inventory of preliminary candidate records, distinct from the provisional empirical core",
     ),
     (
         "research/data/mmat_current_study_registry.csv",
@@ -111,6 +111,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     (
         "research/data/current_synthesis_scope.csv",
         "explicit empirical/contextual role for each current retained record",
+    ),
+    (
+        "research/data/study_contribution_current.json",
+        "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
     ),
     (
         "research/data/adjudicated_population_decisions.csv",
@@ -186,7 +190,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/src/analysis/mmat_current.py",
-        "validator separating the 12 provisional empirical inclusions from the 11-study MMAT appraisal scope",
+        "validator separating provisional retention, screening responses and category-specific MMAT coverage",
     ),
     (
         "research/src/analysis/mmat_current_tcc_table.py",
@@ -194,7 +198,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/exports/references/mmat_current_tcc_table.tex",
-        "preliminary MMAT table for 11 assessed empirical studies; the corpus retains 12 provisionally",
+        "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
     ),
     (
         "research/requirements.txt",
@@ -862,6 +866,7 @@ def generate_manifest(
                 "pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. "
                 f"MMAT has not been applied to the {unretrieved_report_label}. "
                 "Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
+                " Historical reviewer labels do not establish completed human reading or appraisal; human verification remains pending."
             ),
         },
         "artifact_scope": "research_snapshot",

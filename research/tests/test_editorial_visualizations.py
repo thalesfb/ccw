@@ -149,3 +149,22 @@ def test_flow_and_funnel_do_not_duplicate_external_captions(tmp_path):
         assert "Priorização operacional\n(n=20)" in stage_labels
         assert all("Elegibilidade" not in label for label in stage_labels)
     plt.close(figure)
+
+
+def test_full_text_flow_does_not_certify_study_independence_or_threshold_only_exclusions(tmp_path):
+    """Scope decisions share the operational stage; retained rows are provisional."""
+    stats = {
+        "identification": 100, "duplicates_removed": 3, "screening": 97,
+        "screening_excluded": 70, "prioritization": 27,
+        "prioritization_excluded": 9, "shortlisted": 18,
+        "abstract_screening_excluded": 1, "reports_sought": 17,
+        "reports_not_retrieved": 1, "eligibility": 16,
+        "eligibility_excluded": 1, "included": 15,
+    }
+    with patch.object(plt, "close"):
+        ReviewVisualizer(tmp_path).prisma_flow_diagram(stats)
+        figure = plt.gcf()
+        labels = [item.get_text() for item in figure.axes[0].texts]
+        assert "Registros empíricos retidos provisoriamente\n(n = 15)" in labels
+        assert "Excluídos na priorização operacional\n(n = 9; limiar e decisões de escopo)" in labels
+    plt.close(figure)

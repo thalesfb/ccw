@@ -126,14 +126,15 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "18 records in the preliminary list" in manifest["bibliography"]["separation_rule"]
     assert "15 are currently included" in manifest["bibliography"]["separation_rule"]
     appraisal = manifest["methodological_appraisal"]["interpretation"]
-    assert "preliminary record for 14 studies" in appraisal
+    assert "S1/S2 screening for 14 studies" in appraisal
+    assert "category-specific appraisal for 11" in appraisal
     assert "15 records remain provisionally" in appraisal
     assert "11 studies" not in appraisal
 
     mmat_limitation = next(
         item
         for item in manifest["reproduction"]["limitations"]
-        if "empirical MMAT denominator" in item
+        if "empirical MMAT screening denominator" in item
     )
     assert "14" in mmat_limitation
     assert "15" in mmat_limitation
@@ -181,7 +182,8 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     assert current_mmat["final_ready"] is False
     assert current_mmat["source_or_period_hold_ids"] == []
     assert current_mmat["current_denominator"] == 14
-    assert current_mmat["criterion_rows"] == 14
+    assert current_mmat["criterion_rows"] == 11
+    assert current_mmat["category_pending_ids"] == ["5", "7", "14"]
     assert current_mmat["included_empirical_study_ids"][-1] == 6920
     assert current_mmat["mmat_unit_hold_ids"] == ["8"]
     assert current_mmat["primary_text_reviewed_rows"] == 14

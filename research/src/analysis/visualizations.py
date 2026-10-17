@@ -100,7 +100,7 @@ class ReviewVisualizer:
                 f"Selecionados para leitura de resumo\n(n = {int(stats['shortlisted']):,})",
                 f"Relatórios buscados para recuperação do texto integral\n(n = {int(stats['reports_sought']):,})",
                 f"Relatórios recuperados e avaliados em texto integral\n(n = {int(stats['eligibility']):,})",
-                f"Estudos empíricos incluídos na síntese\n(n = {int(stats['included']):,})",
+                f"Registros empíricos retidos provisoriamente\n(n = {int(stats['included']):,})",
             ]
             for y, label in zip(main_y, main_labels):
                 ax.add_patch(Rectangle(
@@ -113,7 +113,7 @@ class ReviewVisualizer:
 
             exclusion_rows = [
                 (main_y[1], f"Excluídos na triagem inicial\n(n = {int(stats['screening_excluded']):,})"),
-                (main_y[2], f"Excluídos pelo limiar de priorização\n(n = {int(stats['prioritization_excluded']):,}; etapa operacional)"),
+                (main_y[2], f"Excluídos na priorização operacional\n(n = {int(stats['prioritization_excluded']):,}; limiar e decisões de escopo)"),
                 (main_y[3], f"Excluído após leitura do resumo\n(n = {int(stats['abstract_screening_excluded']):,})"),
                 (main_y[4], f"Texto integral não recuperado\n(n = {int(stats['reports_not_retrieved']):,})"),
                 (main_y[5], f"Protocolo sem resultados concluídos\n(n = {int(stats['eligibility_excluded']):,})"),

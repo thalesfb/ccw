@@ -22,7 +22,12 @@ A pergunta e o objetivo geral preservam a proposição de uma especificação t�
 
 Na conferência de 8 de outubro de 2026, os requisitos funcionais e o protocolo foram alinhados a essa distinção: uma probabilidade preditiva não é denominada proficiência sem modelo de mensuração, escala e evidências de validade para a interpretação pretendida. Isso corrige uma ambiguidade interna da especificação sem modificar os objetivos aprovados nem afirmar eficácia educacional própria.
 
-O atendimento ao objetivo de propor o protocolo corresponde à definição de procedimentos, não à realização de experimentos. A conclusão preserva a ausência de validação empírica educacional própria e a condição preliminar da síntese e do MMAT.
+O OE4 tem como objeto a viabilidade e a coerência da especificação conceitual.
+Seu resultado é a proposição de critérios e de um procedimento de revisão
+documental; a aplicação ainda não foi realizada. O protocolo experimental de
+uma possível implementação constitui contingência distinta e não demonstra
+atendimento empírico desse objetivo. A conclusão preserva a ausência de
+validação educacional própria e a condição preliminar da síntese e do MMAT.
 
 Piaget foi retirado da redação ativa por delimitação editorial. Sua proveniência bibliográfica foi preservada como não utilizada; a decisão não declara incompatibilidade universal entre teorias. As contribuições pedagógicas remanescentes foram organizadas em prosa, distinguindo conceitos atribuídos aos autores de requisitos propostos neste trabalho.
 

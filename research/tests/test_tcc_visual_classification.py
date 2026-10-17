@@ -45,7 +45,7 @@ def test_generated_mmat_export_is_a_quadro_and_is_self_describing() -> None:
     assert "Q1--Q5 correspondem aos critérios" in export
     assert "\\ref{sec:qualidade-estudos}" in export
     assert "Quant. = quantitativo" in export
-    assert "Base = fonte documental consultada" in export
+    assert "Base = fonte consultada" in export
 
     component_caption = r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos"
     component_caption_index = export.index(component_caption)

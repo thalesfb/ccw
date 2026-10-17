@@ -22,8 +22,8 @@ snapshot_date,source_artifact,metric,value,unit,scope_or_formula,status
 2026-10-12,research/exports/analysis/papers.csv,records_after_deduplication,11877,records,11904 identified minus 27 identity duplicates,confirmed
 2026-10-12,research/exports/analysis/papers.csv,initial_screening_excluded,9391,records,terminal screening-stage exclusions,confirmed
 2026-10-12,research/exports/analysis/papers.csv,records_entering_operational_prioritization,2486,records,11877 after deduplication minus 9391 initial-screen exclusions,confirmed
-2026-10-12,research/exports/analysis/papers.csv,operational_prioritization_excluded,2468,records,heuristic threshold only; not full-text eligibility,confirmed
-2026-10-12,research/data/current_synthesis_scope.csv,shortlisted_for_manual_review,18,records,2486 prioritized minus 2468 threshold exclusions,confirmed
+2026-10-12,research/exports/analysis/papers.csv,operational_prioritization_excluded,2468,records,2463 low-score exclusions plus five documented scope decisions; not full-text eligibility,confirmed
+2026-10-12,research/data/current_synthesis_scope.csv,shortlisted_for_manual_review,18,records,2486 prioritized minus 2468 operational exclusions,confirmed
 2026-10-12,research/data/current_synthesis_scope.csv,abstract_scope_exclusion,1,record,Machine2019_007 excluded at abstract stage because reported courses are CS/CIS rather than mathematics,confirmed
 2026-10-12,research/data/current_synthesis_scope.csv,reports_sought,17,reports,18 shortlisted minus one abstract-stage scope exclusion,confirmed
 2026-10-12,research/data/current_synthesis_scope.csv,reports_not_retrieved,4,reports,Math2021_001; Design2025_004; Machine2024_009; Zeng2025_6923,confirmed
@@ -38,4 +38,4 @@ snapshot_date,source_artifact,metric,value,unit,scope_or_formula,status
 2026-10-14,research/data/current_synthesis_scope.csv,reports_assessed_at_full_text,16,reports,17 sought minus 1 not retrieved,confirmed
 2026-10-14,research/data/current_synthesis_scope.csv,full_text_scope_exclusions,1,report,one protocol/proposal without completed empirical results,confirmed
 2026-10-14,research/data/current_synthesis_scope.csv,empirical_studies_included,15,studies,16 full-text reports assessed minus one protocol exclusion; study 8 remains provisional pending human scope adjudication,confirmed
-2026-10-14,research/data/mmat_reassessment_current.csv,current_mmat_empirical_denominator,14,studies,14 provisional MMAT criterion appraisals among 15 provisionally included empirical records; study 8 remains without responses pending human adjudication; no aggregate score,confirmed
+2026-10-14,research/data/mmat_reassessment_current.csv,current_mmat_empirical_denominator,14,records,14 provisional S1/S2 response sets among 15 retained records; 11 category-specific response sets; human verification pending; no aggregate score,confirmed

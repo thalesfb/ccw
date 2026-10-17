@@ -110,7 +110,7 @@ def test_canonical_defense_deck_uses_reconciled_full_text_counts() -> None:
     slides = " ".join((ROOT / "presentation/slides.md").read_text(encoding="utf-8").split())
     parallel_pptx = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
 
-    assert "entre os 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo" in slides
+    assert "dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo" in slides.lower()
     assert "para 13, avaliação em texto completo" not in slides
     assert "Dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo" in parallel_pptx
 

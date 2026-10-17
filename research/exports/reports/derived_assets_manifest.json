@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "559835f72c86638fdd0353bd7144a44ef3e05e981c0938a69881ea40b8e7386a",
+    "sha256": "18dd15c33cec989ea17de3cd022e93e310a59714de5c63e8c3019f3fe8da729c",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/claim_evidence_current.json",
@@ -25,6 +25,7 @@
       "research/data/prisma_population_reconciliation.csv",
       "research/data/protocol_execution_2025.json",
       "research/data/reference_audit.csv",
+      "research/data/study_contribution_current.json",
       "research/exports/analysis/papers.csv",
       "research/src/__init__.py",
       "research/src/analysis/__init__.py",
@@ -116,17 +117,17 @@
     {
       "name": "prisma_flow.png",
       "canonical_path": "research/exports/visualizations/prisma_flow.png",
-      "canonical_sha256": "58ce92133fcd18ca72d332f93999e8e1c17b78f7cd2b8e4ed1556ff7917ca86d",
+      "canonical_sha256": "d1fce2b7d1ad5fc6d78ce9e5b3223bb51ae17969125a3c903f20778086abd6a7",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/prisma_flow.png",
-          "sha256": "58ce92133fcd18ca72d332f93999e8e1c17b78f7cd2b8e4ed1556ff7917ca86d"
+          "sha256": "d1fce2b7d1ad5fc6d78ce9e5b3223bb51ae17969125a3c903f20778086abd6a7"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/prisma_flow.png",
-          "sha256": "58ce92133fcd18ca72d332f93999e8e1c17b78f7cd2b8e4ed1556ff7917ca86d"
+          "sha256": "d1fce2b7d1ad5fc6d78ce9e5b3223bb51ae17969125a3c903f20778086abd6a7"
         }
       ]
     },
