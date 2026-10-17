@@ -217,3 +217,10 @@ brainstorm.txt
 *.lof
 *.lot
 *.toc
+
+# Private advisor feedback, transcripts, and annotated manuscript extracts
+/feedback/private/
+
+# Local dependencies for the canonical Slidev presentation
+/presentation/node_modules/
+/.tcc-build/

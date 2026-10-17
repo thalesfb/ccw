@@ -1,22 +1,34 @@
 # Contributing
 
-We prefer a clean Git history and standardized commit messages. This repo uses the Conventional Commits style:
+We use Gitmoji with Conventional Commits for commit subjects.
 
-- format: `type(scope): subject` (e.g., `feat(cli): add --verbose flag`)
-- `type` is one of: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `build`, `ci`, `revert`.
-- Optional `scope` describes the area affected.
-- Keep the subject short (50 chars recommended) and in English/Portuguese as appropriate.
+## Commit format
+
+```text
+:emoji_code: type(scope): imperative subject
+```
+
+- Use one Gitmoji shortcode, such as `:sparkles:`, `:bug:`, or `:books:`;
+  do not use a Unicode emoji in the subject.
+- Use a Conventional Commit type: `feat`, `fix`, `docs`, `style`, `refactor`,
+  `perf`, `test`, `build`, `ci`, `chore`, or `revert`.
+- Keep the complete first line at or below 72 characters.
+- Write the subject and optional body in English; use an imperative verb.
+- Separate an optional body from the subject with a blank line. Keep body lines
+  at or below 100 characters and explain why when useful.
 
 Examples:
-- `feat(research): add excel export for included papers`
-- `fix(db): prevent duplicate insertion`
 
-Commit message body:
-- Use the body to explain the *what* and *why* in more detail if needed.
-- Use `BREAKING CHANGE: ` prefix in the body/footer when the change is not backwards-compatible.
+```text
+:sparkles: feat(research): add source-page claim traceability
+:bug: fix(tcc): reconcile evidence and claims
+:books: docs(contributing): standardize Gitmoji commit guidance
+```
 
-Workflow policy — prefer rebase instead of merge:
-- Fetch latest main: `git fetch origin`
-- Update your branch with rebase: `git rebase origin/main`
-- If there are conflicts, resolve them and continue: `git add .` then `git rebase --continue`
-- Prefer 'Rebase and merge' or 'Squash and merge' on GitHub for pull requests.
+## Pull request workflow
+
+- Fetch the latest `main` and rebase the feature branch when appropriate.
+- Keep commits focused and reviewable; preserve authorship when rewriting
+  history.
+- Run the relevant tests and validations before pushing.
+- Prefer rebase or squash merging for pull requests.

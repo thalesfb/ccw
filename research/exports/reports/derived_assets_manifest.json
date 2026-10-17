@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "71076239031fdee52f396ece9d768a6f6aadc86c000be5b06057d39396024787",
+    "sha256": "4689f38ee259edfe73051702ad99453b71925ac68b4372755a93ff35b7884ee7",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/current_eligibility_protocol.csv",
@@ -68,6 +68,7 @@
       "research/src/validation/__init__.py",
       "research/src/validation/bibliography_audit.py",
       "research/src/validation/derived_assets.py",
+      "research/src/validation/pdf_feedback.py",
       "research/src/validation/reproducibility.py",
       "research/src/validation/temporal.py",
       "research/src/validation/versioned_snapshot.py"
