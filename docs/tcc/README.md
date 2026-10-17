@@ -11,8 +11,9 @@ Os documentos deste diretório não alteram, por si só, a classe LaTeX, o conte
 ## Documentos
 
 - [`NORMATIVE_GOVERNANCE.md`](NORMATIVE_GOVERNANCE.md): política para fontes normativas e institucionais, preservação de particularidades do IFC, detecção de drift e resolução de conflitos.
+- [`ABNT-2025-CORRECOES.md`](ABNT-2025-CORRECOES.md): linha de base normativa documentada, correções verificáveis e limites de conformidade institucional.
 - [`DOCUMENT_ENGINEERING_ROADMAP.md`](DOCUMENT_ENGINEERING_ROADMAP.md): arquitetura proposta para previews de PR, verificações de conformidade, monitoramento de mudanças externas e eventual contribuição upstream após a conclusão do TCC.
-- [`PROJECT_INTEGRATION.md`](PROJECT_INTEGRATION.md): posicionamento da engenharia documental em relação à issue #7, ao merge do PR #6 e à sequência de revisão dos PRs científicos e técnicos.
+- [`PROJECT_INTEGRATION.md`](PROJECT_INTEGRATION.md): separação entre conteúdo científico, engenharia documental, implementação computacional e requisitos institucionais.
 - [`PRESENTATION_GOVERNANCE.md`](PRESENTATION_GOVERNANCE.md): governança da apresentação Slidev do TCC, distinção entre o template de referência e requisitos do trabalho, identidade IFC, QR e critérios de legibilidade.
 - [`ESTADO-ATUAL-TCC.md`](ESTADO-ATUAL-TCC.md): estado público, limites interpretativos e decisões metodológicas pendentes da versão atual.
 - [`AUDITORIA-ESTUDOS-SINTESE.md`](AUDITORIA-ESTUDOS-SINTESE.md): papel sustentado, limites e pendências documentais dos 18 registros retidos no snapshot vigente.
@@ -41,4 +42,4 @@ Esta documentação não:
 
 ## Baseline de verificação
 
-As fontes públicas institucionais descritas nos documentos deste diretório foram verificadas em **2026-08-07**. Como páginas, regulamentos, templates e normas podem mudar, essa data é parte da proveniência e não deve ser interpretada como garantia de vigência futura.
+O registro inicial das fontes institucionais foi feito em **2026-08-07**. As páginas do SIBI/IFC, da Biblioteca do Campus Videira e do curso de Ciência da Computação foram reconsultadas em **2026-10-11**; os pacotes LaTeX de 2026 listados pelo curso direcionam ao Google Drive, cujo conteúdo solicitou autenticação e não foi comparado com a classe local. As demais fontes mantêm as datas de conferência registradas em seus próprios documentos. Essas datas são proveniência da consulta, não garantia de vigência futura.

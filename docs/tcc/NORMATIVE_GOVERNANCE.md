@@ -43,7 +43,7 @@ O regulamento de 2023 estabelece, para PTCC e TCC, a observância dos padrões n
 
 ### 3.1 Observação sobre os modelos públicos
 
-Na data de verificação, a página pública do curso direcionava os modelos LaTeX para arquivos disponibilizados por Google Drive. Não foi identificado, a partir dessa página institucional, um repositório Git público explicitamente indicado como fonte canônica dos modelos. Uma futura contribuição upstream deve primeiro identificar o mantenedor e o repositório canônico, ou confirmar com a instituição o canal apropriado para contribuição.
+Em reconsulta de 2026-10-11, a página pública do curso listava pacotes LaTeX de 2026 para TC tradicional e desenvolvimento de software, hospedados no Google Drive. Os links solicitaram autenticação nesta conferência; por isso, foi possível confirmar a existência e o rótulo dos pacotes, mas não inspecionar seu conteúdo ou compará-lo com a adaptação local. Não foi identificado, a partir da página institucional, um repositório Git público explicitamente indicado como fonte canônica. Uma futura contribuição upstream deve primeiro identificar o mantenedor e o repositório canônico, ou confirmar com a instituição o canal apropriado para contribuição.
 
 ## 4. Modelo de autoridade por domínio
 
@@ -155,10 +155,12 @@ id: pretextual.cover.layout
 domain: pretextual.cover
 classification: institutional-strict
 authority:
-  source: ifc-videira-tcc-template
-  verified_at: 2026-08-07
+  source: ifc-videira-tcc-template-2026
+  content_verified_at: null
+  access_checked_at: 2026-10-11
+  access_result: authentication_required
 verification:
-  mode: visual
+  mode: pending_package_inspection
   severity: error
 implementation:
   files:
@@ -168,7 +170,7 @@ change_policy:
   institutional_review_on_conflict: true
 ```
 
-Esse registro deve armazenar apenas metadados, interpretação operacional e referências necessárias para auditoria. O texto integral de normas técnicas não deve ser versionado no repositório quando sua licença não permitir redistribuição.
+O bloco acima é apenas um exemplo de esquema e registra a limitação de acesso observada, não uma validação do conteúdo do pacote. Um registro real deve armazenar apenas metadados, interpretação operacional e referências necessárias para auditoria. O texto integral de normas técnicas não deve ser versionado no repositório quando sua licença não permitir redistribuição.
 
 ## 9. Classes de verificação
 
