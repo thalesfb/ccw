@@ -7,21 +7,25 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "71076239031fdee52f396ece9d768a6f6aadc86c000be5b06057d39396024787",
+    "sha256": "ba2363b0c1d34cd606e4a3a15e3bf02614bf4af3b0c0cb86559742381864b9b5",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
+      "research/data/claim_evidence_current.json",
       "research/data/current_eligibility_protocol.csv",
       "research/data/current_synthesis_scope.csv",
+      "research/data/evidence_sources_current.json",
       "research/data/manual_override_adjudication.csv",
       "research/data/manual_override_evidence_matrix.csv",
       "research/data/metadata_provenance_audit.csv",
       "research/data/mmat_assessments.csv",
+      "research/data/mmat_component_reassessment_current.csv",
       "research/data/mmat_current_study_registry.csv",
       "research/data/mmat_primary_sources_manifest.csv",
       "research/data/mmat_reassessment_current.csv",
       "research/data/prisma_population_reconciliation.csv",
       "research/data/protocol_execution_2025.json",
       "research/data/reference_audit.csv",
+      "research/data/study_contribution_current.json",
       "research/exports/analysis/papers.csv",
       "research/src/__init__.py",
       "research/src/analysis/__init__.py",
@@ -68,6 +72,8 @@
       "research/src/validation/__init__.py",
       "research/src/validation/bibliography_audit.py",
       "research/src/validation/derived_assets.py",
+      "research/src/validation/evidence_retrieval.py",
+      "research/src/validation/pdf_feedback.py",
       "research/src/validation/reproducibility.py",
       "research/src/validation/temporal.py",
       "research/src/validation/versioned_snapshot.py"
@@ -77,102 +83,102 @@
     {
       "name": "database_coverage.png",
       "canonical_path": "research/exports/visualizations/database_coverage.png",
-      "canonical_sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22",
+      "canonical_sha256": "adc6909606b4fb01a48ef71f096c5d958138f2718c143648ee48425d8d75d3d3",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/database_coverage.png",
-          "sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22"
+          "sha256": "adc6909606b4fb01a48ef71f096c5d958138f2718c143648ee48425d8d75d3d3"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/database_coverage.png",
-          "sha256": "7fe80e1482444894888170bc98426473459b49b22f18f158202234de7f7fcd22"
+          "sha256": "adc6909606b4fb01a48ef71f096c5d958138f2718c143648ee48425d8d75d3d3"
         }
       ]
     },
     {
       "name": "papers_by_year.png",
       "canonical_path": "research/exports/visualizations/papers_by_year.png",
-      "canonical_sha256": "01bef1a755c23532f7a3ae47be48ddd1eeeb7e25ab0b91de31e65c09c46a981a",
+      "canonical_sha256": "94262cc9411b1a2d1d2ef69d63266bb4bebf4555fc6da45f78adab83385d8d43",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/papers_by_year.png",
-          "sha256": "01bef1a755c23532f7a3ae47be48ddd1eeeb7e25ab0b91de31e65c09c46a981a"
+          "sha256": "94262cc9411b1a2d1d2ef69d63266bb4bebf4555fc6da45f78adab83385d8d43"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/papers_by_year.png",
-          "sha256": "01bef1a755c23532f7a3ae47be48ddd1eeeb7e25ab0b91de31e65c09c46a981a"
+          "sha256": "94262cc9411b1a2d1d2ef69d63266bb4bebf4555fc6da45f78adab83385d8d43"
         }
       ]
     },
     {
       "name": "prisma_flow.png",
       "canonical_path": "research/exports/visualizations/prisma_flow.png",
-      "canonical_sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b",
+      "canonical_sha256": "d1fce2b7d1ad5fc6d78ce9e5b3223bb51ae17969125a3c903f20778086abd6a7",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/prisma_flow.png",
-          "sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b"
+          "sha256": "d1fce2b7d1ad5fc6d78ce9e5b3223bb51ae17969125a3c903f20778086abd6a7"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/prisma_flow.png",
-          "sha256": "92dad6231a07f88a7237e656c519a6d253066d825413726164f85cd0275d8d0b"
+          "sha256": "d1fce2b7d1ad5fc6d78ce9e5b3223bb51ae17969125a3c903f20778086abd6a7"
         }
       ]
     },
     {
       "name": "relevance_distribution.png",
       "canonical_path": "research/exports/visualizations/relevance_distribution.png",
-      "canonical_sha256": "d8e3c34b939c5954904db2505096daa43956009fced3061762cf138a664e8a9b",
+      "canonical_sha256": "05ee32e8f1160f5932421ba2b74b3bfde5b33446882e1b5332aed7c488c3747e",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/relevance_distribution.png",
-          "sha256": "d8e3c34b939c5954904db2505096daa43956009fced3061762cf138a664e8a9b"
+          "sha256": "05ee32e8f1160f5932421ba2b74b3bfde5b33446882e1b5332aed7c488c3747e"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/relevance_distribution.png",
-          "sha256": "d8e3c34b939c5954904db2505096daa43956009fced3061762cf138a664e8a9b"
+          "sha256": "05ee32e8f1160f5932421ba2b74b3bfde5b33446882e1b5332aed7c488c3747e"
         }
       ]
     },
     {
       "name": "selection_funnel.png",
       "canonical_path": "research/exports/visualizations/selection_funnel.png",
-      "canonical_sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54",
+      "canonical_sha256": "c009b67e8a0ec14c4f260c6cfa853f9faa7da51b4e5d4be07fcb0b42a0f2f65f",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/selection_funnel.png",
-          "sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54"
+          "sha256": "c009b67e8a0ec14c4f260c6cfa853f9faa7da51b4e5d4be07fcb0b42a0f2f65f"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/selection_funnel.png",
-          "sha256": "1f66f6d88b23d53cc365a6d503305c9190c68f3af937037684645613c49a1b54"
+          "sha256": "c009b67e8a0ec14c4f260c6cfa853f9faa7da51b4e5d4be07fcb0b42a0f2f65f"
         }
       ]
     },
     {
       "name": "techniques_distribution.png",
       "canonical_path": "research/exports/visualizations/techniques_distribution.png",
-      "canonical_sha256": "1b1340a8b33a3d7d987ffc99ed213e32a6db9936f21a6c70e9c8cec5a590633c",
+      "canonical_sha256": "13adb40f281bb71ba9b522c0420159fa219a186a87c5a00f6fbf43bc09fe4ae0",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/techniques_distribution.png",
-          "sha256": "1b1340a8b33a3d7d987ffc99ed213e32a6db9936f21a6c70e9c8cec5a590633c"
+          "sha256": "13adb40f281bb71ba9b522c0420159fa219a186a87c5a00f6fbf43bc09fe4ae0"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/techniques_distribution.png",
-          "sha256": "1b1340a8b33a3d7d987ffc99ed213e32a6db9936f21a6c70e9c8cec5a590633c"
+          "sha256": "13adb40f281bb71ba9b522c0420159fa219a186a87c5a00f6fbf43bc09fe4ae0"
         }
       ]
     }

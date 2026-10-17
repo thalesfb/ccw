@@ -12,15 +12,20 @@ MANIFEST = Path(__file__).resolve().parents[1] / "data" / "protocol_execution_20
 def test_historical_protocol_is_not_presented_as_current_baseline() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
 
+    assert manifest["schema_version"] == 2
     assert manifest["status"] == "historical_reconstruction_not_current_baseline"
-    assert manifest["current_baseline"] == {
-        "manifest": "research/exports/reports/reproducibility_manifest.json",
+    assert "current_baseline" not in manifest
+    assert manifest["pre_adjudication_snapshot"] == {
+        "snapshot_date": "2026-08-31",
+        "adjudicated_snapshot_date": "2026-09-03",
+        "source_artifact": "research/data/prisma_population_reconciliation.csv",
         "identified": 11904,
         "deterministic_identity_duplicates_removed": 27,
         "screening": 11877,
         "eligibility": 2486,
         "included_operational": 16,
-        "note": "This historical protocol record must not be used as the current PRISMA baseline.",
+        "superseded_by": "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md",
+        "note": "Pre-adjudication operational snapshot; do not use as the current PRISMA baseline.",
     }
     assert manifest["counts"]["identified"] == 9431
     assert manifest["counts"]["included"] == 17

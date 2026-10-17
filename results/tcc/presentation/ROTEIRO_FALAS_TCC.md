@@ -4,6 +4,10 @@ Tempo sugerido: aproximadamente 18–20 minutos, deixando espaço para perguntas
 O texto é um guia oral; a redação científica completa permanece em
 `results/tcc/`.
 
+Este roteiro acompanha o export PPTX editável paralelo, com 19 slides. Ele não
+corresponde ao deck canônico Slidev da defesa, que contém 25 slides; use o
+roteiro apenas com a versão de 19 slides.
+
 ## 1. Capa — 0:30
 
 Este trabalho investiga o uso de técnicas computacionais no ensino de
@@ -58,18 +62,22 @@ contagem de chamadas HTTP concluídas.
 
 ## 7. Contagens — 1:10
 
-O snapshot começa com 11.904 registros. Foram removidas 27 linhas por identidade
+O recorte versionado começa com 11.904 registros. Foram removidas 27 linhas por identidade
 bibliográfica determinística, chegando a 11.877 na triagem. A triagem excluiu
-9.391 registros e encaminhou 2.486 para elegibilidade. Nessa etapa, 2.468 foram
-excluídos e 18 foram retidos operacionalmente. Cada número representa uma etapa
-distinta, por isso não devemos substituir o fluxo por uma única porcentagem.
+9.391 registros e submeteu 2.486 à priorização operacional baseada em metadados
+e resumos. Nessa etapa, 2.468 foram excluídos e 18 foram retidos
+provisoriamente para adjudicação de escopo. Essa priorização não corresponde à
+avaliação de elegibilidade de relatórios em texto completo. Cada número descreve
+uma etapa distinta, por isso não devemos substituir o fluxo por uma única
+porcentagem.
 
-## 8. PRISMA — 0:45
+## 8. Fluxo operacional — 0:45
 
 Esta figura é a representação visual do mesmo fluxo. Ela está versionada junto
 dos artefatos de pesquisa e foi incorporada diretamente à apresentação. O
 objetivo é permitir que o leitor acompanhe a transição entre identificação,
-deduplicação, triagem, elegibilidade e retenção.
+deduplicação, triagem, priorização operacional e retenção provisória; a figura
+é própria e não reproduz todas as etapas do diagrama PRISMA 2020.
 
 ## 9. Deduplicação — 1:05
 
@@ -90,7 +98,7 @@ qualidade e não medem eficácia.
 
 ## 11. Tempo e fontes — 0:50
 
-As distribuições por ano e por fonte ajudam a caracterizar o snapshot. O ano de
+As distribuições por ano e por fonte ajudam a caracterizar o recorte versionado. O ano de
 2026 é parcial, com coleta até 31 de agosto, então a barra menor não representa
 uma queda anual da produção científica e não deve ser comparada diretamente com
 anos completos. As figuras mostram como o conjunto foi recuperado, mas não
@@ -98,23 +106,34 @@ permitem concluir que uma base é mais representativa ou que a produção
 científica esteja distribuída de forma uniforme. A cobertura está condicionada
 às fontes, aos idiomas e às condições de disponibilidade dos metadados.
 
-## 12. População retida — 1:05
+## 12. Conjunto retido — 1:05
 
-Dos 18 registros retidos operacionalmente, 17 são candidatos empíricos
-provisórios. Um registro é um protocolo ou proposta contextual e foi preservado
-para rastreabilidade, não para sustentar uma conclusão empírica. Entre os
-empíricos, a recorrência envolve predição de desempenho e estimativa de
-proficiência, com uso recorrente de modelos supervisionados. Isso descreve a
-literatura encontrada; não escolhe um algoritmo vencedor.
+Dos 18 registros selecionados preliminarmente, 15 permanecem provisoriamente no núcleo
+empírico. Um foi excluído após a triagem do resumo; um texto integral não foi
+recuperado; um protocolo sem resultados concluídos foi excluído após texto
+completo. A síntese mantém os 15 registros: 14 têm S1/S2 respondidas e 11 têm
+apreciação dos critérios da categoria. O estudo 8 segue sem respostas até adjudicação de sua
+elegibilidade e unidade de análise; suas bases distintas não devem ser somadas.
+Entre os estudos consultados, há classificação e
+predição de resultados matemáticos; um estudo também integra
+Transformada de Fourier ao ensino universitário de matemática, mas compara
+coortes separadas por quatro anos e não isola o efeito da IA.
 
 ## 13. MMAT — 1:10
 
-O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
-respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
-uma pontuação agregada. A avaliação é preliminar e foi feita por um único
-revisor. Nove registros tiveram texto primário revisado e oito dependeram de
-resumo e metadados. A recuperação das fontes, os localizadores e a adjudicação
-precisam ser consolidados. Portanto, não apresento um ranking de qualidade.
+A triagem S1/S2 do MMAT 2018 abrange 14 dos 15 registros empíricos mantidos
+provisoriamente; 11 têm apreciação por categoria e três aguardam definição do
+delineamento, com Q1--Q5 sem resposta, não CT. O registro é de revisor único e não tem
+pontuação agregada. No
+estudo 7, não localizamos o procedimento de alocação; por isso, o delineamento
+e Q1--Q5 continuam pendentes, sem classificá-lo como randomizado ou não
+randomizado. No estudo 8, tarefas e dados humanos distintos impedem fixar uma
+unidade de apreciação; nenhum critério MMAT recebeu resposta até a adjudicação.
+O texto não recuperado não recebeu MMAT e suas células ficam sem
+resposta, não como CT. Um registro foi excluído após resumo e não integra o
+denominador. O manifesto registra fontes e datas; o registro de avaliação, a base documental
+e os localizadores. Falta a adjudicação independente; portanto, não apresento
+um ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
 
@@ -124,13 +143,24 @@ diferentes. Isso impede comparar diretamente todas as acurácias e impede
 transferir o resultado de um artigo para outra escola. Predição de desempenho
 também não é sinônimo de aprendizagem.
 
-## 15. Lacunas — 0:55
+## 15. Limitações localizadas nos estudos — 0:55
 
-As lacunas mais relevantes estão na explicabilidade, no alinhamento curricular,
-na participação docente, na análise de equidade, na reprodutibilidade e na
-validação em diferentes contextos. Elas orientam decisões da especificação. Uma
-lacuna não é uma prova automática de ineficácia; é um sinal de que uma solução
-futura precisaria tornar essas condições explícitas e avaliáveis.
+Apresento quatro exemplos e os localizadores: He et al. (2025, pp. 1, 16,
+31–35) descrevem oito turmas de 45 estudantes, mas declaram amostra total de
+90, além de uma distribuição desigual de docentes entre condições; Villegas-Ch
+et al. (2025, pp. 14, 22) descrevem seis semanas nos métodos e resultados
+na oitava semana na subanálise de programação; Nyantah et al. (2025, pp. 101–105) apresentam versões
+incompatíveis sobre alocação, diferença no pré-teste e intervenção combinada;
+Echeveria et al. (2025, pp. 66, 69–70) usam itens da escala tanto para formar
+categorias quanto entre preditores. Esses pontos afetam denominadores,
+comparabilidade, atribuição do resultado e interpretação diagnóstica de cada
+estudo. São exemplos localizados, não estimativa da frequência na literatura.
+Os exemplos provêm dos 15 estudos mantidos provisoriamente e com texto integral consultado.
+Um registro segue pendente sem MMAT; um foi excluído após resumo e um
+protocolo após texto completo por não apresentar resultados concluídos. O
+MMAT permanece preliminar e feito por um único revisor. Outros requisitos, como
+equidade e alinhamento curricular, não foram codificados de modo comparável e
+permanecem questões para investigação, não ausências demonstradas no corpus.
 
 ## 16. Derivação — 0:55
 
