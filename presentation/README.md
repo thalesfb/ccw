@@ -82,6 +82,18 @@ Times New Roman a um provedor de fontes web. A configuração segue a
 Os fallbacks Times/Nimbus Roman continuam definidos no CSS; disponibilidade
 tipográfica e legibilidade devem ser verificadas no ambiente de exportação.
 
+Os títulos usam o peso negrito 700, espaçamento natural entre letras e
+entrelinha mínima de 1,12. Não reutilize o espaçamento negativo da composição
+sans-serif anterior com Times: essa combinação comprime e sobrepõe glifos.
+No funil da seleção, o recorte dos trapézios se aplica apenas ao fundo
+decorativo, nunca ao texto. Confira as legendas completas, inclusive a etapa
+com 18 registros, no navegador e no PDF exportado.
+
+O rodapé do fluxo é conciso e seu painel central pode encolher dentro do palco,
+sem reduzir o corpo da fonte. A retenção explicita os quatro destinos dos 18
+registros: 15 + 1 + 1 + 1. Ressalvas científicas após o título não recebem a
+opacidade reduzida do tema padrão; sua leitura integra a revisão visual do PDF.
+
 O slide MMAT exibe agora as perguntas de triagem S1 e S2 e a legenda vigente
 Y/N/CT, em vez de esconder essas perguntas sob uma abreviação. A fonte
 científica continua sendo o ledger versionado; a apresentação não cria um

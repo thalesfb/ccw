@@ -584,14 +584,15 @@ small { font-size: 0.73rem; }
 
 .tcc-funnel-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.2rem; align-items: center; min-height: 21rem; margin-top: 0.1rem; }
 .tcc-funnel { display: grid; justify-items: center; gap: 0.1rem; }
-.tcc-funnel-stage { display: flex; min-height: 3.15rem; flex-direction: column; align-items: center; justify-content: center; padding: 0.35rem 0.8rem; color: #111; text-align: center; clip-path: polygon(7% 0, 93% 0, 83% 100%, 17% 100%); }
+.tcc-funnel-stage { position: relative; isolation: isolate; display: flex; min-height: 3.15rem; flex-direction: column; align-items: center; justify-content: center; padding: 0.35rem 0.8rem; color: #111; text-align: center; }
+.tcc-funnel-stage::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--funnel-fill); clip-path: polygon(7% 0, 93% 0, 83% 100%, 17% 100%); }
 .tcc-funnel-stage span { font: 700 0.88rem/1 'Asap', sans-serif; }
 .tcc-funnel-stage strong { margin-top: 0.15rem; font: 800 1.65rem/0.95 'Asap', sans-serif; }
-.tcc-funnel-stage small { margin-top: 0.14rem; font-size: 0.68rem; line-height: 1; }
-.funnel-identification { width: 100%; background: #9ed3e8; }
-.funnel-dedup { width: 84%; background: #54b0cb; }
-.funnel-screening { width: 67%; background: #7ec2b7; }
-.funnel-inclusion { width: 46%; min-height: 3.7rem; background: #efad4a; }
+.tcc-funnel-stage small { max-width: 76%; margin-top: 0.14rem; font-size: 0.68rem; line-height: 1.15; }
+.funnel-identification { width: 100%; --funnel-fill: #9ed3e8; }
+.funnel-dedup { width: 84%; --funnel-fill: #54b0cb; }
+.funnel-screening { width: 67%; --funnel-fill: #7ec2b7; }
+.funnel-inclusion { width: 46%; min-height: 3.7rem; --funnel-fill: #efad4a; }
 .tcc-funnel-notes { display: grid; gap: 1rem; }
 .tcc-funnel-notes p { padding-left: 0.9rem; border-left: 0.27rem solid var(--tcc-green); color: #111; font: 1.05rem/1.18 'Asap', sans-serif; }
 .tcc-funnel-notes p:nth-child(2) { border-left-color: var(--tcc-amber); }
@@ -996,7 +997,7 @@ small { font-size: 0.73rem; }
 .tcc-mmat-key { margin-top: 0.75rem; }
 .tcc-mmat-key > div { padding: 0.44rem 0; }
 .tcc-mmat-key span { font-size: 0.84rem; }
-.tcc-mmat-result { margin-top: 0.35rem; padding: 0.55rem 0.8rem; font-size: 0.76rem; }
+.tcc-mmat-result { margin-top: 0.35rem; padding: 0.55rem 0.8rem; font-size: 0.84rem; line-height: 1.25; }
 
 .tcc-synthesis-layout { gap: 2.2rem; }
 .tcc-synthesis-orbit { width: 18rem; height: 18rem; }
@@ -1084,6 +1085,28 @@ small { font-size: 0.73rem; }
 .slidev-layout,
 .slidev-layout * {
   font-family: 'Times New Roman', 'Nimbus Roman', Times, serif !important;
+  /* The previous sans-serif composition used negative tracking and 800 weight.
+     Keep natural serif spacing and the native regular/bold font weights. */
+  letter-spacing: normal !important;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout strong,
+.slidev-layout b {
+  font-weight: 700 !important;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  line-height: 1.12 !important;
+}
+
+/* The default theme dims the first paragraph; evidence caveats are body text. */
+.slidev-layout.content-slide > h1 + p {
+  opacity: 1;
 }
 
 .slidev-layout:not(.cover-page) {
@@ -1149,6 +1172,24 @@ small { font-size: 0.73rem; }
 ) {
   flex: 1 1 auto;
   min-height: 22rem;
+}
+
+/* A two-line heading and a readable source note must fit the export canvas. */
+.slidev-layout.content-slide.flow-slide > .tcc-funnel-layout {
+  min-height: 0;
+}
+
+.tcc-retained-slide .tcc-retained-strata {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.tcc-retained-slide .tcc-retained-strata strong {
+  color: #267653 !important;
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 .slidev-layout.content-slide:not(.tcc-objectives-slide) > .tcc-challenge-layout,
