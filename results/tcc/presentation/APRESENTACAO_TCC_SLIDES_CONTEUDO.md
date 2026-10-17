@@ -3,17 +3,17 @@
 ## Identidade
 
 - **Título:** Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais
-- **Formato:** PowerPoint editável, 16:9
+- **Papel:** storyboard de conteúdo para o deck canônico Slidev de 25 slides; não é o export PPTX editável paralelo de 19 slides
 - **Autor:** Thales Ferreira Batista
 - **Orientação:** Prof. Dr. Rafael Zanin; Prof. Dr. Manassés Ribeiro
 - **Instituição:** IFC — Campus Videira
-- **Snapshot:** 03/09/2026
+- **Atualização da síntese e do escopo:** 12/10/2026
 - **Recorte temporal:** 2015–2026, com data de corte em 31/08/2026
 
-O roteiro segue a progressão usada na apresentação do PTC — problema, método,
-resultados, implicações e encerramento —, mas o conteúdo abaixo é derivado do
-TCC e do snapshot atual. O deck não reproduz números históricos nem transforma
-o protótipo conceitual em aplicação implementada.
+O roteiro organiza a exposição do TCC em problema, método, resultados,
+implicações e encerramento. O conteúdo abaixo é derivado do manuscrito e do
+recorte versionado atual. O deck não reproduz números históricos nem transforma o
+protótipo conceitual em aplicação implementada.
 
 ## Sequência dos slides
 
@@ -21,7 +21,7 @@ o protótipo conceitual em aplicação implementada.
 
 Subtítulo: oportunidades e técnicas computacionais. Apresenta a revisão
 sistemática e a especificação conceitual de protótipo, com autor, orientação,
-instituição, data do snapshot e recorte temporal.
+instituição, data do recorte versionado e período considerado.
 
 ### 2. O desafio fundamental: diagnóstico personalizado com evidências
 
@@ -32,10 +32,10 @@ pedagógica.
 
 ### 3. Objetivo geral
 
-Apresenta ação central, finalidade e escopo. O objetivo é mapear e analisar
-aplicações computacionais em educação matemática e identificar tendências,
-lacunas e oportunidades para uma especificação conceitual, sem apresentá-la
-como protótipo funcional ou avaliação de eficácia.
+Apresenta ação central, finalidade e escopo: propor uma especificação técnica e
+pedagógica para apoiar a interpretação docente da aprendizagem matemática,
+fundamentada no mapeamento e na análise da literatura, sem apresentá-la como
+protótipo funcional ou avaliação de eficácia.
 
 ### 4. Quatro perguntas fundamentam a busca por clareza
 
@@ -61,9 +61,11 @@ observa diretamente todos os processos da aprendizagem.
 
 ### 7. Objetivos específicos
 
-Apresenta o percurso OE1–OE7 em fluxo visual: revisão, identificação,
-classificação, análise, mapeamento de lacunas, auditoria e derivação de
-requisitos, avaliação e arquitetura conceitual.
+Apresenta quatro objetivos: categorizar técnicas e finalidades pedagógicas;
+identificar limitações e lacunas; formular a especificação; propor um protocolo
+de avaliação da viabilidade e da coerência da especificação conceitual. Sua
+aplicação ainda está pendente. Uma eventual avaliação empírica do protótipo
+constitui contingência separada.
 
 ### 8. Estratégia de busca: três camadas
 
@@ -73,7 +75,7 @@ retrospectiva de chamadas HTTP.
 
 ### 9. Quatro fontes de indexação complementares
 
-Apresenta a distribuição do snapshot após a remoção determinística: Semantic
+Apresenta a distribuição do recorte versionado após a remoção determinística: Semantic
 Scholar (1.931 registros), OpenAlex (3.057), Crossref (5.049) e CORE (1.840).
 Os valores somam 11.877 registros na triagem, não são contagens independentes
 de estudos retidos e não devem ser somados ao total identificado de 11.904.
@@ -82,15 +84,22 @@ do protocolo.
 
 ### 10. O funil da descoberta
 
-Mostra as contagens do snapshot: 11.904 identificados; 27 remoções
+Mostra as contagens do recorte versionado: 11.904 identificados; 27 remoções
 determinísticas por DOI/URL; 11.877 na triagem; 9.391 excluídos na triagem;
-2.486 na elegibilidade; 2.468 excluídos na elegibilidade; 18 retidos
-operacionalmente.
+2.486 submetidos à priorização operacional; 2.468 excluídos nessa etapa; 18
+retidos provisoriamente para adjudicação de escopo. A priorização usa metadados
+e resumos e não corresponde à avaliação de elegibilidade em texto completo.
 
-### 11. Fluxo PRISMA do snapshot
+### 11. Fluxo operacional (referência PRISMA 2020)
 
-Incorpora `research/exports/visualizations/prisma_flow.png`, que é a figura
-canônica sincronizada com os artefatos públicos.
+Incorpora `research/exports/visualizations/prisma_flow.png`, figura operacional
+própria, com referência ao PRISMA 2020, sincronizada com os artefatos públicos;
+ela não reproduz o diagrama PRISMA completo. Dos 18 registros selecionados preliminarmente,
+um foi excluído após a triagem do resumo; 17 relatórios foram procurados, um
+não foi recuperado e 16 foram avaliados em texto completo. Um protocolo sem
+resultados concluídos foi excluído; os outros 15 estudos empíricos integram o
+núcleo incluído. A priorização operacional anterior não é apresentada como
+etapa PRISMA de elegibilidade.
 
 ### 12. Deduplicação: o que foi confirmado
 
@@ -121,51 +130,67 @@ Mostra a distribuição do score e o limiar operacional de 4,0. O score organiza
 o processamento, mas não é medida de qualidade metodológica, não produz ranking
 e não substitui a leitura das fontes primárias.
 
-### 16. População retida: dois estratos de leitura
+### 16. Conjunto retido: dois estratos de leitura
 
-Dos 18 registros retidos, 17 são candidatos empíricos provisórios e 1 é um
-protocolo ou proposta contextual. A síntese empírica considera os 17; o registro
-contextual permanece para rastreabilidade e não sustenta resultado empírico.
-A síntese empírica preliminar aponta recorrência de tarefas de predição de
-desempenho e estimativa de proficiência, com uso recorrente de modelos
-supervisionados.
+Dos 18 registros selecionados preliminarmente, 15 integram provisoriamente o núcleo empírico. Um foi excluído
+após a triagem do resumo; um texto integral não foi recuperado; um
+protocolo sem resultados concluídos foi excluído após texto completo. A síntese
+empírica aponta recorrência de predição de desempenho e estimativa de
+proficiência, além de uma experiência que integra Transformada de Fourier ao
+ensino universitário de matemática. Nesse caso, coortes separadas por quatro
+anos limitam a inferência e não isolam o efeito da IA.
 
-### 17. Nosso filtro de qualidade: critérios, não uma nota global
+### 17. Apreciação metodológica preliminar: critérios, não uma nota global
 
-O MMAT é apresentado por critério, conforme o desenho de cada estudo, usando
-Sim, Não ou Não é possível determinar. A apreciação é preliminar e feita por um
-único revisor: nove registros tiveram texto primário revisado e oito foram
-apreciados com resumo/metadados. Não há média, ranking ou categoria geral de
-qualidade; recuperação de fontes, localizadores e adjudicação ainda precisam ser
-consolidados.
+O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
+15 registros permanecem provisoriamente no núcleo empírico, com consultas
+documentais declaradas; 14 têm triagem S1/S2 e 11 têm apreciação por categoria.
+São registros preliminares produzidos com apoio de IA, não comprovação de
+leitura humana integral ou apreciação independente. Nos estudos 5, 7 e 14, Q1--Q5 permanecem sem resposta
+até a definição do delineamento, sem serem codificados como CT. O estudo 8 permanece no fluxo
+PRISMA e no corpus, sem respostas MMAT até adjudicação de elegibilidade e
+unidade de análise; suas bases distintas não devem ser somadas. Um registro
+continua sem texto integral e sem MMAT; um foi excluído após resumo. A
+apreciação aguarda adjudicação independente e consolidação dos localizadores.
 
-### 18. O que emerge entre os candidatos empíricos
+### 18. O que emerge entre os estudos incluídos
 
-Organiza as recorrências em torno de predição de desempenho e estimativa de
-proficiência, com uso de RF, SVM e redes neurais. A heterogeneidade de
+Apresenta exemplos de classificação e predição de resultados matemáticos,
+com RF, SVM e redes neurais como alternativas observadas. Categorias de desempenho
+não equivalem automaticamente a níveis de proficiência validados. A heterogeneidade de
 populações, instrumentos, variáveis e métricas limita a comparabilidade entre
 estudos.
 
 ### 19. O que podemos concluir — e o que permanece aberto
 
-O snapshot oferece um mapa auditável. A heterogeneidade de populações,
+O recorte versionado oferece um mapa auditável. A heterogeneidade de populações,
 instrumentos, variáveis e métricas impede comparar todos os resultados
 diretamente. Acurácia de um artigo não demonstra superioridade geral nem
 eficácia pedagógica transferível.
 
-### 20. As lacunas que orientam a especificação
+### 20. Limitações identificadas nos estudos consultados
 
-Explicabilidade, integração curricular, participação docente, equidade,
-reprodutibilidade e validação em contextos diversos aparecem como lacunas. Elas
-são convertidas em requisitos de projeto, não apresentadas como evidência de
-que uma solução futura será eficaz.
+Apresenta quatro exemplos localizados, com páginas: divergência de
+denominadores e possível confundimento entre docente e condição em He et al.
+(2025, pp. 1, 16, 31–35); seis semanas nos métodos e resultado na oitava semana na subanálise de
+programação em Villegas-Ch et al. (2025, pp. 14, 22); descrições incompatíveis de alocação, diferença no
+pré-teste e intervenção combinada em Nyantah et al. (2025, pp. 101–105); e
+sobreposição entre itens usados para construir categorias e preditores em
+Echeveria et al. (2025, pp. 66, 69–70). São exemplos dos textos consultados,
+não estimativa de frequência da literatura. Os exemplos são casos localizados
+nos textos integrais dos estudos incluídos. Um registro
+continua sem texto integral e sem apreciação MMAT; um foi excluído após resumo
+e um protocolo sem resultados concluídos foi excluído após texto completo. A revisão
+segue documental e preliminar, com conferência humana por fonte e critério pendente.
 
 ### 21. Da evidência à especificação — sem saltar para a implementação
 
 Mostra a derivação visual: evidências da revisão e da fundamentação → lacunas →
 requisitos. A entrega é uma especificação técnica e pedagógica auditável, com
-protocolo e arquitetura de referência; não é aplicação funcional nem validação
-com participantes.
+protocolo para avaliar sua viabilidade e coerência e arquitetura de referência.
+A aplicação desse protocolo está pendente; não é aplicação funcional nem
+validação com participantes. Experimento de eventual protótipo é contingência
+separada, dependente de decisão posterior.
 
 ### 22. Arquitetura de referência: da fonte à decisão docente
 
@@ -182,15 +207,15 @@ fundamentação.
 
 ### 24. Próximos passos científicos
 
-Indica a consolidação da recuperação das fontes e da adjudicação do MMAT, a
-revisão das lacunas e da especificação conceitual e a necessidade de novo
-protocolo e autorização para qualquer validação experimental. A revisão
-sistematizada fundamenta decisões futuras, mas não substitui esse protocolo.
+Indica a recuperação e conferência humana das fontes, a adjudicação do MMAT e
+a aplicação do protocolo de avaliação da especificação conceitual. Qualquer
+desenvolvimento e validação experimental de um protótipo constituem contingência
+separada e exigirão decisão, protocolo e autorização próprios.
 
 ### 25. Obrigado
 
 Encerramento para perguntas e discussão, mantendo título, autor, instituição,
-snapshot e recorte temporal.
+recorte versionado e período considerado.
 
 ## Regra de referência
 
@@ -198,4 +223,4 @@ O deck não usa IDs operacionais de artigos como se fossem citações para o
 leitor. Quando uma fonte é necessária na exposição, ela deve ser identificada
 por autor e ano ou pela referência bibliográfica correspondente no TCC. As
 referências teóricas e pedagógicas permanecem externas ao conjunto derivado do
-pipeline e não são removidas por uma atualização do snapshot.
+fluxo automatizado e não são removidas por uma atualização do recorte versionado.

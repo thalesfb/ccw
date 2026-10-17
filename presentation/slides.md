@@ -6,6 +6,7 @@ colorSchema: light
 fonts:
   sans: Times New Roman
   serif: Times New Roman
+  provider: none
 title: "Ensino Personalizado de Matemática"
 info: "Revisão Sistemática da Literatura — dados da revisão"
 author: "Thales Ferreira Batista"
@@ -27,7 +28,7 @@ mdc: true
 <div class="cover-art cover-art-bottom-right" aria-hidden="true">n = −√(a²x²)<br>sin(x) = Δπ / n</div>
 
 <div class="ifc-mark" aria-label="Instituto Federal Catarinense — Campus Videira">
-  <img class="ifc-logo" src="./public/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
+  <img class="ifc-logo" src="/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
 </div>
 
 <div class="cover-slide">
@@ -38,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Snapshot: 03/09/2026 · Data de corte: 31/08/2026</div>
+<div class="cover-snapshot">Versão revisada: 15/10/2026 · Corte da busca: 31/08/2026</div>
 
 ---
 layout: default
@@ -73,7 +74,7 @@ class: content-slide tcc-objective-general-slide
 
 <div class="tcc-objective-layout">
   <div class="tcc-objective-box tcc-action"><span>OBJETO DA REVISÃO</span><p>Aplicações de técnicas computacionais na educação matemática.</p></div>
-  <div class="tcc-objective-core">Mapear e analisar sistematicamente essas aplicações — especialmente <em>machine learning</em>, <em>learning analytics</em> e sistemas tutores inteligentes — para identificar tendências, lacunas e oportunidades.</div>
+  <div class="tcc-objective-core">Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.</div>
   <div class="tcc-objective-box tcc-impact"><span>IMPACTO (PARA QUÊ?)</span><p>Fundamentar uma especificação conceitual, explicável e orientada ao apoio do professor.</p></div>
   <div class="tcc-objective-box tcc-scope"><span>ESCOPO</span><p>Revisão sistemática, síntese de evidências e requisitos. Não é protótipo funcional nem avaliação de eficácia.</p></div>
 </div>
@@ -85,7 +86,7 @@ class: content-slide
 
 <div class="slide-kicker">03 / PERGUNTAS</div>
 
-# Quatro perguntas<br>organizam a investigação
+# Quatro perguntas orientam<br>a análise da literatura
 
 <div class="rq-grid tcc-question-grid">
   <div class="rq-card rq-blue"><span>01</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="13" cy="13" r="7"/><path d="m18.5 18.5 7 7M10 13h6m-3-3v6"/></svg></div><strong>Pergunta 1 (O quê?)</strong><p>Quais técnicas aparecem na educação matemática e em que contextos?</p></div></div>
@@ -107,13 +108,13 @@ class: content-slide tcc-mission-slide
 
 <div class="tcc-mission-layout">
   <div class="tcc-mission-copy">
-    <p>O TCC mapeia aplicações de <strong>machine learning</strong>, <strong>learning analytics</strong> e sistemas tutores inteligentes em educação matemática.</p>
+    <p>O TCC propõe uma <strong>especificação técnica e pedagógica</strong> para apoiar a interpretação docente da aprendizagem matemática, fundamentada na revisão da literatura.</p>
     <div class="tcc-reading-lens"><span>LEITURA RESPONSÁVEL</span><strong>Desempenho observado ≠ aprendizagem</strong><p>Uma saída computacional organiza registros e pode gerar estimativas; não observa, sozinha, os processos cognitivos, sociais e afetivos.</p></div>
   </div>
   <div class="tcc-rigor-card">
     <h2>A ferramenta de rigor</h2>
     <div class="tcc-rigor-mark">PRISMA<br><b>2020</b></div>
-    <p><span>✓</span> Protocolo explícito para orientar identificação, seleção e relato.</p>
+    <p><span>✓</span> Diretriz de relato para tornar identificação e seleção transparentes.</p>
     <p><span>✓</span> Decisões documentadas para favorecer transparência e rastreabilidade.</p>
     <p><span>✓</span> Resultados apresentados com limites, sem ranking ou inferência de eficácia.</p>
   </div>
@@ -131,9 +132,9 @@ class: content-slide
 <div class="interpretation-ladder">
   <div class="interpretation-level level-blue"><b>01</b><strong>Desempenho observado</strong><span>Acertos, notas, tentativas, estratégias ou tempo registrados em uma tarefa.</span></div>
   <div class="interpretation-level level-purple"><b>02</b><strong>Probabilidade preditiva</strong><span>Saída condicionada ao modelo, aos dados e a um alvo definido; não é proficiência.</span></div>
-  <div class="interpretation-level level-green"><b>03</b><strong>Proficiência estimada</strong><span>Inferência produzida por um modelo a partir de várias evidências.</span></div>
-  <div class="interpretation-level level-orange"><b>04</b><strong>Competência</strong><span>Mobilização de conhecimentos, procedimentos e atitudes para resolver problemas.</span></div>
-  <div class="interpretation-level level-red"><b>05</b><strong>Aprendizagem</strong><span>Transformação construída ao longo do tempo, com compreensão, autonomia e transferência.</span></div>
+  <div class="interpretation-level level-green"><b>03</b><strong>Proficiência estimada</strong><span>Posição inferida em uma escala, dependente do modelo de mensuração.</span></div>
+  <div class="interpretation-level level-orange"><b>04</b><strong>Competência</strong><span>Mobilização de conhecimentos, habilidades, atitudes e valores para resolver demandas.</span></div>
+  <div class="interpretation-level level-red"><b>05</b><strong>Aprendizagem</strong><span>Neste TCC: mudanças no que o estudante sabe e consegue fazer ao longo do tempo.</span></div>
 </div>
 
 <div class="concept-note"><strong>Regra de interpretação:</strong> uma saída computacional pode organizar evidências e produzir estimativas, mas não observa sozinha todos os processos cognitivos, sociais e afetivos da aprendizagem, nem demonstra eficácia pedagógica.</div>
@@ -145,20 +146,16 @@ class: content-slide tcc-objectives-slide
 
 <div class="slide-kicker">06 / OBJETIVOS ESPECÍFICOS</div>
 
-# A execução em 7 objetivos específicos
+# Quatro objetivos para a especificação
 
 <div class="tcc-objective-roadmap">
-  <svg class="tcc-roadmap-streams" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true"><path d="M0 88 C150 20 180 156 330 88 S510 20 660 88 S840 156 1000 88"/><path d="M0 235 C150 170 180 300 330 235 S510 170 660 235 S840 300 1000 235"/><path d="M0 365 C150 300 180 420 330 365 S510 300 660 365 S840 420 1000 365"/></svg>
-  <div class="tcc-objective-step"><span>01</span><strong>Revisar</strong><p>Literatura de 2015–2026, conforme o protocolo.</p></div>
-  <div class="tcc-objective-step"><span>02</span><strong>Identificar</strong><p>Técnicas computacionais utilizadas.</p></div>
-  <div class="tcc-objective-step"><span>03</span><strong>Classificar</strong><p>Finalidades pedagógicas.</p></div>
-  <div class="tcc-objective-step"><span>04</span><strong>Analisar</strong><p>Avaliação e limitações.</p></div>
-  <div class="tcc-objective-step"><span>05</span><strong>Mapear</strong><p>Lacunas e desafios.</p></div>
-  <div class="tcc-objective-step"><span>06</span><strong>Auditar</strong><p>Pipeline e artefatos versionados.</p></div>
-  <div class="tcc-objective-step"><span>07</span><strong>Derivar</strong><p>Requisitos e arquitetura conceitual.</p></div>
+  <div class="tcc-objective-step"><span>01</span><strong>Categorizar</strong><p>Técnicas computacionais e finalidades pedagógicas na literatura mapeada.</p></div>
+  <div class="tcc-objective-step"><span>02</span><strong>Identificar limites</strong><p>Limitações e lacunas técnicas, pedagógicas, metodológicas e éticas.</p></div>
+  <div class="tcc-objective-step"><span>03</span><strong>Formular a especificação</strong><p>Requisitos, critérios de dados e modelos e arquitetura de referência.</p></div>
+  <div class="tcc-objective-step"><span>04</span><strong>Propor a avaliação</strong><p>Viabilidade e coerência da especificação conceitual; aplicação ainda pendente.</p></div>
 </div>
 
-<div class="tcc-caption">Juntos, estes objetivos conectam a busca, a síntese e a especificação do TCC.</div>
+<div class="tcc-caption">Revisão de 2015–2026, MMAT preliminar e pipeline auditável são meios. O protocolo proposto avalia a especificação conceitual; sua aplicação está pendente.</div>
 
 ---
 layout: default
@@ -203,23 +200,23 @@ class: content-slide flow-slide
 
 <div class="slide-kicker">09 / SELEÇÃO</div>
 
-# Da descoberta à retenção: 11.904 registros → 18 retidos
+# Da busca à seleção preliminar: 11.904 registros → 18 em avaliação de escopo
 
 <div class="tcc-funnel-layout">
   <div class="tcc-funnel">
     <div class="tcc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
     <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
     <div class="tcc-funnel-stage funnel-screening"><span>Após triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
-    <div class="tcc-funnel-stage funnel-inclusion"><span>Retenção operacional</span><strong>18</strong><small>2.468 excluídos na priorização</small></div>
+    <div class="tcc-funnel-stage funnel-inclusion"><span>Lista preliminar</span><strong>18</strong><small>2.468 não avançaram na priorização</small></div>
   </div>
   <div class="tcc-funnel-notes">
     <p><strong>Identidade:</strong> 25 DOI + 2 URL são removidos de forma determinística.</p>
     <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
-    <p><strong>Conjunto retido:</strong> 17 candidatos empíricos provisórios + 1 protocolo contextual.</p>
+    <p><strong>Desfecho da seleção:</strong> 15 registros empíricos mantidos provisoriamente; 1 relatório não recuperado; 1 exclusão após resumo; 1 protocolo excluído após texto completo.</p>
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Taxa de retenção final: 0,15%.</strong> A baixa retenção descreve o filtro aplicado; não é medida de qualidade nem de eficácia pedagógica.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Priorização por metadados e resumos não equivale à elegibilidade em texto completo. Após uma exclusão no resumo: 17 relatórios procurados, 1 não recuperado e 16 declarados avaliados; excluído 1 protocolo, restam 15 registros provisórios.</div>
 
 ---
 layout: center
@@ -228,9 +225,9 @@ class: image-slide tcc-prisma-slide
 
 <div class="slide-kicker">10 / FLUXO</div>
 
-<h1 class="sr-only">Fluxo PRISMA dos dados da revisão</h1>
+<h1 class="sr-only">Representação operacional do processo de seleção, com referência ao PRISMA 2020</h1>
 
-<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image tcc-prisma-image" />
+<img src="/images/prisma_flow.png" alt="Representação operacional do processo de seleção; não corresponde ao diagrama PRISMA completo" class="feature-image prisma-image tcc-prisma-image" />
 
 <small class="source-note">Fonte versionada: `research/exports/visualizations/prisma_flow.png`.</small>
 
@@ -252,7 +249,7 @@ class: content-slide
       <div><b>03</b><span>Excedentes são candidatos a revisão semântica; não equivalem a duplicatas confirmadas.</span></div>
     </div>
   </div>
-  <div class="image-frame"><img src="./public/images/selection_funnel.png" alt="Funil de seleção da revisão" /></div>
+  <div class="image-frame"><img src="/images/selection_funnel.png" alt="Funil de seleção da revisão" /></div>
 </div>
 
 ---
@@ -265,11 +262,11 @@ class: content-slide
 # Distribuição anual no recorte observado
 
 <div class="tcc-growth-layout">
-  <div class="tcc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano; 2026 é um ano parcial até 31 de agosto" /></div>
-  <div class="tcc-growth-copy"><h2>O snapshot observado</h2><p>Os registros cobrem 2015–2026. O pico de 2025 não deve ser comparado diretamente com 2026, pois o último ano está incompleto.</p><small>2026* = publicações identificadas até 31/08/2026. A leitura é descritiva do conjunto recuperado; não estima a produção mundial, representatividade ou qualidade.</small></div>
+  <div class="tcc-growth-chart"><img src="/images/papers_by_year.png" alt="Distribuição de registros por ano; 2026 é um ano parcial até 31 de agosto" /></div>
+<div class="tcc-growth-copy"><h2>O recorte observado</h2><p>Os registros cobrem 2015–2026. O pico de 2025 não deve ser comparado diretamente com 2026, pois o último ano está incompleto.</p><small>2026* = publicações identificadas até 31/08/2026. A leitura é descritiva do conjunto recuperado; não estima a produção mundial, representatividade ou qualidade.</small></div>
 </div>
 
-<div class="tcc-caption">Distribuição anual dos registros no recorte temporal do protocolo. *2026 é um ano parcial no snapshot.</div>
+<div class="tcc-caption">Distribuição anual dos registros no recorte temporal do protocolo. *2026 é um ano parcial no conjunto analisado.</div>
 
 ---
 layout: default
@@ -281,7 +278,7 @@ class: content-slide
 # Técnicas: frequências do conjunto pós-deduplicação
 
 <div class="tcc-technique-layout">
-  <div class="tcc-technique-chart"><img src="./public/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
+  <div class="tcc-technique-chart"><img src="/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
   <div class="tcc-technique-copy"><div class="tcc-technique-stat"><strong>6.399</strong><span>técnica não especificada</span></div><p>As categorias descrevem os 11.877 registros após remoção determinística; podem se sobrepor e não representam somente os 18 retidos.</p><div class="tcc-technique-list"><div><span>assessment</span><b>1.073</b></div><div><span>IA</span><b>863</b></div><div><span>ML</span><b>771</b></div><div><span>preditiva</span><b>345</b></div></div></div>
 </div>
 
@@ -297,7 +294,7 @@ class: content-slide tcc-score-slide
 # Score: prioridade de leitura, não qualidade
 
 <div class="tcc-score-layout">
-  <div class="tcc-score-visual"><img src="./public/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
+  <div class="tcc-score-visual"><img src="/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
   <div class="tcc-score-copy">
     <div class="tcc-score-threshold">≥ 4,0</div>
     <h2>O score organiza o processamento.</h2>
@@ -315,14 +312,14 @@ class: content-slide tcc-retained-slide
 
 <div class="slide-kicker">15 / RETENÇÃO</div>
 
-# Retenção: dois estratos de leitura
+# Composição dos 18 registros selecionados preliminarmente
 
 <div class="tcc-retained-layout">
-  <div class="tcc-retained-number"><strong>18</strong><span>registros retidos<br>na revisão</span><div class="tcc-retained-rule"></div><p>O conjunto final não é homogêneo.</p></div>
+  <div class="tcc-retained-number"><strong>18</strong><span>registros selecionados<br>para avaliação de escopo</span><div class="tcc-retained-rule"></div><p>Seleção preliminar não é inclusão final.</p></div>
   <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata"><strong>17</strong><span>candidatos empíricos provisórios</span><strong>+</strong><strong>1</strong><span>protocolo contextual</span></div>
-    <h2>Dois estratos de leitura</h2>
-    <p>Os candidatos empíricos sustentam a síntese. O protocolo contextual permanece para rastreabilidade, sem resultado empírico.</p>
+    <div class="tcc-retained-strata" aria-label="Quatro destinos dos 18 registros: 15 mais 1 mais 1 mais 1"><strong>15</strong><span>registros empíricos provisórios</span><strong>1</strong><span>relatório não recuperado</span><strong>1</strong><span>exclusão após resumo</span><strong>1</strong><span>protocolo excluído após texto completo</span></div>
+    <h2>Desfechos da seleção</h2>
+    <p>Um registro foi excluído após o resumo; dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo. Um protocolo foi excluído após essa avaliação. O relatório não recuperado não recebeu MMAT.</p>
     <div class="tcc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
   </div>
 </div>
@@ -355,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> entre os 17 candidatos empíricos, 9 tiveram texto primário revisado e 8 foram apreciados com resumo/metadados. Um revisor conduziu a leitura; recuperação de fontes, localizadores e adjudicação ainda precisam ser consolidados.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros provisórios. O ledger contém S1/S2 para 14 e critérios de categoria para 11; a validação humana está pendente. Estudos 5, 7 e 14: categoria indefinida, Q1–Q5 sem resposta. Estudo 8: elegibilidade e unidade pendentes, sem respostas. Texto não recuperado: sem apreciação. Sem escore agregado.</div>
 
 ---
 layout: default
@@ -364,18 +361,18 @@ class: content-slide tcc-synthesis-slide
 
 <div class="slide-kicker">17 / SÍNTESE</div>
 
-# Síntese provisória dos candidatos empíricos
+# Síntese dos estudos provisórios
 
 <div class="tcc-synthesis-layout">
-  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>17</strong><span>candidatos<br>empíricos</span><i>evidências<br>relacionadas</i></div>
+  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>15</strong><span>estudos<br>provisórios</span><i>evidências<br>relacionadas</i></div>
   <div class="tcc-synthesis-copy">
-    <h2>Predição e estimativa aparecem como eixo recorrente.</h2>
-    <p>Os estudos organizam evidências de desempenho e inferem proficiência a partir de registros observados, frequentemente com modelos supervisionados.</p>
+    <h2>Predição e avaliação, com limites distintos.</h2>
+    <p>Os estudos examinados incluem classificação e predição de resultados matemáticos. Categorias operacionais de desempenho não equivalem automaticamente a níveis de proficiência validados.</p>
     <div class="tcc-synthesis-points"><div><b>01</b><span><strong>Finalidade</strong> reconhecer padrões em registros de avaliação.</span></div><div><b>02</b><span><strong>Modelos</strong> RF, SVM e redes neurais aparecem como alternativas.</span></div><div><b>03</b><span><strong>Limite</strong> populações, instrumentos e métricas variam entre estudos.</span></div></div>
   </div>
 </div>
 
-<div class="tcc-caption">A síntese organiza o estado da literatura; não estabelece ranking de modelos nem eficácia pedagógica geral.</div>
+<div class="tcc-caption">A síntese organiza o recorte examinado; não estabelece ranking de modelos nem eficácia pedagógica geral.</div>
 
 ---
 layout: default
@@ -399,19 +396,19 @@ layout: default
 class: content-slide tcc-gaps-slide
 ---
 
-<div class="slide-kicker">19 / LACUNAS</div>
+<div class="slide-kicker">19 / EVIDÊNCIAS E LIMITES</div>
 
-# Lacunas que orientam a especificação
+# Limitações identificadas nos estudos consultados
 
-<p class="tcc-gaps-intro">Seis lacunas documentadas são agrupadas em quatro eixos para conduzir a próxima decisão científica.</p>
+<p class="tcc-gaps-intro">Quatro exemplos localizados nos textos primários; não são uma contagem de frequência nem uma afirmação sobre toda a literatura.</p>
 <div class="tcc-gaps-grid">
-  <div><b>1</b><h2>Explicabilidade</h2><p>Resultados compreensíveis, com incerteza e participação docente.</p></div>
-  <div><b>2</b><h2>Contexto curricular</h2><p>Indicadores relacionados a objetivos e descritores matemáticos.</p></div>
-  <div><b>3</b><h2>Validação real</h2><p>População, ambiente educacional e equidade precisam ser investigados.</p></div>
-  <div><b>4</b><h2>Reprodutibilidade</h2><p>Dados, código, parâmetros e decisões permanecem rastreáveis.</p></div>
+  <div><h2>He et al. (2025)<small>pp. 1, 16, 31–35</small></h2><p><strong>Relato:</strong> oito turmas × 45 = 360, mas amostra declarada n=90; docentes também se distribuem de modo desigual entre condições.</p><p><strong>Implicação:</strong> denominador, unidade de análise e confundimento exigem cautela.</p></div>
+  <div><h2>Villegas-Ch et al. (2025)<small>pp. 2, 14, 22</small></h2><p><strong>Relato:</strong> introdução menciona um semestre; métodos, seis semanas; a subanálise de programação chega à semana 8.</p><p><strong>Implicação:</strong> não atribuir semana 8 à matemática nem inferir duração única.</p></div>
+  <div><h2>Nyantah et al. (2025)<small>pp. 101–105</small></h2><p><strong>Relato:</strong> alocação descrita de modo incompatível; há diferença no pré-teste e a intervenção combina animação e jigsaw.</p><p><strong>Implicação:</strong> não atribuir o resultado à animação isoladamente.</p></div>
+  <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Como a revisão usa essas lacunas:</strong> elas orientam requisitos da especificação; não são apresentadas como prova de que uma solução futura será eficaz.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros provisórios, não estimativa de prevalência. O MMAT contém 14 triagens S1/S2 e 11 conjuntos de critérios de categoria, ainda sujeitos à conferência humana. O estudo 8 aguarda adjudicação de elegibilidade e unidade; o relatório não recuperado não recebeu apreciação.</div>
 
 ---
 layout: default
@@ -471,7 +468,7 @@ class: content-slide tcc-next-slide
 # Próximos passos — antes de qualquer experimento
 
 <div class="tcc-next-layout">
-  <div class="tcc-next-list"><div><b>01</b><span>Consolidar recuperação das fontes e adjudicação final do MMAT.</span></div><div><b>02</b><span>Revisar lacunas à luz dos 17 estudos empíricos provisórios.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Adjudicar a elegibilidade e a unidade de análise do estudo 8, além das 14 triagens e 11 apreciações por categoria e do texto pendente.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
   <div class="tcc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 
@@ -491,7 +488,7 @@ class: closing-slide
 
 <div class="close-rule"></div>
 <div class="close-repository">
-  <img class="repo-qr" src="./public/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">
+  <img class="repo-qr" src="/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">
   <div class="close-repository-copy"><strong>Aponte a câmera para a fonte pública</strong><span>código, dados derivados e apresentação versionados</span></div>
 </div>
 <p class="close-title"><strong>Ensino Personalizado de Matemática</strong><br>Oportunidades e Técnicas Computacionais</p>

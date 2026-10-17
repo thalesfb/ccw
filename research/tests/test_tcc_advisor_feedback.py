@@ -82,9 +82,10 @@ def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> N
 
 def test_interpretation_precedes_the_long_synthesis_quadro() -> None:
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
-    interpretation = chapter.index("Antes do quadro detalhado")
+    interpretation = chapter.index("O Quadro~\\ref{qua:sintese-estudos-empiricos}")
     quadro = chapter.index(r"\label{qua:sintese-estudos-empiricos}")
     assert interpretation < quadro
+    assert "A leitura deve considerar conjuntamente o desenho" in chapter[interpretation:quadro]
 
 
 def test_long_python_identifier_is_breakable() -> None:
@@ -151,12 +152,14 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     conclusion = _read(TCC_CONTENT / "conclusao.tex")
     abstract = _read(TCC_ABSTRACT)
 
-    assert "O escopo executado compreendeu" in introduction
+    assert "O escopo executado compreendeu" in _read(TCC_CONTENT / "metodologia.tex")
+    assert "A delimitação dos procedimentos executados" in introduction
     assert "especificação conceitual do protótipo" in prototype
     assert "não foi tratada como evidência de uma aplicação funcional" in prototype
-    assert "O objetivo geral foi alcançado" in results
+    assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "Este trabalho investigou" in conclusion
-    assert "Como contribuições, o trabalho produziu" in abstract
+    assert "Este trabalho elaborou uma especificação técnica e pedagógica" in abstract
+    assert "O protocolo não foi executado empiricamente" in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:
@@ -173,6 +176,11 @@ def test_learning_concepts_and_teacher_role_are_explicit() -> None:
         assert concept.lower() in foundation.lower()
     assert "responsabilidade do professor pela interpretação" in foundation.lower()
     assert "não observa diretamente todos os processos" in foundation.lower()
+    assert r"\cite{Romero2020}" in _read(TCC_CONTENT / "introducao.tex")
+    assert r"\cite{NRC2001}" in foundation
+    assert r"\cite{LGPD2018}" in foundation
+    assert "não foram estimados neste trabalho" in foundation
+    assert "não como efeito demonstrado pelos estudos reunidos" in foundation
 
 
 def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
@@ -194,11 +202,48 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert MMAT_LATEX.read_text(encoding="utf-8") == render_table(load_rows())
 
     chapter = _read(TCC_CONTENT / "resultadosesperados.tex")
+    study8_row = next(
+        (
+            line
+            for line in chapter.splitlines()
+            if r"\citeonline{Computational2017_008}" in line
+        ),
+        "",
+    )
+    assert "Mantido provisoriamente no fluxo de síntese" in study8_row
+    assert "elegibilidade como estudo empírico e a unidade de apreciação MMAT aguardam adjudicação humana" in study8_row
+    assert r"O Quadro~\ref{qua:sintese-estudos-empiricos}" in chapter
+    assert "não apresenta medida harmonizada de efeito" in chapter
+    assert "Resultado reportado" not in chapter
     mmat_section = chapter[chapter.index("Avaliação Metodológica com o MMAT") :]
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
     assert "sem média, ranking ou categoria geral" in mmat_section
     assert r"\input{../../research/exports/references/mmat_current_tcc_table.tex}" in chapter
     assert "Tjahyadi (2025) & Quant." not in chapter
+
+    methodology = _read(TCC_CONTENT / "metodologia.tex")
+    normalized_methodology = " ".join(methodology.split())
+    assert "Institute of Medicine" not in methodology
+    assert "referências do" not in methodology
+    storyboard = _read(TCC_ROOT / "presentation" / "APRESENTACAO_TCC_SLIDES_CONTEUDO.md")
+    slides = _read(REPO_ROOT / "presentation" / "slides.md")
+    for text in (methodology, storyboard, slides):
+        assert "Nove textos estão arquivados" not in text
+        assert "nove fontes" not in text
+    assert r"\citeonline{Zeng2025_6923}" in methodology
+    assert "Q1--Q5 permanecem sem resposta" in methodology
+    assert "esses cinco critérios não foram apreciados e permanecem sem resposta, em vez de CT" in methodology
+    assert "produzidos com apoio de IA generativa" in methodology
+    assert "não constituem essa avaliação independente" in methodology
+    assert "não apresenta uma apreciação humana concluída" in methodology
+    assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology
+    assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
+    assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
+    assert "seus componentes qualitativos e quantitativos são apreciados separadamente" in normalized_methodology.lower()
+    mmat_table = MMAT_LATEX.read_text(encoding="utf-8")
+    assert "Q1--Q5 correspondem aos critérios MMAT da categoria" in mmat_table
+    for author in ("Villegas-Ch et al. (2025)", "Xia et al. (2026)", "Echeveria et al. (2025)"):
+        assert f"{author} & Métodos mistos &" in mmat_table
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:

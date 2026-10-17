@@ -28,6 +28,9 @@ def test_versioned_export_partition_matches_summary() -> None:
     assert dataframe["id"].is_unique
     assert dataframe["selection_stage"].value_counts().to_dict() == {
         "screening": prisma["screening_excluded"],
+        "prioritization": prisma["prioritization_excluded"],
+        "abstract_screening": prisma["abstract_screening_excluded"],
+        "not_retrieved": prisma["reports_not_retrieved"],
         "eligibility": prisma["eligibility_excluded"],
         "included": prisma["included"],
     }

@@ -345,7 +345,8 @@ def normalize_doi(doi: Optional[str]) -> str:
     The normalization accepts the common ``doi:`` and DOI resolver forms and
     removes citation punctuation that is appended after a DOI in prose. It
     deliberately does not perform fuzzy matching: the result is still an
-    exact identity key.
+    exact identity key. Missing scalar values normalize to an empty string so
+    they cannot collide as if they were a shared DOI.
 
     Args:
         doi: DOI string to normalize
@@ -353,7 +354,7 @@ def normalize_doi(doi: Optional[str]) -> str:
     Returns:
         Normalized DOI string
     """
-    if doi is None:
+    if doi is None or pd.isna(doi):
         return ""
     d = str(doi).strip().lower()
     d = re.sub(r"^doi:\s*", "", d)
