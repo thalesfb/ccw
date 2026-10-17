@@ -138,6 +138,7 @@ def render_component_table(
     }
     lines = [
         "% Quadro gerado de research/data/mmat_component_reassessment_current.csv",
+        r"\clearpage",  # Keep legacy longtable anchors with the first-page caption.
         r"\begingroup",
         r"\SingleSpacing",
         r"\def\LTcaptype{quadro}",
