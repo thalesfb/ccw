@@ -38,11 +38,14 @@ def test_study_specific_limitations_are_concentrated_in_the_gaps_section() -> No
     assert r"\ref{sec:tendencias-lacunas}" in synthesis
 
 
-def test_tcc_front_pages_exclude_unfilled_optional_elements() -> None:
+def test_tcc_front_pages_preserve_inactive_optional_templates() -> None:
     main = (TCC / "main.tex").read_text(encoding="utf-8")
+    active_main = "\n".join(
+        line for line in main.splitlines() if not line.lstrip().startswith("%")
+    )
     for optional_page in ("dedicatoria", "agradecimentos", "epigrafe", "folhadeautorizacao"):
-        assert rf"\include{{pretextuais/{optional_page}}}" not in main
-        assert not (TCC / "pretextuais" / f"{optional_page}.tex").exists()
+        assert rf"\include{{pretextuais/{optional_page}}}" not in active_main
+        assert (TCC / "pretextuais" / f"{optional_page}.tex").is_file()
 
 
 def test_pedagogical_support_uses_plain_language_without_mixing_theories() -> None:
