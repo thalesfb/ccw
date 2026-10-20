@@ -94,8 +94,11 @@ O workflow [tcc-quality.yml](tcc-quality.yml) executa em PRs, push na `main` e
 acionamento manual. Ele verifica fontes Python, snapshot, adjudicação,
 bibliografia, tabelas MMAT, testes de pesquisa e protótipo, apresentação Slidev,
 PPTX e compilação LaTeX. Em PRs do próprio repositório, a etapa
-`canonical-pdf-sync` pode atualizar o PDF compilado na branch e solicitar nova
-validação.
+`canonical-pdf-sync` executa `python scripts/check_canonical_pdf.py` em modo
+somente leitura. Ela verifica a proveniência do PDF versionado, não cria commits,
+não faz push e não dispara uma nova execução do workflow. Quando o PDF estiver
+desatualizado, o autor deve compilá-lo, conferir o resultado e incluí-lo no PR
+com os fontes correspondentes; o CI não altera a branch.
 
 Checks aprovados demonstram as propriedades verificadas pelo código. A leitura
 das fontes primárias, o julgamento metodológico e a revisão do texto continuam
