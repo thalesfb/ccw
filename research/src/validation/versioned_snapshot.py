@@ -20,13 +20,22 @@ PAPERS_PATH = RESEARCH_ROOT / "exports" / "analysis" / "papers.csv"
 SUMMARY_PATH = RESEARCH_ROOT / "exports" / "reports" / "summary.json"
 SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
 
-PAPERS_REQUIRED_FIELDS = ("id", "selection_stage", "year")
-SCOPE_REQUIRED_FIELDS = ("study_id",)
+PAPERS_REQUIRED_FIELDS = ("id", "selection_stage", "status", "year")
+SCOPE_REQUIRED_FIELDS = (
+    "study_id", "record_status", "synthesis_role",
+    "empirical_mmat_applicability", "selection_stage", "selection_status",
+)
 PRISMA_FIELDS = (
     "identification",
     "duplicates_removed",
     "screening",
     "screening_excluded",
+    "prioritization",
+    "prioritization_excluded",
+    "shortlisted",
+    "abstract_screening_excluded",
+    "reports_sought",
+    "reports_not_retrieved",
     "eligibility",
     "eligibility_excluded",
     "included",
@@ -104,9 +113,24 @@ def _prisma_counts(summary: dict[str, Any], path: Path) -> dict[str, int]:
         f"{path} has an inconsistent identification/deduplication relation",
     )
     _require(
-        counts["screening_excluded"] + counts["eligibility"]
+        counts["screening_excluded"] + counts["prioritization"]
         == counts["screening"],
         f"{path} has an inconsistent screening relation",
+    )
+    _require(
+        counts["prioritization_excluded"] + counts["shortlisted"]
+        == counts["prioritization"],
+        f"{path} has an inconsistent operational-prioritization relation",
+    )
+    _require(
+        counts["abstract_screening_excluded"] + counts["reports_sought"]
+        == counts["shortlisted"],
+        f"{path} has an inconsistent abstract-screening/report-retrieval relation",
+    )
+    _require(
+        counts["reports_not_retrieved"] + counts["eligibility"]
+        == counts["reports_sought"],
+        f"{path} has an inconsistent report-retrieval relation",
     )
     _require(
         counts["eligibility_excluded"] + counts["included"]
@@ -239,8 +263,14 @@ def validate_versioned_snapshot(
     temporal = _temporal_accounting(summary, summary_path, papers, papers_path)
     expected_stage_counts = {
         "screening": prisma["screening_excluded"],
+        "prioritization": prisma["prioritization_excluded"],
+        "abstract_screening": prisma["abstract_screening_excluded"],
+        "not_retrieved": prisma["reports_not_retrieved"],
         "eligibility": prisma["eligibility_excluded"],
         "included": prisma["included"],
+    }
+    expected_stage_counts = {
+        stage: count for stage, count in expected_stage_counts.items() if count
     }
     _require(
         dict(stage_counts) == expected_stage_counts,
@@ -260,13 +290,49 @@ def validate_versioned_snapshot(
     included_ids = sorted(
         int(row["id"]) for row in papers if row["selection_stage"] == "included"
     )
+    paper_states = {
+        int(row["id"]): (row["selection_stage"], row["status"])
+        for row in papers
+    }
+    scope_states = {
+        int(row["study_id"]): (row["selection_stage"], row["selection_status"])
+        for row in scope
+    }
     _require(
-        sorted(scope_ids) == included_ids,
-        f"{scope_path} study IDs disagree with included IDs in {papers_path}",
+        set(scope_states).issubset(paper_states),
+        f"{scope_path} study IDs disagree with the shortlisted records in {papers_path}",
+    )
+    for scope_row in scope:
+        study_id = int(scope_row["study_id"])
+        _require(
+            scope_states[study_id] == paper_states[study_id],
+            f"{scope_path} disposition disagrees with {papers_path} for study {study_id}",
+        )
+    status_counts = Counter(row["record_status"] for row in scope)
+    _require(
+        status_counts.get("included_empirical_core", 0) == prisma["included"],
+        f"{scope_path} empirical-core count disagrees with {summary_path}",
     )
     _require(
-        len(scope_ids) == prisma["included"],
-        f"{scope_path} row count disagrees with {summary_path} included",
+        status_counts.get("awaiting_full_text", 0) == prisma["reports_not_retrieved"],
+        f"{scope_path} pending-text count disagrees with {summary_path}",
+    )
+    _require(
+        status_counts.get("context_only", 0) + status_counts.get("protocol_context_only", 0)
+        == prisma["abstract_screening_excluded"] + prisma["eligibility_excluded"],
+        f"{scope_path} excluded contextual records disagree with {summary_path}",
+    )
+    _require(
+        sorted(
+            int(row["study_id"])
+            for row in scope
+            if row["record_status"] == "included_empirical_core"
+        ) == included_ids,
+        f"{scope_path} empirical-core IDs disagree with included IDs in {papers_path}",
+    )
+    _require(
+        len(scope_ids) == prisma["shortlisted"],
+        f"{scope_path} row count disagrees with {summary_path} shortlisted",
     )
 
     return {
@@ -276,6 +342,7 @@ def validate_versioned_snapshot(
         "summary_prisma": prisma,
         "summary_years": temporal,
         "scope_rows": len(scope),
+        "shortlisted_ids": sorted(scope_ids),
     }
 
 

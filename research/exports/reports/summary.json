@@ -1,7 +1,7 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais",
-  "generated_at": "03/09/2026 11:46",
+  "generated_at": "16/10/2026 19:47",
   "statistics": {
     "total_papers": 11904,
     "prisma": {
@@ -11,9 +11,9 @@
       "duplicates_removed": 27,
       "screening": 11877,
       "screening_excluded": 9391,
-      "eligibility": 2486,
-      "eligibility_excluded": 2468,
-      "included": 18,
+      "eligibility": 16,
+      "eligibility_excluded": 1,
+      "included": 15,
       "deduplication_audit": {
         "raw_rows": 11904,
         "operationally_flagged_rows": 0,
@@ -52,23 +52,37 @@
       "stage_percentages": {
         "screening_excluded_of_identification": 78.89,
         "screening_advanced_of_identification": 20.88,
-        "eligibility_excluded_of_eligibility": 99.28,
-        "included_of_eligibility": 0.72,
-        "included_of_identification": 0.15
+        "screening_excluded_of_screened_records": 79.07,
+        "prioritization_passed_of_screened_records": 20.93,
+        "prioritization_excluded_of_prioritization": 99.28,
+        "shortlisted_of_prioritization": 0.72,
+        "abstract_screening_excluded_of_shortlist": 5.56,
+        "reports_not_retrieved_of_reports_sought": 5.88,
+        "full_text_excluded_of_assessed": 6.25,
+        "included_of_assessed": 93.75,
+        "eligibility_excluded_of_eligibility": 6.25,
+        "included_of_eligibility": 93.75,
+        "included_of_identification": 0.13
       },
       "_audit": {
-        "raw_included_total": 18,
+        "raw_included_total": 15,
         "duplicates_marked_included": 0,
-        "included_without_operational_flag": 18,
+        "included_without_operational_flag": 15,
         "expected_delta": 0,
         "actual_delta": 0
-      }
+      },
+      "prioritization": 2486,
+      "prioritization_excluded": 2468,
+      "shortlisted": 18,
+      "abstract_screening_excluded": 1,
+      "reports_sought": 17,
+      "reports_not_retrieved": 1
     },
     "integrity": {
       "raw_rows": 11904,
       "distinct_doi": 10657,
       "duplicates_removed": 27,
-      "included_without_operational_flag": 18,
+      "included_without_operational_flag": 15,
       "operationally_flagged_rows": 0,
       "deterministic_identity_duplicate_rows": 27,
       "confirmed_semantic_duplicates": 0
@@ -111,9 +125,17 @@
     "stage_percentages": {
       "screening_excluded_of_identification": 78.89,
       "screening_advanced_of_identification": 20.88,
-      "eligibility_excluded_of_eligibility": 99.28,
-      "included_of_eligibility": 0.72,
-      "included_of_identification": 0.15
+      "screening_excluded_of_screened_records": 79.07,
+      "prioritization_passed_of_screened_records": 20.93,
+      "prioritization_excluded_of_prioritization": 99.28,
+      "shortlisted_of_prioritization": 0.72,
+      "abstract_screening_excluded_of_shortlist": 5.56,
+      "reports_not_retrieved_of_reports_sought": 5.88,
+      "full_text_excluded_of_assessed": 6.25,
+      "included_of_assessed": 93.75,
+      "eligibility_excluded_of_eligibility": 6.25,
+      "included_of_eligibility": 93.75,
+      "included_of_identification": 0.13
     },
     "years": {
       "min": 2015,
@@ -165,11 +187,17 @@
     },
     "selection_stages": {
       "Identificação": 11904,
-      "Triagem": 11877,
-      "Elegibilidade": 2486,
-      "Incluídos": 18,
-      "Excluídos na Triagem": 9391,
-      "Excluídos na Elegibilidade": 2468
+      "Registros após deduplicação": 11877,
+      "Excluídos na triagem inicial": 9391,
+      "Registros enviados à priorização operacional": 2486,
+      "Excluídos pelo limiar operacional": 2468,
+      "Selecionados para leitura de resumo": 18,
+      "Excluídos após leitura de resumo": 1,
+      "Relatórios buscados": 17,
+      "Relatórios não recuperados": 1,
+      "Textos integrais avaliados": 16,
+      "Excluídos após texto integral": 1,
+      "Incluídos na síntese empírica": 15
     }
   },
   "config": {},
@@ -255,14 +283,6 @@
       "url": "https://openalex.org/W2744614829"
     },
     {
-      "title": "Machine Learning-based Predictive Analytics of Student Academic Performance in STEM Education",
-      "authors": "Vladimir L. Uskov; Jeffrey P. Bakken; Adam Byerly; Ashok Shah",
-      "year": 2019,
-      "venue": NaN,
-      "doi": "10.1109/educon.2019.8725237",
-      "url": "https://openalex.org/W2946865664"
-    },
-    {
       "title": "Computational Models of Human Learning: Applications for Tutor Development, Behavior Prediction, and Theory Testing",
       "authors": "Christopher J. MacLellan",
       "year": 2017,
@@ -301,22 +321,6 @@
       "venue": "International Journal of Mathematics and Mathematics Education",
       "doi": "10.56855/ijmme.v3i2.1299",
       "url": "https://doi.org/10.56855/ijmme.v3i2.1299"
-    },
-    {
-      "title": "Beyond  the  traditional  classroom:  innovation  and  inclusion  in  math teaching with AI",
-      "authors": "R. C. Fabiola Imperatrice; Lucia Melchiorre; Domenico Lorusso; Domenico Santoro; Luca Grilli",
-      "year": 2025,
-      "venue": NaN,
-      "doi": NaN,
-      "url": ""
-    },
-    {
-      "title": "Multimodal neurophysiological measurement of cognitive load during math problem solving in 4th graders",
-      "authors": "Zeng, Jialing",
-      "year": 2025,
-      "venue": NaN,
-      "doi": "10.7916/2q6y-bm58",
-      "url": "https://doi.org/10.7916/2q6y-bm58"
     }
   ],
   "fulltext_stats": null

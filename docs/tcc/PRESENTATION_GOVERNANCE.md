@@ -5,18 +5,27 @@ em `presentation/`. Ele separa a referência visual fornecida, os requisitos
 institucionais e os critérios científicos verificáveis, sem transformar
 decisões de implementação em afirmações acadêmicas.
 
-## Escopo aprovado
+## Escopo da apresentação
 
 - A fonte de verdade do deck é `presentation/slides.md`, em Slidev.
 - Os números devem continuar reconciliados com
   `research/exports/reports/summary.json`.
-- O estado científico apresentado é o snapshot atual: 18 registros retidos,
-  sendo 17 candidatos empíricos provisórios e um protocolo contextual.
+- O estado científico apresentado é o snapshot atual: 18 registros shortlistados,
+  dos quais 15 integram provisoriamente o núcleo empírico, 1 aguarda texto
+  integral, 1 foi excluído após resumo e 1 protocolo foi excluído após texto
+  completo por não apresentar resultados concluídos.
 - A apresentação não deve prometer eficácia, validação experimental ou um
   protótipo executado quando a evidência correspondente ainda não existe.
 - O encerramento deve oferecer o repositório por QR code, com destino
   canônico `https://github.com/thalesfb/ccw`, texto alternativo e uma área
   visual legível para leitura em projeção.
+
+## Roteiro de fala: etapa posterior
+
+A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
+após a revisão dos PRs e a validação da orientação, com base no conteúdo
+aprovado. O roteiro histórico do export paralelo não integra os contratos de
+atualidade científica do deck; estes conferem o storyboard e o Slidev.
 
 ## Template fornecido: instrução versus requisito
 
@@ -80,12 +89,10 @@ script, e o SVG gerado é um artefato local reproduzível.
 ## Limites de publicação
 
 A apresentação publica somente o estado científico e técnico que possui
-evidência versionada. O rastreador de issues e o histórico de pull requests
-servem à proveniência da engenharia, mas não são fontes de resultados,
-aprovação acadêmica ou validação experimental. Reuniões, decisões pendentes,
-hipóteses de continuidade e tarefas de desenvolvimento devem aparecer no
-deck apenas quando forem necessárias para explicar o escopo e sempre com a
-distinção explícita entre realizado, demonstrado e proposto.
+evidência versionada. Reuniões, decisões pendentes, hipóteses de continuidade
+e tarefas de desenvolvimento devem aparecer no deck apenas quando forem
+necessárias para explicar o escopo e sempre com a distinção explícita entre
+realizado, demonstrado e proposto.
 
 Não devem ser publicados em documentos acadêmicos: caminhos locais,
 credenciais, logs brutos, transcrições de assistência, instruções internas de
@@ -95,7 +102,15 @@ seu efeito sobre o alcance das conclusões.
 
 Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
 o código do pipeline está implementado, os testes sintéticos estão verdes, o
-experimento com dados reais permanece pendente e o MMAT é preliminar. No slide
-do MMAT, a contagem deve deixar explícito que nove dos 17 candidatos empíricos
-tiveram texto primário revisado e oito foram apreciados com resumo e
-metadados; o protocolo contextual não integra essa apreciação.
+experimento com dados reais é continuidade fora do escopo documental desta entrega,
+e o MMAT é preliminar. O núcleo empírico mantém provisoriamente 15 registros:
+14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria. Nos estudos
+5, 7 e 14, Q1--Q5 aguardam definição do delineamento, sem resposta CT.
+O estudo 8 permanece no fluxo PRISMA e no corpus sem
+respostas MMAT até adjudicação humana de sua elegibilidade e unidade de
+apreciação; suas bases distintas não devem ser somadas. O registro 6923
+aguarda o texto integral e não recebeu respostas MMAT; um registro foi
+excluído após resumo e um protocolo sem resultados concluídos foi excluído
+após texto completo. O estudo 6919 foi mantido conforme
+o protocolo escrito, que não exige personalização como condição de elegibilidade.
+Alguns textos consultados externamente não estão arquivados no repositório público.

@@ -20,8 +20,9 @@ def test_review_section_uses_semantic_float_types_and_labels() -> None:
     repository_root = Path(__file__).resolve().parents[2]
     review = _read(repository_root, "results/tcc/conteudo/resultadosesperados.tex")
 
+    assert review.count("\\begin{figure}") == 0
     assert review.count("\\begin{fluxograma}") == 1
-    assert review.count("\\begin{grafico}") == 2
+    assert review.count("\\begin{grafico}") == 1
     assert review.count("\\begin{table}") == 1
     assert "\\label{qua:sintese-estudos-empiricos}" in review
     assert "Tabela~\\ref{tab:sintese-estudos-empiricos}" not in review
@@ -40,6 +41,18 @@ def test_generated_mmat_export_is_a_quadro_and_is_self_describing() -> None:
     assert "\\label{qua:mmat-reavaliacao-atual}" in export
     assert "\\quadroname\\ \\thequadro" in export
     assert "\\label{tab:mmat-reavaliacao-atual}" not in export
+    assert "S1 e S2 são perguntas de triagem" in export
+    assert "Q1--Q5 correspondem aos critérios" in export
+    assert "\\ref{sec:qualidade-estudos}" in export
+    assert "Quant. = quantitativo" in export
+    assert "Base = fonte consultada" in export
+
+    component_caption = r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos"
+    component_caption_index = export.index(component_caption)
+    previous_table_end = export.rfind(r"\end{longtable}", 0, component_caption_index)
+    component_table_start = export.rfind(r"\begin{longtable}", 0, component_caption_index)
+    assert previous_table_end < component_table_start < component_caption_index
+    assert r"\Needspace{18\baselineskip}" not in export
 
 
 def test_prisma_appendix_classifies_checklist_as_quadro() -> None:
