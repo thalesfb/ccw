@@ -54,7 +54,7 @@ def test_methodology_dates_final_scope_reconciliation_without_implying_a_new_sea
 
 def test_research_readme_uses_operational_prioritization_and_explicit_denominators() -> None:
     readme = (ROOT / "research/README.md").read_text(encoding="utf-8")
-    current = readme.split("**População do snapshot de busca (03/09/2026), com escopo atualizado em 14/10/2026**:", 1)[1].split(
+    current = readme.split("**População do snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026**:", 1)[1].split(
         "**Baseline histórico", 1
     )[0]
 

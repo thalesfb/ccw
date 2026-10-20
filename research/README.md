@@ -1,11 +1,13 @@
 # 📚 Revisão Sistemática da Literatura - CCW Research
 
-> **Fluxo PRISMA versionado (14/10/2026):** o snapshot preserva
+> **Fluxo PRISMA versionado (20/10/2026):** o snapshot preserva
 > 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e
 > 11.877 registros na triagem. Após a priorização operacional, 18 registros
 > formaram a shortlist. O fluxo mantém provisoriamente 15 registros empíricos,
 > 1 relatório não recuperado, 1 exclusão após resumo e 1 protocolo excluído
-> após texto completo. O estudo 8 aguarda adjudicação de elegibilidade/unidade
+> após texto completo. A conferência suplementar do texto integral do registro
+> excluído após o resumo confirmou a decisão de escopo sem alterar a etapa ou
+> as contagens PRISMA. O estudo 8 aguarda adjudicação de elegibilidade/unidade
 > e não recebeu respostas MMAT; o denominador MMAT atual é 14.
 > O registro 6918 foi corrigido para 2014 e excluído do recorte 2015--2026.
 > A baseline operacional de 31/08/2026 (16 retidos) e os números históricos de
@@ -204,12 +206,12 @@ explícitas. O SQLite permanece local e não versionado; para reconstituir o
 snapshot sem distribuir o banco, use os exports versionados e
 research/src/processing/adjudicated_snapshot.py.
 
-**População do snapshot de busca (03/09/2026), com escopo atualizado em 14/10/2026**:
+**População do snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026**:
 
 - **Identificação**: 11.904 registros; 27 remoções determinísticas (25 DOI + 2 URL)
 - **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 encaminhados à priorização operacional
 - **Priorização operacional**: 2.486 registros; 2.468 não avançaram nessa etapa; 18 formaram a shortlist
-- **Fluxo pós-shortlist**: 1 registro excluído após resumo; 17 relatórios procurados; 1 não recuperado; 16 avaliados em texto completo; 1 protocolo excluído e 15 estudos empíricos mantidos provisoriamente
+- **Fluxo pós-shortlist**: 1 registro excluído após resumo (decisão confirmada por conferência suplementar do texto integral, sem alterar a etapa ou a contagem); 17 relatórios procurados; 1 não recuperado; 16 avaliados em texto completo; 1 protocolo excluído e 15 estudos empíricos mantidos provisoriamente
 - **Percentuais sobre os 11.904 identificados**: 78,89% excluídos na triagem; 20,88% encaminhados à priorização; 0,15% na shortlist; 0,13% incluídos provisoriamente no núcleo empírico.
 - **Percentuais sobre os 2.486 submetidos à priorização operacional**: 99,28% não avançaram nessa etapa; 0,72% formaram a shortlist.
 - **Identidade**: 25 excedentes DOI + 2 excedentes URL removidos; 257 excedentes de título continuam como candidatos de auditoria, dos quais 232 são apenas por título
@@ -721,5 +723,5 @@ python -m research.src.cli run-pipeline
 
 ---
 
-*📅 Última atualização documental: 14 de outubro de 2026*
-*🟡 Status: Snapshot reconciliado em 14 out. 2026 | 15 inclusões empíricas provisórias | MMAT preliminar em 14 estudos; estudo 8 e adjudicação independente pendentes*
+*📅 Última atualização documental: 20 de outubro de 2026*
+*🟡 Status: Snapshot reconciliado em 20 out. 2026 | 15 inclusões empíricas provisórias | MMAT preliminar em 14 estudos; estudo 8 e adjudicação independente pendentes*

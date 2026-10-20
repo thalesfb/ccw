@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from src.analysis.reports import ReportGenerator
+from src.analysis.mmat_current import validate_current_artifacts
 from src.validation.reproducibility import _sha256 as _artifact_sha256
 
 
@@ -40,7 +41,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     counts = snapshot["counts"]
 
     assert manifest["schema_version"] == "1.3"
-    assert manifest["scope_updated_at"] == "2026-10-14"
+    assert manifest["scope_updated_at"] == "2026-10-20"
     assert manifest["database"]["versioned"] is False
     assert manifest["operational_database_snapshot"]["status"] == "diagnostic_only"
     assert manifest["operational_database_snapshot"]["authoritative_snapshot"] == "snapshot"
@@ -190,7 +191,8 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
     assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 0
     assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 15
-    assert current_mmat["record_evidence_levels"]["abstract_and_metadata_only"] == 1
+    assert current_mmat["record_evidence_levels"]["abstract_and_metadata_only"] == 0
+    assert current_mmat["record_evidence_levels"]["primary_full_text_scope_exclusion"] == 1
     assert current_mmat["record_evidence_levels"]["pending_full_text_not_appraised"] == 1
 
     assert manifest["artifact_scope"] == "research_snapshot"
@@ -230,6 +232,12 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     assert all(
         document["owner"] in {"documentation PR", "manuscript PR", "manuscript PR and LaTeX CI"}
         for document in manifest["companion_documents"]
+    )
+
+
+def test_manifest_appraisal_summary_matches_the_current_ledger() -> None:
+    assert _manifest()["methodological_appraisal"]["current_mmat_qa"] == (
+        validate_current_artifacts()
     )
 
 

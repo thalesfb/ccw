@@ -2,7 +2,7 @@
 
 Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e relatórios do pipeline são regeneráveis via CLI e não devem ser editados manualmente; páginas metodológicas versionadas devem permanecer coerentes com seus ledgers de origem.
 
-> **Snapshot de busca (03/09/2026), com escopo atualizado em 14/10/2026:**
+> **Snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026:**
 > 11.904 registros identificados;
 > 27 registros redundantes foram removidos deterministicamente por DOI/URL antes
 > da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos, 2.486
@@ -202,7 +202,7 @@ python -m research.src.cli deep-analysis
 | Total de registros brutos no banco | 11.904 |
 | Remoções determinísticas por DOI/URL | 27 |
 | Registros avaliados na triagem | 11.877 |
-| Registros shortlistados | 18 (15 incluídos provisoriamente, 1 não recuperado, 1 excluído após resumo e 1 protocolo excluído) |
+| Registros shortlistados | 18 (15 incluídos provisoriamente, 1 não recuperado, 1 excluído após resumo — decisão confirmada por conferência suplementar do texto integral, sem alterar a contagem — e 1 protocolo excluído) |
 | Taxa de inclusão empírica provisória | 0,13% (15/11.904) |
 | Período analítico configurado | 2015--2026 |
 | Excluídos na triagem | 9.391 (78,89% da identificação) |

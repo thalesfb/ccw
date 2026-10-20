@@ -57,7 +57,8 @@ def test_optional_font_decoder_is_recorded_and_pinned_for_replay():
     assert f"fonttools=={environment['fonttools_version']}" in requirements.splitlines()
 
     recovered = [source for source in manifest['sources']
-                 if source['status'] == 'recovered_identity_candidate']
+                 if source.get('replay_status') == 'frozen_retrieval_replay_verified']
+    assert replay_validation['checked_study_ids'] == [source['study_id'] for source in recovered]
     assert replay_validation['checked_source_count'] == len(recovered)
     assert replay_validation['checked_chunk_count'] == sum(source['chunks'] for source in recovered)
     assert replay_validation['integrity_failures'] == 0

@@ -45,6 +45,7 @@ DESIGN_LABELS = {
 }
 BASIS_LABELS = {
     "primary_full_text_reviewed_externally": "Texto primário externo",
+    "primary_full_text_scope_exclusion": "Texto integral; fora do escopo",
     "pending_full_text_not_appraised": "Texto pendente; sem MMAT",
     "abstract_and_metadata_only": "Resumo/metadados",
     "abstract_only": "Resumo",
@@ -193,6 +194,7 @@ def render_table(
         "% Quadro gerado de research/data/mmat_reassessment_current.csv",
         "% Reavaliação documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
+        r"\clearpage",  # Keep the legacy CI destination on the caption page.
         r"\begingroup",
         r"\SingleSpacing",
         r"\fontsize{10}{11.5}\selectfont",

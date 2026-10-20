@@ -9,6 +9,8 @@ const registryPath = path.join(root, 'research', 'data', 'mmat_current_study_reg
 const scopePath = path.join(root, 'research', 'data', 'current_synthesis_scope.csv');
 const reproducibilityManifestPath = path.join(root, 'research', 'exports', 'reports', 'reproducibility_manifest.json');
 const outputPath = path.join(root, 'research', 'exports', 'analysis', 'mmat_current.html');
+const sourceCoverage = JSON.parse(fs.readFileSync(path.join(root, 'research', 'data', 'study_contribution_current.json'), 'utf8'));
+const coverageById = new Map(sourceCoverage.records.map((row) => [row.study_id, row]));
 
 function parseCsv(text) {
   const rows = [];
@@ -65,6 +67,8 @@ function criterion(value) {
 }
 
 function sourceStatus(row, scope) {
+  if (row.assessment_basis === 'primary_full_text_scope_exclusion') return '<span class="tag tag-amber">texto integral conferido; fora do escopo matemático</span>';
+  if (coverageById.get(row.study_id)?.current_appraisal_verification === 'not_revalidated_without_primary_text') return '<span class="tag tag-amber">MMAT histórico; fonte indisponível nesta revisão</span>';
   if (scope?.empirical_mmat_applicability === 'pending_unit_adjudication') return '<span class="tag tag-amber">MMAT suspenso; unidade de análise pendente</span>';
   if (row.design === 'design_pending' && row.s1) return '<span class="tag tag-amber">texto primário revisado; categoria MMAT pendente</span>';
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') return '<span class="tag tag-green">texto primário revisado</span>';
@@ -75,6 +79,12 @@ function sourceStatus(row, scope) {
 }
 
 function sourceAndAppraisalStatus(row, scope) {
+  if (row.assessment_basis === 'primary_full_text_scope_exclusion') {
+    return 'Texto integral conferido após a exclusão originalmente registrada na triagem do resumo. Confirmado fora do escopo matemático; MMAT não aplicado. A recuperação suplementar não altera as contagens históricas.';
+  }
+  if (coverageById.get(row.study_id)?.current_appraisal_verification === 'not_revalidated_without_primary_text') {
+    return 'Respostas históricas provisórias, não revalidadas nesta revisão por falta do texto integral. A indisponibilidade de acesso não demonstra baixa qualidade nem confirma inelegibilidade.';
+  }
   if (scope?.empirical_mmat_applicability === 'pending_unit_adjudication') {
     return 'Texto integral consultado; MMAT suspenso. Elegibilidade e unidade de apreciação aguardam adjudicação humana; nenhum critério recebeu resposta.';
   }
@@ -230,17 +240,19 @@ const unitHoldRows = currentScope.filter((row) => row.empirical_mmat_applicabili
 const mmatAppraised = current.filter((row) => mmatAppraisedIds.has(row.study_id));
 const categoryPending = mmatAppraised.filter((row) => row.design === 'design_pending');
 const categoryAppraised = mmatAppraised.filter((row) => row.design !== 'design_pending');
-const abstractOnly = current.filter((row) => row.assessment_basis === 'abstract_and_metadata_only');
+const abstractOnly = currentScope.filter((row) => row.selection_stage === 'abstract_screening' && row.selection_status === 'excluded');
+const fullTextScopeChecks = current.filter((row) => row.assessment_basis === 'primary_full_text_scope_exclusion');
+const localPrimaryCount = sourceCoverage.records.filter((row) => row.full_text_available_locally).length;
 const pendingFullText = current.filter((row) => row.assessment_basis === 'pending_full_text_not_appraised');
 const abstractExclusionSummary = abstractOnly.length === 1
   ? 'Um registro foi excluído após a triagem do resumo e não recebeu MMAT.'
   : `${abstractOnly.length} registros foram excluídos após a triagem do resumo e não receberam MMAT.`;
 const pendingFullTextSummary = pendingFullText.length === 1
-  ? 'Um texto integral ainda não foi recuperado e não recebeu apreciação MMAT.'
-  : `${pendingFullText.length} textos integrais ainda não foram recuperados e não receberam apreciação MMAT.`;
+  ? 'Um relatório permanece não recuperado no fluxo de seleção e não recebeu apreciação MMAT.'
+  : `${pendingFullText.length} relatórios permanecem não recuperados no fluxo de seleção e não receberam apreciação MMAT.`;
 const pendingFullTextLabel = pendingFullText.length === 1
-  ? 'texto integral pendente'
-  : 'textos integrais pendentes';
+  ? 'relatório não recuperado no fluxo'
+  : 'relatórios não recuperados no fluxo';
 const pendingFullTextQuestionSummary = pendingFullText.length === 1
   ? '1 registro aguarda texto integral e também não recebe MMAT.'
   : `${pendingFullText.length} registros aguardam texto integral e também não recebem MMAT.`;
@@ -285,6 +297,8 @@ function criterionEvidenceDetails(row, scope) {
     ? 'MMAT suspenso: elegibilidade e unidade de apreciação ainda aguardam adjudicação humana; nenhum critério foi avaliado.'
     : row.assessment_basis === 'pending_full_text_not_appraised'
     ? 'Texto integral não recuperado; MMAT não aplicado.'
+    : row.assessment_basis === 'primary_full_text_scope_exclusion'
+      ? 'Exclusão por escopo matemático confirmada no texto integral; MMAT não aplicado.'
     : row.assessment_basis === 'abstract_and_metadata_only'
       ? 'Registro excluído após a triagem do resumo; MMAT não aplicado.'
       : 'Justificativa não consta no registro disponível.';
@@ -294,6 +308,8 @@ function criterionEvidenceDetails(row, scope) {
       code,
       label: row.empirical_status === 'protocol_or_proposal_not_applicable'
         ? 'Não aplicável: protocolo contextual sem resultados empíricos concluídos.'
+        : row.assessment_basis === 'primary_full_text_scope_exclusion'
+          ? 'Não aplicável neste recorte: exclusão por escopo matemático.'
         : designQuestions?.get(code) ?? 'Pergunta específica não determinada porque o delineamento permanece pendente.',
     })),
   ];
@@ -422,6 +438,8 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
           <h3>${primaryReviewed.length} registros com consulta documental declarada</h3>
+          <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
+          <p>O acervo local contém ${localPrimaryCount} PDFs dos 18 registros. Faltam os estudos 3 e 6923: o estudo 3 permanece retido provisoriamente, mas sua ficha histórica não foi revalidada sem o original; 6923 é o relatório não recuperado no fluxo. Disponibilidade local não é elegibilidade nem certificação de leitura humana. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
           <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm S1/S2 respondidas; ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. Em ${categoryPending.length} estudos (${categoryPending.map((row) => escapeHtml(row.study_id)).join(', ')}), Q1–Q5 permanecem não avaliados até definir o delineamento, sem resposta CT. ${unitHoldRows.length} registro (${unitHoldRows.map((row) => escapeHtml(row.study_id)).join(', ')}) permanece no corpus e no fluxo PRISMA sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise; não se somam suas bases distintas. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. Os julgamentos documentais receberam apoio automatizado; o rótulo histórico de revisor único não comprova leitura humana integral. A conferência humana por fonte e critério e a adjudicação metodológica permanecem pendentes.</p>
         </article>
       </section>
@@ -454,7 +472,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável · — = não avaliado. Nos estudos 5, 7 e 14, apenas S1/S2 foram respondidas; Q1–Q5 aguardam definição da categoria. Os registros sem texto integral e o estudo 8 (unidade de análise pendente) não receberam respostas MMAT.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável · — = não avaliado. Nos estudos 5, 7 e 14, apenas S1/S2 foram respondidas; Q1–Q5 aguardam definição da categoria. O relatório 6923 e o estudo 8 (unidade de análise pendente) não receberam respostas MMAT. O estudo 9 está fora do escopo matemático, sem MMAT. As respostas históricas do estudo 3 não foram revalidadas nesta revisão sem o original.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>

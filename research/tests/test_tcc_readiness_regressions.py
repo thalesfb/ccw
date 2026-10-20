@@ -88,7 +88,9 @@ def test_mmat_does_not_infer_sampling_or_analysis_from_topic_relevance_alone() -
     for study_id in ("6923", "9"):
         assert all(rows[study_id][criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
         assert rows[study_id]["criterion_evidence"] == ""
-    assert rows["9"]["assessment_status"] == "not_assessed_after_abstract_exclusion"
+    assert rows["9"]["assessment_status"] == "not_assessed_scope_exclusion_confirmed"
+    assert rows["9"]["assessment_basis"] == "primary_full_text_scope_exclusion"
+    assert rows["9"]["design"] == "not_applicable"
 
     methodology = " ".join(
         (TCC / "conteudo" / "metodologia.tex")

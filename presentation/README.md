@@ -122,7 +122,7 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
   após resumo e um protocolo sem resultados concluídos foi excluído após texto
   completo;
 - o MMAT atual é preliminar: a busca tem data de corte em 31/08/2026 e o escopo
-  foi reconciliado em 14/10/2026; 14 registros têm triagem S1/S2 e 11 têm
+  foi reconciliado em 20/10/2026; 14 registros têm triagem S1/S2 e 11 têm
   critérios por categoria apreciados; o estudo 8 aguarda adjudicação. Não há
   nota média ou ranking;
 - as frequências técnicas são descritivas sobre o snapshot após deduplicação,

@@ -68,6 +68,7 @@ ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
 EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT|N/A)\s+.+$")
 VALID_ASSESSMENT_BASES = {
     "primary_full_text_reviewed_externally",
+    "primary_full_text_scope_exclusion",
     "pending_full_text_not_appraised",
     "abstract_and_metadata_only",
     "abstract_only",
@@ -128,9 +129,16 @@ def load_current_reassessment(
         unit_pending = row.get("design_status") == "unit_of_appraisal_pending"
         not_appraised = (
             source_pending
-            or row.get("assessment_basis") == "abstract_and_metadata_only"
+            or row.get("assessment_basis") in {
+                "abstract_and_metadata_only", "primary_full_text_scope_exclusion"
+            }
             or unit_pending
         )
+        if (
+            row.get("assessment_basis") == "primary_full_text_scope_exclusion"
+            and int(row["study_id"]) not in CONTEXT_ONLY_STUDY_IDS
+        ):
+            raise ValueError("Full-text scope exclusion is not an empirical appraisal basis")
         for criterion in ALL_CRITERIA:
             if row.get(criterion, "") not in VALID_RESPONSES:
                 raise ValueError(
@@ -435,6 +443,24 @@ def validate_current_artifacts(
                     f"Study {row['study_id']} has a metadata-only MMAT ledger "
                     "that disagrees with the current registry"
                 )
+        if basis == "primary_full_text_scope_exclusion":
+            source_row = next(
+                source for source in primary_sources
+                if source["source_id"] == row["source_id"]
+            )
+            if (
+                scope_row["synthesis_role"] != "contextual_study"
+                or registry_row.get("empirical_status") != "empirical_outside_mathematics_scope"
+                or registry_row.get("design_status") != "not_applicable"
+                or row.get("design") != "not_applicable"
+                or row.get("design_status") != "not_applicable"
+                or row.get("assessment_status") != "not_assessed_scope_exclusion_confirmed"
+                or source_row.get("full_text_status") != "externally_reviewed_not_archived"
+                or not re.fullmatch(r"[a-f0-9]{64}", source_row.get("sha256", ""))
+            ):
+                raise ValueError(
+                    f"Study {row['study_id']} has an inconsistent full-text scope exclusion"
+                )
         if basis == "protocol_or_proposal_not_applicable":
             if registry_row.get("design_status") != "not_applicable":
                 raise ValueError(
@@ -470,6 +496,7 @@ def validate_current_artifacts(
     scored_population = [*core_reassessment, *protocol_reassessment]
     evidence_levels = {
         "primary_full_text_reviewed_externally": 0,
+        "primary_full_text_scope_exclusion": 0,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
         "metadata_only": 0,

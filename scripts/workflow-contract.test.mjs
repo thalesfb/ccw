@@ -3,6 +3,14 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 
 const workflow = await readFile(new URL('../.github/workflows/publish-reports.yml', import.meta.url), 'utf8')
+const qualityWorkflow = await readFile(new URL('../.github/workflows/tcc-quality.yml', import.meta.url), 'utf8')
+
+test('source validation checks the reproducibility manifest and optional templates', () => {
+  assert.ok(qualityWorkflow.includes('tests/test_reproducibility_manifest.py'))
+  assert.ok(qualityWorkflow.includes('tests/test_tcc_optional_frontmatter.py'))
+  assert.ok(qualityWorkflow.includes('tests/test_protocol_consistency_current.py'))
+  assert.ok(qualityWorkflow.includes('tests/test_tcc_readiness_regressions.py'))
+})
 
 test('Pages waits for a successful TCC quality workflow on main', () => {
   assert.match(workflow, /workflow_run:\s*\n\s*workflows:\s*\n\s*- TCC quality/)
