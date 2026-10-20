@@ -608,12 +608,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "8f7ef817e238559b166b56ac4714304a65e7ffd02dffc7dc3d96e2b85375df8e"
+      "sha256": "2dc3e3d2871b5b3d152f35e3bdb6cb95bfdd8925e08cee5550129c5daf981cd9"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "2e14102f5e278e4a5a20da2ebb628a933e8316c84eb665a32f884b8a7c7ae283"
+      "sha256": "fe23c5915b589cd4b151a6dbc252d9d1bdd3b722a34db167671ad4a3eec0091c"
     },
     {
       "path": "research/requirements.txt",
