@@ -16,6 +16,8 @@ We use Gitmoji with Conventional Commits for commit subjects.
 - Write the subject and optional body in English; use an imperative verb.
 - Separate an optional body from the subject with a blank line. Keep body lines
   at or below 100 characters and explain why when useful.
+- Do not add attribution trailers or co-authorship footers to commits or pull
+  requests. Keep publication metadata free of tool branding and signatures.
 
 Examples:
 
@@ -32,3 +34,7 @@ Examples:
   history.
 - Run the relevant tests and validations before pushing.
 - Prefer rebase or squash merging for pull requests.
+- Review the final merge message explicitly. Squashing commits with different
+  authors can introduce attribution footers even when the PR body has none.
+- CI validates compiled artifacts but must not create commits on contributor
+  branches. Rebuild, inspect and commit an outdated canonical PDF before merge.
