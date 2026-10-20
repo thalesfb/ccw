@@ -86,6 +86,10 @@ jobs:
           python -m pytest \
             tests/test_bibliography_audit.py \
             tests/test_tcc_normalization.py \
+            tests/test_tcc_optional_frontmatter.py \
+            tests/test_reproducibility_manifest.py \
+            tests/test_protocol_consistency_current.py \
+            tests/test_tcc_readiness_regressions.py \
             tests/test_experiment_contract.py \
             tests/test_mmat.py \
             tests/test_mmat_artifacts.py \

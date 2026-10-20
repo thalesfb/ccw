@@ -173,7 +173,7 @@ class EditorialFeedbackTests(unittest.TestCase):
             for record in candidates
         )
         abstract_excluded = sum(
-            record["empirical_status"] == "empirical_abstract_only"
+            record["empirical_status"] == "empirical_outside_mathematics_scope"
             for record in candidates
         )
         self.assertEqual(

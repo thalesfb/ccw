@@ -119,19 +119,20 @@ def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     assert report["evidence_levels"]["protocol_or_proposal_not_applicable"] == 1
     assert report["record_evidence_levels"]["pending_full_text_not_appraised"] == 1
     assert report["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 15
-    assert report["record_evidence_levels"]["abstract_and_metadata_only"] == 1
+    assert report["record_evidence_levels"]["abstract_and_metadata_only"] == 0
+    assert report["record_evidence_levels"]["primary_full_text_scope_exclusion"] == 1
     assert report["non_ct_criterion_decisions"] > 0
     assert report["final_ready"] is False
     assert report["blocking_reasons"]
     assert not any("source/year eligibility hold" in reason for reason in report["blocking_reasons"])
 
 
-def test_record_excluded_after_abstract_screen_has_no_mmat_appraisal() -> None:
+def test_full_text_confirmation_preserves_scope_exclusion_without_mmat() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
     excluded = rows["9"]
 
-    assert excluded["assessment_basis"] == "abstract_and_metadata_only"
-    assert excluded["assessment_status"] == "not_assessed_after_abstract_exclusion"
+    assert excluded["assessment_basis"] == "primary_full_text_scope_exclusion"
+    assert excluded["assessment_status"] == "not_assessed_scope_exclusion_confirmed"
     assert all(
         excluded[criterion] == ""
         for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5")
@@ -166,7 +167,7 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
     assert "allocation" in current_by_id["5"]["notes"].lower()
     assert "cited study [17]" in current_by_id["10"]["notes"]
     assert current_by_id["10"]["q5"] == "CT"
-    assert registry["9"]["empirical_status"] == "empirical_abstract_only"
+    assert registry["9"]["empirical_status"] == "empirical_outside_mathematics_scope"
     study_6923 = next(row for row in rows if row["study_id"] == "6923")
     assert study_6923["assessment_basis"] == "pending_full_text_not_appraised"
     assert study_6923["assessment_status"] == "hold_source_verification"
@@ -194,10 +195,8 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
         assert study["page_or_section"]
     assert rows["6923"]["assessment_basis"] == "pending_full_text_not_appraised"
     assert rows["6923"]["assessment_status"] == "hold_source_verification"
-    assert (
-        "Q3=CT grades demographics and predictors are identified but measurement "
-        "appropriateness is not established"
-    ) in rows["4"]["criterion_evidence"]
+    assert "Q3=CT binary and five-class grade thresholds" in rows["4"]["criterion_evidence"]
+    assert "selected predictor subsets are insufficiently specified" in rows["4"]["criterion_evidence"]
     component = next(
         row for row in load_component_reassessments()
         if row["study_id"] == "6920" and row["component"] == "quantitative"
@@ -377,8 +376,15 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         r"<tr>\s*<td>9</td>(.*?)</tr>", html, flags=re.DOTALL
     )
     assert abstract_excluded
-    assert "excluído após resumo; mmat não aplicado" in abstract_excluded.group(1).lower()
+    assert "texto integral conferido; fora do escopo matemático" in abstract_excluded.group(1).lower()
     assert "criterion-ct" not in abstract_excluded.group(1)
+
+
+def test_first_mmat_longtable_starts_on_a_fresh_page_for_legacy_hyperref() -> None:
+    from src.analysis.mmat_current_tcc_table import load_rows, render_table
+
+    prefix = render_table(load_rows()).split(r"\begin{longtable}", 1)[0]
+    assert r"\clearpage" in prefix
 
 
 def test_general_paper_exports_do_not_publish_superseded_mmat_payloads() -> None:
@@ -426,7 +432,7 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
             "10": "2026-10-14",
             "14": "2026-10-12",
             "6915": "2026-10-09",
-            "6919": "2026-10-12",
+            "6919": "2026-10-17",
         }[study_id]
         assert sources[study_id]["accessed_date"] == expected_access_date
         assert not sources[study_id]["local_file"]

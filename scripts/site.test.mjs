@@ -84,8 +84,12 @@ assert.match(mmat, /O registro de apreciação reúne 18 itens/i, 'the current p
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
 assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">consultas documentais declaradas<\/span>/, 'historical consultation labels must not certify completed human reading');
 assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
-assert.match(mmat, /<span class="metric-value">1<\/span><span class="metric-label">texto integral pendente<\/span>/, 'the current page must report shortlisted full texts that remain unretrieved');
-assert.match(mmat, /Um texto integral ainda não foi recuperado e não recebeu apreciação MMAT\. Um registro foi excluído após a triagem do resumo e não recebeu MMAT\./, 'the evidence summary must distinguish the unretrieved full text from the abstract-stage exclusion');
+assert.match(mmat, /<span class="metric-value">1<\/span><span class="metric-label">relatório não recuperado no fluxo<\/span>/, 'the current page must distinguish historical selection from current PDF availability');
+assert.match(mmat, /Um relatório permanece não recuperado no fluxo de seleção e não recebeu apreciação MMAT\. Um registro foi excluído após a triagem do resumo e não recebeu MMAT\./, 'the evidence summary must distinguish the unretrieved report from the abstract-stage exclusion');
+assert.match(mmat, /O acervo local contém 16 PDFs dos 18 registros\. Faltam os estudos 3 e 6923/, 'the current page must identify both unavailable primary PDFs');
+assert.match(mmat, /A reprodução congelada do índice textual abrange 12 fontes/, 'current PDF availability must not imply a larger retrieval replay');
+const historicalUnverifiedRow = mmat.match(/<tr>\s*<td>3<\/td>[\s\S]*?<\/tr>/)?.[0];
+assert.match(historicalUnverifiedRow, /MMAT histórico; fonte indisponível nesta revisão/, 'historical responses must not imply source-bound revalidation');
 assert.doesNotMatch(mmat, /abstracts?\/metadados/i, 'the current page should use Portuguese for source-availability labels');
 const zengRow = mmat.match(/<tr>\s*<td>6923<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(zengRow, 'study 6923 must be present in the current MMAT table');
@@ -94,7 +98,7 @@ assert.equal([...zengRow.matchAll(/aria-label="Não avaliado"/g)].length, 7, 'pe
 assert.doesNotMatch(zengRow, /aria-label="Resposta:/, 'pending study 6923 must not expose MMAT responses');
 const abstractExcludedRow = mmat.match(/<tr>\s*<td>9<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(abstractExcludedRow, 'the abstract-stage exclusion must remain visible in the 18-record ledger');
-assert.match(abstractExcludedRow, /excluído após resumo; MMAT não aplicado/, 'the abstract-stage exclusion must not appear appraised');
+assert.match(abstractExcludedRow, /texto integral conferido; fora do escopo matemático/, 'supplementary full-text recovery must be distinguished from an MMAT appraisal');
 assert.equal([...abstractExcludedRow.matchAll(/aria-label="Não avaliado"/g)].length, 7, 'the abstract-stage exclusion must leave all MMAT responses unappraised');
 const unitHoldRow = mmat.match(/<tr>\s*<td>8<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(unitHoldRow, 'study 8 must remain visible in the current 18-record ledger');
@@ -137,9 +141,9 @@ assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_primary_sources
 assert.equal((mmat.match(/class="mmat-question-group"/g) || []).length, 5, 'the current page must expose all MMAT design groups');
 assert.match(mmat, /O que esta avaliação registra/i, 'the public page must explain the purpose of the appraisal in reader-facing language');
 assert.doesNotMatch(mmat, /\b(?:ledger|shortlist|snapshot)\b/i, 'the public page must avoid unexplained development jargon');
-assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Escopo MMAT atual reconciliado em 14\/10\/2026; apreciações registradas até 15\/10\/2026\./i, 'the current page must distinguish search cutoff, adjudication and current MMAT scope dates');
+assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Escopo MMAT atual reconciliado em 20\/10\/2026; apreciações registradas até 20\/10\/2026\./i, 'the current page must distinguish search cutoff, adjudication and current MMAT review dates');
 assert.doesNotMatch(mmat, /Recorte do corpus: 12\/10\/2026/i, 'the scope update date must not be presented as a new search record');
-assert.match(mmat, /apreciações registradas até 15\/10\/2026/i, 'the current page must expose the latest appraisal date');
+assert.match(mmat, /apreciações registradas até 20\/10\/2026/i, 'the current page must expose the latest appraisal date');
 assert.equal((mmat.match(/class="mmat-evidence"/g) || []).length, 18, 'every MMAT record must expose criterion evidence details');
 assert.match(mmat, /Ver perguntas, justificativas e localização da evidência/i, 'the evidence disclosure must be clearly labeled');
 assert.match(mmat, /medidas acadêmicas e demográficas/i, 'the current page must expose the evidence note for study 2 Q3');

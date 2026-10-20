@@ -217,6 +217,6 @@ def test_tcc_review_table_distinguishes_all_shortlisted_records_by_stage() -> No
         assert any(
             f"\\citeonline{{{reference_key}}}" in line for line in pending_rows
         )
-    assert "excluído após resumo" in table.lower()
+    assert "após resumo" in table.lower()
     assert "excluído da síntese empírica após texto completo" in table.lower()
     assert "não apresentar resultados empíricos concluídos" in table.lower()

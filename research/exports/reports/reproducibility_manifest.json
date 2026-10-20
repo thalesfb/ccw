@@ -3,6 +3,7 @@
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-14",
   "generated_at": "2026-10-17T04:10:22+00:00",
+  "versioned_artifacts_refreshed_at": "2026-10-20T22:30:45+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -413,6 +414,7 @@
       "denominator_meaning": "S1/S2 screening records; use category_appraised_rows for Q1-Q5 coverage",
       "evidence_levels": {
         "primary_full_text_reviewed_externally": 14,
+        "primary_full_text_scope_exclusion": 0,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
         "metadata_only": 0,
@@ -420,7 +422,8 @@
       },
       "record_evidence_levels": {
         "primary_full_text_reviewed_externally": 15,
-        "abstract_and_metadata_only": 1,
+        "primary_full_text_scope_exclusion": 1,
+        "abstract_and_metadata_only": 0,
         "abstract_only": 0,
         "metadata_only": 0,
         "protocol_or_proposal_not_applicable": 1,
@@ -478,27 +481,27 @@
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "44e878c0870d897160415212e9ecfed7665849d4a33dd126a1529a0954066d43"
+      "sha256": "f74e3a3d4268f77ce3afd4764fc5bd6ffa5066e3a62a2e09280a887a880a7cd1"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "610da2038888e024c219ba9f8d53316716d565c1ec9dc50749271d7e31cee6f4"
+      "sha256": "87b57f09a1920564c4968800e614b61cf347135f38ef5ed9de7e15de313d84cb"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "e96650060a55d1a4957f3ed5c4454aa0a51f9e62b71e7a1d8cfe36ecc38e19e6"
+      "sha256": "47d8f97ed8aea4b706941323f5e7e0bb5434855b42f562facfc0595da75fb79a"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
-      "sha256": "bf264217cdc6f4cff51967c756976f2fb12e3bfbc72fba887d256d994512d29f"
+      "sha256": "37782dde2ff3b9b37c2fdb4f2dda775a38dd6dec260f9c98f863f03b1cee7196"
     },
     {
       "path": "research/data/study_contribution_current.json",
       "role": "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
-      "sha256": "8ce7b3e76335a366a6b128fb8e23f75f223f597772964cb36994690b1cfffe10"
+      "sha256": "c13c28fe0cd3f9ab8018d85796566a1fe958b8db94e64bc6bb3d88aabac62e38"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
@@ -593,17 +596,17 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "validator separating provisional retention, screening responses and category-specific MMAT coverage",
-      "sha256": "d49cfa83ee1438886bf2eca27552df071f724631bab4e19c007aed85f45cbc57"
+      "sha256": "ff7cc587fcb057637941c470064dabbdc44841e6e4d87173fddd087d34509898"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "2dc3e3d2871b5b3d152f35e3bdb6cb95bfdd8925e08cee5550129c5daf981cd9"
+      "sha256": "f41c4420093c0cf519ef3c0285c40c068ad558f333b2a3301a709991505a4397"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "fe23c5915b589cd4b151a6dbc252d9d1bdd3b722a34db167671ad4a3eec0091c"
+      "sha256": "b5ba2f436fc48ed5f874b4ba6612b845e36b1abcd822b702f8713cef46f67198"
     },
     {
       "path": "research/requirements.txt",
