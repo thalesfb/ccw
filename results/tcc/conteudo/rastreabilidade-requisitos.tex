@@ -1,0 +1,88 @@
+\section{Fundamentação e Rastreabilidade dos Requisitos}
+\label{sec:rastreabilidade-requisitos}
+
+A especificação articula três origens que não devem ser confundidas: observações localizadas nos estudos do corpus, fundamentos teóricos ou normativos e decisões de projeto do autor. Um problema de relato identificado em um artigo pode motivar uma salvaguarda, mas não demonstra que a solução proposta seja eficaz. Da mesma forma, um referencial pedagógico orienta a interpretação das saídas sem validar uma interface ou um algoritmo específico.
+
+O Quadro~\ref{qua:rastreabilidade-requisitos} organiza os requisitos das seções anteriores em 26 grupos identificáveis. A coluna de origem explicita a base da decisão e a última coluna delimita a inferência permitida. Requisitos de engenharia que não receberam sustentação externa específica são apresentados como escolhas autorais, e não como achados empíricos da revisão. As referências remetem aos trabalhos discutidos na fundamentação e na síntese; os localizadores das apreciações empíricas permanecem no registro de evidências dos estudos.
+
+Os grupos R01--R19 remetem aos requisitos e critérios da Seção~\ref{sec:principios-requisitos}; R07, R10, R11 e R16 também explicitam condições da arquitetura na Seção~\ref{sec:arquitetura-prototipo}. R20--R26 correspondem às condições do protocolo de avaliação da Seção~\ref{sec:protocolo-avaliacao}. Esses vínculos identificam onde cada grupo foi especificado, sem transformar as decisões autorais em exigências extraídas de um artigo.
+
+\begingroup
+\def\LTcaptype{quadro}
+\fontsize{8.5}{10.5}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.7cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{5.7cm}|}
+\caption{Origem, derivação e limites dos requisitos da especificação conceitual.}\label{qua:rastreabilidade-requisitos}\\
+\hline
+\textbf{ID} & \textbf{Requisito ou grupo} & \textbf{Origem e base documental} & \textbf{Derivação e limite da justificativa} \\
+\hline
+\endfirsthead
+\multicolumn{4}{c}{\quadroname\ \thequadro\ -- Continuação}\\
+\hline
+\textbf{ID} & \textbf{Requisito ou grupo} & \textbf{Origem e base documental} & \textbf{Derivação e limite da justificativa} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\textit{Continua na próxima página}}\\
+\endfoot
+\hline
+\endlastfoot
+R01 & Apoio docente e revisão humana, sem prescrição autônoma. & Fundamento teórico e decisão autoral: mediação em \citeonline{Vygotsky1978} e \citeonline{WoodBrunerRoss1976}. & A mediação orienta a participação do professor; não demonstra utilidade do protótipo nem mensuração da zona de desenvolvimento proximal. \\
+\hline
+R02 & Separar desempenho, previsão, proficiência, competência e aprendizagem. & Fundamento teórico e normativo: \citeonline[pp.~42--44]{NRC2001}, \citeonline{OECDPISA2022Framework} e \citeonline{BNCC2018}. & Exigir construto e validade para interpretar inferências. A definição operacional de aprendizagem adotada neste trabalho não foi testada pelo protótipo. \\
+\hline
+R03 & Comunicar explicações, incertezas e condições de validade. & Fundamento teórico e decisão autoral: \citeonline{NRC2001} e \citeonline{HattieTimperley2007}. & Informação interpretável é condição proposta de uso. Explicação algorítmica não equivale automaticamente a feedback formativo compreendido pelo docente. \\
+\hline
+R04 & Finalidade, minimização, acesso e análise de riscos de identificação e uso indevido. & Fundamento normativo e decisão de governança: \citeonline{LGPD2018}. & Orientar o planejamento do tratamento de dados pessoais; não declarar conformidade jurídica de uma implementação ainda não avaliada. \\
+\hline
+R05 & Evitar rótulos permanentes e interpretações discriminatórias. & Fundamento teórico e salvaguarda autoral: limites de inferência em \citeonline{NRC2001}. & Restringir a interpretação à tarefa e ao contexto; não afirmar dano demonstrado no corpus nem equidade já alcançada. \\
+\hline
+R06 & Registrar versões, parâmetros e dependências; exportar dados e resultados, vinculando cada saída à fonte e à versão do experimento. & Decisão de projeto do autor, explicitada nos princípios e requisitos deste capítulo. & Viabilizar inspeção documental e reprodução futura. O corpus não demonstra a eficácia desse conjunto operacional. \\
+\hline
+R07 & Importar dados documentados e preservar procedência. & Decisão de projeto do autor, relativa à ingestão e à preparação. & Preservar contexto e registrar validações de formato; não presumir qualidade pelo simples sucesso da importação. \\
+\hline
+R08 & Relacionar evidências a habilidades, descritores e objetivos curriculares. & Fundamento teórico e normativo: \citeonline{BNCC2018} e \citeonline{Ausubel1968}; aplicação operacional autoral. & Orientar o vínculo curricular e considerar conhecimentos anteriores. A associação concreta entre variáveis e habilidades ainda deverá ser demonstrada. \\
+\hline
+R09 & Definir o alvo e distinguir saídas individuais de agregadas. & Observação do corpus: alvos e unidades distintos em \citeonline[pp.~11--12, seção de definição do resultado predito]{He2025_6915}; fundamento em \citeonline{NRC2001}; decisão autoral de apresentação. & A predição de efeito de intervenções não equivale à proficiência individual. A forma de exibição ainda não foi avaliada com docentes. \\
+\hline
+R10 & Separar componentes para favorecer testabilidade. & Decisão de arquitetura do autor: ingestão, preparação, modelagem, avaliação e apresentação. & Organizar responsabilidades e pontos de inspeção; não tratar modularidade como propriedade empiricamente comprovada da proposta. \\
+\hline
+R11 & Documentar o ambiente e permitir substituição controlada de técnicas. & Decisão de projeto do autor sobre portabilidade e interfaces. & Condicionar execução à documentação de dependências e contratos; a especificação não demonstra portabilidade entre ambientes reais. \\
+\hline
+R12 & Considerar acessibilidade e diferentes perfis de usuários. & Requisito autoral de apresentação, sem validação específica no corpus. & Registrar uma condição a operacionalizar em critérios de aceitação; não declarar acessibilidade alcançada ou avaliada. \\
+\hline
+R13 & Examinar SAEB e PISA como fontes candidatas, não definitivas. & Exemplo do corpus em \citeonline{Math2021_001}; documentação contextual de \citeonline{SAEB2021} e \citeonline{PISA2022}; decisão autoral. & Uso de uma edição do PISA não valida outra base, outra edição ou sua transferência ao contexto brasileiro. \\
+\hline
+R14 & Verificar licença, condições de uso, dicionário e documentação metodológica. & Critério autoral para seleção das fontes. & Condicionar uso à documentação e às permissões pertinentes. Disponibilidade pública e proteção de dados não substituem licença de uso. \\
+\hline
+R15 & Examinar unidade de análise e representatividade da população. & Observação do corpus: seleção e alvo em \citeonline[p.~50]{Math2021_001}; distinção de unidades em \citeonline[pp.~11--12, seção de definição do resultado predito]{He2025_6915}; decisão autoral. & Exigir compatibilidade entre pergunta, amostra e inferência. Casos localizados não estimam a frequência de problemas na literatura. \\
+\hline
+R16 & Documentar metadados, transformações e valores ausentes. & Decisão de projeto do autor para seleção e preparação de dados. & Tornar as decisões examináveis; não fixar regra universal de imputação nem garantir validade das variáveis. \\
+\hline
+R17 & Restringir dados sintéticos à verificação técnica. & Delimitação autoral do escopo e do protocolo proposto. & Verificar fluxos e regras sem inferir aprendizagem, validade preditiva em dados reais ou eficácia pedagógica. \\
+\hline
+R18 & Considerar famílias supervisionadas como alternativas. & Exemplos do corpus em \citeonline[p.~1609, algoritmos de classificação]{Identifying2017_006} e \citeonline[p.~156, Tabela~2]{Implementation2025_000}; fontes metodológicas \cite{Breiman2001,CortesVapnik1995}. & Identificar candidatos, condicionando a escolha ao tipo de variável, à distribuição das classes, ao custo e à explicabilidade. A ocorrência em artigos não estabelece superioridade ou adequação. \\
+\hline
+R19 & Comparar com referências simples e justificar complexidade. & Fundamento metodológico em \citeonline{James2021}; regra de comparação autoral. & Interpretar ganhos sob condições explícitas; não antecipar algoritmo vencedor ou limiar universal de ganho aceitável. \\
+\hline
+R20 & Separar treino, validação e teste e prevenir vazamento. & Fundamento metodológico em \citeonline{James2021}; relato contraditório de \citeonline[pp.~50--51]{Math2021_001}. & A ambiguidade documental motiva separação e relato inequívocos; não permite determinar qual procedimento foi efetivamente executado no artigo. \\
+\hline
+R21 & Examinar confusão, precisão, revocação e F1 por classe. & Resultados por classe em \citeonline[p.~160, Tabela~8]{Implementation2025_000}; fundamento em \citeonline{James2021}; decisão autoral de protocolo. & Examinar erros que a acurácia agregada pode ocultar; resultados de uma base não determinam o desempenho futuro do protótipo. \\
+\hline
+R22 & Usar ROC-AUC e calibração quando compatíveis com a tarefa. & Fundamentos metodológicos em \citeonline{Fawcett2006} e \citeonline{NiculescuMizilCaruana2005}. & Distinguir discriminação e qualidade probabilística; nenhuma das métricas constitui medida de aprendizagem. \\
+\hline
+R23 & Examinar estabilidade das explicações e diferenças entre grupos. & Decisão autoral de avaliação, orientada pelos limites de validade discutidos em \citeonline{NRC2001}. & Formular verificações futuras, cujo procedimento ainda deverá ser operacionalizado. Desempenho médio não demonstra estabilidade ou equidade. \\
+\hline
+R24 & Delimitar generalização e evitar causalidade automática. & Observações localizadas em \citeonline[p.~50]{Math2021_001}, \citeonline[p.~5, seção~2.2]{Machine2024_009} e \citeonline[p.~654, conclusão]{Design2025_004}; interpretação crítica autoral. & Restringir a conclusão à população, ao alvo e ao desenho examinados; não transformar associação ou ganho relatado em efeito causal. \\
+\hline
+R25 & Prever revisão documental por docentes e registrar julgamentos. & Referencial curricular em \citeonline{BNCC2018} e avaliação formativa em \citeonline{HattieTimperley2007}; procedimento proposto pelo autor. & Examinar adequação curricular e interpretativa da especificação. O procedimento não foi executado e não substituiria avaliação de eficácia educacional. \\
+\hline
+R26 & Examinar SHAP e LIME, sua estabilidade, custo e comunicação curricular. & Fontes metodológicas \cite{LundbergLee2017,RibeiroSinghGuestrin2016}; escolha autoral de alternativas. & Identificar métodos de explicação, sem atribuir às fontes prova de compreensão docente, estabilidade ou adequação curricular da aplicação proposta. \\
+\hline
+\end{longtable}
+\endgroup
+\fonte{Elaborado pelo autor (2026).}
+
+O quadro torna verificável a origem declarada de cada grupo, mas não encerra a apreciação científica das referências. Permanecem distintas a rastreabilidade documental, a conferência independente da interpretação de cada fonte e a avaliação futura do artefato. Os critérios operacionais de acessibilidade, estabilidade explicativa e revisão docente ainda deverão ser detalhados antes de uma execução; essa pendência limita o protocolo proposto, sem constituir resultado experimental ausente do escopo desta entrega.

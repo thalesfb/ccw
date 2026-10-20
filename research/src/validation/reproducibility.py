@@ -94,7 +94,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/exports/references/included_papers.bib",
-        "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
+        "BibTeX inventory of preliminary candidate records, distinct from the provisional empirical core",
     ),
     (
         "research/data/mmat_assessments.csv",
@@ -110,11 +110,15 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/data/mmat_reassessment_current.csv",
-        "preliminary current MMAT ledger with S1/S2 and criterion-level CT responses",
+        "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
     ),
     (
         "research/data/current_synthesis_scope.csv",
         "explicit empirical/contextual role for each current retained record",
+    ),
+    (
+        "research/data/study_contribution_current.json",
+        "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
     ),
     (
         "research/data/adjudicated_population_decisions.csv",
@@ -190,7 +194,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/src/analysis/mmat_current.py",
-        "versioned validator for the current 18-record MMAT artifacts",
+        "validator separating provisional retention, screening responses and category-specific MMAT coverage",
     ),
     (
         "research/src/analysis/study_scope.py",
@@ -202,7 +206,7 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/exports/references/mmat_current_tcc_table.tex",
-        "preliminary current 18-record MMAT table included by the TCC",
+        "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
     ),
     (
         "research/requirements.txt",
@@ -221,6 +225,11 @@ def _sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def _counted(count: int, singular: str, plural: str) -> str:
+    """Render a count with the correct singular or plural label."""
+    return f"{count} {singular if count == 1 else plural}"
 
 
 def _count(conn: sqlite3.Connection, query: str, params: tuple[Any, ...] = ()) -> int:
@@ -495,6 +504,10 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
     overrides_path = root / MANUAL_OVERRIDE_ADJUDICATION
     with overrides_path.open("r", encoding="utf-8-sig", newline="") as handle:
         override_rows = list(csv.DictReader(handle))
+    scope_path = root / "research" / "data" / "current_synthesis_scope.csv"
+    with scope_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        scope_rows = list(csv.DictReader(handle))
+    scope_counts = Counter(row["record_status"] for row in scope_rows)
     identity_audit = dict(statistics["deduplication_audit"])
     identity_audit["deterministic_identity_duplicate_rows_by_identifier"] = {
         "doi": int(identity_audit["doi"]["excess_rows"]),
@@ -514,6 +527,12 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
                     "duplicates_removed",
                     "screening",
                     "screening_excluded",
+                    "prioritization",
+                    "prioritization_excluded",
+                    "shortlisted",
+                    "abstract_screening_excluded",
+                    "reports_sought",
+                    "reports_not_retrieved",
                     "eligibility",
                     "eligibility_excluded",
                     "included",
@@ -521,6 +540,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
             },
         },
         "included_ids": facts["included_ids"],
+        "scope_record_status_counts": dict(sorted(scope_counts.items())),
         "deduplication_audit": identity_audit,
         "manual_overrides": [
             {"id": int(row["study_id"])}
@@ -542,12 +562,17 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
             "manual_overrides_recorded": 7,
             "metadata_corrections_recorded": 1,
             "current_included": facts["summary_prisma"]["included"],
+            "shortlisted_records": facts["summary_prisma"]["shortlisted"],
             "interpretation": (
                 "The 23-record candidate universe is preserved as historical "
                 "context: 16 operationally retained records plus seven manual "
-                "overrides. The current 18-record population is derived by the "
-                "approved scope decisions and the 6918 year correction; it is "
-                "not a new collection or an additional PRISMA stage."
+                "overrides. The current selection is divided into "
+                f"{_counted(facts['summary_prisma']['included'], 'empirical study', 'empirical studies')}, "
+                f"{_counted(facts['summary_prisma']['abstract_screening_excluded'], 'record excluded after abstract screening', 'records excluded after abstract screening')}, "
+                f"{_counted(facts['summary_prisma']['reports_not_retrieved'], 'full-text report not retrieved', 'full-text reports not retrieved')}, and "
+                f"{_counted(facts['summary_prisma']['eligibility_excluded'], 'protocol excluded after full-text assessment', 'protocols excluded after full-text assessment')}. "
+                "These categories describe distinct stages; the preliminary list is not "
+                "equivalent to the empirical included set or an additional PRISMA stage."
             ),
         },
     }
@@ -798,9 +823,23 @@ def generate_manifest(
         snapshot["manual_overrides"],
     )
     mmat_qa = validate_current_artifacts()
+    prisma_counts = snapshot["counts"]["prisma"]
+    mmat_denominator = int(mmat_qa["current_denominator"])
+    unretrieved_report_label = _counted(
+        prisma_counts["reports_not_retrieved"],
+        "unretrieved shortlisted report",
+        "unretrieved shortlisted reports",
+    )
+    scope_path = root / "research" / "data" / "current_synthesis_scope.csv"
+    with scope_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        scope_dates = [row["snapshot_date"] for row in csv.DictReader(handle)]
+    if not scope_dates:
+        raise ValueError("The current synthesis scope ledger is empty")
+    scope_updated_at = max(scope_dates)
     manifest = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "snapshot_date": "2026-09-03",
+        "scope_updated_at": scope_updated_at,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "database": {
             "path": "research/systematic_review.sqlite",
@@ -819,7 +858,8 @@ def generate_manifest(
             ],
             "reference_audit": "research/data/reference_audit.csv",
             "separation_rule": (
-                "The 18 included studies are derived from the review pipeline. "
+                f"The BibTeX inventory contains {prisma_counts['shortlisted']} records in the preliminary list; "
+                f"{prisma_counts['included']} are currently included in the empirical core. "
                 "Methodological, pedagogical, assessment and technical references "
                 "are external to the pipeline study set and remain in the complete TCC bibliography."
             ),
@@ -827,8 +867,14 @@ def generate_manifest(
         "methodological_appraisal": {
             "current_mmat_qa": mmat_qa,
             "interpretation": (
-                "The current MMAT ledger is a criterion-level preliminary record. "
+                f"The current MMAT ledger records S1/S2 screening for {mmat_denominator} studies and "
+                f"category-specific appraisal for {mmat_qa['category_appraised_rows']}; "
+                "three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. "
+                f"{prisma_counts['included']} records remain provisionally in the empirical corpus; study 8 has no MMAT responses "
+                "pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. "
+                f"MMAT has not been applied to the {unretrieved_report_label}. "
                 "Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
+                " Historical reviewer labels do not establish completed human reading or appraisal; human verification remains pending."
             ),
         },
         "artifact_scope": "research_snapshot",
@@ -850,7 +896,7 @@ def generate_manifest(
                 "Compare artifact SHA-256 values with this manifest.",
                 "Read PRISMA counts from research/exports/reports/summary.json.",
                 "Read row-level states from research/exports/analysis/papers.csv or papers.json.",
-                "Read the 18 pipeline-derived citations from research/exports/references/included_papers.bib.",
+                "Read the 18 shortlisted pipeline-derived citations from research/exports/references/included_papers.bib; confirm empirical inclusion in research/data/current_synthesis_scope.csv.",
                 "Read the historical evidence ledger from research/data/manual_override_adjudication.csv.",
                 "Read the structured source-evidence matrix from research/data/manual_override_evidence_matrix.csv; the final population decision is recorded separately in research/data/adjudicated_population_decisions.csv.",
                 "Read the approved population decisions from research/data/adjudicated_population_decisions.csv and rerun research/src/processing/adjudicated_snapshot.py without SQLite.",
@@ -865,7 +911,7 @@ def generate_manifest(
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-                "The current 18-record MMAT ledger is preliminary; source retrieval, criterion locators and supervisor adjudication remain required before quality synthesis.",
+                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have category-specific appraisals and three await design adjudication with Q1-Q5 unassessed. {prisma_counts['included']} records remain provisionally included in the empirical corpus. Study 8 has no MMAT responses pending human adjudication of eligibility and appraisal unit; do not combine its distinct datasets. No MMAT appraisal was assigned to the {unretrieved_report_label}. One record was excluded after abstract screening and one protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis.",
             ],
         },
     }
