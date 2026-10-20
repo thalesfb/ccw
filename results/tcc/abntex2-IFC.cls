@@ -58,7 +58,7 @@
    \vspace{-0.7 cm}
     {\large \SingleSpacing \imprimirinstituicao}
     \vspace{-0.7cm}
-    \center{ \hrulefill}
+    \par\noindent\rule{\linewidth}{0.4pt}\par
     
     \textbf{\large\imprimirautor}
    
