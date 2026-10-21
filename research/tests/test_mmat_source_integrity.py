@@ -103,15 +103,15 @@ def test_full_text_scope_exclusion_rejects_fabricated_criterion_evidence(monkeyp
     ("sha256", ""),
     ("full_text_status", "not_retrieved"),
 ])
-def test_full_text_scope_exclusion_requires_matching_primary_source(monkeypatch, field, value):
-    original_read = current._read_csv
+def test_full_text_scope_exclusion_requires_matching_primary_source(tmp_path, field, value):
+    with current.PRIMARY_SOURCES_PATH.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    next(row for row in rows if row["study_id"] == "9")[field] = value
+    corrupted_sources = tmp_path / "inconsistent-primary-source.csv"
+    with corrupted_sources.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
 
-    def read(path):
-        rows = original_read(path)
-        if path == current.PRIMARY_SOURCES_PATH:
-            next(row for row in rows if row["study_id"] == "9")[field] = value
-        return rows
-
-    monkeypatch.setattr(current, "_read_csv", read)
     with pytest.raises(ValueError, match="inconsistent full-text scope exclusion"):
-        current.validate_current_artifacts()
+        current.validate_current_artifacts(primary_sources_path=corrupted_sources)
