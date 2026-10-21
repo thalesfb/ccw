@@ -46,6 +46,7 @@ SOURCE_OR_PERIOD_HOLD_STATUSES = {
 }
 DATA_ROOT = Path(__file__).resolve().parents[2] / "data"
 REGISTRY_PATH = DATA_ROOT / "mmat_current_study_registry.csv"
+HISTORICAL_MMAT_PATH = DATA_ROOT / "mmat_assessments.csv"
 REASSESSMENT_PATH = DATA_ROOT / "mmat_reassessment_current.csv"
 
 
@@ -170,9 +171,11 @@ def validate_current_artifacts(
     primary_sources_path: Path | str = PRIMARY_SOURCES_PATH,
     reassessment_path: Path | str = REASSESSMENT_PATH,
     synthesis_scope_path: Path | str = SYNTHESIS_SCOPE_PATH,
+    historical_mmat_path: Path | str = HISTORICAL_MMAT_PATH,
 ) -> dict[str, Any]:
     """Return QA facts for the current MMAT artifacts without scoring quality."""
     registry = load_current_registry(registry_path)
+    historical_mmat_rows = _read_csv(Path(historical_mmat_path))
     primary_sources = load_primary_sources(primary_sources_path)
     reassessment = load_current_reassessment(reassessment_path)
     synthesis_scope = load_current_synthesis_scope(synthesis_scope_path)
@@ -247,6 +250,13 @@ def validate_current_artifacts(
                 f"Study {row['study_id']} claims primary-text review without a "
                 "matching source-manifest status"
             )
+    historical_ids = [row.get("ID", "").strip() for row in historical_mmat_rows]
+    if (
+        not historical_ids
+        or any(not study_id for study_id in historical_ids)
+        or len(historical_ids) != len(set(historical_ids))
+    ):
+        raise ValueError("Historical MMAT ledger must contain unique, non-empty IDs")
     source_or_period_hold_rows = [
         row for row in reassessment
         if row.get("assessment_status") == "hold_source_verification"
@@ -287,8 +297,8 @@ def validate_current_artifacts(
         "contextual_protocol_rows": sum(
             row["synthesis_role"] == "contextual_protocol" for row in synthesis_scope
         ),
-        "historical_denominator": 17,
-        "current_denominator": len(CURRENT_STUDY_IDS),
+        "historical_mmat_assessment_rows": len(historical_mmat_rows),
+        "current_mmat_ledger_rows": len(reassessment),
         "evidence_levels": evidence_levels,
         "primary_text_reviewed_rows": len(primary_text_rows),
         "source_or_period_hold_rows": len(source_or_period_hold_rows),
