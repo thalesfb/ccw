@@ -64,3 +64,12 @@ Antes de publicar uma nova versão, verificar: linguagem formal; ausência de
 dados sensíveis ou caminhos locais; distinção entre TCC e PTC histórico;
 coerência entre texto, apresentação e artefatos; e correspondência entre o
 estado declarado e a evidência realmente disponível.
+
+## Informações espelhadas
+
+Alterar um objetivo, contagem, decisão de escopo ou limitação exige atualizar e
+conferir seus consumidores na mesma alteração. A apresentação, o site, os READMEs
+e os infográficos não podem conservar uma interpretação anterior como se fosse
+vigente. O [contrato de sincronização](DOCUMENTATION_SYNC.md) distingue os blocos
+gerados da revisão dos resumos e imagens, mantendo explícitos os limites da
+automação e a aprovação científica humana pendente.

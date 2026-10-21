@@ -2,9 +2,10 @@
 
 > **Aviso de versão:** esta verificação preserva o baseline histórico de 9.431
 > registros e 17 incluídos e a baseline operacional anterior de 31/08/2026.
-> A fonte vigente, após o PR #55, é
-> `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`, com 18 registros
-> retidos e o ID 6918 corrigido para 2014 e excluído do recorte.
+> Para o estado atual, consulte a
+> [reconciliação](RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md) e a
+> [nota de estado](tcc/ESTADO-ATUAL-TCC.md): 18 candidatos não equivalem a
+> 18 inclusões empíricas finais. O histórico abaixo não é a síntese vigente.
 
 ## Estado do baseline operacional anterior (31/08/2026)
 
@@ -18,11 +19,12 @@ Os IDs retidos são 1--10,
 
 A execução histórica tinha 17 incluídos. Em uma nova rodada, foram identificados 23 candidatos e aplicados 7 overrides manuais, chegando aos 16 registros retidos operacionais. A diferença também envolve atualização da ingestão e correção do scoring; não é uma simples substituição numérica. A reavaliação documental do MMAT aos registros empíricos aplicáveis foi registrada com decisões e evidências por critério; nove textos primários foram revisados externamente, enquanto a confirmação das fontes, a adjudicação e a conclusão final permanecem pendentes. Quatro overrides ainda exigem adjudicação de fonte primária/escopo.
 
-![Fluxo PRISMA do snapshot operacional atual](../research/exports/visualizations/prisma_flow.png)
+As visualizações publicadas nesses caminhos são regeneradas para o escopo
+vigente e não representam o baseline de 16 registros descrito acima. Para não
+associar uma imagem atual a números históricos, consulte os gráficos pelo
+[índice atual da revisão](../research/index.html), junto à reconciliação vigente.
 
-![Funil de seleção do snapshot operacional atual](../research/exports/visualizations/selection_funnel.png)
-
-### Auditoria de identidade do snapshot atual
+### Auditoria de identidade do baseline operacional descrito
 
 O snapshot possui **0 remoções pela flag persistida**, mas a reconstrução do
 fluxo identifica **27 registros redundantes por identidade determinística**:

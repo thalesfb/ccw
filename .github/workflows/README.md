@@ -69,7 +69,15 @@ Para conferir a população publicada e as imagens sem distribuir o banco:
 python -m research.src.validation.versioned_snapshot
 python -m research.src.processing.adjudicated_snapshot --check
 python -m research.src.validation.derived_assets --check
+python scripts/sync_project_docs.py --check
 ```
+
+O último comando verifica os blocos documentais gerados e os vínculos da revisão
+de consistência dos resumos e imagens. O job `source-validation` de `TCC quality`
+executa essa conferência em modo somente leitura. Após mudar os insumos, siga o
+[contrato de sincronização](../../docs/tcc/DOCUMENTATION_SYNC.md): atualizar
+blocos não renova automaticamente a revisão dos resumos manuais. O controle
+detecta desatualização, mas não certifica validade científica ou aprovação humana.
 
 Quando necessário, regenere os relatórios a partir do snapshot adjudicado:
 

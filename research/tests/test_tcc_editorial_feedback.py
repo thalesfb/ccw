@@ -1,6 +1,8 @@
 """Deterministic editorial regressions, not certification of scientific claims."""
 
 import csv
+from datetime import date
+import json
 import re
 import unittest
 from pathlib import Path
@@ -139,7 +141,10 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_public_status_and_defense_artifacts_are_currently_distinguished(self):
         status = (ROOT / "docs/tcc/ESTADO-ATUAL-TCC.md").read_text(encoding="utf-8")
-        self.assertIn("15 de outubro de 2026", status)
+        coverage = json.loads(
+            (ROOT / "research/data/study_contribution_current.json").read_text(encoding="utf-8")
+        )
+        self.assertIn(date.fromisoformat(coverage["review_date"]).strftime("%d/%m/%Y"), status)
         self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", status)
         self.assertIn("Slidev em 25 slides", status)
         self.assertIn("19 slides", status)
@@ -219,7 +224,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         )
         audit = (ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md").read_text(encoding="utf-8")
         self.assertIn("PDF p. 5; artigo p. 654", audit)
-        self.assertIn("classifica estudantes em níveis de proficiência matemática", audit)
+        self.assertIn("classifica estudantes em categorias operacionais de desempenho", audit)
+        self.assertNotIn("classifica estudantes em níveis de proficiência matemática", audit)
+        self.assertIn("não são uma medida validada de proficiência individual", audit)
         self.assertIn("diferença relativa entre os ganhos médios dos grupos", audit)
         self.assertIn("primeiro ano de Engenharia Industrial, com dados de 2017 a 2021", audit)
 

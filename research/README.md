@@ -1,15 +1,14 @@
 # 📚 Revisão Sistemática da Literatura - CCW Research
 
-> **Fluxo PRISMA versionado (14/10/2026):** o snapshot preserva
-> 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e
-> 11.877 registros na triagem. Após a priorização operacional, 18 registros
-> formaram a shortlist. O fluxo mantém provisoriamente 15 registros empíricos,
-> 1 relatório não recuperado, 1 exclusão após resumo e 1 protocolo excluído
-> após texto completo. O estudo 8 aguarda adjudicação de elegibilidade/unidade
-> e não recebeu respostas MMAT; o denominador MMAT atual é 14.
-> O registro 6918 foi corrigido para 2014 e excluído do recorte 2015--2026.
-> A baseline operacional de 31/08/2026 (16 retidos) e os números históricos de
-> 9.431 registros e 17 incluídos permanecem preservados para rastreabilidade.
+<!-- ccw-sync:start snapshot -->
+Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 14/10/2026; cobertura documental: 20/10/2026.
+
+O snapshot registra 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e 11.877 registros na triagem. Foram 2.486 submetidos à priorização operacional; 2.468 não avançaram dessa etapa. A priorização encaminhou 18 candidatos, não 18 inclusões finais: 15 estudos empíricos mantidos provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 14 triagens S1/S2 e 11 apreciações por categoria; não há escore agregado nem aprovação científica final.
+<!-- ccw-sync:end snapshot -->
+
+O estudo 8 aguarda adjudicação de elegibilidade/unidade e não recebeu respostas
+MMAT. Os estudos 5, 7 e 14 têm S1/S2, mas os critérios da categoria permanecem
+sem resposta até definir o delineamento. Os snapshots anteriores são históricos.
 
 A reconciliação detalhada da população vigente, incluindo deduplicação, decisões
 de escopo e separação entre candidatos empíricos e contexto, está em
@@ -21,34 +20,37 @@ O manifesto histórico [`research/data/protocol_execution_2025.json`](data/proto
 
 Sistema modular para revisão sistemática da literatura em educação matemática com técnicas computacionais, com relato orientado pelo PRISMA 2020.
 
-**Status atual**: ✅ Snapshot vigente reconciliado | 🧪 Testes-alvo da reconciliação validados | 📊 Visualizações PRISMA corretas
+O software e seus testes verificam operações e contratos documentais. A seleção
+científica, a cobertura das fontes e os julgamentos MMAT permanecem preliminares;
+um teste aprovado não certifica sua validade metodológica.
 
 ---
 
 ## ⚡ Quick Start
 
 ```bash
-# 1. Instalar dependências
-cd c:\dev\ccw
-pip install -r research/requirements.txt
+# A partir da raiz deste checkout, com o ambiente Python ativado
+python -m pip install -r research/requirements.txt
 
-# 2. Configurar ambiente (opcional)
-cp research/.env.example research/.env
-# Editar .env com credenciais de APIs se necessário
-
-# 3. Executar pipeline completo
-python -m research.src.cli run-pipeline
-python -m research.src.cli export
-
-# Verificar manualmente os derivados publicados (o export já faz esse sync)
+# Conferir os artefatos versionados, sem nova busca nem SQLite
+python -m research.src.validation.versioned_snapshot
 python -m research.src.validation.derived_assets --check
-
-# Reproduzir a população adjudicada e seus relatórios sem SQLite
-python -m research.src.processing.adjudicated_snapshot
-
-# 4. Ver resultados
-# Os arquivos são gerados em research/exports/
+python -m research.src.processing.adjudicated_snapshot --check
+python scripts/sync_project_docs.py --check
 ```
+
+Uma nova coleta é uma operação diferente: consulta APIs, grava o SQLite local e
+pode gerar resultados distintos. Se for deliberadamente necessária, configure
+as credenciais localmente, sem publicá-las, e use:
+
+```bash
+python -m research.src.cli run-pipeline
+```
+
+`export` lê esse banco e escreve os relatórios. Não o execute para simplesmente
+conferir os arquivos de referência. Qualquer regeneração ou reclassificação
+exige revisão das diferenças e de todos os consumidores, conforme
+[`DOCUMENTATION_SYNC.md`](../docs/tcc/DOCUMENTATION_SYNC.md).
 
 O exportador sincroniza automaticamente as seis visualizações canônicas para
 `results/tcc/images/` e `presentation/public/images/`. O CI compara esses
@@ -78,7 +80,7 @@ research/
 │   ├── processing/               # Processamento de dados
 │   │   ├── dedup.py              # Identidade DOI/URL + auditoria de títulos
 │   │   ├── scoring.py            # Score de relevância
-│   │   ├── selection.py          # Seleção PRISMA
+│   │   ├── selection.py          # Filtragem e priorização operacional
 │   │   └── language_utils.py     # Detecção de idioma
 │   ├── analysis/                 # Análise e visualização
 │   │   ├── visualizations.py     # Gráficos PRISMA
@@ -88,19 +90,16 @@ research/
 │   └── pipeline/                 # Orquestração
 │       └── run.py                # Pipeline completo
 ├── tests/                        # Testes automatizados
-│   ├── test_prisma_stages.py     # ✅ Validação PRISMA
-│   ├── test_complete_pipeline.py # Suite completa
-│   └── test_performance_benchmark.py
-├── exports/                      # Saídas geradas
-│   ├── summary_report.html       # Relatório resumido
-│   ├── papers_report.html        # Papers incluídos
-│   ├── gap_analysis.html         # Análise de lacunas
+│   ├── test_prisma_stages.py     # Regras de estágios implementadas no software
+│   ├── test_adjudicated_snapshot.py # Replay dos artefatos versionados
+│   └── test_documentation_sync.py # Contrato de coerência documental
+├── exports/                      # Saídas versionadas do snapshot
 │   ├── analysis/                 # Dados estruturados
 │   ├── visualizations/           # Gráficos PNG
-│   └── reports/                  # Relatórios completos
-├── cache/                        # Cache de APIs
-├── logs/                         # Logs de execução
-└── systematic_review.sqlite      # Banco SQLite principal (fonte local não versionada)
+│   └── reports/                  # HTMLs e manifestos da revisão
+├── data/                         # Escopo, fontes, protocolo e apreciação MMAT
+├── private/                      # Acervo operacional privado; não versionado
+└── systematic_review.sqlite      # Diagnóstico operacional local; não é o snapshot publicado
 ```
 
 ---
@@ -159,7 +158,7 @@ registro no snapshot operacional.
   `computational_techniques`;
 - idioma e presença de abstract foram registrados, mas não foram gates
   obrigatórios nessa configuração (`abstract_required=false`);
-- a elegibilidade aplicou score de relevância `>=4,0`, seguida da auditoria
+- a priorização operacional aplicou score de relevância `>=4,0`, seguida da auditoria
   manual dos 23 candidatos e dos sete overrides registrados no ledger.
 
 Revisão por pares, tipo documental, texto completo e evidência empírica
@@ -262,11 +261,8 @@ consulte esses artefatos para números fixos gerados em uma execução específi
 ### CLI Completo
 
 ```bash
-# Executar pipeline completo
-python -m research.src.cli run-pipeline
-  --apis semantic_scholar openalex crossref core  # APIs específicas
-  --min-score 4.5                            # Score mínimo customizado
-  --limit-per-query 100                      # Limite por query
+# Nova coleta com parâmetros explícitos; altera o banco operacional
+python -m research.src.cli run-pipeline --apis semantic_scholar openalex crossref core --min-score 4.5 --limit-per-query 100
 
 # Ver estatísticas
 python -m research.src.cli stats
@@ -298,7 +294,7 @@ Use estes comandos em vez dos scripts avulsos em `tools/` e `research/scripts/`:
 # Auditoria cruzada DB → Exports → PTC (legado; ver observação abaixo)
 python -m research.src.cli audit
 
-# Valida o snapshot publicado sem modificar o banco
+# Diagnóstico de consistência entre o SQLite local e seus exports
 python -m research.src.cli validate-exports
 
 # Checagem ampla de exports, incluindo parsing dos relatórios HTML
@@ -307,7 +303,7 @@ python -m research.src.cli check-exports
 # Verificação de duplicatas/ausências/irrelevância no CSV (gera CSV de relatório)
 python -m research.src.cli verify-papers --csv research/exports/analysis/papers.csv
 
-# Regenera summary.json a partir do DB canônico
+# Regenera summary.json a partir do banco operacional local, não do snapshot versionado
 python -m research.src.cli regenerate-summary
 
 # Gera o manifesto versionado do snapshot sem copiar o SQLite para o Git
@@ -466,13 +462,15 @@ Os relatórios HTML gerados agora incluem:
 
 A taxa de extração automática do pipeline descreve o processamento técnico do
 snapshot e não equivale à recuperação ou à avaliação científica de fontes
-primárias. No escopo vigente, 15 estudos empíricos provisórios tiveram o texto
-integral consultado; 14 receberam apreciação MMAT preliminar por um único revisor,
-enquanto o estudo 8 aguarda adjudicação de escopo/unidade. Um relatório continua
-sem texto integral e não recebeu MMAT. Um registro
-foi excluído após a triagem do resumo e um protocolo sem resultados concluídos
-foi excluído após texto completo. A adjudicação independente e a consolidação
-dos localizadores permanecem pendentes.
+primárias. A cobertura atual identifica 16 PDFs locais entre os 18 candidatos;
+faltam os registros 3 e 6923. O fluxo histórico tem 15 inclusões provisórias,
+14 triagens MMAT S1/S2 e 11 apreciações por categoria. Esses números não comprovam
+leitura humana integral. O estudo 8 aguarda adjudicação de escopo/unidade; as
+categorias de 5, 7 e 14 também estão pendentes. O replay textual congelado cobre
+12 fontes e 484 trechos, não os 16 PDFs atuais. A avaliação do registro 3 não foi
+revalidada sem o original; 6923 não recebeu respostas. Consulte a
+[matriz de cobertura](../docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md) para
+localizadores e limites, sem converter disponibilidade em elegibilidade.
 
 **Principais Causas de Falha**:
 - `connection_exhausted`: Timeout após múltiplas tentativas
@@ -493,37 +491,30 @@ dos localizadores permanecem pendentes.
 ### Executar Testes
 
 ```bash
-# Todos os testes
-cd research && pytest
+# A partir da raiz do repositório, sem o teste de rede
+python -m pytest research/tests -m "not integration" -q
 
-# Testes PRISMA específicos
-pytest research/tests/test_prisma_stages.py -v
+# Regras de estágios implementadas no software
+python -m pytest research/tests/test_prisma_stages.py -v
 
-# Com cobertura
-pytest --cov=research.src --cov-report=html
+# Coerência documental e contagens mostradas na defesa
+python -m pytest research/tests/test_documentation_sync.py research/tests/test_defense_consistency.py -q
 ```
 
 ### Suite de Testes
 
-**✅ test_prisma_stages.py** (9 testes da validação PRISMA):
+**`test_prisma_stages.py`** verifica contratos de software, não certifica PRISMA:
 
 - Critérios de inclusão/exclusão
 - Fases PRISMA (screening, eligibility, inclusion)
 - Consistência de estatísticas
 - Registro de motivos de exclusão/inclusão
 
-**✅ test_complete_pipeline.py**:
-
-- Integração completa do pipeline
-- Validação de APIs e coleta
-- Processamento e deduplicação
-- Seleção PRISMA e exportação
-
-**✅ test_performance_benchmark.py**:
-
-- Métricas de performance
-- Cache hit rate
-- Tempo de execução por fase
+**`test_versioned_snapshot.py`** e **`test_adjudicated_snapshot.py`** verificam
+o material versionado e o replay das decisões registradas, sem validar o mérito
+científico dessas decisões. **`test_documentation_sync.py`** exercita a atualização
+dos trechos espelhados e a detecção de revisões desatualizadas. A suíte não
+substitui a leitura das fontes, a revisão humana ou a defesa dos argumentos.
 
 ---
 

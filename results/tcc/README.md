@@ -1,6 +1,34 @@
-Modelo de trabalho acadêmico do IFC.
+# Trabalho de Conclusão de Curso
 
-O arquivo main.tex tem as referências.
+[`main.tex`](main.tex) inclui os capítulos, os elementos pré e pós-textuais e
+a bibliografia do TCC. O PDF compilado é [`main.pdf`](main.pdf). O relato
+científico é a referência para os resumos do site, da apresentação e da
+documentação; o modelo institucional serve à formatação, não define o escopo
+da pesquisa. A versão desta entrega é documental, sem treinamento com dados
+reais ou validação educacional própria.
+
+## Objetivos do manuscrito
+
+<!-- ccw-sync:start goals -->
+### Objetivo geral
+
+Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.
+
+### Objetivos específicos
+
+**OE1:** categorizar as abordagens e técnicas computacionais e as finalidades pedagógicas descritas na literatura mapeada.
+
+**OE2:** identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas no material examinado.
+
+**OE3:** formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência.
+
+**OE4:** propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de uma eventual execução. A proposição desse protocolo não equivale à realização da avaliação nem exige desenvolver o protótipo nesta versão.
+<!-- ccw-sync:end goals -->
+
+As contagens e os limites estão na [nota de estado](../../docs/tcc/ESTADO-ATUAL-TCC.md).
+Ao alterar o texto, siga o [contrato de sincronização](../../docs/tcc/DOCUMENTATION_SYNC.md)
+e confira também os resumos manuais e as imagens. Elementos opcionais do modelo
+continuam disponíveis; não devem ser removidos para atualizar a documentação.
 
 ## Elementos opcionais editáveis
 
