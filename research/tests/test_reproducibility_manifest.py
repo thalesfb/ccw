@@ -165,6 +165,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     ]
     assert "external to the pipeline study set" in bibliography["separation_rule"]
     artifact_paths = {artifact["path"] for artifact in manifest["artifacts"]}
+    assert "research/data/mmat_assessments.csv" in artifact_paths
     assert "research/data/protocol_execution_2025.json" in artifact_paths
     assert "research/data/manual_override_evidence_matrix.csv" in artifact_paths
 

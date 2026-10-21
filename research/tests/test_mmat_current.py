@@ -12,6 +12,7 @@ from src.analysis.mmat_current_tcc_table import load_rows as load_current_table_
 from src.analysis.mmat_current_tcc_table import render_table as render_current_table
 
 from pathlib import Path
+import pytest
 
 
 CURRENT_TABLE = Path(__file__).resolve().parents[1] / "exports" / "references" / "mmat_current_tcc_table.tex"
@@ -34,8 +35,8 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
 def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     report = validate_current_artifacts()
 
-    assert report["current_denominator"] == 18
-    assert report["historical_denominator"] == 17
+    assert report["current_mmat_ledger_rows"] == 18
+    assert report["historical_mmat_assessment_rows"] == 17
     assert report["criterion_rows"] == 18
     assert report["primary_source_rows"] == 18
     assert report["synthesis_scope_rows"] == 18
@@ -52,6 +53,17 @@ def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     assert report["final_ready"] is False
     assert report["blocking_reasons"]
     assert not any("source/year eligibility hold" in reason for reason in report["blocking_reasons"])
+
+
+def test_historical_mmat_count_requires_unique_record_ids(tmp_path) -> None:
+    historical_mmat = tmp_path / "historical-mmat.csv"
+    historical_mmat.write_text(
+        "ID,Title\nlegacy-1,First record\nlegacy-1,Duplicate record\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="unique, non-empty IDs"):
+        validate_current_artifacts(historical_mmat_path=historical_mmat)
 
 
 def test_current_mmat_evidence_matches_criterion_values() -> None:
