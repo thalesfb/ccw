@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-09-04T02:45:33+00:00",
+  "generated_at": "2026-10-21T09:47:20+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -430,8 +430,8 @@
       "synthesis_scope_rows": 18,
       "empirical_evidence_rows": 17,
       "contextual_protocol_rows": 1,
-      "historical_denominator": 17,
-      "current_denominator": 18,
+      "historical_mmat_assessment_rows": 17,
+      "current_mmat_ledger_rows": 18,
       "evidence_levels": {
         "primary_full_text_reviewed_externally": 9,
         "abstract_and_metadata_only": 8,
@@ -474,7 +474,7 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "40c31a1c68a33885b4809f4334605832add0ae318b14e623baab672cb48abf39"
+      "sha256": "bd3583e05677b5e2c096cd80d67c18b49bc3064c6baddd21276eb3e84661c367"
     },
     {
       "path": "research/exports/reports/summary.json",
@@ -485,6 +485,11 @@
       "path": "research/exports/references/included_papers.bib",
       "role": "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
       "sha256": "37e4d47d1042df453bbd7b43e7b0fc940773783fb74894331446e1aee5289acd"
+    },
+    {
+      "path": "research/data/mmat_assessments.csv",
+      "role": "archived 17-record MMAT assessment, kept separate from the current 18-record ledger",
+      "sha256": "7c0b8f2746a7cfa541b21eb8637a692e533ba9b6e6c8d7d48c6a29546511a12c"
     },
     {
       "path": "research/data/mmat_current_study_registry.csv",
@@ -554,7 +559,7 @@
     {
       "path": "research/src/processing/dedup.py",
       "role": "versioned duplicate-candidate audit and deduplication implementation",
-      "sha256": "9315e29ebb5a1128ee46aa42e0293b29860b6fec8a84cb962e7c4672b0405bbe"
+      "sha256": "48a8affa80ac106f15808bf5a767699238984355ed4036d9bcc211529100c348"
     },
     {
       "path": "research/src/analysis/reports.py",
@@ -589,7 +594,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "c0ebd1ac0084ec413cc5bb4b48594f8261a6ec8c3a23271e81e823fcf77b317b"
+      "sha256": "763c271252322a615847dbbf7f66aa34cc1a5c2d30f3a1b2960dde6650def1e0"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -599,7 +604,12 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "versioned validator for the current 18-record MMAT artifacts",
-      "sha256": "8221784e72712f4fa2c1c77ee2988daf480392c276fed27712afb49944a3794c"
+      "sha256": "8d1e06b91d6406a2f19c6821bc13b8875319fbb2a809e4bf1dab0a8b09d457d4"
+    },
+    {
+      "path": "research/src/analysis/study_scope.py",
+      "role": "candidate inventory and primary-source metadata loading without MMAT judgments",
+      "sha256": "b3ff0b0c232d0e4f6fa37b98c74c7380b16b8dffe3342c841d5edcc59a2d2cf2"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",

@@ -97,6 +97,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
         "BibTeX containing only the 18 pipeline-derived retained records (17 provisional empirical candidates plus contextual protocol)",
     ),
     (
+        "research/data/mmat_assessments.csv",
+        "archived 17-record MMAT assessment, kept separate from the current 18-record ledger",
+    ),
+    (
         "research/data/mmat_current_study_registry.csv",
         "current 18-record MMAT registry, separate from the historical 17-study appraisal",
     ),
@@ -187,6 +191,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     (
         "research/src/analysis/mmat_current.py",
         "versioned validator for the current 18-record MMAT artifacts",
+    ),
+    (
+        "research/src/analysis/study_scope.py",
+        "candidate inventory and primary-source metadata loading without MMAT judgments",
     ),
     (
         "research/src/analysis/mmat_current_tcc_table.py",
