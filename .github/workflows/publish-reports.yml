@@ -119,6 +119,10 @@ jobs:
           mkdir -p _site/research/data
           cp research/data/mmat_reassessment_current.csv _site/research/data/
           cp research/data/mmat_current_study_registry.csv _site/research/data/
+          cp research/data/current_synthesis_scope.csv _site/research/data/
+          cp research/data/mmat_component_reassessment_current.csv _site/research/data/
+          cp research/data/mmat_primary_sources_manifest.csv _site/research/data/
+          cp research/data/study_contribution_current.json _site/research/data/
           
           # Create research directory structure  
           mkdir -p _site/research

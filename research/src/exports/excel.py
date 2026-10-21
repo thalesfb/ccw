@@ -7,7 +7,7 @@ import logging
 import sqlite3
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 from openpyxl import Workbook
@@ -28,6 +28,64 @@ from ..processing.dedup import (
 from ..validation.derived_assets import sync_derived_assets
 
 logger = logging.getLogger(__name__)
+
+
+def _remove_legacy_mmat_fields(value: Any) -> Any:
+    """Remove superseded MMAT payloads while preserving unrelated note data."""
+    if isinstance(value, dict):
+        return {
+            key: _remove_legacy_mmat_fields(item)
+            for key, item in value.items()
+            if not str(key).lower().startswith("mmat_")
+        }
+    if isinstance(value, list):
+        return [_remove_legacy_mmat_fields(item) for item in value]
+    return value
+
+
+def _clean_legacy_mmat_note(value: Any) -> Any:
+    if not isinstance(value, str) or not value.strip():
+        return value
+
+    text = value.strip()
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError:
+        parsed = None
+    if isinstance(parsed, (dict, list)):
+        cleaned = _remove_legacy_mmat_fields(parsed)
+        if cleaned != parsed:
+            return json.dumps(cleaned, ensure_ascii=False) if cleaned else ""
+        return value
+
+    # Adjudication notes may prefix a serialized legacy object. Parse only a
+    # complete JSON object suffix, leaving any free-text provenance intact.
+    for index in range(text.rfind("{"), -1, -1):
+        try:
+            parsed_suffix = json.loads(text[index:])
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(parsed_suffix, dict):
+            continue
+        cleaned = _remove_legacy_mmat_fields(parsed_suffix)
+        if cleaned == parsed_suffix:
+            return value
+        prefix = text[:index].rstrip(" ;")
+        suffix = json.dumps(cleaned, ensure_ascii=False) if cleaned else ""
+        return " ".join(part for part in (prefix, suffix) if part)
+    return value
+
+
+def remove_legacy_mmat_from_notes(papers: pd.DataFrame) -> pd.DataFrame:
+    """Return a copy without outdated MMAT payloads embedded in general notes.
+
+    Current criterion-level appraisals live in the versioned MMAT ledger; the
+    separate historical ledger remains available for archival review.
+    """
+    result = papers.copy()
+    if "notes" in result.columns:
+        result["notes"] = result["notes"].map(_clean_legacy_mmat_note)
+    return result
 
 
 def _get_historical_dedup_stats() -> Tuple[int, int]:
@@ -151,6 +209,7 @@ def to_excel_with_filters(
     Returns:
         Path do arquivo criado
     """
+    df = remove_legacy_mmat_from_notes(df)
     config = load_config()
 
     if output_path is None:
@@ -289,6 +348,7 @@ def export_for_analysis(
     Returns:
         Dicionário com formato e path do arquivo
     """
+    df = remove_legacy_mmat_from_notes(df)
     config = load_config()
 
     if output_dir is None:
@@ -798,7 +858,7 @@ def export_complete_review(
                 # Recalcular flag (todos agora únicos)
                 df_best['is_duplicate'] = False
                 df_best['duplicate_of'] = None
-        df_for_export = df_best
+        df_for_export = remove_legacy_mmat_from_notes(df_best)
         logger.info(f"Registros para export (após melhor duplicata): {len(df_for_export)}")
 
         # AUDITORIA: Comparar contagens de stage após deduplicação

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from pathlib import Path
 
 from src.processing.scoring import extract_techniques
@@ -21,6 +22,9 @@ RESEARCH_ROOT = Path(__file__).resolve().parents[1]
 SUMMARY_PATH = RESEARCH_ROOT / "exports" / "reports" / "summary.json"
 PAPERS_PATH = RESEARCH_ROOT / "exports" / "analysis" / "papers.csv"
 PROTOCOL_PATH = RESEARCH_ROOT / "data" / "current_eligibility_protocol.csv"
+SYNTHESIS_SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
+PRISMA_RECONCILIATION_PATH = RESEARCH_ROOT / "data" / "prisma_population_reconciliation.csv"
+REFERENCE_AUDIT_PATH = RESEARCH_ROOT / "data" / "reference_audit.csv"
 
 
 def test_canonical_search_strategy_remains_72_queries() -> None:
@@ -64,22 +68,60 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     assert prisma["duplicates_removed"] == 27
     assert prisma["screening"] == 11877
     assert prisma["screening_excluded"] == 9391
-    assert prisma["eligibility"] == 2486
-    assert prisma["eligibility_excluded"] == 2468
-    assert prisma["included"] == 18
+    assert prisma["prioritization"] == 2486
+    assert prisma["prioritization_excluded"] == 2468
+    assert prisma["shortlisted"] == 18
+    assert prisma["abstract_screening_excluded"] == 1
+    assert prisma["reports_sought"] == 17
+    assert prisma["reports_not_retrieved"] == 1
+    assert prisma["eligibility"] == 16
+    assert prisma["eligibility_excluded"] == 1
+    assert prisma["included"] == 15
     assert prisma["stage_percentages"] == {
         "screening_excluded_of_identification": 78.89,
         "screening_advanced_of_identification": 20.88,
-        "eligibility_excluded_of_eligibility": 99.28,
-        "included_of_eligibility": 0.72,
-        "included_of_identification": 0.15,
+        "screening_excluded_of_screened_records": 79.07,
+        "prioritization_passed_of_screened_records": 20.93,
+        "prioritization_excluded_of_prioritization": 99.28,
+        "shortlisted_of_prioritization": 0.72,
+        "abstract_screening_excluded_of_shortlist": 5.56,
+        "reports_not_retrieved_of_reports_sought": 5.88,
+        "full_text_excluded_of_assessed": 6.25,
+        "included_of_assessed": 93.75,
+        "eligibility_excluded_of_eligibility": 6.25,
+        "included_of_eligibility": 93.75,
+        "included_of_identification": 0.13,
     }
     assert prisma["deduplication_audit"]["doi"]["excess_rows"] == 25
     assert prisma["deduplication_audit"]["url"]["excess_rows"] == 2
     assert prisma["deduplication_audit"]["confirmed_semantic_duplicates"] == 0
 
 
-def test_current_export_has_exactly_the_adjudicated_eighteen_ids() -> None:
+def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> None:
+    with PRISMA_RECONCILIATION_PATH.open(encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    flow = {
+        row["metric"]: int(row["value"])
+        for row in rows
+        if row["snapshot_date"] == "2026-10-14"
+    }
+    latest_scope = {
+        row["metric"]: int(row["value"])
+        for row in rows
+        if row["snapshot_date"] == "2026-10-14"
+    }
+
+    assert flow["reports_sought"] == 17
+    assert flow["reports_not_retrieved"] == 1
+    assert flow["reports_assessed_at_full_text"] == 16
+    assert flow["full_text_scope_exclusions"] == 1
+    assert flow["empirical_studies_included"] == 15
+    assert latest_scope["empirical_studies_included"] == 15
+    assert latest_scope["current_mmat_empirical_denominator"] == 14
+
+
+def test_current_export_has_exactly_the_adjudicated_empirical_core_ids() -> None:
     with PAPERS_PATH.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
@@ -98,17 +140,25 @@ def test_current_export_has_exactly_the_adjudicated_eighteen_ids() -> None:
         6,
         7,
         8,
-        9,
         10,
-        6916,
-        6917,
         14,
         6915,
-        6920,
+        6916,
+        6917,
         6919,
-        6921,
-        6923,
+        6920,
     }
+
+
+def test_current_evidence_ledgers_have_consistent_csv_rows() -> None:
+    for path in (SYNTHESIS_SCOPE_PATH, REFERENCE_AUDIT_PATH):
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.reader(handle))
+
+        assert rows
+        expected_width = len(rows[0])
+        malformed_rows = [index for index, row in enumerate(rows[1:], start=2) if len(row) != expected_width]
+        assert malformed_rows == [], f"{path.name} has malformed CSV rows: {malformed_rows}"
 
 
 def test_current_eligibility_protocol_makes_adjudication_gates_explicit() -> None:
