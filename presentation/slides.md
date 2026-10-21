@@ -6,6 +6,7 @@ colorSchema: light
 fonts:
   sans: Times New Roman
   serif: Times New Roman
+  provider: none
 title: "Ensino Personalizado de Matemática"
 info: "Revisão Sistemática da Literatura — dados da revisão"
 author: "Thales Ferreira Batista"
@@ -27,7 +28,7 @@ mdc: true
 <div class="cover-art cover-art-bottom-right" aria-hidden="true">n = −√(a²x²)<br>sin(x) = Δπ / n</div>
 
 <div class="ifc-mark" aria-label="Instituto Federal Catarinense — Campus Videira">
-  <img class="ifc-logo" src="./public/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
+  <img class="ifc-logo" src="/branding/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira">
 </div>
 
 <div class="cover-slide">
@@ -230,7 +231,7 @@ class: image-slide tcc-prisma-slide
 
 <h1 class="sr-only">Fluxo PRISMA dos dados da revisão</h1>
 
-<img src="./public/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image tcc-prisma-image" />
+<img src="/images/prisma_flow.png" alt="Fluxo PRISMA dos dados da revisão" class="feature-image prisma-image tcc-prisma-image" />
 
 <small class="source-note">Fonte versionada: `research/exports/visualizations/prisma_flow.png`.</small>
 
@@ -252,7 +253,7 @@ class: content-slide
       <div><b>03</b><span>Excedentes são candidatos a revisão semântica; não equivalem a duplicatas confirmadas.</span></div>
     </div>
   </div>
-  <div class="image-frame"><img src="./public/images/selection_funnel.png" alt="Funil de seleção da revisão" /></div>
+  <div class="image-frame"><img src="/images/selection_funnel.png" alt="Funil de seleção da revisão" /></div>
 </div>
 
 ---
@@ -265,7 +266,7 @@ class: content-slide
 # Distribuição anual no recorte observado
 
 <div class="tcc-growth-layout">
-  <div class="tcc-growth-chart"><img src="./public/images/papers_by_year.png" alt="Distribuição de registros por ano; 2026 é um ano parcial até 31 de agosto" /></div>
+  <div class="tcc-growth-chart"><img src="/images/papers_by_year.png" alt="Distribuição de registros por ano; 2026 é um ano parcial até 31 de agosto" /></div>
   <div class="tcc-growth-copy"><h2>O snapshot observado</h2><p>Os registros cobrem 2015–2026. O pico de 2025 não deve ser comparado diretamente com 2026, pois o último ano está incompleto.</p><small>2026* = publicações identificadas até 31/08/2026. A leitura é descritiva do conjunto recuperado; não estima a produção mundial, representatividade ou qualidade.</small></div>
 </div>
 
@@ -281,7 +282,7 @@ class: content-slide
 # Técnicas: frequências do conjunto pós-deduplicação
 
 <div class="tcc-technique-layout">
-  <div class="tcc-technique-chart"><img src="./public/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
+  <div class="tcc-technique-chart"><img src="/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
   <div class="tcc-technique-copy"><div class="tcc-technique-stat"><strong>6.399</strong><span>técnica não especificada</span></div><p>As categorias descrevem os 11.877 registros após remoção determinística; podem se sobrepor e não representam somente os 18 retidos.</p><div class="tcc-technique-list"><div><span>assessment</span><b>1.073</b></div><div><span>IA</span><b>863</b></div><div><span>ML</span><b>771</b></div><div><span>preditiva</span><b>345</b></div></div></div>
 </div>
 
@@ -297,7 +298,7 @@ class: content-slide tcc-score-slide
 # Score: prioridade de leitura, não qualidade
 
 <div class="tcc-score-layout">
-  <div class="tcc-score-visual"><img src="./public/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
+  <div class="tcc-score-visual"><img src="/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
   <div class="tcc-score-copy">
     <div class="tcc-score-threshold">≥ 4,0</div>
     <h2>O score organiza o processamento.</h2>
@@ -491,7 +492,7 @@ class: closing-slide
 
 <div class="close-rule"></div>
 <div class="close-repository">
-  <img class="repo-qr" src="./public/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">
+  <img class="repo-qr" src="/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">
   <div class="close-repository-copy"><strong>Aponte a câmera para a fonte pública</strong><span>código, dados derivados e apresentação versionados</span></div>
 </div>
 <p class="close-title"><strong>Ensino Personalizado de Matemática</strong><br>Oportunidades e Técnicas Computacionais</p>
