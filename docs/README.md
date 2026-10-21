@@ -1,49 +1,51 @@
-# Relatórios da Revisão Sistemática
+# Documentação do projeto
 
-Este diretório contém os relatórios publicados automaticamente via GitHub Actions.
+Este diretório reúne governança, decisões e auditorias. Os relatórios da revisão
+estão em [`research/exports/`](../research/exports/), não em `docs/`.
 
-## 📊 Conteúdo
+## Referências atuais
 
-Os seguintes arquivos são gerados e publicados:
+- [Texto e PDF do TCC](../results/tcc/README.md): fonte do relato científico.
+- [Estado, escopo e pendências](tcc/ESTADO-ATUAL-TCC.md): entrega documental e
+  limites da apreciação MMAT preliminar.
+- [Cobertura e contribuições das fontes](tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md):
+  disponibilidade atual, cobertura de leitura e contribuições delimitadas.
+- [Reconciliação da população](RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md):
+  estágios distintos da seleção e proveniência das contagens.
+- [Governança documental e normativa](tcc/README.md): documentos implementados,
+  propostas futuras e limites de conformidade institucional.
+- [Sincronização dos materiais](tcc/DOCUMENTATION_SYNC.md): geração dos trechos
+  repetidos e revisão das páginas, apresentações e imagens.
+- [Operação do módulo de pesquisa](../research/README.md): comandos e distinção
+  entre verificar o snapshot e executar uma nova coleta.
 
-- **`index.html`** - Sumário executivo da revisão sistemática
-- **`papers.html`** - Lista detalhada dos artigos incluídos
-- **`gap-analysis.html`** - Análise de lacunas e oportunidades
-- **`visualizations/`** - Gráficos e diagramas
+Notas e propostas históricas conservam sua data e seu escopo; não substituem
+essas referências para descrever o estado atual.
 
-## 🔄 Atualização
+## Relatórios e publicação
 
-Os relatórios são atualizados automaticamente quando:
+Os arquivos versionados incluem
+[`summary_report.html`](../research/exports/reports/summary_report.html),
+[`papers_report_included.html`](../research/exports/reports/papers_report_included.html),
+[`gap_analysis.html`](../research/exports/reports/gap_analysis.html), a
+[página MMAT](../research/exports/analysis/mmat_current.html) e as
+[visualizações](../research/exports/visualizations/).
 
-- Há push para `main` ou `develop`
-- O workflow é executado manualmente
+O [site público](https://thalesfb.github.io/ccw/) é publicado pelo
+[workflow de Pages](../.github/workflows/publish-reports.yml), após a conclusão
+com sucesso de `TCC quality` na `main`, ou por acionamento manual. O workflow
+utiliza os artefatos versionados e o PDF validado; não executa uma nova busca.
+Um PR aprovado nos testes ainda não significa que essa versão esteja publicada.
 
-## 🌐 Acesso Online
+## Conferência local sem nova busca
 
-Após habilitar GitHub Pages, os relatórios estarão disponíveis em:
-
-```
-https://thalesfb.github.io/ccw/
-```
-
-## 📝 Geração Local
-
-Para gerar os relatórios localmente:
+Na raiz do checkout, com as dependências de pesquisa instaladas:
 
 ```bash
-# Executar pipeline completo
-python -m research.src.cli run-pipeline
-
-# Ou apenas exportar do banco existente
-python -m research.src.cli export
+python -m research.src.validation.versioned_snapshot
+python -m research.src.processing.adjudicated_snapshot --check
+python scripts/sync_project_docs.py --check
 ```
 
-Os arquivos serão salvos em `research/exports/`.
-
-## 🛠️ Workflow
-
-O processo de publicação é gerenciado pelo workflow:
-
-`.github/workflows/publish-reports.yml`
-
-Consulte o README do workflow para mais detalhes sobre configuração e troubleshooting.
+Esses comandos verificam contratos e rastreabilidade. Não certificam revisão
+científica completa, leitura humana das fontes ou aprovação da orientação.

@@ -55,6 +55,9 @@ jobs:
       - name: Validate derived visualization synchronization
         run: python -m research.src.validation.derived_assets --check
 
+      - name: Check manuscript and public-document consistency
+        run: python scripts/sync_project_docs.py --check
+
       - name: Validate versioned research snapshot
         working-directory: research
         run: python -m src.validation.versioned_snapshot
@@ -97,6 +100,7 @@ jobs:
             tests/test_study_scope.py \
             tests/test_study_contribution_coverage.py \
             tests/test_defense_consistency.py \
+            tests/test_documentation_sync.py \
             tests/test_mmat_source_integrity.py \
             tests/test_temporal_scope.py \
             tests/test_adjudicated_snapshot.py \

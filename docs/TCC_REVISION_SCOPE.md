@@ -12,8 +12,8 @@ não inferido somente do fechamento daquela etapa editorial.
 - Alegações sem artefatos reproduzíveis sobre protótipo, experimentos, validação escolar e defesa foram removidas.
 - O PRISMA 2020 é apresentado como diretriz de relato.
 - O PRISMA-P é apresentado como orientação para protocolos; não se declara conformidade integral porque não houve registro prospectivo.
-- O limiar usado na elegibilidade representa relevância temática e não qualidade metodológica.
-- O MMAT é reportado por Q1--Q5, sem nota geral, média, ranking ou categoria de qualidade.
+- O limiar de priorização operacional representa relevância temática, não elegibilidade por texto completo nem qualidade metodológica.
+- O MMAT distingue a triagem S1/S2 dos critérios Q1--Q5 da categoria, sem nota geral, média, ranking ou categoria de qualidade.
 - A reutilização do cache é explicada como métrica dependente da execução; os valores conflitantes de 63% e 92% foram removidos por não constituírem uma medida estável e versionada da mesma execução.
 - Desempenho observado, proficiência estimada, competência e aprendizagem são tratados como conceitos relacionados, mas distintos.
 
@@ -36,8 +36,10 @@ da biblioteca ou da instituição.
 
 ## Regra de adjudicação científica do snapshot vigente
 
-O snapshot versionado de 03/09/2026 é uma representação adjudicada do escopo e
-não converte automaticamente os 18 registros retidos em evidência empírica final.
+O snapshot de busca tem adjudicação inicial em 03/09/2026 e reconciliação de
+escopo em 14/10/2026. O [estado atual](tcc/ESTADO-ATUAL-TCC.md) distingue os
+18 candidatos das 15 inclusões provisórias e registra a cobertura documental
+posterior. A seleção operacional não converte candidatos em evidência empírica final.
 As regras abaixo devem ser aplicadas antes de qualquer afirmação conclusiva,
 reclassificação de um override ou fechamento do MMAT. Elas não reescrevem as
 contagens do fluxo PRISMA; documentam o gate científico que sucede o filtro

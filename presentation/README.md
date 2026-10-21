@@ -10,7 +10,10 @@ renderização.
 O arquivo `results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx`
 é um export editável paralelo de 19 slides, gerado por outro script. Ele não é
 o arquivo da defesa, não é exportado de `slides.md` e não permanece sincronizado
-automaticamente. Para apresentar o TCC, use o deck Slidev.
+automaticamente. Isso não autoriza divergências científicas: mudanças no TCC
+exigem conferir os resumos do Slidev, do storyboard e do export paralelo, conforme
+[`DOCUMENTATION_SYNC.md`](../docs/tcc/DOCUMENTATION_SYNC.md). Para apresentar o
+TCC, use o deck Slidev.
 
 A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
 após a revisão dos PRs e a validação da orientação, com base no conteúdo
@@ -24,6 +27,27 @@ nunca como fonte dos números atuais do TCC.
 O conteúdo quantitativo do deck canônico é validado contra
 `research/exports/reports/summary.json`; as visualizações são cópias dos PNGs
 versionados em `research/exports/visualizations`.
+
+## Objetivos de referência do manuscrito
+
+Os slides resumem os objetivos para leitura em apresentação, sem mudar seu
+sentido. A transcrição abaixo é gerada do TCC, não do roteiro de fala.
+
+<!-- ccw-sync:start goals -->
+### Objetivo geral
+
+Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.
+
+### Objetivos específicos
+
+**OE1:** categorizar as abordagens e técnicas computacionais e as finalidades pedagógicas descritas na literatura mapeada.
+
+**OE2:** identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas no material examinado.
+
+**OE3:** formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência.
+
+**OE4:** propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de uma eventual execução. A proposição desse protocolo não equivale à realização da avaliação nem exige desenvolver o protótipo nesta versão.
+<!-- ccw-sync:end goals -->
 
 ## Execução local
 
