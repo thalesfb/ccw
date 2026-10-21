@@ -1,4 +1,6 @@
 """Reject plausible-looking ledger corruption without editing research data."""
+import csv
+
 import pytest
 from src.analysis import mmat_current as current
 
@@ -27,18 +29,17 @@ def test_reassessment_rejects_invalid_source_or_design(monkeypatch, field, value
         load_rows()
 
 
-def test_primary_source_ids_must_be_unique(monkeypatch):
-    original_read = current._read_csv
-
-    def read(path):
-        rows = original_read(path)
-        if path == current.PRIMARY_SOURCES_PATH:
-            rows[0]["source_id"] = rows[1]["source_id"]
-        return rows
-
-    monkeypatch.setattr(current, "_read_csv", read)
+def test_primary_source_ids_must_be_unique(tmp_path):
+    with current.PRIMARY_SOURCES_PATH.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    rows[0]["source_id"] = rows[1]["source_id"]
+    corrupted_sources = tmp_path / "duplicate-source-ids.csv"
+    with corrupted_sources.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
     with pytest.raises(ValueError, match="duplicate source_id"):
-        current.validate_current_artifacts()
+        current.validate_current_artifacts(primary_sources_path=corrupted_sources)
 
 
 def test_current_ledger_remains_provisional():

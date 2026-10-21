@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-10-21T05:22:43+00:00",
+  "generated_at": "2026-10-21T09:06:50+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -589,7 +589,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "c0ebd1ac0084ec413cc5bb4b48594f8261a6ec8c3a23271e81e823fcf77b317b"
+      "sha256": "29b17662d0f00b1e1838231ccdbc493b38704efcdf44604283490e1efcb0bf31"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -599,7 +599,12 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "versioned validator for the current 18-record MMAT artifacts",
-      "sha256": "8221784e72712f4fa2c1c77ee2988daf480392c276fed27712afb49944a3794c"
+      "sha256": "7aa942c3ad2f973d015cd3560421974eef5a83fd65065fc80cec86a977257901"
+    },
+    {
+      "path": "research/src/analysis/study_scope.py",
+      "role": "candidate inventory and primary-source metadata loading without MMAT judgments",
+      "sha256": "b3ff0b0c232d0e4f6fa37b98c74c7380b16b8dffe3342c841d5edcc59a2d2cf2"
     },
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",

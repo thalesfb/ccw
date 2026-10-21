@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "621ff3a9a3ac10cacbaf7fe0af9687f79f94a39022594cf8afdb15510dc17842",
+    "sha256": "26784d2dfb89e420608287b136414cd10dd3393344276b8dd4ae5b322c4c1d29",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/current_eligibility_protocol.csv",
@@ -32,6 +32,7 @@
       "research/src/analysis/mmat_current_tcc_table.py",
       "research/src/analysis/mmat_tcc_table.py",
       "research/src/analysis/reports.py",
+      "research/src/analysis/study_scope.py",
       "research/src/analysis/visualizations.py",
       "research/src/cache/sqlite_cache.py",
       "research/src/cli.py",
