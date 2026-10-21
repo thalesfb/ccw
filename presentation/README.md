@@ -54,7 +54,8 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 
 - os 18 registros retidos incluem 17 candidatos empíricos provisórios e um
   protocolo contextual;
-- o MMAT atual é preliminar e não produz nota média ou ranking;
+- o MMAT é preliminar: a base tem data de corte em 31/08/2026 e o escopo foi
+  reconciliado em 03/09/2026; não produz nota média ou ranking;
 - as frequências técnicas são descritivas sobre o snapshot após deduplicação,
   não uma síntese de eficácia;
 - referências teóricas, pedagógicas, metodológicas e técnicas do TCC permanecem

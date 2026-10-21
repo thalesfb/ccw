@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const currentPath = path.join(root, 'research', 'data', 'mmat_reassessment_current.csv');
+const scopePath = path.join(root, 'research', 'data', 'current_synthesis_scope.csv');
+const reproducibilityManifestPath = path.join(root, 'research', 'exports', 'reports', 'reproducibility_manifest.json');
 const registryPath = path.join(root, 'research', 'data', 'mmat_current_study_registry.csv');
 const outputPath = path.join(root, 'research', 'exports', 'analysis', 'mmat_current.html');
 
@@ -152,11 +154,16 @@ const screeningQuestions = MMAT_SCREENING_QUESTIONS.map(screeningQuestionCard).j
 const criteriaGroups = MMAT_CRITERIA_GROUPS.map(criteriaGroup).join('');
 
 const current = parseCsv(fs.readFileSync(currentPath, 'utf8'));
+const currentScope = parseCsv(fs.readFileSync(scopePath, 'utf8'));
+const reproducibilityManifest = JSON.parse(fs.readFileSync(reproducibilityManifestPath, 'utf8'));
 const registry = parseCsv(fs.readFileSync(registryPath, 'utf8'));
 const registryById = new Map(registry.map((row) => [row.study_id, row]));
-const latestSnapshot = current.map((row) => row.snapshot_date).sort().at(-1);
-const latestSnapshotLabel = latestSnapshot.split('-').reverse().join('/');
+const cutoffDate = reproducibilityManifest.protocol.cutoff_date;
+const cutoffDateLabel = cutoffDate.split('-').reverse().join('/');
+const scopeSnapshot = currentScope.map((row) => row.snapshot_date).sort().at(-1);
+const scopeSnapshotLabel = scopeSnapshot.split('-').reverse().join('/');
 const empirical = current.filter((row) => row.empirical_status !== 'protocol_or_proposal_not_applicable');
+const contextualCount = current.length - empirical.length;
 const primaryReviewed = current.filter((row) => row.assessment_basis === 'primary_full_text_reviewed_externally');
 const abstractOnly = current.filter((row) => row.assessment_basis === 'abstract_and_metadata_only');
 
@@ -178,8 +185,8 @@ const page = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Apreciação preliminar por critérios do MMAT 2018 para o snapshot vigente do CCW.">
-  <title>MMAT atual · CCW</title>
+  <meta name="description" content="Apreciação preliminar por critérios do MMAT 2018 para o escopo reconciliado em ${scopeSnapshotLabel}; data de corte ${cutoffDateLabel}.">
+  <title>MMAT · escopo ${scopeSnapshotLabel} · CCW</title>
   <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
 <body>
@@ -192,7 +199,7 @@ const page = `<!doctype html>
       <nav class="site-nav site-nav-desktop" aria-label="Navegação principal">
         <a href="../../../">Visão geral</a>
         <a href="../../index.html">Revisão sistemática</a>
-        <a href="./mmat_current.html" aria-current="page">MMAT atual</a>
+        <a href="./mmat_current.html" aria-current="page">MMAT</a>
         <a href="../../../presentation/">Apresentação</a>
         <a href="../../../results/ptc/index.html">PTC</a>
         <a href="../../../results/tcc/index.html">TCC</a>
@@ -203,7 +210,7 @@ const page = `<!doctype html>
         <nav id="site-primary-nav" class="site-nav site-nav-mobile" aria-label="Navegação principal">
           <a href="../../../">Visão geral</a>
           <a href="../../index.html">Revisão sistemática</a>
-          <a href="./mmat_current.html" aria-current="page">MMAT atual</a>
+          <a href="./mmat_current.html" aria-current="page">MMAT</a>
           <a href="../../../presentation/">Apresentação</a>
           <a href="../../../results/ptc/index.html">PTC</a>
           <a href="../../../results/tcc/index.html">TCC</a>
@@ -215,21 +222,22 @@ const page = `<!doctype html>
 
   <main>
     <div class="site-shell">
-      <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão</a> / <strong>MMAT atual</strong></p>
+      <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão</a> / <strong>MMAT · ${scopeSnapshotLabel}</strong></p>
       <section class="page-hero" aria-labelledby="page-title">
-        <span class="eyebrow">MMAT 2018 · snapshot vigente de ${latestSnapshotLabel}</span>
+        <span class="eyebrow">MMAT 2018 · escopo reconciliado em ${scopeSnapshotLabel}</span>
         <h1 id="page-title">Apreciação preliminar por critérios</h1>
-        <p class="lede">A leitura atual registra evidências e limites para cada critério. Ela não é uma nota global, um percentual ou um ranking de qualidade.</p>
+        <p class="lede">A busca teve data de corte ${cutoffDateLabel}, e a população foi reconciliada em ${scopeSnapshotLabel}. As datas individuais das avaliações permanecem registradas no ledger; esta apreciação não é uma nota global, percentual ou ranking de qualidade.</p>
         <div class="action-row">
           <a class="btn btn-primary" href="../../index.html">Voltar à revisão</a>
-          <a class="btn btn-secondary" href="mmat_visualization.html">Visualização histórica — 17 estudos</a>
+          <a class="btn btn-secondary" href="mmat_visualization.html">Arquivo histórico — 17 registros</a>
         </div>
+        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Essa contagem não deve ser confundida com os ${empirical.length} candidatos empíricos do escopo reconciliado: são artefatos e snapshots distintos, e a coincidência numérica não implica equivalência dos conjuntos.</p>
       </section>
 
       <section class="section" aria-labelledby="summary-title">
         <div class="section-heading">
           <h2 id="summary-title">O que este ledger representa</h2>
-          <p>O ledger atual contém ${current.length} registros. Os valores abaixo são contagens do registro atual e não devem ser interpretados como escore de qualidade.</p>
+          <p>O ledger MMAT do escopo reconciliado contém ${current.length} registros: ${empirical.length} candidatos empíricos provisórios e ${contextualCount} protocolo contextual. As contagens descrevem registros, não um escore de qualidade.</p>
         </div>
         <div class="data-strip">
           <div class="metric-card"><span class="metric-value">${current.length}</span><span class="metric-label">registros no ledger</span></div>
@@ -274,7 +282,7 @@ const page = `<!doctype html>
 
       <section class="section" aria-labelledby="table-title">
         <div class="section-heading">
-          <h2 id="table-title">Ledger atual</h2>
+          <h2 id="table-title">Ledger do escopo reconciliado</h2>
           <p>Registro por estudo, origem da apreciação e critérios MMAT aplicáveis.</p>
         </div>
         <div class="table-wrap">
@@ -300,7 +308,7 @@ const page = `<!doctype html>
         <span class="eyebrow">Proveniência</span>
         <h3>Fontes versionadas</h3>
         <p><a href="../../../data/mmat_reassessment_current.csv">CSV do ledger atual</a> · <a href="../../../data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
-        <p class="source-note">A página foi gerada a partir de <code>research/data/mmat_reassessment_current.csv</code> e <code>research/data/mmat_current_study_registry.csv</code>.</p>
+        <p class="source-note">Os julgamentos e títulos vêm de <code>research/data/mmat_reassessment_current.csv</code> e <code>research/data/mmat_current_study_registry.csv</code>; o escopo, de <code>research/data/current_synthesis_scope.csv</code>; e a data de corte, de <code>protocol.cutoff_date</code> em <code>research/exports/reports/reproducibility_manifest.json</code>.</p>
         <p class="source-note">As perguntas seguem o <a href="https://doi.org/10.3233/EFI-180221" target="_blank" rel="noopener">MMAT 2018</a>; a tradução em português é acompanhada pela formulação original em inglês para manter a rastreabilidade do instrumento.</p>
       </section>
     </div>
@@ -308,7 +316,7 @@ const page = `<!doctype html>
 
   <footer class="site-footer">
     <div class="site-shell site-footer-inner">
-      <p><strong>MMAT atual · CCW</strong><br>Apreciação preliminar por critérios</p>
+      <p><strong>MMAT · escopo ${scopeSnapshotLabel} · CCW</strong><br>Apreciação preliminar por critérios</p>
       <p><a href="../../index.html">Revisão</a> · <a href="../../../">Visão geral</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></p>
     </div>
   </footer>

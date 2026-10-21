@@ -25,10 +25,12 @@ for (const page of expectedPages) {
   assert.match(html, /site-nav-mobile/, `${page} must expose the mobile navigation variant`);
   assert.match(html, /aria-controls="site-primary-nav"/, `${page} must associate the menu toggle with its navigation`);
   assert.match(html, /Revisão sistemática/i, `${page} must link to the research area`);
+  assert.match(html, /<a href="[^"]*mmat_current\.html"[^>]*>MMAT(?: reconciliado)?<\/a>/i, `${page} must provide a concise MMAT navigation link`);
+  assert.doesNotMatch(html, /MMAT atual/i, `${page} must not imply an undated MMAT state`);
 }
 
 const homepage = read('index.html');
-assert.match(homepage, /MMAT atual/i, 'the homepage must promote the current MMAT page');
+assert.match(homepage, /Ver MMAT · 03\/09\/2026/i, 'the homepage must promote the dated MMAT scope');
 assert.doesNotMatch(homepage, /MMAT histórico \(referência\)/i, 'the homepage must not present the historical page as current');
 assert.match(homepage, /ifc-campus-videira-horizontal\.png/, 'the homepage must use the official IFC mark');
 assert.doesNotMatch(homepage, /linear-gradient|Segoe UI.*Tahoma/i, 'the homepage must not retain the legacy visual system');
@@ -56,7 +58,15 @@ assert.match(functionalRequirements, /exportar dados.*auditoria/i, 'section 5.2 
 
 const mmat = read('research/exports/analysis/mmat_current.html');
 assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggregate scoring');
-assert.match(mmat, /visualização histórica/i, 'the current page must preserve historical provenance');
+assert.match(mmat, /arquivo histórico/i, 'the current page must preserve historical provenance');
+assert.match(mmat, /data de corte 31\/08\/2026/i, 'the MMAT page must identify the review cutoff date');
+assert.match(mmat, /escopo reconciliado em 03\/09\/2026/i, 'the MMAT page must distinguish the adjudicated scope date');
+assert.match(mmat, /17 candidatos empíricos provisórios e 1 protocolo contextual/i, 'the MMAT page must explain its current 18-record population');
+assert.match(mmat, /17 registros MMAT.*não deve ser confundida.*17 candidatos empíricos/i, 'the MMAT page must distinguish the historical 17-record artifact from the current empirical candidates');
+assert.match(mmat, /current_synthesis_scope\.csv/i, 'the MMAT page must identify the source of its reconciled population');
+assert.match(mmat, /reproducibility_manifest\.json/i, 'the MMAT page must identify the source of its cutoff date');
+const historicalMmat = read('research/exports/analysis/mmat_visualization.html');
+assert.match(historicalMmat, /17 registros.*não deve ser confundida.*17 candidatos empíricos/i, 'the historical MMAT page must distinguish its archive count from the current empirical candidates');
 assert.match(mmat, /18 registros/i, 'the current page must expose the current denominator');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
