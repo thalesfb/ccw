@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-09-04T02:45:33+00:00",
+  "generated_at": "2026-10-21T05:22:43+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -554,7 +554,7 @@
     {
       "path": "research/src/processing/dedup.py",
       "role": "versioned duplicate-candidate audit and deduplication implementation",
-      "sha256": "9315e29ebb5a1128ee46aa42e0293b29860b6fec8a84cb962e7c4672b0405bbe"
+      "sha256": "48a8affa80ac106f15808bf5a767699238984355ed4036d9bcc211529100c348"
     },
     {
       "path": "research/src/analysis/reports.py",
