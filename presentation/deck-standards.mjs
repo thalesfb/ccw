@@ -29,13 +29,13 @@ export function deckValidationErrors({ slides, css, assetPaths, repositoryUrl })
   const errors = []
   const assets = new Set(assetPaths)
 
-  if (!slides.includes('./public/branding/ifc-campus-videira-horizontal.png')) {
+  if (!/src=["']\/branding\/ifc-campus-videira-horizontal\.png["']/.test(slides)) {
     errors.push('The deck must use the official IFC Campus Videira logo asset.')
   }
   if (!assets.has('public/branding/ifc-campus-videira-horizontal.png')) {
     errors.push('The official IFC Campus Videira logo asset is missing.')
   }
-  if (!slides.includes('./public/branding/ccw-repository-qr.svg')) {
+  if (!/src=["']\/branding\/ccw-repository-qr\.svg["']/.test(slides)) {
     errors.push('The closing slide must include the repository QR asset.')
   }
   if (!assets.has('public/branding/ccw-repository-qr.svg')) {
