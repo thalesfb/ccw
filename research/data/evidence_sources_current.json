@@ -1,0 +1,288 @@
+{
+  "schema_version": 2,
+  "review_date": "2026-10-20",
+  "scope_sha256": "37782dde2ff3b9b37c2fdb4f2dda775a38dd6dec260f9c98f863f03b1cee7196",
+  "retrieval_scope_sha256": "f76dfbd371f570075943a57ed28f00769df5b982bef63db2ac321893fe359add",
+  "scope_drift_explanation": "The 18-record selection roles are unchanged. Current coverage identifies 16 private primary PDFs, but the frozen retrieval bundle replays only its original 12 sources. Supplementary text/OCR reviews are not a replay of that index. Selection-ledger notes changed, so the historical extraction fingerprint is not a fingerprint of the current scope file; scope_unchanged remains false. The four supplementary sources have not been replayed in the frozen extraction bundle.",
+  "text_hash_normalization": "UTF-8 with LF line endings",
+  "base_commit": "af920535759ce66f8075843919deb275ee91dcf6",
+  "extraction_settings": {
+    "pypdf_version": "6.19.0",
+    "chunk_size": 3000,
+    "page_numbering": "physical_one_based"
+  },
+  "replay_validation": {
+    "environment": {
+      "pypdf_version": "6.19.0",
+      "fonttools_version": "4.66.1"
+    },
+    "checked_source_count": 12,
+    "checked_chunk_count": 484,
+    "integrity_failures": 0,
+    "checked_study_ids": [
+      "1",
+      "2",
+      "5",
+      "6",
+      "8",
+      "10",
+      "14",
+      "6915",
+      "6916",
+      "6917",
+      "6920",
+      "6921"
+    ],
+    "validation_date": "2026-10-14"
+  },
+  "code_hashes": {
+    "research/src/validation/evidence_retrieval.py": "3bfc5ff21f0660d7a5fd7713580e7516dc8f28d4c033917fc2fcad2b6d3145b1",
+    "research/src/validation/pdf_feedback.py": "189219f5913f2163a3e42762a34ee038a421a86b55ea00882ff692c569d8c740"
+  },
+  "scope_unchanged": false,
+  "source_coverage": {
+    "date": "2026-10-20",
+    "identified_local_pdf_count": 16,
+    "missing_study_ids": [
+      "3",
+      "6923"
+    ],
+    "note": "Current local availability is separate from historical selection and the frozen 12-source retrieval replay."
+  },
+  "sources": [
+    {
+      "study_id": "1",
+      "bib_key": "Math2021_001",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.1109/SISY52375.2021.9582522",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://doi.org/10.1109/SISY52375.2021.9582522",
+      "sha256": "22cc1315a9e6ffa2a6f80ec134904b46d966881314a7c4a31dae9d3bdfe97042",
+      "page_count": 6,
+      "chunks": 15,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "2",
+      "bib_key": "Implementation2025_000",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.ijiet.org/vol15/IJIET-V15N1-2228.pdf",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://www.ijiet.org/vol15/IJIET-V15N1-2228.pdf",
+      "sha256": "4dae8a6f7b1da4067b488b16bded80a06caa0329b4dd074acea100638979df94",
+      "page_count": 10,
+      "chunks": 20,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "3",
+      "bib_key": "Multimodels2020_002",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.researchgate.net/publication/342670436_Multi-models_of_Educational_Data_Mining_for_Predicting_Student_Performance_in_Mathematics_A_Case_Study_on_High_Schools_in_Cambodia",
+      "status": "not_recovered",
+      "failure_category": "HTTPError",
+      "access_status": "purchase_required_reported_by_author",
+      "access_status_date": "2026-10-20",
+      "current_appraisal_verification": "not_revalidated_without_primary_text"
+    },
+    {
+      "study_id": "4",
+      "bib_key": "Analysis2022_003",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.researchgate.net/publication/359520060_Analysis_of_Feature_Selection_and_Data_Mining_Techniques_to_Predict_Student_Academic_Performance",
+      "status": "recovered_identity_candidate",
+      "sha256": "83050d62d3a703f9f2477c48cda8ec8b625759dcbc12c6197ebff45ca0deef5a",
+      "page_count": 5,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "recovered_on": "2026-10-20",
+      "extraction_method": "pypdf_text_with_selective_visual_check",
+      "replay_status": "not_in_frozen_retrieval_replay"
+    },
+    {
+      "study_id": "5",
+      "bib_key": "Design2025_004",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.1109/CIPAE66821.2025.00116",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://doi.org/10.1109/CIPAE66821.2025.00116",
+      "sha256": "563f6e3cceb34edf5ebd0663cee6c4de21e2bd16fdaece0ed0d212ec18aa9241",
+      "page_count": 6,
+      "chunks": 14,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "6",
+      "bib_key": "Identifying2017_006",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://jestp.com/menuscript/index.php/estp/article/download/426/381/754",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://jestp.com/menuscript/index.php/estp/article/download/426/381/754",
+      "sha256": "c861251a34879d25a6318721a0022b9efa0e500bace8c4ea6fbb00adfce7c672",
+      "page_count": 20,
+      "chunks": 25,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "7",
+      "bib_key": "Innovative2023_005",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://amns.sciendo.com/pdf/10.2478/amns.2023.2.01524",
+      "status": "recovered_identity_candidate",
+      "sha256": "9ccac2a135f5f9b78c85fb4c7e3e7eb325587f537563da7551527e8378c5bb3c",
+      "page_count": 16,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "recovered_on": "2026-10-17",
+      "extraction_method": "pypdf_text_with_selective_visual_check",
+      "replay_status": "not_in_frozen_retrieval_replay"
+    },
+    {
+      "study_id": "8",
+      "bib_key": "Computational2017_008",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://chrismaclellan.com/media/publications/MacLellan-Camera-Ready.pdf",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://chrismaclellan.com/media/publications/MacLellan-Camera-Ready.pdf",
+      "sha256": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23",
+      "page_count": 108,
+      "chunks": 149,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "9",
+      "bib_key": "Machine2019_007",
+      "synthesis_role": "contextual_study",
+      "source_url": "https://doi.org/10.1109/EDUCON.2019.8725237",
+      "status": "recovered_identity_candidate",
+      "sha256": "c1f419944ecf689f5cf6390ff0dab9d061cc101869ae56ce031fe286efe3ac6b",
+      "page_count": 7,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "recovered_on": "2026-10-20",
+      "extraction_method": "local_ocr_with_selective_visual_check",
+      "replay_status": "not_in_frozen_retrieval_replay"
+    },
+    {
+      "study_id": "10",
+      "bib_key": "Machine2024_009",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://doi.org/10.1002/cae.22787",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://doi.org/10.1002/cae.22787",
+      "sha256": "8775601a7408ce1db41aa25ab543cc9e9b56b71bdb124cc7fc138efa4c31137b",
+      "page_count": 10,
+      "chunks": 21,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "14",
+      "bib_key": "Enhancing2025_012",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://journals.eduped.org/index.php/IJMME/article/view/1299",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://journals.eduped.org/index.php/IJMME/article/download/1299/945",
+      "sha256": "d95e78c4a32c3a929a0429b97e672b49aa1a13bd3ffdb3f081a3ac610caadc0c",
+      "page_count": 22,
+      "chunks": 39,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "6915",
+      "bib_key": "He2025_6915",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://link.springer.com/article/10.1186/s40561-025-00415-z",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://link.springer.com/content/pdf/10.1186/s40561-025-00415-z.pdf",
+      "sha256": "cc54ac711d64948d823c517998ae3cb7874d676dbc91f32ebf6a311fb918ed29",
+      "page_count": 42,
+      "chunks": 70,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "6916",
+      "bib_key": "Villegas2025_6916",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://link.springer.com/article/10.1186/s40561-025-00389-y",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://link.springer.com/content/pdf/10.1186/s40561-025-00389-y.pdf",
+      "sha256": "e1e6dd886d1e4e6d42e7da3e1b366505bab06365015d57ea15fa4a37b39cbfcc",
+      "page_count": 31,
+      "chunks": 50,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "6917",
+      "bib_key": "Ozseven2026_6917",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://thesai.org/Downloads/Volume17No5/Paper_16-A_Hybrid_Neuro_Fuzzy_and_Machine_Learning_Model.pdf",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://thesai.org/Downloads/Volume17No5/Paper_16-A_Hybrid_Neuro_Fuzzy_and_Machine_Learning_Model.pdf",
+      "sha256": "8b7c283a6cac47b6c961294abe2461b8cd7d64dc6ea4d7b99600829c4431dd8d",
+      "page_count": 17,
+      "chunks": 38,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "6919",
+      "bib_key": "UniversityMathematics2026_6919",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.mdpi.com/2071-1050/18/4/1900",
+      "status": "recovered_identity_candidate",
+      "sha256": "c4f3dfd39fcd4df63c8e4604586fd315355c825cc4cc78cd4a76890579cfba30",
+      "page_count": 27,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "recovered_on": "2026-10-17",
+      "extraction_method": "pypdf_text_with_selective_visual_check",
+      "replay_status": "not_in_frozen_retrieval_replay"
+    },
+    {
+      "study_id": "6920",
+      "bib_key": "Echeveria2025_6920",
+      "synthesis_role": "empirical_evidence",
+      "source_url": "https://www.eu-opensci.org/index.php/ejedu/article/download/30934/6690/33249",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://eu-opensci.org/index.php/ejedu/article/download/30934/6690/33249",
+      "sha256": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9",
+      "page_count": 13,
+      "chunks": 28,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "6921",
+      "bib_key": "Imperatrice2025_6921",
+      "synthesis_role": "contextual_protocol",
+      "source_url": "https://www.inclusiveteaching.it/index.php/inclusiveteaching/article/download/449/422/3083",
+      "status": "recovered_identity_candidate",
+      "resolved_url": "https://www.inclusiveteaching.it/index.php/inclusiveteaching/article/download/449/422/3083",
+      "sha256": "942936526014622e74e8c1e916b9b28bf96206bc6a9d4d99cb728161e08e8068",
+      "page_count": 8,
+      "chunks": 15,
+      "identity_status": "title_or_doi_candidate_match; final_human_review_pending",
+      "replay_status": "frozen_retrieval_replay_verified"
+    },
+    {
+      "study_id": "6923",
+      "bib_key": "Zeng2025_6923",
+      "synthesis_role": "pending_full_text",
+      "source_url": "https://doi.org/10.7916/2q6y-bm58",
+      "status": "not_recovered",
+      "failure_category": "ValueError",
+      "access_status": "repository_embargo",
+      "access_status_date": "2026-10-20",
+      "current_appraisal_verification": "not_appraised"
+    }
+  ],
+  "limitations": [
+    "Recovery is not MMAT approval or proof of scientific support.",
+    "Full texts and the operational database are not distributed."
+  ]
+}

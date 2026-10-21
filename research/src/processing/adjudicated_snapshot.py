@@ -14,6 +14,7 @@ import argparse
 import copy
 import csv
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -22,7 +23,12 @@ import pandas as pd
 
 from ..analysis.reports import ReportGenerator
 from ..analysis.visualizations import ReviewVisualizer
-from ..exports.excel import to_excel_with_filters
+from ..analysis.mmat_current import (
+    CURRENT_EMPIRICAL_STUDY_IDS,
+    load_current_synthesis_scope,
+    load_primary_sources,
+)
+from ..exports.excel import remove_legacy_mmat_from_notes, to_excel_with_filters
 from ..validation.derived_assets import sync_derived_assets
 
 
@@ -128,6 +134,9 @@ def apply_adjudications(
     result = papers.copy()
     result["id"] = pd.to_numeric(result["id"], errors="raise").astype(int)
     by_id = {int(row["id"]): index for index, row in result.iterrows()}
+    scope_by_id = {
+        int(row["study_id"]): row for row in load_current_synthesis_scope()
+    }
 
     for decision in decisions:
         study_id = int(decision["study_id"])
@@ -140,6 +149,19 @@ def apply_adjudications(
             (decision["previous_selection_stage"], decision["previous_status"]),
             (decision["final_selection_stage"], decision["final_status"]),
         }
+        if "eligibility" in {
+            decision["previous_selection_stage"], decision["final_selection_stage"]
+        }:
+            # The current export deliberately renamed this legacy operational
+            # threshold stage to `prioritization`; permit replay of the older
+            # adjudication ledger against that semantically equivalent label.
+            allowed_previous.add(("prioritization", decision["previous_status"]))
+            allowed_previous.add(("prioritization", decision["final_status"]))
+        if study_id in scope_by_id:
+            scope_row = scope_by_id[study_id]
+            allowed_previous.add(
+                (scope_row["selection_stage"], scope_row["selection_status"])
+            )
         if (current_stage, current_status) not in allowed_previous:
             raise ValueError(
                 f"Study {study_id} has unexpected state {(current_stage, current_status)!r}; "
@@ -167,6 +189,89 @@ def apply_adjudications(
             )
 
     return result
+
+
+def apply_current_scope_adjudications(
+    papers: pd.DataFrame,
+    scope: list[dict[str, str]] | None = None,
+) -> pd.DataFrame:
+    """Apply the current full-text, context and empirical-scope decisions.
+
+    The source-controlled scope ledger is the current disposition authority;
+    the older PR54 population ledger remains an independently replayable
+    historical decision layer.
+    """
+    scope = scope or load_current_synthesis_scope()
+    result = remove_legacy_mmat_from_notes(papers)
+    result["id"] = pd.to_numeric(result["id"], errors="raise").astype(int)
+    by_id = {int(row["id"]): index for index, row in result.iterrows()}
+    source_by_id = {row["study_id"]: row for row in load_primary_sources()}
+    expected_ids = {int(row["study_id"]) for row in scope}
+    if not expected_ids.issubset(by_id):
+        raise ValueError(
+            f"Scope decisions have no papers.csv rows: {sorted(expected_ids - set(by_id))}"
+        )
+
+    # The former 2,468-row `eligibility` label represented an automated
+    # operational prioritization threshold, not full-text eligibility. Do not
+    # relabel the shortlisted studies whose current full-text dispositions
+    # also use the `eligibility` stage.
+    candidate_ids = {int(row["study_id"]) for row in scope}
+    operational_threshold = (
+        result["selection_stage"].eq("eligibility")
+        & ~result["id"].isin(candidate_ids)
+    )
+    result.loc[operational_threshold, "selection_stage"] = "prioritization"
+
+    for decision in scope:
+        study_id = int(decision["study_id"])
+        index = by_id[study_id]
+        current = (
+            _normalise_text(result.at[index, "selection_stage"]),
+            _normalise_text(result.at[index, "status"]),
+        )
+        candidate_state = ("included", "included")
+        final_state = (decision["selection_stage"], decision["selection_status"])
+        recovered_from_not_retrieved = (
+            current == ("not_retrieved", "not_retrieved")
+            and final_state == ("included", "included")
+            and source_by_id.get(str(study_id), {}).get("full_text_status")
+            == "externally_reviewed_not_archived"
+        )
+        if current not in {candidate_state, final_state} and not recovered_from_not_retrieved:
+            raise ValueError(
+                f"Study {study_id} has unexpected state {current!r}; expected "
+                f"the shortlisted state, a verified recovered-text transition, or "
+                f"current decision {final_state!r}"
+            )
+        result.at[index, "selection_stage"] = final_state[0]
+        result.at[index, "status"] = final_state[1]
+        result.at[index, "exclusion_reason"] = (
+            "" if final_state[1] == "included" else decision["selection_reason"]
+        )
+        note = (
+            f"Adjudicação de escopo {decision.get('snapshot_date', '2026-10-12')} "
+            f"({decision['record_status']});"
+        )
+        existing = _normalise_text(result.at[index, "notes"])
+        existing = re.sub(
+            r"(?:Adjudicação de escopo \d{4}-\d{2}-\d{2} \([^)]*\)|"
+            r"Adjudicação de escopo PR54 aplicada \(estudo \d+\));\s*",
+            "",
+            existing,
+        ).strip()
+        result.at[index, "notes"] = f"{note} {existing}".strip()
+    return result
+
+
+def apply_current_adjudications(
+    papers: pd.DataFrame,
+    decisions: list[dict[str, str]] | None = None,
+    scope: list[dict[str, str]] | None = None,
+) -> pd.DataFrame:
+    """Replay historical population adjudications, then current scope decisions."""
+    updated = apply_adjudications(papers, decisions)
+    return apply_current_scope_adjudications(updated, scope)
 
 
 def _write_analysis_exports(papers: pd.DataFrame) -> None:
@@ -199,50 +304,22 @@ def _write_analysis_exports(papers: pd.DataFrame) -> None:
     )
 
 
-def _build_scope(
-    papers: pd.DataFrame,
-    decisions: list[dict[str, str]],
-) -> None:
-    existing = _read_csv(SCOPE_PATH)
-    existing_by_id = {int(row["study_id"]): row for row in existing}
-    decision_by_id = {int(row["study_id"]): row for row in decisions}
-    scope_rows: list[dict[str, str]] = []
-    fields = [
-        "snapshot_date",
-        "study_id",
-        "study_key",
-        "operational_inclusion",
-        "synthesis_role",
-        "empirical_mmat_applicability",
-        "disposition_note",
-    ]
-
-    for raw_id in papers.loc[
-        papers["selection_stage"] == "included", "id"
-    ].astype(int).tolist():
-        old = existing_by_id.get(raw_id, {})
-        decision = decision_by_id.get(raw_id, {})
-        row = {
-            "snapshot_date": "2026-09-03",
-            "study_id": str(raw_id),
-            "study_key": old.get("study_key") or decision.get("study_key", ""),
-            "operational_inclusion": "retained_in_current_snapshot",
-            "synthesis_role": old.get("synthesis_role")
-            or decision.get("final_synthesis_role", "empirical_evidence"),
-            "empirical_mmat_applicability": old.get("empirical_mmat_applicability")
-            or decision.get("final_empirical_mmat_applicability", "applicable"),
-            "disposition_note": (
-                "Retained after the 2026-09-03 scope adjudication; final MMAT "
-                "assessment remains provisional."
-            ),
-        }
-        scope_rows.append(row)
-
-    scope_rows.sort(key=lambda row: int(row["study_id"]))
-    with SCOPE_PATH.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(scope_rows)
+def _validate_scope_reconciliation(papers: pd.DataFrame) -> None:
+    scope = load_current_synthesis_scope()
+    by_id = {int(row["id"]): row for _, row in papers.iterrows()}
+    for decision in scope:
+        study_id = int(decision["study_id"])
+        row = by_id[study_id]
+        observed = (
+            _normalise_text(row["selection_stage"]),
+            _normalise_text(row["status"]),
+        )
+        expected = (decision["selection_stage"], decision["selection_status"])
+        if observed != expected:
+            raise ValueError(
+                f"Scope ledger and papers.csv disagree for study {study_id}: "
+                f"{expected!r} != {observed!r}"
+            )
 
 
 def _prisma_seed() -> dict[str, Any]:
@@ -261,20 +338,42 @@ def _updated_prisma(papers: pd.DataFrame) -> dict[str, Any]:
     screening_excluded = int(
         ((stages == "screening") & statuses.str.contains("exclu")).sum()
     )
+    prioritization_excluded = int(
+        ((stages == "prioritization") & statuses.str.contains("exclu")).sum()
+    )
+    abstract_screening_excluded = int(
+        ((stages == "abstract_screening") & statuses.str.contains("exclu")).sum()
+    )
+    reports_not_retrieved = int((stages == "not_retrieved").sum())
     eligibility_excluded = int(
         ((stages == "eligibility") & statuses.str.contains("exclu")).sum()
     )
     included = int((stages == "included").sum())
-    eligibility = int(stages.isin({"eligibility", "included"}).sum())
     screening = int(len(papers))
+    prioritization = screening - screening_excluded
+    shortlisted = abstract_screening_excluded + reports_not_retrieved + eligibility_excluded + included
+    reports_sought = reports_not_retrieved + eligibility_excluded + included
+    eligibility = eligibility_excluded + included
     identification = int(prisma["identification"])
     if identification - int(prisma["duplicates_removed"]) != screening:
         raise ValueError("Immutable identity counts no longer match papers.csv")
+    if prioritization_excluded + shortlisted != prioritization:
+        raise ValueError("Prioritization counts do not reconcile with the shortlisted records")
+    if abstract_screening_excluded + reports_sought != shortlisted:
+        raise ValueError("Abstract-screening counts do not reconcile with reports sought")
+    if reports_not_retrieved + eligibility != reports_sought:
+        raise ValueError("Report-retrieval counts do not reconcile with full-text assessment")
 
     prisma.update(
         {
             "screening": screening,
             "screening_excluded": screening_excluded,
+            "prioritization": prioritization,
+            "prioritization_excluded": prioritization_excluded,
+            "shortlisted": shortlisted,
+            "abstract_screening_excluded": abstract_screening_excluded,
+            "reports_sought": reports_sought,
+            "reports_not_retrieved": reports_not_retrieved,
             "eligibility": eligibility,
             "eligibility_excluded": eligibility_excluded,
             "included": included,
@@ -285,8 +384,30 @@ def _updated_prisma(papers: pd.DataFrame) -> dict[str, Any]:
             100 * screening_excluded / identification, 2
         ),
         "screening_advanced_of_identification": round(
-            100 * eligibility / identification, 2
+            100 * prioritization / identification, 2
         ),
+        "screening_excluded_of_screened_records": round(
+            100 * screening_excluded / screening, 2
+        ),
+        "prioritization_passed_of_screened_records": round(
+            100 * prioritization / screening, 2
+        ),
+        "prioritization_excluded_of_prioritization": round(
+            100 * prioritization_excluded / prioritization, 2
+        ),
+        "shortlisted_of_prioritization": round(
+            100 * shortlisted / prioritization, 2
+        ),
+        "abstract_screening_excluded_of_shortlist": round(
+            100 * abstract_screening_excluded / shortlisted, 2
+        ),
+        "reports_not_retrieved_of_reports_sought": round(
+            100 * reports_not_retrieved / reports_sought, 2
+        ),
+        "full_text_excluded_of_assessed": round(
+            100 * eligibility_excluded / eligibility, 2
+        ),
+        "included_of_assessed": round(100 * included / eligibility, 2),
         "eligibility_excluded_of_eligibility": round(
             100 * eligibility_excluded / eligibility, 2
         ),
@@ -320,9 +441,9 @@ def regenerate() -> dict[str, Any]:
 
     decisions = load_decisions()
     papers = pd.read_csv(PAPERS_PATH, encoding="utf-8-sig")
-    updated = apply_adjudications(papers, decisions)
+    updated = apply_current_adjudications(papers, decisions)
+    _validate_scope_reconciliation(updated)
     _write_analysis_exports(updated)
-    _build_scope(updated, decisions)
     prisma = _updated_prisma(updated)
     _regenerate_reports(updated, prisma)
     return {
@@ -349,7 +470,8 @@ def main() -> None:
     args = parser.parse_args()
     decisions = load_decisions()
     papers = pd.read_csv(PAPERS_PATH, encoding="utf-8-sig")
-    updated = apply_adjudications(papers, decisions)
+    updated = apply_current_adjudications(papers, decisions)
+    _validate_scope_reconciliation(updated)
     facts = {
         "papers_rows": len(updated),
         "stage_counts": dict(
@@ -364,11 +486,15 @@ def main() -> None:
     }
     expected = {
         "papers_rows": 11877,
-        "stage_counts": {"screening": 9391, "eligibility": 2468, "included": 18},
-        "included_ids": [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917,
-            6919, 6920, 6921, 6923,
-        ],
+        "stage_counts": {
+            "abstract_screening": 1,
+            "eligibility": 1,
+            "included": 15,
+            "not_retrieved": 1,
+            "prioritization": 2468,
+            "screening": 9391,
+        },
+        "included_ids": list(CURRENT_EMPIRICAL_STUDY_IDS),
     }
     if facts["papers_rows"] != expected["papers_rows"]:
         raise SystemExit(f"Unexpected row count: {facts['papers_rows']}")
