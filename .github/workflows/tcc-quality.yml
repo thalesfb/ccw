@@ -161,7 +161,9 @@ jobs:
         run: node scripts/generate-mmat-page.mjs
 
       - name: Validate public site contract
-        run: node scripts/site.test.mjs
+        run: |
+          node scripts/site.test.mjs
+          node --test scripts/workflow-contract.test.mjs
 
   tcc-editable-pptx-validation:
     name: tcc-editable-pptx-validation
