@@ -249,8 +249,10 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     )
 
     assert "15/15 tests passing" not in root_html
-    assert "Filtro operacional" in root_html
-    assert "não substitui a adjudicação científica final" in root_html
-    assert "números abaixo são explicitamente históricos" in tcc_html
-    assert "2.517" in tcc_html
+    assert "registros retidos operacionalmente" in root_html
+    assert "17 candidatos empíricos provisórios" in root_html
+    assert "MMAT preliminar" in root_html
+    assert "17 candidatos empíricos provisórios" in tcc_html
+    assert "A apreciação MMAT é preliminar, por critério, e não é um escore agregado" in tcc_html
+    assert "A aplicação funcional e a validação experimental estão fora do escopo" in tcc_html
     assert "11.904" not in tcc_html

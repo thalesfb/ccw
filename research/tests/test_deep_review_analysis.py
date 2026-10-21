@@ -109,8 +109,8 @@ class TestDeepReviewAnalyzer(unittest.TestCase):
         self.assertIn('10.1000/no_pdf', loaded_dois)
         self.assertNotIn('10.1000/duplicate', loaded_dois)
 
-    @patch('PyPDF2.PdfReader')
-    @patch(f'{MODULE_PATH}.requests.get')
+    @patch(f'{MODULE_PATH}.PdfReader')
+    @patch(f'{MODULE_PATH}.requests.Session.get')
     def test_fetch_full_text_successful_extraction(self, mock_requests_get, mock_pdf_reader):
         """
         Testa a extração de texto bem-sucedida, simulando o download de um PDF.
@@ -119,6 +119,7 @@ class TestDeepReviewAnalyzer(unittest.TestCase):
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.content = b'fake pdf content'
+        mock_response.headers = {"content-type": "application/pdf"}
         mock_response.raise_for_status = MagicMock()
         mock_requests_get.return_value = mock_response
 
@@ -129,9 +130,17 @@ class TestDeepReviewAnalyzer(unittest.TestCase):
         mock_pdf_instance.pages = [mock_page]
         mock_pdf_reader.return_value = mock_pdf_instance
 
-        # Executar a função
+        # Exercise PDF download/extraction only; keep URL resolution offline.
         self.analyzer.load_included_papers()
-        self.analyzer.fetch_full_text()
+        pdf_response = MagicMock()
+        pdf_response.status_code = 200
+        pdf_response.headers = {"Content-Type": "application/pdf"}
+        with patch.object(
+            self.analyzer,
+            "_try_get_pdf_url",
+            side_effect=lambda paper: paper.get("open_access_pdf"),
+        ), patch.object(self.analyzer.session, "head", return_value=pdf_response):
+            self.analyzer.fetch_full_text()
 
         # Verificar se o texto foi adicionado ao paper
         paper_com_pdf = next(p for p in self.analyzer.papers if p['doi'] == '10.1000/included')
@@ -149,14 +158,22 @@ class TestDeepReviewAnalyzer(unittest.TestCase):
             self.assertIn('10.1000/included', cache_data)
             self.assertEqual(cache_data['10.1000/included'], "Este é o texto extraído.")
 
-    @patch(f'{MODULE_PATH}.requests.get')
+    @patch(f'{MODULE_PATH}.requests.Session.get')
     def test_fetch_full_text_download_fails(self, mock_requests_get):
         """Testa o comportamento quando o download do PDF falha."""
         # Configurar o mock para simular uma falha de requisição
         mock_requests_get.side_effect = requests.exceptions.RequestException("Falha na conexão")
 
         self.analyzer.load_included_papers()
-        self.analyzer.fetch_full_text()
+        pdf_response = MagicMock()
+        pdf_response.status_code = 200
+        pdf_response.headers = {"Content-Type": "application/pdf"}
+        with patch.object(
+            self.analyzer,
+            "_try_get_pdf_url",
+            side_effect=lambda paper: paper.get("open_access_pdf"),
+        ), patch.object(self.analyzer.session, "head", return_value=pdf_response):
+            self.analyzer.fetch_full_text()
 
         paper_com_pdf = next(p for p in self.analyzer.papers if p['doi'] == '10.1000/included')
         self.assertIsNone(paper_com_pdf['full_text'])
@@ -179,9 +196,9 @@ class TestDeepReviewAnalyzer(unittest.TestCase):
                 content = f.read()
                 # Verificações mais flexíveis para evitar falhas por pequenas variações de formatação
                 import re
-                # Procurar a contagem de extrações bem-sucedidas como '0 (0.0%)'
+                # The report labels the metric as completed full-text extractions.
                 self.assertIsNotNone(
-                    re.search(r"extra(ç|c)\w*\s+bem-?sucedidas?.*0\s*\(0\.0%\)", content, flags=re.IGNORECASE | re.DOTALL),
+                    re.search(r"Textos completos extraídos com sucesso.*0\s*\(0\.0%\)", content, flags=re.IGNORECASE | re.DOTALL),
                     "Relatório não contém a contagem de extrações bem-sucedidas esperada"
                 )
                 # Procurar indicador de falha (permitindo variações)
