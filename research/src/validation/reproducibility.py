@@ -32,6 +32,7 @@ DEFAULT_OUTPUT = REPOSITORY_ROOT / "research" / "exports" / "reports" / "reprodu
 MANUAL_OVERRIDE_ADJUDICATION = "research/data/manual_override_adjudication.csv"
 MANUAL_OVERRIDE_EVIDENCE_MATRIX = "research/data/manual_override_evidence_matrix.csv"
 HISTORICAL_PROTOCOL_MANIFEST = "research/data/protocol_execution_2025.json"
+TEXT_ARTIFACT_SUFFIXES = {".bib", ".csv", ".html", ".json", ".py", ".tex", ".txt"}
 
 # The research PR must be verifiable on its own.  Manuscript, presentation and
 # editorial documents are companion deliverables owned by their respective
@@ -203,6 +204,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
 
 
 def _sha256(path: Path) -> str:
+    if path.suffix.lower() in TEXT_ARTIFACT_SUFFIXES:
+        content = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        return hashlib.sha256(content).hexdigest()
+
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
