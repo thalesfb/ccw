@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
   "snapshot_date": "2026-09-03",
-  "generated_at": "2026-10-21T09:06:50+00:00",
+  "generated_at": "2026-10-21T09:47:20+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -474,7 +474,7 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "40c31a1c68a33885b4809f4334605832add0ae318b14e623baab672cb48abf39"
+      "sha256": "bd3583e05677b5e2c096cd80d67c18b49bc3064c6baddd21276eb3e84661c367"
     },
     {
       "path": "research/exports/reports/summary.json",
