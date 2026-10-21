@@ -189,6 +189,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
         "versioned validator for the current 18-record MMAT artifacts",
     ),
     (
+        "research/src/analysis/study_scope.py",
+        "candidate inventory and primary-source metadata loading without MMAT judgments",
+    ),
+    (
         "research/src/analysis/mmat_current_tcc_table.py",
         "versioned renderer for the preliminary current MMAT table",
     ),

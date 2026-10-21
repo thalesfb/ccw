@@ -8,15 +8,23 @@ of the current review.
 
 from __future__ import annotations
 
-import csv
 import re
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
-
-CURRENT_STUDY_IDS: tuple[int, ...] = (
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923
+from .study_scope import (
+    CANDIDATE_SCOPE_PATH,
+    CANDIDATE_STUDY_IDS,
+    PRIMARY_SOURCES_PATH,
+    _ids,
+    _read_csv,
+    load_candidate_scope,
+    load_primary_sources,
 )
+
+
+CURRENT_STUDY_IDS = CANDIDATE_STUDY_IDS
+SYNTHESIS_SCOPE_PATH = CANDIDATE_SCOPE_PATH
 VALID_RESPONSES = {"Y", "N", "CT"}
 VALID_DESIGNS = {
     "qualitative", "quantitative_randomized", "quantitative_nonrandomized",
@@ -38,21 +46,7 @@ SOURCE_OR_PERIOD_HOLD_STATUSES = {
 }
 DATA_ROOT = Path(__file__).resolve().parents[2] / "data"
 REGISTRY_PATH = DATA_ROOT / "mmat_current_study_registry.csv"
-PRIMARY_SOURCES_PATH = DATA_ROOT / "mmat_primary_sources_manifest.csv"
 REASSESSMENT_PATH = DATA_ROOT / "mmat_reassessment_current.csv"
-SYNTHESIS_SCOPE_PATH = DATA_ROOT / "current_synthesis_scope.csv"
-
-
-def _read_csv(path: Path) -> list[dict[str, str]]:
-    with path.open("r", encoding="utf-8-sig", newline="") as handle:
-        return list(csv.DictReader(handle))
-
-
-def _ids(rows: Iterable[dict[str, str]], field: str = "study_id") -> list[int]:
-    try:
-        return [int(row[field]) for row in rows]
-    except (KeyError, TypeError, ValueError) as exc:
-        raise ValueError(f"Invalid study identifier in field {field!r}") from exc
 
 
 def load_current_registry(path: Path | str = REGISTRY_PATH) -> list[dict[str, str]]:
@@ -142,34 +136,11 @@ def load_current_reassessment(
     return rows
 
 
-def load_primary_sources(
-    path: Path | str = PRIMARY_SOURCES_PATH,
-) -> list[dict[str, str]]:
-    """Load one source-ledger row for every current study."""
-    rows = _read_csv(Path(path))
-    ids = _ids(rows)
-    expected = list(CURRENT_STUDY_IDS)
-    if sorted(ids) != expected or len(ids) != len(set(ids)):
-        raise ValueError(
-            f"Primary-source manifest must contain exactly {expected}; got {ids}"
-        )
-    for row in rows:
-        if not row.get("source_id") or not row.get("source_url"):
-            raise ValueError(f"Study {row.get('study_id')} lacks a source identifier or URL")
-    return rows
-
-
 def load_current_synthesis_scope(
     path: Path | str = SYNTHESIS_SCOPE_PATH,
 ) -> list[dict[str, str]]:
-    """Load the explicit role of every operationally retained current record."""
-    rows = _read_csv(Path(path))
-    ids = _ids(rows)
-    expected = list(CURRENT_STUDY_IDS)
-    if sorted(ids) != expected or len(ids) != len(set(ids)):
-        raise ValueError(
-            f"Current synthesis scope must contain exactly {expected}; got {ids}"
-        )
+    """Load the legacy MMAT scope schema through its compatibility adapter."""
+    rows = load_candidate_scope(path)
     for row in rows:
         if row.get("operational_inclusion") != "retained_in_current_snapshot":
             raise ValueError(
