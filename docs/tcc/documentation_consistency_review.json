@@ -31,8 +31,9 @@
     "presentation/README.md": "494c503226b9702de8d4732e50a7aa2b19a01c382792af06a2c1904f43e8e28d",
     "results/tcc/README.md": "6983a4428ddbf6824ceb1eade593221cbc7d5dfc51a4c6b433e1a81101f02f7d",
     "docs/README.md": "09df41bb263fc6d798520d98bc1b796393acbf9e73c9298fd86a034b7ec22e76",
-    "docs/tcc/README.md": "c534860e8c044f1825634812c603359935e29c3377431d546806acb9acc7222f",
+    "docs/tcc/README.md": "6f9f174185423e1b56a12b0a4f21b4e1462b5a53af422505c4169dd83d67fd01",
     "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md": "f5f8bf13b710c824209d893ff2ef51a8c79c3f68c8ef49c30dd3a42c39d04ec5",
+    "docs/tcc/REUNIAO-DECISAO-ESCOPO.md": "7ac02317de403337d573638e8f2868bc65eacc1e1e60541a856b9e2148e69d94",
     "docs/tcc/NORMATIVE_GOVERNANCE.md": "673f87cbff7ef04811157cfe1320571a710a71d42eb85b370df270ef1451c831",
     "docs/TCC_REVISION_SCOPE.md": "823d18b533880395b06f336e84d9d6f482b215b5e2c6e8ead930c1344526fd0d",
     "docs/VERIFICACAO-NUMEROS-PRISMA.md": "76e17686ce016d918e7aa3f722d546ede32ad552ed75b3730c191cc46947617d",
@@ -43,7 +44,7 @@
     "presentation/slides.md": "e08b5650efe4805fc881185b63246c10fb7411e1c26753aa49a9a91b10b8d56c",
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "2ee35749c96095b529253f4062f0093c81480d705d845bd734f95426b3f7ff38",
     "scripts/generate_tcc_presentation.py": "5ba3517be847ad5e12b31bd99d94d22b947624960f36b3d7b4995a505d717b29",
-    "scripts/sync_project_docs.py": "e8cec62b91a5f3abedb73039a5c258f76dad9c60e533591c9a2f144fe62126b9",
+    "scripts/sync_project_docs.py": "afcf05f510a771eab926fb77e6fe4687b97b4aeaaf009f8cbc72b16624a4db64",
     "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "a86fa9be9eac0dba49543c42bae46b95f5ffa971ef25116350fba3afcfed2fe4",
     "results/tcc/images/project_overview_2026-10-20.png": "a0c6a5f478faae9d70b06a7810a32468d1ff6c2185ea3104bbb1a8167a25bc8c"
   }

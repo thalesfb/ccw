@@ -20,6 +20,7 @@ no conteúdo ou nos workflows exigem mudanças verificáveis e revisão humana.
 - [`ESTADO-ATUAL-TCC.md`](ESTADO-ATUAL-TCC.md): estado público, limites interpretativos e decisões metodológicas pendentes da versão atual.
 - [`AUDITORIA-ESTUDOS-SINTESE.md`](AUDITORIA-ESTUDOS-SINTESE.md): papel sustentado, limites e pendências dos 18 candidatos, não 18 inclusões empíricas finais.
 - [`SOURCE-COVERAGE-AND-CONTRIBUTIONS.md`](SOURCE-COVERAGE-AND-CONTRIBUTIONS.md): matriz de cobertura e contribuições derivada dos registros estruturados.
+- [`REUNIAO-DECISAO-ESCOPO.md`](REUNIAO-DECISAO-ESCOPO.md): material comparativo dos cenários A/B/C para a reunião de decisão de escopo (#27); não registra decisão.
 - [`DOCUMENTATION_SYNC.md`](DOCUMENTATION_SYNC.md): fontes, consumidores e verificação das informações espelhadas.
 - [`PUBLICATION_GOVERNANCE.md`](PUBLICATION_GOVERNANCE.md): critérios para separar relato acadêmico, proveniência técnica e fluxo público de desenvolvimento.
 - [`../adr/0001-preserve-ifc-institutional-formatting.md`](../adr/0001-preserve-ifc-institutional-formatting.md): registro da decisão arquitetural de não substituir automaticamente particularidades institucionais durante atualizações normativas.
