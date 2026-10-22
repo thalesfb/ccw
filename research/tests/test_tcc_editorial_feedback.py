@@ -283,11 +283,23 @@ class EditorialFeedbackTests(unittest.TestCase):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
         self.assertIn("2.486 para priorização operacional", abstract)
         self.assertIn("15 registros empíricos mantidos provisoriamente", abstract)
-        self.assertIn("14 desses registros receberam respostas S1/S2 e 11 tiveram os critérios da categoria apreciados", abstract)
-        self.assertIn("A dissertação não recuperada também não recebeu apreciação MMAT", abstract)
-        self.assertIn("sem estimar sua frequência", abstract)
+        self.assertIn("sem pontuação geral", abstract)
+        self.assertIn("não são conceitos equivalentes", abstract)
+        self.assertIn("devem apoiar, e não substituir, a interpretação do professor", abstract)
         self.assertNotIn("2.486 para a elegibilidade", abstract)
         self.assertNotIn("lacunas relacionadas à explicabilidade", abstract)
+        # Process details live in the body, not in the abstract.
+        for detail in ("S1/S2", "Q1--Q5", "estudo 8", "busca histórica"):
+            self.assertNotIn(detail, abstract)
+        results = (TCC / "conteudo/resultados.tex").read_text(encoding="utf-8")
+        method = (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8")
+        conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
+        self.assertIn("14 receberam respostas S1/S2 e 11 tiveram os critérios específicos da categoria apreciados", results)
+        self.assertIn("também não recebeu apreciação", method)
+        self.assertIn("não foi recuperado; por isso, não recebeu apreciação MMAT", conclusion)
+        self.assertIn("sem estimar sua frequência", results)
+        self.assertIn("não equivale à avaliação de elegibilidade", method)
+        self.assertIn("não permitem reconstruir integralmente as consultas históricas", conclusion)
 
     def test_technical_term_is_defined_without_unclear_translation(self):
         theory = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
