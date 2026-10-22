@@ -51,6 +51,7 @@ REVIEW_TARGETS = (
     *TARGETS,
     "docs/README.md", "docs/tcc/README.md",
     "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md",
+    "docs/tcc/REUNIAO-DECISAO-ESCOPO.md",
     "docs/tcc/NORMATIVE_GOVERNANCE.md",
     "docs/TCC_REVISION_SCOPE.md",
     "docs/VERIFICACAO-NUMEROS-PRISMA.md",
