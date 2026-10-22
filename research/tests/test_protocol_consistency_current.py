@@ -25,6 +25,7 @@ PROTOCOL_PATH = RESEARCH_ROOT / "data" / "current_eligibility_protocol.csv"
 SYNTHESIS_SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
 PRISMA_RECONCILIATION_PATH = RESEARCH_ROOT / "data" / "prisma_population_reconciliation.csv"
 REFERENCE_AUDIT_PATH = RESEARCH_ROOT / "data" / "reference_audit.csv"
+TCC_REVIEW_PATH = RESEARCH_ROOT.parent / "results" / "tcc" / "conteudo" / "resultadosesperados.tex"
 
 
 def test_canonical_search_strategy_remains_72_queries() -> None:
@@ -174,3 +175,48 @@ def test_current_eligibility_protocol_makes_adjudication_gates_explicit() -> Non
     }
     assert all(row["if_unresolved"] == "hold" for row in rows)
     assert all(row["evidence_required"] for row in rows)
+
+
+def test_tcc_review_table_distinguishes_all_shortlisted_records_by_stage() -> None:
+    manuscript = TCC_REVIEW_PATH.read_text(encoding="utf-8")
+    table = manuscript.split(r"\begin{longtable}", maxsplit=1)[1].split(
+        r"\end{longtable}", maxsplit=1
+    )[0]
+    reference_keys = set(re.findall(r"\\citeonline\{([^}]+)\}", table))
+
+    assert len(reference_keys) == 18
+    for reference_key in {
+        "Implementation2025_000",
+        "Math2021_001",
+        "He2025_6915",
+        "Villegas2025_6916",
+        "Multimodels2020_002",
+        "Analysis2022_003",
+        "Ozseven2026_6917",
+        "Design2025_004",
+        "Innovative2023_005",
+        "Identifying2017_006",
+        "Machine2019_007",
+        "Computational2017_008",
+        "Machine2024_009",
+        "UniversityMathematics2026_6919",
+        "Echeveria2025_6920",
+        "Enhancing2025_012",
+        "Imperatrice2025_6921",
+        "Zeng2025_6923",
+    }:
+        assert reference_key in reference_keys
+
+    pending_rows = [
+        line for line in table.splitlines()
+        if line.startswith(r"\citeonline") and "Pendente:" in line
+    ]
+    assert len(pending_rows) == 1
+    assert all("MMAT não aplicado" in line for line in pending_rows)
+    for reference_key in {"Zeng2025_6923"}:
+        assert any(
+            f"\\citeonline{{{reference_key}}}" in line for line in pending_rows
+        )
+    assert "após resumo" in table.lower()
+    assert "excluído da síntese empírica após texto completo" in table.lower()
+    assert "não apresentar resultados empíricos concluídos" in table.lower()

@@ -572,6 +572,10 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert "Base = fonte consultada." in rendered
     note = rendered.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
     assert len(note) <= 450
+    tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
+    prose = tcc_results.read_text(encoding="utf-8")
+    assert "O estudo 8 permanece no fluxo e no núcleo sem respostas" in prose
+    assert "adjudicação de sua elegibilidade e unidade de apreciação" in prose
 
 
 def test_public_mmat_page_marks_study_8_as_unassessed_due_to_unit_hold() -> None:
