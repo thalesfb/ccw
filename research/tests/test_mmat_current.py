@@ -410,6 +410,21 @@ def test_general_paper_exports_do_not_publish_superseded_mmat_payloads() -> None
 
 
 
+def test_defense_material_preserves_pending_mmat_decisions() -> None:
+    root = Path(__file__).resolve().parents[2]
+    slides = " ".join((root / "presentation/slides.md").read_text(encoding="utf-8").lower().split())
+    storyboard = " ".join(
+        (root / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md")
+        .read_text(encoding="utf-8")
+        .lower()
+        .split()
+    )
+    assert "estudos 5, 7 e 14: categoria indefinida, q1–q5 sem resposta" in slides
+    assert "estudo 8: elegibilidade e unidade pendentes, sem respostas" in slides
+    assert "q1--q5 permanecem sem resposta até a definição do delineamento" in storyboard
+    assert "sem respostas mmat até adjudicação de elegibilidade e unidade de análise" in storyboard
+
+
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
     sources = {row["study_id"]: row for row in load_primary_sources()}
@@ -572,6 +587,10 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert "Base = fonte consultada." in rendered
     note = rendered.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
     assert len(note) <= 450
+    tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
+    prose = tcc_results.read_text(encoding="utf-8")
+    assert "O estudo 8 permanece no fluxo e no núcleo sem respostas" in prose
+    assert "adjudicação de sua elegibilidade e unidade de apreciação" in prose
 
 
 def test_public_mmat_page_marks_study_8_as_unassessed_due_to_unit_hold() -> None:
