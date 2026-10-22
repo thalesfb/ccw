@@ -101,10 +101,17 @@ O alerta não será denominado diagnóstico, reprovação provável ou incapacid
 As hipóteses iniciais serão testadas e poderão ser refinadas após a seleção definitiva da base:
 
 - **H1:** modelos que incorporam histórico por habilidade apresentam melhor desempenho preditivo do que referências baseadas apenas na frequência global de acertos;
-- **H2:** pelo menos um modelo não linear apresenta ganho mensurável sobre a regressão logística, sem perda desproporcional de calibração ou interpretabilidade;
+- **H2 (formulação histórica, substituída):** pelo menos um modelo não linear apresenta ganho mensurável sobre a regressão logística, sem perda desproporcional de calibração ou interpretabilidade;
 - **H3:** a agregação por habilidade produz perfis mais informativos para análise de erros do que uma única pontuação global;
 - **H4:** o desempenho e a calibração variam entre habilidades e subgrupos disponíveis na base, exigindo análise estratificada;
 - **H5:** explicações baseadas em atributos históricos podem ser apresentadas de forma rastreável, mas não autorizam inferências causais sobre o estudante.
+
+> **Formulação vigente.** As hipóteses confirmatórias vigentes estão em
+> `docs/TCC_EXPERIMENTAL_DESIGN.md` e em `prototype/config/experiment.json`:
+> H2 afirma que a regressão logística regularizada supera o melhor baseline
+> histórico simples. O contraste "modelo não linear contra regressão logística"
+> listado acima passou a ser a análise exploratória E1, não uma hipótese
+> confirmatória. Nenhuma hipótese foi testada.
 
 ## 9. Modelos de referência
 
@@ -131,6 +138,13 @@ A avaliação principal deverá considerar:
 - desempenho por habilidade;
 - desempenho por subgrupos disponíveis e eticamente utilizáveis;
 - estabilidade entre diferentes sementes e divisões de dados.
+
+> **Hierarquia vigente das métricas.** A lista acima não define prioridade. No
+> desenho vigente (`docs/TCC_EXPERIMENTAL_DESIGN.md`, seção "Métricas", e
+> `prototype/config/experiment.json`), o log-loss é a métrica de seleção, o
+> Brier Score é co-primário, a calibração é avaliada por intercepto, inclinação
+> e curva, e ROC-AUC, PR-AUC, acurácia, precisão, revocação e F1 são
+> secundárias.
 
 A divisão entre treino, validação e teste deverá impedir vazamento temporal e vazamento entre registros relacionados. A estratégia definitiva dependerá da estrutura da base e será registrada antes da avaliação final.
 

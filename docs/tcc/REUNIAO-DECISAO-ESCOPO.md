@@ -58,6 +58,10 @@ usado (`prototype/README.md:7-14`; `ESTADO-ATUAL-TCC.md`).
 
 ### 1.2 Divergências documentais
 
+> Nota: a conciliação dessas divergências, com fontes, está em
+> [`AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md`](AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md)
+> (PR #114); a lista abaixo permanece como registrada para a reunião.
+
 Pesam pouco no cenário A e passam a pesar nos cenários B e C, porque a execução
 herdaria escolhas que o manuscrito não sustenta.
 

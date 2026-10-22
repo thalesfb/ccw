@@ -12,7 +12,7 @@
         "knowledge_tracing_baseline"
       ],
       "canonical_page": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
-      "license_or_terms": "Official dataset page states that the data are free to use; exact access terms must be recorded in the manifest",
+      "license_or_terms": "The official 2009-2010 data page states that the dataset is free to use and the site links a separate terms-of-use page (https://sites.google.com/site/assistmentsdata/termsofuseforusingdata); no SPDX license is given; exact access terms must be recorded in the manifest",
       "acquisition": "public_download",
       "redistribute_raw": false,
       "expected_format": "csv",

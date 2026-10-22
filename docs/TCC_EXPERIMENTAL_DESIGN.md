@@ -228,6 +228,8 @@ Habilidades abaixo do suporte predefinido serão reportadas como evidência insu
 
 A regressão logística fornecerá coeficientes e efeitos direcionais. Para modelos de árvore, poderão ser avaliadas explicações globais e locais com SHAP ou método equivalente.
 
+Estado do código em `prototype/`: está implementada apenas a explicação da regressão logística, por decomposição exata do log-odds em intercepto e termos coeficiente × valor transformado, com importância por permutação calculada no teste (`tcc_prototype/modeling/explanations.py`). O candidato `HistGradientBoostingClassifier` não tem explicação implementada, e SHAP e LIME continuam alternativas especificadas no manuscrito (R26), sem implementação.
+
 A interpretação deverá distinguir:
 
 - associação estatística;

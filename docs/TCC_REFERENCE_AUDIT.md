@@ -113,6 +113,10 @@ A especificação conceitual citava técnicas computacionais sem que todas possu
 | calibração de probabilidades | Niculescu-Mizil e Caruana (2005) | fundamentação metodológica de calibração, sem antecipar resultado experimental |
 | LIME | Ribeiro, Singh e Guestrin (2016) | técnica candidata de explicação local |
 | SHAP | Lundberg e Lee (2017) | técnica candidata de atribuição de importância local/global |
+| gradient boosting | Friedman (2001) | identificação do candidato não linear exploratório do código (`HistGradientBoostingClassifier`), sem evidência de superioridade |
+| biblioteca scikit-learn | Pedregosa et al. (2011) | identificação da biblioteca usada pelo código exploratório |
+| importância por permutação | Breiman (2001), seção 10 | origem do procedimento de permutação; o código usa a versão agnóstica ao modelo do scikit-learn |
+| conjunto ASSISTments 2009–2010 | página do conjunto (URL em nota de rodapé) e Feng, Heffernan e Koedinger (2009) | fonte do teste de viabilidade do código; o artigo descreve o sistema, não esse conjunto |
 
 Essas referências sustentam a descrição das técnicas. Elas não demonstram que essas técnicas sejam as melhores para a base ainda não executada e não constituem resultados do protótipo.
 
@@ -156,7 +160,7 @@ A auditoria não declara todos os registros como perfeitos. Permanecem, de forma
 1. decidir se o Cochrane Handbook historicamente citado deve permanecer em 6.4 ou ser atualizado após comparação metodológica com edições posteriores;
 2. confirmar em fonte editorial os metadados ainda ambíguos de `Innovative2023_005`;
 3. revisar a edição bibliográfica de Vygotsky antes de enriquecer campos de editores/edição;
-4. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos;
+4. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos. Em 22/10/2026, `SAEB2021` foi corrigida para o volume 1 do relatório de resultados (Inep, 2024, ISBN 978-65-5801-078-4) e permanece apenas como documentação contextual; os microdados de 2023 registrados no código não estão citados no manuscrito;
 5. concluir a adjudicação do MMAT dos 15 estudos empíricos mantidos
    provisoriamente (14 com triagem S1/S2, 11 com apreciação por categoria e 1
    aguardando texto integral); o registro excluído após resumo e o protocolo

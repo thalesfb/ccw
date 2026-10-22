@@ -33,7 +33,7 @@ Assessing2024_015,historical_study,verified,metadata_fix,unused,10.69942/1920184
 Analysis2021_016,historical_study,verified,verified,unused,10.21432/cjlt27895,retain_unused,Historical pipeline reference removed from the current TCC synthesis; retained only in audit provenance
 BNCC2018,pedagogy,verified,verified,verified,https://basenacionalcomum.mec.gov.br/,keep,Official MEC document and canonical institutional URL
 PISA2022,assessment,verified,verified,verified,10.1787/53f23881-en,keep,Use for proficiency descriptors and results
-SAEB2021,assessment,verified,metadata_fix,scope_limited,https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb,normalize,Distinguish report documentation and microdata release before using as a dataset citation
+SAEB2021,assessment,verified,verified,scope_limited,https://download.inep.gov.br/educacao_basica/saeb/2021/resultados/relatorio_de_resultados_do_saeb_2021_volume_1.pdf,keep,"Volume 1 results report (Inep, Brasilia, 2024; ISBN 978-65-5801-078-4) checked against its cataloguing page on 2026-10-22; contextual documentation only; not a citation of the Saeb 2023 microdata registered in prototype/config"
 Piaget1972,pedagogy,verified,replace,unused,,replace,Exact Portuguese edition is uncertain and key is superseded by Piaget1972EN
 Vygotsky1978,pedagogy,verified,metadata_fix,verified,9780674576292,normalize,Add editors and edition metadata after checking the cited edition
 Ausubel1968,pedagogy,verified,verified,verified,,keep,Meaningful learning and prior knowledge
@@ -56,3 +56,6 @@ Fawcett2006,technology,verified,verified,verified,10.1016/j.patrec.2005.10.010,k
 NiculescuMizilCaruana2005,technology,verified,verified,verified,10.1145/1102351.1102430,keep,Primary methodological source for probability calibration
 RibeiroSinghGuestrin2016,technology,verified,verified,verified,10.1145/2939672.2939778,keep,Primary LIME source
 LundbergLee2017,technology,verified,verified,verified,https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html,keep,Primary SHAP source
+Friedman2001,technology,verified,verified,scope_limited,10.1214/aos/1013203451,keep,"Primary gradient boosting source (Crossref checked 2026-10-22); cited only to identify the exploratory HistGradientBoostingClassifier candidate, not as evidence of superiority"
+Pedregosa2011,technology,verified,verified,scope_limited,https://jmlr.org/papers/v12/pedregosa11a.html,keep,"scikit-learn reference (JMLR 12(85):2825-2830, checked 2026-10-22); identifies the library used by the exploratory code"
+Feng2009,dataset,verified,verified,scope_limited,10.1007/s11257-009-9063-7,keep,"Citation requested by the ASSISTments data page for the system (Crossref checked 2026-10-22); the paper does not use the 2009-2010 Skill Builder data"
