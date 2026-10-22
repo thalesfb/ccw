@@ -52,27 +52,50 @@ def test_methodology_dates_final_scope_reconciliation_without_implying_a_new_sea
     assert "sem alterar o corte temporal da busca" in methodology
 
 
-def test_tcc_uses_the_updated_primary_text_coverage() -> None:
+def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
     results = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+    presentation = (
+        ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md"
+    ).read_text(encoding="utf-8")
+    normalized_presentation = " ".join(presentation.split())
 
     assert "um texto não recuperado" in methodology
     assert "15 estudos empíricos mantidos provisoriamente" in methodology
     assert "um não foi recuperado" in results
     assert "15 estudos compõem provisoriamente o núcleo empírico incluído" in results
+    assert "um texto integral não foi recuperado" in normalized_presentation
+    assert "os outros 15 estudos empíricos integram o núcleo incluído" in normalized_presentation
     assert "nove registros tiveram" not in results.lower()
+    assert "nove registros tiveram" not in presentation.lower()
 
 
-def test_prisma_counts_are_current_in_tcc_appendix() -> None:
+def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
+    presentation = " ".join(
+        (ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md")
+        .read_text(encoding="utf-8")
+        .split()
+    )
     appendix = " ".join(
         (ROOT / "results/tcc/postextuais/apendice.tex")
         .read_text(encoding="utf-8")
         .split()
     )
 
+    assert "17 relatórios foram procurados, um não foi recuperado e 16 foram avaliados" in presentation
     assert "17 relatórios foram procurados, 1 não foi recuperado e 16 foram avaliados" in appendix
+    assert "quatro não foi recuperado" not in presentation
     assert "4 não recuperados, 13 avaliados" not in appendix
     assert "quatro descrições se limitam" not in appendix
+
+
+def test_canonical_defense_deck_uses_reconciled_full_text_counts() -> None:
+    slides = " ".join((ROOT / "presentation/slides.md").read_text(encoding="utf-8").split())
+    parallel_pptx = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
+
+    assert "dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo" in slides.lower()
+    assert "para 13, avaliação em texto completo" not in slides
+    assert "Dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo" in parallel_pptx
 
 
 def test_gray_literature_eligibility_has_an_explicit_methodological_rationale() -> None:
@@ -83,13 +106,23 @@ def test_gray_literature_eligibility_has_an_explicit_methodological_rationale() 
     assert "sem flexibilizar os critérios de elegibilidade" in methodology
 
 
-def test_tcc_does_not_call_operational_prioritization_eligibility() -> None:
+def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> None:
     results = (ROOT / "results/tcc/conteudo/resultados.tex").read_text(encoding="utf-8")
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
+    slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+    pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
+    storyboard = (
+        ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md"
+    ).read_text(encoding="utf-8")
 
     assert "triagem e a avaliação de elegibilidade, 18 registros" not in results
     assert "priorização operacional" in results
     assert "não equivale à avaliação de elegibilidade de relatórios" in methodology
+    assert "9 tiveram texto primário revisado e 8 foram" not in slides
+    assert "nove registros com texto primário revisado e oito" not in pptx_source
+    assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard
+    assert "encaminhou 2.486 para elegibilidade" not in storyboard
+    assert "registros → 18 em avaliação de escopo" in slides
 
 
 def test_background_distinguishes_abstract_only_records_from_verified_full_text_evidence() -> None:

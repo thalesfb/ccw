@@ -50,6 +50,23 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("não permite estimar a frequência", gaps)
         self.assertNotIn("aparecem menos desenvolvidas", gaps)
 
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        gap_slide = slides.split('<div class="slide-kicker">19 / EVIDÊNCIAS E LIMITES</div>', 1)[1].split(
+            'class: content-slide tcc-specification-slide', 1
+        )[0]
+        for author, locator in (
+            ("He et al. (2025)", "pp. 1, 16, 31–35"),
+            ("Villegas-Ch et al. (2025)", "pp. 2, 14, 22"),
+            ("Nyantah et al. (2025)", "pp. 101–105"),
+            ("Echeveria et al. (2025)", "pp. 65, 69–70"),
+        ):
+            self.assertIn(author, gap_slide)
+            self.assertIn(locator, gap_slide)
+        self.assertIn("15 registros provisórios", gap_slide)
+        self.assertIn("ainda sujeitos à conferência humana", gap_slide)
+        self.assertIn("não estimativa de prevalência", gap_slide)
+        self.assertNotIn("pp. 1, 14, 22", gap_slide)
+
         manuscript = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn(r"\citeonline[pp.~2, 14, 22]{Villegas2025_6916}", manuscript)
         self.assertNotIn(r"\\citeonline", manuscript)
@@ -72,8 +89,45 @@ class EditorialFeedbackTests(unittest.TestCase):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn("Pendente: texto integral da dissertação não recuperado; MMAT não aplicado.", results)
         self.assertIn("não tratados como verificados no texto integral", results)
+        slides = " ".join(
+            (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
+        )
+        self.assertIn("material associado aos 15 registros provisórios", slides)
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn("Pendente: texto integral da dissertação não recuperado; MMAT não aplicado.", results)
+
+    def test_defense_deck_and_parallel_pptx_are_distinguished(self):
+        slidev_readme = (ROOT / "presentation/README.md").read_text(encoding="utf-8")
+        pptx_readme = (TCC / "presentation/README.md").read_text(encoding="utf-8")
+        storyboard = (TCC / "presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md").read_text(encoding="utf-8")
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        normalized_pptx_readme = re.sub(r"\s+", " ", pptx_readme.lower())
+        self.assertIn("deck canônico da defesa", slidev_readme.lower())
+        self.assertIn("25 slides", slidev_readme)
+        self.assertIn("export editável paralelo", pptx_readme.lower())
+        self.assertIn("19 slides", pptx_readme)
+        self.assertIn("não é o arquivo da defesa", normalized_pptx_readme)
+        self.assertEqual(len(re.findall(r"^### \d+\.", storyboard, re.M)), 25)
+        self.assertEqual(len(re.findall(r"^layout: \w+$", slides, re.M)), 25)
+
+    def test_speech_is_deferred_until_content_approval(self):
+        for path in (
+            ROOT / "presentation/README.md",
+            TCC / "presentation/README.md",
+        ):
+            document = " ".join(path.read_text(encoding="utf-8").lower().split())
+            self.assertIn("a fala não integra esta revisão semifinal", document)
+            self.assertIn("após a revisão dos prs e a validação da orientação", document)
+
+    def test_defense_artifacts_use_the_revised_version_date(self):
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
+        self.assertIn("Versão revisada: 15/10/2026", slides)
+        self.assertNotIn("Snapshot: 03/09/2026", slides)
+        self.assertNotIn("Snapshot adjudicado: 03/09/2026", pptx_source)
+        self.assertIn("Versão revisada: 15/10/2026", pptx_source)
+        self.assertIn("não recebeu MMAT", pptx_source)
+        self.assertNotIn("não receberam MMAT", pptx_source)
 
     def test_current_article_access_counts_match_the_study_registry(self):
         registry_path = ROOT / "research/data/mmat_current_study_registry.csv"
@@ -100,6 +154,16 @@ class EditorialFeedbackTests(unittest.TestCase):
             (len(candidates), primary_text_reviewed, pending_full_text, abstract_excluded),
             (17, 15, 1, 1),
         )
+
+        slides = " ".join(
+            (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
+        )
+        self.assertIn("Texto não recuperado: sem apreciação", slides)
+        self.assertIn("exclusão após resumo", slides)
+        self.assertNotIn("cinco candidatos foram apreciados por resumo/metadados", slides)
+        self.assertNotIn("17 estudos empíricos provisórios", slides)
+        self.assertIn("Adjudicar a elegibilidade e a unidade de análise do estudo 8", slides)
+        self.assertIn("14 triagens S1/S2 e 11 conjuntos de critérios de categoria", slides)
 
     def test_study_specific_quantitative_claims_have_primary_source_locators(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")

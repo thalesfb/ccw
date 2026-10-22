@@ -41,6 +41,15 @@ class ObjectiveAlignmentTests(unittest.TestCase):
                     "BlackWiliam1998", "HattieTimperley2007"):
             self.assertIn(key, pedagogical)
 
+    def test_slidev_and_editable_generator_have_four_objectives(self):
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        objectives = slides.split("06 / OBJETIVOS ESPECÍFICOS", 1)[1].split("\n---", 1)[0]
+        self.assertEqual(objectives.count('class="tcc-objective-step"'), 4)
+        self.assertNotIn("7 objetivos", slides)
+        generator = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
+        self.assertEqual(re.findall(r'\("(OE\d+)"', generator),
+                         ["OE1", "OE2", "OE3", "OE4"])
+
     def test_evaluation_is_proposed_not_claimed_as_completed(self):
         results = (CONTENT / "resultados.tex").read_text(encoding="utf-8")
         alignment = results.split(r"\section{Atendimento aos Objetivos}", 1)[1].split(
