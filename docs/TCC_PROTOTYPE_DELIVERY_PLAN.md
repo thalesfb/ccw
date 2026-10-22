@@ -285,7 +285,7 @@ Cada PR deverá ser pequeno o suficiente para permitir revisão temática. Recom
 
 ## 9. Estado do plano
 
-**Status:** ativo.
+**Status:** em espera. A governança da #7 registra que a continuidade da implementação depende de decisão com a orientação (#24, #27); as etapas não realizadas ficam em espera, não canceladas, e o código já implementado é preservado. O escopo registrado para esta entrega é revisão e especificação conceitual (`docs/tcc/ESTADO-ATUAL-TCC.md`).
 
 **Issue de acompanhamento:** #7.
 

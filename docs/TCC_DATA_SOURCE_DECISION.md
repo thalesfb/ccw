@@ -1,5 +1,15 @@
 # Decisão e governança das fontes de dados
 
+> **Alcance desta decisão.** Este documento fixa a fonte usada pelo código
+> exploratório em `prototype/` para verificar a viabilidade técnica do fluxo de
+> previsão da próxima resposta. Não é a seleção da base de uma investigação
+> empírica do TCC: o manuscrito mantém a escolha da fonte condicionada à
+> documentação e ao problema (`results/tcc/conteudo/prototipo.tex`, seção
+> "Princípios e Requisitos"), e a decisão de executar ou não o protótipo está
+> pendente com a orientação (#7, #24, #27). Nenhum arquivo real foi processado.
+> A conciliação está em
+> [`tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md`](tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md).
+
 ## Decisão principal
 
 A base primária do primeiro experimento será a versão corrigida do conjunto **ASSISTments Skill Builder 2009–2010**.
@@ -21,9 +31,9 @@ Página canônica do conjunto:
 
 `https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010`
 
-A página oficial declara o conjunto como livre para uso, mas não apresenta nessa página uma licença padronizada equivalente a um identificador SPDX. Por isso, o manifesto da execução deverá registrar a URL canônica, a data de acesso e os termos observados no momento da aquisição, sem inferir permissões adicionais.
+A página dos dados de 2009–2010 (`https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data`) declara que o conjunto é livre para uso, mas nenhuma das duas páginas apresenta uma licença padronizada equivalente a um identificador SPDX. O site também mantém uma página separada de termos (`https://sites.google.com/site/assistmentsdata/termsofuseforusingdata`), que, em 22/10/2026, impunha, entre outras condições, não tentar identificar estudantes, não repassar os dados a terceiros, reconhecer o ASSISTments nas publicações e tornar públicos os dados e algoritmos do trabalho publicado. Por isso, o manifesto da execução deverá registrar a URL canônica, a data de acesso e os termos observados no momento da aquisição, sem inferir permissões adicionais.
 
-A utilização acadêmica também deverá citar o sistema ASSISTments por meio de Feng, Heffernan e Koedinger (2009), DOI `10.1007/s11257-009-9063-7`.
+A página do conjunto pede que a publicação inclua a URL exata do conjunto (no manuscrito, nota de rodapé no capítulo da especificação, pois a página não informa data de publicação) e que o sistema ASSISTments seja citado por Feng, Heffernan e Koedinger (2009), "Addressing the assessment challenge with an online system that tutors as it assesses", *User Modeling and User-Adapted Interaction*, 19(3), 243–266, DOI `10.1007/s11257-009-9063-7` (bib `Feng2009`; metadados conferidos no Crossref em 22/10/2026). A própria página informa que esse artigo não usa o conjunto de 2009–2010.
 
 ## Base secundária
 
@@ -53,7 +63,9 @@ Fontes canônicas:
 
 O SAEB será a principal referência brasileira para proficiência, contexto educacional e discussão de aplicabilidade nacional. Os microdados de 2023 poderão sustentar um experimento complementar de proficiência, mas não substituem registros sequenciais por habilidade necessários ao alvo de próxima resposta.
 
-A página oficial de resultados de 2023 do Inep é a referência canônica desta edição e disponibiliza o acesso aos Microdados Saeb 2023.
+A página oficial de resultados de 2023 do Inep é a referência canônica desta edição e disponibiliza o acesso aos Microdados Saeb 2023 e aos três volumes de "Resultados Saeb 2023". Em 22/10/2026, 2023 era a edição mais recente com microdados nessa página; a de 2025 oferecia apenas planilha de resultados.
+
+Duas edições aparecem no repositório com papéis distintos. O manuscrito cita o *Relatório de resultados do Saeb 2021*, volume 1 (Inep, Brasília, 2024, ISBN 978-65-5801-078-4; bib `SAEB2021`), só como documentação contextual (requisito R13). A configuração `saeb_2023` registra uma candidata de dados sem adaptador implementado. Se o SAEB vier a ser usado operacionalmente, o texto deverá citar o relatório e os microdados da mesma edição efetivamente adquirida.
 
 Fonte oficial:
 

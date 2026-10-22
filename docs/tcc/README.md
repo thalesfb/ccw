@@ -22,6 +22,7 @@ no conteúdo ou nos workflows exigem mudanças verificáveis e revisão humana.
 - [`SOURCE-COVERAGE-AND-CONTRIBUTIONS.md`](SOURCE-COVERAGE-AND-CONTRIBUTIONS.md): matriz de cobertura e contribuições derivada dos registros estruturados.
 - [`DOCUMENTATION_SYNC.md`](DOCUMENTATION_SYNC.md): fontes, consumidores e verificação das informações espelhadas.
 - [`PUBLICATION_GOVERNANCE.md`](PUBLICATION_GOVERNANCE.md): critérios para separar relato acadêmico, proveniência técnica e fluxo público de desenvolvimento.
+- [`AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md`](AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md): conciliação, com fontes, entre o que a especificação propõe e o que o código exploratório implementa; não decide o escopo.
 - [`../adr/0001-preserve-ifc-institutional-formatting.md`](../adr/0001-preserve-ifc-institutional-formatting.md): registro da decisão arquitetural de não substituir automaticamente particularidades institucionais durante atualizações normativas.
 
 ## Princípios

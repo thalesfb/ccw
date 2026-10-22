@@ -1,6 +1,6 @@
 # Protótipo do TCC
 
-Este módulo implementa o pipeline reproduzível que transforma conjuntos educacionais autorizados em interações canônicas e executa o protocolo técnico de avaliação do TCC.
+Este módulo implementa o pipeline reproduzível que transforma conjuntos educacionais autorizados em interações canônicas e executa o protocolo experimental descrito em `docs/TCC_EXPERIMENTAL_DESIGN.md`. Esse protocolo é distinto do protocolo do OE4, que avalia a especificação conceitual e não exige execução do código.
 
 ## Estado para orientação
 
@@ -16,6 +16,21 @@ remoto, de eventual automação CLI ou de Colab Enterprise deverá ser confirmad
 na conta e no orçamento disponíveis. O notebook deve publicar somente
 manifestos, hashes, dados derivados permitidos e relatórios; arquivos brutos
 restritos ficam fora do Git.
+
+## Relação com a especificação do TCC
+
+O código é uma verificação exploratória de viabilidade, não a materialização
+das escolhas que o manuscrito deixa em aberto
+(`results/tcc/conteudo/prototipo.tex`):
+
+| Tema | Manuscrito | Código desta pasta |
+| --- | --- | --- |
+| Fonte de dados | SAEB, PISA ou dados sintéticos como possibilidades, sem base definitiva | apenas adaptador do ASSISTments 2009–2010 corrigido; demais fontes só em `config/data_sources.json` |
+| Modelos | Random Forest e SVM como alternativas | baselines, regressão logística regularizada e `HistGradientBoostingClassifier` (Friedman, 2001; scikit-learn) |
+| Explicabilidade | SHAP e LIME como alternativas | decomposição exata da regressão logística e importância por permutação; nada para o gradient boosting |
+
+Nenhum modelo foi treinado com dados reais. A conciliação e as fontes estão em
+`docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md`.
 
 ## Princípios
 
@@ -76,7 +91,8 @@ O campo `order_id` é usado como ordem cronológica da interação. O campo
 na primeira tentativa; uma primeira resposta incorreta ou um pedido de ajuda é
 registrado como incorreto. Tentativas, dicas e tempo da própria interação são
 preservados somente como campos observados e continuam proibidos como atributos
-da mesma interação no protocolo preditivo definido no TCC.
+da mesma interação no protocolo preditivo definido em
+`docs/TCC_EXPERIMENTAL_DESIGN.md`.
 
 ## Avaliar modelos de referência
 

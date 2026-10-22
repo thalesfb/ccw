@@ -54,6 +54,7 @@ REVIEW_TARGETS = (
     "docs/tcc/NORMATIVE_GOVERNANCE.md",
     "docs/TCC_REVISION_SCOPE.md",
     "docs/VERIFICACAO-NUMEROS-PRISMA.md",
+    "docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md",
     "results/tcc/images/README.md",
     "index.html", "research/index.html", "results/tcc/index.html",
     "presentation/slides.md",
