@@ -13,7 +13,7 @@ def test_selection_percentages_refer_to_records_not_a_study_population() -> None
 
     assert "parcela dos registros inicialmente identificados" in review
     assert "parcela da população inicialmente identificada" not in review
-    assert "15 estudos compõem provisoriamente o núcleo empírico incluído" in review
+    assert "15 estudos compõem o corpus final" in review
     assert "17 candidatos empíricos provisórios" not in review
     assert "A população retida compreende" not in review
 
