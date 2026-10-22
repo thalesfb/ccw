@@ -52,6 +52,23 @@ def test_methodology_dates_final_scope_reconciliation_without_implying_a_new_sea
     assert "sem alterar o corte temporal da busca" in methodology
 
 
+def test_research_readme_uses_operational_prioritization_and_explicit_denominators() -> None:
+    readme = (ROOT / "research/README.md").read_text(encoding="utf-8")
+    current = readme.split("**População do snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026**:", 1)[1].split(
+        "**Baseline histórico", 1
+    )[0]
+
+    assert "2.486 submetidos à priorização operacional" in current
+    assert "20,88% encaminhados à priorização" in current
+    assert "99,28% não avançaram nessa etapa" in current
+    assert "0,72% formaram a shortlist" in current
+    assert "17 relatórios procurados" in current
+    assert "15 estudos empíricos mantidos provisoriamente" in current
+    assert "Para diagnóstico da execução no SQLite local" in readme
+    assert "não devem substituir os números versionados no TCC" in readme
+    assert "Para obter os números atualizados" not in readme
+
+
 def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
     results = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")

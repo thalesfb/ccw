@@ -1,7 +1,8 @@
 # Reconciliação da População Adjudicada da Revisão Sistemática
 
-**Snapshot vigente:** 03/09/2026
-**Commit de consolidação:** `5d72bf6` (PR #55)
+**Adjudicação inicial:** 03/09/2026
+**Reconciliação do escopo:** 14/10/2026; cobertura documental atualizada em 20/10/2026
+**Commit da consolidação inicial:** `5d72bf6` (PR #55)
 **Fonte versionada:** `research/exports/analysis/papers.csv`, `summary.json` e
 `research/data/current_synthesis_scope.csv`
 **Auditoria de identidade:** `research/exports/analysis/deduplication_identity_audit.csv`
@@ -10,8 +11,9 @@
 ## Escopo deste documento
 
 Este documento descreve a população resultante das decisões de escopo aprovadas
-no PR #54 e implementadas no PR #55. Ele é a referência pública para o snapshot
-vigente. A execução local do SQLite permanece útil para diagnóstico operacional,
+no PR #54 e implementadas no PR #55, com a disposição atual registrada no
+manifesto de escopo. Ele distingue a lista inicial de candidatos do núcleo
+empírico provisório atual. A execução local do SQLite permanece útil para diagnóstico operacional,
 mas não contém as decisões adjudicadas e não deve substituir os artefatos
 versionados.
 
@@ -27,18 +29,26 @@ síntese e a auditoria de identidade indicados acima.
 
 ## Fluxo PRISMA vigente
 
-| Etapa | Entraram | Excluídos/removidos | Avançaram/retidos |
-| --- | ---: | ---: | ---: |
-| Identificação | 11.904 | 27 por identidade DOI/URL | 11.877 |
-| Triagem | 11.877 | 9.391 | 2.486 |
-| Priorização operacional (etapa reportada como elegibilidade) | 2.486 | 2.468 (99,28%) | 18 (0,72%) |
-| Inclusão | 18 | — | 18 |
+<!-- ccw-sync:start flow -->
+| Etapa | Quantidade | Interpretação |
+| --- | --- | --- |
+| Identificação | 11.904 | Registros no snapshot versionado |
+| Remoções determinísticas | 27 | Identidades DOI/URL; não duplicatas semânticas confirmadas |
+| Triagem | 11.877 | 9.391 excluídos |
+| Priorização operacional | 2.486 | 2.468 não avançaram; não é elegibilidade por texto completo |
+| Lista preliminar | 18 | 1 exclusão após resumo |
+| Relatórios procurados | 17 | 1 não recuperado no fluxo histórico |
+| Relatórios declarados avaliados em texto completo | 16 | 1 protocolo excluído; a contagem não certifica leitura humana integral |
+| Núcleo empírico provisório | 15 | Sujeito às pendências de apreciação e elegibilidade |
+<!-- ccw-sync:end flow -->
 
 Dos **11.904 identificados**, 78,89% foram excluídos na triagem, 20,88%
-avançaram para elegibilidade e 0,15% foram retidos ao final. As duas primeiras
+avançaram para priorização operacional e 0,15% compuseram a lista preliminar;
+0,13% integram provisoriamente o núcleo empírico. As duas primeiras
 taxas usam a identificação como denominador, e não os 11.877 que entraram na
-triagem. Na linha de elegibilidade da tabela, 99,28% e 0,72% usam os **2.486
-avaliados nessa etapa**. Essas taxas descrevem o fluxo de seleção, não a
+triagem. Na priorização operacional, 99,28% não avançaram e 0,72% formaram a
+lista preliminar, usando os **2.486 registros dessa etapa** como denominador.
+Essas taxas descrevem o fluxo de seleção, não a
 qualidade metodológica.
 
 ### Deduplicação
@@ -57,14 +67,14 @@ excedentes brutos incluem as 27 linhas já removidas por identidade; por isso,
 não se deve somar 27 e 232 nem subtrair 232 do fluxo PRISMA. Até o snapshot
 vigente, não há duplicatas semânticas confirmadas.
 
-## Como 16 registros se tornaram 18
+## Como 16 registros se tornaram 18 candidatos na adjudicação inicial
 
 A mudança não é uma simples substituição do número 16 por 18. A auditoria
 histórica preservou um universo de 23 candidatos: 16 registros retidos no
 snapshot operacional anterior e 7 overrides manuais. As oito decisões de
 escopo aprovadas no PR #54 foram aplicadas em nível de linha:
 
-| ID | Disposição vigente | Consequência |
+| ID | Disposição na adjudicação inicial | Consequência |
 | ---: | --- | --- |
 | 14 | `include` | recuperado como candidato empírico provisório |
 | 15 | `exclude_computational_centrality` | permanece fora por ausência de técnica computacional avaliada |
@@ -88,10 +98,14 @@ Os 18 IDs do snapshot são:
 14, 6915, 6916, 6917, 6919, 6920, 6921, 6923
 ```
 
-O arquivo `current_synthesis_scope.csv` distingue 17 candidatos empíricos
-provisórios do ID 6921, que permanece como protocolo/proposta contextual. O
-6921 não sustenta resultado empírico nem entra em uma síntese quantitativa ou
-em uma avaliação MMAT empírica.
+O arquivo `current_synthesis_scope.csv` distingue atualmente 15 inclusões
+empíricas provisórias, o registro 9 excluído após resumo, o relatório 6923 não
+recuperado no fluxo histórico e o protocolo 6921 excluído após texto completo.
+Os três últimos não integram o denominador empírico MMAT. Dos 15 provisórios,
+14 têm triagens S1/S2 e 11 têm apreciação por categoria; os delineamentos de
+5, 7 e 14 e a unidade/elegibilidade de 8 permanecem pendentes. A disponibilidade
+atual de PDFs é uma dimensão distinta, registrada na
+[matriz de cobertura](tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md).
 
 O artigo identificado pelo ID 6918 não pertence à população atual: a fonte
 institucional confirma o ano 2014, fora do recorte 2015--2026. A ocorrência

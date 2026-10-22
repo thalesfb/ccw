@@ -15,6 +15,8 @@ SOURCES = (
     ":(exclude)results/tcc/index.html",
     ":(exclude)results/tcc/README.md",
     ":(exclude)results/tcc/presentation",
+    ":(exclude)results/tcc/images/README.md",
+    ":(exclude)results/tcc/images/project_overview_*.png",
 )
 
 

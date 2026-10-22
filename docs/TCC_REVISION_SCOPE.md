@@ -1,17 +1,19 @@
 # Registro da revisão do TCC
 
-A revisão é acompanhada pela issue #5 e pelo PR #6.
+O registro inicial remete à issue #5 e ao PR #6, já encerrados. O estado científico
+vigente deve ser lido junto aos artefatos versionados e às limitações abaixo,
+não inferido somente do fechamento daquela etapa editorial.
 
 ## Decisões aplicadas
 
-- A revisão sistemática da literatura é a etapa de pesquisa concluída.
-- A seleção de tecnologias e bases, a implementação e a validação experimental permanecem como etapas posteriores.
+- O pipeline de busca e seleção possui um snapshot versionado, mas a apreciação metodológica e a verificação documental permanecem preliminares. A execução do pipeline não equivale à conclusão científica integral da revisão.
+- Há implementação técnica adicional e testes sintéticos no repositório. A escolha de uma base definitiva, o desenvolvimento da aplicação educacional, o treinamento correspondente e a validação com participantes permanecem etapas posteriores.
 - Trechos prospectivos herdados do PTC foram corrigidos quando descreviam procedimentos já realizados.
 - Alegações sem artefatos reproduzíveis sobre protótipo, experimentos, validação escolar e defesa foram removidas.
 - O PRISMA 2020 é apresentado como diretriz de relato.
 - O PRISMA-P é apresentado como orientação para protocolos; não se declara conformidade integral porque não houve registro prospectivo.
-- O limiar usado na elegibilidade representa relevância temática e não qualidade metodológica.
-- O MMAT é reportado por Q1--Q5, sem nota geral, média, ranking ou categoria de qualidade.
+- O limiar de priorização operacional representa relevância temática, não elegibilidade por texto completo nem qualidade metodológica.
+- O MMAT distingue a triagem S1/S2 dos critérios Q1--Q5 da categoria, sem nota geral, média, ranking ou categoria de qualidade.
 - A reutilização do cache é explicada como métrica dependente da execução; os valores conflitantes de 63% e 92% foram removidos por não constituírem uma medida estável e versionada da mesma execução.
 - Desempenho observado, proficiência estimada, competência e aprendizagem são tratados como conceitos relacionados, mas distintos.
 
@@ -27,10 +29,17 @@ O repositório contém uma customização LaTeX institucional criada em 2017. El
 
 Mudanças já aplicadas incluem palavras-chave separadas por ponto e vírgula, fontes autorais com ano, remoção de referência obsoleta à NBR 14724:2011 no arquivo principal, correção de espaçamento entre legenda e fonte e registro explícito da limitação do template legado.
 
+A linha de base normativa e os limites de sua conferência estão registrados em
+`docs/tcc/ABNT-2025-CORRECOES.md`. Esse registro considera a versão corrigida de
+01.04.2025 da NBR 14724:2024 e a NBR 6023:2025, sem declarar certificação integral
+da biblioteca ou da instituição.
+
 ## Regra de adjudicação científica do snapshot vigente
 
-O snapshot versionado de 03/09/2026 é uma representação adjudicada do escopo e
-não converte automaticamente os 18 registros retidos em evidência empírica final.
+O snapshot de busca tem adjudicação inicial em 03/09/2026 e reconciliação de
+escopo em 14/10/2026. O [estado atual](tcc/ESTADO-ATUAL-TCC.md) distingue os
+18 candidatos das 15 inclusões provisórias e registra a cobertura documental
+posterior. A seleção operacional não converte candidatos em evidência empírica final.
 As regras abaixo devem ser aplicadas antes de qualquer afirmação conclusiva,
 reclassificação de um override ou fechamento do MMAT. Elas não reescrevem as
 contagens do fluxo PRISMA; documentam o gate científico que sucede o filtro
@@ -103,4 +112,9 @@ Os testes do retorno do orientador verificam, entre outros pontos:
 
 ## Etapa posterior
 
-Depois da consolidação desta revisão, a pesquisa deverá comparar fontes de dados candidatas, definir o problema computacional, estabelecer modelos de referência, selecionar a arquitetura mínima e implementar um protótipo reproduzível. Nenhuma tecnologia ou modelo será considerado escolhido apenas por ter aparecido com maior frequência na literatura.
+Depois da consolidação científica desta revisão, a pesquisa deverá comparar
+fontes de dados candidatas, delimitar a tarefa empírica e validar os modelos e a
+aplicação educacional a partir da especificação e da implementação técnica já
+disponíveis. Nenhuma tecnologia ou modelo será considerado escolhido apenas
+por ter aparecido com maior frequência na literatura. Os testes sintéticos não
+demonstram desempenho em dados reais nem eficácia pedagógica.

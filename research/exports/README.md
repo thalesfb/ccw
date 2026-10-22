@@ -1,16 +1,27 @@
 # 📊 Exports - Saídas da Revisão Sistemática
 
-Este diretório contém as **saídas geradas automaticamente** pelo pipeline de revisão sistemática. Todos os arquivos aqui são **gerados via CLI** e não devem ser editados manualmente.
+Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e relatórios do pipeline são regeneráveis via CLI e não devem ser editados manualmente; páginas metodológicas versionadas devem permanecer coerentes com seus ledgers de origem.
 
-> **População adjudicada atual (03/09/2026):** 11.904 registros identificados;
+> **Snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026:**
+> 11.904 registros identificados;
 > 27 registros redundantes foram removidos deterministicamente por DOI/URL antes
 > da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos, 2.486
-> na elegibilidade, 2.468 excluídos nessa etapa e 18 registros retidos (17
-> candidatos empíricos provisórios e o protocolo contextual 6921). O registro
+> submetidos à priorização operacional; 2.468 não avançaram nessa etapa e 18
+> formaram a shortlist. Na elegibilidade, 17 relatórios foram procurados, 1 não
+> foi recuperado, 16 foram avaliados em texto completo, 1 protocolo foi excluído
+> e 15 registros empíricos foram mantidos provisoriamente. O registro
 > 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A auditoria
 > bruta encontrou 257 excedentes em
 > títulos normalizados; após a remoção DOI/URL, 232 excedentes permanecem apenas
 > por título como candidatos de auditoria.
+
+**Fonte vigente para MMAT:** a apreciação atual, por critério e sem score agregado,
+está no [ledger atual](../data/mmat_reassessment_current.csv) e na página
+[MMAT atual](analysis/mmat_current.html). Os exports gerais `analysis/papers.csv`,
+`analysis/papers.json` e planilhas não são fonte de apreciação MMAT. A tabela
+[legada](../data/mmat_assessments.csv) e a página [MMAT histórico](analysis/mmat_visualization.html)
+foram preservadas para rastreabilidade; seus julgamentos e scores não representam
+a avaliação vigente e não devem ser usados para interpretar os 18 registros shortlistados.
 
 ---
 
@@ -126,9 +137,10 @@ python -m research.src.cli export-bibtex -o research/references
 # Consulte included_papers.bib como a bibliografia derivada do pipeline.
 ```
 
-`included_papers.bib` contém somente os 18 registros retidos derivados do
-pipeline (17 candidatos empíricos provisórios e o
-protocolo contextual 6921). O
+`included_papers.bib` contém os 18 registros shortlistados derivados do
+pipeline, não 18 estudos incluídos. O núcleo empírico tem 15 estudos
+provisórios; um relatório não foi recuperado, um registro foi excluído após
+resumo e um protocolo foi excluído após texto completo. O
 TCC mantém separadamente referências metodológicas, pedagógicas, de avaliação
 e técnicas em `results/tcc/referencias.bib` e
 `results/tcc/referencias_pedagogicas.bib`. Essa separação é deliberada e está
@@ -190,8 +202,8 @@ python -m research.src.cli deep-analysis
 | Total de registros brutos no banco | 11.904 |
 | Remoções determinísticas por DOI/URL | 27 |
 | Registros avaliados na triagem | 11.877 |
-| Registros retidos | 18 (17 provisoriamente empíricos + 1 contextual) |
-| Taxa de inclusão | 0,15% (18/11.904) |
+| Registros shortlistados | 18 (15 incluídos provisoriamente, 1 não recuperado, 1 excluído após resumo — decisão confirmada por conferência suplementar do texto integral, sem alterar a contagem — e 1 protocolo excluído) |
+| Taxa de inclusão empírica provisória | 0,13% (15/11.904) |
 | Período analítico configurado | 2015--2026 |
 | Excluídos na triagem | 9.391 (78,89% da identificação) |
 | Avançaram à elegibilidade | 2.486 (20,88% da identificação) |
@@ -206,13 +218,14 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 ## 🚀 Próximos Passos
 
 ### Fase 1 (Revisão Sistemática) - 🟡 SNAPSHOT ADJUDICADO
-- [x] Snapshot atual exportado (11.904 identificados; 11.877 após deduplicação; 18 registros retidos)
+- [x] Snapshot de busca exportado (11.904 identificados; 11.877 após deduplicação; 18 registros shortlistados; 15 incluídos provisoriamente após elegibilidade)
 - [x] Fluxo de triagem e elegibilidade reconciliado
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
-- [x] Exportação BibTeX dos 18 registros retidos do pipeline (17 candidatos empíricos provisórios + 1 contextual)
+- [x] Exportação BibTeX dos 18 registros shortlistados do pipeline; status de elegibilidade e inclusão são mantidos separadamente no ledger
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
-- [x] Reavaliação documental preliminar do MMAT aos 17 registros empíricos com evidência por critério
-- [ ] Recuperação das fontes restantes e adjudicação final do MMAT aos 17 registros empíricos
+- [x] Triagem S1/S2 do MMAT em 14 e apreciação dos critérios da categoria em 11 dos 15 registros empíricos mantidos provisoriamente; estudo 8 sem respostas até adjudicação de escopo/unidade
+- [ ] Obter o texto integral do registro 6923 quando houver acesso legítimo; sem aplicar MMAT a resumo ou metadados
+- [ ] Adjudicar independentemente as 14 triagens, os 11 conjuntos de critérios e as três categorias pendentes do MMAT do núcleo empírico
 
 ### Fase 2 (Especificação conceitual do Protótipo) - ✅ REGISTRADA NO TCC
 - [x] Derivar requisitos funcionais e não funcionais

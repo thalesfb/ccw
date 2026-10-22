@@ -2,21 +2,31 @@
 
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
-> **População vigente (03/09/2026):** o snapshot versionado contém 11.904 registros identificados, 27 remoções determinísticas por DOI/URL, 11.877 registros na triagem e 18 registros retidos após a adjudicação de escopo. São 17 candidatos empíricos provisórios e o protocolo contextual 6921. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. Os números históricos de 9.431 registros e 17 incluídos permanecem apenas como contexto; a reconciliação vigente está em [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
+<!-- ccw-sync:start snapshot -->
+Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; cobertura documental: 20/10/2026.
+
+O snapshot registra 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e 11.877 registros na triagem. Foram 2.486 submetidos à priorização operacional; 2.468 não avançaram dessa etapa. A priorização encaminhou 18 candidatos, não 18 inclusões finais: 15 estudos empíricos mantidos provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 14 triagens S1/S2 e 11 apreciações por categoria; não há escore agregado nem aprovação científica final.
+<!-- ccw-sync:end snapshot -->
 
 O estado público, os limites interpretativos e as decisões metodológicas ainda
 pendentes estão resumidos em [`docs/tcc/ESTADO-ATUAL-TCC.md`](docs/tcc/ESTADO-ATUAL-TCC.md).
 
 ## Sobre o Projeto
 
-Este repositório documenta uma revisão sistemática da literatura e a elaboração de uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente de evidências sobre competências matemáticas. A especificação não corresponde a uma aplicação funcional nem a uma validação experimental realizada neste trabalho.
+Este repositório documenta uma revisão crítica da literatura e uma especificação
+técnica e pedagógica de protótipo para apoiar a interpretação docente da
+aprendizagem matemática. Esse apoio não significa inferir aprendizagem diretamente
+de notas ou de probabilidades preditivas. A entrega é documental: a especificação
+e seu protocolo de avaliação foram propostos, mas a avaliação da especificação e
+a validação educacional do protótipo não foram realizadas nesta versão.
 
-![Visão geral atualizada do projeto, da revisão sistemática à especificação conceitual](results/tcc/images/project_overview_current.png)
+![Síntese visual do TCC: revisão crítica, MMAT preliminar e especificação conceitual](results/tcc/images/project_overview_2026-10-20.png)
 
-> Esta síntese visual apresenta o escopo e os números do snapshot vigente. A fonte
-> de verdade continua sendo a documentação versionada da reconciliação e os
-> artefatos derivados do pipeline; a imagem não substitui tabelas, referências ou
-> o relato metodológico do TCC.
+> O texto do [TCC](results/tcc/main.tex) é a fonte de verdade do relato científico;
+> os artefatos versionados sustentam suas contagens e sua rastreabilidade. A imagem
+> é uma síntese, não substitui o manuscrito e não certifica revisão científica
+> concluída. A cobertura atual é de 16 PDFs locais para 18 candidatos; faltam os
+> registros 3 e 6923, sem mudança retroativa do fluxo histórico.
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
@@ -31,39 +41,43 @@ Aplicações de técnicas computacionais no ensino de matemática e elaboração
 
 ## Objetivos
 
-### Objetivo Geral
+Os objetivos abaixo são derivados de
+[`introducao.tex`](results/tcc/conteudo/introducao.tex). A revisão, o relato PRISMA
+2020, o MMAT 2018 e os scripts são meios metodológicos para atendê-los, não objetivos
+adicionais nem certificações automáticas de validade científica.
 
-Mapear e analisar sistematicamente as aplicações de técnicas computacionais no ensino de matemática e, a partir das evidências encontradas, elaborar uma especificação técnica e pedagógica de protótipo para apoio à interpretação de evidências sobre competências.
+<!-- ccw-sync:start goals -->
+### Objetivo geral
 
-### Objetivos Específicos
+Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.
 
-1. **OE1:** Realizar uma revisão sistemática da literatura, com relato apoiado pelo PRISMA 2020, sobre estudos publicados entre 2015 e 2026.
-2. **OE2:** Identificar e categorizar as principais abordagens computacionais aplicadas ao ensino de matemática.
-3. **OE3:** Classificar as finalidades pedagógicas atribuídas às aplicações encontradas.
-4. **OE4:** Analisar criticamente as metodologias e limitações dos estudos incluídos.
-5. **OE5:** Mapear lacunas técnicas, pedagógicas, metodológicas e éticas.
-6. **OE6:** Manter um pipeline automatizado e auditável para coleta, processamento e exportação da revisão.
-7. **OE7:** Derivar requisitos funcionais e não funcionais, critérios de seleção de dados e modelos, um protocolo de avaliação e uma arquitetura de referência para o protótipo.
+### Objetivos específicos
+
+**OE1:** categorizar as abordagens e técnicas computacionais e as finalidades pedagógicas descritas na literatura mapeada.
+
+**OE2:** identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas no material examinado.
+
+**OE3:** formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência.
+
+**OE4:** propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de uma eventual execução. A proposição desse protocolo não equivale à realização da avaliação nem exige desenvolver o protótipo nesta versão.
+<!-- ccw-sync:end goals -->
 
 ## Estrutura do Repositório
 
 ```bash
 ├── .github/            # Automação e validação do repositório
-├── docs/               # Academic documentation (constitution, regulations)
-├── research/           # Phase 1: Systematic literature review module
-│   ├── src/            # Pipeline modules (ingestion, processing, analysis)
-│   ├── tests/          # Test suite (integration, performance, quality)
-│   ├── docs/           # Module documentation (methodology, theory)
-│   ├── references/     # BibTeX academic references
-│   ├── papers/         # Downloaded PDFs
-│   ├── cache/          # API response cache (SQLite)
-│   ├── exports/        # Analysis results (CSV, JSON, HTML)
-│   └── logs/           # Execution logs [gitignored]
-├── src/                # Protótipo futuro; não implementado no TCC vigente
-├── results/            # Artefatos do PTC histórico e do TCC vigente
-├── presentation/       # Fonte e build da apresentação Slidev
-├── .gitignore          # Git exclusion patterns
-└── README.md           # Project documentation
+├── docs/               # Governança, regulamento e notas de auditoria
+├── research/           # Código e evidências da revisão da literatura
+│   ├── src/            # Coleta, processamento, análise e verificadores
+│   ├── tests/          # Testes de software e contratos documentais
+│   ├── data/           # Protocolo, escopo, fontes e MMAT versionados
+│   ├── exports/        # Snapshot, relatórios e visualizações versionados
+│   └── private/        # Acervo e auditorias locais; ignorados pelo Git
+├── prototype/          # Código técnico com testes sintéticos, sem ensaio educacional
+├── results/            # PTC histórico e fontes, PDF e export paralelo do TCC
+├── presentation/       # Fonte canônica da apresentação Slidev
+├── scripts/            # Compilação, publicação e sincronização documental
+└── README.md           # Visão geral derivada do TCC e dos artefatos
 ```
 
 ## Apresentação
@@ -73,17 +87,19 @@ compila a versão hospedável e a publica em [Abrir apresentação Slidev](https
 
 ## Uso do Módulo Research
 
-O módulo `research/` implementa a revisão sistemática automatizada seguindo PRISMA 2020.
+O módulo `research/` automatiza tarefas de coleta, deduplicação, filtragem,
+priorização e exportação. PRISMA 2020 orienta o relato; os scripts não realizam
+sozinhos a revisão crítica nem validam elegibilidade e MMAT. Execute os comandos
+abaixo a partir da **raiz deste checkout**, não de `research/`.
 
 ### Configuração Inicial
 
 #### Instalar dependências
 
 ```bash
-cd research
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r research/requirements.txt
 ```
 
 #### Inicializar banco de dados:
@@ -94,12 +110,22 @@ python -m research.src.cli init-db
 
 ### Comandos Disponíveis
 
-#### 1. Pipeline Completo
+#### 1. Nova execução de busca
 
-Executa revisão sistemática completa (busca → screening → seleção):
+Consulta APIs e modifica o banco operacional local. Não é necessário executar
+este comando para conferir o snapshot versionado e ele não reproduz, por si só,
+as decisões documentais e humanas da revisão:
 
 ```bash
 python -m research.src.cli run-pipeline --min-score 4.0
+```
+
+Para verificar o material versionado, sem nova coleta ou leitura do SQLite:
+
+```bash
+python -m research.src.validation.versioned_snapshot
+python -m research.src.processing.adjudicated_snapshot --check
+python scripts/sync_project_docs.py --check
 ```
 
 #### 2. Estatísticas
@@ -112,7 +138,8 @@ python -m research.src.cli stats
 
 #### 3. Exportação Padrão
 
-Gera relatórios HTML, CSV, JSON e visualizações:
+Exporta relatórios do banco local. Uma exportação de outra coleta não deve
+sobrescrever o snapshot de referência sem reconciliação explícita:
 
 ```bash
 python -m research.src.cli export
@@ -123,9 +150,9 @@ python -m research.src.cli export
 - `research/exports/analysis/papers.csv` - Dados tabulares
 - `research/exports/reports/reproducibility_manifest.json` - Manifesto versionado do snapshot, decisões de auditoria e hashes
 - `research/exports/reports/summary_report.html` - Relatório visual
-- `research/exports/visualizations/*.png` - Gráficos PRISMA
+- `research/exports/visualizations/*.png` - Visualizações derivadas
 
-#### 4. Exportação BibTeX (✨)
+#### 4. Exportação BibTeX
 
 Gera referências bibliográficas formatadas para LaTeX:
 
@@ -139,12 +166,14 @@ python -m research.src.cli export-bibtex
 
 **Saídas**:
 
-- `research/exports/references/included_papers.bib` - Registros bibliográficos derivados do snapshot vigente (18; 17 candidatos empíricos provisórios + 1 protocolo contextual)
+- `research/exports/references/included_papers.bib` - Registros bibliográficos derivados do snapshot vigente (18 na lista preliminar; consultar a disposição atual de cada registro no manifesto de escopo)
 - `research/exports/references/high_relevance.bib` - Registros com score de relevância ≥ 7,0 quando gerado pelo CLI; não é um artefato versionado do snapshot vigente
 - `research/exports/references/technique_*.bib` - Por técnica computacional
 
-O arquivo `included_papers.bib` contém somente os 18 registros derivados do
-pipeline. O protocolo 6921 é mantido para rastreabilidade, mas não sustenta
+No snapshot versionado, `included_papers.bib` preserva os 18 candidatos da lista
+preliminar; seu nome não significa 18 inclusões empíricas finais. Uma nova
+exportação consulta o banco local e pode produzir outro conjunto. O protocolo
+6921 é mantido para rastreabilidade, mas não sustenta
 afirmações empíricas. As referências de fundamentação pedagógica, avaliação,
 metodologia e técnica são mantidas separadamente na bibliografia completa do
 TCC e não alteram a contagem de estudos incluídos.
@@ -153,18 +182,22 @@ TCC e não alteram a contagem de estudos incluídos.
 
 ```latex
 \bibliography{included_papers}
-\bibliographystyle{abntex2-num}
+% O estilo autor-data do TCC é configurado em config_inicial.tex.
 ```
+
+Esse exemplo usa apenas o export bibliográfico. No TCC, preserve a bibliografia
+completa declarada em `main.tex`, incluindo as fontes teóricas e metodológicas;
+não a substitua pelo subconjunto de candidatos do pipeline.
 
 ### Testes
 
 ```bash
-# Executar suite completa
-pytest research/tests/
+# Testes locais, sem a consulta de integração à API
+python -m pytest research/tests -m "not integration" -q
 
 # Testes específicos
-pytest research/tests/test_complete_pipeline.py
-pytest research/tests/test_performance_benchmark.py
+python -m pytest research/tests/test_documentation_sync.py -q
+python -m pytest research/tests/test_defense_consistency.py -q
 ```
 
 ---
@@ -177,8 +210,8 @@ pytest research/tests/test_performance_benchmark.py
   - Uso: `python -m research.src.cli [comando] [opções]`
   - Comandos principais: `init-db`, `run-pipeline`, `stats`, `export`, `export-bibtex`, `generate-manifest`, `normalize-prisma`, `validate-exports`, `check-exports`
   - `audit` é legado e depende de um módulo ausente; sua correção deve ser tratada em PR atômico separado
-- **`research/src/pipeline/`**: Módulos do pipeline de revisão sistemática
-- **`research/src/database/`**: Gerenciamento de banco SQLite
+- **`research/src/processing/`**: Deduplicação, seleção e replay adjudicado
+- **`research/src/db.py`** e **`research/src/database/`**: Acesso ao SQLite operacional
 - **`research/tests/`**: Testes automatizados (pytest)
 
 ---
@@ -187,28 +220,30 @@ pytest research/tests/test_performance_benchmark.py
 
 ### Fase 1: Revisão Sistemática — snapshot adjudicado; MMAT preliminar registrado
 
-**População vigente após adjudicação (03/09/2026):**
-
+<!-- ccw-sync:start flow -->
 | Etapa | Quantidade | Interpretação |
-|-------|------------|---------------|
-| Identificação | 11.904 | Registros identificados no snapshot versionado |
-| Deduplicação | 27 removidos | 25 excedentes por DOI + 2 por URL exata (um grupo misto quanto ao DOI) |
-| Triagem | 11.877 → 2.486 | 9.391 excluídos na triagem |
-| Elegibilidade | 2.486 → 18 | 2.468 excluídos na elegibilidade |
-| Auditoria de candidatos | 23 → 18 | 8 decisões de escopo aprovadas; 3 recuperados, 1 excluído por período e 4 mantidos fora |
-| Retidos | **18** | 17 candidatos empíricos provisórios + 1 protocolo contextual |
+| --- | --- | --- |
+| Identificação | 11.904 | Registros no snapshot versionado |
+| Remoções determinísticas | 27 | Identidades DOI/URL; não duplicatas semânticas confirmadas |
+| Triagem | 11.877 | 9.391 excluídos |
+| Priorização operacional | 2.486 | 2.468 não avançaram; não é elegibilidade por texto completo |
+| Lista preliminar | 18 | 1 exclusão após resumo |
+| Relatórios procurados | 17 | 1 não recuperado no fluxo histórico |
+| Relatórios declarados avaliados em texto completo | 16 | 1 protocolo excluído; a contagem não certifica leitura humana integral |
+| Núcleo empírico provisório | 15 | Sujeito às pendências de apreciação e elegibilidade |
+<!-- ccw-sync:end flow -->
 
 Os sete overrides manuais e a correção temporal do ID 6918 estão registrados
 na população adjudicada. Quatro overrides permaneceram excluídos por escopo,
 enquanto três foram recuperados; a mudança envolveu também a correção do ano
 bibliográfico, a composição do conjunto e a separação entre síntese empírica e
 contextual. Não se trata de trocar apenas um número. A fonte de verdade e as
-ressalvas sobre DOI e MMAT estão em
+ressalvas sobre DOI e MMAT estão documentadas em
 [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
 
 O SQLite é um artefato operacional local e permanece ignorado pelo Git. A
 reconstituição auditável do snapshot é feita pelos exports versionados, pelo
-ledger de decisões, pela bibliografia dos 18 registros retidos e pelo manifesto
+ledger de decisões, pela bibliografia dos 18 registros selecionados preliminarmente e pelo manifesto
 de reprodutibilidade; uma nova coleta nas APIs pode produzir metadados
 diferentes.
 
@@ -249,12 +284,14 @@ da baseline operacional anterior.
 - **Termos Frequentes:** Machine Learning (58,8%), Assessment (52,9%), Predictive Analytics (47,1%), Adaptive Learning (35,3%)
 - **Desempenho dos Modelos:** Acurácias reportadas de 75% a 96,89%
 
-### Fase 2: Especificação conceitual do protótipo — concluída no escopo do TCC
+### Especificação conceitual — produto documental proposto
 
 O TCC vigente produziu uma especificação conceitual baseada na revisão e na
 fundamentação pedagógica. Foram consolidados requisitos, critérios para dados
-e modelos, um protocolo de avaliação e uma arquitetura de referência. Não foi
-desenvolvida uma aplicação funcional nem treinado um modelo definitivo.
+e modelos, um protocolo para avaliar a viabilidade e a coerência da especificação
+e uma arquitetura de referência. A aplicação desse protocolo não ocorreu. Há
+código técnico em `prototype/`, mas não uma aplicação educacional validada nem
+treinamento com dados reais nesta versão.
 
 ### Fase 3: Validação experimental — fora do escopo atual
 
@@ -264,16 +301,21 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 
 ### Próximos Passos Imediatos
 
-- [x] Completar protocolo de revisão sistemática
-- [x] Definir bases de dados, termos de busca e critérios de inclusão/exclusão
-- [x] Definir e versionar a estratégia canônica de busca (72 consultas bilíngues × 4 APIs)
-- [x] Consolidar o snapshot versionado da busca (11.904 registros identificados)
-- [x] Analisar e categorizar os artigos encontrados (18 registros retidos no snapshot vigente; 17 candidatos empíricos provisórios e 1 protocolo contextual)
-- [x] Gerar relatórios e visualizações PRISMA
-- [x] Finalizar documentação acadêmica do TCC (LaTeX)
-- [ ] Concluir a recuperação de fontes, os localizadores e a adjudicação metodológica do MMAT
-- [ ] Realizar a revisão final do TCC com a orientação
-- [ ] Registrar eventuais trabalhos futuros separadamente, sem tratá-los como resultados do TCC vigente
+O protocolo, o snapshot, a disposição dos candidatos e as visualizações estão
+versionados. Permanecem pendentes a conferência humana das interpretações, a
+adjudicação do MMAT e a revisão final com a orientação. Os registros 3 e 6923
+continuam sem cópia integral local; essa limitação está documentada e não impede
+a continuidade da entrega delimitada. Trabalhos futuros e eventual aplicação do
+protocolo devem ser relatados separadamente, sem antecipá-los como resultados.
+
+## Coerência entre os materiais
+
+Os trechos identificados por `ccw-sync` são gerados a partir do manuscrito e dos
+artefatos versionados. Atualizações também exigem conferir páginas, slides e
+imagens na mesma alteração. O procedimento e seus limites estão em
+[`DOCUMENTATION_SYNC.md`](docs/tcc/DOCUMENTATION_SYNC.md). A aprovação técnica não
+publica esta versão: a publicação depende de integração à `main` e conclusão do
+workflow de Pages. Os testes não substituem a revisão científica.
 
 ## Autor
 

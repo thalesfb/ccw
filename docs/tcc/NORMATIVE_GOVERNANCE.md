@@ -45,6 +45,13 @@ O regulamento de 2023 estabelece, para PTCC e TCC, a observância dos padrões n
 
 Em reconsulta de 2026-10-11, a página pública do curso listava pacotes LaTeX de 2026 para TC tradicional e desenvolvimento de software, hospedados no Google Drive. Os links solicitaram autenticação nesta conferência; por isso, foi possível confirmar a existência e o rótulo dos pacotes, mas não inspecionar seu conteúdo ou compará-lo com a adaptação local. Não foi identificado, a partir da página institucional, um repositório Git público explicitamente indicado como fonte canônica. Uma futura contribuição upstream deve primeiro identificar o mantenedor e o repositório canônico, ou confirmar com a instituição o canal apropriado para contribuição.
 
+A conferência posterior de 2026-10-14 comparou o pacote tradicional fornecido
+localmente, como registrado em [`ABNT-2025-CORRECOES.md`](ABNT-2025-CORRECOES.md).
+Isso supera a ausência de inspeção local daquele pacote, mas não confirma sua
+identidade criptográfica com o arquivo remoto nem a conformidade do pacote de
+desenvolvimento. A divergência institucional de capa e folha de rosto permanece
+pendente de orientação ou Coordenação; não deve ser resolvida automaticamente.
+
 ## 4. Modelo de autoridade por domínio
 
 A resolução deve considerar **qual componente está sendo regulado** e **qual fonte possui autoridade sobre aquele componente**. Não se adota uma hierarquia global única.
