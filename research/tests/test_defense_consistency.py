@@ -106,3 +106,10 @@ def test_requirement_origins_are_explicit_without_fabricated_empirical_support()
         assert set(cite.split(",")) <= bib_keys
     prototype = (ROOT / "results/tcc/conteudo/prototipo.tex").read_text(encoding="utf-8")
     assert r"\input{conteudo/rastreabilidade-requisitos}" in prototype
+
+
+def test_readme_distinguishes_shortlist_from_provisional_empirical_inclusion():
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "17 candidatos empíricos provisórios" not in text
+    assert "15 estudos empíricos mantidos provisoriamente" in text
+    assert "14 triagens S1/S2" in text and "11 apreciações por categoria" in text

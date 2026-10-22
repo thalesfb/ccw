@@ -1,51 +1,59 @@
 # 📚 Revisão Sistemática da Literatura - CCW Research
 
-> **População adjudicada atual (03/09/2026):** o snapshot versionado preserva
-> 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e
-> 11.877 registros na triagem. Após a adjudicação de escopo, são 18 registros
-> retidos (17 candidatos empíricos provisórios e o protocolo contextual 6921).
-> O registro 6918 foi corrigido para 2014 e excluído do recorte 2015--2026.
-> A baseline operacional de 31/08/2026 (16 retidos) e os números históricos de
-> 9.431 registros e 17 incluídos permanecem preservados para rastreabilidade.
+<!-- ccw-sync:start snapshot -->
+Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; cobertura documental: 20/10/2026.
+
+O snapshot registra 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e 11.877 registros na triagem. Foram 2.486 submetidos à priorização operacional; 2.468 não avançaram dessa etapa. A priorização encaminhou 18 candidatos, não 18 inclusões finais: 15 estudos empíricos mantidos provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 14 triagens S1/S2 e 11 apreciações por categoria; não há escore agregado nem aprovação científica final.
+<!-- ccw-sync:end snapshot -->
+
+Em 20/10/2026, a conferência suplementar do texto integral do registro excluído
+após o resumo confirmou a decisão de escopo; não criou uma nova etapa nem
+alterou as contagens do fluxo PRISMA.
+O estudo 8 aguarda adjudicação de elegibilidade/unidade e não recebeu respostas
+MMAT. Os estudos 5, 7 e 14 têm S1/S2, mas os critérios da categoria permanecem
+sem resposta até definir o delineamento. Os snapshots anteriores são históricos.
 
 A reconciliação detalhada da população vigente, incluindo deduplicação, decisões
 de escopo e separação entre candidatos empíricos e contexto, está em
 [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](../docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
 
-O manifesto histórico [`research/data/protocol_execution_2025.json`](data/protocol_execution_2025.json), extraído do contexto do PR #23, preserva a estratégia e os limites da execução de 2025. Ele é evidência histórica, não a fonte de verdade do snapshot atual; em particular, registra a divergência não resolvida entre 2.517 duplicatas reportadas e `total_removed=2494` no artefato SQLite histórico.
+O manifesto histórico [`research/data/protocol_execution_2025.json`](data/protocol_execution_2025.json) preserva a estratégia e os limites da execução de 2025. Ele é evidência histórica, não a fonte de verdade do snapshot atual; em particular, registra a divergência não resolvida entre 2.517 duplicatas reportadas e `total_removed=2494` no artefato SQLite histórico.
 
 ## 🎯 Visão Geral
 
 Sistema modular para revisão sistemática da literatura em educação matemática com técnicas computacionais, com relato orientado pelo PRISMA 2020.
 
-**Status atual**: ✅ Snapshot vigente reconciliado | 🧪 Testes-alvo da reconciliação validados | 📊 Visualizações PRISMA corretas
+O software e seus testes verificam operações e contratos documentais. A seleção
+científica, a cobertura das fontes e os julgamentos MMAT permanecem preliminares;
+um teste aprovado não certifica sua validade metodológica.
 
 ---
 
 ## ⚡ Quick Start
 
 ```bash
-# 1. Instalar dependências
-cd c:\dev\ccw
-pip install -r research/requirements.txt
+# A partir da raiz deste checkout, com o ambiente Python ativado
+python -m pip install -r research/requirements.txt
 
-# 2. Configurar ambiente (opcional)
-cp research/.env.example research/.env
-# Editar .env com credenciais de APIs se necessário
-
-# 3. Executar pipeline completo
-python -m research.src.cli run-pipeline
-python -m research.src.cli export
-
-# Verificar manualmente os derivados publicados (o export já faz esse sync)
+# Conferir os artefatos versionados, sem nova busca nem SQLite
+python -m research.src.validation.versioned_snapshot
 python -m research.src.validation.derived_assets --check
-
-# Reproduzir a população adjudicada e seus relatórios sem SQLite
-python -m research.src.processing.adjudicated_snapshot
-
-# 4. Ver resultados
-# Os arquivos são gerados em research/exports/
+python -m research.src.processing.adjudicated_snapshot --check
+python scripts/sync_project_docs.py --check
 ```
+
+Uma nova coleta é uma operação diferente: consulta APIs, grava o SQLite local e
+pode gerar resultados distintos. Se for deliberadamente necessária, configure
+as credenciais localmente, sem publicá-las, e use:
+
+```bash
+python -m research.src.cli run-pipeline
+```
+
+`export` lê esse banco e escreve os relatórios. Não o execute para simplesmente
+conferir os arquivos de referência. Qualquer regeneração ou reclassificação
+exige revisão das diferenças e de todos os consumidores, conforme
+[`DOCUMENTATION_SYNC.md`](../docs/tcc/DOCUMENTATION_SYNC.md).
 
 O exportador sincroniza automaticamente as seis visualizações canônicas para
 `results/tcc/images/` e `presentation/public/images/`. O CI compara esses
@@ -75,7 +83,7 @@ research/
 │   ├── processing/               # Processamento de dados
 │   │   ├── dedup.py              # Identidade DOI/URL + auditoria de títulos
 │   │   ├── scoring.py            # Score de relevância
-│   │   ├── selection.py          # Seleção PRISMA
+│   │   ├── selection.py          # Filtragem e priorização operacional
 │   │   └── language_utils.py     # Detecção de idioma
 │   ├── analysis/                 # Análise e visualização
 │   │   ├── visualizations.py     # Gráficos PRISMA
@@ -85,19 +93,16 @@ research/
 │   └── pipeline/                 # Orquestração
 │       └── run.py                # Pipeline completo
 ├── tests/                        # Testes automatizados
-│   ├── test_prisma_stages.py     # ✅ Validação PRISMA
-│   ├── test_complete_pipeline.py # Suite completa
-│   └── test_performance_benchmark.py
-├── exports/                      # Saídas geradas
-│   ├── summary_report.html       # Relatório resumido
-│   ├── papers_report.html        # Papers incluídos
-│   ├── gap_analysis.html         # Análise de lacunas
+│   ├── test_prisma_stages.py     # Regras de estágios implementadas no software
+│   ├── test_adjudicated_snapshot.py # Replay dos artefatos versionados
+│   └── test_documentation_sync.py # Contrato de coerência documental
+├── exports/                      # Saídas versionadas do snapshot
 │   ├── analysis/                 # Dados estruturados
 │   ├── visualizations/           # Gráficos PNG
-│   └── reports/                  # Relatórios completos
-├── cache/                        # Cache de APIs
-├── logs/                         # Logs de execução
-└── systematic_review.sqlite      # Banco SQLite principal (fonte local não versionada)
+│   └── reports/                  # HTMLs e manifestos da revisão
+├── data/                         # Escopo, fontes, protocolo e apreciação MMAT
+├── private/                      # Acervo operacional privado; não versionado
+└── systematic_review.sqlite      # Diagnóstico operacional local; não é o snapshot publicado
 ```
 
 ---
@@ -106,12 +111,16 @@ research/
 
 ### Bases de Dados Integradas
 
-| API | Cobertura | Status | Taxa de Sucesso |
-|-----|-----------|--------|-----------------|
-| **Semantic Scholar** | CS + multidisciplinar | ✅ Estável | >95% |
-| **OpenAlex** | 250M+ works abertos | ✅ Estável | >95% |
-| **Crossref** | Metadados DOI | ✅ Estável | >95% |
-| **CORE** | Open access | ⚠️ Instável | ~70% |
+| API | Cobertura registrada no pipeline |
+|-----|----------------------------------|
+| **Semantic Scholar** | Computação e busca multidisciplinar |
+| **OpenAlex** | Busca multidisciplinar de publicações |
+| **Crossref** | Metadados de DOI |
+| **CORE** | Busca de textos em acesso aberto |
+
+Não há, nesta documentação versionada, janela de observação e denominador
+reprodutível para publicar taxas de sucesso por API. Por isso, a disponibilidade
+dos conectores não é apresentada como desempenho medido.
 
 ### Estratégia de Busca
 
@@ -152,7 +161,7 @@ registro no snapshot operacional.
   `computational_techniques`;
 - idioma e presença de abstract foram registrados, mas não foram gates
   obrigatórios nessa configuração (`abstract_required=false`);
-- a elegibilidade aplicou score de relevância `>=4,0`, seguida da auditoria
+- a priorização operacional aplicou score de relevância `>=4,0`, seguida da auditoria
   manual dos 23 candidatos e dos sete overrides registrados no ledger.
 
 Revisão por pares, tipo documental, texto completo e evidência empírica
@@ -170,15 +179,19 @@ e a adjudicação dos overrides permanecem sob revisão.
 
 ### Fluxo PRISMA
 
-O pipeline segue as fases padrão: Identificação → Deduplicação → Triagem →
-Elegibilidade → Inclusão.
+O fluxo operacional documentado é: identificação → remoção determinística de
+registros com identidade repetida → triagem → priorização operacional →
+adjudicação de escopo. A priorização operacional não corresponde à avaliação
+de elegibilidade de relatórios em texto completo do PRISMA 2020; por isso, as
+contagens vigentes abaixo não são apresentadas como se reproduzissem esse
+fluxo padrão.
 
-**Baseline operacional anterior (31/08/2026; preservada como histórico)**:
+**Snapshot operacional pré-adjudicação (31/08/2026; histórico)**:
 
 - **Identificação**: 11.904 registros brutos no snapshot operacional
 - **Deduplicação determinística**: 27 registros removidos (25 DOI + 2 URL exata; um grupo de URL é misto quanto ao DOI)
-- **Triagem**: 11.877 avaliados; 9.391 excluídos; 2.486 avançaram
-- **Elegibilidade**: 2.486 avaliados; 2.470 excluídos; 16 retidos antes da adjudicação
+- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 encaminhados à priorização operacional
+- **Priorização operacional pré-adjudicação**: 2.486 registros; 2.470 excluídos; 16 retidos antes da adjudicação
 - **Auditoria de candidatos**: 23 candidatos operacionais; 7 overrides manuais registrados, dos quais 4 aguardam adjudicação de escopo
 - **Auditoria de identidade**: 25 excedentes DOI e 2 excedentes URL removidos deterministicamente; a auditoria bruta tem 257 excedentes em títulos, dos quais 232 permanecem apenas por título após a remoção DOI/URL e sem remoção automática
 - **Retidos antes da adjudicação**: 16 registros operacionais; 15 eram provisoriamente empíricos (6918 em hold por conflito temporal) e o protocolo 6921 permanecia contextual
@@ -193,14 +206,14 @@ explícitas. O SQLite permanece local e não versionado; para reconstituir o
 snapshot sem distribuir o banco, use os exports versionados e
 research/src/processing/adjudicated_snapshot.py.
 
-**População adjudicada atual (03/09/2026)**:
+**População do snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026**:
 
 - **Identificação**: 11.904 registros; 27 remoções determinísticas (25 DOI + 2 URL)
-- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 avançaram
-- **Elegibilidade**: 2.486 registros; 2.468 excluídos; 18 retidos
-- **Retidos**: 17 candidatos empíricos provisórios e o protocolo contextual 6921
-- **Percentuais sobre os 11.904 identificados**: 78,89% excluídos na triagem; 20,88% avançaram para elegibilidade; 0,15% retidos ao final.
-- **Percentuais sobre os 2.486 avaliados na elegibilidade**: 99,28% excluídos; 0,72% retidos.
+- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 encaminhados à priorização operacional
+- **Priorização operacional**: 2.486 registros; 2.468 não avançaram nessa etapa; 18 formaram a shortlist
+- **Fluxo pós-shortlist**: 1 registro excluído após resumo (decisão confirmada por conferência suplementar do texto integral, sem alterar a etapa ou a contagem); 17 relatórios procurados; 1 não recuperado; 16 avaliados em texto completo; 1 protocolo excluído e 15 estudos empíricos mantidos provisoriamente
+- **Percentuais sobre os 11.904 identificados**: 78,89% excluídos na triagem; 20,88% encaminhados à priorização; 0,15% na shortlist; 0,13% incluídos provisoriamente no núcleo empírico.
+- **Percentuais sobre os 2.486 submetidos à priorização operacional**: 99,28% não avançaram nessa etapa; 0,72% formaram a shortlist.
 - **Identidade**: 25 excedentes DOI + 2 excedentes URL removidos; 257 excedentes de título continuam como candidatos de auditoria, dos quais 232 são apenas por título
 
 **Baseline histórico (25/11/2025; não vigente)**:
@@ -214,7 +227,9 @@ research/src/processing/adjudicated_snapshot.py.
 Os contadores históricos acima são preservados para rastreabilidade e não
 validam a execução atual. O manifesto histórico registra a divergência entre
 2.517 duplicatas documentadas e `total_removed=2494` no único resumo SQLite
-preservado da execução original.
+preservado da execução original. Os rótulos de etapas desse relato de 2025 são
+mantidos como reconstrução histórica e não devem ser transferidos para o fluxo
+operacional vigente.
 
 Para conferir o snapshot publicado, consulte
 `research/exports/reports/summary.json` e valide sua correspondência com o CSV
@@ -249,11 +264,8 @@ consulte esses artefatos para números fixos gerados em uma execução específi
 ### CLI Completo
 
 ```bash
-# Executar pipeline completo
-python -m research.src.cli run-pipeline
-  --apis semantic_scholar openalex crossref core  # APIs específicas
-  --min-score 4.5                            # Score mínimo customizado
-  --limit-per-query 100                      # Limite por query
+# Nova coleta com parâmetros explícitos; altera o banco operacional
+python -m research.src.cli run-pipeline --apis semantic_scholar openalex crossref core --min-score 4.5 --limit-per-query 100
 
 # Ver estatísticas
 python -m research.src.cli stats
@@ -285,7 +297,7 @@ Use estes comandos em vez dos scripts avulsos em `tools/` e `research/scripts/`:
 # Auditoria cruzada DB → Exports → PTC (legado; ver observação abaixo)
 python -m research.src.cli audit
 
-# Valida o snapshot publicado sem modificar o banco
+# Diagnóstico de consistência entre o SQLite local e seus exports
 python -m research.src.cli validate-exports
 
 # Checagem ampla de exports, incluindo parsing dos relatórios HTML
@@ -294,7 +306,7 @@ python -m research.src.cli check-exports
 # Verificação de duplicatas/ausências/irrelevância no CSV (gera CSV de relatório)
 python -m research.src.cli verify-papers --csv research/exports/analysis/papers.csv
 
-# Regenera summary.json a partir do DB canônico
+# Regenera summary.json a partir do banco operacional local, não do snapshot versionado
 python -m research.src.cli regenerate-summary
 
 # Gera o manifesto versionado do snapshot sem copiar o SQLite para o Git
@@ -313,8 +325,9 @@ escopo de hashes do manifesto é o snapshot de pesquisa; a reconciliação
 editorial e os artefatos compilados do TCC aparecem como documentos
 acompanhantes, verificados pelos PRs que os possuem. O arquivo de referências
 derivadas do pipeline é `research/exports/references/included_papers.bib` e
-contém somente os 18 registros retidos atuais (17 candidatos empíricos
-provisórios e o protocolo contextual 6921). Referências
+contém os 18 registros shortlistados, não 18 estudos incluídos. O núcleo
+empírico vigente tem 15 estudos; um registro aguarda texto integral, um
+foi excluído após resumo e um protocolo após texto completo. Referências
 pedagógicas, metodológicas, de avaliação e técnicas usadas na fundamentação
 permanecem na bibliografia completa do TCC; são externas ao conjunto da revisão
 e não entram na contagem PRISMA.
@@ -448,12 +461,19 @@ Os relatórios HTML gerados agora incluem:
 - Palavras-chave detectadas automaticamente
 - Motivos de falha quando aplicável
 
-### Taxa de Sucesso Atual
+### Situação Atual da Recuperação e da Apreciação
 
-automaticamente no snapshot atual; essa métrica não representa a revisão
-externa de fontes primárias. O ledger MMAT registra nove textos primários
-examinados externamente e mantém os demais casos explicitamente como
-abstract/metadados, hold ou pendentes de recuperação/adjudicação.
+A taxa de extração automática do pipeline descreve o processamento técnico do
+snapshot e não equivale à recuperação ou à avaliação científica de fontes
+primárias. A cobertura atual identifica 16 PDFs locais entre os 18 candidatos;
+faltam os registros 3 e 6923. O fluxo histórico tem 15 inclusões provisórias,
+14 triagens MMAT S1/S2 e 11 apreciações por categoria. Esses números não comprovam
+leitura humana integral. O estudo 8 aguarda adjudicação de escopo/unidade; as
+categorias de 5, 7 e 14 também estão pendentes. O replay textual congelado cobre
+12 fontes e 484 trechos, não os 16 PDFs atuais. A avaliação do registro 3 não foi
+revalidada sem o original; 6923 não recebeu respostas. Consulte a
+[matriz de cobertura](../docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md) para
+localizadores e limites, sem converter disponibilidade em elegibilidade.
 
 **Principais Causas de Falha**:
 - `connection_exhausted`: Timeout após múltiplas tentativas
@@ -474,37 +494,30 @@ abstract/metadados, hold ou pendentes de recuperação/adjudicação.
 ### Executar Testes
 
 ```bash
-# Todos os testes
-cd research && pytest
+# A partir da raiz do repositório, sem o teste de rede
+python -m pytest research/tests -m "not integration" -q
 
-# Testes PRISMA específicos
-pytest research/tests/test_prisma_stages.py -v
+# Regras de estágios implementadas no software
+python -m pytest research/tests/test_prisma_stages.py -v
 
-# Com cobertura
-pytest --cov=research.src --cov-report=html
+# Coerência documental e contagens mostradas na defesa
+python -m pytest research/tests/test_documentation_sync.py research/tests/test_defense_consistency.py -q
 ```
 
 ### Suite de Testes
 
-**✅ test_prisma_stages.py** (9 testes da validação PRISMA):
+**`test_prisma_stages.py`** verifica contratos de software, não certifica PRISMA:
 
 - Critérios de inclusão/exclusão
 - Fases PRISMA (screening, eligibility, inclusion)
 - Consistência de estatísticas
 - Registro de motivos de exclusão/inclusão
 
-**✅ test_complete_pipeline.py**:
-
-- Integração completa do pipeline
-- Validação de APIs e coleta
-- Processamento e deduplicação
-- Seleção PRISMA e exportação
-
-**✅ test_performance_benchmark.py**:
-
-- Métricas de performance
-- Cache hit rate
-- Tempo de execução por fase
+**`test_versioned_snapshot.py`** e **`test_adjudicated_snapshot.py`** verificam
+o material versionado e o replay das decisões registradas, sem validar o mérito
+científico dessas decisões. **`test_documentation_sync.py`** exercita a atualização
+dos trechos espelhados e a detecção de revisões desatualizadas. A suíte não
+substitui a leitura das fontes, a revisão humana ou a defesa dos argumentos.
 
 ---
 
@@ -630,13 +643,14 @@ python -m research.src.cli run-pipeline
 
 ## 📈 Métricas de Qualidade
 
-### Performance Atual
+### Indicadores do snapshot e limites das métricas operacionais
 
-- **Taxa de sucesso das APIs**: >95% (exceto CORE ~70%)
-- **Tempo de execução**: variável; depende das APIs, limites e cache
+- **Taxa de sucesso das APIs**: não reportada; não há janela e denominador versionados para reproduzir o cálculo
+- **Tempo de execução**: depende das APIs, dos limites e do cache; não há benchmark versionado nesta referência
 - **Deduplicação determinística**: 27 registros removidos no fluxo (25 excedentes por DOI + 2 por URL exata; um grupo de URL é misto quanto ao DOI); a flag persistida está zerada
-- **Taxa de inclusão atual**: 0,15% (18 de 11.904)
-- **Cobertura temporal**: 2015-2026 (12 anos)
+- **Shortlist operacional**: 0,15% dos registros identificados (18/11.904)
+- **Núcleo empírico incluído provisoriamente**: 0,13% dos registros identificados (15/11.904); proporção do snapshot, não estimativa de prevalência nem medida de eficácia
+- **Recorte temporal**: 2015–2026, com 2026 parcial e corte da busca em 31/08/2026
 - **Cache**: contadores acumulados e dependentes do histórico; não são uma métrica fixa de reprodutibilidade
 
 ### Qualidade dos Dados
@@ -644,7 +658,7 @@ python -m research.src.cli run-pipeline
 - **Papers com abstract**: 11.885/11.904 (99,8%)
 - **Papers com DOI**: 10.682/11.904 (89,7%)
 - **Papers com ano preenchido**: 11.904/11.904 (100%) no banco bruto; 255 registros do export versionado estão fora do intervalo analítico 2015--2026 após a correção de 6918 para 2014
-- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e ledgers de adjudicação versionados; nova coleta pode variar e a avaliação MMAT dos 17 candidatos empíricos continua provisória
+- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e ledgers de adjudicação versionados; nova coleta pode variar. O MMAT preliminar abrange 14 dos 15 registros empíricos mantidos provisoriamente; o estudo 8 permanece sem respostas até adjudicação de escopo/unidade, e um registro segue sem texto integral.
 
 ---
 
@@ -661,10 +675,10 @@ python -m research.src.cli run-pipeline
 ### Metodologia Científica
 
 - ✅ Relato estruturado conforme as diretrizes PRISMA 2020 (não um registro prospectivo ou protocolo completo)
-- ✅ Transparência total (código aberto)
+- ✅ Código e artefatos derivados versionados são públicos; o SQLite operacional é local, um texto integral não foi recuperado e a apreciação MMAT é preliminar
 - ✅ Reprodutibilidade do snapshot documentada por exports e manifesto
-- ✅ Auditabilidade via logs
-- ✅ Rastreabilidade de cada paper
+- ✅ Auditoria por exports e ledgers versionados
+- ✅ Rastreabilidade dos 18 registros shortlistados e da decisão de escopo de cada um; isso não equivale a suporte arquivado para todas as afirmações do manuscrito
 
 ### Insights para o Protótipo
 
@@ -701,5 +715,5 @@ python -m research.src.cli run-pipeline
 
 ---
 
-*📅 Última atualização documental: 1 de setembro de 2026*
-*🟡 Status: Snapshot reconciliado | MMAT documental preliminar dos 15 registros empíricos registrado | fontes restantes e adjudicação final pendentes*
+*📅 Última atualização documental: 20 de outubro de 2026*
+*🟡 Status: Snapshot reconciliado em 20 out. 2026 | 15 inclusões empíricas provisórias | MMAT preliminar em 14 estudos; estudo 8 e adjudicação independente pendentes*

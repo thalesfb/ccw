@@ -69,7 +69,15 @@ Para conferir a população publicada e as imagens sem distribuir o banco:
 python -m research.src.validation.versioned_snapshot
 python -m research.src.processing.adjudicated_snapshot --check
 python -m research.src.validation.derived_assets --check
+python scripts/sync_project_docs.py --check
 ```
+
+O último comando verifica os blocos documentais gerados e os vínculos da revisão
+de consistência dos resumos e imagens. O job `source-validation` de `TCC quality`
+executa essa conferência em modo somente leitura. Após mudar os insumos, siga o
+[contrato de sincronização](../../docs/tcc/DOCUMENTATION_SYNC.md): atualizar
+blocos não renova automaticamente a revisão dos resumos manuais. O controle
+detecta desatualização, mas não certifica validade científica ou aprovação humana.
 
 Quando necessário, regenere os relatórios a partir do snapshot adjudicado:
 
@@ -99,6 +107,9 @@ somente leitura. Ela verifica a proveniência do PDF versionado, não cria commi
 não faz push e não dispara uma nova execução do workflow. Quando o PDF estiver
 desatualizado, o autor deve compilá-lo, conferir o resultado e incluí-lo no PR
 com os fontes correspondentes; o CI não altera a branch.
+Arquivos de `results/tcc` que não entram na compilação (`README.md`,
+`index.html`, `presentation/`, `images/README.md` e
+`images/project_overview_*.png`) não exigem novo PDF.
 
 Checks aprovados demonstram as propriedades verificadas pelo código. A leitura
 das fontes primárias, o julgamento metodológico e a revisão do texto continuam

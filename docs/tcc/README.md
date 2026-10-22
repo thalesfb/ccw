@@ -4,9 +4,11 @@ Este diretório registra decisões de engenharia relacionadas à produção, val
 
 ## Estado
 
-**Documentação de arquitetura e trabalho futuro.**
-
-Os documentos deste diretório não alteram, por si só, a classe LaTeX, o conteúdo científico, a formatação do TCC ou os workflows existentes. Qualquer implementação futura deve ocorrer em pull requests próprios, com escopo reduzido, evidências de regressão e revisão humana.
+Este diretório contém tanto notas do estado implementado quanto políticas e
+propostas futuras. A nota de estado, a cobertura das fontes e as auditorias
+descrevem evidências e pendências atuais; o roadmap identifica trabalho futuro.
+Uma proposta documentada não comprova sua implementação. Alterações na classe,
+no conteúdo ou nos workflows exigem mudanças verificáveis e revisão humana.
 
 ## Documentos
 
@@ -16,7 +18,9 @@ Os documentos deste diretório não alteram, por si só, a classe LaTeX, o conte
 - [`PROJECT_INTEGRATION.md`](PROJECT_INTEGRATION.md): separação entre conteúdo científico, engenharia documental, implementação computacional e requisitos institucionais.
 - [`PRESENTATION_GOVERNANCE.md`](PRESENTATION_GOVERNANCE.md): governança da apresentação Slidev do TCC, distinção entre o template de referência e requisitos do trabalho, identidade IFC, QR e critérios de legibilidade.
 - [`ESTADO-ATUAL-TCC.md`](ESTADO-ATUAL-TCC.md): estado público, limites interpretativos e decisões metodológicas pendentes da versão atual.
-- [`AUDITORIA-ESTUDOS-SINTESE.md`](AUDITORIA-ESTUDOS-SINTESE.md): papel sustentado, limites e pendências documentais dos 18 registros retidos no snapshot vigente.
+- [`AUDITORIA-ESTUDOS-SINTESE.md`](AUDITORIA-ESTUDOS-SINTESE.md): papel sustentado, limites e pendências dos 18 candidatos, não 18 inclusões empíricas finais.
+- [`SOURCE-COVERAGE-AND-CONTRIBUTIONS.md`](SOURCE-COVERAGE-AND-CONTRIBUTIONS.md): matriz de cobertura e contribuições derivada dos registros estruturados.
+- [`DOCUMENTATION_SYNC.md`](DOCUMENTATION_SYNC.md): fontes, consumidores e verificação das informações espelhadas.
 - [`PUBLICATION_GOVERNANCE.md`](PUBLICATION_GOVERNANCE.md): critérios para separar relato acadêmico, proveniência técnica e fluxo público de desenvolvimento.
 - [`../adr/0001-preserve-ifc-institutional-formatting.md`](../adr/0001-preserve-ifc-institutional-formatting.md): registro da decisão arquitetural de não substituir automaticamente particularidades institucionais durante atualizações normativas.
 
@@ -42,4 +46,12 @@ Esta documentação não:
 
 ## Baseline de verificação
 
-O registro inicial das fontes institucionais foi feito em **2026-08-07**. As páginas do SIBI/IFC, da Biblioteca do Campus Videira e do curso de Ciência da Computação foram reconsultadas em **2026-10-11**; os pacotes LaTeX de 2026 listados pelo curso direcionam ao Google Drive, cujo conteúdo solicitou autenticação e não foi comparado com a classe local. As demais fontes mantêm as datas de conferência registradas em seus próprios documentos. Essas datas são proveniência da consulta, não garantia de vigência futura.
+O registro inicial das fontes institucionais foi feito em **2026-08-07**. As páginas
+do SIBI/IFC, da Biblioteca do Campus Videira e do curso foram reconsultadas em
+**2026-10-11**; os links do Drive solicitaram autenticação nessa consulta.
+Posteriormente, o pacote tradicional de 2026 fornecido localmente foi comparado
+em **2026-10-14**, conforme
+[`ABNT-2025-CORRECOES.md`](ABNT-2025-CORRECOES.md). A identidade criptográfica com
+o arquivo remoto e o pacote de desenvolvimento não foram confirmados. A decisão
+institucional sobre capa e folha de rosto continua pendente; não se declara
+conformidade integral. As datas registram a consulta, não garantem vigência futura.

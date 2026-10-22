@@ -38,3 +38,16 @@ Examples:
   authors can introduce attribution footers even when the PR body has none.
 - CI validates compiled artifacts but must not create commits on contributor
   branches. Rebuild, inspect and commit an outdated canonical PDF before merge.
+
+## Keep scientific statements synchronized
+
+The TCC manuscript owns the scientific narrative; versioned evidence artifacts
+support its numerical and documentary claims. A change to either requires
+reviewing every affected README, page, slide, storyboard, parallel export, and
+image in the same pull request. Historical snapshots must remain explicitly dated.
+
+Run `python scripts/sync_project_docs.py --write` for generated blocks. Review
+manual summaries and images before `--record-review`, then run `--check` and
+the relevant tests. The assisted review binding is not scientific approval.
+See [the synchronization contract](docs/tcc/DOCUMENTATION_SYNC.md) for sources,
+consumers, limitations, and the distinction between reviewed and published work.

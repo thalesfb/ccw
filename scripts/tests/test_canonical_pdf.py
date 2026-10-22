@@ -67,6 +67,22 @@ class CanonicalPdfTests(unittest.TestCase):
         result = self.check()
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_public_overview_assets_do_not_require_pdf_refresh(self) -> None:
+        images = self.pdf.parent / "images"
+        images.mkdir()
+        (images / "README.md").write_text("overview notes\n", encoding="utf-8")
+        (images / "project_overview_2026-10-20.png").write_bytes(b"overview fixture\n")
+        self.commit()
+        result = self.check()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_manuscript_figures_still_require_pdf_refresh(self) -> None:
+        images = self.pdf.parent / "images"
+        images.mkdir()
+        (images / "prisma_flow.png").write_bytes(b"figure fixture\n")
+        self.commit()
+        self.assertEqual(self.check().returncode, 1)
+
     def test_invalid_pdf_header_is_rejected(self) -> None:
         self.pdf.write_bytes(b"not a PDF\n")
         self.commit()

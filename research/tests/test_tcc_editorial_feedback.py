@@ -1,6 +1,8 @@
 """Deterministic editorial regressions, not certification of scientific claims."""
 
 import csv
+from datetime import date
+import json
 import re
 import unittest
 from pathlib import Path
@@ -66,7 +68,6 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("ainda sujeitos à conferência humana", gap_slide)
         self.assertIn("não estimativa de prevalência", gap_slide)
         self.assertNotIn("pp. 1, 14, 22", gap_slide)
-
         manuscript = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn(r"\citeonline[pp.~2, 14, 22]{Villegas2025_6916}", manuscript)
         self.assertNotIn(r"\\citeonline", manuscript)
@@ -86,6 +87,11 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("2022--2023", gaps)
         self.assertIn("sem esclarecer se são coortes distintas", gaps)
 
+        audit = (ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md").read_text(encoding="utf-8")
+        self.assertIn("semestre", audit)
+        self.assertIn("2023--2024 e 2022--2023", audit)
+        self.assertIn("Excluído após resumo", audit)
+        self.assertIn("A triagem não encontrou resultado explícito de aprendizagem matemática no resumo", audit)
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn("Pendente: texto integral da dissertação não recuperado; MMAT não aplicado.", results)
         self.assertIn("não tratados como verificados no texto integral", results)
@@ -114,12 +120,37 @@ class EditorialFeedbackTests(unittest.TestCase):
         for path in (
             ROOT / "presentation/README.md",
             TCC / "presentation/README.md",
+            ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md",
         ):
             document = " ".join(path.read_text(encoding="utf-8").lower().split())
             self.assertIn("a fala não integra esta revisão semifinal", document)
             self.assertIn("após a revisão dos prs e a validação da orientação", document)
 
-    def test_defense_artifacts_use_the_revised_version_date(self):
+    def test_public_evidence_note_states_scope_without_private_workflow(self):
+        note_path = ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md"
+        note = note_path.read_text(encoding="utf-8")
+        normalized_note = " ".join(note.split())
+        self.assertIn("15 registros permanecem provisoriamente no núcleo empírico", normalized_note)
+        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", normalized_note)
+        self.assertIn("SUPPORTED", normalized_note)
+        self.assertIn("adjudicação humana", normalized_note.lower())
+        self.assertIn("as nove afirmações têm adjudicação humana", normalized_note)
+        self.assertNotIn("feedback/private", normalized_note)
+        self.assertNotIn("compile_tcc.py", normalized_note)
+        self.assertFalse((ROOT / "docs/TCC_FEEDBACK_WORKFLOW.md").exists())
+
+    def test_public_status_and_defense_artifacts_are_currently_distinguished(self):
+        status = (ROOT / "docs/tcc/ESTADO-ATUAL-TCC.md").read_text(encoding="utf-8")
+        coverage = json.loads(
+            (ROOT / "research/data/study_contribution_current.json").read_text(encoding="utf-8")
+        )
+        self.assertIn(date.fromisoformat(coverage["review_date"]).strftime("%d/%m/%Y"), status)
+        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", status)
+        self.assertIn("Slidev em 25 slides", status)
+        self.assertIn("19 slides", status)
+        self.assertIn("exportação paralela", status)
+        self.assertNotIn("Colab CLI", status)
+        self.assertNotIn("MCP", status)
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
         self.assertIn("Versão revisada: 15/10/2026", slides)
@@ -129,7 +160,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("não recebeu MMAT", pptx_source)
         self.assertNotIn("não receberam MMAT", pptx_source)
 
-    def test_current_article_access_counts_match_the_study_registry(self):
+    def test_presentation_governance_matches_current_article_access_counts(self):
         registry_path = ROOT / "research/data/mmat_current_study_registry.csv"
         with registry_path.open(encoding="utf-8-sig", newline="") as source:
             records = list(csv.DictReader(source))
@@ -155,6 +186,18 @@ class EditorialFeedbackTests(unittest.TestCase):
             (17, 15, 1, 1),
         )
 
+        governance = " ".join((ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md").read_text(encoding="utf-8").split())
+        self.assertIn("núcleo empírico mantém provisoriamente 15 registros", governance)
+        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", governance)
+        self.assertIn("1 aguarda texto integral", governance)
+        self.assertIn("um registro foi excluído após resumo", governance)
+        self.assertNotIn("cinco foram apreciados", governance)
+        self.assertNotIn("nove dos 17 candidatos empíricos", governance)
+        note = (ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md").read_text(encoding="utf-8")
+        normalized_note = " ".join(note.split())
+        self.assertIn("um texto integral não foi recuperado", normalized_note)
+        self.assertIn("Um foi excluído após a triagem do resumo", normalized_note)
+        self.assertNotIn("os cinco candidatos restantes foram apreciados", normalized_note)
         slides = " ".join(
             (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
         )
@@ -179,6 +222,13 @@ class EditorialFeedbackTests(unittest.TestCase):
             r"author = {Aleksandar Peji{\'c} and Piroska Stani{\'c} Molcer",
             bibliography,
         )
+        audit = (ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md").read_text(encoding="utf-8")
+        self.assertIn("PDF p. 5; artigo p. 654", audit)
+        self.assertIn("classifica estudantes em categorias operacionais de desempenho", audit)
+        self.assertNotIn("classifica estudantes em níveis de proficiência matemática", audit)
+        self.assertIn("não são uma medida validada de proficiência individual", audit)
+        self.assertIn("diferença relativa entre os ganhos médios dos grupos", audit)
+        self.assertIn("primeiro ano de Engenharia Industrial, com dados de 2017 a 2021", audit)
 
     def test_recovered_studies_are_cited_with_precise_units_and_boundaries(self):
         foundation = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
@@ -286,6 +336,13 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("Registros identificados por fonte científica", review)
         self.assertIn(r"\section{Limitações e Contribuições da Revisão}", review)
         self.assertNotIn(r"\section{Contribuições para a Especificação do Protótipo}", review)
+
+    def test_public_status_distinguishes_prioritization_from_eligibility(self):
+        status = (ROOT / "docs/tcc/ESTADO-ATUAL-TCC.md").read_text(encoding="utf-8")
+        normalized = " ".join(status.split())
+        self.assertIn("2.486 submetidos à priorização operacional", normalized)
+        self.assertIn("2.468 não avançaram dessa etapa", normalized)
+        self.assertNotIn("2.486 submetidos à elegibilidade", normalized)
 
     def test_bncc_short_call_preserves_institutional_responsibility(self):
         bib = (TCC / "referencias.bib").read_text(encoding="utf-8")

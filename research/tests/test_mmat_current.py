@@ -407,7 +407,11 @@ def test_general_paper_exports_do_not_publish_superseded_mmat_payloads() -> None
 
     assert all('"mmat_' not in note for note in csv_notes + json_notes if isinstance(note, str))
 
-
+    readme = " ".join(
+        (PAPERS_CSV.parents[1] / "README.md").read_text(encoding="utf-8").lower().split()
+    )
+    assert "ledger atual" in readme
+    assert "não representam a avaliação vigente" in readme
 
 
 def test_defense_material_preserves_pending_mmat_decisions() -> None:
