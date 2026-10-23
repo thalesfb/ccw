@@ -240,8 +240,15 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         assert removed not in methodology
     assert "A seleção dos estudos e a apreciação metodológica foram realizadas pelo autor, com apoio de ferramentas automatizadas." in methodology
     appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
-    assert "O autor realizou a seleção dos estudos, com apoio de ferramentas automatizadas" in appendix
-    assert "A apreciação metodológica foi realizada pelo autor, com apoio de ferramentas automatizadas" in appendix
+    selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
+    appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
+    assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
+    assert r"Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão" in selection_row
+    assert r"O autor realizou a seleção dos estudos, com apoio de ferramentas automatizadas. \\" in selection_row
+    assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
+    assert r"A apreciação metodológica foi realizada pelo autor, com apoio de ferramentas automatizadas. \\" in appraisal_row
+    assert "a verificação documental permanece incompleta" not in selection_row
+    assert "com fontes e julgamentos ainda incompletos" not in appraisal_row
     assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology
     assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
     assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
