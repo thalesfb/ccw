@@ -238,6 +238,10 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "esta versão não apresenta uma apreciação concluída" in methodology
     for removed in ("adjudicação", "revisor único", "avaliação independente"):
         assert removed not in methodology
+    assert "A seleção dos estudos e a apreciação metodológica foram realizadas pelo autor, com apoio de ferramentas automatizadas." in methodology
+    appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
+    assert "O autor realizou a seleção dos estudos, com apoio de ferramentas automatizadas" in appendix
+    assert "A apreciação metodológica foi realizada pelo autor, com apoio de ferramentas automatizadas" in appendix
     assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology
     assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
     assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
