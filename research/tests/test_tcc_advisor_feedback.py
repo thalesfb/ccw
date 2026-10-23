@@ -43,7 +43,7 @@ def test_cache_percentages_are_not_reported_as_stable_metrics() -> None:
         r"(?:63\s*\\?%|92\s*\\?%|265\s*/\s*287).{0,100}cache)"
     )
     assert not fixed_cache_claim.search(source)
-    assert "Um acerto de cache ocorre" in _read(TCC_CONTENT / "metodologia.tex")
+    assert r"Um acerto de \textit{cache} ocorre" in _read(TCC_CONTENT / "metodologia.tex")
 
 
 def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
@@ -65,17 +65,17 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
 
 def test_current_deduplication_description_matches_identity_audit() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
-    assert "DOI normalizado" in methodology
-    assert "URL exata" in methodology
-    assert "27 linhas excedentes" in methodology
-    assert "232 excedentes" in methodology
+    assert "mesmo DOI, após padronização da grafia, ou com a mesma URL" in methodology
+    assert "removeu 27 duplicatas, sendo 25 identificadas por DOI e 2 por URL" in methodology
+    assert "232 registros com título repetido" in methodology
     assert "não foram removidos automaticamente por título" in methodology
+    assert "determinística" not in methodology
 
 
 def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
     assert "A estratégia canônica foi composta por 72 consultas" in methodology
-    assert "não foi preservado um log histórico completo" in methodology
+    assert "não foi preservado um registro histórico completo" in methodology
     assert "Foram executadas 72 consultas" not in methodology
     assert "resultaram em 11.904 registros identificados" not in methodology
 
@@ -158,8 +158,8 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     assert "não foi tratada como evidência de uma aplicação funcional" in prototype
     assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "Este trabalho investigou" in conclusion
-    assert "Este trabalho elaborou uma especificação técnica e pedagógica" in abstract
-    assert "O protocolo não foi executado empiricamente" in abstract
+    assert "Este trabalho teve como objetivo propor uma especificação técnica e pedagógica" in abstract
+    assert "um protocolo de avaliação, ainda não aplicado," in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:
@@ -210,8 +210,9 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         ),
         "",
     )
-    assert "Mantido provisoriamente no fluxo de síntese" in study8_row
-    assert "elegibilidade como estudo empírico e a unidade de apreciação MMAT aguardam adjudicação humana" in study8_row
+    assert "Incluído no corpus final, sem MMAT" in study8_row
+    assert "não está definido se a apreciação deve considerar as simulações ou os estudos com estudantes" in study8_row
+    assert "adjudicação" not in study8_row
     assert r"O Quadro~\ref{qua:sintese-estudos-empiricos}" in chapter
     assert "não apresenta medida harmonizada de efeito" in chapter
     assert "Resultado reportado" not in chapter
@@ -231,11 +232,23 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         assert "Nove textos estão arquivados" not in text
         assert "nove fontes" not in text
     assert r"\citeonline{Zeng2025_6923}" in methodology
-    assert "Q1--Q5 permanecem sem resposta" in methodology
-    assert "esses cinco critérios não foram apreciados e permanecem sem resposta, em vez de CT" in methodology
+    assert "Q1--Q5 ficaram sem resposta porque o delineamento desses estudos não está definido" in methodology
+    assert "esses cinco critérios ficaram sem resposta (e não CT)" in methodology
     assert "produzidos com apoio de IA generativa" in methodology
-    assert "não constituem essa avaliação independente" in methodology
-    assert "não apresenta uma apreciação humana concluída" in methodology
+    assert "esta versão não apresenta uma apreciação concluída" in methodology
+    for removed in ("adjudicação", "revisor único", "avaliação independente"):
+        assert removed not in methodology
+    assert "A seleção dos estudos e a apreciação metodológica foram realizadas pelo autor, com apoio de ferramentas automatizadas." in methodology
+    appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
+    selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
+    appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
+    assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
+    assert r"Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão" in selection_row
+    assert r"O autor realizou a seleção dos estudos, com apoio de ferramentas automatizadas. \\" in selection_row
+    assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
+    assert r"A apreciação metodológica foi realizada pelo autor, com apoio de ferramentas automatizadas. \\" in appraisal_row
+    assert "a verificação documental permanece incompleta" not in selection_row
+    assert "com fontes e julgamentos ainda incompletos" not in appraisal_row
     assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology
     assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
     assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()

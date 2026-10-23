@@ -593,8 +593,9 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert len(note) <= 450
     tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
     prose = tcc_results.read_text(encoding="utf-8")
-    assert "O estudo 8 permanece no fluxo e no núcleo sem respostas" in prose
-    assert "adjudicação de sua elegibilidade e unidade de apreciação" in prose
+    assert "O estudo 8 integra o corpus final sem respostas" in prose
+    assert "não está definido se a apreciação deve considerar as simulações computacionais" in prose
+    assert "adjudicação" not in prose
 
 
 def test_public_mmat_page_marks_study_8_as_unassessed_due_to_unit_hold() -> None:

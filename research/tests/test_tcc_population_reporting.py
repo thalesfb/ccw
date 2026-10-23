@@ -10,15 +10,16 @@ def test_tcc_distinguishes_search_cutoff_from_scope_adjudication() -> None:
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
 
     assert "corte temporal declarado da busca foi 31 de agosto de 2026" in methodology
-    assert "adjudicação inicial do escopo da população foi concluída em 3 de setembro de 2026" in methodology
-    assert "não foi preservado um log histórico completo das requisições" in methodology
+    assert "definição inicial do escopo do corpus foi concluída em 3 de setembro de 2026" in methodology
+    assert "adjudicação inicial do escopo" not in methodology
+    assert "não foi preservado um registro histórico completo das requisições" in methodology
 
 
 def test_tcc_does_not_present_heuristic_prioritization_as_full_report_eligibility() -> None:
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
     results = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
 
-    assert "não corresponde à avaliação de elegibilidade de relatórios" in methodology
+    assert "não corresponde à avaliação de elegibilidade em texto completo" in methodology
     assert "elaborada com referência ao PRISMA 2020" in results
     assert "a priorização não equivale a essa avaliação" in results
 
@@ -28,7 +29,7 @@ def test_tcc_population_percentages_name_their_denominators() -> None:
 
     assert "0,23\\% dos 11.904 registros identificados" in results
     assert "78,89\\% dos mesmos 11.904 registros identificados" in results
-    assert "99,28\\% dos 2.486 registros submetidos à priorização operacional" in results
+    assert "99,28\\% dos 2.486 registros submetidos à priorização por relevância" in results
 
 
 def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_records() -> None:
@@ -40,14 +41,15 @@ def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_r
     assert "Relatórios não recuperados & 1" in results
     assert "Relatórios avaliados em texto completo & 16" in results
     assert "Protocolos excluídos após texto completo & 1" in results
-    assert "Estudos empíricos mantidos provisoriamente & 15" in results
+    assert "Estudos empíricos no corpus final & 15" in results
+    assert "mantidos provisoriamente & 15" not in results
     assert "Candidatos empíricos provisórios & 17" not in results
 
 
 def test_methodology_dates_final_scope_reconciliation_without_implying_a_new_search() -> None:
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
 
-    assert "Em 14 de outubro de 2026, uma reconciliação atualizada confrontou os 18 registros da lista preliminar" in methodology
+    assert "Em 14 de outubro de 2026, uma conferência atualizada confrontou os 18 registros da lista preliminar" in methodology
     assert "sem nova consulta às bases" in methodology
     assert "sem alterar o corte temporal da busca" in methodology
 
@@ -78,9 +80,10 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     normalized_presentation = " ".join(presentation.split())
 
     assert "um texto não recuperado" in methodology
-    assert "15 estudos empíricos mantidos provisoriamente" in methodology
+    assert "15 estudos empíricos no corpus final" in methodology
     assert "um não foi recuperado" in results
-    assert "15 estudos compõem provisoriamente o núcleo empírico incluído" in results
+    assert "15 estudos compõem o corpus final" in results
+    assert "núcleo empírico" not in results
     assert "um texto integral não foi recuperado" in normalized_presentation
     assert "os outros 15 estudos empíricos integram o núcleo incluído" in normalized_presentation
     assert "nove registros tiveram" not in results.lower()
@@ -133,8 +136,9 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     ).read_text(encoding="utf-8")
 
     assert "triagem e a avaliação de elegibilidade, 18 registros" not in results
-    assert "priorização operacional" in results
-    assert "não equivale à avaliação de elegibilidade de relatórios" in methodology
+    assert "priorização por relevância" in results
+    assert "priorização operacional" not in results
+    assert "não corresponde à avaliação de elegibilidade em texto completo" in methodology
     assert "9 tiveram texto primário revisado e 8 foram" not in slides
     assert "nove registros com texto primário revisado e oito" not in pptx_source
     assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard

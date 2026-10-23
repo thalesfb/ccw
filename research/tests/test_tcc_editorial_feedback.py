@@ -47,7 +47,8 @@ class EditorialFeedbackTests(unittest.TestCase):
             r"\citeonline[pp.~65, 69--70]{Echeveria2025_6920}",
         ):
             self.assertIn(citation, gaps)
-        self.assertIn("15 registros mantidos provisoriamente no núcleo empírico, sem pressupor leitura humana integral", gaps)
+        self.assertIn("textos consultados dos 15 estudos do corpus final, sem pressupor leitura integral", gaps)
+        self.assertNotIn("núcleo empírico", gaps)
         self.assertIn("Um registro aguarda recuperação do texto", gaps)
         self.assertIn("não permite estimar a frequência", gaps)
         self.assertNotIn("aparecem menos desenvolvidas", gaps)
@@ -268,7 +269,8 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_discussion_bounds_gap_claims_and_avoids_prose_bold(self):
         discussion = (TCC / "conteudo/resultados.tex").read_text(encoding="utf-8")
         self.assertNotIn("lacunas mais recorrentes", discussion.lower())
-        self.assertIn("sem comprovar leitura humana integral de todos os textos", discussion)
+        self.assertIn("sem que isso signifique leitura integral de todos os textos", discussion)
+        self.assertNotIn("adjudicação", discussion)
         self.assertIn("14 receberam respostas S1/S2 e 11 tiveram os critérios específicos da categoria apreciados", discussion)
         self.assertNotIn("parte deles se baseou em resumos e metadados", discussion)
         self.assertNotIn(r"\textbf{OE", discussion)
@@ -281,13 +283,27 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_abstract_reports_operational_selection_and_limits_gap_claims(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
-        self.assertIn("2.486 para priorização operacional", abstract)
-        self.assertIn("15 registros empíricos mantidos provisoriamente", abstract)
-        self.assertIn("14 desses registros receberam respostas S1/S2 e 11 tiveram os critérios da categoria apreciados", abstract)
-        self.assertIn("A dissertação não recuperada também não recebeu apreciação MMAT", abstract)
-        self.assertIn("sem estimar sua frequência", abstract)
+        self.assertIn("18 foram selecionados para leitura", abstract)
+        self.assertIn("o corpus final reuniu 15 estudos empíricos", abstract)
+        for removed in ("priorização operacional", "mantidos provisoriamente", "adjudicação", "único pesquisador", "DOI/URL"):
+            self.assertNotIn(removed, abstract)
+        self.assertIn("sem pontuação geral", abstract)
+        self.assertIn("não são conceitos equivalentes", abstract)
+        self.assertIn("devem apoiar, e não substituir, a interpretação do professor", abstract)
         self.assertNotIn("2.486 para a elegibilidade", abstract)
         self.assertNotIn("lacunas relacionadas à explicabilidade", abstract)
+        # Process details live in the body, not in the abstract.
+        for detail in ("S1/S2", "Q1--Q5", "estudo 8", "busca histórica"):
+            self.assertNotIn(detail, abstract)
+        results = (TCC / "conteudo/resultados.tex").read_text(encoding="utf-8")
+        method = (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8")
+        conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
+        self.assertIn("14 receberam respostas S1/S2 e 11 tiveram os critérios específicos da categoria apreciados", results)
+        self.assertIn("também não recebeu apreciação", method)
+        self.assertIn("não foi recuperado; por isso, não recebeu apreciação MMAT", conclusion)
+        self.assertIn("sem estimar sua frequência", results)
+        self.assertIn("não equivale à avaliação de elegibilidade", method)
+        self.assertIn("não permitem reconstruir integralmente as consultas históricas", conclusion)
 
     def test_technical_term_is_defined_without_unclear_translation(self):
         theory = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
@@ -332,7 +348,8 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_coverage_caption_names_post_deduplication_universe(self):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn("Registros do recorte versionado após deduplicação", review)
+        self.assertIn("Registros após a remoção de duplicatas, por fonte científica", review)
+        self.assertNotIn("recorte versionado", review)
         self.assertNotIn("Registros identificados por fonte científica", review)
         self.assertIn(r"\section{Limitações e Contribuições da Revisão}", review)
         self.assertNotIn(r"\section{Contribuições para a Especificação do Protótipo}", review)
@@ -383,7 +400,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("Denominador: 14 registros", table)
         note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
         self.assertLessEqual(len(note), 450)
-        self.assertIn("O estudo 8 permanece no fluxo e no núcleo sem respostas", review)
+        self.assertIn("O estudo 8 integra o corpus final sem respostas", review)
         self.assertIn(r"\renewcommand{\arraystretch}{1.0}", mmat)
 
     def test_he_mmat_interpretation_matches_the_provisional_ledger_design(self):
@@ -401,7 +418,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("quantitativo não randomizado", mmat)
         self.assertIn("controle de confundidores", mmat)
         self.assertIn("administração da intervenção", mmat)
-        self.assertIn("adjudicação independente", mmat)
+        self.assertNotIn("adjudicação", mmat)
         self.assertIn(r"\citeonline[seção 4.1, pp.~9--11 e Tabela~2]{Innovative2023_005}", mmat)
         self.assertIn(r"p=0{,}583", mmat)
         self.assertIn("18 casos sem desfecho válido", mmat)
@@ -410,10 +427,10 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("79 estudantes", mmat)
         self.assertIn("10.052 passos", mmat)
         self.assertIn("unidade de avaliação", mmat)
-        self.assertIn("S1, S2 e Q1--Q5 permanecem sem resposta", mmat)
+        self.assertIn("S1, S2 e Q1--Q5 ficaram sem resposta", mmat)
         self.assertNotIn("seguem como CT", mmat)
         self.assertIn("a ausência de apreciação não deve ser interpretada como CT", mmat)
-        self.assertIn("sem inferir eficácia", mmat)
+        self.assertIn("não constitui evidência de eficácia do protótipo", mmat)
         self.assertNotIn("quantitativo descritivo", mmat)
         self.assertNotIn("próprios de outra categoria", mmat)
 
@@ -423,7 +440,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         theory = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn("sequência automatizada de etapas", intro)
-        self.assertIn("versão congelada dos registros", method)
+        self.assertIn("versão analisada dos dados designa o conjunto fixo de registros", method)
         for phrase in ("média harmônica", "falsos positivos", "concordância", "calibração"):
             self.assertIn(phrase, theory)
         for phrase in ("regras de classificação", "redes neurais multicamadas",
