@@ -31,6 +31,23 @@ permite a adoção das normas ABNT ou de critérios definidos pela Coordenação
 - título, autor e assunto foram declarados nos metadados do PDF;
 - testes estáticos e compilação do TCC verificam essas propriedades.
 
+## Capitalização de citações e títulos nas referências
+
+São regras distintas e devem ser verificadas separadamente:
+
+- nas citações autor-data entre parênteses, a NBR 10520:2023 usa a forma
+  convencional do nome, como (Silva, 2023), em vez de colocar todo o sobrenome
+  em caixa alta;
+- na lista de referências, a NBR 6023:2025, seção 8.2, determina que título e
+  subtítulo sejam reproduzidos como aparecem no documento consultado, separados
+  por dois-pontos.
+
+Por isso, não se deve converter em bloco os títulos das referências para Title
+Case ou caixa alta. Cada título precisa ser conferido na fonte citada; a
+capitalização de uma chamada autor-data não serve como evidência para alterar o
+título bibliográfico. A [NBR 6023:2025](https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/149/2025/05/Referencias-NBR-6023-2025.pdf),
+seção 8.2, é a fonte consultada para essa distinção.
+
 ## Conferência das versões em 8 de outubro de 2026
 
 A identificação da NBR 14724 foi conferida no frontispício e no prefácio da

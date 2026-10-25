@@ -65,7 +65,11 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
 
 def test_current_deduplication_description_matches_identity_audit() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
-    assert "mesmo DOI, após padronização da grafia, ou com a mesma URL" in methodology
+    assert (
+        "mesmo \\textit{Digital Object Identifier} (DOI, identificador de objeto digital), "
+        "após padronização da grafia, ou com o mesmo \\textit{Uniform Resource Locator} "
+        "(URL, localizador uniforme de recursos)"
+    ) in methodology
     assert "removeu 27 duplicatas, sendo 25 identificadas por DOI e 2 por URL" in methodology
     assert "232 registros com título repetido" in methodology
     assert "não foram removidos automaticamente por título" in methodology
@@ -158,8 +162,8 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     assert "não foi tratada como evidência de uma aplicação funcional" in prototype
     assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "Este trabalho investigou" in conclusion
-    assert "Este trabalho teve como objetivo propor uma especificação técnica e pedagógica" in abstract
-    assert "um protocolo de avaliação, ainda não aplicado," in abstract
+    assert "Este trabalho propôs uma especificação técnica e pedagógica" in abstract
+    assert "um protocolo de avaliação ainda não aplicado" in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:

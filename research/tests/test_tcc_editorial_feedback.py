@@ -283,13 +283,13 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_abstract_reports_operational_selection_and_limits_gap_claims(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
-        self.assertIn("18 foram selecionados para leitura", abstract)
-        self.assertIn("o corpus final reuniu 15 estudos empíricos", abstract)
+        self.assertIn("18 selecionados preliminarmente", abstract)
+        self.assertIn("15 estudos empíricos compuseram o corpus final", abstract)
         for removed in ("priorização operacional", "mantidos provisoriamente", "adjudicação", "único pesquisador", "DOI/URL"):
             self.assertNotIn(removed, abstract)
         self.assertIn("sem pontuação geral", abstract)
         self.assertIn("não são conceitos equivalentes", abstract)
-        self.assertIn("devem apoiar, e não substituir, a interpretação do professor", abstract)
+        self.assertIn("saídas computacionais devem apoiar, e não substituir, a interpretação docente", abstract)
         self.assertNotIn("2.486 para a elegibilidade", abstract)
         self.assertNotIn("lacunas relacionadas à explicabilidade", abstract)
         # Process details live in the body, not in the abstract.
@@ -447,6 +447,83 @@ class EditorialFeedbackTests(unittest.TestCase):
                        "modelos probabilísticos", "comparação de modelos",
                        "aprendizagem cooperativa"):
             self.assertIn(phrase, theory + review)
+
+    def test_active_acronym_list_is_alphabetical_and_covers_terms_used_in_text(self):
+        main = (TCC / "main.tex").read_text(encoding="utf-8")
+        glossary = re.search(r"\\begin\{siglas\}(.*?)\\end\{siglas\}", main, re.S)
+        self.assertIsNotNone(glossary)
+        entries = re.findall(r"\\item\[([^\]]+)\]", glossary.group(1))
+        self.assertEqual(entries, sorted(entries, key=str.casefold))
+
+        for acronym in (
+            "AIC", "BIC", "CORE", "CRF", "CSV", "CT", "EEG", "F1", "HTML", "JSON", "MLP",
+            "N/A", "PCA", "PDF", "PICO", "PICOS", "RN", "ROC", "ROC-AUC", "SHA-256",
+            "TIMSS", "URL", "RIPPER",
+        ):
+            self.assertIn(fr"\item[{acronym}]", glossary.group(1))
+
+    def test_abstract_reports_the_prisma_flow_without_counting_unretrieved_text_as_excluded(self):
+        abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
+        portuguese = abstract.split(r"\begin{resumo}", 1)[1].split(
+            r"\end{resumo}", 1
+        )[0]
+        english = abstract.split(r"\begin{resumo}[Abstract]", 1)[1].split(
+            r"\end{otherlanguage*}", 1
+        )[0]
+
+        for phrase in (
+            "um foi excluído após a triagem do resumo",
+            "17 relatórios procurados",
+            "um texto integral não foi recuperado",
+            "16 foram avaliados",
+            "um protocolo sem resultados empíricos concluídos foi excluído",
+            "15 estudos empíricos",
+        ):
+            self.assertIn(phrase, " ".join(portuguese.lower().split()))
+        self.assertNotIn("excluídos um registro fora do escopo, um texto integral não recuperado",
+                         " ".join(portuguese.lower().split()))
+
+        for phrase in (
+            "one was excluded after abstract screening",
+            "17 reports sought",
+            "one full text could not be retrieved",
+            "16 were assessed",
+            "one protocol without completed empirical results was excluded",
+            "15 empirical studies",
+        ):
+            self.assertIn(phrase, " ".join(english.lower().split()))
+
+    def test_prisma_appendix_keeps_abstract_gaps_and_links_public_materials(self):
+        appendix = (TCC / "postextuais/apendice.tex").read_text(encoding="utf-8")
+        normalized = " ".join(appendix.split())
+        self.assertIn("2 & Resumo & Parcial:", normalized)
+        self.assertIn("critérios gerais", normalized)
+        self.assertIn("data individual da última consulta", normalized)
+        self.assertIn("total agregado de participantes", normalized)
+        self.assertIn("financiamento", normalized)
+        self.assertIn("registro prospectivo", normalized)
+        self.assertIn("https://github.com/thalesfb/ccw/tree/main/research", normalized)
+        self.assertIn("título não identifica o trabalho como revisão sistemática", normalized)
+
+    def test_new_abbreviations_are_expanded_before_first_use(self):
+        abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
+        methodology = (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8")
+        for text in (abstract,):
+            self.assertIn(r"Preferred Reporting Items for Systematic Reviews and Meta-Analyses} (PRISMA)", text)
+            self.assertIn(r"Mixed Methods Appraisal Tool} (MMAT)", text)
+        self.assertIn(r"Secure Hash Algorithm} de 256 bits (SHA-256)", methodology)
+        theory = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
+        results = (TCC / "conteudo/resultados.tex").read_text(encoding="utf-8")
+        self.assertIn(r"Repeated Incremental Pruning to Produce Error Reduction} (RIPPER)", theory)
+        self.assertIn(r"Digital Object Identifier} (DOI", methodology)
+        self.assertIn(r"Uniform Resource Locator} (URL", methodology)
+        self.assertIn(r"Comma-Separated Values} (CSV", results)
+        self.assertIn(r"JavaScript Object Notation} (JSON", (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8"))
+        self.assertIn(r"HyperText Markup Language} (HTML", results)
+        self.assertIn(r"Can't tell} (CT", (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8"))
+        self.assertIn(r"COnnecting REpositories} (CORE)", abstract)
+        self.assertIn(r"Portable Document Format} (PDF", (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8"))
+        self.assertIn(r"Not applicable} (N/A", methodology)
 
 
 if __name__ == "__main__":
