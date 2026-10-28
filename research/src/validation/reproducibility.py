@@ -72,6 +72,8 @@ COMPANION_DOCUMENTS: tuple[tuple[str, str, str], ...] = (
 )
 
 ARTIFACTS: tuple[tuple[str, str], ...] = (
+    ("research/data/mmat_followup_questions_current.csv", "prepared unsent questions covering indeterminate criteria and structural appraisal holds"),
+    ("research/data/mmat_completion_review_2026-10-28.json", "source-linked documentary reappraisal changes and retained measurement uncertainties"),
     (
         "research/exports/analysis/papers.csv",
         "row-level versioned representation of the current snapshot",

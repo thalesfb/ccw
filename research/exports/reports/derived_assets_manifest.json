@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "16d99194210b577f708cea21e47ac4dd0a41d4820ac9480d0c682d6b195831c2",
+    "sha256": "364fc365e4b0bda4f97b14135c5551cdd9ebaad2620a452c7875203b5fb3a494",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/claim_evidence_current.json",
@@ -18,8 +18,10 @@
       "research/data/manual_override_evidence_matrix.csv",
       "research/data/metadata_provenance_audit.csv",
       "research/data/mmat_assessments.csv",
+      "research/data/mmat_completion_review_2026-10-28.json",
       "research/data/mmat_component_reassessment_current.csv",
       "research/data/mmat_current_study_registry.csv",
+      "research/data/mmat_followup_questions_current.csv",
       "research/data/mmat_primary_sources_manifest.csv",
       "research/data/mmat_reassessment_current.csv",
       "research/data/prisma_population_reconciliation.csv",
@@ -34,6 +36,7 @@
       "research/src/analysis/mmat_assessment.py",
       "research/src/analysis/mmat_current.py",
       "research/src/analysis/mmat_current_tcc_table.py",
+      "research/src/analysis/mmat_followups.py",
       "research/src/analysis/mmat_tcc_table.py",
       "research/src/analysis/reports.py",
       "research/src/analysis/study_scope.py",

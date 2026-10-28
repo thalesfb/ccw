@@ -37,7 +37,7 @@ CONTEXT_ONLY_STUDY_IDS = (9,)
 PENDING_FULL_TEXT_STUDY_IDS = (6923,)
 CONTEXTUAL_PROTOCOL_STUDY_IDS = (6921,)
 SYNTHESIS_SCOPE_PATH = CANDIDATE_SCOPE_PATH
-VALID_RESPONSES = {"", "Y", "N", "CT", "N/A"}
+VALID_RESPONSES = {"", "Y", "N", "CT"}
 VALID_DESIGNS = {
     "qualitative", "quantitative_randomized", "quantitative_nonrandomized",
     "quantitative_descriptive", "mixed_methods", "metadata_hold", "not_applicable",
@@ -65,7 +65,7 @@ VALID_DESIGN_STATUSES = {
 REQUIRED_CRITERIA = ("q1", "q2", "q3", "q4", "q5")
 COMPONENT_CRITERIA = ("c1", "c2", "c3", "c4", "c5")
 ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
-EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT|N/A)\s+.+$")
+EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT)\s+.+$")
 VALID_ASSESSMENT_BASES = {
     "primary_full_text_reviewed_externally",
     "primary_full_text_scope_exclusion",
@@ -130,7 +130,8 @@ def load_current_reassessment(
         not_appraised = (
             source_pending
             or row.get("assessment_basis") in {
-                "abstract_and_metadata_only", "primary_full_text_scope_exclusion"
+                "abstract_and_metadata_only", "primary_full_text_scope_exclusion",
+                "protocol_or_proposal_not_applicable",
             }
             or unit_pending
         )
@@ -212,19 +213,8 @@ def load_current_reassessment(
                 f"Study {row.get('study_id')} uses an unknown assessment basis: "
                 f"{row['assessment_basis']!r}"
             )
-        protocol_record = row["assessment_basis"] == "protocol_or_proposal_not_applicable"
-        has_not_applicable_response = any(row[criterion] == "N/A" for criterion in ALL_CRITERIA)
-        if protocol_record and not all(row[criterion] == "N/A" for criterion in ALL_CRITERIA):
-            raise ValueError(
-                f"Protocol/proposal {row.get('study_id')} must mark every empirical MMAT "
-                "criterion as not applicable"
-            )
-        if not protocol_record and has_not_applicable_response:
-            raise ValueError(
-                f"Study {row.get('study_id')} uses N/A outside a protocol/proposal record"
-            )
         if row["assessment_basis"] == "protocol_or_proposal_not_applicable":
-            if row.get("design_status") != "not_applicable":
+            if row.get("design_status") != "not_applicable" or row.get("design") != "not_applicable":
                 raise ValueError(
                     f"Study {row.get('study_id')} marks a protocol/proposal as "
                     "applicable to an empirical design"

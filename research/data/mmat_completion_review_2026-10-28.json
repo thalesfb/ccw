@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-28",
+  "review_type": "source_grounded_assisted_documentary_reappraisal",
+  "human_adjudication": "pending",
+  "changes": [
+    {
+      "study_id": "6",
+      "component": "study",
+      "criterion": "Q1",
+      "old": "CT",
+      "new": "Y",
+      "physical_pages": [
+        4
+      ],
+      "source_id": "PS-006",
+      "rationale_pt": "A pergunta se refere a estudantes turcos do oitavo ano e utiliza o segmento correspondente do TIMSS 2011; a fonte e o recorte são pertinentes à classificação operacional (página física 4). Isso não demonstra representatividade da amostra final.",
+      "source_sha256": "c861251a34879d25a6318721a0022b9efa0e500bace8c4ea6fbb00adfce7c672"
+    },
+    {
+      "study_id": "6917",
+      "component": "study",
+      "criterion": "Q1",
+      "old": "CT",
+      "new": "Y",
+      "physical_pages": [
+        3,
+        4,
+        15,
+        16
+      ],
+      "source_id": "PS-6917",
+      "rationale_pt": "A fonte ASSISTments e os critérios de seleção e limpeza são descritos e justificados para a predição das respostas registradas, além da partição de validação (páginas físicas 3–4 e 15–16). A dúvida sobre limite ou exclusão de estudantes com mais de mil interações permanece como ressalva.",
+      "source_sha256": "8b7c283a6cac47b6c961294abe2461b8cd7d64dc6ea4d7b99600829c4431dd8d"
+    },
+    {
+      "study_id": "6916",
+      "component": "qualitative",
+      "criterion": "C2",
+      "old": "CT",
+      "new": "Y",
+      "physical_pages": [
+        16
+      ],
+      "source_id": "PS-6916",
+      "rationale_pt": "Entrevistas estruturadas com estudantes e educadores, realizadas ao fim da experiência e com tópicos pertinentes explicitados, são adequadas para explorar as percepções sobre o sistema (página física 16). Detalhes de seleção e registro continuam como perguntas de esclarecimento, sem serem tratados automaticamente como inadequação da coleta.",
+      "source_sha256": "e1e6dd886d1e4e6d42e7da3e1b366505bab06365015d57ea15fa4a37b39cbfcc"
+    },
+    {
+      "study_id": "6920",
+      "component": "qualitative",
+      "criterion": "C2",
+      "old": "CT",
+      "new": "Y",
+      "physical_pages": [
+        3,
+        11,
+        12
+      ],
+      "source_id": "PS-6920",
+      "rationale_pt": "O relato identifica entrevistas com cinco docentes de Matemática para explorar o uso do modelo e apresenta suas falas individuais (páginas físicas 3 e 11–12), constituindo coleta pertinente à questão de percepção docente. A seleção e o registro das respostas permanecem pouco detalhados.",
+      "source_sha256": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9"
+    },
+    {
+      "study_id": "6920",
+      "component": "qualitative",
+      "criterion": "C4",
+      "old": "CT",
+      "new": "Y",
+      "physical_pages": [
+        11,
+        12
+      ],
+      "source_id": "PS-6920",
+      "rationale_pt": "As falas individuais dos docentes sustentam a interpretação descritiva de suas percepções sobre identificação, apoio e planejamento (páginas físicas 11–12). O julgamento não transforma expectativas dos entrevistados em efeito observado sobre aprendizagem.",
+      "source_sha256": "a53059fc8cad21e7e5a17337f764a0f51658c3e38125bdba2a2271974c796cc9"
+    }
+  ],
+  "common_appraisal_rule": "Na categoria descritiva, distinguir pertinência da fonte/seleção (4.1) de representatividade (4.2). Mensuração (4.3) considera clareza e adequação das medidas para a pergunta operacional apreciada; não valida construtos ampliados nem eficácia pedagógica. Nas avaliações qualitativas, adequação da coleta (1.2) não equivale à derivação analítica (1.3), sustentação da interpretação (1.4) ou coerência de todo o processo (1.5).",
+  "protocol_disposition": {
+    "study_id": "6921",
+    "criterion_answers_removed": 7,
+    "reason": "Non-empirical protocol outside the completed empirical appraisal; record status is retained separately."
+  },
+  "source_access_limits_this_cycle": [
+    {
+      "study_id": "3",
+      "status": "historical_appraisal_not_revalidated_without_primary_text"
+    },
+    {
+      "study_id": "7",
+      "status": "publisher_url_redirected_to_homepage; author_copy_pdf_not_retrieved; no_new_full_pdf_appraisal"
+    },
+    {
+      "study_id": "6919",
+      "status": "publisher_http_403; previous_appraisal_not_revalidated_this_cycle"
+    },
+    {
+      "study_id": "6923",
+      "status": "previous_embargo_record; full_text_not_retrieved; no_new_release_date_claim"
+    }
+  ],
+  "screening_proposal_pending_unit_decision": {
+    "study_id": "8",
+    "proposed_s1": "Y",
+    "proposed_s2": "Y",
+    "basis": "Abstract and Chapter 5 pp. 60–64 identify questions, human tutoring records and simulations. Chapter 6 is a distinct computational analysis; do not sum the datasets.",
+    "decision_needed": "Define the thesis/computational component appraisal unit and appropriate category with the TCC supervision before integrating this proposal into the authoritative table."
+  },
+  "guide": {
+    "url": "https://medschool.cuanschutz.edu/docs/librariesprovider94/di-docs/methods-(design)-docx/mmat_2018_criteria-manual_2018-08-01_eng.pdf",
+    "sha256": "d93bd6d5d6ca9bf1ba0c0015ff76e5204f1ec440c8f005f1c50a3a49221ee828",
+    "physical_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "no_external_contact_performed": true,
+  "measurement_proposals_not_adopted": [
+    {
+      "study_id": "6",
+      "criterion": "Q3",
+      "retained": "CT",
+      "reason_pt": "O instrumento TIMSS, a primeira estimativa plausível e o corte maior que 500 são descritos (página física 5), mas sua adequação para inferir sucesso ou proficiência individual permanece incerta. Definição operacional não demonstra validade do construto."
+    },
+    {
+      "study_id": "6917",
+      "criterion": "Q3",
+      "retained": "CT",
+      "reason_pt": "Os registros e o alvo correct são definidos (páginas físicas 4–5 e 7), mas a adequação dos indicadores históricos aos construtos de esforço cognitivo e proficiência não está estabelecida. A disponibilidade temporal das variáveis também exige esclarecimento."
+    }
+  ]
+}

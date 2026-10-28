@@ -67,7 +67,7 @@ def load_rows(path: Path = DATA_PATH) -> list[dict[str, str]]:
         if row.get("assessment_status") == "final":
             raise ValueError("The current TCC table cannot render final MMAT claims")
         for criterion in CRITERIA:
-            if row.get(criterion) not in {"", "Y", "N", "CT", "N/A"}:
+            if row.get(criterion) not in {"", "Y", "N", "CT"}:
                 raise ValueError(f"Invalid {criterion} value for study {row.get('study_id')}")
     return rows
 
@@ -242,7 +242,7 @@ def render_table(
         r"\textit{Nota:} Registros provisórios, conferência humana pendente, sem escore agregado. "
         r"S1 e S2 são perguntas de triagem. "
         r"Q1--Q5 correspondem aos critérios MMAT da categoria; "
-        r"Y/N/CT/N/A = sim/não/não é possível concluir/não aplicável. "
+        r"Y/N/CT = sim/não/não é possível concluir. "
         r"Quant. = quantitativo; rand. = randomizado. "
         r"Base = fonte consultada. "
         r"Ver Seção~\ref{sec:qualidade-estudos}. "

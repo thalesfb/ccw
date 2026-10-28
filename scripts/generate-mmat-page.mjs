@@ -11,6 +11,7 @@ const reproducibilityManifestPath = path.join(root, 'research', 'exports', 'repo
 const outputPath = path.join(root, 'research', 'exports', 'analysis', 'mmat_current.html');
 const sourceCoverage = JSON.parse(fs.readFileSync(path.join(root, 'research', 'data', 'study_contribution_current.json'), 'utf8'));
 const coverageById = new Map(sourceCoverage.records.map((row) => [row.study_id, row]));
+const followups = parseCsv(fs.readFileSync(path.join(root, 'research/data/mmat_followup_questions_current.csv'), 'utf8'));
 
 function parseCsv(text) {
   const rows = [];
@@ -61,8 +62,9 @@ function criterion(value) {
     return '<span class="criterion criterion-pending" title="Não avaliado" aria-label="Não avaliado">—</span>';
   }
   const normalized = answer.toLowerCase();
-  const className = normalized === 'y' ? 'criterion-y' : normalized === 'n' ? 'criterion-n' : normalized === 'n/a' ? 'criterion-na' : 'criterion-ct';
-  const response = normalized === 'y' ? 'Sim' : normalized === 'n' ? 'Não' : normalized === 'n/a' ? 'Não se aplica' : 'Não é possível determinar';
+  if (!['y', 'n', 'ct'].includes(normalized)) throw new Error(`Invalid MMAT criterion response: ${answer}`);
+  const className = normalized === 'y' ? 'criterion-y' : normalized === 'n' ? 'criterion-n' : 'criterion-ct';
+  const response = normalized === 'y' ? 'Sim' : normalized === 'n' ? 'Não' : 'Não é possível determinar';
   return `<span class="criterion ${className}" title="Resposta: ${escapeHtml(response)}" aria-label="Resposta: ${escapeHtml(response)}">${escapeHtml(answer)}</span>`;
 }
 
@@ -72,7 +74,7 @@ function sourceStatus(row, scope) {
   if (scope?.empirical_mmat_applicability === 'pending_unit_adjudication') return '<span class="tag tag-amber">MMAT suspenso; unidade de análise pendente</span>';
   if (row.design === 'design_pending' && row.s1) return '<span class="tag tag-amber">texto primário revisado; categoria MMAT pendente</span>';
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') return '<span class="tag tag-green">texto primário revisado</span>';
-  if (row.empirical_status === 'protocol_or_proposal_not_applicable') return '<span class="tag tag-red">protocolo contextual</span>';
+  if (row.empirical_status === 'protocol_or_proposal_not_applicable') return '<span class="tag tag-amber">protocolo contextual; MMAT não aplicado</span>';
   if (row.assessment_basis === 'pending_full_text_not_appraised') return '<span class="tag tag-amber">texto integral pendente; MMAT não aplicado</span>';
   if (row.assessment_basis === 'abstract_and_metadata_only') return '<span class="tag tag-amber">excluído após resumo; MMAT não aplicado</span>';
   return '<span class="tag tag-amber">resumo/metadados</span>';
@@ -291,6 +293,9 @@ const mixedMethodsNote = mixedMethodsStudies.length
   : '';
 
 function criterionEvidenceDetails(row, scope) {
+  if (row.empirical_status === 'protocol_or_proposal_not_applicable') {
+    return `<tr class="mmat-evidence-row"><td colspan="10"><details class="mmat-evidence"><summary>Ver perguntas, justificativas e localização da evidência</summary><p>Protocolo sem resultados empíricos concluídos; critérios MMAT não avaliados.</p><p>Esta é a situação do registro, não uma resposta aos critérios qualitativos ou quantitativos.</p><p class="source-note"><strong>Fonte:</strong> ${escapeHtml(row.source_id)}; <strong>localizador:</strong> ${escapeHtml(row.page_or_section)}.</p></details></td></tr>`;
+  }
   const evidence = parseCriterionEvidence(row.criterion_evidence);
   const designQuestions = criterionQuestionsByDesign.get(row.design);
   const missingEvidence = scope?.empirical_mmat_applicability === 'pending_unit_adjudication'
@@ -444,7 +449,7 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Leitura metodológica</span>
           <h3>Critérios, não uma nota</h3>
-          <p>O registro de apreciação preserva S1 e S2 como perguntas de triagem e Q1–Q5 como critérios de apreciação. As células usam <strong>Y</strong> (sim), <strong>N</strong> (não), <strong>CT</strong> (não é possível concluir) e <strong>N/A</strong> (não aplicável ao protocolo contextual).</p>
+          <p>O registro de apreciação preserva S1 e S2 como perguntas de triagem e Q1–Q5 como critérios de apreciação. As respostas são <strong>Y</strong> (sim), <strong>N</strong> (não) e <strong>CT</strong> (critério avaliado, mas não é possível concluir). O traço indica critério não avaliado. A não aplicação ao protocolo contextual é explicada como situação do registro, sem atribuir respostas.</p>
         </article>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
@@ -483,7 +488,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · N/A = não aplicável · — = não avaliado. Nos estudos 5, 7 e 14, apenas S1/S2 foram respondidas; Q1–Q5 aguardam definição da categoria. O relatório 6923 e o estudo 8 (unidade de análise pendente) não receberam respostas MMAT. O estudo 9 está fora do escopo matemático, sem MMAT. As respostas históricas do estudo 3 não foram revalidadas nesta revisão sem o original.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Nos estudos 5, 7 e 14, apenas S1/S2 foram respondidas; Q1–Q5 aguardam definição da categoria. O relatório 6923 e o estudo 8 (unidade de análise pendente) não receberam respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios. As respostas históricas do estudo 3 não foram revalidadas nesta revisão sem o original.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
@@ -498,6 +503,9 @@ const page = `<!doctype html>
             <p>Completar os localizadores por critério, recuperar o relatório pendente no fluxo (${pendingFullText.length}), revalidar as demais fontes ainda não examináveis nesta auditoria e adjudicar a elegibilidade e unidade de análise do estudo 8. As consultas históricas declaradas não certificam leitura humana; a matriz de cobertura distingue acesso e leitura efetivamente registrados. O protocolo 6921 continua fora da síntese empírica.</p>
           </div>
         </div>
+        <p>${followups.length} perguntas preparadas: esclarecimentos para os critérios indeterminados, definição de delineamento e unidade, e recuperação de fontes. Nenhum contato externo ou resposta de autor foi registrado nesta revisão.</p>
+        <p><a href="../../../docs/tcc/MMAT-PERGUNTAS-PENDENTES.md">Lista de perguntas por estudo</a> · <a href="../../../research/data/mmat_followup_questions_current.csv">CSV das perguntas</a></p>
+        ${[...new Set(followups.map((q) => q.study_id))].map((id) => `<details class="surface-card"><summary>Estudo ${escapeHtml(id)} · perguntas pendentes</summary><ul>${followups.filter((q) => q.study_id === id).map((q) => `<li><strong>${escapeHtml(({study:'critérios principais',record:'pendência do registro',qualitative:'componente qualitativo',quantitative:'componente quantitativo'})[q.component])} · ${escapeHtml(({unit:'unidade de apreciação',design:'delineamento',access:'acesso ao texto'})[q.mmat_criterion] ?? q.mmat_criterion)}</strong>: ${escapeHtml(q.question_pt)} <small>Fonte: ${escapeHtml(q.source_id)}; ${escapeHtml(q.evidence_locator)}. Pergunta preparada, não enviada.</small></li>`).join('')}</ul></details>`).join('')}
       </section>
 
       <section class="section surface-card">
