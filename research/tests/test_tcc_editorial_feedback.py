@@ -86,7 +86,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("os resultados se estendem até a oitava semana", gaps)
         self.assertIn("2023--2024", gaps)
         self.assertIn("2022--2023", gaps)
-        self.assertIn("sem esclarecer se são coortes distintas", gaps)
+        self.assertIn("sem esclarecer se são grupos distintos de estudantes", gaps)
 
         audit = (ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md").read_text(encoding="utf-8")
         self.assertIn("semestre", audit)

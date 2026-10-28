@@ -339,6 +339,17 @@ function criterionEvidenceDetails(row, scope) {
   </tr>`;
 }
 
+const designLabels = new Map([
+  ['qualitative', 'Qualitativo'],
+  ['quantitative_randomized', 'Quantitativo randomizado'],
+  ['quantitative_nonrandomized', 'Quantitativo não randomizado'],
+  ['quantitative_descriptive', 'Quantitativo descritivo'],
+  ['mixed_methods', 'Métodos mistos'],
+  ['metadata_hold', 'Categoria não confirmada'],
+  ['not_applicable', 'Não aplicável'],
+  ['design_pending', 'Categoria pendente'],
+]);
+
 const rows = current.map((row) => {
   const study = registryById.get(row.study_id) ?? {};
   const scope = scopeById.get(row.study_id) ?? {};
@@ -347,8 +358,8 @@ const rows = current.map((row) => {
   const type = row.empirical_status === 'protocol_or_proposal_not_applicable'
     ? 'fora da síntese empírica'
     : row.study_id === '6915'
-      ? `${row.design} · componente escolar`
-      : row.design || 'design não informado';
+      ? `${designLabels.get(row.design) ?? 'Categoria não informada'} · componente escolar`
+      : designLabels.get(row.design) ?? 'Categoria não informada';
   return `<tr>
     <td>${escapeHtml(row.study_id)}</td>
     <td><span class="study-title">${escapeHtml(title)}</span><span class="study-meta">${escapeHtml(row.study_key)} · ${escapeHtml(type)}</span></td>

@@ -146,14 +146,14 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     assert "registros → 18 em avaliação de escopo" in slides
 
 
-def test_background_distinguishes_abstract_only_records_from_verified_full_text_evidence() -> None:
+def test_background_uses_empirical_examples_and_keeps_exclusion_in_the_review() -> None:
     introduction = (ROOT / "results/tcc/conteudo/introducao.tex").read_text(encoding="utf-8")
     foundations = (ROOT / "results/tcc/conteudo/fundamentacao.tex").read_text(encoding="utf-8")
 
-    assert "excluído na triagem do resumo" in introduction
-    assert "somente como contexto bibliográfico" in introduction
-    assert "resumo indexado" in introduction
-    assert "somente como contexto bibliográfico, não como evidência incluída na síntese" in introduction
+    review = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+    assert "Machine2019_007" not in introduction
+    assert r"\citeonline{Machine2019_007}" in review
+    assert "Exclusão por escopo registrada após resumo" in review
     for citation in ("Math2021_001", "Design2025_004", "Machine2024_009"):
         assert f"\\citeonline{{{citation}}}" in foundations
     assert "não constituem, em conjunto, evidência de eficácia de ensino personalizado" in foundations
