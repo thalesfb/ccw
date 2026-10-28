@@ -617,7 +617,7 @@
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "b5ba2f436fc48ed5f874b4ba6612b845e36b1abcd822b702f8713cef46f67198"
+      "sha256": "25a096613e0e4afbaea29c1f6311647e361dbcc41cc438c711cdb7971d8d645c"
     },
     {
       "path": "research/requirements.txt",

@@ -139,7 +139,11 @@ for (const studyId of ['6916', '6919', '6920']) {
   assert.match(mixedRow, /qualitativo|quantitativo/i, `mixed-methods study ${studyId} must identify component types`);
 }
 assert.match(mmat, /<td>6919<\/td>[\s\S]{0,1200}texto primário revisado/, 'study 6919 must be identified as externally reviewed in the current table');
-assert.match(mmat, /He2025_6915 · quantitative_nonrandomized · componente escolar/, 'study 6915 must identify the classroom component as its appraisal unit');
+assert.match(mmat, /He2025_6915 · Quantitativo não randomizado · componente escolar/, 'study 6915 must identify the classroom component and design in Portuguese');
+for (const metadata of mmat.matchAll(/class="study-meta">([^<]+)</g)) {
+  assert.doesNotMatch(metadata[1], /quantitative_|design_pending|mixed_methods|metadata_hold|not_applicable/, 'reader-facing classifications must not expose internal design codes');
+}
+assert.match(mmat, /Design2025_004 · Categoria pendente/, 'a pending category must remain explicit rather than being inferred');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
 assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');

@@ -92,9 +92,8 @@ def test_interpretation_precedes_the_long_synthesis_quadro() -> None:
     assert "A leitura deve considerar conjuntamente o desenho" in chapter[interpretation:quadro]
 
 
-def test_long_python_identifier_is_breakable() -> None:
+def test_unbreakable_python_identifiers_do_not_leak_into_prose() -> None:
     source = _all_tex()
-    assert r"\texttt{RandomForest\allowbreak Classifier}" in source
     assert r"\texttt{RandomForestClassifier}" not in source
     assert r"\path{RandomForestClassifier}" not in source
     assert r"\nolinkurl{RandomForestClassifier}" not in source

@@ -215,7 +215,7 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
         if row["study_id"] == "6920" and row["component"] == "quantitative"
     )
     assert component["c3"] == "N"
-    assert "independent measurement of the target" in component["evidence_c3"]
+    assert "mensuração independente do alvo" in component["evidence_c3"]
 
 
 def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
@@ -236,8 +236,8 @@ def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
     )
     assert component["c2"] == "CT"
     assert rows["6920"]["q4"] == "CT"
-    assert "without clarifying cohort provenance" in component["evidence_c4"].lower()
-    assert "whether missing cases create nonresponse bias" in component["evidence_c4"].lower()
+    assert "sem esclarecer a origem dos grupos" in component["evidence_c4"].lower()
+    assert "se os casos ausentes produzem viés de não resposta" in component["evidence_c4"].lower()
 
 
 def test_unreported_allocation_and_appraisal_unit_keep_design_pending() -> None:
