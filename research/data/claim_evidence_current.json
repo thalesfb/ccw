@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "review_date": "2026-10-16",
-  "manuscript_binding_updated_on": "2026-10-22",
+  "manuscript_binding_updated_on": "2026-10-28",
   "manuscript_binding_note": "The nine previously reviewed statements remain verbatim; the containing manuscript changed elsewhere. Hash bindings were refreshed without claiming a new whole-manuscript or primary-source review.",
   "scope": "Nine explicitly reviewed claims; not whole-manuscript certification",
   "status_meaning": "SUPPORTED means the attributed statement is documented, not that the primary study is validated.",
@@ -9,7 +9,7 @@
     {
       "claim_id": "C-RSL-01",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "Os autores descrevem uma divisão de 70\\% para treinamento e 30\\% para teste e reportam 75\\% de acurácia de teste para a combinação de SMOTE e RUSBoost.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -41,7 +41,7 @@
     {
       "claim_id": "C-RSL-02",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "Na mesma comparação, a revocação da classe de baixo desempenho é de 43\\%.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -68,7 +68,7 @@
     {
       "claim_id": "C-RSL-03",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "o alvo da modelagem foi o tamanho de efeito de uma intervenção, não a proficiência individual.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -105,7 +105,7 @@
     {
       "claim_id": "C-RSL-04",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "os resultados apresentam, na subanálise de programação, progresso até a oitava semana para estudantes com alta interação.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -135,7 +135,7 @@
     {
       "claim_id": "C-RSL-05",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "Na Tabela~3 (p.~105; página física 15), os autores reportam diferença estatisticamente significativa entre os grupos já no pré-teste ($U=6714$, $Z=4{,}839$, $p<0{,}001$, tamanho de efeito=0{,}346)",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -161,7 +161,7 @@
     {
       "claim_id": "C-RSL-06",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "oito itens da escala de mentalidade matemática utilizados para formar as categorias também permanecem entre os preditores selecionados.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -193,7 +193,7 @@
     {
       "claim_id": "C-RSL-07",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "Nas tarefas de frações, compara simulações com registros de tutoria previamente coletados no DataShop para 79 estudantes e prevê qualitativamente efeitos de sequenciamentos instrucionais, não escores absolutos de desempenho no tutor ou em pós-teste.",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -221,7 +221,7 @@
     {
       "claim_id": "C-RSL-08",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "a análise utiliza 4.568 passos nos quais os estudantes executaram as próprias ações. A nota 5 esclarece que o subconjunto inclui os passos de estratégia em que o estudante escolhe a transformação; ficam fora somente os passos em que o tutor executa os cálculos",
       "claim_type": "empirical_result",
       "citation_keys": [
@@ -247,7 +247,7 @@
     {
       "claim_id": "C-RSL-09",
       "tcc_file": "results/tcc/conteudo/resultadosesperados.tex",
-      "manuscript_sha256": "fe0c111689c1969df71264f88ffc04a59bc85bd21be6b2467a52eb4139b668ae",
+      "manuscript_sha256": "952bfe56c0c06081a15aa150f098ea0634a7537f2b43f9159cce09cf9faf5641",
       "claim_text": "Desempenho em matemática on-line.\\newline Finalidade: Predição",
       "claim_type": "study_characterization",
       "citation_keys": [

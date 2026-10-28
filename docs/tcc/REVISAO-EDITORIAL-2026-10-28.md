@@ -33,3 +33,9 @@ As justificativas e localizadores estão em `research/data/mmat_reassessment_cur
 ## Limites restantes
 
 O texto mantém repetições de contagens e ressalvas entre metodologia, revisão, discussão e conclusão. Uma redução estrutural dessas repetições pode ser objeto de outra revisão, sem apagar limitações materiais. A exposição matemática da explicação do modelo pode ser simplificada futuramente, preservando os detalhes necessários à reprodução. Nenhuma eficácia educacional própria foi atribuída ao protótipo nesta revisão.
+
+## Verificação e correções de integração
+
+O PDF de 84 páginas foi compilado até convergência das referências; o validador conferiu 61 destinos do sumário e das listas. Foram inspecionadas visualmente a introdução e as páginas do quadro complementar traduzido. A página MMAT foi aberta no navegador integrado e seus rótulos em português e estados pendentes foram conferidos; a captura consultada não apresentou mensagens de erro ou aviso no console.
+
+O primeiro ciclo de CI do PR #118, run `40635202059`, passou na compilação LaTeX, site, apresentação e PowerPoint, mas detectou dois vínculos de hash desatualizados nos testes de pesquisa e a ausência de atualização do PDF canônico. As nove afirmações vinculadas permaneceram literalmente iguais e conservaram os mesmos localizadores, fontes, respostas e situação de revisão; somente o vínculo ao arquivo do manuscrito foi atualizado. O manifesto recebeu o novo hash do quadro gerado, sem alterar a população, a busca ou o diagnóstico histórico do banco. O PDF compilado e inspecionado foi incluído no caminho canônico, conforme o gate do repositório. Essas atualizações não representam nova aprovação científica.
