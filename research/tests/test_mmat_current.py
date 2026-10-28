@@ -22,6 +22,30 @@ import json
 import pytest
 
 
+def test_followup_questions_cover_every_indeterminate_criterion_and_structural_hold():
+    from src.analysis.mmat_followups import load_questions, validate_questions, render_markdown
+    questions = load_questions()
+    validate_questions(questions)
+    expected = {
+        (r["study_id"], "study", key.upper())
+        for r in load_current_reassessment()
+        for key in ("s1", "s2", "q1", "q2", "q3", "q4", "q5") if r[key] == "CT"
+    } | {
+        (r["study_id"], r["component"], key.upper())
+        for r in load_component_reassessments()
+        for key in ("c1", "c2", "c3", "c4", "c5") if r[key] == "CT"
+    }
+    actual = {(q["study_id"], q["component"], q["criterion"]) for q in questions if q["component"] != "record"}
+    assert actual == expected
+    assert len(actual) == 55
+    assert {q["study_id"] for q in questions if q["criterion"] == "design"} == {"5", "7", "14"}
+    assert all(q["status"] == "prepared_not_sent" for q in questions)
+    report = Path(__file__).resolve().parents[2] / "docs/tcc/MMAT-PERGUNTAS-PENDENTES.md"
+    assert report.read_text(encoding="utf-8") == render_markdown(questions)
+    with pytest.raises(ValueError, match="coverage"):
+        validate_questions(questions[1:])
+
+
 CURRENT_TABLE = Path(__file__).resolve().parents[1] / "exports" / "references" / "mmat_current_tcc_table.tex"
 EVIDENCE_MATRIX = Path(__file__).resolve().parents[1] / "data" / "manual_override_evidence_matrix.csv"
 CURRENT_HTML = Path(__file__).resolve().parents[1] / "exports" / "analysis" / "mmat_current.html"
@@ -161,7 +185,7 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
     assert all(
         row["criterion_evidence"].count(";") == (1 if row["design"] == "design_pending" else 6)
         for row in rows
-        if row["study_id"] not in {"8", "9", "6923"}
+        if row["study_id"] not in {"8", "9", "6921", "6923"}
     )
     assert rows[1]["assessment_status"] == "provisional_primary_source_review"
     assert rows[1]["q2"] == "CT"
@@ -198,7 +222,7 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
         assert study["q3"] == "CT"
         if study_id in {"2", "3", "6", "6917"}:
             assert "Q3=CT" in study["criterion_evidence"]
-    assert "measurement appropriateness" in study["criterion_evidence"]
+    assert "adequação dos indicadores" in rows["6917"]["criterion_evidence"]
     for study_id in ("1", "5", "10"):
         study = rows[study_id]
         assert study["assessment_basis"] == "primary_full_text_reviewed_externally"
@@ -220,8 +244,9 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
 
 def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
-    assert rows["6"]["q1"] == "CT"
-    assert "relevance of the sampling procedure" in rows["6"]["criterion_evidence"].lower()
+    assert rows["6"]["q1"] == "Y"
+    assert rows["6"]["q2"] == "CT"
+    assert "não demonstra representatividade" in rows["6"]["criterion_evidence"].lower()
 
     assert rows["2"]["q2"] == "CT"
     assert "target population" in rows["2"]["criterion_evidence"].lower()
@@ -320,7 +345,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         )
         assert match, f"Study {study_id} missing from generated MMAT page"
         answers = re.findall(
-            r'<span class="criterion(?: [^"]*)?"[^>]*>(Y|N|CT|N/A|—)</span>',
+            r'<span class="criterion(?: [^"]*)?"[^>]*>(Y|N|CT|—)</span>',
             match.group(1),
         )
         expected = [
@@ -556,7 +581,26 @@ def test_protocol_is_retained_only_as_contextual_non_empirical_record() -> None:
     assert scope["6921"]["synthesis_role"] == "contextual_protocol"
     assert scope["6921"]["empirical_mmat_applicability"] == "not_applicable"
     assert reassessment["6921"]["design"] == "not_applicable"
-    assert all(reassessment["6921"][criterion] == "N/A" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
+    assert all(reassessment["6921"][criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
+    assert reassessment["6921"]["criterion_evidence"] == ""
+
+
+@pytest.mark.parametrize("study_id", ["1", "6921"])
+def test_na_is_a_record_status_not_an_mmat_criterion_response(monkeypatch, study_id) -> None:
+    from src.analysis import mmat_current as current
+
+    original_read = current._read_csv
+
+    def read(path):
+        rows = original_read(path)
+        if path == current.REASSESSMENT_PATH:
+            row = next(item for item in rows if item["study_id"] == study_id)
+            row["q1"] = "N/A"
+        return rows
+
+    monkeypatch.setattr(current, "_read_csv", read)
+    with pytest.raises(ValueError, match="Invalid q1 response"):
+        current.load_current_reassessment()
 
 
 def test_all_18_records_have_explicit_empirical_scope_and_text_status() -> None:
@@ -611,7 +655,7 @@ def test_mmat_appraisal_corrects_unfounded_analysis_and_sampling_decisions() -> 
     records = {row["study_id"]: row for row in load_current_reassessment()}
     assert records["3"]["q5"] == "CT"
     assert records["6"]["q5"] == "CT"
-    assert records["6917"]["q1"] == "CT"
+    assert records["6917"]["q1"] == "Y"
     assert records["6917"]["q2"] == "CT"
 
 

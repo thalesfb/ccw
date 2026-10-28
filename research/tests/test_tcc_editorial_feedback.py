@@ -457,7 +457,7 @@ class EditorialFeedbackTests(unittest.TestCase):
 
         for acronym in (
             "AIC", "BIC", "CORE", "CRF", "CSV", "CT", "EEG", "F1", "HTML", "JSON", "MLP",
-            "N/A", "PCA", "PDF", "PICO", "PICOS", "RN", "ROC", "ROC-AUC", "SHA-256",
+            "PCA", "PDF", "PICO", "PICOS", "RN", "ROC", "ROC-AUC", "SHA-256",
             "TIMSS", "URL", "RIPPER",
         ):
             self.assertIn(fr"\item[{acronym}]", glossary.group(1))
@@ -523,7 +523,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn(r"Can't tell} (CT", (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8"))
         self.assertIn(r"COnnecting REpositories} (CORE)", abstract)
         self.assertIn(r"Portable Document Format} (PDF", (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8"))
-        self.assertIn(r"Not applicable} (N/A", methodology)
+        self.assertIn("a não aplicação do instrumento é uma situação do registro", methodology.lower())
 
 
 if __name__ == "__main__":

@@ -433,7 +433,7 @@
       "primary_text_reviewed_rows": 14,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 44,
+      "non_ct_criterion_decisions": 46,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
@@ -449,6 +449,16 @@
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
+    {
+      "path": "research/data/mmat_followup_questions_current.csv",
+      "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
+      "sha256": "13d3f0bd9cb36c8267c20fe944a4c9d58931830e4f6c81507b114c9c76fae1f3"
+    },
+    {
+      "path": "research/data/mmat_completion_review_2026-10-28.json",
+      "role": "source-linked documentary reappraisal changes and retained measurement uncertainties",
+      "sha256": "0332d98c9b9e1ec41715cc5b6e430126a868151ed232add45717f1c414ee492a"
+    },
     {
       "path": "research/exports/analysis/papers.csv",
       "role": "row-level versioned representation of the current snapshot",
@@ -497,7 +507,7 @@
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "47d8f97ed8aea4b706941323f5e7e0bb5434855b42f562facfc0595da75fb79a"
+      "sha256": "c325afbc9d1363562f449b6e6b9e64850bfae02cfb60674d68c90c1c673fa08c"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
@@ -592,7 +602,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "dffefac1cbaf94f3b8ec0300bc66422865f5697a586e6faf33563104fb59497e"
+      "sha256": "11630859ba21b308a5d316c20a523427c5e127c49fb82b4cd3723c2f9a1a9245"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -602,7 +612,7 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "validator separating provisional retention, screening responses and category-specific MMAT coverage",
-      "sha256": "625cbcae74defbcf770b5e2c74a7cae2c3a69be4ae6d021c0c895b606f294141"
+      "sha256": "5e5bbea2035e075809d583e465827f97cf9877595a3f006c44ba4dcd1838af09"
     },
     {
       "path": "research/src/analysis/study_scope.py",
@@ -612,12 +622,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "f41c4420093c0cf519ef3c0285c40c068ad558f333b2a3301a709991505a4397"
+      "sha256": "c307d63dfecf5ad3dce7c1357720ade9f3bad04ae7b4cb538503498e021df8bf"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "25a096613e0e4afbaea29c1f6311647e361dbcc41cc438c711cdb7971d8d645c"
+      "sha256": "bf5bddef38c8de552e6905a06e4905277be767c4fe9557e34f5cf2694f2fa6ae"
     },
     {
       "path": "research/requirements.txt",

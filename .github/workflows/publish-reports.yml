@@ -123,6 +123,10 @@ jobs:
           cp research/data/mmat_component_reassessment_current.csv _site/research/data/
           cp research/data/mmat_primary_sources_manifest.csv _site/research/data/
           cp research/data/study_contribution_current.json _site/research/data/
+          cp research/data/mmat_followup_questions_current.csv _site/research/data/
+          cp research/data/mmat_completion_review_2026-10-28.json _site/research/data/
+          mkdir -p _site/docs/tcc
+          cp docs/tcc/MMAT-PERGUNTAS-PENDENTES.md _site/docs/tcc/
           
           # Create research directory structure  
           mkdir -p _site/research
