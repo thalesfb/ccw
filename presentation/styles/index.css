@@ -1261,3 +1261,10 @@ small { font-size: 0.73rem; }
   color: #35443d !important;
   font: 0.76rem/1.18 'Asap', sans-serif;
 }
+
+/* Exemplos e protocolo: evidenciar os produtos conceituais na defesa. */
+.tcc-requirement-examples h2 { font-size: 1.35rem; }
+.tcc-requirement-examples p { margin-top: 0.7rem; font-size: 0.94rem; line-height: 1.2; }
+.tcc-protocol-copy h2 { font-size: 1.35rem; }
+.tcc-protocol-copy p { margin-top: 0.65rem; font-size: 0.9rem; line-height: 1.2; }
+.tcc-protocol-copy .tcc-architecture-note { font-size: 0.85rem; }

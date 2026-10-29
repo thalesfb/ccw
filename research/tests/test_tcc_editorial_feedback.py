@@ -154,10 +154,10 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("MCP", status)
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
-        self.assertIn("Versão revisada: 15/10/2026", slides)
+        self.assertIn("Versão revisada: 28/10/2026", slides)
         self.assertNotIn("Snapshot: 03/09/2026", slides)
         self.assertNotIn("Snapshot adjudicado: 03/09/2026", pptx_source)
-        self.assertIn("Versão revisada: 15/10/2026", pptx_source)
+        self.assertIn("Versão revisada: 28/10/2026", pptx_source)
         self.assertIn("não recebeu MMAT", pptx_source)
         self.assertNotIn("não receberam MMAT", pptx_source)
 
@@ -427,12 +427,22 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("79 estudantes", mmat)
         self.assertIn("10.052 passos", mmat)
         self.assertIn("unidade de avaliação", mmat)
-        self.assertIn("S1, S2 e Q1--Q5 ficaram sem resposta", mmat)
-        self.assertNotIn("seguem como CT", mmat)
-        self.assertIn("a ausência de apreciação não deve ser interpretada como CT", mmat)
+        self.assertNotIn("S1, S2 e Q1--Q5 ficaram sem resposta", mmat)
+        self.assertIn("categoria 4 adaptada", mmat)
+        self.assertIn("S1, S2 e Q1 receberam Y", mmat)
+        self.assertIn("Q2--Q5 permaneceram CT", mmat)
         self.assertIn("não constitui evidência de eficácia do protótipo", mmat)
         self.assertNotIn("quantitativo descritivo", mmat)
         self.assertNotIn("próprios de outra categoria", mmat)
+
+    def test_defense_demonstrates_traceability_and_distinguishes_proposal_from_application(self):
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        for phrase in ("R02", "R20", "26 grupos", "rastreabilidade", "consistência arquitetural",
+                       "correspondência conceitual", "condições de viabilidade",
+                       "11.877 registros após deduplicação", "fonte da versão mantida",
+                       "Page et al. (2021)", "Hong et al. (2018)", "National Research Council (2001)"):
+            self.assertIn(phrase, slides)
+        self.assertNotIn("um futuro protocolo de avaliação", slides)
 
     def test_reader_facing_technical_terms_have_context_not_only_acronyms(self):
         intro = (TCC / "conteudo/introducao.tex").read_text(encoding="utf-8")

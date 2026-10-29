@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Versão revisada: 15/10/2026 · Corte da busca: 31/08/2026</div>
+<div class="cover-snapshot">Versão revisada: 28/10/2026 · Corte da busca: 31/08/2026</div>
 
 ---
 layout: default
@@ -117,6 +117,7 @@ class: content-slide tcc-mission-slide
     <p><span>✓</span> Diretriz de relato para tornar identificação e seleção transparentes.</p>
     <p><span>✓</span> Decisões documentadas para favorecer transparência e rastreabilidade.</p>
     <p><span>✓</span> Resultados apresentados com limites, sem ranking ou inferência de eficácia.</p>
+    <small>Diretriz: Page et al. (2021), PRISMA 2020.</small>
   </div>
 </div>
 
@@ -138,6 +139,8 @@ class: content-slide
 </div>
 
 <div class="concept-note"><strong>Regra de interpretação:</strong> uma saída computacional pode organizar evidências e produzir estimativas, mas não observa sozinha todos os processos cognitivos, sociais e afetivos da aprendizagem, nem demonstra eficácia pedagógica.</div>
+
+<div class="tcc-caption">Elaboração do autor com base em National Research Council (2001), pp. 42–44, OECD (2023) e Brasil / BNCC (2018); não é uma escala validada de cinco níveis.</div>
 
 ---
 layout: default
@@ -191,7 +194,7 @@ class: content-slide tcc-sources-slide
   <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 7h9a4 4 0 0 1 3 1.4A4 4 0 0 1 19 7h9v19h-9a4 4 0 0 0-3 1.4 4 4 0 0 0-3-1.4H4zM16 9v18"/><path d="M8 12h5m-5 4h5m6-4h5m-5 4h5"/></svg></span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.840 registros</small></p></div>
 </div>
 
-<div class="tcc-caption">Teses e dissertações também podem ser aceitas quando atendem aos mesmos critérios de elegibilidade.</div>
+<div class="tcc-caption">11.877 registros após deduplicação; fonte da versão mantida. Não representa cobertura exclusiva das bases. Dados: <code>research/exports/analysis/papers.csv</code>. Teses e dissertações também podem atender à elegibilidade.</div>
 
 ---
 layout: default
@@ -354,6 +357,8 @@ class: content-slide tcc-mmat-slide
 
 <div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros provisórios. S1/S2 e critérios de categoria apreciados nos 15; validação humana pendente. Estudos 5 e 7: categoria 3 operacional, alocação desconhecida. Estudo 14: categoria 2 declarada e contraditória. Estudo 8: categoria 4 adaptada para modelagem; frações reutilizadas não são duplicadas. Texto não recuperado: sem apreciação. Sem escore agregado.</div>
 
+<div class="tcc-caption">Instrumento: Hong et al. (2018), Mixed Methods Appraisal Tool, versão 2018. Rotas e ressalvas: matriz pública do projeto.</div>
+
 ---
 layout: default
 class: content-slide tcc-synthesis-slide
@@ -420,11 +425,11 @@ class: content-slide tcc-specification-slide
 # Especificação conceitual: da evidência aos requisitos
 
 <div class="tcc-spec-layout">
-  <div class="tcc-spec-path"><div><b>01</b><strong>Evidências</strong><span>literatura + fundamentação</span></div><i>→</i><div><b>02</b><strong>Lacunas</strong><span>riscos e necessidades</span></div><i>→</i><div><b>03</b><strong>Requisitos</strong><span>funções e restrições</span></div></div>
-  <div class="tcc-spec-delivery"><div class="tcc-paper-icon">▤</div><h2>Entrega do TCC</h2><p>Uma especificação técnica e pedagógica auditável, com protocolo e arquitetura de referência.</p><small>Não é aplicação funcional, não usa base definitiva e não possui validação com participantes.</small></div>
+  <div class="tcc-requirement-examples"><h2>26 grupos rastreáveis</h2><p><strong>R02 — separar os conceitos.</strong><br>Origem teórica/normativa: NRC (2001), OECD (2023), BNCC (2018). Decisão: distinguir desempenho, previsão e aprendizagem nas saídas. Limite: não valida uma escala nem o protótipo.</p><p><strong>R20 — prevenir vazamento de dados.</strong><br>Origem: relato ambíguo de Pejić et al. (2021, pp. 50–51), fundamento de James et al. (2021) e decisão autoral. Decisão: separar treino, validação e teste. Limite: não determina o que o artigo executou.</p></div>
+  <div class="tcc-spec-delivery"><h2>Entrega do TCC</h2><p>Especificação técnica e pedagógica, protocolo proposto e arquitetura de referência.</p><small>Observação empírica, fundamento teórico/normativo e escolha autoral têm origens distintas. Uma salvaguarda proposta não demonstra eficácia.</small></div>
 </div>
 
-<div class="tcc-spec-caption">A evidência orienta requisitos; os requisitos orientam um futuro protocolo de avaliação.</div>
+<div class="tcc-spec-caption">Fonte: capítulo “Especificação do protótipo”, quadro R01–R26. O protocolo está proposto; sua aplicação permanece pendente.</div>
 
 ---
 layout: default
@@ -437,7 +442,7 @@ class: content-slide tcc-architecture-slide
 
 <div class="tcc-architecture-layout">
   <div class="tcc-architecture-path"><div class="arch-node arch-data"><b>01</b><strong>Ingestão</strong><span>fontes</span></div><i>→</i><div class="arch-node arch-prep"><b>02</b><strong>Preparação</strong><span>dados documentados</span></div><i>→</i><div class="arch-node arch-model"><b>03</b><strong>Modelagem</strong><span>modelos candidatos</span></div><i>→</i><div class="arch-node arch-eval"><b>04</b><strong>Avaliação</strong><span>métricas e explicações</span></div><i>→</i><div class="arch-node arch-present"><b>05</b><strong>Apresentação</strong><span>decisão docente</span></div></div>
-  <div class="tcc-architecture-copy"><h2>Componentes separáveis</h2><p>A separação favorece testabilidade, rastreabilidade e substituição controlada de técnicas.</p><div class="tcc-architecture-note">A arquitetura é uma referência conceitual do TCC, não a descrição de um sistema implementado.</div></div>
+  <div class="tcc-architecture-copy tcc-protocol-copy"><h2>Protocolo documental proposto</h2><p><strong>Objeto:</strong> especificação conceitual. Critérios: rastreabilidade, consistência arquitetural, correspondência conceitual e condições de viabilidade.</p><p><strong>Registro por requisito:</strong> código, versão, fonte/localização, critério, justificativa e ajuste necessário.</p><p><strong>Julgamentos previstos:</strong> coerência documental, coerência com ressalvas ou necessidade de revisão; falta de evidência explícita.</p><div class="tcc-architecture-note">Aplicação e revisão docente pendentes. Não avalia eficácia de um sistema treinado.</div></div>
 </div>
 
 <div class="tcc-caption">A apresentação finaliza no apoio à análise docente; não automatiza a decisão pedagógica.</div>
