@@ -127,8 +127,8 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "18 records in the preliminary list" in manifest["bibliography"]["separation_rule"]
     assert "15 are currently included" in manifest["bibliography"]["separation_rule"]
     appraisal = manifest["methodological_appraisal"]["interpretation"]
-    assert "S1/S2 screening for 14 studies" in appraisal
-    assert "category-specific appraisal for 11" in appraisal
+    assert "S1/S2 screening and category-specific appraisal for all 15 records" in appraisal
+    assert "operational inferred category-3 routes" in appraisal
     assert "15 records remain provisionally" in appraisal
     assert "11 studies" not in appraisal
 
@@ -137,7 +137,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         for item in manifest["reproduction"]["limitations"]
         if "empirical MMAT screening denominator" in item
     )
-    assert "14" in mmat_limitation
+    assert "15" in mmat_limitation
     assert "15" in mmat_limitation
     assert "1 unretrieved shortlisted report" in mmat_limitation
     assert "four shortlisted reports were not retrieved" not in mmat_limitation
@@ -182,13 +182,13 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     current_mmat = manifest["methodological_appraisal"]["current_mmat_qa"]
     assert current_mmat["final_ready"] is False
     assert current_mmat["source_or_period_hold_ids"] == []
-    assert current_mmat["current_denominator"] == 14
-    assert current_mmat["criterion_rows"] == 11
-    assert current_mmat["category_pending_ids"] == ["5", "7", "14"]
+    assert current_mmat["current_denominator"] == 15
+    assert current_mmat["criterion_rows"] == 15
+    assert current_mmat["category_pending_ids"] == []
     assert current_mmat["included_empirical_study_ids"][-1] == 6920
-    assert current_mmat["mmat_unit_hold_ids"] == ["8"]
-    assert current_mmat["primary_text_reviewed_rows"] == 14
-    assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
+    assert current_mmat["mmat_unit_hold_ids"] == []
+    assert current_mmat["primary_text_reviewed_rows"] == 15
+    assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 15
     assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 0
     assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 15
     assert current_mmat["record_evidence_levels"]["abstract_and_metadata_only"] == 0
@@ -318,7 +318,7 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "submetidos à priorização operacional" in root_html
     assert "encaminhados à elegibilidade" not in root_html
     assert "Dos 18 registros selecionados preliminarmente, 15 permanecem provisoriamente no núcleo empírico" in tcc_html
-    assert "a apreciação MMAT preliminar abrange 14" in tcc_html
+    assert "a apreciação MMAT preliminar abrange 15" in tcc_html
     assert "A aplicação funcional e a validação experimental estão fora do escopo" in tcc_html
     assert "Não há escore agregado" in tcc_html
     assert "11.904" not in tcc_html

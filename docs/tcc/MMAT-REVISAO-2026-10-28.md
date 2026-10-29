@@ -1,5 +1,7 @@
 # Revisão documental da apreciação MMAT — 28/10/2026
 
+> Registro da primeira rodada, incorporada no PR #119. A rodada posterior está nas [decisões operacionais](MMAT-PAUTA-DE-DECISAO.md): os 15 registros empíricos agora têm triagem e critérios apreciados, com rotas explicitamente limitadas. As contagens e pendências abaixo preservam o estado da primeira rodada, não a matriz corrente.
+
 A matriz, o HTML e o quadro do TCC passaram a distinguir respostas aos critérios de situações dos registros. O MMAT 2018 oferece Y, N e CT. Foram retiradas as sete respostas N/A atribuídas ao protocolo 6921, sem resultados empíricos concluídos. Seus critérios permanecem sem avaliação; a exclusão da síntese empírica continua registrada.
 
 ## Julgamentos alterados
@@ -21,6 +23,8 @@ O registro principal contém 42 Y, quatro N e 37 CT; 43 células permanecem sem 
 Os estudos 5, 7 e 14 continuam com categoria pendente. No 14, as descrições contraditórias de alocação precisam ser esclarecidas antes da escolha entre categorias randomizada e não randomizada. No 8, simulação não impede apreciação empírica: há suporte documental para propor S1/S2 positivos, mas a unidade/categoria da tese deve ser adjudicada antes de incorporar respostas. Não foram somadas bases humanas de capítulos diferentes.
 
 O [registro de perguntas](MMAT-PERGUNTAS-PENDENTES.md) cobre todos os 55 CT, três decisões de delineamento, uma de unidade e três de acesso. Destinatários e encaminhamento dependem de definição humana. Não houve contato externo nesta revisão. Respostas futuras precisam de registro e conferência antes de alterar a matriz.
+
+A [pauta de decisão](MMAT-PAUTA-DE-DECISAO.md) organiza as quatro questões que antecedem novas respostas por categoria, com propostas para revisão e efeitos sobre a matriz. Não registra concordância da orientação.
 
 O original do estudo 3 não foi recuperado; 6919 retornou HTTP 403 e sua apreciação anterior não foi revalidada. A URL editorial do 7 redirecionou para página genérica; a questão de alocação foi mantida a partir do relato disponível, sem declarar nova conferência integral do PDF. O estudo 6923 continua sem texto integral nesta rodada; não se afirma nova verificação de término do embargo.
 

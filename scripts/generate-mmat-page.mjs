@@ -360,11 +360,17 @@ const rows = current.map((row) => {
   const scope = scopeById.get(row.study_id) ?? {};
   const unitPending = scope.empirical_mmat_applicability === 'pending_unit_adjudication';
   const title = study.title || row.study_key;
-  const type = row.empirical_status === 'protocol_or_proposal_not_applicable'
+  const operationalLabel = row.design_status === 'operational_category_inferred_allocation_unknown'
+    ? 'Categoria 3 operacional · alocação desconhecida'
+    : row.design_status === 'operational_category_adaptation'
+      ? 'Categoria 4 adaptada · modelagem computacional'
+      : row.design_status === 'design_reassessed_provisional_with_allocation_conflict'
+        ? 'Categoria 2 declarada · alocação contraditória' : null;
+  const type = operationalLabel ?? (row.empirical_status === 'protocol_or_proposal_not_applicable'
     ? 'fora da síntese empírica'
     : row.study_id === '6915'
       ? `${designLabels.get(row.design) ?? 'Categoria não informada'} · componente escolar`
-      : designLabels.get(row.design) ?? 'Categoria não informada';
+      : designLabels.get(row.design) ?? 'Categoria não informada');
   return `<tr>
     <td>${escapeHtml(row.study_id)}</td>
     <td><span class="study-title">${escapeHtml(title)}</span><span class="study-meta">${escapeHtml(row.study_key)} · ${escapeHtml(type)}</span></td>
@@ -456,7 +462,7 @@ const page = `<!doctype html>
           <h3>${primaryReviewed.length} registros com consulta documental declarada</h3>
           <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
           <p>O acervo local contém ${localPrimaryCount} PDFs dos 18 registros. Faltam os estudos 3 e 6923: o estudo 3 permanece retido provisoriamente, mas sua ficha histórica não foi revalidada sem o original; 6923 é o relatório não recuperado no fluxo. Disponibilidade local não é elegibilidade nem certificação de leitura humana. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
-          <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm S1/S2 respondidas; ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. Em ${categoryPending.length} estudos (${categoryPending.map((row) => escapeHtml(row.study_id)).join(', ')}), Q1–Q5 permanecem não avaliados até definir o delineamento, sem resposta CT. ${unitHoldRows.length} registro (${unitHoldRows.map((row) => escapeHtml(row.study_id)).join(', ')}) permanece no corpus e no fluxo PRISMA sem respostas MMAT enquanto se adjudicam elegibilidade e unidade de análise; não se somam suas bases distintas. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. Os julgamentos documentais receberam apoio automatizado; o rótulo histórico de revisor único não comprova leitura humana integral. A conferência humana por fonte e critério e a adjudicação metodológica permanecem pendentes.</p>
+          <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm S1/S2 respondidas; ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 2 a partir do sorteio declarado das escolas, apesar da contradição documental; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. Os julgamentos documentais receberam apoio automatizado; o rótulo histórico de revisor único não comprova leitura humana integral. A conferência humana por fonte e critério e a adjudicação metodológica permanecem pendentes.</p>
         </article>
       </section>
 
@@ -465,7 +471,7 @@ const page = `<!doctype html>
       <section class="section" aria-labelledby="questions-title">
         <div class="section-heading">
           <h2 id="questions-title">Perguntas de triagem do MMAT 2018</h2>
-          <p>No recorte atual, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos. Q1–Q5 foram apreciados em ${categoryAppraised.length}; ${categoryPending.length} aguardam definição da categoria. ${unitHoldRows.length} registro com texto consultado está temporariamente sem respostas enquanto se define a unidade de apreciação; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e não integra o corpus empírico.</p>
+          <p>No recorte atual, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos. Q1–Q5 foram apreciados em ${categoryAppraised.length}; as rotas operacionais e suas incertezas estão identificadas em cada ficha; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e não integra o corpus empírico.</p>
         </div>
         <div class="mmat-screening-grid">${screeningQuestions}</div>
         <div class="callout callout-blue mmat-question-note">
@@ -488,7 +494,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Nos estudos 5, 7 e 14, apenas S1/S2 foram respondidas; Q1–Q5 aguardam definição da categoria. O relatório 6923 e o estudo 8 (unidade de análise pendente) não receberam respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios. As respostas históricas do estudo 3 não foram revalidadas nesta revisão sem o original.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Os 15 estudos do corpus têm triagem e critérios apreciados, incluindo rotas operacionais explicitamente limitadas nos estudos 5, 7, 8 e 14. O relatório 6923 não recebeu respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios. As respostas históricas do estudo 3 não foram revalidadas nesta revisão sem o original.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
@@ -500,7 +506,7 @@ const page = `<!doctype html>
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
             <h3 id="pending-title">Pendências antes da consolidação</h3>
-            <p>Completar os localizadores por critério, recuperar o relatório pendente no fluxo (${pendingFullText.length}), revalidar as demais fontes ainda não examináveis nesta auditoria e adjudicar a elegibilidade e unidade de análise do estudo 8. As consultas históricas declaradas não certificam leitura humana; a matriz de cobertura distingue acesso e leitura efetivamente registrados. O protocolo 6921 continua fora da síntese empírica.</p>
+            <p>Completar os localizadores por critério, recuperar o relatório pendente no fluxo (${pendingFullText.length}), revalidar as demais fontes ainda não examináveis nesta auditoria e conferir as rotas operacionais com seus limites, inclusive a adequação da adaptação da categoria 4 no estudo 8. As consultas históricas declaradas não certificam leitura humana; a matriz de cobertura distingue acesso e leitura efetivamente registrados. O protocolo 6921 continua fora da síntese empírica.</p>
           </div>
         </div>
         <p>${followups.length} perguntas preparadas: esclarecimentos para os critérios indeterminados, definição de delineamento e unidade, e recuperação de fontes. Nenhum contato externo ou resposta de autor foi registrado nesta revisão.</p>

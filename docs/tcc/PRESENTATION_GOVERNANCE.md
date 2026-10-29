@@ -104,11 +104,7 @@ Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
 o código do pipeline está implementado, os testes sintéticos estão verdes, o
 experimento com dados reais é continuidade fora do escopo documental desta entrega,
 e o MMAT é preliminar. O núcleo empírico mantém provisoriamente 15 registros:
-14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria. Nos estudos
-5, 7 e 14, Q1--Q5 aguardam definição do delineamento, sem resposta CT.
-O estudo 8 permanece no fluxo PRISMA e no corpus sem
-respostas MMAT até adjudicação humana de sua elegibilidade e unidade de
-apreciação; suas bases distintas não devem ser somadas. O registro 6923
+15 têm triagem S1/S2 e apreciação dos critérios. As categorias dos estudos 5, 7, 8 e 14 são rotas operacionais explicitamente limitadas, sem confirmar os delineamentos. A unidade do estudo 8 é uma tese com componentes matemáticos; frações reutilizadas entre capítulos não são duplicadas. O registro 6923
 aguarda o texto integral e não recebeu respostas MMAT; um registro foi
 excluído após resumo e um protocolo sem resultados concluídos foi excluído
 após texto completo. O estudo 6919 foi mantido conforme

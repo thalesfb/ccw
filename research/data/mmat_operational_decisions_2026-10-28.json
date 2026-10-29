@@ -1,0 +1,147 @@
+{
+  "review_date": "2026-10-28",
+  "decision_type": "assisted_operational_appraisal",
+  "human_independent_review": "pending",
+  "corpus_eligibility_counts_changed": false,
+  "no_external_contact_performed": true,
+  "decisions": [
+    {
+      "study_id": "5",
+      "source_id": "PS-005",
+      "source_sha256": "563f6e3cceb34edf5ebd0663cee6c4de21e2bd16fdaece0ed0d212ec18aa9241",
+      "design": "quantitative_nonrandomized",
+      "status": "operational_category_inferred_allocation_unknown",
+      "locator": "Páginas físicas 3–5; III.B–C; figuras 1–3",
+      "answers": [
+        "CT",
+        "CT",
+        "CT",
+        "CT",
+        "CT"
+      ],
+      "rationales": [
+        "Não são informados população elegível, tamanho da amostra nem seleção para a comparação de condições (páginas físicas 3–5).",
+        "Notas, tempos e satisfação são relatados, mas instrumentos, pontuação e validade das medidas não são suficientemente documentados. O texto e o gráfico de satisfação apresentam valores divergentes (páginas físicas 3–5).",
+        "Não há denominadores claros por condição, correspondência pré/pós nem descrição de perdas. As barras de usuários não estabelecem uma amostra elegível (páginas físicas 4–5).",
+        "Não são estabelecidas alocação, comparabilidade inicial ou análise de fatores de confusão. Não se infere ausência de randomização apenas pela omissão (página física 4).",
+        "As condições e comparadores são descritos, mas não há informação suficiente sobre exposição recebida, duração, adesão ou desvios, e a origem humana ou simulada continua incerta (páginas físicas 3–5)."
+      ],
+      "note": "Decisão analítica assistida de 28/10/2026: aplicar provisoriamente a categoria 3 à comparação quantitativa da intervenção descrita em III.C, sem certificar a natureza não randomizada nem a origem humana dos resultados. Alocação e origem humana/simulada continuam incertas. Questionário fechado não estabelece métodos mistos. Os cinco critérios foram considerados e permanecem CT por lacunas distintas, não por falta de escolha da categoria. Os resultados não sustentam efeito causal ou generalização.",
+      "source_verification_this_cycle": "private_primary_pdf_focused_review",
+      "screening": {
+        "s1": {
+          "answer": "Y",
+          "rationale_pt": "O objetivo de otimizar trajetórias personalizadas e comparar o algoritmo proposto é explícito (páginas físicas 1 e 3–4, §III)."
+        },
+        "s2": {
+          "answer": "Y",
+          "rationale_pt": "Notas, tempos, questionários e comparações quantitativas são relacionados à pergunta, preservando incerteza sobre origem humana ou simulada e denominadores (páginas físicas 3–5)."
+        }
+      }
+    },
+    {
+      "study_id": "7",
+      "source_id": "PS-007",
+      "design": "quantitative_nonrandomized",
+      "status": "operational_category_inferred_allocation_unknown",
+      "locator": "Texto público do autor, §4.1–4.2; páginas impressas 9–13; tabelas 1–7",
+      "answers": [
+        "CT",
+        "CT",
+        "CT",
+        "CT",
+        "CT"
+      ],
+      "rationales": [
+        "O relato identifica duas turmas de primeiro ano de gestão financeira, mas não estabelece população-alvo e seleção suficientes para julgar representatividade (§4.1, página impressa 9).",
+        "São relatados testes de Matemática e escala de satisfação, sem documentação suficiente dos instrumentos, regras de pontuação e equivalência das medidas (§4.1–4.2).",
+        "Dos 120 participantes iniciais, os resultados válidos de desempenho abrangem 50 e 52. A razão e distribuição das 18 ausências não são estabelecidas (§4.1).",
+        "O procedimento de alocação e o tratamento de fatores de confusão não são estabelecidos. O pré-teste com p=0,583 não demonstra equivalência dos grupos (§4.1, tabela 2).",
+        "O modelo e as comparações são descritos, mas cronologia, exposição efetiva e adesão à intervenção não são suficientemente documentadas (§4.1–4.2)."
+      ],
+      "note": "Decisão analítica assistida de 28/10/2026: aplicar provisoriamente a categoria 3 à comparação de duas turmas, sem afirmar que a alocação foi não aleatória. A omissão de procedimento de randomização permanece uma limitação explícita, reversível por esclarecimento. Texto público do autor reconsultado em §4.1–4.2; não se declara nova recuperação do PDF. Há 120 participantes inicialmente e 50/52 resultados válidos de desempenho; o questionário de 120 não prova completude do desfecho matemático. Sem conclusão causal.",
+      "source_verification_this_cycle": "public_primary_text_focused_review_no_new_pdf",
+      "screening": {
+        "s1": {
+          "answer": "Y",
+          "rationale_pt": "O objetivo compara o modelo de ensino inteligente de Matemática superior com condições convencionais (§4.1–4.2, páginas impressas 9–13 do texto público)."
+        },
+        "s2": {
+          "answer": "Y",
+          "rationale_pt": "Resultados matemáticos pré/pós e questionários permitem examinar a comparação relatada, sem estabelecer validade causal, alocação ou completude (§4.1–4.2)."
+        }
+      },
+      "historical_pdf_sha256": "9ccac2a135f5f9b78c85fb4c7e3e7eb325587f537563da7551527e8378c5bb3c",
+      "reviewed_material": "Author/public full-text transcription, focused §4.1–4.2; no newly acquired PDF and no claim that the historical PDF hash authenticates this transcription.",
+      "reviewed_url": "https://www.researchgate.net/publication/377551343_An_Innovative_Model_of_Higher_Mathematics_Curriculum_Education_Incorporating_Artificial_Intelligence_Technology"
+    },
+    {
+      "study_id": "14",
+      "source_id": "PS-014",
+      "source_sha256": "d95e78c4a32c3a929a0429b97e672b49aa1a13bd3ffdb3f081a3ac610caadc0c",
+      "design": "quantitative_randomized",
+      "status": "design_reassessed_provisional_with_allocation_conflict",
+      "locator": "Páginas físicas 11–15; §2.4–2.9; tabelas 1–3",
+      "answers": [
+        "CT",
+        "N",
+        "Y",
+        "CT",
+        "CT"
+      ],
+      "rationales": [
+        "§2.4 declara alocação aleatória das escolas, mas §2.7 nega atribuição aleatória. A sequência e sua ocultação não são descritas. Categoria 2 representa o procedimento específico declarado, não randomização confirmada (páginas físicas 11–12).",
+        "Os grupos diferem no desempenho inicial: o pré-teste da tabela 3 apresenta p menor que 0,001 e efeito 0,346. A comparabilidade inicial não foi atendida (página física 15).",
+        "As tabelas 1–3 apresentam os mesmos 95 e 101 participantes e total 196 no pré e no pós-teste, apoiando completude dos testes matemáticos reportados. Não é auditoria individual de perdas, substituições ou outros desfechos (páginas físicas 12–13 e 15).",
+        "São descritos docentes, supervisão e validação do instrumento, mas não fica estabelecido quem corrigiu os testes ou se conhecia a condição. Validação externa não prova cegamento da correção (páginas físicas 11–13).",
+        "Há descrição de treinamento e supervisão, mas não proporção de participantes que concluíram a intervenção, frequência ou desvios suficientes para estabelecer adesão (página física 11)."
+      ],
+      "note": "Decisão analítica assistida de 28/10/2026: aplicar a categoria 2 ao procedimento específico de randomização por escola declarado em §2.4. Isso não confirma aleatorização adequada: a contradição de §2.7 permanece em Q1=CT. A amostragem intencional das escolas não impede posterior sorteio entre condições. Há somente duas escolas e desequilíbrio inicial documentado; comparações pré/pós separadas não ajustam esse desequilíbrio nem demonstram efeito causal. A distinção escola/estudante é hipótese de esclarecimento, não explicação confirmada.",
+      "source_verification_this_cycle": "private_primary_pdf_focused_review",
+      "screening": {
+        "s1": {
+          "answer": "Y",
+          "rationale_pt": "A pergunta compara aprendizagem de teoremas de círculos sob jigsaw com animação e ensino convencional (§2.4 e resultados, páginas físicas 11–15)."
+        },
+        "s2": {
+          "answer": "Y",
+          "rationale_pt": "Testes pré/pós nos dois grupos são pertinentes à pergunta, sem superar desequilíbrio inicial e confusão com escola (páginas físicas 12–15)."
+        }
+      }
+    },
+    {
+      "study_id": "8",
+      "source_id": "PS-008",
+      "source_sha256": "d6e9472d6912b0ceb451f8ff2a1a0bda7b5b29bced69f65309f6840cd3bb2f23",
+      "design": "quantitative_descriptive",
+      "status": "operational_category_adaptation",
+      "locator": "Páginas físicas 5, 60–65 e 68–78; capítulos 5–6, componentes matemáticos",
+      "answers": [
+        "Y",
+        "CT",
+        "CT",
+        "CT",
+        "CT"
+      ],
+      "rationales": [
+        "Fontes DataShop, tarefas e subconjuntos são identificados e pertinentes à modelagem nos tutores matemáticos escolhidos, com justificativas de seleção. Isso não estabelece representatividade (páginas físicas 60–61 e 68–72).",
+        "Os conjuntos e tarefas selecionados não estabelecem representatividade de uma população-alvo de estudantes e tarefas matemáticas (páginas físicas 60 e 68–72).",
+        "Erros e oportunidades são definidos, mas diferenças de interface, pontuação e conhecimento prévio entre humanos e agentes deixam incerta a adequação das medidas comparativas (páginas físicas 61–65 e 74–75).",
+        "Os subconjuntos são descritos, mas faltam denominadores elegíveis, ausências e comparação de participantes ou registros incluídos e excluídos para estabelecer baixo risco de não resposta (páginas físicas 60 e 68–72).",
+        "São explicitados modelos mistos e AIC/BIC, mas os testes de razão de verossimilhança relatam qui-quadrado com zero graus de liberdade, cuja adequação exige esclarecimento. Os resultados agregados de sete domínios não isolam Matemática (páginas físicas 64 e 77–78)."
+      ],
+      "note": "Decisão analítica assistida de 28/10/2026: uma tese como um relatório empírico computacional, apreciando os componentes matemáticos de frações, boxes and arrows e equações dos capítulos 5–6. Categoria 4 como adaptação operacional descritiva/preditiva, não checklist especializado de modelos computacionais nem apreciação de nova intervenção humana. Frações são reutilizadas entre capítulos e não devem ser contadas duas vezes. Não somar amostras distintas nem atribuir resultados agregados de sete tutores exclusivamente à Matemática. Randomização dos estudos humanos originais não classifica a tese inteira como ensaio randomizado. Não há componente qualitativo empírico que justifique métodos mistos. A tese também testa hipóteses e teorias de aprendizagem, o que não corresponde literalmente à definição de estudo apenas descritivo do guia MMAT. A categoria 4 é uma lente adaptada, não classificação confirmada do delineamento.",
+      "source_verification_this_cycle": "private_primary_pdf_focused_review",
+      "screening": {
+        "s1": {
+          "answer": "Y",
+          "rationale_pt": "A tese explicita predição de comportamento, padrões instrucionais e comparação de modelos/teorias nos tutores matemáticos (resumo e páginas físicas 60, 62–64 e 68)."
+        },
+        "s2": {
+          "answer": "Y",
+          "rationale_pt": "Registros humanos, simulações por estudante, problemas correspondentes e medidas de desempenho são pertinentes às perguntas computacionais (páginas físicas 60–64 e 70–75)."
+        }
+      }
+    }
+  ]
+}

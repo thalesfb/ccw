@@ -43,15 +43,15 @@ def test_synthesis_slide_matches_the_provisional_corpus_not_an_undefined_subset(
     assert "categorias operacionais de desempenho" in synthesis.casefold()
 
 
-def test_pending_design_keeps_screening_but_does_not_rate_undefined_criteria():
+def test_operational_routes_keep_screening_and_explicit_uncertainty():
     rows = read_rows("research/data/mmat_reassessment_current.csv")
     for row in rows:
-        if row["study_id"] not in {"5", "7", "14"}:
+        if row["study_id"] not in {"5", "7"}:
             continue
-        assert row["design"] == "design_pending"
+        assert row["design_status"] == "operational_category_inferred_allocation_unknown"
         assert row["s1"] == row["s2"] == "Y"
-        assert all(not row[criterion] for criterion in mmat_current.REQUIRED_CRITERIA)
-        assert len(row["criterion_evidence"].split(";")) == 2
+        assert all(row[criterion] == "CT" for criterion in mmat_current.REQUIRED_CRITERIA)
+        assert len(row["criterion_evidence"].split(";")) == 7
 
 
 def test_pending_design_rejects_ct_as_if_a_category_criterion_had_been_appraised(monkeypatch):
@@ -61,6 +61,8 @@ def test_pending_design_rejects_ct_as_if_a_category_criterion_had_been_appraised
         rows = original(path)
         if path == mmat_current.REASSESSMENT_PATH:
             row = next(item for item in rows if item["study_id"] == "5")
+            row["design"] = "design_pending"
+            row["design_status"] = "allocation_unreported_pending"
             for criterion in mmat_current.REQUIRED_CRITERIA:
                 row[criterion] = "CT"
             row["criterion_evidence"] = (
@@ -76,9 +78,9 @@ def test_pending_design_rejects_ct_as_if_a_category_criterion_had_been_appraised
 
 def test_qa_distinguishes_screening_from_category_specific_appraisal():
     report = mmat_current.validate_current_artifacts()
-    assert report["screening_rows"] == 14
-    assert report["category_appraised_rows"] == 11
-    assert report["category_pending_ids"] == ["5", "7", "14"]
+    assert report["screening_rows"] == 15
+    assert report["category_appraised_rows"] == 15
+    assert report["category_pending_ids"] == []
     assert report["empirical_evidence_rows"] == 15
 
 
@@ -112,4 +114,4 @@ def test_readme_distinguishes_shortlist_from_provisional_empirical_inclusion():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "17 candidatos empíricos provisórios" not in text
     assert "15 estudos empíricos mantidos provisoriamente" in text
-    assert "14 triagens S1/S2" in text and "11 apreciações por categoria" in text
+    assert "15 triagens S1/S2" in text and "15 apreciações por categoria" in text

@@ -2,11 +2,11 @@
 
 Revisão documental de 28/10/2026. Perguntas preparadas, não enviadas. Não há respostas de autores registradas neste documento.
 
-São 55 critérios indeterminados (37 no registro principal e 18 nos componentes mistos), três decisões de delineamento, uma de unidade de apreciação e três de acesso ao texto: 62 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.
+São 72 critérios indeterminados (54 no registro principal e 18 nos componentes mistos) e três pendências de acesso ao texto: 75 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.
 
-As dúvidas de categoria e unidade exigem adjudicação com a orientação do TCC. As demais foram redigidas para eventual esclarecimento dos autores; destinatários e encaminhamento ainda precisam ser definidos pelo responsável. Nenhum contato externo foi realizado nesta revisão.
+As rotas de apreciação dos estudos 5, 7, 8 e 14 foram decididas operacionalmente nesta revisão, com limitações explícitas. Alocação e demais lacunas não foram resolvidas por inferência. As perguntas foram redigidas para eventual esclarecimento dos autores; destinatários e encaminhamento ainda precisam ser definidos pelo responsável. Nenhum contato externo foi realizado nesta revisão.
 
-As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas correspondentes derivam dos registros anteriores e exigem recuperação do original antes de qualquer alteração. Simulação pode constituir pesquisa empírica; no estudo 8, a pendência é a unidade/categoria, não a simples presença de simulações.
+As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas correspondentes derivam dos registros anteriores e exigem recuperação do original antes de qualquer alteração. Simulação pode constituir pesquisa empírica; no estudo 8, a unidade agora é uma tese/um relatório com componentes matemáticos, sem duplicar os dados de frações reutilizados entre capítulos.
 
 ## Estudo 1
 
@@ -72,8 +72,20 @@ As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas corresponde
 
 ## Estudo 5
 
-- **pendência do registro · delineamento** — Os resultados de notas, tempo e satisfação provêm de estudantes reais, simulações ou ambos? Quais números por condição, seleção e procedimento de alocação permitem definir o delineamento?
-  Fonte: PS-005; PDF pp. 1, 3–6 (design, personalization method, comparisons, and reported outcomes). Encaminhamento previsto: autores; orientação para adjudicar categoria.
+- **critérios principais · 3.1** — Quais população elegível, tamanho da amostra e seleção produziram a comparação, e quais resultados são humanos, simulados ou ambos?
+  Fonte: PS-005; Páginas físicas 3–5; III.B–C; figuras 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.2** — Quais instrumentos e regras mediram notas, tempo e satisfação, e como conciliar os valores da figura 3 com 85% no texto e média 4,2/5 no resumo?
+  Fonte: PS-005; Páginas físicas 3–5; III.B–C; figuras 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.3** — Quais denominadores por condição, perdas e correspondência pré/pós sustentam os resultados? As contagens do gráfico são usuários independentes?
+  Fonte: PS-005; Páginas físicas 3–5; III.B–C; figuras 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.4** — Como foram alocadas as condições e tratados fatores iniciais de confusão? Houve algum sorteio e em qual unidade?
+  Fonte: PS-005; Páginas físicas 3–5; III.B–C; figuras 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.5** — Quais duração, exposição efetiva, adesão e desvios ocorreram, distinguindo estudantes e simulações?
+  Fonte: PS-005; Páginas físicas 3–5; III.B–C; figuras 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 6
 
@@ -91,13 +103,34 @@ As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas corresponde
 
 ## Estudo 7
 
-- **pendência do registro · delineamento** — Como as duas turmas foram selecionadas e alocadas? Como se distribuem os 18 participantes sem resultado válido e quais diferenças iniciais foram consideradas?
-  Fonte: PS-007; Abstract; §3 Smart teaching model; §4.1 pp. 9-11; Tables 1-6; §4.2. Encaminhamento previsto: autores; orientação para adjudicar categoria.
+- **critérios principais · 3.1** — Qual população-alvo e como as duas turmas foram selecionadas para representá-la?
+  Fonte: PS-007; Texto público do autor, §4.1–4.2; páginas impressas 9–13; tabelas 1–7. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.2** — Quais instrumentos, pontuação e critérios de equivalência sustentam os testes matemáticos e a escala de satisfação?
+  Fonte: PS-007; Texto público do autor, §4.1–4.2; páginas impressas 9–13; tabelas 1–7. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.3** — Quais razões e distribuição por condição explicam os 18 participantes sem resultados matemáticos válidos, e eles diferiam dos incluídos?
+  Fonte: PS-007; Texto público do autor, §4.1–4.2; páginas impressas 9–13; tabelas 1–7. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.4** — Como foram formadas e alocadas as duas turmas, houve sorteio e como fatores iniciais foram considerados além do pré-teste p=0,583?
+  Fonte: PS-007; Texto público do autor, §4.1–4.2; páginas impressas 9–13; tabelas 1–7. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 3.5** — Qual cronologia, exposição efetiva e adesão documentam a execução da intervenção e dos comparadores?
+  Fonte: PS-007; Texto público do autor, §4.1–4.2; páginas impressas 9–13; tabelas 1–7. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 8
 
-- **pendência do registro · unidade de apreciação** — A unidade de apreciação será a tese com componentes computacionais dos capítulos 5 e 6 ou os estudos humanos originais? O resumo e o capítulo 5 sustentam a proposta S1/S2=sim, ainda sem incorporação à matriz. Qual categoria é apropriada a essa unidade?
-  Fonte: PS-008; Abstract; Chapter 5 §§5.2-5.5 pp. 41-49 (print), pp. 60-65 (PDF); Chapter 6 §§6.2-6.3 pp. 52-56 (print), pp. 70-72 (PDF). Encaminhamento previsto: orientação do TCC.
+- **critérios principais · 4.2** — Qual população-alvo de estudantes e tarefas matemáticas os conjuntos pretendem representar e que comparação demonstra sua cobertura?
+  Fonte: PS-008; Páginas físicas 5, 60–65 e 68–78; capítulos 5–6, componentes matemáticos. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 4.3** — Que análise verifica a robustez das comparações às diferenças de interface, pontuação e conhecimento prévio humano não reproduzido nos agentes?
+  Fonte: PS-008; Páginas físicas 5, 60–65 e 68–78; capítulos 5–6, componentes matemáticos. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 4.4** — Quantos participantes e registros elegíveis foram excluídos ou estavam incompletos em cada conjunto matemático, por qual razão e com qual impacto?
+  Fonte: PS-008; Páginas físicas 5, 60–65 e 68–78; capítulos 5–6, componentes matemáticos. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 4.5** — Como foram calculados os testes de razão de verossimilhança com zero graus de liberdade e justificada a comparação de modelos alternativos? Quais resultados são exclusivamente matemáticos, sem duplicar frações reutilizadas?
+  Fonte: PS-008; Páginas físicas 5, 60–65 e 68–78; capítulos 5–6, componentes matemáticos. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 10
 
@@ -118,8 +151,14 @@ As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas corresponde
 
 ## Estudo 14
 
-- **pendência do registro · delineamento** — Houve sorteio das escolas entre condições? Como conciliar a alocação aleatória descrita numa seção com a ausência de atribuição aleatória em outra? Os mesmos 196 estudantes participaram de ambas as medidas e como foram ajustadas diferenças iniciais e entre escolas?
-  Fonte: PS-014; Publisher PDF pp. 101-105; Table 3, printed p. 105 (physical PDF p. 15): purposive selection of two schools; conflicting statements on random allocation (p. 101) and quasi-experimental/no random assignment (p. 102); pretest U=6714, Z=4.839, p<.001, effect size=0.346. Encaminhamento previsto: autores; orientação para adjudicar categoria.
+- **critérios principais · 2.1** — Qual procedimento efetivo de sorteio das escolas ocorreu e a que unidade se refere a negação de atribuição aleatória em §2.7?
+  Fonte: PS-014; Páginas físicas 11–15; §2.4–2.9; tabelas 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 2.4** — Quem corrigiu os testes e essa pessoa conhecia a condição atribuída à escola?
+  Fonte: PS-014; Páginas físicas 11–15; §2.4–2.9; tabelas 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+
+- **critérios principais · 2.5** — Quantos participantes concluíram a intervenção atribuída e quais registros de presença, interrupções ou desvios foram preservados?
+  Fonte: PS-014; Páginas físicas 11–15; §2.4–2.9; tabelas 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 6915
 

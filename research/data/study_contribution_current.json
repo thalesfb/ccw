@@ -149,7 +149,8 @@
         6
       ],
       "physical_visual_pages": [
-        4
+        4,
+        5
       ],
       "printed_page_mapping": "650-655",
       "multimodal_complete": false,
@@ -158,7 +159,7 @@
       "contribution": "Apresenta uma proposta computacional de personalização e fornece um exemplo de insuficiência de relato sobre amostra e alocação.",
       "does_not_support": "Percentuais globais em três disciplinas não são efeito matemático isolado, causal ou generalizável; natureza da avaliação permanece pendente.",
       "claim_locators": "pp. impressas 650–654 (físicas 1–5); equação 4, Figura 1 e Tabela I.",
-      "coverage_limits": "Equações 4-5 e Figura 1 examinadas visualmente; Figuras 2-3 não; fontes Symbol e ArialUnicode ausentes no renderizador",
+      "coverage_limits": "Leitura textual assistida e inspeção visual das figuras e tabela nas páginas 4–5. Divergências entre satisfação no gráfico, texto e resumo permanecem; sem conferência humana integral.",
       "identity_note": "Identidade e interpretação permanecem sujeitas à conferência humana."
     },
     {
@@ -240,11 +241,11 @@
       "printed_page_mapping": "Localizadores por página física; fascículo de 2024, publicação on-line em 2023.",
       "multimodal_complete": false,
       "human_reading_status": "pending",
-      "relationship": "Direta para ensino de matemática e comparação pré/pós; categoria MMAT pendente.",
+      "relationship": "Direta para ensino de matemática e comparação pré/pós; categoria 3 aplicada como rota operacional com alocação desconhecida.",
       "contribution": "Caracteriza modelo de ensino inteligente, resultados de turmas e percepções dos estudantes. A leitura documental de 17/10/2026 preserva inconsistências de médias e denominadores.",
-      "does_not_support": "Não esclarece a alocação nem demonstra eficácia causal transferível; não autoriza presumir randomização ou preencher critérios de categoria sem delineamento definido.",
+      "does_not_support": "Não esclarece a alocação nem demonstra eficácia causal transferível. A categoria operacional inferida não confirma ausência de randomização.",
       "claim_locators": "PDF físico p. 9: amostra e pré-teste; pp. 10-11: médias e diferenças; pp. 12-14: satisfação e séries temporais.",
-      "coverage_limits": "Leitura textual parcial e inspeção visual seletiva. Categoria pendente; propostas privadas não são julgamentos humanos finais.",
+      "coverage_limits": "Leitura histórica parcial do PDF; §4.1–4.2 do texto público reconsultado em 28/10, sem nova recuperação do PDF. Rotas operacionais não são julgamentos humanos finais.",
       "identity_note": "PDF do editor recuperado em 17/10/2026; título, DOI, paginação e hash conferidos; datas on-line e de fascículo distintas."
     },
     {
@@ -307,7 +308,7 @@
       "human_reading_status": "pending",
       "relationship": "Direta nos capítulos de tarefas matemáticas; contextual nas demais unidades.",
       "contribution": "Contribui para modelagem computacional e distinção entre domínios, registros humanos reutilizados e avaliações de modelos.",
-      "does_not_support": "Não somar estudantes ou passos de bases diferentes, herdar efeitos de estudos de origem ou decidir a unidade MMAT sem adjudicação.",
+      "does_not_support": "Não somar estudantes ou passos de conjuntos distintos, duplicar frações reutilizadas entre capítulos, herdar efeitos causais dos estudos de origem ou atribuir resultados de sete domínios exclusivamente à matemática. Categoria 4 é adaptação limitada.",
       "claim_locators": "capítulos 5–7, pp. impressas 41–70 (físicas 57–86); Figura 5.3 e nota 5, pp. 46 e 56.",
       "coverage_limits": "Capítulos 5-7 em texto; capítulos 1-4/apêndice/referências não lidos integralmente; Figura 5.3 e nota 5 da impressa 56 conferidas visualmente; demais figuras só texto/legendas",
       "identity_note": "Título e autoria conferem com o PDF; vínculo DOI ainda exige confirmação editorial."
@@ -421,7 +422,7 @@
       "human_reading_status": "pending",
       "relationship": "Direta para intervenção pedagógica com recurso computacional.",
       "contribution": "Contribui para examinar intervenção combinada, alocação contraditória e desequilíbrio pré-teste.",
-      "does_not_support": "Não permite isolar animação de jigsaw nem resolver a alocação por inferência; categoria MMAT pendente.",
+      "does_not_support": "Não permite isolar animação de jigsaw ou intervenção da escola. Categoria 2 operacional parte da randomização declarada, mantendo a contradição em CT e o desequilíbrio inicial em N.",
       "claim_locators": "pp. impressas 101–105 (físicas 11–15), desenho, grupos e Tabela 3.",
       "coverage_limits": "Body extracted; references unread; Table 3 and Fig 4 histogram inspected visually",
       "identity_note": "Identidade e interpretação permanecem sujeitas à conferência humana."

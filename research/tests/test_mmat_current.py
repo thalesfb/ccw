@@ -22,6 +22,28 @@ import json
 import pytest
 
 
+def test_operational_appraisal_decisions_are_explicit_and_do_not_certify_allocation():
+    rows = {r['study_id']: r for r in load_current_reassessment()}
+    assert rows['8']['design'] == 'quantitative_descriptive'
+    assert [rows['8'][k] for k in ('s1','s2','q1','q2','q3','q4','q5')] == ['Y','Y','Y','CT','CT','CT','CT']
+    assert rows['14']['design'] == 'quantitative_randomized'
+    assert [rows['14'][k] for k in ('q1','q2','q3','q4','q5')] == ['CT','N','Y','CT','CT']
+    for sid in ('5', '7'):
+        assert rows[sid]['design'] == 'quantitative_nonrandomized'
+        assert all(rows[sid][k] == 'CT' for k in ('q1','q2','q3','q4','q5'))
+        assert rows[sid]['adjudication_status'] == 'supervisor_review_pending'
+    decision_path = Path(__file__).resolve().parents[1] / 'data/mmat_operational_decisions_2026-10-28.json'
+    decisions = {d['study_id']: d for d in json.loads(decision_path.read_text(encoding='utf-8'))['decisions']}
+    for sid, decision in decisions.items():
+        assert decision['answers'] == [rows[sid][f'q{i}'] for i in range(1, 6)]
+        assert decision['status'] == rows[sid]['design_status']
+        for key in ('s1', 's2'):
+            assert decision['screening'][key]['answer'] == rows[sid][key]
+            assert decision['screening'][key]['rationale_pt'] in rows[sid]['criterion_evidence']
+    assert 'historical_pdf_sha256' in decisions['7'] and 'source_sha256' not in decisions['7']
+    assert decisions['7']['reviewed_url'].startswith('https://www.researchgate.net/')
+
+
 def test_followup_questions_cover_every_indeterminate_criterion_and_structural_hold():
     from src.analysis.mmat_followups import load_questions, validate_questions, render_markdown
     questions = load_questions()
@@ -37,8 +59,8 @@ def test_followup_questions_cover_every_indeterminate_criterion_and_structural_h
     }
     actual = {(q["study_id"], q["component"], q["criterion"]) for q in questions if q["component"] != "record"}
     assert actual == expected
-    assert len(actual) == 55
-    assert {q["study_id"] for q in questions if q["criterion"] == "design"} == {"5", "7", "14"}
+    assert len(actual) == 72
+    assert {q["study_id"] for q in questions if q["criterion"] == "design"} == set()
     assert all(q["status"] == "prepared_not_sent" for q in questions)
     report = Path(__file__).resolve().parents[2] / "docs/tcc/MMAT-PERGUNTAS-PENDENTES.md"
     assert report.read_text(encoding="utf-8") == render_markdown(questions)
@@ -74,7 +96,7 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
         for row in synthesis_scope
         if row["empirical_mmat_applicability"] == "applicable"
     ] == list(CURRENT_MMAT_STUDY_IDS)
-    assert PENDING_UNIT_ADJUDICATION_STUDY_IDS == (8,)
+    assert PENDING_UNIT_ADJUDICATION_STUDY_IDS == ()
     assert all(row["mmat_status"] != "final" for row in registry)
     assert all(row["assessment_status"] != "final" for row in reassessment)
     assert all(row["reviewer"] == "single_reviewer" for row in reassessment)
@@ -87,19 +109,15 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
     assert excluded_after_abstract["adjudication_status"] == "not_applicable_scope_exclusion"
 
 
-def test_registry_preserves_the_same_pending_design_states_as_the_ledger() -> None:
-    registry = {row["study_id"]: row for row in load_current_registry()}
-    ledger = {row["study_id"]: row for row in load_current_reassessment()}
-    retained_ids = {str(study_id) for study_id in CURRENT_EMPIRICAL_STUDY_IDS}
-    pending = {
-        study_id for study_id, row in ledger.items()
-        if study_id in retained_ids and row["design"] == "design_pending"
-    }
+def test_registry_preserves_operational_routes_and_unknown_allocation():
+    registry = {r['study_id']: r for r in load_current_registry()}
+    ledger = {r['study_id']: r for r in load_current_reassessment()}
+    for sid in ('5','7','8','14'):
+        assert registry[sid]['design_status'] == ledger[sid]['design_status']
+    assert ledger['5']['design_status'] == ledger['7']['design_status'] == 'operational_category_inferred_allocation_unknown'
+    assert ledger['8']['design_status'] == 'operational_category_adaptation'
+    assert ledger['14']['design_status'] == 'design_reassessed_provisional_with_allocation_conflict'
 
-    assert pending == {"5", "7", "8", "14"}
-    for study_id in pending:
-        assert registry[study_id]["design_status"] == ledger[study_id]["design_status"]
-        assert all(not ledger[study_id][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5"))
 
 
 def test_current_mmat_rejects_missing_review_provenance(monkeypatch) -> None:
@@ -121,9 +139,9 @@ def test_current_mmat_rejects_missing_review_provenance(monkeypatch) -> None:
 def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     report = validate_current_artifacts()
 
-    assert report["current_denominator"] == 14
+    assert report["current_denominator"] == 15
     assert report["historical_denominator"] == 17
-    assert report["criterion_rows"] == 11
+    assert report["criterion_rows"] == 15
     assert report["assessment_registry_rows"] == 18
     assert report["current_mmat_ledger_rows"] == 18
     assert report["historical_mmat_assessment_rows"] == 17
@@ -131,15 +149,15 @@ def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     assert report["synthesis_scope_rows"] == 18
     assert report["empirical_evidence_rows"] == 15
     assert report["included_empirical_study_ids"] == list(CURRENT_EMPIRICAL_STUDY_IDS)
-    assert report["mmat_unit_hold_ids"] == ["8"]
-    assert report["mmat_unit_hold_rows"] == 1
+    assert report["mmat_unit_hold_ids"] == []
+    assert report["mmat_unit_hold_rows"] == 0
     assert report["contextual_study_rows"] == 1
     assert report["awaiting_full_text_rows"] == 1
     assert report["contextual_protocol_rows"] == 1
-    assert report["primary_text_reviewed_rows"] == 14
+    assert report["primary_text_reviewed_rows"] == 15
     assert report["source_or_period_hold_rows"] == 0
     assert report["source_or_period_hold_ids"] == []
-    assert report["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
+    assert report["evidence_levels"]["primary_full_text_reviewed_externally"] == 15
     assert report["evidence_levels"]["abstract_and_metadata_only"] == 0
     assert report["evidence_levels"]["metadata_only"] == 0
     assert report["evidence_levels"]["protocol_or_proposal_not_applicable"] == 1
@@ -199,9 +217,9 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
     current_by_id = {row["study_id"]: row for row in rows}
     assert "early stopping" in current_by_id["1"]["notes"].lower()
     assert current_by_id["1"]["q5"] == "CT"
-    assert current_by_id["5"]["design_status"] == "allocation_unreported_pending"
-    assert all(current_by_id["5"][criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
-    assert "allocation" in current_by_id["5"]["notes"].lower()
+    assert current_by_id["5"]["design_status"] == "operational_category_inferred_allocation_unknown"
+    assert all(current_by_id["5"][criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert "alocação" in current_by_id["5"]["notes"].lower()
     assert "cited study [17]" in current_by_id["10"]["notes"]
     assert current_by_id["10"]["q5"] == "CT"
     assert registry["9"]["empirical_status"] == "empirical_outside_mathematics_scope"
@@ -265,70 +283,44 @@ def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
     assert "se os casos ausentes produzem viés de não resposta" in component["evidence_c4"].lower()
 
 
-def test_unreported_allocation_and_appraisal_unit_keep_design_pending() -> None:
-    rows = {row["study_id"]: row for row in load_current_reassessment()}
-    expected_statuses = {
-        "7": "allocation_unreported_pending",
-        "8": "unit_of_appraisal_pending",
-        "14": "allocation_conflict_pending",
-    }
-
-    for study_id, design_status in expected_statuses.items():
-        study = rows[study_id]
-        assert study["design"] == "design_pending"
-        assert study["design_status"] == design_status
-        if study_id == "8":
-            assert study["assessment_status"] == "hold_unit_of_appraisal"
-            assert all(study[criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
-            assert study["criterion_evidence"] == ""
-        else:
-            assert all(study[criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
-
-    for study_id in ("7",):
-        study = rows[study_id]
-        for criterion in ("q1", "q2", "q3", "q4", "q5"):
-            assert not study[criterion]
-            assert f"{criterion.upper()}=" not in study["criterion_evidence"]
+def test_operational_routes_do_not_claim_confirmed_study_designs():
+    rows = {r['study_id']: r for r in load_current_reassessment()}
+    for sid in ('5','7'):
+        assert rows[sid]['design_status'] == 'operational_category_inferred_allocation_unknown'
+        assert 'não confirma' in rows[sid]['notes'] or 'sem certificar' in rows[sid]['notes'] or 'sem afirmar' in rows[sid]['notes']
+    assert 'não corresponde literalmente' in rows['8']['notes']
+    assert rows['14']['q1'] == 'CT'
 
 
-def test_appraisal_unit_pending_is_not_mmat_appraised_but_stays_in_empirical_scope() -> None:
-    study = {row["study_id"]: row for row in load_current_reassessment()}["8"]
-    scope = {row["study_id"]: row for row in load_current_synthesis_scope()}["8"]
-    assert study["design"] == "design_pending"
-    assert study["design_status"] == "unit_of_appraisal_pending"
-    assert study["assessment_status"] == "hold_unit_of_appraisal"
-    assert all(study[criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))
-    assert study["criterion_evidence"] == ""
-    assert scope["record_status"] == "included_empirical_core"
-    assert scope["selection_status"] == "included"
-    assert scope["empirical_mmat_applicability"] == "pending_unit_adjudication"
-    assert "appraisal unit" in study["notes"].lower()
-    assert "79 students" in study["notes"]
-    assert "10,052 available steps" in study["notes"]
-    assert "4,568-step subset of student-executed actions" in study["notes"]
-    assert "pre-existing" in study["notes"]
+
+def test_thesis_unit_is_one_report_without_duplicate_fractions_or_inherited_trial_design():
+    study = {r['study_id']: r for r in load_current_reassessment()}['8']
+    scope = {r['study_id']: r for r in load_current_synthesis_scope()}['8']
+    assert scope['record_status'] == 'included_empirical_core'
+    assert scope['empirical_mmat_applicability'] == 'applicable'
+    assert study['s1'] == study['s2'] == 'Y'
+    assert study['design_status'] == 'operational_category_adaptation'
+    assert 'Frações são reutilizadas' in study['notes']
+    assert 'não classifica a tese inteira como ensaio randomizado' in study['notes']
 
 
-def test_nonrandomized_outcome_completeness_and_confounding_are_not_overstated() -> None:
-    study = {row["study_id"]: row for row in load_current_reassessment()}["7"]
-    assert study["design"] == "design_pending"
-    assert study["design_status"] == "allocation_unreported_pending"
-    assert all(study[criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
-    assert "allocation procedure" in study["notes"].lower()
+
+def test_unknown_allocation_completeness_and_confounding_remain_indeterminate():
+    study = {r['study_id']: r for r in load_current_reassessment()}['7']
+    assert study['design_status'] == 'operational_category_inferred_allocation_unknown'
+    assert study['q3'] == study['q4'] == 'CT'
+    assert 'alocação' in study['notes']
 
 
-def test_study_7_full_text_sample_and_allocation_evidence_are_preserved() -> None:
-    study = {row["study_id"]: row for row in load_current_reassessment()}["7"]
-    source = {row["study_id"]: row for row in load_primary_sources()}["7"]
 
-    assert study["review_date"] == "2026-10-15"
-    assert "120 students" in study["notes"]
-    assert "50 experimental" in study["notes"]
-    assert "52 control" in study["notes"]
-    assert "p=.583" in study["notes"]
-    assert "does not establish equivalence" in study["notes"]
-    assert "researchgate.net" in source["verification_note"].lower()
-    assert "CC BY 4.0" in source["verification_note"]
+def test_study_7_sample_allocation_and_access_limits_are_preserved():
+    study = {r['study_id']: r for r in load_current_reassessment()}['7']
+    assert study['review_date'] == '2026-10-28'
+    assert '120 participantes' in study['notes'] and '50/52' in study['notes']
+    assert 'não prova completude' in study['notes']
+    assert 'não se declara nova recuperação do PDF' in study['notes']
+    assert 'p=0,583' in study['criterion_evidence']
+
 
 
 def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
@@ -360,17 +352,17 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "uma apreciação preliminar separada dos componentes" in html.lower()
     assert "15 registros com consulta documental declarada" in html.lower()
     assert "não comprova leitura humana integral" in html.lower()
-    assert "nenhum critério recebeu resposta" in html.lower()
+    assert "não recebeu respostas MMAT" in html
     assert "perguntas de triagem do mmat 2018" in html.lower()
     assert "há perguntas de pesquisa claras?" in html.lower()
     assert "17 candidatos empíricos submetidos ao mmat" not in html.lower()
     assert "15 registros empíricos incluídos provisoriamente" in html.lower()
-    assert "14 têm s1/s2 respondidas" in html.lower()
-    assert "11 têm apreciação preliminar dos critérios da categoria" in html.lower()
+    assert "15 têm s1/s2 respondidas" in html.lower()
+    assert "15 têm apreciação preliminar dos critérios da categoria" in html.lower()
 
     for study_id, expected_text in {
-        "7": ("120 students", "50 experimental", "52 control", "p=.583"),
-        "8": ("79 estudantes", "10.052 passos", "4.568 ações", "unidade de análise"),
+        "7": ("120 participantes", "50/52", "não prova completude"),
+        "8": ("uma tese", "Frações são reutilizadas", "empírico computacional"),
     }.items():
         row = re.search(
             rf"<tr>\s*<td>{re.escape(study_id)}</td>(.*?)</tr>",
@@ -448,10 +440,10 @@ def test_defense_material_preserves_pending_mmat_decisions() -> None:
         .lower()
         .split()
     )
-    assert "estudos 5, 7 e 14: categoria indefinida, q1–q5 sem resposta" in slides
-    assert "estudo 8: elegibilidade e unidade pendentes, sem respostas" in slides
-    assert "q1--q5 permanecem sem resposta até a definição do delineamento" in storyboard
-    assert "sem respostas mmat até adjudicação de elegibilidade e unidade de análise" in storyboard
+    assert "estudos 5 e 7: categoria 3 operacional, alocação desconhecida" in slides
+    assert "estudo 8: categoria 4 adaptada" in slides
+    assert "categoria 3 operacional" in storyboard
+    assert "categoria 4 adaptada" in storyboard
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:
@@ -494,22 +486,22 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
     assert "www.mdpi.com/2071-1050/18/4/1900" in sources["6919"]["source_url"]
     assert "10.3390/su18041900" in sources["6919"]["verification_note"]
 
-    assert rows["14"]["design"] == "design_pending"
-    assert rows["14"]["design_status"] == "allocation_conflict_pending"
-    assert all(rows["14"][criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert rows["14"]["design"] == "quantitative_randomized"
+    assert rows["14"]["design_status"] == "design_reassessed_provisional_with_allocation_conflict"
+    assert [rows["14"][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5")] == ["CT","N","Y","CT","CT"]
     assert "random" in rows["14"]["notes"].lower()
     assert "45" in rows["6915"]["notes"] and "90" in rows["6915"]["notes"]
     assert [rows["6915"][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5")] == [
         "CT", "Y", "CT", "N", "Y"
     ]
     assert rows["6915"]["q4"] == "N"
-    assert "Nyantah et al. (2025) & Pendente & Y & Y & --- & --- & --- & --- & ---" in (
+    assert "Nyantah et al. (2025) & Cat. 2 declarada (contraditória) & Y & Y & CT & N & Y & CT & CT" in (
         CURRENT_TABLE.read_text(encoding="utf-8")
     )
 
-    assert rows["7"]["q5"] == ""
-    assert rows["7"]["design"] == "design_pending"
-    assert "Q5=" not in rows["7"]["criterion_evidence"]
+    assert rows["7"]["q5"] == "CT"
+    assert rows["7"]["design"] == "quantitative_nonrandomized"
+    assert "Q5=CT" in rows["7"]["criterion_evidence"]
 
     mixed_evidence = rows["6919"]["criterion_evidence"].lower()
     assert "q1=y the article states a rationale for a mixed-methods approach" in mixed_evidence
@@ -529,6 +521,8 @@ def test_unresolved_mmat_design_cannot_receive_category_specific_ratings(monkeyp
         rows = original_read(path)
         if path == current.REASSESSMENT_PATH:
             row = next(item for item in rows if item["study_id"] == "14")
+            row["design"] = "design_pending"
+            row["design_status"] = "allocation_conflict_pending"
             row["q1"] = "N"
             row["criterion_evidence"] = row["criterion_evidence"].replace(
                 "Q1=CT", "Q1=N"
@@ -567,6 +561,8 @@ def test_pending_appraisal_unit_rejects_any_mmat_response(monkeypatch) -> None:
         rows = original_read(path)
         if path == current.REASSESSMENT_PATH:
             row = next(item for item in rows if item["study_id"] == "8")
+            row["design"] = "design_pending"
+            row["design_status"] = "unit_of_appraisal_pending"
             row["s1"] = "Y"
         return rows
 
@@ -607,8 +603,8 @@ def test_all_18_records_have_explicit_empirical_scope_and_text_status() -> None:
     scope = load_current_synthesis_scope()
     by_id = {row["study_id"]: row for row in scope}
     assert len(by_id) == 18
-    assert sum(row["empirical_mmat_applicability"] == "applicable" for row in scope) == 14
-    assert sum(row["empirical_mmat_applicability"] == "pending_unit_adjudication" for row in scope) == 1
+    assert sum(row["empirical_mmat_applicability"] == "applicable" for row in scope) == 15
+    assert sum(row["empirical_mmat_applicability"] == "pending_unit_adjudication" for row in scope) == 0
     assert sum(row["empirical_mmat_applicability"] == "context_only" for row in scope) == 1
     assert sum(row["empirical_mmat_applicability"] == "pending_full_text" for row in scope) == 1
     assert sum(row["empirical_mmat_applicability"] == "not_applicable" for row in scope) == 1
@@ -621,13 +617,13 @@ def test_all_18_records_have_explicit_empirical_scope_and_text_status() -> None:
 def test_current_mmat_table_contains_only_records_with_screening_responses() -> None:
     rows = load_current_table_rows()
     ids = [row["study_id"] for row in rows]
-    assert len(ids) == 14
+    assert len(ids) == 15
     assert set(ids) == {str(study_id) for study_id in CURRENT_MMAT_STUDY_IDS}
-    assert not {"8", "9", "6921", "6923"}.intersection(ids)
+    assert not {"9", "6921", "6923"}.intersection(ids)
     assert "6919" in ids
     rendered = render_current_table(rows)
-    assert "14 registros do corpus" in rendered
-    assert "Denominador: 14 registros" in rendered
+    assert "15 registros do corpus" in rendered
+    assert "Denominador: 15 registros" in rendered
     assert "S1 e S2 são perguntas de triagem." in rendered
     assert "Q1--Q5 correspondem aos critérios MMAT da categoria;" in rendered
     assert rendered.index(r"\fonte{Elaborado pelo autor (2026).}") < rendered.index(r"\endgroup")
@@ -637,18 +633,19 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert len(note) <= 450
     tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
     prose = tcc_results.read_text(encoding="utf-8")
-    assert "O estudo 8 integra o corpus final sem respostas" in prose
-    assert "não está definido se a apreciação deve considerar as simulações computacionais" in prose
+    assert "a categoria 4 do estudo 8 é uma adaptação" in prose
+    assert "as limitações dessas escolhas permanecem explícitas" in prose.lower()
     assert "adjudicação" not in prose
 
 
-def test_public_mmat_page_marks_study_8_as_unassessed_due_to_unit_hold() -> None:
-    html = CURRENT_HTML.read_text(encoding="utf-8")
-    assert "14 estudos empíricos" in html
-    assert "unidade de análise pendente" in html.lower()
-    study_row = html.split('<td>8</td>', 1)[1].split('</tr>', 1)[0]
-    assert "MMAT suspenso" in study_row
-    assert study_row.count('aria-label="Não avaliado"') == 7
+def test_public_mmat_page_marks_operational_routes_without_certifying_designs():
+    html = CURRENT_HTML.read_text(encoding='utf-8')
+    assert '15 estudos empíricos' in html
+    assert 'Categoria 4 adaptada · modelagem computacional' in html
+    assert 'Categoria 3 operacional · alocação desconhecida' in html
+    assert 'Categoria 2 declarada · alocação contraditória' in html
+    assert 'essas rotas não certificam delineamentos' in html.lower()
+
 
 
 def test_mmat_appraisal_corrects_unfounded_analysis_and_sampling_decisions() -> None:
@@ -711,7 +708,7 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
         load_current_table_rows()
     )
     table = CURRENT_TABLE.read_text(encoding="utf-8")
-    assert "Nyantah et al. (2025) & Pendente" in table
+    assert "Nyantah et al. (2025) & Cat. 2 declarada" in table
     assert "Xia et al. (2026)" in table
     assert "Xia et al. (2026)" in table
     assert "3.1 (CT):" in table

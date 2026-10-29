@@ -9,8 +9,7 @@ from .mmat_current import load_current_reassessment, load_component_reassessment
 ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / "research/data/mmat_followup_questions_current.csv"
 REPORT = ROOT / "docs/tcc/MMAT-PERGUNTAS-PENDENTES.md"
-HOLDS = {("5", "design"), ("7", "design"), ("14", "design"),
-         ("8", "unit"), ("3", "access"), ("6919", "access"), ("6923", "access")}
+HOLDS = {("3", "access"), ("6919", "access"), ("6923", "access")}
 LABELS = {"study": "critérios principais", "record": "pendência do registro",
           "qualitative": "componente qualitativo", "quantitative": "componente quantitativo",
           "unit": "unidade de apreciação", "design": "delineamento", "access": "acesso ao texto"}
@@ -45,9 +44,9 @@ def render_markdown(questions):
     validate_questions(questions)
     lines = ["# Perguntas pendentes para completar a apreciação MMAT", "",
              "Revisão documental de 28/10/2026. Perguntas preparadas, não enviadas. Não há respostas de autores registradas neste documento.", "",
-             "São 55 critérios indeterminados (37 no registro principal e 18 nos componentes mistos), três decisões de delineamento, uma de unidade de apreciação e três de acesso ao texto: 62 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.", "",
-             "As dúvidas de categoria e unidade exigem adjudicação com a orientação do TCC. As demais foram redigidas para eventual esclarecimento dos autores; destinatários e encaminhamento ainda precisam ser definidos pelo responsável. Nenhum contato externo foi realizado nesta revisão.", "",
-             "As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas correspondentes derivam dos registros anteriores e exigem recuperação do original antes de qualquer alteração. Simulação pode constituir pesquisa empírica; no estudo 8, a pendência é a unidade/categoria, não a simples presença de simulações.", ""]
+             "São 72 critérios indeterminados (54 no registro principal e 18 nos componentes mistos) e três pendências de acesso ao texto: 75 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.", "",
+             "As rotas de apreciação dos estudos 5, 7, 8 e 14 foram decididas operacionalmente nesta revisão, com limitações explícitas. Alocação e demais lacunas não foram resolvidas por inferência. As perguntas foram redigidas para eventual esclarecimento dos autores; destinatários e encaminhamento ainda precisam ser definidos pelo responsável. Nenhum contato externo foi realizado nesta revisão.", "",
+             "As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas correspondentes derivam dos registros anteriores e exigem recuperação do original antes de qualquer alteração. Simulação pode constituir pesquisa empírica; no estudo 8, a unidade agora é uma tese/um relatório com componentes matemáticos, sem duplicar os dados de frações reutilizados entre capítulos.", ""]
     previous = None
     for q in questions:
         if q["study_id"] != previous:
