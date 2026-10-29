@@ -163,12 +163,12 @@ def render_blocks(root):
     )
     replay = evidence["replay_validation"]
     coverage_text = (
-        f"O inventário de {day(matrix['review_date'])} registrou **{local} de {len(records)} PDFs locais** "
-        f"identificados por hash; naquele inventário faltavam os registros **{' e '.join(missing)}**. "
-        f"A cópia do estudo 6919 não foi localizada no acervo consultado na revisão de pendências; sua disponibilidade atual exige conferência. Esse registro histórico não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. "
+        f"Em {day(matrix.get('availability_check_date', matrix['review_date']))}, há **{local} de {len(records)} PDFs locais** "
+        f"identificados por hash; faltam os registros **{' e '.join(missing)}**. "
+        f"Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. "
         f"O replay textual congelado de {day(replay['validation_date'])} abrange "
         f"**{replay['checked_source_count']} fontes e {replay['checked_chunk_count']} trechos**, "
-        f"não os {local} PDFs do inventário histórico. As fontes suplementares não foram incorporadas a esse replay. "
+        f"não os {local} PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. "
         f"A leitura documental assistida e a revisão científica humana são estados distintos."
     )
     table = ["| ID e referência primária | Páginas físicas com texto examinado | Contribuição delimitada |",

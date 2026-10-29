@@ -2,13 +2,13 @@
 
 Revisão documental de 28/10/2026. Perguntas preparadas, não enviadas. Não há respostas de autores registradas neste documento.
 
-São 72 critérios indeterminados (54 no registro principal e 18 nos componentes mistos) e três pendências de acesso ao texto: 75 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.
+São 72 critérios indeterminados (54 no registro principal e 18 nos componentes mistos) e duas pendências de acesso ao texto: 74 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.
 
 CT é uma conclusão de insuficiência de informação, não uma tarefa necessariamente incompleta. A consolidação não exige eliminar todos os CT ou obter resposta a todas as perguntas. As tarefas efetivas, seus responsáveis, evidências e próximos passos estão em `research/data/mmat_consolidation_actions_current.json` e na seção de consolidação da página MMAT. As correções documentais desta rodada não alteraram respostas por inferência.
 
 As rotas de apreciação dos estudos 5, 7, 8 e 14 foram decididas operacionalmente nesta revisão, com limitações explícitas. Alocação e demais lacunas não foram resolvidas por inferência. As perguntas foram redigidas para eventual esclarecimento dos autores; destinatários e encaminhamento ainda precisam ser definidos pelo responsável. Nenhum contato externo foi realizado nesta revisão.
 
-As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas correspondentes derivam dos registros anteriores e exigem recuperação do original antes de alterar seus julgamentos. Para 6923, a consulta oficial de 28/10/2026 confirmou o embargo até 16/05/2027; o texto integral não foi recuperado e não há apreciação MMAT. Simulação pode constituir pesquisa empírica; no estudo 8, a unidade agora é uma tese/um relatório com componentes matemáticos, sem duplicar os dados de frações reutilizados entre capítulos.
+A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros anteriores e exigem recuperação do original antes de alterar os julgamentos. O estudo 6919 foi revalidado no PDF primário em 29/10/2026: as respostas foram mantidas e os localizadores passaram a páginas físicas. Para 6923, a consulta oficial de 28/10/2026 confirmou o embargo até 16/05/2027; o texto integral não foi recuperado e não há apreciação MMAT. Simulação pode constituir pesquisa empírica; no estudo 8, a unidade agora é uma tese/um relatório com componentes matemáticos, sem duplicar os dados de frações reutilizados entre capítulos.
 
 ## Estudo 1
 
@@ -203,7 +203,7 @@ As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas corresponde
   Fonte: PS-6916; Publisher HTML: Introduction; Experimental Design; Data Acquisition and Evaluation; Qualitative Analysis; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 - **critérios principais · 5.5** — Que informações adicionais sobre recrutamento, medidas, completude, confundimento, adesão e análise qualitativa permitem concluir os critérios ainda CT nos componentes já apreciados separadamente?
-  Fonte: PS-6916; Páginas físicas 13–17 e 24–27; componentes quantitativo C1–C5 e qualitativo C3–C5 já registrados. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Fonte: PS-6916; Páginas físicas 2 e 13–27; componentes quantitativo C1–C5 e qualitativo C3–C5 já registrados. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 6917
 
@@ -219,25 +219,22 @@ As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas corresponde
 ## Estudo 6919
 
 - **componente qualitativo · 1.3** — Como as entrevistas foram codificadas e transformadas em temas, com quais exemplos de sustentação?
-  Fonte: PS-6919; §4.4.8 p. 18; §6 pp. 24–25. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Fonte: PS-6919; Páginas físicas 18 (§4.4.8) e 24 (§6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 - **componente qualitativo · 1.5** — Como seleção dos 12 estudantes, coleta, análise e conclusões qualitativas se articulam?
-  Fonte: PS-6919; §4.4.8 p. 18; §6 pp. 24–25. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Fonte: PS-6919; Páginas físicas 18 (§4.4.8) e 24 (§6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 - **componente quantitativo · 3.1** — Qual população-alvo e como foram selecionados os grupos de estudantes de controle e intervenção?
-  Fonte: PS-6919; §4.1.1 pp. 8–9; §4.3 pp. 13–14; §6 pp. 24–25. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Fonte: PS-6919; Páginas físicas 7–8 (§4.1.1), 12–14 (§4.3–4.4.1) e 24 (§6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 - **componente quantitativo · 3.3** — Quantos estudantes contribuíram para cada resultado nos dois grupos e como foram tratados dados ausentes e perdas?
-  Fonte: PS-6919; §4.1.1 pp. 8–9; §4.3 pp. 13–14; §6 pp. 24–25. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Fonte: PS-6919; Páginas físicas 7–8 (§4.1.1), 12–14 (§4.3–4.4.1) e 24 (§6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 - **componente quantitativo · 3.5** — Quais registros documentam implementação, exposição recebida e desvios da intervenção?
-  Fonte: PS-6919; §4.1.1 pp. 8–9; §4.3 pp. 13–14; §6 pp. 24–25. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-
-- **pendência do registro · acesso ao texto** — É possível recuperar a cópia primária usada anteriormente ou uma cópia legítima dos autores? O acesso ao editor retornou HTTP 403 nesta rodada e os julgamentos anteriores não foram revalidados.
-  Fonte: PS-6919; Full text mirror: 4.1.1 pp. 8–9; 4.3 pp. 13–14; 4.4.8 p. 18; 6 pp. 24–25. Encaminhamento previsto: acervo privado ou biblioteca ou autores.
+  Fonte: PS-6919; Páginas físicas 7–8 (§4.1.1), 12–14 (§4.3–4.4.1) e 24 (§6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 - **critérios principais · 5.4** — Que concordâncias e discordâncias entre resultados dos grupos de estudantes e entrevistas foram identificadas e como foram tratadas?
-  Fonte: PS-6919; Full text mirror: 4.1.1 pp. 8–9; 4.3 pp. 13–14; 4.4.8 p. 18; 6 pp. 24–25. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Fonte: PS-6919; Páginas físicas 7–8, 12–18 e 24 (§4.1.1, §4.3–4.4.8 e §6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 6920
 

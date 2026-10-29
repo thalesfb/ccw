@@ -25,8 +25,8 @@ a validação educacional do protótipo não foram realizadas nesta versão.
 > O texto do [TCC](results/tcc/main.tex) é a fonte de verdade do relato científico;
 > os artefatos versionados sustentam suas contagens e sua rastreabilidade. A imagem
 > é uma síntese, não substitui o manuscrito e não certifica revisão científica
-> concluída. O inventário de 20/10/2026 registrou 16 PDFs locais para 18 candidatos;
-> faltavam os registros 3 e 6923. Essa contagem é histórica e não muda o fluxo.
+> concluída. Em 29/10/2026, há 16 PDFs locais para 18 candidatos; faltam os
+> registros 3 e 6923, sem mudança retroativa do fluxo histórico.
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 

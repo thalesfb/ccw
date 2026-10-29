@@ -627,7 +627,7 @@
       "does_not_support": "Não demonstra causalidade, ganhos duradouros ou benefício isolado de EEG, rastreamento ocular ou IA. Confundimento temporal permanece; propostas privadas de reavaliação não foram automaticamente consolidadas.",
       "claim_locators": "PDF físico pp. 7-8: coortes; pp. 12-14: métodos e questionário; p. 18: entrevistas; p. 19: KMO; p. 24: limitações.",
       "coverage_limits": "Leitura textual parcial e inspeção visual da p. 19; não equivale a apreciação humana final de todos os componentes.",
-      "identity_note": "PDF do editor recuperado em 17/10/2026; título, DOI, paginação e hash conferidos."
+      "identity_note": "PDF do editor recuperado em 17/10/2026; título, DOI, paginação e hash conferidos. Em 29/10/2026, as respostas MMAT e os localizadores foram revalidados nas pp. 7–8, 12–14, 18 e 24–25, sem mudança de respostas."
     },
     {
       "study_id": "6920",
@@ -728,5 +728,6 @@
       "current_appraisal_verification": "not_appraised"
     }
   ],
-  "availability_note": "full_text_available_locally flags preserve the inventory dated 2026-10-20; they are not a new availability check. In the 2026-10-28 pending-task review the previously recorded copy for study 6919 was not located in the consulted collection; criteria were not revalidated. No historical selection or appraisal count was changed."
+  "availability_check_date": "2026-10-29",
+  "availability_note": "full_text_available_locally flags were rechecked on 2026-10-29: the 16 recorded study PDFs are present in the private collection and match their recorded SHA-256 hashes; studies 3 and 6923 remain unavailable. No historical selection or appraisal count was changed."
 }
