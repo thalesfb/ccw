@@ -3,7 +3,7 @@
   "review_date": "2026-10-20",
   "scope_sha256": "e6af79719f5ed0ee01918bdc2a9d218dcfc8b339181706ec80fb252218090ddc",
   "retrieval_scope_sha256": "f76dfbd371f570075943a57ed28f00769df5b982bef63db2ac321893fe359add",
-  "scope_drift_explanation": "The 18-record selection roles are unchanged. The historical 2026-10-20 inventory identified 16 private primary PDFs, but the frozen retrieval bundle replays only its original 12 sources. Supplementary text/OCR reviews are not a replay of that index. Selection-ledger notes changed, so the historical extraction fingerprint is not a fingerprint of the current scope file; scope_unchanged remains false. The four supplementary sources have not been replayed in the frozen extraction bundle.",
+  "scope_drift_explanation": "The 18-record selection roles are unchanged. Current coverage, rechecked by hash on 2026-10-29, identifies 16 private primary PDFs, but the frozen retrieval bundle replays only its original 12 sources. Supplementary text/OCR reviews are not a replay of that index. Selection-ledger notes changed, so the historical extraction fingerprint is not a fingerprint of the current scope file; scope_unchanged remains false. The four supplementary sources have not been replayed in the frozen extraction bundle.",
   "text_hash_normalization": "UTF-8 with LF line endings",
   "base_commit": "af920535759ce66f8075843919deb275ee91dcf6",
   "extraction_settings": {
@@ -47,7 +47,7 @@
       "3",
       "6923"
     ],
-    "note": "Historical inventory dated 2026-10-20, distinct from selection and the frozen 12-source replay. During the 2026-10-28 pending-task review, the previously recorded PDF for study 6919 was not located in the consulted collection; this is not a new complete inventory or proof of definitive loss."
+    "note": "Current local availability, rechecked by hash on 2026-10-29 (all 16 recorded study PDFs present, including 6919), is separate from historical selection and the frozen 12-source replay."
   },
   "sources": [
     {

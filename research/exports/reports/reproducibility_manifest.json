@@ -447,7 +447,7 @@
     {
       "path": "research/data/mmat_consolidation_actions_current.json",
       "role": "documentary corrections, source-access blockers and outstanding human appraisal tasks, separate from indeterminate MMAT responses",
-      "sha256": "385e3ba572aed49b2483c362b64b994389a5beb141e6932ff3907623756eee80"
+      "sha256": "503afbfe19ddc3d782b2454e95c76e60bfa920d459b856e7bff2749a340cea86"
     },
     {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",
@@ -457,7 +457,7 @@
     {
       "path": "research/data/mmat_followup_questions_current.csv",
       "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
-      "sha256": "c15afd294ceff98c9ae7ed52d3687a2cdac257b8b1e62411043e7eb41ee067e2"
+      "sha256": "3be7bd923b63e8b0bd8f28238b9e2b15f55abb4b38332c1e2a666c3dba691832"
     },
     {
       "path": "research/data/mmat_completion_review_2026-10-28.json",
@@ -507,12 +507,12 @@
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "77f369eefcd023ce4c678cd1b775a83d4b414d96350a3b60758642c2cea0d25b"
+      "sha256": "009b8b03f235ff29a9e139e8d47920482e2e241a2efe5830e1939d3c660ef58d"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "3b210781b39f3a1b396414581b2ab4cc0a39379fe212c177771832d263a2a372"
+      "sha256": "900641a889fbf6cbded8d89fb71ac2e11ea1a93fac3857c8fe2b25795bed172e"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
@@ -522,7 +522,7 @@
     {
       "path": "research/data/study_contribution_current.json",
       "role": "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
-      "sha256": "8f4b4e6c7e1688f798cfcc116a1c807ef27bfc13febaadab3452343d49fb1f71"
+      "sha256": "5bfa7603057e7a5ad70391623988008fd777080ab7fec89e2c777a59eba519cc"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
@@ -632,7 +632,7 @@
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "289e2a72cc2408001aba29fbfe974d5c025263d596a552f257b9d912cbeddb35"
+      "sha256": "ea6150e3e397493edd2cd05093f869afe5af983a3509536a1785ecb69bd8ed0f"
     },
     {
       "path": "research/requirements.txt",

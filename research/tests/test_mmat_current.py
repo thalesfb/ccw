@@ -84,7 +84,9 @@ def test_resolved_documentary_tasks_do_not_promote_indeterminate_mmat_answers():
     assert qualitative['c5'] == 'CT'
     assert 'registros dos estudantes' not in qualitative['evidence_c5']
     for component in ('quantitative', 'qualitative'):
-        assert 'não revalidado' in components[('6919', component)]['source_locator']
+        assert 'Páginas físicas' in components[('6919', component)]['source_locator']
+        assert 'não revalidado' not in components[('6919', component)]['source_locator']
+    assert 'Revalidado no PDF primário em 29/10/2026' in records['6919']['notes']
 
 
 def test_pending_page_distinguishes_documentary_tasks_from_uncertain_article_reporting():
