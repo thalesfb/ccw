@@ -49,7 +49,7 @@ def test_generated_mmat_export_is_a_quadro_and_is_self_describing() -> None:
     assert r"\clearpage" not in export
     assert r"\par\noindent\textit{Nota:}" in export
 
-    component_caption = r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos"
+    component_caption = r"\caption{Componentes qualitativos e quantitativos dos estudos de métodos mistos.}"
     component_caption_index = export.index(component_caption)
     previous_table_end = export.rfind(r"\end{longtable}", 0, component_caption_index)
     component_table_start = export.rfind(r"\begin{longtable}", 0, component_caption_index)

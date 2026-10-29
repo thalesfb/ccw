@@ -29,7 +29,8 @@ def test_maclellan_synthesis_preserves_data_reuse_and_qualitative_scope():
     assert '4.568' in synthesis
     assert 'qualitativa' in row
     assert 'escores absolutos' in synthesis
-    assert 'não constitui avaliação prospectiva' in synthesis
+    limitations = text.split(r'\section{Limitações e Contribuições da Revisão}', 1)[1]
+    assert 'dados humanos preexistentes e não uma avaliação prospectiva' in limitations
     assert 'executaram as próprias ações' in synthesis
     assert 'inclui os passos de estratégia em que o estudante escolhe a transformação' in synthesis
     assert 'ficam fora somente os passos em que o tutor executa os cálculos' in synthesis

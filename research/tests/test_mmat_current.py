@@ -19,6 +19,7 @@ from src.analysis.mmat_current_tcc_table import render_table as render_current_t
 from pathlib import Path
 import csv
 import json
+import re
 import pytest
 
 
@@ -531,7 +532,7 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
         "CT", "Y", "CT", "N", "Y"
     ]
     assert rows["6915"]["q4"] == "N"
-    assert "Nyantah et al. (2025) & Cat. 2 declarada (contraditória) & Y & Y & CT & N & Y & CT & CT" in (
+    assert r"\citeonline{Enhancing2025_012} & Cat. 2 declarada (contraditória) & Y & Y & CT & N & Y & CT & CT" in (
         CURRENT_TABLE.read_text(encoding="utf-8")
     )
 
@@ -658,8 +659,10 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert not {"9", "6921", "6923"}.intersection(ids)
     assert "6919" in ids
     rendered = render_current_table(rows)
-    assert "15 registros do corpus" in rendered
-    assert "15 registros do corpus" in rendered
+    assert "15 estudos do corpus" in rendered
+    main_table, component_table = rendered.split(r"\label{qua:mmat-componentes}", 1)
+    assert len(re.findall(r"^\\citeonline\{[^}]+\} &", main_table, re.M)) == 15
+    assert len(re.findall(r"^\\citeonline\{[^}]+\} &", component_table, re.M)) == 6
     assert "S1/S2 = perguntas de triagem" in rendered
     assert "Q1--Q5 = critérios da categoria" in rendered
     assert rendered.index(r"\fonte{Elaborado pelo autor (2026).}") < rendered.index(r"\endgroup")
@@ -669,8 +672,8 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert len(note) <= 450
     tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
     prose = tcc_results.read_text(encoding="utf-8")
-    assert "a categoria 4 do estudo 8 é uma adaptação" in prose
-    assert "as limitações dessas escolhas permanecem explícitas" in prose.lower()
+    assert r"A categoria 4 foi adaptada à modelagem computacional da tese de \citeonline{Computational2017_008}" in prose
+    assert "As categorias utilizadas provisoriamente não confirmam delineamentos" in prose
     assert "adjudicação" not in prose
 
 
@@ -744,14 +747,14 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
         load_current_table_rows()
     )
     table = CURRENT_TABLE.read_text(encoding="utf-8")
-    assert "Nyantah et al. (2025) & Cat. 2 declarada" in table
-    assert "Xia et al. (2026)" in table
-    assert "Xia et al. (2026)" in table
+    assert r"\citeonline{Enhancing2025_012} & Cat. 2 declarada" in table
+    assert r"\citeonline{UniversityMathematics2026_6919} & Métodos mistos" in table
+    assert r"\citeonline{UniversityMathematics2026_6919} & Quant. não rand." in table
     assert "3.1 (CT):" in table
     assert "2.1 (CT):" not in table
     assert r"\ref{sec:avaliacao-qualidade}" in table
     assert "ID" not in table
-    assert "Enhancing2025" not in table
+    assert "Nyantah et al. (2025)" not in table
 
 
 def test_study_6919_scope_evidence_reflects_the_latest_primary_text_review() -> None:

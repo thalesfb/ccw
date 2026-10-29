@@ -46,7 +46,7 @@ Propor uma especificação técnica e pedagógica de protótipo para apoiar a in
 
 **OE3:** formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência.
 
-**OE4:** propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de uma eventual execução. A proposição desse protocolo não equivale à realização da avaliação nem exige desenvolver o protótipo nesta versão.
+**OE4:** propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de uma eventual execução.
 <!-- ccw-sync:end goals -->
 
 ## Execução local

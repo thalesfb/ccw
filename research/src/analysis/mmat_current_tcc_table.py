@@ -121,12 +121,19 @@ def load_component_rows(path: Path = COMPONENT_DATA_PATH) -> list[dict[str, str]
     return [row for row in rows if int(row["study_id"]) in CURRENT_MMAT_STUDY_IDS]
 
 
+def _study_reference(row: dict[str, str], labels: dict[str, str] | None) -> str:
+    """Use the manuscript bibliography for consistent author/year citations."""
+
+    if labels is not None:
+        return _latex_escape(labels.get(row["study_id"], row["study_key"]))
+    return rf"\citeonline{{{row['study_key']}}}"
+
+
 def render_component_table(
     components: list[dict[str, str]], labels: dict[str, str] | None = None
 ) -> str:
     if not components:
         return ""
-    labels = labels or load_study_labels()
     category_labels = {
         "qualitative": "Qualitativo",
         "quantitative_nonrandomized": "Quant. não rand.",
@@ -147,14 +154,14 @@ def render_component_table(
         r"\setlength{\tabcolsep}{2pt}",
         r"\renewcommand{\arraystretch}{1.15}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|ccccc|>{\raggedright\arraybackslash}p{6.1cm}|}",
-        r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos em estudos de métodos mistos.}\label{qua:mmat-componentes}\\",
+        r"\caption{Componentes qualitativos e quantitativos dos estudos de métodos mistos.}\label{qua:mmat-componentes}\\",
         r"\hline",
-        r"\textbf{Estudo} & \textbf{Componente} & \textbf{C1} & \textbf{C2} & \textbf{C3} & \textbf{C4} & \textbf{C5} & \textbf{Síntese dos julgamentos e localizador} \\",
+        r"\textbf{Estudo} & \textbf{Componente} & \textbf{C1} & \textbf{C2} & \textbf{C3} & \textbf{C4} & \textbf{C5} & \textbf{Síntese e páginas consultadas} \\",
         r"\hline",
         r"\endfirsthead",
         r"\multicolumn{8}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
         r"\hline",
-        r"\textbf{Estudo} & \textbf{Componente} & \textbf{C1} & \textbf{C2} & \textbf{C3} & \textbf{C4} & \textbf{C5} & \textbf{Síntese dos julgamentos e localizador} \\",
+        r"\textbf{Estudo} & \textbf{Componente} & \textbf{C1} & \textbf{C2} & \textbf{C3} & \textbf{C4} & \textbf{C5} & \textbf{Síntese e páginas consultadas} \\",
         r"\hline",
         r"\endhead",
         r"\hline",
@@ -169,9 +176,9 @@ def render_component_table(
             f"{prefix}.{index} ({row[criterion]}): {row[f'evidence_{criterion}']}"
             for index, criterion in enumerate(COMPONENT_CRITERIA, start=1)
         ]
-        rationales.append(f"Localizador: {row['source_locator']}")
+        rationales.append(f"Páginas e seções: {row['source_locator']}")
         values = [
-            _latex_escape(labels.get(row["study_id"], row["study_key"])),
+            _study_reference(row, labels),
             _latex_escape(category_labels[row["design"]]),
             *[row[criterion] for criterion in COMPONENT_CRITERIA],
             _latex_escape(" ".join(rationales)),
@@ -189,7 +196,6 @@ def render_component_table(
 def render_table(
     rows: list[dict[str, str]], labels: dict[str, str] | None = None
 ) -> str:
-    labels = labels or load_study_labels()
     lines = [
         "% Quadro gerado de research/data/mmat_reassessment_current.csv",
         "% Reavaliação documental preliminar; não representa score nem avaliação final.",
@@ -203,7 +209,7 @@ def render_table(
         r"\setlength{\LTcapwidth}{\textwidth}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{4.5cm}|"
         r">{\raggedright\arraybackslash}p{4.5cm}|ccccccc|}",
-        rf"\caption{{Triagem e respostas documentais preliminares ao MMAT 2018 de {len(rows)} registros do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
+        rf"\caption{{Triagem e apreciação preliminar pelo MMAT 2018 de {len(rows)} estudos do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
@@ -229,7 +235,7 @@ def render_table(
             design = "metadata_hold"
         design_label = DESIGN_LABELS.get(design, design)
         if row.get('design_status') == 'operational_category_inferred_allocation_unknown':
-            design_label = 'Cat. 3 operacional (alocação incerta)'
+            design_label = 'Cat. 3 utilizada (alocação incerta)'
         elif row.get('design_status') == 'operational_category_adaptation':
             design_label = 'Cat. 4 adaptada (modelagem)'
         elif row.get('design_status') == 'design_reassessed_provisional_with_allocation_conflict':
@@ -237,7 +243,7 @@ def render_table(
         if row["study_id"] == "6915":
             design_label += " (componente escolar)"
         values = [
-            _latex_escape(labels.get(row["study_id"], row["study_key"])),
+            _study_reference(row, labels),
             _latex_escape(design_label),
             *[row[criterion] or "---" for criterion in CRITERIA],
         ]
