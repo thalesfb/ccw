@@ -1,6 +1,9 @@
 """Check rendered chart structure and counts, independently of PNG hashes."""
 
 from unittest.mock import patch
+import json
+import re
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -10,7 +13,7 @@ from matplotlib.patches import Wedge
 from src.analysis.visualizations import ReviewVisualizer
 
 
-def test_coverage_is_one_chart_with_counts_and_snapshot_scope(tmp_path):
+def test_coverage_is_one_chart_with_counts_and_proper_source_names(tmp_path):
     frame = pd.DataFrame({"database": ["crossref"] * 3 + ["openalex"] * 2})
     visualizer = ReviewVisualizer(tmp_path)
     with patch.object(plt, "close"):
@@ -26,7 +29,9 @@ def test_coverage_is_one_chart_with_counts_and_snapshot_scope(tmp_path):
         labels = [text.get_text() for text in axes.texts]
         assert any("3 (60,0%)" in label for label in labels)
         assert any("2 (40,0%)" in label for label in labels)
-        assert any("n=5" in text.get_text() for text in figure.texts)
+        assert any("Crossref" in label for label in labels)
+        assert any("OpenAlex" in label for label in labels)
+        assert not figure.texts
     plt.close(figure)
 
 
@@ -53,7 +58,7 @@ def test_coverage_without_provenance_still_accounts_for_every_record(tmp_path, f
         figure = plt.gcf()
         labels = [text.get_text() for text in figure.axes[0].texts]
         assert labels == ["Sem fonte registrada\n2 (100,0%)"]
-        assert any("n=2" in text.get_text() for text in figure.texts)
+        assert not figure.texts
     plt.close(figure)
 
 
@@ -165,6 +170,71 @@ def test_full_text_flow_does_not_certify_study_independence_or_threshold_only_ex
         ReviewVisualizer(tmp_path).prisma_flow_diagram(stats)
         figure = plt.gcf()
         labels = [item.get_text() for item in figure.axes[0].texts]
-        assert "Registros empíricos retidos provisoriamente\n(n = 15)" in labels
-        assert "Excluídos na priorização operacional\n(n = 9; limiar e decisões de escopo)" in labels
+        assert "Corpus final\n(n = 15)" in labels
+        assert "Excluídos na priorização por relevância\n(n = 9; limiar e decisões de escopo)" in labels
     plt.close(figure)
+
+
+def test_current_funnel_rendered_values_match_the_versioned_summary(tmp_path):
+    summary = json.loads((Path(__file__).resolve().parents[1] / 'exports/reports/summary.json').read_text(encoding='utf-8'))
+    stats = summary['statistics']['prisma']
+    expected = [stats[key] for key in ('identification', 'screening', 'prioritization', 'shortlisted', 'included')]
+    with patch.object(plt, 'close'):
+        ReviewVisualizer(tmp_path).selection_stages_funnel(pd.DataFrame({'selection_stage': ['included']}), stats=stats)
+        figure = plt.gcf()
+        assert [bar.get_width() for bar in figure.axes[0].patches] == expected
+        labels = [label.get_text() for label in figure.axes[0].get_yticklabels()]
+        assert labels == [f'{name}\n(n={value:,})'.replace(',', '.') for name, value in zip(
+            ('Identificação', 'Após deduplicação', 'Priorização por relevância', 'Lista preliminar', 'Corpus final'), expected)]
+    plt.close(figure)
+
+
+def test_current_prisma_is_legible_and_does_not_mislabel_source_denominators(tmp_path):
+    summary = json.loads((Path(__file__).resolve().parents[1] / 'exports/reports/summary.json').read_text(encoding='utf-8'))
+    with patch.object(plt, 'close'):
+        ReviewVisualizer(tmp_path).prisma_flow_diagram(summary['statistics']['prisma'], source_counts=summary['statistics']['databases'])
+        figure = plt.gcf()
+        figure.canvas.draw()
+        nodes = [text for text in figure.axes[0].texts if text.get_text()]
+        labels = ' '.join(node.get_text() for node in nodes)
+        for prefix, key in (
+            ('Registros identificados', 'identification'),
+            ('Após remoção', 'screening'),
+            ('Priorização por relevância', 'prioritization'),
+            ('Lista preliminar', 'shortlisted'),
+            ('Relatórios procurados', 'reports_sought'),
+            ('Relatórios avaliados', 'eligibility'),
+            ('Corpus final', 'included'),
+        ):
+            node = next(n for n in nodes if n.get_text().startswith(prefix))
+            match = re.search(r'\(n = ([\d.]+)\)', node.get_text())
+            assert int(match.group(1).replace('.', '')) == summary['statistics']['prisma'][key]
+        assert '11.904' in labels and '11.877' in labels and '2.486' in labels
+        assert 'após deduplicação' in labels
+        for name in ('Crossref', 'OpenAlex', 'Semantic Scholar', 'CORE'):
+            assert name in labels
+        assert 'A priorização é heurística' not in labels
+        assert min(node.get_fontsize() * 16 / (figure.get_figwidth() * 2.54) for node in nodes) >= 8
+        renderer = figure.canvas.get_renderer()
+        for node in nodes:
+            extent = node.get_window_extent(renderer)
+            boxes = [p.get_window_extent(renderer) for p in figure.axes[0].patches
+                     if p.get_window_extent(renderer).contains(*figure.axes[0].transData.transform(node.get_position()))]
+            assert len(boxes) == 1
+            assert boxes[0].contains(extent.x0, extent.y0) and boxes[0].contains(extent.x1, extent.y1)
+    plt.close(figure)
+
+
+def test_generate_all_keeps_records_without_source_in_the_flow(tmp_path):
+    stats = dict(identification=3, duplicates_removed=1, screening=2,
+                 screening_excluded=0, prioritization=2, prioritization_excluded=1,
+                 shortlisted=1, abstract_screening_excluded=0, reports_sought=1,
+                 reports_not_retrieved=0, eligibility=1, eligibility_excluded=0, included=1)
+    frame = pd.DataFrame({'database': ['crossref', None], 'selection_stage': ['included', 'screening']})
+    visualizer = ReviewVisualizer(tmp_path)
+    with patch.object(visualizer, 'papers_by_year', return_value=tmp_path/'years.png'), \
+         patch.object(visualizer, 'techniques_distribution', return_value=tmp_path/'techniques.png'), \
+         patch.object(visualizer, 'relevance_score_distribution', return_value=tmp_path/'relevance.png'):
+        output = visualizer.generate_all_visualizations(frame, stats)
+    assert len(output) == 6
+    assert (tmp_path/'prisma_flow.png').is_file()

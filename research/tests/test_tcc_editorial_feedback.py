@@ -29,7 +29,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         blocks = re.findall(r"\\begin\{(?:grafico|figure|fluxograma)\}.*?\\end\{(?:grafico|figure|fluxograma)\}", review, re.S)
         self.assertEqual(len(blocks), 2)
-        self.assertIn(r"\begin{fluxograma}[H]", review)
+        self.assertIn(r"\begin{fluxograma}[htbp]", review)
         self.assertIn(r"\caption{Fluxo de seleção da revisão sistemática.}", review)
         self.assertNotIn(r"\label{fig:selection-funnel}", review)
         for block in blocks:
@@ -364,7 +364,7 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_bncc_short_call_preserves_institutional_responsibility(self):
         bib = (TCC / "referencias.bib").read_text(encoding="utf-8")
         bncc = bib.split("@misc{BNCC2018,", 1)[1].split("\n}", 1)[0]
-        self.assertIn("author = {{Brasil}}", bncc)
+        self.assertIn("author = {{BRASIL}}", bncc)
         self.assertIn("organization = {Ministério da Educação}", bncc)
 
     def test_captions_follow_the_2026_institutional_template(self):
@@ -380,8 +380,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn(r"\fontsize{10}{11.5}", mmat)
         self.assertIn(r"\setlength{\tabcolsep}{2pt}", generator)
         self.assertIn(r"\setlength{\LTcapwidth}{\textwidth}", generator)
-        self.assertIn(r"\multicolumn{10}{r}{\textit{Continua na próxima página}}", generator)
-        for width in ("3.0", "2.5", "3.6"):
+        self.assertIn(r"\multicolumn{9}{r}{\textit{Continua na próxima página}}", generator)
+        for width in ("4.5",):
             self.assertIn("p{" + width + "cm}", generator)
         self.assertNotIn(r"\resizebox", generator)
         self.assertNotIn(r"\Needspace{18\baselineskip}", review)
@@ -396,8 +396,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertEqual(table.count(r"\fonte{Elaborado pelo autor (2026).}"), 2)
         self.assertEqual(table.count(r"\textit{Nota:}"), 2)
         self.assertNotIn("Um registro foi excluído após a triagem", table)
-        self.assertIn("conferência humana pendente, sem escore agregado", table)
-        self.assertIn("Denominador: 15 registros", table)
+        self.assertIn("conferência humana permanece pendente, sem escore agregado", review)
+        self.assertIn("15 registros do corpus", table)
         note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
         self.assertLessEqual(len(note), 450)
         self.assertIn("a categoria 4 do estudo 8 é uma adaptação", review)

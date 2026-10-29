@@ -41,11 +41,13 @@ def test_generated_mmat_export_is_a_quadro_and_is_self_describing() -> None:
     assert "\\label{qua:mmat-reavaliacao-atual}" in export
     assert "\\quadroname\\ \\thequadro" in export
     assert "\\label{tab:mmat-reavaliacao-atual}" not in export
-    assert "S1 e S2 são perguntas de triagem" in export
-    assert "Q1--Q5 correspondem aos critérios" in export
-    assert "\\ref{sec:qualidade-estudos}" in export
+    assert "S1/S2 = perguntas de triagem" in export
+    assert "Q1--Q5 = critérios da categoria" in export
+    assert "\\ref{sec:avaliacao-qualidade}" in export
     assert "Quant. = quantitativo" in export
-    assert "Base = fonte consultada" in export
+    assert r"\textbf{Base}" not in export
+    assert r"\clearpage" not in export
+    assert r"\par\noindent\textit{Nota:}" in export
 
     component_caption = r"\caption{Apreciação preliminar dos componentes qualitativos e quantitativos"
     component_caption_index = export.index(component_caption)

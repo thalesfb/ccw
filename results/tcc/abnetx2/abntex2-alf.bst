@@ -1398,7 +1398,11 @@ FUNCTION {extract.cvs.key} %we borrow the functionality of format.title.for.labe
 FUNCTION {calc.extended.label}
 { "{"
   author empty$ not
-    {author format.names.for.label1 * "}{" * author format.names.for.label2 *}
+    {org-short empty$
+      {author format.names.for.label1 * "}{" * author format.names.for.label2 *}
+      {org-short * "}{" * org-short
+       abnt.cite.style #0 = {"u" change.case$} 'skip$ if$ *}
+     if$}
     {editor empty$ not
      {editor format.names.for.label1 * "}{" *  editor format.names.for.label2 *}
      {org-short empty$ not
@@ -1422,7 +1426,7 @@ FUNCTION {calc.extended.label}
 %final result is placed onto the stack
 FUNCTION {calc.simple.label}
 { author empty$ not
-    {author format.names.for.label1}
+    {org-short empty$ {author format.names.for.label1} {org-short} if$}
     {editor empty$ not
      {editor format.names.for.label1}
      {organization empty$ not

@@ -446,11 +446,11 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "criterion-ct" not in abstract_excluded.group(1)
 
 
-def test_first_mmat_longtable_starts_on_a_fresh_page_for_legacy_hyperref() -> None:
+def test_mmat_longtables_allow_natural_pagination() -> None:
     from src.analysis.mmat_current_tcc_table import load_rows, render_table
 
     prefix = render_table(load_rows()).split(r"\begin{longtable}", 1)[0]
-    assert r"\clearpage" in prefix
+    assert r"\clearpage" not in prefix
 
 
 def test_general_paper_exports_do_not_publish_superseded_mmat_payloads() -> None:
@@ -659,12 +659,12 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert "6919" in ids
     rendered = render_current_table(rows)
     assert "15 registros do corpus" in rendered
-    assert "Denominador: 15 registros" in rendered
-    assert "S1 e S2 são perguntas de triagem." in rendered
-    assert "Q1--Q5 correspondem aos critérios MMAT da categoria;" in rendered
+    assert "15 registros do corpus" in rendered
+    assert "S1/S2 = perguntas de triagem" in rendered
+    assert "Q1--Q5 = critérios da categoria" in rendered
     assert rendered.index(r"\fonte{Elaborado pelo autor (2026).}") < rendered.index(r"\endgroup")
     assert "Quant. = quantitativo; rand. = randomizado." in rendered
-    assert "Base = fonte consultada." in rendered
+    assert r"\textbf{Base}" not in rendered
     note = rendered.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
     assert len(note) <= 450
     tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
@@ -749,7 +749,7 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
     assert "Xia et al. (2026)" in table
     assert "3.1 (CT):" in table
     assert "2.1 (CT):" not in table
-    assert "3.1--3.5 (quantitativo não randomizado)" in table
+    assert r"\ref{sec:avaliacao-qualidade}" in table
     assert "ID" not in table
     assert "Enhancing2025" not in table
 

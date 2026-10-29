@@ -257,15 +257,15 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
     assert "seus componentes qualitativos e quantitativos são apreciados separadamente" in normalized_methodology.lower()
     mmat_table = MMAT_LATEX.read_text(encoding="utf-8")
-    assert "Q1--Q5 correspondem aos critérios MMAT da categoria" in mmat_table
+    assert "Q1--Q5 = critérios da categoria" in mmat_table
     for author in ("Villegas-Ch et al. (2025)", "Xia et al. (2026)", "Echeveria et al. (2025)"):
         assert f"{author} & Métodos mistos &" in mmat_table
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:
     invalid: list[str] = []
-    pattern = re.compile(r"\\fonte\{(Elaborado pelo autor[^}]*)\}")
-    expected = re.compile(r"Elaborado pelo autor \((?:19|20)\d{2}\)\.")
+    pattern = re.compile(r"\\fonte\{(Elaborado pelo autor.*)\}$", re.MULTILINE)
+    expected = re.compile(r"Elaborado pelo autor \((?:19|20)\d{2}\)(?:\.|, com base em \\citeonline\{PRISMA2020\}\..*)")
 
     for path in sorted(TCC_ROOT.rglob("*.tex")):
         for source in pattern.findall(_read(path)):

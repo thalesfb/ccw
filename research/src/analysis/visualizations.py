@@ -68,7 +68,8 @@ class ReviewVisualizer:
     def prisma_flow_diagram(
         self,
         stats: Dict[str, int],
-        save_path: Optional[Path] = None
+        save_path: Optional[Path] = None,
+        source_counts: Optional[Dict[str, int]] = None,
     ) -> Path:
         """Create PRISMA flow diagram.
 
@@ -83,68 +84,67 @@ class ReviewVisualizer:
             save_path = self.output_dir / "prisma_flow.png"
 
         if "reports_sought" in stats:
-            fig, ax = plt.subplots(figsize=(16, 9))
+            # At 16 cm in the manuscript, 22 pt on this 16-inch canvas is 8.66 pt.
+            fig, ax = plt.subplots(figsize=(16, 10.5))
             ax.set_xlim(0, 16)
-            ax.set_ylim(0, 9)
+            ax.set_ylim(0, 10.5)
             ax.axis("off")
             fig.patch.set_facecolor("white")
-            ax.set_facecolor("white")
-
+            def count(key: str) -> str:
+                return f"{int(stats[key]):,}".replace(",", ".")
+            identification = f"Registros identificados (n = {count('identification')})"
+            if source_counts:
+                total = sum(int(value) for value in source_counts.values())
+                names = {"crossref": "Crossref", "openalex": "OpenAlex",
+                         "semantic_scholar": "Semantic Scholar", "core": "CORE"}
+                if total == int(stats['identification']):
+                    scope = "Por fonte na identificação"
+                elif total == int(stats['screening']):
+                    scope = "Por fonte após deduplicação"
+                else:
+                    raise ValueError("Source counts do not match identification or screening")
+                sources = [f"{names.get(key, key)}: {int(value):,}".replace(",", ".")
+                           for key, value in source_counts.items()]
+                identification += f"\n{scope} (n = {total:,}):".replace(",", ".")
+                identification += "\n" + " · ".join(sources[:2]) + "\n" + " · ".join(sources[2:])
+            ax.add_patch(Rectangle((0.35, 8.7), 15.3, 1.55, facecolor="#E8F4FD",
+                                   edgecolor="#334155", linewidth=1.2))
+            ax.text(8, 9.475, identification, ha="center", va="center",
+                    fontsize=22, linespacing=1.05, color="#1f2937")
             main_x, exclusion_x = 4.0, 12.0
-            box_width, side_width, box_height = 6.2, 6.5, 0.92
-            main_y = [8.15, 7.0, 5.85, 4.7, 3.55, 2.4, 1.25]
+            box_width, box_height = 7.1, 1.02
+            main_y = [7.85, 6.55, 5.25, 3.95, 2.65, 1.35]
             main_labels = [
-                f"Registros identificados\n(n = {int(stats['identification']):,})",
-                f"Após remoção de {int(stats['duplicates_removed']):,} duplicatas de identidade,\nregistros submetidos à triagem (n = {int(stats['screening']):,})",
-                f"Após triagem inicial, enviados à priorização operacional\n(n = {int(stats['prioritization']):,})",
-                f"Selecionados para leitura de resumo\n(n = {int(stats['shortlisted']):,})",
-                f"Relatórios buscados para recuperação do texto integral\n(n = {int(stats['reports_sought']):,})",
-                f"Relatórios recuperados e avaliados em texto integral\n(n = {int(stats['eligibility']):,})",
-                f"Registros empíricos retidos provisoriamente\n(n = {int(stats['included']):,})",
+                f"Após remoção de {count('duplicates_removed')} duplicatas DOI/URL,\nregistros submetidos à triagem (n = {count('screening')})",
+                f"Priorização por relevância\n(n = {count('prioritization')})",
+                f"Lista preliminar para leitura de resumo\n(n = {count('shortlisted')})",
+                f"Relatórios procurados para texto integral\n(n = {count('reports_sought')})",
+                f"Relatórios avaliados em texto integral\n(n = {count('eligibility')})",
+                f"Corpus final\n(n = {count('included')})",
             ]
             for y, label in zip(main_y, main_labels):
-                ax.add_patch(Rectangle(
-                    (main_x - box_width / 2, y - box_height / 2),
-                    box_width, box_height, facecolor="#E8F4FD",
-                    edgecolor="#334155", linewidth=1.2,
-                ))
-                ax.text(main_x, y, label, ha="center", va="center",
-                        fontsize=12, linespacing=1.08, color="#1f2937")
-
-            exclusion_rows = [
-                (main_y[1], f"Excluídos na triagem inicial\n(n = {int(stats['screening_excluded']):,})"),
-                (main_y[2], f"Excluídos na priorização operacional\n(n = {int(stats['prioritization_excluded']):,}; limiar e decisões de escopo)"),
-                (main_y[3], f"Excluído após leitura do resumo\n(n = {int(stats['abstract_screening_excluded']):,})"),
-                (main_y[4], f"Texto integral não recuperado\n(n = {int(stats['reports_not_retrieved']):,})"),
-                (main_y[5], f"Protocolo sem resultados concluídos\n(n = {int(stats['eligibility_excluded']):,})"),
+                ax.add_patch(Rectangle((main_x-box_width/2, y-box_height/2),
+                    box_width, box_height, facecolor="#E8F4FD", edgecolor="#334155", linewidth=1.2))
+                ax.text(main_x, y, label, ha="center", va="center", fontsize=22,
+                        linespacing=1.05, color="#1f2937")
+            exclusions = [
+                (main_y[0], f"Excluídos na triagem inicial\n(n = {count('screening_excluded')})"),
+                (main_y[1], f"Excluídos na priorização por relevância\n(n = {count('prioritization_excluded')}; limiar e decisões de escopo)"),
+                (main_y[2], f"Excluído após leitura do resumo\n(n = {count('abstract_screening_excluded')})"),
+                (main_y[3], f"Texto integral não recuperado\n(n = {count('reports_not_retrieved')})"),
+                (main_y[4], f"Protocolo sem resultados concluídos\n(n = {count('eligibility_excluded')})"),
             ]
-            for y, label in exclusion_rows:
-                ax.add_patch(Rectangle(
-                    (exclusion_x - side_width / 2, y - box_height / 2),
-                    side_width, box_height, facecolor="#FFF1F2",
-                    edgecolor="#B91C1C", linewidth=1.2,
-                ))
-                ax.text(exclusion_x, y, label, ha="center", va="center",
-                        fontsize=12, linespacing=1.08, color="#7f1d1d")
-                ax.annotate(
-                    "", xy=(exclusion_x - side_width / 2, y),
-                    xytext=(main_x + box_width / 2, y),
-                    arrowprops=dict(arrowstyle="->", lw=1.3, color="#B91C1C"),
-                )
-
-            for upper, lower in zip(main_y, main_y[1:]):
-                ax.annotate(
-                    "", xy=(main_x, lower + box_height / 2),
-                    xytext=(main_x, upper - box_height / 2),
-                    arrowprops=dict(arrowstyle="->", lw=1.7, color="#334155"),
-                )
-            ax.text(
-                8, 0.35,
-                "A priorização é heurística operacional, não decisão de elegibilidade. "
-                "Textos integrais não recuperados não são contados como exclusões após leitura integral.",
-                ha="center", va="center", fontsize=9, color="#475569",
-            )
-            plt.subplots_adjust(left=0.02, right=0.98, top=0.98, bottom=0.04)
+            for y, label in exclusions:
+                ax.add_patch(Rectangle((exclusion_x-box_width/2, y-box_height/2),
+                    box_width, box_height, facecolor="#FFF1F2", edgecolor="#B91C1C", linewidth=1.2))
+                ax.text(exclusion_x, y, label, ha="center", va="center", fontsize=22,
+                        linespacing=1.05, color="#7f1d1d")
+                ax.annotate("", xy=(exclusion_x-box_width/2, y), xytext=(main_x+box_width/2, y),
+                            arrowprops=dict(arrowstyle="->", lw=1.3, color="#B91C1C"))
+            for upper, lower in zip([8.7, *[y-box_height/2 for y in main_y]], main_y):
+                ax.annotate("", xy=(main_x, lower+box_height/2), xytext=(main_x, upper),
+                            arrowprops=dict(arrowstyle="->", lw=1.7, color="#334155"))
+            plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
             plt.savefig(save_path, dpi=220, facecolor="white")
             plt.close()
             logger.info("PRISMA full-text flow diagram saved to %s", save_path)
@@ -456,17 +456,14 @@ class ReviewVisualizer:
         for database, count in db_counts.items():
             percentage = f'{100 * count / len(df):.1f}'.replace('.', ',')
             quantity = f'{count:,}'.replace(',', '.')
-            labels.append(f'{database}\n{quantity} ({percentage}%)')
+            name = {'crossref': 'Crossref', 'openalex': 'OpenAlex', 'semantic_scholar': 'Semantic Scholar', 'core': 'CORE'}.get(database, database)
+            labels.append(f'{name}\n{quantity} ({percentage}%)')
         fig, ax = plt.subplots(figsize=(8, 6))
         ax.pie(db_counts.values, labels=labels, startangle=90,
                colors=['#246b55', '#75a993', '#aac5df', '#d1b477', '#d3d3d3'],
                textprops={'fontsize': 16}, wedgeprops={'edgecolor': 'white', 'linewidth': 1.5})
         ax.set_aspect('equal')
-        scope = f'Snapshot após deduplicação DOI/URL: n={len(df):,}'.replace(',', '.')
-        if missing:
-            scope += f'; sem fonte registrada: {missing}'
-        fig.text(0.5, 0.02, scope, ha='center', fontsize=14)
-        plt.tight_layout(rect=(0, 0.06, 1, 1))
+        plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
 
@@ -594,11 +591,20 @@ Desvio Padrão: {scores.std():.2f}"""
             ('Registros retidos', max(0, included_count), '#4CAF50')
         ]
 
+        if stats and 'reports_sought' in stats:
+            funnel_stages = [
+                ('Identificação', int(stats['identification']), '#E8F4FD'),
+                ('Após deduplicação', int(stats['screening']), '#B3E5FC'),
+                ('Priorização por relevância', int(stats['prioritization']), '#81C784'),
+                ('Lista preliminar', int(stats['shortlisted']), '#66BB6A'),
+                ('Corpus final', int(stats['included']), '#4CAF50'),
+            ]
+
         stages = [name for name, _, _ in funnel_stages]
         counts = [count for _, count, _ in funnel_stages]
         colors = [color for _, _, color in funnel_stages]
 
-        labels = [f'{stage}\n(n={count})' for stage, count in zip(stages, counts)]
+        labels = [f'{stage}\n(n={count:,})'.replace(',', '.') for stage, count in zip(stages, counts)]
 
         fig, ax = plt.subplots(figsize=(12, 8))
 
@@ -611,7 +617,7 @@ Desvio Padrão: {scores.std():.2f}"""
         bars = ax.barh(y_positions, plot_counts, color=colors, alpha=0.8, edgecolor='black')
 
         ax.set_yticks(y_positions)
-        ax.set_yticklabels(labels)
+        ax.set_yticklabels(labels, fontsize=18)
         ax.set_xlabel('Número de registros')
 
         # Add value labels
@@ -620,10 +626,10 @@ Desvio Padrão: {scores.std():.2f}"""
             ax.text(
                 min(bar.get_width(), counts_max) + counts_max * 0.01,
                 bar.get_y() + bar.get_height() / 2,
-                f'{count}',
+                f'{count:,}'.replace(',', '.'),
                 ha='left',
                 va='center',
-                fontsize=12,
+                fontsize=18,
                 fontweight='bold',
             )
 
@@ -658,7 +664,7 @@ Desvio Padrão: {scores.std():.2f}"""
         try:
             # PRISMA flow (requires stats)
             if stats:
-                generated_files.append(self.prisma_flow_diagram(stats))
+                generated_files.append(self.prisma_flow_diagram(stats, source_counts=df['database'].fillna('Sem fonte registrada').value_counts().to_dict() if 'database' in df else None))
 
             # Papers by year
             generated_files.append(self.papers_by_year(df))
