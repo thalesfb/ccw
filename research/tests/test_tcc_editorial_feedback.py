@@ -41,10 +41,10 @@ class EditorialFeedbackTests(unittest.TestCase):
             r"\section{Limitações e Contribuições da Revisão}", 1
         )[0]
         for citation in (
-            r"\citeonline[pp.~1, 16, 31--35]{He2025_6915}",
-            r"\citeonline[pp.~2, 14, 22]{Villegas2025_6916}",
-            r"\citeonline[pp.~101--105]{Enhancing2025_012}",
-            r"\citeonline[pp.~65, 69--70]{Echeveria2025_6920}",
+            r"\citeonline[p.~1, 16, 31--35]{He2025_6915}",
+            r"\citeonline[p.~2, 14, 22]{Villegas2025_6916}",
+            r"\citeonline[p.~101--105]{Enhancing2025_012}",
+            r"\citeonline[p.~65, 69--70]{Echeveria2025_6920}",
         ):
             self.assertIn(citation, gaps)
         self.assertIn("textos consultados dos 15 estudos do corpus final, sem pressupor leitura integral", gaps)
@@ -70,7 +70,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("não estimativa de prevalência", gap_slide)
         self.assertNotIn("pp. 1, 14, 22", gap_slide)
         manuscript = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn(r"\citeonline[pp.~2, 14, 22]{Villegas2025_6916}", manuscript)
+        self.assertIn(r"\citeonline[p.~2, 14, 22]{Villegas2025_6916}", manuscript)
         self.assertNotIn(r"\\citeonline", manuscript)
 
     def test_temporal_and_sample_frames_are_reported_without_false_reconciliation(self):
@@ -94,14 +94,14 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("Excluído após resumo", audit)
         self.assertIn("A triagem não encontrou resultado explícito de aprendizagem matemática no resumo", audit)
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn("Pendente: texto integral da dissertação não recuperado; MMAT não aplicado.", results)
+        self.assertIn("Pendente: texto integral da tese não recuperado; MMAT não aplicado.", results)
         self.assertIn("não tratados como verificados no texto integral", results)
         slides = " ".join(
             (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
         )
         self.assertIn("material associado aos 15 registros provisórios", slides)
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn("Pendente: texto integral da dissertação não recuperado; MMAT não aplicado.", results)
+        self.assertIn("Pendente: texto integral da tese não recuperado; MMAT não aplicado.", results)
 
     def test_defense_deck_and_parallel_pptx_are_distinguished(self):
         slidev_readme = (ROOT / "presentation/README.md").read_text(encoding="utf-8")
@@ -211,7 +211,7 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_study_specific_quantitative_claims_have_primary_source_locators(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn(r"\citeonline[seção~6]{UniversityMathematics2026_6919}", results)
+        self.assertIn(r"\cite[seção~6]{UniversityMathematics2026_6919}", results)
         self.assertIn("não demonstra equivalência", results)
         self.assertIn("Tabela~3, p.~105", results)
         self.assertIn("pré-teste", results)
@@ -238,9 +238,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("50 estudantes do primeiro ano de Engenharia Industrial, observados entre 2017 e 2021", foundation)
 
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn(r"\citeonline[pp.~50--53]{Math2021_001}", results)
-        self.assertIn(r"\citeonline[pp.~4--5]{Machine2024_009}", results)
-        self.assertIn(r"\citeonline[pp.~650, 653--654]{Design2025_004}", results)
+        self.assertIn(r"\citeonline[p.~50--53]{Math2021_001}", results)
+        self.assertIn(r"\citeonline[p.~4--5]{Machine2024_009}", results)
+        self.assertIn(r"\citeonline[p.~650, 653--654]{Design2025_004}", results)
         self.assertIn("taxa de melhoria do efeito de aprendizagem", results.lower())
         self.assertIn("a taxa é definida pelos autores", results.lower())
         self.assertIn("4.568 passos nos quais os estudantes executaram as próprias ações.", results)
@@ -419,11 +419,11 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("controle de confundidores", mmat)
         self.assertIn("administração da intervenção", mmat)
         self.assertNotIn("adjudicação", mmat)
-        self.assertIn(r"\citeonline[seção 4.1, pp.~9--11 e Tabela~2]{Innovative2023_005}", mmat)
+        self.assertIn(r"\citeonline[seção 4.1, p.~9--11 e Tabela~2]{Innovative2023_005}", mmat)
         self.assertIn(r"p=0{,}583", mmat)
         self.assertIn("18 casos sem desfecho válido", mmat)
         self.assertIn("procedimento de alocação", mmat)
-        self.assertIn(r"\citeonline[pp.~44--49, 52--56]{Computational2017_008}", mmat)
+        self.assertIn(r"\citeonline[p.~44--49, 52--56]{Computational2017_008}", mmat)
         self.assertIn("79 estudantes", mmat)
         self.assertIn("10.052 passos", mmat)
         self.assertIn("unidade de avaliação", mmat)
@@ -454,7 +454,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         for phrase in ("média harmônica", "falsos positivos", "concordância", "calibração"):
             self.assertIn(phrase, theory)
         for phrase in ("regras de classificação", "redes neurais multicamadas",
-                       "modelos probabilísticos", "comparação de modelos",
+                       "campos aleatórios condicionais", "comparação de modelos",
                        "aprendizagem cooperativa"):
             self.assertIn(phrase, theory + review)
 

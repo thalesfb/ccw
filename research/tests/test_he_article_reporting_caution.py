@@ -14,7 +14,7 @@ def test_he_classroom_analysis_reports_cluster_level_uncertainty_cautiously():
     )
     evidence_section = chapter[section_start:section_end]
     he_start = evidence_section.index(
-        r"Em \citeonline[pp.~1, 16, 31--35]{He2025_6915}"
+        r"Em \citeonline[p.~1, 16, 31--35]{He2025_6915}"
     )
     he_end = evidence_section.index("\n\n", he_start)
     he_section = evidence_section[he_start:he_end].lower()

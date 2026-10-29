@@ -120,7 +120,8 @@ def test_innovative_model_uses_publisher_issue_metadata() -> None:
     assert "year = {2024}" in article
     assert "volume = {9}" in article
     assert "number = {1}" in article
-    assert "pages = {1--16}" in article
+    assert "note = {Artigo 20231524}" in article
+    assert "pages = {1--16}" not in article
 
 
 def test_primary_technical_references_are_present_and_cited() -> None:
