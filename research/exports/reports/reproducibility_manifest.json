@@ -445,6 +445,11 @@
   "artifact_scope": "research_snapshot",
   "artifacts": [
     {
+      "path": "research/data/mmat_consolidation_actions_current.json",
+      "role": "documentary corrections, source-access blockers and outstanding human appraisal tasks, separate from indeterminate MMAT responses",
+      "sha256": "385e3ba572aed49b2483c362b64b994389a5beb141e6932ff3907623756eee80"
+    },
+    {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",
       "role": "explicit provisional appraisal routes, source locators and criterion-level decisions for studies 5, 7, 8 and 14",
       "sha256": "417bbf3940beb005272bfad6b36be2aa7265b0642e6ae0cb8db6fc27fe1b0163"
@@ -452,7 +457,7 @@
     {
       "path": "research/data/mmat_followup_questions_current.csv",
       "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
-      "sha256": "0dd25a19f3945eb58472c8025e3705799d1e08dd0c440a76daf770f82930d778"
+      "sha256": "c15afd294ceff98c9ae7ed52d3687a2cdac257b8b1e62411043e7eb41ee067e2"
     },
     {
       "path": "research/data/mmat_completion_review_2026-10-28.json",
@@ -502,12 +507,12 @@
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "87b57f09a1920564c4968800e614b61cf347135f38ef5ed9de7e15de313d84cb"
+      "sha256": "77f369eefcd023ce4c678cd1b775a83d4b414d96350a3b60758642c2cea0d25b"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "4dc73826bb23ef3a9a2d23a27d2fd0698ed5d899efeb3d7bf5458752675d8983"
+      "sha256": "3b210781b39f3a1b396414581b2ab4cc0a39379fe212c177771832d263a2a372"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
@@ -517,7 +522,7 @@
     {
       "path": "research/data/study_contribution_current.json",
       "role": "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
-      "sha256": "5a1d5de0f22546191245bdec5b4fb6935d17b886f2a3bf2910d298451371e9a4"
+      "sha256": "8f4b4e6c7e1688f798cfcc116a1c807ef27bfc13febaadab3452343d49fb1f71"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
@@ -602,7 +607,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "88421e78dda5d875769dea6ffbcda12eb64cb95b1437484b8d17d97a418237eb"
+      "sha256": "58277ad00813a68973484a37e7e362ce96c9a7e8f5301b7eb17772b80b9a4509"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -627,7 +632,7 @@
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "cff50bce67d27cd969de18431ce5385a6cef853dd11476db5f8057b94616464b"
+      "sha256": "289e2a72cc2408001aba29fbfe974d5c025263d596a552f257b9d912cbeddb35"
     },
     {
       "path": "research/requirements.txt",

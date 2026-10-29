@@ -68,6 +68,40 @@ def test_followup_questions_cover_every_indeterminate_criterion_and_structural_h
         validate_questions(questions[1:])
 
 
+def test_resolved_documentary_tasks_do_not_promote_indeterminate_mmat_answers():
+    records = {r['study_id']: r for r in load_current_reassessment()}
+    assert records['6916']['q5'] == 'CT'
+    assert 'pending the separate component appraisal' not in records['6916']['criterion_evidence']
+    assert 'componentes já apreciados' in records['6916']['criterion_evidence']
+    for study_id in ('2', '6', '6917'):
+        assert 'físicas' in records[study_id]['page_or_section']
+    components = {(r['study_id'], r['component']): r for r in load_component_reassessments()}
+    quantitative = components[('6920', 'quantitative')]
+    assert quantitative['c2'] == 'CT'
+    assert 'população-alvo mais ampla' not in quantitative['evidence_c2']
+    assert '428' in quantitative['evidence_c2'] and '633' in quantitative['evidence_c2']
+    qualitative = components[('6920', 'qualitative')]
+    assert qualitative['c5'] == 'CT'
+    assert 'registros dos estudantes' not in qualitative['evidence_c5']
+    for component in ('quantitative', 'qualitative'):
+        assert 'não revalidado' in components[('6919', component)]['source_locator']
+
+
+def test_pending_page_distinguishes_documentary_tasks_from_uncertain_article_reporting():
+    html = CURRENT_HTML.read_text(encoding='utf-8')
+    assert 'CT não é uma tarefa incompleta' in html
+    assert 'não depende de obter resposta a todas as perguntas' in html
+    assert 'Tarefas de consolidação' in html
+    assert '16/05/2027' in html
+    assert '75 envios obrigatórios' not in html
+    import json
+    actions = json.loads((Path(__file__).resolve().parents[1] / 'data/mmat_consolidation_actions_current.json').read_text(encoding='utf-8'))
+    assert len({a['id'] for a in actions['actions']}) == len(actions['actions'])
+    assert any(a['status'] == 'completed_documentary' for a in actions['actions'])
+    assert any(a['status'] == 'pending_human_review' for a in actions['actions'])
+    assert all(a['evidence'] and a['next_step'] for a in actions['actions'])
+
+
 CURRENT_TABLE = Path(__file__).resolve().parents[1] / "exports" / "references" / "mmat_current_tcc_table.tex"
 EVIDENCE_MATRIX = Path(__file__).resolve().parents[1] / "data" / "manual_override_evidence_matrix.csv"
 CURRENT_HTML = Path(__file__).resolve().parents[1] / "exports" / "analysis" / "mmat_current.html"

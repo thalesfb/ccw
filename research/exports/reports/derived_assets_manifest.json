@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "3401d21408c0f168f6bcba570bdc1a70a50e0c42b788c87c0354654dbff3fed5",
+    "sha256": "a364a04d1a6e5cb4da74a1b631326dea4b0be2e34d2247dd697874a2c7f1c106",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/claim_evidence_current.json",
@@ -20,6 +20,7 @@
       "research/data/mmat_assessments.csv",
       "research/data/mmat_completion_review_2026-10-28.json",
       "research/data/mmat_component_reassessment_current.csv",
+      "research/data/mmat_consolidation_actions_current.json",
       "research/data/mmat_current_study_registry.csv",
       "research/data/mmat_followup_questions_current.csv",
       "research/data/mmat_operational_decisions_2026-10-28.json",

@@ -97,7 +97,7 @@ assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-lab
 assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
 assert.match(mmat, /<span class="metric-value">1<\/span><span class="metric-label">relatório não recuperado no fluxo<\/span>/, 'the current page must distinguish historical selection from current PDF availability');
 assert.match(mmat, /Um relatório permanece não recuperado no fluxo de seleção e não recebeu apreciação MMAT\. Um registro foi excluído após a triagem do resumo e não recebeu MMAT\./, 'the evidence summary must distinguish the unretrieved report from the abstract-stage exclusion');
-assert.match(mmat, /O acervo local contém 16 PDFs dos 18 registros\. Faltam os estudos 3 e 6923/, 'the current page must identify both unavailable primary PDFs');
+assert.match(mmat, /identificou 16 PDFs dos 18 registros; faltavam os estudos 3 e 6923\. Essa contagem é histórica\./, 'the current page must mark the 16-PDF count as historical and identify both unavailable primary PDFs');
 assert.match(mmat, /A reprodução congelada do índice textual abrange 12 fontes/, 'current PDF availability must not imply a larger retrieval replay');
 const historicalUnverifiedRow = mmat.match(/<tr>\s*<td>3<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.match(historicalUnverifiedRow, /MMAT histórico; fonte indisponível nesta revisão/, 'historical responses must not imply source-bound revalidation');
@@ -163,7 +163,7 @@ assert.match(mmat, /nota 95 nas categorias Medium/i, 'the current page must expo
 assert.match(mmat, /regra efetivamente usada e a adequação das demais medidas/i, 'the current page must explain why study 2 Q3 remains indeterminate');
 assert.match(mmat, /75 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda');
 const pagesWorkflow = read('.github/workflows/publish-reports.yml');
-for (const asset of ['research/data/mmat_followup_questions_current.csv', 'docs/tcc/MMAT-PERGUNTAS-PENDENTES.md']) {
+for (const asset of ['research/data/mmat_followup_questions_current.csv', 'research/data/mmat_consolidation_actions_current.json', 'docs/tcc/MMAT-PERGUNTAS-PENDENTES.md']) {
   assert.ok(pagesWorkflow.includes(`cp ${asset} _site/`), `Pages must package the linked MMAT followup asset: ${asset}`);
 }
 assert.match(mmat, /class="question-code">3\.1</, 'non-randomized quantitative components must use MMAT category 3');

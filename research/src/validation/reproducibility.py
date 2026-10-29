@@ -72,6 +72,7 @@ COMPANION_DOCUMENTS: tuple[tuple[str, str, str], ...] = (
 )
 
 ARTIFACTS: tuple[tuple[str, str], ...] = (
+    ("research/data/mmat_consolidation_actions_current.json", "documentary corrections, source-access blockers and outstanding human appraisal tasks, separate from indeterminate MMAT responses"),
     ("research/data/mmat_operational_decisions_2026-10-28.json", "explicit provisional appraisal routes, source locators and criterion-level decisions for studies 5, 7, 8 and 14"),
     ("research/data/mmat_followup_questions_current.csv", "prepared unsent questions covering indeterminate criteria and structural appraisal holds"),
     ("research/data/mmat_completion_review_2026-10-28.json", "source-linked documentary reappraisal changes and retained measurement uncertainties"),
