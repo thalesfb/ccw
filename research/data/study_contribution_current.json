@@ -721,11 +721,12 @@
       "contribution": "Mantém rastreabilidade do relatório não recuperado, sem avaliação MMAT nem contribuição empírica ratificada.",
       "does_not_support": "Descrição atribuída a metadados/resumo não equivale a confirmação do desenho, algoritmos ou resultados no texto integral.",
       "claim_locators": "Nenhuma página primária examinada; indisponibilidade registrada separadamente do corpus retido.",
-      "coverage_limits": "Texto integral não recuperado. O manifesto registra embargo consultado em 13/10/2026, com liberação informada para 16/05/2027; em 20/10/2026 o autor relatou acesso indisponível até o ano seguinte. A data não foi novamente confirmada nesta rodada. Sem MMAT ou juízo de qualidade.",
+      "coverage_limits": "Texto integral não recuperado. O manifesto registra embargo consultado em 13/10/2026, com liberação informada para 16/05/2027; em 20/10/2026 o autor relatou acesso indisponível até o ano seguinte. Em 28/10/2026, os metadados oficiais da Columbia confirmaram o embargo até 16/05/2027. Sem MMAT ou juízo de qualidade.",
       "identity_note": "Identidade e interpretação permanecem sujeitas à conferência humana.",
       "access_status": "repository_embargo",
-      "access_status_date": "2026-10-20",
+      "access_status_date": "2026-10-28",
       "current_appraisal_verification": "not_appraised"
     }
-  ]
+  ],
+  "availability_note": "full_text_available_locally flags preserve the inventory dated 2026-10-20; they are not a new availability check. In the 2026-10-28 pending-task review the previously recorded copy for study 6919 was not located in the consulted collection; criteria were not revalidated. No historical selection or appraisal count was changed."
 }

@@ -465,12 +465,12 @@ Os relatórios HTML gerados agora incluem:
 
 A taxa de extração automática do pipeline descreve o processamento técnico do
 snapshot e não equivale à recuperação ou à avaliação científica de fontes
-primárias. A cobertura atual identifica 16 PDFs locais entre os 18 candidatos;
-faltam os registros 3 e 6923. O fluxo histórico tem 15 inclusões provisórias,
+primárias. O inventário de 20/10/2026 identificou 16 PDFs locais entre os 18
+candidatos; faltavam os registros 3 e 6923. O fluxo histórico tem 15 inclusões provisórias,
 14 triagens MMAT S1/S2 e 11 apreciações por categoria. Esses números não comprovam
 leitura humana integral. O estudo 8 aguarda adjudicação de escopo/unidade; as
 categorias de 5, 7 e 14 também estão pendentes. O replay textual congelado cobre
-12 fontes e 484 trechos, não os 16 PDFs atuais. A avaliação do registro 3 não foi
+12 fontes e 484 trechos, não os 16 PDFs daquele inventário. A avaliação do registro 3 não foi
 revalidada sem o original; 6923 não recebeu respostas. Consulte a
 [matriz de cobertura](../docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md) para
 localizadores e limites, sem converter disponibilidade em elegibilidade.

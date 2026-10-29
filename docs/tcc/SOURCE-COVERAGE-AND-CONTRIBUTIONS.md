@@ -12,7 +12,7 @@ e 15 registros mantidos provisoriamente. Esses números não comprovam 15 estudo
 independentes, leitura humana integral ou disponibilidade atual de todas as fontes.
 
 <!-- ccw-sync:start coverage -->
-Em 20/10/2026, há **16 de 18 PDFs locais** identificados por hash; faltam os registros **3 e 6923**. Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. A leitura documental assistida e a revisão científica humana são estados distintos.
+O inventário de 20/10/2026 registrou **16 de 18 PDFs locais** identificados por hash; naquele inventário faltavam os registros **3 e 6923**. A cópia do estudo 6919 não foi localizada no acervo consultado na revisão de pendências; sua disponibilidade atual exige conferência. Esse registro histórico não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs do inventário histórico. As fontes suplementares não foram incorporadas a esse replay. A leitura documental assistida e a revisão científica humana são estados distintos.
 <!-- ccw-sync:end coverage -->
 
 A leitura documental assistida por IA compreendeu texto extraível e imagens

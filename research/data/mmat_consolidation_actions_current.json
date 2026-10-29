@@ -1,0 +1,62 @@
+{
+  "review_date": "2026-10-28",
+  "review_kind": "assisted_documentary_review",
+  "actions": [
+    {
+      "id": "DOC-01",
+      "subject": "Precisar os localizadores das fontes reexaminadas",
+      "status": "completed_documentary",
+      "owner": "revisão documental",
+      "evidence": "Páginas físicas e seções registradas nos estudos 1, 2, 6, 10, 6916, 6917 e 6920 e nos componentes reexaminados. As fontes históricas não revalidadas estão identificadas.",
+      "next_step": "Usar os localizadores na conferência humana; não interpretar localização como aprovação do julgamento."
+    },
+    {
+      "id": "DOC-02",
+      "subject": "Corrigir justificativas sem alterar respostas por inferência",
+      "status": "completed_documentary",
+      "owner": "revisão documental",
+      "evidence": "6916/Q5 passa a referir componentes já apreciados; 6920/C2 quantitativo considera a população local e os 428/633 registros; 6920/C5 qualitativo distingue coerência qualitativa de integração mista. CT preservados.",
+      "next_step": "Conferir cada julgamento contra a pergunta correspondente do MMAT e os limites dos textos."
+    },
+    {
+      "id": "SRC-003",
+      "subject": "Recuperar o original do estudo 3 para revalidação",
+      "status": "blocked_source_access",
+      "owner": "responsável pela revisão / biblioteca",
+      "evidence": "Registro editorial e DOI identificados; consulta direta ao editor expirou em 28/10/2026. Não foi obtida uma cópia do texto integral nesta rodada. O relato anterior de compra necessária não comprova impossibilidade de outras vias legítimas.",
+      "next_step": "Obter cópia legítima pelo editor, biblioteca ou autor e então revalidar todos os critérios históricos."
+    },
+    {
+      "id": "SRC-6919",
+      "subject": "Revalidar as apreciações históricas do estudo 6919",
+      "status": "blocked_source_access",
+      "owner": "responsável pela revisão",
+      "evidence": "O manifesto registra preservação privada anterior. A cópia não foi localizada no acervo consultado nesta rodada; downloads do editor e do espelho retornaram HTTP 403. O espelho apresenta texto indexado, mas não foi realizada nova revisão completa por critério.",
+      "next_step": "Localizar a cópia privada anteriormente registrada ou obter o original por via legítima; conferir identidade e critérios sem presumir que a consulta histórica foi ratificada."
+    },
+    {
+      "id": "SRC-6923",
+      "subject": "Acesso ao relatório 6923",
+      "status": "blocked_embargo",
+      "owner": "repositório institucional / responsável pela revisão",
+      "evidence": "Metadados oficiais da Columbia consultados novamente em 28/10/2026: embargo com disponibilidade prevista em 16/05/2027. Texto integral não recuperado e sem apreciação MMAT.",
+      "next_step": "Registrar como relatório não recuperado e limitação do fluxo. Só apreciar se uma cópia legítima vier a ser disponibilizada; a consolidação não exige inventar respostas nem esperar o fim do embargo."
+    },
+    {
+      "id": "HUM-01",
+      "subject": "Conferência humana dos julgamentos e da síntese",
+      "status": "pending_human_review",
+      "owner": "autor e orientação científica",
+      "evidence": "Há apreciações preliminares nos 15 registros empíricos; o apoio automatizado e a revisão de consistência não constituem aprovação científica humana, inclusive para Y e N.",
+      "next_step": "Conferir fonte, pergunta, justificativa e impacto na síntese por estudo. Registrar divergências e decisões; manter CT quando a informação continuar insuficiente."
+    },
+    {
+      "id": "METH-08",
+      "subject": "Conferência das rotas operacionais, especialmente estudo 8",
+      "status": "pending_human_review",
+      "owner": "autor e orientação científica",
+      "evidence": "Rotas de 5, 7, 8 e 14 já decididas operacionalmente. A categoria 4 adaptada do estudo 8 não corresponde literalmente a um desenho apenas descritivo; a tese também testa hipóteses.",
+      "next_step": "Confirmar a apresentação dessas limitações e a adequação da lente adaptada, sem duplicar frações nem transformar a rota em delineamento confirmado."
+    }
+  ]
+}

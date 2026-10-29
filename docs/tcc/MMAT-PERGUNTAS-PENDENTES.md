@@ -4,9 +4,11 @@ Revisão documental de 28/10/2026. Perguntas preparadas, não enviadas. Não há
 
 São 72 critérios indeterminados (54 no registro principal e 18 nos componentes mistos) e três pendências de acesso ao texto: 75 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.
 
+CT é uma conclusão de insuficiência de informação, não uma tarefa necessariamente incompleta. A consolidação não exige eliminar todos os CT ou obter resposta a todas as perguntas. As tarefas efetivas, seus responsáveis, evidências e próximos passos estão em `research/data/mmat_consolidation_actions_current.json` e na seção de consolidação da página MMAT. As correções documentais desta rodada não alteraram respostas por inferência.
+
 As rotas de apreciação dos estudos 5, 7, 8 e 14 foram decididas operacionalmente nesta revisão, com limitações explícitas. Alocação e demais lacunas não foram resolvidas por inferência. As perguntas foram redigidas para eventual esclarecimento dos autores; destinatários e encaminhamento ainda precisam ser definidos pelo responsável. Nenhum contato externo foi realizado nesta revisão.
 
-As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas correspondentes derivam dos registros anteriores e exigem recuperação do original antes de qualquer alteração. Simulação pode constituir pesquisa empírica; no estudo 8, a unidade agora é uma tese/um relatório com componentes matemáticos, sem duplicar os dados de frações reutilizados entre capítulos.
+As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas correspondentes derivam dos registros anteriores e exigem recuperação do original antes de alterar seus julgamentos. Para 6923, a consulta oficial de 28/10/2026 confirmou o embargo até 16/05/2027; o texto integral não foi recuperado e não há apreciação MMAT. Simulação pode constituir pesquisa empírica; no estudo 8, a unidade agora é uma tese/um relatório com componentes matemáticos, sem duplicar os dados de frações reutilizados entre capítulos.
 
 ## Estudo 1
 
@@ -200,8 +202,8 @@ As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas corresponde
 - **critérios principais · 5.4** — Houve casos em que percepção e desempenho divergiram, incluindo críticas sobre alunos avançados, e como foram explicados?
   Fonte: PS-6916; Publisher HTML: Introduction; Experimental Design; Data Acquisition and Evaluation; Qualitative Analysis; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
-- **critérios principais · 5.5** — Que informações adicionais resolvem as incertezas de mensuração, completude, confundimento e análise qualitativa dos componentes?
-  Fonte: PS-6916; Publisher HTML: Introduction; Experimental Design; Data Acquisition and Evaluation; Qualitative Analysis; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+- **critérios principais · 5.5** — Que informações adicionais sobre recrutamento, medidas, completude, confundimento, adesão e análise qualitativa permitem concluir os critérios ainda CT nos componentes já apreciados separadamente?
+  Fonte: PS-6916; Páginas físicas 13–17 e 24–27; componentes quantitativo C1–C5 e qualitativo C3–C5 já registrados. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 6917
 
@@ -242,10 +244,10 @@ As fontes 3 e 6919 não foram revalidadas nesta rodada. As perguntas corresponde
 - **componente qualitativo · 1.3** — Como as falas dos cinco professores foram analisadas e agrupadas nos quatro benefícios?
   Fonte: PS-6920; §2.1 p. 65; §3.3.4 p. 73. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
-- **componente qualitativo · 1.5** — Quando ocorreram as entrevistas e como foram distinguidas experiências observadas, expectativas e interpretações finais?
+- **componente qualitativo · 1.5** — Como as fontes, a seleção e coleta de entrevistas, a análise e a interpretação qualitativas se articulam de modo coerente? A integração com os dados quantitativos será apreciada separadamente nos critérios mistos.
   Fonte: PS-6920; §2.1 p. 65; §3.3.4 p. 73. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
-- **componente quantitativo · 4.2** — Qual população de referência e como os 428 casos completos representam os estudantes elegíveis da escola?
+- **componente quantitativo · 4.2** — Como os 428 casos completos correspondem à população local dos 633 estudantes recrutados, considerando os anos letivos divergentes, os casos não retidos e a cobertura da escola descrita?
   Fonte: PS-6920; §2.1 p. 65; §2.6 p. 68; §3.1 p. 69; Results pp. 69–70. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 - **componente quantitativo · 4.4** — Por que 205 dos 633 estudantes não integraram a análise, como diferiam dos incluídos e qual ano letivo corresponde ao grupo estudado?
