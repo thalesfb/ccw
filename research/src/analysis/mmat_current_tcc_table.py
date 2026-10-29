@@ -139,11 +139,11 @@ def render_component_table(
     }
     lines = [
         "% Quadro gerado de research/data/mmat_component_reassessment_current.csv",
-        r"\clearpage",  # Keep legacy longtable anchors with the first-page caption.
         r"\begingroup",
         r"\SingleSpacing",
+        r"\setlength{\parindent}{0pt}",
         r"\def\LTcaptype{quadro}",
-        r"\fontsize{10}{11.5}\selectfont",
+        r"\fontsize{10}{12}\selectfont",
         r"\setlength{\tabcolsep}{2pt}",
         r"\renewcommand{\arraystretch}{1.15}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|ccccc|>{\raggedright\arraybackslash}p{6.1cm}|}",
@@ -180,7 +180,7 @@ def render_component_table(
     lines.extend([
         r"\end{longtable}",
         r"\fonte{Elaborado pelo autor (2026).}",
-        r"\textit{Nota:} C1--C5 correspondem aos cinco critérios da categoria indicada: 1.1--1.5 (qualitativo), 3.1--3.5 (quantitativo não randomizado) e 4.1--4.5 (quantitativo descritivo). Y = sim; N = não; CT = não é possível concluir. Os registros documentais são provisórios, sem pontuação global; a conferência humana permanece pendente.",
+        r"\par\noindent\textit{Nota:} C1--C5 = critérios da categoria; Y = sim; N = não; CT = não é possível concluir; Quant. = quantitativo; rand. = randomizado. Ver Seção~\ref{sec:avaliacao-qualidade}.\par",
         r"\endgroup",
     ])
     return "\n".join(lines)
@@ -194,32 +194,31 @@ def render_table(
         "% Quadro gerado de research/data/mmat_reassessment_current.csv",
         "% Reavaliação documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
-        r"\clearpage",  # Keep the legacy CI destination on the caption page.
         r"\begingroup",
         r"\SingleSpacing",
-        r"\fontsize{10}{11.5}\selectfont",
+        r"\setlength{\parindent}{0pt}",
+        r"\fontsize{10}{12}\selectfont",
         r"\def\LTcaptype{quadro}",
         r"\setlength{\tabcolsep}{2pt}",
         r"\setlength{\LTcapwidth}{\textwidth}",
-        r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|"
-        r">{\raggedright\arraybackslash}p{2.5cm}|ccccccc|"
-        r">{\raggedright\arraybackslash}p{3.6cm}|}",
+        r"\begin{longtable}{|>{\raggedright\arraybackslash}p{4.5cm}|"
+        r">{\raggedright\arraybackslash}p{4.5cm}|ccccccc|}",
         rf"\caption{{Triagem e respostas documentais preliminares ao MMAT 2018 de {len(rows)} registros do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
-        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} \\",
+        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} \\",
         r"\hline",
         r"\endfirsthead",
-        r"\multicolumn{10}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
+        r"\multicolumn{9}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
         r"\hline",
         r"\textbf{Estudo} & \textbf{Desenho} & "
         r"\textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & "
-        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} & \textbf{Base} \\",
+        r"\textbf{Q3} & \textbf{Q4} & \textbf{Q5} \\",
         r"\hline",
         r"\endhead",
         r"\hline",
-        r"\multicolumn{10}{r}{\textit{Continua na próxima página}}\\",
+        r"\multicolumn{9}{r}{\textit{Continua na próxima página}}\\",
         r"\endfoot",
         r"\hline",
         r"\endlastfoot",
@@ -241,23 +240,17 @@ def render_table(
             _latex_escape(labels.get(row["study_id"], row["study_key"])),
             _latex_escape(design_label),
             *[row[criterion] or "---" for criterion in CRITERIA],
-            _latex_escape(BASIS_LABELS.get(row["assessment_basis"], row["assessment_basis"])),
         ]
         lines.append(" & ".join(values) + r" \\")
     note = (
-        r"\textit{Nota:} Registros provisórios, conferência humana pendente, sem escore agregado. "
-        r"S1 e S2 são perguntas de triagem. "
-        r"Q1--Q5 correspondem aos critérios MMAT da categoria; "
-        r"Y/N/CT = sim/não/não é possível concluir. "
+        r"\par\noindent\textit{Nota:} S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
+        r"Y = sim; N = não; CT = não é possível concluir; "
         r"Quant. = quantitativo; rand. = randomizado. "
-        r"Base = fonte consultada. "
-        r"Ver Seção~\ref{sec:qualidade-estudos}. "
-        rf"Denominador: {len(rows)} registros."
+        r"Ver Seção~\ref{sec:avaliacao-qualidade}.\par"
     )
     lines.extend([
         r"\end{longtable}",
         r"\fonte{Elaborado pelo autor (2026).}",
-        r"\textit{Cobertura:} S1/S2 e Q1--Q5 apreciados para 15 registros. As categorias 3 dos estudos 5 e 7 são rotas operacionais com alocação desconhecida; a categoria 4 do estudo 8 é adaptação para modelagem computacional; a categoria 2 do estudo 14 corresponde ao sorteio declarado, mas contraditório. Não são classificações confirmadas. --- significa não avaliado, não CT.",
         note,
         r"\endgroup",
     ])

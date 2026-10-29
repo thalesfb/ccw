@@ -7,12 +7,12 @@ Este capítulo apresenta os resultados da revisão sistemática desenvolvida no 
 
 O Fluxograma~\ref{fig:prisma-flow} apresenta uma representação adaptada do processo de seleção, elaborada com referência ao PRISMA 2020. Ele distingue a priorização por relevância da avaliação de elegibilidade em texto completo: a priorização não equivale a essa avaliação. Após a identificação, 27 duplicatas foram removidas: 25 por DOI e 2 por URL. Dos 11.877 registros triados, 9.391 foram excluídos e 2.486 passaram à priorização; 2.468 foram excluídos nessa etapa e 18 formaram a lista preliminar. Um registro foi excluído após resumo. Dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo; o protocolo sem resultados concluídos foi excluído. Os 15 restantes compõem o corpus final. Portanto, os 18 registros pré-selecionados não equivalem a 18 artigos incluídos.
 
-\begin{fluxograma}[H]
+\begin{fluxograma}[htbp]
 \centering
 \caption{Fluxo de seleção da revisão sistemática.}
 \label{fig:prisma-flow}
 \includegraphics[width=\textwidth]{images/prisma_flow.png}
-\fonte{Elaborado pelo autor (2026).}
+\fonte{Elaborado pelo autor (2026), com base em \citeonline{PRISMA2020}. A priorização por relevância não equivale à avaliação de elegibilidade. Relatórios não recuperados não são exclusões após leitura integral. A distribuição por fonte refere-se às versões mantidas após deduplicação; as contagens brutas por base não estão disponíveis nos dados versionados.}
 \end{fluxograma}
 
 \section{Estatísticas Descritivas}
@@ -58,7 +58,7 @@ A distribuição por fonte é apresentada no Gráfico~\ref{fig:database-coverage
 \centering
 \caption{Registros após a remoção de duplicatas, por fonte científica.}
 \label{fig:database-coverage}
-\includegraphics[width=0.85\textwidth]{images/database_coverage.png}
+\includegraphics[width=\textwidth]{images/database_coverage.png}
 \fonte{Elaborado pelo autor (2026).}
 \end{grafico}
 
@@ -75,8 +75,6 @@ O Quadro~\ref{qua:sintese-estudos-empiricos} caracteriza os 18 registros selecio
 
 A consulta de \citeonline[pp.~7--8, 12--14, 18, 24--25]{UniversityMathematics2026_6919}, complementada pela recuperação do arquivo no formato \textit{Portable Document Format} (PDF) em 17 de outubro de 2026 e pela conferência de seções selecionadas, descreve integração computacional ao ensino universitário de matemática: uma reforma aplicada à metrologia de carbeto de silício, o uso da Transformada de Fourier e um questionário adaptativo que os autores denominam baseado em IA. Para análise estrutural dos dados do questionário, a seção 4.3.2 relata o uso de análise de componentes principais (PCA); esse procedimento não deve ser confundido com o mecanismo de personalização \citeonline[seção~4.3.2]{UniversityMathematics2026_6919}. A comparação usa um grupo de controle de 2021 (n=94) e um grupo pós-reforma de 2025 (n=89), separados por quatro anos. Na seção~6, os autores afirmam que os testes de equivalência da linha de base não identificaram diferenças estatisticamente significativas ($p>0{,}05$), sem apresentar ali estatísticas detalhadas \citeonline[seção~6]{UniversityMathematics2026_6919}. Esse resultado de não significância não demonstra equivalência entre os dois grupos. O desenho não contemporâneo também não elimina confundimento temporal, isto é, a influência de mudanças ocorridas entre os anos comparados que podem se misturar ao efeito da intervenção, e o artigo reconhece possíveis mudanças de equipe e contexto. Assim, os resultados não isolam o efeito do questionário ou da IA, nem demonstram eficácia generalizável de tutoria personalizada. Não foi identificado algoritmo de aprendizado de máquina nas passagens examinadas; isso não demonstra sua ausência em todo o artigo, nem permite classificar o estudo como evidência de ML. A leitura do artigo foi parcial, e os julgamentos MMAT continuam preliminares.
 
-% Mantenha a âncora do quadro junto à legenda também no longtable legado do CI.
-\clearpage
 \begingroup
 \fontsize{10}{11.5}\selectfont
 \setlength{\tabcolsep}{2pt}
@@ -85,7 +83,7 @@ A consulta de \citeonline[pp.~7--8, 12--14, 18, 24--25]{UniversityMathematics202
 \setlength{\LTcapwidth}{\textwidth}
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{\fill}
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr0.17\textwidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.17\textwidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.14\textwidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.30\textwidth-2\tabcolsep\relax}}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.17\textwidth-2\tabcolsep-1.2\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.2\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.17\textwidth-2\tabcolsep-1.2\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.14\textwidth-2\tabcolsep-1.2\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.30\textwidth-2\tabcolsep-1.2\arrayrulewidth\relax}|}
 \caption{Caracterização e situação dos 18 registros selecionados preliminarmente.}\label{qua:sintese-estudos-empiricos}\\
 \hline
 \textbf{Autores/Ano} & \textbf{Tema e finalidade} & \textbf{Abordagem} & \textbf{Avaliação} & \textbf{Situação no fluxo e síntese} \\
@@ -118,7 +116,7 @@ A consulta de \citeonline[pp.~7--8, 12--14, 18, 24--25]{UniversityMathematics202
 \citeonline{Echeveria2025_6920} & Mentalidade matemática e intervenção precoce.\newline Finalidade: Classificação de mentalidade & EDM; NB; SVM; MLP & Acurácia & Incluído no corpus final. O divergência sobre os grupos e anos letivos analisados e a sobreposição entre itens do desfecho e preditores limitam a interpretação \\
 \citeonline{Enhancing2025_012} & Teoremas de círculo.\newline Finalidade: Ensino de geometria & Animação computacional; aprendizagem cooperativa & Delineamento experimental descrito de modo inconsistente & Incluído no corpus final. O relato diverge sobre alocação aleatória; a intervenção combina componentes \\
 \citeonline{Imperatrice2025_6921} & Ensino inclusivo de matemática.\newline Finalidade: Protocolo de estudo & Protocolo/\allowbreak proposta & Não aplicável: sem resultados concluídos & Excluído da síntese empírica após texto completo por não apresentar resultados empíricos concluídos; não recebe apreciação MMAT de estudo concluído \\
-\citeonline{Zeng2025_6923} & Carga cognitiva durante resolução de problemas matemáticos, conforme o resumo institucional. & Eletroencefalografia (EEG) e rastreamento ocular; regressão logística e SVM, conforme o resumo & Delineamento com comparação de condições nos mesmos participantes em duas fases, conforme o resumo & Pendente: texto integral da dissertação não recuperado; MMAT não aplicado. Desenho, algoritmos e resultados são atribuídos ao resumo, não tratados como verificados no texto integral \\
+\citeonline{Zeng2025_6923} & Carga cognitiva durante resolução de problemas matemáticos, conforme o resumo institucional. & EEG e rastreamento ocular; regressão logística e SVM, conforme o resumo & Delineamento com comparação de condições nos mesmos participantes em duas fases, conforme o resumo & Pendente: texto integral da dissertação não recuperado; MMAT não aplicado. Desenho, algoritmos e resultados são atribuídos ao resumo, não tratados como verificados no texto integral \\
 \end{longtable}
 \fonte{Elaborado pelo autor (2026).}
 \endgroup
@@ -146,6 +144,10 @@ Os Quadros~\ref{qua:mmat-reavaliacao-atual} e~\ref{qua:mmat-componentes} são ge
 \fontsize{10}{11.5}\selectfont
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.0}
+\noindent\textit{Cobertura:} S1/S2 e Q1--Q5 apreciados para 15 registros. As categorias 3 dos estudos 5 e 7 são rotas operacionais com alocação desconhecida; a categoria 4 do estudo 8 é adaptação para modelagem computacional; a categoria 2 do estudo 14 corresponde ao sorteio declarado, mas contraditório. Não são classificações confirmadas. --- significa não avaliado, não CT.
+
+A base documental declarada dos 15 registros é a consulta externa ao texto integral; a conferência humana permanece pendente, sem escore agregado, conforme a Seção~\ref{sec:avaliacao-qualidade}.
+
 \input{../../research/exports/references/mmat_current_tcc_table.tex}
 \endgroup
 
