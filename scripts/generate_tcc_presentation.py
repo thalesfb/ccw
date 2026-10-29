@@ -353,7 +353,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Revisão sistemática da literatura e especificação conceitual de protótipo", Inches(1.35), Inches(3.48), Inches(10.65), Inches(0.45), size=20, color=RGBColor(11, 86, 108), align=PP_ALIGN.CENTER)
     add_text(slide, "Thales Ferreira Batista\nCiência da Computação", Inches(4.0), Inches(4.45), Inches(5.35), Inches(0.65), size=16, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
     add_text(slide, "Orientador: Prof. Dr. Rafael Zanin\nCoorientador: Prof. Dr. Manassés Ribeiro", Inches(3.3), Inches(5.35), Inches(6.75), Inches(0.65), size=14, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
-    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nVersão revisada: 15/10/2026 · corte da busca: 31/08/2026", Inches(2.25), Inches(6.35), Inches(8.85), Inches(0.5), size=11.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
+    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nVersão revisada: 28/10/2026 · corte da busca: 31/08/2026", Inches(2.25), Inches(6.35), Inches(8.85), Inches(0.5), size=11.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
 
     # 2 — Problem.
     slide = new_slide(prs, EXPECTED_TITLES[1], 2)
@@ -516,7 +516,7 @@ def build_deck() -> Presentation:
         ("Evidências", "revisão + fundamentação", BLUE, PALE_BLUE),
         ("Lacunas", "técnicas, pedagógicas, metodológicas e éticas", TEAL, PALE_TEAL),
         ("Requisitos", "funcionais e não funcionais", VIOLET, PALE_VIOLET),
-        ("Protocolo", "dados, modelos, métricas e limites", AMBER, PALE_AMBER),
+        ("Protocolo", "especificação conceitual; aplicação pendente", AMBER, PALE_AMBER),
         ("Arquitetura", "referência conceitual auditável", INDIGO, RGBColor(238, 242, 255)),
     ]
     for index, (title, body, accent, fill) in enumerate(stages):
@@ -525,7 +525,7 @@ def build_deck() -> Presentation:
         if index < len(stages) - 1:
             add_text(slide, "→", Inches(2.78 + index * 2.55), Inches(2.72), Inches(0.38), Inches(0.35), size=24, color=MUTED, bold=True, align=PP_ALIGN.CENTER)
     add_shape(slide, MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.35), Inches(5.05), Inches(10.55), Inches(0.8), NAVY)
-    add_text(slide, "O resultado é uma especificação conceitual: documentada, verificável e coerente com o escopo executado.", Inches(1.65), Inches(5.3), Inches(9.95), Inches(0.3), size=17, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
+    add_text(slide, "26 grupos rastreáveis: R02 separa conceitos; R20 exige separar treino, validação e teste.", Inches(1.65), Inches(5.3), Inches(9.95), Inches(0.3), size=17, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
 
     # 17 — Prototype specification.
     slide = new_slide(prs, EXPECTED_TITLES[16], 17)
@@ -555,7 +555,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Obrigado", Inches(0.7), Inches(1.75), Inches(11.9), Inches(0.8), size=42, color=WHITE, bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
     add_text(slide, "Perguntas e discussão", Inches(1.0), Inches(2.8), Inches(11.3), Inches(0.45), size=23, color=RGBColor(186, 230, 253), align=PP_ALIGN.CENTER)
     add_text(slide, "Ensino Personalizado de Matemática\nOportunidades e Técnicas Computacionais", Inches(1.2), Inches(4.35), Inches(10.9), Inches(0.8), size=20, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nVersão revisada: 15/10/2026 · corte da busca: 31/08/2026", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
+    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nVersão revisada: 28/10/2026 · corte da busca: 31/08/2026", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
 
     return prs
 

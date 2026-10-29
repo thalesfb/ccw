@@ -181,6 +181,10 @@ segue documental e preliminar, com conferência humana por fonte e critério pen
 Mostra a derivação visual: evidências da revisão e da fundamentação → lacunas →
 requisitos. A entrega é uma especificação técnica e pedagógica auditável, com
 protocolo para avaliar sua viabilidade e coerência e arquitetura de referência.
+Dois exemplos dos 26 grupos explicitam a derivação: R02 separa os conceitos
+com fundamento teórico/normativo; R20 prevê separação entre treino, validação e
+teste, motivada por relato localizado, fundamento metodológico e decisão
+autoral. Os limites de cada justificativa são apresentados sem inferir eficácia.
 A aplicação desse protocolo está pendente; não é aplicação funcional nem
 validação com participantes. Experimento de eventual protótipo é contingência
 separada, dependente de decisão posterior.
@@ -189,7 +193,12 @@ separada, dependente de decisão posterior.
 
 Resume a arquitetura de referência em ingestão, preparação, modelagem,
 avaliação/explicabilidade e apresentação. A separação favorece testabilidade,
-rastreabilidade e substituição controlada de técnicas.
+rastreabilidade e substituição controlada de técnicas. O protocolo documental
+proposto examina rastreabilidade, consistência arquitetural, correspondência
+conceitual e condições de viabilidade. Registra código, versão, fonte,
+critério, justificativa e ajuste necessário por requisito. Os julgamentos
+previstos distinguem coerência documental, ressalvas e necessidade de revisão;
+a aplicação e a revisão docente permanecem pendentes.
 
 ### 23. Ciência aberta como trilha de auditoria
 
