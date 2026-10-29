@@ -1,3 +1,5 @@
+> Atualização de 28/10/2026: para o MMAT, usar as [decisões operacionais atuais](MMAT-PAUTA-DE-DECISAO.md), com 15 triagens e apreciações preliminares e limites explícitos. Os quadros abaixo preservam a preparação histórica de 22/10.
+
 # Material para a reunião de decisão de escopo científico
 
 **Base:** `origin/main` em `2a05171` (após #110–#112), conferida em 22/10/2026.

@@ -132,7 +132,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         note = note_path.read_text(encoding="utf-8")
         normalized_note = " ".join(note.split())
         self.assertIn("15 registros permanecem provisoriamente no núcleo empírico", normalized_note)
-        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", normalized_note)
+        self.assertIn("15 têm triagem S1/S2 e apreciação dos critérios", normalized_note)
         self.assertIn("SUPPORTED", normalized_note)
         self.assertIn("adjudicação humana", normalized_note.lower())
         self.assertIn("as nove afirmações têm adjudicação humana", normalized_note)
@@ -146,7 +146,7 @@ class EditorialFeedbackTests(unittest.TestCase):
             (ROOT / "research/data/study_contribution_current.json").read_text(encoding="utf-8")
         )
         self.assertIn(date.fromisoformat(coverage["review_date"]).strftime("%d/%m/%Y"), status)
-        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", status)
+        self.assertIn("15 têm triagem S1/S2 e apreciação dos critérios", status)
         self.assertIn("Slidev em 25 slides", status)
         self.assertIn("19 slides", status)
         self.assertIn("exportação paralela", status)
@@ -189,7 +189,7 @@ class EditorialFeedbackTests(unittest.TestCase):
 
         governance = " ".join((ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md").read_text(encoding="utf-8").split())
         self.assertIn("núcleo empírico mantém provisoriamente 15 registros", governance)
-        self.assertIn("14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria", governance)
+        self.assertIn("15 têm triagem S1/S2 e apreciação dos critérios", governance)
         self.assertIn("1 aguarda texto integral", governance)
         self.assertIn("um registro foi excluído após resumo", governance)
         self.assertNotIn("cinco foram apreciados", governance)
@@ -206,8 +206,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("exclusão após resumo", slides)
         self.assertNotIn("cinco candidatos foram apreciados por resumo/metadados", slides)
         self.assertNotIn("17 estudos empíricos provisórios", slides)
-        self.assertIn("Adjudicar a elegibilidade e a unidade de análise do estudo 8", slides)
-        self.assertIn("14 triagens S1/S2 e 11 conjuntos de critérios de categoria", slides)
+        self.assertIn("Conferir as 15 apreciações preliminares e suas rotas operacionais", slides)
+        self.assertIn("15 triagens S1/S2 e 15 conjuntos de critérios", slides)
 
     def test_study_specific_quantitative_claims_have_primary_source_locators(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
@@ -271,7 +271,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("lacunas mais recorrentes", discussion.lower())
         self.assertIn("sem que isso signifique leitura integral de todos os textos", discussion)
         self.assertNotIn("adjudicação", discussion)
-        self.assertIn("14 receberam respostas S1/S2 e 11 tiveram os critérios específicos da categoria apreciados", discussion)
+        self.assertIn("15 receberam respostas S1/S2 e critérios específicos", discussion)
         self.assertNotIn("parte deles se baseou em resumos e metadados", discussion)
         self.assertNotIn(r"\textbf{OE", discussion)
         self.assertIn(r"\ref{sec:tendencias-lacunas}", discussion)
@@ -298,7 +298,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         results = (TCC / "conteudo/resultados.tex").read_text(encoding="utf-8")
         method = (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8")
         conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
-        self.assertIn("14 receberam respostas S1/S2 e 11 tiveram os critérios específicos da categoria apreciados", results)
+        self.assertIn("15 receberam respostas S1/S2 e critérios específicos", results)
         self.assertIn("também não recebeu apreciação", method)
         self.assertIn("não foi recuperado; por isso, não recebeu apreciação MMAT", conclusion)
         self.assertIn("sem estimar sua frequência", results)
@@ -397,10 +397,10 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertEqual(table.count(r"\textit{Nota:}"), 2)
         self.assertNotIn("Um registro foi excluído após a triagem", table)
         self.assertIn("conferência humana pendente, sem escore agregado", table)
-        self.assertIn("Denominador: 14 registros", table)
+        self.assertIn("Denominador: 15 registros", table)
         note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
         self.assertLessEqual(len(note), 450)
-        self.assertIn("O estudo 8 integra o corpus final sem respostas", review)
+        self.assertIn("a categoria 4 do estudo 8 é uma adaptação", review)
         self.assertIn(r"\renewcommand{\arraystretch}{1.0}", mmat)
 
     def test_he_mmat_interpretation_matches_the_provisional_ledger_design(self):

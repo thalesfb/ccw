@@ -1,5 +1,7 @@
 # Revisão documental da apreciação MMAT — 28/10/2026
 
+> Registro da primeira rodada, incorporada no PR #119. A rodada posterior está nas [decisões operacionais](MMAT-PAUTA-DE-DECISAO.md): os 15 registros empíricos agora têm triagem e critérios apreciados, com rotas explicitamente limitadas. As contagens e pendências abaixo preservam o estado da primeira rodada, não a matriz corrente.
+
 A matriz, o HTML e o quadro do TCC passaram a distinguir respostas aos critérios de situações dos registros. O MMAT 2018 oferece Y, N e CT. Foram retiradas as sete respostas N/A atribuídas ao protocolo 6921, sem resultados empíricos concluídos. Seus critérios permanecem sem avaliação; a exclusão da síntese empírica continua registrada.
 
 ## Julgamentos alterados

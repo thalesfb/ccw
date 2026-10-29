@@ -82,8 +82,8 @@ def test_mmat_does_not_infer_sampling_or_analysis_from_topic_relevance_alone() -
     assert rows["1"]["s1"] == "Y" and rows["1"]["s2"] == "Y"
     assert rows["1"]["q1"] == "Y"
     assert rows["5"]["assessment_status"] == "provisional_primary_source_review"
-    assert rows["5"]["design_status"] == "allocation_unreported_pending"
-    assert all(rows["5"][criterion] == "" for criterion in ("q1", "q2", "q3", "q4", "q5"))
+    assert rows["5"]["design_status"] == "operational_category_inferred_allocation_unknown"
+    assert all(rows["5"][criterion] == "CT" for criterion in ("q1", "q2", "q3", "q4", "q5"))
     assert rows["10"]["s1"] == "Y" and rows["10"]["s2"] == "Y"
     for study_id in ("6923", "9"):
         assert all(rows[study_id][criterion] == "" for criterion in ("s1", "s2", "q1", "q2", "q3", "q4", "q5"))

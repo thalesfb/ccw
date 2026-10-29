@@ -144,14 +144,7 @@ anos limitam a inferência e não isolam o efeito da IA.
 
 O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
 15 registros permanecem provisoriamente no núcleo empírico, com consultas
-documentais declaradas; 14 têm triagem S1/S2 e 11 têm apreciação por categoria.
-São registros preliminares produzidos com apoio de IA, não comprovação de
-leitura humana integral ou apreciação independente. Nos estudos 5, 7 e 14, Q1--Q5 permanecem sem resposta
-até a definição do delineamento, sem serem codificados como CT. O estudo 8 permanece no fluxo
-PRISMA e no corpus, sem respostas MMAT até adjudicação de elegibilidade e
-unidade de análise; suas bases distintas não devem ser somadas. Um registro
-continua sem texto integral e sem MMAT; um foi excluído após resumo. A
-apreciação aguarda adjudicação independente e consolidação dos localizadores.
+documentais declaradas; 15 têm triagem S1/S2 e apreciação por categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacional, com alocação desconhecida; o 14 usa a categoria 2 declarada e contraditória; o 8 usa a categoria 4 adaptada às análises computacionais matemáticas. Essas rotas não confirmam delineamentos. Frações reutilizadas entre capítulos não são duplicadas. A conferência humana permanece pendente; o texto não recuperado não recebeu apreciação.
 
 ### 18. O que emerge entre os estudos incluídos
 

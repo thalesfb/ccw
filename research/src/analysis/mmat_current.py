@@ -27,9 +27,9 @@ CURRENT_RECORD_IDS = CANDIDATE_STUDY_IDS
 CURRENT_EMPIRICAL_STUDY_IDS: tuple[int, ...] = (
     1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 6915, 6916, 6917, 6919, 6920
 )
-PENDING_UNIT_ADJUDICATION_STUDY_IDS: tuple[int, ...] = (8,)
+PENDING_UNIT_ADJUDICATION_STUDY_IDS: tuple[int, ...] = ()
 CURRENT_MMAT_STUDY_IDS: tuple[int, ...] = (
-    1, 2, 3, 4, 5, 6, 7, 10, 14, 6915, 6916, 6917, 6919, 6920
+    1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 6915, 6916, 6917, 6919, 6920
 )
 # Compatibility alias: historical callers use this for the 18-record ledger.
 CURRENT_STUDY_IDS = CURRENT_RECORD_IDS
@@ -51,6 +51,8 @@ PENDING_DESIGN_STATUSES = {
     "primary_text_not_retrieved_pending",
 }
 VALID_DESIGN_STATUSES = {
+    "operational_category_inferred_allocation_unknown",
+    "operational_category_adaptation",
     "abstract_based",
     "allocation_conflict_pending",
     "allocation_sequence_unreported_pending",
@@ -528,10 +530,10 @@ def validate_current_artifacts(
     category_pending_rows = [row for row in core_reassessment if row["design"] == "design_pending"]
     category_appraised_rows = [row for row in core_reassessment if row["design"] != "design_pending"]
     blocking_reasons = [
-        "The empirical corpus retains 15 studies provisionally; 14 have MMAT screening responses and 11 have category-specific appraisals. These counts are not final eligibility decisions.",
-        "Three screened studies await MMAT design adjudication; their Q1-Q5 cells are unappraised, not CT.",
+        "The empirical corpus retains 15 studies provisionally; all have preliminary screening and category-specific appraisals, including explicitly operational routes. These are not final design or eligibility decisions.",
+        "Studies 5 and 7 use an inferred category-3 route with allocation unknown; study 8 uses an explicitly adapted category-4 route for computational models.",
         "The preliminary ledger must not be interpreted as a quality score or ranking.",
-        "Study 8 has no MMAT responses pending human adjudication of scope and unit of appraisal; its distinct datasets must not be combined.",
+        "Study 8 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
     ]
     if len(primary_text_rows) != len(CURRENT_MMAT_STUDY_IDS):
         blocking_reasons.append(

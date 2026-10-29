@@ -18,7 +18,7 @@ fluxo de desenvolvimento estão em
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e 11.877 registros na triagem. Foram 2.486 submetidos à priorização operacional; 2.468 não avançaram dessa etapa. A priorização encaminhou 18 candidatos, não 18 inclusões finais: 15 estudos empíricos mantidos provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 14 triagens S1/S2 e 11 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e 11.877 registros na triagem. Foram 2.486 submetidos à priorização operacional; 2.468 não avançaram dessa etapa. A priorização encaminhou 18 candidatos, não 18 inclusões finais: 15 estudos empíricos mantidos provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->
@@ -46,12 +46,7 @@ altera o corte temporal da busca.
 
 O registro de avaliação MMAT 2018 preserva S1 e S2 como perguntas de triagem e Q1--Q5 como
 critérios específicos do delineamento. Dos 15 registros empíricos mantidos
-provisoriamente, 14 têm triagem S1/S2 e 11 têm apreciação dos critérios da categoria.
-Nos estudos 5, 7 e 14, Q1--Q5 permanecem sem resposta até definir o delineamento;
-não foram codificados como CT. O estudo 8 permanece no
-fluxo PRISMA e no núcleo provisório, sem respostas MMAT até adjudicar sua
-elegibilidade e unidade de apreciação; suas bases distintas não devem ser
-somadas. O registro 6923 sem texto integral também não recebeu apreciação; suas
+provisoriamente, 15 têm triagem S1/S2 e apreciação dos critérios. As categorias 3 dos estudos 5 e 7 são rotas operacionais com alocação desconhecida; a categoria 2 do 14 segue o sorteio declarado, mas contraditório; e a categoria 4 do 8 é adaptação à modelagem computacional. A unidade do 8 é uma tese/um relatório com componentes matemáticos, sem duplicar frações reutilizadas. O registro 6923 sem texto integral também não recebeu apreciação; suas
 células permanecem sem resposta, não como CT. O registro
 excluído após resumo e o protocolo sem resultados concluídos estão fora do
 denominador MMAT. Como a avaliação foi conduzida por um único revisor e a
@@ -77,8 +72,7 @@ divisão dos dados e critérios de avaliação.
 
 O escopo desta entrega foi confirmado como revisão crítica da literatura e
 especificação conceitual, sem exigir treinamento ou validação educacional do
-protótipo. Permanecem a adjudicação da elegibilidade e unidade do estudo 8,
-das três categorias MMAT pendentes e dos julgamentos registrados; a eventual
+protótipo. Permanecem a conferência dos julgamentos e das rotas operacionais, sem tratá-las como delineamentos confirmados; a eventual
 recuperação dos registros 3 e 6923 por via legítima; e a avaliação do
 impacto dos filtros automatizados sobre a cobertura da revisão. Uma execução
 computacional futura dependerá de decisão e protocolo próprios, incluindo

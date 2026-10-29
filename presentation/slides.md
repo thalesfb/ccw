@@ -352,7 +352,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros provisórios. O ledger contém S1/S2 para 14 e critérios de categoria para 11; a validação humana está pendente. Estudos 5, 7 e 14: categoria indefinida, Q1–Q5 sem resposta. Estudo 8: elegibilidade e unidade pendentes, sem respostas. Texto não recuperado: sem apreciação. Sem escore agregado.</div>
+<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros provisórios. S1/S2 e critérios de categoria apreciados nos 15; validação humana pendente. Estudos 5 e 7: categoria 3 operacional, alocação desconhecida. Estudo 14: categoria 2 declarada e contraditória. Estudo 8: categoria 4 adaptada para modelagem; frações reutilizadas não são duplicadas. Texto não recuperado: sem apreciação. Sem escore agregado.</div>
 
 ---
 layout: default
@@ -408,7 +408,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros provisórios, não estimativa de prevalência. O MMAT contém 14 triagens S1/S2 e 11 conjuntos de critérios de categoria, ainda sujeitos à conferência humana. O estudo 8 aguarda adjudicação de elegibilidade e unidade; o relatório não recuperado não recebeu apreciação.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros provisórios, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios, incluindo rotas operacionais, ainda sujeitos à conferência humana; o relatório não recuperado não recebeu apreciação.</div>
 
 ---
 layout: default
@@ -468,7 +468,7 @@ class: content-slide tcc-next-slide
 # Próximos passos — antes de qualquer experimento
 
 <div class="tcc-next-layout">
-  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Adjudicar a elegibilidade e a unidade de análise do estudo 8, além das 14 triagens e 11 apreciações por categoria e do texto pendente.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Conferir as 15 apreciações preliminares e suas rotas operacionais; recuperar o texto pendente e esclarecer as lacunas de relato.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
   <div class="tcc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 

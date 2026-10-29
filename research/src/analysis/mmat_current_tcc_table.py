@@ -2,7 +2,7 @@
 
 The output is deliberately labelled preliminary. It is generated from the
 audit ledger, with separate screening and category-specific response coverage.
-Study 8 is held until its eligibility and appraisal unit are adjudicated.
+Operational category routes remain distinct from confirmed study designs.
 Historical reviewer labels do not establish completed human appraisal.
 No overall quality score is assigned.
 """
@@ -229,6 +229,12 @@ def render_table(
         if row.get("assessment_status") == "hold_source_verification":
             design = "metadata_hold"
         design_label = DESIGN_LABELS.get(design, design)
+        if row.get('design_status') == 'operational_category_inferred_allocation_unknown':
+            design_label = 'Cat. 3 operacional (alocação incerta)'
+        elif row.get('design_status') == 'operational_category_adaptation':
+            design_label = 'Cat. 4 adaptada (modelagem)'
+        elif row.get('design_status') == 'design_reassessed_provisional_with_allocation_conflict':
+            design_label = 'Cat. 2 declarada (contraditória)'
         if row["study_id"] == "6915":
             design_label += " (componente escolar)"
         values = [
@@ -251,7 +257,7 @@ def render_table(
     lines.extend([
         r"\end{longtable}",
         r"\fonte{Elaborado pelo autor (2026).}",
-        r"\textit{Cobertura:} S1/S2 respondidas para 14 registros; Q1--Q5 apreciados para 11. Nos três registros com categoria pendente, --- significa não avaliado, não CT.",
+        r"\textit{Cobertura:} S1/S2 e Q1--Q5 apreciados para 15 registros. As categorias 3 dos estudos 5 e 7 são rotas operacionais com alocação desconhecida; a categoria 4 do estudo 8 é adaptação para modelagem computacional; a categoria 2 do estudo 14 corresponde ao sorteio declarado, mas contraditório. Não são classificações confirmadas. --- significa não avaliado, não CT.",
         note,
         r"\endgroup",
     ])

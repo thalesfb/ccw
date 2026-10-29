@@ -33,7 +33,7 @@ assert.match(homepage, /Ver MMAT · 20\/10\/2026/i, 'the homepage must promote t
 assert.doesNotMatch(homepage, /MMAT histórico \(referência\)/i, 'the homepage must not present the historical page as current');
 assert.match(homepage, /15 registros empíricos mantidos provisoriamente/i, 'the homepage must report the provisional empirical inclusion count');
 assert.match(homepage, /Um texto integral segue pendente/i, 'the homepage must disclose the unretrieved full text');
-assert.match(homepage, /MMAT preliminar: 14 triagens S1\/S2 e 11 apreciações por categoria em 15 inclusões empíricas provisórias/i, 'the homepage must distinguish the MMAT denominator from the provisional corpus');
+assert.match(homepage, /MMAT preliminar: 15 triagens S1\/S2 e 15 apreciações por categoria em 15 inclusões empíricas provisórias/i, 'the homepage must distinguish the MMAT denominator from the provisional corpus');
 assert.match(homepage, /1 registro excluído após resumo/i, 'the homepage must disclose the abstract-stage exclusion');
 assert.match(homepage, /1 protocolo excluído após texto completo/i, 'the homepage must disclose the protocol exclusion');
 assert.doesNotMatch(homepage, /17 candidatos empíricos provisórios/i, 'the homepage must not classify the abstract-stage exclusion as an empirical candidate');
@@ -45,7 +45,7 @@ assert.doesNotMatch(homepage, /linear-gradient|Segoe UI.*Tahoma/i, 'the homepage
 
 const researchLanding = read('research/index.html');
 assert.match(researchLanding, /15 estudos empíricos mantidos provisoriamente/i, 'the research landing page must report the provisional empirical inclusion count');
-assert.match(researchLanding, /MMAT: 14 triagens S1\/S2 e 11 apreciações por categoria/i, 'the research landing page must distinguish the MMAT denominator from the provisional corpus');
+assert.match(researchLanding, /MMAT: 15 triagens S1\/S2 e 15 apreciações por categoria/i, 'the research landing page must distinguish the MMAT denominator from the provisional corpus');
 assert.match(researchLanding, /1 texto integral pendente/i, 'the research landing page must disclose the unretrieved full text');
 assert.match(researchLanding, /href="data\/current_synthesis_scope\.csv"/, 'the research landing page must link the current eligibility ledger');
 assert.match(researchLanding, /1 registro excluído após resumo/i, 'the research landing page must disclose the abstract-stage exclusion');
@@ -54,7 +54,7 @@ assert.doesNotMatch(researchLanding, /17 candidatos empíricos provisórios/i, '
 
 const historicalMmat = read('research/exports/analysis/mmat_visualization.html');
 assert.match(historicalMmat, /visualização histórica[^<]*17 registros/i, 'the legacy MMAT visualization must identify its historical 17-study denominator');
-assert.match(historicalMmat, /15 registros empíricos mantidos provisoriamente[\s\S]*14 triagens S1\/S2 e 11 apreciações por categoria/i, 'the legacy MMAT visualization must point readers to current scope and appraisal counts');
+assert.match(historicalMmat, /15 registros empíricos mantidos provisoriamente[\s\S]*15 triagens S1\/S2 e 15 apreciações por categoria/i, 'the legacy MMAT visualization must point readers to current scope and appraisal counts');
 assert.doesNotMatch(historicalMmat, /população vigente contém 18 registros: 17 candidatos empíricos/i, 'the legacy MMAT visualization must not describe its historical denominator as current');
 
 const siteCss = read('public-site/assets/site.css');
@@ -94,7 +94,7 @@ assert.match(mmat, /arquivo histórico/i, 'the current page must preserve histor
 assert.match(mmat, /O registro de apreciação reúne 18 itens/i, 'the current page must expose the current scope in reader-facing language');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
 assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">consultas documentais declaradas<\/span>/, 'historical consultation labels must not certify completed human reading');
-assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
+assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
 assert.match(mmat, /<span class="metric-value">1<\/span><span class="metric-label">relatório não recuperado no fluxo<\/span>/, 'the current page must distinguish historical selection from current PDF availability');
 assert.match(mmat, /Um relatório permanece não recuperado no fluxo de seleção e não recebeu apreciação MMAT\. Um registro foi excluído após a triagem do resumo e não recebeu MMAT\./, 'the evidence summary must distinguish the unretrieved report from the abstract-stage exclusion');
 assert.match(mmat, /O acervo local contém 16 PDFs dos 18 registros\. Faltam os estudos 3 e 6923/, 'the current page must identify both unavailable primary PDFs');
@@ -113,11 +113,9 @@ assert.match(abstractExcludedRow, /texto integral conferido; fora do escopo mate
 assert.equal([...abstractExcludedRow.matchAll(/aria-label="Não avaliado"/g)].length, 7, 'the abstract-stage exclusion must leave all MMAT responses unappraised');
 const unitHoldRow = mmat.match(/<tr>\s*<td>8<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(unitHoldRow, 'study 8 must remain visible in the current 18-record ledger');
-assert.match(unitHoldRow, /MMAT suspenso; unidade de análise pendente/, 'study 8 must be retained but visibly held from MMAT appraisal');
-assert.equal([...unitHoldRow.matchAll(/aria-label="Não avaliado"/g)].length, 7, 'study 8 must expose no S1/S2/Q1-Q5 responses while its appraisal unit is pending');
-assert.doesNotMatch(unitHoldRow, /aria-label="Resposta:/, 'study 8 must not present provisional MMAT responses as decisions');
-const unitHoldEvidence = mmat.slice(mmat.indexOf(unitHoldRow));
-assert.match(unitHoldEvidence, /componentes distintos e não devem ser somados/i, 'study 8 must state that its datasets are distinct and must not be combined');
+assert.match(unitHoldRow, /Categoria 4 adaptada/, 'the thesis must expose an adapted route rather than a confirmed descriptive design');
+assert.equal([...unitHoldRow.matchAll(/aria-label="Resposta:/g)].length, 7, 'the thesis route must have screening and five criterion responses');
+assert.match(mmat, /Frações são reutilizadas/, 'the thesis must disclose reused fractions');
 const echeveriaRow = mmat.match(/<tr>\s*<td>6920<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(echeveriaRow, 'study 6920 must be present in the current MMAT table');
 const echeveriaRatings = [...echeveriaRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
@@ -143,11 +141,11 @@ assert.match(mmat, /He2025_6915 · Quantitativo não randomizado · componente e
 for (const metadata of mmat.matchAll(/class="study-meta">([^<]+)</g)) {
   assert.doesNotMatch(metadata[1], /quantitative_|design_pending|mixed_methods|metadata_hold|not_applicable/, 'reader-facing classifications must not expose internal design codes');
 }
-assert.match(mmat, /Design2025_004 · Categoria pendente/, 'a pending category must remain explicit rather than being inferred');
+assert.match(mmat, /Design2025_004 · Categoria 3 operacional · alocação desconhecida/, 'a pending category must remain explicit rather than being inferred');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
 assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');
-assert.match(mmat, /No recorte atual, S1 e S2 estão preenchidas para 14 estudos empíricos\. Q1–Q5 foram apreciados em 11; 3 aguardam definição da categoria\. 1 registro com texto consultado está temporariamente sem respostas enquanto se define a unidade de apreciação; 1 registro aguarda texto integral e também não recebe MMAT\. Um registro foi excluído após a triagem do resumo e não recebeu MMAT\./i, 'the current page must distinguish MMAT appraisal from empirical inclusion, unretrieved reports and abstract-stage exclusion');
+assert.match(mmat, /No recorte atual, S1 e S2 estão preenchidas para 15 estudos empíricos\. Q1–Q5 foram apreciados em 15;/i, 'all current empirical records must expose preliminary appraisals');
 assert.match(mmat, /Are there clear research questions\?/i, 'the current page must preserve the original S1 wording');
 assert.match(mmat, /Critérios de apreciação por delineamento/i, 'the current page must expose design-specific criteria');
 assert.match(mmat, /MMAT 2018<\/a>/i, 'the current page must cite the MMAT 2018 source');
@@ -163,13 +161,13 @@ assert.equal((mmat.match(/class="mmat-evidence"/g) || []).length, 18, 'every MMA
 assert.match(mmat, /Ver perguntas, justificativas e localização da evidência/i, 'the evidence disclosure must be clearly labeled');
 assert.match(mmat, /nota 95 nas categorias Medium/i, 'the current page must expose the concrete measurement ambiguity for study 2 Q3');
 assert.match(mmat, /regra efetivamente usada e a adequação das demais medidas/i, 'the current page must explain why study 2 Q3 remains indeterminate');
-assert.match(mmat, /62 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda');
+assert.match(mmat, /75 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda');
 const pagesWorkflow = read('.github/workflows/publish-reports.yml');
 for (const asset of ['research/data/mmat_followup_questions_current.csv', 'docs/tcc/MMAT-PERGUNTAS-PENDENTES.md']) {
   assert.ok(pagesWorkflow.includes(`cp ${asset} _site/`), `Pages must package the linked MMAT followup asset: ${asset}`);
 }
 assert.match(mmat, /class="question-code">3\.1</, 'non-randomized quantitative components must use MMAT category 3');
-assert.doesNotMatch(mmat, /class="question-code">2\.1</, 'non-randomized quantitative components must not use randomized category 2');
+assert.match(mmat, /Categoria 2 declarada · alocação contraditória/, 'randomized category use must retain the allocation contradiction');
 assert.match(mmat, /Protocolo sem resultados empíricos concluídos; critérios MMAT não avaliados\./, 'protocol non-applicability must be explained as record disposition, not a criterion answer');
 assert.doesNotMatch(mmat, /aria-label="Resposta: Não se aplica"/, 'N/A must not masquerade as an official MMAT response');
 for (const criterion of ['Q1', 'Q2', 'Q3', 'Q4', 'Q5']) {

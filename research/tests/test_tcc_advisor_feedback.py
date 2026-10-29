@@ -213,8 +213,8 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         ),
         "",
     )
-    assert "Incluído no corpus final, sem MMAT" in study8_row
-    assert "não está definido se a apreciação deve considerar as simulações ou os estudos com estudantes" in study8_row
+    assert "Incluído como uma tese/um relatório de modelagem computacional" in study8_row
+    assert "Frações reutilizadas entre capítulos não são contadas duas vezes" in study8_row
     assert "adjudicação" not in study8_row
     assert r"O Quadro~\ref{qua:sintese-estudos-empiricos}" in chapter
     assert "não apresenta medida harmonizada de efeito" in chapter
@@ -235,8 +235,8 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         assert "Nove textos estão arquivados" not in text
         assert "nove fontes" not in text
     assert r"\citeonline{Zeng2025_6923}" in methodology
-    assert "Q1--Q5 ficaram sem resposta porque o delineamento desses estudos não está definido" in methodology
-    assert "esses cinco critérios ficaram sem resposta (e não CT)" in methodology
+    assert "a categoria 3 foi aplicada como rota operacional" in methodology
+    assert "a execução adequada da randomização recebeu ct" in methodology.lower()
     assert "produzidos com apoio de IA generativa" in methodology
     assert "esta versão não apresenta uma apreciação concluída" in methodology
     for removed in ("adjudicação", "revisor único", "avaliação independente"):

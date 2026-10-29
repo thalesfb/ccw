@@ -379,6 +379,7 @@
         5,
         6,
         7,
+        8,
         10,
         14,
         6915,
@@ -387,18 +388,12 @@
         6919,
         6920
       ],
-      "mmat_unit_hold_ids": [
-        "8"
-      ],
-      "mmat_unit_hold_rows": 1,
-      "criterion_rows": 11,
-      "screening_rows": 14,
-      "category_appraised_rows": 11,
-      "category_pending_ids": [
-        "5",
-        "7",
-        "14"
-      ],
+      "mmat_unit_hold_ids": [],
+      "mmat_unit_hold_rows": 0,
+      "criterion_rows": 15,
+      "screening_rows": 15,
+      "category_appraised_rows": 15,
+      "category_pending_ids": [],
       "assessment_registry_rows": 18,
       "component_criterion_rows": 6,
       "component_assessment_registry_rows": 6,
@@ -411,10 +406,10 @@
       "historical_mmat_assessment_rows": 17,
       "current_mmat_ledger_rows": 18,
       "historical_denominator": 17,
-      "current_denominator": 14,
+      "current_denominator": 15,
       "denominator_meaning": "S1/S2 screening records; use category_appraised_rows for Q1-Q5 coverage",
       "evidence_levels": {
-        "primary_full_text_reviewed_externally": 14,
+        "primary_full_text_reviewed_externally": 15,
         "primary_full_text_scope_exclusion": 0,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
@@ -430,29 +425,34 @@
         "protocol_or_proposal_not_applicable": 1,
         "pending_full_text_not_appraised": 1
       },
-      "primary_text_reviewed_rows": 14,
+      "primary_text_reviewed_rows": 15,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 46,
+      "non_ct_criterion_decisions": 51,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
-        "The empirical corpus retains 15 studies provisionally; 14 have MMAT screening responses and 11 have category-specific appraisals. These counts are not final eligibility decisions.",
-        "Three screened studies await MMAT design adjudication; their Q1-Q5 cells are unappraised, not CT.",
+        "The empirical corpus retains 15 studies provisionally; all have preliminary screening and category-specific appraisals, including explicitly operational routes. These are not final design or eligibility decisions.",
+        "Studies 5 and 7 use an inferred category-3 route with allocation unknown; study 8 uses an explicitly adapted category-4 route for computational models.",
         "The preliminary ledger must not be interpreted as a quality score or ranking.",
-        "Study 8 has no MMAT responses pending human adjudication of scope and unit of appraisal; its distinct datasets must not be combined.",
+        "Study 8 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
         "Supervisor adjudication is pending for at least one study.",
         "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
       ]
     },
-    "interpretation": "The current MMAT ledger records S1/S2 screening for 14 studies and category-specific appraisal for 11; three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. 15 records remain provisionally in the empirical corpus; study 8 has no MMAT responses pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. Historical reviewer labels do not establish completed human reading or appraisal; human verification remains pending."
+    "interpretation": "S1/S2 screening and category-specific appraisal for all 15 records remain provisional. Studies 5 and 7 use operational inferred category-3 routes with allocation unknown, study 8 an adapted category-4 computational route, and study 14 the contradictory declared school-randomization route. These are not confirmed designs; 15 records remain provisionally in the empirical corpus."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
     {
+      "path": "research/data/mmat_operational_decisions_2026-10-28.json",
+      "role": "explicit provisional appraisal routes, source locators and criterion-level decisions for studies 5, 7, 8 and 14",
+      "sha256": "417bbf3940beb005272bfad6b36be2aa7265b0642e6ae0cb8db6fc27fe1b0163"
+    },
+    {
       "path": "research/data/mmat_followup_questions_current.csv",
       "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
-      "sha256": "13d3f0bd9cb36c8267c20fe944a4c9d58931830e4f6c81507b114c9c76fae1f3"
+      "sha256": "0dd25a19f3945eb58472c8025e3705799d1e08dd0c440a76daf770f82930d778"
     },
     {
       "path": "research/data/mmat_completion_review_2026-10-28.json",
@@ -477,7 +477,7 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "35afdbfeac371703638c3f9d184051307b0db5aab8e1a78071f8e16d02a8adc1"
+      "sha256": "eaa8cfec70b9459c66bf24c9b52bdb02ca01ac918b995e3badfe807ec9a2d30e"
     },
     {
       "path": "research/exports/reports/summary.json",
@@ -497,7 +497,7 @@
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "f74e3a3d4268f77ce3afd4764fc5bd6ffa5066e3a62a2e09280a887a880a7cd1"
+      "sha256": "cd8fdd59fad7142089eea78e35629a6c7f5f3921f86fc54b8649f785dfd3ba1d"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
@@ -507,17 +507,17 @@
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "c325afbc9d1363562f449b6e6b9e64850bfae02cfb60674d68c90c1c673fa08c"
+      "sha256": "4dc73826bb23ef3a9a2d23a27d2fd0698ed5d899efeb3d7bf5458752675d8983"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
-      "sha256": "37782dde2ff3b9b37c2fdb4f2dda775a38dd6dec260f9c98f863f03b1cee7196"
+      "sha256": "e6af79719f5ed0ee01918bdc2a9d218dcfc8b339181706ec80fb252218090ddc"
     },
     {
       "path": "research/data/study_contribution_current.json",
       "role": "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
-      "sha256": "c13c28fe0cd3f9ab8018d85796566a1fe958b8db94e64bc6bb3d88aabac62e38"
+      "sha256": "5a1d5de0f22546191245bdec5b4fb6935d17b886f2a3bf2910d298451371e9a4"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
@@ -602,7 +602,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "11630859ba21b308a5d316c20a523427c5e127c49fb82b4cd3723c2f9a1a9245"
+      "sha256": "88421e78dda5d875769dea6ffbcda12eb64cb95b1437484b8d17d97a418237eb"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -612,7 +612,7 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "validator separating provisional retention, screening responses and category-specific MMAT coverage",
-      "sha256": "5e5bbea2035e075809d583e465827f97cf9877595a3f006c44ba4dcd1838af09"
+      "sha256": "75339bba14416865b4b4100c597e9e35d8cd77b595c090ee44860db338cfc5cb"
     },
     {
       "path": "research/src/analysis/study_scope.py",
@@ -622,12 +622,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "c307d63dfecf5ad3dce7c1357720ade9f3bad04ae7b4cb538503498e021df8bf"
+      "sha256": "19ec144e8b8c2e0caee8befefcf5a0eb3673f998dd1ea37777aadc91b5b2d13e"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "bf5bddef38c8de552e6905a06e4905277be767c4fe9557e34f5cf2694f2fa6ae"
+      "sha256": "cff50bce67d27cd969de18431ce5385a6cef853dd11476db5f8057b94616464b"
     },
     {
       "path": "research/requirements.txt",
@@ -693,7 +693,7 @@
       "External API responses, metadata and cache state can change on a fresh collection.",
       "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The current empirical MMAT screening denominator is 14; 11 have category-specific appraisals and three await design adjudication with Q1-Q5 unassessed. 15 records remain provisionally included in the empirical corpus. Study 8 has no MMAT responses pending human adjudication of eligibility and appraisal unit; do not combine its distinct datasets. No MMAT appraisal was assigned to the 1 unretrieved shortlisted report. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis."
+      "The empirical MMAT screening denominator is 15, with preliminary operational routes explicitly limited; 1 unretrieved shortlisted report remains outside the denominator."
     ]
   }
 }
