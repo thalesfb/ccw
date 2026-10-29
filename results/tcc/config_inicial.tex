@@ -73,6 +73,18 @@
 \usepackage{tabularx}
 \usepackage{pdflscape}
 
+% A âncora acompanha a caixa da legenda quando o longtable inicia em outra
+% página. Isso também atende às versões legadas de hyperref/ltcaption do CI,
+% sem antecipar a paginação com quebras forçadas.
+\makeatletter
+\AtBeginDocument{%
+  \let\TCC@LT@makecaption\LT@makecaption
+  \long\def\LT@makecaption#1#2#3{%
+    \TCC@LT@makecaption{#1}{#2}{\phantomsection#3}%
+  }%
+}
+\makeatother
+
 % Evita a sobreposição entre legendas e fontes no template legado.
 % O texto passado ao comando deve conter apenas a identificação da fonte.
 \renewcommand{\fonte}[1]{%
