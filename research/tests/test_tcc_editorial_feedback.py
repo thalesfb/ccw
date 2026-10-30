@@ -524,7 +524,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("data individual da última consulta", normalized)
         self.assertIn("total agregado de participantes", normalized)
         self.assertIn("financiamento", normalized)
-        self.assertIn("registro prospectivo", normalized)
+        self.assertIn("pré-registro", normalized)
         self.assertIn("https://github.com/thalesfb/ccw/tree/main/research", normalized)
         self.assertIn("título não identifica o trabalho como revisão sistemática", normalized)
 

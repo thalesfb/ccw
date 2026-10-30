@@ -56,7 +56,7 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
     assert "prisma-p 2015" in lowered
     assert "orienta o planejamento e o relato de protocolos" in lowered
     assert "seus princípios foram utilizados parcialmente" in lowered
-    assert "não houve registro prospectivo" in lowered
+    assert "não houve registro em plataforma de pré-registro" in lowered
     for unsupported in (
         "seguiu integralmente",
         "seguiu rigorosamente",
