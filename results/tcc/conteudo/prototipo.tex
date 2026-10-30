@@ -38,20 +38,28 @@ Quanto à modelagem, a revisão identificou uso de \textit{Random Forest}, máqu
 
 O código exploratório não implementa essas duas alternativas. Ele contém referências históricas simples, uma regressão logística regularizada \cite{James2021} e, como candidato não linear exploratório, um classificador que combina modelos ajustados sequencialmente (\textit{gradient boosting}) \cite{Friedman2001} em sua variante baseada em histogramas disponível na biblioteca scikit-learn \cite{Pedregosa2011}. Essa composição foi definida para testar o fluxo com um modelo interpretável e um candidato não linear; não resulta de uma comparação com \textit{Random Forest} ou SVM nem indica superioridade de qualquer modelo. Nenhum desses modelos foi treinado com dados educacionais reais.
 
+\subsection{Alternativas de Mensuração}
+
+O rótulo ``proficiência'' somente poderá ser usado mediante definição de construto, escala, instrumento e evidências de validade. Se houver respostas por item e amostra adequada à calibração, a TRI poderá ser examinada, com verificação de dimensionalidade, ajuste dos itens e comparabilidade entre grupos. Os valores plausíveis do PISA são destinados a inferências populacionais; não serão tomados como diagnóstico individual \cite[cap.~11]{OECDTechnical2024}.
+
+Se a finalidade for acompanhar sequências de prática por habilidade, BKT e DKT constituem alternativas a comparar. BKT permite explicitar hipóteses sobre domínio, transição, acerto ao acaso e erro ocasional; DKT exige sequências suficientes e avaliação da consistência e interpretação das previsões \cite{Abdelrahman2023}. Para ambos, a previsão da próxima resposta continuará identificada por esse alvo. Sem calibração e validade de mensuração, não se converterá sua probabilidade em nível de proficiência. Nenhuma dessas alternativas foi ajustada neste trabalho.
+
+\input{conteudo/aceitacao-cenarios}
+
 \section{Protocolo de Avaliação da Especificação Conceitual}
 \label{sec:protocolo-avaliacao}
 
 O protocolo proposto para o OE4 examina a especificação conceitual; sua aplicação permanece pendente. O procedimento deverá examinar a rastreabilidade dos requisitos até as fontes ou decisões autorais, a consistência entre entradas, saídas e responsabilidades da arquitetura e a correspondência entre as saídas previstas e os conceitos educacionais adotados. A viabilidade será examinada documentalmente pelas condições necessárias de acesso e uso dos dados, disponibilidade de variáveis, recursos computacionais e participação docente.
 
-Para cada requisito examinado, deverão ser registrados seu identificador, a versão da especificação, a fonte e a localização no texto (página ou seção), o critério utilizado, a justificativa e a necessidade de ajuste. O julgamento poderá indicar coerência documental, coerência condicionada a ressalvas ou necessidade de revisão; falta de evidência deverá permanecer explícita, sem ser convertida em aprovação. A revisão por docentes e a análise técnica deverão ser registradas separadamente, com discussão das divergências. O Quadro~\ref{qua:rastreabilidade-requisitos} organiza os requisitos a serem examinados nesse procedimento.
+Para cada requisito examinado, deverão ser registrados seu identificador, a versão da especificação, a fonte e a localização no texto (página ou seção), o critério utilizado, a justificativa e a necessidade de ajuste. A revisão por docentes e a análise técnica serão registradas separadamente. O Quadro~\ref{qua:rastreabilidade-requisitos} organiza os requisitos a serem examinados; o procedimento a seguir fixa participantes, instrumento e regra de decisão.
+
+\input{conteudo/protocolo-docente}
 
 \label{sec:avaliacao-empirica-futura}
 
 Para uma futura execução e avaliação do protótipo com dados educacionais reais, um protocolo experimental distinto deverá orientar a modelagem e a interpretação dos seus resultados. Ele deverá separar o que será observado no comportamento técnico dos modelos daquilo que exigiria evidência educacional adicional. Essa separação começa pela definição explícita dos conjuntos de treino, validação e teste e pela prevenção de vazamento de informação entre preparação, modelagem e avaliação. Os modelos candidatos deverão ser comparados com referências simples, para que diferenças de desempenho, inclusive resultados nulos ou desfavoráveis, sejam interpretadas em relação a uma base de comparação, e as métricas deverão ser analisadas por classe, além das medidas agregadas, quando a tarefa permitir essa decomposição.
 
 Como descrição complementar dos erros e acertos, o protocolo prevê o uso de matriz de confusão, precisão, revocação e medida F1. A área sob a curva ROC e a calibração somente deverão ser calculadas quando forem compatíveis com a tarefa e com o tipo de saída produzido \cite{Fawcett2006,NiculescuMizilCaruana2005}. Também deverão ser examinadas a estabilidade das explicações e possíveis diferenças entre grupos, sem converter essas análises em conclusões causais não sustentadas pelo desenho do estudo. Por fim, a execução deverá registrar as limitações de generalização relacionadas à fonte de dados, à população observada e às condições de aplicação.
-
-Para examinar a adequação pedagógica da especificação, o protocolo prevê uma revisão documental por docentes da área de matemática. Essa revisão deverá considerar a correspondência dos requisitos com o referencial curricular pertinente ao nível de ensino, a clareza das explicações e das incertezas apresentadas, a possibilidade de interpretação contextualizada e a preservação da decisão docente. Cada julgamento deverá registrar o requisito examinado, a evidência documental, a justificativa, as limitações e os ajustes necessários.
 
 Como parte da avaliação e da revisão humana, SHAP e LIME foram incluídos como alternativas para explicar modelos, com referência às formulações originais de Lundberg e Lee e de Ribeiro, Singh e Guestrin \cite{LundbergLee2017,RibeiroSinghGuestrin2016}. Seu uso deverá considerar a estabilidade das explicações, o custo computacional e a possibilidade de tradução dos resultados para uma linguagem curricular compreensível. A implementação exploratória não inclui SHAP nem LIME, que permanecem alternativas especificadas. Para a regressão logística, ela decompõe o logaritmo da razão de chances de cada previsão em intercepto e produtos entre coeficientes e valores transformados dos atributos. Essa decomposição é exata para esse modelo linear. Também calcula a importância por permutação no conjunto de teste, adaptando o procedimento proposto por \citeonline{Breiman2001} para florestas aleatórias a outros tipos de modelo. O candidato de \textit{gradient boosting} não possui explicação implementada.
 
@@ -66,6 +74,10 @@ A etapa de avaliação e explicabilidade deverá calcular as métricas, analisar
 
 A separação dos componentes deverá favorecer a testabilidade, a rastreabilidade e a substituição controlada de técnicas. Ela também permite localizar em qual etapa uma decisão, uma transformação ou uma limitação foi introduzida. A arquitetura não impõe uma interface específica e poderá ser materializada como caderno computacional interativo, aplicação local, API ou sistema web. Essas formas de execução deverão preservar os requisitos da Seção~\ref{sec:principios-requisitos}.
 
+\input{conteudo/arquitetura-figura}
+
 \input{conteudo/rastreabilidade-requisitos}
+
+\input{conteudo/estudos-requisitos}
 
 %--------- FIM ESPECIFICAÇÃO DO PROTÓTIPO ------------

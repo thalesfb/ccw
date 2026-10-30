@@ -16,8 +16,8 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         self.assertEqual(re.findall(r"^O (OE\d+) consiste em ", intro, re.M),
                          ["OE1", "OE2", "OE3", "OE4"])
         self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
-        for phrase in ("o primeiro objetivo específico foi desenvolvido", "O segundo foi desenvolvido",
-                       "O terceiro foi operacionalizado", "O quarto resultou na proposição"):
+        for phrase in ("O OE1 foi desenvolvido", "O OE2 identificou",
+                       "O OE3 resultou", "O OE4 resultou"):
             self.assertIn(phrase, results)
         objectives = intro.split(r"\section{Objetivos}", 1)[1].split(
             r"\section{Estrutura do Trabalho}", 1
@@ -59,12 +59,10 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         alignment = results.split(r"\section{Atendimento aos Objetivos}", 1)[1].split(
             r"\section{Discussão Integrada}", 1
         )[0]
-        self.assertIn("proposição", alignment)
-        self.assertIn("não", alignment)
-        self.assertIn("Sua aplicação não foi realizada", alignment)
-        self.assertIn("possibilidade separada", alignment)
-        self.assertIn("Sua fundamentação permanece preliminar", alignment)
-        self.assertIn("sem representar síntese conclusiva da literatura", alignment)
+        self.assertIn("protocolo documental", alignment)
+        self.assertIn("A aplicação do painel e a avaliação de uma implementação são etapas posteriores", alignment)
+        self.assertIn("escopo documental", alignment)
+        self.assertIn(r"\ref{sec:limitacoes-revisao}", alignment)
 
     def test_protocol_covers_the_proposed_pedagogical_review(self):
         source = (CONTENT / "prototipo.tex").read_text(encoding="utf-8")
@@ -72,10 +70,15 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         protocol = source.split(r"\section{Protocolo de Avaliação da Especificação Conceitual}", 1)[1].split(
             r"\section{Arquitetura de Referência}", 1
         )[0]
-        for phrase in ("revisão documental por docentes", "nível de ensino",
-                       "evidência documental", "não foi executado",
-                       "não substituiria um estudo empírico"):
-            self.assertIn(phrase, protocol)
+        self.assertIn(r"\input{conteudo/protocolo-docente}", protocol)
+        teacher_protocol = (CONTENT / "protocolo-docente.tex").read_text(encoding="utf-8")
+        for phrase in ("cinco docentes distintos", "educação básica", "ensino superior",
+                       "segunda rodada individual", "quatro dos cinco docentes", "coerente",
+                       "evidência insuficiente", "Plataforma Brasil", "aguardar a decisão",
+                       "sem participantes convidados ou avaliação realizada"):
+            self.assertIn(phrase, teacher_protocol)
+        self.assertIn("não foi executado", protocol)
+        self.assertIn("não substituiria um estudo empírico", protocol)
 
 
 if __name__ == "__main__":

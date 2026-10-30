@@ -1,6 +1,7 @@
 """Test the artifact parser with representative nested memoir captions."""
 import importlib.util
 from pathlib import Path
+import pytest
 
 
 spec = importlib.util.spec_from_file_location("pdf_gate", Path(__file__).resolve().parents[2] / "scripts/validate_tcc_pdf.py")
@@ -22,8 +23,19 @@ def test_normalization_handles_pdf_line_breaks_case_and_accents():
 def test_quadro_count_includes_traceability_and_mixed_methods_appraisal(tmp_path):
     entries = [
         rf"\contentsline {{quadro}}{{\numberline {{{index}}}{{Quadro {index}.}}}}{{{index}}}{{quadro.{index}}}"
-        for index in range(1, 8)
+        for index in range(1, 15)
     ]
     (tmp_path / "main.loq").write_text("\n".join(entries), encoding="utf-8")
 
-    assert gate.validate_quadro_count(tmp_path) == 7
+    assert gate.validate_quadro_count(tmp_path) == 14
+
+
+@pytest.mark.parametrize("count", [6, 7, 13, 15])
+def test_quadro_count_rejects_old_or_incomplete_content_inventory(tmp_path, count):
+    entries = [
+        rf"\contentsline {{quadro}}{{\numberline {{{index}}}{{Quadro {index}.}}}}{{{index}}}{{quadro.{index}}}"
+        for index in range(1, count + 1)
+    ]
+    (tmp_path / "main.loq").write_text("\n".join(entries), encoding="utf-8")
+    with pytest.raises(ValueError, match="fourteen quadros"):
+        gate.validate_quadro_count(tmp_path)

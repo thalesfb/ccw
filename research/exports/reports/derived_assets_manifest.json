@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "295f5236465cbc5e44961057fc47e58a020349f500c09d007cff3eb29856b35e",
+    "sha256": "96307bed13e68ed8917b71bb8e25bed89cd4f2c1dae8905d60f4263281070c8d",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/claim_evidence_current.json",
@@ -30,9 +30,11 @@
       "research/data/protocol_execution_2025.json",
       "research/data/reference_audit.csv",
       "research/data/study_contribution_current.json",
+      "research/data/study_synthesis_current.csv",
       "research/exports/analysis/papers.csv",
       "research/src/__init__.py",
       "research/src/analysis/__init__.py",
+      "research/src/analysis/content_synthesis.py",
       "research/src/analysis/deep_review_analysis.py",
       "research/src/analysis/html_pdf_scraper.py",
       "research/src/analysis/mmat_assessment.py",

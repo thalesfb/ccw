@@ -33,7 +33,7 @@ A Tabela~\ref{tab:stats-descritivas} reúne os principais números da revisão. 
 Registros identificados & 11.904 \\
 Duplicatas removidas por DOI ou URL & 27 (0,23\%) \\
 Registros na triagem & 11.877 \\
-Excluídos na triagem & 9.391 (78,89\%) \\
+Excluídos na triagem & 9.391 (79,07\%) \\
 Registros submetidos à priorização por relevância & 2.486 \\
 Excluídos na priorização por relevância & 2.468 (99,28\%) \\
 Registros na lista preliminar & 18 \\
@@ -51,7 +51,7 @@ Período de cobertura & 2015--2026 \\
 \fonte{Elaborado pelo autor (2026).}
 \end{table}
 
-Os percentuais têm os seguintes denominadores: 27 remoções correspondem a 0,23\% dos 11.904 registros identificados; 9.391 exclusões na triagem correspondem a 78,89\% dos mesmos 11.904 registros identificados; e 2.468 exclusões correspondem a 99,28\% dos 2.486 registros submetidos à priorização por relevância. Assim, o percentual da triagem descreve a parcela dos registros inicialmente identificados, não a proporção excluída apenas entre os registros efetivamente triados.
+Os percentuais têm os seguintes denominadores: 27 remoções correspondem a 0,23\% dos 11.904 registros identificados; 9.391 exclusões na triagem correspondem a 79,07\% dos 11.877 registros efetivamente triados; e 2.468 exclusões correspondem a 99,28\% dos 2.486 registros submetidos à priorização por relevância. Os dois filtros de resumo e de termos metodológicos respondem, respectivamente, por 36,32\% (4.314) e 17,48\% (2.076) dos registros triados, totalizando 53,80\% (6.390). As categorias descrevem o primeiro motivo atribuído pelo processamento, sem dupla contagem.
 
 A distribuição por fonte é apresentada no Gráfico~\ref{fig:database-coverage}. O gráfico considera os 11.877 registros restantes após a remoção de duplicatas por DOI ou URL, e não os 11.904 registros brutos identificados. A fonte indicada é a origem da versão mantida de cada registro. A distribuição não mede a cobertura exclusiva de cada base nem a qualidade dos estudos. As quantidades e proporções foram calculadas a partir dos arquivos exportados, sem nova coleta.
 
@@ -66,7 +66,7 @@ A distribuição por fonte é apresentada no Gráfico~\ref{fig:database-coverage
 \section{Caracterização dos Estudos Incluídos}
 \label{sec:caracterizacao-registros}
 
-O corpus final reúne 15 estudos empíricos sobre predição de desempenho, classificação ou estimativa de proficiência, personalização, avaliação formativa, recursos pedagógicos e modelagem da aprendizagem. Entre as técnicas descritas estão \textit{Random Forest}, SVM, árvores de decisão e redes neurais. Os preditores incluem notas, respostas a itens, características contextuais e registros de interação.
+O corpus final reúne 15 estudos empíricos de predição/classificação, personalização/STI, intervenção didática, modelagem cognitiva e integração curricular. Entre as técnicas descritas estão \textit{Random Forest}, SVM, árvores de decisão e redes neurais. Os preditores incluem notas, respostas a itens, características contextuais e registros de interação.
 
 O Quadro~\ref{qua:sintese-estudos-empiricos} caracteriza esses estudos e apresenta também os outros três registros da lista preliminar, totalizando 18. Sua última coluna distingue inclusão, exclusão e texto não recuperado. \citeonline{UniversityMathematics2026_6919} foi incluído segundo os critérios escritos, que não exigem personalização como condição. O protocolo de \citeonline{Imperatrice2025_6921} foi excluído por não apresentar resultados concluídos. As informações sobre \citeonline{Zeng2025_6923} provêm do resumo institucional.
 
@@ -128,6 +128,15 @@ A tese de \citeonline[p.~44--48, 56]{Computational2017_008} contribui como refer
 
 \citeonline[p.~50--53]{Math2021_001} classifica estudantes em três categorias operacionais de desempenho com dados do PISA 2012 computadorizado. \citeonline[p.~4--5]{Machine2024_009} utiliza uma árvore de decisão e reporta 72\% de acurácia para estudantes de um único curso e instituição. Já \citeonline[p.~650, 653--654]{Design2025_004} propõe trajetórias personalizadas e reporta melhoria de 15\% no efeito de aprendizagem, definida pela diferença relativa entre ganhos médios dos grupos. O artigo também relata redução de tempo de 20\% e satisfação de 4,2/5.
 
+\subsection{Matriz de Categorização do OE1}
+\label{sec:matriz-oe1}
+
+A finalidade principal foi atribuída ao componente matemático central de cada estudo. Predição/classificação reúne alvos como nota, classe de desempenho, acerto ou mentalidade; personalização/STI reúne seleção de trajetória, recurso e retorno adaptativo. Intervenção didática examina o uso de recursos em uma situação de ensino; modelagem cognitiva examina mecanismos computacionais relacionados a registros humanos; integração curricular articula conteúdo matemático e contexto de aplicação. A categorização não confirma o desenho nem o efeito da intervenção.
+
+No estudo de \citeonline{He2025_6915}, a finalidade principal corresponde à aplicação escolar apreciada no MMAT; a predição de efeitos de tecnologias é registrada como finalidade secundária. A tese de \citeonline{Computational2017_008} conta uma vez, sem duplicar frações reutilizadas entre capítulos. \citeonline{Multimodels2020_002} mantém a finalidade histórica indicada pelo título e registro, com os demais campos não reconferidos. O nível e o tamanho amostral preservam as unidades informadas, sem total de participantes agregado.
+
+\input{../../research/exports/references/study_synthesis_tcc.tex}
+
 \section{Avaliação Metodológica com o MMAT}
 \label{sec:qualidade-estudos}
 
@@ -147,6 +156,14 @@ Em \citeonline[seção 4.1, p.~9--11 e Tabela~2]{Innovative2023_005}, os cinco c
 
 Em \citeonline[p.~1, 16, 31--35]{He2025_6915}, a apreciação se restringe ao componente escolar, classificado como quantitativo não randomizado. Os demais componentes do artigo não integram essa unidade de avaliação. Essa categoria inclui controle de confundidores e administração da intervenção conforme planejada \cite{MMAT2018}.
 
+\subsection{Síntese das Respostas por Critério}
+
+O Quadro~\ref{qua:mmat-contagens} conta respostas por critério e categoria, mantendo as rubricas específicas do MMAT. S1 e S2 receberam Y nos 15 estudos. Na categoria quantitativa descritiva (oito estudos, incluindo uma adaptação à modelagem), representatividade, medidas e não resposta receberam CT nos oito; a análise recebeu CT em seis e Y em dois. Nos três não randomizados, representatividade e completude receberam CT nos três. O critério de confundidores recebeu N em um e CT em dois. A categoria randomizada mantém N para comparabilidade inicial, sem confirmar o sorteio adequado. Nos três mistos, a integração recebeu Y; a interpretação recebeu um N e dois CT, e o tratamento de divergências recebeu três CT.
+
+\input{../../research/exports/references/mmat_counts_tcc.tex}
+
+Essas contagens descrevem principalmente informação insuficiente para concluir, além das restrições concretas registradas como N. Não constituem escore, não tornam as rubricas Q1--Q5 equivalentes e não demonstram que o procedimento ausente no relato não tenha ocorrido. Os componentes qualitativos e quantitativos foram contados à parte, dentro dos mesmos três estudos, sem ampliar o corpus. As adaptações de categoria e a fonte histórica não reconferida permanecem qualificadas nas avaliações individuais e na seção de Limitações.
+
 \section{Tendências e Lacunas}
 \label{sec:tendencias-lacunas}
 
@@ -157,17 +174,17 @@ Equidade, participação docente, integração curricular e reprodutibilidade ta
 \section{Limitações e Contribuições da Revisão}
 \label{sec:limitacoes-revisao}
 
-A cobertura da revisão depende das fontes, dos idiomas e das regras de seleção. As bases possuem cobertura predominantemente anglófona, e foram aceitos textos em português e inglês. O histórico incompleto das requisições impede reconstruir toda a busca ou afirmar a data de última consulta a cada fonte. A estratégia configurada e as contagens do conjunto analisado não demonstram recuperação exaustiva da literatura.
+A cobertura da revisão depende das fontes, dos idiomas e das regras de seleção. Foram aceitos textos em português e inglês, mas as APIs e a ordenação dos resultados condicionam a cobertura. O corte nominal em 50 resultados por consulta/API trunca a recuperação conforme relevância, ano ou amostragem, sem garantia de exaustividade. A amostragem Crossref sem semente não garante repetir a mesma seleção apenas reenviando a consulta. O histórico incompleto das requisições impede reconstruir toda a busca ou afirmar a data de última consulta a cada fonte. A estratégia configurada e as contagens do conjunto analisado não demonstram recuperação exaustiva da literatura.
 
-Na triagem, resumo ausente ou curto e ausência dos termos metodológicos procurados em inglês não demonstram falta de método. Essas regras podem produzir falsos negativos. Nem todos os excluídos foram conferidos manualmente e não foi estimada a sensibilidade dos filtros. O limiar 4,0 não foi validado como ponto de corte científico nem submetido a análise de sensibilidade. A priorização por metadados e resumos tampouco equivale à elegibilidade por texto completo.
+Na triagem, 4.314 registros foram excluídos por resumo ausente ou com menos de 50 palavras, e 2.076 pela ausência dos termos metodológicos em inglês. Esse filtro foi aplicado também às consultas em português. Resumo ausente ou curto e ausência desses termos não demonstram falta de método. Essas regras podem produzir falsos negativos. Nem todos os excluídos foram conferidos manualmente e não foi estimada a sensibilidade dos filtros. O limiar 4,0 não foi validado como ponto de corte científico nem submetido a análise de sensibilidade. A priorização por metadados e resumos tampouco equivale à elegibilidade por texto completo.
 
 O protocolo não foi registrado prospectivamente. O PRISMA 2020 orientou o relato e o PRISMA-P contribuiu parcialmente para o planejamento. Não foi aplicado teste formal de viés de publicação. A disponibilidade desigual dos textos completos restringe a síntese. A heterogeneidade de desenhos, populações e métricas impediu uma síntese quantitativa conjunta e a comparação de eficácia entre intervenções. O número de participantes não foi agregado por falta de unidades e denominadores comparáveis.
 
-Os julgamentos MMAT foram produzidos com apoio de IA generativa e ainda dependem de conferência humana por fonte e critério. A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices. A pertinência temática também não substitui os critérios do instrumento: CT expressa insuficiência da evidência disponível, sem concluir automaticamente que o estudo tem baixa qualidade. As categorias utilizadas provisoriamente não confirmam delineamentos, e os julgamentos não foram convertidos em escore agregado ou síntese final de qualidade. Em estudos descritivos, mencionar comparação entre modelos não demonstra análise estatística apropriada sem a descrição do procedimento.
+Um único revisor conduziu seleção e apreciação, com apoio de IA generativa em ambas. Não houve dupla seleção ou avaliação independente documentada, o que deixa decisões e erros de interpretação sem essa verificação. Os julgamentos MMAT ainda dependem de conferência humana por fonte e critério. A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices. A pertinência temática também não substitui os critérios do instrumento: CT expressa insuficiência da evidência disponível, sem concluir automaticamente que o estudo tem baixa qualidade. As categorias utilizadas provisoriamente não confirmam delineamentos, e os julgamentos não foram convertidos em escore agregado ou síntese final de qualidade. Em estudos descritivos, mencionar comparação entre modelos não demonstra análise estatística apropriada sem a descrição do procedimento.
 
 Nos estudos preditivos, a pertinência da fonte à pergunta foi distinguida da representatividade da população. A apreciação das medidas não certifica construtos mais amplos nem eficácia pedagógica. Nos componentes qualitativos, a adequação da coleta foi distinguida da forma como as categorias foram obtidas na análise, da sustentação das interpretações e da coerência do processo.
 
-O texto integral de \citeonline{Zeng2025_6923} não foi recuperado; sua elegibilidade e apreciação MMAT permanecem pendentes. Para \citeonline{Multimodels2020_002}, a inclusão e as respostas anteriores foram mantidas sem nova conferência de uma cópia verificável. A recuperação posterior de \citeonline{Machine2019_007} confirmou a exclusão já registrada na triagem do resumo, sem alterar as contagens ou criar nova etapa. O Apêndice~\ref{apendice:recuperacao-fontes} distingue recuperação, leitura e extração automática de texto.
+O texto integral de \citeonline{Zeng2025_6923} não foi recuperado e está sob embargo até 16 de maio de 2027, conforme o repositório; sua elegibilidade e apreciação MMAT permanecem pendentes. Para \citeonline{Multimodels2020_002}, a inclusão e as respostas anteriores foram mantidas sem nova conferência de uma cópia verificável. A recuperação posterior de \citeonline{Machine2019_007} confirmou a exclusão já registrada na triagem do resumo, sem alterar as contagens ou criar nova etapa. O Apêndice~\ref{apendice:recuperacao-fontes} distingue recuperação, leitura e extração automática de texto.
 
 As limitações dos estudos descritas a seguir dizem respeito ao relato e às passagens examinadas. As divergências não foram corrigidas por inferência nem atribuídas automaticamente à execução dos procedimentos. Resultados preditivos, explicações de modelos e métricas de desempenho foram interpretados em seus contextos, sem equivalência automática com aprendizagem ou eficácia pedagógica.
 
@@ -179,7 +196,7 @@ Em \citeonline{Implementation2025_000}, o horizonte entre os registros escolares
 
 Em \citeonline{Math2021_001}, as três categorias operacionais não têm equivalência demonstrada com os níveis oficiais do PISA. A redução de 271.323 registros iniciais para 58.753 não é suficientemente explicada, e o relato diverge sobre o uso do conjunto de teste no treinamento. Não foi possível confirmar a independência da avaliação de teste. \citeonline{Machine2024_009} analisou 50 estudantes do primeiro ano de Engenharia Industrial entre 2017 e 2021, sem descrever validação independente para o classificador. A passagem sobre \textit{k-fold} refere-se a outro estudo citado.
 
-Em \citeonline{Design2025_004}, faltam informações sobre amostra, alocação, análise inferencial e incerteza. A melhoria de aprendizagem, a redução de tempo e a satisfação são resultados reportados pelos autores; não sustentam inferência causal ou generalizável. As reduções de tempo também variam entre as comparações. Em \citeonline{Innovative2023_005}, foram informados 120 estudantes, com desfecho válido para 50 no grupo experimental e 52 no controle. O resultado basal $p=0{,}583$ não demonstra equivalência. Não foi localizado o procedimento de alocação nem uma explicação para os 18 casos sem desfecho válido.
+Em \citeonline{Design2025_004}, faltam informações sobre amostra, alocação, análise inferencial e incerteza. A melhoria de aprendizagem, a redução de tempo e a satisfação são resultados reportados pelos autores; não sustentam inferência causal ou generalizável. As reduções de tempo também variam entre as comparações. Em \citeonline{Innovative2023_005}, foram informados 120 estudantes, com desfecho válido para 50 no grupo experimental e 52 no controle. O resultado basal $p=0{,}583$ não demonstra equivalência. A comparação pré-teste informa 80 graus de liberdade para o teste \textit{t}, embora os grupos com desfecho válido somem 102 participantes; o texto não reconcilia a diferença. Não foi localizado o procedimento de alocação nem uma explicação para os 18 casos sem desfecho válido.
 
 A tese de \citeonline{Computational2017_008} reúne análises com dados humanos preexistentes e não uma avaliação prospectiva. As amostras de frações e de equações não formam um único grupo. O exame se restringiu aos componentes matemáticos dos capítulos 5 e 6, sem atribuir à matemática os resultados agregados de sete domínios. A adaptação da categoria 4 não confirma um desenho descritivo, pois a tese também testa hipóteses.
 

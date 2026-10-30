@@ -248,8 +248,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("A nota 5 esclarece que o subconjunto inclui", results)
 
         conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
-        for key in ("Math2021_001", "Machine2024_009", "Design2025_004", "UniversityMathematics2026_6919"):
-            self.assertIn(f"\\citeonline{{{key}}}", conclusion)
+        for purpose in ("predição/classificação (oito estudos)", "personalização ou STI (três)",
+                        "intervenção didática (dois)", "modelagem cognitiva (um)", "integração curricular (um)"):
+            self.assertIn(purpose, conclusion)
 
     def test_prototype_specification_uses_fewer_cohesive_sections(self):
         specification = (TCC / "conteudo/prototipo.tex").read_text(encoding="utf-8")
@@ -274,7 +275,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("lacunas mais recorrentes", discussion.lower())
         self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("adjudicação", discussion)
-        self.assertIn("respostas S1/S2 e cinco critérios específicos para os 15 estudos empíricos", discussion)
+        self.assertIn(r"As contagens MMAT do Quadro~\ref{qua:mmat-contagens}", discussion)
+        self.assertIn("sem contar os três estudos mistos novamente", discussion)
         self.assertNotIn("parte deles se baseou em resumos e metadados", discussion)
         self.assertNotIn(r"\textbf{OE", discussion)
         self.assertIn(r"\ref{sec:limitacoes-revisao}", discussion)
@@ -289,9 +291,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("um corpus de 15 estudos empíricos", abstract)
         for removed in ("priorização operacional", "mantidos provisoriamente", "adjudicação", "único pesquisador", "DOI/URL"):
             self.assertNotIn(removed, abstract)
-        self.assertIn("sem pontuação geral", abstract)
-        self.assertIn("distinções entre desempenho, proficiência, competência e aprendizagem", abstract)
-        self.assertIn("soluções computacionais de apoio à interpretação docente", abstract)
+        self.assertIn("por critério, sem escore", abstract)
+        self.assertIn("diferenças entre desempenho, previsão, proficiência, competência e aprendizagem", abstract)
+        self.assertIn("base documental de apoio à interpretação docente", abstract)
         prototype = (TCC / "conteudo/prototipo.tex").read_text(encoding="utf-8")
         self.assertIn("apoiar a decisão pedagógica sem substituir o professor", prototype)
         self.assertNotIn("2.486 para a elegibilidade", abstract)
@@ -303,7 +305,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         method = (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8")
         conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn("respostas S1/S2 e cinco critérios específicos para os 15 estudos empíricos", results)
+        self.assertIn(r"As contagens MMAT do Quadro~\ref{qua:mmat-contagens}", results)
         self.assertIn(r"A tese de \citeonline{Zeng2025_6923} não foi apreciada por falta do texto integral", review)
         self.assertIn(r"o relatório de \citeonline{Zeng2025_6923} não foi recuperado", conclusion)
         self.assertIn("sem estimativa de frequência", review)
@@ -346,7 +348,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         technical = theory.split(r"\section{Técnicas Computacionais na Educação}", 1)[1].split(
             r"\section{Avaliação Automatizada e Métricas}", 1
         )[0]
-        self.assertNotIn(r"\subsection", technical)
+        self.assertEqual(re.findall(r"\\subsection\{([^}]+)\}", technical), ["Trabalhos Relacionados"])
+        self.assertIn(r"\label{sec:trabalhos-relacionados}", technical)
         for phrase in ("alvo e da unidade de análise", "classe majoritária",
                        "proporção de classificações corretas", "não são sinônimos",
                        "James2021"):

@@ -1,0 +1,30 @@
+\subsection{Critérios de Aceitação das Funções}
+\label{sec:aceitacao-funcional}
+
+Os critérios do Quadro~\ref{qua:aceitacao-funcional} definem verificações propostas para uma implementação futura. Não são resultados de testes já realizados. F01--F07 identificam as funções descritas neste capítulo e remetem aos grupos R01--R26 da matriz de origem dos requisitos.
+
+\begingroup\small\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}
+\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{|p{1cm}|p{4cm}|>{\raggedright\arraybackslash}p{9.6cm}|}
+\caption{Critérios de aceitação dos requisitos funcionais.}\label{qua:aceitacao-funcional}\\\hline
+\textbf{Cód.} & \textbf{Requisito e vínculo} & \textbf{Condição observável de aceitação} \\\hline
+\endfirsthead
+\multicolumn{3}{c}{\quadroname\ \thequadro\ -- Continuação}\\\hline
+\textbf{Cód.} & \textbf{Requisito e vínculo} & \textbf{Condição observável de aceitação} \\\hline\endhead
+\hline\endfoot\hline\endlastfoot
+F01 & Importar dados documentados (R07, R14, R16). & Em arquivo de teste com linhas válidas e inválidas conhecidas, informar os totais aceitos/rejeitados e o motivo por linha. Vincular fonte, versão, licença e dicionário. Impedir análise se faltar campo obrigatório ou permissão de uso. \\\hline
+F02 & Organizar evidências curriculares (R02, R08). & Cada resultado deve indicar habilidade ou descritor e a origem desse vínculo. Registro sem associação deve aparecer como ``vínculo curricular não estabelecido'', sem classificação automática de competência. \\\hline
+F03 & Estimar um alvo definido (R09, R18--R22). & Apresentar alvo, unidade, horizonte, variáveis disponíveis antes do desfecho, partição e tamanho de treino/validação/teste. Registrar comparação com referência simples e métricas por classe. Bloquear relatório de validade quando houver sobreposição indevida de estudantes, itens ou período entre partições. \\\hline
+F04 & Apresentar resultados individuais e agregados (R09, R15). & Em conjunto sintético de contagens conhecidas, os totais por turma/habilidade devem corresponder aos registros filtrados. Exibir denominador, período e dados ausentes; limitar a visualização individual a perfil autorizado. \\\hline
+F05 & Explicar estimativas e incertezas (R03, R23, R26). & Associar a saída ao modelo e aos atributos efetivamente usados, informando método de explicação e domínio de validade. Probabilidade sem calibração examinada deve ser assim identificada; contribuição de atributo não deve ser apresentada como causa. \\\hline
+F06 & Permitir revisão docente (R01, R05, R25). & O professor deve poder manter, rejeitar ou pedir revisão da sugestão, com justificativa e histórico. Nenhuma ação pedagógica deverá ser executada automaticamente pela previsão; o relatório deve preservar a decisão docente e a evidência que a motivou. \\\hline
+F07 & Exportar versões, decisões e saídas (R06, R10, R11). & A exportação deve reunir versão dos dados/modelo, parâmetros, dependências, critérios, métricas e revisão docente. Reabrir o pacote deve permitir vincular cada saída à entrada correspondente, com identificadores pseudonimizados e sem dados pessoais desnecessários. \\\hline
+\end{longtable}\endgroup
+\fonte{Elaborado pelo autor (2026).}
+
+\subsection{Cenários de Uso e Saídas Previstas}
+\label{sec:cenarios-uso}
+
+No primeiro cenário, uma professora examina atividades de frações de uma turma. Após verificar a licença e o dicionário dos dados (F01), associa os itens às habilidades trabalhadas (F02) e consulta os registros por estudante e turma (F04). A saída ilustrativa seria: ``Exemplo fictício, sem execução de modelo: estudante A; habilidade: comparação de frações; 4 acertos em 6 itens nesta atividade; 2 registros sem tempo de resposta; vínculo curricular informado pela professora; previsão não disponível''. A professora registra a necessidade de examinar as estratégias escritas antes de escolher uma nova atividade (F06). A contagem descreve aquela tarefa; não recebe o rótulo de proficiência.
+
+No segundo cenário, um docente examina um modelo candidato de previsão da próxima resposta. A interface apresenta: ``Exemplo fictício, sem treinamento real: probabilidade prevista de acerto=0,65; alvo: próximo item da habilidade indicada; calibração ainda não examinada; validação externa pendente; não usar como diagnóstico de competência''. O docente consulta quais registros e atributos sustentariam a previsão (F03/F05), identifica eventual uso do próprio desfecho entre os preditores e solicita revisão, impedindo sua liberação. A decisão e a versão examinada integram a exportação (F07). Esse cenário especifica uma proteção, sem alegar desempenho do modelo.
