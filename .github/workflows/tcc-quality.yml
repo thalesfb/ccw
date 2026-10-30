@@ -108,6 +108,7 @@ jobs:
             tests/test_he_article_reporting_caution.py \
             tests/test_missing_doi_dedup.py \
             tests/test_tcc_visual_classification.py \
+            tests/test_content_synthesis.py \
             tests/test_pdf_feedback.py \
             tests/test_evidence_retrieval.py \
             tests/test_claim_evidence_artifacts.py \

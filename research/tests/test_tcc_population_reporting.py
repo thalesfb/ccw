@@ -30,7 +30,9 @@ def test_tcc_population_percentages_name_their_denominators() -> None:
     results = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
 
     assert "0,23\\% dos 11.904 registros identificados" in results
-    assert "78,89\\% dos mesmos 11.904 registros identificados" in results
+    assert "79,07\\% dos 11.877 registros efetivamente triados" in results
+    assert round(9391 / 11877 * 100, 2) == 79.07
+    assert "53,80\\% (6.390)" in results
     assert "99,28\\% dos 2.486 registros submetidos à priorização por relevância" in results
 
 

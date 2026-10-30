@@ -46,7 +46,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 7 & Buscas & Parcial: Cap.~\ref{cap:metodologia}, Estratégia de Busca e Quadro~\ref{qua:camadas-busca}. Há composição canônica e exemplos; o relato por fonte, com filtros e limites, não está completo. \\
 \hline
-8 & Seleção & Parcial: Cap.~\ref{cap:metodologia}, Processo de Seleção, e Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão. O autor realizou a seleção dos estudos, com apoio de ferramentas automatizadas. \\
+8 & Seleção & Parcial: Cap.~\ref{cap:metodologia}, Processo de Seleção, e Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão. O autor realizou a seleção como único revisor, com regras automatizadas e apoio de IA generativa; não há segunda seleção independente documentada. \\
 \hline
 9 & Coleta de dados & Parcial: Cap.~\ref{cap:metodologia}, Identificação e Avaliação da Qualidade Metodológica. A obtenção de metadados está descrita; a extração dos textos e sua confirmação não estão integralmente documentadas. \\
 \hline
@@ -54,7 +54,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 10b & Outras variáveis & Parcial: Cap.~\ref{cap:metodologia}, Identificação. Não há definição completa das variáveis extraídas e do tratamento de informação ausente. \\
 \hline
-11 & Viés nos estudos & Parcial: Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica. A apreciação metodológica foi realizada pelo autor, com apoio de ferramentas automatizadas. \\
+11 & Viés nos estudos & Parcial: Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica. O autor realizou a apreciação como único revisor, com apoio de IA generativa; a conferência humana por fonte e critério permanece pendente. \\
 \hline
 12 & Medidas de efeito & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos}. As métricas reportadas são heterogêneas; não foi definida medida comum para combinação quantitativa. \\
 \hline
@@ -156,5 +156,62 @@ python -m research.src.validation.versioned_snapshot
 python -m research.src.processing.adjudicated_snapshot --check
 python -m research.src.validation.bibliography_audit
 \end{verbatim}
+
+
+
+\chapter{FORMULÁRIO DE REVISÃO DA ESPECIFICAÇÃO}
+\label{apendice:formulario-oe4}
+
+Modelo proposto para o OE4, ainda não aplicado. Utilizar somente após a tramitação ética e o consentimento previstos na Seção~\ref{sec:revisao-docente-operacional}. Não preencher com dados identificáveis de estudantes. Cada docente receberá uma cópia, com código individual; a correspondência entre código e identidade terá acesso restrito.
+
+Código do participante: \underline{\hspace{2cm}}. Rodada: \underline{\hspace{1cm}}. Data: \underline{\hspace{2cm}}.
+
+Versão da especificação: \underline{\hspace{3cm}}. Perfil/nível de ensino e tempo de experiência: \underline{\hspace{3cm}}.
+
+Registrar em cada dimensão: 1=incoerente; 2=alteração substancial; 3=ajuste pontual; 4=coerente; NE=evidência insuficiente. A=sustentação na fonte ou decisão autoral; B=adequação curricular; C=clareza da saída; D=viabilidade documental. Não deixar campo vazio: justificar NE.
+
+\begin{quadro}[htbp]\centering
+\caption{Ficha individual de julgamento por requisito.}\label{qua:formulario-oe4}
+\small\begin{tabularx}{\textwidth}{|p{1.4cm}|c|c|c|c|X|}\hline
+Cód. & A & B & C & D & Página, justificativa e ajuste necessário \\\hline
+R01 & & & & & \\ \hline
+R02 & & & & & \\ \hline
+R03 & & & & & \\ \hline
+R04 & & & & & \\ \hline
+R05 & & & & & \\ \hline
+R06 & & & & & \\ \hline
+R07 & & & & & \\ \hline
+R08 & & & & & \\ \hline
+R09 & & & & & \\ \hline
+R10 & & & & & \\ \hline
+R11 & & & & & \\ \hline
+R12 & & & & & \\ \hline
+R13 & & & & & \\ \hline
+R14 & & & & & \\ \hline
+R15 & & & & & \\ \hline
+R16 & & & & & \\ \hline
+R17 & & & & & \\ \hline
+R18 & & & & & \\ \hline
+R19 & & & & & \\ \hline
+R20 & & & & & \\ \hline
+R21 & & & & & \\ \hline
+R22 & & & & & \\ \hline
+R23 & & & & & \\ \hline
+R24 & & & & & \\ \hline
+R25 & & & & & \\ \hline
+R26 & & & & & \\ \hline
+\end{tabularx}
+\fonte{Elaborado pelo autor (2026).}
+\end{quadro}
+
+Para cada F01--F07, anexar uma ficha de aceitação com os campos seguintes: função e requisito R associado; entrada do cenário; saída esperada; critério do Quadro~\ref{qua:aceitacao-funcional}; trecho que permite verificar esse critério; condição faltante; parecer ``coerente'' ou ``revisar''; justificativa. Nesta revisão documental, julga-se a definição do critério, sem marcar testes de implementação como executados.
+
+Problema crítico identificado: \underline{\hspace{8cm}}.
+
+Observação sobre o cenário de uso e sua interpretação docente:
+
+\noindent\underline{\hspace{0.95\textwidth}}
+
+O autor consolidará, por requisito e dimensão, a quantidade de respostas 3/4 entre cinco docentes. Quatro respostas 3/4 em cada dimensão, sem problema crítico pendente, permitem ``coerente''; os demais casos exigem ``revisar''. Os ajustes associados à nota 3 deverão ser incorporados e confirmados pelos docentes que os solicitaram antes da classificação final. Registrar a divergência, a alteração proposta e o parecer individual da segunda rodada. Sem cinco avaliações completas, registrar painel incompleto. Não calcular escore de qualidade dos estudos ou eficácia pedagógica a partir deste formulário.
 
 \end{apendicesenv}

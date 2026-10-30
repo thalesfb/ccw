@@ -55,6 +55,13 @@ Como princípio de projeto, uma regra adaptativa deverá ser compreensível ao p
 
 Os métodos computacionais devem ser distinguidos das estratégias didáticas que podem acompanhar seu uso. O termo \textit{jigsaw}, empregado na síntese do estudo sobre geometria, identifica uma modalidade de aprendizagem cooperativa: participantes estudam partes do conteúdo em grupos de especialistas e compartilham essa aprendizagem com seu grupo de origem.\footnote{Descrição do procedimento no site oficial \textit{The Jigsaw Classroom}, etapas 3--8: \url{https://www.jigsaw.org/}. Acesso em: 7 out. 2026.}
 
+\subsection{Trabalhos Relacionados}
+\label{sec:trabalhos-relacionados}
+
+Os trabalhos relacionados exigidos na organização do TCC são apresentados nesta subseção. \citeonline{Opesemowo2024} revisaram dez artigos de periódicos sobre IA em educação matemática, de 2015 a 2023, recuperados em Scopus e Google Scholar. A revisão descreve métodos, instrumentos, participantes e ferramentas, com predomínio qualitativo e uso de questionários. Seu foco em aplicações e no contexto da quarta revolução industrial difere da relação entre evidências e requisitos de apoio docente proposta aqui.
+
+\citeonline{Yi2025} sintetizaram 21 estudos e 40 amostras sobre IA e desempenho matemático na educação básica, a partir de cinco bases e publicações de 2000 a dezembro de 2023. O resumo publicado informa uma metanálise, com efeito geral de 0,343. Aqui, a comparação se restringe ao escopo e ao tipo de síntese informados nesse resumo, sem exame do texto integral. Esta revisão abrange diferentes níveis, finalidades e unidades de análise; sua síntese descritiva não estima o efeito conjunto de uma intervenção. As duas revisões são referências de contextualização, sem inclusão adicional no corpus empírico.
+
 \section{Avaliação Automatizada e Métricas}
 
 Sistemas automatizados podem organizar respostas, calcular indicadores e aplicar regras previamente definidas. Em tarefas de classificação, podem ser empregadas acurácia, precisão, revocação (\textit{recall}), medida F1 (média harmônica entre precisão e revocação) e área sob a curva característica de operação do receptor (ROC, \textit{Receiver Operating Characteristic}) \cite{Romero2020}. A escolha depende do alvo e da distribuição das classes; essas métricas não se aplicam indistintamente à predição de valores contínuos. Elas avaliam o comportamento do modelo e não medem diretamente a qualidade pedagógica da intervenção.
@@ -66,6 +73,10 @@ A curva ROC relaciona a taxa de casos positivos corretamente reconhecidos à tax
 No domínio educacional, também podem ser observados acertos e erros por habilidade, tempo e número de tentativas, progressão entre avaliações, participação e conclusão de atividades e explicações ou estratégias registradas pelo estudante.
 
 A interpretação deve considerar o instrumento, a população e a finalidade. Um bom desempenho médio não demonstra, por si só, validade equivalente das inferências entre grupos; por isso, a avaliação proposta inclui análise por classe, validação em dados não utilizados no treinamento e investigação de possíveis diferenças de erro, quando os dados permitirem \cite{NRC2001}.
+
+Como alternativa de mensuração, a Teoria de Resposta ao Item (TRI) relaciona respostas a características dos itens e a uma variável latente. A interpretação em uma escala exige calibração, ajuste do modelo e evidências de validade. O relatório técnico do PISA descreve esses procedimentos e o uso de valores plausíveis para inferências populacionais, que não devem ser transformados em diagnósticos individuais \cite[cap.~11, p.~217--225]{OECDTechnical2024}.
+
+O acompanhamento do conhecimento ao longo de interações, ou \textit{knowledge tracing}, responde a outra pergunta. O \textit{Bayesian Knowledge Tracing} (BKT) representa estados por habilidade e suas transições probabilísticas; o \textit{Deep Knowledge Tracing} (DKT) usa redes recorrentes para prever respostas a partir de sequências. Sua saída usual é uma probabilidade condicionada ao histórico, e não automaticamente uma escala de proficiência \cite[seções~2.1.1 e~2.2.1]{Abdelrahman2023}. A escolha entre TRI, BKT e DKT depende de dados por item ou sequência, definição de habilidades, validação e finalidade de uso.
 
 Dessas definições decorrem requisitos para a especificação: apresentar evidências de desempenho, relacioná-las a objetivos curriculares e oferecer explicações compreensíveis ao professor. Também se exige comunicar incertezas, permitir revisão humana e proteger os dados educacionais. A avaliação técnica deve anteceder qualquer afirmação de eficácia pedagógica.
 

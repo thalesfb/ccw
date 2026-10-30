@@ -169,9 +169,9 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     assert "A especificação permaneceu documental" in limitations
     assert "Não incluiu uma aplicação educacional funcional" in limitations
     assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
-    assert "Este trabalho investigou" in conclusion
+    assert "resposta à pergunta ``como estruturar''" in conclusion
     assert "Este trabalho propôs uma especificação técnica e pedagógica" in abstract
-    assert "um protocolo de avaliação ainda não aplicado" in abstract
+    assert "protocolo docente ainda não aplicado" in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:
@@ -218,7 +218,7 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
         (
             line
             for line in chapter.splitlines()
-            if r"\citeonline{Computational2017_008}" in line
+            if r"\citeonline{Computational2017_008}" in line and " & " in line
         ),
         "",
     )
@@ -247,20 +247,25 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "A categoria 3 foi utilizada para examinar as comparações quantitativas" in chapter
     assert "com alocação desconhecida" in chapter
     assert "a execução da randomização recebeu ct" in chapter.lower()
-    assert "produzidos com apoio de IA generativa" in chapter
+    assert "Um único revisor conduziu seleção e apreciação, com apoio de IA generativa em ambas" in chapter
     assert "ainda dependem de conferência humana por fonte e critério" in chapter
     assert "não foram convertidos em escore agregado ou síntese final de qualidade" in chapter
-    for removed in ("adjudicação", "revisor único", "avaliação independente"):
+    for removed in ("adjudicação",):
         assert removed not in methodology
-    assert "A seleção e a apreciação metodológica foram realizadas pelo autor, com apoio de ferramentas automatizadas." in methodology
+    assert "um único revisor, o autor" in methodology
+    assert "Não há segunda avaliação independente documentada" in methodology
+    assert "IA generativa na seleção e no preenchimento do MMAT" in methodology
     appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
     selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
     appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
     assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
     assert r"Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão" in selection_row
-    assert r"O autor realizou a seleção dos estudos, com apoio de ferramentas automatizadas. \\" in selection_row
+    assert "seleção como único revisor" in selection_row
+    assert "regras automatizadas e apoio de IA generativa" in selection_row
+    assert "não há segunda seleção independente documentada" in selection_row
     assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
-    assert r"A apreciação metodológica foi realizada pelo autor, com apoio de ferramentas automatizadas. \\" in appraisal_row
+    assert "apreciação como único revisor, com apoio de IA generativa" in appraisal_row
+    assert "conferência humana por fonte e critério permanece pendente" in appraisal_row
     assert "a verificação documental permanece incompleta" not in selection_row
     assert "com fontes e julgamentos ainda incompletos" not in appraisal_row
     assert "Os critérios Q1--Q5 dependem da categoria" in normalized_methodology
