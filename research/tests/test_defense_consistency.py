@@ -94,7 +94,10 @@ def test_screening_disclosure_matches_the_recorded_operational_reasons():
         assert f"{count:,}".replace(",", ".") in methodology
     missing = sum(row["exclusion_reason"] == "abstract_too_short" and row["abstract"] == "Abstract não disponível" for row in rows)
     assert f"{missing:,}".replace(",", ".") in methodology
-    assert "falsos negativos" in methodology
+    review = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+    limitations = review.split(r"\section{Limitações e Contribuições da Revisão}", 1)[1]
+    assert "falsos negativos" in limitations
+    assert r"\ref{sec:limitacoes-revisao}" in methodology
 
 
 def test_requirement_origins_are_explicit_without_fabricated_empirical_support():

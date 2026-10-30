@@ -92,17 +92,16 @@ def plain_tex(value):
 
 def goals(root):
     intro = (root / INTRO).read_text(encoding="utf-8")
-    general, specific = intro.split(r"\subsection{Objetivo Geral}", 1)[1].split(
-        r"\subsection{Objetivos Específicos}", 1
-    )
-    paragraph = specific.strip().split("\n\n", 1)[0]
-    matches = list(re.finditer(r"O \\textbf\{(OE\d+)\} consiste em ", paragraph))
-    if not matches or [m[1] for m in matches] != [f"OE{i+1}" for i in range(len(matches))]:
+    section = intro.split(r"\section{Objetivos}", 1)[1].split(
+        r"\section{Estrutura do Trabalho}", 1
+    )[0].strip()
+    general = section.split("\n\n", 1)[0]
+    objectives = re.findall(r"^O (OE\d+) consiste em ([^\n]+)$", section, re.M)
+    if [key for key, _ in objectives] != [f"OE{i}" for i in range(1, 5)]:
         raise ValueError("cannot extract sequential manuscript objectives")
     parts = ["### Objetivo geral", plain_tex(general), "### Objetivos específicos"]
-    for index, match in enumerate(matches):
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(paragraph)
-        parts.append(f"**{match[1]}:** {plain_tex(paragraph[match.end():end])}")
+    for key, description in objectives:
+        parts.append(f"**{key}:** {plain_tex(description)}")
     return "\n\n".join(parts)
 
 

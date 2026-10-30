@@ -13,19 +13,23 @@ class ObjectiveAlignmentTests(unittest.TestCase):
     def test_intro_and_results_reference_only_four_unique_objectives(self):
         intro = (CONTENT / "introducao.tex").read_text(encoding="utf-8")
         results = (CONTENT / "resultados.tex").read_text(encoding="utf-8")
-        self.assertEqual(re.findall(r"\\textbf\{(OE\d+)\}", intro),
+        self.assertEqual(re.findall(r"^O (OE\d+) consiste em ", intro, re.M),
                          ["OE1", "OE2", "OE3", "OE4"])
         self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
         for phrase in ("o primeiro objetivo específico foi desenvolvido", "O segundo foi desenvolvido",
                        "O terceiro foi operacionalizado", "O quarto resultou na proposição"):
             self.assertIn(phrase, results)
-        objectives = intro.split(r"\subsection{Objetivos Específicos}", 1)[1].split(
+        objectives = intro.split(r"\section{Objetivos}", 1)[1].split(
             r"\section{Estrutura do Trabalho}", 1
         )[0]
+        self.assertNotIn(r"\subsection", objectives)
+        self.assertNotIn(r"\textbf", objectives)
         self.assertNotIn(r"\begin{itemize}", objectives)
         self.assertIn("metodológicas", objectives)
         self.assertIn("viabilidade e a coerência da especificação conceitual", objectives)
-        self.assertIn("não equivale à realização da avaliação", objectives)
+        prototype = (CONTENT / "prototipo.tex").read_text(encoding="utf-8")
+        self.assertIn("sua aplicação permanece pendente", prototype)
+        self.assertIn("O produto do trabalho é documental", intro)
 
     def test_piaget_is_not_cited_in_active_manuscript(self):
         source = "\n".join(path.read_text(encoding="utf-8")
@@ -58,8 +62,9 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         self.assertIn("proposição", alignment)
         self.assertIn("não", alignment)
         self.assertIn("Sua aplicação não foi realizada", alignment)
-        self.assertIn("contingência separada", alignment)
-        self.assertIn("não equivalem a uma síntese final do corpus", alignment)
+        self.assertIn("possibilidade separada", alignment)
+        self.assertIn("Sua fundamentação permanece preliminar", alignment)
+        self.assertIn("sem representar síntese conclusiva da literatura", alignment)
 
     def test_protocol_covers_the_proposed_pedagogical_review(self):
         source = (CONTENT / "prototipo.tex").read_text(encoding="utf-8")

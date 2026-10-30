@@ -43,7 +43,9 @@ def test_cache_percentages_are_not_reported_as_stable_metrics() -> None:
         r"(?:63\s*\\?%|92\s*\\?%|265\s*/\s*287).{0,100}cache)"
     )
     assert not fixed_cache_claim.search(source)
-    assert r"Um acerto de \textit{cache} ocorre" in _read(TCC_CONTENT / "metodologia.tex")
+    methodology = _read(TCC_CONTENT / "metodologia.tex")
+    assert r"Um \textit{cache} local armazenou respostas obtidas anteriormente" in methodology
+    assert "Um acerto ocorre quando uma solicitação é atendida com uma resposta armazenada, sem nova consulta à API" in methodology
 
 
 def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
@@ -52,8 +54,9 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
     assert "prisma 2020" in lowered
     assert "diretriz de relato" in lowered
     assert "prisma-p 2015" in lowered
-    assert "protocolos de revisões sistemáticas" in lowered
-    assert "não se afirma conformidade integral com o prisma-p" in lowered
+    assert "orienta o planejamento e o relato de protocolos" in lowered
+    assert "seus princípios foram utilizados parcialmente" in lowered
+    assert "não houve registro prospectivo" in lowered
     for unsupported in (
         "seguiu integralmente",
         "seguiu rigorosamente",
@@ -67,19 +70,21 @@ def test_current_deduplication_description_matches_identity_audit() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
     assert (
         "mesmo \\textit{Digital Object Identifier} (DOI, identificador de objeto digital), "
-        "após padronização da grafia, ou com o mesmo \\textit{Uniform Resource Locator} "
+        "após padronização, ou o mesmo \\textit{Uniform Resource Locator} "
         "(URL, localizador uniforme de recursos)"
     ) in methodology
-    assert "removeu 27 duplicatas, sendo 25 identificadas por DOI e 2 por URL" in methodology
+    assert "removeram 27 duplicatas: 25 por DOI e 2 por URL" in methodology
     assert "232 registros com título repetido" in methodology
-    assert "não foram removidos automaticamente por título" in methodology
+    assert "restantes foram indicados para conferência manual" in methodology
+    review = _read(TCC_CONTENT / "resultadosesperados.tex")
+    assert "não tratados como duplicatas confirmadas" in review
     assert "determinística" not in methodology
 
 
 def test_query_count_is_reported_as_canonical_strategy_not_http_execution() -> None:
     methodology = _read(TCC_CONTENT / "metodologia.tex")
-    assert "A estratégia canônica foi composta por 72 consultas" in methodology
-    assert "não foi preservado um registro histórico completo" in methodology
+    assert "A estratégia canônica reuniu 72 consultas: 48 em inglês e 24 em português" in methodology
+    assert "ausência de histórico completo das requisições impede determinar quantas foram concluídas" in methodology
     assert "Foram executadas 72 consultas" not in methodology
     assert "resultaram em 11.904 registros identificados" not in methodology
 
@@ -89,7 +94,7 @@ def test_interpretation_precedes_the_long_synthesis_quadro() -> None:
     interpretation = chapter.index("O Quadro~\\ref{qua:sintese-estudos-empiricos}")
     quadro = chapter.index(r"\label{qua:sintese-estudos-empiricos}")
     assert interpretation < quadro
-    assert "A leitura deve considerar conjuntamente o desenho" in chapter[interpretation:quadro]
+    assert "As diferenças entre populações, instrumentos, variáveis e desenhos impedem tratar os resultados como medidas de um mesmo fenômeno" in chapter[interpretation:quadro]
 
 
 def test_unbreakable_python_identifiers_do_not_leak_into_prose() -> None:
@@ -155,10 +160,14 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     conclusion = _read(TCC_CONTENT / "conclusao.tex")
     abstract = _read(TCC_ABSTRACT)
 
-    assert "O escopo executado compreendeu" in _read(TCC_CONTENT / "metodologia.tex")
+    assert "O escopo compreendeu a revisão, a apreciação metodológica preliminar dos estudos empíricos incluídos e a elaboração de uma especificação conceitual de protótipo" in _read(TCC_CONTENT / "metodologia.tex")
     assert "A delimitação dos procedimentos executados" in introduction
     assert "especificação conceitual do protótipo" in prototype
-    assert "não foi tratada como evidência de uma aplicação funcional" in prototype
+    limitations = _read(TCC_CONTENT / "resultadosesperados.tex").split(
+        r"\section{Limitações e Contribuições da Revisão}", 1
+    )[1]
+    assert "A especificação permaneceu documental" in limitations
+    assert "Não incluiu uma aplicação educacional funcional" in limitations
     assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "Este trabalho investigou" in conclusion
     assert "Este trabalho propôs uma especificação técnica e pedagógica" in abstract
@@ -217,7 +226,7 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "Frações reutilizadas entre capítulos não são contadas duas vezes" in study8_row
     assert "adjudicação" not in study8_row
     assert r"O Quadro~\ref{qua:sintese-estudos-empiricos}" in chapter
-    assert "não apresenta medida harmonizada de efeito" in chapter
+    assert "Não há medida harmonizada de efeito" in chapter
     assert "Resultado reportado" not in chapter
     mmat_section = chapter[chapter.index("Avaliação Metodológica com o MMAT") :]
     assert not re.search(r"\b[0-5]\s*/\s*5\b", mmat_section)
@@ -234,14 +243,16 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     for text in (methodology, storyboard, slides):
         assert "Nove textos estão arquivados" not in text
         assert "nove fontes" not in text
-    assert r"\citeonline{Zeng2025_6923}" in methodology
-    assert "a categoria 3 foi aplicada como rota operacional" in methodology
-    assert "a execução adequada da randomização recebeu ct" in methodology.lower()
-    assert "produzidos com apoio de IA generativa" in methodology
-    assert "esta versão não apresenta uma apreciação concluída" in methodology
+    assert r"\citeonline{Zeng2025_6923}" in chapter
+    assert "A categoria 3 foi utilizada para examinar as comparações quantitativas" in chapter
+    assert "com alocação desconhecida" in chapter
+    assert "a execução da randomização recebeu ct" in chapter.lower()
+    assert "produzidos com apoio de IA generativa" in chapter
+    assert "ainda dependem de conferência humana por fonte e critério" in chapter
+    assert "não foram convertidos em escore agregado ou síntese final de qualidade" in chapter
     for removed in ("adjudicação", "revisor único", "avaliação independente"):
         assert removed not in methodology
-    assert "A seleção dos estudos e a apreciação metodológica foram realizadas pelo autor, com apoio de ferramentas automatizadas." in methodology
+    assert "A seleção e a apreciação metodológica foram realizadas pelo autor, com apoio de ferramentas automatizadas." in methodology
     appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
     selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
     appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
@@ -252,14 +263,14 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert r"A apreciação metodológica foi realizada pelo autor, com apoio de ferramentas automatizadas. \\" in appraisal_row
     assert "a verificação documental permanece incompleta" not in selection_row
     assert "com fontes e julgamentos ainda incompletos" not in appraisal_row
-    assert "Os critérios Q1--Q5 variam conforme a categoria do MMAT" in normalized_methodology
-    assert "em estudos quantitativos descritivos, q1 avalia a pertinência da estratégia de amostragem" in normalized_methodology.lower()
-    assert "em estudos quantitativos não randomizados, q1 avalia a representatividade dos participantes" in normalized_methodology.lower()
-    assert "seus componentes qualitativos e quantitativos são apreciados separadamente" in normalized_methodology.lower()
+    assert "Os critérios Q1--Q5 dependem da categoria" in normalized_methodology
+    assert "em estudos quantitativos descritivos, q1 examina a estratégia de amostragem" in normalized_methodology.lower()
+    assert "nos não randomizados, examina a representatividade dos participantes" in normalized_methodology.lower()
+    assert "foram apreciados separadamente, sem contar estudos adicionais" in chapter
     mmat_table = MMAT_LATEX.read_text(encoding="utf-8")
     assert "Q1--Q5 = critérios da categoria" in mmat_table
-    for author in ("Villegas-Ch et al. (2025)", "Xia et al. (2026)", "Echeveria et al. (2025)"):
-        assert f"{author} & Métodos mistos &" in mmat_table
+    for key in ("Villegas2025_6916", "UniversityMathematics2026_6919", "Echeveria2025_6920"):
+        assert rf"\citeonline{{{key}}} & Métodos mistos &" in mmat_table
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:

@@ -75,7 +75,7 @@ const functionalRequirements = prototype
 assert.ok(functionalRequirements, 'the consolidated principles and requirements section must exist');
 assert.doesNotMatch(functionalRequirements, /\\begin\{enumerate\}|\\item\s/, 'the consolidated requirements must be continuous academic prose');
 assert.match(functionalRequirements, /No plano funcional, a futura implementação deverá importar dados documentados e relacionados a objetivos curriculares/i, 'the consolidated section must preserve the data-import requirement');
-assert.match(functionalRequirements, /deverá permitir revisão humana das recomendações produzidas/i, 'the consolidated section must preserve human review');
+assert.match(functionalRequirements, /A revisão humana deverá permanecer integrada ao uso das recomendações/i, 'the consolidated section must preserve human review');
 assert.match(functionalRequirements, /deverá exportar dados, parâmetros e resultados para auditoria/i, 'the consolidated section must preserve audit export');
 
 const mmat = read('research/exports/analysis/mmat_current.html');

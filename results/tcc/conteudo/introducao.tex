@@ -3,31 +3,33 @@
 
 Este trabalho parte da necessidade de interpretar evidências de desempenho de estudantes com conhecimentos prévios, ritmos e dificuldades distintos. A mineração de dados educacionais e a analítica da aprendizagem reúnem métodos para analisar registros educacionais e identificar padrões, podendo apoiar a organização de informações usadas no acompanhamento de turmas \cite{Romero2020}. Esse apoio não torna a saída computacional uma medida direta de aprendizagem: a validade da inferência depende do alvo definido, dos dados e do contexto de uso \cite{NRC2001}.
 
-Na educação matemática, estudos consultados em texto integral incluem a predição de desempenho escolar por \cite{Implementation2025_000}, a classificação em categorias operacionais de desempenho com itens de Matemática do PISA computadorizado por \cite{Math2021_001} e a classificação de resultados em uma disciplina de Matemática por \cite{Machine2024_009}. Esses trabalhos exemplificam tarefas de predição e avaliação, mas não demonstram que uma intervenção pedagógica personalizada tenha melhorado a aprendizagem. A interpretação dessas saídas requer explicitar os dados, os alvos e as limitações de amostragem e validação; elas não substituem a avaliação do professor.
+Na educação matemática, os estudos consultados incluem a predição de desempenho escolar por \citeonline{Implementation2025_000}, a classificação com itens de Matemática do PISA computadorizado por \citeonline{Math2021_001} e a classificação de resultados em uma disciplina de Matemática por \citeonline{Machine2024_009}. Esses exemplos ilustram tarefas de predição e avaliação. O alcance de seus resultados é discutido no Capítulo~\ref{cap:revisao}.
 
 \section{Justificativa}
 
 A relevância deste trabalho decorreu de duas necessidades complementares. A primeira consistiu em organizar a literatura, dispersa entre diferentes bases e áreas de pesquisa, sobre técnicas computacionais aplicadas ao ensino de matemática. A segunda consistiu em transformar as evidências encontradas em requisitos técnicos e pedagógicos para uma especificação de protótipo voltada ao apoio do professor.
 
-Para professores, uma síntese crítica auxilia na compreensão das abordagens investigadas, dos resultados reportados e das limitações metodológicas recorrentes. Para estudantes e instituições, a pesquisa contribui ao explicitar que desempenho observado, proficiência estimada, competência e aprendizagem são conceitos relacionados, porém não equivalentes. Na especificação, também foi prevista a distinção entre a probabilidade preditiva de um alvo definido --- uma saída condicionada ao modelo e aos dados disponíveis --- e o indicador de desempenho observado. Nenhuma dessas saídas, isoladamente, equivale a proficiência, competência, aprendizagem ou eficácia pedagógica.
+Para professores, uma síntese crítica auxilia na compreensão das abordagens investigadas, dos resultados reportados e de suas limitações metodológicas. Para estudantes e instituições, a pesquisa explicita as diferenças entre desempenho observado, proficiência estimada, competência e aprendizagem. A especificação também distingue a probabilidade preditiva de um alvo definido do indicador de desempenho observado.
 
 \section{Problema de Pesquisa}
 
 Diante desse contexto, o trabalho respondeu ao seguinte problema de pesquisa: como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura?
 
-Essa finalidade pressupõe articular os registros de desempenho ao contexto pedagógico e à interpretação do professor. Não significa inferir aprendizagem diretamente de notas ou de probabilidades preditivas, nem demonstrar que a especificação proposta já a avalia ou melhora. O alcance desta pesquisa permanece documental, sem validação educacional própria.
+Essa finalidade articula registros de desempenho, contexto pedagógico e interpretação do professor, no escopo documental da revisão e da especificação.
 
 \section{Objetivos}
 
-\subsection{Objetivo Geral}
-
 Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.
 
-\subsection{Objetivos Específicos}
+O OE1 consiste em categorizar as abordagens e técnicas computacionais e as finalidades pedagógicas descritas na literatura mapeada.
 
-O \textbf{OE1} consiste em categorizar as abordagens e técnicas computacionais e as finalidades pedagógicas descritas na literatura mapeada. O \textbf{OE2} consiste em identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas no material examinado. O \textbf{OE3} consiste em formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência. O \textbf{OE4} consiste em propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de uma eventual execução. A proposição desse protocolo não equivale à realização da avaliação nem exige desenvolver o protótipo nesta versão.
+O OE2 consiste em identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas no material examinado.
 
-A revisão sistemática, com relato apoiado pelo PRISMA 2020 \cite{PRISMA2020}, a apreciação metodológica preliminar com o MMAT 2018 \cite{MMAT2018} e a sequência automatizada de etapas de processamento constituíram os meios metodológicos para atender a esses objetivos. Sua descrição, seus dados e seu código foram preservados, assim como o recorte de publicações de 2015 a 2026.
+O OE3 consiste em formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência.
+
+O OE4 consiste em propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de uma eventual execução.
+
+A revisão sistemática e a apreciação metodológica dos estudos fundamentaram a elaboração da especificação. O Capítulo~\ref{cap:metodologia} apresenta os procedimentos empregados e o recorte de publicações de 2015 a 2026.
 
 O produto do trabalho é documental: uma revisão da literatura e uma especificação de protótipo. A delimitação dos procedimentos executados e das atividades empíricas não realizadas é apresentada no Capítulo~\ref{cap:metodologia}.
 
