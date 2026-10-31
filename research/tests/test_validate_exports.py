@@ -45,7 +45,9 @@ def test_versioned_export_preserves_deduplication_accounting() -> None:
 
     assert prisma["raw_rows"] == summary["statistics"]["total_papers"]
     assert prisma["raw_rows"] - prisma["duplicates_removed"] == prisma["screening"]
-    assert prisma["duplicates_removed"] == 27
+    assert prisma["duplicates_removed"] == 29
     assert audit["doi"]["excess_rows"] == 25
     assert audit["url"]["excess_rows"] == 2
+    assert audit["deterministic_identity_duplicate_rows"] == 27
+    assert audit["adjudicated_same_report_duplicate_rows"] == 2
     assert audit["confirmed_semantic_duplicates"] == 0

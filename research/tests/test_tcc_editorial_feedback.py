@@ -45,7 +45,7 @@ class EditorialFeedbackTests(unittest.TestCase):
             r"\citeonline[p.~65, 69--70]{Echeveria2025_6920}",
         ):
             self.assertIn(citation, limitations)
-        self.assertIn("O corpus final reúne 15 estudos empíricos", review)
+        self.assertIn("A seleção histórica reúne 15 estudos empíricos", review)
         self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("núcleo empírico", limitations)
         self.assertIn(r"O texto integral de \citeonline{Zeng2025_6923} não foi recuperado", limitations)
@@ -154,10 +154,10 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("MCP", status)
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
-        self.assertIn("Versão revisada: 28/10/2026", slides)
+        self.assertIn("Rascunho histórico — não usar na defesa", slides)
         self.assertNotIn("Snapshot: 03/09/2026", slides)
         self.assertNotIn("Snapshot adjudicado: 03/09/2026", pptx_source)
-        self.assertIn("Versão revisada: 28/10/2026", pptx_source)
+        self.assertIn("Rascunho histórico, não usar na defesa", pptx_source)
         self.assertIn("não recebeu MMAT", pptx_source)
         self.assertNotIn("não receberam MMAT", pptx_source)
 
@@ -366,8 +366,8 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_public_status_distinguishes_prioritization_from_eligibility(self):
         status = (ROOT / "docs/tcc/ESTADO-ATUAL-TCC.md").read_text(encoding="utf-8")
         normalized = " ".join(status.split())
-        self.assertIn("2.486 submetidos à priorização operacional", normalized)
-        self.assertIn("2.468 não avançaram dessa etapa", normalized)
+        self.assertIn("2.482 avançaram à priorização histórica", normalized)
+        self.assertIn("2.464 não avançaram sob a regra histórica", normalized)
         self.assertNotIn("2.486 submetidos à elegibilidade", normalized)
 
     def test_bncc_short_call_preserves_institutional_responsibility(self):
@@ -450,7 +450,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         for phrase in ("R02", "R20", "26 grupos", "rastreabilidade", "consistência arquitetural",
                        "correspondência conceitual", "condições de viabilidade",
-                       "11.877 registros após deduplicação", "fonte da versão mantida",
+                       "11.875 registros após a remoção histórica de 29 duplicatas",
                        "Page et al. (2021)", "Hong et al. (2018)", "National Research Council (2001)"):
             self.assertIn(phrase, slides)
         self.assertNotIn("um futuro protocolo de avaliação", slides)

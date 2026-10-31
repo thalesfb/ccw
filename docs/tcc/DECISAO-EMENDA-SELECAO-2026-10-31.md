@@ -50,8 +50,17 @@ de termos metodológicos apenas em inglês, corrigir identidades e anos
 confirmados, e vincular relatórios que pertençam ao mesmo estudo. Cada decisão
 de elegibilidade deverá registrar o motivo e a localização da evidência.
 
-Até a conclusão dessa etapa, o corpus de 15 estudos e os números publicados no
-TCC continuam sendo o snapshot anterior à emenda; não representam um corpus
-reavaliado. Contagens, MMAT, síntese, especificação e defesa só serão
-atualizados depois da reconciliação. O relato final deverá identificar a emenda
-e sua aplicação conforme PRISMA 2020, item 24c.
+Em 31/10, a reconciliação confirmou dois registros do mesmo relatório (6952 →
+155; 6977 → 8) e corrigiu os anos originais dos registros 361 (2005) e 7001
+(1997). O fluxo atualizado mantém 11.904 registros identificados, conta 29
+duplicatas removidas e 11.875 registros únicos triados; 9.393 foram excluídos
+na triagem, 2.482 avançaram à priorização e 2.464 foram interrompidos pelo
+limiar operacional ainda não reaplicado. Os 18 registros de leitura manual e
+os 15 estudos incluídos permanecem iguais nesta etapa.
+
+Esses números são uma reconciliação dos dados, não a reaplicação dos critérios
+aprovados. O corpus de 15 estudos ainda é a seleção anterior à emenda. A
+reavaliação da população, a auditoria dos filtros automáticos e a vinculação de
+relatórios devem ocorrer antes de atualizar MMAT, síntese, especificação e
+defesa. O relato final deverá identificar a emenda e sua aplicação conforme
+PRISMA 2020, item 24c.

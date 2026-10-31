@@ -425,25 +425,25 @@ const page = `<!doctype html>
     <div class="site-shell">
       <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão</a> / <strong>MMAT · ${scopeSnapshotLabel}</strong></p>
       <section class="page-hero" aria-labelledby="page-title">
-        <span class="eyebrow">MMAT 2018 · escopo reconciliado em ${scopeSnapshotLabel}</span>
-        <h1 id="page-title">Apreciação preliminar por critérios</h1>
-        <p class="lede">A busca teve data de corte ${cutoffDateLabel}, e a população foi reconciliada em ${scopeSnapshotLabel}. As datas individuais das avaliações permanecem registradas na fonte versionada; esta apreciação não é uma nota global, percentual ou ranking de qualidade.</p>
-        <p class="source-note">Data de corte da busca: ${searchCutoffLabel}. Recorte consolidado em ${adjudicatedSnapshotLabel}. Escopo MMAT atual reconciliado em ${latestScopeReconciliationLabel}; apreciações registradas até ${latestReviewDateLabel}.</p>
+        <span class="eyebrow">MMAT 2018 · recorte histórico reconciliado em ${scopeSnapshotLabel}</span>
+        <h1 id="page-title">Apreciação preliminar do recorte histórico</h1>
+        <p class="lede">Esta página registra as apreciações preliminares do conjunto selecionado antes da emenda de 31/10/2026. A busca teve data de corte em ${cutoffDateLabel} e a população foi reconciliada em ${scopeSnapshotLabel}. A emenda remove o escore como critério de exclusão e sua reaplicação ainda está pendente; portanto, este conjunto não representa o corpus final. Esta apreciação não é uma nota global, percentual ou ranking de qualidade.</p>
+        <p class="source-note">Data de corte da busca: ${searchCutoffLabel}. Recorte consolidado em ${adjudicatedSnapshotLabel}. Registro MMAT do recorte anterior à emenda, reconciliado em ${latestScopeReconciliationLabel}; apreciações registradas até ${latestReviewDateLabel}.</p>
         <div class="action-row">
           <a class="btn btn-primary" href="../../index.html">Voltar à revisão</a>
           <a class="btn btn-secondary" href="mmat_visualization.html">Arquivo histórico — 17 registros</a>
         </div>
-        <p class="source-note">O arquivo legado preserva 17 registros MMAT. O escopo vigente contém ${current.length} registros, dos quais ${empiricalCore.length} estudos empíricos foram mantidos provisoriamente, ${pendingFullText.length} aguarda recuperação do texto integral, ${abstractOnly.length} foi excluído após a triagem do resumo e 1 protocolo foi excluído após texto completo. São registros e decisões distintos; as contagens não são equivalentes.</p>
+        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Este registro histórico contém ${current.length} itens: ${empiricalCore.length} estudos empíricos da seleção anterior à emenda, ${pendingFullText.length} relatório sem texto integral recuperado, ${abstractOnly.length} registro excluído após a triagem do resumo e 1 protocolo excluído após texto completo. A emenda aprovada ainda não foi reaplicada; esses itens e decisões não representam o corpus final.</p>
       </section>
 
       <section class="section" aria-labelledby="summary-title">
         <div class="section-heading">
           <h2 id="summary-title">O que esta avaliação registra</h2>
-          <p>O registro de apreciação reúne ${current.length} itens, entre estudos empíricos e registros com exclusão ou pendências documentais. As contagens abaixo descrevem o escopo atual e não devem ser interpretadas como escore de qualidade.</p>
+          <p>O registro de apreciação reúne ${current.length} itens do recorte histórico anterior à emenda, entre estudos empíricos, exclusões e pendências documentais. As contagens abaixo descrevem esse registro e não devem ser interpretadas como corpus final nem como escore de qualidade.</p>
         </div>
         <div class="data-strip">
           <div class="metric-card"><span class="metric-value">${current.length}</span><span class="metric-label">itens no registro de apreciação</span></div>
-          <div class="metric-card"><span class="metric-value">${empiricalCore.length}</span><span class="metric-label">estudos empíricos mantidos provisoriamente</span></div>
+          <div class="metric-card"><span class="metric-value">${empiricalCore.length}</span><span class="metric-label">estudos empíricos na seleção histórica</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
           <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">consultas documentais declaradas</span></div>
           <div class="metric-card"><span class="metric-value">${mmatAppraised.length}</span><span class="metric-label">registros com triagem MMAT (S1/S2)</span></div>
@@ -462,8 +462,8 @@ const page = `<!doctype html>
           <span class="eyebrow">Status da evidência</span>
           <h3>${primaryReviewed.length} registros com consulta documental declarada</h3>
           <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
-          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sobre essas fontes: o estudo 3 permanece retido provisoriamente, mas sua ficha histórica não foi revalidada sem o original; 6923 é o relatório não recuperado no fluxo. Disponibilidade local não é elegibilidade nem certificação de leitura humana. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
-          <p>Dos ${empiricalCore.length} registros empíricos incluídos provisoriamente, ${mmatAppraised.length} têm S1/S2 respondidas; ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 2 a partir do sorteio declarado das escolas, apesar da contradição documental; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integra o corpus empírico. Os julgamentos documentais receberam apoio automatizado; o rótulo histórico de revisor único não comprova leitura humana integral. A conferência humana por fonte e critério e a adjudicação metodológica permanecem pendentes.</p>
+          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sobre essas fontes: o estudo 3 consta da seleção histórica, mas sua ficha não foi revalidada sem o original; 6923 é o relatório não recuperado no fluxo. Disponibilidade local não é elegibilidade nem certificação de leitura humana. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
+          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm S1/S2 respondidas e ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 2 a partir do sorteio declarado das escolas, apesar da contradição documental; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica. Os julgamentos documentais receberam apoio automatizado; o rótulo histórico de revisor único não comprova leitura humana integral. A conferência humana por fonte e critério e a adjudicação metodológica permanecem pendentes. A reaplicação dos critérios de elegibilidade após a emenda também está pendente.</p>
         </article>
       </section>
 
@@ -472,7 +472,7 @@ const page = `<!doctype html>
       <section class="section" aria-labelledby="questions-title">
         <div class="section-heading">
           <h2 id="questions-title">Perguntas de triagem do MMAT 2018</h2>
-          <p>No recorte atual, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos. Q1–Q5 foram apreciados em ${categoryAppraised.length}; as rotas operacionais e suas incertezas estão identificadas em cada ficha; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e não integra o corpus empírico.</p>
+          <p>No recorte histórico anterior à emenda, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos. Q1–Q5 foram apreciados em ${categoryAppraised.length}; as rotas operacionais e suas incertezas estão identificadas em cada ficha; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e não integrou a seleção empírica histórica.</p>
         </div>
         <div class="mmat-screening-grid">${screeningQuestions}</div>
         <div class="callout callout-blue mmat-question-note">
@@ -495,7 +495,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Os 15 estudos do corpus têm triagem e critérios apreciados, incluindo rotas operacionais explicitamente limitadas nos estudos 5, 7, 8 e 14. O relatório 6923 não recebeu respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios. As respostas históricas do estudo 3 não foram revalidadas nesta revisão sem o original.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Os 15 estudos da seleção histórica têm triagem e critérios apreciados, incluindo rotas operacionais explicitamente limitadas nos estudos 5, 7, 8 e 14. O relatório 6923 não recebeu respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios. As respostas históricas do estudo 3 não foram revalidadas nesta revisão sem o original.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>

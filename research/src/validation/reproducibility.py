@@ -89,6 +89,10 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
         "row-level audit of the deterministic DOI/URL records removed from the PRISMA flow",
     ),
     (
+        "research/data/adjudicated_record_corrections.csv",
+        "separate source-linked ledger for two same-report duplicates and two corrected publication years",
+    ),
+    (
         "research/exports/analysis/mmat_visualization.html",
         "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
     ),
@@ -490,7 +494,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
     The local database still exists for operational diagnostics, but it does
     not contain the supervisor-approved scope decisions.  The committed CSV,
     summary and scope ledger are therefore the only valid source for the
-    current scientific population in this manifest.
+    historical pre-amendment population snapshot in this manifest.
     """
 
     facts = validate_versioned_snapshot(
@@ -502,6 +506,9 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     statistics = summary["statistics"]
     prisma = statistics["prisma"]
+    amendment_path = root / "research" / "data" / "selection_protocol_amendment_2026-10-31.json"
+    amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+    selection_flow_status = amendment["post_decision_data_reconciliation"]["flow_status"]
     decisions_path = root / "research" / "data" / "adjudicated_population_decisions.csv"
     with decisions_path.open("r", encoding="utf-8-sig", newline="") as handle:
         decisions = list(csv.DictReader(handle))
@@ -520,6 +527,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
     }
 
     return {
+        "selection_flow_status": selection_flow_status,
         "counts": {
             "total_records": int(prisma["identification"]),
             "versioned_rows": facts["papers_rows"],
@@ -570,13 +578,14 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
             "interpretation": (
                 "The 23-record candidate universe is preserved as historical "
                 "context: 16 operationally retained records plus seven manual "
-                "overrides. The current selection is divided into "
+                "overrides. The pre-amendment historical selection is divided into "
                 f"{_counted(facts['summary_prisma']['included'], 'empirical study', 'empirical studies')}, "
                 f"{_counted(facts['summary_prisma']['abstract_screening_excluded'], 'record excluded after abstract screening', 'records excluded after abstract screening')}, "
                 f"{_counted(facts['summary_prisma']['reports_not_retrieved'], 'full-text report not retrieved', 'full-text reports not retrieved')}, and "
                 f"{_counted(facts['summary_prisma']['eligibility_excluded'], 'protocol excluded after full-text assessment', 'protocols excluded after full-text assessment')}. "
                 "These categories describe distinct stages; the preliminary list is not "
-                "equivalent to the empirical included set or an additional PRISMA stage."
+                "equivalent to the empirical included set or an additional PRISMA stage. "
+                "The approved amendment has not been reapplied, so this is not the post-amendment corpus."
             ),
         },
     }
@@ -608,23 +617,31 @@ def _current_protocol() -> dict[str, Any]:
     """
 
     config = load_config()
+    amendment_path = REPOSITORY_ROOT / "research" / "data" / "selection_protocol_amendment_2026-10-31.json"
+    amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
     return {
-        "status": "current_snapshot_protocol",
+        "status": "approved_amendment_pending_implementation_and_reapplication",
         "year_min": config.review.year_min,
         "year_max": config.review.year_max,
         "cutoff_date": config.review.cutoff_date,
         "languages": list(config.review.languages),
         "abstract_required": config.review.abstract_required,
-        "relevance_threshold": config.review.relevance_threshold,
+        "legacy_selector_relevance_threshold": config.review.relevance_threshold,
+        "selection_amendment_id": amendment["amendment_id"],
+        "selection_amendment_status": amendment["status"],
+        "selection_flow_status": amendment["post_decision_data_reconciliation"]["flow_status"],
+        "relevance_score_role": "queue_order_only_after_reapplication",
         "canonical_query_count": len(get_all_queries()),
         "query_generator": "research/src/search_terms.py",
         "sources": ["semantic_scholar", "openalex", "crossref", "core"],
         "source_count": 4,
         "max_results_per_query": config.max_results_per_query,
         "interpretation": (
-            "These parameters describe the protocol contract for a fresh run. "
-            "External API responses, cache state and metadata may change; they "
-            "do not replace the current versioned snapshot exports."
+            "The selector still contains the legacy cutoff recorded in legacy_selector_relevance_threshold; "
+            "this is not the approved eligibility protocol. The approved 2026-10-31 amendment removes "
+            "relevance score as an exclusion criterion, but implementation and population reapplication "
+            "are pending. External API responses, "
+            "cache state and metadata may change; they do not replace the current versioned snapshot exports."
         ),
     }
 
@@ -863,7 +880,8 @@ def generate_manifest(
             "reference_audit": "research/data/reference_audit.csv",
             "separation_rule": (
                 f"The BibTeX inventory contains {prisma_counts['shortlisted']} records in the preliminary list; "
-                f"{prisma_counts['included']} are currently included in the empirical core. "
+                f"{prisma_counts['included']} remain in the pre-amendment historical empirical selection. "
+                "The corpus count is pending reapplication of the approved eligibility amendment. "
                 "Methodological, pedagogical, assessment and technical references "
                 "are external to the pipeline study set and remain in the complete TCC bibliography."
             ),
@@ -871,10 +889,10 @@ def generate_manifest(
         "methodological_appraisal": {
             "current_mmat_qa": mmat_qa,
             "interpretation": (
-                f"The current MMAT ledger records S1/S2 screening for {mmat_denominator} studies and "
+                f"The MMAT ledger describes the historical pre-amendment selection: S1/S2 screening for {mmat_denominator} studies and "
                 f"category-specific appraisal for {mmat_qa['category_appraised_rows']}; "
                 "three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. "
-                f"{prisma_counts['included']} records remain provisionally in the empirical corpus; study 8 has no MMAT responses "
+                f"{prisma_counts['included']} records remain provisionally in the historical empirical selection; study 8 has no MMAT responses "
                 "pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. "
                 f"MMAT has not been applied to the {unretrieved_report_label}. "
                 "Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
@@ -910,10 +928,14 @@ def generate_manifest(
                 "python -m research.src.cli --db /path/to/systematic_review.sqlite export",
                 "python -m research.src.cli --db /path/to/systematic_review.sqlite generate-manifest",
             ],
-            "fresh_collection": "python -m research.src.cli run-pipeline --min-score 4.0",
+            "fresh_collection": (
+                "Pending: the selector still applies its legacy --min-score 4.0. "
+                "Do not treat a fresh run as following the approved amendment until "
+                "the selector is updated and the full population is reassessed."
+            ),
             "limitations": [
                 "External API responses, metadata and cache state can change on a fresh collection.",
-                "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
+                "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
                 f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have category-specific appraisals and three await design adjudication with Q1-Q5 unassessed. {prisma_counts['included']} records remain provisionally included in the empirical corpus. Study 8 has no MMAT responses pending human adjudication of eligibility and appraisal unit; do not combine its distinct datasets. No MMAT appraisal was assigned to the {unretrieved_report_label}. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis.",
             ],

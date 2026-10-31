@@ -1,5 +1,10 @@
 # Apresentação Slidev do TCC
 
+> **Rascunho fora de uso na defesa:** o Slidev, o storyboard e o PPTX ainda
+> descrevem a seleção de 15 estudos anterior à emenda. O fluxo histórico foi
+> reconciliado em 31/10/2026, mas a regra aprovada ainda aguarda reaplicação
+> uniforme; não use estes materiais na defesa antes da atualização do corpus.
+
 ## Arquivo da defesa
 
 `slides.md` é o deck canônico da defesa: contém 25 slides, incluindo a capa, e
@@ -24,9 +29,11 @@ O material em `results/ptc/presentation/` é uma terceira apresentação,
 histórica, referente ao PTC. Serve apenas como referência narrativa e visual,
 nunca como fonte dos números atuais do TCC.
 
-O conteúdo quantitativo do deck canônico é validado contra
-`research/exports/reports/summary.json`; as visualizações são cópias dos PNGs
-versionados em `research/exports/visualizations`.
+Os gráficos versionados, as contagens do fluxo histórico e as legendas da
+reconciliação de 31/10/2026 estão atualizados. A síntese dos 15 estudos e outras
+partes da narrativa ainda descrevem a seleção pré-emenda; devem ser revistas
+depois da reaplicação uniforme do protocolo. Até lá, o conjunto não é corpus
+final e os materiais continuam fora de uso na defesa.
 
 ## Objetivos de referência do manuscrito
 
@@ -141,15 +148,16 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 
 ## Limites científicos
 
-- dos 18 registros shortlistados, 15 registros foram mantidos no núcleo empírico
-  provisoriamente, um relatório não foi recuperado, um registro foi excluído
-  após resumo e um protocolo sem resultados concluídos foi excluído após texto
-  completo;
-- o MMAT atual é preliminar: a busca tem data de corte em 31/08/2026 e o escopo
-  foi reconciliado em 20/10/2026; 14 registros têm triagem S1/S2 e 11 têm
-  critérios por categoria apreciados; o estudo 8 aguarda adjudicação. Não há
-  nota média ou ranking;
-- as frequências técnicas são descritivas sobre o snapshot após deduplicação,
-  não uma síntese de eficácia;
+- na seleção histórica anterior à emenda, dos 18 registros do MMAT, 15 estudos
+  empíricos foram selecionados, um relatório não foi recuperado, um registro foi
+  excluído após o resumo e um protocolo sem resultados concluídos após o texto
+  completo; essa seleção não é o corpus final;
+- o MMAT desse recorte histórico é preliminar: a busca tem data de corte em
+  31/08/2026 e o recorte foi reconciliado em 20/10/2026; 15 estudos têm
+  triagem S1/S2 e apreciação dos critérios por categoria; o estudo 8 ainda
+  aguarda adjudicação humana. Não há nota média ou ranking, e a reaplicação da
+  elegibilidade após a emenda continua pendente;
+- as frequências técnicas descrevem o snapshot histórico após deduplicação,
+  não uma síntese de eficácia nem o corpus após a emenda;
 - referências teóricas, pedagógicas, metodológicas e técnicas do TCC permanecem
   separadas das referências derivadas do pipeline.

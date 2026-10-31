@@ -1,7 +1,7 @@
 # Reconciliação da População Adjudicada da Revisão Sistemática
 
 **Adjudicação inicial:** 03/09/2026
-**Reconciliação do escopo:** 14/10/2026; cobertura documental atualizada em 20/10/2026
+**Reconciliação do escopo:** 14/10/2026; cobertura documental atualizada em 20/10/2026; identidade e anos bibliográficos reconciliados em 31/10/2026
 **Commit da consolidação inicial:** `5d72bf6` (PR #55)
 **Fonte versionada:** `research/exports/analysis/papers.csv`, `summary.json` e
 `research/data/current_synthesis_scope.csv`
@@ -21,6 +21,13 @@ O manuscrito do TCC ainda é uma unidade de trabalho separada. Este documento
 não autoriza inserir no TCC o histórico de PRs, discussões internas ou detalhes
 de implementação que não sejam necessários ao relato científico.
 
+Em 31/10/2026, uma reconciliação posterior confirmou 6952 como o mesmo artigo
+de 155 e 6977 como a mesma tese de 8, além de corrigir os anos de publicação
+dos registros 361 (2005) e 7001 (1997). Evidências e disposições estão em
+`research/data/adjudicated_record_corrections.csv`. A emenda aprovada nessa
+data retira o escore de critério de exclusão, mas ainda não foi reaplicada; por
+isso, os 15 estudos abaixo continuam representando a seleção histórica.
+
 O arquivo `research/data/prisma_population_reconciliation.csv` não é a fonte do
 snapshot vigente. Ele preserva uma reconciliação histórica datada de
 31/08/2026, com a população operacional anterior de 16 registros. Para os
@@ -33,39 +40,41 @@ síntese e a auditoria de identidade indicados acima.
 | Etapa | Quantidade | Interpretação |
 | --- | --- | --- |
 | Identificação | 11.904 | Registros no snapshot versionado |
-| Remoções determinísticas | 27 | Identidades DOI/URL; não duplicatas semânticas confirmadas |
-| Triagem | 11.877 | 9.391 excluídos |
-| Priorização operacional | 2.486 | 2.468 não avançaram; não é elegibilidade por texto completo |
+| Duplicatas removidas | 29 | 27 por DOI/URL; 2 relatórios iguais confirmados manualmente |
+| Triagem | 11.875 | 9.393 excluídos |
+| Priorização histórica | 2.482 | 2.464 não avançaram sob a regra anterior; emenda aprovada ainda não reaplicada |
 | Lista preliminar | 18 | 1 exclusão após resumo |
 | Relatórios procurados | 17 | 1 não recuperado no fluxo histórico |
 | Relatórios declarados avaliados em texto completo | 16 | 1 protocolo excluído; a contagem não certifica leitura humana integral |
-| Núcleo empírico provisório | 15 | Sujeito às pendências de apreciação e elegibilidade |
+| Seleção histórica de estudos empíricos | 15 | Sujeita à reaplicação dos critérios e à revisão do MMAT |
 <!-- ccw-sync:end flow -->
 
-Dos **11.904 identificados**, 78,89% foram excluídos na triagem, 20,88%
-avançaram para priorização operacional e 0,15% compuseram a lista preliminar;
-0,13% integram provisoriamente o núcleo empírico. As duas primeiras
-taxas usam a identificação como denominador, e não os 11.877 que entraram na
-triagem. Na priorização operacional, 99,28% não avançaram e 0,72% formaram a
-lista preliminar, usando os **2.486 registros dessa etapa** como denominador.
-Essas taxas descrevem o fluxo de seleção, não a
-qualidade metodológica.
+Dos **11.904 identificados**, 9.393 (78,91%) foram excluídos na triagem; 2.482
+(20,85%) avançaram à priorização histórica; e 18 (0,15%) compuseram a lista
+preliminar. Dos 11.875 registros triados, 79,10% foram excluídos. Entre os
+2.482 priorizados, 2.464 (99,27%) não avançaram sob a regra anterior e 18
+(0,73%) seguiram à lista preliminar. Os 15 estudos empíricos e as taxas de
+seleção descrevem o fluxo histórico; não são a conclusão da reaplicação da
+emenda nem uma medida de qualidade metodológica.
 
 ### Deduplicação
 
-A auditoria atual não é uma contagem zero. As 27 remoções determinísticas são:
+A reconciliação totaliza 29 duplicatas removidas antes da triagem. A auditoria
+determinística confirmou 27 registros:
 
 - 25 linhas excedentes em 25 grupos de DOI normalizado;
 - 2 linhas excedentes em 2 grupos de URL exata;
 - 0 linhas removidas apenas pela flag persistida do SQLite.
 
-Há ainda 177 grupos de título normalizado, com 257 excedentes brutos. Depois da
-remoção DOI/URL, 232 excedentes permanecem apenas por título. Eles são
-candidatos à auditoria semântica e não foram removidos automaticamente, porque
-títulos iguais podem representar versões, erratas ou obras distintas. Os 257
-excedentes brutos incluem as 27 linhas já removidas por identidade; por isso,
-não se deve somar 27 e 232 nem subtrair 232 do fluxo PRISMA. Até o snapshot
-vigente, não há duplicatas semânticas confirmadas.
+Além dessas linhas, a revisão manual confirmou dois relatórios iguais: 6952 →
+155 (PDF idêntico) e 6977 → 8 (relação `IsIdenticalTo` da DataCite). Essas
+duas decisões estão em ledger separado e completam o total PRISMA de 29.
+Também há 177 grupos de título normalizado, com 257 excedentes brutos; após as
+27 remoções DOI/URL, a auditoria registrou 232 excedentes apenas por título.
+Esse total descreve candidatos, não duplicatas confirmadas: igualdade de
+título, sem evidência adicional, não causa remoção automática. Os 257
+excedentes brutos incluem as 27 linhas determinísticas; os dois relatórios
+confirmados manualmente são contados uma única vez no total de 29.
 
 ## Como 16 registros se tornaram 18 candidatos na adjudicação inicial
 

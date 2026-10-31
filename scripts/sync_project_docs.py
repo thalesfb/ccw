@@ -6,6 +6,7 @@ images. It records an assisted consistency review, not scientific approval.
 """
 
 import argparse
+import csv
 from datetime import date
 import hashlib
 import json
@@ -17,12 +18,14 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 INTRO = "results/tcc/conteudo/introducao.tex"
 MANIFEST = "research/exports/reports/reproducibility_manifest.json"
+RECORD_CORRECTIONS = "research/data/adjudicated_record_corrections.csv"
+SELECTION_AMENDMENT = "research/data/selection_protocol_amendment_2026-10-31.json"
 CONTRIBUTIONS = "research/data/study_contribution_current.json"
 EVIDENCE = "research/data/evidence_sources_current.json"
 OVERVIEW = "results/tcc/images/project_overview_2026-10-20.png"
 REVIEW_RECORD = "docs/tcc/documentation_consistency_review.json"
 INPUTS = (
-    INTRO, MANIFEST, CONTRIBUTIONS, EVIDENCE,
+    INTRO, MANIFEST, CONTRIBUTIONS, EVIDENCE, RECORD_CORRECTIONS, SELECTION_AMENDMENT,
     "results/tcc/conteudo/fundamentacao.tex",
     "results/tcc/conteudo/metodologia.tex",
     "results/tcc/conteudo/resultadosesperados.tex",
@@ -91,6 +94,10 @@ def number(value):
     return f"{value:,}".replace(",", ".")
 
 
+def percentage(numerator, denominator):
+    return f"{100 * numerator / denominator:.2f}".replace(".", ",") if denominator else "0,00"
+
+
 def plain_tex(value):
     value = " ".join(value.split())
     if "\\" in value or "{" in value or "}" in value:
@@ -128,7 +135,16 @@ def render_blocks(root):
     matrix = read_json(root, CONTRIBUTIONS)
     evidence = read_json(root, EVIDENCE)
     counts = manifest["snapshot"]["counts"]["prisma"]
+    deduplication = manifest["snapshot"]["deduplication_audit"]
     qa = manifest["methodological_appraisal"]["current_mmat_qa"]
+    amendment = read_json(root, SELECTION_AMENDMENT)
+    with (root / RECORD_CORRECTIONS).open("r", encoding="utf-8-sig", newline="") as handle:
+        corrections = list(csv.DictReader(handle))
+    identity_reconciliation_date = max(row["decision_date"] for row in corrections)
+    deterministic_duplicates = int(deduplication["deterministic_identity_duplicate_rows"])
+    same_report_duplicates = int(deduplication["adjudicated_same_report_duplicate_rows"])
+    if deterministic_duplicates + same_report_duplicates != int(counts["duplicates_removed"]):
+        raise ValueError("PRISMA duplicate total disagrees with the record-correction ledgers")
     records = matrix["records"]
     local = sum(record["full_text_available_locally"] for record in records)
     missing = [record["study_id"] for record in records if not record["full_text_available_locally"]]
@@ -138,16 +154,24 @@ def render_blocks(root):
     dates = (f"Corte da busca: {day(manifest['protocol']['cutoff_date'])}; "
              f"adjudicação inicial: {day(manifest['snapshot_date'])}; "
              f"reconciliação do escopo: {day(manifest['scope_updated_at'])}; "
+             f"reconciliação de identidade e ano: {day(identity_reconciliation_date)}; "
              f"cobertura documental: {day(matrix['review_date'])}.")
     snapshot = (
         f"{dates}\n\n"
-        f"O snapshot registra {number(counts['identification'])} registros identificados, "
-        f"{counts['duplicates_removed']} remoções determinísticas por DOI/URL e "
-        f"{number(counts['screening'])} registros na triagem. Foram "
-        f"{number(counts['prioritization'])} submetidos à priorização operacional; "
-        f"{number(counts['prioritization_excluded'])} não avançaram dessa etapa. A priorização "
-        f"encaminhou {counts['shortlisted']} candidatos, não {counts['shortlisted']} inclusões finais: "
-        f"{counts['included']} estudos empíricos mantidos provisoriamente, "
+        f"O snapshot registra {number(counts['identification'])} registros identificados e "
+        f"{counts['duplicates_removed']} duplicatas removidas: {deterministic_duplicates} por identidade DOI/URL "
+        f"e {same_report_duplicates} relatórios confirmados manualmente como repetidos. Foram "
+        f"{number(counts['screening'])} registros únicos na triagem, dos quais "
+        f"{number(counts['screening_excluded'])} foram excluídos ({percentage(counts['screening_excluded'], counts['screening'])}%). "
+        f"{number(counts['prioritization'])} avançaram à priorização histórica "
+        f"({percentage(counts['prioritization'], counts['screening'])}% da triagem); "
+        f"{number(counts['prioritization_excluded'])} não avançaram sob a regra histórica "
+        f"({percentage(counts['prioritization_excluded'], counts['prioritization'])}%). "
+        f"A emenda aprovada em {day(amendment['decision_date'])} retira o escore de critério de exclusão, "
+        f"mas ainda não foi reaplicada à população. A priorização histórica "
+        f"encaminhou {counts['shortlisted']} registros à lista preliminar "
+        f"({percentage(counts['shortlisted'], counts['prioritization'])}%), não a inclusões finais: "
+        f"{counts['included']} estudos empíricos mantidos na seleção histórica, ainda provisoriamente, "
         f"{counts['abstract_screening_excluded']} exclusão após resumo, "
         f"{counts['reports_not_retrieved']} relatório não recuperado no fluxo histórico e "
         f"{counts['eligibility_excluded']} protocolo excluído após texto completo. "
@@ -157,13 +181,13 @@ def render_blocks(root):
     )
     flow_rows = [
         ("Identificação", counts["identification"], "Registros no snapshot versionado"),
-        ("Remoções determinísticas", counts["duplicates_removed"], "Identidades DOI/URL; não duplicatas semânticas confirmadas"),
+        ("Duplicatas removidas", counts["duplicates_removed"], f"{deterministic_duplicates} por DOI/URL; {same_report_duplicates} relatórios iguais confirmados manualmente"),
         ("Triagem", counts["screening"], f"{number(counts['screening_excluded'])} excluídos"),
-        ("Priorização operacional", counts["prioritization"], f"{number(counts['prioritization_excluded'])} não avançaram; não é elegibilidade por texto completo"),
+        ("Priorização histórica", counts["prioritization"], f"{number(counts['prioritization_excluded'])} não avançaram sob a regra anterior; emenda aprovada ainda não reaplicada"),
         ("Lista preliminar", counts["shortlisted"], f"{counts['abstract_screening_excluded']} exclusão após resumo"),
         ("Relatórios procurados", counts["reports_sought"], f"{counts['reports_not_retrieved']} não recuperado no fluxo histórico"),
         ("Relatórios declarados avaliados em texto completo", counts["eligibility"], f"{counts['eligibility_excluded']} protocolo excluído; a contagem não certifica leitura humana integral"),
-        ("Núcleo empírico provisório", counts["included"], "Sujeito às pendências de apreciação e elegibilidade"),
+        ("Seleção histórica de estudos empíricos", counts["included"], "Sujeita à reaplicação dos critérios e à revisão do MMAT"),
     ]
     flow = "| Etapa | Quantidade | Interpretação |\n| --- | --- | --- |\n" + "\n".join(
         f"| {label} | {number(value)} | {meaning} |" for label, value, meaning in flow_rows

@@ -11,9 +11,9 @@ TCC = ROOT / "results" / "tcc"
 def test_selection_percentages_refer_to_records_not_a_study_population() -> None:
     review = (TCC / "conteudo" / "resultadosesperados.tex").read_text(encoding="utf-8")
 
-    assert "dos 11.877 registros efetivamente triados" in review
+    assert "dos 11.875 registros únicos triados" in review
     assert "parcela da população inicialmente identificada" not in review
-    assert "Os 15 restantes compõem o corpus final" in review
+    assert "Os 15 restantes compõem o corpus da seleção histórica" in review
     assert "17 candidatos empíricos provisórios" not in review
     assert "A população retida compreende" not in review
 

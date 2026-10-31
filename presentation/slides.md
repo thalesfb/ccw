@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Versão revisada: 28/10/2026 · Corte da busca: 31/08/2026</div>
+<div class="cover-snapshot">Rascunho histórico — não usar na defesa · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; reaplicação da emenda pendente</div>
 
 ---
 layout: default
@@ -191,10 +191,10 @@ class: content-slide tcc-sources-slide
   <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="8" cy="16" r="3"/><circle cx="24" cy="9" r="3"/><circle cx="24" cy="23" r="3"/><path d="m10.8 14.8 10.4-4.6m-10.4 7 10.4 4.6"/></svg></span><p><strong>Semantic Scholar</strong><br>Ciência da Computação e métricas de influência.<small>1.931 registros</small></p></div>
   <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="8" rx="10" ry="4"/><path d="M6 8v14c0 2.2 4.5 4 10 4s10-1.8 10-4V8M6 15c0 2.2 4.5 4 10 4s10-1.8 10-4"/></svg></span><p><strong>OpenAlex</strong><br>Cobertura ampla e aberta da literatura.<small>3.057 registros</small></p></div>
   <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 20 9 23a5 5 0 0 1-7-7l4-4a5 5 0 0 1 7 0m7-4 3-3a5 5 0 0 1 7 7l-4 4a5 5 0 0 1-7 0M11 21l10-10"/></svg></span><p><strong>Crossref</strong><br>Precisão de metadados e DOIs.<small>5.049 registros</small></p></div>
-  <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 7h9a4 4 0 0 1 3 1.4A4 4 0 0 1 19 7h9v19h-9a4 4 0 0 0-3 1.4 4 4 0 0 0-3-1.4H4zM16 9v18"/><path d="M8 12h5m-5 4h5m6-4h5m-5 4h5"/></svg></span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.840 registros</small></p></div>
+  <div><span class="tcc-source-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 7h9a4 4 0 0 1 3 1.4A4 4 0 0 1 19 7h9v19h-9a4 4 0 0 0-3 1.4 4 4 0 0 0-3-1.4H4zM16 9v18"/><path d="M8 12h5m-5 4h5m6-4h5m-5 4h5"/></svg></span><p><strong>CORE</strong><br>Foco em artigos e literatura de acesso aberto.<small>1.838 registros</small></p></div>
 </div>
 
-<div class="tcc-caption">11.877 registros após deduplicação; fonte da versão mantida. Não representa cobertura exclusiva das bases. Dados: <code>research/exports/analysis/papers.csv</code>. Teses e dissertações também podem atender à elegibilidade.</div>
+<div class="tcc-caption">11.875 registros após a remoção histórica de 29 duplicatas (27 por DOI/URL e 2 confirmadas manualmente). Não representa cobertura exclusiva das bases. Dados: <code>research/exports/analysis/papers.csv</code>. Teses e dissertações também podem atender à elegibilidade.</div>
 
 ---
 layout: default
@@ -203,23 +203,23 @@ class: content-slide flow-slide
 
 <div class="slide-kicker">09 / SELEÇÃO</div>
 
-# Da busca à seleção preliminar: 11.904 registros → 18 em avaliação de escopo
+# Fluxo histórico pré-emenda: 11.904 registros → 18 na lista de leitura
 
 <div class="tcc-funnel-layout">
   <div class="tcc-funnel">
     <div class="tcc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
-    <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.877</strong><small>27 remoções determinísticas</small></div>
-    <div class="tcc-funnel-stage funnel-screening"><span>Após triagem</span><strong>2.486</strong><small>9.391 excluídos</small></div>
-    <div class="tcc-funnel-stage funnel-inclusion"><span>Lista preliminar</span><strong>18</strong><small>2.468 não avançaram na priorização</small></div>
+    <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.875</strong><small>29 remoções: 27 por DOI/URL e 2 confirmadas</small></div>
+    <div class="tcc-funnel-stage funnel-screening"><span>Após triagem</span><strong>2.482</strong><small>9.393 excluídos</small></div>
+    <div class="tcc-funnel-stage funnel-inclusion"><span>Lista histórica</span><strong>18</strong><small>2.464 não avançaram na priorização antiga</small></div>
   </div>
   <div class="tcc-funnel-notes">
-    <p><strong>Identidade:</strong> 25 DOI + 2 URL são removidos de forma determinística.</p>
+    <p><strong>Identidade:</strong> 27 duplicatas por DOI/URL e 2 relatórios iguais confirmados manualmente.</p>
     <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
-    <p><strong>Desfecho da seleção:</strong> 15 registros empíricos mantidos provisoriamente; 1 relatório não recuperado; 1 exclusão após resumo; 1 protocolo excluído após texto completo.</p>
+    <p><strong>Seleção histórica:</strong> 15 estudos empíricos; 1 relatório não recuperado; 1 exclusão após resumo; 1 protocolo excluído após texto completo. A emenda ainda não foi reaplicada.</p>
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Fluxo operacional próprio, com referência ao PRISMA 2020.</strong> Priorização por metadados e resumos não equivale à elegibilidade em texto completo. Após uma exclusão no resumo: 17 relatórios procurados, 1 não recuperado e 16 declarados avaliados; excluído 1 protocolo, restam 15 registros provisórios.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo histórico reconciliado, relatado com referência ao PRISMA 2020.</strong> O corte 4,0 foi usado na execução original, mas a emenda aprovada o retira como exclusão; a seleção precisa ser reaplicada. Após uma exclusão no resumo: 17 relatórios procurados, 1 não recuperado e 16 avaliados; excluído 1 protocolo, restam 15 estudos históricos.</div>
 
 ---
 layout: center
@@ -245,11 +245,11 @@ class: content-slide
 
 <div class="dedupe-layout">
   <div class="dedupe-copy">
-    <div class="big-number"><strong>27</strong><span>registros removidos<br>por identidade DOI/URL</span></div>
+    <div class="big-number"><strong>29</strong><span>relatórios duplicados<br>removidos antes da triagem</span></div>
     <div class="reading-list">
-      <div><b>01</b><span>Não há remoção automática apenas por igualdade de título.</span></div>
-      <div><b>02</b><span>Há 232 excedentes apenas por título após a remoção determinística.</span></div>
-      <div><b>03</b><span>Excedentes são candidatos a revisão semântica; não equivalem a duplicatas confirmadas.</span></div>
+      <div><b>01</b><span>27 foram removidos por DOI/URL; 2 relatórios iguais foram confirmados manualmente.</span></div>
+      <div><b>02</b><span>Restam 232 excedentes apenas por título após as 27 remoções por DOI/URL.</span></div>
+      <div><b>03</b><span>Os 232 casos seguem como candidatos; igualdade de título não confirma identidade.</span></div>
     </div>
   </div>
   <div class="image-frame"><img src="/images/selection_funnel.png" alt="Funil de seleção da revisão" /></div>
@@ -282,10 +282,10 @@ class: content-slide
 
 <div class="tcc-technique-layout">
   <div class="tcc-technique-chart"><img src="/images/techniques_distribution.png" alt="Distribuição de técnicas nos dados da revisão" /></div>
-  <div class="tcc-technique-copy"><div class="tcc-technique-stat"><strong>6.399</strong><span>técnica não especificada</span></div><p>As categorias descrevem os 11.877 registros após remoção determinística; podem se sobrepor e não representam somente os 18 retidos.</p><div class="tcc-technique-list"><div><span>assessment</span><b>1.073</b></div><div><span>IA</span><b>863</b></div><div><span>ML</span><b>771</b></div><div><span>preditiva</span><b>345</b></div></div></div>
+  <div class="tcc-technique-copy"><div class="tcc-technique-stat"><strong>6.399</strong><span>técnica não especificada</span></div><p>As categorias descrevem os 11.875 registros após a reconciliação histórica; podem se sobrepor e não representam somente os 18 da lista de leitura.</p><div class="tcc-technique-list"><div><span>assessment</span><b>1.073</b></div><div><span>IA</span><b>863</b></div><div><span>ML</span><b>771</b></div><div><span>preditiva</span><b>345</b></div></div></div>
 </div>
 
-<div class="tcc-caption">Frequências descritivas: não medem qualidade, eficácia ou predominância entre os estudos incluídos.</div>
+<div class="tcc-caption">Frequências do conjunto histórico reconciliado; não medem qualidade, eficácia ou predominância entre os estudos incluídos na seleção histórica.</div>
 
 ---
 layout: default
@@ -294,19 +294,19 @@ class: content-slide tcc-score-slide
 
 <div class="slide-kicker">14 / RELEVÂNCIA</div>
 
-# Score: prioridade de leitura, não qualidade
+# Score histórico: ordem de leitura, não elegibilidade
 
 <div class="tcc-score-layout">
   <div class="tcc-score-visual"><img src="/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
   <div class="tcc-score-copy">
-    <div class="tcc-score-threshold">≥ 4,0</div>
-    <h2>O score organiza o processamento.</h2>
-    <p>Ele prioriza a leitura dos registros, mas não mede qualidade metodológica, não produz ranking e não substitui a leitura das fontes primárias.</p>
-    <div class="tcc-guardrail"><span>!</span><strong>Filtro operacional ≠ conclusão científica</strong></div>
+    <div class="tcc-score-threshold">4,0</div>
+    <h2>Corte usado na seleção antiga.</h2>
+    <p>A emenda aprovada retira o score como critério de exclusão. Ele pode ordenar a leitura, mas não substitui a avaliação uniforme de elegibilidade nem mede qualidade metodológica.</p>
+    <div class="tcc-guardrail"><span>!</span><strong>Reaplicação pendente</strong></div>
   </div>
 </div>
 
-<div class="tcc-caption">A pontuação é uma regra de processamento documentada, não uma conclusão sobre os estudos.</div>
+<div class="tcc-caption">A pontuação descreve a execução histórica; a seleção final ainda depende da reaplicação dos critérios emendados.</div>
 
 ---
 layout: default

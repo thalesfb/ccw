@@ -61,7 +61,7 @@ EXPECTED_TITLES = [
     "Objetivos específicos",
     "A base conceitual: quatro níveis de interpretação",
     "Desenho metodológico",
-    "Do registro bruto ao conjunto retido provisoriamente",
+    "Fluxo histórico antes da reaplicação",
     "Fluxo operacional do processo de seleção",
     "Deduplicação: o que foi confirmado",
     "Panorama descritivo do recorte versionado",
@@ -78,12 +78,13 @@ EXPECTED_TITLES = [
 
 CURRENT_MARKERS = (
     "11.904",
-    "11.877",
-    "9.391",
-    "2.486",
-    "2.468",
+    "29",
+    "11.875",
+    "9.393",
+    "2.482",
+    "2.464",
     "18",
-    "27",
+    "15 estudos na seleção histórica",
     "2015–2026",
     "MMAT 2018",
 )
@@ -353,7 +354,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Revisão sistemática da literatura e especificação conceitual de protótipo", Inches(1.35), Inches(3.48), Inches(10.65), Inches(0.45), size=20, color=RGBColor(11, 86, 108), align=PP_ALIGN.CENTER)
     add_text(slide, "Thales Ferreira Batista\nCiência da Computação", Inches(4.0), Inches(4.45), Inches(5.35), Inches(0.65), size=16, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
     add_text(slide, "Orientador: Prof. Dr. Rafael Zanin\nCoorientador: Prof. Dr. Manassés Ribeiro", Inches(3.3), Inches(5.35), Inches(6.75), Inches(0.65), size=14, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
-    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nVersão revisada: 28/10/2026 · corte da busca: 31/08/2026", Inches(2.25), Inches(6.35), Inches(8.85), Inches(0.5), size=11.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
+    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nRascunho histórico, não usar na defesa · fluxo reconciliado em 31/10/2026 · reaplicação da emenda pendente", Inches(1.0), Inches(6.22), Inches(11.3), Inches(0.7), size=10.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
 
     # 2 — Problem.
     slide = new_slide(prs, EXPECTED_TITLES[1], 2)
@@ -423,20 +424,20 @@ def build_deck() -> Presentation:
 
     # 7 — Flow metrics.
     slide = new_slide(prs, EXPECTED_TITLES[6], 7)
-    add_text(slide, "Contagens do recorte versionado", Inches(0.75), Inches(1.05), Inches(5), Inches(0.3), size=18, color=NAVY, bold=True)
+    add_text(slide, "Fluxo histórico reconciliado em 31/10/2026", Inches(0.75), Inches(1.05), Inches(7.5), Inches(0.3), size=18, color=NAVY, bold=True)
     metrics = [
         ("11.904", "registros identificados", BLUE, PALE_BLUE),
-        ("27", "remoções por identidade\n25 DOI + 2 URL", TEAL, PALE_TEAL),
-        ("11.877", "registros na triagem", GREEN, PALE_GREEN),
-        ("9.391", "excluídos na triagem", AMBER, PALE_AMBER),
-        ("2.486", "submetidos à priorização", ORANGE, RGBColor(255, 247, 237)),
-        ("2.468", "excluídos nessa etapa", VIOLET, PALE_VIOLET),
-        ("18", "retidos operacionalmente", INDIGO, RGBColor(238, 242, 255)),
+        ("29", "duplicatas removidas\n27 DOI/URL + 2 confirmadas", TEAL, PALE_TEAL),
+        ("11.875", "registros triados", GREEN, PALE_GREEN),
+        ("9.393", "excluídos na triagem", AMBER, PALE_AMBER),
+        ("2.482", "priorizados no fluxo antigo", ORANGE, RGBColor(255, 247, 237)),
+        ("2.464", "não avançaram pelo corte antigo", VIOLET, PALE_VIOLET),
+        ("18", "na lista histórica de leitura", INDIGO, RGBColor(238, 242, 255)),
     ]
     positions = [(0.75, 1.6), (3.15, 1.6), (5.55, 1.6), (7.95, 1.6), (1.95, 4.15), (4.35, 4.15), (6.75, 4.15)]
     for (value, label, accent, fill), (x, y) in zip(metrics, positions):
         add_metric(slide, value, label, Inches(x), Inches(y), Inches(2.0), Inches(1.5), fill=fill, accent=accent, value_size=24, label_size=10.5)
-    add_text(slide, "A priorização dos 2.486 registros usa metadados/resumos e não equivale à elegibilidade em texto completo; títulos repetidos seguem para auditoria semântica.", Inches(0.85), Inches(6.15), Inches(11.6), Inches(0.45), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "A seleção de 15 estudos e o corte 4,0 pertencem à execução anterior. A emenda remove o score como exclusão; sua reaplicação uniforme ainda está pendente.", Inches(0.85), Inches(6.15), Inches(11.6), Inches(0.45), size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 8 — Operational selection-flow image, informed by PRISMA 2020.
     slide = new_slide(prs, EXPECTED_TITLES[7], 8)
@@ -446,7 +447,7 @@ def build_deck() -> Presentation:
     # 9 — Deduplication.
     slide = new_slide(prs, EXPECTED_TITLES[8], 9)
     add_image_contain(slide, ROOT / "research" / "exports" / "visualizations" / "selection_funnel.png", Inches(0.7), Inches(1.15), Inches(6.15), Inches(5.4))
-    add_callout(slide, "Confirmadas no fluxo", "27 linhas excedentes por identidade bibliográfica determinística: 25 DOI normalizado e 2 URL exata.", Inches(7.15), Inches(1.35), Inches(5.2), Inches(1.25), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
+    add_callout(slide, "Confirmadas no fluxo", "29 relatórios duplicados: 27 por DOI/URL e 2 confirmados manualmente como o mesmo relatório.", Inches(7.15), Inches(1.35), Inches(5.2), Inches(1.25), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_callout(slide, "Mantidas para auditoria", "232 excedentes apenas por título normalizado permaneceram como candidatos a revisão semântica.", Inches(7.15), Inches(2.95), Inches(5.2), Inches(1.25), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=14)
     add_callout(slide, "Leitura científica", "Títulos semelhantes podem ser versões, erratas ou obras distintas. Por isso, não foram tratados automaticamente como duplicatas confirmadas.", Inches(7.15), Inches(4.55), Inches(5.2), Inches(1.35), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=13.5)
 
@@ -458,22 +459,22 @@ def build_deck() -> Presentation:
     add_metric(slide, "1.073", "assessment", Inches(8.9), Inches(2.95), Inches(3.3), Inches(0.95), fill=PALE_TEAL, accent=TEAL, value_size=21, label_size=10.5)
     add_metric(slide, "863", "IA / inteligência artificial", Inches(8.9), Inches(4.05), Inches(3.3), Inches(0.95), fill=PALE_VIOLET, accent=VIOLET, value_size=21, label_size=10.5)
     add_metric(slide, "771", "machine learning", Inches(8.9), Inches(5.15), Inches(3.3), Inches(0.95), fill=PALE_AMBER, accent=AMBER, value_size=21, label_size=10.5)
-    add_text(slide, "As categorias podem se sobrepor e são calculadas sobre os 11.877 registros após a remoção determinística. Não representam qualidade ou eficácia.", Inches(0.8), Inches(6.65), Inches(11.7), Inches(0.3), size=11, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "As categorias podem se sobrepor e são calculadas sobre os 11.875 registros da seleção histórica reconciliada. Não representam qualidade ou eficácia.", Inches(0.8), Inches(6.65), Inches(11.7), Inches(0.3), size=11, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 11 — Time and databases.
     slide = new_slide(prs, EXPECTED_TITLES[10], 11)
     add_image_contain(slide, ROOT / "research" / "exports" / "visualizations" / "papers_by_year.png", Inches(0.6), Inches(1.25), Inches(6.0), Inches(2.7))
     add_image_contain(slide, ROOT / "research" / "exports" / "visualizations" / "database_coverage.png", Inches(6.75), Inches(1.25), Inches(6.0), Inches(2.7))
     add_callout(slide, "Período", "O recorte foi delimitado a 2015–2026, com data de corte em 31 de agosto de 2026. Como 2026 é parcial, sua barra não deve ser comparada diretamente com anos completos.", Inches(0.85), Inches(4.35), Inches(5.65), Inches(1.15), fill=PALE_BLUE, accent=BLUE, title_size=15, body_size=13.5)
-    add_callout(slide, "Fontes", "As quatro fontes foram complementares; as contagens representam a fonte da versão mantida após a deduplicação DOI/URL (11.877 registros).", Inches(6.95), Inches(4.35), Inches(5.55), Inches(1.15), fill=PALE_TEAL, accent=TEAL, title_size=15, body_size=13.5)
+    add_callout(slide, "Fontes", "As quatro fontes foram complementares; as contagens descrevem os 11.875 registros da população histórica após a reconciliação de identidade.", Inches(6.95), Inches(4.35), Inches(5.55), Inches(1.15), fill=PALE_TEAL, accent=TEAL, title_size=15, body_size=13.5)
     add_text(slide, "Visualizações descritivas: não inferem representatividade, qualidade ou efeito pedagógico.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.3), size=13, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 12 — Retained population.
     slide = new_slide(prs, EXPECTED_TITLES[11], 12)
-    add_metric(slide, "18", "registros retidos operacionalmente", Inches(0.85), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_BLUE, accent=INDIGO, value_size=29, label_size=12)
-    add_metric(slide, "15", "registros empíricos mantidos provisoriamente", Inches(4.95), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_TEAL, accent=TEAL, value_size=29, label_size=12)
+    add_metric(slide, "18", "registros na lista histórica de leitura", Inches(0.85), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_BLUE, accent=INDIGO, value_size=29, label_size=12)
+    add_metric(slide, "15", "estudos históricos antes da emenda", Inches(4.95), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_TEAL, accent=TEAL, value_size=29, label_size=12)
     add_metric(slide, "1", "texto integral pendente", Inches(9.05), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_AMBER, accent=AMBER, value_size=29, label_size=12)
-    add_callout(slide, "Desfecho da seleção", "Dos 18 registros selecionados preliminarmente, um foi excluído após o resumo. Dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo; um protocolo sem resultados concluídos foi excluído após essa avaliação e 15 registros empíricos permanecem provisoriamente no núcleo. Os 15 estudos têm apreciação preliminar, incluindo rotas operacionais explícitas; o relatório não recuperado não recebeu MMAT.", Inches(0.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=14.5)
+    add_callout(slide, "Desfecho histórico", "Dos 18 registros na lista antiga, um foi excluído após resumo. Dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo; um protocolo foi excluído. Restaram 15 estudos na seleção histórica, ainda não reaplicada ao protocolo emendado. O MMAT precisa acompanhar a seleção revisada.", Inches(0.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=14.5)
     add_callout(slide, "Exemplos observados", "Há classificação e predição de resultados matemáticos, com RF, SVM, árvores e redes neurais entre as alternativas examinadas. Categorias operacionais de desempenho não equivalem automaticamente a níveis de proficiência validados.", Inches(6.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=14.5)
     add_text(slide, "Os resultados de artigos individuais permanecem condicionados à população, ao instrumento, à métrica e ao desenho de cada estudo.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=13.5, color=MUTED, align=PP_ALIGN.CENTER)
 
@@ -484,7 +485,7 @@ def build_deck() -> Presentation:
     add_text(slide, "avaliação por critério\nsem nota global", Inches(1.05), Inches(2.35), Inches(2.7), Inches(0.85), size=19, color=RGBColor(186, 230, 253), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Instrumento aplicado conforme o desenho metodológico de cada estudo empírico.", Inches(1.1), Inches(4.15), Inches(2.6), Inches(0.75), size=13.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
-    add_callout(slide, "Estado atual", "15 registros provisórios. S1/S2 e Q1–Q5: 15. Estudos 5/7: categoria 3 operacional; 14: sorteio contraditório; 8: categoria 4 adaptada. Um texto não recuperado, sem MMAT. Conferência humana pendente.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=13)
+    add_callout(slide, "Seleção histórica", "15 estudos pré-emenda. S1/S2 e Q1–Q5: 15 conjuntos. Estudos 5/7: cat. 3 operacional; 14: sorteio contraditório; 8: cat. 4 adaptada. O relatório não recuperado não recebeu MMAT. Reaplicação e conferência humana pendentes.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=12.5)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_text(slide, "O MMAT organiza a leitura das limitações; não transforma uma apreciação preliminar em classificação definitiva.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
@@ -508,7 +509,7 @@ def build_deck() -> Presentation:
         x = Inches(0.75 + (index % 2) * 6.05)
         y = Inches(1.2 + (index // 2) * 2.15)
         add_callout(slide, title, body, x, y, Inches(5.75), Inches(1.9), fill=fill, accent=accent, title_size=16, body_size=13)
-    add_text(slide, "Estes exemplos localizados não estimam a frequência da literatura. Quinze registros permanecem provisoriamente no núcleo; há 15 triagens S1/S2 e 15 apreciações por categoria, com rotas operacionais explicitamente limitadas. Um relatório não recuperado não recebeu MMAT; um registro foi excluído após resumo e um protocolo após texto completo.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=12.5, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
+    add_text(slide, "Exemplos da seleção histórica (n=15); não estimam a frequência da literatura. MMAT e síntese deverão ser reaplicados após a revisão do corpus. Um relatório não recuperado não recebeu MMAT; houve exclusões após resumo e texto completo.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=12.5, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
 
     # 16 — From evidence to specification.
     slide = new_slide(prs, EXPECTED_TITLES[15], 16)
@@ -555,7 +556,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Obrigado", Inches(0.7), Inches(1.75), Inches(11.9), Inches(0.8), size=42, color=WHITE, bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
     add_text(slide, "Perguntas e discussão", Inches(1.0), Inches(2.8), Inches(11.3), Inches(0.45), size=23, color=RGBColor(186, 230, 253), align=PP_ALIGN.CENTER)
     add_text(slide, "Ensino Personalizado de Matemática\nOportunidades e Técnicas Computacionais", Inches(1.2), Inches(4.35), Inches(10.9), Inches(0.8), size=20, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nVersão revisada: 28/10/2026 · corte da busca: 31/08/2026", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
+    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nRascunho histórico, não usar na defesa · seleção pré-emenda", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
 
     return prs
 
@@ -607,7 +608,7 @@ def validate_presentation(path: Path) -> list[str]:
         "Villegas-Ch et al. (2025)",
         "Nyantah et al. (2025)",
         "Echeveria et al. (2025)",
-        "quinze registros permanecem provisoriamente no núcleo",
+        "seleção histórica",
         "um relatório não recuperado",
         "não recebeu MMAT",
         "não estimam a frequência da literatura",

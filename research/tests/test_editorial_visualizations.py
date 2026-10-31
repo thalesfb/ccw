@@ -132,6 +132,25 @@ def test_prisma_full_text_exclusion_label_does_not_group_two_records_as_one(tmp_
     assert "estudo contextual e protocolo" not in labels
 
 
+def test_current_prisma_figure_uses_summary_and_separates_duplicate_sources(tmp_path):
+    summary_path = Path(__file__).resolve().parents[1] / "exports" / "reports" / "summary.json"
+    prisma = json.loads(summary_path.read_text(encoding="utf-8"))["statistics"]["prisma"]
+
+    visualizer = ReviewVisualizer(tmp_path)
+    with patch.object(plt, "close"):
+        visualizer.prisma_flow_diagram(prisma)
+        labels = " ".join(text.get_text() for text in plt.gcf().axes[0].texts)
+
+    assert "29 duplicatas removidas" in labels
+    assert "27 DOI/URL" in labels
+    assert "2 relatórios iguais (manual)" in labels
+    assert "n = 11.875" in labels
+    assert "n = 9.393" in labels
+    assert "n = 2.482" in labels
+    assert "n = 2.464" in labels
+    plt.close("all")
+
+
 def test_flow_and_funnel_do_not_duplicate_external_captions(tmp_path):
     visualizer = ReviewVisualizer(tmp_path)
     stats = {"identification": 100, "duplicates_removed": 10, "screening": 90,
@@ -170,8 +189,8 @@ def test_full_text_flow_does_not_certify_study_independence_or_threshold_only_ex
         ReviewVisualizer(tmp_path).prisma_flow_diagram(stats)
         figure = plt.gcf()
         labels = [item.get_text() for item in figure.axes[0].texts]
-        assert "Corpus final\n(n = 15)" in labels
-        assert "Excluídos na priorização por relevância\n(n = 9; limiar e decisões de escopo)" in labels
+        assert "Seleção histórica\n(n = 15)" in labels
+        assert "Não avançaram na priorização histórica\n(n = 9)" in labels
     plt.close(figure)
 
 
@@ -185,7 +204,7 @@ def test_current_funnel_rendered_values_match_the_versioned_summary(tmp_path):
         assert [bar.get_width() for bar in figure.axes[0].patches] == expected
         labels = [label.get_text() for label in figure.axes[0].get_yticklabels()]
         assert labels == [f'{name}\n(n={value:,})'.replace(',', '.') for name, value in zip(
-            ('Identificação', 'Após deduplicação', 'Priorização por relevância', 'Lista preliminar', 'Corpus final'), expected)]
+            ('Identificação', 'Após deduplicação', 'Priorização histórica', 'Lista preliminar', 'Seleção histórica'), expected)]
     plt.close(figure)
 
 
@@ -199,17 +218,17 @@ def test_current_prisma_is_legible_and_does_not_mislabel_source_denominators(tmp
         labels = ' '.join(node.get_text() for node in nodes)
         for prefix, key in (
             ('Registros identificados', 'identification'),
-            ('Após remoção', 'screening'),
-            ('Priorização por relevância', 'prioritization'),
+            ('29 duplicatas removidas', 'screening'),
+            ('Priorização histórica', 'prioritization'),
             ('Lista preliminar', 'shortlisted'),
             ('Relatórios procurados', 'reports_sought'),
             ('Relatórios avaliados', 'eligibility'),
-            ('Corpus final', 'included'),
+            ('Seleção histórica', 'included'),
         ):
             node = next(n for n in nodes if n.get_text().startswith(prefix))
             match = re.search(r'\(n = ([\d.]+)\)', node.get_text())
             assert int(match.group(1).replace('.', '')) == summary['statistics']['prisma'][key]
-        assert '11.904' in labels and '11.877' in labels and '2.486' in labels
+        assert '11.904' in labels and '11.875' in labels and '2.482' in labels
         assert 'após deduplicação' in labels
         for name in ('Crossref', 'OpenAlex', 'Semantic Scholar', 'CORE'):
             assert name in labels

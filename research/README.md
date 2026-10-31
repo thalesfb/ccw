@@ -1,9 +1,9 @@
 # 📚 Revisão Sistemática da Literatura - CCW Research
 
 <!-- ccw-sync:start snapshot -->
-Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; cobertura documental: 20/10/2026.
+Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e 11.877 registros na triagem. Foram 2.486 submetidos à priorização operacional; 2.468 não avançaram dessa etapa. A priorização encaminhou 18 candidatos, não 18 inclusões finais: 15 estudos empíricos mantidos provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). A emenda aprovada em 31/10/2026 retira o escore de critério de exclusão, mas ainda não foi reaplicada à população. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 Em 20/10/2026, a conferência suplementar do texto integral do registro excluído
@@ -208,13 +208,12 @@ research/src/processing/adjudicated_snapshot.py.
 
 **População do snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026**:
 
-- **Identificação**: 11.904 registros; 27 remoções determinísticas (25 DOI + 2 URL)
-- **Triagem**: 11.877 registros; 9.391 excluídos; 2.486 encaminhados à priorização operacional
-- **Priorização operacional**: 2.486 registros; 2.468 não avançaram nessa etapa; 18 formaram a shortlist
-- **Fluxo pós-shortlist**: 1 registro excluído após resumo (decisão confirmada por conferência suplementar do texto integral, sem alterar a etapa ou a contagem); 17 relatórios procurados; 1 não recuperado; 16 avaliados em texto completo; 1 protocolo excluído e 15 estudos empíricos mantidos provisoriamente
-- **Percentuais sobre os 11.904 identificados**: 78,89% excluídos na triagem; 20,88% encaminhados à priorização; 0,15% na shortlist; 0,13% incluídos provisoriamente no núcleo empírico.
-- **Percentuais sobre os 2.486 submetidos à priorização operacional**: 99,28% não avançaram nessa etapa; 0,72% formaram a shortlist.
-- **Identidade**: 25 excedentes DOI + 2 excedentes URL removidos; 257 excedentes de título continuam como candidatos de auditoria, dos quais 232 são apenas por título
+- **Reconciliação de 31/10/2026**: 11.904 registros identificados; 29 duplicatas removidas (27 por DOI/URL e 2 relatórios repetidos confirmados manualmente); 11.875 registros únicos na triagem.
+- **Triagem**: 9.393 excluídos; 2.482 avançaram à priorização histórica (20,85% da identificação e 20,90% da triagem).
+- **Prioridade histórica**: 2.464 não avançaram sob a regra anterior (99,27% dos 2.482); 18 seguiram à lista preliminar (0,73%). A emenda aprovada em 31/10 retira o escore como critério de exclusão e ainda não foi reaplicada.
+- **Fluxo pós-shortlist histórico**: 1 registro excluído após resumo; 17 relatórios procurados; 1 não recuperado; 16 avaliados em texto completo; 1 protocolo excluído e 15 estudos empíricos na seleção histórica.
+- **Percentuais**: 78,91% dos identificados foram excluídos na triagem; 79,10% dos registros triados foram excluídos; 0,15% dos identificados chegaram à lista preliminar; 0,13% compõem a seleção histórica empírica.
+- **Identidade**: a auditoria determinística removeu 25 excedentes DOI + 2 URL; a reconciliação manual confirmou mais 2 relatórios iguais. A auditoria de título sinalizou 257 excedentes brutos e 232 após as 27 remoções DOI/URL; títulos sem confirmação de identidade não foram removidos automaticamente.
 
 **Baseline histórico (25/11/2025; não vigente)**:
 

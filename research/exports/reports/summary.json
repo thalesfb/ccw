@@ -1,16 +1,16 @@
 {
   "title": "Relatório da Revisão Sistemática",
   "subtitle": "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais",
-  "generated_at": "21/10/2026 19:00",
+  "generated_at": "31/10/2026 10:02",
   "statistics": {
     "total_papers": 11904,
     "prisma": {
       "raw_rows": 11904,
       "distinct_doi": 10657,
       "identification": 11904,
-      "duplicates_removed": 27,
-      "screening": 11877,
-      "screening_excluded": 9391,
+      "duplicates_removed": 29,
+      "screening": 11875,
+      "screening_excluded": 9393,
       "eligibility": 16,
       "eligibility_excluded": 1,
       "included": 15,
@@ -47,15 +47,16 @@
           "repeated_rows": 386,
           "excess_rows": 232
         },
-        "interpretation": "Exact normalized DOI/URL identity rows are removed deterministically from the PRISMA flow; normalized-title counts remain weaker candidates for semantic review because versioned records and unrelated works must remain distinct. The title metric includes identity-overlap rows; title_only is calculated after deterministic identity removal."
+        "interpretation": "The PRISMA duplicate total combines exact normalized DOI/URL removals (27) and separately documented same-report adjudications (2). The latter were discovered during post-hoc identity reconciliation and remain in their own ledger. Every confirmed duplicate is counted before screening, regardless of the legacy stage stored for that row.",
+        "adjudicated_same_report_duplicate_rows": 2
       },
       "stage_percentages": {
-        "screening_excluded_of_identification": 78.89,
-        "screening_advanced_of_identification": 20.88,
-        "screening_excluded_of_screened_records": 79.07,
-        "prioritization_passed_of_screened_records": 20.93,
-        "prioritization_excluded_of_prioritization": 99.28,
-        "shortlisted_of_prioritization": 0.72,
+        "screening_excluded_of_identification": 78.91,
+        "screening_advanced_of_identification": 20.85,
+        "screening_excluded_of_screened_records": 79.1,
+        "prioritization_passed_of_screened_records": 20.9,
+        "prioritization_excluded_of_prioritization": 99.27,
+        "shortlisted_of_prioritization": 0.73,
         "abstract_screening_excluded_of_shortlist": 5.56,
         "reports_not_retrieved_of_reports_sought": 5.88,
         "full_text_excluded_of_assessed": 6.25,
@@ -71,8 +72,8 @@
         "expected_delta": 0,
         "actual_delta": 0
       },
-      "prioritization": 2486,
-      "prioritization_excluded": 2468,
+      "prioritization": 2482,
+      "prioritization_excluded": 2464,
       "shortlisted": 18,
       "abstract_screening_excluded": 1,
       "reports_sought": 17,
@@ -81,10 +82,11 @@
     "integrity": {
       "raw_rows": 11904,
       "distinct_doi": 10657,
-      "duplicates_removed": 27,
+      "duplicates_removed": 29,
       "included_without_operational_flag": 15,
       "operationally_flagged_rows": 0,
       "deterministic_identity_duplicate_rows": 27,
+      "adjudicated_same_report_duplicate_rows": 2,
       "confirmed_semantic_duplicates": 0
     },
     "deduplication_audit": {
@@ -120,15 +122,16 @@
         "repeated_rows": 386,
         "excess_rows": 232
       },
-      "interpretation": "Exact normalized DOI/URL identity rows are removed deterministically from the PRISMA flow; normalized-title counts remain weaker candidates for semantic review because versioned records and unrelated works must remain distinct. The title metric includes identity-overlap rows; title_only is calculated after deterministic identity removal."
+      "interpretation": "The PRISMA duplicate total combines exact normalized DOI/URL removals (27) and separately documented same-report adjudications (2). The latter were discovered during post-hoc identity reconciliation and remain in their own ledger. Every confirmed duplicate is counted before screening, regardless of the legacy stage stored for that row.",
+      "adjudicated_same_report_duplicate_rows": 2
     },
     "stage_percentages": {
-      "screening_excluded_of_identification": 78.89,
-      "screening_advanced_of_identification": 20.88,
-      "screening_excluded_of_screened_records": 79.07,
-      "prioritization_passed_of_screened_records": 20.93,
-      "prioritization_excluded_of_prioritization": 99.28,
-      "shortlisted_of_prioritization": 0.72,
+      "screening_excluded_of_identification": 78.91,
+      "screening_advanced_of_identification": 20.85,
+      "screening_excluded_of_screened_records": 79.1,
+      "prioritization_passed_of_screened_records": 20.9,
+      "prioritization_excluded_of_prioritization": 99.27,
+      "shortlisted_of_prioritization": 0.73,
       "abstract_screening_excluded_of_shortlist": 5.56,
       "reports_not_retrieved_of_reports_sought": 5.88,
       "full_text_excluded_of_assessed": 6.25,
@@ -143,25 +146,25 @@
       "mean": 2021.6,
       "distribution": {
         "2025": 1948,
-        "2024": 1489,
+        "2024": 1488,
         "2023": 1246,
-        "2020": 1100,
+        "2020": 1099,
         "2022": 1061,
         "2021": 1030,
         "2019": 791,
         "2026": 707,
         "2017": 698,
-        "2018": 587,
+        "2018": 586,
         "2016": 541,
-        "2015": 424
+        "2015": 423
       },
-      "out_of_range_count": 255
+      "out_of_range_count": 257
     },
     "databases": {
       "crossref": 5049,
       "openalex": 3057,
       "semantic_scholar": 1931,
-      "core": 1840
+      "core": 1838
     },
     "techniques": {
       "Não especificado": 6399,
@@ -183,21 +186,21 @@
       "std": 0.86,
       "high_relevance": 0,
       "medium_relevance": 24,
-      "low_relevance": 11853
+      "low_relevance": 11851
     },
     "selection_stages": {
       "Identificação": 11904,
-      "Registros após deduplicação": 11877,
-      "Excluídos na triagem inicial": 9391,
-      "Registros enviados à priorização operacional": 2486,
-      "Excluídos pelo limiar operacional": 2468,
+      "Registros após deduplicação": 11875,
+      "Excluídos na triagem inicial": 9393,
+      "Registros submetidos à priorização histórica": 2482,
+      "Não avançaram na priorização histórica": 2464,
       "Selecionados para leitura de resumo": 18,
       "Excluídos após leitura de resumo": 1,
       "Relatórios buscados": 17,
       "Relatórios não recuperados": 1,
       "Textos integrais avaliados": 16,
       "Excluídos após texto integral": 1,
-      "Incluídos na síntese empírica": 15
+      "Estudos da seleção histórica": 15
     }
   },
   "config": {},

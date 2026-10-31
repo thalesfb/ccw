@@ -2,8 +2,10 @@
 
 > **Escopo histórico — não vigente:** este documento preserva a baseline
 > operacional de 31/08/2026 antes da adjudicação de escopo. A população vigente
-> de 03/09/2026 está documentada em
+> da adjudicação inicial de 03/09/2026 está documentada em
 > [`RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md).
+> A reconciliação posterior de 31/10/2026 confirmou dois relatórios repetidos e
+> corrigiu dois anos; use o fluxo vigente nessa reconciliação para as contagens atuais.
 
 **Snapshot:** 2026-08-31
 **Última atualização documental:** 2026-09-01

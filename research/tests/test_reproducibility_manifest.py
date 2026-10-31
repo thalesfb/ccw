@@ -47,29 +47,36 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert manifest["operational_database_snapshot"]["authoritative_snapshot"] == "snapshot"
     assert "not the current PRISMA baseline" in manifest["operational_database_snapshot"]["interpretation"]
     assert manifest["protocol"] == {
-        "status": "current_snapshot_protocol",
+        "status": "approved_amendment_pending_implementation_and_reapplication",
         "year_min": 2015,
         "year_max": 2026,
         "cutoff_date": "2026-08-31",
         "languages": ["en", "pt"],
         "abstract_required": False,
-        "relevance_threshold": 4.0,
+        "legacy_selector_relevance_threshold": 4.0,
+        "selection_amendment_id": "PRISMA-24c-2026-10-31",
+        "selection_amendment_status": "approved_pending_reapplication",
+        "selection_flow_status": "historical_snapshot_reconciled_pending_reapplication",
+        "relevance_score_role": "queue_order_only_after_reapplication",
         "canonical_query_count": 72,
         "query_generator": "research/src/search_terms.py",
         "sources": ["semantic_scholar", "openalex", "crossref", "core"],
         "source_count": 4,
         "max_results_per_query": 10,
         "interpretation": (
-            "These parameters describe the protocol contract for a fresh run. "
-            "External API responses, cache state and metadata may change; they "
-            "do not replace the current versioned snapshot exports."
+            "The selector still contains the legacy cutoff recorded in legacy_selector_relevance_threshold; "
+            "this is not the approved eligibility protocol. The approved 2026-10-31 amendment removes "
+            "relevance score as an exclusion criterion, but implementation and population reapplication "
+            "are pending. External API responses, "
+            "cache state and metadata may change; they do not replace the current versioned snapshot exports."
         ),
     }
     assert counts["total_records"] == 11904
-    assert counts["versioned_rows"] == 11877
+    assert counts["versioned_rows"] == 11875
+    assert snapshot["selection_flow_status"] == "historical_snapshot_reconciled_pending_reapplication"
     assert counts["selection_stage_counts"] == {
-        "screening": 9391,
-        "prioritization": 2468,
+        "screening": 9393,
+        "prioritization": 2464,
         "abstract_screening": 1,
         "not_retrieved": 1,
         "eligibility": 1,
@@ -77,11 +84,11 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     }
     assert counts["prisma"] == {
         "identification": 11904,
-        "duplicates_removed": 27,
-        "screening": 11877,
-        "screening_excluded": 9391,
-        "prioritization": 2486,
-        "prioritization_excluded": 2468,
+        "duplicates_removed": 29,
+        "screening": 11875,
+        "screening_excluded": 9393,
+        "prioritization": 2482,
+        "prioritization_excluded": 2464,
         "shortlisted": 18,
         "abstract_screening_excluded": 1,
         "reports_sought": 17,
@@ -125,11 +132,12 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "false_positives_removed" not in snapshot["candidate_audit"]
 
     assert "18 records in the preliminary list" in manifest["bibliography"]["separation_rule"]
-    assert "15 are currently included" in manifest["bibliography"]["separation_rule"]
+    assert "15 remain in the pre-amendment historical empirical selection" in manifest["bibliography"]["separation_rule"]
     appraisal = manifest["methodological_appraisal"]["interpretation"]
-    assert "S1/S2 screening and category-specific appraisal for all 15 records" in appraisal
-    assert "operational inferred category-3 routes" in appraisal
-    assert "15 records remain provisionally" in appraisal
+    assert "S1/S2 screening for 15 studies and category-specific appraisal for 15" in appraisal
+    assert "three screened studies await design adjudication" in appraisal
+    assert "15 records remain provisionally in the historical empirical selection" in appraisal
+    assert "not the post-amendment corpus" in interpretation
     assert "11 studies" not in appraisal
 
     mmat_limitation = next(
@@ -160,6 +168,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert audit["raw_rows"] == 11904
     assert audit["operationally_flagged_rows"] == 0
     assert audit["deterministic_identity_duplicate_rows"] == 27
+    assert audit["adjudicated_same_report_duplicate_rows"] == 2
     assert audit["deterministic_identity_duplicate_rows_by_identifier"] == {
         "doi": 25,
         "url": 2,
@@ -211,11 +220,12 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         "results/tcc/referencias.bib",
         "results/tcc/referencias_pedagogicas.bib",
     ]
-    assert "15 are currently included in the empirical core" in bibliography["separation_rule"]
+    assert "15 remain in the pre-amendment historical empirical selection" in bibliography["separation_rule"]
     artifact_paths = {artifact["path"] for artifact in manifest["artifacts"]}
     assert "research/data/mmat_assessments.csv" in artifact_paths
     assert "research/data/protocol_execution_2025.json" in artifact_paths
     assert "research/data/manual_override_evidence_matrix.csv" in artifact_paths
+    assert "research/data/adjudicated_record_corrections.csv" in artifact_paths
 
     companion_paths = {
         document["path"] for document in manifest["companion_documents"]
@@ -282,7 +292,7 @@ def test_summary_json_export_does_not_replace_audited_html(tmp_path: Path) -> No
     assert "Contexto histórico da deduplicação" in html
     assert "2.517 duplicatas removidas" in html
     assert "Excluídos na priorização operacional" in html
-    assert "não equivale à avaliação de elegibilidade de relatórios" in html
+    assert "não equivale à elegibilidade em texto completo" in html
     assert "Elegibilidade" not in html
 
 
@@ -303,6 +313,13 @@ def test_published_summary_images_use_paths_relative_to_the_report() -> None:
     assert "não corresponde ao diagrama PRISMA 2020 completo" in html
     assert "Excluídos na elegibilidade / elegibilidade" not in html
     assert "Estruturado conforme as diretrizes PRISMA 2020" not in html
+    assert "27 remoções por identidade DOI/URL" in html
+    assert "2 relatórios repetidos confirmados manualmente" in html
+    assert "(29 no total)" in html
+    assert "Não avançaram na priorização histórica" in html
+    assert "emenda aprovada ainda não foi reaplicada" in html
+    assert "priorização por metadados e resumos não equivale à elegibilidade" in html
+    assert "Excluídos pelo limiar / registros priorizados" not in html
 
 
 def test_public_pages_do_not_present_operational_scope_as_final_results() -> None:
@@ -313,9 +330,9 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
 
     assert "15/15 tests passing" not in root_html
     assert "MMAT preliminar" in root_html
-    assert "Filtro operacional" in root_html
-    assert "não substitui a adjudicação científica final" in root_html
-    assert "submetidos à priorização operacional" in root_html
+    assert "Seleção histórica" in root_html
+    assert "A emenda aprovada retira o escore como critério de exclusão" in root_html
+    assert "na priorização histórica" in root_html
     assert "encaminhados à elegibilidade" not in root_html
     assert "Dos 18 registros selecionados preliminarmente, 15 permanecem provisoriamente no núcleo empírico" in tcc_html
     assert "a apreciação MMAT preliminar abrange 15" in tcc_html

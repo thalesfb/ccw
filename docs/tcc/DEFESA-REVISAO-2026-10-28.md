@@ -7,7 +7,7 @@ Base: manuscrito, apresentação Slidev, matriz MMAT e quadro R01–R26 após a 
 - Remover o resíduo que apresentava o estudo 8 como sem apreciação. A unidade operacional é a tese como um relatório, com componentes matemáticos separados: S1/S2/Q1 = Y e Q2–Q5 = CT, categoria 4 adaptada. A rota permanece limitada, inclusive pela presença de teste de hipóteses.
 - Demonstrar R02 e R20 na defesa, explicitando origem, decisão e limite, em vez de apresentar apenas uma cadeia genérica entre evidência e requisito.
 - Mostrar que o protocolo documental do OE4 já foi proposto, enquanto aplicação, revisão docente e avaliação de eficácia permanecem pendentes.
-- Explicitar que os totais das quatro fontes somam 11.877 registros após deduplicação e atribuem a fonte da versão mantida; não medem cobertura exclusiva de cada base.
+- Explicitar que os totais das quatro fontes somam 11.875 registros na triagem, após 27 remoções determinísticas DOI/URL e duas confirmações manuais de relatório repetido; atribuem a fonte da versão mantida e não medem cobertura exclusiva de cada base. Atualizar o roteiro após a reaplicação da emenda de seleção.
 - Acrescentar referências breves aos conceitos, PRISMA e MMAT, e atualizar a data da apresentação para 28/10/2026, preservando o corte da busca em 31/08/2026.
 
 ## Perguntas que exigem respostas precisas na defesa
