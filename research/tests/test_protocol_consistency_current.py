@@ -24,6 +24,7 @@ PAPERS_PATH = RESEARCH_ROOT / "exports" / "analysis" / "papers.csv"
 PROTOCOL_PATH = RESEARCH_ROOT / "data" / "current_eligibility_protocol.csv"
 SYNTHESIS_SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
 PRISMA_RECONCILIATION_PATH = RESEARCH_ROOT / "data" / "prisma_population_reconciliation.csv"
+SELECTION_AMENDMENT_PATH = RESEARCH_ROOT / "data" / "selection_protocol_amendment_2026-10-31.json"
 REFERENCE_AUDIT_PATH = RESEARCH_ROOT / "data" / "reference_audit.csv"
 TCC_REVIEW_PATH = RESEARCH_ROOT.parent / "results" / "tcc" / "conteudo" / "resultadosesperados.tex"
 
@@ -175,6 +176,34 @@ def test_current_eligibility_protocol_makes_adjudication_gates_explicit() -> Non
     }
     assert all(row["if_unresolved"] == "hold" for row in rows)
     assert all(row["evidence_required"] for row in rows)
+
+
+def test_approved_threshold_amendment_uses_score_only_for_ordering() -> None:
+    amendment = json.loads(SELECTION_AMENDMENT_PATH.read_text(encoding="utf-8"))
+
+    assert amendment["decision_date"] == "2026-10-31"
+    assert amendment["status"] == "approved_pending_reapplication"
+    assert amendment["eligibility_criteria_changed"] is False
+    assert amendment["scope_refinement_adopted"] is False
+    assert amendment["search_reprocessed"] is False
+    assert "orders the reading queue only" in amendment["amended_rule"]
+    assert "not an exclusion criterion" in amendment["amended_rule"]
+
+    census = amendment["rationale"]["census_3_75_to_3_95"]
+    assert census["examined"] == 45
+    assert census["eligible"] == 13
+    assert census["ineligible"] + census["uncertain"] + census["not_retrieved"] == 32
+
+    directed = amendment["rationale"]["directed_3_50_to_3_74"]
+    assert directed["examined"] == 54
+    assert directed["eligible"] == 29
+    assert "not representative" in directed["method"]
+
+    sample = amendment["rationale"]["stratified_random_3_00_to_3_49"]
+    assert sample["seed"] == 20261030
+    assert sample["examined"] == 30
+    assert sample["eligible"] == 5
+    assert sample["conservative_95_percent_interval_for_eligible_records"] == [13, 356]
 
 
 def test_tcc_review_table_distinguishes_all_shortlisted_records_by_stage() -> None:

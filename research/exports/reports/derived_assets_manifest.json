@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "96307bed13e68ed8917b71bb8e25bed89cd4f2c1dae8905d60f4263281070c8d",
+    "sha256": "7b2ffaa11f38c8ed116ae203bb60eaa72cceecbcdd3b233a9222214b06041fae",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/claim_evidence_current.json",
@@ -29,6 +29,7 @@
       "research/data/prisma_population_reconciliation.csv",
       "research/data/protocol_execution_2025.json",
       "research/data/reference_audit.csv",
+      "research/data/selection_protocol_amendment_2026-10-31.json",
       "research/data/study_contribution_current.json",
       "research/data/study_synthesis_current.csv",
       "research/exports/analysis/papers.csv",

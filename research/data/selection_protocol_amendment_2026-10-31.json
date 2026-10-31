@@ -1,0 +1,73 @@
+{
+  "amendment_id": "PRISMA-24c-2026-10-31",
+  "decision_date": "2026-10-31",
+  "decision_authority": "TCC author",
+  "status": "approved_pending_reapplication",
+  "protocol_item": "study_selection",
+  "previous_rule": "A relevance score of at least 4.0 on the observed 0-4.5 scale was used to advance records from screening to full-text consideration.",
+  "amended_rule": "The relevance score orders the reading queue only. It is not an exclusion criterion. Eligibility is decided by applying the existing explicit criteria uniformly to each record and report.",
+  "eligibility_criteria_changed": false,
+  "scope_refinement_adopted": false,
+  "search_reprocessed": false,
+  "rationale": {
+    "score_validation": "The regex-based score was not validated against the review's eligibility criteria.",
+    "census_3_75_to_3_95": {
+      "method": "census",
+      "population": 45,
+      "examined": 45,
+      "eligible": 13,
+      "ineligible": 15,
+      "uncertain": 8,
+      "not_retrieved": 9
+    },
+    "directed_3_50_to_3_74": {
+      "method": "directed candidate review; not representative of the band",
+      "population": 157,
+      "examined": 54,
+      "eligible": 29,
+      "ineligible": 5,
+      "uncertain": 1,
+      "not_retrieved": 19
+    },
+    "stratified_random_3_00_to_3_49": {
+      "method": "stratified random sample",
+      "seed": 20261030,
+      "population": 473,
+      "examined": 30,
+      "eligible": 5,
+      "ineligible": 16,
+      "uncertain": 2,
+      "not_retrieved": 7,
+      "conservative_95_percent_interval_for_eligible_records": [
+        13,
+        356
+      ]
+    },
+    "interpretation": "Eligible records were found below 4.0, including in the random sample below 3.50. The directed 3.50-3.74 review cannot estimate the eligibility rate for that full band, and unresolved or unretrieved reports are not counted as ineligible."
+  },
+  "unchanged_scope": {
+    "mathematics_teaching_or_learning": true,
+    "computational_technique_or_system": true,
+    "empirical_evidence_or_evaluated_system": true,
+    "publication_period": "2015-2026, cutoff 2026-08-31",
+    "languages": [
+      "English",
+      "Portuguese"
+    ],
+    "document_types": [
+      "full peer-reviewed journal articles",
+      "full peer-reviewed conference papers",
+      "doctoral theses",
+      "master's dissertations"
+    ]
+  },
+  "reapplication_requirements": [
+    "Reassess records previously excluded only by the 4.0 score cutoff using the unchanged eligibility criteria.",
+    "Keep uncertain and unretrieved reports distinct from ineligible reports; record decision reason and source locator for each assessed report.",
+    "Audit the short-or-missing-abstract and English-only methodology filters for false exclusions before claiming a complete revised corpus.",
+    "Resolve confirmed record identities and publication years before recalculating PRISMA counts.",
+    "Link multiple reports from the same study before counting unique studies or updating MMAT."
+  ],
+  "current_snapshot_note": "This amendment records the approved decision only. The 15-study corpus and published PRISMA counts remain the pre-amendment snapshot until reapplication and reconciliation are complete.",
+  "prisma_reporting": "Report this retrospective protocol amendment under PRISMA 2020 item 24c, stating the date, reason, changed selection procedure, and stage at which it was applied."
+}

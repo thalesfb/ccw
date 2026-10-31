@@ -18,6 +18,7 @@ no conteúdo ou nos workflows exigem mudanças verificáveis e revisão humana.
 - [`PROJECT_INTEGRATION.md`](PROJECT_INTEGRATION.md): separação entre conteúdo científico, engenharia documental, implementação computacional e requisitos institucionais.
 - [`PRESENTATION_GOVERNANCE.md`](PRESENTATION_GOVERNANCE.md): governança da apresentação Slidev do TCC, distinção entre o template de referência e requisitos do trabalho, identidade IFC, QR e critérios de legibilidade.
 - [`ESTADO-ATUAL-TCC.md`](ESTADO-ATUAL-TCC.md): estado público, limites interpretativos e decisões metodológicas pendentes da versão atual.
+- [`DECISAO-EMENDA-SELECAO-2026-10-31.md`](DECISAO-EMENDA-SELECAO-2026-10-31.md): emenda retrospectiva aprovada para usar o escore apenas na ordem de leitura; a reaplicação ainda está pendente.
 - [`AUDITORIA-ESTUDOS-SINTESE.md`](AUDITORIA-ESTUDOS-SINTESE.md): papel sustentado, limites e pendências dos 18 candidatos, não 18 inclusões empíricas finais.
 - [`SOURCE-COVERAGE-AND-CONTRIBUTIONS.md`](SOURCE-COVERAGE-AND-CONTRIBUTIONS.md): matriz de cobertura e contribuições derivada dos registros estruturados.
 - [`REUNIAO-DECISAO-ESCOPO.md`](REUNIAO-DECISAO-ESCOPO.md): material comparativo dos cenários A/B/C para a reunião de decisão de escopo (#27); não registra decisão.
