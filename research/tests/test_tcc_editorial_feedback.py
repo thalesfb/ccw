@@ -154,7 +154,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("MCP", status)
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
-        self.assertIn("Versão revisada: 28/10/2026", slides)
+        self.assertIn("Rascunho histórico — não usar na defesa", slides)
         self.assertNotIn("Snapshot: 03/09/2026", slides)
         self.assertNotIn("Snapshot adjudicado: 03/09/2026", pptx_source)
         self.assertIn("Versão revisada: 28/10/2026", pptx_source)
@@ -450,7 +450,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         for phrase in ("R02", "R20", "26 grupos", "rastreabilidade", "consistência arquitetural",
                        "correspondência conceitual", "condições de viabilidade",
-                       "11.877 registros após deduplicação", "fonte da versão mantida",
+                       "11.875 registros após a remoção histórica de 29 duplicatas",
                        "Page et al. (2021)", "Hong et al. (2018)", "National Research Council (2001)"):
             self.assertIn(phrase, slides)
         self.assertNotIn("um futuro protocolo de avaliação", slides)

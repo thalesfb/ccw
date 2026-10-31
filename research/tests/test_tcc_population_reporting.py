@@ -158,7 +158,7 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     assert "nove registros com texto primário revisado e oito" not in pptx_source
     assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard
     assert "encaminhou 2.486 para elegibilidade" not in storyboard
-    assert "registros → 18 em avaliação de escopo" in slides
+    assert "Fluxo histórico pré-emenda: 11.904 registros → 18 na lista de leitura" in slides
 
 
 def test_background_uses_examples_and_keeps_study_limits_and_exclusion_in_the_review() -> None:
