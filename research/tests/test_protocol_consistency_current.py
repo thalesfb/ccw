@@ -67,11 +67,11 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     prisma = summary["statistics"]["prisma"]
 
     assert prisma["identification"] == 11904
-    assert prisma["duplicates_removed"] == 27
-    assert prisma["screening"] == 11877
-    assert prisma["screening_excluded"] == 9391
-    assert prisma["prioritization"] == 2486
-    assert prisma["prioritization_excluded"] == 2468
+    assert prisma["duplicates_removed"] == 29
+    assert prisma["screening"] == 11875
+    assert prisma["screening_excluded"] == 9393
+    assert prisma["prioritization"] == 2482
+    assert prisma["prioritization_excluded"] == 2464
     assert prisma["shortlisted"] == 18
     assert prisma["abstract_screening_excluded"] == 1
     assert prisma["reports_sought"] == 17
@@ -80,12 +80,12 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     assert prisma["eligibility_excluded"] == 1
     assert prisma["included"] == 15
     assert prisma["stage_percentages"] == {
-        "screening_excluded_of_identification": 78.89,
-        "screening_advanced_of_identification": 20.88,
-        "screening_excluded_of_screened_records": 79.07,
-        "prioritization_passed_of_screened_records": 20.93,
-        "prioritization_excluded_of_prioritization": 99.28,
-        "shortlisted_of_prioritization": 0.72,
+        "screening_excluded_of_identification": 78.91,
+        "screening_advanced_of_identification": 20.85,
+        "screening_excluded_of_screened_records": 79.1,
+        "prioritization_passed_of_screened_records": 20.9,
+        "prioritization_excluded_of_prioritization": 99.27,
+        "shortlisted_of_prioritization": 0.73,
         "abstract_screening_excluded_of_shortlist": 5.56,
         "reports_not_retrieved_of_reports_sought": 5.88,
         "full_text_excluded_of_assessed": 6.25,
@@ -96,6 +96,8 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     }
     assert prisma["deduplication_audit"]["doi"]["excess_rows"] == 25
     assert prisma["deduplication_audit"]["url"]["excess_rows"] == 2
+    assert prisma["deduplication_audit"]["deterministic_identity_duplicate_rows"] == 27
+    assert prisma["deduplication_audit"]["adjudicated_same_report_duplicate_rows"] == 2
     assert prisma["deduplication_audit"]["confirmed_semantic_duplicates"] == 0
 
 
@@ -121,6 +123,26 @@ def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> 
     assert flow["empirical_studies_included"] == 15
     assert latest_scope["empirical_studies_included"] == 15
     assert latest_scope["current_mmat_empirical_denominator"] == 14
+
+
+def test_latest_prisma_reconciliation_is_labeled_historical_until_reapplication() -> None:
+    with PRISMA_RECONCILIATION_PATH.open(encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    latest = [row for row in rows if row["snapshot_date"] == "2026-10-31"]
+    amendment = json.loads(SELECTION_AMENDMENT_PATH.read_text(encoding="utf-8"))
+
+    assert len(latest) == 10
+    assert {
+        row["status"] for row in latest
+    } == {"historical_snapshot_reconciled_pending_reapplication"}
+    assert amendment["post_decision_data_reconciliation"]["flow_status"] == (
+        "historical_snapshot_reconciled_pending_reapplication"
+    )
+    assert amendment["post_decision_data_reconciliation"]["selection_reapplication_complete"] is False
+    interpretation = amendment["post_decision_data_reconciliation"]["interpretation"]
+    assert "duplicates are counted before screening" in interpretation
+    assert "not a post-amendment corpus" in interpretation
 
 
 def test_current_export_has_exactly_the_adjudicated_empirical_core_ids() -> None:
@@ -188,6 +210,9 @@ def test_approved_threshold_amendment_uses_score_only_for_ordering() -> None:
     assert amendment["search_reprocessed"] is False
     assert "orders the reading queue only" in amendment["amended_rule"]
     assert "not an exclusion criterion" in amendment["amended_rule"]
+    assert amendment["post_decision_data_reconciliation"]["flow_status"] == (
+        "historical_snapshot_reconciled_pending_reapplication"
+    )
 
     census = amendment["rationale"]["census_3_75_to_3_95"]
     assert census["examined"] == 45

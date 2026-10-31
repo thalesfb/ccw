@@ -45,7 +45,7 @@ class EditorialFeedbackTests(unittest.TestCase):
             r"\citeonline[p.~65, 69--70]{Echeveria2025_6920}",
         ):
             self.assertIn(citation, limitations)
-        self.assertIn("O corpus final reúne 15 estudos empíricos", review)
+        self.assertIn("A seleção histórica reúne 15 estudos empíricos", review)
         self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("núcleo empírico", limitations)
         self.assertIn(r"O texto integral de \citeonline{Zeng2025_6923} não foi recuperado", limitations)
@@ -366,8 +366,8 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_public_status_distinguishes_prioritization_from_eligibility(self):
         status = (ROOT / "docs/tcc/ESTADO-ATUAL-TCC.md").read_text(encoding="utf-8")
         normalized = " ".join(status.split())
-        self.assertIn("2.486 submetidos à priorização operacional", normalized)
-        self.assertIn("2.468 não avançaram dessa etapa", normalized)
+        self.assertIn("2.482 avançaram à priorização histórica", normalized)
+        self.assertIn("2.464 não avançaram sob a regra histórica", normalized)
         self.assertNotIn("2.486 submetidos à elegibilidade", normalized)
 
     def test_bncc_short_call_preserves_institutional_responsibility(self):

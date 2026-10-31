@@ -37,9 +37,12 @@ ANALYSIS_ROOT = RESEARCH_ROOT / "exports" / "analysis"
 REPORT_ROOT = RESEARCH_ROOT / "exports" / "reports"
 VISUALIZATION_ROOT = RESEARCH_ROOT / "exports" / "visualizations"
 PAPERS_PATH = ANALYSIS_ROOT / "papers.csv"
+PAPERS_JSON_PATH = ANALYSIS_ROOT / "papers.json"
 SUMMARY_PATH = REPORT_ROOT / "summary.json"
 SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
 DECISIONS_PATH = RESEARCH_ROOT / "data" / "adjudicated_population_decisions.csv"
+RECORD_CORRECTIONS_PATH = RESEARCH_ROOT / "data" / "adjudicated_record_corrections.csv"
+DETERMINISTIC_DUPLICATES_PATH = ANALYSIS_ROOT / "deduplication_identity_audit.csv"
 
 DECISION_FIELDS = (
     "decision_date",
@@ -63,6 +66,34 @@ DECISION_FIELDS = (
 )
 
 EXPECTED_DECISION_IDS = (14, 15, 6915, 6918, 6919, 6922, 6925, 6926)
+RECORD_CORRECTION_FIELDS = (
+    "decision_date",
+    "source_snapshot_date",
+    "record_id",
+    "correction_type",
+    "previous_year",
+    "corrected_year",
+    "previous_selection_stage",
+    "previous_status",
+    "final_selection_stage",
+    "final_status",
+    "final_exclusion_reason",
+    "duplicate_of",
+    "evidence_source",
+    "evidence_locator",
+    "evidence_description",
+    "decision_status",
+    "notes",
+)
+EXPECTED_RECORD_CORRECTION_IDS = (361, 6952, 6977, 7001)
+RECONCILIATION_EXPORT_FIELDS = (
+    "year",
+    "inclusion_criteria_met",
+    "selection_stage",
+    "exclusion_reason",
+    "status",
+    "notes",
+)
 INCLUDED_DISPOSITIONS = {"include"}
 FINAL_EXCLUSION_REASONS = {
     15: "exclude_computational_centrality",
@@ -101,6 +132,64 @@ def load_decisions(path: Path | str = DECISIONS_PATH) -> list[dict[str, str]]:
     return rows
 
 
+def load_record_corrections(
+    path: Path | str = RECORD_CORRECTIONS_PATH,
+) -> list[dict[str, str]]:
+    """Load the source-linked identity and publication-year corrections."""
+
+    path = Path(path)
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fields = tuple(reader.fieldnames or ())
+        missing = [field for field in RECORD_CORRECTION_FIELDS if field not in fields]
+        if missing:
+            raise ValueError(f"{path} is missing correction fields: {missing}")
+        rows = list(reader)
+
+    ids = [int(row["record_id"]) for row in rows]
+    if tuple(sorted(ids)) != EXPECTED_RECORD_CORRECTION_IDS or len(ids) != len(set(ids)):
+        raise ValueError(f"Unexpected record-correction IDs: {ids}")
+    for row in rows:
+        if row["decision_status"] != "approved_by_author":
+            raise ValueError(
+                f"Record correction {row['record_id']} is not author-approved"
+            )
+        if not row["evidence_source"] or not row["evidence_locator"]:
+            raise ValueError(f"Record correction {row['record_id']} lacks evidence")
+        if row["correction_type"] == "same_report_duplicate":
+            if not row["duplicate_of"]:
+                raise ValueError(
+                    f"Duplicate record {row['record_id']} has no canonical record"
+                )
+            if (
+                row["final_selection_stage"] != "duplicate_removed"
+                or row["final_status"] != "duplicate_removed"
+                or not row["final_exclusion_reason"].startswith("same_report_as_")
+            ):
+                raise ValueError(
+                    f"Duplicate record {row['record_id']} has an invalid disposition"
+                )
+        elif row["correction_type"] == "publication_year_correction":
+            if row["duplicate_of"]:
+                raise ValueError(
+                    f"Year correction {row['record_id']} cannot identify a duplicate"
+                )
+            if (
+                row["final_selection_stage"] != "screening"
+                or row["final_status"] != "excluded"
+                or row["final_exclusion_reason"] != "year_range"
+            ):
+                raise ValueError(
+                    f"Year correction {row['record_id']} has an invalid disposition"
+                )
+        else:
+            raise ValueError(
+                f"Unsupported correction type for record {row['record_id']}: "
+                f"{row['correction_type']!r}"
+            )
+    return rows
+
+
 def _normalise_text(value: object) -> str:
     if value is None or (isinstance(value, float) and pd.isna(value)):
         return ""
@@ -110,8 +199,8 @@ def _normalise_text(value: object) -> str:
 def _append_provenance_note(existing: object, study_id: int) -> str:
     marker = f"Adjudicação de escopo PR54 aplicada (estudo {study_id});"
     current = _normalise_text(existing)
-    if marker in current:
-        return current.replace(f"{marker} ver", marker).strip()
+    legacy_marker = rf"Adjudicação de escopo PR54 aplicada \(estudo {study_id}\);?"
+    current = re.sub(legacy_marker, "", current).strip(" ;")
     return f"{marker} {current}".strip()
 
 
@@ -122,6 +211,106 @@ def _remove_criterion(criteria: object, criterion: str) -> str:
         if item.strip() and item.strip() != criterion
     ]
     return "; ".join(values)
+
+
+def _append_record_correction_note(existing: object, record_id: int, corrected_year: int) -> str:
+    marker = f"Ano bibliográfico corrigido em 2026-10-31 para {corrected_year} (registro {record_id});"
+    current = _normalise_text(existing)
+    if marker in current:
+        return current
+    return f"{marker} {current}".strip()
+
+
+def apply_record_corrections(
+    papers: pd.DataFrame,
+    corrections: list[dict[str, str]] | None = None,
+) -> pd.DataFrame:
+    """Apply verified report identities and publication years to the snapshot.
+
+    Same-report duplicates are preserved in the correction ledger and removed
+    from the unique screening population. Replaying the function on the
+    corrected export is idempotent.
+    """
+
+    corrections = corrections or load_record_corrections()
+    result = papers.copy()
+    result["id"] = pd.to_numeric(result["id"], errors="raise").astype(int)
+    if result["id"].duplicated().any():
+        raise ValueError("papers.csv contains repeated record IDs")
+    by_id = {int(row["id"]): index for index, row in result.iterrows()}
+
+    duplicate_ids: set[int] = set()
+    for correction in corrections:
+        record_id = int(correction["record_id"])
+        duplicate_of = correction["duplicate_of"].strip()
+        expected_state = (
+            correction["final_selection_stage"], correction["final_status"]
+        )
+        if correction["correction_type"] == "same_report_duplicate":
+            duplicate_ids.add(record_id)
+            if not duplicate_of or int(duplicate_of) == record_id:
+                raise ValueError(f"Record {record_id} has an invalid duplicate link")
+            if int(duplicate_of) not in by_id:
+                raise ValueError(
+                    f"Canonical record {duplicate_of} for {record_id} is missing"
+                )
+            if record_id not in by_id:
+                continue
+            index = by_id[record_id]
+            observed_state = (
+                _normalise_text(result.at[index, "selection_stage"]),
+                _normalise_text(result.at[index, "status"]),
+            )
+            previous_state = (
+                correction["previous_selection_stage"], correction["previous_status"]
+            )
+            if observed_state not in {previous_state, expected_state}:
+                raise ValueError(
+                    f"Record {record_id} has unexpected identity-correction state "
+                    f"{observed_state!r}"
+                )
+            if int(result.at[index, "year"]) not in {
+                int(correction["previous_year"]), int(correction["corrected_year"])
+            }:
+                raise ValueError(f"Record {record_id} has an unexpected publication year")
+            continue
+
+        if record_id not in by_id:
+            raise ValueError(f"Year-correction record {record_id} is missing")
+        index = by_id[record_id]
+        observed_state = (
+            _normalise_text(result.at[index, "selection_stage"]),
+            _normalise_text(result.at[index, "status"]),
+        )
+        previous_state = (
+            correction["previous_selection_stage"], correction["previous_status"]
+        )
+        if observed_state not in {previous_state, expected_state}:
+            raise ValueError(
+                f"Record {record_id} has unexpected year-correction state "
+                f"{observed_state!r}"
+            )
+        previous_year = int(correction["previous_year"])
+        corrected_year = int(correction["corrected_year"])
+        observed_year = int(result.at[index, "year"])
+        if observed_year not in {previous_year, corrected_year}:
+            raise ValueError(
+                f"Record {record_id} has unexpected publication year {observed_year}"
+            )
+        result.at[index, "year"] = corrected_year
+        result.at[index, "selection_stage"] = correction["final_selection_stage"]
+        result.at[index, "status"] = correction["final_status"]
+        result.at[index, "exclusion_reason"] = correction["final_exclusion_reason"]
+        if "inclusion_criteria_met" in result.columns:
+            result.at[index, "inclusion_criteria_met"] = _remove_criterion(
+                result.at[index, "inclusion_criteria_met"], "year_range"
+            )
+        if "notes" in result.columns:
+            result.at[index, "notes"] = _append_record_correction_note(
+                result.at[index, "notes"], record_id, corrected_year
+            )
+
+    return result.loc[~result["id"].isin(duplicate_ids)].copy()
 
 
 def apply_adjudications(
@@ -256,7 +445,7 @@ def apply_current_scope_adjudications(
         existing = _normalise_text(result.at[index, "notes"])
         existing = re.sub(
             r"(?:Adjudicação de escopo \d{4}-\d{2}-\d{2} \([^)]*\)|"
-            r"Adjudicação de escopo PR54 aplicada \(estudo \d+\));\s*",
+            r"Adjudicação de escopo PR54 aplicada \(estudo \d+\));?\s*",
             "",
             existing,
         ).strip()
@@ -270,12 +459,66 @@ def apply_current_adjudications(
     scope: list[dict[str, str]] | None = None,
 ) -> pd.DataFrame:
     """Replay historical population adjudications, then current scope decisions."""
-    updated = apply_adjudications(papers, decisions)
+    corrected = apply_record_corrections(papers)
+    updated = apply_adjudications(corrected, decisions)
     return apply_current_scope_adjudications(updated, scope)
 
 
-def _write_analysis_exports(papers: pd.DataFrame) -> None:
+def _json_scalar(value: object) -> object:
+    if pd.isna(value):
+        return None
+    if hasattr(value, "item"):
+        return value.item()
+    return value
+
+
+def _same_export_value(left: object, right: object) -> bool:
+    return _json_scalar(left) == _json_scalar(right)
+
+
+def _reconciled_json_records(
+    source_papers: pd.DataFrame,
+    updated_papers: pd.DataFrame,
+    original_records: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Update adjudicated fields while preserving all other JSON source text."""
+
+    source_by_id = {
+        int(row["id"]): row for _, row in source_papers.iterrows()
+    }
+    updated_by_id = {
+        int(row["id"]): row for _, row in updated_papers.iterrows()
+    }
+    reconciled: list[dict[str, Any]] = []
+    for original in original_records:
+        record_id = int(original["id"])
+        if record_id not in updated_by_id:
+            continue
+        source = source_by_id.get(record_id)
+        updated = updated_by_id[record_id]
+        record = dict(original)
+        if source is not None:
+            for field in RECONCILIATION_EXPORT_FIELDS:
+                if field in updated and not _same_export_value(
+                    source.get(field), updated[field]
+                ):
+                    record[field] = _json_scalar(updated[field])
+        reconciled.append(record)
+    return reconciled
+
+
+def _write_analysis_exports(
+    papers: pd.DataFrame,
+    source_papers: pd.DataFrame,
+) -> None:
     ANALYSIS_ROOT.mkdir(parents=True, exist_ok=True)
+    with PAPERS_JSON_PATH.open("r", encoding="utf-8") as handle:
+        original_json_records = json.load(handle)
+    json_records = _reconciled_json_records(
+        source_papers,
+        papers,
+        original_json_records,
+    )
     csv_papers = papers.copy()
     for column in csv_papers.select_dtypes(include=["object", "string"]).columns:
         csv_papers[column] = csv_papers[column].map(
@@ -291,8 +534,8 @@ def _write_analysis_exports(papers: pd.DataFrame) -> None:
         encoding="utf-8-sig",
         lineterminator="\n",
     )
-    papers.to_json(
-        ANALYSIS_ROOT / "papers.json",
+    pd.DataFrame(json_records).to_json(
+        PAPERS_JSON_PATH,
         orient="records",
         indent=2,
         force_ascii=False,
@@ -328,6 +571,26 @@ def _prisma_seed() -> dict[str, Any]:
     required = ("identification", "duplicates_removed", "screening")
     if any(key not in prisma for key in required):
         raise ValueError("summary.json lacks the immutable PRISMA identity counts")
+    if not DETERMINISTIC_DUPLICATES_PATH.is_file():
+        raise FileNotFoundError(DETERMINISTIC_DUPLICATES_PATH)
+    deterministic_duplicates = len(_read_csv(DETERMINISTIC_DUPLICATES_PATH))
+    same_report_duplicates = sum(
+        row["correction_type"] == "same_report_duplicate"
+        for row in load_record_corrections()
+    )
+    prisma["duplicates_removed"] = deterministic_duplicates + same_report_duplicates
+    audit = dict(prisma.get("deduplication_audit", {}))
+    audit["deterministic_identity_duplicate_rows"] = deterministic_duplicates
+    audit["adjudicated_same_report_duplicate_rows"] = same_report_duplicates
+    audit["interpretation"] = (
+        "The PRISMA duplicate total combines exact normalized DOI/URL removals "
+        f"({deterministic_duplicates}) and separately documented same-report "
+        f"adjudications ({same_report_duplicates}). The latter were discovered "
+        "during post-hoc identity reconciliation and remain in their own ledger. "
+        "Every confirmed duplicate is counted before screening, regardless of "
+        "the legacy stage stored for that row."
+    )
+    prisma["deduplication_audit"] = audit
     return prisma
 
 
@@ -440,10 +703,10 @@ def regenerate() -> dict[str, Any]:
     """Apply decisions and regenerate versioned derived artifacts."""
 
     decisions = load_decisions()
-    papers = pd.read_csv(PAPERS_PATH, encoding="utf-8-sig")
-    updated = apply_current_adjudications(papers, decisions)
+    source_papers = pd.read_csv(PAPERS_PATH, encoding="utf-8-sig")
+    updated = apply_current_adjudications(source_papers, decisions)
     _validate_scope_reconciliation(updated)
-    _write_analysis_exports(updated)
+    _write_analysis_exports(updated, source_papers)
     prisma = _updated_prisma(updated)
     _regenerate_reports(updated, prisma)
     return {
@@ -485,14 +748,14 @@ def main() -> None:
         "prisma": _updated_prisma(updated),
     }
     expected = {
-        "papers_rows": 11877,
+        "papers_rows": 11875,
         "stage_counts": {
             "abstract_screening": 1,
             "eligibility": 1,
             "included": 15,
             "not_retrieved": 1,
-            "prioritization": 2468,
-            "screening": 9391,
+            "prioritization": 2464,
+            "screening": 9393,
         },
         "included_ids": list(CURRENT_EMPIRICAL_STUDY_IDS),
     }

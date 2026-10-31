@@ -29,11 +29,11 @@ def test_tcc_does_not_present_heuristic_prioritization_as_full_report_eligibilit
 def test_tcc_population_percentages_name_their_denominators() -> None:
     results = (ROOT / "results/tcc/conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
 
-    assert "0,23\\% dos 11.904 registros identificados" in results
-    assert "79,07\\% dos 11.877 registros efetivamente triados" in results
-    assert round(9391 / 11877 * 100, 2) == 79.07
-    assert "53,80\\% (6.390)" in results
-    assert "99,28\\% dos 2.486 registros submetidos à priorização por relevância" in results
+    assert "0,24\\% dos 11.904 registros identificados" in results
+    assert "79,10\\% dos 11.875 registros únicos triados" in results
+    assert round(9393 / 11875 * 100, 2) == 79.10
+    assert "53,81\\% (6.390)" in results
+    assert "99,27\\% dos 2.482 registros submetidos à priorização por relevância" in results
 
 
 def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_records() -> None:
@@ -45,7 +45,7 @@ def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_r
     assert "Relatórios não recuperados & 1" in results
     assert "Relatórios avaliados em texto completo & 16" in results
     assert "Protocolos excluídos após texto completo & 1" in results
-    assert "Estudos empíricos no corpus final & 15" in results
+    assert "Estudos empíricos na seleção histórica & 15" in results
     assert "mantidos provisoriamente & 15" not in results
     assert "Candidatos empíricos provisórios & 17" not in results
 
@@ -64,12 +64,12 @@ def test_research_readme_uses_operational_prioritization_and_explicit_denominato
         "**Baseline histórico", 1
     )[0]
 
-    assert "2.486 submetidos à priorização operacional" in current
-    assert "20,88% encaminhados à priorização" in current
-    assert "99,28% não avançaram nessa etapa" in current
-    assert "0,72% formaram a shortlist" in current
+    assert "2.482 avançaram à priorização histórica" in current
+    assert "20,90% da triagem" in current
+    assert "99,27%" in current and "não avançaram sob a regra anterior" in current
+    assert "18 seguiram à lista preliminar (0,73%)" in current
     assert "17 relatórios procurados" in current
-    assert "15 estudos empíricos mantidos provisoriamente" in current
+    assert "15 estudos empíricos na seleção histórica" in current
     assert "Para diagnóstico da execução no SQLite local" in readme
     assert "não devem substituir os números versionados no TCC" in readme
     assert "Para obter os números atualizados" not in readme
@@ -84,9 +84,9 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     normalized_presentation = " ".join(presentation.split())
 
     assert r"\citeonline{Zeng2025_6923} não foi recuperado" in results
-    assert "Os 15 estudos empíricos do corpus final receberam apreciação preliminar" in methodology
+    assert "Os 15 estudos empíricos da seleção histórica receberam apreciação preliminar" in methodology
     assert "um não foi recuperado" in results
-    assert "Os 15 restantes compõem o corpus final" in results
+    assert "Os 15 restantes compõem o corpus da seleção histórica" in results
     assert "núcleo empírico" not in results
     assert "um texto integral não foi recuperado" in normalized_presentation
     assert "os outros 15 estudos empíricos integram o núcleo incluído" in normalized_presentation

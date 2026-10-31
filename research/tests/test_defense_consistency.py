@@ -23,7 +23,7 @@ def test_public_mmat_empirical_metric_matches_the_inclusion_ledger():
     html = (ROOT / "research/exports/analysis/mmat_current.html").read_text(encoding="utf-8")
     metric = re.search(
         r'<span class="metric-value">(\d+)</span>'
-        r'<span class="metric-label">estudos empíricos mantidos provisoriamente</span>',
+        r'<span class="metric-label">estudos empíricos na seleção histórica</span>',
         html,
     )
     assert metric and int(metric[1]) == retained
@@ -87,9 +87,10 @@ def test_qa_distinguishes_screening_from_category_specific_appraisal():
 def test_screening_disclosure_matches_the_recorded_operational_reasons():
     rows = read_rows("research/exports/analysis/papers.csv")
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
-    reasons = {"abstract_too_short", "no_methodology", "inclusion_criteria_not_met", "non_research", "off_topic"}
+    reasons = {"abstract_too_short", "no_methodology", "inclusion_criteria_not_met", "non_research", "off_topic", "year_range"}
     counts = {reason: sum(row["exclusion_reason"] == reason for row in rows) for reason in reasons}
-    assert sum(counts.values()) == 9391
+    assert sum(counts.values()) == 9393
+    assert counts["year_range"] == 2
     for count in counts.values():
         assert f"{count:,}".replace(",", ".") in methodology
     missing = sum(row["exclusion_reason"] == "abstract_too_short" and row["abstract"] == "Abstract não disponível" for row in rows)
@@ -116,5 +117,5 @@ def test_requirement_origins_are_explicit_without_fabricated_empirical_support()
 def test_readme_distinguishes_shortlist_from_provisional_empirical_inclusion():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "17 candidatos empíricos provisórios" not in text
-    assert "15 estudos empíricos mantidos provisoriamente" in text
+    assert "15 estudos empíricos mantidos na seleção histórica" in text
     assert "15 triagens S1/S2" in text and "15 apreciações por categoria" in text

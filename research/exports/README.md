@@ -2,18 +2,17 @@
 
 Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e relatórios do pipeline são regeneráveis via CLI e não devem ser editados manualmente; páginas metodológicas versionadas devem permanecer coerentes com seus ledgers de origem.
 
-> **Snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026:**
-> 11.904 registros identificados;
-> 27 registros redundantes foram removidos deterministicamente por DOI/URL antes
-> da triagem. O fluxo analítico conta 11.877 na triagem, 9.391 excluídos, 2.486
-> submetidos à priorização operacional; 2.468 não avançaram nessa etapa e 18
-> formaram a shortlist. Na elegibilidade, 17 relatórios foram procurados, 1 não
-> foi recuperado, 16 foram avaliados em texto completo, 1 protocolo foi excluído
-> e 15 registros empíricos foram mantidos provisoriamente. O registro
-> 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A auditoria
-> bruta encontrou 257 excedentes em
-> títulos normalizados; após a remoção DOI/URL, 232 excedentes permanecem apenas
-> por título como candidatos de auditoria.
+> **Snapshot reconciliado em 31/10/2026**: 11.904 registros identificados;
+> 29 duplicatas removidas (27 por DOI/URL e 2 relatórios iguais confirmados
+> manualmente); 11.875 registros únicos na triagem; 9.393 excluídos; 2.482
+> avançaram à priorização histórica e 2.464 não avançaram sob a regra anterior.
+> A emenda que retira o escore como critério de exclusão ainda não foi reaplicada.
+> A seleção histórica contém 18 registros na shortlist, 17 relatórios procurados,
+> 1 não recuperado, 16 avaliados em texto completo, 1 protocolo excluído e 15
+> estudos empíricos. O histórico de 31/08 foi corrigido: ID 6952 é repetido do
+> artigo 155 (2016), ID 6977 é a mesma tese de ID 8 (2017), e os anos de 361 e
+> 7001 foram corrigidos para 2005 e 1997. Fontes e decisões estão em
+> `research/data/adjudicated_record_corrections.csv`.
 
 **Fonte vigente para MMAT:** a apreciação atual, por critério e sem score agregado,
 está no [ledger atual](../data/mmat_reassessment_current.csv) e na página
@@ -21,7 +20,7 @@ está no [ledger atual](../data/mmat_reassessment_current.csv) e na página
 `analysis/papers.json` e planilhas não são fonte de apreciação MMAT. A tabela
 [legada](../data/mmat_assessments.csv) e a página [MMAT histórico](analysis/mmat_visualization.html)
 foram preservadas para rastreabilidade; seus julgamentos e scores não representam
-a avaliação vigente e não devem ser usados para interpretar os 18 registros shortlistados.
+a avaliação vigente. A seleção de 15 estudos e os 18 registros da shortlist ainda são históricos até a reaplicação da emenda.
 
 ---
 
@@ -200,14 +199,15 @@ python -m research.src.cli deep-analysis
 | Métrica | Valor |
 |---------|-------|
 | Total de registros brutos no banco | 11.904 |
-| Remoções determinísticas por DOI/URL | 27 |
-| Registros avaliados na triagem | 11.877 |
-| Registros shortlistados | 18 (15 incluídos provisoriamente, 1 não recuperado, 1 excluído após resumo — decisão confirmada por conferência suplementar do texto integral, sem alterar a contagem — e 1 protocolo excluído) |
+| Duplicatas removidas (27 DOI/URL + 2 relatórios iguais confirmados manualmente) | 29 |
+| Registros avaliados na triagem | 11.875 |
+| Registros na shortlist histórica | 18 (15 estudos empíricos na seleção histórica, 1 não recuperado, 1 excluído após resumo e 1 protocolo excluído) |
 | Taxa de inclusão empírica provisória | 0,13% (15/11.904) |
 | Período analítico configurado | 2015--2026 |
-| Excluídos na triagem | 9.391 (78,89% da identificação) |
-| Avançaram à elegibilidade | 2.486 (20,88% da identificação) |
-| Excluídos na elegibilidade | 2.468 (99,28% da elegibilidade) |
+| Excluídos na triagem | 9.393 (78,91% da identificação; 79,10% dos triados) |
+| Avançaram à priorização histórica | 2.482 (20,85% da identificação; 20,90% dos triados) |
+| Não avançaram sob a priorização histórica | 2.464 (99,27% de 2.482) |
+| Registros encaminhados à leitura de resumo | 18 (0,73% de 2.482) |
 | Bases de dados | Consulte `summary.json` e `papers.csv` |
 
 As frequências temáticas devem ser lidas do `summary.json` do mesmo snapshot;
@@ -217,9 +217,10 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 
 ## 🚀 Próximos Passos
 
-### Fase 1 (Revisão Sistemática) - 🟡 SNAPSHOT ADJUDICADO
-- [x] Snapshot de busca exportado (11.904 identificados; 11.877 após deduplicação; 18 registros shortlistados; 15 incluídos provisoriamente após elegibilidade)
-- [x] Fluxo de triagem e elegibilidade reconciliado
+### Fase 1 (Revisão Sistemática) - 🟡 RECONCILIAÇÃO DE DADOS FEITA; REAPLICAÇÃO PENDENTE
+- [x] Snapshot de busca reconciliado (11.904 identificados; 29 duplicatas removidas; 11.875 únicos na triagem; 18 na seleção histórica; 15 estudos empíricos antes da reaplicação)
+- [x] Fluxo histórico de triagem e texto completo reconciliado
+- [ ] Reaplicar os critérios uniformes à população após a emenda aprovada de 31/10
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
 - [x] Exportação BibTeX dos 18 registros shortlistados do pipeline; status de elegibilidade e inclusão são mantidos separadamente no ledger
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)

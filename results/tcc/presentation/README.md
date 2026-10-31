@@ -1,5 +1,10 @@
 # Export PowerPoint editável paralelo do TCC
 
+> **Desatualizado para a defesa.** Este export e suas visualizações incorporadas
+> refletem a seleção anterior à emenda aprovada em 31/10/2026. A elegibilidade
+> ainda precisa ser reaplicada; não use estes números como corpus final nem
+> apresente o arquivo até a atualização posterior à reaplicação.
+
 Este diretório contém um artefato editável auxiliar, não a apresentação que
 será usada na defesa do TCC **Ensino Personalizado de Matemática:
 Oportunidades e Técnicas Computacionais**.

@@ -45,6 +45,30 @@
     },
     "interpretation": "Eligible records were found below 4.0, including in the random sample below 3.50. The directed 3.50-3.74 review cannot estimate the eligibility rate for that full band, and unresolved or unretrieved reports are not counted as ineligible."
   },
+  "post_decision_data_reconciliation": {
+    "date": "2026-10-31",
+    "flow_status": "historical_snapshot_reconciled_pending_reapplication",
+    "same_report_duplicates": [
+      {"record_id": 6952, "retained_record_id": 155, "evidence": "identical editor and Zenodo PDFs; SHA-256 recorded in adjudicated_record_corrections.csv"},
+      {"record_id": 6977, "retained_record_id": 8, "evidence": "DataCite IsIdenticalTo relation for the same 2017 doctoral thesis"}
+    ],
+    "publication_year_corrections": [
+      {"record_id": 361, "previous_year": 2024, "verified_year": 2005},
+      {"record_id": 7001, "previous_year": 2015, "verified_year": 1997}
+    ],
+    "corrected_prisma_flow": {
+      "identification": 11904,
+      "duplicates_removed": 29,
+      "screening": 11875,
+      "screening_excluded": 9393,
+      "prioritization": 2482,
+      "prioritization_excluded": 2464,
+      "shortlisted": 18,
+      "included": 15
+    },
+    "selection_reapplication_complete": false,
+    "interpretation": "The original sensitivity-review denominators and decisions remain reported as examined. Legacy prioritization stages for the two duplicate rows are retained only as provenance; duplicates are counted before screening in the reconstructed PRISMA flow. The two year-corrected records move from historical prioritization to temporal screening exclusions. Their stored relevance scores are retained only as historical metadata and do not determine the temporal decision. This reconciliation describes the pre-amendment selection snapshot; the amended eligibility procedure has not been reapplied and the historical 15-study set is not a post-amendment corpus."
+  },
   "unchanged_scope": {
     "mathematics_teaching_or_learning": true,
     "computational_technique_or_system": true,
@@ -68,6 +92,6 @@
     "Resolve confirmed record identities and publication years before recalculating PRISMA counts.",
     "Link multiple reports from the same study before counting unique studies or updating MMAT."
   ],
-  "current_snapshot_note": "This amendment records the approved decision only. The 15-study corpus and published PRISMA counts remain the pre-amendment snapshot until reapplication and reconciliation are complete.",
+  "current_snapshot_note": "The 15-study set remains the pre-reapplication historical selection. Confirmed record identities and publication years were reconciled on 2026-10-31; the corrected historical flow is 11,904 identified, 29 duplicates removed, 11,875 screened, 9,393 excluded at screening, 2,482 advanced to historical prioritization, and 15 studies retained in the historical selection. These are not post-amendment corpus counts. The amended eligibility rule has not yet been reapplied to the population.",
   "prisma_reporting": "Report this retrospective protocol amendment under PRISMA 2020 item 24c, stating the date, reason, changed selection procedure, and stage at which it was applied."
 }

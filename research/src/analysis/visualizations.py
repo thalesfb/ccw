@@ -112,15 +112,36 @@ class ReviewVisualizer:
             ax.text(8, 9.475, identification, ha="center", va="center",
                     fontsize=22, linespacing=1.05, color="#1f2937")
             main_x, exclusion_x = 4.0, 12.0
-            box_width, box_height = 7.1, 1.02
+            box_width, box_height = 7.1, 1.12
             main_y = [7.85, 6.55, 5.25, 3.95, 2.65, 1.35]
+            dedup_audit = stats.get('deduplication_audit', {}) or {}
+            deterministic_rows = dedup_audit.get('deterministic_identity_duplicate_rows')
+            same_report_rows = dedup_audit.get('adjudicated_same_report_duplicate_rows')
+            if deterministic_rows is not None and same_report_rows is not None:
+                deterministic_rows = int(deterministic_rows)
+                same_report_rows = int(same_report_rows)
+                if deterministic_rows + same_report_rows != int(stats['duplicates_removed']):
+                    raise ValueError(
+                        "PRISMA duplicate total disagrees with the deterministic and "
+                        "same-report ledgers"
+                    )
+                duplicate_label = (
+                    f"{count('duplicates_removed')} duplicatas removidas\n"
+                    f"{deterministic_rows} DOI/URL; {same_report_rows} relatórios iguais (manual)\n"
+                    f"Registros triados (n = {count('screening')})"
+                )
+            else:
+                duplicate_label = (
+                    f"Após remoção de {count('duplicates_removed')} duplicatas DOI/URL,\n"
+                    f"registros submetidos à triagem (n = {count('screening')})"
+                )
             main_labels = [
-                f"Após remoção de {count('duplicates_removed')} duplicatas DOI/URL,\nregistros submetidos à triagem (n = {count('screening')})",
-                f"Priorização por relevância\n(n = {count('prioritization')})",
+                duplicate_label,
+                f"Priorização histórica\n(n = {count('prioritization')})",
                 f"Lista preliminar para leitura de resumo\n(n = {count('shortlisted')})",
                 f"Relatórios procurados para texto integral\n(n = {count('reports_sought')})",
                 f"Relatórios avaliados em texto integral\n(n = {count('eligibility')})",
-                f"Corpus final\n(n = {count('included')})",
+                f"Seleção histórica\n(n = {count('included')})",
             ]
             for y, label in zip(main_y, main_labels):
                 ax.add_patch(Rectangle((main_x-box_width/2, y-box_height/2),
@@ -129,7 +150,7 @@ class ReviewVisualizer:
                         linespacing=1.05, color="#1f2937")
             exclusions = [
                 (main_y[0], f"Excluídos na triagem inicial\n(n = {count('screening_excluded')})"),
-                (main_y[1], f"Excluídos na priorização por relevância\n(n = {count('prioritization_excluded')}; limiar e decisões de escopo)"),
+                (main_y[1], f"Não avançaram na priorização histórica\n(n = {count('prioritization_excluded')})"),
                 (main_y[2], f"Excluído após leitura do resumo\n(n = {count('abstract_screening_excluded')})"),
                 (main_y[3], f"Texto integral não recuperado\n(n = {count('reports_not_retrieved')})"),
                 (main_y[4], f"Protocolo sem resultados concluídos\n(n = {count('eligibility_excluded')})"),
@@ -196,7 +217,9 @@ class ReviewVisualizer:
         if doi_excess is not None and url_excess is not None:
             audit_label = (f"Auditoria de identidade: {int(doi_excess)} excedentes DOI + "
                            f"{int(url_excess)} excedentes URL.")
-
+        same_report_rows = dedup_audit.get('adjudicated_same_report_duplicate_rows')
+        if same_report_rows is not None:
+            audit_label += f" {int(same_report_rows)} relatórios iguais confirmados manualmente."
         logger.info(
             f"PRISMA stats used -> ident={identification}, dup_removed={duplicates_removed}, "
             f"screening={screening}, eligibility={eligibility}, included={included}, "
@@ -595,9 +618,9 @@ Desvio Padrão: {scores.std():.2f}"""
             funnel_stages = [
                 ('Identificação', int(stats['identification']), '#E8F4FD'),
                 ('Após deduplicação', int(stats['screening']), '#B3E5FC'),
-                ('Priorização por relevância', int(stats['prioritization']), '#81C784'),
+                ('Priorização histórica', int(stats['prioritization']), '#81C784'),
                 ('Lista preliminar', int(stats['shortlisted']), '#66BB6A'),
-                ('Corpus final', int(stats['included']), '#4CAF50'),
+                ('Seleção histórica', int(stats['included']), '#4CAF50'),
             ]
 
         stages = [name for name, _, _ in funnel_stages]

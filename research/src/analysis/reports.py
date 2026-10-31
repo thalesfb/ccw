@@ -391,6 +391,9 @@ class ReportGenerator:
             'deterministic_identity_duplicate_rows': int(
                 deduplication_audit.get('deterministic_identity_duplicate_rows', 0)
             ),
+            'adjudicated_same_report_duplicate_rows': int(
+                deduplication_audit.get('adjudicated_same_report_duplicate_rows', 0)
+            ),
             'confirmed_semantic_duplicates': int(
                 deduplication_audit.get('confirmed_semantic_duplicates', 0)
             ),
@@ -489,15 +492,15 @@ class ReportGenerator:
                     'Identificação': identification,
                     'Registros após deduplicação': screening_remaining,
                     'Excluídos na triagem inicial': screening_excluded,
-                    'Registros enviados à priorização operacional': int(prisma_stats['prioritization']),
-                    'Excluídos pelo limiar operacional': int(prisma_stats['prioritization_excluded']),
+                    'Registros submetidos à priorização histórica': int(prisma_stats['prioritization']),
+                    'Não avançaram na priorização histórica': int(prisma_stats['prioritization_excluded']),
                     'Selecionados para leitura de resumo': int(prisma_stats['shortlisted']),
                     'Excluídos após leitura de resumo': int(prisma_stats['abstract_screening_excluded']),
                     'Relatórios buscados': int(prisma_stats['reports_sought']),
                     'Relatórios não recuperados': int(prisma_stats['reports_not_retrieved']),
                     'Textos integrais avaliados': eligibility,
                     'Excluídos após texto integral': eligibility_excluded,
-                    'Incluídos na síntese empírica': included,
+                    'Estudos da seleção histórica': included,
                 }
             else:
                 report_stats['selection_stages'] = {
@@ -639,6 +642,15 @@ class ReportGenerator:
         Returns:
             Path to HTML file
         """
+        statistics = report_data.setdefault("statistics", {})
+        statistics.setdefault(
+            "integrity",
+            {
+                "deterministic_identity_duplicate_rows": 0,
+                "adjudicated_same_report_duplicate_rows": 0,
+            },
+        )
+
         html_template = """
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -727,8 +739,8 @@ class ReportGenerator:
             <tr><th>Relação</th><th>Percentual</th></tr>
             {% if statistics.prisma.reports_sought is defined %}
             <tr><td>Excluídos na triagem inicial / registros após deduplicação</td><td>{{ statistics.stage_percentages.screening_excluded_of_screened_records }}%</td></tr>
-            <tr><td>Enviados à priorização operacional / registros após deduplicação</td><td>{{ statistics.stage_percentages.prioritization_passed_of_screened_records }}%</td></tr>
-            <tr><td>Excluídos pelo limiar / registros priorizados</td><td>{{ statistics.stage_percentages.prioritization_excluded_of_prioritization }}%</td></tr>
+            <tr><td>Submetidos à priorização histórica / registros após deduplicação</td><td>{{ statistics.stage_percentages.prioritization_passed_of_screened_records }}%</td></tr>
+            <tr><td>Não avançaram na priorização histórica / registros priorizados</td><td>{{ statistics.stage_percentages.prioritization_excluded_of_prioritization }}%</td></tr>
             <tr><td>Excluídos após resumo / shortlist</td><td>{{ statistics.stage_percentages.abstract_screening_excluded_of_shortlist }}%</td></tr>
             <tr><td>Relatórios não recuperados / relatórios buscados</td><td>{{ statistics.stage_percentages.reports_not_retrieved_of_reports_sought }}%</td></tr>
             <tr><td>Excluídos após texto integral / textos avaliados</td><td>{{ statistics.stage_percentages.full_text_excluded_of_assessed }}%</td></tr>
@@ -741,7 +753,7 @@ class ReportGenerator:
             {% endif %}
             <tr><td>Incluídos / identificação</td><td>{{ statistics.stage_percentages.included_of_identification }}%</td></tr>
         </table>
-        <p>O limiar de priorização é operacional e não substitui os critérios de elegibilidade. A etapa de texto integral considera apenas relatórios recuperados; registros não recuperados permanecem separados e não são tratados como exclusões após leitura integral.</p>
+        <p>O fluxo de seleção exibido é histórico: a priorização por metadados e resumos não equivale à elegibilidade em texto completo, e a emenda aprovada ainda não foi reaplicada. Relatórios não recuperados permanecem separados e não são tratados como exclusões após leitura integral.</p>
     </div>
     {% endif %}
 
@@ -758,7 +770,7 @@ class ReportGenerator:
             <tr><td>Título-only após DOI/URL</td><td>{{ statistics.deduplication_audit.title_only.repeated_groups }}</td><td>{{ statistics.deduplication_audit.title_only.repeated_rows }}</td><td>{{ statistics.deduplication_audit.title_only.excess_rows }}</td></tr>
             {% endif %}
         </table>
-        <p><strong>Registros removidos por identidade DOI/URL:</strong> {{ statistics.deduplication_audit.deterministic_identity_duplicate_rows }}. <strong>Flags persistidas no snapshot:</strong> {{ statistics.deduplication_audit.operationally_flagged_rows }}. <strong>Duplicatas semanticamente confirmadas por título:</strong> {{ statistics.deduplication_audit.confirmed_semantic_duplicates }}.</p>
+        <p><strong>Registros removidos por identidade DOI/URL:</strong> {{ statistics.deduplication_audit.deterministic_identity_duplicate_rows }}. <strong>Relatórios repetidos confirmados em revisão manual:</strong> {{ statistics.deduplication_audit.adjudicated_same_report_duplicate_rows }}. <strong>Flags persistidas no snapshot:</strong> {{ statistics.deduplication_audit.operationally_flagged_rows }}. <strong>Duplicatas semanticamente confirmadas por título:</strong> {{ statistics.deduplication_audit.confirmed_semantic_duplicates }}.</p>
     </div>
     {% endif %}
 
@@ -769,8 +781,11 @@ class ReportGenerator:
         banco informa <code>total_removed=2494</code>; a execução que resolveria essa
         divergência não está arquivada. Esses valores são mantidos como contexto
         histórico e não são usados para calcular o fluxo atual: 11.904 registros
-        brutos, {{ statistics.prisma.duplicates_removed or 0 }} redundâncias DOI/URL
-        removidas e {{ statistics.prisma.screening or 0 }} registros na triagem.</p>
+        brutos, {{ statistics.integrity.deterministic_identity_duplicate_rows }} remoções por identidade DOI/URL e
+        {{ statistics.integrity.adjudicated_same_report_duplicate_rows }} relatórios repetidos confirmados manualmente
+        ({{ statistics.prisma.duplicates_removed or 0 }} no total), seguidos por
+        {{ statistics.prisma.screening or 0 }} registros na triagem. O fluxo de seleção abaixo mantém a regra histórica;
+        a emenda aprovada em 31/10 ainda não foi reaplicada.</p>
     </div>
 
     {% if fulltext_stats %}
@@ -1003,15 +1018,15 @@ class ReportGenerator:
                     <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.screening }}</td>
                 </tr>
                 <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos na triagem inicial</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.screening_excluded }}</td></tr>
-                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Enviados à priorização operacional (não é elegibilidade)</td><td style="padding: 12px; text-align: right;">{{ prisma.prioritization }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos pelo limiar operacional</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.prioritization_excluded }}</td></tr>
+                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Registros submetidos à priorização histórica (não é elegibilidade)</td><td style="padding: 12px; text-align: right;">{{ prisma.prioritization }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Não avançaram na priorização histórica; emenda ainda não reaplicada</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.prioritization_excluded }}</td></tr>
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Selecionados para leitura de resumo</td><td style="padding: 12px; text-align: right;">{{ prisma.shortlisted }}</td></tr>
                 <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após resumo</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.abstract_screening_excluded }}</td></tr>
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios buscados para recuperação</td><td style="padding: 12px; text-align: right;">{{ prisma.reports_sought }}</td></tr>
                 <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Textos integrais não recuperados</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.reports_not_retrieved }}</td></tr>
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Textos integrais avaliados</td><td style="padding: 12px; text-align: right;">{{ prisma.eligibility }}</td></tr>
                 <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após texto integral</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.eligibility_excluded }}</td></tr>
-                <tr style="background: #d4edda;"><td style="padding: 12px; font-weight: bold;">Incluídos na síntese empírica</td><td style="padding: 12px; text-align: right; font-weight: bold; color: #28a745;">{{ prisma.included }}</td></tr>
+                <tr style="background: #d4edda;"><td style="padding: 12px; font-weight: bold;">Estudos da seleção histórica</td><td style="padding: 12px; text-align: right; font-weight: bold; color: #28a745;">{{ prisma.included }}</td></tr>
                 {% else %}
                 <tr style="background: #f8f9fa;">
                     <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Estágio</th>

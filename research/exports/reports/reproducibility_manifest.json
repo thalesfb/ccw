@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-10-21T22:01:36+00:00",
+  "generated_at": "2026-10-31T13:02:41+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -10,71 +10,68 @@
   },
   "operational_database_snapshot": {
     "counts": {
-      "total_records": 4791,
+      "total_records": 0,
       "selection_stage_counts": {
-        "screening": 4484,
-        "eligibility": 305,
-        "included": 2
+        "screening": 0,
+        "eligibility": 0,
+        "included": 0
       },
       "prisma": {
-        "identification": 4791,
-        "duplicates_removed": 1,
-        "screening": 4790,
-        "screening_excluded": 4483,
-        "eligibility": 307,
-        "eligibility_excluded": 305,
-        "included": 2
+        "identification": 0,
+        "duplicates_removed": 0,
+        "screening": 0,
+        "screening_excluded": 0,
+        "eligibility": 0,
+        "eligibility_excluded": 0,
+        "included": 0
       }
     },
-    "included_ids": [
-      1,
-      2
-    ],
+    "included_ids": [],
     "deduplication_audit": {
-      "raw_rows": 4791,
+      "raw_rows": 0,
       "operationally_flagged_rows": 0,
-      "deterministic_identity_duplicate_rows": 1,
+      "deterministic_identity_duplicate_rows": 0,
       "deterministic_identity_duplicate_rows_by_identifier": {
         "doi": 0,
-        "url": 1,
+        "url": 0,
         "persisted_flag": 0
       },
       "confirmed_semantic_duplicates": 0,
       "doi": {
-        "non_empty_rows": 4420,
-        "distinct_values": 4420,
+        "non_empty_rows": 0,
+        "distinct_values": 0,
         "repeated_groups": 0,
         "repeated_rows": 0,
         "excess_rows": 0
       },
       "url": {
-        "non_empty_rows": 4791,
-        "distinct_values": 4790,
-        "repeated_groups": 1,
-        "repeated_rows": 2,
-        "excess_rows": 1
+        "non_empty_rows": 0,
+        "distinct_values": 0,
+        "repeated_groups": 0,
+        "repeated_rows": 0,
+        "excess_rows": 0
       },
       "title": {
-        "non_empty_rows": 4791,
-        "distinct_values": 4697,
-        "repeated_groups": 62,
-        "repeated_rows": 156,
-        "excess_rows": 94
+        "non_empty_rows": 0,
+        "distinct_values": 0,
+        "repeated_groups": 0,
+        "repeated_rows": 0,
+        "excess_rows": 0
       },
       "title_only": {
-        "non_empty_rows": 4790,
-        "distinct_values": 4697,
-        "repeated_groups": 61,
-        "repeated_rows": 154,
-        "excess_rows": 93
+        "non_empty_rows": 0,
+        "distinct_values": 0,
+        "repeated_groups": 0,
+        "repeated_rows": 0,
+        "excess_rows": 0
       },
       "interpretation": "Repeated normalized DOI/URL identities are deterministic duplicate records for the current PRISMA flow. The raw title metric includes rows in those identity groups; title_only is recalculated after identity removal. Title-only matches remain candidates for semantic review and are not removed automatically."
     },
     "manual_overrides": [],
     "candidate_audit": {
-      "operational_candidates": 2,
+      "operational_candidates": 0,
       "manual_overrides_recorded": 0,
-      "current_included": 2,
+      "current_included": 0,
       "interpretation": "The operational candidate count is the current included set plus the persisted manual-audit overrides. These overrides are not scientific exclusion findings until adjudicated, and are not an extra PRISMA stage."
     },
     "status": "diagnostic_only",
@@ -82,7 +79,7 @@
     "interpretation": "This block records the unversioned SQLite state available when the manifest was generated. It is diagnostic only and is not the current PRISMA baseline; use the versioned snapshot object and summary.json for the current adjudicated population."
   },
   "protocol": {
-    "status": "current_snapshot_protocol",
+    "status": "approved_amendment_pending_implementation_and_reapplication",
     "year_min": 2015,
     "year_max": 2026,
     "cutoff_date": "2026-08-31",
@@ -91,7 +88,11 @@
       "pt"
     ],
     "abstract_required": false,
-    "relevance_threshold": 4.0,
+    "legacy_selector_relevance_threshold": 4.0,
+    "selection_amendment_id": "PRISMA-24c-2026-10-31",
+    "selection_amendment_status": "approved_pending_reapplication",
+    "selection_flow_status": "historical_snapshot_reconciled_pending_reapplication",
+    "relevance_score_role": "queue_order_only_after_reapplication",
     "canonical_query_count": 72,
     "query_generator": "research/src/search_terms.py",
     "sources": [
@@ -102,27 +103,28 @@
     ],
     "source_count": 4,
     "max_results_per_query": 10,
-    "interpretation": "These parameters describe the protocol contract for a fresh run. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
+    "interpretation": "The selector still contains the legacy cutoff recorded in legacy_selector_relevance_threshold; this is not the approved eligibility protocol. The approved 2026-10-31 amendment removes relevance score as an exclusion criterion, but implementation and population reapplication are pending. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
   },
   "snapshot": {
+    "selection_flow_status": "historical_snapshot_reconciled_pending_reapplication",
     "counts": {
       "total_records": 11904,
-      "versioned_rows": 11877,
+      "versioned_rows": 11875,
       "selection_stage_counts": {
         "abstract_screening": 1,
         "eligibility": 1,
         "included": 15,
         "not_retrieved": 1,
-        "prioritization": 2468,
-        "screening": 9391
+        "prioritization": 2464,
+        "screening": 9393
       },
       "prisma": {
         "identification": 11904,
-        "duplicates_removed": 27,
-        "screening": 11877,
-        "screening_excluded": 9391,
-        "prioritization": 2486,
-        "prioritization_excluded": 2468,
+        "duplicates_removed": 29,
+        "screening": 11875,
+        "screening_excluded": 9393,
+        "prioritization": 2482,
+        "prioritization_excluded": 2464,
         "shortlisted": 18,
         "abstract_screening_excluded": 1,
         "reports_sought": 17,
@@ -188,7 +190,8 @@
         "repeated_rows": 386,
         "excess_rows": 232
       },
-      "interpretation": "Exact normalized DOI/URL identity rows are removed deterministically from the PRISMA flow; normalized-title counts remain weaker candidates for semantic review because versioned records and unrelated works must remain distinct. The title metric includes identity-overlap rows; title_only is calculated after deterministic identity removal.",
+      "interpretation": "The PRISMA duplicate total combines exact normalized DOI/URL removals (27) and separately documented same-report adjudications (2). The latter were discovered during post-hoc identity reconciliation and remain in their own ledger. Every confirmed duplicate is counted before screening, regardless of the legacy stage stored for that row.",
+      "adjudicated_same_report_duplicate_rows": 2,
       "deterministic_identity_duplicate_rows_by_identifier": {
         "doi": 25,
         "url": 2,
@@ -283,7 +286,7 @@
       "metadata_corrections_recorded": 1,
       "current_included": 15,
       "shortlisted_records": 18,
-      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The current selection is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage."
+      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The pre-amendment historical selection is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage. The approved amendment has not been reapplied, so this is not the post-amendment corpus."
     },
     "manual_override_adjudication": {
       "path": "research/data/manual_override_adjudication.csv",
@@ -329,7 +332,7 @@
       "results/tcc/referencias_pedagogicas.bib"
     ],
     "reference_audit": "research/data/reference_audit.csv",
-    "separation_rule": "The BibTeX inventory contains 18 records in the preliminary list; 15 are currently included in the empirical core. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
+    "separation_rule": "The BibTeX inventory contains 18 records in the preliminary list; 15 remain in the pre-amendment historical empirical selection. The corpus count is pending reapplication of the approved eligibility amendment. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
   },
   "methodological_appraisal": {
     "current_mmat_qa": {
@@ -440,7 +443,7 @@
         "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
       ]
     },
-    "interpretation": "S1/S2 screening and category-specific appraisal for all 15 records remain provisional. Studies 5 and 7 use operational inferred category-3 routes with allocation unknown, study 8 an adapted category-4 computational route, and study 14 the contradictory declared school-randomization route. These are not confirmed designs; 15 records remain provisionally in the empirical corpus."
+    "interpretation": "The MMAT ledger describes the historical pre-amendment selection: S1/S2 screening for 15 studies and category-specific appraisal for 15; three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. 15 records remain provisionally in the historical empirical selection; study 8 has no MMAT responses pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. Historical reviewer labels do not establish completed human reading or appraisal; human verification remains pending."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
@@ -467,12 +470,12 @@
     {
       "path": "research/exports/analysis/papers.csv",
       "role": "row-level versioned representation of the current snapshot",
-      "sha256": "993f4ad1b1be32fcb9789172929f191df983ed0db3694858de521098f66b1a07"
+      "sha256": "02049b2b7a57f28dba86a243aa9ed0effbcf6c2e311ee25e080831ff0e2010e5"
     },
     {
       "path": "research/exports/analysis/papers.json",
       "role": "JSON representation of the current snapshot",
-      "sha256": "7dd0e1a4a39756d9034fa5bd5c981726857554cd33b09a050762ffe1ddcd202b"
+      "sha256": "7f875bf26751222c1f340a10b1fcc7c03072f82866b1155e4ca179f70c30ed05"
     },
     {
       "path": "research/exports/analysis/deduplication_identity_audit.csv",
@@ -480,14 +483,19 @@
       "sha256": "ad11fce48c8e254567dbf459cf00f8f2f3d71f70e15dfdf084db8219a996db4a"
     },
     {
+      "path": "research/data/adjudicated_record_corrections.csv",
+      "role": "separate source-linked ledger for two same-report duplicates and two corrected publication years",
+      "sha256": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee"
+    },
+    {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "eaa8cfec70b9459c66bf24c9b52bdb02ca01ac918b995e3badfe807ec9a2d30e"
+      "sha256": "8123735da647d9b926966f7a86bbaba58595b24466190abfc6045f33b6ace4c0"
     },
     {
       "path": "research/exports/reports/summary.json",
       "role": "PRISMA and derived summary statistics",
-      "sha256": "458ed5f78a6d21a54fbe8d65360286eceeb6d7591b611b0f7d2d6be68fa07dd1"
+      "sha256": "1030eee81c99ebd4a922aff94bdaaa90cc3355407453799ec3a5531130024467"
     },
     {
       "path": "research/exports/references/included_papers.bib",
@@ -577,12 +585,12 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "55fce6612c19128d39be5bbd9bb568fdc37b2caa4a0bfda4309a8d8bd5cad2b1"
+      "sha256": "0daafa876a0dd510705ba801d87784320df1e7f34c60bb6f118b4648667fcef7"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "664b727c09ac0d11d89e0e43a6ad2171034dd4ea50645bfe4f2acd06d564fde5"
+      "sha256": "30c7182746a9c21e99fe3e4da257643aa97181fe4071c8fd29ff58f7a147cfe2"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
@@ -607,12 +615,12 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "58277ad00813a68973484a37e7e362ce96c9a7e8f5301b7eb17772b80b9a4509"
+      "sha256": "4617493bb7c236a97f363c7de68694c090a6eaf0b77da074b876d5fe6418983a"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
       "role": "SQLite-independent transformation from the versioned row export and adjudication ledger",
-      "sha256": "b5005bfbbe696d38939d7f50b17d79f521a66838d80ca50b9159e8f8c0475372"
+      "sha256": "649e8d9f4c4108f7752b2b97430283b58d018ca134535ec0daf02a172421dcf7"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
@@ -693,12 +701,12 @@
       "python -m research.src.cli --db /path/to/systematic_review.sqlite export",
       "python -m research.src.cli --db /path/to/systematic_review.sqlite generate-manifest"
     ],
-    "fresh_collection": "python -m research.src.cli run-pipeline --min-score 4.0",
+    "fresh_collection": "Pending: the selector still applies its legacy --min-score 4.0. Do not treat a fresh run as following the approved amendment until the selector is updated and the full population is reassessed.",
     "limitations": [
       "External API responses, metadata and cache state can change on a fresh collection.",
-      "The duplicate-candidate audit is not a semantic adjudication and does not change PRISMA counts.",
+      "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The empirical MMAT screening denominator is 15, with preliminary operational routes explicitly limited; 1 unretrieved shortlisted report remains outside the denominator."
+      "The current empirical MMAT screening denominator is 15; 15 have category-specific appraisals and three await design adjudication with Q1-Q5 unassessed. 15 records remain provisionally included in the empirical corpus. Study 8 has no MMAT responses pending human adjudication of eligibility and appraisal unit; do not combine its distinct datasets. No MMAT appraisal was assigned to the 1 unretrieved shortlisted report. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis."
     ]
   }
 }

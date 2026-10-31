@@ -6,10 +6,14 @@ from src.exports.excel import export_for_analysis, remove_legacy_mmat_from_notes
 from src.processing.adjudicated_snapshot import (
     EXPECTED_DECISION_IDS,
     PAPERS_PATH,
+    _updated_prisma,
     apply_adjudications,
     apply_current_adjudications,
     apply_current_scope_adjudications,
+    apply_record_corrections,
+    _reconciled_json_records,
     load_decisions,
+    load_record_corrections,
 )
 
 
@@ -43,10 +47,10 @@ def test_current_scope_has_reconciled_prisma_stages_and_empirical_core() -> None
     papers = pd.read_csv(PAPERS_PATH, encoding="utf-8-sig")
     replayed = apply_current_adjudications(papers)
 
-    assert len(replayed) == 11877
+    assert len(replayed) == 11875
     assert replayed["selection_stage"].value_counts().to_dict() == {
-        "screening": 9391,
-        "prioritization": 2468,
+        "screening": 9393,
+        "prioritization": 2464,
         "included": 15,
         "not_retrieved": 1,
         "eligibility": 1,
@@ -67,9 +71,104 @@ def test_current_scope_has_reconciled_prisma_stages_and_empirical_core() -> None
     assert row_6919["notes"].startswith(
         "Adjudicação de escopo 2026-10-12 (included_empirical_core);"
     )
+    row_15 = replayed.loc[replayed["id"] == 15, "notes"].item()
+    assert row_15.count("Adjudicação de escopo PR54 aplicada (estudo 15)") == 1
     assert replayed.loc[replayed["id"] == 6921, "selection_stage"].item() == "eligibility"
     assert replayed.loc[replayed["id"].isin([1, 5, 10]), "selection_stage"].eq("included").all()
     assert replayed.loc[replayed["id"] == 6923, "selection_stage"].item() == "not_retrieved"
+
+
+def test_confirmed_record_corrections_preserve_duplicate_provenance_and_years() -> None:
+    papers = pd.read_csv(PAPERS_PATH, encoding="utf-8-sig")
+    replayed = apply_current_adjudications(papers)
+    rows = replayed.set_index("id")
+    corrections = {int(row["record_id"]): row for row in load_record_corrections()}
+
+    assert 6952 not in rows.index
+    assert corrections[6952]["corrected_year"] == "2016"
+    assert corrections[6952]["duplicate_of"] == "155"
+    assert corrections[6952]["previous_selection_stage"] == "prioritization"
+    assert "removido antes da triagem" in corrections[6952]["notes"].lower()
+    assert "5ebb4290e486a924fd9ab8ee2c46efe7daa94adc54f5de615df15b2ff2dc3f01" in corrections[6952]["evidence_description"]
+
+    assert 6977 not in rows.index
+    assert corrections[6977]["corrected_year"] == "2017"
+    assert corrections[6977]["duplicate_of"] == "8"
+    assert corrections[6977]["previous_selection_stage"] == "prioritization"
+    assert "removido antes da triagem" in corrections[6977]["notes"].lower()
+    assert "IsIdenticalTo" in corrections[6977]["evidence_description"]
+
+    assert int(rows.loc[7001, "year"]) == 1997
+    assert rows.loc[7001, "selection_stage"] == "screening"
+    assert rows.loc[7001, "exclusion_reason"] == "year_range"
+    assert int(rows.loc[361, "year"]) == 2005
+    assert rows.loc[361, "selection_stage"] == "screening"
+    assert rows.loc[361, "exclusion_reason"] == "year_range"
+
+    assert len(replayed) == 11875
+    assert len(load_record_corrections()) == 4
+    prisma = _updated_prisma(replayed)
+    assert prisma["identification"] == 11904
+    assert prisma["duplicates_removed"] == 29
+    assert prisma["screening"] == 11875
+    assert prisma["screening_excluded"] == 9393
+    assert prisma["prioritization"] == 2482
+    assert prisma["prioritization_excluded"] == 2464
+    assert prisma["shortlisted"] == 18
+    assert prisma["included"] == 15
+    assert prisma["deduplication_audit"]["deterministic_identity_duplicate_rows"] == 27
+    assert prisma["deduplication_audit"]["adjudicated_same_report_duplicate_rows"] == 2
+
+
+def test_record_corrections_replay_on_a_small_source_frame() -> None:
+    papers = pd.DataFrame(
+        [
+            {"id": 8, "year": 2017, "selection_stage": "included", "status": "included", "exclusion_reason": "", "inclusion_criteria_met": "year_range; math_focus"},
+            {"id": 155, "year": 2016, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "inclusion_criteria_met": "year_range; math_focus"},
+            {"id": 6952, "year": 2020, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "inclusion_criteria_met": "year_range; math_focus"},
+            {"id": 6977, "year": 2018, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "inclusion_criteria_met": "year_range; math_focus"},
+            {"id": 361, "year": 2024, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "inclusion_criteria_met": "year_range; math_focus"},
+            {"id": 7001, "year": 2015, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "inclusion_criteria_met": "year_range; math_focus"},
+        ]
+    )
+
+    corrected = apply_record_corrections(papers)
+    rows = corrected.set_index("id")
+
+    assert set(rows.index) == {8, 155, 361, 7001}
+    assert rows.loc[361, "year"] == 2005
+    assert rows.loc[361, "selection_stage"] == "screening"
+    assert rows.loc[361, "exclusion_reason"] == "year_range"
+    assert rows.loc[7001, "year"] == 1997
+    assert rows.loc[7001, "selection_stage"] == "screening"
+    assert rows.loc[7001, "exclusion_reason"] == "year_range"
+
+
+def test_json_export_preserves_unmodified_source_text_and_removes_duplicate_rows() -> None:
+    source = pd.DataFrame(
+        [
+            {"id": 361, "year": 2024, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "notes": "historical score"},
+            {"id": 6952, "year": 2020, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "notes": "duplicate row"},
+        ]
+    )
+    updated = pd.DataFrame(
+        [
+            {"id": 361, "year": 2005, "selection_stage": "screening", "status": "excluded", "exclusion_reason": "year_range", "notes": "corrected year", "abstract": "unchanged"},
+        ]
+    )
+    original = [
+        {"id": 361, "year": 2024, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "notes": "historical score", "abstract": "paragraph one\r\nparagraph two"},
+        {"id": 6952, "year": 2020, "selection_stage": "prioritization", "status": "excluded", "exclusion_reason": "low_relevance_score", "notes": "duplicate row", "abstract": "duplicate"},
+    ]
+
+    records = _reconciled_json_records(source, updated, original)
+
+    assert [record["id"] for record in records] == [361]
+    assert records[0]["year"] == 2005
+    assert records[0]["selection_stage"] == "screening"
+    assert records[0]["exclusion_reason"] == "year_range"
+    assert records[0]["notes"] == "corrected year"
+    assert records[0]["abstract"] == "paragraph one\r\nparagraph two"
 
 
 def test_current_scope_removes_superseded_mmat_fields_without_losing_other_notes() -> None:

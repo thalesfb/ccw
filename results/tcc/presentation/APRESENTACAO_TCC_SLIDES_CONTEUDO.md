@@ -1,5 +1,10 @@
 # Apresentação do TCC — conteúdo dos slides
 
+> **Rascunho histórico — não usar na defesa.** Os números deste storyboard
+> antecedem a reconciliação de 31/10/2026 e a emenda de seleção aprovada. A
+> reaplicação dos critérios ainda está pendente; o storyboard e o PPTX serão
+> atualizados depois que o corpus resultante for fechado.
+
 ## Identidade
 
 - **Título:** Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais

@@ -16,9 +16,9 @@ fluxo de desenvolvimento estão em
 ## Revisão sistemática e MMAT
 
 <!-- ccw-sync:start snapshot -->
-Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; cobertura documental: 20/10/2026.
+Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados, 27 remoções determinísticas por DOI/URL e 11.877 registros na triagem. Foram 2.486 submetidos à priorização operacional; 2.468 não avançaram dessa etapa. A priorização encaminhou 18 candidatos, não 18 inclusões finais: 15 estudos empíricos mantidos provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). A emenda aprovada em 31/10/2026 retira o escore de critério de exclusão, mas ainda não foi reaplicada à população. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->

@@ -73,11 +73,11 @@ def test_current_deduplication_description_matches_identity_audit() -> None:
         "após padronização, ou o mesmo \\textit{Uniform Resource Locator} "
         "(URL, localizador uniforme de recursos)"
     ) in methodology
-    assert "removeram 27 duplicatas: 25 por DOI e 2 por URL" in methodology
-    assert "232 registros com título repetido" in methodology
-    assert "restantes foram indicados para conferência manual" in methodology
+    assert "Essa etapa removeu 27 duplicatas por DOI/URL" in methodology
+    assert "232 excedentes em grupos repetidos" in methodology
+    assert "sem evidência de identidade, os demais casos permanecem apenas como candidatos" in methodology
     review = _read(TCC_CONTENT / "resultadosesperados.tex")
-    assert "não tratados como duplicatas confirmadas" in review
+    assert "sem confirmação de identidade permanecem sem remoção automática" in review
     assert "determinística" not in methodology
 
 
