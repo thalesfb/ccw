@@ -1,9 +1,9 @@
 # Apresentação Slidev do TCC
 
-> **Rascunho desatualizado em 31/10/2026:** o deck Slidev, o storyboard e o
-> PPTX ainda exibem números da seleção anterior. A regra aprovada para retirar
-> o escore de critério de exclusão aguarda reaplicação uniforme; não use estes
-> materiais na defesa até a atualização posterior ao fechamento do corpus.
+> **Rascunho fora de uso na defesa:** o Slidev, o storyboard e o PPTX ainda
+> descrevem a seleção de 15 estudos anterior à emenda. O fluxo histórico foi
+> reconciliado em 31/10/2026, mas a regra aprovada ainda aguarda reaplicação
+> uniforme; não use estes materiais na defesa antes da atualização do corpus.
 
 ## Arquivo da defesa
 
@@ -29,10 +29,11 @@ O material em `results/ptc/presentation/` é uma terceira apresentação,
 histórica, referente ao PTC. Serve apenas como referência narrativa e visual,
 nunca como fonte dos números atuais do TCC.
 
-Os gráficos versionados em `research/exports/visualizations` já refletem a
-reconciliação de dados. Os números escritos nos slides ainda não foram
-atualizados e devem ser revistos junto com o deck depois da reaplicação da
-emenda e da revisão do corpus.
+Os gráficos versionados, as contagens do fluxo histórico e as legendas da
+reconciliação de 31/10/2026 estão atualizados. A síntese dos 15 estudos e outras
+partes da narrativa ainda descrevem a seleção pré-emenda; devem ser revistas
+depois da reaplicação uniforme do protocolo. Até lá, o conjunto não é corpus
+final e os materiais continuam fora de uso na defesa.
 
 ## Objetivos de referência do manuscrito
 

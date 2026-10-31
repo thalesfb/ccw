@@ -157,7 +157,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("Rascunho histórico — não usar na defesa", slides)
         self.assertNotIn("Snapshot: 03/09/2026", slides)
         self.assertNotIn("Snapshot adjudicado: 03/09/2026", pptx_source)
-        self.assertIn("Versão revisada: 28/10/2026", pptx_source)
+        self.assertIn("Rascunho histórico, não usar na defesa", pptx_source)
         self.assertIn("não recebeu MMAT", pptx_source)
         self.assertNotIn("não receberam MMAT", pptx_source)
 
