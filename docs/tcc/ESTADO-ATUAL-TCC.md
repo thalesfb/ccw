@@ -1,6 +1,6 @@
 # Estado atual e limites da versão do TCC
 
-**Atualização documental:** 20 de outubro de 2026
+**Atualização documental:** 31 de outubro de 2026
 
 Este registro público descreve o estado verificável da versão atual do
 Trabalho de Conclusão de Curso e separa resultados produzidos, validações
@@ -69,6 +69,14 @@ metodológica explícita sobre fonte, licença, unidade de análise, desfecho,
 divisão dos dados e critérios de avaliação.
 
 ## Decisões metodológicas pendentes
+
+Em 31/10/2026, o autor aprovou uma emenda retrospectiva ao protocolo: a
+pontuação de relevância passa a ordenar a fila de leitura e deixa de funcionar
+como critério de exclusão. Os critérios de elegibilidade permanecem os mesmos;
+nenhum recorte mais estreito foi adotado. A reaplicação e a auditoria dos filtros
+automáticos ainda não foram concluídas. Portanto, o snapshot acima, inclusive o
+corpus de 15 estudos, registra a análise anterior à emenda. Ver
+[`DECISAO-EMENDA-SELECAO-2026-10-31.md`](DECISAO-EMENDA-SELECAO-2026-10-31.md).
 
 O escopo desta entrega foi confirmado como revisão crítica da literatura e
 especificação conceitual, sem exigir treinamento ou validação educacional do
