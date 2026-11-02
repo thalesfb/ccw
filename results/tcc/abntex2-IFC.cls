@@ -63,7 +63,7 @@
     \textbf{\large\imprimirautor}
    
     \vspace*{7.5cm}
-    \parbox{15cm}{
+    \parbox{\textwidth}{
         \OnehalfSpacing\centering\large\textbf{\imprimirtitulo}
     }
     \vspace*{\fill}
