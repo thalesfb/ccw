@@ -1,6 +1,10 @@
 \begingroup\small\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}
 \setlength{\LTleft}{0pt}
-\setlength{\LTcapwidth}{\textwidth}\renewcommand{\arraystretch}{1.12}
+\setlength{\LTright}{\fill}
+\settowidth{\LTcapwidth}{\begin{tabular}{|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{3.3cm}|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}p{4.5cm}|}
+\textbf{Estudo} & \textbf{Finalidade principal} & \textbf{Família de técnica} & \textbf{Nível e n (unidade)} \\ \hline
+\end{tabular}}
+\renewcommand{\arraystretch}{1.12}
 \begin{longtable}{|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{3.3cm}|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}p{4.5cm}|}
 \caption{Finalidade, técnica e população dos estudos incluídos.}\label{qua:sintese-tipologia}\\\hline
 \textbf{Estudo} & \textbf{Finalidade principal} & \textbf{Família de técnica} & \textbf{Nível e n (unidade)} \\ \hline
@@ -28,7 +32,11 @@
 \fonte{Elaborado pelo autor (2026).}
 \begingroup\small\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}
 \setlength{\LTleft}{0pt}
-\setlength{\LTcapwidth}{\textwidth}\renewcommand{\arraystretch}{1.12}
+\setlength{\LTright}{\fill}
+\settowidth{\LTcapwidth}{\begin{tabular}{|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{3.3cm}|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}p{4.5cm}|}
+\textbf{Estudo} & \textbf{Alvo} & \textbf{Validação e fonte} & \textbf{Métrica ou resultado reportado} \\ \hline
+\end{tabular}}
+\renewcommand{\arraystretch}{1.12}
 \begin{longtable}{|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{3.3cm}|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}p{4.5cm}|}
 \caption{Alvos, validação e métricas dos estudos incluídos.}\label{qua:sintese-validacao}\\\hline
 \textbf{Estudo} & \textbf{Alvo} & \textbf{Validação e fonte} & \textbf{Métrica ou resultado reportado} \\ \hline
@@ -54,13 +62,18 @@
 \citeonline{Echeveria2025_6920} & Quatro categorias de mentalidade derivadas de questionário; não domínio matemático ou resposta à intervenção. & Relato menciona dois terços,80/\allowbreak{}20 e dez dobras; execução final incerta. Oito itens do alvo permanecem nos preditores. (páginas físicas 3 e 6–12) & SVM: 83/\allowbreak{}84=98,8\%, Kappa 0,98. Matriz MLP tem total impresso 84 e colunas somando 86; não harmonizada. \\ \hline
 \end{longtable}\endgroup
 \fonte{Elaborado pelo autor (2026).}
-\begin{table}[htbp]\centering
-\caption{Frequência da finalidade principal no corpus de 15 estudos.}\label{tab:tipologia-frequencias}
-\begin{tabular}{lr}\hline Finalidade & Estudos (n) \\ \hline
+\newsavebox{\TCCFrequencyTableBox}
+\sbox{\TCCFrequencyTableBox}{%
+\begin{tabular}{>{\raggedright\arraybackslash}p{10.2cm}r}\hline\textbf{Finalidade} & \textbf{Estudos (n)} \\ \hline
 Predição/\allowbreak{}classificação & 8 \\
 Personalização/\allowbreak{}STI & 3 \\
 Modelagem cognitiva & 1 \\
 Intervenção didática & 2 \\
 Integração curricular & 1 \\
-\hline Total & 15 \\ \hline\end{tabular}
-\fonte{Elaborado pelo autor (2026).}\end{table}
+\hline\textbf{Total} & 15 \\ \hline\end{tabular}}
+\begin{table}[htbp]\centering
+\begin{minipage}{\wd\TCCFrequencyTableBox}
+\caption{Frequência da finalidade principal no corpus de 15 estudos.}\label{tab:tipologia-frequencias}
+\usebox{\TCCFrequencyTableBox}
+\fonte{Elaborado pelo autor (2026).}
+\end{minipage}\end{table}
