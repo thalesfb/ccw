@@ -75,10 +75,12 @@ aprovação e catalogação.
 
 Quanto ao alinhamento, a seção 5.8 exige que identificação, título, fonte,
 legenda e notas acompanhem as margens da ilustração; não prescreve, por si só,
-centralização nem alinhamento à esquerda. O template específico do curso para
-TC tradicional (2026) configura as legendas com `\captionstyle[\raggedright]{}`;
-essa configuração foi adotada no TCC como escolha do modelo institucional, não
-como exigência atribuída à ABNT.
+centralização nem alinhamento à esquerda. Para manter consistência com o template
+do curso para TC tradicional (2026), o TCC alinha legendas de uma ou várias linhas
+à esquerda e faz a fonte acompanhar a margem do elemento. Em quadros e tabelas
+estreitos, a legenda e a fonte acompanham a largura do próprio elemento. Essa é
+uma escolha visual do projeto baseada no modelo institucional, não uma exigência
+de alinhamento atribuída à ABNT.
 
 A NBR 10520:2023, seção 6.1.6, exige letras minúsculas após o ano para distinguir
 documentos da mesma autoria publicados no mesmo ano. Como o TCC cita duas obras
@@ -109,9 +111,10 @@ software.
 O item do curso identifica o primeiro pacote como ``TC – Trabalho de Conclusão
 de Curso – TRADICIONAL'' e aponta para ``modelo-latex-ifc-TCC-Tradicional-2026.zip''.
 O pacote tradicional foi comparado localmente em 14 de outubro de 2026. Seu
-`config_inicial.tex` usa `\hangcaption` e `\captionstyle[\raggedright]{}`; o TCC
-foi alinhado nesse ponto, sem substituir em bloco as adaptações e revisões já
-incorporadas. A cópia local não foi comparada criptograficamente com o arquivo
+`config_inicial.tex` usa `\hangcaption` e `\captionstyle[\raggedright]{}`; no TCC,
+o alinhamento à esquerda também é aplicado às legendas longas, e a fonte acompanha
+a margem do quadro, tabela ou ilustração. As demais adaptações e revisões foram
+preservadas. A cópia local não foi comparada criptograficamente com o arquivo
 remoto do Drive, cuja visualização solicita login. O pacote de desenvolvimento
 também aponta para o Drive e não foi inspecionado. No pacote tradicional, a classe
 usa o brasão da República na capa e não insere imagem na folha de rosto; a classe

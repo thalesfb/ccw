@@ -89,7 +89,7 @@
 % O texto passado ao comando deve conter apenas a identificação da fonte.
 \renewcommand{\fonte}[1]{%
   \par\vspace{0.25cm}%
-  {\centering\ABNTEXfontereduzida\textbf{Fonte:} #1\par}%
+  {\ABNTEXfontereduzida\raggedright\textbf{Fonte:} #1\par}%
   \vspace{0.15cm}%
 }
 
@@ -104,8 +104,8 @@
 \setlength{\emergencystretch}{2em}
 
 \hangcaption
-% Alinhamento reproduzido do config_inicial.tex do template IFC para TC tradicional (2026).
-\captionstyle[\raggedright]{}
+% Mantém legendas curtas e longas à esquerda, nas margens do elemento descrito.
+\captionstyle[\raggedright]{\raggedright}
 \setlength{\belowcaptionskip}{5pt}
 \setlength{\abovecaptionskip}{5pt}
 

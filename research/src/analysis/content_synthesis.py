@@ -56,12 +56,28 @@ def component_counts(root: Path = ROOT) -> dict[str, dict[str, dict[str, int]]]:
                      for i in range(1, 6)} for design in sorted({row["design"] for row in rows})}
 
 
-def longtable(caption: str, label: str, widths: str, headers: list[str], rows: list[list[str]]) -> str:
+def longtable(
+    caption: str,
+    label: str,
+    widths: str,
+    headers: list[str],
+    rows: list[list[str]],
+    *,
+    caption_width_rows: list[list[str]] | None = None,
+) -> str:
     heading = " & ".join(r"\textbf{" + header + "}" for header in headers) + r" \\ \hline"
+    width_measurement = [
+        r"\settowidth{\LTcapwidth}{\begin{tabular}{" + widths + "}",
+        heading,
+        *[" & ".join(row) + r" \\" for row in (caption_width_rows or [])],
+        r"\end{tabular}}",
+    ]
     return "\n".join([
         r"\begingroup\small\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}",
         r"\setlength{\LTleft}{0pt}",
-        r"\setlength{\LTcapwidth}{\textwidth}\renewcommand{\arraystretch}{1.12}",
+        r"\setlength{\LTright}{\fill}",
+        *width_measurement,
+        r"\renewcommand{\arraystretch}{1.12}",
         r"\begin{longtable}{" + widths + "}",
         r"\caption{" + caption + r"}\label{" + label + r"}\\\hline",
         heading, r"\endfirsthead",
@@ -85,13 +101,21 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
     text += longtable("Alvos, validação e métricas dos estudos incluídos.", "qua:sintese-validacao", widths,
                       ["Estudo", "Alvo", "Validação e fonte", "Métrica ou resultado reportado"], second)
     frequencies = Counter(row["purpose"] for row in studies)
+    frequency_rows = [
+        f"{tex(purpose)} & {count}" + r" \\" for purpose, count in frequencies.items()
+    ]
     text += "\n".join([
+        r"\newsavebox{\TCCFrequencyTableBox}",
+        r"\sbox{\TCCFrequencyTableBox}{%",
+        r"\begin{tabular}{>{\raggedright\arraybackslash}p{10.2cm}r}\hline\textbf{Finalidade} & \textbf{Estudos (n)} \\ \hline",
+        *frequency_rows,
+        r"\hline\textbf{Total} & 15 \\ \hline\end{tabular}}",
         r"\begin{table}[htbp]\centering",
+        r"\begin{minipage}{\wd\TCCFrequencyTableBox}",
         r"\caption{Frequência da finalidade principal no corpus de 15 estudos.}\label{tab:tipologia-frequencias}",
-        r"\begin{tabular}{lr}\hline Finalidade & Estudos (n) \\ \hline",
-        *[f"{tex(purpose)} & {count}" + r" \\" for purpose, count in frequencies.items()],
-        r"\hline Total & 15 \\ \hline\end{tabular}",
-        r"\fonte{Elaborado pelo autor (2026).}\end{table}", "",
+        r"\usebox{\TCCFrequencyTableBox}",
+        r"\fonte{Elaborado pelo autor (2026).}",
+        r"\end{minipage}\end{table}", "",
     ])
     count_rows = []
     for group, criteria in mmat_counts(root).items():
@@ -100,16 +124,27 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
             count_rows.append([tex(group_name), criterion.upper(),
                                *[str(values.get(answer, 0)) for answer in ("Y", "N", "CT")],
                                str(sum(values.values()))])
-    counts_tex = longtable("Respostas MMAT por critério e categoria de desenho.", "qua:mmat-contagens",
-                           "|p{6.3cm}|c|r|r|r|r|", ["Categoria", "Critério", "Y", "N", "CT", "n"], count_rows)
+    counts_tex = longtable(
+        "Respostas MMAT por critério e categoria de desenho.",
+        "qua:mmat-contagens",
+        "|p{6.3cm}|c|r|r|r|r|",
+        ["Categoria", "Critério", "Y", "N", "CT", "n"],
+        count_rows,
+        caption_width_rows=count_rows,
+    )
     component_rows = [[tex(GROUPS[group]), criterion.upper(),
                        *[str(values.get(answer, 0)) for answer in ("Y", "N", "CT")],
                        str(sum(values.values()))]
                       for group, criteria in component_counts(root).items()
                       for criterion, values in criteria.items()]
-    counts_tex += longtable("Contagens separadas dos componentes dos três estudos mistos.",
-                            "qua:mmat-contagens-componentes", "|p{6.3cm}|c|r|r|r|r|",
-                            ["Categoria do componente", "Critério", "Y", "N", "CT", "n"], component_rows)
+    counts_tex += longtable(
+        "Contagens separadas dos componentes dos três estudos mistos.",
+        "qua:mmat-contagens-componentes",
+        "|p{6.3cm}|c|r|r|r|r|",
+        ["Categoria do componente", "Critério", "Y", "N", "CT", "n"],
+        component_rows,
+        caption_width_rows=component_rows,
+    )
     return {"research/exports/references/study_synthesis_tcc.tex": text,
             "research/exports/references/mmat_counts_tcc.tex": counts_tex}
 

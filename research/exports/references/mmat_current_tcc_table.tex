@@ -7,7 +7,12 @@
 \fontsize{10}{12}\selectfont
 \def\LTcaptype{quadro}
 \setlength{\tabcolsep}{2pt}
-\setlength{\LTcapwidth}{\textwidth}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{\fill}
+\settowidth{\LTcapwidth}{\begin{tabular}{|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{4.5cm}|ccccccc|}
+\textbf{Estudo} & \textbf{Desenho} & \textbf{S1} & \textbf{S2} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} & \textbf{Q5} \\
+ &  & CT & CT & CT & CT & CT & CT & CT \\
+\end{tabular}}
 \begin{longtable}{|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{4.5cm}|ccccccc|}
 \caption{Triagem e apreciação preliminar pelo MMAT 2018 de 15 estudos do corpus.}\label{qua:mmat-reavaliacao-atual}\\
 \hline
@@ -51,7 +56,13 @@
 \def\LTcaptype{quadro}
 \fontsize{10}{12}\selectfont
 \setlength{\tabcolsep}{2pt}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{\fill}
 \renewcommand{\arraystretch}{1.15}
+\settowidth{\LTcapwidth}{\begin{tabular}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|ccccc|>{\raggedright\arraybackslash}p{6.1cm}|}
+\textbf{Estudo} & \textbf{Componente} & \textbf{C1} & \textbf{C2} & \textbf{C3} & \textbf{C4} & \textbf{C5} & \textbf{Síntese e páginas consultadas} \\
+ &  & CT & CT & CT & CT & CT &  \\
+\end{tabular}}
 \begin{longtable}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|ccccc|>{\raggedright\arraybackslash}p{6.1cm}|}
 \caption{Componentes qualitativos e quantitativos dos estudos de métodos mistos.}\label{qua:mmat-componentes}\\
 \hline

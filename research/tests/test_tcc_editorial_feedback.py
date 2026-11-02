@@ -378,7 +378,8 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_captions_follow_the_2026_institutional_template(self):
         config = (TCC / "config_inicial.tex").read_text(encoding="utf-8")
-        self.assertIn(r"\captionstyle[\raggedright]{}", config)
+        self.assertIn(r"\captionstyle[\raggedright]{\raggedright}", config)
+        self.assertIn(r"{\ABNTEXfontereduzida\raggedright\textbf{Fonte:}", config)
         self.assertNotIn(r"\captionstyle{\centering}", config)
 
     def test_mmat_preserves_readable_type_in_a_portrait_width_table(self):
@@ -388,7 +389,10 @@ class EditorialFeedbackTests(unittest.TestCase):
         mmat = review.split(r"\section{Avaliação Metodológica com o MMAT}", 1)[1]
         self.assertIn(r"\fontsize{10}{12}", table)
         self.assertIn(r"\setlength{\tabcolsep}{2pt}", generator)
-        self.assertIn(r"\setlength{\LTcapwidth}{\textwidth}", generator)
+        self.assertIn("def _caption_width_measurement(", generator)
+        self.assertIn(r"\settowidth{\LTcapwidth}{\begin{tabular}{", generator)
+        self.assertIn(r"\setlength{\LTleft}{0pt}", generator)
+        self.assertIn(r"\setlength{\LTright}{\fill}", generator)
         self.assertIn(r"\multicolumn{9}{r}{\textit{Continua na próxima página}}", generator)
         for width in ("4.5",):
             self.assertIn("p{" + width + "cm}", generator)
