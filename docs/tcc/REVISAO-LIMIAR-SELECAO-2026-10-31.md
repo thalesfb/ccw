@@ -1,18 +1,14 @@
-# Proposta de revisão do procedimento de seleção — 31/10/2026
+# Estado da seleção e limites do escore
 
-## Situação da proposta
+Atualização documental: 03/11/2026.
 
-Não há mudança aprovada ou aplicada à regra de seleção. O corte 4,0 e a seleção
-histórica de 15 estudos permanecem inalterados. Os textos integrais adicionais
-já solicitados serão avaliados antes de decidir se o procedimento será mantido
-ou modificado e, neste último caso, como será reaplicado.
+## Conjunto adotado
 
-A possibilidade em análise é usar o escore somente para ordenar a leitura,
-sem alterar os critérios de domínio matemático, técnica computacional,
-evidência empírica, período, idioma e tipo documental. Não foi adotado um
-recorte mais estreito nem uma escolha de estudos por conveniência.
+Esta versão relata a seleção histórica de 15 estudos sob o corte 4,0.
+Os critérios de elegibilidade e o conjunto de estudos não foram alterados.
+Não houve nova seleção nem incorporação de estudos adicionais.
 
-## Motivo e evidência
+## Limitações documentadas
 
 A pontuação foi produzida por regras lexicais e não foi validada contra a
 elegibilidade. A verificação focal de textos integrais encontrou elegíveis abaixo
@@ -31,34 +27,20 @@ estudos elegíveis. Os incertos e não recuperados permanecem separados dos
 inelegíveis. As decisões e páginas examinadas estão preservadas no estudo de
 decisão privado do titular.
 
-## O que permanece nesta versão
+## Reconciliação dos dados
 
-O seletor continua com o corte 4,0. Os critérios atuais de matemática, técnica
-computacional, evidência empírica, período de 2015–2026 com corte em 31/08/2026,
-idiomas inglês e português e tipos documentais especificados não foram
-alterados. A estratégia de busca não foi reprocessada.
+Em 31/10, foram confirmados dois registros do mesmo relatório (6952 → 155;
+6977 → 8) e corrigidos os anos originais dos registros 361 (2005) e 7001
+(1997). O fluxo mantém 11.904 identificados, 29 duplicatas removidas e
+11.875 registros únicos triados; 9.393 foram excluídos na triagem, 2.482
+avançaram à priorização e 2.464 não avançaram: 2.459 por pontuação e cinco
+por outros motivos de escopo. A lista preliminar contém 18 registros,
+dos quais 15 constituem o conjunto empírico apresentado.
 
-Em 31/10, a reconciliação confirmou dois registros do mesmo relatório (6952 →
-155; 6977 → 8) e corrigiu os anos originais dos registros 361 (2005) e 7001
-(1997). O fluxo mantém 11.904 registros identificados, 29 duplicatas removidas
-e 11.875 registros únicos triados; 9.393 foram excluídos na triagem, 2.482
-avançaram à priorização e 2.464 não avançaram sob as regras históricas: 2.459
-por pontuação e cinco por outros motivos de escopo. A lista preliminar de 18
-registros e a seleção histórica de 15 estudos permanecem iguais.
+As correções de identidade e ano não constituem mudança da regra de seleção.
+As respostas MMAT permanecem preliminares e não foram modificadas nesta
+atualização documental. O escore não equivale a avaliação de elegibilidade,
+escore de qualidade ou medida de aprendizagem.
 
-Essas correções de identidade e ano não constituem mudança do procedimento de
-seleção. As apreciações MMAT atuais também não foram substituídas.
-
-## Próximas decisões
-
-Primeiro serão avaliados os textos integrais adicionais já solicitados.
-Depois será decidido se o procedimento deve ser mantido ou modificado. Se
-houver mudança, sua aplicação deverá examinar os registros barrados somente
-pelo escore, verificar os filtros de resumo e de termos metodológicos, e
-identificar relatórios do mesmo estudo. Casos incertos ou não recuperados
-continuarão separados das exclusões confirmadas, com motivo e localização da
-evidência para cada decisão.
-
-Uma eventual mudança e sua aplicação deverão ser relatadas conforme o item
-24c do PRISMA 2020. Só então caberá atualizar a seleção, o MMAT e a síntese
-afetados por essa decisão.
+O registro estruturado do estado atual está em
+[`selection_status_current.json`](../../research/data/selection_status_current.json).

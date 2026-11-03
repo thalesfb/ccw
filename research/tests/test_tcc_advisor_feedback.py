@@ -250,7 +250,7 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "o autor conduziu a seleção e a apreciação preliminar" in chapter.lower()
     assert "apoio de regras automatizadas e de ia generativa" in chapter.lower()
     assert "o orientador rafael zanin e o coorientador manassés ribeiro ainda não revisaram especificamente esses julgamentos" in chapter.lower()
-    assert "o autor encaminhará o tcc a ambos após esta rodada" in chapter.lower()
+    assert "o autor encaminhará" not in chapter.lower()
     assert "os julgamentos mmat dependem de conferência humana por fonte e critério" in chapter.lower()
     assert "não foram convertidos em escore agregado ou síntese final de qualidade" in chapter
     for removed in ("adjudicação",):
@@ -265,10 +265,10 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "O autor conduziu a seleção" in selection_row
     assert "regras automatizadas e apoio de IA generativa" in selection_row
     assert "o orientador e o coorientador acompanham o trabalho" in selection_row.lower()
-    assert "ainda não revisaram essas decisões de forma independente" in selection_row.lower()
+    assert "ainda não revisaram especificamente essas decisões" in selection_row.lower()
     assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
     assert "O autor realizou a apreciação preliminar com apoio de IA generativa" in appraisal_row
-    assert "o orientador e o coorientador ainda não revisaram esses julgamentos de forma independente" in appraisal_row.lower()
+    assert "o orientador e o coorientador ainda não revisaram especificamente esses julgamentos" in appraisal_row.lower()
     assert "conferência humana por fonte e critério permanece pendente" in appraisal_row
     assert "a verificação documental permanece incompleta" not in selection_row
     assert "com fontes e julgamentos ainda incompletos" not in appraisal_row

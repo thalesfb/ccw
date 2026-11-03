@@ -1,10 +1,6 @@
 {
-  "amendment_id": "PRISMA-24c-2026-10-31",
-  "decision_date": null,
-  "decision_authority": "TCC author",
-  "status": "pending_full_text_review",
+  "status": "historical_snapshot_unchanged",
   "protocol_item": "study_selection",
-  "previous_rule": "A relevance score of at least 4.0 on the observed 0-4.5 scale was used to advance records from screening to full-text consideration.",
   "eligibility_criteria_changed": false,
   "scope_refinement_adopted": false,
   "search_reprocessed": false,
@@ -60,14 +56,12 @@
       "master's dissertations"
     ]
   },
-  "current_snapshot_note": "The current version retains the historical 15-study selection under the 4.0 cutoff, without new studies, altered appraisals or changed eligibility rules. Identity and year corrections remain applied. A decision on the selection proposal is pending assessment of the additional full texts already requested.",
-  "prisma_reporting": "The proposed change has not been approved or applied. If a protocol amendment is later adopted, report its date, rationale and actual application under PRISMA 2020 item 24c.",
-  "proposal_date": "2026-10-31",
+  "current_snapshot_note": "This version reports the historical 15-study selection under the 4.0 cutoff. No new studies, selection rerun, altered MMAT judgments or changed eligibility rules are incorporated. The cutoff was not validated against eligibility and the appraisal remains preliminary.",
+  "prisma_reporting": "The reported flow describes the preserved historical selection and the documented identity/year corrections. No new selection rule was approved or applied in this version.",
   "current_relevance_threshold": 4,
-  "proposed_rule": "The relevance score orders the reading queue only. It is not an exclusion criterion. Eligibility is decided by applying the existing explicit criteria uniformly to each record and report.",
   "data_reconciliation": {
     "date": "2026-10-31",
-    "flow_status": "historical_snapshot_reconciled_pending_full_text_review",
+    "flow_status": "historical_snapshot_reconciled",
     "same_report_duplicates": [
       {
         "record_id": 6952,
@@ -102,15 +96,10 @@
       "shortlisted": 18,
       "included": 15
     },
-    "selection_reapplication_complete": false,
-    "interpretation": "The original sensitivity-review denominators and findings remain recorded. Confirmed duplicate reports are removed before screening and the two corrected years move records to temporal screening exclusions. These corrections do not change the 15-study historical selection or the 4.0 cutoff. Additional full texts already requested must be assessed before any decision to change or reapply the selection procedure."
+    "interpretation": "The original sensitivity-review denominators and findings remain recorded. Confirmed duplicate reports are removed before screening and the two corrected years move records to temporal screening exclusions. These corrections do not change the 15-study historical selection or the 4.0 cutoff. No new studies or selection rerun are incorporated.",
+    "selection_reapplied": false
   },
-  "conditions_before_any_change": [
-    "Assess the additional full texts already requested before the author decides whether to change or reapply the selection procedure.",
-    "Reassess records previously excluded only by the 4.0 score cutoff using the unchanged eligibility criteria.",
-    "Keep uncertain and unretrieved reports distinct from ineligible reports; record decision reason and source locator for each assessed report.",
-    "Audit the short-or-missing-abstract and English-only methodology filters for false exclusions before claiming a complete revised corpus.",
-    "Resolve confirmed record identities and publication years before recalculating PRISMA counts.",
-    "Link multiple reports from the same study before counting unique studies or updating MMAT."
-  ]
+  "record_id": "SELECTION-STATUS-2026-11-03",
+  "review_date": "2026-11-03",
+  "applied_rule": "The historical selection used a relevance score cutoff of 4.0 on the observed 0-4.5 scale. The score affected which records advanced; it was not used only to order reading."
 }

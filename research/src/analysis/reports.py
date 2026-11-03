@@ -753,7 +753,7 @@ class ReportGenerator:
             {% endif %}
             <tr><td>Incluídos / identificação</td><td>{{ statistics.stage_percentages.included_of_identification }}%</td></tr>
         </table>
-        <p>O fluxo de seleção exibido é histórico: a priorização por metadados e resumos não equivale à elegibilidade em texto completo, e uma decisão sobre mudança ou reaplicação depende da avaliação dos textos integrais adicionais solicitados. Relatórios não recuperados permanecem separados e não são tratados como exclusões após leitura integral.</p>
+        <p>O fluxo de seleção exibido é histórico: a priorização por metadados e resumos não equivale à elegibilidade em texto completo. Relatórios não recuperados permanecem separados e não são tratados como exclusões após leitura integral.</p>
     </div>
     {% endif %}
 
@@ -785,7 +785,7 @@ class ReportGenerator:
         {{ statistics.integrity.adjudicated_same_report_duplicate_rows }} relatórios repetidos confirmados manualmente
         ({{ statistics.prisma.duplicates_removed or 0 }} no total), seguidos por
         {{ statistics.prisma.screening or 0 }} registros na triagem. O fluxo de seleção abaixo mantém a regra histórica;
-        o corte 4,0 e os 15 estudos permanecem inalterados; uma decisão sobre mudança ou reaplicação depende da avaliação dos textos solicitados.</p>
+        o corte 4,0 e os 15 estudos permanecem inalterados.</p>
     </div>
 
     {% if fulltext_stats %}
@@ -1019,7 +1019,7 @@ class ReportGenerator:
                 </tr>
                 <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos na triagem inicial</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.screening_excluded }}</td></tr>
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Registros submetidos à priorização histórica (não é elegibilidade)</td><td style="padding: 12px; text-align: right;">{{ prisma.prioritization }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Não avançaram na priorização histórica; decisão sobre mudança pendente</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.prioritization_excluded }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Não avançaram na priorização histórica</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.prioritization_excluded }}</td></tr>
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Selecionados para leitura de resumo</td><td style="padding: 12px; text-align: right;">{{ prisma.shortlisted }}</td></tr>
                 <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após resumo</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.abstract_screening_excluded }}</td></tr>
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios buscados para recuperação</td><td style="padding: 12px; text-align: right;">{{ prisma.reports_sought }}</td></tr>

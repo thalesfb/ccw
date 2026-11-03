@@ -3,7 +3,7 @@
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). Os textos integrais adicionais solicitados serão avaliados antes de qualquer decisão sobre mudança ou reaplicação da seleção. O corte 4,0 permanece inalterado. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 Em 20/10/2026, a conferência suplementar do texto integral do registro excluído
@@ -210,7 +210,7 @@ research/src/processing/adjudicated_snapshot.py.
 
 - **Reconciliação de 31/10/2026**: 11.904 registros identificados; 29 duplicatas removidas (27 por DOI/URL e 2 relatórios repetidos confirmados manualmente); 11.875 registros únicos na triagem.
 - **Triagem**: 9.393 excluídos; 2.482 avançaram à priorização histórica (20,85% da identificação e 20,90% da triagem).
-- **Prioridade histórica**: 2.464 dos 2.482 registros não avançaram sob as regras então usadas (99,27%; 2.459 por pontuação e cinco por outros motivos de escopo); 18 seguiram à lista preliminar (0,73%). O corte 4,0 permanece inalterado; os textos integrais adicionais solicitados serão avaliados antes de decidir se a seleção muda.
+- **Prioridade histórica**: 2.464 dos 2.482 registros não avançaram sob as regras então usadas (99,27%; 2.459 por pontuação e cinco por outros motivos de escopo); 18 seguiram à lista preliminar (0,73%). O corte 4,0 permanece inalterado.
 - **Fluxo pós-shortlist histórico**: 1 registro excluído após resumo; 17 relatórios procurados; 1 não recuperado; 16 avaliados em texto completo; 1 protocolo excluído e 15 estudos empíricos na seleção histórica.
 - **Percentuais**: 78,91% dos identificados foram excluídos na triagem; 79,10% dos registros triados foram excluídos; 0,15% dos identificados chegaram à lista preliminar; 0,13% compõem a seleção histórica empírica.
 - **Identidade**: a auditoria determinística removeu 25 excedentes DOI + 2 URL; a reconciliação manual confirmou mais 2 relatórios iguais. A auditoria de título sinalizou 257 excedentes brutos e 232 após as 27 remoções DOI/URL; títulos sem confirmação de identidade não foram removidos automaticamente.
@@ -466,9 +466,9 @@ A taxa de extração automática do pipeline descreve o processamento técnico d
 snapshot e não equivale à recuperação ou à avaliação científica de fontes
 primárias. A conferência de 29/10/2026 identifica 16 PDFs locais entre os 18
 candidatos; faltam os registros 3 e 6923. O fluxo histórico tem 15 inclusões provisórias,
-14 triagens MMAT S1/S2 e 11 apreciações por categoria. Esses números não comprovam
-leitura humana integral. O estudo 8 aguarda adjudicação de escopo/unidade; as
-categorias de 5, 7 e 14 também estão pendentes. O replay textual congelado cobre
+15 triagens MMAT S1/S2 e 15 apreciações preliminares por categoria. Esses números
+não comprovam leitura humana integral. Os estudos 5, 7, 8 e 14 têm rotas
+operacionais com limitações explícitas. O replay textual congelado cobre
 12 fontes e 484 trechos, não os 16 PDFs atuais. A avaliação do registro 3 não foi
 revalidada sem o original; 6923 não recebeu respostas. Consulte a
 [matriz de cobertura](../docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md) para
@@ -715,4 +715,4 @@ python -m research.src.cli run-pipeline
 ---
 
 *📅 Última atualização documental: 20 de outubro de 2026*
-*🟡 Status: Snapshot reconciliado em 20 out. 2026 | 15 inclusões empíricas provisórias | MMAT preliminar em 14 estudos; estudo 8 e adjudicação independente pendentes*
+*🟡 Status: Snapshot reconciliado em 20 out. 2026 | 15 inclusões empíricas provisórias | MMAT preliminar em 15 estudos; rotas operacionais e incertezas explícitas*

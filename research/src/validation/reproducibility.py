@@ -506,7 +506,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     statistics = summary["statistics"]
     prisma = statistics["prisma"]
-    amendment_path = root / "research" / "data" / "selection_protocol_amendment_2026-10-31.json"
+    amendment_path = root / "research" / "data" / "selection_status_current.json"
     amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
     selection_flow_status = amendment["data_reconciliation"]["flow_status"]
     decisions_path = root / "research" / "data" / "adjudicated_population_decisions.csv"
@@ -586,7 +586,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
                 "These categories describe distinct stages; the preliminary list is not "
                 "equivalent to the empirical included set or an additional PRISMA stage. "
                 "The 15-study selection is historical and is not presented as the final corpus. "
-                "The cutoff and selection are unchanged; any change awaits assessment of the additional full texts already requested."
+                "The cutoff and the historical selection are unchanged; no new studies or selection rerun are incorporated."
             ),
         },
     }
@@ -618,7 +618,7 @@ def _current_protocol() -> dict[str, Any]:
     """
 
     config = load_config()
-    amendment_path = REPOSITORY_ROOT / "research" / "data" / "selection_protocol_amendment_2026-10-31.json"
+    amendment_path = REPOSITORY_ROOT / "research" / "data" / "selection_status_current.json"
     amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
     return {
         "status": "historical_selection_threshold_unchanged",
@@ -628,10 +628,10 @@ def _current_protocol() -> dict[str, Any]:
         "languages": list(config.review.languages),
         "abstract_required": config.review.abstract_required,
         "legacy_selector_relevance_threshold": config.review.relevance_threshold,
-        "selection_amendment_id": amendment["amendment_id"],
-        "selection_amendment_status": amendment["status"],
+        "selection_status_record": amendment["record_id"],
+        "selection_status": amendment["status"],
         "selection_flow_status": amendment["data_reconciliation"]["flow_status"],
-        "relevance_score_role": "historical_cutoff_pending_decision",
+        "relevance_score_role": "historical_cutoff",
         "canonical_query_count": len(get_all_queries()),
         "query_generator": "research/src/search_terms.py",
         "sources": ["semantic_scholar", "openalex", "crossref", "core"],
@@ -639,8 +639,8 @@ def _current_protocol() -> dict[str, Any]:
         "max_results_per_query": config.max_results_per_query,
         "interpretation": (
             "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. "
-            "A decision to change or reapply selection is pending assessment of the additional full texts "
-            "already requested; the 15-study historical selection is unchanged. External API responses, "
+            "This version reports the 15-study historical selection without a new selection run "
+            "or additional studies. External API responses, "
             "cache state and metadata may change; they do not replace the current versioned snapshot exports."
         ),
     }
@@ -881,7 +881,7 @@ def generate_manifest(
             "separation_rule": (
                 f"The BibTeX inventory contains {prisma_counts['shortlisted']} records in the preliminary list; "
                 f"{prisma_counts['included']} remain in the historical empirical selection under the 4.0 cutoff. "
-                "Any selection change requires a decision after assessing the additional full texts already requested. "
+                "This version contains no new studies or selection rerun. "
                 "Methodological, pedagogical, assessment and technical references "
                 "are external to the pipeline study set and remain in the complete TCC bibliography."
             ),
@@ -899,7 +899,7 @@ def generate_manifest(
                 "Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
                 " The author performed preliminary selection and appraisal with automated support. "
                 "Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; "
-                "this version will be sent to them after the current revision round."
+                "the recorded appraisals remain preliminary."
             ),
         },
         "artifact_scope": "research_snapshot",
@@ -932,15 +932,15 @@ def generate_manifest(
                 "python -m research.src.cli --db /path/to/systematic_review.sqlite generate-manifest",
             ],
             "fresh_collection": (
-                "Pending: the selector still applies its legacy --min-score 4.0. "
-                "No changed rule is approved or applied. Assess the additional full texts already requested "
-                "before deciding whether to change or reapply the selection procedure."
+                "The versioned flow uses the historical --min-score 4.0 cutoff. "
+                "No new selection run or changed rule is part of this version. "
+                "External API responses and cache state can differ from the preserved snapshot."
             ),
             "limitations": [
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have preliminary category-specific appraisals, including explicit operational routes. {prisma_counts['included']} records remain provisionally included in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. No MMAT appraisal was assigned to the {unretrieved_report_label}. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; this version will be sent to them after the current revision round.",
+                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have preliminary category-specific appraisals, including explicit operational routes. {prisma_counts['included']} records remain provisionally included in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. No MMAT appraisal was assigned to the {unretrieved_report_label}. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; the recorded appraisals remain preliminary.",
             ],
         },
     }

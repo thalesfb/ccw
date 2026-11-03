@@ -37,7 +37,7 @@ da biblioteca ou da instituição.
 ## Regra de adjudicação científica do snapshot vigente
 
 O snapshot de busca tem adjudicação inicial em 03/09/2026 e reconciliação de
-escopo em 14/10/2026. O [estado atual](tcc/ESTADO-ATUAL-TCC.md) distingue os
+escopo em 20/10/2026. O [estado atual](tcc/ESTADO-ATUAL-TCC.md) distingue os
 18 candidatos das 15 inclusões provisórias e registra a cobertura documental
 posterior. A seleção operacional não converte candidatos em evidência empírica final.
 As regras abaixo devem ser aplicadas antes de qualquer afirmação conclusiva,

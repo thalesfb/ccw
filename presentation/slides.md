@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Rascunho histórico — não usar na defesa · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; decisão sobre a seleção depende da leitura dos textos solicitados</div>
+<div class="cover-snapshot">Rascunho histórico — não usar na defesa · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção histórica sob o corte 4,0</div>
 
 ---
 layout: default
@@ -215,11 +215,11 @@ class: content-slide flow-slide
   <div class="tcc-funnel-notes">
     <p><strong>Identidade:</strong> 27 duplicatas por DOI/URL e 2 relatórios iguais confirmados manualmente.</p>
     <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
-    <p><strong>Seleção histórica:</strong> 15 estudos empíricos; 1 relatório não recuperado; 1 exclusão após resumo; 1 protocolo excluído após texto completo. Os textos adicionais solicitados serão avaliados antes de qualquer decisão sobre mudança ou reaplicação.</p>
+    <p><strong>Seleção histórica:</strong> 15 estudos empíricos; 1 relatório não recuperado; 1 exclusão após resumo; 1 protocolo excluído após texto completo.</p>
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Fluxo histórico reconciliado, relatado com referência ao PRISMA 2020.</strong> O corte 4,0 permanece inalterado; os textos adicionais solicitados serão avaliados antes de decidir sobre mudança ou reaplicação da seleção. Após uma exclusão no resumo: 17 relatórios procurados, 1 não recuperado e 16 avaliados; excluído 1 protocolo, restam 15 estudos históricos.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo histórico reconciliado, relatado com referência ao PRISMA 2020.</strong> O corte 4,0 permanece inalterado. Após uma exclusão no resumo: 17 relatórios procurados, 1 não recuperado e 16 avaliados; excluído 1 protocolo, restam 15 estudos históricos.</div>
 
 ---
 layout: center
@@ -294,19 +294,19 @@ class: content-slide tcc-score-slide
 
 <div class="slide-kicker">14 / RELEVÂNCIA</div>
 
-# Score histórico: ordem de leitura, não elegibilidade
+# Escore de relevância na seleção histórica
 
 <div class="tcc-score-layout">
   <div class="tcc-score-visual"><img src="/images/relevance_distribution.png" alt="Distribuição do score de relevância" /></div>
   <div class="tcc-score-copy">
     <div class="tcc-score-threshold">4,0</div>
     <h2>Corte usado na seleção histórica.</h2>
-    <p>O corte 4,0 permanece inalterado. Os textos adicionais solicitados serão avaliados antes de decidir sobre mudança ou reaplicação. O escore não mede qualidade metodológica.</p>
-    <div class="tcc-guardrail"><span>!</span><strong>Decisão metodológica pendente</strong></div>
+    <p>O corte 4,0 permanece inalterado. O escore não mede qualidade metodológica.</p>
+    <div class="tcc-guardrail"><span>!</span><strong>Escore sem validação contra elegibilidade</strong></div>
   </div>
 </div>
 
-<div class="tcc-caption">A pontuação descreve a seleção histórica; os textos adicionais serão avaliados antes de decidir se o procedimento muda.</div>
+<div class="tcc-caption">A pontuação descreve a seleção histórica sob o corte 4,0 e não equivale à qualidade metodológica dos estudos.</div>
 
 ---
 layout: default

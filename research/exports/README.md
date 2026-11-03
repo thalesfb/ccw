@@ -6,7 +6,7 @@ Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e
 > 29 duplicatas removidas (27 por DOI/URL e 2 relatórios iguais confirmados
 > manualmente); 11.875 registros únicos na triagem; 9.393 excluídos; 2.482
 > avançaram à priorização histórica e 2.464 não avançaram sob a regra anterior.
-> O corte 4,0 permanece inalterado; a decisão sobre mudança ou reaplicação depende da avaliação dos textos integrais adicionais solicitados.
+> O corte 4,0 permanece inalterado.
 > A seleção histórica contém 18 registros na shortlist, 17 relatórios procurados,
 > 1 não recuperado, 16 avaliados em texto completo, 1 protocolo excluído e 15
 > estudos empíricos. O histórico de 31/08 foi corrigido: ID 6952 é repetido do
@@ -20,7 +20,7 @@ está no [ledger atual](../data/mmat_reassessment_current.csv) e na página
 `analysis/papers.json` e planilhas não são fonte de apreciação MMAT. A tabela
 [legada](../data/mmat_assessments.csv) e a página [MMAT histórico](analysis/mmat_visualization.html)
 foram preservadas para rastreabilidade; seus julgamentos e scores não representam
-a avaliação vigente. A seleção de 15 estudos e os 18 registros da shortlist ainda são históricos sob o corte 4,0; uma decisão sobre mudança ou reaplicação depende dos textos solicitados.
+a avaliação vigente. A seleção de 15 estudos e os 18 registros da shortlist ainda são históricos sob o corte 4,0.
 
 ---
 
@@ -217,16 +217,16 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 
 ## 🚀 Próximos Passos
 
-### Fase 1 (Revisão Sistemática) - 🟡 RECONCILIAÇÃO FEITA; DECISÃO DE SELEÇÃO PENDENTE
+### Fase 1 (Revisão Sistemática) - 🟡 SELEÇÃO HISTÓRICA RECONCILIADA; MMAT PRELIMINAR
 - [x] Snapshot de busca reconciliado (11.904 identificados; 29 duplicatas removidas; 11.875 únicos na triagem; 18 na seleção histórica; 15 estudos empíricos sob o corte 4,0)
 - [x] Fluxo histórico de triagem e texto completo reconciliado
-- [ ] Avaliar os textos adicionais solicitados e decidir se o procedimento de seleção deve ser mantido ou modificado
+- [x] Descrever o corte 4,0 e o conjunto de 15 estudos efetivamente adotados nesta versão
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
 - [x] Exportação BibTeX dos 18 registros shortlistados do pipeline; status de elegibilidade e inclusão são mantidos separadamente no ledger
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)
-- [x] Triagem S1/S2 do MMAT em 14 e apreciação dos critérios da categoria em 11 dos 15 registros empíricos mantidos provisoriamente; estudo 8 sem respostas até adjudicação de escopo/unidade
+- [x] Triagem S1/S2 e apreciação preliminar dos critérios da categoria nos 15 estudos empíricos, incluindo as rotas operacionais dos estudos 5, 7, 8 e 14
 - [ ] Obter o texto integral do registro 6923 quando houver acesso legítimo; sem aplicar MMAT a resumo ou metadados
-- [ ] Adjudicar independentemente as 14 triagens, os 11 conjuntos de critérios e as três categorias pendentes do MMAT do núcleo empírico
+- [ ] Apreciação científica final não concluída; há 15 triagens e 15 conjuntos de critérios preliminares, com rotas operacionais explicitamente limitadas
 
 ### Fase 2 (Especificação conceitual do Protótipo) - ✅ REGISTRADA NO TCC
 - [x] Derivar requisitos funcionais e não funcionais

@@ -88,11 +88,11 @@
       "pt"
     ],
     "abstract_required": false,
-    "legacy_selector_relevance_threshold": 4.0,
-    "selection_amendment_id": "PRISMA-24c-2026-10-31",
-    "selection_amendment_status": "pending_full_text_review",
-    "selection_flow_status": "historical_snapshot_reconciled_pending_full_text_review",
-    "relevance_score_role": "historical_cutoff_pending_decision",
+    "legacy_selector_relevance_threshold": 4,
+    "selection_status_record": "SELECTION-STATUS-2026-11-03",
+    "selection_status": "historical_snapshot_unchanged",
+    "selection_flow_status": "historical_snapshot_reconciled",
+    "relevance_score_role": "historical_cutoff",
     "canonical_query_count": 72,
     "query_generator": "research/src/search_terms.py",
     "sources": [
@@ -103,10 +103,10 @@
     ],
     "source_count": 4,
     "max_results_per_query": 10,
-    "interpretation": "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. A decision to change or reapply selection is pending assessment of the additional full texts already requested; the 15-study historical selection is unchanged. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
+    "interpretation": "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. This version reports the 15-study historical selection without a new selection run or additional studies. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
   },
   "snapshot": {
-    "selection_flow_status": "historical_snapshot_reconciled_pending_full_text_review",
+    "selection_flow_status": "historical_snapshot_reconciled",
     "counts": {
       "total_records": 11904,
       "versioned_rows": 11875,
@@ -286,7 +286,7 @@
       "metadata_corrections_recorded": 1,
       "current_included": 15,
       "shortlisted_records": 18,
-      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The historical selection under the 4.0 cutoff is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage. The 15-study selection is historical and is not presented as the final corpus. The cutoff and selection are unchanged; any change awaits assessment of the additional full texts already requested."
+      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The historical selection under the 4.0 cutoff is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage. The 15-study selection is historical and is not presented as the final corpus. The cutoff and the historical selection are unchanged; no new studies or selection rerun are incorporated."
     },
     "manual_override_adjudication": {
       "path": "research/data/manual_override_adjudication.csv",
@@ -332,7 +332,7 @@
       "results/tcc/referencias_pedagogicas.bib"
     ],
     "reference_audit": "research/data/reference_audit.csv",
-    "separation_rule": "The BibTeX inventory contains 18 records in the preliminary list; 15 remain in the historical empirical selection under the 4.0 cutoff. Any selection change requires a decision after assessing the additional full texts already requested. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
+    "separation_rule": "The BibTeX inventory contains 18 records in the preliminary list; 15 remain in the historical empirical selection under the 4.0 cutoff. This version contains no new studies or selection rerun. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
   },
   "methodological_appraisal": {
     "current_mmat_qa": {
@@ -443,7 +443,7 @@
         "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
       ]
     },
-    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 15 studies and category-specific appraisal for 15; 15 records remain provisionally in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-2 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. The author performed preliminary selection and appraisal with automated support. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; this version will be sent to them after the current revision round."
+    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 15 studies and category-specific appraisal for 15; 15 records remain provisionally in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-2 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. The author performed preliminary selection and appraisal with automated support. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; the recorded appraisals remain preliminary."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
@@ -490,7 +490,7 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "0e3e4de222a649a1bc29a30940ea8ceb9a7d7c6a322e0cd18c8af113646ae843"
+      "sha256": "6d58ff69fd148b6198c6b4fcc82236382d465b3b12ede576d26b052c15273004"
     },
     {
       "path": "research/exports/reports/summary.json",
@@ -585,7 +585,7 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "f9d3747b768f119db996626a385d68c839f15bb544a3892e7928cd55179d1b39"
+      "sha256": "d9c1898059de228a8bb052518d71ec257e0a462e1df0da216db7c33033a5feb7"
     },
     {
       "path": "research/src/analysis/visualizations.py",
@@ -615,7 +615,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "6bebd4d65f036294b3fac67d0a61d4b5776f74923218e6ca4526a0e6b7dae8e5"
+      "sha256": "fa56d9640b08b9b2c21ab3d2a9adbc80cb7b5f04d4ea159844a739ff0d3f0c47"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -701,12 +701,12 @@
       "python -m research.src.cli --db /path/to/systematic_review.sqlite export",
       "python -m research.src.cli --db /path/to/systematic_review.sqlite generate-manifest"
     ],
-    "fresh_collection": "Pending: the selector still applies its legacy --min-score 4.0. No changed rule is approved or applied. Assess the additional full texts already requested before deciding whether to change or reapply the selection procedure.",
+    "fresh_collection": "The versioned flow uses the historical --min-score 4.0 cutoff. No new selection run or changed rule is part of this version. External API responses and cache state can differ from the preserved snapshot.",
     "limitations": [
       "External API responses, metadata and cache state can change on a fresh collection.",
       "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The current empirical MMAT screening denominator is 15; 15 have preliminary category-specific appraisals, including explicit operational routes. 15 records remain provisionally included in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. No MMAT appraisal was assigned to the 1 unretrieved shortlisted report. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; this version will be sent to them after the current revision round."
+      "The current empirical MMAT screening denominator is 15; 15 have preliminary category-specific appraisals, including explicit operational routes. 15 records remain provisionally included in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. No MMAT appraisal was assigned to the 1 unretrieved shortlisted report. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; the recorded appraisals remain preliminary."
     ]
   }
 }

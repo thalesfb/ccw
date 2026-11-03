@@ -36,7 +36,7 @@ A shortlist contém 18 registros. Um foi excluído após a triagem do resumo;
 dos 17 relatórios procurados, um texto integral não foi recuperado e 16 foram
 avaliados em texto completo. Um protocolo sem resultados concluídos foi
 excluído após essa avaliação; 15 registros permanecem provisoriamente no núcleo
-empírico. No MMAT preliminar, de revisor único, 15 têm triagem S1/S2 e apreciação dos critérios. As categorias dos estudos 5, 7, 8 e 14 são rotas operacionais explicitamente limitadas, sem confirmar os delineamentos. A unidade do estudo 8 é uma tese com componentes matemáticos; frações reutilizadas entre capítulos não são duplicadas. A dissertação 6923, único texto não recuperado, também não recebeu
+empírico. No MMAT preliminar realizado pelo autor, 15 têm triagem S1/S2 e apreciação dos critérios. As categorias dos estudos 5, 7, 8 e 14 são rotas operacionais explicitamente limitadas, sem confirmar os delineamentos. A unidade do estudo 8 é uma tese com componentes matemáticos; frações reutilizadas entre capítulos não são duplicadas. A dissertação 6923, único texto não recuperado, também não recebeu
 MMAT. Não há escore agregado ou ranking.
 
 Essas condições limitam a força e a abrangência das conclusões. Uma busca sem

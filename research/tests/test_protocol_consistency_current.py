@@ -24,7 +24,7 @@ PAPERS_PATH = RESEARCH_ROOT / "exports" / "analysis" / "papers.csv"
 PROTOCOL_PATH = RESEARCH_ROOT / "data" / "current_eligibility_protocol.csv"
 SYNTHESIS_SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
 PRISMA_RECONCILIATION_PATH = RESEARCH_ROOT / "data" / "prisma_population_reconciliation.csv"
-SELECTION_AMENDMENT_PATH = RESEARCH_ROOT / "data" / "selection_protocol_amendment_2026-10-31.json"
+SELECTION_STATUS_PATH = RESEARCH_ROOT / "data" / "selection_status_current.json"
 REFERENCE_AUDIT_PATH = RESEARCH_ROOT / "data" / "reference_audit.csv"
 TCC_REVIEW_PATH = RESEARCH_ROOT.parent / "results" / "tcc" / "conteudo" / "resultadosesperados.tex"
 
@@ -125,25 +125,25 @@ def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> 
     assert latest_scope["current_mmat_empirical_denominator"] == 14
 
 
-def test_latest_prisma_reconciliation_preserves_the_cutoff_pending_full_text_review() -> None:
+def test_latest_prisma_reconciliation_describes_the_unchanged_current_selection() -> None:
     with PRISMA_RECONCILIATION_PATH.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
     latest = [row for row in rows if row["snapshot_date"] == "2026-10-31"]
-    amendment = json.loads(SELECTION_AMENDMENT_PATH.read_text(encoding="utf-8"))
+    amendment = json.loads(SELECTION_STATUS_PATH.read_text(encoding="utf-8"))
 
     assert len(latest) == 10
     assert {
         row["status"] for row in latest
-    } == {"historical_snapshot_reconciled_pending_full_text_review"}
+    } == {"historical_snapshot_reconciled"}
     assert amendment["data_reconciliation"]["flow_status"] == (
-        "historical_snapshot_reconciled_pending_full_text_review"
+        "historical_snapshot_reconciled"
     )
-    assert amendment["data_reconciliation"]["selection_reapplication_complete"] is False
+    assert amendment["data_reconciliation"]["selection_reapplied"] is False
     interpretation = amendment["data_reconciliation"]["interpretation"]
     assert "duplicate reports are removed before screening" in interpretation
     assert "do not change the 15-study historical selection or the 4.0 cutoff" in interpretation
-    assert "before any decision to change or reapply" in interpretation
+    assert "No new studies or selection rerun are incorporated" in interpretation
 
 
 def test_current_export_has_exactly_the_adjudicated_empirical_core_ids() -> None:
@@ -201,21 +201,17 @@ def test_current_eligibility_protocol_makes_adjudication_gates_explicit() -> Non
     assert all(row["evidence_required"] for row in rows)
 
 
-def test_threshold_proposal_is_pending_full_text_review_without_rule_change() -> None:
-    amendment = json.loads(SELECTION_AMENDMENT_PATH.read_text(encoding="utf-8"))
-
-    assert amendment["proposal_date"] == "2026-10-31"
-    assert amendment["decision_date"] is None
-    assert amendment["status"] == "pending_full_text_review"
+def test_selection_status_records_only_the_unchanged_current_execution() -> None:
+    amendment = json.loads(SELECTION_STATUS_PATH.read_text(encoding="utf-8"))
+    assert amendment["record_id"] == "SELECTION-STATUS-2026-11-03"
+    assert amendment["status"] == "historical_snapshot_unchanged"
     assert amendment["current_relevance_threshold"] == 4.0
     assert amendment["eligibility_criteria_changed"] is False
     assert amendment["scope_refinement_adopted"] is False
     assert amendment["search_reprocessed"] is False
-    assert "orders the reading queue only" in amendment["proposed_rule"]
-    assert "not an exclusion criterion" in amendment["proposed_rule"]
-    assert amendment["data_reconciliation"]["flow_status"] == (
-        "historical_snapshot_reconciled_pending_full_text_review"
-    )
+    assert "not used only to order reading" in amendment["applied_rule"]
+    assert "proposed_rule" not in amendment
+    assert "conditions_before_any_change" not in amendment
 
     census = amendment["rationale"]["census_3_75_to_3_95"]
     assert census["examined"] == 45
@@ -277,3 +273,27 @@ def test_tcc_review_table_distinguishes_all_shortlisted_records_by_stage() -> No
     assert "após resumo" in table.lower()
     assert "excluído da síntese empírica após texto completo" in table.lower()
     assert "não apresentar resultados empíricos concluídos" in table.lower()
+
+
+def test_manuscript_reports_current_selection_without_promising_new_reading():
+    root = RESEARCH_ROOT.parent
+    paths = (
+        "results/tcc/conteudo/metodologia.tex",
+        "results/tcc/conteudo/resultadosesperados.tex",
+        "results/tcc/postextuais/apendice.tex",
+        "results/tcc/pretextuais/resumo.tex",
+    )
+    texts = [(root / path).read_text(encoding="utf-8") for path in paths]
+    forbidden = (
+        r"textos integrais adicionais.{0,100}(?:serão|precederá)",
+        r"(?:antes de|precederá).{0,100}decisão sobre mudança",
+        r"Additional full texts.{0,100}will be assessed",
+        r"esta versão será encaminhada",
+    )
+    for path, text in zip(paths, texts):
+        for pattern in forbidden:
+            assert not re.search(pattern, text, re.I), (path, pattern)
+    assert "corte 4,0" in texts[0]
+    assert "15 estudos" in texts[0]
+    assert "não foi validado contra elegibilidade" in texts[1]
+    assert "apreciação preliminar" in texts[0]
