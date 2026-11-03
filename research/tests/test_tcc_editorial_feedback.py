@@ -287,11 +287,11 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_abstract_reports_operational_selection_and_limits_gap_claims(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
-        self.assertIn("18 foram encaminhados para leitura", abstract)
-        self.assertIn("restando 15 estudos empíricos na seleção histórica", abstract)
+        self.assertIn("conjunto empírico adotado reuniu 15 estudos", abstract)
+        self.assertIn("26 grupos de requisitos", abstract)
         for removed in ("priorização operacional", "mantidos provisoriamente", "adjudicação", "único pesquisador", "DOI/URL"):
             self.assertNotIn(removed, abstract)
-        self.assertIn("por critério, sem escore", abstract)
+        self.assertIn("por critério e sem escore agregado", abstract)
         self.assertIn("diferenças entre desempenho, previsão, proficiência, competência e aprendizagem", abstract)
         self.assertIn("base documental de apoio à interpretação docente", abstract)
         prototype = (TCC / "conteudo/prototipo.tex").read_text(encoding="utf-8")
@@ -489,36 +489,27 @@ class EditorialFeedbackTests(unittest.TestCase):
         ):
             self.assertIn(fr"\item[{acronym}]", glossary.group(1))
 
-    def test_abstract_reports_the_prisma_flow_without_counting_unretrieved_text_as_excluded(self):
+    def test_abstract_keeps_essential_results_within_the_ifc_word_range(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
-        portuguese = abstract.split(r"\begin{resumo}", 1)[1].split(
-            r"\end{resumo}", 1
-        )[0]
-        english = abstract.split(r"\begin{resumo}[Abstract]", 1)[1].split(
-            r"\end{otherlanguage*}", 1
-        )[0]
-
-        for phrase in (
-            "um foi excluído após resumo",
-            "17 relatórios procurados",
-            "um não foi recuperado",
-            "16 foram avaliados",
-            "um protocolo sem resultados concluídos foi excluído",
-            "15 estudos empíricos",
-        ):
-            self.assertIn(phrase, " ".join(portuguese.lower().split()))
-        self.assertNotIn("excluídos um registro fora do escopo, um texto integral não recuperado",
-                         " ".join(portuguese.lower().split()))
-
-        for phrase in (
-            "one was excluded after abstract screening",
-            "17 reports sought",
-            "one was not retrieved",
-            "16 were assessed",
-            "one protocol without completed results was excluded",
-            "15 empirical studies",
-        ):
-            self.assertIn(phrase, " ".join(english.lower().split()))
+        portuguese = abstract.split(r"\begin{resumo}", 1)[1].split(r"\vspace", 1)[0]
+        english = abstract.split(r"\begin{resumo}[Abstract]", 1)[1].split(r"\vspace", 1)[0]
+        bodies = []
+        for text in (portuguese, english):
+            body = text.split(r"\noindent", 1)[1].strip()
+            self.assertEqual(len(re.split(r"\n\s*\n", body)), 1)
+            words = body.replace(r"\textit", "").replace("{", "").replace("}", "").split()
+            self.assertGreaterEqual(len(words), 150)
+            self.assertLessEqual(len(words), 500)
+            for credit in ("2025", "Catarinense", "financiamento", "funding",
+                           "11.904", "11,904", "17 relatórios", "17 reports"):
+                self.assertNotIn(credit, body)
+            bodies.append(body)
+        self.assertIn("15 estudos", bodies[0])
+        self.assertIn("26 grupos de requisitos", bodies[0])
+        self.assertIn("15 studies", bodies[1])
+        self.assertIn("26 requirement groups", bodies[1])
+        self.assertIn("não demonstra eficácia educacional", bodies[0])
+        self.assertIn("does not demonstrate the educational effectiveness", bodies[1])
 
     def test_prisma_appendix_keeps_abstract_gaps_and_links_public_materials(self):
         appendix = (TCC / "postextuais/apendice.tex").read_text(encoding="utf-8")

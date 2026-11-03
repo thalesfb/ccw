@@ -589,9 +589,12 @@ O score é uma escala operacional limitada a 0--10, baseada em sinais de
 domínio matemático, técnica computacional, sinais metodológicos, recência e
 metadados (por exemplo, comprimento do resumo, DOI e indicador simplificado de
 veículo). Ele não mede qualidade metodológica, impacto, citações ou H-index.
-No snapshot vigente, os valores observados variaram de 0 a 4,5; por isso, o
-limiar `>=4,0` deve ser interpretado como filtro de aderência temática e não
-como nota de qualidade científica.
+No snapshot vigente, os valores observados variaram de 0 a 4,5, sem
+renormalização. O corte `>=4,0` foi aplicado à soma ponderada para manter o
+registro como candidato à leitura, sujeito aos demais critérios. A manutenção
+do corte e do conjunto foi confirmada com a orientação. O PTC e o código
+registram o valor, mas não uma calibração ou justificativa empírica para a
+escolha exata de 4,0. Não se trata de percentual ou nota de qualidade científica.
 
 ### Detecção Robusta de Idioma
 

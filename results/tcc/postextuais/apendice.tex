@@ -34,7 +34,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \endlastfoot
 1 & Título & Parcial: capa e folha de rosto identificam o tema, mas o título não explicita revisão sistemática. \\
 \hline
-2 & Resumo & Parcial: Resumo e Abstract foram conferidos frente aos 12 itens do PRISMA 2020 para resumos. Informam objetivo, critérios gerais, fontes e data de corte, métodos, síntese, resultados, limitações, interpretação, ausência de pré-registro e de financiamento externo. O título não identifica o trabalho como revisão sistemática; os resumos não apresentam total agregado de participantes, pois unidades de análise e denominadores não são comparáveis, nem a data individual da última consulta a cada fonte; a data de corte é global. \\
+2 & Resumo & Parcial: Resumo e Abstract apresentam objetivo, critérios gerais, fontes e data de corte, métodos, achados, limitações e conclusão, com 15 estudos e 26 grupos de requisitos como resultados quantitativos essenciais. O título não identifica o trabalho como revisão sistemática; não há total agregado de participantes, pois as unidades e os denominadores não são comparáveis, nem a data individual da última consulta a cada fonte. As declarações de financiamento e ausência de pré-registro estão no método, não nos resumos. \\
 \hline
 3 & Justificativa & Localizado: Cap.~\ref{cap:introducao}, Justificativa. \\
 \hline
@@ -106,9 +106,9 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 24a & Registro & Localizado: Cap.~\ref{cap:metodologia}, Protocolo e Relato da Revisão Sistemática, declara que não houve registro em plataforma de pré-registro. \\
 \hline
-24b & Protocolo & Localizado: Cap.~\ref{cap:metodologia}, Protocolo e Relato da Revisão Sistemática, indica o Projeto de Trabalho de Conclusão de Curso aprovado em banca em 10 de dezembro de 2025 e o repositório público do projeto. \\
+24b & Protocolo & Localizado: Cap.~\ref{cap:metodologia}, Seção~\ref{sec:protocolo-relato}, identifica o Projeto de Trabalho de Conclusão de Curso e o repositório público do código e dos registros da revisão. \\
 \hline
-24c & Alterações & Localizado: Cap.~\ref{cap:metodologia}, Quadro~\ref{qua:alteracoes-protocolo}, lista as alterações entre o protocolo e a revisão executada, com justificativa para cada uma. \\
+24c & Alterações & Parcial: Cap.~\ref{cap:metodologia}, Seção~\ref{sec:protocolo-relato}, descreve as adaptações efetivamente documentadas de período, tipos de publicação e organização das etapas. A escolha exata do corte 4,0 não tem calibração ou justificativa empírica registrada nas fontes preservadas. \\
 \hline
 25 & Apoio & Localizado: Seção~\ref{sec:apoio-pesquisa}, Protocolo e Relato da Revisão Sistemática. A pesquisa foi desenvolvida no Instituto Federal Catarinense – Campus Videira, com recursos próprios, sem financiamento externo ou participação de financiador nas decisões da revisão. \\
 \hline
@@ -162,56 +162,86 @@ python -m research.src.validation.bibliography_audit
 \chapter{FORMULÁRIO DE REVISÃO DA ESPECIFICAÇÃO}
 \label{apendice:formulario-oe4}
 
-Modelo proposto para o OE4, ainda não aplicado. Utilizar somente após a tramitação ética e o consentimento previstos na Seção~\ref{sec:revisao-docente-operacional}. Não preencher com dados identificáveis de estudantes. Cada docente receberá uma cópia, com código individual; a correspondência entre código e identidade terá acesso restrito.
+Este apêndice apresenta o instrumento documental proposto no OE4 para registrar a avaliação da viabilidade e da coerência da especificação. O formulário reúne identificação da versão examinada, julgamento dos requisitos R01--R26, justificativas e ficha de aceitação documental das funções F01--F07. Não contém resultados de uma avaliação realizada.
+
+O instrumento integra o protocolo da Seção~\ref{sec:revisao-docente-operacional}, ainda não aplicado. Sua utilização está condicionada à tramitação ética e ao consentimento descritos naquela seção. Os campos abaixo são modelos em branco, sem dados identificáveis de estudantes. A correspondência entre o código do participante e sua identidade tem acesso restrito.
 
 Código do participante: \underline{\hspace{2cm}}. Rodada: \underline{\hspace{1cm}}. Data: \underline{\hspace{2cm}}.
 
-Versão da especificação: \underline{\hspace{3cm}}. Perfil/nível de ensino e tempo de experiência: \underline{\hspace{3cm}}.
+Versão da especificação: \underline{\hspace{3cm}}.
 
-Registrar em cada dimensão: 1=incoerente; 2=alteração substancial; 3=ajuste pontual; 4=coerente; NE=evidência insuficiente. A=sustentação na fonte ou decisão autoral; B=adequação curricular; C=clareza da saída; D=viabilidade documental. Não deixar campo vazio: justificar NE.
+Perfil/nível de ensino e tempo de experiência: \underline{\hspace{6cm}}.
 
-\begin{quadro}[htbp]\centering
-\caption{Ficha individual de julgamento por requisito.}\label{qua:formulario-oe4}
-\small\begin{tabularx}{\textwidth}{|p{1.4cm}|c|c|c|c|X|}\hline
-Cód. & A & B & C & D & Página, justificativa e ajuste necessário \\\hline
-R01 & & & & & \\ \hline
-R02 & & & & & \\ \hline
-R03 & & & & & \\ \hline
-R04 & & & & & \\ \hline
-R05 & & & & & \\ \hline
-R06 & & & & & \\ \hline
-R07 & & & & & \\ \hline
-R08 & & & & & \\ \hline
-R09 & & & & & \\ \hline
-R10 & & & & & \\ \hline
-R11 & & & & & \\ \hline
-R12 & & & & & \\ \hline
-R13 & & & & & \\ \hline
-R14 & & & & & \\ \hline
-R15 & & & & & \\ \hline
-R16 & & & & & \\ \hline
-R17 & & & & & \\ \hline
-R18 & & & & & \\ \hline
-R19 & & & & & \\ \hline
-R20 & & & & & \\ \hline
-R21 & & & & & \\ \hline
-R22 & & & & & \\ \hline
-R23 & & & & & \\ \hline
-R24 & & & & & \\ \hline
-R25 & & & & & \\ \hline
-R26 & & & & & \\ \hline
+Registrar em cada dimensão: 1=incoerente; 2=alteração substancial; 3=ajuste pontual; 4=coerente; NE=evidência insuficiente. A=sustentação na fonte ou decisão autoral; B=adequação curricular; C=clareza da saída; D=viabilidade documental. Justificar cada resposta, inclusive NE.
+
+\begingroup
+\small
+\def\LTcaptype{quadro}
+\setlength{\LTcapwidth}{\textwidth}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{\fill}
+\begin{longtable}{|p{1.2cm}|*{4}{>{\centering\arraybackslash}p{0.6cm}|}p{\dimexpr\textwidth-3.6cm-12\tabcolsep-7\arrayrulewidth\relax}|}
+\caption{Ficha individual de julgamento por requisito.}\label{qua:formulario-oe4}\\
+\hline
+Cód. & A & B & C & D & Página, justificativa e ajuste necessário \\ \hline
+\endfirsthead
+\multicolumn{6}{c}{\quadroname\ \thequadro\ -- Continuação}\\
+\multicolumn{6}{l}{Participante: \underline{\hspace{1.6cm}}. Rodada: \underline{\hspace{0.7cm}}. Versão: \underline{\hspace{1.8cm}}.}\\
+\hline
+Cód. & A & B & C & D & Página, justificativa e ajuste necessário \\ \hline
+\endhead
+\multicolumn{6}{r}{\textit{Continua na próxima página}}\\
+\endfoot
+\endlastfoot
+R01\rule{0pt}{1.4em} & & & & & \\ \hline
+R02\rule{0pt}{1.4em} & & & & & \\ \hline
+R03\rule{0pt}{1.4em} & & & & & \\ \hline
+R04\rule{0pt}{1.4em} & & & & & \\ \hline
+R05\rule{0pt}{1.4em} & & & & & \\ \hline
+R06\rule{0pt}{1.4em} & & & & & \\ \hline
+R07\rule{0pt}{1.4em} & & & & & \\ \hline
+R08\rule{0pt}{1.4em} & & & & & \\ \hline
+R09\rule{0pt}{1.4em} & & & & & \\ \hline
+R10\rule{0pt}{1.4em} & & & & & \\ \hline
+R11\rule{0pt}{1.4em} & & & & & \\ \hline
+R12\rule{0pt}{1.4em} & & & & & \\ \hline
+R13\rule{0pt}{1.4em} & & & & & \\ \hline
+R14\rule{0pt}{1.4em} & & & & & \\ \hline
+R15\rule{0pt}{1.4em} & & & & & \\ \hline
+R16\rule{0pt}{1.4em} & & & & & \\ \hline
+R17\rule{0pt}{1.4em} & & & & & \\ \hline
+R18\rule{0pt}{1.4em} & & & & & \\ \hline
+R19\rule{0pt}{1.4em} & & & & & \\ \hline
+R20\rule{0pt}{1.4em} & & & & & \\ \hline
+R21\rule{0pt}{1.4em} & & & & & \\ \hline
+R22\rule{0pt}{1.4em} & & & & & \\ \hline
+R23\rule{0pt}{1.4em} & & & & & \\ \hline
+R24\rule{0pt}{1.4em} & & & & & \\ \hline
+R25\rule{0pt}{1.4em} & & & & & \\ \hline
+R26\rule{0pt}{1.4em} & & & & & \\ \hline
+\end{longtable}
+\fonte{Elaborado pelo autor (2026).}
+\endgroup
+
+\begin{quadro}[H]
+A ficha seguinte é um modelo reutilizável para cada função F01--F07. Ela registra o exame documental do critério de aceitação do Quadro~\ref{qua:aceitacao-funcional}; o parecer sobre a especificação não indica execução de teste de implementação.
+
+\small
+\caption{Modelo de ficha de aceitação documental por função.}\label{qua:ficha-aceitacao-documental}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.8cm}|X|}
+\hline
+Campo & Registro \\ \hline
+Participante, rodada e versão & \rule{0pt}{1.8em}\\ \hline
+Função F e requisito R associado & \rule{0pt}{1.8em}\\ \hline
+Entrada do cenário & \rule{0pt}{1.8em}\\ \hline
+Saída esperada & \rule{0pt}{1.8em}\\ \hline
+Critério e trecho que permite verificá-lo & \rule{0pt}{2.3em}\\ \hline
+Condição faltante ou problema crítico & \rule{0pt}{2.3em}\\ \hline
+Parecer e justificativa & \rule{0pt}{2.3em} Coerente / Revisar\\ \hline
 \end{tabularx}
 \fonte{Elaborado pelo autor (2026).}
 \end{quadro}
 
-Para cada F01--F07, anexar uma ficha de aceitação com os campos seguintes: função e requisito R associado; entrada do cenário; saída esperada; critério do Quadro~\ref{qua:aceitacao-funcional}; trecho que permite verificar esse critério; condição faltante; parecer ``coerente'' ou ``revisar''; justificativa. Nesta revisão documental, julga-se a definição do critério, sem marcar testes de implementação como executados.
-
-Problema crítico identificado: \underline{\hspace{8cm}}.
-
-Observação sobre o cenário de uso e sua interpretação docente:
-
-\noindent\underline{\hspace{0.95\textwidth}}
-
-O autor consolidará, por requisito e dimensão, a quantidade de respostas 3/4 entre cinco docentes. Quatro respostas 3/4 em cada dimensão, sem problema crítico pendente, permitem ``coerente''; os demais casos exigem ``revisar''. Os ajustes associados à nota 3 deverão ser incorporados e confirmados pelos docentes que os solicitaram antes da classificação final. Registrar a divergência, a alteração proposta e o parecer individual da segunda rodada. Sem cinco avaliações completas, registrar painel incompleto. Não calcular escore de qualidade dos estudos ou eficácia pedagógica a partir deste formulário.
+A consolidação dos julgamentos e o tratamento das divergências seguem a Seção~\ref{sec:revisao-docente-operacional}. Os registros deste formulário não produzem escore de qualidade dos estudos nem demonstram eficácia pedagógica de uma implementação.
 
 \end{apendicesenv}

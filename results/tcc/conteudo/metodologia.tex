@@ -2,6 +2,7 @@
 \label{cap:metodologia}
 
 \section{Protocolo e Relato da Revisão Sistemática}
+\label{sec:protocolo-relato}
 
 Este trabalho empregou uma Revisão Sistemática da Literatura para identificar e analisar técnicas computacionais aplicadas ao ensino de matemática. O procedimento seguido foi o protocolo do TCC, descrito neste capítulo. O \textit{Cochrane Handbook for Systematic Reviews of Interventions} \cite{CochraneHandbook} foi utilizado como referência complementar para organizar a pergunta e os critérios de elegibilidade, com adaptações ao domínio educacional e aos estudos computacionais. O escopo compreendeu a revisão, a apreciação metodológica preliminar dos estudos empíricos incluídos e a elaboração de uma especificação conceitual de protótipo.
 
@@ -9,60 +10,14 @@ Neste relato, registro designa a referência recuperada nas bases durante a iden
 
 O PRISMA 2020 orientou o relato da pergunta, das fontes, dos critérios, do processo de seleção e dos resultados \cite{PRISMA2020}. Trata-se de uma diretriz de relato, distinta de um método de busca ou de avaliação da qualidade. O PRISMA-P 2015 orienta o planejamento e o relato de protocolos \cite{PRISMAP2015}. Seus princípios foram utilizados parcialmente: a questão, os critérios, a estratégia de busca e a forma de síntese foram definidos antes da execução, mas não houve registro em plataforma de pré-registro. A consulta complementar ao Handbook não substituiu o protocolo do TCC nem corresponde à adoção integral dos procedimentos de uma revisão Cochrane.
 
-O protocolo foi definido no Projeto de Trabalho de Conclusão de Curso, aprovado em banca em 10 de dezembro de 2025, e a revisão foi documentada sob controle de versão em repositório público.\footnote{Projeto de Trabalho de Conclusão de Curso validado, disponível em \url{https://github.com/thalesfb/ccw/blob/main/results/ptc/main.pdf}. Repositório público do trabalho: \url{https://github.com/thalesfb/ccw}.}
+O protocolo inicial foi descrito no Projeto de Trabalho de Conclusão de Curso \cite{Batista2025PTC}. O código e os registros da revisão foram mantidos sob controle de versão em repositório público \cite{BatistaCCWCode2026}.
 
 A lista de verificação PRISMA 2020 foi preenchida retrospectivamente, após a consolidação do conjunto de dados e decisões analisados. Ela documenta o relato no Apêndice~\ref{apendice:prisma-checklist}. O histórico de consultas, a recuperação dos textos e os arquivos de conferência estão reunidos no Apêndice~\ref{apendice:recuperacao-fontes}.
 
 \label{sec:apoio-pesquisa}
 A pesquisa foi conduzida pelo autor no Instituto Federal Catarinense – Campus Videira, com recursos próprios, sem financiamento externo. Não houve entidade financiadora externa com participação no delineamento, na seleção dos estudos, na análise ou na decisão de disponibilização dos resultados. O autor declara não haver conflitos de interesse relacionados a esta pesquisa.
 
-As alterações entre o protocolo e a revisão executada estão reunidas no Quadro~\ref{qua:alteracoes-protocolo}. Cada item foi incluído somente quando confirmado pela comparação entre o texto do protocolo e o relato desta revisão; a justificativa indica o motivo registrado no relato ou a consequência direta da execução.
-
-\begingroup
-\small
-\setlength{\tabcolsep}{2pt}
-\renewcommand{\arraystretch}{1.0}
-\def\LTcaptype{quadro}
-\setlength{\LTcapwidth}{\textwidth}
-\setlength{\LTleft}{0pt}
-\setlength{\LTright}{\fill}
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{\dimexpr(\textwidth-2.6cm-8\tabcolsep-5\arrayrulewidth)/3\relax}|>{\raggedright\arraybackslash}p{\dimexpr(\textwidth-2.6cm-8\tabcolsep-5\arrayrulewidth)/3\relax}|>{\raggedright\arraybackslash}p{\dimexpr(\textwidth-2.6cm-8\tabcolsep-5\arrayrulewidth)/3\relax}|}
-\caption{Alterações entre o protocolo (PTC) e a revisão executada.}\label{qua:alteracoes-protocolo}\\
-\hline
-\textbf{Aspecto} & \textbf{Protocolo (PTC)} & \textbf{Revisão executada} & \textbf{Justificativa} \\
-\hline
-\endfirsthead
-\multicolumn{4}{c}{\quadroname\ \thequadro\ -- Continuação}\\
-\hline
-\textbf{Aspecto} & \textbf{Protocolo (PTC)} & \textbf{Revisão executada} & \textbf{Justificativa} \\
-\hline
-\endhead
-\hline
-\multicolumn{4}{r}{\textit{Continua na próxima página}}\\
-\endfoot
-\hline
-\endlastfoot
-Janela temporal & 2015 a 2025 & 2015 a 2026, com corte em 31/08/2026 & Atualização do período até a data de corte da coleta. \\
-\hline
-Coleta & 9.431 registros identificados & 11.904 registros identificados & Coleta atualizada para o corte de 2026; as contagens não são comparáveis. \\
-\hline
-Deduplicação & O PTC relata DOI e similaridade de título (TF-IDF, cosseno $>$ 0,9), com 2.517 remoções. O resumo preservado no SQLite registra 2.494 & 27 remoções por identidade DOI/URL e 2 relatórios repetidos confirmados individualmente, totalizando 29 & A diferença histórica de 23 remoções não foi reconciliada. Os 232 excedentes inicialmente sinalizados por título não autorizam remoções sem confirmação de identidade. \\
-\hline
-Triagem & Remoção de registros sem título ou resumo válido, fora do período e em idioma não previsto & Regras sobre metadados e resumos (resumo com menos de 50 palavras; ausência de termos metodológicos em inglês), com 9.393 exclusões após corrigir dois anos & Critérios operacionalizados em regras verificáveis na execução. \\
-\hline
-Escore e limiar & Escore de 0 a 10 aplicado à elegibilidade (1.883 avaliados); limiar de 4,0 & Na seleção histórica sob o corte 4,0, 2.482 registros avançaram à priorização e 2.464 não prosseguiram: 2.459 por escore e 5 por critérios de escopo & O escore foi utilizado para priorização, sem validação contra os critérios de elegibilidade. \\
-\hline
-Fluxo após priorização & Elegibilidade em uma etapa: 1.883 avaliados e 17 incluídos & 18 na shortlist; 1 excluído após resumo; 17 relatórios procurados, 1 não recuperado, 16 avaliados e 1 protocolo excluído & Separação entre priorização e avaliação de texto completo, com exclusões e recuperação registradas. \\
-\hline
-Tipos documentais & Somente artigos revisados por pares & Também teses e dissertações, tratadas como literatura cinzenta & Inclusão de estudos empíricos pertinentes de outros veículos, sem flexibilizar os critérios de elegibilidade. \\
-\hline
-Apreciação da qualidade & MMAT programado para a fase do TCC, sobre os 17 estudos & Apreciação preliminar com o MMAT 2018, por critério e sem escore, sobre os 15 estudos da seleção histórica & Apreciação realizada na fase prevista, sem uso do MMAT como critério de exclusão. \\
-\hline
-Seleção empírica & 17 estudos no PTC & 15 estudos na seleção histórica sob o corte 4,0 & A revisão do TCC utiliza o conjunto resultante da execução com corte em 31/08/2026. \\
-\hline
-\end{longtable}
-\fonte{Elaborado pelo autor (2026).}
-\endgroup
+O protocolo inicial considerava publicações de 2015 a 2025 e artigos revisados por pares. Na revisão executada, o período abrangeu 2015 a 2026, com corte em 31 de agosto de 2026, e os tipos documentais incluíram também teses e dissertações, conforme os critérios apresentados neste capítulo. O relato distinguiu a priorização por metadados e resumos da avaliação de elegibilidade em texto completo. A apreciação com o MMAT foi realizada na fase do TCC, por critério, sem escore agregado e sem utilização como regra de exclusão.
 
 \section{Estratégia de Busca}
 
@@ -91,7 +46,7 @@ Contexto educacional & education; learning & educacao; ensino \\
 
 A estratégia canônica reuniu 72 consultas: 48 em inglês e 24 em português. Em cada consulta, um termo matemático foi combinado com um termo computacional e um termo educacional. São exemplos \texttt{mathematics AND machine learning AND education} e \texttt{matemática AND aprendizado de máquina AND educacao}. Esse total descreve a estratégia configurada; a ausência de histórico completo das requisições impede determinar quantas foram concluídas por consulta ou por API e suas datas exatas. O limite configurado foi de até 50 resultados por consulta e por API. Uma passagem pelas 72 consultas e quatro APIs teria, nominalmente, teto de $72\times4\times50=14.400$ resultados antes de deduplicar. Esse valor descreve a configuração, não um limite comprovado do histórico armazenado.
 
-No Crossref, o coletor retira o texto \texttt{AND}, envia os termos à busca bibliográfica, solicita ordenação por relevância e chama uma amostragem de até 100 resultados para obter até 50 itens aceitos. A documentação do serviço define essa amostragem como aleatória; o código não fixa uma semente. Portanto, a resposta não é uma lista reproduzível dos 50 primeiros por relevância.\footnote{Documentação oficial do Crossref, seção \textit{Tips and tricks}, exemplo do parâmetro \texttt{sample}: \url{https://www.crossref.org/documentation/retrieve-metadata/rest-api/tips-for-using-the-crossref-rest-api/}. Acesso em: 3 nov. 2026.} No Semantic Scholar, a expressão é enviada com \texttt{AND} literal no campo de consulta. O OpenAlex retira apenas as aspas, preservando \texttt{AND}; esses dois clientes não definem um parâmetro de ordenação. O CORE recebe a expressão e ordena os resultados por ano decrescente. O limite restringe os itens que avançam conforme a ordem retornada pelos serviços; no Crossref, atua sobre a amostra.
+No Crossref, o coletor retira o texto \texttt{AND}, envia os termos à busca bibliográfica, solicita ordenação por relevância e chama uma amostragem de até 100 resultados para obter até 50 itens aceitos. A documentação do serviço define essa amostragem como aleatória; o código não fixa uma semente. Portanto, a resposta não é uma lista reproduzível dos 50 primeiros por relevância \cite{CrossrefTips2025}. No Semantic Scholar, a expressão é enviada com \texttt{AND} literal no campo de consulta. O OpenAlex retira apenas as aspas, preservando \texttt{AND}; esses dois clientes não definem um parâmetro de ordenação. O CORE recebe a expressão e ordena os resultados por ano decrescente. O limite restringe os itens que avançam conforme a ordem retornada pelos serviços; no Crossref, atua sobre a amostra.
 
 O cache pode devolver uma coleção anterior sem reaplicar o limite, e as tentativas do coletor Crossref podem acumular respostas. O conjunto preservado contém pares API/consulta com mais de 50 itens, inclusive mais registros Crossref que os 3.600 nominais de uma passagem. Por isso, não se infere do código atual quantas requisições históricas ocorreram nem quais páginas de resultados foram percorridas. Não houve reprocessamento da busca nesta revisão do relato.
 
@@ -136,7 +91,11 @@ Na identificação, cada registro armazenou, quando disponíveis, título, autor
 
 A triagem utilizou regras sobre os metadados e os resumos. Foram registradas 4.314 exclusões associadas a resumos com menos de 50 palavras; em 4.093 desses casos, o campo continha ``Abstract não disponível''. Outras 2.076 exclusões decorreram da ausência dos termos em inglês \texttt{method}, \texttt{approach}, \texttt{experiment}, \texttt{study}, \texttt{analysis}, \texttt{evaluation}, \texttt{test} ou \texttt{assess}, com exceções para termos de revisão. Os demais motivos foram não atendimento aos critérios de inclusão, com 2.856 registros; conteúdo não classificado como pesquisa, com 103; conteúdo fora do tema, com 42; e ano fora do intervalo temporal em dois registros (IDs 361 e 7001), cujos anos foram corrigidos para 2005 e 1997, respectivamente. Esses valores totalizam as 9.393 exclusões de triagem, distintas das 2.464 exclusões históricas na priorização. O autor realizou a seleção e a apreciação preliminar com o MMAT, com apoio de regras automatizadas e de IA generativa. O orientador Rafael Zanin e o coorientador Manassés Ribeiro ainda não revisaram especificamente esses julgamentos.
 
-A priorização histórica combinou presença de técnicas computacionais, aderência ao ensino de matemática, completude de metadados e resumos e disponibilidade de identificadores bibliográficos. A pontuação operacional, calculada por expressões regulares, variou de 0,0 a 4,5; o corte 4,0 foi usado para encaminhar registros à leitura. Esta versão mantém essa seleção histórica. A avaliação metodológica ocorreu separadamente, com o MMAT 2018. As limitações do procedimento são discutidas na Seção~\ref{sec:limitacoes-revisao}.
+A priorização por relevância foi aplicada aos registros que passaram pelas regras iniciais de triagem. A função de pontuação combinou indicadores obtidos do título, resumo e metadados: domínio matemático, com peso 0,3; técnicas computacionais, com peso 0,3; termos de delineamento e avaliação, com peso 0,2; ano de publicação, com peso 0,1; e completude do resumo, DOI e indicação de veículo, com peso 0,1. Esses componentes são sinais lexicais e bibliográficos, não verificações da qualidade metodológica \cite{BatistaCCWCode2026}.
+
+O PTC descreveu uma escala nominal de 0 a 10 e estabeleceu o corte 4,0 \cite{Batista2025PTC}. A função executada limita a soma ao intervalo de 0 a 10, mas os valores preservados no conjunto variaram de 0,0 a 4,5, sem renormalização. Portanto, a escala descrita no protocolo e a distribuição produzida pela execução não são equivalentes. O valor 4,0 representa o ponto de corte da soma ponderada: registros com escore igual ou superior a 4,0 permaneceram candidatos à leitura, sujeitos aos demais critérios; os inferiores ao corte foram sinalizados como baixa relevância. O número não representa uma porcentagem de aderência, probabilidade de elegibilidade ou nota de qualidade.
+
+Esta versão manteve o limiar 4,0 e o conjunto de estudos resultante. O protocolo, o código e os registros preservados não apresentam calibração empírica ou comparação entre limiares que justifique a escolha exata de 4,0 em lugar de outro valor. Assim, a finalidade operacional do corte está documentada, mas sua escolha numérica não é tratada como validada. A apreciação metodológica ocorreu separadamente, com o MMAT 2018. As limitações do procedimento são discutidas na Seção~\ref{sec:limitacoes-revisao}.
 
 \section{Infraestrutura Tecnológica da Revisão}
 
