@@ -34,7 +34,7 @@ assert.doesNotMatch(homepage, /MMAT histórico \(referência\)/i, 'the homepage 
 assert.match(homepage, /15 estudos empíricos integram a seleção histórica/i, 'the homepage must identify the 15-study selection as historical');
 assert.match(homepage, /Um texto integral segue pendente/i, 'the homepage must disclose the unretrieved full text');
 assert.match(homepage, /MMAT preliminar da seleção histórica: 15 triagens S1\/S2 e 15 apreciações por critério/i, 'the homepage must label MMAT counts as historical');
-assert.match(homepage, /emenda de seleção aprovada em 31\/10\/2026 ainda precisa ser reaplicada/i, 'the homepage must disclose that the approved amendment has not been reapplied');
+assert.match(homepage, /textos integrais adicionais solicitados serão avaliados antes de decidir sobre mudança ou reaplicação da seleção; o corte 4,0 permanece inalterado/i, 'the homepage must disclose the unchanged cutoff and pending full-text decision');
 assert.doesNotMatch(homepage, /população vigente|snapshot vigente/i, 'the homepage must not present the pre-amendment snapshot as current');
 assert.match(homepage, /1 registro foi excluído após o resumo/i, 'the homepage must disclose the abstract-stage exclusion');
 assert.match(homepage, /1 protocolo foi excluído após o texto completo/i, 'the homepage must disclose the protocol exclusion');
@@ -45,10 +45,10 @@ assert.match(homepage, /ifc-campus-videira-horizontal\.png/, 'the homepage must 
 assert.doesNotMatch(homepage, /linear-gradient|Segoe UI.*Tahoma/i, 'the homepage must not retain the legacy visual system');
 
 const researchLanding = read('research/index.html');
-assert.match(researchLanding, /recorte anterior à emenda reuniu 15 estudos empíricos/i, 'the research landing page must identify the 15-study selection as historical');
+assert.match(researchLanding, /seleção histórica sob o corte 4,0 reuniu 15 estudos empíricos/i, 'the research landing page must identify the 15-study selection as historical');
 assert.match(researchLanding, /15 estudos empíricos com apreciação MMAT preliminar/i, 'the research landing page must identify the MMAT-reviewed selection as historical');
 assert.match(researchLanding, /1 relatório não foi recuperado/i, 'the research landing page must disclose the unretrieved full text');
-assert.match(researchLanding, /ainda precisa ser reaplicada/i, 'the research landing page must disclose pending application of the amendment');
+assert.match(researchLanding, /textos integrais adicionais solicitados serão avaliados antes de decidir sobre mudança ou reaplicação da seleção/i, 'the research landing page must defer a selection change until requested full texts are assessed');
 assert.doesNotMatch(researchLanding, /escopo vigente|população retida/i, 'the research landing page must not label the pre-amendment selection as current');
 assert.match(researchLanding, /href="data\/current_synthesis_scope\.csv"/, 'the research landing page must link the current eligibility ledger');
 assert.match(researchLanding, /1 registro foi excluído após o resumo/i, 'the research landing page must disclose the abstract-stage exclusion');
@@ -57,7 +57,7 @@ assert.doesNotMatch(researchLanding, /17 candidatos empíricos provisórios/i, '
 
 const historicalMmat = read('research/exports/analysis/mmat_visualization.html');
 assert.match(historicalMmat, /visualização histórica[^<]*17 registros/i, 'the legacy MMAT visualization must identify its historical 17-study denominator');
-assert.match(historicalMmat, /seleção anterior à emenda[\s\S]*15 estudos empíricos com 15 triagens S1\/S2 e 15 apreciações por categoria/i, 'the legacy MMAT visualization must label the linked appraisal counts as historical');
+assert.match(historicalMmat, /seleção histórica sob o corte 4,0[\s\S]*15 estudos empíricos com 15 triagens S1\/S2 e 15 apreciações por categoria/i, 'the legacy MMAT visualization must label the linked appraisal counts as historical');
 assert.doesNotMatch(historicalMmat, /população vigente contém 18 registros: 17 candidatos empíricos/i, 'the legacy MMAT visualization must not describe its historical denominator as current');
 
 const siteCss = read('public-site/assets/site.css');
@@ -85,18 +85,20 @@ const mmat = read('research/exports/analysis/mmat_current.html');
 assert.doesNotMatch(mmat, /^[\t ]+$/m, 'generated MMAT page must not contain whitespace-only lines');
 assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggregate scoring');
 assert.match(mmat, /arquivo histórico/i, 'the current page must preserve historical provenance');
-assert.match(mmat, /Apreciação preliminar do recorte histórico/i, 'the MMAT page title must identify the pre-amendment record');
-assert.match(mmat, /ainda está pendente; portanto, este conjunto não representa o corpus final/i, 'the MMAT page must state that reapplication is pending');
+assert.match(mmat, /Apreciação preliminar do recorte histórico/i, 'the MMAT page title must identify the historical record');
+assert.match(mmat, /Os textos integrais adicionais solicitados serão avaliados antes de decidir sobre mudança ou reaplicação da seleção[\s\S]*este conjunto não é apresentado como corpus final/i, 'the MMAT page must identify the historical selection and pending decision');
 assert.match(mmat, /data de corte 31\/08\/2026/i, 'the MMAT page must identify the review cutoff date');
 assert.match(mmat, /recorte histórico reconciliado em 20\/10\/2026/i, 'the MMAT page must distinguish the historical reconciled scope date');
 assert.match(mmat, /<span class="metric-value">18<\/span><span class="metric-label">itens no registro de apreciação<\/span>/, 'the MMAT page must explain its current 18-record population');
-assert.match(mmat, /arquivo legado preserva 17 registros MMAT.*registro histórico contém 18 itens.*15 estudos empíricos da seleção anterior à emenda/i, 'the MMAT page must distinguish the legacy artifact from the historical 18-item appraisal register');
+assert.match(mmat, /arquivo legado preserva 17 registros MMAT.*registro histórico contém 18 itens.*15 estudos empíricos da seleção histórica sob o corte 4,0/i, 'the MMAT page must distinguish the legacy artifact from the historical 18-item appraisal register');
 assert.match(mmat, /current_synthesis_scope\.csv/i, 'the MMAT page must identify the source of its reconciled population');
 assert.match(mmat, /reproducibility_manifest\.json/i, 'the MMAT page must identify the source of its cutoff date');
-assert.match(historicalMmat, /17 registros[\s\S]*15 estudos empíricos com 15 triagens S1\/S2/i, 'the historical MMAT page must identify the linked appraisal set as pre-amendment');
+assert.match(historicalMmat, /17 registros[\s\S]*15 estudos empíricos com 15 triagens S1\/S2/i, 'the historical MMAT page must identify the linked appraisal set as historical');
+assert.match(historicalMmat, /avaliações históricas anteriores[\s\S]*textos integrais adicionais solicitados serão avaliados/i, 'the archived MMAT page must distinguish its older records from the current historical selection');
+assert.doesNotMatch(historicalMmat, /reaplicação da emenda|emenda ainda não foi reaplicada/i, 'the archived MMAT page must not claim an approved amendment');
 assert.match(mmat, /18 registros/i, 'the current page must expose the current denominator');
 assert.match(mmat, /arquivo histórico/i, 'the current page must preserve historical provenance');
-assert.match(mmat, /O registro de apreciação reúne 18 itens do recorte histórico anterior à emenda/i, 'the MMAT page must describe its 18-item scope as historical');
+assert.match(mmat, /O registro de apreciação reúne 18 itens da seleção histórica sob o corte 4,0/i, 'the MMAT page must describe its 18-item scope as historical');
 assert.doesNotMatch(mmat, /estudos empíricos mantidos provisoriamente/i, 'the MMAT page must not describe the pre-amendment selection as provisional/current');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
 assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">consultas documentais declaradas<\/span>/, 'historical consultation labels must not certify completed human reading');
@@ -151,7 +153,7 @@ assert.match(mmat, /Design2025_004 · Categoria 3 operacional · alocação desc
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
 assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');
-assert.match(mmat, /No recorte histórico anterior à emenda, S1 e S2 estão preenchidas para 15 estudos empíricos\. Q1–Q5 foram apreciados em 15;/i, 'the historical empirical records must expose their preliminary appraisals');
+assert.match(mmat, /Na seleção histórica sob o corte 4,0, S1 e S2 estão preenchidas para 15 estudos empíricos\. Q1–Q5 foram apreciados em 15;/i, 'the historical empirical records must expose their preliminary appraisals');
 assert.match(mmat, /Are there clear research questions\?/i, 'the current page must preserve the original S1 wording');
 assert.match(mmat, /Critérios de apreciação por delineamento/i, 'the current page must expose design-specific criteria');
 assert.match(mmat, /MMAT 2018<\/a>/i, 'the current page must cite the MMAT 2018 source');
@@ -160,7 +162,7 @@ assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_primary_sources
 assert.equal((mmat.match(/class="mmat-question-group"/g) || []).length, 5, 'the current page must expose all MMAT design groups');
 assert.match(mmat, /O que esta avaliação registra/i, 'the public page must explain the purpose of the appraisal in reader-facing language');
 assert.doesNotMatch(mmat, /\b(?:ledger|shortlist|snapshot)\b/i, 'the public page must avoid unexplained development jargon');
-assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Registro MMAT do recorte anterior à emenda, reconciliado em 20\/10\/2026; apreciações registradas até 28\/10\/2026\./i, 'the MMAT page must distinguish search cutoff, historical scope reconciliation and appraisal dates');
+assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Registro MMAT da seleção histórica sob o corte 4,0, reconciliado em 20\/10\/2026; apreciações registradas até 28\/10\/2026\./i, 'the MMAT page must distinguish search cutoff, historical scope reconciliation and appraisal dates');
 assert.doesNotMatch(mmat, /Recorte do corpus: 12\/10\/2026/i, 'the scope update date must not be presented as a new search record');
 assert.match(mmat, /apreciações registradas até 28\/10\/2026/i, 'the current page must expose the latest appraisal date');
 assert.match(mmat, /15 estudos da seleção histórica têm triagem e critérios apreciados/i, 'the MMAT table caption must not call the pre-amendment studies the current corpus');

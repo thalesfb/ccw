@@ -46,7 +46,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         ):
             self.assertIn(citation, limitations)
         self.assertIn("A seleção histórica reúne 15 estudos empíricos", review)
-        self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
+        self.assertIn("A inclusão na seleção histórica não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("núcleo empírico", limitations)
         self.assertIn(r"O texto integral de \citeonline{Zeng2025_6923} não foi recuperado", limitations)
         gaps = review.split(r"\section{Tendências e Lacunas}", 1)[1].split(
@@ -273,7 +273,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         limitations = review.split(r"\section{Limitações e Contribuições da Revisão}", 1)[1]
         self.assertNotIn("lacunas mais recorrentes", discussion.lower())
-        self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
+        self.assertIn("A inclusão na seleção histórica não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("adjudicação", discussion)
         self.assertIn(r"As contagens MMAT do Quadro~\ref{qua:mmat-contagens}", discussion)
         self.assertIn("sem contar os três estudos mistos novamente", discussion)
@@ -288,7 +288,7 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_abstract_reports_operational_selection_and_limits_gap_claims(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
         self.assertIn("18 foram encaminhados para leitura", abstract)
-        self.assertIn("um corpus de 15 estudos empíricos", abstract)
+        self.assertIn("restando 15 estudos empíricos na seleção histórica", abstract)
         for removed in ("priorização operacional", "mantidos provisoriamente", "adjudicação", "único pesquisador", "DOI/URL"):
             self.assertNotIn(removed, abstract)
         self.assertIn("por critério, sem escore", abstract)

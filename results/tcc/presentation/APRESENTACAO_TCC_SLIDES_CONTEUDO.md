@@ -1,9 +1,10 @@
 # Apresentação do TCC — conteúdo dos slides
 
 > **Rascunho histórico — não usar na defesa.** Os números deste storyboard
-> antecedem a reconciliação de 31/10/2026 e a emenda de seleção aprovada. A
-> reaplicação dos critérios ainda está pendente; o storyboard e o PPTX serão
-> atualizados depois que o corpus resultante for fechado.
+> antecedem a reconciliação de 31/10/2026. O corte 4,0 e a seleção histórica
+> de 15 estudos permanecem inalterados. A decisão sobre mudança ou reaplicação
+> depende da avaliação dos textos adicionais solicitados; a revisão da
+> apresentação para a defesa permanece suspensa.
 
 ## Identidade
 

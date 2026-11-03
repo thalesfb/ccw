@@ -247,24 +247,28 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "A categoria 3 foi utilizada para examinar as comparações quantitativas" in chapter
     assert "com alocação desconhecida" in chapter
     assert "a execução da randomização recebeu ct" in chapter.lower()
-    assert "Um único revisor conduziu seleção e apreciação, com apoio de IA generativa em ambas" in chapter
-    assert "ainda dependem de conferência humana por fonte e critério" in chapter
+    assert "o autor conduziu a seleção e a apreciação preliminar" in chapter.lower()
+    assert "apoio de regras automatizadas e de ia generativa" in chapter.lower()
+    assert "o orientador rafael zanin e o coorientador manassés ribeiro ainda não revisaram especificamente esses julgamentos" in chapter.lower()
+    assert "o autor encaminhará o tcc a ambos após esta rodada" in chapter.lower()
+    assert "os julgamentos mmat dependem de conferência humana por fonte e critério" in chapter.lower()
     assert "não foram convertidos em escore agregado ou síntese final de qualidade" in chapter
     for removed in ("adjudicação",):
         assert removed not in methodology
-    assert "um único revisor, o autor" in methodology
-    assert "Não há segunda avaliação independente documentada" in methodology
-    assert "IA generativa na seleção e no preenchimento do MMAT" in methodology
+    assert "O autor realizou a seleção e a apreciação preliminar com o MMAT" in methodology
+    assert "o orientador rafael zanin e o coorientador manassés ribeiro ainda não revisaram especificamente esses julgamentos" in methodology.lower()
     appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
     selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
     appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
     assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
     assert r"Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão" in selection_row
-    assert "seleção como único revisor" in selection_row
+    assert "O autor conduziu a seleção" in selection_row
     assert "regras automatizadas e apoio de IA generativa" in selection_row
-    assert "não há segunda seleção independente documentada" in selection_row
+    assert "o orientador e o coorientador acompanham o trabalho" in selection_row.lower()
+    assert "ainda não revisaram essas decisões de forma independente" in selection_row.lower()
     assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
-    assert "apreciação como único revisor, com apoio de IA generativa" in appraisal_row
+    assert "O autor realizou a apreciação preliminar com apoio de IA generativa" in appraisal_row
+    assert "o orientador e o coorientador ainda não revisaram esses julgamentos de forma independente" in appraisal_row.lower()
     assert "conferência humana por fonte e critério permanece pendente" in appraisal_row
     assert "a verificação documental permanece incompleta" not in selection_row
     assert "com fontes e julgamentos ainda incompletos" not in appraisal_row

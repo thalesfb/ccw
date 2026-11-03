@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "62065e04e1b6fafe20a5fa0562f0a4d4526dfc515b87ae7c46f2248478519915",
+    "sha256": "a39c48fa93daa01bcf4625b0c2990e07efc628b61441777a7e8e9e42cd2e2034",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/adjudicated_record_corrections.csv",
@@ -127,17 +127,17 @@
     {
       "name": "prisma_flow.png",
       "canonical_path": "research/exports/visualizations/prisma_flow.png",
-      "canonical_sha256": "9ca136e96fb5f9cae7e10e10945b93179cf4ca8e12e46eef8336cbb85eed29f8",
+      "canonical_sha256": "5da236a7566b0307970a386126a608fafd483023fdb17a12dea9caed2027f6ae",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/prisma_flow.png",
-          "sha256": "9ca136e96fb5f9cae7e10e10945b93179cf4ca8e12e46eef8336cbb85eed29f8"
+          "sha256": "5da236a7566b0307970a386126a608fafd483023fdb17a12dea9caed2027f6ae"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/prisma_flow.png",
-          "sha256": "9ca136e96fb5f9cae7e10e10945b93179cf4ca8e12e46eef8336cbb85eed29f8"
+          "sha256": "5da236a7566b0307970a386126a608fafd483023fdb17a12dea9caed2027f6ae"
         }
       ]
     },
