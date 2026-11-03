@@ -1,6 +1,6 @@
 # Estado atual e limites da versão do TCC
 
-**Atualização documental:** 31 de outubro de 2026
+**Atualização documental:** 3 de novembro de 2026
 
 Este registro público descreve o estado verificável da versão atual do
 Trabalho de Conclusão de Curso e separa resultados produzidos, validações
@@ -18,7 +18,7 @@ fluxo de desenvolvimento estão em
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). Os textos integrais adicionais solicitados serão avaliados antes de qualquer decisão sobre mudança ou reaplicação da seleção. O corte 4,0 permanece inalterado. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->
@@ -39,7 +39,7 @@ nenhuma consulta histórica tenha ocorrido.
 
 O manifesto distingue as datas de referência: a busca tem corte em 31 de agosto
 de 2026, a adjudicação inicial do escopo ocorreu em 3 de setembro e a
-reconciliação do escopo foi atualizada em 14 de outubro de 2026. O arquivo foi
+reconciliação do escopo foi atualizada em 20 de outubro de 2026. O arquivo foi
 regenerado para esta revisão e preserva verificadores de integridade dos
 artefatos versionados; a atualização não representa nova consulta às APIs nem
 altera o corte temporal da busca.
@@ -49,9 +49,9 @@ critérios específicos do delineamento. Dos 15 registros empíricos mantidos
 provisoriamente, 15 têm triagem S1/S2 e apreciação dos critérios. As categorias 3 dos estudos 5 e 7 são rotas operacionais com alocação desconhecida; a categoria 2 do 14 segue o sorteio declarado, mas contraditório; e a categoria 4 do 8 é adaptação à modelagem computacional. A unidade do 8 é uma tese/um relatório com componentes matemáticos, sem duplicar frações reutilizadas. O registro 6923 sem texto integral também não recebeu apreciação; suas
 células permanecem sem resposta, não como CT. O registro
 excluído após resumo e o protocolo sem resultados concluídos estão fora do
-denominador MMAT. Como a avaliação foi conduzida por um único revisor e a
-adjudicação humana independente permanece pendente, o MMAT é preliminar e por
-critério. Não há escore agregado, ranking ou conclusão de eficácia.
+denominador MMAT. O autor realizou a apreciação preliminar com apoio
+automatizado, registrando justificativas e limites por critério. Não há
+escore agregado, ranking ou conclusão de eficácia.
 
 ## Implementação e escopo experimental
 
@@ -70,13 +70,11 @@ divisão dos dados e critérios de avaliação.
 
 ## Decisões metodológicas pendentes
 
-Em 31/10/2026, foi registrada uma proposta de revisão do uso do escore de
-relevância. Nenhuma mudança no protocolo foi aprovada ou aplicada: o corte 4,0,
-os critérios de elegibilidade e a seleção histórica de 15 estudos permanecem
-inalterados. Os textos integrais adicionais já solicitados serão avaliados
-antes de qualquer decisão sobre mudança ou reaplicação da seleção. Ver
+Esta versão relata a seleção realizada sob o corte de relevância 4,0,
+os critérios aplicados e o conjunto histórico de 15 estudos. Não houve
+alteração da regra, nova seleção ou incorporação de estudos adicionais. Ver
 [`REVISAO-LIMIAR-SELECAO-2026-10-31.md`](REVISAO-LIMIAR-SELECAO-2026-10-31.md),
-que documenta a proposta, não uma decisão adotada.
+que documenta o estado da seleção e as limitações do escore utilizado.
 
 O escopo desta entrega foi confirmado como revisão crítica da literatura e
 especificação conceitual, sem exigir treinamento ou validação educacional do

@@ -2,9 +2,8 @@
 
 > **Rascunho histórico — não usar na defesa.** Os números deste storyboard
 > antecedem a reconciliação de 31/10/2026. O corte 4,0 e a seleção histórica
-> de 15 estudos permanecem inalterados. A decisão sobre mudança ou reaplicação
-> depende da avaliação dos textos adicionais solicitados; a revisão da
-> apresentação para a defesa permanece suspensa.
+> de 15 estudos permanecem inalterados. A revisão da apresentação para a
+> defesa permanece suspensa; esta atualização não modifica o conjunto de estudos.
 
 ## Identidade
 

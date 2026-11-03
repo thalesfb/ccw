@@ -2,9 +2,8 @@
 
 > **Rascunho fora de uso na defesa:** o Slidev, o storyboard e o PPTX ainda
 > descrevem a seleção histórica de 15 estudos sob o corte 4,0. O fluxo foi
-> reconciliado em 31/10/2026. A decisão sobre mudança ou reaplicação depende
-> da avaliação dos textos adicionais solicitados; a revisão para a defesa
-> permanece suspensa.
+> reconciliado em 31/10/2026. A revisão da apresentação para a defesa
+> permanece suspensa; esta correção registra somente o conjunto atual.
 
 ## Arquivo da defesa
 
@@ -32,10 +31,9 @@ nunca como fonte dos números atuais do TCC.
 
 Os gráficos versionados, as contagens do fluxo histórico e as legendas da
 reconciliação de 31/10/2026 estão atualizados. A síntese descreve os 15 estudos
-selecionados historicamente sob o corte 4,0. A proposta de mudança não foi
-adotada. Os textos integrais adicionais solicitados serão avaliados antes de o
-autor decidir se a seleção deve mudar. Até essa revisão e a avaliação da
-orientação, os materiais continuam fora de uso na defesa.
+selecionados historicamente sob o corte 4,0. Não houve mudança do corte,
+nova seleção ou incorporação de estudos adicionais. Os materiais continuam
+identificados como rascunho, fora de uso na defesa.
 
 ## Objetivos de referência do manuscrito
 
@@ -156,10 +154,8 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
   completo; essa seleção não é o corpus final;
 - o MMAT desse recorte histórico é preliminar: a busca tem data de corte em
   31/08/2026 e o recorte foi reconciliado em 20/10/2026; 15 estudos têm
-  triagem S1/S2 e apreciação dos critérios por categoria; o estudo 8 ainda
-  aguarda adjudicação humana. Não há nota média ou ranking. Os textos integrais
-  adicionais serão avaliados antes de qualquer decisão sobre mudança ou
-  reaplicação da seleção;
+  triagem S1/S2 e apreciação preliminar dos critérios por categoria, incluindo
+  as rotas operacionais dos estudos 5, 7, 8 e 14. Não há nota média ou ranking;
 - as frequências técnicas descrevem a seleção histórica após deduplicação,
   não uma síntese de eficácia nem um corpus final;
 - referências teóricas, pedagógicas, metodológicas e técnicas do TCC permanecem

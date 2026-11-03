@@ -54,10 +54,10 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "languages": ["en", "pt"],
         "abstract_required": False,
         "legacy_selector_relevance_threshold": 4.0,
-        "selection_amendment_id": "PRISMA-24c-2026-10-31",
-        "selection_amendment_status": "pending_full_text_review",
-        "selection_flow_status": "historical_snapshot_reconciled_pending_full_text_review",
-        "relevance_score_role": "historical_cutoff_pending_decision",
+        "selection_status_record": "SELECTION-STATUS-2026-11-03",
+        "selection_status": "historical_snapshot_unchanged",
+        "selection_flow_status": "historical_snapshot_reconciled",
+        "relevance_score_role": "historical_cutoff",
         "canonical_query_count": 72,
         "query_generator": "research/src/search_terms.py",
         "sources": ["semantic_scholar", "openalex", "crossref", "core"],
@@ -65,14 +65,14 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "max_results_per_query": 10,
         "interpretation": (
             "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. "
-            "A decision to change or reapply selection is pending assessment of the additional full texts "
-            "already requested; the 15-study historical selection is unchanged. External API responses, "
+            "This version reports the 15-study historical selection without a new selection run "
+            "or additional studies. External API responses, "
             "cache state and metadata may change; they do not replace the current versioned snapshot exports."
         ),
     }
     assert counts["total_records"] == 11904
     assert counts["versioned_rows"] == 11875
-    assert snapshot["selection_flow_status"] == "historical_snapshot_reconciled_pending_full_text_review"
+    assert snapshot["selection_flow_status"] == "historical_snapshot_reconciled"
     assert counts["selection_stage_counts"] == {
         "screening": 9393,
         "prioritization": 2464,
@@ -318,7 +318,8 @@ def test_published_summary_images_use_paths_relative_to_the_report() -> None:
     assert "2 relatórios repetidos confirmados manualmente" in html
     assert "(29 no total)" in html
     assert "Não avançaram na priorização histórica" in html
-    assert "decisão sobre mudança ou reaplicação depende da avaliação dos textos" in html
+    assert "o corte 4,0 e os 15 estudos permanecem inalterados" in html
+    assert "textos integrais adicionais solicitados serão avaliados" not in html
     assert "emenda aprovada" not in html
     assert "priorização por metadados e resumos não equivale à elegibilidade" in html
     assert "Excluídos pelo limiar / registros priorizados" not in html

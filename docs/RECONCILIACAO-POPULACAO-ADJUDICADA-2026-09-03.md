@@ -24,8 +24,8 @@ de implementação que não sejam necessários ao relato científico.
 Em 31/10/2026, uma reconciliação posterior confirmou 6952 como o mesmo artigo
 de 155 e 6977 como a mesma tese de 8, além de corrigir os anos de publicação
 dos registros 361 (2005) e 7001 (1997). Evidências e disposições estão em
-`research/data/adjudicated_record_corrections.csv`. O corte 4,0 permanece inalterado. Uma decisão sobre mudança ou reaplicação
-depende da avaliação dos textos integrais adicionais solicitados; por
+`research/data/adjudicated_record_corrections.csv`. O corte 4,0 permanece
+inalterado, sem nova seleção ou incorporação de estudos adicionais; por
 isso, os 15 estudos abaixo continuam representando a seleção histórica.
 
 O arquivo `research/data/prisma_population_reconciliation.csv` não é a fonte do
@@ -42,11 +42,11 @@ síntese e a auditoria de identidade indicados acima.
 | Identificação | 11.904 | Registros no snapshot versionado |
 | Duplicatas removidas | 29 | 27 por DOI/URL; 2 relatórios iguais confirmados manualmente |
 | Triagem | 11.875 | 9.393 excluídos |
-| Priorização histórica | 2.482 | 2.464 não avançaram sob a regra histórica; decisão sobre mudança pendente da avaliação dos textos solicitados |
+| Priorização histórica | 2.482 | 2.464 não avançaram sob as regras históricas: 2.459 por pontuação e cinco por escopo |
 | Lista preliminar | 18 | 1 exclusão após resumo |
 | Relatórios procurados | 17 | 1 não recuperado no fluxo histórico |
 | Relatórios declarados avaliados em texto completo | 16 | 1 protocolo excluído; a contagem não certifica leitura humana integral |
-| Seleção histórica de estudos empíricos | 15 | Seleção histórica sob 4,0; eventual mudança depende da avaliação dos textos solicitados |
+| Seleção histórica de estudos empíricos | 15 | Conjunto adotado nesta versão, selecionado sob o corte 4,0 |
 <!-- ccw-sync:end flow -->
 
 Dos **11.904 identificados**, 9.393 (78,91%) foram excluídos na triagem; 2.482

@@ -1,8 +1,8 @@
 # Export PowerPoint editável paralelo do TCC
 
 > **Desatualizado para a defesa.** Este export e suas visualizações incorporadas
-> refletem a seleção histórica de 15 estudos sob o corte 4,0. A decisão sobre
-> mudança ou reaplicação depende da avaliação dos textos adicionais solicitados.
+> refletem a seleção histórica de 15 estudos sob o corte 4,0, com apreciações
+> preliminares e limitações metodológicas explicitadas.
 > Não use estes números como corpus final; a revisão para a defesa permanece suspensa.
 
 Este diretório contém um artefato editável auxiliar, não a apresentação que

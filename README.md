@@ -5,7 +5,7 @@
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). Os textos integrais adicionais solicitados serão avaliados antes de qualquer decisão sobre mudança ou reaplicação da seleção. O corte 4,0 permanece inalterado. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 O estado público, os limites interpretativos e as decisões metodológicas ainda
@@ -20,7 +20,7 @@ de notas ou de probabilidades preditivas. A entrega é documental: a especifica�
 e seu protocolo de avaliação foram propostos, mas a avaliação da especificação e
 a validação educacional do protótipo não foram realizadas nesta versão.
 
-![Síntese visual do TCC: revisão crítica, MMAT preliminar e especificação conceitual](results/tcc/images/project_overview_2026-10-20.png)
+![Síntese visual do TCC: revisão crítica, MMAT preliminar e especificação conceitual](results/tcc/images/project_overview_2026-11-03.png)
 
 > O texto do [TCC](results/tcc/main.tex) é a fonte de verdade do relato científico;
 > os artefatos versionados sustentam suas contagens e sua rastreabilidade. A imagem
@@ -226,11 +226,11 @@ python -m pytest research/tests/test_defense_consistency.py -q
 | Identificação | 11.904 | Registros no snapshot versionado |
 | Duplicatas removidas | 29 | 27 por DOI/URL; 2 relatórios iguais confirmados manualmente |
 | Triagem | 11.875 | 9.393 excluídos |
-| Priorização histórica | 2.482 | 2.464 não avançaram sob a regra histórica; decisão sobre mudança pendente da avaliação dos textos solicitados |
+| Priorização histórica | 2.482 | 2.464 não avançaram sob as regras históricas: 2.459 por pontuação e cinco por escopo |
 | Lista preliminar | 18 | 1 exclusão após resumo |
 | Relatórios procurados | 17 | 1 não recuperado no fluxo histórico |
 | Relatórios declarados avaliados em texto completo | 16 | 1 protocolo excluído; a contagem não certifica leitura humana integral |
-| Seleção histórica de estudos empíricos | 15 | Seleção histórica sob 4,0; eventual mudança depende da avaliação dos textos solicitados |
+| Seleção histórica de estudos empíricos | 15 | Conjunto adotado nesta versão, selecionado sob o corte 4,0 |
 <!-- ccw-sync:end flow -->
 
 Os sete overrides manuais e a correção temporal do ID 6918 estão registrados
