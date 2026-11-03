@@ -211,7 +211,7 @@ def test_current_funnel_rendered_values_match_the_versioned_summary(tmp_path):
 def test_current_prisma_is_legible_and_does_not_mislabel_source_denominators(tmp_path):
     summary = json.loads((Path(__file__).resolve().parents[1] / 'exports/reports/summary.json').read_text(encoding='utf-8'))
     with patch.object(plt, 'close'):
-        ReviewVisualizer(tmp_path).prisma_flow_diagram(summary['statistics']['prisma'], source_counts=summary['statistics']['databases'])
+        ReviewVisualizer(tmp_path).prisma_flow_diagram(summary['statistics']['prisma'])
         figure = plt.gcf()
         figure.canvas.draw()
         nodes = [text for text in figure.axes[0].texts if text.get_text()]
@@ -229,9 +229,9 @@ def test_current_prisma_is_legible_and_does_not_mislabel_source_denominators(tmp
             match = re.search(r'\(n = ([\d.]+)\)', node.get_text())
             assert int(match.group(1).replace('.', '')) == summary['statistics']['prisma'][key]
         assert '11.904' in labels and '11.875' in labels and '2.482' in labels
-        assert 'após deduplicação' in labels
+        assert 'Por fonte' not in labels
         for name in ('Crossref', 'OpenAlex', 'Semantic Scholar', 'CORE'):
-            assert name in labels
+            assert name not in labels
         assert 'A priorização é heurística' not in labels
         assert min(node.get_fontsize() * 16 / (figure.get_figwidth() * 2.54) for node in nodes) >= 8
         renderer = figure.canvas.get_renderer()
@@ -253,7 +253,14 @@ def test_generate_all_keeps_records_without_source_in_the_flow(tmp_path):
     visualizer = ReviewVisualizer(tmp_path)
     with patch.object(visualizer, 'papers_by_year', return_value=tmp_path/'years.png'), \
          patch.object(visualizer, 'techniques_distribution', return_value=tmp_path/'techniques.png'), \
-         patch.object(visualizer, 'relevance_score_distribution', return_value=tmp_path/'relevance.png'):
+         patch.object(visualizer, 'relevance_score_distribution', return_value=tmp_path/'relevance.png'), \
+         patch.object(visualizer, 'database_coverage', return_value=tmp_path/'sources.png'), \
+         patch.object(visualizer, 'selection_stages_funnel', return_value=tmp_path/'funnel.png'), \
+         patch.object(plt, 'close'):
         output = visualizer.generate_all_visualizations(frame, stats)
+        labels = ' '.join(text.get_text() for text in plt.gcf().axes[0].texts)
+        assert 'Por fonte' not in labels
+        assert 'Crossref' not in labels
     assert len(output) == 6
     assert (tmp_path/'prisma_flow.png').is_file()
+    plt.close('all')

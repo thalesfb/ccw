@@ -6,7 +6,7 @@ Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e
 > 29 duplicatas removidas (27 por DOI/URL e 2 relatórios iguais confirmados
 > manualmente); 11.875 registros únicos na triagem; 9.393 excluídos; 2.482
 > avançaram à priorização histórica e 2.464 não avançaram sob a regra anterior.
-> A emenda que retira o escore como critério de exclusão ainda não foi reaplicada.
+> O corte 4,0 permanece inalterado; a decisão sobre mudança ou reaplicação depende da avaliação dos textos integrais adicionais solicitados.
 > A seleção histórica contém 18 registros na shortlist, 17 relatórios procurados,
 > 1 não recuperado, 16 avaliados em texto completo, 1 protocolo excluído e 15
 > estudos empíricos. O histórico de 31/08 foi corrigido: ID 6952 é repetido do
@@ -20,7 +20,7 @@ está no [ledger atual](../data/mmat_reassessment_current.csv) e na página
 `analysis/papers.json` e planilhas não são fonte de apreciação MMAT. A tabela
 [legada](../data/mmat_assessments.csv) e a página [MMAT histórico](analysis/mmat_visualization.html)
 foram preservadas para rastreabilidade; seus julgamentos e scores não representam
-a avaliação vigente. A seleção de 15 estudos e os 18 registros da shortlist ainda são históricos até a reaplicação da emenda.
+a avaliação vigente. A seleção de 15 estudos e os 18 registros da shortlist ainda são históricos sob o corte 4,0; uma decisão sobre mudança ou reaplicação depende dos textos solicitados.
 
 ---
 
@@ -217,10 +217,10 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 
 ## 🚀 Próximos Passos
 
-### Fase 1 (Revisão Sistemática) - 🟡 RECONCILIAÇÃO DE DADOS FEITA; REAPLICAÇÃO PENDENTE
-- [x] Snapshot de busca reconciliado (11.904 identificados; 29 duplicatas removidas; 11.875 únicos na triagem; 18 na seleção histórica; 15 estudos empíricos antes da reaplicação)
+### Fase 1 (Revisão Sistemática) - 🟡 RECONCILIAÇÃO FEITA; DECISÃO DE SELEÇÃO PENDENTE
+- [x] Snapshot de busca reconciliado (11.904 identificados; 29 duplicatas removidas; 11.875 únicos na triagem; 18 na seleção histórica; 15 estudos empíricos sob o corte 4,0)
 - [x] Fluxo histórico de triagem e texto completo reconciliado
-- [ ] Reaplicar os critérios uniformes à população após a emenda aprovada de 31/10
+- [ ] Avaliar os textos adicionais solicitados e decidir se o procedimento de seleção deve ser mantido ou modificado
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
 - [x] Exportação BibTeX dos 18 registros shortlistados do pipeline; status de elegibilidade e inclusão são mantidos separadamente no ledger
 - [ ] Adjudicação dos 232 candidatos restantes apenas por título (a auditoria bruta registrou 257 excedentes, com sobreposição de identidades)

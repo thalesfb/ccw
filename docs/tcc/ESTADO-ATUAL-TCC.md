@@ -18,7 +18,7 @@ fluxo de desenvolvimento estão em
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). A emenda aprovada em 31/10/2026 retira o escore de critério de exclusão, mas ainda não foi reaplicada à população. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). Os textos integrais adicionais solicitados serão avaliados antes de qualquer decisão sobre mudança ou reaplicação da seleção. O corte 4,0 permanece inalterado. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->
@@ -70,13 +70,13 @@ divisão dos dados e critérios de avaliação.
 
 ## Decisões metodológicas pendentes
 
-Em 31/10/2026, o autor aprovou uma emenda retrospectiva ao protocolo: a
-pontuação de relevância passa a ordenar a fila de leitura e deixa de funcionar
-como critério de exclusão. Os critérios de elegibilidade permanecem os mesmos;
-nenhum recorte mais estreito foi adotado. A reaplicação e a auditoria dos filtros
-automáticos ainda não foram concluídas. Portanto, o snapshot acima, inclusive o
-corpus de 15 estudos, registra a análise anterior à emenda. Ver
-[`DECISAO-EMENDA-SELECAO-2026-10-31.md`](DECISAO-EMENDA-SELECAO-2026-10-31.md).
+Em 31/10/2026, foi registrada uma proposta de revisão do uso do escore de
+relevância. Nenhuma mudança no protocolo foi aprovada ou aplicada: o corte 4,0,
+os critérios de elegibilidade e a seleção histórica de 15 estudos permanecem
+inalterados. Os textos integrais adicionais já solicitados serão avaliados
+antes de qualquer decisão sobre mudança ou reaplicação da seleção. Ver
+[`REVISAO-LIMIAR-SELECAO-2026-10-31.md`](REVISAO-LIMIAR-SELECAO-2026-10-31.md),
+que documenta a proposta, não uma decisão adotada.
 
 O escopo desta entrega foi confirmado como revisão crítica da literatura e
 especificação conceitual, sem exigir treinamento ou validação educacional do

@@ -66,7 +66,7 @@ def test_research_readme_uses_operational_prioritization_and_explicit_denominato
 
     assert "2.482 avançaram à priorização histórica" in current
     assert "20,90% da triagem" in current
-    assert "99,27%" in current and "não avançaram sob a regra anterior" in current
+    assert "99,27%" in current and "não avançaram sob as regras então usadas" in current
     assert "18 seguiram à lista preliminar (0,73%)" in current
     assert "17 relatórios procurados" in current
     assert "15 estudos empíricos na seleção histórica" in current
@@ -84,9 +84,9 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     normalized_presentation = " ".join(presentation.split())
 
     assert r"\citeonline{Zeng2025_6923} não foi recuperado" in results
-    assert "Os 15 estudos empíricos da seleção histórica receberam apreciação preliminar" in methodology
+    assert "Os 15 estudos empíricos da seleção histórica sob o corte 4,0 receberam apreciação preliminar" in methodology
     assert "um não foi recuperado" in results
-    assert "Os 15 restantes compõem o corpus da seleção histórica" in results
+    assert "Restaram 15 estudos empíricos na seleção histórica" in results
     assert "núcleo empírico" not in results
     assert "um texto integral não foi recuperado" in normalized_presentation
     assert "os outros 15 estudos empíricos integram o núcleo incluído" in normalized_presentation
@@ -158,7 +158,7 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     assert "nove registros com texto primário revisado e oito" not in pptx_source
     assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard
     assert "encaminhou 2.486 para elegibilidade" not in storyboard
-    assert "Fluxo histórico pré-emenda: 11.904 registros → 18 na lista de leitura" in slides
+    assert "Fluxo da seleção histórica sob corte 4,0: 11.904 registros → 18 na lista de leitura" in slides
 
 
 def test_background_uses_examples_and_keeps_study_limits_and_exclusion_in_the_review() -> None:

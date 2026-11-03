@@ -137,7 +137,9 @@ def render_blocks(root):
     counts = manifest["snapshot"]["counts"]["prisma"]
     deduplication = manifest["snapshot"]["deduplication_audit"]
     qa = manifest["methodological_appraisal"]["current_mmat_qa"]
-    amendment = read_json(root, SELECTION_AMENDMENT)
+    proposal = read_json(root, SELECTION_AMENDMENT)
+    if proposal["status"] != "pending_full_text_review" or proposal["decision_date"] is not None:
+        raise ValueError("selection status must reflect the pending full-text assessment")
     with (root / RECORD_CORRECTIONS).open("r", encoding="utf-8-sig", newline="") as handle:
         corrections = list(csv.DictReader(handle))
     identity_reconciliation_date = max(row["decision_date"] for row in corrections)
@@ -167,8 +169,8 @@ def render_blocks(root):
         f"({percentage(counts['prioritization'], counts['screening'])}% da triagem); "
         f"{number(counts['prioritization_excluded'])} não avançaram sob a regra histórica "
         f"({percentage(counts['prioritization_excluded'], counts['prioritization'])}%). "
-        f"A emenda aprovada em {day(amendment['decision_date'])} retira o escore de critério de exclusão, "
-        f"mas ainda não foi reaplicada à população. A priorização histórica "
+        f"Os textos integrais adicionais solicitados serão avaliados antes de qualquer decisão "
+        f"sobre mudança ou reaplicação da seleção. O corte 4,0 permanece inalterado. A priorização histórica "
         f"encaminhou {counts['shortlisted']} registros à lista preliminar "
         f"({percentage(counts['shortlisted'], counts['prioritization'])}%), não a inclusões finais: "
         f"{counts['included']} estudos empíricos mantidos na seleção histórica, ainda provisoriamente, "
@@ -183,11 +185,11 @@ def render_blocks(root):
         ("Identificação", counts["identification"], "Registros no snapshot versionado"),
         ("Duplicatas removidas", counts["duplicates_removed"], f"{deterministic_duplicates} por DOI/URL; {same_report_duplicates} relatórios iguais confirmados manualmente"),
         ("Triagem", counts["screening"], f"{number(counts['screening_excluded'])} excluídos"),
-        ("Priorização histórica", counts["prioritization"], f"{number(counts['prioritization_excluded'])} não avançaram sob a regra anterior; emenda aprovada ainda não reaplicada"),
+        ("Priorização histórica", counts["prioritization"], f"{number(counts['prioritization_excluded'])} não avançaram sob a regra histórica; decisão sobre mudança pendente da avaliação dos textos solicitados"),
         ("Lista preliminar", counts["shortlisted"], f"{counts['abstract_screening_excluded']} exclusão após resumo"),
         ("Relatórios procurados", counts["reports_sought"], f"{counts['reports_not_retrieved']} não recuperado no fluxo histórico"),
         ("Relatórios declarados avaliados em texto completo", counts["eligibility"], f"{counts['eligibility_excluded']} protocolo excluído; a contagem não certifica leitura humana integral"),
-        ("Seleção histórica de estudos empíricos", counts["included"], "Sujeita à reaplicação dos critérios e à revisão do MMAT"),
+        ("Seleção histórica de estudos empíricos", counts["included"], "Seleção histórica sob 4,0; eventual mudança depende da avaliação dos textos solicitados"),
     ]
     flow = "| Etapa | Quantidade | Interpretação |\n| --- | --- | --- |\n" + "\n".join(
         f"| {label} | {number(value)} | {meaning} |" for label, value, meaning in flow_rows

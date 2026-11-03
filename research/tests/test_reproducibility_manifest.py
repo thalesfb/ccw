@@ -47,7 +47,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert manifest["operational_database_snapshot"]["authoritative_snapshot"] == "snapshot"
     assert "not the current PRISMA baseline" in manifest["operational_database_snapshot"]["interpretation"]
     assert manifest["protocol"] == {
-        "status": "approved_amendment_pending_implementation_and_reapplication",
+        "status": "historical_selection_threshold_unchanged",
         "year_min": 2015,
         "year_max": 2026,
         "cutoff_date": "2026-08-31",
@@ -55,25 +55,24 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "abstract_required": False,
         "legacy_selector_relevance_threshold": 4.0,
         "selection_amendment_id": "PRISMA-24c-2026-10-31",
-        "selection_amendment_status": "approved_pending_reapplication",
-        "selection_flow_status": "historical_snapshot_reconciled_pending_reapplication",
-        "relevance_score_role": "queue_order_only_after_reapplication",
+        "selection_amendment_status": "pending_full_text_review",
+        "selection_flow_status": "historical_snapshot_reconciled_pending_full_text_review",
+        "relevance_score_role": "historical_cutoff_pending_decision",
         "canonical_query_count": 72,
         "query_generator": "research/src/search_terms.py",
         "sources": ["semantic_scholar", "openalex", "crossref", "core"],
         "source_count": 4,
         "max_results_per_query": 10,
         "interpretation": (
-            "The selector still contains the legacy cutoff recorded in legacy_selector_relevance_threshold; "
-            "this is not the approved eligibility protocol. The approved 2026-10-31 amendment removes "
-            "relevance score as an exclusion criterion, but implementation and population reapplication "
-            "are pending. External API responses, "
+            "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. "
+            "A decision to change or reapply selection is pending assessment of the additional full texts "
+            "already requested; the 15-study historical selection is unchanged. External API responses, "
             "cache state and metadata may change; they do not replace the current versioned snapshot exports."
         ),
     }
     assert counts["total_records"] == 11904
     assert counts["versioned_rows"] == 11875
-    assert snapshot["selection_flow_status"] == "historical_snapshot_reconciled_pending_reapplication"
+    assert snapshot["selection_flow_status"] == "historical_snapshot_reconciled_pending_full_text_review"
     assert counts["selection_stage_counts"] == {
         "screening": 9393,
         "prioritization": 2464,
@@ -132,12 +131,14 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "false_positives_removed" not in snapshot["candidate_audit"]
 
     assert "18 records in the preliminary list" in manifest["bibliography"]["separation_rule"]
-    assert "15 remain in the pre-amendment historical empirical selection" in manifest["bibliography"]["separation_rule"]
+    assert "15 remain in the historical empirical selection under the 4.0 cutoff" in manifest["bibliography"]["separation_rule"]
     appraisal = manifest["methodological_appraisal"]["interpretation"]
     assert "S1/S2 screening for 15 studies and category-specific appraisal for 15" in appraisal
-    assert "three screened studies await design adjudication" in appraisal
+    assert "category-specific appraisal for 15" in appraisal
+    assert "three screened studies await design adjudication" not in appraisal
+    assert "Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments" in appraisal
     assert "15 records remain provisionally in the historical empirical selection" in appraisal
-    assert "not the post-amendment corpus" in interpretation
+    assert "historical and is not presented as the final corpus" in interpretation
     assert "11 studies" not in appraisal
 
     mmat_limitation = next(
@@ -220,7 +221,7 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
         "results/tcc/referencias.bib",
         "results/tcc/referencias_pedagogicas.bib",
     ]
-    assert "15 remain in the pre-amendment historical empirical selection" in bibliography["separation_rule"]
+    assert "15 remain in the historical empirical selection under the 4.0 cutoff" in bibliography["separation_rule"]
     artifact_paths = {artifact["path"] for artifact in manifest["artifacts"]}
     assert "research/data/mmat_assessments.csv" in artifact_paths
     assert "research/data/protocol_execution_2025.json" in artifact_paths
@@ -317,7 +318,8 @@ def test_published_summary_images_use_paths_relative_to_the_report() -> None:
     assert "2 relatórios repetidos confirmados manualmente" in html
     assert "(29 no total)" in html
     assert "Não avançaram na priorização histórica" in html
-    assert "emenda aprovada ainda não foi reaplicada" in html
+    assert "decisão sobre mudança ou reaplicação depende da avaliação dos textos" in html
+    assert "emenda aprovada" not in html
     assert "priorização por metadados e resumos não equivale à elegibilidade" in html
     assert "Excluídos pelo limiar / registros priorizados" not in html
 
@@ -331,11 +333,13 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "15/15 tests passing" not in root_html
     assert "MMAT preliminar" in root_html
     assert "Seleção histórica" in root_html
-    assert "A emenda aprovada retira o escore como critério de exclusão" in root_html
+    assert "O corte 4,0 e os 15 estudos permanecem inalterados" in root_html
+    assert "emenda aprovada" not in root_html
     assert "na priorização histórica" in root_html
     assert "encaminhados à elegibilidade" not in root_html
-    assert "Dos 18 registros selecionados preliminarmente, 15 permanecem provisoriamente no núcleo empírico" in tcc_html
-    assert "a apreciação MMAT preliminar abrange 15" in tcc_html
+    assert "A seleção histórica tem 18 registros na lista preliminar: 15 estudos empíricos selecionados sob o corte 4,0" in tcc_html
+    assert "a apreciação mmat preliminar abrange os 15 estudos" in tcc_html.lower()
     assert "A aplicação funcional e a validação experimental estão fora do escopo" in tcc_html
     assert "Não há escore agregado" in tcc_html
+    assert "Não há escore agregado nem corpus final" in tcc_html
     assert "11.904" not in tcc_html

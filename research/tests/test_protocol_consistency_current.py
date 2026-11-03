@@ -125,7 +125,7 @@ def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> 
     assert latest_scope["current_mmat_empirical_denominator"] == 14
 
 
-def test_latest_prisma_reconciliation_is_labeled_historical_until_reapplication() -> None:
+def test_latest_prisma_reconciliation_preserves_the_cutoff_pending_full_text_review() -> None:
     with PRISMA_RECONCILIATION_PATH.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
@@ -135,14 +135,15 @@ def test_latest_prisma_reconciliation_is_labeled_historical_until_reapplication(
     assert len(latest) == 10
     assert {
         row["status"] for row in latest
-    } == {"historical_snapshot_reconciled_pending_reapplication"}
-    assert amendment["post_decision_data_reconciliation"]["flow_status"] == (
-        "historical_snapshot_reconciled_pending_reapplication"
+    } == {"historical_snapshot_reconciled_pending_full_text_review"}
+    assert amendment["data_reconciliation"]["flow_status"] == (
+        "historical_snapshot_reconciled_pending_full_text_review"
     )
-    assert amendment["post_decision_data_reconciliation"]["selection_reapplication_complete"] is False
-    interpretation = amendment["post_decision_data_reconciliation"]["interpretation"]
-    assert "duplicates are counted before screening" in interpretation
-    assert "not a post-amendment corpus" in interpretation
+    assert amendment["data_reconciliation"]["selection_reapplication_complete"] is False
+    interpretation = amendment["data_reconciliation"]["interpretation"]
+    assert "duplicate reports are removed before screening" in interpretation
+    assert "do not change the 15-study historical selection or the 4.0 cutoff" in interpretation
+    assert "before any decision to change or reapply" in interpretation
 
 
 def test_current_export_has_exactly_the_adjudicated_empirical_core_ids() -> None:
@@ -200,18 +201,20 @@ def test_current_eligibility_protocol_makes_adjudication_gates_explicit() -> Non
     assert all(row["evidence_required"] for row in rows)
 
 
-def test_approved_threshold_amendment_uses_score_only_for_ordering() -> None:
+def test_threshold_proposal_is_pending_full_text_review_without_rule_change() -> None:
     amendment = json.loads(SELECTION_AMENDMENT_PATH.read_text(encoding="utf-8"))
 
-    assert amendment["decision_date"] == "2026-10-31"
-    assert amendment["status"] == "approved_pending_reapplication"
+    assert amendment["proposal_date"] == "2026-10-31"
+    assert amendment["decision_date"] is None
+    assert amendment["status"] == "pending_full_text_review"
+    assert amendment["current_relevance_threshold"] == 4.0
     assert amendment["eligibility_criteria_changed"] is False
     assert amendment["scope_refinement_adopted"] is False
     assert amendment["search_reprocessed"] is False
-    assert "orders the reading queue only" in amendment["amended_rule"]
-    assert "not an exclusion criterion" in amendment["amended_rule"]
-    assert amendment["post_decision_data_reconciliation"]["flow_status"] == (
-        "historical_snapshot_reconciled_pending_reapplication"
+    assert "orders the reading queue only" in amendment["proposed_rule"]
+    assert "not an exclusion criterion" in amendment["proposed_rule"]
+    assert amendment["data_reconciliation"]["flow_status"] == (
+        "historical_snapshot_reconciled_pending_full_text_review"
     )
 
     census = amendment["rationale"]["census_3_75_to_3_95"]

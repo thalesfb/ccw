@@ -69,7 +69,6 @@ class ReviewVisualizer:
         self,
         stats: Dict[str, int],
         save_path: Optional[Path] = None,
-        source_counts: Optional[Dict[str, int]] = None,
     ) -> Path:
         """Create PRISMA flow diagram.
 
@@ -93,20 +92,6 @@ class ReviewVisualizer:
             def count(key: str) -> str:
                 return f"{int(stats[key]):,}".replace(",", ".")
             identification = f"Registros identificados (n = {count('identification')})"
-            if source_counts:
-                total = sum(int(value) for value in source_counts.values())
-                names = {"crossref": "Crossref", "openalex": "OpenAlex",
-                         "semantic_scholar": "Semantic Scholar", "core": "CORE"}
-                if total == int(stats['identification']):
-                    scope = "Por fonte na identificação"
-                elif total == int(stats['screening']):
-                    scope = "Por fonte após deduplicação"
-                else:
-                    raise ValueError("Source counts do not match identification or screening")
-                sources = [f"{names.get(key, key)}: {int(value):,}".replace(",", ".")
-                           for key, value in source_counts.items()]
-                identification += f"\n{scope} (n = {total:,}):".replace(",", ".")
-                identification += "\n" + " · ".join(sources[:2]) + "\n" + " · ".join(sources[2:])
             ax.add_patch(Rectangle((0.35, 8.7), 15.3, 1.55, facecolor="#E8F4FD",
                                    edgecolor="#334155", linewidth=1.2))
             ax.text(8, 9.475, identification, ha="center", va="center",
@@ -687,7 +672,7 @@ Desvio Padrão: {scores.std():.2f}"""
         try:
             # PRISMA flow (requires stats)
             if stats:
-                generated_files.append(self.prisma_flow_diagram(stats, source_counts=df['database'].fillna('Sem fonte registrada').value_counts().to_dict() if 'database' in df else None))
+                generated_files.append(self.prisma_flow_diagram(stats))
 
             # Papers by year
             generated_files.append(self.papers_by_year(df))

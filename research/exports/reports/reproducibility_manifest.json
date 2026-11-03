@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-10-31T13:02:41+00:00",
+  "generated_at": "2026-11-03T10:05:02+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -79,7 +79,7 @@
     "interpretation": "This block records the unversioned SQLite state available when the manifest was generated. It is diagnostic only and is not the current PRISMA baseline; use the versioned snapshot object and summary.json for the current adjudicated population."
   },
   "protocol": {
-    "status": "approved_amendment_pending_implementation_and_reapplication",
+    "status": "historical_selection_threshold_unchanged",
     "year_min": 2015,
     "year_max": 2026,
     "cutoff_date": "2026-08-31",
@@ -90,9 +90,9 @@
     "abstract_required": false,
     "legacy_selector_relevance_threshold": 4.0,
     "selection_amendment_id": "PRISMA-24c-2026-10-31",
-    "selection_amendment_status": "approved_pending_reapplication",
-    "selection_flow_status": "historical_snapshot_reconciled_pending_reapplication",
-    "relevance_score_role": "queue_order_only_after_reapplication",
+    "selection_amendment_status": "pending_full_text_review",
+    "selection_flow_status": "historical_snapshot_reconciled_pending_full_text_review",
+    "relevance_score_role": "historical_cutoff_pending_decision",
     "canonical_query_count": 72,
     "query_generator": "research/src/search_terms.py",
     "sources": [
@@ -103,10 +103,10 @@
     ],
     "source_count": 4,
     "max_results_per_query": 10,
-    "interpretation": "The selector still contains the legacy cutoff recorded in legacy_selector_relevance_threshold; this is not the approved eligibility protocol. The approved 2026-10-31 amendment removes relevance score as an exclusion criterion, but implementation and population reapplication are pending. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
+    "interpretation": "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. A decision to change or reapply selection is pending assessment of the additional full texts already requested; the 15-study historical selection is unchanged. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
   },
   "snapshot": {
-    "selection_flow_status": "historical_snapshot_reconciled_pending_reapplication",
+    "selection_flow_status": "historical_snapshot_reconciled_pending_full_text_review",
     "counts": {
       "total_records": 11904,
       "versioned_rows": 11875,
@@ -286,7 +286,7 @@
       "metadata_corrections_recorded": 1,
       "current_included": 15,
       "shortlisted_records": 18,
-      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The pre-amendment historical selection is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage. The approved amendment has not been reapplied, so this is not the post-amendment corpus."
+      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The historical selection under the 4.0 cutoff is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage. The 15-study selection is historical and is not presented as the final corpus. The cutoff and selection are unchanged; any change awaits assessment of the additional full texts already requested."
     },
     "manual_override_adjudication": {
       "path": "research/data/manual_override_adjudication.csv",
@@ -332,7 +332,7 @@
       "results/tcc/referencias_pedagogicas.bib"
     ],
     "reference_audit": "research/data/reference_audit.csv",
-    "separation_rule": "The BibTeX inventory contains 18 records in the preliminary list; 15 remain in the pre-amendment historical empirical selection. The corpus count is pending reapplication of the approved eligibility amendment. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
+    "separation_rule": "The BibTeX inventory contains 18 records in the preliminary list; 15 remain in the historical empirical selection under the 4.0 cutoff. Any selection change requires a decision after assessing the additional full texts already requested. Methodological, pedagogical, assessment and technical references are external to the pipeline study set and remain in the complete TCC bibliography."
   },
   "methodological_appraisal": {
     "current_mmat_qa": {
@@ -443,7 +443,7 @@
         "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
       ]
     },
-    "interpretation": "The MMAT ledger describes the historical pre-amendment selection: S1/S2 screening for 15 studies and category-specific appraisal for 15; three screened studies await design adjudication and have blank Q1-Q5 cells, not CT. 15 records remain provisionally in the historical empirical selection; study 8 has no MMAT responses pending human scope and appraisal-unit adjudication, and its distinct datasets must not be combined. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. Historical reviewer labels do not establish completed human reading or appraisal; human verification remains pending."
+    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 15 studies and category-specific appraisal for 15; 15 records remain provisionally in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-2 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. The author performed preliminary selection and appraisal with automated support. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; this version will be sent to them after the current revision round."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
@@ -490,12 +490,12 @@
     {
       "path": "research/exports/analysis/mmat_visualization.html",
       "role": "historical MMAT visualization with an explicit pointer to the preliminary current ledger",
-      "sha256": "8123735da647d9b926966f7a86bbaba58595b24466190abfc6045f33b6ace4c0"
+      "sha256": "0e3e4de222a649a1bc29a30940ea8ceb9a7d7c6a322e0cd18c8af113646ae843"
     },
     {
       "path": "research/exports/reports/summary.json",
       "role": "PRISMA and derived summary statistics",
-      "sha256": "1030eee81c99ebd4a922aff94bdaaa90cc3355407453799ec3a5531130024467"
+      "sha256": "2ad36b902499b2f578303bd10a11df65c3260b442b55f307862d8b6c06bb68b2"
     },
     {
       "path": "research/exports/references/included_papers.bib",
@@ -585,12 +585,12 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "0daafa876a0dd510705ba801d87784320df1e7f34c60bb6f118b4648667fcef7"
+      "sha256": "f9d3747b768f119db996626a385d68c839f15bb544a3892e7928cd55179d1b39"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "30c7182746a9c21e99fe3e4da257643aa97181fe4071c8fd29ff58f7a147cfe2"
+      "sha256": "1903ba2577b68b77972210c4b84a7c1e6fe21364aadec99960d1a60f778def59"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
@@ -615,7 +615,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "4617493bb7c236a97f363c7de68694c090a6eaf0b77da074b876d5fe6418983a"
+      "sha256": "6bebd4d65f036294b3fac67d0a61d4b5776f74923218e6ca4526a0e6b7dae8e5"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -701,12 +701,12 @@
       "python -m research.src.cli --db /path/to/systematic_review.sqlite export",
       "python -m research.src.cli --db /path/to/systematic_review.sqlite generate-manifest"
     ],
-    "fresh_collection": "Pending: the selector still applies its legacy --min-score 4.0. Do not treat a fresh run as following the approved amendment until the selector is updated and the full population is reassessed.",
+    "fresh_collection": "Pending: the selector still applies its legacy --min-score 4.0. No changed rule is approved or applied. Assess the additional full texts already requested before deciding whether to change or reapply the selection procedure.",
     "limitations": [
       "External API responses, metadata and cache state can change on a fresh collection.",
       "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The current empirical MMAT screening denominator is 15; 15 have category-specific appraisals and three await design adjudication with Q1-Q5 unassessed. 15 records remain provisionally included in the empirical corpus. Study 8 has no MMAT responses pending human adjudication of eligibility and appraisal unit; do not combine its distinct datasets. No MMAT appraisal was assigned to the 1 unretrieved shortlisted report. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Criterion locators and independent human adjudication remain required before any final quality synthesis."
+      "The current empirical MMAT screening denominator is 15; 15 have preliminary category-specific appraisals, including explicit operational routes. 15 records remain provisionally included in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. No MMAT appraisal was assigned to the 1 unretrieved shortlisted report. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; this version will be sent to them after the current revision round."
     ]
   }
 }
