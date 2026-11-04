@@ -8,6 +8,16 @@ Esta versão relata a seleção histórica de 15 estudos sob o corte 4,0.
 Os critérios de elegibilidade e o conjunto de estudos não foram alterados.
 Não houve nova seleção nem incorporação de estudos adicionais.
 
+A manutenção do limiar e do conjunto foi confirmada com a orientação. O PTC
+descreve a escala nominal 0–10 e o corte 4,0. A função executada também limita
+a soma a 0–10, mas os valores preservados variam de 0–4,5, sem renormalização.
+Operacionalmente, escores iguais ou superiores a 4,0 mantêm o registro como
+candidato, sujeito aos demais critérios; valores inferiores recebem o motivo
+de baixa relevância. O protocolo, o código e os registros consultados não
+documentam calibração ou comparação entre cortes para justificar por que
+exatamente 4,0 foi escolhido. A finalidade operacional é conhecida; a escolha
+numérica não é apresentada como validada.
+
 ## Limitações documentadas
 
 A pontuação foi produzida por regras lexicais e não foi validada contra a

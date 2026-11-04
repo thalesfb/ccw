@@ -68,13 +68,20 @@ foram congelados. Qualquer execução com dados reais depende de uma decisão
 metodológica explícita sobre fonte, licença, unidade de análise, desfecho,
 divisão dos dados e critérios de avaliação.
 
-## Decisões metodológicas pendentes
+## Seleção adotada e limites metodológicos
 
 Esta versão relata a seleção realizada sob o corte de relevância 4,0,
 os critérios aplicados e o conjunto histórico de 15 estudos. Não houve
 alteração da regra, nova seleção ou incorporação de estudos adicionais. Ver
 [`REVISAO-LIMIAR-SELECAO-2026-10-31.md`](REVISAO-LIMIAR-SELECAO-2026-10-31.md),
 que documenta o estado da seleção e as limitações do escore utilizado.
+
+A manutenção do corte e do conjunto foi confirmada com a orientação.
+O valor 4,0 é um corte
+da soma ponderada aplicada aos metadados e resumos: a escala nominal é 0–10,
+enquanto os valores preservados vão de 0–4,5. O protocolo e o código registram
+o limiar, mas não uma calibração empírica ou justificativa para a escolha
+exata desse número. O valor não é percentual de aderência ou nota de qualidade.
 
 O escopo desta entrega foi confirmado como revisão crítica da literatura e
 especificação conceitual, sem exigir treinamento ou validação educacional do

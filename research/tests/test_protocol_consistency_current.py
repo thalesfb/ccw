@@ -37,6 +37,19 @@ def test_canonical_search_strategy_remains_72_queries() -> None:
     assert len([query for query in queries if query.startswith("matemática ")]) == 24
 
 
+def test_operational_threshold_includes_four_and_excludes_values_below_it() -> None:
+    import pandas as pd
+
+    frame = pd.DataFrame({
+        "selection_stage": ["screening"] * 3,
+        "status": ["reviewed"] * 3,
+        "relevance_score": [3.99, 4.0, 4.01],
+    })
+    result = PRISMASelector().eligibility_phase(frame, min_relevance_score=4.0)
+    assert result["status"].tolist() == ["excluded", "reviewed", "reviewed"]
+    assert result.loc[0, "exclusion_reason"] == "low_relevance_score"
+
+
 def test_ai_token_does_not_match_substrings_inside_ordinary_words() -> None:
     selector = PRISMASelector()
     false_positive_texts = [

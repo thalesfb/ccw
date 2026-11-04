@@ -101,5 +101,16 @@
   },
   "record_id": "SELECTION-STATUS-2026-11-03",
   "review_date": "2026-11-03",
-  "applied_rule": "The historical selection used a relevance score cutoff of 4.0 on the observed 0-4.5 scale. The score affected which records advanced; it was not used only to order reading."
+  "applied_rule": "The protocol and scoring function use a nominal 0-10 range; preserved values range from 0.0 to 4.5 without renormalization. The operational comparison score >= 4.0 retained candidates for further eligibility consideration, subject to other criteria. The cutoff was not used only to order reading and is not a quality score or percentage.",
+  "threshold_retained_with_advisors": true,
+  "threshold_decision_date": null,
+  "nominal_score_range": [
+    0,
+    10
+  ],
+  "observed_score_range": [
+    0,
+    4.5
+  ],
+  "threshold_calibration": "No empirical calibration or comparison of cutoffs documenting why exactly 4.0 was originally selected was found in the protocol, scoring code and preserved records."
 }

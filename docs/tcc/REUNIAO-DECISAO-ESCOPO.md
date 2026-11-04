@@ -29,7 +29,7 @@ como **a confirmar com a orientação**. A reunião não exige protótipo em exe
 | Especificação conceitual | Requisitos, critérios para dados e modelos, arquitetura de referência e um quadro com 26 grupos de requisitos rastreáveis. O protocolo do OE4 foi **proposto, não aplicado**. | `results/tcc/conteudo/prototipo.tex:43-48`; `resultados.tex:44`; `rastreabilidade-requisitos.tex` |
 | Objetivos | Objetivo geral propositivo e 4 objetivos específicos (OE1–OE4). O OE4 não exige desenvolver o protótipo. | `results/tcc/conteudo/introducao.tex:24,28` |
 | Título vigente | "Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais" | `results/tcc/pretextuais/capa.tex:5` |
-| Apresentação | Deck canônico em Slidev, com 25 slides; o PPTX de 19 slides é um export paralelo. | `docs/tcc/ESTADO-ATUAL-TCC.md` (seção de decisões pendentes) |
+| Apresentação | Deck canônico em Slidev, com 25 slides; o PPTX de 19 slides é um export paralelo. | `docs/tcc/ESTADO-ATUAL-TCC.md` (seção sobre seleção adotada e limites) |
 
 ### 1.1 Implementado versus especificado (`prototype/`)
 
