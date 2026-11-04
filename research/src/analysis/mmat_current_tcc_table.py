@@ -262,6 +262,8 @@ def render_table(
             design_label = 'Cat. 2 declarada (contraditória)'
         if row["study_id"] == "6915":
             design_label += " (componente escolar)"
+        if row["study_key"] == "Multimodels2020_002":
+            design_label += " (*)"
         values = [
             _study_reference(row, labels),
             _latex_escape(design_label),
@@ -272,6 +274,7 @@ def render_table(
         r"\par\noindent\textit{Nota:} S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
         r"Y = sim; N = não; CT = não é possível concluir; "
         r"Quant. = quantitativo; rand. = randomizado. "
+        r"(*) Multimodels2020\_002: julgamentos históricos e preliminares, não reconferidos nesta versão. "
         r"Ver Seção~\ref{sec:avaliacao-qualidade}.\par"
     )
     lines.extend([

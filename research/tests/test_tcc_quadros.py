@@ -96,16 +96,22 @@ class RenderedPage:
                 visitor_text(text, matrix, tm, {}, size * gate.PT_TO_PDF)
 
 
+def rendered_sources():
+    return {i: "Fonte: autor" for i in range(1, 16)}
+
+
 def test_pdf_gate_reads_actual_caption_body_and_source_font_runs():
     result = gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage()]), 0, INVENTORY,
-                              {i: f"Quadro {i} – Título" for i in range(1, 16)})
+                              {i: f"Quadro {i} – Título" for i in range(1, 16)},
+                              rendered_sources())
     assert len(result) == 15
     assert all(row["body_runs"] == 1 and row["source_seen"] for row in result)
 
 
 def test_continued_caption_can_arrive_as_separate_pdf_fragments():
     result = gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage("split_continuation")]),
-                              0, INVENTORY, {i: f"Quadro {i} – Título" for i in range(1, 16)})
+                              0, INVENTORY, {i: f"Quadro {i} – Título" for i in range(1, 16)},
+                              rendered_sources())
     assert result[6]["body_runs"] == 2
 
 
@@ -115,7 +121,147 @@ def test_continued_caption_can_arrive_as_separate_pdf_fragments():
 def test_pdf_gate_rejects_bad_typography_order_and_unapproved_rotation(fault):
     with pytest.raises(ValueError):
         gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage(fault)]), 0, INVENTORY,
-                         {i: f"Quadro {i} – Título" for i in range(1, 16)})
+                         {i: f"Quadro {i} – Título" for i in range(1, 16)},
+                         rendered_sources())
+
+
+class FragmentPage(RenderedPage):
+    def __init__(self, runs):
+        super().__init__()
+        self.runs = runs
+
+    def extract_text(self, visitor_text):
+        for text, size, y in self.runs:
+            visitor_text(text, [1, 0, 0, 1, 0, 0], [1, 0, 0, 1, 85, y], {},
+                         size * gate.PT_TO_PDF)
+
+
+def inspect_source_fragments(tail, expected="Fonte: autor. Nota: texto final.", same_page=False):
+    sources = rendered_sources()
+    sources[15] = expected
+    runs = [(text, size, y) for i in range(1, 16)
+            for text, size, y in [(f"Quadro {i} – Título", 12, 120),
+                                  ("Dado", 10, 100), ("Fonte: autor", 10, 80)]]
+    if same_page:
+        runs.extend(tail[0])
+        tail = tail[1:]
+    pages = [FragmentPage(runs), *[FragmentPage(page) for page in tail]]
+    return gate.inspect_pdf(SimpleNamespace(pages=pages), 0, INVENTORY,
+                            {i: f"Quadro {i} – Título" for i in range(1, 16)}, sources)
+
+
+@pytest.mark.parametrize("size", [8, 12])
+@pytest.mark.parametrize("kind", ["source", "notes"])
+def test_pdf_source_continuation_rejects_wrong_size_across_pages(size, kind):
+    expected, fragment = (("Fonte: autor texto final.", "texto final.") if kind == "source"
+                          else ("Fonte: autor. Nota: texto final.", ". Nota: texto final."))
+    with pytest.raises(ValueError, match="source/notes.*typography"):
+        inspect_source_fragments([[(fragment, size, 740)]], expected)
+
+
+def test_pdf_source_rejects_12pt_content_after_30pt_gap():
+    with pytest.raises(ValueError, match="source/notes.*typography"):
+        inspect_source_fragments([[('. Nota: texto final.', 12, 50)]], same_page=True)
+
+
+@pytest.mark.parametrize("prose_y", [740, 710])
+def test_pdf_accepts_complete_crosspage_notes_then_normal_prose(prose_y):
+    rows = inspect_source_fragments([
+        [('90', 12, 800), ('. Nota:', 10, 770)],
+        [('texto ', 10, 770), ('final.', 10, 750),
+         ('Prosa normal depois da nota.', 12, prose_y)],
+    ])
+    assert rows[-1]["source_seen"]
+    assert rows[-1]["pages"] == [1, 2, 3]
+
+
+def test_pdf_accepts_following_prose_without_waiting_for_a_large_gap():
+    rows = inspect_source_fragments([[('Prosa normal.', 12, 70)]], "Fonte: autor", same_page=True)
+    assert rows[-1]["source_seen"]
+
+
+def test_pdf_accepts_crosspage_source_then_prose_after_30pt_gap():
+    rows = inspect_source_fragments([
+        [('texto final.', 10, 740), ('Prosa normal.', 12, 710)],
+    ], "Fonte: autor texto final.")
+    assert rows[-1]["source_seen"] and rows[-1]["pages"] == [1, 2]
+
+
+def test_pdf_rejects_missing_expected_note_at_end_or_before_another_quadro():
+    for tail in ([], [[('Quadro 1 – Título', 12, 740)]]):
+        with pytest.raises(ValueError, match="source/notes"):
+            inspect_source_fragments(tail)
+
+
+@pytest.mark.parametrize("override", [
+    r"\setstretch{1.5}", r"\begin{spacing}{1.5}",
+    r"\baselineskip=18pt", r"\setlength{\baselineskip}{18pt}",
+    r"\addtolength{\baselineskip}{6pt}", r"\renewcommand{\baselinestretch}{1.5}",
+    r"\linespread{1.5}", r"\OnehalfSpacing", r"\DoubleSpacing",
+    r"\onehalfspacing", r"\doublespacing", r"\begin{DoubleSpace}",
+])
+@pytest.mark.parametrize("location", ["body", "source", "note"])
+def test_source_gate_rejects_local_leading_overrides(monkeypatch, override, location):
+    override += " "
+    sources = gate.included_sources(ROOT)
+    row = INVENTORY["quadros"][5]
+    text = sources[row["source"]]
+    if location == "body":
+        marker = r"\TCCQuadroSetup{" + row["label"] + "}"
+        text = text.replace(marker, marker + override, 1)
+    elif location == "source":
+        text = text.replace(r"\fonte{", r"\fonte{" + override, 1)
+    else:
+        text = text.replace(r"\textit{Nota:}", r"\textit{Nota:}" + override, 1)
+    sources[row["source"]] = text
+    monkeypatch.setattr(gate, "included_sources", lambda root: sources)
+    with pytest.raises(ValueError, match="Local .*overrides the shared style"):
+        gate.validate_sources(ROOT)
+
+
+def test_source_gate_allows_grid_spacing_comments_and_following_prose(monkeypatch):
+    sources = gate.included_sources(ROOT)
+    row = INVENTORY["quadros"][0]
+    key = row["source"]
+    marker = r"\TCCQuadroSetup{" + row["label"] + "}"
+    sources[key] = sources[key].replace(marker, marker + r"\renewcommand{\arraystretch}{1.3}", 1)
+    sources[key] = sources[key].replace(r"\end{quadro}",
+                                      "\\end{quadro}\n\\setstretch{1.5}\nProsa normal.", 1)
+    monkeypatch.setattr(gate, "included_sources", lambda root: sources)
+    gate.validate_sources(ROOT)
+
+
+def test_expected_source_text_handles_nested_groups_notes_and_aux_references(tmp_path, monkeypatch):
+    sources = gate.included_sources(ROOT)
+    row = INVENTORY["quadros"][0]
+    sources[row["source"]] = sources[row["source"]].replace(
+        r"\fonte{Elaborado pelo autor (2026).}",
+        r"\fonte{Elaborado pelo \textbf{autor}, com \citeonline{PRISMA2020}.}"
+        "\n" + r"\par\noindent\textit{Nota:} Ver Seção~\ref{sec:teste}.\par", 1)
+    monkeypatch.setattr(gate, "included_sources", lambda root: sources)
+    (tmp_path / "main.aux").write_text(
+        r"\bibciteEXPL{PRISMA2020}{Page et al.}" + "\n" +
+        r"\bibciteYEAR{PRISMA2020}{2021}" + "\n" +
+        r"\newlabel{sec:teste}{{3.6}{27}{Título}{section.33}{}}", encoding="utf-8")
+    result = gate.source_texts(ROOT, {"quadros": [row]}, tmp_path)
+    assert gate.compact(result[1]) == gate.compact(
+        "Fonte: Elaborado pelo autor, com Page et al. (2021). Nota: Ver Seção 3.6.")
+
+
+def test_expected_source_text_does_not_silently_drop_unknown_macros(tmp_path, monkeypatch):
+    sources = gate.included_sources(ROOT)
+    row = INVENTORY["quadros"][0]
+    sources[row["source"]] = sources[row["source"]].replace(
+        r"\fonte{Elaborado pelo autor (2026).}", r"\fonte{\unknownsource{autor}}", 1)
+    monkeypatch.setattr(gate, "included_sources", lambda root: sources)
+    with pytest.raises(ValueError, match="Unsupported.*source/notes"):
+        gate.source_texts(ROOT, {"quadros": [row]}, tmp_path)
+
+
+def test_expected_source_text_stops_before_next_group_or_saved_table(tmp_path):
+    result = gate.source_texts(ROOT, {"quadros": INVENTORY["quadros"][3:5]}, tmp_path)
+    assert all(gate.compact(text) == gate.compact("Fonte: Elaborado pelo autor (2026).")
+               for text in result.values())
 
 
 def test_bbox_gate_handles_poppler_controls_without_hiding_overflow(tmp_path):

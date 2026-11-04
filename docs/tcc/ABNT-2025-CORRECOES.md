@@ -169,11 +169,32 @@ quadros, com tolerância de 2 pt para as margens horizontais. Essa conferência
 não detecta todo possível recorte de linhas, glifos ou figuras e não substitui
 a inspeção visual.
 
-A associação dos fragmentos de fonte e notas no PDF utiliza a continuidade da
-página e o intervalo vertical antes da retomada da prosa. Uma fonte que cruze
-páginas ou contenha um intervalo atípico pode não ser coberta integralmente
-por essa heurística; por isso, o tamanho declarado no estilo e a inspeção das
-fontes e notas permanecem verificações complementares.
+A associação dos fragmentos de fonte e notas acompanha o texto esperado de
+`\fonte{...}` e das notas adjacentes nos arquivos LaTeX ativos. Referências e
+citações `\citeonline` são resolvidas pelos arquivos `.aux` da mesma compilação
+do PDF. O consumo desse texto continua entre páginas e só libera a prosa após
+o término do bloco esperado; uma quebra de página ou um intervalo de 30 pt
+não dispensa a conferência dos fragmentos restantes em 10 pt. Numerais no
+cabeçalho/rodapé são ignorados fora da área de texto. O PDF, seus fontes, o log
+e os auxiliares precisam corresponder à mesma versão.
+
+No fonte, comandos locais de tamanho, escala ou entrelinha são rejeitados
+desde `\TCCQuadroSetup` até o fim do bloco de fonte/notas. Isso inclui
+`\setstretch`, `\linespread`, `\baselineskip`, `\baselinestretch` e os comandos
+e ambientes explícitos de espaçamento reconhecidos pelo validador. A delimitação
+acompanha a estrutura atual: grupo/ambiente de quadro, parágrafo vazio, próxima
+chamada de quadro ou definição seguinte de caixa. `\arraystretch`, alturas de
+linhas de grade e o espaçamento da prosa posterior não são tratados como
+entrelinha de parágrafos do quadro.
+
+Essa leitura suporta as construções usadas no manuscrito atual, não interpreta
+LaTeX em geral e rejeita macros desconhecidas dentro do texto esperado de
+fonte/notas. Novas formas de agrupar notas ou macros indiretas exigem revisão
+do reconhecimento e testes próprios. A normalização ignora pontuação e espaços;
+o log comprova a entrelinha no ponto do setup, e o PDF verifica tamanhos e
+transformações dos fragmentos reconhecidos, sem medir sistematicamente a
+entrelinha efetiva de cada célula. As verificações não certificam legibilidade,
+conformidade ABNT integral ou conteúdo científico e não substituem inspeção visual.
 
 As justificativas completas dos componentes MMAT foram mantidas no apêndice,
 geradas do mesmo CSV que produz o quadro de comparação. A transferência não
