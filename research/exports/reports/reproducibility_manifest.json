@@ -635,12 +635,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "2510215c231d52b2e94d30ea42279b71246c1a0a71c09b6cf2b22e881be77f2c"
+      "sha256": "e507f2270a11785c5c0b4cb26a2a5ce29fad3a1a7095ca73303a9bc0695d33ef"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "52da18fda73f7124ccf8a1451fb7c8c13e98d6ba38497d269deb014c1cd56916"
+      "sha256": "775f9e31364f5f561c652f0f024f0315c9e7634048084460d1cf5535d3983d31"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",
@@ -655,7 +655,7 @@
     {
       "path": "scripts/validate_tcc_quadros.py",
       "role": "source, compiled typography and PDF checks for the fifteen quadros",
-      "sha256": "b7a312a71e9309158dbf72a79d0a7a54035a1912ee0204bca35f93c5f65c6c1d"
+      "sha256": "a3825952fd5a9b6526e30ce02b3cb7cb244da7a2fa06dbc1fad2be49da335494"
     },
     {
       "path": "research/requirements.txt",

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import unicodedata
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -36,6 +37,28 @@ def included_sources(root: Path) -> dict[str, str]:
     return sources
 
 
+def braced(text: str, start: int) -> tuple[str, int]:
+    """Read a balanced argument, retaining nested formatting and escaped braces."""
+    depth = 0
+    for match in re.finditer(r"\\[{}]|[{}]", text[start:]):
+        token = match[0]
+        depth += (token == "{") - (token == "}")
+        if depth == 0:
+            stop = start + match.end()
+            return text[start + 1:stop - 1], stop
+    raise ValueError("Unclosed source/notes argument")
+
+
+def source_block(text: str, source: int) -> tuple[str, int]:
+    content, end = braced(text, source + len(r"\fonte"))
+    # These are the explicit boundaries used by the active manuscript. A blank
+    # paragraph after an ungrouped source ends its scope; adjacent notes stay in it.
+    boundary = re.search(r"\n[ \t]*\n|\\(?:begin|end)group\b|\\(?:begin|end)\{quadro\}|"
+                         r"\\(?:TCCQuadroSetup|newsavebox)\b", text[end:])
+    stop = end + boundary.start() if boundary else len(text)
+    return "Fonte: " + content + text[end:stop], stop
+
+
 def validate_sources(root: Path = ROOT) -> None:
     rows = inventory(root)["quadros"]
     sources = included_sources(root)
@@ -61,9 +84,18 @@ def validate_sources(root: Path = ROOT) -> None:
         next_caption = text.find(r"\caption{", body_end)
         if not start < caption < label < body_end < source or (0 <= next_caption < source):
             raise ValueError(f"Expected title/number, body, source: {row['label']}")
-        body = text[start:body_end]
+        _, source_end = source_block(text, source)
+        body = text[start:source_end]
         if re.search(r"\\(?:fontsize|small|footnotesize|scriptsize|tiny|normalsize|large|Large|LARGE|huge|Huge|resizebox|scalebox)\b", body):
             raise ValueError(f"Local size or scaling overrides the shared style: {row['label']}")
+        if re.search(
+            r"\\(?:setstretch|linespread|baselineskip|baselinestretch|"
+            r"SingleSpacing|OnehalfSpacing|DoubleSpacing|"
+            r"singlespacing|onehalfspacing|doublespacing)\b|"
+            r"\\begin\s*\{(?:spacing|SingleSpace\*?|OnehalfSpace\*?|DoubleSpace\*?|"
+            r"singlespace\*?|onehalfspace\*?|doublespace\*?)\}", body
+        ):
+            raise ValueError(f"Local leading or spacing overrides the shared style: {row['label']}")
 
 
 def validate_style_log(log: str, policy: dict) -> None:
@@ -80,7 +112,41 @@ def expected_size(actual: float, tex_points: float) -> bool:
 
 
 def compact(text: str) -> str:
-    return re.sub(r"[\W_]+", "", text.casefold())
+    return re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", text).casefold())
+
+
+def source_texts(root: Path, policy: dict, auxiliaries: Path) -> dict[int, str]:
+    """Expand only the source/notes constructs used here; fail on unknown macros.
+
+    References and author/year citations must come from this PDF's auxiliaries.
+    This is deliberately not a general TeX interpreter.
+    """
+    aux = "\n".join(path.read_text(encoding="utf-8") for path in auxiliaries.rglob("*.aux"))
+    refs = dict(re.findall(r"\\newlabel\{([^{}]+)\}\{\{([^{}]*)\}", aux))
+    authors = dict(re.findall(r"\\bibciteEXPL\{([^{}]+)\}\{([^{}]*)\}", aux))
+    years = dict(re.findall(r"\\bibciteYEAR\{([^{}]+)\}\{([^{}]*)\}", aux))
+
+    def resolve(match):
+        command, key = match.groups()
+        try:
+            return refs[key] if command == "ref" else f"{authors[key]} ({years[key]})"
+        except KeyError:
+            raise ValueError(f"Unresolved source/notes {command}: {key}") from None
+
+    sources = included_sources(root)
+    result = {}
+    for row in policy["quadros"]:
+        text = sources[row["source"]]
+        start = text.index(r"\label{" + row["label"] + "}")
+        source = text.index(r"\fonte{", start)
+        content, _ = source_block(text, source)
+        content = re.sub(r"\\(ref|citeonline)\{([^{}]+)\}", resolve, content)
+        content = re.sub(r"\\(?:textit|textbf|emph|textrm|textnormal|par|noindent|allowbreak)\b", "", content)
+        content = re.sub(r"\\([%&_{}])", r"\1", content)
+        if "\\" in content:
+            raise ValueError(f"Unsupported LaTeX in source/notes: {row['label']}")
+        result[row["number"]] = content.replace("{", "").replace("}", "")
+    return result
 
 
 def caption_texts(root: Path, policy: dict) -> dict[int, str]:
@@ -104,17 +170,14 @@ def unscaled(cm, tm) -> bool:
 
 
 def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
-                captions: dict[int, str]) -> list[dict]:
+                captions: dict[int, str], sources: dict[int, str]) -> list[dict]:
     """Check font runs, wrapped/continued captions and complete source/notes blocks."""
     records = {}
     active = None
     caption_remaining = []
     body_started = source_started = False
-    source_y = None
-    source_page = None
+    source_remaining = ""
     for index, page in enumerate(reader.pages):
-        if source_started and source_page != index:
-            active, source_started = None, False
         size = (float(page.mediabox.width), float(page.mediabox.height))
         rotated = int(page.get("/Rotate", 0)) % 180 != 0
         if abs(size[0] - 595.276) > 1 or abs(size[1] - 841.89) > 1:
@@ -126,23 +189,18 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
 
         def visit(text, cm, tm, font, font_size):
             nonlocal active, body_started, caption_remaining
-            nonlocal source_started, source_y, source_page
+            nonlocal source_started, source_remaining
             text = text.strip()
             if not text:
                 return
             y = tm[4] * cm[1] + tm[5] * cm[3] + cm[5]
+            # Page numerals in the running head/foot are not quadro fragments.
+            if (y > size[1] - 70 or y < 30) and re.fullmatch(r"\d+|[ivxlcdm]+", text, re.I):
+                return
             caption = re.match(r"Quadro\s+(\d+)\s*[–-]", text)
-            if source_started and not caption:
-                # Source and note paragraphs are 10 pt. Normal prose resumes at
-                # 12 pt after a vertical paragraph gap, not in a wrapped source line.
-                if expected_size(font_size, 12) and source_y - y >= 18:
-                    active, source_started = None, False
-                else:
-                    if not expected_size(font_size, policy["source_pt"]) or not unscaled(cm, tm):
-                        raise ValueError(f"Quadro {active}: source/notes run has invalid typography")
-                    records[active]["source_seen"] |= bool(compact(text).removeprefix("fonte"))
-                    source_y = y
-                    return
+            if source_started:
+                consume_source(text, cm, tm, font_size)
+                return
             if caption:
                 number = int(caption[1])
                 if number not in captions:
@@ -171,15 +229,32 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
             if text.startswith("Fonte:"):
                 if not body_started or not expected_size(font_size, policy["source_pt"]):
                     raise ValueError(f"Quadro {active}: missing body or source typography")
-                source_started, source_page, source_y = True, index, y
-                record["source_seen"] = bool(compact(text).removeprefix("fonte"))
+                source_started = True
+                source_remaining = compact(sources[active])
+                consume_source(text, cm, tm, font_size)
                 return
             if not expected_size(font_size, policy["body_pt"]):
                 raise ValueError(f"Quadro {active}: body run {text[:45]!r} uses {font_size} PDF pt")
             body_started = True
             record["body_runs"] += 1
 
+        def consume_source(text, cm, tm, font_size):
+            nonlocal active, source_started, source_remaining
+            if not expected_size(font_size, policy["source_pt"]) or not unscaled(cm, tm):
+                raise ValueError(f"Quadro {active}: source/notes run has invalid typography")
+            fragment = compact(text)
+            if not source_remaining.startswith(fragment):
+                raise ValueError(f"Quadro {active}: source/notes content differs or is incomplete: "
+                                 f"{fragment[:60]!r}, expected {source_remaining[:60]!r}")
+            records[active]["pages"].add(index + 1)
+            source_remaining = source_remaining[len(fragment):]
+            if not source_remaining:
+                records[active]["source_seen"] = True
+                active, source_started = None, False
+
         page.extract_text(visitor_text=visit)
+    if source_started:
+        raise ValueError(f"Quadro {active}: incomplete source/notes")
     if set(records) != set(range(1, 16)):
         raise ValueError("Not all fifteen quadro titles were found in the PDF")
     for row in records.values():
@@ -222,7 +297,8 @@ def validate(pdf: Path, auxiliaries: Path, log: Path, root: Path = ROOT,
     if len(anchors) != 15:
         raise ValueError("The list of quadros must contain exactly fifteen entries")
     first_page = reader.get_destination_page_number(reader.named_destinations[anchors[0][1]])
-    rows = inspect_pdf(reader, first_page, policy, caption_texts(root, policy))
+    rows = inspect_pdf(reader, first_page, policy, caption_texts(root, policy),
+                       source_texts(root, policy, auxiliaries))
     if bbox:
         validate_bbox(bbox, {page for row in rows for page in row["pages"]})
     return {"quadros": rows, "body_pt": policy["body_pt"],
