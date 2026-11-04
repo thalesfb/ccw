@@ -89,9 +89,22 @@
 % O texto passado ao comando deve conter apenas a identificação da fonte.
 \renewcommand{\fonte}[1]{%
   \par\vspace{0.25cm}%
-  {\ABNTEXfontereduzida\raggedright\textbf{Fonte:} #1\par}%
+  {\SingleSpacing\ABNTEXfontereduzida\raggedright\textbf{Fonte:} #1\par}%
   \vspace{0.15cm}%
 }
+
+% Corpo dos quadros: decisão editorial de legibilidade (não prescrita pela ABNT).
+% Identificação/título preservam os 12 pt do template; fonte/nota usam 10 pt.
+\newcommand{\TCCQuadroCaption}{\normalfont\fontsize{12}{14}\selectfont}
+\makeatletter
+\newcommand{\TCCQuadroSetup}[1]{%
+  \SingleSpacing\fontsize{10}{12}\selectfont
+  \setlength{\LTleft}{0pt}\setlength{\LTright}{\fill}%
+  \captionnamefont{\TCCQuadroCaption}%
+  \captiontitlefont{\TCCQuadroCaption}%
+  \typeout{TCCQUADRO|#1|size=\f@size|baseline=\the\baselineskip}%
+}
+\makeatother
 
 % Configurações de aparência do PDF final
 \definecolor{blue}{RGB}{41,5,195}

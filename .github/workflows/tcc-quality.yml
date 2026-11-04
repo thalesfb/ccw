@@ -108,6 +108,7 @@ jobs:
             tests/test_he_article_reporting_caution.py \
             tests/test_missing_doi_dedup.py \
             tests/test_tcc_visual_classification.py \
+            tests/test_tcc_quadros.py \
             tests/test_content_synthesis.py \
             tests/test_pdf_feedback.py \
             tests/test_evidence_retrieval.py \
@@ -251,7 +252,9 @@ jobs:
         run: python scripts/compile_tcc.py --output results/tcc/main.pdf --diagnostics .tcc-build/aux
 
       - name: Verify compiled front matter and page destinations
-        run: python scripts/validate_tcc_pdf.py --pdf results/tcc/main.pdf --aux .tcc-build/aux
+        run: |
+          python scripts/validate_tcc_pdf.py --pdf results/tcc/main.pdf --aux .tcc-build/aux
+          python scripts/validate_tcc_quadros.py --pdf results/tcc/main.pdf --aux .tcc-build/aux --log results/tcc/main.log
 
       - name: Upload LaTeX diagnostics
         if: always()

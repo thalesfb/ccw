@@ -28,10 +28,10 @@ def validate_quadro_count(auxiliaries: Path) -> int:
     entries = list_entries((auxiliaries / "main.loq").read_text(encoding="utf-8"))
     if len(entries) != 15:
         raise ValueError(
-            "Expected fifteen quadros: search strategy, PICOS, protocol changes, study characterization, "
+            "Expected fifteen quadros: search strategy, PICOS, study characterization, "
             "two synthesis matrices, MMAT study appraisal, mixed-method components, "
             "two criterion-count tables, functional acceptance, requirement traceability, "
-            "study-requirement matrix, PRISMA checklist and teacher-review form"
+            "study-requirement matrix, PRISMA checklist, teacher-review form and function acceptance form"
         )
     return len(entries)
 

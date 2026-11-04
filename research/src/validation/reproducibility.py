@@ -217,6 +217,18 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
         "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
     ),
     (
+        "research/exports/references/mmat_component_details_tcc.tex",
+        "complete unchanged component rationales and source locators rendered in the manuscript appendix",
+    ),
+    (
+        "scripts/tcc_quadros.json",
+        "active fifteen-quadro inventory and authorized editorial typography policy",
+    ),
+    (
+        "scripts/validate_tcc_quadros.py",
+        "source, compiled typography and PDF checks for the fifteen quadros",
+    ),
+    (
         "research/requirements.txt",
         "research runtime dependencies",
     ),

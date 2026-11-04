@@ -143,6 +143,43 @@ automaticamente todos os seus usos nem os requisitos do pacote de desenvolviment
 de software, que não foi inspecionado. As decisões de capa e folha de rosto
 permanecem pendentes de confirmação institucional.
 
+## Legibilidade dos quadros
+
+O corpo dos 15 quadros utiliza 10 pt com entrelinha de 12 pt e espaçamento
+simples. Trata-se de decisão editorial autorizada para esta versão, e não de
+uma exigência literal atribuída à ABNT. Os títulos e as identificações são
+mantidos em 12 pt, como no modelo do curso adotado; fontes e notas usam 10 pt
+com espaçamento simples. O padrão de alinhamento às margens do elemento foi
+preservado.
+
+O [modelo oficial do curso](https://videira.ifc.edu.br/ciencia-da-computacao/defesas-de-tc/)
+e o [Guia SIBI/IFC](https://biblioteca.ifc.edu.br/wp-content/uploads/sites/53/2022/11/Guia-basico-para-Elaboracao-de-Producoes-Academicas-3a-edicao-revisado-14-12-2021-1.pdf),
+seções 3.1 e 3.2 (páginas impressas 12 e 15), são as referências institucionais
+para a fonte reduzida das identificações de origem e o espaçamento. As regras
+atuais da NBR 14724 sobre ordem e margens das ilustrações continuam aplicáveis;
+o guia institucional de 2021 não substitui as atualizações normativas.
+
+O inventário e os tamanhos editoriais estão em `scripts/tcc_quadros.json`.
+`scripts/validate_tcc_quadros.py` confere as 15 chamadas efetivamente incluídas,
+a ordem título/corpo/fonte, o tamanho e a entrelinha registrados na compilação,
+os tamanhos renderizados no PDF e o padrão A4/retrato. A lista de exceções para
+paisagem está vazia. A opção `--bbox` recebe a saída de `pdftotext -bbox`
+produzida do mesmo PDF e verifica os limites das palavras nas páginas dos
+quadros, com tolerância de 2 pt para as margens horizontais. Essa conferência
+não detecta todo possível recorte de linhas, glifos ou figuras e não substitui
+a inspeção visual.
+
+A associação dos fragmentos de fonte e notas no PDF utiliza a continuidade da
+página e o intervalo vertical antes da retomada da prosa. Uma fonte que cruze
+páginas ou contenha um intervalo atípico pode não ser coberta integralmente
+por essa heurística; por isso, o tamanho declarado no estilo e a inspeção das
+fontes e notas permanecem verificações complementares.
+
+As justificativas completas dos componentes MMAT foram mantidas no apêndice,
+geradas do mesmo CSV que produz o quadro de comparação. A transferência não
+altera os julgamentos ou os localizadores. Os geradores devem ser executados
+antes da compilação; os arquivos exportados não devem ser corrigidos à mão.
+
 ## Fontes públicas de conferência
 
 - [Normalização do Sistema de Bibliotecas da UFES](https://sib.ufes.br/normalizacao)
