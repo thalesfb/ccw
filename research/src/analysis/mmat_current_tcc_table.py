@@ -307,7 +307,7 @@ def render_component_details(components: list[dict[str, str]]) -> str:
             r"\noindent Localização: " + _latex_escape(row["source_locator"]) + r"\par",
             "",
         ])
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def main() -> None:

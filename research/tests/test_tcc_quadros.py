@@ -141,6 +141,7 @@ def test_component_appendix_preserves_every_response_rationale_and_locator():
     )
     rows = load_component_rows()
     details = render_component_details(rows)
+    assert details.endswith("\n") and not details.endswith("\n\n")
     assert len(rows) == 6 and len({row["study_key"] for row in rows}) == 3
     for row in rows:
         assert _latex_escape(row["source_locator"]) in details
@@ -149,5 +150,3 @@ def test_component_appendix_preserves_every_response_rationale_and_locator():
             assert _latex_escape(row[f"evidence_{criterion}"]) in details
     assert (ROOT / "research/exports/references/mmat_component_details_tcc.tex").read_text(
         encoding="utf-8") == details
-
-
