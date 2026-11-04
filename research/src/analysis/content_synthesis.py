@@ -73,7 +73,8 @@ def longtable(
         r"\end{tabular}}",
     ]
     return "\n".join([
-        r"\begingroup\small\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}",
+        r"\begingroup\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}",
+        rf"\TCCQuadroSetup{{{label}}}",
         r"\setlength{\LTleft}{0pt}",
         r"\setlength{\LTright}{\fill}",
         *width_measurement,
@@ -81,7 +82,7 @@ def longtable(
         r"\begin{longtable}{" + widths + "}",
         r"\caption{" + caption + r"}\label{" + label + r"}\\\hline",
         heading, r"\endfirsthead",
-        r"\multicolumn{" + str(len(headers)) + r"}{c}{\quadroname\ \thequadro\ -- Continuação}\\\hline",
+        r"\multicolumn{" + str(len(headers)) + r"}{c}{{\TCCQuadroCaption\quadroname\ \thequadro\ -- Continuação}}\\\hline",
         heading, r"\endhead", r"\hline\endfoot\hline\endlastfoot",
         *[" & ".join(row) + r" \\ \hline" for row in rows],
         r"\end{longtable}\endgroup", r"\fonte{Elaborado pelo autor (2026).}", "",
@@ -93,9 +94,9 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
     widths = "|" + "|".join(r">{\raggedright\arraybackslash}p{" + width + "cm}"
                              for width in ("2.8", "3.3", "4.1", "4.5")) + "|"
     first = [[rf"\citeonline{{{row['study_key']}}}", tex(row["purpose"]),
-              tex(row["technique"]), tex(row["level"] + "; " + row["sample"])] for row in studies]
+              tex(row["technique"]), tex(row["level"].rstrip(".") + "; " + row["sample"])] for row in studies]
     second = [[rf"\citeonline{{{row['study_key']}}}", tex(row["target"]),
-               tex(row["validation"] + " (" + row["source"] + ")"), tex(row["metric"])] for row in studies]
+               tex(row["validation"].rstrip(".") + " (" + row["source"] + ")."), tex(row["metric"])] for row in studies]
     text = longtable("Finalidade, técnica e população dos estudos incluídos.", "qua:sintese-tipologia", widths,
                      ["Estudo", "Finalidade principal", "Família de técnica", "Nível e n (unidade)"], first)
     text += longtable("Alvos, validação e métricas dos estudos incluídos.", "qua:sintese-validacao", widths,

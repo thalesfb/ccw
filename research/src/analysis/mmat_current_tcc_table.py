@@ -114,14 +114,14 @@ def _latex_escape(value: object) -> str:
     return "".join(replacements.get(char, char) for char in str(value))
 
 
-def _caption_width_measurement(column_spec: str, headers: list[str], probe: list[str]) -> list[str]:
+def _caption_width_measurement(column_spec: str, headers: list[str], probes: list[list[str]]) -> list[str]:
     """Measure the table width so longtable captions share its left margin."""
 
     header = " & ".join(r"\textbf{" + value + "}" for value in headers)
     return [
         r"\settowidth{\LTcapwidth}{\begin{tabular}{" + column_spec + "}",
         header + r" " + r"\\",
-        " & ".join(probe) + r" " + r"\\",
+        *[" & ".join(probe) + r" " + r"\\" for probe in probes],
         r"\end{tabular}}",
     ]
 
@@ -151,37 +151,35 @@ def render_component_table(
         "quantitative_nonrandomized": "Quant. não rand.",
         "quantitative_descriptive": "Quant. descritivo",
     }
-    criterion_prefix = {
-        "qualitative": "1",
-        "quantitative_nonrandomized": "3",
-        "quantitative_descriptive": "4",
-    }
     column_spec = (
         r"|>{\raggedright\arraybackslash}p{2.2cm}|"
         r">{\raggedright\arraybackslash}p{2.2cm}|ccccc|"
         r">{\raggedright\arraybackslash}p{6.1cm}|"
     )
-    headers = ["Estudo", "Componente", "C1", "C2", "C3", "C4", "C5", "Síntese e páginas consultadas"]
+    headers = ["Estudo", "Componente", "C1", "C2", "C3", "C4", "C5", "Localização na fonte"]
     header_row = " & ".join(r"\textbf{" + value + "}" for value in headers) + r" \\"
     lines = [
         "% Quadro gerado de research/data/mmat_component_reassessment_current.csv",
         r"\begingroup",
-        r"\SingleSpacing",
+        r"\TCCQuadroSetup{qua:mmat-componentes}",
+
         r"\setlength{\parindent}{0pt}",
         r"\def\LTcaptype{quadro}",
-        r"\fontsize{10}{12}\selectfont",
+
         r"\setlength{\tabcolsep}{2pt}",
         r"\setlength{\LTleft}{0pt}",
         r"\setlength{\LTright}{\fill}",
         r"\renewcommand{\arraystretch}{1.15}",
-        *_caption_width_measurement(column_spec, headers, ["", "", "CT", "CT", "CT", "CT", "CT", ""]),
+        *_caption_width_measurement(column_spec, headers, [
+            ["", "", *[row[key] for key in COMPONENT_CRITERIA], ""] for row in components
+        ]),
         r"\begin{longtable}{" + column_spec + "}",
         r"\caption{Componentes qualitativos e quantitativos dos estudos de métodos mistos.}\label{qua:mmat-componentes}\\",
         r"\hline",
         header_row,
         r"\hline",
         r"\endfirsthead",
-        r"\multicolumn{8}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
+        r"\multicolumn{8}{c}{{\TCCQuadroCaption\quadroname\ \thequadro\ -- Continuação}}\\",
         r"\hline",
         header_row,
         r"\hline",
@@ -193,23 +191,17 @@ def render_component_table(
         r"\endlastfoot",
     ]
     for row in components:
-        prefix = criterion_prefix[row["design"]]
-        rationales = [
-            f"{prefix}.{index} ({row[criterion]}): {row[f'evidence_{criterion}']}"
-            for index, criterion in enumerate(COMPONENT_CRITERIA, start=1)
-        ]
-        rationales.append(f"Páginas e seções: {row['source_locator']}")
         values = [
             _study_reference(row, labels),
             _latex_escape(category_labels[row["design"]]),
             *[row[criterion] for criterion in COMPONENT_CRITERIA],
-            _latex_escape(" ".join(rationales)),
+            _latex_escape(row["source_locator"]),
         ]
-        lines.append(" & ".join(values) + r" \\")
+        lines.append(" & ".join(values) + r" \\ \hline")
     lines.extend([
         r"\end{longtable}",
         r"\fonte{Elaborado pelo autor (2026).}",
-        r"\par\noindent\textit{Nota:} C1--C5 = critérios da categoria; Y = sim; N = não; CT = não é possível concluir; Quant. = quantitativo; rand. = randomizado. Ver Seção~\ref{sec:avaliacao-qualidade}.\par",
+        r"\par\noindent\textit{Nota:} C1--C5 = critérios da categoria; Y = sim; N = não; CT = não é possível concluir; Quant. = quantitativo; rand. = randomizado. Justificativas completas no Apêndice~\ref{apendice:mmat-componentes}; ver Seção~\ref{sec:avaliacao-qualidade}.\par",
         r"\endgroup",
     ])
     return "\n".join(lines)
@@ -229,21 +221,24 @@ def render_table(
         "% Reavaliação documental preliminar; não representa score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
         r"\begingroup",
-        r"\SingleSpacing",
+        r"\TCCQuadroSetup{qua:mmat-reavaliacao-atual}",
+
         r"\setlength{\parindent}{0pt}",
-        r"\fontsize{10}{12}\selectfont",
+
         r"\def\LTcaptype{quadro}",
         r"\setlength{\tabcolsep}{2pt}",
         r"\setlength{\LTleft}{0pt}",
         r"\setlength{\LTright}{\fill}",
-        *_caption_width_measurement(column_spec, headers, ["", "", *["CT"] * 7]),
+        *_caption_width_measurement(column_spec, headers, [
+            ["", "", *[row[key] or "---" for key in CRITERIA]] for row in rows
+        ]),
         r"\begin{longtable}{" + column_spec + "}",
         rf"\caption{{Triagem e apreciação preliminar pelo MMAT 2018 de {len(rows)} estudos do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
         r"\hline",
         header_row,
         r"\hline",
         r"\endfirsthead",
-        r"\multicolumn{9}{c}{\quadroname\ \thequadro\ -- Continuação}\\",
+        r"\multicolumn{9}{c}{{\TCCQuadroCaption\quadroname\ \thequadro\ -- Continuação}}\\",
         r"\hline",
         header_row,
         r"\hline",
@@ -291,26 +286,52 @@ def render_table(
     return "\n".join(lines) + "\n"
 
 
+def render_component_details(components: list[dict[str, str]]) -> str:
+    """Preserve every component rationale outside the compact comparison matrix."""
+    prefixes = {"qualitative": "1", "quantitative_nonrandomized": "3",
+                "quantitative_descriptive": "4"}
+    categories = {"qualitative": "Qualitativo",
+                  "quantitative_nonrandomized": "Quantitativo não randomizado",
+                  "quantitative_descriptive": "Quantitativo descritivo"}
+    lines = ["% Gerado do mesmo CSV de componentes; não editar manualmente.", ""]
+    for row in components:
+        prefix = prefixes[row["design"]]
+        lines.extend([
+            r"\noindent\textbf{" + _study_reference(row, None) + " -- "
+            + categories[row["design"]] + ".}",
+            "",
+            " ".join(rf"\textbf{{{prefix}.{index} ({row[criterion]}):}} "
+                     + _latex_escape(row[f"evidence_{criterion}"])
+                     for index, criterion in enumerate(COMPONENT_CRITERIA, start=1)),
+            "",
+            r"\noindent Localização: " + _latex_escape(row["source_locator"]) + r"\par",
+            "",
+        ])
+    return "\n".join(lines) + "\n"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    expected = render_table(load_rows())
-    if args.check:
-        actual = OUTPUT_PATH.read_text(encoding="utf-8") if OUTPUT_PATH.exists() else ""
-        if actual != expected:
-            diff = "".join(
-                difflib.unified_diff(
-                    actual.splitlines(keepends=True),
-                    expected.splitlines(keepends=True),
-                    fromfile=str(OUTPUT_PATH),
-                    tofile="generated",
-                )
-            )
-            raise SystemExit(f"Current MMAT TCC export is stale:\n{diff}")
-        return
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(expected, encoding="utf-8")
+    outputs = {
+        OUTPUT_PATH: render_table(load_rows()),
+        OUTPUT_PATH.with_name("mmat_component_details_tcc.tex"):
+            render_component_details(load_component_rows()),
+    }
+    for path, expected in outputs.items():
+        if args.check:
+            actual = path.read_text(encoding="utf-8") if path.exists() else ""
+            if actual != expected:
+                diff = "".join(difflib.unified_diff(
+                    actual.splitlines(keepends=True), expected.splitlines(keepends=True),
+                    fromfile=str(path), tofile="generated",
+                ))
+                raise SystemExit(f"Current MMAT TCC export is stale:\n{diff}")
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(expected, encoding="utf-8", newline="\n")
+
 
 
 if __name__ == "__main__":

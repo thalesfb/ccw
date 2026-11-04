@@ -3,13 +3,14 @@
 
 Os critérios do Quadro~\ref{qua:aceitacao-funcional} definem verificações propostas para uma implementação futura. Não são resultados de testes já realizados. F01--F07 identificam as funções descritas neste capítulo e remetem aos grupos R01--R26 da matriz de origem dos requisitos.
 
-\begingroup\small\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}
+\begingroup
+\TCCQuadroSetup{qua:aceitacao-funcional}\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}
 \setlength{\LTcapwidth}{\textwidth}
-\begin{longtable}{|p{1cm}|p{4cm}|>{\raggedright\arraybackslash}p{9.6cm}|}
+\begin{longtable}{|p{1cm}|p{4cm}|>{\raggedright\arraybackslash}p{\dimexpr\textwidth-5cm-6\tabcolsep-4\arrayrulewidth\relax}|}
 \caption{Critérios de aceitação dos requisitos funcionais.}\label{qua:aceitacao-funcional}\\\hline
 \textbf{Cód.} & \textbf{Requisito e vínculo} & \textbf{Condição observável de aceitação} \\\hline
 \endfirsthead
-\multicolumn{3}{c}{\quadroname\ \thequadro\ -- Continuação}\\\hline
+\multicolumn{3}{c}{{\TCCQuadroCaption\quadroname\ \thequadro\ -- Continuação}}\\\hline
 \textbf{Cód.} & \textbf{Requisito e vínculo} & \textbf{Condição observável de aceitação} \\\hline\endhead
 \hline\endfoot\hline\endlastfoot
 F01 & Importar dados documentados (R07, R14, R16). & Em arquivo de teste com linhas válidas e inválidas conhecidas, informar os totais aceitos/rejeitados e o motivo por linha. Vincular fonte, versão, licença e dicionário. Impedir análise se faltar campo obrigatório ou permissão de uso. \\\hline

@@ -8,7 +8,8 @@ Este apêndice apresenta um mapeamento do relato deste manuscrito com base no PR
 A indicação \textit{Localizado} identifica uma passagem pertinente, mas não certifica sua suficiência. \textit{Parcial} indica informação disponível com limitações explicitadas. \textit{Não apresentado} registra informação ou resultado não encontrado no manuscrito examinado, sem afirmar que o procedimento jamais ocorreu; quando a atividade não foi realizada, isso é indicado na justificativa. \textit{Não aplicável} é empregado somente com justificativa específica; a ausência de meta-análise não dispensa o relato dos métodos de síntese narrativa.
 
 \begingroup
-\fontsize{10}{12}\selectfont
+\TCCQuadroSetup{qua:prisma-checklist}
+
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.12}
 \def\LTcaptype{quadro}
@@ -22,7 +23,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \textbf{Item} & \textbf{Tópico abreviado} & \textbf{Localização e estado do relato}\\
 \hline
 \endfirsthead
-\multicolumn{3}{c}{\quadroname\ \thequadro\ -- Continuação}\\
+\multicolumn{3}{c}{{\TCCQuadroCaption\quadroname\ \thequadro\ -- Continuação}}\\
 \hline
 \textbf{Item} & \textbf{Tópico abreviado} & \textbf{Localização e estado do relato}\\
 \hline
@@ -76,7 +77,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 16a & Fluxo & Parcial: o Fluxograma~\ref{fig:prisma-flow} e a Tabela~\ref{tab:stats-descritivas} apresentam as etapas e contagens, distinguindo relatórios procurados, não recuperados, avaliados e excluídos. A priorização por relevância é explicitada como etapa automatizada, não de elegibilidade. \\
 \hline
-16b & Exclusões justificadas & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos} identifica o protocolo de \citeonline{Imperatrice2025_6921} excluído após texto completo por não apresentar resultados empíricos concluídos. O trabalho de \citeonline{Machine2019_007}, excluído após resumo, e o texto não recuperado são distinguidos dessa exclusão; o estudo de \citeonline{UniversityMathematics2026_6919} foi incluído conforme os critérios escritos do protocolo. A caracterização do relato pendente limita-se aos metadados e resumos disponíveis. \\
+16b & Exclusões justificadas & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos}: \citeonline{Imperatrice2025_6921}, protocolo sem resultados empíricos concluídos, excluído após texto completo; \citeonline{Machine2019_007}, excluído após resumo; texto não recuperado, distinto dessas exclusões. \citeonline{UniversityMathematics2026_6919} foi incluído conforme o protocolo escrito. A caracterização do relato pendente limita-se aos metadados e resumos disponíveis. \\
 \hline
 17 & Características & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos}. Os 18 registros selecionados preliminarmente são identificados com sua situação no fluxo; características de amostra e desenho não estão uniformemente detalhadas. O único relatório não recuperado é descrito com base nos metadados e no resumo disponível; o registro excluído após resumo pertence a etapa distinta e não foi tratado como relatório procurado. \\
 \hline
@@ -175,7 +176,8 @@ Perfil/nível de ensino e tempo de experiência: \underline{\hspace{6cm}}.
 Registrar em cada dimensão: 1=incoerente; 2=alteração substancial; 3=ajuste pontual; 4=coerente; NE=evidência insuficiente. A=sustentação na fonte ou decisão autoral; B=adequação curricular; C=clareza da saída; D=viabilidade documental. Justificar cada resposta, inclusive NE.
 
 \begingroup
-\small
+\TCCQuadroSetup{qua:formulario-oe4}
+
 \def\LTcaptype{quadro}
 \setlength{\LTcapwidth}{\textwidth}
 \setlength{\LTleft}{0pt}
@@ -185,7 +187,7 @@ Registrar em cada dimensão: 1=incoerente; 2=alteração substancial; 3=ajuste p
 \hline
 Cód. & A & B & C & D & Página, justificativa e ajuste necessário \\ \hline
 \endfirsthead
-\multicolumn{6}{c}{\quadroname\ \thequadro\ -- Continuação}\\
+\multicolumn{6}{c}{{\TCCQuadroCaption\quadroname\ \thequadro\ -- Continuação}}\\
 \multicolumn{6}{l}{Participante: \underline{\hspace{1.6cm}}. Rodada: \underline{\hspace{0.7cm}}. Versão: \underline{\hspace{1.8cm}}.}\\
 \hline
 Cód. & A & B & C & D & Página, justificativa e ajuste necessário \\ \hline
@@ -224,9 +226,10 @@ R26\rule{0pt}{1.4em} & & & & & \\ \hline
 \endgroup
 
 \begin{quadro}[H]
+\TCCQuadroSetup{qua:ficha-aceitacao-documental}
 A ficha seguinte é um modelo reutilizável para cada função F01--F07. Ela registra o exame documental do critério de aceitação do Quadro~\ref{qua:aceitacao-funcional}; o parecer sobre a especificação não indica execução de teste de implementação.
 
-\small
+
 \caption{Modelo de ficha de aceitação documental por função.}\label{qua:ficha-aceitacao-documental}
 \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.8cm}|X|}
 \hline
@@ -243,5 +246,12 @@ Parecer e justificativa & \rule{0pt}{2.3em} Coerente / Revisar\\ \hline
 \end{quadro}
 
 A consolidação dos julgamentos e o tratamento das divergências seguem a Seção~\ref{sec:revisao-docente-operacional}. Os registros deste formulário não produzem escore de qualidade dos estudos nem demonstram eficácia pedagógica de uma implementação.
+
+\chapter{JUSTIFICATIVAS DOS COMPONENTES MMAT}
+\label{apendice:mmat-componentes}
+
+As justificativas dos seis componentes dos mesmos três estudos de métodos mistos detalham o Quadro~\ref{qua:mmat-componentes}. São transcritas dos registros de apreciação preliminar, por critério e sem escore agregado, mantendo os julgamentos e os localizadores das fontes. A apresentação separada não acrescenta estudos ao conjunto.
+
+\input{../../research/exports/references/mmat_component_details_tcc.tex}
 
 \end{apendicesenv}

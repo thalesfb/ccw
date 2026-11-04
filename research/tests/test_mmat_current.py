@@ -750,8 +750,10 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
     assert r"\citeonline{Enhancing2025_012} & Cat. 2 declarada" in table
     assert r"\citeonline{UniversityMathematics2026_6919} & Métodos mistos" in table
     assert r"\citeonline{UniversityMathematics2026_6919} & Quant. não rand." in table
-    assert "3.1 (CT):" in table
-    assert "2.1 (CT):" not in table
+    details = CURRENT_TABLE.with_name("mmat_component_details_tcc.tex").read_text(encoding="utf-8")
+    assert "3.1 (CT):" in details
+    assert "2.1 (CT):" not in details
+    assert r"\ref{apendice:mmat-componentes}" in table
     assert r"\ref{sec:avaliacao-qualidade}" in table
     assert "ID" not in table
     assert "Nyantah et al. (2025)" not in table

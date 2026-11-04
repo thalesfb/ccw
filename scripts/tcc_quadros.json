@@ -1,0 +1,85 @@
+{
+  "body_pt": 10,
+  "baseline_pt": 12,
+  "caption_pt": 12,
+  "source_pt": 10,
+  "landscape_allowlist": [],
+  "quadros": [
+    {
+      "number": 1,
+      "label": "qua:camadas-busca",
+      "source": "results/tcc/conteudo/metodologia.tex"
+    },
+    {
+      "number": 2,
+      "label": "qua:picos",
+      "source": "results/tcc/conteudo/metodologia.tex"
+    },
+    {
+      "number": 3,
+      "label": "qua:sintese-estudos-empiricos",
+      "source": "results/tcc/conteudo/resultadosesperados.tex"
+    },
+    {
+      "number": 4,
+      "label": "qua:sintese-tipologia",
+      "source": "research/exports/references/study_synthesis_tcc.tex"
+    },
+    {
+      "number": 5,
+      "label": "qua:sintese-validacao",
+      "source": "research/exports/references/study_synthesis_tcc.tex"
+    },
+    {
+      "number": 6,
+      "label": "qua:mmat-reavaliacao-atual",
+      "source": "research/exports/references/mmat_current_tcc_table.tex"
+    },
+    {
+      "number": 7,
+      "label": "qua:mmat-componentes",
+      "source": "research/exports/references/mmat_current_tcc_table.tex"
+    },
+    {
+      "number": 8,
+      "label": "qua:mmat-contagens",
+      "source": "research/exports/references/mmat_counts_tcc.tex"
+    },
+    {
+      "number": 9,
+      "label": "qua:mmat-contagens-componentes",
+      "source": "research/exports/references/mmat_counts_tcc.tex"
+    },
+    {
+      "number": 10,
+      "label": "qua:aceitacao-funcional",
+      "source": "results/tcc/conteudo/aceitacao-cenarios.tex"
+    },
+    {
+      "number": 11,
+      "label": "qua:rastreabilidade-requisitos",
+      "source": "results/tcc/conteudo/rastreabilidade-requisitos.tex"
+    },
+    {
+      "number": 12,
+      "label": "qua:estudos-requisitos",
+      "source": "results/tcc/conteudo/estudos-requisitos.tex"
+    },
+    {
+      "number": 13,
+      "label": "qua:prisma-checklist",
+      "source": "results/tcc/postextuais/apendice.tex"
+    },
+    {
+      "number": 14,
+      "label": "qua:formulario-oe4",
+      "source": "results/tcc/postextuais/apendice.tex"
+    },
+    {
+      "number": 15,
+      "label": "qua:ficha-aceitacao-documental",
+      "source": "results/tcc/postextuais/apendice.tex"
+    }
+  ]
+}
+

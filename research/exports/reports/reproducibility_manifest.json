@@ -615,7 +615,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "fa56d9640b08b9b2c21ab3d2a9adbc80cb7b5f04d4ea159844a739ff0d3f0c47"
+      "sha256": "c3186554c5cb95b216f7a079d55dc121e6c1f9aaf35793abda42df3e166d0974"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -635,12 +635,27 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "ccb79af15427b3e9be8e93b38dd03ddde3ea06563c003b7c4bdb286785a3a5be"
+      "sha256": "8d840cff996a880098a478dc1e7ab792ab1740d7af80300063b7f342d9c71469"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "bb4de26a90a73203c0166daaf2e10422f2d3be5f76bbebcbafaf4056c184ea7c"
+      "sha256": "52da18fda73f7124ccf8a1451fb7c8c13e98d6ba38497d269deb014c1cd56916"
+    },
+    {
+      "path": "research/exports/references/mmat_component_details_tcc.tex",
+      "role": "complete unchanged component rationales and source locators rendered in the manuscript appendix",
+      "sha256": "9aa0a6de8b2c4d219a630133a0884406f133621d060505aee0ee8ad6d8c05441"
+    },
+    {
+      "path": "scripts/tcc_quadros.json",
+      "role": "active fifteen-quadro inventory and authorized editorial typography policy",
+      "sha256": "b819422edd6fc2babc00923b3bfbd488224547da0fb18b06e6766b89dbc8e383"
+    },
+    {
+      "path": "scripts/validate_tcc_quadros.py",
+      "role": "source, compiled typography and PDF checks for the fifteen quadros",
+      "sha256": "a22c35a08d0d153fcb67c02e02f2db7efcac0d8e0a655680ab1decb28283990a"
     },
     {
       "path": "research/requirements.txt",

@@ -379,7 +379,7 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_captions_follow_the_2026_institutional_template(self):
         config = (TCC / "config_inicial.tex").read_text(encoding="utf-8")
         self.assertIn(r"\captionstyle[\raggedright]{\raggedright}", config)
-        self.assertIn(r"{\ABNTEXfontereduzida\raggedright\textbf{Fonte:}", config)
+        self.assertIn(r"{\SingleSpacing\ABNTEXfontereduzida\raggedright\textbf{Fonte:}", config)
         self.assertNotIn(r"\captionstyle{\centering}", config)
 
     def test_mmat_preserves_readable_type_in_a_portrait_width_table(self):
@@ -387,7 +387,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         table = (ROOT / "research/exports/references/mmat_current_tcc_table.tex").read_text(encoding="utf-8")
         mmat = review.split(r"\section{Avaliação Metodológica com o MMAT}", 1)[1]
-        self.assertIn(r"\fontsize{10}{12}", table)
+        config = (TCC / "config_inicial.tex").read_text(encoding="utf-8")
+        self.assertIn(r"\TCCQuadroSetup{qua:mmat-reavaliacao-atual}", table)
         self.assertIn(r"\setlength{\tabcolsep}{2pt}", generator)
         self.assertIn("def _caption_width_measurement(", generator)
         self.assertIn(r"\settowidth{\LTcapwidth}{\begin{tabular}{", generator)
@@ -415,7 +416,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
         self.assertLessEqual(len(note), 450)
         self.assertIn(r"A categoria 4 foi adaptada à modelagem computacional da tese de \citeonline{Computational2017_008}", review)
-        self.assertIn(r"\SingleSpacing", table)
+        self.assertIn(r"\TCCQuadroSetup{qua:mmat-reavaliacao-atual}", table)
+        self.assertIn(r"\SingleSpacing\fontsize{10}{12}\selectfont", config)
 
     def test_he_mmat_interpretation_matches_the_provisional_ledger_design(self):
         with (ROOT / "research/data/mmat_reassessment_current.csv").open(
