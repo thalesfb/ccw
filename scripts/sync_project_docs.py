@@ -39,6 +39,7 @@ INPUTS = (
     "results/tcc/conteudo/conclusao.tex",
     "results/tcc/pretextuais/resumo.tex",
     "results/tcc/postextuais/apendice.tex",
+    "results/tcc/postextuais/ferramentas-ia.tex",
     "results/tcc/config_inicial.tex",
     "research/src/analysis/mmat_current_tcc_table.py",
     "research/exports/references/mmat_component_details_tcc.tex",

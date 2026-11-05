@@ -1,0 +1,39 @@
+\chapter{FERRAMENTAS DE INTELIGÊNCIA ARTIFICIAL E LIMITES DO INVENTÁRIO}
+\label{apendice:ferramentas-ia}
+
+Este inventário complementa a Seção~\ref{sec:uso-ferramentas-ia}. Os nomes e as versões abaixo são identificadores encontrados nos registros locais das ferramentas, não uma atribuição de autoria a sistemas de IA. Os períodos indicam a janela dos registros disponíveis em horário UTC, sem afirmar utilização contínua; a exceção dos logs sem fuso horário é indicada expressamente. Quando há apenas seleção de modelo ou tentativa sem resposta, essa condição é explicitada.
+
+\section{Modelos e usos documentados}
+
+\begin{description}
+\item[GPT Luna.] \textbf{Versão registrada:} \texttt{gpt-6-luna}. \textbf{Ferramenta:} Codex. \textbf{Período:} 11/10 a 05/11/2026. \textbf{Finalidades:} consultas por agentes sobre estudos, MMAT, PRISMA, referências, coerência do site e recuperação de textos integrais.
+
+\item[GPT Sol.] \textbf{Versão registrada:} \texttt{gpt-6.1-sol}. \textbf{Ferramenta:} Codex. \textbf{Período:} 15/10 a 05/11/2026 nos turnos diretamente conferidos. \textbf{Finalidades:} revisão e execução de tarefas do repositório, acompanhamento de alterações do trabalho e desenvolvimento ou revisão de validadores. Metadados associam o modelo a uma sessão criada em 14/10, mas não demonstram seu uso em todos os turnos desde essa data.
+
+
+\item[Claude Opus.] \textbf{Versão registrada:} \texttt{claude-opus-5-5}. \textbf{Ferramenta:} Claude Code. \textbf{Período:} 21/10 a 05/11/2026. \textbf{Finalidades:} revisão do manuscrito, alterações de \LaTeX{} e normalização, conferência documental e pesquisa sobre a declaração de IA.
+
+\item[Claude Sonnet.] \textbf{Versão registrada:} \texttt{claude-sonnet-5-5}. \textbf{Ferramenta:} Claude Code. \textbf{Período:} 22/10 a 05/11/2026. \textbf{Finalidades:} resolução de conflitos entre alterações do trabalho, verificações e coordenação de consultas.
+
+\item[Claude Haiku.] \textbf{Versão registrada:} \texttt{claude-haiku-5-5}. \textbf{Ferramenta:} Claude Code. \textbf{Período:} 30/10/2026. \textbf{Finalidade:} tarefa delimitada sobre o relato do planejamento e do financiamento no resumo e no \textit{abstract}. O registro não permite atribuir a esse modelo uma etapa completa da revisão.
+
+\item[Gemini Flash, configuração Low.] \textbf{Versão registrada:} \texttt{gemini-3.8-flash-low}. \textbf{Ferramenta:} Antigravity CLI (\texttt{agy}). \textbf{Período:} 20/10/2026. \textbf{Finalidades:} segunda opinião sobre a apreciação do trabalho de \citeonline{Analysis2022_003} e revisão de código relacionado ao MMAT e à geração de sua página. A consulta por IA não acrescenta um revisor ao procedimento.
+
+\item[Gemini Flash, configuração Medium.] \textbf{Versões indicadas nos registros:} Gemini 3.6 Flash e Gemini 3.8 Flash. \textbf{Ferramenta:} \texttt{agy}. \textbf{Períodos no calendário dos logs, sem fuso informado:} 14/09/2026 para 3.6; 14/09 a 05/11/2026 para 3.8. \textbf{Finalidade comprovada:} revisão crítica da declaração de IA em 05/11/2026 UTC, com 3.8. Nos demais registros desse grupo, a indicação do modelo e do projeto não comprova, isoladamente, uma consulta concluída nem sua finalidade. Para 3.6, só foi comprovada a seleção do modelo.
+
+\item[Qwen.] \textbf{Versão com resposta registrada:} \texttt{qwen3.7-max}. \textbf{Ferramenta:} OpenCode. \textbf{Período:} 14/09/2026. \textbf{Finalidade:} parecer sobre fundamentação, interpretação pedagógica, metodologia e especificação, sem atribuição de cada conclusão incorporada ao modelo.
+
+\item[DeepSeek.] \textbf{Versão com respostas registradas:} \texttt{deepseek-v4-flash}. \textbf{Ferramenta:} OpenCode. \textbf{Período:} 14 a 15/09/2026. \textbf{Finalidades:} sugestões de redação para a documentação e consultas sobre completude e defesa do trabalho. Uma consulta normativa sem saída textual não foi contada como revisão concluída.
+
+\item[GLM Flash.] \textbf{Versão com respostas registradas:} \texttt{glm-5.3-flash}. \textbf{Ferramenta:} OpenCode. \textbf{Período:} 15/09/2026. \textbf{Finalidades:} pareceres sobre slides e texto, teoria e implementação, síntese dos estudos, metodologia e execução do fluxo, PRISMA e MMAT.
+
+\item[GLM, tentativa sem resposta.] \textbf{Versão registrada:} \texttt{glm-5.3}. \textbf{Ferramenta:} OpenCode. \textbf{Período:} 14/09/2026. \textbf{Limite:} há registro de sessão, mas não de saída textual; não se apresenta essa tentativa como revisão concluída. Consultas adicionais sem resposta também não foram convertidas em evidência de uso efetivo.
+\end{description}
+
+\section{Disponibilidade e limites dos registros}
+
+O inventário permite identificar ferramentas e atividades documentadas, mas não determina qual modelo redigiu cada trecho do PDF ou produziu cada linha de código. No Codex, o modelo atual de uma sessão não identifica necessariamente todos os turnos anteriores, e parte dos históricos completos não pôde ser recuperada. Rótulos de configuração, títulos de sessões, tentativas com erro e metadados de atualização não demonstram, sozinhos, a execução de uma consulta ou sua incorporação ao trabalho.
+
+Os modelos de prompts disponíveis em \path{.github/prompts/} são materiais versionados de apoio. Não representam a totalidade dos prompts de triagem, MMAT, redação ou desenvolvimento. A recuperação parcial das interações impede reproduzir integralmente o apoio de IA ou estabelecer uma associação completa entre modelo, etapa e saída. Não foram preenchidas lacunas do inventário por suposição.
+
+A responsabilidade do autor pela verificação das fontes, pela validação do texto e do código incorporados e pelas decisões de pesquisa permanece a descrita na Seção~\ref{sec:uso-ferramentas-ia}. A listagem de ferramentas não transforma suas propostas em resultados científicos nem altera o número de revisores informado nos itens 8 e 11 do mapeamento PRISMA.
