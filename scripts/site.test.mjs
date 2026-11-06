@@ -101,7 +101,7 @@ assert.match(mmat, /arquivo histórico/i, 'the current page must preserve histor
 assert.match(mmat, /O registro de apreciação reúne 18 itens da seleção histórica sob o corte 4,0/i, 'the MMAT page must describe its 18-item scope as historical');
 assert.doesNotMatch(mmat, /estudos empíricos mantidos provisoriamente/i, 'the MMAT page must not describe the pre-amendment selection as provisional/current');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
-assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">consultas documentais declaradas<\/span>/, 'historical consultation labels must not certify completed human reading');
+assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">fichas com consulta histórica declarada<\/span>/, 'historical consultation labels must not certify completed human reading');
 assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
 assert.match(mmat, /<span class="metric-value">1<\/span><span class="metric-label">relatório não recuperado no fluxo<\/span>/, 'the current page must distinguish historical selection from current PDF availability');
 assert.match(mmat, /Um relatório permanece não recuperado no fluxo de seleção e não recebeu apreciação MMAT\. Um registro foi excluído após a triagem do resumo e não recebeu MMAT\./, 'the evidence summary must distinguish the unretrieved report from the abstract-stage exclusion');

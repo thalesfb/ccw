@@ -350,7 +350,7 @@ class: content-slide tcc-mmat-slide
     <div class="tcc-mmat-key">
       <div><b>Y</b><span><strong>Y = Sim</strong> critério atendido segundo a evidência disponível.</span></div>
       <div><b>N</b><span><strong>N = Não</strong> critério não atendido na apreciação documental.</span></div>
-      <div><b>CT</b><span><strong>CT = Não é possível concluir</strong> informação insuficiente para concluir.</span></div>
+      <div><b>CT</b><span><strong>CT = Não é possível concluir</strong> evidência disponível insuficiente para concluir.</span></div>
     </div>
   </div>
 </div>
@@ -473,7 +473,7 @@ class: content-slide tcc-next-slide
 # Próximos passos — antes de qualquer experimento
 
 <div class="tcc-next-layout">
-  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Conferir as 15 apreciações preliminares e suas rotas operacionais; recuperar o texto pendente e esclarecer as lacunas de relato.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
+  <div class="tcc-next-list"><div><b>01</b><span>Consolidar a fonte ainda não recuperada e a adjudicação final do MMAT.</span></div><div><b>02</b><span>Conferir as 15 apreciações preliminares e suas rotas operacionais; registrar limites de acesso, leitura e evidência disponível.</span></div><div><b>03</b><span>Revisar a especificação conceitual à luz da adjudicação final.</span></div><div><b>04</b><span>Qualquer validação experimental exigirá novo protocolo e autorização.</span></div></div>
   <div class="tcc-next-decision"><span>PRÓXIMA DECISÃO</span><strong>evidência<br>antes da<br>implementação</strong><i>→</i></div>
 </div>
 
