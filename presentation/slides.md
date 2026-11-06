@@ -413,7 +413,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros provisórios, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios, incluindo rotas operacionais, ainda sujeitos à conferência humana; o relatório não recuperado não recebeu apreciação.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros provisórios, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios preliminares, incluindo adaptações de categoria. A seleção e a apreciação foram realizadas por um único revisor, o autor, sem dupla avaliação independente; o relatório não recuperado não recebeu apreciação.</div>
 
 ---
 layout: default

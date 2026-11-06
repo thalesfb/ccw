@@ -149,7 +149,7 @@ anos limitam a inferência e não isolam o efeito da IA.
 
 O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
 15 registros permanecem provisoriamente no núcleo empírico, com consultas
-documentais declaradas; 15 têm triagem S1/S2 e apreciação por categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacional, com alocação desconhecida; o 14 usa a categoria 2 declarada e contraditória; o 8 usa a categoria 4 adaptada às análises computacionais matemáticas. Essas rotas não confirmam delineamentos. Frações reutilizadas entre capítulos não são duplicadas. A conferência humana permanece pendente; o texto não recuperado não recebeu apreciação.
+documentais declaradas; 15 têm triagem S1/S2 e apreciação por categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacional, com alocação desconhecida; o 14 usa a categoria 2 declarada e contraditória; o 8 usa a categoria 4 adaptada às análises computacionais matemáticas. Essas rotas não confirmam delineamentos. Frações reutilizadas entre capítulos não são duplicadas. A seleção e a apreciação foram realizadas por um único revisor, o autor, sem dupla avaliação independente; o texto não recuperado não recebeu apreciação.
 
 ### 18. O que emerge entre os estudos incluídos
 
@@ -179,7 +179,7 @@ não estimativa de frequência da literatura. Os exemplos são casos localizados
 nos textos integrais dos estudos incluídos. Um registro
 continua sem texto integral e sem apreciação MMAT; um foi excluído após resumo
 e um protocolo sem resultados concluídos foi excluído após texto completo. A revisão
-segue documental e preliminar, com conferência humana por fonte e critério pendente.
+segue documental e preliminar, com seleção e apreciação por um único revisor, o autor, sem dupla avaliação independente.
 
 ### 21. Da evidência à especificação — sem saltar para a implementação
 
@@ -214,7 +214,7 @@ fundamentação.
 
 ### 24. Próximos passos científicos
 
-Indica a recuperação e conferência humana das fontes, a adjudicação do MMAT e
+Indica o aprofundamento da conferência das fontes e dos julgamentos MMAT e
 a aplicação do protocolo de avaliação da especificação conceitual. Qualquer
 desenvolvimento e validação experimental de um protótipo constituem contingência
 separada e exigirão decisão, protocolo e autorização próprios.
