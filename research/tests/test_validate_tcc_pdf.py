@@ -23,19 +23,19 @@ def test_normalization_handles_pdf_line_breaks_case_and_accents():
 def test_quadro_count_includes_traceability_and_mixed_methods_appraisal(tmp_path):
     entries = [
         rf"\contentsline {{quadro}}{{\numberline {{{index}}}{{Quadro {index}.}}}}{{{index}}}{{quadro.{index}}}"
-        for index in range(1, 16)
+        for index in range(1, 17)
     ]
     (tmp_path / "main.loq").write_text("\n".join(entries), encoding="utf-8")
 
-    assert gate.validate_quadro_count(tmp_path) == 15
+    assert gate.validate_quadro_count(tmp_path) == 16
 
 
-@pytest.mark.parametrize("count", [6, 7, 13, 14, 16])
+@pytest.mark.parametrize("count", [6, 7, 13, 14, 15, 17])
 def test_quadro_count_rejects_old_or_incomplete_content_inventory(tmp_path, count):
     entries = [
         rf"\contentsline {{quadro}}{{\numberline {{{index}}}{{Quadro {index}.}}}}{{{index}}}{{quadro.{index}}}"
         for index in range(1, count + 1)
     ]
     (tmp_path / "main.loq").write_text("\n".join(entries), encoding="utf-8")
-    with pytest.raises(ValueError, match="fifteen quadros"):
+    with pytest.raises(ValueError, match="sixteen quadros"):
         gate.validate_quadro_count(tmp_path)
