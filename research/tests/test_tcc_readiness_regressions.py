@@ -13,7 +13,7 @@ def test_selection_percentages_refer_to_records_not_a_study_population() -> None
 
     assert "dos 11.875 registros únicos triados" in review
     assert "parcela da população inicialmente identificada" not in review
-    assert "Restaram 15 estudos empíricos na seleção histórica" in review
+    assert "Restaram 15 estudos empíricos." in review
     assert "17 candidatos empíricos provisórios" not in review
     assert "A população retida compreende" not in review
 

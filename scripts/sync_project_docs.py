@@ -117,7 +117,12 @@ def goals(root):
         r"\section{Estrutura do Trabalho}", 1
     )[0].strip()
     general = section.split("\n\n", 1)[0]
-    objectives = re.findall(r"^O (OE\d+) consiste em ([^\n]+)$", section, re.M)
+    objectives = re.findall(
+        r"^O (?:primeiro|segundo|terceiro|quarto) objetivo específico "
+        r"\((OE\d+)\) consiste em ([^\n]+)$",
+        section,
+        re.M,
+    )
     if [key for key, _ in objectives] != [f"OE{i}" for i in range(1, 5)]:
         raise ValueError("cannot extract sequential manuscript objectives")
     parts = ["### Objetivo geral", plain_tex(general), "### Objetivos específicos"]

@@ -33,7 +33,7 @@ def test_tcc_population_percentages_name_their_denominators() -> None:
     assert "79,10\\% dos 11.875 registros únicos triados" in results
     assert round(9393 / 11875 * 100, 2) == 79.10
     assert "53,81\\% (6.390)" in results
-    assert "99,27\\% dos 2.482 registros submetidos à priorização por relevância" in results
+    assert "99,27\\% dos 2.482 registros submetidos a essa etapa" in results
 
 
 def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_records() -> None:
@@ -45,7 +45,7 @@ def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_r
     assert "Relatórios não recuperados & 1" in results
     assert "Relatórios avaliados em texto completo & 16" in results
     assert "Protocolos excluídos após texto completo & 1" in results
-    assert "Estudos empíricos na seleção histórica & 15" in results
+    assert "Estudos empíricos selecionados pelo corte 4,0 & 15" in results
     assert "mantidos provisoriamente & 15" not in results
     assert "Candidatos empíricos provisórios & 17" not in results
 
@@ -84,9 +84,9 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     normalized_presentation = " ".join(presentation.split())
 
     assert r"\citeonline{Zeng2025_6923} não foi recuperado" in results
-    assert "Os 15 estudos empíricos da seleção histórica sob o corte 4,0 receberam apreciação preliminar" in methodology
+    assert "Os 15 estudos selecionados segundo o corte de relevância 4,0 receberam apreciação preliminar" in methodology
     assert "um não foi recuperado" in results
-    assert "Restaram 15 estudos empíricos na seleção histórica" in results
+    assert "Restaram 15 estudos empíricos." in results
     assert "núcleo empírico" not in results
     assert "um texto integral não foi recuperado" in normalized_presentation
     assert "os outros 15 estudos empíricos integram o núcleo incluído" in normalized_presentation
