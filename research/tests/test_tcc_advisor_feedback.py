@@ -57,11 +57,18 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
     assert "orienta o planejamento e o relato de protocolos" in lowered
     assert "seus princípios foram utilizados parcialmente" in lowered
     assert "não houve registro em plataforma de pré-registro" in lowered
+    assert "planejamento inicial" in lowered
+    assert "histórico do repositório" in lowered
     for unsupported in (
         "seguiu integralmente",
         "seguiu rigorosamente",
         "aderência integral ao prisma-p",
         "foi integralmente aderente ao prisma-p",
+        "definidos antes da execução",
+        "protocolo inicial",
+        "projeto de trabalho de conclusão de curso",
+        "batista2025ptc",
+        "o ptc",
     ):
         assert unsupported not in lowered
 
