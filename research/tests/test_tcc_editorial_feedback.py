@@ -45,8 +45,8 @@ class EditorialFeedbackTests(unittest.TestCase):
             r"\citeonline[p.~65, 69--70]{Echeveria2025_6920}",
         ):
             self.assertIn(citation, limitations)
-        self.assertIn("A seleção histórica reúne 15 estudos empíricos", review)
-        self.assertIn("A inclusão na seleção histórica não comprova leitura integral dos textos, figuras e apêndices", limitations)
+        self.assertIn("Os 15 estudos compõem a seleção pelo corte de relevância 4,0", review)
+        self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("núcleo empírico", limitations)
         self.assertIn(r"O texto integral de \citeonline{Zeng2025_6923} não foi recuperado", limitations)
         gaps = review.split(r"\section{Tendências e Lacunas}", 1)[1].split(
@@ -274,7 +274,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         limitations = review.split(r"\section{Limitações e Contribuições da Revisão}", 1)[1]
         self.assertNotIn("lacunas mais recorrentes", discussion.lower())
-        self.assertIn("A inclusão na seleção histórica não comprova leitura integral dos textos, figuras e apêndices", limitations)
+        self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("adjudicação", discussion)
         self.assertIn(r"As contagens MMAT do Quadro~\ref{qua:mmat-contagens}", discussion)
         self.assertIn("sem contar os três estudos mistos novamente", discussion)
@@ -484,7 +484,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         for phrase in ("média harmônica", "falsos positivos", "concordância", "calibração"):
             self.assertIn(phrase, theory)
         for phrase in ("regras de classificação", "redes neurais multicamadas",
-                       "campos aleatórios condicionais", "comparação de modelos",
+                        "campos aleatórios condicionais", "comparação entre modelos",
                        "aprendizagem cooperativa"):
             self.assertIn(phrase, (theory + review).lower())
 
@@ -497,10 +497,28 @@ class EditorialFeedbackTests(unittest.TestCase):
 
         for acronym in (
             "AIC", "BIC", "CORE", "CRF", "CSV", "CT", "EEG", "F1", "HTML", "JSON", "MLP",
-            "PCA", "PDF", "PICO", "PICOS", "RN", "ROC", "ROC-AUC", "SHA-256",
+            "PCA", "PDF", "PICOS", "RN", "ROC", "ROC-AUC", "SHA-256",
             "TIMSS", "URL", "RIPPER",
         ):
             self.assertIn(fr"\item[{acronym}]", glossary.group(1))
+        self.assertIn(r"\item[LGPD]", glossary.group(1))
+        self.assertNotIn(r"\item[ANN]", glossary.group(1))
+        self.assertNotIn(r"\item[XAI]", glossary.group(1))
+
+    def test_disambiguating_year_suffixes_are_used_in_reference_entries(self):
+        style = (TCC / "abnetx2/abntex2-alf.bst").read_text(encoding="utf-8")
+        formatter = style.split("FUNCTION {format.year}", 1)[1].split(
+            "FUNCTION {format.year.presented}", 1
+        )[0]
+        self.assertIn("year.label n.dashify", formatter)
+        date_formatter = style.split("FUNCTION {format.date}", 1)[1].split(
+            "FUNCTION {format.btitle}", 1
+        )[0]
+        self.assertIn("year.label n.dashify", date_formatter)
+        self.assertIn("@misc{BNCC2018,", (TCC / "referencias.bib").read_text(encoding="utf-8"))
+        self.assertIn("@misc{LGPD2018,", (TCC / "referencias.bib").read_text(encoding="utf-8"))
+        self.assertIn("@article{MMAT2018,", (TCC / "referencias.bib").read_text(encoding="utf-8"))
+        self.assertIn("@misc{MMATGuide2018,", (TCC / "referencias.bib").read_text(encoding="utf-8"))
 
     def test_abstract_keeps_essential_results_within_the_ifc_word_range(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
@@ -567,6 +585,15 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn(pdf_definition, main)
         self.assertLess(main.index(pdf_definition), main.index(r"\include{conteudo/introducao}"))
         self.assertIn("a ausência de avaliação é distinta de ct e não constitui resposta adicional do instrumento", methodology.lower())
+        intro = (TCC / "conteudo/introducao.tex").read_text(encoding="utf-8")
+        protocol = (TCC / "conteudo/protocolo-docente.tex").read_text(encoding="utf-8")
+        self.assertIn("Programa Internacional de Avaliação de Estudantes (PISA, na sigla em inglês)", intro)
+        for ordinal, key in (("primeiro", "OE1"), ("segundo", "OE2"),
+                             ("terceiro", "OE3"), ("quarto", "OE4")):
+            self.assertIn(f"O {ordinal} objetivo específico ({key})", intro)
+        self.assertIn("Instituto Federal Catarinense (IFC)", protocol)
+        self.assertIn("Lei Geral de Proteção de Dados Pessoais (LGPD)", theory)
+        self.assertIn("carbeto de silício (SiC)", (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

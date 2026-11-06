@@ -13,7 +13,9 @@ class ObjectiveAlignmentTests(unittest.TestCase):
     def test_intro_and_results_reference_only_four_unique_objectives(self):
         intro = (CONTENT / "introducao.tex").read_text(encoding="utf-8")
         results = (CONTENT / "resultados.tex").read_text(encoding="utf-8")
-        self.assertEqual(re.findall(r"^O (OE\d+) consiste em ", intro, re.M),
+        self.assertEqual(re.findall(
+            r"^O (?:primeiro|segundo|terceiro|quarto) objetivo específico "
+            r"\((OE\d+)\) consiste em ", intro, re.M),
                          ["OE1", "OE2", "OE3", "OE4"])
         self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
         for phrase in ("O OE1 foi desenvolvido", "O OE2 identificou",

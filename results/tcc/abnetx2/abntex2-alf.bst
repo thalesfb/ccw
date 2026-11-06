@@ -830,8 +830,8 @@ FUNCTION {format.date}
 	{ "existe o campo month (mês) mas não o campo year (ano) em " cite$ * warning$ month}
       if$}
     { month empty$
-	{ year n.dashify}
-	{ month " " * year * }
+	{ year.label n.dashify}
+	{ month " " * year.label * }
       if$}
   if$
 }
@@ -1173,7 +1173,7 @@ FUNCTION {format.year}
    { "campo year vazio ou faltando em " cite$ *
     abnt.missing.year {" (vou colocar [s.d.])" *} 'skip$ if$ warning$
     abnt.missing.year {", " } {""} if$ bbl.missing.year *}
-    {year n.dashify "year" bibinfo.check}
+     {year.label n.dashify "year" bibinfo.check}
 if$
 }
 
