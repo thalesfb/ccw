@@ -588,12 +588,26 @@ class EditorialFeedbackTests(unittest.TestCase):
         intro = (TCC / "conteudo/introducao.tex").read_text(encoding="utf-8")
         protocol = (TCC / "conteudo/protocolo-docente.tex").read_text(encoding="utf-8")
         self.assertIn("Programa Internacional de Avaliação de Estudantes (PISA, na sigla em inglês)", intro)
-        for ordinal, key in (("primeiro", "OE1"), ("segundo", "OE2"),
-                             ("terceiro", "OE3"), ("quarto", "OE4")):
-            self.assertIn(f"O {ordinal} objetivo específico ({key})", intro)
+        objectives = intro.split(r"\section{Objetivos}", 1)[1].split(
+            r"\section{Estrutura do Trabalho}", 1
+        )[0]
+        self.assertIn("objetivos específicos", objectives)
+        for key in ("OE1", "OE2", "OE3", "OE4"):
+            self.assertIn(f"\\item ({key})", objectives)
         self.assertIn("Instituto Federal Catarinense (IFC)", protocol)
         self.assertIn("Lei Geral de Proteção de Dados Pessoais (LGPD)", theory)
         self.assertIn("carbeto de silício (SiC)", (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8"))
+
+
+    def test_partial_requirement_links_are_explicit_in_acceptance_table(self):
+        acceptance = (TCC / "conteudo/aceitacao-cenarios.tex").read_text(encoding="utf-8")
+        self.assertIn("R04 tem vínculo parcial em F04 e F07", acceptance)
+        self.assertIn("F04 & Apresentar resultados individuais e agregados (R04 parcial, R09, R15)", acceptance)
+        self.assertIn("F05 & Explicar estimativas e incertezas (R03, R23 (parcial), R24 (parcial), R26)", acceptance)
+        self.assertIn("F07 & Exportar versões, decisões e saídas (R04 parcial, R06, R10, R11)", acceptance)
+        self.assertIn("R24 tem vínculo parcial em F05", acceptance)
+        self.assertIn("R17 circunscreve os testes sintéticos", acceptance)
+        self.assertIn("R12 permanece como requisito a operacionalizar", acceptance)
 
 
 if __name__ == "__main__":

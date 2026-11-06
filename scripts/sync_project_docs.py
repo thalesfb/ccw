@@ -116,10 +116,14 @@ def goals(root):
     section = intro.split(r"\section{Objetivos}", 1)[1].split(
         r"\section{Estrutura do Trabalho}", 1
     )[0].strip()
-    general = section.split("\n\n", 1)[0]
+    general_source = section.split("\n\n", 1)[0]
+    general_match = re.search(r"definiu-se como objetivo geral (.+?)\.\s*$", general_source)
+    if not general_match:
+        raise ValueError("cannot extract the manuscript's general objective")
+    general = plain_tex(general_match.group(1).strip())
+    general = general[:1].upper() + general[1:] + "."
     objectives = re.findall(
-        r"^O (?:primeiro|segundo|terceiro|quarto) objetivo específico "
-        r"\((OE\d+)\) consiste em ([^\n]+)$",
+        r"^\\item \((OE\d+)\) ([^;\n]+)[;.]\s*$",
         section,
         re.M,
     )
@@ -127,7 +131,8 @@ def goals(root):
         raise ValueError("cannot extract sequential manuscript objectives")
     parts = ["### Objetivo geral", plain_tex(general), "### Objetivos específicos"]
     for key, description in objectives:
-        parts.append(f"**{key}:** {plain_tex(description)}")
+        clean_description = plain_tex(description).rstrip("; .")
+        parts.append(f"**{key}:** {clean_description}.")
     return "\n\n".join(parts)
 
 
