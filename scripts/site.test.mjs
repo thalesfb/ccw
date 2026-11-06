@@ -127,12 +127,13 @@ assert.match(mmat, /Frações são reutilizadas/, 'the thesis must disclose reus
 const echeveriaRow = mmat.match(/<tr>\s*<td>6920<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(echeveriaRow, 'study 6920 must be present in the current MMAT table');
 const echeveriaRatings = [...echeveriaRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
-assert.equal(echeveriaRatings[4], 'Não é possível determinar', 'mixed-methods Q3 must not use a quantitative-component defect as evidence about interpretation of integrated outputs');
-assert.equal(echeveriaRatings[5], 'Não é possível determinar', 'mixed-methods Q4 must remain indeterminate without direct evidence about divergences');
+assert.equal(echeveriaRatings[4], 'Não', 'mixed-methods Q3 must reflect the unmeasured performance claim in the integrated interpretation');
+assert.equal(echeveriaRatings[5], 'Sim', 'mixed-methods Q4 must apply the manual rule when no quantitative/qualitative divergence is reported');
 const universityRow = mmat.match(/<tr>\s*<td>6919<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(universityRow, 'mixed-methods study 6919 must be present in the current MMAT table');
 const universityRatings = [...universityRow.matchAll(/aria-label="Resposta: ([^"]+)"/g)].map((match) => match[1]);
-assert.equal(universityRatings[5], 'Não é possível determinar', 'study 6919 must not treat a difference between initial challenges and outcomes as evidence that quantitative/qualitative divergence was addressed');
+assert.equal(universityRatings[4], 'Não', 'study 6919 must retain its negative appraisal of integrated interpretation');
+assert.equal(universityRatings[5], 'Sim', 'study 6919 interviews corroborate the negative result and do not report quantitative/qualitative divergence');
 const protocolRow = mmat.match(/<tr>\s*<td>6921<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(protocolRow, 'contextual protocol 6921 must be present in the current MMAT table');
 assert.doesNotMatch(protocolRow, />CT</, 'a protocol must not be presented as an indeterminate empirical MMAT appraisal');
@@ -162,15 +163,15 @@ assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_primary_sources
 assert.equal((mmat.match(/class="mmat-question-group"/g) || []).length, 5, 'the current page must expose all MMAT design groups');
 assert.match(mmat, /O que esta avaliação registra/i, 'the public page must explain the purpose of the appraisal in reader-facing language');
 assert.doesNotMatch(mmat, /\b(?:ledger|shortlist|snapshot)\b/i, 'the public page must avoid unexplained development jargon');
-assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Registro MMAT da seleção histórica sob o corte 4,0, reconciliado em 20\/10\/2026; apreciações registradas até 28\/10\/2026\./i, 'the MMAT page must distinguish search cutoff, historical scope reconciliation and appraisal dates');
+assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Registro MMAT da seleção histórica sob o corte 4,0, reconciliado em 20\/10\/2026; apreciações registradas até 06\/11\/2026\./i, 'the MMAT page must distinguish search cutoff, historical scope reconciliation and appraisal dates');
 assert.doesNotMatch(mmat, /Recorte do corpus: 12\/10\/2026/i, 'the scope update date must not be presented as a new search record');
-assert.match(mmat, /apreciações registradas até 28\/10\/2026/i, 'the current page must expose the latest appraisal date');
+assert.match(mmat, /apreciações registradas até 06\/11\/2026/i, 'the current page must expose the latest appraisal date');
 assert.match(mmat, /15 estudos da seleção histórica têm triagem e critérios apreciados/i, 'the MMAT table caption must not call the pre-amendment studies the current corpus');
 assert.equal((mmat.match(/class="mmat-evidence"/g) || []).length, 18, 'every MMAT record must expose criterion evidence details');
 assert.match(mmat, /Ver perguntas, justificativas e localização da evidência/i, 'the evidence disclosure must be clearly labeled');
 assert.match(mmat, /nota 95 nas categorias Medium/i, 'the current page must expose the concrete measurement ambiguity for study 2 Q3');
 assert.match(mmat, /regra efetivamente usada e a adequação das demais medidas/i, 'the current page must explain why study 2 Q3 remains indeterminate');
-assert.match(mmat, /74 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda');
+assert.match(mmat, /71 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda after the three ratified mixed-methods decisions');
 const pagesWorkflow = read('.github/workflows/publish-reports.yml');
 for (const asset of ['research/data/mmat_followup_questions_current.csv', 'research/data/mmat_consolidation_actions_current.json', 'docs/tcc/MMAT-PERGUNTAS-PENDENTES.md']) {
   assert.ok(pagesWorkflow.includes(`cp ${asset} _site/`), `Pages must package the linked MMAT followup asset: ${asset}`);

@@ -37,6 +37,8 @@ def test_mmat_counts_preserve_each_category_and_criterion():
             assert set(values) <= {"Y", "N", "CT"}
     assert len(rows) == 15
     assert sum(counts["screening"]["s1"].values()) == 15
+    assert counts["mixed_methods"]["q3"] == {"CT": 1, "N": 2}
+    assert counts["mixed_methods"]["q4"] == {"CT": 1, "Y": 2}
 
 
 def test_checked_in_content_tables_match_the_evidence():
