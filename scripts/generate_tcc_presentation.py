@@ -487,7 +487,7 @@ def build_deck() -> Presentation:
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
     add_callout(slide, "Seleção histórica", "15 estudos históricos. S1/S2 e Q1–Q5: 15 conjuntos. Estudos 5/7: cat. 3 operacional; 14: sorteio contraditório; 8: cat. 4 adaptada. O relatório não recuperado não recebeu MMAT. Apreciações preliminares; incertezas de relato preservadas.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=12.5)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
-    add_text(slide, "O MMAT organiza a leitura das limitações; não transforma uma apreciação preliminar em classificação definitiva.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "Mistos (n=3): Q3, 2 N e 1 CT; Q4, 2 Y e 1 CT. Justificativas e limites na matriz pública; sem nota global.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 14 — Findings and boundaries.
     slide = new_slide(prs, EXPECTED_TITLES[13], 14)

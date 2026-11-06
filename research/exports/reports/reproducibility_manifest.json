@@ -431,7 +431,7 @@
       "primary_text_reviewed_rows": 15,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 51,
+      "non_ct_criterion_decisions": 54,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
@@ -450,7 +450,7 @@
     {
       "path": "research/data/mmat_consolidation_actions_current.json",
       "role": "documentary corrections, source-access blockers and outstanding human appraisal tasks, separate from indeterminate MMAT responses",
-      "sha256": "503afbfe19ddc3d782b2454e95c76e60bfa920d459b856e7bff2749a340cea86"
+      "sha256": "9fe47a8ad15333ef3ae06125a064a5925a666b96aba92c201d6698b0e7594c0a"
     },
     {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",
@@ -460,7 +460,7 @@
     {
       "path": "research/data/mmat_followup_questions_current.csv",
       "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
-      "sha256": "3be7bd923b63e8b0bd8f28238b9e2b15f55abb4b38332c1e2a666c3dba691832"
+      "sha256": "09fc3fc2754bcc5fcb48b8a183359987682957495da515504b379b436de65348"
     },
     {
       "path": "research/data/mmat_completion_review_2026-10-28.json",
@@ -520,7 +520,7 @@
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "900641a889fbf6cbded8d89fb71ac2e11ea1a93fac3857c8fe2b25795bed172e"
+      "sha256": "74f90000538a00ec222a10e2ee3a95975ab2de39377afe8080f29e9169c11d26"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
@@ -640,7 +640,7 @@
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "775f9e31364f5f561c652f0f024f0315c9e7634048084460d1cf5535d3983d31"
+      "sha256": "e02b880da100a8f550a1f95e0e4d7bbc8745ce26418bbaf0d60afe0fa25d7e07"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",

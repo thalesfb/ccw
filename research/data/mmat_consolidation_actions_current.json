@@ -1,5 +1,5 @@
 {
-  "review_date": "2026-10-28",
+  "review_date": "2026-11-06",
   "review_kind": "assisted_documentary_review",
   "actions": [
     {
@@ -17,6 +17,14 @@
       "owner": "revisão documental",
       "evidence": "6916/Q5 passa a referir componentes já apreciados; 6920/C2 quantitativo considera a população local e os 428/633 registros; 6920/C5 qualitativo distingue coerência qualitativa de integração mista. CT preservados.",
       "next_step": "Conferir cada julgamento contra a pergunta correspondente do MMAT e os limites dos textos."
+    },
+    {
+      "id": "MIX-2026-11-05",
+      "subject": "Aplicar as decisões do autor sobre três critérios de métodos mistos",
+      "status": "completed_documentary",
+      "owner": "autor",
+      "evidence": "Decisões de 05/11/2026 aplicadas em 06/11/2026: 6919/Q4 CT→Y (pp. físicas 14 e 18), 6920/Q3 CT→N (p. física 13/impressa 75) e 6920/Q4 CT→Y (p. física 7/impressa 69). Q4 segue a regra do MMAT 2018 para ausência de divergência (p. física 8/impressa 7). Q3 de 6919 permanece N. Demais respostas, componentes, corpus e regras de seleção preservados. Justificativas e limites específicos registrados em criterion_evidence no CSV atual.",
+      "next_step": "Usar as respostas atualizadas nas contagens por critério, mantendo os limites interpretativos das fontes e sem produzir escore global."
     },
     {
       "id": "SRC-003",

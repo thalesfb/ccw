@@ -60,7 +60,7 @@ def test_followup_questions_cover_every_indeterminate_criterion_and_structural_h
     }
     actual = {(q["study_id"], q["component"], q["criterion"]) for q in questions if q["component"] != "record"}
     assert actual == expected
-    assert len(actual) == 72
+    assert len(questions) == 71
     assert {q["study_id"] for q in questions if q["criterion"] == "design"} == set()
     assert all(q["status"] == "prepared_not_sent" for q in questions)
     report = Path(__file__).resolve().parents[2] / "docs/tcc/MMAT-PERGUNTAS-PENDENTES.md"
@@ -297,6 +297,23 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
     assert "mensuração independente do alvo" in component["evidence_c3"]
 
 
+def test_ratified_mixed_appraisals_keep_criterion_specific_limits() -> None:
+    rows = {row["study_id"]: row for row in load_current_reassessment()}
+    assert [rows["6919"][f"q{i}"] for i in range(1, 6)] == ["Y", "Y", "N", "Y", "N"]
+    assert [rows["6920"][f"q{i}"] for i in range(1, 6)] == ["Y", "Y", "N", "Y", "N"]
+    evidence = dict(part.split("=", 1) for part in rows["6919"]["criterion_evidence"].split(";"))
+    assert evidence["Q4"].startswith("Y ")
+    for boundary in ("não há divergência", "−0,38", "4 dos 12", "semana 3", "longo prazo", "p. física 18"):
+        assert boundary in evidence["Q4"]
+    evidence = dict(part.split("=", 1) for part in rows["6920"]["criterion_evidence"].split(";"))
+    assert evidence["Q3"].startswith("N ")
+    for boundary in ("§4.2", "13/impressa 75", "§3.3.4", "sem medir esse efeito", "estudo de impacto"):
+        assert boundary in evidence["Q3"]
+    assert evidence["Q4"].startswith("Y ")
+    for boundary in ("não há divergência", "§3.1", "mesmos docentes", "grupos iniciais", "previsões finais"):
+        assert boundary in evidence["Q4"]
+
+
 def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
     assert rows["6"]["q1"] == "Y"
@@ -306,16 +323,16 @@ def test_descriptive_sampling_and_target_population_are_not_inferred() -> None:
     assert rows["2"]["q2"] == "CT"
     assert "target population" in rows["2"]["criterion_evidence"].lower()
     assert rows["6920"]["q2"] == "Y"
-    assert rows["6920"]["q3"] == "CT"
-    assert "integrated outputs" in rows["6920"]["criterion_evidence"].lower()
-    assert "target-predictor overlap is a quantitative component concern" in rows["6920"]["criterion_evidence"].lower()
-    assert "divergences between quantitative and qualitative results" in rows["6920"]["criterion_evidence"].lower()
+    assert rows["6920"]["q3"] == "N"
+    assert "§4.2" in rows["6920"]["criterion_evidence"]
+    assert "sem medir esse efeito" in rows["6920"]["criterion_evidence"]
+    assert "sobreposição entre alvo e preditores" in rows["6920"]["criterion_evidence"]
     component = next(
         row for row in load_component_reassessments()
         if row["study_id"] == "6920" and row["component"] == "quantitative"
     )
     assert component["c2"] == "CT"
-    assert rows["6920"]["q4"] == "CT"
+    assert rows["6920"]["q4"] == "Y"
     assert "sem esclarecer a origem dos grupos" in component["evidence_c4"].lower()
     assert "se os casos ausentes produzem viés de não resposta" in component["evidence_c4"].lower()
 
@@ -506,7 +523,7 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
 
     assert rows["6919"]["design"] == "mixed_methods"
     assert rows["6919"]["snapshot_date"] == "2026-09-03"
-    assert rows["6919"]["review_date"] == "2026-10-11"
+    assert rows["6919"]["review_date"] == "2026-11-06"
     assert rows["6919"]["empirical_status"] == "empirical_confirmed_external"
     assert "4.1.1" in rows["6919"]["page_or_section"]
     assert "4.4.8" in rows["6919"]["page_or_section"]
@@ -544,8 +561,9 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
     assert "q1=y the article states a rationale for a mixed-methods approach" in mixed_evidence
     assert "q2=y quantitative and qualitative components are integrated" in mixed_evidence
     assert "q3=n the interpretation extends to longer-term gains" in mixed_evidence
-    assert rows["6919"]["q4"] == "CT"
-    assert "q4=ct the reviewed sections do not establish whether quantitative and qualitative findings diverge" in mixed_evidence
+    assert rows["6919"]["q4"] == "Y"
+    assert "quando não há divergência" in mixed_evidence
+    assert "entrevistas corroboram o resultado negativo" in mixed_evidence
     assert "q5=n the quality of both components" in mixed_evidence
 
 

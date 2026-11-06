@@ -1,10 +1,10 @@
 # Perguntas pendentes para completar a apreciação MMAT
 
-Revisão documental de 28/10/2026. Perguntas preparadas, não enviadas. Não há respostas de autores registradas neste documento.
+Revisão documental iniciada em 28/10/2026, atualizada em 06/11/2026 após as decisões sobre os estudos mistos. Perguntas preparadas, não enviadas. Não há respostas de autores registradas neste documento.
 
-São 72 critérios indeterminados (54 no registro principal e 18 nos componentes mistos) e duas pendências de acesso ao texto: 74 perguntas. A lista não substitui a conferência humana de todos os julgamentos, inclusive Y e N. Não é escore de qualidade.
+As perguntas abaixo correspondem aos critérios ainda indeterminados, separados entre apreciação principal e componentes, e às pendências de acesso ao texto. Não constituem escore de qualidade.
 
-CT é uma conclusão de insuficiência de informação, não uma tarefa necessariamente incompleta. A consolidação não exige eliminar todos os CT ou obter resposta a todas as perguntas. As tarefas efetivas, seus responsáveis, evidências e próximos passos estão em `research/data/mmat_consolidation_actions_current.json` e na seção de consolidação da página MMAT. As correções documentais desta rodada não alteraram respostas por inferência.
+CT é uma conclusão de insuficiência de informação, não uma tarefa necessariamente incompleta. A consolidação não exige eliminar todos os CT ou obter resposta a todas as perguntas. As tarefas efetivas, seus responsáveis, evidências e próximos passos estão em `research/data/mmat_consolidation_actions_current.json` e na seção de consolidação da página MMAT. As perguntas sobre Q4 de 6919 e Q3/Q4 de 6920 foram retiradas após a revisão das fontes e as decisões do autor, registradas com suas justificativas no CSV da apreciação atual.
 
 As rotas de apreciação dos estudos 5, 7, 8 e 14 foram decididas operacionalmente nesta revisão, com limitações explícitas. Alocação e demais lacunas não foram resolvidas por inferência. As perguntas foram redigidas para eventual esclarecimento dos autores; destinatários e encaminhamento ainda precisam ser definidos pelo responsável. Nenhum contato externo foi realizado nesta revisão.
 
@@ -233,9 +233,6 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 - **componente quantitativo · 3.5** — Quais registros documentam implementação, exposição recebida e desvios da intervenção?
   Fonte: PS-6919; Páginas físicas 7–8 (§4.1.1), 12–14 (§4.3–4.4.1) e 24 (§6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
-- **critérios principais · 5.4** — Que concordâncias e discordâncias entre resultados dos grupos de estudantes e entrevistas foram identificadas e como foram tratadas?
-  Fonte: PS-6919; Páginas físicas 7–8, 12–18 e 24 (§4.1.1, §4.3–4.4.8 e §6). Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-
 ## Estudo 6920
 
 - **componente qualitativo · 1.3** — Como as falas dos cinco professores foram analisadas e agrupadas nos quatro benefícios?
@@ -252,12 +249,6 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 
 - **componente quantitativo · 4.5** — Qual partição e protocolo de validação foram efetivamente usados, com seleção e ajuste de hiperparâmetros dentro das dobras e denominadores corretos por modelo?
   Fonte: PS-6920; §2.1 p. 65; §2.6 p. 68; §3.1 p. 69; Results pp. 69–70. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-
-- **critérios principais · 5.3** — Que conclusões dependem efetivamente da integração, e como se distinguiram classificação atual, detecção precoce e impacto pedagógico?
-  Fonte: PS-6920; §2.1 p. 65; §3.1 p. 69; §2.6 p. 68; §3.3.4 p. 73; Results pp. 69–70. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-
-- **critérios principais · 5.4** — Houve discordâncias entre classificações, avaliações docentes e possibilidades de intervenção, e como foram investigadas?
-  Fonte: PS-6920; §2.1 p. 65; §3.1 p. 69; §2.6 p. 68; §3.3.4 p. 73; Results pp. 69–70. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
 
 ## Estudo 6923
 

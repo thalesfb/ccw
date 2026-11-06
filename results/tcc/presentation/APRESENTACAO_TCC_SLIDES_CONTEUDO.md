@@ -151,6 +151,8 @@ O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
 15 registros permanecem provisoriamente no núcleo empírico, com consultas
 documentais declaradas; 15 têm triagem S1/S2 e apreciação por categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacional, com alocação desconhecida; o 14 usa a categoria 2 declarada e contraditória; o 8 usa a categoria 4 adaptada às análises computacionais matemáticas. Essas rotas não confirmam delineamentos. Frações reutilizadas entre capítulos não são duplicadas. A seleção e a apreciação foram realizadas por um único revisor, o autor, sem dupla avaliação independente; o texto não recuperado não recebeu apreciação.
 
+Nos três mistos, Q3 (interpretação da integração) recebeu dois N e um CT; Q4 (divergências entre componentes), dois Y e um CT. Em 6919, Q4=Y não valida os ganhos de longo prazo e Q3 permanece N. Em 6920, Q3=N corresponde à extrapolação para melhora de desempenho sem medir esse efeito; Q4=Y não demonstra que o consenso docente abrange as previsões finais. As justificativas e as páginas das fontes constam da matriz pública.
+
 ### 18. O que emerge entre os estudos incluídos
 
 Apresenta exemplos de classificação e predição de resultados matemáticos,

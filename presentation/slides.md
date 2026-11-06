@@ -357,7 +357,7 @@ class: content-slide tcc-mmat-slide
 
 <div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros provisórios. S1/S2 e critérios de categoria apreciados nos 15; validação humana pendente. Estudos 5 e 7: categoria 3 operacional, alocação desconhecida. Estudo 14: categoria 2 declarada e contraditória. Estudo 8: categoria 4 adaptada para modelagem; frações reutilizadas não são duplicadas. Texto não recuperado: sem apreciação. Sem escore agregado.</div>
 
-<div class="tcc-caption">Instrumento: Hong et al. (2018), Mixed Methods Appraisal Tool, versão 2018. Rotas e ressalvas: matriz pública do projeto.</div>
+<div class="tcc-caption">Mistos (n=3): interpretação (Q3), 2 N e 1 CT; divergências (Q4), 2 Y e 1 CT. Instrumento: Hong et al. (2018), MMAT 2018. Justificativas e limites na matriz pública.</div>
 
 ---
 layout: default
