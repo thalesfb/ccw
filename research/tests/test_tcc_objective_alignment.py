@@ -60,7 +60,7 @@ class ObjectiveAlignmentTests(unittest.TestCase):
             r"\section{Discussão Integrada}", 1
         )[0]
         self.assertIn("protocolo documental", alignment)
-        self.assertIn("A aplicação do painel e a avaliação de uma implementação são etapas posteriores", alignment)
+        self.assertIn("A aplicação do painel e a avaliação de uma implementação não foram realizadas neste trabalho", alignment)
         self.assertIn("escopo documental", alignment)
         self.assertIn(r"\ref{sec:limitacoes-revisao}", alignment)
 
