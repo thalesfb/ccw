@@ -308,5 +308,5 @@ def test_manuscript_reports_current_selection_without_promising_new_reading():
             assert not re.search(pattern, text, re.I), (path, pattern)
     assert "corte 4,0" in texts[0]
     assert "15 estudos" in texts[0]
-    assert "não foi validado contra elegibilidade" in texts[1]
+    assert "nem valida o corte por leitura humana de uma amostra" in texts[1]
     assert "apreciação preliminar" in texts[0]

@@ -6,11 +6,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_source_appendix_distinguishes_search_cutoff_from_scope_definition() -> None:
+def test_source_appendix_distinguishes_publication_cutoff_from_scope_definition() -> None:
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
     appendix = (ROOT / "results/tcc/postextuais/apendice.tex").read_text(encoding="utf-8")
 
-    assert "corte temporal declarado da busca foi 31 de agosto de 2026" in appendix
+    assert "data-limite de publicação definida no protocolo foi 31 de agosto de 2026" in appendix
     assert "definição inicial do escopo do corpus foi concluída em 3 de setembro de 2026" in appendix
     assert "adjudicação inicial do escopo" not in methodology + appendix
     assert "ausência de histórico completo das requisições impede determinar quantas foram concluídas" in methodology
@@ -55,7 +55,7 @@ def test_source_appendix_dates_scope_reconciliation_without_implying_a_new_searc
 
     assert "Em 14 de outubro de 2026, uma conferência atualizada confrontou os 18 registros da lista preliminar" in appendix
     assert "sem nova consulta às bases" in appendix
-    assert "sem alterar o corte temporal da busca" in appendix
+    assert "sem alterar a data-limite de publicação" in appendix
 
 
 def test_research_readme_uses_operational_prioritization_and_explicit_denominators() -> None:

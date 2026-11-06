@@ -69,7 +69,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 13e & Heterogeneidade & Não apresentado: não foi realizado método formal para investigar possíveis causas de heterogeneidade; diferenças entre populações, desenhos e métricas são discutidas qualitativamente. \\
 \hline
-13f & Sensibilidade & Não apresentado: não foi realizada análise de sensibilidade da síntese. \\
+13f & Sensibilidade & Não apresentado: não foi realizada análise de sensibilidade da síntese. A exploração do corte de seleção, discutida na Seção~\ref{sec:limitacoes-revisao}, tem finalidade distinta. \\
 \hline
 14 & Viés de relato & Não apresentado: não foi realizada avaliação formal. Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão, registra a ausência de teste de viés de publicação. \\
 \hline
@@ -91,7 +91,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 20c & Heterogeneidade & Não apresentado: não foram apresentados resultados de investigação formal das causas de heterogeneidade. \\
 \hline
-20d & Sensibilidade & Não apresentado: não foram apresentados resultados de análises de sensibilidade. \\
+20d & Sensibilidade & Não apresentado para a síntese: a Seção~\ref{sec:limitacoes-revisao} relata a exploração do corte de seleção, que não corresponde a uma análise de robustez dos resultados sintetizados. \\
 \hline
 21 & Viés de relato & Não apresentado: não foram apresentados resultados de avaliação formal de viés decorrente de resultados ausentes. \\
 \hline
@@ -131,7 +131,7 @@ Este registro reúne o histórico de recuperação, os limites da leitura e os a
 
 \section{Histórico de recuperação e leitura}
 
-O corte temporal declarado da busca foi 31 de agosto de 2026. A definição inicial do escopo do corpus foi concluída em 3 de setembro de 2026. Em 14 de outubro de 2026, uma conferência atualizada confrontou os 18 registros da lista preliminar com o protocolo escrito e com a situação de recuperação dos textos integrais, incluindo três artigos recém-recuperados e verificados. Essa atualização corrigiu a classificação das etapas de seleção, sem nova consulta às bases e sem alterar o corte temporal da busca. Em 20 de outubro de 2026, a recuperação posterior do texto integral do registro excluído após a triagem do resumo confirmou que o estudo descreve cursos de Ciência da Computação e Sistemas de Informação e deixa a Matemática para trabalho futuro; essa conferência confirmou a exclusão, sem criar uma nova etapa nem alterar as contagens PRISMA.
+A data-limite de publicação definida no protocolo foi 31 de agosto de 2026. A definição inicial do escopo do corpus foi concluída em 3 de setembro de 2026. Em 14 de outubro de 2026, uma conferência atualizada confrontou os 18 registros da lista preliminar com o protocolo escrito e com a situação de recuperação dos textos integrais, incluindo três artigos recém-recuperados e verificados. Essa atualização corrigiu a classificação das etapas de seleção, sem nova consulta às bases e sem alterar a data-limite de publicação. Em 20 de outubro de 2026, a recuperação posterior do texto integral do registro excluído após a triagem do resumo confirmou que o estudo descreve cursos de Ciência da Computação e Sistemas de Informação e deixa a Matemática para trabalho futuro; essa conferência confirmou a exclusão, sem criar uma nova etapa nem alterar as contagens PRISMA.
 
 Na atualização de 20 de outubro de 2026, conferida novamente em 29 de outubro, 16 dos 18 registros da lista preliminar dispunham de cópias locais identificadas por \textit{hash}. Um quadro complementar registra, para cada fonte, as páginas de texto examinadas, as imagens inspecionadas e a contribuição delimitada. Os textos de \citeonline{Analysis2022_003} e \citeonline{Machine2019_007} foram incorporados nessa atualização; os trabalhos de \citeonline{Innovative2023_005} e \citeonline{UniversityMathematics2026_6919} já haviam sido recuperados em 17 de outubro. No PDF de \citeonline{Machine2019_007}, a codificação do texto embutido estava corrompida, exigindo reconhecimento óptico de caracteres e inspeção visual seletiva. A extensão da leitura é detalhada a seguir. A conferência do texto integral confirmou a exclusão registrada após o resumo, sem criar nova etapa de seleção.
 
@@ -146,6 +146,8 @@ Na releitura documental de 28 de outubro de 2026, cinco respostas anteriormente 
 \section{Arquivos e reprodução}
 
 O arquivo \path{research/exports/reports/reproducibility_manifest.json} funciona como índice da origem dos dados analisados: registra a data de geração, os resumos criptográficos (\textit{hashes}) produzidos pelo algoritmo \textit{Secure Hash Algorithm} de 256 bits (SHA-256) dos arquivos exportados, a versão atual da avaliação MMAT, as fontes primárias consultadas e os comandos de reconstrução. Essa estrutura permite verificar a versão publicada sem distribuir o banco SQLite usado na coleta e torna explícita a diferença entre reproduzir o conjunto analisado e iniciar uma nova coleta nas APIs.
+
+A exploração do limiar está resumida em \path{research/data/selection_status_current.json}, com os desenhos de exame das faixas, as contagens originais e seus limites de interpretação. Esse registro público não altera o conjunto de estudos analisado.
 
 Os critérios documentais de seleção estão em \path{research/data/current_eligibility_protocol.csv}. As respostas MMAT estão em \path{research/data/mmat_reassessment_current.csv}; os componentes qualitativos e quantitativos, em \path{research/data/mmat_component_reassessment_current.csv}. Os arquivos \textit{JavaScript Object Notation} (JSON, notação de objetos JavaScript), CSV e BibTeX permitem conferir as versões publicadas.
 
