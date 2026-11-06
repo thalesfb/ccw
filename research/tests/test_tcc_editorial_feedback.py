@@ -578,10 +578,18 @@ class EditorialFeedbackTests(unittest.TestCase):
             self.assertIn("43,58\\%", text)
             self.assertIn("sensibilidade", text)
             self.assertIn("fonte ou idioma", text)
-        for text in (results, conclusion):
-            self.assertIn("13 de 45", text)
-            self.assertIn("29 de 54", text)
-            self.assertIn("5 de 30", text)
+        self.assertIn("13 registros classificados como elegíveis entre os 45", results)
+        self.assertIn("29 entre os 54", results)
+        self.assertIn("cinco entre os 30", results)
+        summary = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
+        self.assertIn("13 de 45", summary)
+        self.assertIn("29 de 54", summary)
+        self.assertIn("5 de 30", summary)
+        self.assertIn("13 of 45", summary)
+        self.assertIn("29 of 54", summary)
+        self.assertIn("5 of 30", summary)
+        for count in ("13 de 45", "29 de 54", "5 de 30"):
+            self.assertIn(count, conclusion)
 
     def test_new_abbreviations_are_expanded_before_first_use(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
