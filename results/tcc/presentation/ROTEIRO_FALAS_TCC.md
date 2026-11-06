@@ -100,21 +100,25 @@ científica esteja distribuída de forma uniforme. A cobertura está condicionad
 
 ## 12. População retida — 1:05
 
-Dos 18 registros retidos operacionalmente, 17 são candidatos empíricos
-provisórios. Um registro é um protocolo ou proposta contextual e foi preservado
-para rastreabilidade, não para sustentar uma conclusão empírica. Entre os
-empíricos, a recorrência envolve predição de desempenho e estimativa de
-proficiência, com uso recorrente de modelos supervisionados. Isso descreve a
-literatura encontrada; não escolhe um algoritmo vencedor.
+Dos 18 registros da lista de leitura, 15 integram o conjunto empírico da
+seleção sob o corte 4,0. Um foi excluído após o resumo; um relatório não foi
+recuperado e não recebeu MMAT; um protocolo sem resultados concluídos foi
+excluído após texto completo. As finalidades dos 15 estudos incluem
+predição/classificação, personalização ou STI, intervenção didática,
+modelagem cognitiva e integração curricular. Isso descreve o conjunto adotado,
+sem escolher um algoritmo vencedor.
 
 ## 13. MMAT — 1:10
 
 O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
 respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
 uma pontuação agregada. A avaliação é preliminar e foi feita por um único
-revisor. Nove registros tiveram texto primário revisado e oito dependeram de
-resumo e metadados. A recuperação das fontes, os localizadores e a adjudicação
-precisam ser consolidados. Portanto, não apresento um ranking de qualidade.
+revisor. Entre os 15 estudos, 14 têm cópias disponíveis com diferentes
+extensões de leitura; Sokkhey mantém julgamento histórico sem cópia verificável
+para revalidação. CT descreve a evidência disponível ao revisor, com limites
+de acesso e leitura, e não demonstra automaticamente falha do relato.
+A categoria 4 da tese de MacLellan é adaptada à modelagem computacional e não
+certifica a validade dos modelos nem eficácia educacional. Não há ranking de qualidade.
 
 ## 14. Interpretação dos achados — 1:00
 

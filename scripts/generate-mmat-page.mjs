@@ -13,6 +13,13 @@ const sourceCoverage = JSON.parse(fs.readFileSync(path.join(root, 'research', 'd
 const coverageById = new Map(sourceCoverage.records.map((row) => [row.study_id, row]));
 const followups = parseCsv(fs.readFileSync(path.join(root, 'research/data/mmat_followup_questions_current.csv'), 'utf8'));
 const consolidation = JSON.parse(fs.readFileSync(path.join(root, 'research/data/mmat_consolidation_actions_current.json'), 'utf8'));
+const coverageLabels = {
+  insufficient_in_examined_material: 'Informação insuficiente no material examinado',
+  criterion_review_incomplete: 'Exame do critério ainda incompleto',
+  historical_copy_unavailable: 'Cópia histórica indisponível para revalidação',
+  document_not_recovered: 'Documento não recuperado; sem MMAT',
+  basis_not_established: 'Origem da insuficiência não distinguível no registro público',
+};
 
 function parseCsv(text) {
   const rows = [];
@@ -236,6 +243,7 @@ const latestReviewDate = current.map((row) => row.review_date).filter(Boolean).s
 const latestReviewDateLabel = formatDate(latestReviewDate);
 const primaryReviewed = current.filter((row) => row.assessment_basis === 'primary_full_text_reviewed_externally');
 const empiricalCore = currentScope.filter((row) => row.record_status === 'included_empirical_core');
+const availableEmpiricalSources = empiricalCore.filter((row) => coverageById.get(row.study_id)?.full_text_available_locally).length;
 const mmatAppraisedIds = new Set(currentScope
   .filter((row) => row.empirical_mmat_applicability === 'applicable')
   .map((row) => row.study_id));
@@ -445,7 +453,7 @@ const page = `<!doctype html>
           <div class="metric-card"><span class="metric-value">${current.length}</span><span class="metric-label">itens no registro de apreciação</span></div>
           <div class="metric-card"><span class="metric-value">${empiricalCore.length}</span><span class="metric-label">estudos empíricos na seleção histórica</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
-          <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">consultas documentais declaradas</span></div>
+          <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">fichas com consulta histórica declarada</span></div>
           <div class="metric-card"><span class="metric-value">${mmatAppraised.length}</span><span class="metric-label">registros com triagem MMAT (S1/S2)</span></div>
           <div class="metric-card"><span class="metric-value">${categoryAppraised.length}</span><span class="metric-label">estudos com critérios por categoria apreciados</span></div>
           <div class="metric-card"><span class="metric-value">${pendingFullText.length}</span><span class="metric-label">${pendingFullTextLabel}</span></div>
@@ -460,7 +468,8 @@ const page = `<!doctype html>
         </article>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
-          <h3>${primaryReviewed.length} registros com consulta documental declarada</h3>
+          <h3>${availableEmpiricalSources} fontes disponíveis nos ${empiricalCore.length} estudos</h3>
+          <p>As fichas conservam declarações históricas de consulta, com diferentes extensões de leitura. Sokkhey (2020), estudo 3, mantém julgamento histórico sem cópia verificável para revalidação atual; não é texto integral conferido nesta revisão. A disponibilidade de uma fonte também não certifica leitura integral de texto, figuras e apêndices.</p>
           <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
           <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sobre essas fontes: o estudo 3 consta da seleção histórica, mas sua ficha não foi revalidada sem o original; 6923 é o relatório não recuperado no fluxo. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura humana integral dos textos, figuras e apêndices. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
           <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm S1/S2 respondidas e ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 2 a partir do sorteio declarado das escolas, apesar da contradição documental; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica. O autor realizou a seleção e a apreciação preliminar com apoio de regras automatizadas e de IA generativa. O orientador Rafael Zanin e o coorientador Manassés Ribeiro ainda não revisaram especificamente esses julgamentos.</p>
@@ -513,9 +522,9 @@ const page = `<!doctype html>
         <h3>Tarefas de consolidação</h3>
         <p>Revisão documental de ${escapeHtml(consolidation.review_date.split('-').reverse().join('/'))}. Localizadores e justificativas corrigidos não representam aprovação científica humana. As tarefas abaixo distinguem correções concluídas, acesso externo e decisões de revisão.</p>
         <div class="table-wrap"><table><caption>Estado das ações documentais e científicas</caption><thead><tr><th scope="col">Ação</th><th scope="col">Estado e responsável</th><th scope="col">Evidência</th><th scope="col">Próximo passo</th></tr></thead><tbody>${consolidation.actions.map((a) => `<tr><th scope="row">${escapeHtml(a.subject)}</th><td>${escapeHtml(({completed_documentary:'Correção documental concluída',blocked_source_access:'Acesso ao original pendente',blocked_embargo:'Embargo confirmado',pending_human_review:'Conferência humana pendente'})[a.status])}<br>${escapeHtml(a.owner)}</td><td>${escapeHtml(a.evidence)}</td><td>${escapeHtml(a.next_step)}</td></tr>`).join('')}</tbody></table></div>
-        <p>${followups.length} perguntas preparadas: lacunas de relato dos critérios indeterminados e duas pendências de acesso ao texto (estudos 3 e 6923). Não são envios obrigatórios nem decisões metodológicas ainda não tomadas. Nenhum contato externo ou resposta de autor foi registrado nesta revisão.</p>
+        <p>${followups.length} perguntas preparadas: limites da evidência disponível por fonte e critério e duas pendências de acesso ao texto. O estudo 3 mantém ficha histórica sem cópia para revalidação; 6923 não recebeu MMAT. Informação insuficiente no material examinado, exame incompleto e cópia indisponível são situações distintas. Se o registro público não permite distinguir a origem de um CT, essa incerteza é preservada. Não são envios obrigatórios. Nenhum contato externo ou resposta de autor foi registrado nesta revisão.</p>
         <p><a href="../../../docs/tcc/MMAT-PERGUNTAS-PENDENTES.md">Lista de perguntas por estudo</a> · <a href="../../../research/data/mmat_followup_questions_current.csv">CSV das perguntas</a> · <a href="../../../research/data/mmat_consolidation_actions_current.json">Ações de consolidação e evidências</a></p>
-        ${[...new Set(followups.map((q) => q.study_id))].map((id) => `<details class="surface-card"><summary>Estudo ${escapeHtml(id)} · perguntas pendentes</summary><ul>${followups.filter((q) => q.study_id === id).map((q) => `<li><strong>${escapeHtml(({study:'critérios principais',record:'pendência do registro',qualitative:'componente qualitativo',quantitative:'componente quantitativo'})[q.component])} · ${escapeHtml(({unit:'unidade de apreciação',design:'delineamento',access:'acesso ao texto'})[q.mmat_criterion] ?? q.mmat_criterion)}</strong>: ${escapeHtml(q.question_pt)} <small>Fonte: ${escapeHtml(q.source_id)}; ${escapeHtml(q.evidence_locator)}. Pergunta preparada, não enviada.</small></li>`).join('')}</ul></details>`).join('')}
+        ${[...new Set(followups.map((q) => q.study_id))].map((id) => `<details class="surface-card"><summary>Estudo ${escapeHtml(id)} · perguntas pendentes</summary><ul>${followups.filter((q) => q.study_id === id).map((q) => `<li><strong>${escapeHtml(({study:'critérios principais',record:'pendência do registro',qualitative:'componente qualitativo',quantitative:'componente quantitativo'})[q.component])} · ${escapeHtml(({unit:'unidade de apreciação',design:'delineamento',access:'acesso ao texto'})[q.mmat_criterion] ?? q.mmat_criterion)}</strong>: ${escapeHtml(q.question_pt)} <small>Fonte: ${escapeHtml(q.source_id)}; ${escapeHtml(q.evidence_locator)}. Pergunta preparada, não enviada.</small><small><strong>${escapeHtml(coverageLabels[q.coverage_status])}.</strong> ${escapeHtml(q.coverage_notes)} <a href="../../../${escapeHtml(q.coverage_reference)}">Registro público de cobertura</a>.</small></li>`).join('')}</ul></details>`).join('')}
       </section>
 
       <section class="section surface-card">

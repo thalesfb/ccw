@@ -63,10 +63,30 @@ def test_followup_questions_cover_every_indeterminate_criterion_and_structural_h
     assert len(questions) == 71
     assert {q["study_id"] for q in questions if q["criterion"] == "design"} == set()
     assert all(q["status"] == "prepared_not_sent" for q in questions)
+    coverage = json.loads((Path(__file__).resolve().parents[1] / "data/study_contribution_current.json").read_text(encoding="utf-8"))["records"]
+    for question in questions:
+        reference = question["coverage_reference"]
+        assert reference.startswith("research/data/study_contribution_current.json#/records/")
+        record = coverage[int(reference.rsplit("/", 1)[1])]
+        assert record["study_id"] == question["study_id"]
+        assert question["coverage_notes"]
+    for question in questions:
+        if question["study_id"] == "3":
+            assert question["coverage_status"] == "historical_copy_unavailable"
+        elif question["study_id"] == "6923":
+            assert question["coverage_status"] == "document_not_recovered"
+        elif question["study_id"] == "8":
+            assert question["coverage_status"] == "basis_not_established"
+        elif question["study_id"] == "6916" and question["criterion"] == "Q3":
+            assert question["coverage_status"] == "criterion_review_incomplete"
     report = Path(__file__).resolve().parents[2] / "docs/tcc/MMAT-PERGUNTAS-PENDENTES.md"
     assert report.read_text(encoding="utf-8") == render_markdown(questions)
     with pytest.raises(ValueError, match="coverage"):
         validate_questions(questions[1:])
+    invalid = [dict(question) for question in questions]
+    invalid[0]["coverage_status"] = "source_proven_defective"
+    with pytest.raises(ValueError, match="coverage"):
+        validate_questions(invalid)
 
 
 def test_resolved_documentary_tasks_do_not_promote_indeterminate_mmat_answers():
@@ -404,7 +424,8 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         assert meta.group(1).startswith(f"{rows[study_id]['study_key']} · ")
 
     assert "uma apreciação preliminar separada dos componentes" in html.lower()
-    assert "15 registros com consulta documental declarada" in html.lower()
+    assert "14 fontes disponíveis nos 15 estudos" in html.lower()
+    assert "fichas com consulta histórica declarada" in html.lower()
     assert "não comprova leitura humana integral" in html.lower()
     assert "não recebeu respostas MMAT" in html
     assert "perguntas de triagem do mmat 2018" in html.lower()
