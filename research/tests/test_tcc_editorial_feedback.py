@@ -68,8 +68,8 @@ class EditorialFeedbackTests(unittest.TestCase):
             self.assertIn(author, gap_slide)
             self.assertIn(locator, gap_slide)
         self.assertIn("15 registros provisórios", gap_slide)
-        self.assertIn("um único revisor, o autor", gap_slide)
-        self.assertIn("sem dupla avaliação independente", gap_slide)
+        self.assertNotIn("um único revisor", gap_slide)
+        self.assertNotIn("dupla avaliação independente", gap_slide)
         self.assertIn("não estimativa de prevalência", gap_slide)
         self.assertNotIn("pp. 1, 14, 22", gap_slide)
         manuscript = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
@@ -313,12 +313,13 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("tampouco equivale à elegibilidade por texto completo", review)
         self.assertIn(r"\ref{sec:limitacoes-revisao}", method)
         self.assertIn("não permite reconstruir integralmente as consultas históricas", conclusion)
-        self.assertIn("A seleção e a apreciação preliminar foram realizadas por um único revisor, o autor, sem dupla avaliação independente", conclusion)
+        self.assertNotIn("um único revisor", conclusion)
+        self.assertNotIn("dupla avaliação independente", conclusion)
         self.assertIn("Os julgamentos MMAT dos 15 estudos permanecem preliminares", conclusion)
         self.assertNotIn("ainda precisam de conferência humana", conclusion)
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
-        self.assertIn("seleção e apreciação preliminar por um único revisor, o autor", pptx_source)
-        self.assertIn("sem dupla avaliação independente", pptx_source)
+        self.assertNotIn("um único revisor", pptx_source)
+        self.assertNotIn("dupla avaliação independente", pptx_source)
         self.assertIn("MMAT preliminar dos 15 estudos, por critério", pptx_source)
         self.assertNotIn("um único pesquisador", pptx_source)
         self.assertNotIn("conferência humana pendente", pptx_source)
@@ -420,8 +421,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertEqual(table.count(r"\fonte{Elaborado pelo autor (2026).}"), 2)
         self.assertEqual(table.count(r"\textit{Nota:}"), 2)
         self.assertNotIn("Um registro foi excluído após a triagem", table)
-        self.assertIn("um único revisor, o autor", review)
-        self.assertIn("sem dupla avaliação independente", review)
+        self.assertNotIn("um único revisor", review)
+        self.assertNotIn("dupla avaliação independente", review)
         self.assertIn("não foram convertidos em escore agregado ou síntese final de qualidade", review)
         self.assertIn("15 estudos do corpus", table)
         note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
@@ -496,14 +497,19 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertEqual(entries, sorted(entries, key=str.casefold))
 
         for acronym in (
-            "AIC", "BIC", "CORE", "CRF", "CSV", "CT", "EEG", "F1", "HTML", "JSON", "MLP",
-            "PCA", "PDF", "PICOS", "RN", "ROC", "ROC-AUC", "SHA-256",
+            "AIC", "BIC", "CORE", "CRF", "CSV", "CT", "ECE", "EEG", "F1", "HTML", "JSON", "MLP",
+            "OE", "PCA", "PDF", "PICOS", "RN", "ROC", "ROC-AUC", "SHA-256",
             "TIMSS", "URL", "RIPPER",
         ):
             self.assertIn(fr"\item[{acronym}]", glossary.group(1))
         self.assertIn(r"\item[LGPD]", glossary.group(1))
         self.assertNotIn(r"\item[ANN]", glossary.group(1))
         self.assertNotIn(r"\item[XAI]", glossary.group(1))
+        for unused in ("ABNT", "LR"):
+            self.assertNotIn(fr"\item[{unused}]", glossary.group(1))
+        acronym_file = (TCC / "pretextuais/acronimos.tex").read_text(encoding="utf-8")
+        self.assertIn(r"\newacronym{ece}{ECE}", acronym_file)
+        self.assertIn(r"\newacronym{oe}{OE}", acronym_file)
 
     def test_disambiguating_year_suffixes_are_used_in_reference_entries(self):
         style = (TCC / "abnetx2/abntex2-alf.bst").read_text(encoding="utf-8")
@@ -562,6 +568,20 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("Projeto de Trabalho de Conclusão de Curso", protocol)
         self.assertIn("planejamento inicial", amendments)
         self.assertIn("corte 4,0 não tem calibração ou justificativa empírica", amendments)
+
+    def test_missing_abstract_and_sensitivity_limits_are_reported(self):
+        results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+        conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
+        for text in (results, conclusion):
+            self.assertIn("4.093", text)
+            self.assertIn("34,47\\%", text)
+            self.assertIn("43,58\\%", text)
+            self.assertIn("sensibilidade", text)
+            self.assertIn("fonte ou idioma", text)
+        for text in (results, conclusion):
+            self.assertIn("13 de 45", text)
+            self.assertIn("29 de 54", text)
+            self.assertIn("5 de 30", text)
 
     def test_new_abbreviations_are_expanded_before_first_use(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")

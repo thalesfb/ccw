@@ -156,10 +156,10 @@ acurácia ou validação com participantes.
 
 As contribuições são a síntese estruturada, o pipeline automatizado e
 versionado, a distinção entre relevância temática e avaliação metodológica e a
-especificação técnica e pedagógica auditável. Os limites incluem a condução por
-um único pesquisador, a cobertura desigual das fontes, o MMAT preliminar e a
-ausência de eficácia pedagógica própria. Declarar esses limites faz parte da
-validade do resultado.
+especificação técnica e pedagógica auditável. Os limites incluem a cobertura
+desigual das fontes, o caráter preliminar da apreciação MMAT e a ausência de
+eficácia pedagógica própria. Declarar esses limites faz parte da validade do
+resultado.
 
 ## 19. Encerramento — 0:30
 

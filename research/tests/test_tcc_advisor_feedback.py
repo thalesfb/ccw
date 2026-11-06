@@ -255,8 +255,8 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "A categoria 3 foi utilizada para examinar as comparações quantitativas" in chapter
     assert "com alocação desconhecida" in chapter
     assert "a execução da randomização recebeu ct" in chapter.lower()
-    assert "um único revisor, o autor" in chapter.lower()
-    assert "sem dupla avaliação independente" in chapter.lower()
+    assert "um único revisor, o autor" not in chapter.lower()
+    assert "sem dupla avaliação independente" not in chapter.lower()
     assert "apoio de regras automatizadas e de ia generativa" in chapter.lower()
     assert "ainda não revisaram especificamente" not in chapter.lower()
     assert "o autor encaminhará" not in chapter.lower()
@@ -264,8 +264,8 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "não foram convertidos em escore agregado ou síntese final de qualidade" in chapter
     for removed in ("adjudicação",):
         assert removed not in methodology
-    assert "um único revisor, o autor" in methodology.lower()
-    assert "sem dupla avaliação independente" in methodology.lower()
+    assert "um único revisor, o autor" not in methodology.lower()
+    assert "sem dupla avaliação independente" not in methodology.lower()
     assert "ainda não revisaram especificamente" not in methodology.lower()
     assert r"\label{sec:uso-ferramentas-ia}" in methodology
     assert "código versionado" in methodology
@@ -276,13 +276,13 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
     assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
     assert r"Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão" in selection_row
-    assert "um único revisor, o autor" in selection_row
     assert "regras automatizadas e apoio de IA generativa" in selection_row
-    assert "sem dupla avaliação independente" in selection_row
+    assert "um único revisor" not in selection_row
+    assert "dupla avaliação independente" not in selection_row
     assert "orientador" not in selection_row.lower()
     assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
-    assert "um único revisor, o autor" in appraisal_row
-    assert "sem dupla avaliação independente" in appraisal_row
+    assert "um único revisor" not in appraisal_row
+    assert "dupla avaliação independente" not in appraisal_row
     assert "apoio de IA generativa" in appraisal_row
     assert "orientador" not in appraisal_row.lower()
     assert "a verificação documental permanece incompleta" not in selection_row

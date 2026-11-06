@@ -544,7 +544,7 @@ def build_deck() -> Presentation:
     # 18 — Contributions and limitations.
     slide = new_slide(prs, EXPECTED_TITLES[17], 18)
     add_callout(slide, "Contribuições", "• síntese estruturada da literatura\n• pipeline automatizado e versionado\n• separação entre relevância e avaliação metodológica\n• especificação técnica e pedagógica auditável", Inches(0.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_GREEN, accent=GREEN, title_size=18, body_size=15)
-    add_callout(slide, "Limites assumidos", "• seleção e apreciação preliminar por um único revisor, o autor\n• sem dupla avaliação independente\n• um texto integral pendente, sem MMAT\n• fontes e idiomas delimitados\n• MMAT preliminar dos 15 estudos, por critério\n• sem aplicação funcional ou eficácia pedagógica própria", Inches(6.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_AMBER, accent=AMBER, title_size=18, body_size=15)
+    add_callout(slide, "Limites assumidos", "• um texto integral pendente, sem MMAT\n• fontes e idiomas delimitados\n• MMAT preliminar dos 15 estudos, por critério\n• sem aplicação funcional ou eficácia pedagógica própria", Inches(6.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_AMBER, accent=AMBER, title_size=18, body_size=15)
     add_text(slide, "Conclusão", Inches(0.85), Inches(5.05), Inches(2.0), Inches(0.35), size=19, color=NAVY, bold=True)
     add_text(slide, "O trabalho respondeu ao escopo ao articular revisão sistemática, fundamentação pedagógica, apreciação metodológica e especificação conceitual — mantendo o professor no centro da interpretação.", Inches(0.85), Inches(5.55), Inches(11.45), Inches(0.7), size=19, color=SLATE, bold=True, align=PP_ALIGN.CENTER)
 
