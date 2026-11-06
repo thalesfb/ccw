@@ -420,7 +420,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertEqual(table.count(r"\fonte{Elaborado pelo autor (2026).}"), 2)
         self.assertEqual(table.count(r"\textit{Nota:}"), 2)
         self.assertNotIn("Um registro foi excluído após a triagem", table)
-        self.assertIn("A conferência humana permanece pendente", review)
+        self.assertIn("um único revisor, o autor", review)
+        self.assertIn("sem dupla avaliação independente", review)
         self.assertIn("não foram convertidos em escore agregado ou síntese final de qualidade", review)
         self.assertIn("15 estudos do corpus", table)
         note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]

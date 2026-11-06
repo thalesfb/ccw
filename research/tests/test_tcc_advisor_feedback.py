@@ -255,29 +255,36 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "A categoria 3 foi utilizada para examinar as comparações quantitativas" in chapter
     assert "com alocação desconhecida" in chapter
     assert "a execução da randomização recebeu ct" in chapter.lower()
-    assert "o autor conduziu a seleção e a apreciação preliminar" in chapter.lower()
+    assert "um único revisor, o autor" in chapter.lower()
+    assert "sem dupla avaliação independente" in chapter.lower()
     assert "apoio de regras automatizadas e de ia generativa" in chapter.lower()
-    assert "o orientador rafael zanin e o coorientador manassés ribeiro ainda não revisaram especificamente esses julgamentos" in chapter.lower()
+    assert "ainda não revisaram especificamente" not in chapter.lower()
     assert "o autor encaminhará" not in chapter.lower()
-    assert "os julgamentos mmat dependem de conferência humana por fonte e critério" in chapter.lower()
+    assert r"\ref{sec:uso-ferramentas-ia}" in chapter
     assert "não foram convertidos em escore agregado ou síntese final de qualidade" in chapter
     for removed in ("adjudicação",):
         assert removed not in methodology
-    assert "O autor realizou a seleção e a apreciação preliminar com o MMAT" in methodology
-    assert "o orientador rafael zanin e o coorientador manassés ribeiro ainda não revisaram especificamente esses julgamentos" in methodology.lower()
+    assert "um único revisor, o autor" in methodology.lower()
+    assert "sem dupla avaliação independente" in methodology.lower()
+    assert "ainda não revisaram especificamente" not in methodology.lower()
+    assert r"\label{sec:uso-ferramentas-ia}" in methodology
+    assert "código versionado" in methodology
+    assert r"\path{.github/prompts/}" in methodology
+    assert r"\ref{apendice:ferramentas-ia}" in methodology
     appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
     selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
     appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
     assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
     assert r"Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão" in selection_row
-    assert "O autor conduziu a seleção" in selection_row
+    assert "um único revisor, o autor" in selection_row
     assert "regras automatizadas e apoio de IA generativa" in selection_row
-    assert "o orientador e o coorientador acompanham o trabalho" in selection_row.lower()
-    assert "ainda não revisaram especificamente essas decisões" in selection_row.lower()
+    assert "sem dupla avaliação independente" in selection_row
+    assert "orientador" not in selection_row.lower()
     assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
-    assert "O autor realizou a apreciação preliminar com apoio de IA generativa" in appraisal_row
-    assert "o orientador e o coorientador ainda não revisaram especificamente esses julgamentos" in appraisal_row.lower()
-    assert "conferência humana por fonte e critério permanece pendente" in appraisal_row
+    assert "um único revisor, o autor" in appraisal_row
+    assert "sem dupla avaliação independente" in appraisal_row
+    assert "apoio de IA generativa" in appraisal_row
+    assert "orientador" not in appraisal_row.lower()
     assert "a verificação documental permanece incompleta" not in selection_row
     assert "com fontes e julgamentos ainda incompletos" not in appraisal_row
     assert "Os critérios Q1--Q5 dependem da categoria" in normalized_methodology
