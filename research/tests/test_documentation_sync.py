@@ -49,7 +49,7 @@ def test_goals_are_extracted_from_the_manuscript_not_retyped(project):
     assert "viabilidade e a coerência da especificação conceitual" in blocks["goals"]
     intro = project / sync.INTRO
     intro.write_text(intro.read_text(encoding="utf-8").replace(
-        "Propor uma especificação", "Documentar uma especificação", 1
+        "propor uma especificação", "documentar uma especificação", 1
     ), encoding="utf-8")
     assert "Documentar uma especificação" in sync.render_blocks(project)["goals"]
 
@@ -88,7 +88,7 @@ def test_write_does_not_silently_approve_manual_summaries(project):
     assert sync.review_issues(project) == []
     intro = project / sync.INTRO
     intro.write_text(intro.read_text(encoding="utf-8").replace(
-        "Propor uma especificação", "Documentar uma especificação", 1
+        "propor uma especificação", "documentar uma especificação", 1
     ), encoding="utf-8")
     sync.synchronize(project, write=True)
     assert "canonical inputs changed" in " ".join(sync.review_issues(project))

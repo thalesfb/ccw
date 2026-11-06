@@ -23,7 +23,7 @@ def test_historical_mmat_marker_preserves_every_response():
 def test_current_specification_declares_partial_r23_coverage():
     text = (ROOT / "results/tcc/conteudo/aceitacao-cenarios.tex").read_text(encoding="utf-8")
     row = next(line for line in text.splitlines() if line.startswith("F05 &"))
-    assert "R23 parcialmente" in row
+    assert "R23 (parcial)" in row
     assert "não estão operacionalizadas nem abrangidas pela aceitação nesta especificação" in row
 
 

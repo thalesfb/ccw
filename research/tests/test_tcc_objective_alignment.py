@@ -13,24 +13,39 @@ class ObjectiveAlignmentTests(unittest.TestCase):
     def test_intro_and_results_reference_only_four_unique_objectives(self):
         intro = (CONTENT / "introducao.tex").read_text(encoding="utf-8")
         results = (CONTENT / "resultados.tex").read_text(encoding="utf-8")
-        self.assertEqual(re.findall(
-            r"^O (?:primeiro|segundo|terceiro|quarto) objetivo específico "
-            r"\((OE\d+)\) consiste em ", intro, re.M),
-                         ["OE1", "OE2", "OE3", "OE4"])
+        objectives = intro.split(r"\section{Objetivos}", 1)[1].split(
+            r"\section{Estrutura do Trabalho}", 1
+        )[0]
+        labels = re.findall(r"^\\item \((OE\d+)\) ", objectives, re.M)
+        self.assertEqual(labels, ["OE1", "OE2", "OE3", "OE4"])
         self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
         for phrase in ("O OE1 foi desenvolvido", "O OE2 identificou",
                        "O OE3 resultou", "O OE4 resultou"):
             self.assertIn(phrase, results)
-        objectives = intro.split(r"\section{Objetivos}", 1)[1].split(
-            r"\section{Estrutura do Trabalho}", 1
-        )[0]
+        self.assertIn(r"\begin{alineas}", objectives)
+        self.assertIn(r"\end{alineas}", objectives)
         self.assertNotIn(r"\subsection", objectives)
         self.assertNotIn(r"\textbf", objectives)
         self.assertNotIn(r"\begin{itemize}", objectives)
+        self.assertNotIn("consiste em", objectives)
+        self.assertIn("definiu-se como objetivo geral propor", objectives)
+        self.assertIn("Para alcançá-lo, foram definidos os seguintes objetivos específicos", objectives)
+        self.assertIn("(OE1) categorizar as abordagens e técnicas computacionais", objectives)
+        self.assertIn("(OE2) identificar limitações e lacunas técnicas", objectives)
+        self.assertIn("(OE3) formular a especificação técnica e pedagógica", objectives)
+        self.assertIn(
+            "(OE4) propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, "
+            "considerando sua fundamentação, a consistência dos requisitos e as condições técnicas e pedagógicas de execução.",
+            objectives,
+        )
         self.assertIn("metodológicas", objectives)
-        self.assertIn("viabilidade e a coerência da especificação conceitual", objectives)
         prototype = (CONTENT / "prototipo.tex").read_text(encoding="utf-8")
         self.assertIn("sua aplicação permanece pendente", prototype)
+        self.assertIn("A regra de decisão e sua justificativa deverão ser definidas antes de eventual comparação", prototype)
+        self.assertIn("não define as colunas habilitadas", prototype)
+        self.assertIn("a rotina de explicação local decompõe", prototype)
+        self.assertIn("após associar cada previsão ao respectivo registro de origem", prototype)
+        self.assertNotIn("teste alinhado por execução", prototype)
         self.assertIn("O produto do trabalho é documental", intro)
 
     def test_piaget_is_not_cited_in_active_manuscript(self):
@@ -51,6 +66,7 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         objectives = slides.split("06 / OBJETIVOS ESPECÍFICOS", 1)[1].split("\n---", 1)[0]
         self.assertEqual(objectives.count('class="tcc-objective-step"'), 4)
+        self.assertIn("<strong>Propor o protocolo</strong>", objectives)
         self.assertNotIn("7 objetivos", slides)
         generator = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
         self.assertEqual(re.findall(r'\("(OE\d+)"', generator),

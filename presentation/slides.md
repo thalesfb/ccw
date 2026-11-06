@@ -155,7 +155,7 @@ class: content-slide tcc-objectives-slide
   <div class="tcc-objective-step"><span>01</span><strong>Categorizar</strong><p>Técnicas computacionais e finalidades pedagógicas na literatura mapeada.</p></div>
   <div class="tcc-objective-step"><span>02</span><strong>Identificar limites</strong><p>Limitações e lacunas técnicas, pedagógicas, metodológicas e éticas.</p></div>
   <div class="tcc-objective-step"><span>03</span><strong>Formular a especificação</strong><p>Requisitos, critérios de dados e modelos e arquitetura de referência.</p></div>
-  <div class="tcc-objective-step"><span>04</span><strong>Propor a avaliação</strong><p>Viabilidade e coerência da especificação conceitual; aplicação ainda pendente.</p></div>
+  <div class="tcc-objective-step"><span>04</span><strong>Propor o protocolo</strong><p>Avaliar viabilidade e coerência da especificação, considerando fundamentos, requisitos e condições técnicas e pedagógicas; aplicação pendente.</p></div>
 </div>
 
 <div class="tcc-caption">Revisão de 2015–2026, MMAT preliminar e pipeline auditável são meios. O protocolo proposto avalia a especificação conceitual; sua aplicação está pendente.</div>
