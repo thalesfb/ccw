@@ -1,5 +1,5 @@
 {
-  "review_date": "2026-10-28",
+  "review_date": "2026-11-07",
   "decision_type": "assisted_operational_appraisal",
   "human_independent_review": "pending",
   "corpus_eligibility_counts_changed": false,
@@ -34,8 +34,8 @@
           "rationale_pt": "O objetivo de otimizar trajetórias personalizadas e comparar o algoritmo proposto é explícito (páginas físicas 1 e 3–4, §III)."
         },
         "s2": {
-          "answer": "Y",
-          "rationale_pt": "O artigo relata notas, tempos, questionários e comparações quantitativas pertinentes à pergunta comparativa (§§III.A.1, III.C.2 e IV, páginas físicas 3–5), e a resposta Y se limita à correspondência entre medidas relatadas e pergunta, sem confirmar origem humana ou simulada, denominadores ou eficácia causal."
+          "answer": "CT",
+          "rationale_pt": "O artigo relata notas, tempos, questionários e comparações quantitativas, mas a origem humana ou simulada dos resultados não foi confirmada, portanto não é possível concluir que os dados permitem responder à pergunta comparativa (§§III.A.1, III.C.2 e IV, páginas físicas 3–5). Isso não afirma que os resultados sejam simulados nem estabelece eficácia causal."
         }
       }
     },

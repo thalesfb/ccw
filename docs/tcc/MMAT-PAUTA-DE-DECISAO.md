@@ -1,15 +1,15 @@
 # Decisões operacionais para a apreciação MMAT
 
-Atualização de 28/10/2026 após autorização do titular para resolver o que a evidência permite, sem aguardar a orientação. Decisões analíticas assistidas e provisórias; não constituem revisão humana independente nem aprovação da orientação. A pauta anterior foi substituída pelas decisões abaixo.
+Atualização de 07/11/2026: complemento da decisão de 28/10 para S2 do estudo 5. As demais decisões permanecem como registradas abaixo.
 
 | Estudo | Decisão de apreciação | Critérios Q1–Q5 | Limite que permanece |
 |---|---|---|---|
-| 5, Zhang, Zhu e Feng | Categoria 3 como rota operacional para comparação quantitativa | CT / CT / CT / CT / CT | Alocação e origem humana/simulada não estabelecidas. A rota não confirma desenho não randomizado. |
+| 5, Zhang, Zhu e Feng | Categoria 3 como rota operacional; S1=Y, S2=CT | CT / CT / CT / CT / CT | S2 é CT porque a origem humana ou simulada dos resultados não foi confirmada. A alocação também permanece incerta; a rota não confirma desenho não randomizado. |
 | 7, Xiaohui Zhang | Categoria 3 como rota operacional para comparação de turmas | CT / CT / CT / CT / CT | Alocação desconhecida, 18 resultados matemáticos ausentes, medidas e execução pouco documentadas. |
 | 14, Nyantah e colaboradores | Categoria 2 conforme o sorteio das escolas declarado, mas contraditório | CT / N / Y / CT / CT | Contradição sobre randomização, duas escolas e desequilíbrio inicial. Y limita-se aos testes matemáticos reportados. |
 | 8, MacLellan | Uma tese/um relatório, componentes matemáticos dos capítulos 5–6; categoria 4 adaptada | Y / CT / CT / CT / CT | A tese testa hipóteses; a categoria descritiva não corresponde literalmente ao desenho. A adaptação é limitada e não certifica o modelo. |
 
-Os 15 registros empíricos têm agora S1/S2 e critérios apreciados. Isso não aumenta o corpus, não confirma o delineamento dos estudos e não converte evidência insuficiente em resposta positiva. Permanecem 72 CT: 54 no registro principal e 18 nos componentes mistos. As células dos três registros fora da apreciação empírica continuam sem respostas.
+As fichas dos 15 estudos empíricos registram respostas S1/S2 e apreciação por categoria. No estudo 5, S2 é CT porque a origem dos dados não foi confirmada. Isso não altera a seleção nem os critérios Q1–Q5. As respostas são apresentadas por estudo e critério, sem escore agregado. As células dos três registros fora da apreciação empírica continuam sem respostas.
 
 ## Fundamentos das decisões
 
@@ -23,6 +23,6 @@ No estudo 8, resumo e capítulos 5–6 fundamentam S1/S2 positivos. O recorte ma
 
 ## Evidência e próximos passos
 
-O registro estruturado é `research/data/mmat_operational_decisions_2026-10-28.json`; a matriz corrente está nos CSVs da apreciação. O [registro de perguntas](MMAT-PERGUNTAS-PENDENTES.md) contém 74 perguntas: uma para cada CT e duas para acesso às fontes (3 e 6923). Perguntas de alocação permanecem nos critérios pertinentes; as quatro pendências genéricas de categoria/unidade foram substituídas por decisões analíticas explícitas.
+O registro estruturado é `research/data/mmat_operational_decisions_2026-10-28.json`; a matriz corrente está nos CSVs da apreciação. O [registro de perguntas](MMAT-PERGUNTAS-PENDENTES.md) contém 72 perguntas preparadas: uma para cada resposta CT aplicável e para as duas pendências de acesso às fontes (3 e 6923). Perguntas de alocação permanecem nos critérios pertinentes; as quatro pendências genéricas de categoria/unidade foram substituídas por decisões analíticas explícitas.
 
-Podemos prosseguir com a conferência documental dos critérios. Informações novas dos autores podem mudar a rota aplicada ou os julgamentos, sempre com registro da fonte. Não houve contato externo nesta etapa. A fonte 3 não foi revalidada; 6919 foi revalidado no PDF primário em 29/10/2026, sem mudança de respostas; 6923 continua sem texto integral. A revisão humana independente permanece necessária para concluir a apreciação científica.
+Podemos prosseguir com a conferência documental dos critérios. Informações novas dos autores podem mudar a rota aplicada ou os julgamentos, sempre com registro da fonte. Não houve contato externo nesta etapa. A fonte 3 não foi revalidada; 6919 foi revalidado no PDF primário em 29/10/2026, sem mudança de respostas; 6923 continua sem texto integral.

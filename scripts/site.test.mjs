@@ -155,6 +155,10 @@ for (const metadata of mmat.matchAll(/class="study-meta">([^<]+)</g)) {
   assert.doesNotMatch(metadata[1], /quantitative_|design_pending|mixed_methods|metadata_hold|not_applicable/, 'reader-facing classifications must not expose internal design codes');
 }
 assert.match(mmat, /Design2025_004 · Categoria 3 operacional · alocação desconhecida/, 'a pending category must remain explicit rather than being inferred');
+const designStudyRow = mmat.match(/<tr>\s*<td>5<\/td>[\s\S]*?<\/tr>/)?.[0];
+assert.ok(designStudyRow, 'Design2025_004 must remain in the current MMAT table');
+const designScreeningAnswers = [...designStudyRow.matchAll(/class="criterion criterion-(?:y|ct|n)"[^>]*>(Y|CT|N)<\/span>/g)].map(match => match[1]);
+assert.deepEqual(designScreeningAnswers.slice(0, 2), ['Y', 'CT'], 'Design2025_004 must retain S1=Y and report S2=CT');
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
 assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');
@@ -167,15 +171,15 @@ assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_primary_sources
 assert.equal((mmat.match(/class="mmat-question-group"/g) || []).length, 5, 'the current page must expose all MMAT design groups');
 assert.match(mmat, /O que esta avaliação registra/i, 'the public page must explain the purpose of the appraisal in reader-facing language');
 assert.doesNotMatch(mmat, /\b(?:ledger|shortlist|snapshot)\b/i, 'the public page must avoid unexplained development jargon');
-assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Registro MMAT da seleção histórica sob o corte 4,0, reconciliado em 20\/10\/2026; apreciações registradas até 06\/11\/2026\./i, 'the MMAT page must distinguish search cutoff, historical scope reconciliation and appraisal dates');
+assert.match(mmat, /Data de corte da busca: 31\/08\/2026\. Recorte consolidado em 03\/09\/2026\. Registro MMAT da seleção histórica sob o corte 4,0, reconciliado em 20\/10\/2026; apreciações registradas até 07\/11\/2026\./i, 'the MMAT page must distinguish search cutoff, historical scope reconciliation and appraisal dates');
 assert.doesNotMatch(mmat, /Recorte do corpus: 12\/10\/2026/i, 'the scope update date must not be presented as a new search record');
-assert.match(mmat, /apreciações registradas até 06\/11\/2026/i, 'the current page must expose the latest appraisal date');
+assert.match(mmat, /apreciações registradas até 07\/11\/2026/i, 'the current page must expose the latest appraisal date');
 assert.match(mmat, /15 estudos da seleção histórica têm triagem e critérios apreciados/i, 'the MMAT table caption must not call the pre-amendment studies the current corpus');
 assert.equal((mmat.match(/class="mmat-evidence"/g) || []).length, 18, 'every MMAT record must expose criterion evidence details');
 assert.match(mmat, /Ver perguntas, justificativas e localização da evidência/i, 'the evidence disclosure must be clearly labeled');
 assert.match(mmat, /nota 95 nas categorias Medium/i, 'the current page must expose the concrete measurement ambiguity for study 2 Q3');
 assert.match(mmat, /regra efetivamente usada e a adequação das demais medidas/i, 'the current page must explain why study 2 Q3 remains indeterminate');
-assert.match(mmat, /71 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda after the three ratified mixed-methods decisions');
+assert.match(mmat, /72 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda after the three ratified mixed-methods decisions');
 const pagesWorkflow = read('.github/workflows/publish-reports.yml');
 for (const asset of ['research/data/mmat_followup_questions_current.csv', 'research/data/mmat_consolidation_actions_current.json', 'docs/tcc/MMAT-PERGUNTAS-PENDENTES.md']) {
   assert.ok(pagesWorkflow.includes(`cp ${asset} _site/`), `Pages must package the linked MMAT followup asset: ${asset}`);

@@ -49,7 +49,8 @@ def test_operational_routes_keep_screening_and_explicit_uncertainty():
         if row["study_id"] not in {"5", "7"}:
             continue
         assert row["design_status"] == "operational_category_inferred_allocation_unknown"
-        assert row["s1"] == row["s2"] == "Y"
+        assert row["s1"] == "Y"
+        assert row["s2"] == ("CT" if row["study_id"] == "5" else "Y")
         assert all(row[criterion] == "CT" for criterion in mmat_current.REQUIRED_CRITERIA)
         assert len(row["criterion_evidence"].split(";")) == 7
 

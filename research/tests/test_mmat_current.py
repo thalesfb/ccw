@@ -25,6 +25,10 @@ import pytest
 
 def test_operational_appraisal_decisions_are_explicit_and_do_not_certify_allocation():
     rows = {r['study_id']: r for r in load_current_reassessment()}
+    assert rows['5']['s1'] == 'Y' and rows['5']['s2'] == 'CT'
+    assert rows['7']['s1'] == rows['7']['s2'] == 'Y'
+    assert sum(row['s2'] == 'Y' for row in rows.values()) == 14
+    assert sum(row['s2'] == 'CT' for row in rows.values()) == 1
     assert rows['8']['design'] == 'quantitative_descriptive'
     assert [rows['8'][k] for k in ('s1','s2','q1','q2','q3','q4','q5')] == ['Y','Y','Y','CT','CT','CT','CT']
     assert rows['14']['design'] == 'quantitative_randomized'
@@ -60,7 +64,7 @@ def test_followup_questions_cover_every_indeterminate_criterion_and_structural_h
     }
     actual = {(q["study_id"], q["component"], q["criterion"]) for q in questions if q["component"] != "record"}
     assert actual == expected
-    assert len(questions) == 71
+    assert len(questions) == 72
     assert {q["study_id"] for q in questions if q["criterion"] == "design"} == set()
     assert all(q["status"] == "prepared_not_sent" for q in questions)
     coverage = json.loads((Path(__file__).resolve().parents[1] / "data/study_contribution_current.json").read_text(encoding="utf-8"))["records"]

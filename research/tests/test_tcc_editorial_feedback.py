@@ -211,6 +211,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("17 estudos empíricos provisórios", slides)
         self.assertIn("Conferir as 15 apreciações preliminares e suas rotas operacionais", slides)
         self.assertIn("15 triagens S1/S2 e 15 conjuntos de critérios", slides)
+        self.assertIn("S2: 14 respostas Y e 1 CT no estudo 5", slides)
+        self.assertNotIn("validação humana pendente", slides)
 
     def test_study_specific_quantitative_claims_have_primary_source_locators(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")

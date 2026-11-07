@@ -1,6 +1,6 @@
 # Perguntas pendentes para completar a apreciação MMAT
 
-Revisão documental iniciada em 28/10/2026, atualizada em 06/11/2026 após as decisões sobre os estudos mistos. Perguntas preparadas, não enviadas. Não há respostas de autores registradas neste documento.
+Revisão documental iniciada em 28/10/2026, atualizada em 07/11/2026 após a decisão de S2 do estudo 5. Perguntas preparadas, não enviadas. Não há respostas de autores registradas neste documento.
 
 As perguntas abaixo correspondem aos critérios ainda indeterminados, separados entre apreciação principal e componentes, e às pendências de acesso ao texto. Não constituem escore de qualidade.
 
@@ -113,6 +113,10 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 - **critérios principais · 3.5** — Quais duração, exposição efetiva, adesão e desvios ocorreram, distinguindo estudantes e simulações?
   Fonte: PS-005; Páginas físicas 3–5; III.B–C; figuras 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
   Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/4`.
+
+- **critérios principais · S2** — Quais passagens identificam se as notas, os tempos, os questionários e as comparações foram obtidos com estudantes em aplicação humana ou produzidos por simulação, e em que base os dados respondem à pergunta comparativa?
+  Fonte: PS-005; Seções III.A.1, III.C.2 e IV; páginas físicas 3–5. Encaminhamento previsto: autores do estudo; eventual encaminhamento a definir.
+  Cobertura: **Informação insuficiente no material examinado**. A documentação examinada relata notas, tempos, questionários e comparações, mas não confirma a origem humana ou simulada dos resultados. Assim, a evidência registrada não permite concluir que os dados respondem à pergunta; não se afirma que sejam simulados. Registro público: `research/data/study_contribution_current.json#/records/4`.
 
 ## Estudo 6
 
