@@ -10,7 +10,8 @@ def test_source_appendix_distinguishes_publication_cutoff_from_scope_definition(
     methodology = (ROOT / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
     appendix = (ROOT / "results/tcc/postextuais/apendice.tex").read_text(encoding="utf-8")
 
-    assert "data-limite de publicação definida no protocolo foi 31 de agosto de 2026" in appendix
+    assert "A data de corte da busca foi 31 de agosto de 2026" in appendix
+    assert "data-limite de publicação definida no protocolo" not in appendix
     assert "definição inicial do escopo do corpus foi concluída em 3 de setembro de 2026" in appendix
     assert "adjudicação inicial do escopo" not in methodology + appendix
     assert "ausência de histórico completo das requisições impede determinar quantas foram concluídas" in methodology
@@ -56,7 +57,7 @@ def test_source_appendix_dates_scope_reconciliation_without_implying_a_new_searc
 
     assert "Em 14 de outubro de 2026, uma conferência atualizada confrontou os 18 registros da lista preliminar" in appendix
     assert "sem nova consulta às bases" in appendix
-    assert "sem alterar a data-limite de publicação" in appendix
+    assert "sem alterar a data de corte da busca" in appendix
 
 
 def test_research_readme_uses_operational_prioritization_and_explicit_denominators() -> None:
@@ -88,7 +89,11 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     normalized_presentation = " ".join(presentation.split())
 
     assert r"\citeonline{Zeng2025_6923} não foi recuperado" in results
-    assert "Os 15 estudos selecionados segundo o corte de relevância 4,0 receberam apreciação preliminar" in methodology
+    assert "Os 15 estudos da seleção histórica têm registros de apreciação preliminar" in methodology
+    assert "Há texto recuperado para 14; Sokkhey (2020) permanece com respostas MMAT históricas não revalidadas" in methodology
+    assert "Sokkhey (2020) permanece com respostas anteriores do" in (ROOT / "results/tcc/pretextuais/resumo.tex").read_text(encoding="utf-8")
+    assert "Zeng não integra os 15" in (ROOT / "results/tcc/conteudo/conclusao.tex").read_text(encoding="utf-8")
+    assert "os dados disponíveis ao protótipo não contêm as variáveis necessárias" in (ROOT / "results/tcc/conteudo/conclusao.tex").read_text(encoding="utf-8")
     assert "dois não foram recuperados (Sokkhey e Zeng)" in results
     assert "dos quais 14 têm texto recuperado" in results
     assert "núcleo empírico" not in results

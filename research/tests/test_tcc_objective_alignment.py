@@ -31,7 +31,11 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         self.assertIn("definiu-se como objetivo geral propor", objectives)
         self.assertIn("Para alcançá-lo, foram definidos os seguintes objetivos específicos", objectives)
         self.assertIn("(OE1) categorizar as abordagens e técnicas computacionais", objectives)
-        self.assertIn("(OE2) identificar limitações e lacunas técnicas", objectives)
+        self.assertIn(
+            "(OE2) identificar, por codificação sistemática, limitações metodológicas e de relato",
+            objectives,
+        )
+        self.assertIn("discutir conceitualmente dimensões técnicas, pedagógicas e éticas", objectives)
         self.assertIn("(OE3) formular a especificação técnica e pedagógica", objectives)
         self.assertIn(
             "(OE4) propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, "
@@ -49,7 +53,8 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         self.assertIn("pela ordem da interação e pelo identificador do registro de origem", prototype)
         self.assertIn("não uma amostra aleatória", prototype)
         self.assertNotIn("teste alinhado por execução", prototype)
-        self.assertIn("O produto do trabalho é documental", intro)
+        self.assertIn("O produto principal do trabalho é documental", intro)
+        self.assertIn("implementação exploratória serviu como verificação técnica auxiliar", intro)
 
     def test_piaget_is_not_cited_in_active_manuscript(self):
         source = "\n".join(path.read_text(encoding="utf-8")
