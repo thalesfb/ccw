@@ -18,7 +18,7 @@ Propor uma especificação técnica e pedagógica de protótipo para apoiar a in
 
 **OE1:** categorizar as abordagens e técnicas computacionais e as finalidades pedagógicas descritas na literatura mapeada.
 
-**OE2:** identificar limitações e lacunas técnicas, pedagógicas, metodológicas e éticas no material examinado.
+**OE2:** identificar, por codificação sistemática, limitações metodológicas e de relato e discutir conceitualmente dimensões técnicas, pedagógicas e éticas no material examinado.
 
 **OE3:** formular a especificação técnica e pedagógica do protótipo, incluindo requisitos, critérios para seleção de fontes de dados e modelos e uma arquitetura de referência.
 

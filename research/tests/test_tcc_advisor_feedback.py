@@ -168,7 +168,8 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     abstract = _read(TCC_ABSTRACT)
 
     assert "O escopo compreendeu a revisão, a apreciação metodológica preliminar dos estudos empíricos incluídos e a elaboração de uma especificação conceitual de protótipo" in _read(TCC_CONTENT / "metodologia.tex")
-    assert "A delimitação dos procedimentos executados" in introduction
+    assert "A implementação exploratória serviu como verificação técnica auxiliar" in introduction
+    assert "A proposta de revisão docente e sua não aplicação são delimitadas" in introduction
     assert "especificação conceitual do protótipo" in prototype
     limitations = _read(TCC_CONTENT / "resultadosesperados.tex").split(
         r"\section{Limitações e Contribuições da Revisão}", 1

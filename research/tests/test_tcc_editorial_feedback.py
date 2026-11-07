@@ -21,7 +21,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn(r"\subsection", criteria)
         for phrase in ("teses de doutorado", "dissertações de mestrado", "literatura cinzenta",
                        "editoriais", "comentários", "erratas", "relatórios internos",
-                       "2015 a 2026", "31 de agosto de 2026", "inglês", "português"):
+                        "Em relação ao planejamento inicial de 2015 a 2025",
+                        "31 de agosto de 2026", "inglês", "português"):
             self.assertIn(phrase, criteria)
         self.assertNotIn(r"\begin{enumerate}", criteria)
 
@@ -292,11 +293,11 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_abstract_reports_operational_selection_and_limits_gap_claims(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
-        self.assertIn("conjunto empírico adotado reuniu 15 estudos", abstract)
+        self.assertIn("O conjunto histórico reúne 15 estudos: 14 têm texto recuperado", abstract)
         self.assertIn("26 grupos de requisitos", abstract)
         for removed in ("priorização operacional", "mantidos provisoriamente", "adjudicação", "único pesquisador", "DOI/URL"):
             self.assertNotIn(removed, abstract)
-        self.assertIn("por critério e sem escore agregado", abstract)
+        self.assertIn("A apreciação é apresentada por critério, sem escore agregado", abstract)
         self.assertIn("diferenças entre desempenho, previsão, proficiência, competência e aprendizagem", abstract)
         self.assertIn("base documental de apoio à interpretação docente", abstract)
         prototype = (TCC / "conteudo/prototipo.tex").read_text(encoding="utf-8")
@@ -312,12 +313,12 @@ class EditorialFeedbackTests(unittest.TestCase):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn(r"As contagens MMAT do Quadro~\ref{qua:mmat-contagens}", results)
         self.assertIn(r"A tese de \citeonline{Zeng2025_6923} não foi apreciada por falta do texto integral", review)
-        self.assertIn(r"o relatório de \citeonline{Zeng2025_6923} não foi recuperado", conclusion)
+        self.assertIn(r"relatório de \citeonline{Zeng2025_6923} não foi recuperado", conclusion)
         self.assertIn("sem estimativa de frequência", review)
         self.assertIn("tampouco equivale à elegibilidade por texto completo", review)
         self.assertIn(r"\ref{sec:limitacoes-revisao}", method)
         self.assertIn("não permite reconstruir integralmente as consultas históricas", conclusion)
-        self.assertNotIn("um único revisor", conclusion)
+        self.assertIn("um único revisor, o autor", conclusion)
         self.assertNotIn("dupla avaliação independente", conclusion)
         self.assertIn("Os julgamentos MMAT dos 15 estudos permanecem preliminares", conclusion)
         self.assertNotIn("ainda precisam de conferência humana", conclusion)
@@ -578,6 +579,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
         for text in (results, conclusion):
             self.assertIn("4.093", text)
+            self.assertIn("Esse subconjunto de 4.093 registros corresponde a", text)
             self.assertIn("34,47\\%", text)
             self.assertIn("43,58\\%", text)
             self.assertIn("sensibilidade", text)
