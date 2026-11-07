@@ -57,7 +57,7 @@
     ]
   },
   "current_snapshot_note": "This version reports the historical 15-study selection under the 4.0 cutoff. No new studies, selection rerun, altered MMAT judgments or changed eligibility rules are incorporated. The cutoff was not validated against eligibility and the appraisal remains preliminary.",
-  "prisma_reporting": "The reported flow describes the preserved historical selection and the documented identity/year corrections. No new selection rule was approved or applied in this version.",
+  "prisma_reporting": "The historical selection retains 15 empirical studies under the unchanged 4.0 cutoff. The current source-retrieval overlay records 17 reports sought, two without a verifiable copy (Sokkhey and Zeng), 15 assessed at full text, one protocol excluded, and 14 recovered empirical reports. Sokkhey remains a historical inclusion without a verifiable copy. Machine2019_007 remains excluded after abstract screening. No search, selection, corpus, or MMAT judgment was reprocessed.",
   "current_relevance_threshold": 4,
   "data_reconciliation": {
     "date": "2026-10-31",
@@ -98,6 +98,28 @@
     },
     "interpretation": "The original sensitivity-review denominators and findings remain recorded. Confirmed duplicate reports are removed before screening and the two corrected years move records to temporal screening exclusions. These corrections do not change the 15-study historical selection or the 4.0 cutoff. No new studies or selection rerun are incorporated.",
     "selection_reapplied": false
+  },
+  "current_source_retrieval": {
+    "date": "2026-11-06",
+    "shortlisted": 18,
+    "abstract_screening_excluded": 1,
+    "reports_sought": 17,
+    "reports_not_retrieved": 2,
+    "not_retrieved_study_keys": [
+      "Multimodels2020_002",
+      "Zeng2025_6923"
+    ],
+    "not_retrieved_labels": [
+      "Sokkhey (2020)",
+      "Zeng (2025)"
+    ],
+    "reports_assessed_at_full_text": 15,
+    "full_text_exclusions": 1,
+    "full_text_excluded_study_key": "Imperatrice2025_6921",
+    "recovered_empirical_reports": 14,
+    "historical_empirical_selection": 15,
+    "historical_empirical_without_verifiable_copy": 1,
+    "interpretation": "This current source-retrieval overlay does not reapply selection or change the historical 15-study selection. Two reports (Sokkhey and Zeng) have no verifiable copy; 15 reports were assessed, the Imperatrice protocol was excluded, and 14 empirical reports have recovered text. Sokkhey remains only as a historical inclusion with its previous MMAT responses, not as a text verified in this review. Machine2019_007 remains the abstract-stage exclusion."
   },
   "record_id": "SELECTION-STATUS-2026-11-03",
   "review_date": "2026-11-03",

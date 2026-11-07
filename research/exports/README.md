@@ -7,9 +7,10 @@ Este diretório reúne saídas da revisão sistemática. Os arquivos tabulares e
 > manualmente); 11.875 registros únicos na triagem; 9.393 excluídos; 2.482
 > avançaram à priorização histórica e 2.464 não avançaram sob a regra anterior.
 > O corte 4,0 permanece inalterado.
-> A seleção histórica contém 18 registros na shortlist, 17 relatórios procurados,
-> 1 não recuperado, 16 avaliados em texto completo, 1 protocolo excluído e 15
-> estudos empíricos. O histórico de 31/08 foi corrigido: ID 6952 é repetido do
+> A shortlist contém 18 registros: 1 foi excluído após resumo; 17 relatórios
+> foram procurados, 2 não foram recuperados, 15 foram avaliados em texto completo;
+> 1 protocolo foi excluído e 14 relatórios empíricos foram recuperados. A seleção
+> histórica mantém 15 estudos, incluindo Sokkhey sem cópia verificável. O histórico de 31/08 foi corrigido: ID 6952 é repetido do
 > artigo 155 (2016), ID 6977 é a mesma tese de ID 8 (2017), e os anos de 361 e
 > 7001 foram corrigidos para 2005 e 1997. Fontes e decisões estão em
 > `research/data/adjudicated_record_corrections.csv`.
@@ -137,9 +138,11 @@ python -m research.src.cli export-bibtex -o research/references
 ```
 
 `included_papers.bib` contém os 18 registros shortlistados derivados do
-pipeline, não 18 estudos incluídos. O núcleo empírico tem 15 estudos
-provisórios; um relatório não foi recuperado, um registro foi excluído após
-resumo e um protocolo foi excluído após texto completo. O
+pipeline, não 18 estudos incluídos. A seleção histórica mantém 15 estudos;
+dois dos 17 relatórios procurados não foram recuperados, 15 foram avaliados em
+texto completo, um protocolo foi excluído e 14 relatórios empíricos foram
+recuperados. Sokkhey permanece entre os 15 sem cópia verificável. Um registro
+foi excluído após resumo. O
 TCC mantém separadamente referências metodológicas, pedagógicas, de avaliação
 e técnicas em `results/tcc/referencias.bib` e
 `results/tcc/referencias_pedagogicas.bib`. Essa separação é deliberada e está
@@ -201,7 +204,7 @@ python -m research.src.cli deep-analysis
 | Total de registros brutos no banco | 11.904 |
 | Duplicatas removidas (27 DOI/URL + 2 relatórios iguais confirmados manualmente) | 29 |
 | Registros avaliados na triagem | 11.875 |
-| Registros na shortlist histórica | 18 (15 estudos empíricos na seleção histórica, 1 não recuperado, 1 excluído após resumo e 1 protocolo excluído) |
+| Registros na shortlist histórica | 18 (15 estudos empíricos históricos, incluindo Sokkhey sem cópia verificável; Zeng não recuperado e fora dos 15; 1 excluído após resumo; 1 protocolo excluído) |
 | Taxa de inclusão empírica provisória | 0,13% (15/11.904) |
 | Período analítico configurado | 2015--2026 |
 | Excluídos na triagem | 9.393 (78,91% da identificação; 79,10% dos triados) |

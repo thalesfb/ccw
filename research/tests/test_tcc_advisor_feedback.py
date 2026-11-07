@@ -300,7 +300,10 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
 def test_author_created_sources_use_the_standard_year_form() -> None:
     invalid: list[str] = []
     pattern = re.compile(r"\\fonte\{(Elaborado pelo autor.*)\}$", re.MULTILINE)
-    expected = re.compile(r"Elaborado pelo autor \((?:19|20)\d{2}\)(?:\.|, com base em \\citeonline\{PRISMA2020\}\..*)")
+    expected = re.compile(
+        r"Elaborado pelo autor \((?:19|20)\d{2}\)"
+        r"(?:\.|, com base em \\citeonline\{PRISMA2020\}\.)(?: .*)?"
+    )
 
     for path in sorted(TCC_ROOT.rglob("*.tex")):
         for source in pattern.findall(_read(path)):

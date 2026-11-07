@@ -160,8 +160,17 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
     assert all(
         row["adjudication_status"] == "supervisor_review_pending"
         for row in reassessment
-        if row["study_id"] != "9"
+        if row["study_id"] not in {"3", "9"}
     )
+    historical_sokkhey = next(row for row in reassessment if row["study_id"] == "3")
+    assert historical_sokkhey["assessment_basis"] == "historical_appraisal_source_unavailable"
+    assert historical_sokkhey["assessment_status"] == "historical_provisional_not_revalidated"
+    assert [historical_sokkhey[f"q{i}"] for i in range(1, 6)] == ["CT"] * 5
+    assert historical_sokkhey["adjudication_status"] == "historical_record_only"
+    assert "não há cópia primária verificável" in historical_sokkhey["notes"].lower()
+    historical_source = next(row for row in load_primary_sources() if row["study_id"] == "3")
+    assert historical_source["full_text_status"] == "not_retrieved"
+    assert not historical_source["local_file"] and not historical_source["sha256"]
     excluded_after_abstract = next(row for row in reassessment if row["study_id"] == "9")
     assert excluded_after_abstract["adjudication_status"] == "not_applicable_scope_exclusion"
 
@@ -211,15 +220,17 @@ def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     assert report["contextual_study_rows"] == 1
     assert report["awaiting_full_text_rows"] == 1
     assert report["contextual_protocol_rows"] == 1
-    assert report["primary_text_reviewed_rows"] == 15
+    assert report["primary_text_reviewed_rows"] == 14
     assert report["source_or_period_hold_rows"] == 0
     assert report["source_or_period_hold_ids"] == []
-    assert report["evidence_levels"]["primary_full_text_reviewed_externally"] == 15
+    assert report["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
+    assert report["evidence_levels"]["historical_appraisal_source_unavailable"] == 1
     assert report["evidence_levels"]["abstract_and_metadata_only"] == 0
     assert report["evidence_levels"]["metadata_only"] == 0
     assert report["evidence_levels"]["protocol_or_proposal_not_applicable"] == 1
     assert report["record_evidence_levels"]["pending_full_text_not_appraised"] == 1
-    assert report["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 15
+    assert report["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 14
+    assert report["record_evidence_levels"]["historical_appraisal_source_unavailable"] == 1
     assert report["record_evidence_levels"]["abstract_and_metadata_only"] == 0
     assert report["record_evidence_levels"]["primary_full_text_scope_exclusion"] == 1
     assert report["non_ct_criterion_decisions"] > 0
@@ -426,7 +437,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "uma apreciação preliminar separada dos componentes" in html.lower()
     assert "14 fontes disponíveis nos 15 estudos" in html.lower()
     assert "fichas com consulta histórica declarada" in html.lower()
-    assert "não comprova leitura humana integral" in html.lower()
+    assert "não comprova leitura integral" in html.lower()
     assert "não recebeu respostas MMAT" in html
     assert "perguntas de triagem do mmat 2018" in html.lower()
     assert "há perguntas de pesquisa claras?" in html.lower()

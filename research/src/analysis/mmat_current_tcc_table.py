@@ -45,6 +45,7 @@ DESIGN_LABELS = {
 }
 BASIS_LABELS = {
     "primary_full_text_reviewed_externally": "Texto primário externo",
+    "historical_appraisal_source_unavailable": "MMAT histórico; fonte indisponível",
     "primary_full_text_scope_exclusion": "Texto integral; fora do escopo",
     "pending_full_text_not_appraised": "Texto pendente; sem MMAT",
     "abstract_and_metadata_only": "Resumo/metadados",

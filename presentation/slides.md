@@ -215,11 +215,11 @@ class: content-slide flow-slide
   <div class="tcc-funnel-notes">
     <p><strong>Identidade:</strong> 27 duplicatas por DOI/URL e 2 relatórios iguais confirmados manualmente.</p>
     <p><strong>Títulos repetidos:</strong> permanecem como candidatos à auditoria semântica.</p>
-    <p><strong>Seleção histórica:</strong> 15 estudos empíricos; 1 relatório não recuperado; 1 exclusão após resumo; 1 protocolo excluído após texto completo.</p>
+    <p><strong>Seleção histórica:</strong> 15 estudos empíricos, com 14 relatórios recuperados; 1 exclusão após resumo; 1 protocolo excluído após texto completo. Sokkhey permanece nos 15 sem cópia verificável.</p>
   </div>
 </div>
 
-<div class="tcc-funnel-caption"><strong>Fluxo histórico reconciliado, relatado com referência ao PRISMA 2020.</strong> O corte 4,0 permanece inalterado. Após uma exclusão no resumo: 17 relatórios procurados, 1 não recuperado e 16 avaliados; excluído 1 protocolo, restam 15 estudos históricos.</div>
+<div class="tcc-funnel-caption"><strong>Fluxo de recuperação atual e seleção histórica, relatados com referência ao PRISMA 2020.</strong> O corte 4,0 e a seleção histórica permanecem inalterados. Após uma exclusão no resumo, 17 relatórios foram procurados: 2 não recuperados (Sokkhey e Zeng) e 15 avaliados; excluído 1 protocolo, 14 relatórios empíricos foram recuperados. A seleção histórica mantém 15 estudos porque inclui Sokkhey sem cópia verificável.</div>
 
 ---
 layout: center
@@ -320,9 +320,9 @@ class: content-slide tcc-retained-slide
 <div class="tcc-retained-layout">
   <div class="tcc-retained-number"><strong>18</strong><span>registros selecionados<br>para avaliação de escopo</span><div class="tcc-retained-rule"></div><p>Seleção preliminar não é inclusão final.</p></div>
   <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata" aria-label="Quatro destinos dos 18 registros: 15 mais 1 mais 1 mais 1"><strong>15</strong><span>registros empíricos provisórios</span><strong>1</strong><span>relatório não recuperado</span><strong>1</strong><span>exclusão após resumo</span><strong>1</strong><span>protocolo excluído após texto completo</span></div>
+    <div class="tcc-retained-strata" aria-label="Quatro destinos históricos dos 18 registros: 15 estudos, um relatório Zeng, uma exclusão após resumo e um protocolo"><strong>15</strong><span>estudos empíricos da seleção histórica, incluindo Sokkhey sem cópia verificável</span><strong>1</strong><span>relatório Zeng não recuperado, fora dos 15</span><strong>1</strong><span>exclusão após resumo</span><strong>1</strong><span>protocolo excluído após texto completo</span></div>
     <h2>Desfechos da seleção</h2>
-    <p>Um registro foi excluído após o resumo; dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo. Um protocolo foi excluído após essa avaliação. O relatório não recuperado não recebeu MMAT.</p>
+    <p>Um registro foi excluído após o resumo; dos 17 relatórios procurados, dois não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados em texto completo. Um protocolo foi excluído após essa avaliação; 14 relatórios empíricos têm texto recuperado. Sokkhey permanece na seleção histórica sem cópia verificável; Zeng não recebeu MMAT.</p>
     <div class="tcc-guardrail"><span>↗</span><strong>Retenção operacional ≠ evidência homogênea</strong></div>
   </div>
 </div>
@@ -413,7 +413,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 aparecem em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte permanece ambígua; classificação não estabelece diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros provisórios, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios preliminares, incluindo adaptações de categoria. O relatório não recuperado não recebeu apreciação.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção histórica, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios preliminares, incluindo adaptações de categoria. Zeng, o relatório fora da seleção sem texto recuperado, não recebeu apreciação; as respostas de Sokkhey são históricas e não foram revalidadas.</div>
 
 ---
 layout: default

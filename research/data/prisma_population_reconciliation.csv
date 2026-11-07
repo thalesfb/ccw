@@ -49,3 +49,9 @@ snapshot_date,source_artifact,metric,value,unit,scope_or_formula,status
 2026-10-31,research/exports/analysis/papers.csv,operational_prioritization_excluded,2464,records,Historical prioritization: 2459 below cutoff plus five other scope reasons; no changed procedure applied,historical_snapshot_reconciled
 2026-10-31,research/data/current_synthesis_scope.csv,shortlisted_for_manual_review,18,records,Historical shortlist unchanged after identity and year reconciliation; no selection change decided,historical_snapshot_reconciled
 2026-10-31,research/data/current_synthesis_scope.csv,empirical_studies_included,15,studies,Historical empirical selection under 4.0; no new studies or selection rerun incorporated,historical_snapshot_reconciled
+2026-11-06,research/data/selection_status_current.json,current_reports_sought,17,reports,17 shortlisted records minus one abstract-stage exclusion,confirmed
+2026-11-06,research/data/selection_status_current.json,current_reports_not_retrieved,2,reports,Sokkhey and Zeng have no verifiable copy; Sokkhey remains in the historical 15-study selection,confirmed
+2026-11-06,research/data/selection_status_current.json,current_reports_assessed_at_full_text,15,reports,17 reports sought minus 2 not retrieved,confirmed
+2026-11-06,research/data/selection_status_current.json,current_full_text_exclusions,1,report,Imperatrice2025_6921 protocol without completed empirical results; Machine2019_007 remains excluded after abstract,confirmed
+2026-11-06,research/data/selection_status_current.json,current_recovered_empirical_reports,14,reports,15 assessed reports minus the one protocol exclusion,confirmed
+2026-11-06,research/data/selection_status_current.json,historical_empirical_selection,15,studies,14 recovered empirical reports plus the historical Sokkhey inclusion without a verifiable copy,confirmed

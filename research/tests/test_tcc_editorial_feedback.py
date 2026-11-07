@@ -67,7 +67,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         ):
             self.assertIn(author, gap_slide)
             self.assertIn(locator, gap_slide)
-        self.assertIn("15 registros provisórios", gap_slide)
+        self.assertIn("15 registros da seleção histórica", gap_slide)
         self.assertNotIn("um único revisor", gap_slide)
         self.assertNotIn("dupla avaliação independente", gap_slide)
         self.assertIn("não estimativa de prevalência", gap_slide)
@@ -100,7 +100,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = " ".join(
             (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
         )
-        self.assertIn("material associado aos 15 registros provisórios", slides)
+        self.assertIn("material associado aos 15 registros da seleção histórica", slides)
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn("Pendente: texto integral da tese não recuperado; MMAT não aplicado.", results)
 
@@ -132,11 +132,13 @@ class EditorialFeedbackTests(unittest.TestCase):
         note_path = ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md"
         note = note_path.read_text(encoding="utf-8")
         normalized_note = " ".join(note.split())
-        self.assertIn("15 registros permanecem provisoriamente no núcleo empírico", normalized_note)
-        self.assertIn("15 têm triagem S1/S2 e apreciação dos critérios", normalized_note)
+        self.assertIn("a seleção histórica continua com 15 estudos", normalized_note.lower())
+        self.assertIn("dois não têm cópia verificável (Sokkhey e Zeng)", normalized_note)
+        self.assertIn("14 relatórios empíricos recuperados", normalized_note)
         self.assertIn("SUPPORTED", normalized_note)
-        self.assertIn("adjudicação humana", normalized_note.lower())
-        self.assertIn("as nove afirmações têm adjudicação humana", normalized_note)
+        self.assertNotIn("adjudicação humana", normalized_note.lower())
+        self.assertNotIn("Rafael Zanin", normalized_note)
+        self.assertNotIn("Manassés Ribeiro", normalized_note)
         self.assertNotIn("feedback/private", normalized_note)
         self.assertNotIn("compile_tcc.py", normalized_note)
         self.assertFalse((ROOT / "docs/TCC_FEEDBACK_WORKFLOW.md").exists())
@@ -197,7 +199,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("nove dos 17 candidatos empíricos", governance)
         note = (ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md").read_text(encoding="utf-8")
         normalized_note = " ".join(note.split())
-        self.assertIn("um texto integral não foi recuperado", normalized_note)
+        self.assertIn("dois não têm cópia verificável (Sokkhey e Zeng)", normalized_note)
         self.assertIn("Um foi excluído após a triagem do resumo", normalized_note)
         self.assertNotIn("os cinco candidatos restantes foram apreciados", normalized_note)
         slides = " ".join(
@@ -320,7 +322,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
         self.assertNotIn("um único revisor", pptx_source)
         self.assertNotIn("dupla avaliação independente", pptx_source)
-        self.assertIn("MMAT preliminar dos 15 estudos, por critério", pptx_source)
+        self.assertIn("MMAT histórico dos 15 estudos, sem revalidação de Sokkhey", pptx_source)
         self.assertNotIn("um único pesquisador", pptx_source)
         self.assertNotIn("conferência humana pendente", pptx_source)
 
