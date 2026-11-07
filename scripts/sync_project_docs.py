@@ -154,6 +154,7 @@ def render_blocks(root):
     deduplication = manifest["snapshot"]["deduplication_audit"]
     qa = manifest["methodological_appraisal"]["current_mmat_qa"]
     status = read_json(root, SELECTION_STATUS)
+    retrieval = status["current_source_retrieval"]
     if status["status"] != "historical_snapshot_unchanged" or status["eligibility_criteria_changed"]:
         raise ValueError("selection status must describe the unchanged current snapshot")
     with (root / RECORD_CORRECTIONS).open("r", encoding="utf-8-sig", newline="") as handle:
@@ -188,10 +189,14 @@ def render_blocks(root):
         f"O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica "
         f"encaminhou {counts['shortlisted']} registros à lista preliminar "
         f"({percentage(counts['shortlisted'], counts['prioritization'])}%), não a inclusões finais: "
-        f"{counts['included']} estudos empíricos mantidos na seleção histórica, ainda provisoriamente, "
-        f"{counts['abstract_screening_excluded']} exclusão após resumo, "
-        f"{counts['reports_not_retrieved']} relatório não recuperado no fluxo histórico e "
-        f"{counts['eligibility_excluded']} protocolo excluído após texto completo. "
+        f"{counts['included']} estudos empíricos mantidos na seleção histórica, dos quais "
+        f"{retrieval['recovered_empirical_reports']} têm relatório recuperado; Sokkhey permanece "
+        f"sem cópia verificável, como inclusão histórica. Houve "
+        f"{counts['abstract_screening_excluded']} exclusão após resumo. Dos "
+        f"{retrieval['reports_sought']} relatórios procurados, {retrieval['reports_not_retrieved']} não foram recuperados "
+        f"({' e '.join(retrieval['not_retrieved_labels'])}); "
+        f"{retrieval['reports_assessed_at_full_text']} foram avaliados em texto completo, incluindo "
+        f"{retrieval['full_text_exclusions']} protocolo excluído. "
         f"No MMAT preliminar, há {qa['screening_rows']} triagens S1/S2 e "
         f"{qa['category_appraised_rows']} apreciações por categoria; "
         f"não há escore agregado nem aprovação científica final."
@@ -202,9 +207,10 @@ def render_blocks(root):
         ("Triagem", counts["screening"], f"{number(counts['screening_excluded'])} excluídos"),
         ("Priorização histórica", counts["prioritization"], f"{number(counts['prioritization_excluded'])} não avançaram sob as regras históricas: 2.459 por pontuação e cinco por escopo"),
         ("Lista preliminar", counts["shortlisted"], f"{counts['abstract_screening_excluded']} exclusão após resumo"),
-        ("Relatórios procurados", counts["reports_sought"], f"{counts['reports_not_retrieved']} não recuperado no fluxo histórico"),
-        ("Relatórios declarados avaliados em texto completo", counts["eligibility"], f"{counts['eligibility_excluded']} protocolo excluído; a contagem não certifica leitura humana integral"),
-        ("Seleção histórica de estudos empíricos", counts["included"], "Conjunto adotado nesta versão, selecionado sob o corte 4,0"),
+        ("Relatórios procurados", retrieval["reports_sought"], f"{retrieval['reports_not_retrieved']} não recuperados: Sokkhey e Zeng"),
+        ("Relatórios avaliados em texto completo", retrieval["reports_assessed_at_full_text"], f"{retrieval['full_text_exclusions']} protocolo excluído; 14 relatórios empíricos recuperados"),
+        ("Relatórios empíricos recuperados", retrieval["recovered_empirical_reports"], "Os 14 relatórios com texto recuperado; protocolo excluído não incluído"),
+        ("Seleção histórica de estudos empíricos", retrieval["historical_empirical_selection"], "Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados"),
     ]
     flow = "| Etapa | Quantidade | Interpretação |\n| --- | --- | --- |\n" + "\n".join(
         f"| {label} | {number(value)} | {meaning} |" for label, value, meaning in flow_rows

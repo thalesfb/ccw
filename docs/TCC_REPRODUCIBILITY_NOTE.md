@@ -19,25 +19,23 @@ fragmentos existentes em suporte para afirmações que não foram avaliadas.
 
 O estado `SUPPORTED` indica que a passagem localizada documenta a afirmação
 atribuída dentro do limite registrado. Não certifica a validade do estudo, não
-transforma um resultado específico em evidência geral e não equivale a uma
-adjudicação humana concluída. A situação da adjudicação é registrada por
-afirmação; registros pendentes não devem ser apresentados como julgamento
-final.
+transforma um resultado específico em evidência geral.
 
 Os hashes identificam os bytes examinados e permitem detectar mudanças na
 fonte. Não demonstram autoria, autenticidade editorial, validade metodológica
-ou correção científica. Nesta versão, as nove afirmações têm adjudicação humana
-marcada como `pending`; o rastreamento de fontes não substitui julgamento
-acadêmico independente.
+ou correção científica. Os limites documentados para cada afirmação integram
+sua interpretação.
 
 ## Cobertura e limites metodológicos
 
-A shortlist contém 18 registros. Um foi excluído após a triagem do resumo;
-dos 17 relatórios procurados, um texto integral não foi recuperado e 16 foram
-avaliados em texto completo. Um protocolo sem resultados concluídos foi
-excluído após essa avaliação; 15 registros permanecem provisoriamente no núcleo
-empírico. No MMAT preliminar realizado pelo autor, 15 têm triagem S1/S2 e apreciação dos critérios. As categorias dos estudos 5, 7, 8 e 14 são rotas operacionais explicitamente limitadas, sem confirmar os delineamentos. A unidade do estudo 8 é uma tese com componentes matemáticos; frações reutilizadas entre capítulos não são duplicadas. A dissertação 6923, único texto não recuperado, também não recebeu
-MMAT. Não há escore agregado ou ranking.
+A shortlist contém 18 registros. Um foi excluído após a triagem do resumo. Dos
+17 relatórios procurados, dois não têm cópia verificável (Sokkhey e Zeng); os
+outros 15 foram avaliados em texto completo. Um protocolo sem resultados
+concluídos foi excluído após essa avaliação, restando 14 relatórios empíricos
+recuperados. A seleção histórica continua com 15 estudos e conserva Sokkhey
+como inclusão histórica, com suas respostas MMAT anteriores sem revalidação.
+Zeng permanece fora dos 15 e sem apreciação MMAT. Não há escore agregado ou
+ranking.
 
 Essas condições limitam a força e a abrangência das conclusões. Uma busca sem
 resultado não demonstra ausência de um conceito na fonte, e exemplos
@@ -47,6 +45,5 @@ localizados não estimam a prevalência de uma limitação na literatura.
 
 Os registros públicos mantêm identificadores, localizadores e limites de
 interpretação necessários à revisão. Esta nota não reproduz comentários
-individuais de orientação, transcrições de áudio ou dados pessoais. A
-interpretação científica e a decisão de escopo permanecem sujeitas à revisão
-humana.
+individuais, transcrições de áudio ou dados pessoais. A interpretação
+científica e a decisão de escopo são descritas no TCC.

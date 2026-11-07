@@ -7,6 +7,7 @@ const currentPath = path.join(root, 'research', 'data', 'mmat_reassessment_curre
 const componentPath = path.join(root, 'research', 'data', 'mmat_component_reassessment_current.csv');
 const registryPath = path.join(root, 'research', 'data', 'mmat_current_study_registry.csv');
 const scopePath = path.join(root, 'research', 'data', 'current_synthesis_scope.csv');
+const selectionStatusPath = path.join(root, 'research', 'data', 'selection_status_current.json');
 const reproducibilityManifestPath = path.join(root, 'research', 'exports', 'reports', 'reproducibility_manifest.json');
 const outputPath = path.join(root, 'research', 'exports', 'analysis', 'mmat_current.html');
 const sourceCoverage = JSON.parse(fs.readFileSync(path.join(root, 'research', 'data', 'study_contribution_current.json'), 'utf8'));
@@ -228,6 +229,7 @@ const current = parseCsv(fs.readFileSync(currentPath, 'utf8'));
 const componentReassessments = parseCsv(fs.readFileSync(componentPath, 'utf8'));
 const registry = parseCsv(fs.readFileSync(registryPath, 'utf8'));
 const currentScope = parseCsv(fs.readFileSync(scopePath, 'utf8'));
+const currentSourceRetrieval = JSON.parse(fs.readFileSync(selectionStatusPath, 'utf8')).current_source_retrieval;
 const reproducibilityManifest = JSON.parse(fs.readFileSync(reproducibilityManifestPath, 'utf8'));
 const registryById = new Map(registry.map((row) => [row.study_id, row]));
 const cutoffDate = reproducibilityManifest.protocol.cutoff_date;
@@ -241,7 +243,10 @@ const latestScopeReconciliation = currentScope.map((row) => row.snapshot_date).s
 const latestScopeReconciliationLabel = formatDate(latestScopeReconciliation);
 const latestReviewDate = current.map((row) => row.review_date).filter(Boolean).sort().at(-1);
 const latestReviewDateLabel = formatDate(latestReviewDate);
-const primaryReviewed = current.filter((row) => row.assessment_basis === 'primary_full_text_reviewed_externally');
+const historicalConsultation = current.filter((row) => [
+  'primary_full_text_reviewed_externally',
+  'historical_appraisal_source_unavailable',
+].includes(row.assessment_basis));
 const empiricalCore = currentScope.filter((row) => row.record_status === 'included_empirical_core');
 const availableEmpiricalSources = empiricalCore.filter((row) => coverageById.get(row.study_id)?.full_text_available_locally).length;
 const mmatAppraisedIds = new Set(currentScope
@@ -255,17 +260,21 @@ const abstractOnly = currentScope.filter((row) => row.selection_stage === 'abstr
 const fullTextScopeChecks = current.filter((row) => row.assessment_basis === 'primary_full_text_scope_exclusion');
 const localPrimaryCount = sourceCoverage.records.filter((row) => row.full_text_available_locally).length;
 const pendingFullText = current.filter((row) => row.assessment_basis === 'pending_full_text_not_appraised');
+const notRetrievedReports = Number(currentSourceRetrieval.reports_not_retrieved);
 const abstractExclusionSummary = abstractOnly.length === 1
   ? 'Um registro foi excluído após a triagem do resumo e não recebeu MMAT.'
   : `${abstractOnly.length} registros foram excluídos após a triagem do resumo e não receberam MMAT.`;
 const pendingFullTextSummary = pendingFullText.length === 1
-  ? 'Um relatório permanece não recuperado no fluxo de seleção e não recebeu apreciação MMAT.'
+  ? 'Zeng (2025) permanece sem texto integral recuperado e sem apreciação MMAT.'
   : `${pendingFullText.length} relatórios permanecem não recuperados no fluxo de seleção e não receberam apreciação MMAT.`;
-const pendingFullTextLabel = pendingFullText.length === 1
-  ? 'relatório não recuperado no fluxo'
-  : 'relatórios não recuperados no fluxo';
+const notRetrievedLabel = notRetrievedReports === 1
+  ? 'relatório sem cópia verificável na recuperação atual'
+  : 'relatórios sem cópia verificável na recuperação atual';
+const notRetrievedSummary = notRetrievedReports === 2
+  ? 'Dois relatórios não têm cópia verificável: Sokkhey permanece na seleção apenas como inclusão histórica, com suas respostas MMAT anteriores sem revalidação; Zeng não recebeu MMAT e não integra os 15 estudos históricos.'
+  : `${notRetrievedReports} relatórios não têm cópia verificável na recuperação atual.`;
 const pendingFullTextQuestionSummary = pendingFullText.length === 1
-  ? '1 registro aguarda texto integral e também não recebe MMAT.'
+  ? 'Zeng (1 registro) aguarda texto integral e não recebe MMAT.'
   : `${pendingFullText.length} registros aguardam texto integral e também não recebem MMAT.`;
 const mixedMethodsStudies = current.filter((row) => row.design === 'mixed_methods');
 const componentDesignLabels = {
@@ -441,7 +450,7 @@ const page = `<!doctype html>
           <a class="btn btn-primary" href="../../index.html">Voltar à revisão</a>
           <a class="btn btn-secondary" href="mmat_visualization.html">Arquivo histórico — 17 registros</a>
         </div>
-        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Este registro histórico contém ${current.length} itens: ${empiricalCore.length} estudos empíricos da seleção histórica sob o corte 4,0, ${pendingFullText.length} relatório sem texto integral recuperado, ${abstractOnly.length} registro excluído após a triagem do resumo e 1 protocolo excluído após texto completo. Os itens e decisões descrevem o conjunto adotado nesta versão, com apreciações preliminares e limites de recuperação explícitos.</p>
+        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Este registro histórico contém ${current.length} itens: ${empiricalCore.length} estudos empíricos na seleção histórica sob o corte 4,0, ${abstractOnly.length} registro excluído após a triagem do resumo e 1 protocolo excluído após texto completo. Na recuperação atual, ${notRetrievedReports} dos ${currentSourceRetrieval.reports_sought} relatórios procurados não têm cópia verificável; ${currentSourceRetrieval.reports_assessed_at_full_text} foram avaliados em texto completo e ${currentSourceRetrieval.recovered_empirical_reports} relatórios empíricos foram recuperados. Sokkhey permanece historicamente entre os 15. Os itens e decisões descrevem o conjunto adotado nesta versão, com apreciações preliminares e limites de recuperação explícitos.</p>
       </section>
 
       <section class="section" aria-labelledby="summary-title">
@@ -453,10 +462,10 @@ const page = `<!doctype html>
           <div class="metric-card"><span class="metric-value">${current.length}</span><span class="metric-label">itens no registro de apreciação</span></div>
           <div class="metric-card"><span class="metric-value">${empiricalCore.length}</span><span class="metric-label">estudos empíricos na seleção histórica</span></div>
           <div class="metric-card"><span class="metric-value">1</span><span class="metric-label">protocolo contextual</span></div>
-          <div class="metric-card"><span class="metric-value">${primaryReviewed.length}</span><span class="metric-label">fichas com consulta histórica declarada</span></div>
+          <div class="metric-card"><span class="metric-value">${historicalConsultation.length}</span><span class="metric-label">fichas com consulta histórica declarada</span></div>
           <div class="metric-card"><span class="metric-value">${mmatAppraised.length}</span><span class="metric-label">registros com triagem MMAT (S1/S2)</span></div>
           <div class="metric-card"><span class="metric-value">${categoryAppraised.length}</span><span class="metric-label">estudos com critérios por categoria apreciados</span></div>
-          <div class="metric-card"><span class="metric-value">${pendingFullText.length}</span><span class="metric-label">${pendingFullTextLabel}</span></div>
+          <div class="metric-card"><span class="metric-value">${notRetrievedReports}</span><span class="metric-label">${notRetrievedLabel}</span></div>
         </div>
       </section>
 
@@ -471,8 +480,8 @@ const page = `<!doctype html>
           <h3>${availableEmpiricalSources} fontes disponíveis nos ${empiricalCore.length} estudos</h3>
           <p>As fichas conservam declarações históricas de consulta, com diferentes extensões de leitura. Sokkhey (2020), estudo 3, mantém julgamento histórico sem cópia verificável para revalidação atual; não é texto integral conferido nesta revisão. A disponibilidade de uma fonte também não certifica leitura integral de texto, figuras e apêndices.</p>
           <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
-          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sobre essas fontes: o estudo 3 consta da seleção histórica, mas sua ficha não foi revalidada sem o original; 6923 é o relatório não recuperado no fluxo. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura humana integral dos textos, figuras e apêndices. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
-          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm S1/S2 respondidas e ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 2 a partir do sorteio declarado das escolas, apesar da contradição documental; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${pendingFullTextSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica. O autor realizou a seleção e a apreciação preliminar com apoio de regras automatizadas e de IA generativa. O orientador Rafael Zanin e o coorientador Manassés Ribeiro ainda não revisaram especificamente esses julgamentos.</p>
+          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sokkhey permanece na seleção histórica sem cópia verificável para revalidação; o texto de Zeng também não foi recuperado e não recebeu MMAT. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura integral de textos, figuras e apêndices. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
+          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm S1/S2 respondidas e ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 2 a partir do sorteio declarado das escolas, apesar da contradição documental; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${notRetrievedSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica.</p>
         </article>
       </section>
 
@@ -532,7 +541,7 @@ const page = `<!doctype html>
         <h3>Fontes versionadas</h3>
         <p><a href="../../../research/data/mmat_reassessment_current.csv">Arquivo CSV da apreciação atual</a> · <a href="../../../research/data/mmat_component_reassessment_current.csv">CSV da apreciação por componentes</a> · <a href="../../../research/data/mmat_current_study_registry.csv">registro dos estudos</a> · <a href="../../../research/data/mmat_primary_sources_manifest.csv">manifesto de fontes primárias</a> · <a href="../reports/reproducibility_manifest.json">manifesto de reprodutibilidade</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">repositório no GitHub</a></p>
         <p><a href="../../../research/data/study_contribution_current.json">Matriz de cobertura das fontes e contribuição dos 18 registros</a></p>
-        <p class="source-note">Os julgamentos e títulos vêm dos dados versionados; o escopo, de <code>research/data/current_synthesis_scope.csv</code>; a apreciação separada por componentes mistos, de <code>research/data/mmat_component_reassessment_current.csv</code>; e a data de corte, do manifesto de reprodutibilidade. A matriz complementar informa páginas, limites da leitura documental e conferência humana pendente, sem distribuir os textos primários.</p>
+        <p class="source-note">Os julgamentos e títulos vêm dos dados versionados; o escopo, de <code>research/data/current_synthesis_scope.csv</code>; a apreciação separada por componentes mistos, de <code>research/data/mmat_component_reassessment_current.csv</code>; e a data de corte, do manifesto de reprodutibilidade. A matriz complementar informa páginas, limites da leitura documental e a situação de recuperação das fontes, sem distribuir os textos primários.</p>
         <p class="source-note">As perguntas seguem o <a href="https://doi.org/10.3233/EFI-180221" target="_blank" rel="noopener">MMAT 2018</a>; a tradução em português é acompanhada pela formulação original em inglês para manter a rastreabilidade do instrumento.</p>
       </section>
     </div>

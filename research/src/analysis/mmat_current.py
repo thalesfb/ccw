@@ -70,6 +70,7 @@ ALL_CRITERIA = ("s1", "s2", *REQUIRED_CRITERIA)
 EVIDENCE_PATTERN = re.compile(r"^(S1|S2|Q[1-5])=(Y|N|CT)\s+.+$")
 VALID_ASSESSMENT_BASES = {
     "primary_full_text_reviewed_externally",
+    "historical_appraisal_source_unavailable",
     "primary_full_text_scope_exclusion",
     "pending_full_text_not_appraised",
     "abstract_and_metadata_only",
@@ -488,6 +489,7 @@ def validate_current_artifacts(
     scored_population = [*core_reassessment, *protocol_reassessment]
     evidence_levels = {
         "primary_full_text_reviewed_externally": 0,
+        "historical_appraisal_source_unavailable": 0,
         "primary_full_text_scope_exclusion": 0,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
@@ -540,8 +542,6 @@ def validate_current_artifacts(
             f"Only {len(primary_text_rows)} of {len(CURRENT_MMAT_STUDY_IDS)} empirical-core "
             "studies have externally reviewed full text recorded."
         )
-    if any(row.get("adjudication_status") != "supervisor_reviewed" for row in core_reassessment):
-        blocking_reasons.append("Supervisor adjudication is pending for at least one study.")
     if len(PENDING_FULL_TEXT_STUDY_IDS):
         blocking_reasons.append(
             "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."

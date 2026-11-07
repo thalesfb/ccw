@@ -40,6 +40,7 @@ PAPERS_PATH = ANALYSIS_ROOT / "papers.csv"
 PAPERS_JSON_PATH = ANALYSIS_ROOT / "papers.json"
 SUMMARY_PATH = REPORT_ROOT / "summary.json"
 SCOPE_PATH = RESEARCH_ROOT / "data" / "current_synthesis_scope.csv"
+SELECTION_STATUS_PATH = RESEARCH_ROOT / "data" / "selection_status_current.json"
 DECISIONS_PATH = RESEARCH_ROOT / "data" / "adjudicated_population_decisions.csv"
 RECORD_CORRECTIONS_PATH = RESEARCH_ROOT / "data" / "adjudicated_record_corrections.csv"
 DETERMINISTIC_DUPLICATES_PATH = ANALYSIS_ROOT / "deduplication_identity_audit.csv"
@@ -594,6 +595,36 @@ def _prisma_seed() -> dict[str, Any]:
     return prisma
 
 
+def _current_source_retrieval() -> dict[str, Any]:
+    status = json.loads(SELECTION_STATUS_PATH.read_text(encoding="utf-8"))
+    retrieval = status.get("current_source_retrieval")
+    if not isinstance(retrieval, dict):
+        raise ValueError("selection status lacks the current source-retrieval overlay")
+    sought = int(retrieval["reports_sought"])
+    not_retrieved = int(retrieval["reports_not_retrieved"])
+    assessed = int(retrieval["reports_assessed_at_full_text"])
+    excluded = int(retrieval["full_text_exclusions"])
+    recovered = int(retrieval["recovered_empirical_reports"])
+    if not_retrieved + assessed != sought or excluded + recovered != assessed:
+        raise ValueError("current source-retrieval counts do not reconcile")
+    if int(retrieval["historical_empirical_selection"]) != (
+        recovered + int(retrieval["historical_empirical_without_verifiable_copy"])
+    ):
+        raise ValueError("historical study selection does not reconcile with recovered reports")
+    retrieval["stage_percentages"] = {
+        "reports_not_retrieved_of_reports_sought": round(
+            100 * not_retrieved / sought, 2
+        ),
+        "full_text_exclusions_of_assessed": round(
+            100 * excluded / assessed, 2
+        ),
+        "recovered_empirical_reports_of_assessed": round(
+            100 * recovered / assessed, 2
+        ),
+    }
+    return copy.deepcopy(retrieval)
+
+
 def _updated_prisma(papers: pd.DataFrame) -> dict[str, Any]:
     prisma = _prisma_seed()
     stages = papers["selection_stage"].fillna("").astype(str)
@@ -642,6 +673,7 @@ def _updated_prisma(papers: pd.DataFrame) -> dict[str, Any]:
             "included": included,
         }
     )
+    prisma["current_source_retrieval"] = _current_source_retrieval()
     prisma["stage_percentages"] = {
         "screening_excluded_of_identification": round(
             100 * screening_excluded / identification, 2

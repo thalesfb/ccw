@@ -148,6 +148,9 @@ def test_current_prisma_figure_uses_summary_and_separates_duplicate_sources(tmp_
     assert "n = 9.393" in labels
     assert "n = 2.482" in labels
     assert "n = 2.464" in labels
+    assert "Relatórios não recuperados\n(n = 2: Sokkhey e Zeng)" in labels
+    assert "Relatórios avaliados em texto integral\n(n = 15)" in labels
+    assert "Relatórios empíricos recuperados\n(n = 14)" in labels
     plt.close("all")
 
 
@@ -216,18 +219,20 @@ def test_current_prisma_is_legible_and_does_not_mislabel_source_denominators(tmp
         figure.canvas.draw()
         nodes = [text for text in figure.axes[0].texts if text.get_text()]
         labels = ' '.join(node.get_text() for node in nodes)
-        for prefix, key in (
-            ('Registros identificados', 'identification'),
-            ('29 duplicatas removidas', 'screening'),
-            ('Priorização histórica', 'prioritization'),
-            ('Lista preliminar', 'shortlisted'),
-            ('Relatórios procurados', 'reports_sought'),
-            ('Relatórios avaliados', 'eligibility'),
-            ('Seleção histórica', 'included'),
+        for prefix, key, source in (
+            ('Registros identificados', 'identification', 'prisma'),
+            ('29 duplicatas removidas', 'screening', 'prisma'),
+            ('Priorização histórica', 'prioritization', 'prisma'),
+            ('Lista preliminar', 'shortlisted', 'prisma'),
+            ('Relatórios procurados', 'reports_sought', 'prisma'),
+            ('Relatórios avaliados', 'reports_assessed_at_full_text', 'current_source_retrieval'),
+            ('Relatórios empíricos recuperados', 'recovered_empirical_reports', 'current_source_retrieval'),
         ):
             node = next(n for n in nodes if n.get_text().startswith(prefix))
             match = re.search(r'\(n = ([\d.]+)\)', node.get_text())
-            assert int(match.group(1).replace('.', '')) == summary['statistics']['prisma'][key]
+            prisma = summary['statistics']['prisma']
+            expected = prisma[key] if source == 'prisma' else prisma[source][key]
+            assert int(match.group(1).replace('.', '')) == expected
         assert '11.904' in labels and '11.875' in labels and '2.482' in labels
         assert 'Por fonte' not in labels
         for name in ('Crossref', 'OpenAlex', 'Semantic Scholar', 'CORE'):

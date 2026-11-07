@@ -2,81 +2,17 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-03T10:05:02+00:00",
+  "generated_at": "2026-11-07T01:04:53+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
     "role": "local operational source for raw states and diagnostics; not the versioned source of the adjudicated population"
   },
   "operational_database_snapshot": {
-    "counts": {
-      "total_records": 0,
-      "selection_stage_counts": {
-        "screening": 0,
-        "eligibility": 0,
-        "included": 0
-      },
-      "prisma": {
-        "identification": 0,
-        "duplicates_removed": 0,
-        "screening": 0,
-        "screening_excluded": 0,
-        "eligibility": 0,
-        "eligibility_excluded": 0,
-        "included": 0
-      }
-    },
-    "included_ids": [],
-    "deduplication_audit": {
-      "raw_rows": 0,
-      "operationally_flagged_rows": 0,
-      "deterministic_identity_duplicate_rows": 0,
-      "deterministic_identity_duplicate_rows_by_identifier": {
-        "doi": 0,
-        "url": 0,
-        "persisted_flag": 0
-      },
-      "confirmed_semantic_duplicates": 0,
-      "doi": {
-        "non_empty_rows": 0,
-        "distinct_values": 0,
-        "repeated_groups": 0,
-        "repeated_rows": 0,
-        "excess_rows": 0
-      },
-      "url": {
-        "non_empty_rows": 0,
-        "distinct_values": 0,
-        "repeated_groups": 0,
-        "repeated_rows": 0,
-        "excess_rows": 0
-      },
-      "title": {
-        "non_empty_rows": 0,
-        "distinct_values": 0,
-        "repeated_groups": 0,
-        "repeated_rows": 0,
-        "excess_rows": 0
-      },
-      "title_only": {
-        "non_empty_rows": 0,
-        "distinct_values": 0,
-        "repeated_groups": 0,
-        "repeated_rows": 0,
-        "excess_rows": 0
-      },
-      "interpretation": "Repeated normalized DOI/URL identities are deterministic duplicate records for the current PRISMA flow. The raw title metric includes rows in those identity groups; title_only is recalculated after identity removal. Title-only matches remain candidates for semantic review and are not removed automatically."
-    },
-    "manual_overrides": [],
-    "candidate_audit": {
-      "operational_candidates": 0,
-      "manual_overrides_recorded": 0,
-      "current_included": 0,
-      "interpretation": "The operational candidate count is the current included set plus the persisted manual-audit overrides. These overrides are not scientific exclusion findings until adjudicated, and are not an extra PRISMA stage."
-    },
+    "available": false,
     "status": "diagnostic_only",
     "authoritative_snapshot": "snapshot",
-    "interpretation": "This block records the unversioned SQLite state available when the manifest was generated. It is diagnostic only and is not the current PRISMA baseline; use the versioned snapshot object and summary.json for the current adjudicated population."
+    "interpretation": "No unversioned SQLite database was available when the manifest was generated. This is not the current PRISMA baseline; use the versioned snapshot object and summary.json for the current adjudicated population."
   },
   "protocol": {
     "status": "historical_selection_threshold_unchanged",
@@ -88,7 +24,7 @@
       "pt"
     ],
     "abstract_required": false,
-    "legacy_selector_relevance_threshold": 4,
+    "legacy_selector_relevance_threshold": 4.0,
     "selection_status_record": "SELECTION-STATUS-2026-11-03",
     "selection_status": "historical_snapshot_unchanged",
     "selection_flow_status": "historical_snapshot_reconciled",
@@ -132,6 +68,28 @@
         "eligibility": 16,
         "eligibility_excluded": 1,
         "included": 15
+      },
+      "current_source_retrieval": {
+        "date": "2026-11-06",
+        "shortlisted": 18,
+        "abstract_screening_excluded": 1,
+        "reports_sought": 17,
+        "reports_not_retrieved": 2,
+        "not_retrieved_study_keys": [
+          "Multimodels2020_002",
+          "Zeng2025_6923"
+        ],
+        "not_retrieved_labels": [
+          "Sokkhey (2020)",
+          "Zeng (2025)"
+        ],
+        "reports_assessed_at_full_text": 15,
+        "full_text_exclusions": 1,
+        "full_text_excluded_study_key": "Imperatrice2025_6921",
+        "recovered_empirical_reports": 14,
+        "historical_empirical_selection": 15,
+        "historical_empirical_without_verifiable_copy": 1,
+        "interpretation": "This current source-retrieval overlay does not reapply selection or change the historical 15-study selection. Two reports (Sokkhey and Zeng) have no verifiable copy; 15 reports were assessed, the Imperatrice protocol was excluded, and 14 empirical reports have recovered text. Sokkhey remains only as a historical inclusion with its previous MMAT responses, not as a text verified in this review. Machine2019_007 remains the abstract-stage exclusion."
       }
     },
     "included_ids": [
@@ -286,7 +244,7 @@
       "metadata_corrections_recorded": 1,
       "current_included": 15,
       "shortlisted_records": 18,
-      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The historical selection under the 4.0 cutoff is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage. The 15-study selection is historical and is not presented as the final corpus. The cutoff and the historical selection are unchanged; no new studies or selection rerun are incorporated."
+      "interpretation": "The 23-record candidate universe is preserved as historical context: 16 operationally retained records plus seven manual overrides. The selection under the 4.0 cutoff remains historical; current source retrieval is reported separately as 2 reports not retrieved, 15 reports assessed, 14 empirical reports recovered, and 15 historical empirical studies. The 15-study selection retains Sokkhey without a verifiable copy. The historical selection is divided into 15 empirical studies, 1 record excluded after abstract screening, 1 historical full-text report not retrieved, and 1 protocol excluded after full-text assessment. These categories describe distinct stages; the preliminary list is not equivalent to the empirical included set or an additional PRISMA stage. The 15-study selection is historical and is not presented as the final corpus. The cutoff and the historical selection are unchanged; no new studies or selection rerun are incorporated."
     },
     "manual_override_adjudication": {
       "path": "research/data/manual_override_adjudication.csv",
@@ -412,7 +370,8 @@
       "current_denominator": 15,
       "denominator_meaning": "S1/S2 screening records; use category_appraised_rows for Q1-Q5 coverage",
       "evidence_levels": {
-        "primary_full_text_reviewed_externally": 15,
+        "primary_full_text_reviewed_externally": 14,
+        "historical_appraisal_source_unavailable": 1,
         "primary_full_text_scope_exclusion": 0,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
@@ -420,7 +379,8 @@
         "protocol_or_proposal_not_applicable": 1
       },
       "record_evidence_levels": {
-        "primary_full_text_reviewed_externally": 15,
+        "primary_full_text_reviewed_externally": 14,
+        "historical_appraisal_source_unavailable": 1,
         "primary_full_text_scope_exclusion": 1,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
@@ -428,7 +388,7 @@
         "protocol_or_proposal_not_applicable": 1,
         "pending_full_text_not_appraised": 1
       },
-      "primary_text_reviewed_rows": 15,
+      "primary_text_reviewed_rows": 14,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
       "non_ct_criterion_decisions": 54,
@@ -439,11 +399,11 @@
         "Studies 5 and 7 use an inferred category-3 route with allocation unknown; study 8 uses an explicitly adapted category-4 route for computational models.",
         "The preliminary ledger must not be interpreted as a quality score or ranking.",
         "Study 8 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
-        "Supervisor adjudication is pending for at least one study.",
+        "Only 14 of 15 empirical-core studies have externally reviewed full text recorded.",
         "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
       ]
     },
-    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 15 studies and category-specific appraisal for 15; 15 records remain provisionally in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-2 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. MMAT has not been applied to the 1 unretrieved shortlisted report. Incomplete source retrieval or pending methodological adjudication blocks any final quality claim. The author performed preliminary selection and appraisal with automated support. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; the recorded appraisals remain preliminary."
+    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 15 studies and category-specific appraisal for 15; 15 records remain in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-2 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. Sokkhey remains only as a historical record without a verifiable source copy; its previous MMAT responses are not revalidated. Zeng is outside the 15-study selection and has no MMAT appraisal. The recorded appraisals remain preliminary."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
@@ -495,7 +455,7 @@
     {
       "path": "research/exports/reports/summary.json",
       "role": "PRISMA and derived summary statistics",
-      "sha256": "2ad36b902499b2f578303bd10a11df65c3260b442b55f307862d8b6c06bb68b2"
+      "sha256": "4d960b8cd332c9cc3b1655ec7c40e539e4a03f51901e96dd0bb58807662f6843"
     },
     {
       "path": "research/exports/references/included_papers.bib",
@@ -510,27 +470,27 @@
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "cd8fdd59fad7142089eea78e35629a6c7f5f3921f86fc54b8649f785dfd3ba1d"
+      "sha256": "d1b81092fc423d2c2617cbdc5fdb12d2aad9a3a1bd787f2c704bbcd10d596eb4"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
       "role": "source ledger for primary-source verification of current MMAT studies",
-      "sha256": "009b8b03f235ff29a9e139e8d47920482e2e241a2efe5830e1939d3c660ef58d"
+      "sha256": "7fdf4339aaeec1e405d92203759736ff71ec5d762118d75a063b4359fd484f20"
     },
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "74f90000538a00ec222a10e2ee3a95975ab2de39377afe8080f29e9169c11d26"
+      "sha256": "638b3011f5ff73651465e0c4fe9da6ca934d606709774e23d1cfd50b35c3fd3d"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
-      "sha256": "e6af79719f5ed0ee01918bdc2a9d218dcfc8b339181706ec80fb252218090ddc"
+      "sha256": "4c9b79d28146768e4bee4b3d3adaf95658e403035fc761c40338d82694df4775"
     },
     {
       "path": "research/data/study_contribution_current.json",
       "role": "source-bound reading coverage and bounded contributions for all candidate records; human verification pending",
-      "sha256": "5bfa7603057e7a5ad70391623988008fd777080ab7fec89e2c777a59eba519cc"
+      "sha256": "84af05c65a13e9cbd835e5c29a7aee0afca0bdf0d94d336f41ff7fca38c2cfd1"
     },
     {
       "path": "research/data/adjudicated_population_decisions.csv",
@@ -585,12 +545,12 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "d9c1898059de228a8bb052518d71ec257e0a462e1df0da216db7c33033a5feb7"
+      "sha256": "7151aad94fe6bb5aaeccf2f61225232026754530edf0eda94bc59ecc637d5440"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "1903ba2577b68b77972210c4b84a7c1e6fe21364aadec99960d1a60f778def59"
+      "sha256": "b7480260936e5e2e6cd9f90113fba84a6a44243a383e2a9a002fdbcf94245824"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",
@@ -615,17 +575,17 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "0c5639a6d743ab965bc06b94d0b6d2745bfe841d97d0c8a1ddbeee29bfaa40f1"
+      "sha256": "d9bf87b5e88654fb7d143bcd1ad4c960c721bb06e5945df0b62857023dc6b75a"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
       "role": "SQLite-independent transformation from the versioned row export and adjudication ledger",
-      "sha256": "649e8d9f4c4108f7752b2b97430283b58d018ca134535ec0daf02a172421dcf7"
+      "sha256": "0c62e14204360ff03b349c2e1f53c4b9c12b1368d00c6887dc66c14a238a18f5"
     },
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "validator separating provisional retention, screening responses and category-specific MMAT coverage",
-      "sha256": "75339bba14416865b4b4100c597e9e35d8cd77b595c090ee44860db338cfc5cb"
+      "sha256": "2094b55e0721646096417feeae87d137eb1d71fa1161f8118a3f11b44951dadf"
     },
     {
       "path": "research/src/analysis/study_scope.py",
@@ -635,7 +595,7 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "e507f2270a11785c5c0b4cb26a2a5ce29fad3a1a7095ca73303a9bc0695d33ef"
+      "sha256": "7b89efe36528490a806337bc33ed7299b5e74b86c40513ab1c2c4df713d26891"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
@@ -721,7 +681,7 @@
       "External API responses, metadata and cache state can change on a fresh collection.",
       "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The current empirical MMAT screening denominator is 15; 15 have preliminary category-specific appraisals, including explicit operational routes. 15 records remain provisionally included in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. No MMAT appraisal was assigned to the 1 unretrieved shortlisted report. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; the recorded appraisals remain preliminary."
+      "The current empirical MMAT screening denominator is 15; 15 have preliminary category-specific appraisals, including explicit operational routes. 15 records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records 2 reports without a verifiable copy, 15 reports assessed at full text, 1 protocol excluded, and 14 empirical reports recovered. Sokkhey remains a historical inclusion without a verifiable source copy and without revalidation of its previous MMAT responses; Zeng is outside the historical selection. One record was excluded after abstract screening. The recorded appraisals remain preliminary."
     ]
   }
 }

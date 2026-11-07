@@ -3,7 +3,7 @@
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 Em 20/10/2026, a conferência suplementar do texto integral do registro excluído
@@ -211,7 +211,7 @@ research/src/processing/adjudicated_snapshot.py.
 - **Reconciliação de 31/10/2026**: 11.904 registros identificados; 29 duplicatas removidas (27 por DOI/URL e 2 relatórios repetidos confirmados manualmente); 11.875 registros únicos na triagem.
 - **Triagem**: 9.393 excluídos; 2.482 avançaram à priorização histórica (20,85% da identificação e 20,90% da triagem).
 - **Prioridade histórica**: 2.464 dos 2.482 registros não avançaram sob as regras então usadas (99,27%; 2.459 por pontuação e cinco por outros motivos de escopo); 18 seguiram à lista preliminar (0,73%). O corte 4,0 permanece inalterado.
-- **Fluxo pós-shortlist histórico**: 1 registro excluído após resumo; 17 relatórios procurados; 1 não recuperado; 16 avaliados em texto completo; 1 protocolo excluído e 15 estudos empíricos na seleção histórica.
+- **Fluxo atual de recuperação**: 1 registro excluído após resumo; 17 relatórios procurados; 2 sem cópia verificável; 15 avaliados em texto completo; 1 protocolo excluído e 14 relatórios empíricos recuperados. A seleção histórica mantém 15 estudos, incluindo Sokkhey sem cópia verificável.
 - **Percentuais**: 78,91% dos identificados foram excluídos na triagem; 79,10% dos registros triados foram excluídos; 0,15% dos identificados chegaram à lista preliminar; 0,13% compõem a seleção histórica empírica.
 - **Identidade**: a auditoria determinística removeu 25 excedentes DOI + 2 URL; a reconciliação manual confirmou mais 2 relatórios iguais. A auditoria de título sinalizou 257 excedentes brutos e 232 após as 27 remoções DOI/URL; títulos sem confirmação de identidade não foram removidos automaticamente.
 
@@ -677,7 +677,7 @@ python -m research.src.cli run-pipeline
 ### Metodologia Científica
 
 - ✅ Relato estruturado conforme as diretrizes PRISMA 2020 (não um registro prospectivo ou protocolo completo)
-- ✅ Código e artefatos derivados versionados são públicos; o SQLite operacional é local, um texto integral não foi recuperado e a apreciação MMAT é preliminar
+- ✅ Código e artefatos derivados versionados são públicos; o SQLite operacional é local, dois textos integrais não foram recuperados (Sokkhey e Zeng) e a apreciação MMAT é preliminar
 - ✅ Reprodutibilidade do snapshot documentada por exports e manifesto
 - ✅ Auditoria por exports e ledgers versionados
 - ✅ Rastreabilidade dos 18 registros shortlistados e da decisão de escopo de cada um; isso não equivale a suporte arquivado para todas as afirmações do manuscrito

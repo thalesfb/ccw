@@ -521,6 +521,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
     amendment_path = root / "research" / "data" / "selection_status_current.json"
     amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
     selection_flow_status = amendment["data_reconciliation"]["flow_status"]
+    current_source_retrieval = amendment["current_source_retrieval"]
     decisions_path = root / "research" / "data" / "adjudicated_population_decisions.csv"
     with decisions_path.open("r", encoding="utf-8-sig", newline="") as handle:
         decisions = list(csv.DictReader(handle))
@@ -562,6 +563,7 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
                     "included",
                 )
             },
+            "current_source_retrieval": current_source_retrieval,
         },
         "included_ids": facts["included_ids"],
         "scope_record_status_counts": dict(sorted(scope_counts.items())),
@@ -590,10 +592,17 @@ def _versioned_snapshot(root: Path) -> dict[str, Any]:
             "interpretation": (
                 "The 23-record candidate universe is preserved as historical "
                 "context: 16 operationally retained records plus seven manual "
-                "overrides. The historical selection under the 4.0 cutoff is divided into "
+                "overrides. The selection under the 4.0 cutoff remains historical; "
+                "current source retrieval is reported separately as "
+                f"{_counted(current_source_retrieval['reports_not_retrieved'], 'report not retrieved', 'reports not retrieved')}, "
+                f"{_counted(current_source_retrieval['reports_assessed_at_full_text'], 'report assessed', 'reports assessed')}, "
+                f"{_counted(current_source_retrieval['recovered_empirical_reports'], 'empirical report recovered', 'empirical reports recovered')}, and "
+                f"{_counted(current_source_retrieval['historical_empirical_selection'], 'historical empirical study', 'historical empirical studies')}. "
+                "The 15-study selection retains Sokkhey without a verifiable copy. "
+                "The historical selection is divided into "
                 f"{_counted(facts['summary_prisma']['included'], 'empirical study', 'empirical studies')}, "
                 f"{_counted(facts['summary_prisma']['abstract_screening_excluded'], 'record excluded after abstract screening', 'records excluded after abstract screening')}, "
-                f"{_counted(facts['summary_prisma']['reports_not_retrieved'], 'full-text report not retrieved', 'full-text reports not retrieved')}, and "
+                f"{_counted(facts['summary_prisma']['reports_not_retrieved'], 'historical full-text report not retrieved', 'historical full-text reports not retrieved')}, and "
                 f"{_counted(facts['summary_prisma']['eligibility_excluded'], 'protocol excluded after full-text assessment', 'protocols excluded after full-text assessment')}. "
                 "These categories describe distinct stages; the preliminary list is not "
                 "equivalent to the empirical included set or an additional PRISMA stage. "
@@ -834,18 +843,32 @@ def generate_manifest(
     if not destination.is_absolute():
         destination = root / destination
 
-    # The database is retained as a local operational diagnostic.  The
-    # committed versioned artifacts are the source of truth for the current
-    # adjudicated population and must drive the manifest snapshot.
-    operational_snapshot = _database_snapshot(source_db)
-    operational_snapshot["status"] = "diagnostic_only"
-    operational_snapshot["authoritative_snapshot"] = "snapshot"
-    operational_snapshot["interpretation"] = (
-        "This block records the unversioned SQLite state available when the "
-        "manifest was generated. It is diagnostic only and is not the current "
-        "PRISMA baseline; use the versioned snapshot object and summary.json "
-        "for the current adjudicated population."
-    )
+    # The database is an optional local diagnostic. Versioned exports remain
+    # authoritative and the manifest must still be reproducible without a
+    # private SQLite file in a clean checkout.
+    if source_db.exists():
+        operational_snapshot = _database_snapshot(source_db)
+        operational_snapshot["available"] = True
+        operational_snapshot["status"] = "diagnostic_only"
+        operational_snapshot["authoritative_snapshot"] = "snapshot"
+        operational_snapshot["interpretation"] = (
+            "This block records the unversioned SQLite state available when the "
+            "manifest was generated. It is diagnostic only and is not the current "
+            "PRISMA baseline; use the versioned snapshot object and summary.json "
+            "for the current adjudicated population."
+        )
+    else:
+        operational_snapshot = {
+            "available": False,
+            "status": "diagnostic_only",
+            "authoritative_snapshot": "snapshot",
+            "interpretation": (
+                "No unversioned SQLite database was available when the manifest "
+                "was generated. This is not the current PRISMA baseline; use the "
+                "versioned snapshot object and summary.json "
+                "for the current adjudicated population."
+            ),
+        }
     snapshot = _versioned_snapshot(root)
     snapshot["manual_override_adjudication"] = _validate_manual_override_adjudication(
         root / MANUAL_OVERRIDE_ADJUDICATION,
@@ -857,12 +880,8 @@ def generate_manifest(
     )
     mmat_qa = validate_current_artifacts()
     prisma_counts = snapshot["counts"]["prisma"]
+    current_source_retrieval = snapshot["counts"]["current_source_retrieval"]
     mmat_denominator = int(mmat_qa["current_denominator"])
-    unretrieved_report_label = _counted(
-        prisma_counts["reports_not_retrieved"],
-        "unretrieved shortlisted report",
-        "unretrieved shortlisted reports",
-    )
     scope_path = root / "research" / "data" / "current_synthesis_scope.csv"
     with scope_path.open("r", encoding="utf-8-sig", newline="") as handle:
         scope_dates = [row["snapshot_date"] for row in csv.DictReader(handle)]
@@ -903,15 +922,13 @@ def generate_manifest(
             "interpretation": (
                 f"The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for {mmat_denominator} studies and "
                 f"category-specific appraisal for {mmat_qa['category_appraised_rows']}; "
-                f"{prisma_counts['included']} records remain provisionally in the historical empirical selection. "
+                f"{prisma_counts['included']} records remain in the historical empirical selection. "
                 "Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, "
                 "and study 14 a category-2 route with conflicting allocation reports. Distinct datasets "
                 "within study 8 must not be combined or counted twice. "
-                f"MMAT has not been applied to the {unretrieved_report_label}. "
-                "Incomplete source retrieval or pending methodological adjudication blocks any final quality claim."
-                " The author performed preliminary selection and appraisal with automated support. "
-                "Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; "
-                "the recorded appraisals remain preliminary."
+                "Sokkhey remains only as a historical record without a verifiable source copy; its previous MMAT responses are not revalidated. "
+                "Zeng is outside the 15-study selection and has no MMAT appraisal. "
+                "The recorded appraisals remain preliminary."
             ),
         },
         "artifact_scope": "research_snapshot",
@@ -952,7 +969,7 @@ def generate_manifest(
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have preliminary category-specific appraisals, including explicit operational routes. {prisma_counts['included']} records remain provisionally included in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. No MMAT appraisal was assigned to the {unretrieved_report_label}. One record was excluded after abstract screening; supplemental full-text review confirmed that scope decision without changing the original PRISMA stage or count. One protocol was excluded after full-text screening. Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments; the recorded appraisals remain preliminary.",
+                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have preliminary category-specific appraisals, including explicit operational routes. {prisma_counts['included']} records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records {current_source_retrieval['reports_not_retrieved']} reports without a verifiable copy, {current_source_retrieval['reports_assessed_at_full_text']} reports assessed at full text, {current_source_retrieval['full_text_exclusions']} protocol excluded, and {current_source_retrieval['recovered_empirical_reports']} empirical reports recovered. Sokkhey remains a historical inclusion without a verifiable source copy and without revalidation of its previous MMAT responses; Zeng is outside the historical selection. One record was excluded after abstract screening. The recorded appraisals remain preliminary.",
             ],
         },
     }

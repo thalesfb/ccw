@@ -7,9 +7,11 @@ e não constitui avaliação final do MMAT. A versão estruturada encontra-se em
 
 ## Unidades e limites
 
-O fluxo registra 18 candidatos, 17 relatórios procurados, 16 declarados avaliados
-e 15 registros mantidos provisoriamente. Esses números não comprovam 15 estudos
-independentes, leitura humana integral ou disponibilidade atual de todas as fontes.
+O fluxo registra 18 candidatos, 17 relatórios procurados, dois sem cópia
+verificável, 15 avaliados em texto completo e 14 relatórios empíricos recuperados.
+O conjunto histórico mantém 15 estudos, incluindo Sokkhey sem cópia verificável.
+Esses números não comprovam 15 estudos independentes nem disponibilidade atual
+de todas as fontes.
 
 <!-- ccw-sync:start coverage -->
 Em 29/10/2026, há **16 de 18 PDFs locais** identificados por hash; faltam os registros **3 e 6923**. Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. A leitura documental assistida e a revisão científica humana são estados distintos.
