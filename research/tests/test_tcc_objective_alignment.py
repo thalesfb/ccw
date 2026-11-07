@@ -19,7 +19,7 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         labels = re.findall(r"^\\item \((OE\d+)\) ", objectives, re.M)
         self.assertEqual(labels, ["OE1", "OE2", "OE3", "OE4"])
         self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
-        for phrase in ("O OE1 foi desenvolvido", "O OE2 identificou",
+        for phrase in ("O OE1 foi desenvolvido", "O OE2 foi desenvolvido nos termos formulados",
                        "O OE3 resultou", "O OE4 resultou"):
             self.assertIn(phrase, results)
         self.assertIn(r"\begin{alineas}", objectives)
@@ -36,6 +36,8 @@ class ObjectiveAlignmentTests(unittest.TestCase):
             objectives,
         )
         self.assertIn("discutir conceitualmente dimensões técnicas, pedagógicas e éticas", objectives)
+        self.assertIn("O OE2 foi delimitado à codificação sistemática", intro)
+        self.assertIn("O OE2 foi atendido nos termos formulados:", (CONTENT / "conclusao.tex").read_text(encoding="utf-8"))
         self.assertIn("(OE3) formular a especificação técnica e pedagógica", objectives)
         self.assertIn(
             "(OE4) propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, "
