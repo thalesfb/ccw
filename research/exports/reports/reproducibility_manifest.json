@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-07T01:04:53+00:00",
+  "generated_at": "2026-11-07T05:02:16+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -415,7 +415,7 @@
     {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",
       "role": "explicit provisional appraisal routes, source locators and criterion-level decisions for studies 5, 7, 8 and 14",
-      "sha256": "417bbf3940beb005272bfad6b36be2aa7265b0642e6ae0cb8db6fc27fe1b0163"
+      "sha256": "062614ccc789180ab6380488922aa11fcbc12c52fa74794935109875618a8ea8"
     },
     {
       "path": "research/data/mmat_followup_questions_current.csv",
@@ -480,7 +480,7 @@
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "638b3011f5ff73651465e0c4fe9da6ca934d606709774e23d1cfd50b35c3fd3d"
+      "sha256": "629ae712d36a6b79fc3d3ef87144613740ba23048578113a9c6f836972c35620"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",

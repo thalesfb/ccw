@@ -44,7 +44,9 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         self.assertIn("A regra de decisão e sua justificativa deverão ser definidas antes de eventual comparação", prototype)
         self.assertIn("não define as colunas habilitadas", prototype)
         self.assertIn("a rotina de explicação local decompõe", prototype)
-        self.assertIn("após associar cada previsão ao respectivo registro de origem", prototype)
+        self.assertIn("até as 20 primeiras linhas do conjunto de teste, ordenadas pelo identificador", prototype)
+        self.assertIn("pela ordem da interação e pelo identificador do registro de origem", prototype)
+        self.assertIn("não uma amostra aleatória", prototype)
         self.assertNotIn("teste alinhado por execução", prototype)
         self.assertIn("O produto do trabalho é documental", intro)
 
