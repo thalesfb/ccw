@@ -19,7 +19,7 @@ Revisão dos sete capítulos do TCC, resumo em português e inglês, quadro de r
 
 O HTML atual (`mmat_current.html`) corresponde ao gerador e às fontes versionadas. A página `mmat_visualization.html` é histórica e usa outro conjunto de 17 registros. A navegação principal aponta para a página atual. Não foi confirmada nesta revisão a URL que o leitor consultou nem o estado efetivamente publicado no servidor.
 
-O registro atual reúne 18 itens: 15 estudos empíricos provisórios e três disposições distintas (exclusão após resumo, relatório não recuperado e protocolo excluído). Destes 15 estudos, 14 têm S1/S2 e 11 têm Q1–Q5 apreciados. Por isso, o quadro principal MMAT do TCC tem 14 linhas e não 18; sua cobertura não deve ser confundida com o tamanho do corpus. Não há nota global ou ranking de qualidade.
+Registro histórico da revisão editorial de 28/10/2026: naquele momento, o conjunto reunia 18 itens, dos quais 15 eram estudos empíricos provisórios e três tinham outras disposições (exclusão após resumo, relatório não recuperado e protocolo excluído). Desses 15 estudos, 14 tinham respostas S1/S2 e 11 tinham Q1–Q5 apreciados. Essa contagem descreve o estado daquela revisão e não o estado MMAT atualizado em 07/11/2026. Na revisão registrada aqui, o quadro principal tinha 14 linhas, não 18; sua cobertura não deve ser confundida com o tamanho do corpus. Não há nota global ou ranking de qualidade.
 
 | Estudo | Pendência documental/metodológica preservada |
 |---|---|

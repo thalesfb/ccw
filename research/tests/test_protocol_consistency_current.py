@@ -123,7 +123,7 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     assert prisma["deduplication_audit"]["confirmed_semantic_duplicates"] == 0
 
 
-def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> None:
+def test_prisma_reconciliation_preserves_historical_and_current_mmat_denominators() -> None:
     with PRISMA_RECONCILIATION_PATH.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
@@ -132,10 +132,15 @@ def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> 
         for row in rows
         if row["snapshot_date"] == "2026-10-14"
     }
-    latest_scope = {
+    historical_mmat = {
         row["metric"]: int(row["value"])
         for row in rows
         if row["snapshot_date"] == "2026-10-14"
+    }
+    current_mmat = {
+        row["metric"]: int(row["value"])
+        for row in rows
+        if row["snapshot_date"] == "2026-11-07"
     }
 
     assert flow["reports_sought"] == 17
@@ -143,8 +148,9 @@ def test_prisma_reconciliation_uses_the_current_scope_and_mmat_denominator() -> 
     assert flow["reports_assessed_at_full_text"] == 16
     assert flow["full_text_scope_exclusions"] == 1
     assert flow["empirical_studies_included"] == 15
-    assert latest_scope["empirical_studies_included"] == 15
-    assert latest_scope["current_mmat_empirical_denominator"] == 14
+    assert historical_mmat["empirical_studies_included"] == 15
+    assert historical_mmat["current_mmat_empirical_denominator"] == 14
+    assert current_mmat["current_mmat_empirical_denominator"] == 15
 
 
 def test_latest_prisma_reconciliation_describes_the_unchanged_current_selection() -> None:

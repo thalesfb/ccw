@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-07T01:04:53+00:00",
+  "generated_at": "2026-11-07T11:44:47+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -391,7 +391,7 @@
       "primary_text_reviewed_rows": 14,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 54,
+      "non_ct_criterion_decisions": 53,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
@@ -415,12 +415,12 @@
     {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",
       "role": "explicit provisional appraisal routes, source locators and criterion-level decisions for studies 5, 7, 8 and 14",
-      "sha256": "417bbf3940beb005272bfad6b36be2aa7265b0642e6ae0cb8db6fc27fe1b0163"
+      "sha256": "e9db5c7c7950eac963776b344bbb1c2650dff9c64cf3334baf5021c6562442e2"
     },
     {
       "path": "research/data/mmat_followup_questions_current.csv",
       "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
-      "sha256": "ae37a12ede7080877b745432e2ad825ceeb1522dfacbeaedbb0ee4eb6e98615d"
+      "sha256": "bb61329bf25df75cafe6fe4a019309673627d2797c8d9e1f602d85d887644d73"
     },
     {
       "path": "research/data/mmat_completion_review_2026-10-28.json",
@@ -480,7 +480,7 @@
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "638b3011f5ff73651465e0c4fe9da6ca934d606709774e23d1cfd50b35c3fd3d"
+      "sha256": "9c08ffe5e6533539a88717592cdca4cc104b507a1078e1cfd7ccc0244ee5366a"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
@@ -600,7 +600,7 @@
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "e02b880da100a8f550a1f95e0e4d7bbc8745ce26418bbaf0d60afe0fa25d7e07"
+      "sha256": "b9e8766a3bd49b8a738e685e9a62c6d86e9cbf8260eef8bfb8ef2bab997efb88"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",
