@@ -488,6 +488,7 @@ class ReportGenerator:
             eligibility_remaining = int(prisma_stats.get('eligibility', screening_remaining - eligibility_excluded))
 
             if 'reports_sought' in prisma_stats:
+                retrieval = prisma_stats.get('current_source_retrieval') or {}
                 report_stats['selection_stages'] = {
                     'Identificação': identification,
                     'Registros após deduplicação': screening_remaining,
@@ -497,9 +498,18 @@ class ReportGenerator:
                     'Selecionados para leitura de resumo': int(prisma_stats['shortlisted']),
                     'Excluídos após leitura de resumo': int(prisma_stats['abstract_screening_excluded']),
                     'Relatórios buscados': int(prisma_stats['reports_sought']),
-                    'Relatórios não recuperados': int(prisma_stats['reports_not_retrieved']),
-                    'Textos integrais avaliados': eligibility,
-                    'Excluídos após texto integral': eligibility_excluded,
+                    'Relatórios não recuperados': int(
+                        retrieval.get('reports_not_retrieved', prisma_stats['reports_not_retrieved'])
+                    ),
+                    'Textos integrais avaliados': int(
+                        retrieval.get('reports_assessed_at_full_text', eligibility)
+                    ),
+                    'Relatórios empíricos recuperados': int(
+                        retrieval.get('recovered_empirical_reports', included)
+                    ),
+                    'Excluídos após texto integral': int(
+                        retrieval.get('full_text_exclusions', eligibility_excluded)
+                    ),
                     'Estudos da seleção histórica': included,
                 }
             else:
@@ -742,9 +752,9 @@ class ReportGenerator:
             <tr><td>Submetidos à priorização histórica / registros após deduplicação</td><td>{{ statistics.stage_percentages.prioritization_passed_of_screened_records }}%</td></tr>
             <tr><td>Não avançaram na priorização histórica / registros priorizados</td><td>{{ statistics.stage_percentages.prioritization_excluded_of_prioritization }}%</td></tr>
             <tr><td>Excluídos após resumo / shortlist</td><td>{{ statistics.stage_percentages.abstract_screening_excluded_of_shortlist }}%</td></tr>
-            <tr><td>Relatórios não recuperados / relatórios buscados</td><td>{{ statistics.stage_percentages.reports_not_retrieved_of_reports_sought }}%</td></tr>
-            <tr><td>Excluídos após texto integral / textos avaliados</td><td>{{ statistics.stage_percentages.full_text_excluded_of_assessed }}%</td></tr>
-            <tr><td>Incluídos na síntese / textos avaliados</td><td>{{ statistics.stage_percentages.included_of_assessed }}%</td></tr>
+            <tr><td>Relatórios não recuperados / relatórios buscados</td><td>{{ statistics.prisma.current_source_retrieval.stage_percentages.reports_not_retrieved_of_reports_sought if statistics.prisma.current_source_retrieval is defined else statistics.stage_percentages.reports_not_retrieved_of_reports_sought }}%</td></tr>
+            <tr><td>Excluídos após texto integral / textos avaliados</td><td>{{ statistics.prisma.current_source_retrieval.stage_percentages.full_text_exclusions_of_assessed if statistics.prisma.current_source_retrieval is defined else statistics.stage_percentages.full_text_excluded_of_assessed }}%</td></tr>
+            <tr><td>Relatórios empíricos recuperados / textos avaliados</td><td>{{ statistics.prisma.current_source_retrieval.stage_percentages.recovered_empirical_reports_of_assessed if statistics.prisma.current_source_retrieval is defined else statistics.stage_percentages.included_of_assessed }}%</td></tr>
             {% else %}
             <tr><td>Excluídos na triagem / identificação</td><td>{{ statistics.stage_percentages.screening_excluded_of_identification }}%</td></tr>
             <tr><td>Avançaram da triagem / identificação</td><td>{{ statistics.stage_percentages.screening_advanced_of_identification }}%</td></tr>
@@ -753,7 +763,7 @@ class ReportGenerator:
             {% endif %}
             <tr><td>Incluídos / identificação</td><td>{{ statistics.stage_percentages.included_of_identification }}%</td></tr>
         </table>
-        <p>O fluxo de seleção exibido é histórico: a priorização por metadados e resumos não equivale à elegibilidade em texto completo. Relatórios não recuperados permanecem separados e não são tratados como exclusões após leitura integral.</p>
+        <p>A seleção por corte 4,0 permanece histórica e inalterada. A priorização por metadados e resumos não equivale à elegibilidade em texto completo. O fluxo de recuperação atual registra {{ statistics.prisma.current_source_retrieval.reports_not_retrieved if statistics.prisma.current_source_retrieval is defined else statistics.prisma.reports_not_retrieved }} relatório(s) não recuperado(s), {{ statistics.prisma.current_source_retrieval.reports_assessed_at_full_text if statistics.prisma.current_source_retrieval is defined else statistics.prisma.eligibility }} avaliado(s) e {{ statistics.prisma.current_source_retrieval.recovered_empirical_reports if statistics.prisma.current_source_retrieval is defined else statistics.prisma.included }} relatório(s) empírico(s) recuperado(s). Sokkhey permanece apenas como inclusão histórica sem cópia verificável; relatórios não recuperados não são exclusões após leitura integral.</p>
     </div>
     {% endif %}
 
@@ -1023,9 +1033,10 @@ class ReportGenerator:
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Selecionados para leitura de resumo</td><td style="padding: 12px; text-align: right;">{{ prisma.shortlisted }}</td></tr>
                 <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após resumo</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.abstract_screening_excluded }}</td></tr>
                 <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios buscados para recuperação</td><td style="padding: 12px; text-align: right;">{{ prisma.reports_sought }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Textos integrais não recuperados</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.reports_not_retrieved }}</td></tr>
-                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Textos integrais avaliados</td><td style="padding: 12px; text-align: right;">{{ prisma.eligibility }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após texto integral</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.eligibility_excluded }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Relatórios sem cópia verificável na recuperação atual</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.current_source_retrieval.reports_not_retrieved if prisma.current_source_retrieval is defined else prisma.reports_not_retrieved }}</td></tr>
+                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios avaliados em texto integral</td><td style="padding: 12px; text-align: right;">{{ prisma.current_source_retrieval.reports_assessed_at_full_text if prisma.current_source_retrieval is defined else prisma.eligibility }}</td></tr>
+                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Exclusões após texto integral</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.current_source_retrieval.full_text_exclusions if prisma.current_source_retrieval is defined else prisma.eligibility_excluded }}</td></tr>
+                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios empíricos recuperados</td><td style="padding: 12px; text-align: right;">{{ prisma.current_source_retrieval.recovered_empirical_reports if prisma.current_source_retrieval is defined else prisma.included }}</td></tr>
                 <tr style="background: #d4edda;"><td style="padding: 12px; font-weight: bold;">Estudos da seleção histórica</td><td style="padding: 12px; text-align: right; font-weight: bold; color: #28a745;">{{ prisma.included }}</td></tr>
                 {% else %}
                 <tr style="background: #f8f9fa;">
@@ -1058,7 +1069,7 @@ class ReportGenerator:
                 </tr>
                 {% endif %}
             </table>
-            <p>A priorização utiliza metadados e resumos e não equivale à avaliação de elegibilidade em texto completo. Relatórios não recuperados são informados separadamente e não são contados como exclusões após texto integral.</p>
+            <p>A priorização utiliza metadados e resumos e não equivale à avaliação de elegibilidade em texto completo. A seleção histórica mantém 15 estudos; 14 têm relatório empírico recuperado e Sokkhey permanece como inclusão histórica sem cópia verificável. O relatório não recuperado de Zeng não integra os 15. Relatórios sem cópia não são contados como exclusões após texto integral.</p>
         </div>
 
         <div class="card">

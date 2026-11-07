@@ -149,9 +149,10 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 ## Limites científicos
 
 - na seleção histórica sob o corte 4,0, dos 18 registros do MMAT, 15 estudos
-  empíricos foram selecionados, um relatório não foi recuperado, um registro foi
-  excluído após o resumo e um protocolo sem resultados concluídos após o texto
-  completo; essa seleção não é o corpus final;
+  empíricos foram mantidos; um registro foi excluído após o resumo, dois dos 17
+  relatórios procurados não foram recuperados, 15 foram avaliados em texto
+  completo, um protocolo foi excluído e 14 relatórios empíricos foram recuperados;
+  Sokkhey permanece entre os 15 apenas como inclusão histórica sem cópia verificável;
 - o MMAT desse recorte histórico é preliminar: a busca tem data de corte em
   31/08/2026 e o recorte foi reconciliado em 20/10/2026; 15 estudos têm
   triagem S1/S2 e apreciação preliminar dos critérios por categoria, incluindo

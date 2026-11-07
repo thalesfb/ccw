@@ -100,11 +100,12 @@ e resumos e não corresponde à avaliação de elegibilidade em texto completo.
 Incorpora `research/exports/visualizations/prisma_flow.png`, figura operacional
 própria, com referência ao PRISMA 2020, sincronizada com os artefatos públicos;
 ela não reproduz o diagrama PRISMA completo. Dos 18 registros selecionados preliminarmente,
-um foi excluído após a triagem do resumo; 17 relatórios foram procurados, um
-não foi recuperado e 16 foram avaliados em texto completo. Um protocolo sem
-resultados concluídos foi excluído; os outros 15 estudos empíricos integram o
-núcleo incluído. A priorização operacional anterior não é apresentada como
-etapa PRISMA de elegibilidade.
+um foi excluído após a triagem do resumo; 17 relatórios foram procurados, dois
+não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados em texto completo.
+Um protocolo sem resultados concluídos foi excluído; 14 relatórios empíricos
+foram recuperados. A seleção histórica permanece com 15 estudos porque mantém
+Sokkhey sem cópia verificável. A priorização operacional anterior não é apresentada
+como etapa PRISMA de elegibilidade.
 
 ### 12. Deduplicação: o que foi confirmado
 
@@ -137,9 +138,10 @@ e não substitui a leitura das fontes primárias.
 
 ### 16. Conjunto retido: dois estratos de leitura
 
-Dos 18 registros selecionados preliminarmente, 15 integram provisoriamente o núcleo empírico. Um foi excluído
-após a triagem do resumo; um texto integral não foi recuperado; um
-protocolo sem resultados concluídos foi excluído após texto completo. A síntese
+Dos 18 registros selecionados preliminarmente, 15 integram a seleção empírica
+histórica, dos quais 14 têm texto recuperado. Um foi excluído após a triagem do
+resumo; dois relatórios não foram recuperados (Sokkhey e Zeng); um protocolo sem
+resultados concluídos foi excluído após texto completo. A síntese
 empírica aponta recorrência de predição de desempenho e estimativa de
 proficiência, além de uma experiência que integra Transformada de Fourier ao
 ensino universitário de matemática. Nesse caso, coortes separadas por quatro
@@ -149,7 +151,7 @@ anos limitam a inferência e não isolam o efeito da IA.
 
 O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
 15 registros permanecem provisoriamente no núcleo empírico, com consultas
-documentais declaradas; 15 têm triagem S1/S2 e apreciação por categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacional, com alocação desconhecida; o 14 usa a categoria 2 declarada e contraditória; o 8 usa a categoria 4 adaptada às análises computacionais matemáticas. Essas rotas não confirmam delineamentos. Frações reutilizadas entre capítulos não são duplicadas. O texto não recuperado não recebeu apreciação.
+documentais declaradas; 15 têm triagem S1/S2 e apreciação por categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacional, com alocação desconhecida; o 14 usa a categoria 2 declarada e contraditória; o 8 usa a categoria 4 adaptada às análises computacionais matemáticas. Essas rotas não confirmam delineamentos. Frações reutilizadas entre capítulos não são duplicadas. Zeng não recebeu MMAT; as respostas anteriores de Sokkhey permanecem históricas, sem revalidação.
 
 A disponibilidade de uma fonte não comprova leitura integral. Há cópias para 14 dos 15 estudos; Sokkhey mantém julgamento histórico sem cópia para revalidação. Os limites de acesso, leitura e evidência por critério estão na trilha pública. A cobertura pública de MacLellan permanece em 38 de 108 páginas.
 

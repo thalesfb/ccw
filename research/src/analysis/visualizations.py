@@ -91,6 +91,33 @@ class ReviewVisualizer:
             fig.patch.set_facecolor("white")
             def count(key: str) -> str:
                 return f"{int(stats[key]):,}".replace(",", ".")
+            def display_count(value: int) -> str:
+                return f"{int(value):,}".replace(",", ".")
+            retrieval = stats.get("current_source_retrieval") or {}
+            if retrieval:
+                sought = int(retrieval["reports_sought"])
+                not_retrieved = int(retrieval["reports_not_retrieved"])
+                assessed = int(retrieval["reports_assessed_at_full_text"])
+                full_text_exclusions = int(retrieval["full_text_exclusions"])
+                recovered = int(retrieval["recovered_empirical_reports"])
+                historical_included = int(retrieval["historical_empirical_selection"])
+                historical_unretrieved = int(
+                    retrieval["historical_empirical_without_verifiable_copy"]
+                )
+                if not_retrieved + assessed != sought:
+                    raise ValueError("Current PRISMA retrieval counts do not reconcile")
+                if full_text_exclusions + recovered != assessed:
+                    raise ValueError("Current PRISMA assessment counts do not reconcile")
+                if recovered + historical_unretrieved != historical_included:
+                    raise ValueError("Historical inclusion and retrieval counts do not reconcile")
+            else:
+                sought = int(stats["reports_sought"])
+                not_retrieved = int(stats["reports_not_retrieved"])
+                assessed = int(stats["eligibility"])
+                full_text_exclusions = int(stats["eligibility_excluded"])
+                recovered = int(stats["included"])
+                historical_included = recovered
+                historical_unretrieved = 0
             identification = f"Registros identificados (n = {count('identification')})"
             ax.add_patch(Rectangle((0.35, 8.7), 15.3, 1.55, facecolor="#E8F4FD",
                                    edgecolor="#334155", linewidth=1.2))
@@ -125,8 +152,10 @@ class ReviewVisualizer:
                 f"Priorização histórica\n(n = {count('prioritization')})",
                 f"Lista preliminar para leitura de resumo\n(n = {count('shortlisted')})",
                 f"Relatórios procurados para texto integral\n(n = {count('reports_sought')})",
-                f"Relatórios avaliados em texto integral\n(n = {count('eligibility')})",
-                f"Seleção histórica\n(n = {count('included')})",
+                f"Relatórios avaliados em texto integral\n(n = {display_count(assessed)})",
+                (
+                    f"Relatórios empíricos recuperados\n(n = {display_count(recovered)})"
+                ) if retrieval else f"Seleção histórica\n(n = {count('included')})",
             ]
             for y, label in zip(main_y, main_labels):
                 ax.add_patch(Rectangle((main_x-box_width/2, y-box_height/2),
@@ -137,8 +166,15 @@ class ReviewVisualizer:
                 (main_y[0], f"Excluídos na triagem inicial\n(n = {count('screening_excluded')})"),
                 (main_y[1], f"Não avançaram na priorização histórica\n(n = {count('prioritization_excluded')})"),
                 (main_y[2], f"Excluído após leitura do resumo\n(n = {count('abstract_screening_excluded')})"),
-                (main_y[3], f"Texto integral não recuperado\n(n = {count('reports_not_retrieved')})"),
-                (main_y[4], f"Protocolo sem resultados concluídos\n(n = {count('eligibility_excluded')})"),
+                (
+                    main_y[3],
+                    (
+                        f"Relatórios não recuperados\n(n = {not_retrieved}: Sokkhey e Zeng)"
+                        if retrieval else
+                        f"Texto integral não recuperado\n(n = {count('reports_not_retrieved')})"
+                    ),
+                ),
+                (main_y[4], f"Protocolo sem resultados concluídos\n(n = {display_count(full_text_exclusions)})"),
             ]
             for y, label in exclusions:
                 ax.add_patch(Rectangle((exclusion_x-box_width/2, y-box_height/2),

@@ -45,6 +45,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert manifest["database"]["versioned"] is False
     assert manifest["operational_database_snapshot"]["status"] == "diagnostic_only"
     assert manifest["operational_database_snapshot"]["authoritative_snapshot"] == "snapshot"
+    assert manifest["operational_database_snapshot"]["available"] is False
     assert "not the current PRISMA baseline" in manifest["operational_database_snapshot"]["interpretation"]
     assert manifest["protocol"] == {
         "status": "historical_selection_threshold_unchanged",
@@ -73,6 +74,15 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert counts["total_records"] == 11904
     assert counts["versioned_rows"] == 11875
     assert snapshot["selection_flow_status"] == "historical_snapshot_reconciled"
+    retrieval = snapshot["counts"]["current_source_retrieval"]
+    assert retrieval["reports_sought"] == 17
+    assert retrieval["reports_not_retrieved"] == 2
+    assert retrieval["reports_assessed_at_full_text"] == 15
+    assert retrieval["full_text_exclusions"] == 1
+    assert retrieval["full_text_excluded_study_key"] == "Imperatrice2025_6921"
+    assert retrieval["recovered_empirical_reports"] == 14
+    assert retrieval["historical_empirical_selection"] == 15
+    assert retrieval["historical_empirical_without_verifiable_copy"] == 1
     assert counts["selection_stage_counts"] == {
         "screening": 9393,
         "prioritization": 2464,
@@ -126,7 +136,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert snapshot["candidate_audit"]["shortlisted_records"] == 18
     interpretation = snapshot["candidate_audit"]["interpretation"]
     assert "15 empirical studies" in interpretation
-    assert "1 full-text report not retrieved" in interpretation
+    assert "1 historical full-text report not retrieved" in interpretation
     assert "four full-text reports not retrieved" not in interpretation
     assert "false_positives_removed" not in snapshot["candidate_audit"]
 
@@ -136,8 +146,11 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "S1/S2 screening for 15 studies and category-specific appraisal for 15" in appraisal
     assert "category-specific appraisal for 15" in appraisal
     assert "three screened studies await design adjudication" not in appraisal
-    assert "Rafael Zanin and Manassés Ribeiro have not specifically reviewed these judgments" in appraisal
-    assert "15 records remain provisionally in the historical empirical selection" in appraisal
+    assert "Sokkhey remains only as a historical record without a verifiable source copy" in appraisal
+    assert "Zeng is outside the 15-study selection" in appraisal
+    assert "Rafael Zanin" not in appraisal
+    assert "Manassés Ribeiro" not in appraisal
+    assert "15 records remain in the historical empirical selection" in appraisal
     assert "historical and is not presented as the final corpus" in interpretation
     assert "11 studies" not in appraisal
 
@@ -148,7 +161,9 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     )
     assert "15" in mmat_limitation
     assert "15" in mmat_limitation
-    assert "1 unretrieved shortlisted report" in mmat_limitation
+    assert "2 reports without a verifiable copy" in mmat_limitation
+    assert "Sokkhey remains a historical inclusion" in mmat_limitation
+    assert "Zeng is outside the historical selection" in mmat_limitation
     assert "four shortlisted reports were not retrieved" not in mmat_limitation
     assert len(snapshot["manual_overrides"]) == 7
     override_ledger = snapshot["manual_override_adjudication"]
@@ -197,10 +212,12 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     assert current_mmat["category_pending_ids"] == []
     assert current_mmat["included_empirical_study_ids"][-1] == 6920
     assert current_mmat["mmat_unit_hold_ids"] == []
-    assert current_mmat["primary_text_reviewed_rows"] == 15
-    assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 15
+    assert current_mmat["primary_text_reviewed_rows"] == 14
+    assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
+    assert current_mmat["evidence_levels"]["historical_appraisal_source_unavailable"] == 1
     assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 0
-    assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 15
+    assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 14
+    assert current_mmat["record_evidence_levels"]["historical_appraisal_source_unavailable"] == 1
     assert current_mmat["record_evidence_levels"]["abstract_and_metadata_only"] == 0
     assert current_mmat["record_evidence_levels"]["primary_full_text_scope_exclusion"] == 1
     assert current_mmat["record_evidence_levels"]["pending_full_text_not_appraised"] == 1
@@ -338,9 +355,11 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "emenda aprovada" not in root_html
     assert "na priorização histórica" in root_html
     assert "encaminhados à elegibilidade" not in root_html
-    assert "A seleção histórica tem 18 registros na lista preliminar: 15 estudos empíricos selecionados sob o corte 4,0" in tcc_html
-    assert "a apreciação mmat preliminar abrange os 15 estudos" in tcc_html.lower()
+    assert "A seleção histórica mantém 15 estudos empíricos sob o corte 4,0" in tcc_html
+    assert "a apreciação mmat preliminar abrange as 15 fichas" in tcc_html.lower()
     assert "A aplicação funcional e a validação experimental estão fora do escopo" in tcc_html
-    assert "Não há escore agregado" in tcc_html
-    assert "Não há escore agregado nem corpus final" in tcc_html
+    mmat_html = (REPOSITORY_ROOT / "research" / "exports" / "analysis" / "mmat_current.html").read_text(
+        encoding="utf-8"
+    )
+    assert "nota global" in mmat_html.lower()
     assert "11.904" not in tcc_html

@@ -100,10 +100,11 @@ científica esteja distribuída de forma uniforme. A cobertura está condicionad
 
 ## 12. População retida — 1:05
 
-Dos 18 registros da lista de leitura, 15 integram o conjunto empírico da
-seleção sob o corte 4,0. Um foi excluído após o resumo; um relatório não foi
-recuperado e não recebeu MMAT; um protocolo sem resultados concluídos foi
-excluído após texto completo. As finalidades dos 15 estudos incluem
+Dos 18 registros da lista de leitura, 15 integram a seleção empírica
+histórica, dos quais 14 têm texto recuperado. Um foi excluído após o resumo;
+dois relatórios não foram recuperados: Sokkhey, que permanece como inclusão
+histórica sem cópia verificável, e Zeng, que não integra os 15. Um protocolo
+sem resultados concluídos foi excluído após texto completo. As finalidades dos 15 estudos incluem
 predição/classificação, personalização ou STI, intervenção didática,
 modelagem cognitiva e integração curricular. Isso descreve o conjunto adotado,
 sem escolher um algoritmo vencedor.
@@ -113,7 +114,7 @@ sem escolher um algoritmo vencedor.
 O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
 respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
 uma pontuação agregada. A avaliação é preliminar e foi feita por um único
-revisor. Entre os 15 estudos, 14 têm cópias disponíveis com diferentes
+revisor. Entre os 15 estudos históricos, 14 têm cópias disponíveis com diferentes
 extensões de leitura; Sokkhey mantém julgamento histórico sem cópia verificável
 para revalidação. CT descreve a evidência disponível ao revisor, com limites
 de acesso e leitura, e não demonstra automaticamente falha do relato.

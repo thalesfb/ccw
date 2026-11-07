@@ -5,7 +5,7 @@
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, ainda provisoriamente, 1 exclusão após resumo, 1 relatório não recuperado no fluxo histórico e 1 protocolo excluído após texto completo. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. No MMAT preliminar, há 15 triagens S1/S2 e 15 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
 
 O estado público, os limites interpretativos e as decisões metodológicas ainda
@@ -228,9 +228,10 @@ python -m pytest research/tests/test_defense_consistency.py -q
 | Triagem | 11.875 | 9.393 excluídos |
 | Priorização histórica | 2.482 | 2.464 não avançaram sob as regras históricas: 2.459 por pontuação e cinco por escopo |
 | Lista preliminar | 18 | 1 exclusão após resumo |
-| Relatórios procurados | 17 | 1 não recuperado no fluxo histórico |
-| Relatórios declarados avaliados em texto completo | 16 | 1 protocolo excluído; a contagem não certifica leitura humana integral |
-| Seleção histórica de estudos empíricos | 15 | Conjunto adotado nesta versão, selecionado sob o corte 4,0 |
+| Relatórios procurados | 17 | 2 não recuperados: Sokkhey e Zeng |
+| Relatórios avaliados em texto completo | 15 | 1 protocolo excluído; 14 relatórios empíricos recuperados |
+| Relatórios empíricos recuperados | 14 | Os 14 relatórios com texto recuperado; protocolo excluído não incluído |
+| Seleção histórica de estudos empíricos | 15 | Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados |
 <!-- ccw-sync:end flow -->
 
 Os sete overrides manuais e a correção temporal do ID 6918 estão registrados

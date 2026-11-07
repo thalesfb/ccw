@@ -42,10 +42,11 @@ def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_r
     assert "Registros na lista preliminar & 18" in results
     assert "Excluídos após triagem do resumo & 1" in results
     assert "Relatórios procurados após triagem do resumo & 17" in results
-    assert "Relatórios não recuperados & 1" in results
-    assert "Relatórios avaliados em texto completo & 16" in results
+    assert "Relatórios não recuperados & 2" in results
+    assert "Relatórios avaliados em texto completo & 15" in results
     assert "Protocolos excluídos após texto completo & 1" in results
-    assert "Estudos empíricos selecionados pelo corte 4,0 & 15" in results
+    assert "Relatórios empíricos recuperados & 14" in results
+    assert "Estudos empíricos mantidos na seleção histórica & 15" in results
     assert "mantidos provisoriamente & 15" not in results
     assert "Candidatos empíricos provisórios & 17" not in results
 
@@ -60,16 +61,19 @@ def test_source_appendix_dates_scope_reconciliation_without_implying_a_new_searc
 
 def test_research_readme_uses_operational_prioritization_and_explicit_denominators() -> None:
     readme = (ROOT / "research/README.md").read_text(encoding="utf-8")
-    current = readme.split("**População do snapshot de busca (03/09/2026), com escopo atualizado em 20/10/2026**:", 1)[1].split(
-        "**Baseline histórico", 1
+    current = readme.split("<!-- ccw-sync:start snapshot -->", 1)[1].split(
+        "<!-- ccw-sync:end snapshot -->", 1
     )[0]
 
     assert "2.482 avançaram à priorização histórica" in current
     assert "20,90% da triagem" in current
-    assert "99,27%" in current and "não avançaram sob as regras então usadas" in current
-    assert "18 seguiram à lista preliminar (0,73%)" in current
+    assert "99,27%" in current and "não avançaram sob a regra histórica" in current
+    assert "encaminhou 18 registros à lista preliminar (0,73%)" in current
     assert "17 relatórios procurados" in current
-    assert "15 estudos empíricos na seleção histórica" in current
+    assert "15 estudos empíricos mantidos na seleção histórica" in current
+    assert "14 têm relatório recuperado" in current
+    assert "2 não foram recuperados (Sokkhey (2020) e Zeng (2025))" in current
+    assert "15 foram avaliados em texto completo" in current
     assert "Para diagnóstico da execução no SQLite local" in readme
     assert "não devem substituir os números versionados no TCC" in readme
     assert "Para obter os números atualizados" not in readme
@@ -85,11 +89,11 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
 
     assert r"\citeonline{Zeng2025_6923} não foi recuperado" in results
     assert "Os 15 estudos selecionados segundo o corte de relevância 4,0 receberam apreciação preliminar" in methodology
-    assert "um não foi recuperado" in results
-    assert "Restaram 15 estudos empíricos." in results
+    assert "dois não foram recuperados (Sokkhey e Zeng)" in results
+    assert "dos quais 14 têm texto recuperado" in results
     assert "núcleo empírico" not in results
-    assert "um texto integral não foi recuperado" in normalized_presentation
-    assert "os outros 15 estudos empíricos integram o núcleo incluído" in normalized_presentation
+    assert "dois não foram recuperados (Sokkhey e Zeng)" in normalized_presentation
+    assert "A seleção histórica permanece com 15 estudos" in normalized_presentation
     assert "nove registros tiveram" not in results.lower()
     assert "nove registros tiveram" not in presentation.lower()
 
@@ -105,8 +109,12 @@ def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
         .read_text(encoding="utf-8")
         .split()
     )
+    export_readme = (ROOT / "research/exports/README.md").read_text(encoding="utf-8")
+    meeting_notes = (ROOT / "docs/tcc/REUNIAO-DECISAO-ESCOPO.md").read_text(
+        encoding="utf-8"
+    )
 
-    assert "17 relatórios foram procurados, um não foi recuperado e 16 foram avaliados" in presentation
+    assert "17 relatórios foram procurados, dois não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados" in presentation
     review = " ".join(
         (ROOT / "results/tcc/conteudo/resultadosesperados.tex")
         .read_text(encoding="utf-8").split()
@@ -114,21 +122,24 @@ def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
     flow = review.split(r"\section{Fluxo de Seleção}", 1)[1].split(
         r"\section{Estatísticas Descritivas}", 1
     )[0]
-    assert "17 relatórios procurados, um não foi recuperado e 16 foram avaliados" in flow
+    assert "17 relatórios procurados, dois não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados" in flow
     assert r"\ref{fig:prisma-flow}" in appendix
     assert r"\ref{tab:stats-descritivas}" in appendix
     assert "quatro não foi recuperado" not in presentation
     assert "4 não recuperados, 13 avaliados" not in appendix
     assert "quatro descrições se limitam" not in appendix
+    assert "Zeng não recuperado e fora dos 15" in export_readme
+    assert "2 não recuperados, 15 avaliados em texto completo" in meeting_notes
+    assert "14 relatórios empíricos recuperados" in meeting_notes
 
 
 def test_canonical_defense_deck_uses_reconciled_full_text_counts() -> None:
     slides = " ".join((ROOT / "presentation/slides.md").read_text(encoding="utf-8").split())
     parallel_pptx = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
 
-    assert "dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo" in slides.lower()
+    assert "dos 17 relatórios procurados, dois não foram recuperados (sokkhey e zeng) e 15 foram avaliados em texto completo" in slides.lower()
     assert "para 13, avaliação em texto completo" not in slides
-    assert "Dos 17 relatórios procurados, um não foi recuperado e 16 foram avaliados em texto completo" in parallel_pptx
+    assert "Dos 17 relatórios procurados, dois (Sokkhey e Zeng) não foram recuperados e 15 foram avaliados em texto completo" in parallel_pptx
 
 
 def test_gray_literature_eligibility_has_an_explicit_methodological_rationale() -> None:

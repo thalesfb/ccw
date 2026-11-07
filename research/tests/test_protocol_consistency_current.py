@@ -92,6 +92,15 @@ def test_current_summary_preserves_full_prisma_flow_and_nonzero_identity_audit()
     assert prisma["eligibility"] == 16
     assert prisma["eligibility_excluded"] == 1
     assert prisma["included"] == 15
+    retrieval = prisma["current_source_retrieval"]
+    assert retrieval["reports_sought"] == 17
+    assert retrieval["reports_not_retrieved"] == 2
+    assert retrieval["reports_assessed_at_full_text"] == 15
+    assert retrieval["full_text_exclusions"] == 1
+    assert retrieval["full_text_excluded_study_key"] == "Imperatrice2025_6921"
+    assert retrieval["recovered_empirical_reports"] == 14
+    assert retrieval["historical_empirical_selection"] == 15
+    assert retrieval["historical_empirical_without_verifiable_copy"] == 1
     assert prisma["stage_percentages"] == {
         "screening_excluded_of_identification": 78.91,
         "screening_advanced_of_identification": 20.85,
@@ -157,6 +166,19 @@ def test_latest_prisma_reconciliation_describes_the_unchanged_current_selection(
     assert "duplicate reports are removed before screening" in interpretation
     assert "do not change the 15-study historical selection or the 4.0 cutoff" in interpretation
     assert "No new studies or selection rerun are incorporated" in interpretation
+    current_retrieval = {
+        row["metric"]: int(row["value"])
+        for row in rows
+        if row["snapshot_date"] == "2026-11-06"
+    }
+    assert current_retrieval == {
+        "current_reports_sought": 17,
+        "current_reports_not_retrieved": 2,
+        "current_reports_assessed_at_full_text": 15,
+        "current_full_text_exclusions": 1,
+        "current_recovered_empirical_reports": 14,
+        "historical_empirical_selection": 15,
+    }
 
 
 def test_current_export_has_exactly_the_adjudicated_empirical_core_ids() -> None:
