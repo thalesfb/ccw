@@ -161,10 +161,11 @@ A auditoria não declara todos os registros como perfeitos. Permanecem, de forma
 2. confirmar em fonte editorial os metadados ainda ambíguos de `Innovative2023_005`;
 3. revisar a edição bibliográfica de Vygotsky antes de enriquecer campos de editores/edição;
 4. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos. Em 22/10/2026, `SAEB2021` foi corrigida para o volume 1 do relatório de resultados (Inep, 2024, ISBN 978-65-5801-078-4) e permanece apenas como documentação contextual; os microdados de 2023 registrados no código não estão citados no manuscrito;
-5. concluir a adjudicação do MMAT dos 15 estudos empíricos mantidos
-   provisoriamente (14 com triagem S1/S2, 11 com apreciação por categoria e 1
-   aguardando texto integral); o registro excluído após resumo e o protocolo
-   contextual 6921 permanecem fora dessa avaliação. O
+5. concluir a apreciação MMAT dos 15 estudos empíricos mantidos
+   provisoriamente: os 15 têm respostas S1/S2 registradas (S1=Y nos 15; S2=Y
+   em 14 e CT em um), e 11 têm apreciação por categoria. Um registro conserva
+   apenas julgamento histórico, sem cópia verificável da fonte. O registro
+   excluído após resumo e o protocolo contextual 6921 permanecem fora dessa avaliação. O
    ledger vigente já contém decisões e evidências por critério, mas a tabela
    histórica de 17 estudos não pode ser reutilizada como avaliação atual.
 

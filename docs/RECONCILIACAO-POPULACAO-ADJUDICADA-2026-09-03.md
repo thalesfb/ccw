@@ -2,6 +2,7 @@
 
 **Adjudicação inicial:** 03/09/2026
 **Reconciliação do escopo:** 14/10/2026; cobertura documental atualizada em 20/10/2026; identidade e anos bibliográficos reconciliados em 31/10/2026
+**Atualização da cobertura MMAT:** 07/11/2026
 **Commit da consolidação inicial:** `5d72bf6` (PR #55)
 **Fonte versionada:** `research/exports/analysis/papers.csv`, `summary.json` e
 `research/data/current_synthesis_scope.csv`
@@ -110,10 +111,13 @@ Os 18 IDs do snapshot são:
 O arquivo `current_synthesis_scope.csv` distingue atualmente 15 inclusões
 empíricas provisórias, o registro 9 excluído após resumo, o relatório 6923 não
 recuperado no fluxo histórico e o protocolo 6921 excluído após texto completo.
-Os três últimos não integram o denominador empírico MMAT. Dos 15 provisórios,
-14 têm triagens S1/S2 e 11 têm apreciação por categoria; os delineamentos de
-5, 7 e 14 e a unidade/elegibilidade de 8 permanecem pendentes. A disponibilidade
-atual de PDFs é uma dimensão distinta, registrada na
+Os três últimos não integram o denominador empírico MMAT. A reconciliação de
+14/10 registrava 14 conjuntos de respostas S1/S2; esse valor é histórico. Na
+atualização de 07/11, os 15 registros têm respostas S1/S2: S1 recebeu Y nos
+15, e S2 recebeu Y em 14 e CT em um. Onze têm apreciação por categoria; o
+registro de Sokkhey conserva apenas o julgamento histórico, sem cópia verificável.
+Os delineamentos de 5, 7 e 14 e a unidade/elegibilidade de 8 permanecem pendentes.
+A disponibilidade atual de PDFs é uma dimensão distinta, registrada na
 [matriz de cobertura](tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md).
 
 O artigo identificado pelo ID 6918 não pertence à população atual: a fonte
