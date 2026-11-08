@@ -52,7 +52,7 @@ R10 & Separar componentes para favorecer testabilidade. & Arquitetura autoral: i
 \hline
 R11 & Documentar o ambiente e permitir substituição controlada de técnicas. & Autoral: portabilidade e interfaces. & Condicionar execução à documentação de dependências e contratos; a especificação não demonstra portabilidade entre ambientes reais. \\
 \hline
-R12 & Considerar acessibilidade e diferentes perfis de usuários. & Apresentação autoral, sem validação no corpus. & Registrar uma condição a operacionalizar em critérios de aceitação; não declarar acessibilidade alcançada ou avaliada. \\
+R12 & Considerar acessibilidade e diferentes perfis de usuários. & Apresentação autoral, sem validação no corpus. & Condição não implementada no protótipo nem testada nos casos sintéticos; a operacionalizar em critérios futuros de aceitação, sem declarar acessibilidade alcançada ou avaliada. \\
 \hline
 R13 & Examinar SAEB e PISA como fontes candidatas, não definitivas. & Exemplo do corpus em \citeonline{Math2021_001}; documentação contextual de \citeonline{SAEB2021} e \citeonline{PISA2022}; decisão autoral. & Uso de uma edição do PISA não valida outra base, outra edição ou sua transferência ao contexto brasileiro. O uso do ASSISTments no código exploratório é teste de viabilidade, não seleção da base. \\
 \hline
@@ -72,9 +72,9 @@ R20 & Separar treino, validação e teste e prevenir vazamento. & Fundamento em 
 \hline
 R21 & Examinar confusão, precisão, revocação e F1 por classe. & Resultados por classe em \citeonline[p.~160, Tabela~8]{Implementation2025_000}; fundamento em \citeonline{James2021}; decisão autoral de protocolo. & Examinar erros que a acurácia agregada pode ocultar; resultados de uma base não determinam o desempenho futuro do protótipo. \\
 \hline
-R22 & Usar ROC-AUC e calibração quando compatíveis com a tarefa. & Fundamentos em \citeonline{Fawcett2006} e \citeonline{NiculescuMizilCaruana2005}. & Distinguir discriminação e qualidade probabilística; nenhuma das métricas constitui medida de aprendizagem. \\
+R22 & Usar ROC-AUC e calibração quando compatíveis com a tarefa. & Fundamentos em \citeonline{Fawcett2006} e \citeonline{NiculescuMizilCaruana2005}. & O avaliador exploratório calcula ROC-AUC, escore de Brier e curva de confiabilidade em testes sintéticos, distinguindo discriminação e qualidade probabilística; nenhuma das métricas constitui medida de aprendizagem. \\
 \hline
-R23 & Examinar estabilidade das explicações e diferenças entre grupos. & Decisão autoral de avaliação, orientada pelos limites de validade discutidos em \citeonline{NRC2001}. & Formular verificações futuras, cujo procedimento ainda deverá ser operacionalizado. Desempenho médio não demonstra estabilidade ou equidade. \\
+R23 & Examinar estabilidade das explicações e diferenças entre grupos. & Decisão autoral de avaliação, orientada pelos limites de validade discutidos em \citeonline{NRC2001}. & Verificações futuras: o contrato canônico vigente não tem colunas de subgrupo aprovadas e a estabilidade das explicações não foi implementada. Desempenho médio não demonstra estabilidade ou equidade. \\
 \hline
 R24 & Delimitar generalização e evitar causalidade automática. & Observações localizadas em \citeonline[p.~50]{Math2021_001}, \citeonline[p.~5, seção~2.2]{Machine2024_009} e \citeonline[p.~654, conclusão]{Design2025_004}; interpretação crítica autoral. & Restringir a conclusão à população, ao alvo e ao desenho examinados; não transformar associação ou ganho relatado em efeito causal. \\
 \hline
