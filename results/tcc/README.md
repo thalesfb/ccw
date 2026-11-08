@@ -12,7 +12,7 @@ reais ou validação educacional própria.
 <!-- ccw-sync:start goals -->
 ### Objetivo geral
 
-Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica.
+Propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada no mapeamento e na análise da literatura científica. Neste trabalho, o apoio à interpretação docente delimita-se à apresentação, ao professor, de indicadores pontuais de evidência e de incerteza produzidos pelo protótipo a partir de tarefas específicas, incluindo estimativas de probabilidade com intervalo de Wilson por estudante e habilidade; não abrange o acompanhamento longitudinal de trajetórias de aprendizagem nem dispensa o julgamento pedagógico do professor.
 
 ### Objetivos específicos
 
