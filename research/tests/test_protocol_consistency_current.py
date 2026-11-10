@@ -337,4 +337,4 @@ def test_manuscript_reports_current_selection_without_promising_new_reading():
     assert "corte de relevância 4,0" in texts[0]
     assert "15 estudos" in texts[0]
     assert "nem valida o corte por leitura humana de uma amostra" in texts[1]
-    assert "apreciação preliminar" in texts[0]
+    assert "apreciação estruturada" in texts[0]
