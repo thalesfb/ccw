@@ -26,6 +26,7 @@ from ..processing.dedup import (
     normalize_doi,
 )
 from ..validation.derived_assets import sync_derived_assets
+from . import redact_contact_emails_in_frame
 
 logger = logging.getLogger(__name__)
 
@@ -209,7 +210,7 @@ def to_excel_with_filters(
     Returns:
         Path do arquivo criado
     """
-    df = remove_legacy_mmat_from_notes(df)
+    df = redact_contact_emails_in_frame(remove_legacy_mmat_from_notes(df))
     config = load_config()
 
     if output_path is None:
@@ -348,7 +349,7 @@ def export_for_analysis(
     Returns:
         Dicionário com formato e path do arquivo
     """
-    df = remove_legacy_mmat_from_notes(df)
+    df = redact_contact_emails_in_frame(remove_legacy_mmat_from_notes(df))
     config = load_config()
 
     if output_dir is None:

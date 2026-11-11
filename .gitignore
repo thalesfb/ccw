@@ -224,3 +224,6 @@ brainstorm.txt
 # Local dependencies for the canonical Slidev presentation
 /presentation/node_modules/
 /.tcc-build/
+
+# Acervo privado de fontes e revisões locais (nunca publicar)
+research/private/

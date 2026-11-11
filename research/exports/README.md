@@ -32,10 +32,6 @@ research/exports/
 ├── analysis/              # Análises quantitativas (CSV, JSON)
 │   ├── papers_YYYYMMDD_HHMMSS.csv
 │   └── papers_YYYYMMDD_HHMMSS.json
-├── deep_analysis/         # Análise aprofundada via MCPs e APIs externas
-│   ├── DEEP_ANALYSIS_REPORT.md
-│   ├── enriched_papers_cache.json
-│   └── analyses_summary.json
 ├── references/            # Referências bibliográficas (BibTeX)
 │   ├── all_papers.bib
 │   ├── included_papers.bib
@@ -75,24 +71,18 @@ versionados, sem SQLite, execute:
 python -m research.src.processing.adjudicated_snapshot
 ```
 
-### 2. Análise Aprofundada
-Enriquece papers com APIs externas (Semantic Scholar) e gera análise temática:
+### 2. Extração de Texto Completo
+Extrai o texto completo dos PDFs disponíveis antes da exportação, atualizando o campo `full_text` no banco local:
 
 ```bash
-python -m research.src.cli deep-analysis
+# Todos os papers incluídos carregados para extração
+python -m research.src.cli export --fetch-fulltext
+
+# Apenas papers ainda sem full_text
+python -m research.src.cli export --fetch-fulltext --only-missing
 ```
 
-**Saídas**:
-- `deep_analysis/DEEP_ANALYSIS_REPORT.md` - Relatório completo
-- `deep_analysis/enriched_papers_cache.json` - Cache de APIs
-- `deep_analysis/analyses_summary.json` - Análises estruturadas
-
-**Características**:
-- ✅ Enriquecimento via Semantic Scholar API (TL;DR, citações, referências)
-- ✅ Análise temática (técnicas computacionais, abordagens educacionais)
-- ✅ Análise temporal (tendências por ano, evolução de técnicas)
-- ✅ Redes de citação (papers mais citados/influentes)
-- ✅ Cache JSON para reprodutibilidade
+Não há comando `deep-analysis` no CLI atual; a etapa de extração é integrada ao `export`.
 
 ### 3. Exportação BibTeX
 Gera referências bibliográficas formatadas para LaTeX:
@@ -173,24 +163,11 @@ pdflatex main.tex
 
 ## 🔄 Reprodutibilidade
 
-### Cache de Análises
-O arquivo `deep_analysis/enriched_papers_cache.json` preserva todas as respostas de APIs, permitindo:
+### Reexecução da Extração
+Para completar apenas os textos ainda ausentes, sem reprocessar os demais:
 
-1. **Reexecução sem chamadas de API**: Análises rápidas usando cache
-2. **Auditoria**: Verificar dados originais recebidos das APIs
-3. **Compartilhamento**: Enviar cache para colaboradores (evita rate limits)
-
-### Regenerar Análises (com cache)
 ```bash
-# Se enriched_papers_cache.json existir, será usado automaticamente
-python -m research.src.cli deep-analysis
-```
-
-### Forçar Recoleta de APIs
-```bash
-# Remover cache para forçar novas chamadas
-rm research/exports/deep_analysis/enriched_papers_cache.json
-python -m research.src.cli deep-analysis
+python -m research.src.cli export --fetch-fulltext --only-missing
 ```
 
 ---
@@ -257,7 +234,6 @@ Arquivos com timestamp (`papers_20251005_142319.csv`) preservam histórico de ex
 
 ### 📦 Backup
 Recomenda-se fazer backup periódico de:
-- `deep_analysis/enriched_papers_cache.json` (≈200KB, contém dados de APIs)
 - `references/*.bib` (≈45KB cada, referências formatadas)
 - Últimos `analysis/papers_*.csv` (versão mais recente dos dados)
 

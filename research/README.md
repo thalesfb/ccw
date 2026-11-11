@@ -9,9 +9,9 @@ O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27
 Em 20/10/2026, a conferência suplementar do texto integral do registro excluído
 após o resumo confirmou a decisão de escopo; não criou uma nova etapa nem
 alterou as contagens do fluxo PRISMA.
-O estudo 8 aguarda adjudicação de elegibilidade/unidade e não recebeu respostas
-MMAT. Os estudos 5, 7 e 14 têm S1/S2, mas os critérios da categoria permanecem
-sem resposta até definir o delineamento. Os snapshots anteriores são históricos.
+Os 15 estudos têm S1/S2 e critérios da categoria respondidos; o estudo 8 (tese
+de MacLellan) é apreciado nos componentes matemáticos dos capítulos 5–6, e os
+estudos 5, 7 e 14 usam categorias adaptadas descritas no TCC. Os snapshots anteriores são históricos.
 
 A reconciliação detalhada da população vigente, incluindo deduplicação, decisões
 de escopo e separação entre candidatos empíricos e contexto, está em
@@ -24,8 +24,11 @@ O manifesto histórico [`research/data/protocol_execution_2025.json`](data/proto
 Sistema modular para revisão sistemática da literatura em educação matemática com técnicas computacionais, com relato orientado pelo PRISMA 2020.
 
 O software e seus testes verificam operações e contratos documentais. A seleção
-científica, a cobertura das fontes e os julgamentos MMAT permanecem preliminares;
-um teste aprovado não certifica sua validade metodológica.
+científica e a cobertura das fontes permanecem preliminares. Os julgamentos MMAT
+(2018, por critério, sem escore agregado) foram produzidos por ferramentas de IA
+generativa sob o protocolo e os critérios do autor; a conferência critério a
+critério está em andamento. Um teste aprovado não certifica sua validade
+metodológica.
 
 ---
 
@@ -534,12 +537,6 @@ USER_EMAIL=your_email@domain.com
 SEMANTIC_SCHOLAR_RATE_DELAY=4.0
 OPENALEX_RATE_DELAY=6.0
 CROSSREF_RATE_DELAY=4.0
-
-# Critérios de revisão
-REVIEW_YEAR_MIN=2015
-REVIEW_YEAR_MAX=2026
-REVIEW_LANGUAGES=en,pt
-REVIEW_RELEVANCE_THRESHOLD=4.0  # limiar de relevância
 ```
 
 ### Personalizar Termos de Busca
@@ -649,7 +646,7 @@ python -m research.src.cli run-pipeline
 
 - **Taxa de sucesso das APIs**: não reportada; não há janela e denominador versionados para reproduzir o cálculo
 - **Tempo de execução**: depende das APIs, dos limites e do cache; não há benchmark versionado nesta referência
-- **Deduplicação determinística**: 27 registros removidos no fluxo (25 excedentes por DOI + 2 por URL exata; um grupo de URL é misto quanto ao DOI); a flag persistida está zerada
+- **Deduplicação**: 29 registros removidos no fluxo vigente (27 por DOI/URL, sendo 25 excedentes por DOI e 2 por URL exata, e 2 relatórios repetidos confirmados manualmente); a flag persistida está zerada
 - **Shortlist operacional**: 0,15% dos registros identificados (18/11.904)
 - **Núcleo empírico incluído provisoriamente**: 0,13% dos registros identificados (15/11.904); proporção do snapshot, não estimativa de prevalência nem medida de eficácia
 - **Recorte temporal**: 2015–2026, com 2026 parcial e corte da busca em 31/08/2026
@@ -660,7 +657,7 @@ python -m research.src.cli run-pipeline
 - **Papers com abstract**: 11.885/11.904 (99,8%)
 - **Papers com DOI**: 10.682/11.904 (89,7%)
 - **Papers com ano preenchido**: 11.904/11.904 (100%) no banco bruto; 255 registros do export versionado estão fora do intervalo analítico 2015--2026 após a correção de 6918 para 2014
-- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e ledgers de adjudicação versionados; nova coleta pode variar. O MMAT preliminar abrange 14 dos 15 registros empíricos mantidos provisoriamente; o estudo 8 permanece sem respostas até adjudicação de escopo/unidade, e um registro segue sem texto integral.
+- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e ledgers de adjudicação versionados; nova coleta pode variar. O MMAT preliminar abrange os 15 estudos da seleção histórica; Sokkhey (estudo 3) mantém respostas históricas não revalidadas e as respostas foram produzidas por IA, com conferência do autor em andamento.
 
 ---
 
