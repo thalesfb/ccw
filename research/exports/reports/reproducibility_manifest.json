@@ -620,7 +620,7 @@
     {
       "path": "research/requirements.txt",
       "role": "research runtime dependencies",
-      "sha256": "1a3c6473511514e418386a070abd98ff2191735dea4586ee301f8ad93d283590"
+      "sha256": "4f52ad5a474e439c2af4422d10cdb03ae39e1e2e647bfd75e1e7b5bc12d580f1"
     }
   ],
   "companion_documents": [

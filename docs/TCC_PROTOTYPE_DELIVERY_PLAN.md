@@ -1,28 +1,29 @@
+> **Documento histórico de planejamento; o estado vigente está no TCC (`results/tcc/main.pdf`).**
+
 # Plano de entrega do protótipo científico
 
 ## 1. Objetivo
 
 Este documento define como a implementação do protótipo será entregue para revisão. O trabalho será dividido em lotes pequenos, verificáveis e semanticamente coesos, evitando que decisões bibliográficas, metodológicas, técnicas e de interface sejam misturadas no mesmo conjunto de alterações.
 
-O plano está associado à issue #7 e utiliza o PR nº 6 como linha de base acadêmica inicial.
+O plano parte da revisão metodológica anterior como linha de base acadêmica inicial.
 
 ## 2. Estratégia de branches e pull requests
 
-A implementação utilizará PRs empilhados enquanto o lote anterior ainda não estiver incorporado à branch principal.
+A implementação utilizará PRs empilhados enquanto o lote anterior ainda não estiver incorporado à linha principal.
 
 Exemplo:
 
 ```text
 main
-  └── agent/revise-tcc-methodology             PR #6
-        └── agent/tcc-prototype-governance     lote 1
-              └── agent/tcc-reference-audit    lote 2
-                    └── agent/tcc-experiment-design
+  └── lote 1 (governança científica)
+        └── lote 2 (auditoria bibliográfica)
+              └── lote 3 (desenho experimental)
 ```
 
 Cada PR deverá declarar:
 
-- branch-base;
+- base do lote;
 - dependências;
 - arquivos alterados;
 - decisões incluídas;
@@ -270,25 +271,21 @@ Cada PR deverá ser pequeno o suficiente para permitir revisão temática. Recom
 
 ## 8. Dependências iniciais
 
-| Lote | Branch-base prevista | Dependência |
+| Lote | Base prevista | Dependência |
 |---|---|---|
-| 1 | `agent/revise-tcc-methodology` | PR #6 |
-| 2 | `agent/tcc-prototype-governance` | lote 1 |
-| 3 | branch do lote 2 | auditoria bibliográfica |
-| 4 | branch do lote 3 | desenho experimental |
-| 5 | branch do lote 4 | decisão dos dados |
-| 6 | branch do lote 5 | pipeline normalizado |
-| 7 | branch do lote 6 | baselines |
-| 8 | branch do lote 7 | probabilidades avaliadas |
-| 9 | branch do lote 8 | perfil por habilidade |
-| 10 | branch do lote 9 | implementação e resultados |
+| 1 | revisão metodológica anterior | — |
+| 2 | lote 1 | lote 1 |
+| 3 | lote 2 | auditoria bibliográfica |
+| 4 | lote 3 | desenho experimental |
+| 5 | lote 4 | decisão dos dados |
+| 6 | lote 5 | pipeline normalizado |
+| 7 | lote 6 | baselines |
+| 8 | lote 7 | probabilidades avaliadas |
+| 9 | lote 8 | perfil por habilidade |
+| 10 | lote 9 | implementação e resultados |
 
 ## 9. Estado do plano
 
-**Status:** em espera. A governança da #7 registra que a continuidade da implementação depende de decisão com a orientação (#24, #27); as etapas não realizadas ficam em espera, não canceladas, e o código já implementado é preservado. O escopo registrado para esta entrega é revisão e especificação conceitual (`docs/tcc/ESTADO-ATUAL-TCC.md`).
+**Status:** em espera. A continuidade da implementação depende de decisão com a orientação; as etapas não realizadas ficam em espera, não canceladas, e o código já implementado é preservado. O escopo registrado para esta entrega é revisão e especificação conceitual (`docs/tcc/ESTADO-ATUAL-TCC.md`).
 
-**Issue de acompanhamento:** #7.
-
-**Linha de base:** PR #6.
-
-**Primeiro lote:** `agent/tcc-prototype-governance`.
+**Primeiro lote:** governança científica (lote 1).

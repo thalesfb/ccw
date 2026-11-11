@@ -8,5 +8,5 @@ decisão da orientação ou evidência de conclusão científica.
 Para o estado verificável e os limites atuais do TCC, consulte
 [`tcc/ESTADO-ATUAL-TCC.md`](tcc/ESTADO-ATUAL-TCC.md). Para critérios de
 publicação e separação entre relato acadêmico e proveniência técnica, consulte
-[`PUBLICATION_GOVERNANCE.md`](PUBLICATION_GOVERNANCE.md). As contagens
+[`tcc/PUBLICATION_GOVERNANCE.md`](tcc/PUBLICATION_GOVERNANCE.md). As contagens
 históricas permanecem nos relatórios datados, identificados como superados.

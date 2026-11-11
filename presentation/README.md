@@ -1,13 +1,15 @@
 # Apresentação Slidev do TCC
 
-> **Rascunho fora de uso na defesa:** o Slidev, o storyboard e o PPTX ainda
-> descrevem a seleção histórica de 15 estudos sob o corte 4,0. O fluxo foi
-> reconciliado em 31/10/2026. A revisão da apresentação para a defesa
-> permanece suspensa; esta correção registra somente o conjunto atual.
+> **Rascunho até a atualização final:** `slides.md` é o arquivo que será usado
+> na defesa (banca prevista para 03/12/2026). Hoje ele está em revisão e marcado
+> como rascunho (`não usar na defesa`) até a atualização final. O Slidev, o
+> storyboard e o PPTX ainda descrevem a seleção histórica de 15 estudos sob o
+> corte 4,0. O fluxo foi reconciliado em 31/10/2026; esta correção registra
+> somente o conjunto atual.
 
 ## Arquivo da defesa
 
-`slides.md` é o deck canônico da defesa: contém 25 slides, incluindo a capa, e
+`slides.md` é o deck canônico da defesa, em revisão até a atualização final: contém 25 slides, incluindo a capa, e
 é a fonte usada para compilar a apresentação pública. `results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md`
 é o storyboard de 25 slides que documenta sua progressão; não é a fonte de
 renderização.
@@ -33,7 +35,7 @@ Os gráficos versionados, as contagens do fluxo histórico e as legendas da
 reconciliação de 31/10/2026 estão atualizados. A síntese descreve os 15 estudos
 selecionados historicamente sob o corte 4,0. Não houve mudança do corte,
 nova seleção ou incorporação de estudos adicionais. Os materiais continuam
-identificados como rascunho, fora de uso na defesa.
+identificados como rascunho até a atualização final para a defesa.
 
 ## Objetivos de referência do manuscrito
 

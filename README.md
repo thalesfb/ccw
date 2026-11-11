@@ -318,6 +318,18 @@ imagens na mesma alteração. O procedimento e seus limites estão em
 publica esta versão: a publicação depende de integração à `main` e conclusão do
 workflow de Pages. Os testes não substituem a revisão científica.
 
+## Licença
+
+O código deste repositório é distribuído sob a licença MIT ([`LICENSE`](LICENSE)).
+O texto do TCC, a apresentação, a documentação e os dados produzidos pelo autor
+são distribuídos sob a licença CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONTENT.md)).
+
+## Uso de IA
+
+A triagem em texto completo, a extração e as respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor; a
+conferência pelo autor, critério a critério, está em andamento. Detalhes no apêndice de
+ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).
+
 ## Autor
 
 Thales Ferreira - Graduando em Ciência da Computação - IFC Videira

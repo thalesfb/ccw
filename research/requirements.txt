@@ -40,3 +40,6 @@ fonttools==4.66.1
 
 # Editable TCC presentation generation and validation
 python-pptx==1.0.2
+
+# Benchmark de desempenho (research/tests/test_performance_benchmark.py)
+psutil==7.2.2

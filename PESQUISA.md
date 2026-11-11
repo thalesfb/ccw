@@ -3,9 +3,9 @@
 > Documento vivo para agentes e pesquisador. Funciona como CLAUDE.md do projeto,
 > rastreador de melhorias baseado em feedback da banca, e guia de workflow.
 >
-> **Ultima atualizacao:** 2026-09-03
+> **Ultima atualizacao:** 2026-11-11
 
-> **População vigente (03/09/2026):** a base versionada contém 11.904 registros identificados. Após 27 remoções determinísticas por DOI/URL, 11.877 foram avaliados na triagem; 9.391 foram excluídos e 2.486 avançaram à elegibilidade. Nessa etapa, 2.468 foram excluídos e 18 registros foram retidos: 17 candidatos empíricos provisórios e o protocolo contextual 6921. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A transição entre o conjunto operacional anterior e a população adjudicada está em `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`.
+> **Fluxo vigente:** as contagens atuais estão no TCC (`results/tcc/main.pdf`) e nos dados versionados em `research/data/`, que são as fontes vigentes; este documento não as substitui. Em resumo: 11.904 registros identificados; 29 duplicatas removidas (27 por DOI/URL e 2 relatórios iguais, manual); 11.875 triados; 9.393 excluídos na triagem; 2.482 na priorização histórica; 2.464 não avançaram; 18 na lista preliminar. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A transição entre o conjunto operacional anterior e a população adjudicada está em `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`.
 
 ---
 
@@ -26,7 +26,7 @@
 | Fase 2 | Desenvolvimento do prototipo (TCC) | Sem prazo vigente | Aguardando decisão da orientação |
 | Fase 3 | Validacao experimental (TCC) | Sem prazo vigente | Não iniciada |
 
-**Revisao Sistematica vigente:** 11.904 registros identificados; 27 remoções determinísticas por DOI/URL; 11.877 avaliados na triagem; 9.391 excluídos; 2.486 avançaram à elegibilidade; 2.468 excluídos nessa etapa; **18 retidos**. Entre os registros atuais, 17 são candidatos provisoriamente empíricos e o 6921 é contextual; o 6918 foi corrigido para 2014 e excluído por estar fora do recorte. As etiquetas do pipeline têm categorias sobrepostas e descrevem o conteúdo bibliográfico, não qualidade metodológica.
+**Revisao Sistematica vigente:** 11.904 registros identificados; 29 duplicatas removidas; 11.875 triados; 9.393 excluídos na triagem; 2.482 na priorização histórica; 2.464 não avançaram; **18 na lista preliminar**. Dessa lista, 1 foi excluído após o resumo e 17 foram procurados para texto integral; 2 não foram recuperados (Sokkhey 2020 e Zeng 2025); 15 foram avaliados em texto integral, 1 protocolo foi excluído e 14 relatórios empíricos foram recuperados. A seleção histórica sob o corte 4,0 mantém 15 estudos, dos quais 14 têm texto recuperado; Sokkhey permanece com respostas MMAT históricas não revalidadas. O 6918 foi corrigido para 2014 e excluído por estar fora do recorte. As etiquetas do pipeline têm categorias sobrepostas e descrevem o conteúdo bibliográfico, não qualidade metodológica.
 
 ---
 
@@ -61,7 +61,7 @@
 ### Etapas concluidas
 
 - Etapa 1: Correcoes PRISMA
-- Etapa 2: procedimento MMAT definido; reavaliacao documental preliminar registrada para os 17 candidatos empíricos, com consolidacao e adjudicacao pendentes
+- Etapa 2: procedimento MMAT definido; reavaliacao documental preliminar registrada para os 18 registros da lista preliminar, com consolidacao e adjudicacao pendentes
 - Etapa 2.5: Tempo verbal passado
 - Etapa 3: Fundamentacao ensino de matematica
 - Etapa 4: Capitulo do prototipo
@@ -111,7 +111,7 @@ results/tcc/
 
 ## 5. Pipeline MMAT (snapshot vigente e histórico)
 
-O modulo MMAT e standalone e o snapshot vigente possui um ledger de reavaliação por critério para os 18 registros retidos. A avaliação é preliminar: 17 registros são potencialmente empíricos, o 6921 é contextual, e fontes, localizadores e adjudicação ainda precisam ser consolidados antes de qualquer síntese de qualidade metodológica ou afirmação de certeza da evidência.
+O modulo MMAT e standalone e o snapshot vigente possui um ledger de reavaliação por critério para os 18 registros da lista preliminar. A avaliação é preliminar: 14 relatórios empíricos foram recuperados, o protocolo 6921 foi excluído da síntese, e fontes, localizadores e adjudicação ainda precisam ser consolidados antes de qualquer síntese de qualidade metodológica ou afirmação de certeza da evidência.
 
 ### Validar o snapshot vigente
 
@@ -170,9 +170,11 @@ Não há média ou ranking de qualidade reportado para o conjunto vigente.
 - **Publico-alvo:** professor. Nao mencionar formuladores de politicas
 - **Periodo:** 2015-2026 (12 anos)
 
-### Numeros-chave (fonte unica de verdade)
+### Numeros-chave (remetem ao TCC e aos dados vigentes)
 
-Total bruto: 11.904 | Duplicatas determinísticas removidas: 27 | Triagem: 11.877 avaliados, 9.391 excluídos, 2.486 avançaram | Elegibilidade: 2.486 avaliados, 2.468 excluídos, 18 retidos | Taxa final: 0,15% | Consultas: 72 (48 EN + 24 PT) | Bases: 4 | Período: 2015-2026
+Fonte do relato: `results/tcc/main.pdf`, compilado de `results/tcc/main.tex`. Fonte vigente das contagens: `research/data/`. Este documento não é fonte autônoma: em caso de divergência, prevalecem o TCC e os dados versionados.
+
+Consultas: 72 (48 EN + 24 PT) | Bases: 4 | Período: 2015-2026
 
 ### Compilacao
 
@@ -205,3 +207,9 @@ Verificar: zero `^!` no log, zero `undefined`.
 | BNCC (Brasil, 2018) | Curriculo nacional | `BNCC2018` |
 | PISA 2022 (OECD, 2023) | Dados internacionais | `PISA2022` |
 | SAEB 2021 (INEP, 2022) | Dados nacionais | `SAEB2021` |
+
+---
+
+## 8. Uso de IA
+
+A triagem em texto completo, a extração e as respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor. A conferência pelo autor, critério a critério, está em andamento. Detalhes no Apêndice de ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).
