@@ -179,8 +179,8 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "resposta à pergunta ``como estruturar''" in conclusion
     assert "Este trabalho propôs uma especificação técnica e pedagógica" in abstract
-    assert "protocolo documental de avaliação" in abstract
-    assert "não demonstra eficácia educacional" in abstract
+    assert "protocolo documental para avaliar a viabilidade e a coerência" in abstract
+    assert "formulário de revisão docente, ainda não aplicado" in abstract
 
 
 def test_learning_concepts_and_teacher_role_are_explicit() -> None:
