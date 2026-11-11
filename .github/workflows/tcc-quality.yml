@@ -226,6 +226,12 @@ jobs:
       - name: Install LaTeX dependencies
         timeout-minutes: 5
         run: |
+          # The runner's default Azure apt mirror can stop resolving; use the
+          # canonical Ubuntu archive instead.
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            echo "http://archive.ubuntu.com/ubuntu/" | sudo tee /etc/apt/apt-mirrors.txt >/dev/null
+          fi
+          sudo sed -i 's|http://azure.archive.ubuntu.com|http://archive.ubuntu.com|g' /etc/apt/sources.list /etc/apt/sources.list.d/*.sources 2>/dev/null || true
           sudo apt-get -o Acquire::Retries=3 update
           sudo apt-get -o Acquire::Retries=3 install -y --no-install-recommends \
             latexmk \
