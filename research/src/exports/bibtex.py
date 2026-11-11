@@ -16,6 +16,8 @@ from collections import Counter
 import pandas as pd
 import logging
 
+from . import redact_contact_emails
+
 logger = logging.getLogger(__name__)
 
 
@@ -107,6 +109,12 @@ def generate_bibtex_entry(row: Dict[str, Any], index: int) -> str:
     Campos opcionais:
     - volume, number, pages, doi, url, keywords, abstract
     """
+    # E-mails de terceiros (autores/resumos) não entram nos exports publicados
+    row = {
+        **row,
+        **{k: redact_contact_emails(row[k]) for k in ('title', 'authors', 'venue', 'keywords', 'abstract') if k in row},
+    }
+
     # Determinar tipo de publicação
     pub_type = infer_publication_type(row)
     

@@ -430,12 +430,12 @@
     {
       "path": "research/exports/analysis/papers.csv",
       "role": "row-level versioned representation of the current snapshot",
-      "sha256": "02049b2b7a57f28dba86a243aa9ed0effbcf6c2e311ee25e080831ff0e2010e5"
+      "sha256": "ed21d607b9b3ee32a820a94fdd1f3f5450e65f4f9539bae5b13ee8a3392a4f07"
     },
     {
       "path": "research/exports/analysis/papers.json",
       "role": "JSON representation of the current snapshot",
-      "sha256": "7f875bf26751222c1f340a10b1fcc7c03072f82866b1155e4ca179f70c30ed05"
+      "sha256": "14622b6d6e2da4a3ea8df050a1914095fa734c8e2c2798968195a347a1463899"
     },
     {
       "path": "research/exports/analysis/deduplication_identity_audit.csv",
@@ -580,7 +580,7 @@
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
       "role": "SQLite-independent transformation from the versioned row export and adjudication ledger",
-      "sha256": "0c62e14204360ff03b349c2e1f53c4b9c12b1368d00c6887dc66c14a238a18f5"
+      "sha256": "b8a7eae83974f15678916489e5db1aa3441aae02df2f0533a1e68e2874c279e1"
     },
     {
       "path": "research/src/analysis/mmat_current.py",

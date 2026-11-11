@@ -28,6 +28,7 @@ from ..analysis.mmat_current import (
     load_current_synthesis_scope,
     load_primary_sources,
 )
+from ..exports import redact_contact_emails_in_frame, redact_contact_emails_in_records
 from ..exports.excel import remove_legacy_mmat_from_notes, to_excel_with_filters
 from ..validation.derived_assets import sync_derived_assets
 
@@ -513,13 +514,14 @@ def _write_analysis_exports(
     source_papers: pd.DataFrame,
 ) -> None:
     ANALYSIS_ROOT.mkdir(parents=True, exist_ok=True)
+    papers = redact_contact_emails_in_frame(papers)
     with PAPERS_JSON_PATH.open("r", encoding="utf-8") as handle:
         original_json_records = json.load(handle)
-    json_records = _reconciled_json_records(
+    json_records = redact_contact_emails_in_records(_reconciled_json_records(
         source_papers,
         papers,
         original_json_records,
-    )
+    ))
     csv_papers = papers.copy()
     for column in csv_papers.select_dtypes(include=["object", "string"]).columns:
         csv_papers[column] = csv_papers[column].map(
