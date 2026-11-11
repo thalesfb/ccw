@@ -575,7 +575,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "d9bf87b5e88654fb7d143bcd1ad4c960c721bb06e5945df0b62857023dc6b75a"
+      "sha256": "4450cd0b2c469493d2a8aeabdb82a3a681eedc036c23cc804df4deafd238e090"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -609,13 +609,13 @@
     },
     {
       "path": "scripts/tcc_quadros.json",
-      "role": "active sixteen-quadro inventory and authorized editorial typography policy",
-      "sha256": "f854d6563c86e962999183a62ebf99533819e10508f197e91c81e4b3c7fa2325"
+      "role": "active fourteen-quadro inventory and authorized editorial typography policy",
+      "sha256": "8335c4681a8fd7b81dd6f505a5a593da83b98bca220d847e1b5acf3adbc2bf27"
     },
     {
       "path": "scripts/validate_tcc_quadros.py",
-      "role": "source, compiled typography and PDF checks for the sixteen quadros",
-      "sha256": "3929a57878ac48aed6cc8b738316155b90a612c177451a10aef19414702cf164"
+      "role": "source, compiled typography and PDF checks for the fourteen quadros",
+      "sha256": "40cd91015686fc596b43abde6c51b6366357bf7cc0b944aa4f37d2e700548a82"
     },
     {
       "path": "research/requirements.txt",

@@ -92,6 +92,13 @@
   {\SingleSpacing\ABNTEXfontereduzida\raggedright\textbf{Fonte:} #1\par}%
   \vspace{0.15cm}%
 }
+% Informações explicativas ficam em nota própria, após a fonte.
+\providecommand{\nota}{}
+\renewcommand{\nota}[1]{%
+  \vspace{-0.15cm}%
+  {\SingleSpacing\ABNTEXfontereduzida\raggedright\textbf{Nota:} #1\par}%
+  \vspace{0.15cm}%
+}
 
 % Corpo dos quadros: decisão editorial de legibilidade (não prescrita pela ABNT).
 % Identificação/título preservam os 12 pt do template; fonte/nota usam 10 pt.
