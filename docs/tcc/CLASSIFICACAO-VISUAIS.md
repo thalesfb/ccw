@@ -27,16 +27,40 @@ definição de tabela usada pelo IBGE.
 
 ## Mapeamento da versão atual
 
-- **Tabela 1:** estatísticas descritivas da revisão sistemática;
-- **Quadro 1:** síntese dos candidatos empíricos provisórios;
-- **Quadro 2:** reavaliação documental preliminar com o MMAT 2018, incluindo S1,
-  S2 e Q1--Q5;
-- **Quadro 3:** mapeamento do relato ao checklist PRISMA 2020;
+Conferido em 11 de novembro de 2026 contra as listas do PDF compilado.
+
+- **Tabelas 1 e 2:** estatísticas descritivas da revisão; frequência da
+  finalidade principal nos 15 estudos;
+- **Quadros 1 e 2:** camadas da estratégia de busca; dimensões PICOS;
+- **Quadro 3:** caracterização dos 18 registros da lista preliminar;
+- **Quadros 4 e 5:** finalidade, técnica e população; alvos, validação e
+  métricas;
+- **Quadros 6 e 7:** apreciação MMAT preliminar dos 15 estudos e dos
+  componentes dos estudos mistos;
+- **Quadros 8 e 9:** respostas MMAT por critério e categoria; contagens dos
+  componentes dos estudos mistos;
+- **Quadros 10 a 12:** critérios de aceitação; origem dos requisitos;
+  observações dos estudos e requisitos;
+- **Quadros 13 a 16 (apêndices):** mapeamento PRISMA 2020; ficha de julgamento
+  por requisito; ficha de aceitação documental; ferramentas de IA;
 - **Fluxograma 1:** fluxo de seleção da revisão;
-- **Gráficos 1 e 2:** funil de seleção e registros por fonte.
+- **Gráfico 1:** registros por fonte após a remoção de duplicatas;
+- **Figura 1:** componentes e fluxos da arquitetura conceitual.
+
+Os Quadros 8 e 9 apresentam contagens de respostas Y, N e CT. Pelo critério
+acima, poderiam ser apresentados como tabelas; a classificação como quadro foi
+mantida e é uma decisão pendente do autor e da orientação, pois o texto e os
+testes de regressão referem-se a eles como quadros.
 
 As listas de ilustrações, quadros e tabelas são geradas pelo próprio documento,
 e as referências cruzadas do texto usam o mesmo tipo apresentado na legenda.
+
+## Fonte e nota
+
+A linha `Fonte:` identifica apenas a origem do elemento. Informações
+explicativas ficam em `Nota:`, logo abaixo da fonte, pelo comando `\nota{}`
+definido em `results/tcc/config_inicial.tex`, como na ABNT NBR 14724 e nas
+normas de apresentação tabular do IBGE.
 
 ## Fontes públicas
 
