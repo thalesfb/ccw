@@ -44,8 +44,17 @@ Conferido em 11 de novembro de 2026 contra as listas do PDF compilado.
 - **Quadros 11 a 14 (apêndices):** mapeamento PRISMA 2020; ficha de julgamento
   por requisito; ficha de aceitação documental; ferramentas de IA;
 - **Fluxograma 1:** fluxo de seleção da revisão;
+- **Fluxogramas 2 e 3:** regra de escolha de modelo (OE3); regras de avaliação
+  de cada requisito (OE4);
 - **Gráfico 1:** registros por fonte após a remoção de duplicatas;
-- **Figura 1:** componentes e fluxos da arquitetura conceitual.
+- **Figura 1:** cadeia de rastreabilidade da revisão à avaliação;
+- **Figura 2:** exemplo fictício de saída por estudante e habilidade, sem
+  execução de modelo;
+- **Figura 3:** componentes e fluxos da arquitetura conceitual.
+
+As figuras e os fluxogramas do capítulo do protótipo são desenhados no próprio
+LaTeX (ambiente `picture`), sem imagens externas, para manter texto vetorial e
+valores conferíveis no código-fonte.
 
 As contagens de respostas Y, N e CT (Tabelas 3 e 4) seguem o formato tabular do
 IBGE: sem bordas laterais, sem linhas entre as linhas de dados e com fechamento

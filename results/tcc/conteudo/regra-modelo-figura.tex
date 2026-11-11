@@ -1,0 +1,38 @@
+\begin{fluxograma}[htbp]
+\centering
+\caption{Regra de escolha de modelo fixada para o OE3.}
+\label{fig:regra-modelo}
+\setlength{\unitlength}{1mm}
+\resizebox{\textwidth}{!}{%
+\begin{picture}(155,122)
+\small
+\put(0,108){\framebox(100,14){\shortstack{Referência: regressão logística regularizada\\Candidato mais complexo, na partição de validação}}}
+\put(50,108){\vector(0,-1){8}}
+\put(0,84){\framebox(100,16){\shortstack{(i) Diferença média de perda logarítmica em relação\\à referência (reamostragem pareada por estudante)\\com limite superior do IC de 95\% abaixo de zero?}}}
+\put(50,84){\vector(0,-1){8}}
+\put(52,78){\footnotesize sim}
+\put(0,64){\framebox(100,12){\shortstack{(ii) Brier não piora e o erro de calibração esperado\\(ECE) não é maior que o da referência?}}}
+\put(50,64){\vector(0,-1){8}}
+\put(52,58){\footnotesize sim}
+\put(0,44){\framebox(100,12){\shortstack{(iii) Há explicação implementada e conferível\\para as previsões do candidato (F05)?}}}
+\put(50,44){\vector(0,-1){8}}
+\put(52,38){\footnotesize sim}
+\put(50,30){\oval(60,12)}
+\put(20,24){\makebox(60,12){Adota o candidato}}
+\put(100,92){\line(1,0){8}}
+\put(100,50){\line(1,0){8}}
+\put(108,50){\line(0,1){42}}
+\put(100,70){\vector(1,0){15}}
+\put(101,93){\footnotesize não}
+\put(101,71){\footnotesize não}
+\put(101,51){\footnotesize não}
+\put(135,70){\oval(40,14)}
+\put(115,63){\makebox(40,14){\shortstack{Mantém a\\referência}}}
+\put(50,24){\vector(0,-1){10}}
+\put(135,63){\vector(0,-1){49}}
+\put(0,0){\framebox(155,14){\shortstack{Partição de teste: usada uma única vez, para relatar o modelo escolhido,\\e não para escolhê-lo}}}
+\end{picture}
+}%
+\fonte{Elaborado pelo autor (2026).}
+\nota{Regra fixada antes de qualquer treinamento com dados educacionais reais e ainda não aplicada. Na configuração atual, o candidato de \textit{gradient boosting} não atenderia à condição (iii).}
+\end{fluxograma}
