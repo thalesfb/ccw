@@ -89,6 +89,25 @@ def longtable(
     ])
 
 
+def count_table(caption: str, label: str, widths: str, headers: list[str], rows: list[list[str]]) -> str:
+    """Numeric counts as a tabela (IBGE: no side borders or row rules)."""
+    heading = " & ".join(r"\textbf{" + header + "}" for header in headers) + r" \\ \hline"
+    return "\n".join([
+        r"\ifdefined\TCCCountTableBox\else\newsavebox{\TCCCountTableBox}\fi",
+        r"\sbox{\TCCCountTableBox}{\fontsize{10}{12}\selectfont\setlength{\tabcolsep}{6pt}%",
+        r"\begin{tabular}{" + widths + r"}\hline",
+        heading,
+        *[" & ".join(row) + r" \\" for row in rows],
+        r"\hline\end{tabular}}",
+        r"\begin{table}[htbp]\centering",
+        r"\begin{minipage}{\wd\TCCCountTableBox}",
+        r"\caption{" + caption + r"}\label{" + label + "}",
+        r"\usebox{\TCCCountTableBox}",
+        r"\fonte{Elaborado pelo autor (2026).}",
+        r"\end{minipage}\end{table}", "",
+    ])
+
+
 def build_outputs(root: Path = ROOT) -> dict[str, str]:
     studies = study_rows(root)
     widths = "|" + "|".join(r">{\raggedright\arraybackslash}p{" + width + "cm}"
@@ -125,26 +144,24 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
             count_rows.append([tex(group_name), criterion.upper(),
                                *[str(values.get(answer, 0)) for answer in ("Y", "N", "CT")],
                                str(sum(values.values()))])
-    counts_tex = longtable(
+    counts_tex = count_table(
         "Respostas MMAT por critério e categoria de desenho.",
-        "qua:mmat-contagens",
-        "|p{6.3cm}|c|r|r|r|r|",
+        "tab:mmat-contagens",
+        "p{6.3cm}crrrr",
         ["Categoria", "Critério", "Y", "N", "CT", "n"],
         count_rows,
-        caption_width_rows=count_rows,
     )
     component_rows = [[tex(GROUPS[group]), criterion.upper(),
                        *[str(values.get(answer, 0)) for answer in ("Y", "N", "CT")],
                        str(sum(values.values()))]
                       for group, criteria in component_counts(root).items()
                       for criterion, values in criteria.items()]
-    counts_tex += longtable(
+    counts_tex += count_table(
         "Contagens separadas dos componentes dos três estudos mistos.",
-        "qua:mmat-contagens-componentes",
-        "|p{6.3cm}|c|r|r|r|r|",
+        "tab:mmat-contagens-componentes",
+        "p{6.3cm}crrrr",
         ["Categoria do componente", "Critério", "Y", "N", "CT", "n"],
         component_rows,
-        caption_width_rows=component_rows,
     )
     return {"research/exports/references/study_synthesis_tcc.tex": text,
             "research/exports/references/mmat_counts_tcc.tex": counts_tex}

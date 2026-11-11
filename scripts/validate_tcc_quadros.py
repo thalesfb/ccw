@@ -65,8 +65,8 @@ def validate_sources(root: Path = ROOT) -> None:
     calls = [(path, label) for path, text in sources.items()
              for label in re.findall(r"\\TCCQuadroSetup\{([^}]+)\}", text)]
     expected = [(row["source"], row["label"]) for row in rows]
-    if sorted(calls) != sorted(expected) or len(rows) != 16:
-        raise ValueError("The active manuscript must contain exactly the 16 inventoried quadro calls")
+    if sorted(calls) != sorted(expected) or len(rows) != len(expected):
+        raise ValueError(f"The active manuscript must contain exactly the {len(expected)} inventoried quadro calls")
     count = sum(len(re.findall(r"\\begin\{(?:quadro|longtable)\}", text))
                 for text in sources.values())
     if count != len(rows):
@@ -255,8 +255,9 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
         page.extract_text(visitor_text=visit)
     if source_started:
         raise ValueError(f"Quadro {active}: incomplete source/notes")
-    if set(records) != set(range(1, 17)):
-        raise ValueError("Not all sixteen quadro titles were found in the PDF")
+    expected_numbers = {row["number"] for row in policy["quadros"]}
+    if set(records) != expected_numbers:
+        raise ValueError(f"Not all {len(expected_numbers)} quadro titles were found in the PDF")
     for row in records.values():
         if not row["source_seen"] or not row["body_runs"]:
             raise ValueError(f"Incomplete rendered quadro {row['number']}")
@@ -294,8 +295,8 @@ def validate(pdf: Path, auxiliaries: Path, log: Path, root: Path = ROOT,
     reader = PdfReader(pdf)
     loq = (auxiliaries / "main.loq").read_text(encoding="utf-8")
     anchors = re.findall(r"\\contentsline\s*\{[^}]+\}\{.*\}\{(\d+)\}\{([^}]+)\}", loq)
-    if len(anchors) != 16:
-        raise ValueError("The list of quadros must contain exactly sixteen entries")
+    if len(anchors) != len(policy["quadros"]):
+        raise ValueError(f"The list of quadros must contain exactly {len(policy['quadros'])} entries")
     first_page = reader.get_destination_page_number(reader.named_destinations[anchors[0][1]])
     rows = inspect_pdf(reader, first_page, policy, caption_texts(root, policy),
                        source_texts(root, policy, auxiliaries))

@@ -31,26 +31,25 @@ Conferido em 11 de novembro de 2026 contra as listas do PDF compilado.
 
 - **Tabelas 1 e 2:** estatísticas descritivas da revisão; frequência da
   finalidade principal nos 15 estudos;
+- **Tabelas 3 e 4:** respostas MMAT por critério e categoria; contagens dos
+  componentes dos estudos mistos;
 - **Quadros 1 e 2:** camadas da estratégia de busca; dimensões PICOS;
 - **Quadro 3:** caracterização dos 18 registros da lista preliminar;
 - **Quadros 4 e 5:** finalidade, técnica e população; alvos, validação e
   métricas;
 - **Quadros 6 e 7:** apreciação MMAT preliminar dos 15 estudos e dos
   componentes dos estudos mistos;
-- **Quadros 8 e 9:** respostas MMAT por critério e categoria; contagens dos
-  componentes dos estudos mistos;
-- **Quadros 10 a 12:** critérios de aceitação; origem dos requisitos;
+- **Quadros 8 a 10:** critérios de aceitação; origem dos requisitos;
   observações dos estudos e requisitos;
-- **Quadros 13 a 16 (apêndices):** mapeamento PRISMA 2020; ficha de julgamento
+- **Quadros 11 a 14 (apêndices):** mapeamento PRISMA 2020; ficha de julgamento
   por requisito; ficha de aceitação documental; ferramentas de IA;
 - **Fluxograma 1:** fluxo de seleção da revisão;
 - **Gráfico 1:** registros por fonte após a remoção de duplicatas;
 - **Figura 1:** componentes e fluxos da arquitetura conceitual.
 
-Os Quadros 8 e 9 apresentam contagens de respostas Y, N e CT. Pelo critério
-acima, poderiam ser apresentados como tabelas; a classificação como quadro foi
-mantida e é uma decisão pendente do autor e da orientação, pois o texto e os
-testes de regressão referem-se a eles como quadros.
+As contagens de respostas Y, N e CT (Tabelas 3 e 4) seguem o formato tabular do
+IBGE: sem bordas laterais, sem linhas entre as linhas de dados e com fechamento
+apenas no fim. Os julgamentos textuais por estudo permanecem em quadros.
 
 As listas de ilustrações, quadros e tabelas são geradas pelo próprio documento,
 e as referências cruzadas do texto usam o mesmo tipo apresentado na legenda.

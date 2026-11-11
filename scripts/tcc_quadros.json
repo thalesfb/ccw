@@ -42,46 +42,36 @@
     },
     {
       "number": 8,
-      "label": "qua:mmat-contagens",
-      "source": "research/exports/references/mmat_counts_tcc.tex"
-    },
-    {
-      "number": 9,
-      "label": "qua:mmat-contagens-componentes",
-      "source": "research/exports/references/mmat_counts_tcc.tex"
-    },
-    {
-      "number": 10,
       "label": "qua:aceitacao-funcional",
       "source": "results/tcc/conteudo/aceitacao-cenarios.tex"
     },
     {
-      "number": 11,
+      "number": 9,
       "label": "qua:rastreabilidade-requisitos",
       "source": "results/tcc/conteudo/rastreabilidade-requisitos.tex"
     },
     {
-      "number": 12,
+      "number": 10,
       "label": "qua:estudos-requisitos",
       "source": "results/tcc/conteudo/estudos-requisitos.tex"
     },
     {
-      "number": 13,
+      "number": 11,
       "label": "qua:prisma-checklist",
       "source": "results/tcc/postextuais/apendice.tex"
     },
     {
-      "number": 14,
+      "number": 12,
       "label": "qua:formulario-oe4",
       "source": "results/tcc/postextuais/apendice.tex"
     },
     {
-      "number": 15,
+      "number": 13,
       "label": "qua:ficha-aceitacao-documental",
       "source": "results/tcc/postextuais/apendice.tex"
     },
     {
-      "number": 16,
+      "number": 14,
       "label": "qua:ferramentas-ia",
       "source": "results/tcc/postextuais/ferramentas-ia.tex"
     }
