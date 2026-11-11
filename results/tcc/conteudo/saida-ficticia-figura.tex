@@ -1,0 +1,40 @@
+\begin{figure}[htbp]
+\centering
+\caption{Exemplo fictício de saída por estudante e habilidade.}
+\label{fig:saida-ficticia}
+\setlength{\unitlength}{1mm}
+\resizebox{\textwidth}{!}{%
+\begin{picture}(155,104)
+\small
+\put(0,0){\framebox(155,104){}}
+\put(0,94){\framebox(155,10){\textbf{Exemplo fictício, sem dados reais nem treinamento de modelo}}}
+\put(2,82){\framebox(12,8){F04}}
+\put(17,82){\makebox(136,8)[l]{Estudante A; habilidade: comparação de frações; vínculo informado pela professora}}
+\put(2,30){\framebox(12,48){F05}}
+\put(17,72){\makebox(136,6)[l]{Taxa de acertos observada: 4 de 6 (0,67); intervalo de Wilson de 95\%: 0,30--0,90}}
+\put(17,66){\makebox(136,6)[l]{Média das probabilidades previstas de acerto: 0,65, sem intervalo próprio}}
+\put(30,58){\line(1,0){120}}
+\put(30,56){\line(0,1){4}}
+\put(90,56){\line(0,1){4}}
+\put(150,56){\line(0,1){4}}
+\put(30,52){\makebox(0,4){\footnotesize 0}}
+\put(90,52){\makebox(0,4){\footnotesize 0,5}}
+\put(150,52){\makebox(0,4){\footnotesize 1}}
+\linethickness{0.8mm}
+\put(66,58){\line(1,0){72}}
+\thinlines
+\put(110.4,58){\circle*{2.4}}
+\put(108,62){\makebox(0,0){$\times$}}
+\put(17,45){\makebox(136,6)[l]{\footnotesize $\bullet$ taxa observada e intervalo de Wilson;\quad $\times$ média das probabilidades previstas}}
+\put(17,40){\makebox(136,6)[l]{Alvo: próximo item da habilidade indicada}}
+\put(17,35){\makebox(136,6)[l]{Calibração não examinada; validação externa pendente}}
+\put(17,30){\makebox(136,6)[l]{Alerta de risco desabilitado; não usar como diagnóstico nem decisão somativa}}
+\put(2,18){\framebox(12,10){F06}}
+\put(17,18){\makebox(136,10)[l]{\shortstack[l]{Registro da professora: examinar as estratégias escritas antes de\\escolher nova atividade; tipo de erro e obstáculo ficam com a docente}}}
+\put(2,4){\framebox(12,10){F07}}
+\put(17,4){\makebox(136,10)[l]{Exportação: versões dos dados e do modelo, decisão e justificativa}}
+\end{picture}
+}%
+\fonte{Elaborado pelo autor (2026).}
+\nota{Reúne os exemplos fictícios dos dois cenários desta seção; os valores não resultam de execução de modelo. O intervalo de Wilson corresponde a 4 acertos em 6 itens, com $z = 1{,}96$, como na implementação exploratória.}
+\end{figure}
