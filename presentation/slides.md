@@ -48,7 +48,7 @@ class: content-slide tcc-challenge-slide
 
 <div class="slide-kicker">01 / CONTEXTO</div>
 
-# O desafio: interpretar trajetórias<br>em turmas heterogêneas
+# O desafio: interpretar evidências de aprendizagem<br>em turmas heterogêneas
 
 <div class="tcc-challenge-layout">
   <div class="tcc-challenge-copy">
@@ -394,7 +394,7 @@ class: content-slide tcc-boundary-slide
   <div class="tcc-boundary-column boundary-no"><div class="tcc-boundary-mark">?</div><span>O TCC NÃO ENTREGA</span><h2>Eficácia geral</h2><p>Não há base para afirmar superioridade entre modelos ou protótipo validado em escolas.</p></div>
 </div>
 
-<div class="tcc-boundary-foot"><strong>Leitura obrigatória:</strong> resultados individuais exigem população, instrumento, métrica e desenho de avaliação nas fontes primárias.</div>
+<div class="tcc-boundary-foot"><strong>Limitações metodológicas:</strong> revisor único, com triagem, extração e MMAT produzidos por IA, em conferência pelo autor; 14 de 15 com texto recuperado; sensibilidade abaixo de 4,0 com 13/45, 29/54 e 5/30; sem aplicação com participantes.</div>
 
 ---
 layout: default

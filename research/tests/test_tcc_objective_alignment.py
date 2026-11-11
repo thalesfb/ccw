@@ -37,7 +37,7 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         )
         self.assertIn("discutir conceitualmente dimensões técnicas, pedagógicas e éticas", objectives)
         self.assertIn("O OE2 foi delimitado à codificação sistemática", intro)
-        self.assertIn("aplicação do MMAT 2018 aos 15 estudos empíricos", (CONTENT / "conclusao.tex").read_text(encoding="utf-8"))
+        self.assertIn("O OE2 foi atendido nos termos formulados:", (CONTENT / "conclusao.tex").read_text(encoding="utf-8"))
         self.assertIn("(OE3) formular a especificação técnica e pedagógica", objectives)
         self.assertIn(
             "(OE4) propor um protocolo para avaliar a viabilidade e a coerência da especificação conceitual, "
@@ -49,8 +49,11 @@ class ObjectiveAlignmentTests(unittest.TestCase):
         self.assertIn("sua aplicação permanece pendente", prototype)
         self.assertIn("A regra de decisão e sua justificativa deverão ser definidas antes de eventual comparação", prototype)
         self.assertIn("não define as colunas habilitadas", prototype)
-        self.assertIn("a rotina de explicação local decompõe diretamente o logaritmo da razão de chances", prototype)
-        self.assertIn("algebricamente exata", prototype)
+        self.assertIn("a rotina de explicação local decompõe", prototype)
+        self.assertIn("até as 20 primeiras linhas do conjunto de teste, ordenadas pelo identificador", prototype)
+        self.assertIn("identificador do estudante (ordem textual)", prototype)
+        self.assertIn("pela ordem da interação e pelo identificador do registro de origem", prototype)
+        self.assertIn("não uma amostra aleatória", prototype)
         self.assertNotIn("teste alinhado por execução", prototype)
         self.assertIn("O produto principal do trabalho é documental", intro)
         self.assertIn("implementação exploratória serviu como verificação técnica auxiliar", intro)
