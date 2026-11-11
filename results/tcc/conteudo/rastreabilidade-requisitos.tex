@@ -70,7 +70,7 @@ R19 & Comparar com referências simples e justificar complexidade. & Fundamento 
 \hline
 R20 & Separar treino, validação e teste e prevenir vazamento. & Fundamento em \citeonline{James2021}; relato contraditório de \citeonline[p.~50--51]{Math2021_001}. & A ambiguidade documental motiva separação e relato inequívocos; não permite determinar qual procedimento foi efetivamente executado no artigo. \\
 \hline
-R21 & Examinar confusão, precisão, revocação e F1 por classe. & Resultados por classe em \citeonline[p.~160, Tabela~8]{Implementation2025_000}; fundamento em \citeonline{James2021}; decisão autoral de protocolo. & Examinar erros que a acurácia agregada pode ocultar; resultados de uma base não determinam o desempenho futuro do protótipo. \\
+R21 & Examinar confusão, precisão, revocação e F1 por classe. & Resultados por classe em \citeonline[p.~160, Tabela~8]{Implementation2025_000}; fundamento em \citeonline{James2021}; decisão autoral de protocolo. & Examinar erros que a acurácia agregada pode ocultar; resultados de uma base não determinam o desempenho futuro do protótipo. O avaliador exploratório cobre apenas a classe positiva, sem matriz de confusão. \\
 \hline
 R22 & Usar ROC-AUC e calibração quando compatíveis com a tarefa. & Fundamentos em \citeonline{Fawcett2006} e \citeonline{NiculescuMizilCaruana2005}. & O avaliador exploratório calcula ROC-AUC, escore de Brier e curva de confiabilidade em testes sintéticos, distinguindo discriminação e qualidade probabilística; nenhuma das métricas constitui medida de aprendizagem. \\
 \hline
