@@ -44,7 +44,7 @@
     "docs/tcc/ESTADO-ATUAL-TCC.md": "3d1ba268d7d1a152004e828443e89cab2740d8f940c6529d5116ac9ff6ac6db8",
     "docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md": "13a286eb84d32f15767b7ae4213efb9242112dd15ad8c1933c0790ac44b748e0",
     "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md": "e6c0de5b0c7b15b3853503b2665a9ab7ea80b2190511048bea6aee219e735d85",
-    "presentation/README.md": "579e571ba54a6fa09f406d8118b5f139c40d60756465bf54791c4b293b225b6e",
+    "presentation/README.md": "a7d04772cfe58bd81d580432075a48c4bb70a7e27074693a7d2a0684703ebe2b",
     "results/tcc/README.md": "2c4620de2b5295a5928728972755171ea629f6d6d4162cedb0416f463d830747",
     "docs/README.md": "09df41bb263fc6d798520d98bc1b796393acbf9e73c9298fd86a034b7ec22e76",
     "docs/tcc/README.md": "8fad19afa8d7e8921bd50a6606724202ada9c5c416d3197311dcd4a965a4755a",
@@ -58,11 +58,11 @@
     "index.html": "8c259c0683752b80dfacfd5aff166d8cb29eca1e251383fb947a1c2b7657ce85",
     "research/index.html": "148d150e68aa66a76261a79ccb06cc910121cf92d886336d7e54f4fe5503feb8",
     "results/tcc/index.html": "356f12381bce6c15bb6b57ecd30be3fca075e2471436efe1fb358fa602ad619b",
-    "presentation/slides.md": "47674edef5cf406847ecf04272c9ad89a6ecd338fbf54392770f50f66c36a53c",
-    "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "ed68acc8feb5e2be6777381cd95ea067bf451f2481b5e589aa161764b1be0d5f",
-    "scripts/generate_tcc_presentation.py": "8f8a5fa38647bcc9a1d584b86c93bbd7532bb28c85fa57e7fbb3d8ad1a8127f1",
+    "presentation/slides.md": "b75f185f62b458e45355a3947beb597552cf59869c344ae5a6a039925337b9c6",
+    "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "09feaa9b5d60f52dc1a0a5f276ccc5a690188e604f0a9866fb4e41c87478b076",
+    "scripts/generate_tcc_presentation.py": "1a6aadf73195a2f1cd7830fbfea4e376df6e93d7aea96d3bbb539376b1dd6c67",
     "scripts/sync_project_docs.py": "7431412e7f80bb6e1b70405ad8d24b7250277eb9938039a308baf2b4506d1040",
-    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "5211e5e1a99eade76bb514bf1813cad984072d93b9205ccab94a08c1fa28ac86",
+    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "366fac485a2a63efd9f9db13923cdd90d10554429fa46ffaa16bbc02d6168e24",
     "results/tcc/images/project_overview_2026-11-03.png": "0eca3178d32ededab1698f86aacc0528a6c377b929d9cf5426e641c6b87dc316"
   }
 }
