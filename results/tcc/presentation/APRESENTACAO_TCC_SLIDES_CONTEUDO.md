@@ -12,7 +12,7 @@
 - **Autor:** Thales Ferreira Batista
 - **Orientação:** Prof. Dr. Rafael Zanin; Prof. Dr. Manassés Ribeiro
 - **Instituição:** IFC — Campus Videira
-- **Atualização da síntese e do escopo:** 12/10/2026
+- **Atualização da sequência:** 12/11/2026
 - **Recorte temporal:** 2015–2026, com data de corte em 31/08/2026
 
 O roteiro organiza a exposição do TCC em problema, método, resultados,
@@ -22,213 +22,146 @@ protótipo conceitual em aplicação implementada.
 
 ## Sequência dos slides
 
+A sequência de 11/2026 dá mais peso aos resultados de cada objetivo e às
+regras propostas, e menos ao pipeline de coleta. Gráficos de etiquetas de
+técnicas de todos os registros e o histograma de relevância saíram do deck,
+porque não descreviam os 15 estudos.
+
 ### 1. Ensino Personalizado de Matemática
 
-Subtítulo: oportunidades e técnicas computacionais. Apresenta a revisão
-sistemática e a especificação conceitual de protótipo, com autor, orientação,
-instituição, data do recorte versionado e período considerado.
+Capa com título, autor, orientação, instituição, data de corte da busca e
+estado do material.
 
-### 2. O desafio fundamental: diagnóstico personalizado com evidências
+### 2. O problema: ler a aprendizagem em turmas heterogêneas
 
-Apresenta o problema em duas colunas: a heterogeneidade das turmas, o tempo
-docente, o risco de ensino genérico e a fragmentação da literatura. O TCC
-organiza evidências para apoiar a interpretação, sem substituir a decisão
-pedagógica.
+A média da turma não mostra onde cada estudante está nem quanta evidência
+sustenta essa leitura. Técnicas computacionais podem organizar evidências,
+com o professor responsável pela interpretação.
 
-### 3. Objetivo geral
+### 3. O que o trabalho propõe
 
-Apresenta ação central, finalidade e escopo: propor uma especificação técnica e
-pedagógica para apoiar a interpretação docente da aprendizagem matemática,
-fundamentada no mapeamento e na análise da literatura, sem apresentá-la como
-protótipo funcional ou avaliação de eficácia.
+Objetivo geral do TCC, com objeto (técnicas aplicadas à educação matemática,
+2015–2026), finalidade (indícios de desempenho e de incerteza por habilidade)
+e escopo (revisão e especificação documental, sem protótipo validado).
 
-### 4. Quatro perguntas fundamentam a busca por clareza
+### 4. Problema de pesquisa
 
-Apresenta quatro perguntas orientadoras sobre técnicas, avaliação, lacunas e
-direcionamentos para ferramentas de apoio. Elas organizam a análise dos
-achados do TCC.
+Como estruturar a especificação a partir da literatura, desdobrado em quatro
+perguntas, cada uma ligada a um objetivo específico (OE1–OE4).
 
-### 5. Missão: mapear o terreno com rigor e transparência
+### 5. Cinco níveis que uma saída não deve confundir
 
-Relaciona o propósito da revisão à diretriz PRISMA 2020, explicitando que o
-protocolo organiza identificação, seleção e relato. A lâmina também registra
-o limite interpretativo: desempenho observado não equivale automaticamente a
-aprendizagem.
+Desempenho observado, probabilidade preditiva, proficiência estimada,
+competência e aprendizagem, com base em National Research Council (2001),
+OECD (2023) e BNCC (2018).
 
-### 6. A base conceitual: níveis de interpretação
+### 6. Acertar ou errar não revela o tipo de erro
 
-Distingue o indicador de desempenho observado, a probabilidade preditiva
-condicionada ao modelo e aos dados, a proficiência estimada, a competência e a
-aprendizagem. A mensagem central é que uma probabilidade preditiva é uma saída
-para um alvo definido, não uma medida direta de proficiência, competência,
-aprendizagem ou eficácia; a revisão apoia inferências sobre registros, mas não
-observa diretamente todos os processos da aprendizagem.
+Duval (2009) e Brousseau (2008), com o exemplo de 2x + 5 = 15. A
+especificação organiza indícios por habilidade; o tipo de erro e o obstáculo
+ficam com o professor (F06).
 
-### 7. Objetivos específicos
+### 7. Quatro objetivos, quatro produtos
 
-Apresenta quatro objetivos: categorizar técnicas e finalidades pedagógicas;
-identificar limitações e lacunas; formular a especificação; propor um protocolo
-de avaliação da viabilidade e da coerência da especificação conceitual. Sua
-aplicação ainda está pendente. Uma eventual avaliação empírica do protótipo
-constitui contingência separada.
+OE1 a OE4 e o produto de cada um: tipologia, lacunas de relato, 26 grupos de
+requisitos com regra de modelo, e protocolo de avaliação.
 
-### 8. Estratégia de busca: três camadas
+### 8. Revisão sistemática: busca em três camadas
 
-Mostra as camadas matemática, técnicas e educação e as 72 consultas canônicas
-versionadas — 48 em inglês e 24 em português —. A composição não é contagem
-retrospectiva de chamadas HTTP.
+72 consultas (48 em inglês e 24 em português), quatro bases, relato com o
+PRISMA 2020 e apreciação com o MMAT 2018.
 
-### 9. Quatro fontes de indexação complementares
+### 9. Quatro bases de indexação complementares
 
-Apresenta a distribuição do recorte versionado após a remoção determinística: Semantic
-Scholar (1.931 registros), OpenAlex (3.057), Crossref (5.049) e CORE (1.840).
-Os valores somam 11.877 registros na triagem, não são contagens independentes
-de estudos retidos e não devem ser somados ao total identificado de 11.904.
-Teses e dissertações permanecem elegíveis quando atendem aos mesmos critérios
-do protocolo.
+Semantic Scholar, OpenAlex, Crossref e CORE, com 11.875 registros após a
+remoção de 29 duplicatas.
 
-### 10. O funil da descoberta
+### 10. Fluxo da seleção
 
-Mostra as contagens do recorte versionado: 11.904 identificados; 27 remoções
-determinísticas por DOI/URL; 11.877 na triagem; 9.391 excluídos na triagem;
-2.486 submetidos à priorização operacional; 2.468 excluídos nessa etapa; 18
-retidos provisoriamente para adjudicação de escopo. A priorização usa metadados
-e resumos e não corresponde à avaliação de elegibilidade em texto completo.
+De 11.904 registros a 18 na lista de leitura. Após uma exclusão no resumo,
+17 relatórios foram procurados, dois não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados
+em texto completo; um protocolo foi excluído. A seleção histórica permanece com 15 estudos.
 
-### 11. Fluxo operacional (referência PRISMA 2020)
+### 11. Fluxograma PRISMA
 
-Incorpora `research/exports/visualizations/prisma_flow.png`, figura operacional
-própria, com referência ao PRISMA 2020, sincronizada com os artefatos públicos;
-ela não reproduz o diagrama PRISMA completo. Dos 18 registros selecionados preliminarmente,
-um foi excluído após a triagem do resumo; 17 relatórios foram procurados, dois
-não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados em texto completo.
-Um protocolo sem resultados concluídos foi excluído; 14 relatórios empíricos
-foram recuperados. A seleção histórica permanece com 15 estudos porque mantém
-Sokkhey sem cópia verificável. A priorização operacional anterior não é apresentada
-como etapa PRISMA de elegibilidade.
+Fluxograma 1 do TCC, com a distinção entre priorização por relevância e
+avaliação de elegibilidade.
 
-### 12. Deduplicação: o que foi confirmado
+### 12. O corte 4,0 é heurístico
 
-Explica a diferença entre identidade bibliográfica e semelhança de título. As
-27 remoções confirmadas são 25 por DOI normalizado e 2 por URL exata. Os 232
-excedentes observados apenas por título permanecem candidatos à auditoria
-semântica e não foram tratados automaticamente como duplicatas.
+A exploração abaixo do corte encontrou registros classificados como elegíveis
+(13 de 45, 29 de 54 e 5 de 30). O corpus é um recorte, não um censo; a
+limitação é declarada sem estimativa de perda.
 
-### 13. A distribuição anual concentra registros nos anos recentes
+### 13. O destino dos 18 registros
 
-Incorpora a distribuição anual e contextualiza a concentração de registros nos
-anos mais recentes do recorte 2015–2026. O ano de 2026 é parcial, com coleta até
-31/08/2026; por isso, sua barra não deve ser comparada diretamente com anos
-completos. A leitura é descritiva e não infere produção mundial,
-representatividade, causalidade ou qualidade.
+15 estudos empíricos (Sokkhey sem cópia verificável), Zeng não recuperado,
+uma exclusão após resumo e um protocolo excluído.
 
-### 14. Técnicas observadas no conjunto pós-deduplicação
+### 14. MMAT preliminar
 
-Destaque, no conjunto pós-deduplicação (n=11.877), para 6.399 registros com
-técnica não especificada, 1.073 com assessment,
-863 com IA/inteligência artificial, 771 com machine learning e 345 com análise
-preditiva. As categorias podem se sobrepor e não medem qualidade, eficácia ou
-predominância entre os estudos retidos.
+Perguntas S1 e S2, legenda Y/N/CT e estado preliminar: estudos 5 e 7 em
+categoria 3 operacional, estudo 8 em categoria 4 adaptada, sem escore
+agregado; respostas produzidas por IA e em conferência pelo autor.
 
-### 15. Um filtro operacional antes da leitura em profundidade
+### 15. Resultado do OE1: para que as técnicas são usadas
 
-Mostra a distribuição do score e o limiar operacional de 4,0. O score organiza
-o processamento, mas não é medida de qualidade metodológica, não produz ranking
-e não substitui a leitura das fontes primárias.
+Predição/classificação (8), personalização ou STI (3), intervenção didática
+(2), modelagem cognitiva (1) e integração curricular (1), com exemplos de
+técnicas. As categorias não são homogêneas.
 
-### 16. Conjunto retido: dois estratos de leitura
+### 16. Resultado do OE2: o que falta nos relatos
 
-Dos 18 registros selecionados preliminarmente, 15 integram a seleção empírica
-histórica, dos quais 14 têm texto recuperado. Um foi excluído após a triagem do
-resumo; dois relatórios não foram recuperados (Sokkhey e Zeng); um protocolo sem
-resultados concluídos foi excluído após texto completo. A síntese
-empírica aponta recorrência de predição de desempenho e estimativa de
-proficiência, além de uma experiência que integra Transformada de Fourier ao
-ensino universitário de matemática. Nesse caso, coortes separadas por quatro
-anos limitam a inferência e não isolam o efeito da IA.
+Respostas CT por categoria e critério do MMAT. CT predomina em
+representatividade, medidas, completude, controle e análise; a especificação
+passa a exigir alvo, população, transformações e avaliação descritos.
 
-### 17. Apreciação metodológica preliminar: critérios, não uma nota global
+### 17. Resultado do OE2: três eixos de risco viraram requisitos
 
-O MMAT é apresentado por critério, conforme o desenho, sem nota agregada. Os
-15 registros permanecem provisoriamente no núcleo empírico, com consultas
-documentais declaradas; 15 têm triagem S1/S2 e apreciação por categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacional, com alocação desconhecida; o 14 usa a categoria 2 declarada e contraditória; o 8 usa a categoria 4 adaptada às análises computacionais matemáticas. Essas rotas não confirmam delineamentos. Frações reutilizadas entre capítulos não são duplicadas. Zeng não recebeu MMAT; as respostas anteriores de Sokkhey permanecem históricas, sem revalidação.
+Técnico (R20), pedagógico (R02) e ético (R04). A análise por subgrupos (R23)
+não foi operacionalizada.
 
-A disponibilidade de uma fonte não comprova leitura integral. Há cópias para 14 dos 15 estudos; Sokkhey mantém julgamento histórico sem cópia para revalidação. Os limites de acesso, leitura e evidência por critério estão na trilha pública. A cobertura pública de MacLellan permanece em 38 de 108 páginas.
+### 18. O que a evidência permite especificar
 
-Nos três mistos, Q3 (interpretação da integração) recebeu dois N e um CT; Q4 (divergências entre componentes), dois Y e um CT. Em 6919, Q4=Y não valida os ganhos de longo prazo e Q3 permanece N. Em 6920, Q3=N corresponde à extrapolação para melhora de desempenho sem medir esse efeito; Q4=Y não demonstra que o consenso docente abrange as previsões finais. As justificativas e as páginas das fontes constam da matriz pública.
+Síntese dos 15 estudos provisórios: alvo explícito, modelo simples como
+referência e incerteza visível.
 
-### 18. O que emerge entre os estudos incluídos
+### 19. O que o TCC entrega, e o que não entrega
 
-Apresenta exemplos de classificação e predição de resultados matemáticos,
-com RF, SVM e redes neurais como alternativas observadas. Categorias de desempenho
-não equivalem automaticamente a níveis de proficiência validados. A heterogeneidade de
-populações, instrumentos, variáveis e métricas limita a comparabilidade entre
-estudos.
+Entrega um mapa auditável e uma especificação; não entrega evidência de
+eficácia. Limitações: revisor único com apoio de IA, 14 de 15 textos
+recuperados, sensibilidade abaixo do corte e ausência de participantes.
 
-### 19. O que podemos concluir — e o que permanece aberto
+### 20. Exemplos de limitações nos estudos consultados
 
-O recorte versionado oferece um mapa auditável. A heterogeneidade de populações,
-instrumentos, variáveis e métricas impede comparar todos os resultados
-diretamente. Acurácia de um artigo não demonstra superioridade geral nem
-eficácia pedagógica transferível.
+Quatro exemplos localizados nos textos primários (He, Villegas-Ch, Nyantah e
+Echeveria), sem estimativa de prevalência.
 
-### 20. Limitações identificadas nos estudos consultados
+### 21. Resultado do OE3: da evidência aos requisitos
 
-Apresenta quatro exemplos localizados, com páginas: divergência de
-denominadores e possível confundimento entre docente e condição em He et al.
-(2025, pp. 1, 16, 31–35); seis semanas nos métodos e resultado na oitava semana na subanálise de
-programação em Villegas-Ch et al. (2025, pp. 14, 22); descrições incompatíveis de alocação, diferença no
-pré-teste e intervenção combinada em Nyantah et al. (2025, pp. 101–105); e
-sobreposição entre itens usados para construir categorias e preditores em
-Echeveria et al. (2025, pp. 66, 69–70). São exemplos dos textos consultados,
-não estimativa de frequência da literatura. Os exemplos são casos localizados
-nos textos integrais dos estudos incluídos. Um registro
-continua sem texto integral e sem apreciação MMAT; um foi excluído após resumo
-e um protocolo sem resultados concluídos foi excluído após texto completo. A revisão
-segue documental e preliminar, com as limitações de acesso, leitura e evidência por critério indicadas no texto.
+Cadeia revisão → requisitos (26 grupos) → funções F01–F07 → aceitação →
+protocolo, com os exemplos R02 e R20.
 
-### 21. Da evidência à especificação — sem saltar para a implementação
+### 22. Arquitetura e saída para o professor
 
-Mostra a derivação visual: evidências da revisão e da fundamentação → lacunas →
-requisitos. A entrega é uma especificação técnica e pedagógica auditável, com
-protocolo para avaliar sua viabilidade e coerência e arquitetura de referência.
-Dois exemplos dos 26 grupos explicitam a derivação: R02 separa os conceitos
-com fundamento teórico/normativo; R20 prevê separação entre treino, validação e
-teste, motivada por relato localizado, fundamento metodológico e decisão
-autoral. Os limites de cada justificativa são apresentados sem inferir eficácia.
-A aplicação desse protocolo está pendente; não é aplicação funcional nem
-validação com participantes. Experimento de eventual protótipo é contingência
-separada, dependente de decisão posterior.
+Arquitetura de referência e tela fictícia: 4 de 6 acertos, intervalo de
+Wilson de 0,30 a 0,90, média das probabilidades 0,65 sem intervalo próprio.
 
-### 22. Arquitetura de referência: da fonte à decisão docente
+### 23. Regras fixadas antes de qualquer dado real
 
-Resume a arquitetura de referência em ingestão, preparação, modelagem,
-avaliação/explicabilidade e apresentação. A separação favorece testabilidade,
-rastreabilidade e substituição controlada de técnicas. O protocolo documental
-proposto examina rastreabilidade, consistência arquitetural, correspondência
-conceitual e condições de viabilidade. Registra código, versão, fonte,
-critério, justificativa e ajuste necessário por requisito. Os julgamentos
-previstos distinguem coerência documental, ressalvas e necessidade de revisão;
-a aplicação e a revisão docente permanecem pendentes.
+Regra de escolha de modelo (OE3) e regras de avaliação da especificação
+(OE4), que verificam rastreabilidade, consistência arquitetural,
+correspondência conceitual e condições de viabilidade. Nenhuma foi aplicada.
 
-### 23. Ciência aberta como trilha de auditoria
+### 24. Conclusão e próximos passos
 
-Apresenta CSV/JSON, BibTeX, manifesto com hashes e relatórios PNG/HTML como
-artefatos públicos de reprodução. A bibliografia derivada do pipeline permanece
-separada das referências teóricas, pedagógicas, metodológicas e técnicas da
-fundamentação.
-
-### 24. Próximos passos científicos
-
-Indica o aprofundamento da conferência das fontes e dos julgamentos MMAT e
-a aplicação do protocolo de avaliação da especificação conceitual. Qualquer
-desenvolvimento e validação experimental de um protótipo constituem contingência
-separada e exigirão decisão, protocolo e autorização próprios.
+Quatro contribuições ligadas aos objetivos e próximos passos: conferir o
+MMAT, aplicar o protocolo após parecer ético, testar a regra de modelo em
+dados reais e codificar itens por registro de representação.
 
 ### 25. Obrigado
 
-Encerramento para perguntas e discussão, mantendo título, autor, instituição,
-recorte versionado e período considerado.
+Encerramento para perguntas, com QR do repositório e link do TCC.
 
 ## Regra de referência
 

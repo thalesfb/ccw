@@ -44,8 +44,13 @@ test('key narrative slides use the shared inline SVG icon system', () => {
   assert.match(css, /\.tcc-source-icon svg[\s\S]*stroke-linejoin:\s*round/)
 })
 
-test('the annual snapshot labels 2026 as a partial observation', () => {
-  assert.match(slides, /2026\*/)
-  assert.match(slides, /31\/08\/2026/)
-  assert.match(slides, /ano parcial|snapshot parcial/i)
+test('the deck states the search cut-off date', () => {
+  assert.match(slides, /busca até 31\/08\/2026/)
+})
+
+test('result slides are drawn in HTML, not as exported keyword-tag charts', () => {
+  assert.doesNotMatch(slides, /techniques_distribution|relevance_distribution/)
+  assert.match(slides, /class="tcc-typology-bars"/)
+  assert.match(slides, /class="tcc-ct-grid"/)
+  assert.match(css, /\.tcc-output-scale\s*\{[^}]*position:\s*relative;/)
 })

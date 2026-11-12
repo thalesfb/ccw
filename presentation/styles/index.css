@@ -1268,3 +1268,178 @@ small { font-size: 0.73rem; }
 .tcc-protocol-copy h2 { font-size: 1.35rem; }
 .tcc-protocol-copy p { margin-top: 0.65rem; font-size: 0.9rem; line-height: 1.2; }
 .tcc-protocol-copy .tcc-architecture-note { font-size: 0.85rem; }
+
+/* ------------------------------------------------------------------
+   Defense layer (11/2026): result slides for OE1-OE4, rules and
+   conclusion. Scoped to the slide classes introduced for the defense;
+   palette reuses the audited WCAG pairs in deck-standards.mjs.
+   ------------------------------------------------------------------ */
+:root {
+  --def-navy: #0e2a47;
+  --def-blue: #315e9b;
+  --def-green: #267653;
+  --def-amber: #8a5c1a;
+  --def-muted: #536676;
+  --def-line: #d5dce3;
+  --def-card: #ffffff;
+  --def-soft: #f3f6f9;
+}
+
+/* Problem slide: question on top, four derived questions mapped to OEs. */
+.tcc-problem-slide .tcc-problem-statement { max-width: 52rem; margin: 0 0 0.9rem; padding: 0.7rem 1rem; border-left: 0.3rem solid var(--def-blue); background: var(--def-soft); color: var(--def-navy) !important; font: italic 1.02rem/1.25 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-problem-slide .tcc-question-grid .rq-card { min-height: 0; padding-top: 0.7rem; }
+.tcc-problem-slide .tcc-question-grid .rq-card > div strong { min-height: 2.4rem; font-size: 1.05rem; }
+.tcc-problem-slide .tcc-question-grid .rq-card > div strong em { display: block; margin-top: 0.3rem; color: var(--def-muted) !important; font: 700 0.72rem/1 'Times New Roman', 'Nimbus Roman', serif; font-style: normal; letter-spacing: 0.12em; }
+.tcc-problem-slide .tcc-question-grid .rq-card p { margin-top: 0.6rem; font-size: 0.9rem; }
+
+/* Didactic slide: two theory claims, one worked example. */
+.tcc-mission-slide .tcc-mission-copy > p { font-size: 1.06rem; line-height: 1.22; }
+.tcc-mission-slide .tcc-mission-copy > p + p { margin-top: 0.6rem; }
+.tcc-mission-slide .tcc-reading-lens strong { font-size: 0.98rem; font-style: italic; }
+.tcc-mission-slide .tcc-rigor-card { min-height: 0; padding: 1rem 1.2rem; }
+.tcc-mission-slide .tcc-rigor-card h2 { font-size: 1.35rem; }
+.tcc-mission-slide .tcc-rigor-mark { width: auto; margin: 0.5rem auto 0.6rem; font-size: 1.15rem; }
+.tcc-mission-slide .tcc-rigor-mark b { font-size: 1.25rem; }
+
+/* Objectives: product line under each objective. */
+.tcc-objective-step em { grid-column: 2; margin-top: 0.4rem; color: var(--def-green) !important; font: 700 0.8rem/1.15 'Times New Roman', 'Nimbus Roman', serif; font-style: normal; }
+.tcc-objective-step { grid-template-rows: auto auto 1fr; }
+.tcc-objective-step span { grid-row: 1 / span 3; }
+
+/* Method strip under the search figure. */
+.tcc-method-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; margin-top: 0.8rem; }
+.tcc-method-strip span { padding: 0.5rem 0.7rem; border-top: 0.22rem solid var(--def-blue); background: var(--def-card); color: #1f2a37 !important; font: 0.84rem/1.2 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-method-strip b { display: block; color: var(--def-blue) !important; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* Relevance cut: sensitivity strata as horizontal bars. */
+.tcc-sensitivity { display: flex; flex-direction: column; gap: 0.75rem; padding: 1rem 1.1rem; border: 1px solid var(--def-line); background: var(--def-card); }
+.tcc-sensitivity-row { display: grid; grid-template-columns: 8.6rem 1fr 4.6rem; gap: 0.8rem; align-items: center; }
+.tcc-sensitivity-row > span { color: var(--def-navy) !important; font: 700 1rem/1.05 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-sensitivity-row > span small { display: block; margin-top: 0.15rem; color: var(--def-muted) !important; font-size: 0.72rem; font-weight: 400; }
+.tcc-sensitivity-bar { height: 1.35rem; background: #e7ecf1; }
+.tcc-sensitivity-bar i { display: block; height: 100%; background: var(--def-amber); }
+.tcc-sensitivity-row > b { color: var(--def-amber) !important; font: 800 1.05rem/1 'Times New Roman', 'Nimbus Roman', serif; text-align: right; }
+.tcc-sensitivity-note { margin-top: 0.2rem !important; color: var(--def-muted) !important; font-size: 0.8rem; }
+
+/* OE1 typology: bars with technique examples. */
+.tcc-typology-layout { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 1.6rem; align-items: center; margin-top: 0.3rem; }
+.tcc-typology-bars { display: flex; flex-direction: column; gap: 0.55rem; }
+.tcc-typology-row { display: grid; grid-template-columns: 10.2rem 1fr; grid-template-rows: auto auto; column-gap: 0.8rem; align-items: center; }
+.tcc-typology-row > span { grid-row: 1 / span 2; color: var(--def-navy) !important; font: 700 0.98rem/1.05 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-typology-row > div { display: flex; align-items: center; gap: 0.5rem; }
+.tcc-typology-row > div i { display: block; height: 1.25rem; background: var(--def-blue); }
+.tcc-typology-row:first-child > div i { background: var(--def-navy); }
+.tcc-typology-row > div b { color: var(--def-navy) !important; font: 800 1.1rem/1 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-typology-row > small { margin-top: 0.15rem; color: var(--def-muted) !important; font-size: 0.74rem; line-height: 1.1; }
+.tcc-typology-copy h2 { color: var(--def-navy) !important; font-size: 1.3rem; line-height: 1.1; }
+.tcc-typology-copy p { margin-top: 0.6rem !important; font-size: 0.95rem; line-height: 1.22; }
+
+/* OE2 reporting gaps: CT heat grid. */
+.tcc-reporting-layout { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 1.6rem; align-items: center; margin-top: 0.3rem; }
+.tcc-ct-grid { display: flex; flex-direction: column; gap: 0.3rem; }
+.tcc-ct-grid > div { display: grid; grid-template-columns: 12.5rem repeat(5, minmax(0, 1fr)); gap: 0.3rem; align-items: stretch; }
+.tcc-ct-grid > div > span { display: flex; align-items: center; color: var(--def-navy) !important; font: 700 0.9rem/1.1 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-ct-head > span { justify-content: center; color: var(--def-muted) !important; font-size: 0.78rem !important; letter-spacing: 0.08em; }
+.tcc-ct-head > span:first-child { justify-content: flex-start; }
+.tcc-ct-grid b { display: grid; place-items: center; min-height: 2.2rem; font: 800 1.05rem/1 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-ct-grid .ct-none { background: #eef2f5; color: #536676 !important; }
+.tcc-ct-grid .ct-mid { background: #f4e3c4; color: #5b3d10 !important; }
+.tcc-ct-grid .ct-high { background: #d9a85a; color: #2b1d07 !important; }
+.tcc-ct-grid .ct-all { background: #8a5c1a; color: #ffffff !important; }
+.tcc-ct-note { margin-top: 0.3rem !important; color: var(--def-muted) !important; font-size: 0.76rem; }
+.tcc-reporting-copy h2 { color: var(--def-navy) !important; font-size: 1.3rem; line-height: 1.1; }
+.tcc-reporting-copy p { margin-top: 0.6rem !important; font-size: 0.95rem; line-height: 1.22; }
+
+/* OE2 axes: technical, pedagogical, ethical. */
+.tcc-axes-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; margin-top: 0.4rem; }
+.tcc-axis { display: flex; flex-direction: column; gap: 0.5rem; min-height: 15rem; padding: 0.95rem 1rem; border: 1px solid var(--def-line); border-top: 0.3rem solid var(--axis); background: var(--def-card); }
+.tcc-axis.axis-tech { --axis: var(--def-blue); }
+.tcc-axis.axis-ped { --axis: var(--def-green); }
+.tcc-axis.axis-eth { --axis: var(--def-amber); }
+.tcc-axis > span { color: var(--axis) !important; font: 800 0.7rem/1 'Times New Roman', 'Nimbus Roman', serif; letter-spacing: 0.16em; }
+.tcc-axis h2 { color: var(--def-navy) !important; font-size: 1.18rem; line-height: 1.1; }
+.tcc-axis p { flex: 1 1 auto; color: #1f2a37 !important; font-size: 0.92rem; line-height: 1.22; }
+.tcc-axis > b { align-self: flex-start; padding: 0.25rem 0.5rem; background: var(--axis); color: #ffffff !important; font: 700 0.8rem/1 'Times New Roman', 'Nimbus Roman', serif; }
+.tcc-axes-foot { margin-top: 0.8rem; padding-top: 0.55rem; border-top: 1px solid var(--def-line); color: #1f2a37 !important; font-size: 0.86rem; }
+
+/* OE3 chain: review -> requirements -> functions -> acceptance -> protocol. */
+.tcc-chain { display: flex; align-items: stretch; gap: 0.35rem; margin: 0.2rem 0 0.9rem; }
+.tcc-chain > i { align-self: center; color: var(--def-muted) !important; font: 1.2rem/1 'Times New Roman', serif; font-style: normal; }
+.chain-node { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.5rem 0.4rem; border: 1px solid var(--def-line); background: var(--def-card); text-align: center; }
+.chain-node small { color: var(--def-muted) !important; font-size: 0.66rem; letter-spacing: 0.12em; }
+.chain-node strong { margin-top: 0.15rem; color: var(--def-navy) !important; font-size: 1rem; }
+.chain-node span { color: #1f2a37 !important; font-size: 0.8rem; }
+.chain-node.chain-key { border-color: var(--def-navy); background: var(--def-navy); }
+.chain-node.chain-key small, .chain-node.chain-key strong, .chain-node.chain-key span { color: #ffffff !important; }
+.tcc-specification-slide .tcc-spec-layout { min-height: 0; margin-top: 0; align-items: start; }
+.tcc-specification-slide .tcc-requirement-examples p { margin-top: 0.5rem; font-size: 0.86rem; }
+.tcc-specification-slide .tcc-spec-delivery p { font-size: 0.9rem; line-height: 1.22; }
+
+/* Architecture + fictitious output. */
+.tcc-architecture-slide .tcc-architecture-layout { grid-template-columns: 0.95fr 1.05fr; gap: 1.6rem; align-items: start; }
+.tcc-architecture-slide .tcc-architecture-path > i { margin: -0.1rem 0 -0.1rem 1.2rem; font-style: normal; }
+.tcc-architecture-slide .arch-node { grid-template-columns: 3.4rem 7rem 1fr; }
+.tcc-output-card { padding: 0.8rem 1rem; border: 1px solid var(--def-navy); background: var(--def-card); box-shadow: 0 0.2rem 0.6rem rgba(14, 42, 71, 0.12); }
+.tcc-output-head { margin: -0.8rem -1rem 0.6rem; padding: 0.4rem 1rem; background: var(--def-navy); color: #ffffff !important; font: 700 0.74rem/1.2 'Times New Roman', 'Nimbus Roman', serif; letter-spacing: 0.05em; }
+.tcc-output-who { color: var(--def-navy) !important; font-size: 0.95rem; }
+.tcc-output-metric { display: grid; grid-template-columns: 1fr auto; column-gap: 0.6rem; margin-top: 0.55rem; }
+.tcc-output-metric span { color: #1f2a37 !important; font-size: 0.82rem; }
+.tcc-output-metric strong { color: var(--def-navy) !important; font-size: 1.05rem; text-align: right; }
+.tcc-output-metric small { grid-column: 1 / -1; color: var(--def-muted) !important; font-size: 0.74rem; }
+.tcc-output-scale { position: relative; height: 2rem; margin: 0.45rem 0.3rem 0.2rem; border-bottom: 2px solid #9aa6b2; }
+.tcc-output-scale .scale-band { position: absolute; bottom: -0.35rem; height: 0.55rem; background: rgba(49, 94, 155, 0.35); }
+.tcc-output-scale .scale-dot { position: absolute; bottom: -0.45rem; width: 0.75rem; height: 0.75rem; margin-left: -0.375rem; border-radius: 50%; background: var(--def-blue); }
+.tcc-output-scale .scale-cross { position: absolute; bottom: 0.25rem; margin-left: -0.35rem; color: var(--def-amber) !important; font: 800 1rem/1 'Times New Roman', serif; font-style: normal; }
+.tcc-output-scale span { position: absolute; bottom: -1.2rem; transform: translateX(-50%); color: var(--def-muted) !important; font-size: 0.66rem; }
+.tcc-output-card ul { margin: 1rem 0 0; padding-left: 1rem; }
+.tcc-output-card li { color: #1f2a37 !important; font-size: 0.78rem; line-height: 1.25; }
+
+/* OE3 + OE4 rules. */
+.tcc-rules-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; margin-top: 0.2rem; }
+.tcc-rule-panel { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.85rem 1rem; border: 1px solid var(--def-line); border-top: 0.3rem solid var(--def-navy); background: var(--def-card); }
+.tcc-rule-panel h2 { color: var(--def-navy) !important; font-size: 1.15rem; }
+.tcc-rule-panel h2 em { margin-left: 0.35rem; color: var(--def-muted) !important; font-size: 0.75rem; font-style: normal; letter-spacing: 0.12em; }
+.tcc-rule-start { padding: 0.35rem 0.6rem; background: var(--def-soft); color: var(--def-navy) !important; font-size: 0.86rem; font-weight: 700; }
+.tcc-rule-steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.tcc-rule-steps li { display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.45rem; align-items: start; color: #1f2a37 !important; font-size: 0.84rem; line-height: 1.18; }
+.tcc-rule-steps b { display: grid; place-items: center; height: 1.35rem; background: var(--def-blue); color: #ffffff !important; font-size: 0.75rem; }
+.tcc-rule-outcomes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tcc-rule-panel .ok, .tcc-rule-panel .keep { display: inline-block; padding: 0.2rem 0.5rem; font-size: 0.78rem; font-weight: 700; }
+.tcc-rule-panel .ok { background: var(--def-green); color: #ffffff !important; }
+.tcc-rule-panel .keep { background: var(--def-amber); color: #ffffff !important; }
+.tcc-rule-tracks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.tcc-rule-tracks > div { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.55rem 0.6rem; background: var(--def-soft); }
+.tcc-rule-tracks strong { color: var(--def-navy) !important; font-size: 0.92rem; }
+.tcc-rule-tracks p { flex: 1 1 auto; color: #1f2a37 !important; font-size: 0.8rem; line-height: 1.18; }
+.tcc-rule-tracks .ok, .tcc-rule-tracks .keep { align-self: flex-start; }
+.tcc-rule-panel > small { color: var(--def-muted) !important; font-size: 0.74rem; line-height: 1.2; }
+
+/* Conclusion: contributions + next steps. */
+.tcc-next-slide .tcc-next-list span { font-size: 0.98rem; }
+.tcc-next-slide .tcc-next-list strong { color: var(--def-navy) !important; }
+.tcc-next-slide .tcc-next-decision { min-height: 0; justify-content: flex-start; gap: 0.6rem; }
+.tcc-next-slide .tcc-next-decision ul { margin: 0; padding-left: 1rem; }
+.tcc-next-slide .tcc-next-decision li { margin-top: 0.35rem; color: #1f2a37 !important; font-size: 0.9rem; line-height: 1.2; }
+
+/* Defense layer: vertical balance and legibility. */
+.slidev-layout:is(.tcc-problem-slide, .tcc-typology-slide, .tcc-reporting-slide, .tcc-axes-slide, .tcc-rules-slide, .tcc-score-slide, .tcc-architecture-slide, .tcc-next-slide, .tcc-specification-slide) > :is(.tcc-question-grid, .tcc-typology-layout, .tcc-reporting-layout, .tcc-axes-grid, .tcc-rules-layout, .tcc-score-layout, .tcc-architecture-layout, .tcc-next-layout, .tcc-spec-layout) { margin-top: auto; margin-bottom: auto; }
+.tcc-problem-slide .tcc-question-grid .rq-card p { font-size: 1rem; }
+.tcc-typology-bars { gap: 0.95rem; }
+.tcc-typology-row > span { font-size: 1.05rem; }
+.tcc-typology-row > small { font-size: 0.82rem; }
+.tcc-typology-copy p, .tcc-reporting-copy p { font-size: 1rem; }
+.tcc-ct-grid b { min-height: 2.6rem; font-size: 1.15rem; }
+.tcc-ct-grid > div > span { font-size: 0.98rem; }
+.tcc-axis { min-height: 12.5rem; }
+.tcc-axis p { font-size: 1rem; }
+.tcc-axis h2 { font-size: 1.28rem; }
+.tcc-rule-steps li { font-size: 0.92rem; }
+.tcc-rule-tracks p { font-size: 0.88rem; }
+.tcc-rule-panel > small { font-size: 0.8rem; }
+.tcc-output-scale { margin-bottom: 1.3rem; }
+.tcc-output-card li { font-size: 0.84rem; }
+.tcc-specification-slide .tcc-requirement-examples p { font-size: 0.95rem; }
+.tcc-specification-slide .tcc-spec-delivery p { font-size: 0.98rem; }
+.tcc-next-slide .tcc-next-list span { font-size: 1.08rem; }
+.tcc-next-slide .tcc-next-decision li { font-size: 0.98rem; }
+.tcc-mmat-slide .tcc-mmat-copy h2 { font-size: 1.25rem; }

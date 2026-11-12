@@ -37,6 +37,17 @@ selecionados historicamente sob o corte 4,0. Não houve mudança do corte,
 nova seleção ou incorporação de estudos adicionais. Os materiais continuam
 identificados como rascunho até a atualização final para a defesa.
 
+## Sequência da defesa (11/2026)
+
+A sequência atual dá mais peso aos resultados de cada objetivo e às regras
+propostas: problema de pesquisa desdobrado por objetivo, base didática (Duval
+e Brousseau), corte 4,0 com a exploração abaixo dele, tipologia do OE1, lacunas
+de relato e eixos de risco do OE2, cadeia de rastreabilidade, saída fictícia
+com intervalo de Wilson, regras do OE3 e do OE4 e conclusão com as
+contribuições. O gráfico de etiquetas de técnicas de todos os registros e o
+histograma de relevância saíram do deck porque não descreviam os 15 estudos;
+os slides de resultado são desenhados em HTML a partir das tabelas do TCC.
+
 ## Objetivos de referência do manuscrito
 
 Os slides resumem os objetivos para leitura em apresentação, sem mudar seu
