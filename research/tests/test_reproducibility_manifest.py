@@ -63,7 +63,8 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
         "query_generator": "research/src/search_terms.py",
         "sources": ["semantic_scholar", "openalex", "crossref", "core"],
         "source_count": 4,
-        "max_results_per_query": 10,
+        "max_results_per_query": 50,
+        "max_results_per_query_source": "research/src/pipeline/run.py: collect_data(limit_per_query)",
         "interpretation": (
             "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. "
             "This version reports the 15-study historical selection without a new selection run "

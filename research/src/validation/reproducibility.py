@@ -9,6 +9,7 @@ database file.
 
 from __future__ import annotations
 
+import ast
 import hashlib
 import csv
 import json
@@ -25,6 +26,26 @@ from ..analysis.mmat_current import validate_current_artifacts
 from ..config import load_config
 from ..search_terms import get_all_queries
 from .versioned_snapshot import validate_versioned_snapshot
+
+COLLECTOR_SOURCE = Path(__file__).resolve().parents[1] / "pipeline" / "run.py"
+
+
+def collector_limit_per_query() -> int:
+    """Return the per-query, per-API limit used by the search collector.
+
+    The general configuration field ``max_results_per_query`` is not read by
+    ``ResearchPipeline.collect_data``; the collector uses its own
+    ``limit_per_query`` default. Reading it statically avoids importing the
+    collection stack.
+    """
+    tree = ast.parse(COLLECTOR_SOURCE.read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef) and node.name == "collect_data":
+            args = node.args.args[-len(node.args.defaults):]
+            for arg, default in zip(args, node.args.defaults):
+                if arg.arg == "limit_per_query" and isinstance(default, ast.Constant):
+                    return int(default.value)
+    raise RuntimeError("collect_data(limit_per_query) default not found")
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -657,7 +678,8 @@ def _current_protocol() -> dict[str, Any]:
         "query_generator": "research/src/search_terms.py",
         "sources": ["semantic_scholar", "openalex", "crossref", "core"],
         "source_count": 4,
-        "max_results_per_query": config.max_results_per_query,
+        "max_results_per_query": collector_limit_per_query(),
+        "max_results_per_query_source": "research/src/pipeline/run.py: collect_data(limit_per_query)",
         "interpretation": (
             "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. "
             "This version reports the 15-study historical selection without a new selection run "

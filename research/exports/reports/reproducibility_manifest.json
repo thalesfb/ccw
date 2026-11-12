@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-07T11:44:47+00:00",
+  "generated_at": "2026-11-12T18:54:04+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -38,7 +38,8 @@
       "core"
     ],
     "source_count": 4,
-    "max_results_per_query": 10,
+    "max_results_per_query": 50,
+    "max_results_per_query_source": "research/src/pipeline/run.py: collect_data(limit_per_query)",
     "interpretation": "The selector retains the 4.0 cutoff recorded in legacy_selector_relevance_threshold. This version reports the 15-study historical selection without a new selection run or additional studies. External API responses, cache state and metadata may change; they do not replace the current versioned snapshot exports."
   },
   "snapshot": {
@@ -575,7 +576,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "4450cd0b2c469493d2a8aeabdb82a3a681eedc036c23cc804df4deafd238e090"
+      "sha256": "e397261198bcee4b803cafa3b3007c19783a321d91988693410766ce4157dc14"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -620,7 +621,7 @@
     {
       "path": "research/requirements.txt",
       "role": "research runtime dependencies",
-      "sha256": "4f52ad5a474e439c2af4422d10cdb03ae39e1e2e647bfd75e1e7b5bc12d580f1"
+      "sha256": "01536d375fa3e4868c83ebaf7166e639a8547cb1a054e93eb91ef1ffc7802d5b"
     }
   ],
   "companion_documents": [
