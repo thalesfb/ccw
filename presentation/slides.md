@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Rascunho histórico — não usar na defesa · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção histórica sob o corte 4,0</div>
+<div class="cover-snapshot">Versão para a defesa · apreciação MMAT preliminar · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção histórica sob o corte 4,0</div>
 
 ---
 layout: default

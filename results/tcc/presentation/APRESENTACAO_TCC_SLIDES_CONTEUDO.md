@@ -1,9 +1,9 @@
 # Apresentação do TCC — conteúdo dos slides
 
-> **Rascunho histórico — não usar na defesa.** Os números deste storyboard
-> antecedem a reconciliação de 31/10/2026. O corte 4,0 e a seleção histórica
-> de 15 estudos permanecem inalterados. A revisão da apresentação para a
-> defesa permanece suspensa; esta atualização não modifica o conjunto de estudos.
+> **Versão para a defesa — apreciação MMAT preliminar.** O storyboard segue a
+> sequência de 25 slides do deck. O corte 4,0 e a seleção histórica de 15
+> estudos permanecem inalterados; as contagens MMAT continuam preliminares
+> até a conferência pelo autor.
 
 ## Identidade
 

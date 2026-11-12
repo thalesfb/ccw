@@ -1,8 +1,8 @@
 # Apresentação Slidev do TCC
 
-> **Rascunho até a atualização final:** `slides.md` é o arquivo que será usado
-> na defesa (banca prevista para 03/12/2026). Hoje ele está em revisão e marcado
-> como rascunho (`não usar na defesa`) até a atualização final. O Slidev, o
+> **Versão para a defesa:** `slides.md` é o arquivo que será usado na defesa
+> (banca prevista para 03/12/2026). A capa indica que a apreciação MMAT é
+> preliminar enquanto a conferência pelo autor não terminar. O Slidev, o
 > storyboard e o PPTX ainda descrevem a seleção histórica de 15 estudos sob o
 > corte 4,0. O fluxo foi reconciliado em 31/10/2026; esta correção registra
 > somente o conjunto atual.
@@ -34,8 +34,9 @@ nunca como fonte dos números atuais do TCC.
 Os gráficos versionados, as contagens do fluxo histórico e as legendas da
 reconciliação de 31/10/2026 estão atualizados. A síntese descreve os 15 estudos
 selecionados historicamente sob o corte 4,0. Não houve mudança do corte,
-nova seleção ou incorporação de estudos adicionais. Os materiais continuam
-identificados como rascunho até a atualização final para a defesa.
+nova seleção ou incorporação de estudos adicionais. Os materiais deixam de
+ser identificados como rascunho; a apreciação MMAT segue indicada como
+preliminar até a conferência pelo autor.
 
 ## Sequência da defesa (11/2026)
 
