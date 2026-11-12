@@ -129,7 +129,7 @@ class: content-slide tcc-mission-slide
 
 <div class="tcc-mission-layout">
   <div class="tcc-mission-copy">
-    <p><strong>Duval (2009):</strong> compreender exige converter entre registros de representação, como língua natural, tabela, expressão algébrica e gráfico.</p>
+    <p><strong>Duval (2012):</strong> compreender exige coordenar ao menos dois registros de representação, como língua natural, escrita simbólica, figura e gráfico.</p>
     <p><strong>Brousseau (2008):</strong> o erro pode manifestar um obstáculo, e não apenas a falta de um saber.</p>
     <div class="tcc-reading-lens"><span>EXEMPLO DO 7º ANO</span><strong>“O dobro da quantia de Carlos somado a R$ 5,00 resulta em R$ 15,00”</strong><p>Errar a conversão para <em>2x + 5 = 15</em> ou errar ao isolar <em>x</em> são erros distintos, mas ambos viram o mesmo 0 em um registro binário.</p></div>
   </div>
@@ -139,7 +139,7 @@ class: content-slide tcc-mission-slide
     <p><span>✓</span> As saídas organizam indícios por habilidade, com incerteza.</p>
     <p><span>✓</span> O tipo de erro e o obstáculo ficam com o professor, na revisão docente (F06).</p>
     <p><span>✓</span> Codificar itens por registro de representação é trabalho futuro.</p>
-    <small>Fundamentação: Duval (2009); Brousseau (2008).</small>
+    <small>Fundamentação: Duval (2012); Brousseau (2008).</small>
   </div>
 </div>
 

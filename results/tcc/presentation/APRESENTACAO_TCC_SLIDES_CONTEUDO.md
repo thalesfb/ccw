@@ -57,7 +57,7 @@ OECD (2023) e BNCC (2018).
 
 ### 6. Acertar ou errar não revela o tipo de erro
 
-Duval (2009) e Brousseau (2008), com o exemplo de 2x + 5 = 15. A
+Duval (2012) e Brousseau (2008), com o exemplo de 2x + 5 = 15. A
 especificação organiza indícios por habilidade; o tipo de erro e o obstáculo
 ficam com o professor (F06).
 
