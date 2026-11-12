@@ -16,7 +16,6 @@ const summaryText = readFileSync(summaryPath, 'utf8').replace(
 )
 const summary = JSON.parse(summaryText)
 const prisma = summary.statistics.prisma
-const techniques = summary.statistics.techniques
 
 const formatInteger = (value) => value.toLocaleString('pt-BR')
 const requiredStatements = [
@@ -27,10 +26,6 @@ const requiredStatements = [
   formatInteger(prisma.eligibility),
   formatInteger(prisma.eligibility_excluded),
   formatInteger(prisma.included),
-  formatInteger(techniques['Não especificado']),
-  formatInteger(techniques['Assessment']),
-  formatInteger(techniques['AI/Artificial Intelligence']),
-  formatInteger(techniques['Machine Learning']),
   formatInteger(summary.statistics.databases.semantic_scholar),
   formatInteger(summary.statistics.databases.openalex),
   formatInteger(summary.statistics.databases.crossref),
@@ -40,10 +35,12 @@ const requiredStatements = [
   '2015–2026',
   '72',
   '/images/prisma_flow.png',
-  '/images/selection_funnel.png',
-  '/images/papers_by_year.png',
-  '/images/techniques_distribution.png',
-  '/images/relevance_distribution.png',
+  // OE1 typology (Tabela 2 do TCC) and sensitivity strata below the 4,0 cut.
+  'Predição/classificação',
+  '13 de 45',
+  '29 de 54',
+  '5 de 30',
+  '0,30–0,90',
 ]
 
 const requiredTemplateMarkers = [
@@ -55,6 +52,12 @@ const requiredTemplateMarkers = [
   'tcc-search-layout',
   'tcc-source-grid',
   'tcc-funnel-layout',
+  'tcc-typology-layout',
+  'tcc-reporting-layout',
+  'tcc-axes-grid',
+  'tcc-chain',
+  'tcc-output-card',
+  'tcc-rules-layout',
 ]
 
 const forbiddenClaims = [
