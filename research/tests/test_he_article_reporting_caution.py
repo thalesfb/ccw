@@ -17,7 +17,8 @@ def test_he_classroom_analysis_reports_cluster_level_uncertainty_cautiously():
     he_section = evidence_section[he_start:he_end].lower()
 
     assert "oito turmas com 45 estudantes cada" in he_section
-    assert "amostra total de 90" in he_section
+    assert "amostra de 90 que combina os grupos experimental e de controle" in he_section
+    assert "definição de tamanho amostral por comparação" in he_section
     assert "agrupamento" in he_section
     assert "não se pode reconstruir se a análise tratou estudantes ou turmas como observações" in he_section
     assert "nem a precisão das comparações" in he_section

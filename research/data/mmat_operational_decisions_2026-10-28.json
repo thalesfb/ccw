@@ -77,6 +77,7 @@
     },
     {
       "study_id": "14",
+      "superseded_by": "author_conference_2026-11-13: categoria 3 (quantitativo não randomizado), respostas CT, Y, Y, N, CT",
       "source_id": "PS-014",
       "source_sha256": "d95e78c4a32c3a929a0429b97e672b49aa1a13bd3ffdb3f081a3ac610caadc0c",
       "design": "quantitative_randomized",

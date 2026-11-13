@@ -35,7 +35,7 @@ assert.match(homepage, /15 estudos empíricos integram a seleção histórica/i,
 assert.match(homepage, /com 14 relatórios recuperados/i, 'the homepage must distinguish recovered reports from the historical selection');
 assert.match(homepage, /dois não foram recuperados \(Sokkhey e Zeng\)/i, 'the homepage must disclose both reports without a verifiable copy');
 assert.match(homepage, /15 foram avaliados em texto completo/i, 'the homepage must report the current full-text denominator');
-assert.match(homepage, /MMAT preliminar da seleção histórica: 15 triagens S1\/S2 e 15 apreciações por critério/i, 'the homepage must label MMAT counts as historical');
+assert.match(homepage, /MMAT da seleção histórica conferido pelo autor: 15 triagens S1\/S2 e 15 apreciações por critério/i, 'the homepage must label MMAT counts as historical');
 assert.match(homepage, /O corte 4,0 e a seleção permanecem inalterados/i, 'the homepage must describe the unchanged selection');
 assert.doesNotMatch(homepage, /população vigente|snapshot vigente/i, 'the homepage must not present the pre-amendment snapshot as current');
 assert.match(homepage, /um registro foi excluído após resumo/i, 'the homepage must disclose the abstract-stage exclusion');
@@ -185,7 +185,7 @@ for (const asset of ['research/data/mmat_followup_questions_current.csv', 'resea
   assert.ok(pagesWorkflow.includes(`cp ${asset} _site/`), `Pages must package the linked MMAT followup asset: ${asset}`);
 }
 assert.match(mmat, /class="question-code">3\.1</, 'non-randomized quantitative components must use MMAT category 3');
-assert.match(mmat, /Categoria 2 declarada · alocação contraditória/, 'randomized category use must retain the allocation contradiction');
+assert.match(mmat, /Categoria 3 · quase-experimento com sorteio contraditório/, 'the quasi-experimental study must retain the allocation contradiction');
 assert.match(mmat, /Protocolo sem resultados empíricos concluídos; critérios MMAT não avaliados\./, 'protocol non-applicability must be explained as record disposition, not a criterion answer');
 assert.doesNotMatch(mmat, /aria-label="Resposta: Não se aplica"/, 'N/A must not masquerade as an official MMAT response');
 for (const criterion of ['Q1', 'Q2', 'Q3', 'Q4', 'Q5']) {

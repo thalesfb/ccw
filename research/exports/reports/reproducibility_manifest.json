@@ -416,12 +416,12 @@
     {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",
       "role": "explicit provisional appraisal routes, source locators and criterion-level decisions for studies 5, 7, 8 and 14",
-      "sha256": "e9db5c7c7950eac963776b344bbb1c2650dff9c64cf3334baf5021c6562442e2"
+      "sha256": "2724f36d2c834d3821c9ce952dc7b43bd0dc31daf4ca7a49d613f6043aa9e226"
     },
     {
       "path": "research/data/mmat_followup_questions_current.csv",
       "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
-      "sha256": "bb61329bf25df75cafe6fe4a019309673627d2797c8d9e1f602d85d887644d73"
+      "sha256": "64bc7b3d861f1c35d57c6a60ca5e8529fa112bfbdd92345760aca60e02f98e92"
     },
     {
       "path": "research/data/mmat_completion_review_2026-10-28.json",
@@ -481,7 +481,7 @@
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "9c08ffe5e6533539a88717592cdca4cc104b507a1078e1cfd7ccc0244ee5366a"
+      "sha256": "bc036423efe093ad3e79787b7c4e502a4935ec39cddbc5777008e4c5e4f000be"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
@@ -596,12 +596,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "b9492ca1d1b20d61447c7aef17a23534ad569b2e8730b985e0021d1cfb2cdddc"
+      "sha256": "7cd2298df80e352c87f221a54da61279fad737bd3f0f94ea6dbf0a58141156b8"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "0444c540392f02eb38271880de9e3db95791e98d83aa79977750ca740df8cf0a"
+      "sha256": "4b37c88f6ee9b0745f7e3d88e1eec9c1f571cab79a75a9fa42e82f927de96ed3"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",

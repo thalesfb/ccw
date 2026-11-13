@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Versão para a defesa · apreciação MMAT preliminar · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção histórica sob o corte 4,0</div>
+<div class="cover-snapshot">Versão para a defesa · MMAT conferido pelo autor · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção histórica sob o corte 4,0</div>
 
 ---
 layout: default
@@ -159,7 +159,7 @@ class: content-slide tcc-objectives-slide
   <div class="tcc-objective-step"><span>04</span><strong>Propor o protocolo</strong><p>Avaliar viabilidade e coerência da especificação, com fundamentos, requisitos e condições de execução.</p><em>→ regra docente e conferência técnica</em></div>
 </div>
 
-<div class="tcc-caption">Meios: revisão de 2015–2026 relatada com o PRISMA 2020, apreciação MMAT preliminar e pipeline versionado. O protocolo está proposto; sua aplicação está pendente.</div>
+<div class="tcc-caption">Meios: revisão de 2015–2026 relatada com o PRISMA 2020, apreciação MMAT conferida pelo autor e pipeline versionado. O protocolo está proposto; sua aplicação está pendente.</div>
 
 ---
 layout: default
@@ -287,7 +287,7 @@ class: content-slide tcc-mmat-slide
 
 <div class="slide-kicker">13 / QUALIDADE METODOLÓGICA</div>
 
-# MMAT preliminar: critério a critério, sem nota global
+# MMAT conferido: critério a critério, sem nota global
 
 <div class="tcc-mmat-layout">
   <div class="tcc-mmat-visual" aria-hidden="true"><div class="tcc-mmat-scale">⚖</div><span>MMAT 2018</span><small>leitura por critério</small></div>
@@ -305,7 +305,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado preliminar:</strong> 15 registros provisórios, com S1/S2 e critérios da categoria; S2: 14 respostas Y e 1 CT no estudo 5, porque a origem dos dados não foi confirmada. Estudos 5 e 7: categoria 3 operacional, alocação desconhecida. Estudo 14: categoria 2 declarada e contraditória. Estudo 8: categoria 4 adaptada para modelagem. Texto não recuperado: sem apreciação. Sem escore agregado. Instrumento: Hong et al. (2018); respostas produzidas por IA e em conferência pelo autor.</div>
+<div class="tcc-mmat-result"><strong>Estado:</strong> 15 registros, com S1/S2 e critérios da categoria, conferidos pelo autor nos 14 com texto recuperado; S2: 14 respostas Y e 1 CT no estudo 5, porque a origem dos dados não foi confirmada. Estudos 5 e 7: categoria 3 operacional, alocação desconhecida. Estudo 14: categoria 3, por desenho quase-experimental declarado. Estudo 8: categoria 4 adaptada para modelagem. Texto não recuperado: sem apreciação. Sem escore agregado. Instrumento: Hong et al. (2018); respostas propostas por IA e conferidas pelo autor, que alterou 3 de 98 e reclassificou o estudo 14.</div>
 
 ---
 layout: default
@@ -345,10 +345,9 @@ class: content-slide tcc-reporting-slide
 <div class="tcc-reporting-layout">
   <div class="tcc-ct-grid" role="table" aria-label="Respostas CT por categoria MMAT e critério">
     <div class="tcc-ct-head" role="row"><span role="columnheader">Categoria (n)</span><span role="columnheader">Q1</span><span role="columnheader">Q2</span><span role="columnheader">Q3</span><span role="columnheader">Q4</span><span role="columnheader">Q5</span></div>
-    <div role="row"><span role="rowheader">Quantitativo descritivo (8)</span><b class="ct-mid" role="cell">3</b><b class="ct-all" role="cell">8</b><b class="ct-all" role="cell">8</b><b class="ct-all" role="cell">8</b><b class="ct-high" role="cell">6</b></div>
-    <div role="row"><span role="rowheader">Não randomizado (3)</span><b class="ct-all" role="cell">3</b><b class="ct-high" role="cell">2</b><b class="ct-all" role="cell">3</b><b class="ct-high" role="cell">2</b><b class="ct-high" role="cell">2</b></div>
-    <div role="row"><span role="rowheader">Randomizado (1)</span><b class="ct-all" role="cell">1</b><b class="ct-none" role="cell">0</b><b class="ct-none" role="cell">0</b><b class="ct-all" role="cell">1</b><b class="ct-all" role="cell">1</b></div>
-    <div role="row"><span role="rowheader">Métodos mistos (3)</span><b class="ct-none" role="cell">0</b><b class="ct-none" role="cell">0</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b></div>
+    <div role="row"><span role="rowheader">Quantitativo descritivo (8)</span><b class="ct-mid" role="cell">3</b><b class="ct-all" role="cell">8</b><b class="ct-all" role="cell">8</b><b class="ct-all" role="cell">8</b><b class="ct-high" role="cell">7</b></div>
+    <div role="row"><span role="rowheader">Não randomizado (4)</span><b class="ct-all" role="cell">4</b><b class="ct-mid" role="cell">2</b><b class="ct-mid" role="cell">2</b><b class="ct-mid" role="cell">2</b><b class="ct-high" role="cell">3</b></div>
+    <div role="row"><span role="rowheader">Métodos mistos (3)</span><b class="ct-none" role="cell">0</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b></div>
     <p class="tcc-ct-note">Número de respostas CT em cada critério. Q1–Q5 seguem a rubrica de cada categoria.</p>
   </div>
   <div class="tcc-reporting-copy">
@@ -358,7 +357,7 @@ class: content-slide tcc-reporting-slide
   </div>
 </div>
 
-<div class="tcc-caption">Tabela 3 do TCC. Apreciação preliminar, assistida por IA e em conferência pelo autor; respostas não somadas em escore.</div>
+<div class="tcc-caption">Tabela 3 do TCC. Respostas conferidas pelo autor (revisor único); não somadas em escore. Nenhum estudo na categoria randomizada.</div>
 
 ---
 layout: default
@@ -412,7 +411,7 @@ class: content-slide tcc-boundary-slide
   <div class="tcc-boundary-column boundary-no"><div class="tcc-boundary-mark">?</div><span>NÃO ENTREGA</span><h2>Evidência de eficácia</h2><p>Não compara modelos em dados reais, não valida um protótipo em escolas e não mede efeito sobre a aprendizagem.</p></div>
 </div>
 
-<div class="tcc-boundary-foot"><strong>Limitações:</strong> revisor único, com triagem, extração e MMAT produzidos por IA, em conferência pelo autor; 14 de 15 com texto recuperado; sensibilidade abaixo de 4,0 com 13/45, 29/54 e 5/30; sem aplicação com participantes.</div>
+<div class="tcc-boundary-foot"><strong>Limitações:</strong> revisor único, com triagem e extração produzidas por IA e MMAT conferido pelo autor; 14 de 15 com texto recuperado; sensibilidade abaixo de 4,0 com 13/45, 29/54 e 5/30; sem aplicação com participantes.</div>
 
 ---
 layout: default
@@ -431,7 +430,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte ambígua; a classificação não é diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção histórica, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios preliminares, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; as respostas de Sokkhey são históricas e não foram revalidadas.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção histórica, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios, conferidos pelo autor nos 14 com texto recuperado, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; as respostas de Sokkhey são históricas e não foram revalidadas.</div>
 
 ---
 layout: default
@@ -517,8 +516,8 @@ class: content-slide tcc-next-slide
 # Resposta: uma especificação verificável antes dos dados
 
 <div class="tcc-next-layout">
-  <div class="tcc-next-list"><div><b>01</b><span><strong>Tipologia</strong> de finalidades, com limite declarado (OE1).</span></div><div><b>02</b><span><strong>Rastreabilidade</strong> da evidência a 26 grupos de requisitos (OE2, OE3).</span></div><div><b>03</b><span><strong>Regras pré-fixadas</strong> de escolha de modelo e de avaliação (OE3, OE4).</span></div><div><b>04</b><span><strong>Lacunas de relato</strong> como orientação para estudos primários (MMAT preliminar).</span></div></div>
-  <div class="tcc-next-decision"><span>PRÓXIMOS PASSOS</span><ul><li>Conferir as 15 apreciações preliminares e suas rotas operacionais.</li><li>Aplicar o protocolo com docentes, após parecer ético.</li><li>Testar a regra de modelo em dados reais documentados.</li><li>Codificar itens por registro de representação.</li></ul></div>
+  <div class="tcc-next-list"><div><b>01</b><span><strong>Tipologia</strong> de finalidades, com limite declarado (OE1).</span></div><div><b>02</b><span><strong>Rastreabilidade</strong> da evidência a 26 grupos de requisitos (OE2, OE3).</span></div><div><b>03</b><span><strong>Regras pré-fixadas</strong> de escolha de modelo e de avaliação (OE3, OE4).</span></div><div><b>04</b><span><strong>Lacunas de relato</strong> como orientação para estudos primários (MMAT conferido pelo autor).</span></div></div>
+  <div class="tcc-next-decision"><span>PRÓXIMOS PASSOS</span><ul><li>Submeter o MMAT a um segundo avaliador independente.</li><li>Aplicar o protocolo com docentes, após parecer ético.</li><li>Testar a regra de modelo em dados reais documentados.</li><li>Codificar itens por registro de representação.</li></ul></div>
 </div>
 
 <div class="tcc-caption">Contribuições delimitadas pelo escopo documental. Dados, código e testes versionados permitem reproduzir as contagens e os quadros.</div>

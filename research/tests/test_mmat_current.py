@@ -31,15 +31,18 @@ def test_operational_appraisal_decisions_are_explicit_and_do_not_certify_allocat
     assert sum(row['s2'] == 'CT' for row in rows.values()) == 1
     assert rows['8']['design'] == 'quantitative_descriptive'
     assert [rows['8'][k] for k in ('s1','s2','q1','q2','q3','q4','q5')] == ['Y','Y','Y','CT','CT','CT','CT']
-    assert rows['14']['design'] == 'quantitative_randomized'
-    assert [rows['14'][k] for k in ('q1','q2','q3','q4','q5')] == ['CT','N','Y','CT','CT']
+    assert rows['14']['design'] == 'quantitative_nonrandomized'
+    assert [rows['14'][k] for k in ('q1','q2','q3','q4','q5')] == ['CT','Y','Y','N','CT']
     for sid in ('5', '7'):
         assert rows[sid]['design'] == 'quantitative_nonrandomized'
         assert all(rows[sid][k] == 'CT' for k in ('q1','q2','q3','q4','q5'))
-        assert rows[sid]['adjudication_status'] == 'supervisor_review_pending'
+        assert rows[sid]['adjudication_status'] == 'author_conference_completed'
     decision_path = Path(__file__).resolve().parents[1] / 'data/mmat_operational_decisions_2026-10-28.json'
     decisions = {d['study_id']: d for d in json.loads(decision_path.read_text(encoding='utf-8'))['decisions']}
     for sid, decision in decisions.items():
+        if decision.get('superseded_by'):
+            assert decision['superseded_by'].startswith('author_conference_2026-11-13')
+            continue
         assert decision['answers'] == [rows[sid][f'q{i}'] for i in range(1, 6)]
         assert decision['status'] == rows[sid]['design_status']
         for key in ('s1', 's2'):
@@ -162,9 +165,9 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
     assert all(row["assessment_status"] != "final" for row in reassessment)
     assert all(row["reviewer"] == "single_reviewer" for row in reassessment)
     assert all(
-        row["adjudication_status"] == "supervisor_review_pending"
+        row["adjudication_status"] == "author_conference_completed"
         for row in reassessment
-        if row["study_id"] not in {"3", "9"}
+        if row["study_id"] not in {"3", "9", "6921", "6923"}
     )
     historical_sokkhey = next(row for row in reassessment if row["study_id"] == "3")
     assert historical_sokkhey["assessment_basis"] == "historical_appraisal_source_unavailable"
@@ -277,7 +280,7 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
         for row in rows
         if row["study_id"] not in {"8", "9", "6921", "6923"}
     )
-    assert rows[1]["assessment_status"] == "provisional_primary_source_review"
+    assert rows[1]["assessment_status"] == "author_conferred_single_reviewer"
     assert rows[1]["q2"] == "CT"
     assert registry["6923"]["empirical_status"] == "empirical_full_text_pending"
     assert registry["6923"]["design_status"] == "abstract_based"
@@ -316,8 +319,8 @@ def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -
     for study_id in ("1", "5", "10"):
         study = rows[study_id]
         assert study["assessment_basis"] == "primary_full_text_reviewed_externally"
-        assert study["assessment_status"] == "provisional_primary_source_review"
-        assert study["adjudication_status"] == "supervisor_review_pending"
+        assert study["assessment_status"] == "author_conferred_single_reviewer"
+        assert study["adjudication_status"] == "author_conference_completed"
         assert study["criterion_evidence"].count(";") == (1 if study["design"] == "design_pending" else 6)
         assert study["page_or_section"]
     assert rows["6923"]["assessment_basis"] == "pending_full_text_not_appraised"
@@ -448,7 +451,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "17 candidatos empíricos submetidos ao mmat" not in html.lower()
     assert "15 estudos empíricos da seleção histórica" in html.lower()
     assert "15 têm s1/s2 respondidas" in html.lower()
-    assert "15 têm apreciação preliminar dos critérios da categoria" in html.lower()
+    assert "15 têm apreciação dos critérios da categoria, conferida pelo autor" in html.lower()
 
     for study_id, expected_text in {
         "7": ("120 participantes", "50/52", "não prova completude"),
@@ -542,8 +545,8 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
 
     for study_id in ("1", "5", "10", "14", "6915", "6919"):
         assert rows[study_id]["assessment_basis"] == "primary_full_text_reviewed_externally"
-        assert rows[study_id]["assessment_status"] == "provisional_primary_source_review"
-        assert rows[study_id]["adjudication_status"] == "supervisor_review_pending"
+        assert rows[study_id]["assessment_status"] == "author_conferred_single_reviewer"
+        assert rows[study_id]["adjudication_status"] == "author_conference_completed"
         assert rows[study_id]["page_or_section"]
         assert sources[study_id]["full_text_status"] == "externally_reviewed_not_archived"
         expected_access_date = {
@@ -576,16 +579,16 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
     assert "www.mdpi.com/2071-1050/18/4/1900" in sources["6919"]["source_url"]
     assert "10.3390/su18041900" in sources["6919"]["verification_note"]
 
-    assert rows["14"]["design"] == "quantitative_randomized"
+    assert rows["14"]["design"] == "quantitative_nonrandomized"
     assert rows["14"]["design_status"] == "design_reassessed_provisional_with_allocation_conflict"
-    assert [rows["14"][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5")] == ["CT","N","Y","CT","CT"]
+    assert [rows["14"][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5")] == ["CT","Y","Y","N","CT"]
     assert "random" in rows["14"]["notes"].lower()
     assert "45" in rows["6915"]["notes"] and "90" in rows["6915"]["notes"]
     assert [rows["6915"][criterion] for criterion in ("q1", "q2", "q3", "q4", "q5")] == [
-        "CT", "Y", "CT", "N", "Y"
+        "CT", "Y", "Y", "N", "Y"
     ]
     assert rows["6915"]["q4"] == "N"
-    assert r"\citeonline{Enhancing2025_012} & Cat. 2 declarada (contraditória) & Y & Y & CT & N & Y & CT & CT" in (
+    assert r"\citeonline{Enhancing2025_012} & Cat. 3 (quase-experimento; sorteio contraditório) & Y & Y & CT & Y & Y & N & CT" in (
         CURRENT_TABLE.read_text(encoding="utf-8")
     )
 
@@ -736,7 +739,7 @@ def test_public_mmat_page_marks_operational_routes_without_certifying_designs():
     assert '15 estudos empíricos' in html
     assert 'Categoria 4 adaptada · modelagem computacional' in html
     assert 'Categoria 3 operacional · alocação desconhecida' in html
-    assert 'Categoria 2 declarada · alocação contraditória' in html
+    assert 'Categoria 3 · quase-experimento com sorteio contraditório' in html
     assert 'essas rotas não certificam delineamentos' in html.lower()
 
 
@@ -801,7 +804,7 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
         load_current_table_rows()
     )
     table = CURRENT_TABLE.read_text(encoding="utf-8")
-    assert r"\citeonline{Enhancing2025_012} & Cat. 2 declarada" in table
+    assert r"\citeonline{Enhancing2025_012} & Cat. 3 (quase-experimento" in table
     assert r"\citeonline{UniversityMathematics2026_6919} & Métodos mistos" in table
     assert r"\citeonline{UniversityMathematics2026_6919} & Quant. não rand." in table
     details = CURRENT_TABLE.with_name("mmat_component_details_tcc.tex").read_text(encoding="utf-8")

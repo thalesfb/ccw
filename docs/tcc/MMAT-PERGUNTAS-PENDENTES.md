@@ -46,10 +46,6 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 
 ## Estudo 3
 
-- **pendência do registro · acesso ao texto** — É possível recuperar uma cópia legítima do texto integral para conferir os cinco julgamentos históricos indeterminados e os demais critérios?
-  Fonte: PS-003; Data Collection and Preprocessing §4.1 pp. 222–223; Experimental Results §5 pp. 225–226. Encaminhamento previsto: biblioteca ou autores; encaminhamento humano pendente.
-  Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
-
 - **critérios principais · 4.1** — Após recuperar o original, qual procedimento foi usado para selecionar as escolas cambojanas e os 1.204 respondentes, qual o quadro amostral e por que essa seleção é pertinente à pergunta do estudo?
   Fonte: PS-003; Páginas físicas não revalidadas; Localizador histórico: Data Collection and Preprocessing §4.1, pp. editoriais 222–223; página física desconhecida. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
   Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
@@ -68,6 +64,10 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 
 - **critérios principais · 4.5** — Após recuperar o original, qual partição ou procedimento de validação produziu as métricas comparativas, e seleção de atributos, imputação e ajuste dos modelos ocorreram de modo separado da avaliação final?
   Fonte: PS-003; Páginas físicas não revalidadas; Localizador histórico: Experimental Results §5, pp. editoriais 225–226; página física desconhecida. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
+
+- **pendência do registro · acesso ao texto** — É possível recuperar uma cópia legítima do texto integral para conferir os cinco julgamentos históricos indeterminados e os demais critérios?
+  Fonte: PS-003; Data Collection and Preprocessing §4.1 pp. 222–223; Experimental Results §5 pp. 225–226. Encaminhamento previsto: biblioteca ou autores; encaminhamento humano pendente.
   Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
 
 ## Estudo 4
@@ -200,15 +200,11 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 
 ## Estudo 14
 
-- **critérios principais · 2.1** — Qual procedimento efetivo de sorteio das escolas ocorreu e a que unidade se refere a negação de atribuição aleatória em §2.7?
-  Fonte: PS-014; Páginas físicas 11–15; §2.4–2.9; tabelas 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+- **critérios principais · 3.1** — Que características dos 196 estudantes incluídos e dos 724 elegíveis das escolas com laboratório permitem comparar a amostra intencional com a população-alvo?
+  Fonte: PS-014; Páginas físicas 10–12; §2.3–2.4; tabela 1. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
   Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/10`.
 
-- **critérios principais · 2.4** — Quem corrigiu os testes e essa pessoa conhecia a condição atribuída à escola?
-  Fonte: PS-014; Páginas físicas 11–15; §2.4–2.9; tabelas 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/10`.
-
-- **critérios principais · 2.5** — Quantos participantes concluíram a intervenção atribuída e quais registros de presença, interrupções ou desvios foram preservados?
+- **critérios principais · 3.5** — Quantas sessões foram ministradas, por quanto tempo, com que frequência dos estudantes e com quais desvios em relação ao procedimento previsto?
   Fonte: PS-014; Páginas físicas 11–15; §2.4–2.9; tabelas 1–3. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
   Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/10`.
 
@@ -218,11 +214,23 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
   Fonte: PS-6915; Páginas físicas [32, 33]; Componente escolar: Predictive modeling-guided usage time screening for MET e Analysis of pre- and post-test data. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
   Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/11`.
 
-- **critérios principais · 3.3** — O total de 90 refere-se a cada comparação de dois grupos ou à amostra total, considerando oito turmas de 45 alunos, e quantos alunos de cada turma completaram pré-teste e pós-teste, com quais perdas e motivos?
-  Fonte: PS-6915; Páginas físicas [32, 33, 34, 35]; Contradição do N p. física 32, linhas 1386–1387; tabela 11 p. física 33, linhas 1426–1441; pós-teste p. física 34, linhas 1448–1455; tabela 13 p. física 35, linhas 1523–1538. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/11`.
-
 ## Estudo 6916
+
+- **critérios principais · 5.2** — Como os temas das entrevistas foram cruzados com as métricas de desempenho e satisfação, e onde estão os resultados qualitativos por tema?
+  Fonte: PS-6916; Páginas físicas 16–17 e 24–25; análise qualitativa e satisfação. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Cobertura: **Informação insuficiente no material examinado**. Conferência do autor de 13/11/2026: o texto completo foi lido e a justificativa registra a informação ausente. Registro público: `research/data/study_contribution_current.json#/records/12`.
+
+- **critérios principais · 5.3** — Que interpretação adicional resultou da combinação das entrevistas com desempenho e satisfação, além de apresentar resultados paralelos?
+  Fonte: PS-6916; Publisher HTML: Introduction; Experimental Design; Data Acquisition and Evaluation; Qualitative Analysis; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Cobertura: **Exame do critério ainda incompleto**. A justificativa pública de Q3 declara que a interpretação da integração requer exame adicional. Esse limite do exame do critério não estabelece falta de informação no artigo. A leitura do corpo do texto está registrada separadamente. Registro público: `research/data/study_contribution_current.json#/records/12`.
+
+- **critérios principais · 5.4** — Houve casos em que percepção e desempenho divergiram, incluindo críticas sobre alunos avançados, e como foram explicados?
+  Fonte: PS-6916; Publisher HTML: Introduction; Experimental Design; Data Acquisition and Evaluation; Qualitative Analysis; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/12`.
+
+- **critérios principais · 5.5** — Que informações adicionais sobre recrutamento, medidas, completude, confundimento, adesão e análise qualitativa permitem concluir os critérios ainda CT nos componentes já apreciados separadamente?
+  Fonte: PS-6916; Páginas físicas 2 e 13–27; componentes quantitativo C1–C5 e qualitativo C3–C5 já registrados. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/12`.
 
 - **componente qualitativo · 1.3** — Quais etapas de codificação e revisão produziram os temas, e quais exemplos mostram a passagem dos dados aos achados?
   Fonte: PS-6916; Qualitative Analysis; Methods; Results. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
@@ -256,18 +264,6 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
   Fonte: PS-6916; Introduction; Experimental Design; Data Acquisition and Evaluation; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
   Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/12`.
 
-- **critérios principais · 5.3** — Que interpretação adicional resultou da combinação das entrevistas com desempenho e satisfação, além de apresentar resultados paralelos?
-  Fonte: PS-6916; Publisher HTML: Introduction; Experimental Design; Data Acquisition and Evaluation; Qualitative Analysis; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Exame do critério ainda incompleto**. A justificativa pública de Q3 declara que a interpretação da integração requer exame adicional. Esse limite do exame do critério não estabelece falta de informação no artigo. A leitura do corpo do texto está registrada separadamente. Registro público: `research/data/study_contribution_current.json#/records/12`.
-
-- **critérios principais · 5.4** — Houve casos em que percepção e desempenho divergiram, incluindo críticas sobre alunos avançados, e como foram explicados?
-  Fonte: PS-6916; Publisher HTML: Introduction; Experimental Design; Data Acquisition and Evaluation; Qualitative Analysis; Results; Limitations. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/12`.
-
-- **critérios principais · 5.5** — Que informações adicionais sobre recrutamento, medidas, completude, confundimento, adesão e análise qualitativa permitem concluir os critérios ainda CT nos componentes já apreciados separadamente?
-  Fonte: PS-6916; Páginas físicas 2 e 13–27; componentes quantitativo C1–C5 e qualitativo C3–C5 já registrados. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/12`.
-
 ## Estudo 6917
 
 - **critérios principais · 4.2** — Qual população-alvo e quadro de amostragem do ASSISTments 2009–2010 foram adotados, quantos alunos e eventos foram retidos ou excluídos por regra, e como essa seleção representa os perfis de interesse?
@@ -281,6 +277,10 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 - **critérios principais · 4.4** — Quais são as taxas e padrões de registros com user_id, assignment_id ou correct ausentes, como retidos e excluídos diferem, e o limite de mil interações foi truncamento de eventos ou exclusão de estudantes para avaliar seu efeito no risco de viés?
   Fonte: PS-6917; Páginas físicas [4, 16]; §III.B p. física 4, linhas 388–435; limitações p. física 16, linhas 1608–1615. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
   Cobertura: **Informação insuficiente no material examinado**. A ficha registra leitura do texto extraível ou do corpo do documento. A justificativa deste critério não estabelece informação suficiente nos trechos examinados. A inspeção visual e os limites de extração são os indicados na ficha de cobertura; não se conclui ausência da informação em todo o documento nem falha da execução. Registro público: `research/data/study_contribution_current.json#/records/13`.
+
+- **critérios principais · 4.5** — A dificuldade das habilidades (SDI) foi calculada só no conjunto de treino, e tentativas, dicas e tempo da própria interação estão disponíveis antes da resposta que se pretende prever?
+  Fonte: PS-6917; Páginas físicas 4–5, 7 e 10; §III.A–C, tabela II, equações 5 e 7–8, §IV.B. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
+  Cobertura: **Informação insuficiente no material examinado**. Conferência do autor de 13/11/2026: o texto completo foi lido e a justificativa registra a informação ausente. Registro público: `research/data/study_contribution_current.json#/records/13`.
 
 ## Estudo 6919
 

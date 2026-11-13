@@ -303,8 +303,9 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 ### Próximos Passos Imediatos
 
 O protocolo, o snapshot, a disposição dos candidatos e as visualizações estão
-versionados. Permanecem pendentes a conferência humana das interpretações, a
-adjudicação do MMAT e a revisão final com a orientação. Os registros 3 e 6923
+versionados. As respostas MMAT dos 14 estudos com texto recuperado foram conferidas
+pelo autor em 13/11/2026; permanecem pendentes um segundo avaliador independente e a
+revisão final com a orientação. Os registros 3 e 6923
 continuam sem cópia integral local; essa limitação está documentada e não impede
 a continuidade da entrega delimitada. Trabalhos futuros e eventual aplicação do
 protocolo devem ser relatados separadamente, sem antecipá-los como resultados.
@@ -326,8 +327,8 @@ são distribuídos sob a licença CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONT
 
 ## Uso de IA
 
-A triagem em texto completo, a extração e as respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor; a
-conferência pelo autor, critério a critério, está em andamento. Detalhes no apêndice de
+A triagem em texto completo, a extração e as respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor. As
+respostas MMAT dos 14 estudos com texto recuperado foram conferidas pelo autor, critério a critério, em 13/11/2026. Detalhes no apêndice de
 ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).
 
 ## Autor
