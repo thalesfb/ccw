@@ -219,7 +219,7 @@ def render_table(
     header_row = " & ".join(r"\textbf{" + value + "}" for value in headers) + r" \\"
     lines = [
         "% Quadro gerado de research/data/mmat_reassessment_current.csv",
-        "% Reavaliação documental preliminar; não representa score nem avaliação final.",
+        "% Respostas conferidas pelo autor (revisor único); não representam score nem avaliação final.",
         "% Não editar manualmente; execute: python -m src.analysis.mmat_current_tcc_table",
         r"\begingroup",
         r"\TCCQuadroSetup{qua:mmat-reavaliacao-atual}",
@@ -260,7 +260,11 @@ def render_table(
         elif row.get('design_status') == 'operational_category_adaptation':
             design_label = 'Cat. 4 adaptada (modelagem)'
         elif row.get('design_status') == 'design_reassessed_provisional_with_allocation_conflict':
-            design_label = 'Cat. 2 declarada (contraditória)'
+            design_label = (
+                'Cat. 3 (quase-experimento; sorteio contraditório)'
+                if row.get('design') == 'quantitative_nonrandomized'
+                else 'Cat. 2 declarada (contraditória)'
+            )
         if row["study_id"] == "6915":
             design_label += " (componente escolar)"
         if row["study_key"] == "Multimodels2020_002":

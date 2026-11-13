@@ -350,14 +350,14 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     )
 
     assert "15/15 tests passing" not in root_html
-    assert "MMAT preliminar" in root_html
+    assert "MMAT da seleção histórica conferido pelo autor" in root_html
     assert "Seleção histórica" in root_html
     assert "O corte 4,0 e os 15 estudos permanecem inalterados" in root_html
     assert "emenda aprovada" not in root_html
     assert "na priorização histórica" in root_html
     assert "encaminhados à elegibilidade" not in root_html
     assert "A seleção histórica mantém 15 estudos empíricos sob o corte 4,0" in tcc_html
-    assert "a apreciação mmat preliminar abrange as 15 fichas" in tcc_html.lower()
+    assert "conferida pelo autor nos 14 estudos com texto recuperado, abrange as 15 fichas" in tcc_html.lower()
     assert "A aplicação funcional e a validação experimental estão fora do escopo" in tcc_html
     mmat_html = (REPOSITORY_ROOT / "research" / "exports" / "analysis" / "mmat_current.html").read_text(
         encoding="utf-8"

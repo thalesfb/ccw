@@ -110,7 +110,9 @@ function sourceAndAppraisalStatus(row, scope) {
   }
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') {
     if (row.design === 'design_pending') return 'Texto integral consultado; S1/S2 respondidas. Q1–Q5 não avaliados enquanto a categoria MMAT aguarda adjudicação; células vazias não significam CT.';
-    return 'Texto integral consultado; apreciação MMAT preliminar.';
+    return row.adjudication_status === 'author_conference_completed'
+      ? 'Texto integral consultado; respostas MMAT conferidas pelo autor.'
+      : 'Texto integral consultado; apreciação MMAT preliminar.';
   }
   return 'Situação da fonte ou apreciação requer confirmação.';
 }
@@ -383,7 +385,9 @@ const rows = current.map((row) => {
     : row.design_status === 'operational_category_adaptation'
       ? 'Categoria 4 adaptada · modelagem computacional'
       : row.design_status === 'design_reassessed_provisional_with_allocation_conflict'
-        ? 'Categoria 2 declarada · alocação contraditória' : null;
+        ? (row.design === 'quantitative_nonrandomized'
+          ? 'Categoria 3 · quase-experimento com sorteio contraditório'
+          : 'Categoria 2 declarada · alocação contraditória') : null;
   const type = operationalLabel ?? (row.empirical_status === 'protocol_or_proposal_not_applicable'
     ? 'fora da síntese empírica'
     : row.study_id === '6915'
@@ -481,7 +485,7 @@ const page = `<!doctype html>
           <p>As fichas conservam declarações históricas de consulta, com diferentes extensões de leitura. Sokkhey (2020), estudo 3, mantém julgamento histórico sem cópia verificável para revalidação atual; não é texto integral conferido nesta revisão. A disponibilidade de uma fonte também não certifica leitura integral de texto, figuras e apêndices.</p>
           <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
           <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sokkhey permanece na seleção histórica sem cópia verificável para revalidação; o texto de Zeng também não foi recuperado e não recebeu MMAT. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura integral de textos, figuras e apêndices. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
-          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm S1/S2 respondidas e ${categoryAppraised.length} têm apreciação preliminar dos critérios da categoria. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 2 a partir do sorteio declarado das escolas, apesar da contradição documental; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${notRetrievedSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica.</p>
+          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm S1/S2 respondidas e ${categoryAppraised.length} têm apreciação dos critérios da categoria, conferida pelo autor em 13/11/2026 nos 14 estudos com texto recuperado. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 3 porque o artigo se declara quase-experimental sem atribuição aleatória, apesar de mencionar sorteio das escolas; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${notRetrievedSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica.</p>
         </article>
       </section>
 
@@ -525,7 +529,7 @@ const page = `<!doctype html>
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
             <h3 id="pending-title">Pendências antes da consolidação</h3>
-            <p><strong>CT não é uma tarefa incompleta.</strong> É um critério apreciado para o qual a informação disponível não permite concluir. A consolidação não depende de obter resposta a todas as perguntas: depende de conferir os julgamentos, registrar limitações e ajustar a síntese ao que as fontes sustentam. As rotas operacionais já estão registradas; sua conferência humana e a adequação da adaptação da categoria 4 no estudo 8 continuam abertas. O protocolo 6921 permanece fora da síntese empírica.</p>
+            <p><strong>CT não é uma tarefa incompleta.</strong> É um critério apreciado para o qual a informação disponível não permite concluir. A consolidação não depende de obter resposta a todas as perguntas: depende de conferir os julgamentos, registrar limitações e ajustar a síntese ao que as fontes sustentam. As rotas operacionais já estão registradas e foram conferidas pelo autor; um segundo avaliador independente e a conferência dos componentes dos estudos mistos continuam abertos. O protocolo 6921 permanece fora da síntese empírica.</p>
           </div>
         </div>
         <h3>Tarefas de consolidação</h3>

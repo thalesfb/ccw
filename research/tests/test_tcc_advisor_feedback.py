@@ -167,7 +167,7 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     conclusion = _read(TCC_CONTENT / "conclusao.tex")
     abstract = _read(TCC_ABSTRACT)
 
-    assert "O escopo compreendeu a revisão, a apreciação metodológica preliminar dos estudos empíricos incluídos e a elaboração de uma especificação conceitual de protótipo" in _read(TCC_CONTENT / "metodologia.tex")
+    assert "O escopo compreendeu a revisão, a apreciação metodológica dos estudos empíricos incluídos, por revisor único, e a elaboração de uma especificação conceitual de protótipo" in _read(TCC_CONTENT / "metodologia.tex")
     assert "A implementação exploratória serviu como verificação técnica auxiliar" in introduction
     assert "A proposta de revisão docente e sua não aplicação são delimitadas" in introduction
     assert "especificação conceitual do protótipo" in prototype
@@ -255,7 +255,7 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert r"\citeonline{Zeng2025_6923}" in chapter
     assert "A categoria 3 foi utilizada para examinar as comparações quantitativas" in chapter
     assert "com alocação desconhecida" in chapter
-    assert "a execução da randomização recebeu ct" in chapter.lower()
+    assert "o controle de confundidores recebeu n" in chapter.lower()
     assert "um único revisor, o autor" not in chapter.lower()
     assert "sem dupla avaliação independente" not in chapter.lower()
     assert "apoio de regras automatizadas e de ia generativa" in chapter.lower()
