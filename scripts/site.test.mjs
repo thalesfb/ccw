@@ -88,7 +88,7 @@ const mmat = read('research/exports/analysis/mmat_current.html');
 assert.doesNotMatch(mmat, /^[\t ]+$/m, 'generated MMAT page must not contain whitespace-only lines');
 assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggregate scoring');
 assert.match(mmat, /arquivo histórico/i, 'the current page must preserve historical provenance');
-assert.match(mmat, /Apreciação preliminar do recorte histórico/i, 'the MMAT page title must identify the historical record');
+assert.match(mmat, /Apreciação MMAT do recorte histórico/i, 'the MMAT page title must identify the historical record');
 assert.match(mmat, /O corte 4,0 e os 15 estudos permanecem inalterados/i, 'the MMAT page must describe the actual selection without a promised new review');
 assert.match(mmat, /data de corte 31\/08\/2026/i, 'the MMAT page must identify the review cutoff date');
 assert.match(mmat, /recorte histórico reconciliado em 20\/10\/2026/i, 'the MMAT page must distinguish the historical reconciled scope date');
