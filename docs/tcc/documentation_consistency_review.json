@@ -4,7 +4,7 @@
   "human_scientific_approval": "pending",
   "canonical_inputs": {
     "results/tcc/conteudo/introducao.tex": "2ca31fadb0c0f96adadd565c37dc09abfa841b6af2ec07aea4abe6f7c26cfd45",
-    "research/exports/reports/reproducibility_manifest.json": "f7215d40d2bec8078fcda1348f46628350a3b8f0693e649d9a90fe70e738af9c",
+    "research/exports/reports/reproducibility_manifest.json": "4c689be097789cf1ce67de62a9b86151ec3ccc7a293e64e1a5655c4eb0ef4aec",
     "research/data/study_contribution_current.json": "84af05c65a13e9cbd835e5c29a7aee0afca0bdf0d94d336f41ff7fca38c2cfd1",
     "research/data/evidence_sources_current.json": "40fb0f35c128f51a69d19dbeb6ecff0ec0331f9f0433c81bd4c0e6cad1ebbae7",
     "research/data/adjudicated_record_corrections.csv": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee",
@@ -55,7 +55,7 @@
     "docs/VERIFICACAO-NUMEROS-PRISMA.md": "76e17686ce016d918e7aa3f722d546ede32ad552ed75b3730c191cc46947617d",
     "docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md": "299c05edb703acbffea4fa9371109f29e568c098acccd43c7ed174d3aad46e3f",
     "results/tcc/images/README.md": "991e1d8c2400ef0b3586d277b9fa5658320cab59f2225b60d28d8875dd1e481b",
-    "index.html": "dbfdb54b04e4038aabed3c93374b78de5f1ee6dfe89493ed98936ef499f252df",
+    "index.html": "c749c58dd151a02b6d66de72c5ad5945a5fa6415a4909c3a5da70ee7f57ce76f",
     "research/index.html": "b4775842740a71a123a07ba31ebc18cf460ab033bc9dd2345c7cc23a1fc14279",
     "results/tcc/index.html": "d97bdfe84d0f3c9cd5612c8bafe9acbcd91ed630ecc78a04e88c68a82ed4f9f2",
     "presentation/slides.md": "66dcf643a54ea693203a1199bc417c8edc601613f05058b3016ed7f3387a8b0f",

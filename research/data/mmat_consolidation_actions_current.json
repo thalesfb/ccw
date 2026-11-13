@@ -1,5 +1,5 @@
 {
-  "review_date": "2026-11-06",
+  "review_date": "2026-11-13",
   "review_kind": "assisted_documentary_review",
   "actions": [
     {
@@ -52,19 +52,27 @@
     },
     {
       "id": "HUM-01",
-      "subject": "Conferência humana dos julgamentos e da síntese",
-      "status": "pending_human_review",
-      "owner": "autor e orientação científica",
-      "evidence": "Há apreciações preliminares nos 15 registros empíricos; o apoio automatizado e a revisão de consistência não constituem aprovação científica humana, inclusive para Y e N.",
-      "next_step": "Conferir fonte, pergunta, justificativa e impacto na síntese por estudo. Registrar divergências e decisões; manter CT quando a informação continuar insuficiente."
+      "subject": "Conferência do autor dos julgamentos MMAT",
+      "status": "completed_author_review",
+      "owner": "autor",
+      "evidence": "Em 13/11/2026 o autor conferiu as 98 respostas dos 14 estudos com texto recuperado, lendo os textos completos e registrando a página consultada: 95 mantidas, 3 alteradas (6915 Q3, 6916 Q2, 6917 Q5) e o estudo 14 reclassificado para a categoria 3. Os componentes dos estudos mistos não integraram a conferência.",
+      "next_step": "Submeter os julgamentos à revisão da orientação científica e, em trabalho futuro, a um segundo avaliador independente; conferir os componentes dos estudos mistos."
     },
     {
       "id": "METH-08",
       "subject": "Conferência das rotas operacionais, especialmente estudo 8",
+      "status": "completed_author_review",
+      "owner": "autor",
+      "evidence": "Na conferência de 13/11/2026, o autor manteve as rotas de 5, 7 e 8 e reclassificou o estudo 14 para a categoria 3, porque o artigo se declara quase-experimental sem atribuição aleatória. A categoria 4 adaptada do estudo 8 continua sem corresponder literalmente a um desenho apenas descritivo.",
+      "next_step": "Apresentar essas rotas como limitações, sem transformá-las em delineamentos confirmados; submetê-las à revisão da orientação científica."
+    },
+    {
+      "id": "ORI-01",
+      "subject": "Revisão da apreciação MMAT pela orientação científica",
       "status": "pending_human_review",
-      "owner": "autor e orientação científica",
-      "evidence": "Rotas de 5, 7, 8 e 14 já decididas operacionalmente. A categoria 4 adaptada do estudo 8 não corresponde literalmente a um desenho apenas descritivo; a tese também testa hipóteses.",
-      "next_step": "Confirmar a apresentação dessas limitações e a adequação da lente adaptada, sem duplicar frações nem transformar a rota em delineamento confirmado."
+      "owner": "orientação científica",
+      "evidence": "A conferência do autor foi concluída em 13/11/2026; o TCC será encaminhado à orientação em 17/11/2026.",
+      "next_step": "Registrar a devolutiva da orientação sobre julgamentos, rotas operacionais e síntese, mantendo CT quando a informação continuar insuficiente."
     }
   ]
 }

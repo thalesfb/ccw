@@ -411,7 +411,7 @@
     {
       "path": "research/data/mmat_consolidation_actions_current.json",
       "role": "documentary corrections, source-access blockers and outstanding human appraisal tasks, separate from indeterminate MMAT responses",
-      "sha256": "9fe47a8ad15333ef3ae06125a064a5925a666b96aba92c201d6698b0e7594c0a"
+      "sha256": "fae0d9d95df2047000470df628ea78455a8932fd2cd0d514fd14759412b1f69f"
     },
     {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",

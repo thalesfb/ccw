@@ -407,7 +407,7 @@ const page = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Apreciação preliminar por critérios do MMAT 2018 para o escopo reconciliado em ${scopeSnapshotLabel}; data de corte ${cutoffDateLabel}.">
+  <meta name="description" content="Apreciação por critérios do MMAT 2018, conferida pelo autor, para o escopo reconciliado em ${scopeSnapshotLabel}; data de corte ${cutoffDateLabel}.">
   <title>MMAT · escopo ${scopeSnapshotLabel} · CCW</title>
   <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
@@ -447,14 +447,14 @@ const page = `<!doctype html>
       <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão</a> / <strong>MMAT · ${scopeSnapshotLabel}</strong></p>
       <section class="page-hero" aria-labelledby="page-title">
         <span class="eyebrow">MMAT 2018 · recorte histórico reconciliado em ${scopeSnapshotLabel}</span>
-        <h1 id="page-title">Apreciação preliminar do recorte histórico</h1>
-        <p class="lede">Esta página registra as apreciações preliminares do conjunto histórico selecionado sob o corte 4,0. A busca teve data de corte em ${cutoffDateLabel} e a população foi reconciliada em ${scopeSnapshotLabel}. O corte 4,0 e os 15 estudos permanecem inalterados; este conjunto não é apresentado como corpus final. Esta apreciação não é uma nota global, percentual ou ranking de qualidade.</p>
+        <h1 id="page-title">Apreciação MMAT do recorte histórico</h1>
+        <p class="lede">Esta página registra as apreciações MMAT do conjunto histórico selecionado sob o corte 4,0, propostas com apoio de IA e conferidas pelo autor em 13/11/2026 nos 14 estudos com texto recuperado. A busca teve data de corte em ${cutoffDateLabel} e a população foi reconciliada em ${scopeSnapshotLabel}. O corte 4,0 e os 15 estudos permanecem inalterados; este conjunto não é apresentado como corpus final. Esta apreciação não é uma nota global, percentual ou ranking de qualidade.</p>
         <p class="source-note">Data de corte da busca: ${searchCutoffLabel}. Recorte consolidado em ${adjudicatedSnapshotLabel}. Registro MMAT da seleção histórica sob o corte 4,0, reconciliado em ${latestScopeReconciliationLabel}; apreciações registradas até ${latestReviewDateLabel}.</p>
         <div class="action-row">
           <a class="btn btn-primary" href="../../index.html">Voltar à revisão</a>
           <a class="btn btn-secondary" href="mmat_visualization.html">Arquivo histórico — 17 registros</a>
         </div>
-        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Este registro histórico contém ${current.length} itens: ${empiricalCore.length} estudos empíricos na seleção histórica sob o corte 4,0, ${abstractOnly.length} registro excluído após a triagem do resumo e 1 protocolo excluído após texto completo. Na recuperação atual, ${notRetrievedReports} dos ${currentSourceRetrieval.reports_sought} relatórios procurados não têm cópia verificável; ${currentSourceRetrieval.reports_assessed_at_full_text} foram avaliados em texto completo e ${currentSourceRetrieval.recovered_empirical_reports} relatórios empíricos foram recuperados. Sokkhey permanece historicamente entre os 15. Os itens e decisões descrevem o conjunto adotado nesta versão, com apreciações preliminares e limites de recuperação explícitos.</p>
+        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Este registro histórico contém ${current.length} itens: ${empiricalCore.length} estudos empíricos na seleção histórica sob o corte 4,0, ${abstractOnly.length} registro excluído após a triagem do resumo e 1 protocolo excluído após texto completo. Na recuperação atual, ${notRetrievedReports} dos ${currentSourceRetrieval.reports_sought} relatórios procurados não têm cópia verificável; ${currentSourceRetrieval.reports_assessed_at_full_text} foram avaliados em texto completo e ${currentSourceRetrieval.recovered_empirical_reports} relatórios empíricos foram recuperados. Sokkhey permanece historicamente entre os 15. Os itens e decisões descrevem o conjunto adotado nesta versão, com apreciações conferidas pelo autor e limites de recuperação explícitos.</p>
       </section>
 
       <section class="section" aria-labelledby="summary-title">
@@ -534,7 +534,7 @@ const page = `<!doctype html>
         </div>
         <h3>Tarefas de consolidação</h3>
         <p>Revisão documental de ${escapeHtml(consolidation.review_date.split('-').reverse().join('/'))}. Localizadores e justificativas corrigidos não representam aprovação científica humana. As tarefas abaixo distinguem correções concluídas, acesso externo e decisões de revisão.</p>
-        <div class="table-wrap"><table><caption>Estado das ações documentais e científicas</caption><thead><tr><th scope="col">Ação</th><th scope="col">Estado e responsável</th><th scope="col">Evidência</th><th scope="col">Próximo passo</th></tr></thead><tbody>${consolidation.actions.map((a) => `<tr><th scope="row">${escapeHtml(a.subject)}</th><td>${escapeHtml(({completed_documentary:'Correção documental concluída',blocked_source_access:'Acesso ao original pendente',blocked_embargo:'Embargo confirmado',pending_human_review:'Conferência humana pendente'})[a.status])}<br>${escapeHtml(a.owner)}</td><td>${escapeHtml(a.evidence)}</td><td>${escapeHtml(a.next_step)}</td></tr>`).join('')}</tbody></table></div>
+        <div class="table-wrap"><table><caption>Estado das ações documentais e científicas</caption><thead><tr><th scope="col">Ação</th><th scope="col">Estado e responsável</th><th scope="col">Evidência</th><th scope="col">Próximo passo</th></tr></thead><tbody>${consolidation.actions.map((a) => `<tr><th scope="row">${escapeHtml(a.subject)}</th><td>${escapeHtml(({completed_documentary:'Correção documental concluída',blocked_source_access:'Acesso ao original pendente',blocked_embargo:'Embargo confirmado',pending_human_review:'Revisão humana pendente',completed_author_review:'Conferência do autor concluída'})[a.status])}<br>${escapeHtml(a.owner)}</td><td>${escapeHtml(a.evidence)}</td><td>${escapeHtml(a.next_step)}</td></tr>`).join('')}</tbody></table></div>
         <p>${followups.length} perguntas preparadas: limites da evidência disponível por fonte e critério e duas pendências de acesso ao texto. O estudo 3 mantém ficha histórica sem cópia para revalidação; 6923 não recebeu MMAT. Informação insuficiente no material examinado, exame incompleto e cópia indisponível são situações distintas. Se o registro público não permite distinguir a origem de um CT, essa incerteza é preservada. Não são envios obrigatórios. Nenhum contato externo ou resposta de autor foi registrado nesta revisão.</p>
         <p><a href="../../../docs/tcc/MMAT-PERGUNTAS-PENDENTES.md">Lista de perguntas por estudo</a> · <a href="../../../research/data/mmat_followup_questions_current.csv">CSV das perguntas</a> · <a href="../../../research/data/mmat_consolidation_actions_current.json">Ações de consolidação e evidências</a></p>
         ${[...new Set(followups.map((q) => q.study_id))].map((id) => `<details class="surface-card"><summary>Estudo ${escapeHtml(id)} · perguntas pendentes</summary><ul>${followups.filter((q) => q.study_id === id).map((q) => `<li><strong>${escapeHtml(({study:'critérios principais',record:'pendência do registro',qualitative:'componente qualitativo',quantitative:'componente quantitativo'})[q.component])} · ${escapeHtml(({unit:'unidade de apreciação',design:'delineamento',access:'acesso ao texto'})[q.mmat_criterion] ?? q.mmat_criterion)}</strong>: ${escapeHtml(q.question_pt)} <small>Fonte: ${escapeHtml(q.source_id)}; ${escapeHtml(q.evidence_locator)}. Pergunta preparada, não enviada.</small><small><strong>${escapeHtml(coverageLabels[q.coverage_status])}.</strong> ${escapeHtml(q.coverage_notes)} <a href="../../../${escapeHtml(q.coverage_reference)}">Registro público de cobertura</a>.</small></li>`).join('')}</ul></details>`).join('')}
@@ -553,7 +553,7 @@ const page = `<!doctype html>
 
   <footer class="site-footer">
     <div class="site-shell site-footer-inner">
-      <p><strong>MMAT · escopo ${scopeSnapshotLabel} · CCW</strong><br>Apreciação preliminar por critérios</p>
+      <p><strong>MMAT · escopo ${scopeSnapshotLabel} · CCW</strong><br>Apreciação por critérios conferida pelo autor</p>
       <p><a href="../../index.html">Revisão</a> · <a href="../../../">Visão geral</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></p>
     </div>
   </footer>
