@@ -13,7 +13,7 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Titulo** | Ensino Personalizado de Matematica: Oportunidades e Tecnicas Computacionais |
+| **Titulo** | Ensino Personalizado de Matemática: revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente |
 | **Aluno** | Thales Ferreira Batista |
 | **Orientador** | Prof. Dr. Rafael Zanin (IFC) |
 | **Coorientador** | Prof. Dr. Manasses Ribeiro (IFC) |

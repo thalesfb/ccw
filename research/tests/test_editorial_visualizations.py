@@ -192,8 +192,8 @@ def test_full_text_flow_does_not_certify_study_independence_or_threshold_only_ex
         ReviewVisualizer(tmp_path).prisma_flow_diagram(stats)
         figure = plt.gcf()
         labels = [item.get_text() for item in figure.axes[0].texts]
-        assert "Seleção histórica\n(n = 15)" in labels
-        assert "Não avançaram na priorização histórica\n(n = 9)" in labels
+        assert "Seleção original\n(n = 15)" in labels
+        assert "Não avançaram na priorização\n(n = 9)" in labels
     plt.close(figure)
 
 
@@ -207,7 +207,7 @@ def test_current_funnel_rendered_values_match_the_versioned_summary(tmp_path):
         assert [bar.get_width() for bar in figure.axes[0].patches] == expected
         labels = [label.get_text() for label in figure.axes[0].get_yticklabels()]
         assert labels == [f'{name}\n(n={value:,})'.replace(',', '.') for name, value in zip(
-            ('Identificação', 'Após deduplicação', 'Priorização histórica', 'Lista preliminar', 'Seleção histórica'), expected)]
+            ('Identificação', 'Após deduplicação', 'Priorização por relevância', 'Lista preliminar', 'Seleção original'), expected)]
     plt.close(figure)
 
 
@@ -222,7 +222,7 @@ def test_current_prisma_is_legible_and_does_not_mislabel_source_denominators(tmp
         for prefix, key, source in (
             ('Registros identificados', 'identification', 'prisma'),
             ('29 duplicatas removidas', 'screening', 'prisma'),
-            ('Priorização histórica', 'prioritization', 'prisma'),
+            ('Priorização por relevância', 'prioritization', 'prisma'),
             ('Lista preliminar', 'shortlisted', 'prisma'),
             ('Relatórios procurados', 'reports_sought', 'prisma'),
             ('Relatórios avaliados', 'reports_assessed_at_full_text', 'current_source_retrieval'),

@@ -138,7 +138,7 @@ class ReportGenerator:
         # Create report content
         report_data = {
             'title': 'Relatório da Revisão Sistemática',
-            'subtitle': 'Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais',
+            'subtitle': 'Ensino Personalizado de Matemática: revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente',
             'generated_at': datetime.now().strftime('%d/%m/%Y %H:%M'),
             'statistics': report_stats,
             'charts': [{'name': p.stem, 'path': p} for p in chart_paths],

@@ -1,4 +1,4 @@
-# Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais
+# Ensino Personalizado de Matemática: revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente
 
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
