@@ -245,10 +245,8 @@ def render_table(
         header_row,
         r"\hline",
         r"\endhead",
-        r"\hline",
         r"\multicolumn{9}{r}{\textit{Continua na próxima página}}\\",
         r"\endfoot",
-        r"\hline",
         r"\endlastfoot",
     ]
     for row in rows:
@@ -275,7 +273,7 @@ def render_table(
             _latex_escape(design_label),
             *[row[criterion] or "---" for criterion in CRITERIA],
         ]
-        lines.append(" & ".join(values) + r" \\")
+        lines.append(" & ".join(values) + r" \\ \hline")
     note = (
         r"\par\noindent\textit{Nota:} S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
         r"Y = sim; N = não; CT = não é possível concluir; "
