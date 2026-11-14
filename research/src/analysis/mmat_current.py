@@ -29,8 +29,11 @@ CURRENT_EMPIRICAL_STUDY_IDS: tuple[int, ...] = (
 )
 PENDING_UNIT_ADJUDICATION_STUDY_IDS: tuple[int, ...] = ()
 CURRENT_MMAT_STUDY_IDS: tuple[int, ...] = (
-    1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 6915, 6916, 6917, 6919, 6920
+    1, 2, 4, 5, 6, 7, 8, 10, 14, 6915, 6916, 6917, 6919, 6920
 )
+# Author decision (2026-11-14): the study remains in the original selection, but
+# without a verifiable copy it receives no MMAT answers.
+SOURCE_UNAVAILABLE_STUDY_IDS: tuple[int, ...] = (3,)
 # Compatibility alias: historical callers use this for the 18-record ledger.
 CURRENT_STUDY_IDS = CURRENT_RECORD_IDS
 CONTEXT_ONLY_STUDY_IDS = (9,)
@@ -77,6 +80,7 @@ VALID_ASSESSMENT_BASES = {
     "abstract_only",
     "metadata_only",
     "protocol_or_proposal_not_applicable",
+    "source_unavailable_not_appraised",
 }
 SOURCE_OR_PERIOD_HOLD_STATUSES = {
     "metadata_year_conflict",
@@ -134,7 +138,7 @@ def load_current_reassessment(
             source_pending
             or row.get("assessment_basis") in {
                 "abstract_and_metadata_only", "primary_full_text_scope_exclusion",
-                "protocol_or_proposal_not_applicable",
+                "protocol_or_proposal_not_applicable", "source_unavailable_not_appraised",
             }
             or unit_pending
         )
@@ -322,6 +326,8 @@ def load_current_synthesis_scope(
                 "included_empirical_core", "empirical_evidence",
                 "pending_unit_adjudication"
                 if study_id in PENDING_UNIT_ADJUDICATION_STUDY_IDS
+                else "not_applied_source_unavailable"
+                if study_id in SOURCE_UNAVAILABLE_STUDY_IDS
                 else "applicable",
                 "included", "included",
             )
@@ -354,7 +360,7 @@ def load_current_synthesis_scope(
             raise ValueError(f"Unknown synthesis role for study {study_id}")
         if applicability not in {
             "applicable", "pending_unit_adjudication", "context_only",
-            "pending_full_text", "not_applicable",
+            "pending_full_text", "not_applicable", "not_applied_source_unavailable",
         }:
             raise ValueError(f"Unknown empirical MMAT applicability for study {study_id}")
         if role == "contextual_protocol" and applicability != "not_applicable":
@@ -495,6 +501,7 @@ def validate_current_artifacts(
         "abstract_only": 0,
         "metadata_only": 0,
         "protocol_or_proposal_not_applicable": 0,
+        "source_unavailable_not_appraised": 0,
     }
     for row in scored_population:
         basis = row.get("assessment_basis", "")

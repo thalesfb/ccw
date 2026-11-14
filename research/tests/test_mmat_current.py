@@ -27,7 +27,7 @@ def test_operational_appraisal_decisions_are_explicit_and_do_not_certify_allocat
     rows = {r['study_id']: r for r in load_current_reassessment()}
     assert rows['5']['s1'] == 'Y' and rows['5']['s2'] == 'CT'
     assert rows['7']['s1'] == rows['7']['s2'] == 'Y'
-    assert sum(row['s2'] == 'Y' for row in rows.values()) == 14
+    assert sum(row['s2'] == 'Y' for row in rows.values()) == 13
     assert sum(row['s2'] == 'CT' for row in rows.values()) == 1
     assert rows['8']['design'] == 'quantitative_descriptive'
     assert [rows['8'][k] for k in ('s1','s2','q1','q2','q3','q4','q5')] == ['Y','Y','Y','CT','CT','CT','CT']
@@ -67,7 +67,7 @@ def test_followup_questions_cover_every_indeterminate_criterion_and_structural_h
     }
     actual = {(q["study_id"], q["component"], q["criterion"]) for q in questions if q["component"] != "record"}
     assert actual == expected
-    assert len(questions) == 72
+    assert len(questions) == 67
     assert {q["study_id"] for q in questions if q["criterion"] == "design"} == set()
     assert all(q["status"] == "prepared_not_sent" for q in questions)
     coverage = json.loads((Path(__file__).resolve().parents[1] / "data/study_contribution_current.json").read_text(encoding="utf-8"))["records"]
@@ -170,11 +170,12 @@ def test_current_mmat_artifacts_use_exact_current_denominator() -> None:
         if row["study_id"] not in {"3", "9", "6921", "6923"}
     )
     historical_sokkhey = next(row for row in reassessment if row["study_id"] == "3")
-    assert historical_sokkhey["assessment_basis"] == "historical_appraisal_source_unavailable"
-    assert historical_sokkhey["assessment_status"] == "historical_provisional_not_revalidated"
-    assert [historical_sokkhey[f"q{i}"] for i in range(1, 6)] == ["CT"] * 5
-    assert historical_sokkhey["adjudication_status"] == "historical_record_only"
-    assert "não há cópia primária verificável" in historical_sokkhey["notes"].lower()
+    assert historical_sokkhey["assessment_basis"] == "source_unavailable_not_appraised"
+    assert historical_sokkhey["assessment_status"] == "not_appraised_source_unavailable"
+    assert [historical_sokkhey[k] for k in ("s1", "s2", "q1", "q2", "q3", "q4", "q5")] == [""] * 7
+    assert historical_sokkhey["criterion_evidence"] == ""
+    assert historical_sokkhey["adjudication_status"] == "author_decision_2026-11-14"
+    assert "sem cópia verificável" in historical_sokkhey["notes"].lower()
     historical_source = next(row for row in load_primary_sources() if row["study_id"] == "3")
     assert historical_source["full_text_status"] == "not_retrieved"
     assert not historical_source["local_file"] and not historical_source["sha256"]
@@ -212,9 +213,9 @@ def test_current_mmat_rejects_missing_review_provenance(monkeypatch) -> None:
 def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     report = validate_current_artifacts()
 
-    assert report["current_denominator"] == 15
+    assert report["current_denominator"] == 14
     assert report["historical_denominator"] == 17
-    assert report["criterion_rows"] == 15
+    assert report["criterion_rows"] == 14
     assert report["assessment_registry_rows"] == 18
     assert report["current_mmat_ledger_rows"] == 18
     assert report["historical_mmat_assessment_rows"] == 17
@@ -231,13 +232,14 @@ def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     assert report["source_or_period_hold_rows"] == 0
     assert report["source_or_period_hold_ids"] == []
     assert report["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
-    assert report["evidence_levels"]["historical_appraisal_source_unavailable"] == 1
+    assert report["evidence_levels"]["historical_appraisal_source_unavailable"] == 0
+    assert report["record_evidence_levels"]["source_unavailable_not_appraised"] == 1
     assert report["evidence_levels"]["abstract_and_metadata_only"] == 0
     assert report["evidence_levels"]["metadata_only"] == 0
     assert report["evidence_levels"]["protocol_or_proposal_not_applicable"] == 1
     assert report["record_evidence_levels"]["pending_full_text_not_appraised"] == 1
     assert report["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 14
-    assert report["record_evidence_levels"]["historical_appraisal_source_unavailable"] == 1
+    assert report["record_evidence_levels"]["historical_appraisal_source_unavailable"] == 0
     assert report["record_evidence_levels"]["abstract_and_metadata_only"] == 0
     assert report["record_evidence_levels"]["primary_full_text_scope_exclusion"] == 1
     assert report["non_ct_criterion_decisions"] > 0
@@ -278,7 +280,7 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
     assert all(
         row["criterion_evidence"].count(";") == (1 if row["design"] == "design_pending" else 6)
         for row in rows
-        if row["study_id"] not in {"8", "9", "6921", "6923"}
+        if row["study_id"] not in {"3", "8", "9", "6921", "6923"}
     )
     assert rows[1]["assessment_status"] == "author_conferred_single_reviewer"
     assert rows[1]["q2"] == "CT"
@@ -310,10 +312,10 @@ def test_current_mmat_evidence_matches_criterion_values() -> None:
 def test_abstract_only_measurement_criteria_do_not_overclaim_appropriateness() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
 
-    for study_id in ("2", "3", "4", "6", "6917"):
+    for study_id in ("2", "4", "6", "6917"):
         study = rows[study_id]
         assert study["q3"] == "CT"
-        if study_id in {"2", "3", "6", "6917"}:
+        if study_id in {"2", "6", "6917"}:
             assert "Q3=CT" in study["criterion_evidence"]
     assert "adequação dos indicadores" in rows["6917"]["criterion_evidence"]
     for study_id in ("1", "5", "10"):
@@ -450,8 +452,8 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "há perguntas de pesquisa claras?" in html.lower()
     assert "17 candidatos empíricos submetidos ao mmat" not in html.lower()
     assert "15 estudos empíricos da seleção histórica" in html.lower()
-    assert "15 têm s1/s2 respondidas" in html.lower()
-    assert "15 têm apreciação dos critérios da categoria, conferida pelo autor" in html.lower()
+    assert "14 têm s1/s2 respondidas" in html.lower()
+    assert "14 têm apreciação dos critérios da categoria, conferida pelo autor" in html.lower()
 
     for study_id, expected_text in {
         "7": ("120 participantes", "50/52", "não prova completude"),
@@ -697,7 +699,8 @@ def test_all_18_records_have_explicit_empirical_scope_and_text_status() -> None:
     scope = load_current_synthesis_scope()
     by_id = {row["study_id"]: row for row in scope}
     assert len(by_id) == 18
-    assert sum(row["empirical_mmat_applicability"] == "applicable" for row in scope) == 15
+    assert sum(row["empirical_mmat_applicability"] == "applicable" for row in scope) == 14
+    assert {study_id for study_id, row in by_id.items() if row["empirical_mmat_applicability"] == "not_applied_source_unavailable"} == {"3"}
     assert sum(row["empirical_mmat_applicability"] == "pending_unit_adjudication" for row in scope) == 0
     assert sum(row["empirical_mmat_applicability"] == "context_only" for row in scope) == 1
     assert sum(row["empirical_mmat_applicability"] == "pending_full_text" for row in scope) == 1
@@ -711,14 +714,14 @@ def test_all_18_records_have_explicit_empirical_scope_and_text_status() -> None:
 def test_current_mmat_table_contains_only_records_with_screening_responses() -> None:
     rows = load_current_table_rows()
     ids = [row["study_id"] for row in rows]
-    assert len(ids) == 15
+    assert len(ids) == 14
     assert set(ids) == {str(study_id) for study_id in CURRENT_MMAT_STUDY_IDS}
     assert not {"9", "6921", "6923"}.intersection(ids)
     assert "6919" in ids
     rendered = render_current_table(rows)
-    assert "15 estudos do corpus" in rendered
+    assert "14 estudos do corpus" in rendered
     main_table, component_table = rendered.split(r"\label{qua:mmat-componentes}", 1)
-    assert len(re.findall(r"^\\citeonline\{[^}]+\} &", main_table, re.M)) == 15
+    assert len(re.findall(r"^\\citeonline\{[^}]+\} &", main_table, re.M)) == 14
     assert len(re.findall(r"^\\citeonline\{[^}]+\} &", component_table, re.M)) == 6
     assert "S1/S2 = perguntas de triagem" in rendered
     assert "Q1--Q5 = critérios da categoria" in rendered
@@ -746,7 +749,7 @@ def test_public_mmat_page_marks_operational_routes_without_certifying_designs():
 
 def test_mmat_appraisal_corrects_unfounded_analysis_and_sampling_decisions() -> None:
     records = {row["study_id"]: row for row in load_current_reassessment()}
-    assert records["3"]["q5"] == "CT"
+    assert records["3"]["q5"] == ""
     assert records["6"]["q5"] == "CT"
     assert records["6917"]["q1"] == "Y"
     assert records["6917"]["q2"] == "CT"
@@ -754,8 +757,9 @@ def test_mmat_appraisal_corrects_unfounded_analysis_and_sampling_decisions() -> 
 
 def test_design_status_records_appraisal_state_not_source_review_provenance() -> None:
     rows = {row["study_id"]: row for row in load_current_reassessment()}
-    for study_id in ("2", "3", "4", "6", "6915", "6917"):
+    for study_id in ("2", "4", "6", "6915", "6917"):
         assert rows[study_id]["design_status"] == "design_reassessed_provisional"
+    assert rows["3"]["design_status"] == "primary_text_not_retrieved_pending"
     assert all(
         row["design_status"] not in {
             "primary_text_reviewed_external",

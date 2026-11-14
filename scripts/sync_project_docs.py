@@ -197,7 +197,7 @@ def render_blocks(root):
         f"({' e '.join(retrieval['not_retrieved_labels'])}); "
         f"{retrieval['reports_assessed_at_full_text']} foram avaliados em texto completo, incluindo "
         f"{retrieval['full_text_exclusions']} protocolo excluído. "
-        f"No MMAT preliminar, há {qa['screening_rows']} triagens S1/S2 e "
+        f"No MMAT conferido pelo autor, há {qa['screening_rows']} triagens S1/S2 e "
         f"{qa['category_appraised_rows']} apreciações por categoria; "
         f"não há escore agregado nem aprovação científica final."
     )

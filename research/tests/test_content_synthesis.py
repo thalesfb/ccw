@@ -35,8 +35,8 @@ def test_mmat_counts_preserve_each_category_and_criterion():
             assert values == dict(Counter(row[criterion] for row in expected))
             assert sum(values.values()) == len(expected)
             assert set(values) <= {"Y", "N", "CT"}
-    assert len(rows) == 15
-    assert sum(counts["screening"]["s1"].values()) == 15
+    assert len(rows) == 14
+    assert sum(counts["screening"]["s1"].values()) == 14
     assert counts["mixed_methods"]["q3"] == {"CT": 1, "N": 2}
     assert counts["mixed_methods"]["q4"] == {"CT": 1, "Y": 2}
 

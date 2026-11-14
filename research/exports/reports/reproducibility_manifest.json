@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-12T18:54:04+00:00",
+  "generated_at": "2026-11-14T21:12:08+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -336,7 +336,6 @@
       "mmat_study_ids": [
         1,
         2,
-        3,
         4,
         5,
         6,
@@ -352,9 +351,9 @@
       ],
       "mmat_unit_hold_ids": [],
       "mmat_unit_hold_rows": 0,
-      "criterion_rows": 15,
-      "screening_rows": 15,
-      "category_appraised_rows": 15,
+      "criterion_rows": 14,
+      "screening_rows": 14,
+      "category_appraised_rows": 14,
       "category_pending_ids": [],
       "assessment_registry_rows": 18,
       "component_criterion_rows": 6,
@@ -368,31 +367,33 @@
       "historical_mmat_assessment_rows": 17,
       "current_mmat_ledger_rows": 18,
       "historical_denominator": 17,
-      "current_denominator": 15,
+      "current_denominator": 14,
       "denominator_meaning": "S1/S2 screening records; use category_appraised_rows for Q1-Q5 coverage",
       "evidence_levels": {
         "primary_full_text_reviewed_externally": 14,
-        "historical_appraisal_source_unavailable": 1,
+        "historical_appraisal_source_unavailable": 0,
         "primary_full_text_scope_exclusion": 0,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
         "metadata_only": 0,
-        "protocol_or_proposal_not_applicable": 1
+        "protocol_or_proposal_not_applicable": 1,
+        "source_unavailable_not_appraised": 0
       },
       "record_evidence_levels": {
         "primary_full_text_reviewed_externally": 14,
-        "historical_appraisal_source_unavailable": 1,
+        "historical_appraisal_source_unavailable": 0,
         "primary_full_text_scope_exclusion": 1,
         "abstract_and_metadata_only": 0,
         "abstract_only": 0,
         "metadata_only": 0,
         "protocol_or_proposal_not_applicable": 1,
+        "source_unavailable_not_appraised": 1,
         "pending_full_text_not_appraised": 1
       },
       "primary_text_reviewed_rows": 14,
       "source_or_period_hold_rows": 0,
       "source_or_period_hold_ids": [],
-      "non_ct_criterion_decisions": 53,
+      "non_ct_criterion_decisions": 51,
       "all_preliminary": true,
       "final_ready": false,
       "blocking_reasons": [
@@ -400,11 +401,10 @@
         "Studies 5 and 7 use an inferred category-3 route with allocation unknown; study 8 uses an explicitly adapted category-4 route for computational models.",
         "The preliminary ledger must not be interpreted as a quality score or ranking.",
         "Study 8 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
-        "Only 14 of 15 empirical-core studies have externally reviewed full text recorded.",
         "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
       ]
     },
-    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 15 studies and category-specific appraisal for 15; 15 records remain in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-2 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. Sokkhey remains only as a historical record without a verifiable source copy; its previous MMAT responses are not revalidated. Zeng is outside the 15-study selection and has no MMAT appraisal. The recorded appraisals remain preliminary."
+    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 14 studies and category-specific appraisal for 14; 15 records remain in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-2 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. Sokkhey remains in the original selection without a verifiable source copy and receives no MMAT answers. Zeng is outside the 15-study selection and has no MMAT appraisal. The recorded appraisals remain preliminary."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
@@ -421,7 +421,7 @@
     {
       "path": "research/data/mmat_followup_questions_current.csv",
       "role": "prepared unsent questions covering indeterminate criteria and structural appraisal holds",
-      "sha256": "64bc7b3d861f1c35d57c6a60ca5e8529fa112bfbdd92345760aca60e02f98e92"
+      "sha256": "479258f1e8a2e4fc4debe7282bc00a95731c0919e7d8e956d0c4773cfb4bb501"
     },
     {
       "path": "research/data/mmat_completion_review_2026-10-28.json",
@@ -471,7 +471,7 @@
     {
       "path": "research/data/mmat_current_study_registry.csv",
       "role": "current 18-record MMAT registry, separate from the historical 17-study appraisal",
-      "sha256": "d1b81092fc423d2c2617cbdc5fdb12d2aad9a3a1bd787f2c704bbcd10d596eb4"
+      "sha256": "b34d2df23bda3e31d773dd66116efeddf4c176ca3e2bbbafdde601b21bc7e845"
     },
     {
       "path": "research/data/mmat_primary_sources_manifest.csv",
@@ -481,12 +481,12 @@
     {
       "path": "research/data/mmat_reassessment_current.csv",
       "role": "current MMAT ledger with criterion responses for appraised records and explicit no-response holds",
-      "sha256": "bc036423efe093ad3e79787b7c4e502a4935ec39cddbc5777008e4c5e4f000be"
+      "sha256": "84d8d6574a455c5f2ef6d46171f70fae3da77d5510f594bf38c4f1d91dceaed2"
     },
     {
       "path": "research/data/current_synthesis_scope.csv",
       "role": "explicit empirical/contextual role for each current retained record",
-      "sha256": "4c9b79d28146768e4bee4b3d3adaf95658e403035fc761c40338d82694df4775"
+      "sha256": "37cdeebe4c845acb5709eeaee549a64aeb7e50f8413a90977990a0572f7ddb36"
     },
     {
       "path": "research/data/study_contribution_current.json",
@@ -576,7 +576,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "e397261198bcee4b803cafa3b3007c19783a321d91988693410766ce4157dc14"
+      "sha256": "90c73fe75967eac86182cded0589380863cec49543bc88dd44a1a2e0a81c611c"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -586,7 +586,7 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "validator separating provisional retention, screening responses and category-specific MMAT coverage",
-      "sha256": "2094b55e0721646096417feeae87d137eb1d71fa1161f8118a3f11b44951dadf"
+      "sha256": "21853d4ec80edcdb4b79f7629afab40e603d9444d95263667f8aaa40b5debe99"
     },
     {
       "path": "research/src/analysis/study_scope.py",
@@ -596,12 +596,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the preliminary current MMAT table",
-      "sha256": "7cd2298df80e352c87f221a54da61279fad737bd3f0f94ea6dbf0a58141156b8"
+      "sha256": "3f6aff33261c38b136b3a78819cd063e8d56f9e71ee7eeb9e44b2228639dc9b5"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
-      "sha256": "4b37c88f6ee9b0745f7e3d88e1eec9c1f571cab79a75a9fa42e82f927de96ed3"
+      "sha256": "df55982ed708ceaa88b039f9d352c129f63c7a2e7da668f65eccd78ba447a9e5"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",
@@ -682,7 +682,7 @@
       "External API responses, metadata and cache state can change on a fresh collection.",
       "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The current empirical MMAT screening denominator is 15; 15 have preliminary category-specific appraisals, including explicit operational routes. 15 records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records 2 reports without a verifiable copy, 15 reports assessed at full text, 1 protocol excluded, and 14 empirical reports recovered. Sokkhey remains a historical inclusion without a verifiable source copy and without revalidation of its previous MMAT responses; Zeng is outside the historical selection. One record was excluded after abstract screening. The recorded appraisals remain preliminary."
+      "The current empirical MMAT screening denominator is 14; 14 have preliminary category-specific appraisals, including explicit operational routes. 15 records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records 2 reports without a verifiable copy, 15 reports assessed at full text, 1 protocol excluded, and 14 empirical reports recovered. Sokkhey remains a historical inclusion without a verifiable source copy and without revalidation of its previous MMAT responses; Zeng is outside the historical selection. One record was excluded after abstract screening. The recorded appraisals remain preliminary."
     ]
   }
 }

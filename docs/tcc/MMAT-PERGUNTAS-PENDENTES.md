@@ -46,26 +46,6 @@ A fonte 3 não foi revalidada nesta rodada; suas perguntas derivam dos registros
 
 ## Estudo 3
 
-- **critérios principais · 4.1** — Após recuperar o original, qual procedimento foi usado para selecionar as escolas cambojanas e os 1.204 respondentes, qual o quadro amostral e por que essa seleção é pertinente à pergunta do estudo?
-  Fonte: PS-003; Páginas físicas não revalidadas; Localizador histórico: Data Collection and Preprocessing §4.1, pp. editoriais 222–223; página física desconhecida. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
-
-- **critérios principais · 4.2** — Após recuperar o original, qual população-alvo foi definida e quais tamanhos, critérios de inclusão/exclusão e informações de cobertura permitem julgar a representatividade das escolas e dos 1.204 estudantes registrados historicamente?
-  Fonte: PS-003; Páginas físicas não revalidadas; Localizador histórico: Data Collection and Preprocessing §4.1, pp. editoriais 222–223; página física desconhecida. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
-
-- **critérios principais · 4.3** — Após recuperar o original, como foram obtidas e operacionalizadas as 43 variáveis e o desempenho em Matemática, e que evidência de validade, confiabilidade ou adequação das medidas sustenta sua utilização para responder à pergunta?
-  Fonte: PS-003; Páginas físicas não revalidadas; Localizador histórico: Data Collection and Preprocessing §4.1, pp. editoriais 222–223; página física desconhecida. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
-
-- **critérios principais · 4.4** — Após recuperar o original, quais taxas e padrões de itens ou participantes não observados foram registrados, como os valores ausentes foram imputados e houve avaliação das diferenças entre respondentes e não respondentes?
-  Fonte: PS-003; Páginas físicas não revalidadas; Localizador histórico: Data Collection and Preprocessing §4.1, pp. editoriais 222–223; página física desconhecida. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
-
-- **critérios principais · 4.5** — Após recuperar o original, qual partição ou procedimento de validação produziu as métricas comparativas, e seleção de atributos, imputação e ajuste dos modelos ocorreram de modo separado da avaliação final?
-  Fonte: PS-003; Páginas físicas não revalidadas; Localizador histórico: Experimental Results §5, pp. editoriais 225–226; página física desconhecida. Encaminhamento previsto: autores do estudo; encaminhamento humano pendente.
-  Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.
-
 - **pendência do registro · acesso ao texto** — É possível recuperar uma cópia legítima do texto integral para conferir os cinco julgamentos históricos indeterminados e os demais critérios?
   Fonte: PS-003; Data Collection and Preprocessing §4.1 pp. 222–223; Experimental Results §5 pp. 225–226. Encaminhamento previsto: biblioteca ou autores; encaminhamento humano pendente.
   Cobertura: **Cópia histórica indisponível para revalidação**. A ficha mantém o julgamento histórico deste critério. Não há cópia verificável nem páginas examinadas nesta revisão para revalidá-lo. A consulta anterior declarada não comprova a extensão da leitura; falta de acesso não demonstra falha do relato. Registro público: `research/data/study_contribution_current.json#/records/2`.

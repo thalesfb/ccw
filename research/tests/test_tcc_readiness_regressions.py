@@ -79,7 +79,8 @@ def test_mmat_does_not_infer_sampling_or_analysis_from_topic_relevance_alone() -
     with ledger_path.open(encoding="utf-8-sig", newline="") as source:
         rows = {row["study_id"]: row for row in csv.DictReader(source)}
 
-    for study_id in ("3", "4"):
+    assert rows["3"]["q1"] == ""
+    for study_id in ("4",):
         assert rows[study_id]["q1"] == "CT"
         evidence = next(
             item for item in rows[study_id]["criterion_evidence"].split(";")

@@ -35,7 +35,7 @@ assert.match(homepage, /15 estudos empíricos integram a seleção histórica/i,
 assert.match(homepage, /com 14 relatórios recuperados/i, 'the homepage must distinguish recovered reports from the historical selection');
 assert.match(homepage, /dois não foram recuperados \(Sokkhey e Zeng\)/i, 'the homepage must disclose both reports without a verifiable copy');
 assert.match(homepage, /15 foram avaliados em texto completo/i, 'the homepage must report the current full-text denominator');
-assert.match(homepage, /MMAT da seleção histórica conferido pelo autor: 15 triagens S1\/S2 e 15 apreciações por critério/i, 'the homepage must label MMAT counts as historical');
+assert.match(homepage, /MMAT da seleção histórica conferido pelo autor: 14 triagens S1\/S2 e 14 apreciações por critério/i, 'the homepage must label MMAT counts as historical');
 assert.match(homepage, /O corte 4,0 e a seleção permanecem inalterados/i, 'the homepage must describe the unchanged selection');
 assert.doesNotMatch(homepage, /população vigente|snapshot vigente/i, 'the homepage must not present the pre-amendment snapshot as current');
 assert.match(homepage, /um registro foi excluído após resumo/i, 'the homepage must disclose the abstract-stage exclusion');
@@ -104,10 +104,10 @@ assert.match(mmat, /arquivo histórico/i, 'the current page must preserve histor
 assert.match(mmat, /O registro de apreciação reúne 18 itens da seleção histórica sob o corte 4,0/i, 'the MMAT page must describe its 18-item scope as historical');
 assert.doesNotMatch(mmat, /estudos empíricos mantidos provisoriamente/i, 'the MMAT page must not describe the pre-amendment selection as provisional/current');
 assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current page must render every current MMAT record');
-assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">fichas com consulta histórica declarada<\/span>/, 'historical consultation labels must not certify completed human reading');
-assert.match(mmat, /<span class="metric-value">15<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
+assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">fichas com consulta histórica declarada<\/span>/, 'historical consultation labels must not certify completed human reading');
+assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
 assert.match(mmat, /<span class="metric-value">2<\/span><span class="metric-label">relatórios sem cópia verificável na recuperação atual<\/span>/, 'the current page must show both reports without verifiable copies');
-assert.match(mmat, /Dois relatórios não têm cópia verificável: Sokkhey permanece na seleção apenas como inclusão histórica, com suas respostas MMAT anteriores sem revalidação; Zeng não recebeu MMAT e não integra os 15 estudos históricos\./, 'the current page must separate Sokkhey historical inclusion from Zeng appraisal status');
+assert.match(mmat, /Dois relatórios não têm cópia verificável: Sokkhey permanece na seleção original sem apreciação MMAT; Zeng não recebeu MMAT e não integra os 15 estudos históricos\./, 'the current page must separate Sokkhey historical inclusion from Zeng appraisal status');
 assert.match(mmat, /Zeng \(1 registro\) aguarda texto integral e não recebe MMAT\./, 'the no-MMAT statement must refer to Zeng rather than Sokkhey');
 assert.match(mmat, /o acervo local contém 16 PDFs dos 18 registros, identificados por hash\. Faltam os estudos 3 e 6923/, 'the current page must identify both unavailable primary PDFs');
 assert.match(mmat, /A reprodução congelada do índice textual abrange 12 fontes/, 'current PDF availability must not imply a larger retrieval replay');
@@ -162,7 +162,7 @@ assert.deepEqual(designScreeningAnswers.slice(0, 2), ['Y', 'CT'], 'Design2025_00
 assert.match(mmat, /Perguntas de triagem do MMAT 2018/i, 'the current page must expose the MMAT screening questions');
 assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must expose S1');
 assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');
-assert.match(mmat, /Na seleção histórica sob o corte 4,0, S1 e S2 estão preenchidas para 15 estudos empíricos\. Q1–Q5 foram apreciados em 15;/i, 'the historical empirical records must expose their preliminary appraisals');
+assert.match(mmat, /Na seleção histórica sob o corte 4,0, S1 e S2 estão preenchidas para 14 estudos empíricos\. Q1–Q5 foram apreciados em 14;/i, 'the historical empirical records must expose their preliminary appraisals');
 assert.match(mmat, /Are there clear research questions\?/i, 'the current page must preserve the original S1 wording');
 assert.match(mmat, /Critérios de apreciação por delineamento/i, 'the current page must expose design-specific criteria');
 assert.match(mmat, /MMAT 2018<\/a>/i, 'the current page must cite the MMAT 2018 source');
@@ -179,7 +179,7 @@ assert.equal((mmat.match(/class="mmat-evidence"/g) || []).length, 18, 'every MMA
 assert.match(mmat, /Ver perguntas, justificativas e localização da evidência/i, 'the evidence disclosure must be clearly labeled');
 assert.match(mmat, /nota 95 nas categorias Medium/i, 'the current page must expose the concrete measurement ambiguity for study 2 Q3');
 assert.match(mmat, /regra efetivamente usada e a adequação das demais medidas/i, 'the current page must explain why study 2 Q3 remains indeterminate');
-assert.match(mmat, /72 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda after the three ratified mixed-methods decisions');
+assert.match(mmat, /67 perguntas preparadas/i, 'the page must expose the unresolved clarification agenda after the three ratified mixed-methods decisions');
 const pagesWorkflow = read('.github/workflows/publish-reports.yml');
 for (const asset of ['research/data/mmat_followup_questions_current.csv', 'research/data/mmat_consolidation_actions_current.json', 'docs/tcc/MMAT-PERGUNTAS-PENDENTES.md']) {
   assert.ok(pagesWorkflow.includes(`cp ${asset} _site/`), `Pages must package the linked MMAT followup asset: ${asset}`);

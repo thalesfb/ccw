@@ -79,8 +79,8 @@ def test_pending_design_rejects_ct_as_if_a_category_criterion_had_been_appraised
 
 def test_qa_distinguishes_screening_from_category_specific_appraisal():
     report = mmat_current.validate_current_artifacts()
-    assert report["screening_rows"] == 15
-    assert report["category_appraised_rows"] == 15
+    assert report["screening_rows"] == 14
+    assert report["category_appraised_rows"] == 14
     assert report["category_pending_ids"] == []
     assert report["empirical_evidence_rows"] == 15
 
@@ -119,4 +119,4 @@ def test_readme_distinguishes_shortlist_from_provisional_empirical_inclusion():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "17 candidatos empíricos provisórios" not in text
     assert "15 estudos empíricos mantidos na seleção histórica" in text
-    assert "15 triagens S1/S2" in text and "15 apreciações por categoria" in text
+    assert "14 triagens S1/S2" in text and "14 apreciações por categoria" in text

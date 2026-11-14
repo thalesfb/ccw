@@ -213,7 +213,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("cinco candidatos foram apreciados por resumo/metadados", slides)
         self.assertNotIn("17 estudos empíricos provisórios", slides)
         self.assertIn("Submeter o MMAT a um segundo avaliador independente", slides)
-        self.assertIn("15 triagens S1/S2 e 15 conjuntos de critérios", slides)
+        self.assertIn("14 triagens S1/S2 e 14 conjuntos de critérios", slides)
         self.assertIn("S2: 14 respostas Y e 1 CT no estudo 5", slides)
         self.assertNotIn("validação humana pendente", slides)
 
@@ -327,7 +327,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
         self.assertNotIn("um único revisor", pptx_source)
         self.assertNotIn("dupla avaliação independente", pptx_source)
-        self.assertIn("MMAT histórico dos 15 estudos, sem revalidação de Sokkhey", pptx_source)
+        self.assertIn("MMAT de 14 estudos; Sokkhey sem apreciação", pptx_source)
         self.assertNotIn("um único pesquisador", pptx_source)
         self.assertNotIn("conferência humana pendente", pptx_source)
 
@@ -431,7 +431,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("um único revisor", review)
         self.assertNotIn("dupla avaliação independente", review)
         self.assertIn("não foram convertidos em escore agregado ou síntese final de qualidade", review)
-        self.assertIn("15 estudos do corpus", table)
+        self.assertIn("14 estudos do corpus", table)
         note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
         self.assertLessEqual(len(note), 450)
         self.assertIn(r"A categoria 4 foi adaptada à modelagem computacional da tese de \citeonline{Computational2017_008}", review)

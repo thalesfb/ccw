@@ -144,10 +144,10 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "18 records in the preliminary list" in manifest["bibliography"]["separation_rule"]
     assert "15 remain in the historical empirical selection under the 4.0 cutoff" in manifest["bibliography"]["separation_rule"]
     appraisal = manifest["methodological_appraisal"]["interpretation"]
-    assert "S1/S2 screening for 15 studies and category-specific appraisal for 15" in appraisal
-    assert "category-specific appraisal for 15" in appraisal
+    assert "S1/S2 screening for 14 studies and category-specific appraisal for 14" in appraisal
+    assert "category-specific appraisal for 14" in appraisal
     assert "three screened studies await design adjudication" not in appraisal
-    assert "Sokkhey remains only as a historical record without a verifiable source copy" in appraisal
+    assert "Sokkhey remains in the original selection without a verifiable source copy and receives no MMAT answers" in appraisal
     assert "Zeng is outside the 15-study selection" in appraisal
     assert "Rafael Zanin" not in appraisal
     assert "Manassés Ribeiro" not in appraisal
@@ -208,17 +208,18 @@ def test_manifest_hashes_and_bibliography_scope_are_current() -> None:
     current_mmat = manifest["methodological_appraisal"]["current_mmat_qa"]
     assert current_mmat["final_ready"] is False
     assert current_mmat["source_or_period_hold_ids"] == []
-    assert current_mmat["current_denominator"] == 15
-    assert current_mmat["criterion_rows"] == 15
+    assert current_mmat["current_denominator"] == 14
+    assert current_mmat["criterion_rows"] == 14
     assert current_mmat["category_pending_ids"] == []
     assert current_mmat["included_empirical_study_ids"][-1] == 6920
     assert current_mmat["mmat_unit_hold_ids"] == []
     assert current_mmat["primary_text_reviewed_rows"] == 14
     assert current_mmat["evidence_levels"]["primary_full_text_reviewed_externally"] == 14
-    assert current_mmat["evidence_levels"]["historical_appraisal_source_unavailable"] == 1
+    assert current_mmat["evidence_levels"]["historical_appraisal_source_unavailable"] == 0
     assert current_mmat["evidence_levels"]["abstract_and_metadata_only"] == 0
     assert current_mmat["record_evidence_levels"]["primary_full_text_reviewed_externally"] == 14
-    assert current_mmat["record_evidence_levels"]["historical_appraisal_source_unavailable"] == 1
+    assert current_mmat["record_evidence_levels"]["historical_appraisal_source_unavailable"] == 0
+    assert current_mmat["record_evidence_levels"]["source_unavailable_not_appraised"] == 1
     assert current_mmat["record_evidence_levels"]["abstract_and_metadata_only"] == 0
     assert current_mmat["record_evidence_levels"]["primary_full_text_scope_exclusion"] == 1
     assert current_mmat["record_evidence_levels"]["pending_full_text_not_appraised"] == 1
@@ -357,7 +358,7 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "na priorização histórica" in root_html
     assert "encaminhados à elegibilidade" not in root_html
     assert "A seleção histórica mantém 15 estudos empíricos sob o corte 4,0" in tcc_html
-    assert "conferida pelo autor nos 14 estudos com texto recuperado, abrange as 15 fichas" in tcc_html.lower()
+    assert "conferida pelo autor, abrange os 14 estudos com texto recuperado" in tcc_html.lower()
     assert "A aplicação funcional e a validação experimental estão fora do escopo" in tcc_html
     mmat_html = (REPOSITORY_ROOT / "research" / "exports" / "analysis" / "mmat_current.html").read_text(
         encoding="utf-8"
