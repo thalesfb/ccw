@@ -352,7 +352,7 @@ def build_deck() -> Presentation:
             add_shape(slide, MSO_SHAPE.ROUNDED_RECTANGLE, Inches(logo_x + col * 0.18), Inches(logo_y + row * 0.18), Inches(0.13), Inches(0.13), fill)
     add_text(slide, "INSTITUTO\nFEDERAL", Inches(5.35), Inches(1.02), Inches(2.65), Inches(0.46), size=12.5, color=RGBColor(20, 20, 20), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Catarinense", Inches(5.35), Inches(1.48), Inches(2.65), Inches(0.25), size=11.5, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
-    add_text(slide, "Ensino Personalizado de Matemática:\nOportunidades e Técnicas Computacionais", Inches(0.65), Inches(2.0), Inches(12.05), Inches(1.15), size=32, color=RGBColor(11, 86, 108), bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
+    add_text(slide, "Ensino Personalizado de Matemática:\nrevisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente", Inches(0.65), Inches(2.0), Inches(12.05), Inches(1.15), size=26, color=RGBColor(11, 86, 108), bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
     add_text(slide, "Revisão sistemática da literatura e especificação conceitual de protótipo", Inches(1.35), Inches(3.48), Inches(10.65), Inches(0.45), size=20, color=RGBColor(11, 86, 108), align=PP_ALIGN.CENTER)
     add_text(slide, "Thales Ferreira Batista\nCiência da Computação", Inches(4.0), Inches(4.45), Inches(5.35), Inches(0.65), size=16, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
     add_text(slide, "Orientador: Prof. Dr. Rafael Zanin\nCoorientador: Prof. Dr. Manassés Ribeiro", Inches(3.3), Inches(5.35), Inches(6.75), Inches(0.65), size=14, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
@@ -557,7 +557,7 @@ def build_deck() -> Presentation:
     add_shape(slide, MSO_SHAPE.RECTANGLE, Inches(0), Inches(0), SLIDE_WIDTH, Inches(0.12), TEAL)
     add_text(slide, "Obrigado", Inches(0.7), Inches(1.75), Inches(11.9), Inches(0.8), size=42, color=WHITE, bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
     add_text(slide, "Perguntas e discussão", Inches(1.0), Inches(2.8), Inches(11.3), Inches(0.45), size=23, color=RGBColor(186, 230, 253), align=PP_ALIGN.CENTER)
-    add_text(slide, "Ensino Personalizado de Matemática\nOportunidades e Técnicas Computacionais", Inches(1.2), Inches(4.35), Inches(10.9), Inches(0.8), size=20, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
+    add_text(slide, "Ensino Personalizado de Matemática\nRevisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente", Inches(1.2), Inches(4.35), Inches(10.9), Inches(0.8), size=16, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nVersão para a defesa, MMAT conferido pelo autor · seleção histórica", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
 
     return prs

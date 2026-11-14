@@ -32,14 +32,14 @@ mdc: true
 </div>
 
 <div class="cover-slide">
-  <h1>Ensino Personalizado de Matemática:<br>Oportunidades e Técnicas Computacionais</h1>
+  <h1>Ensino Personalizado de Matemática:<br><span class="cover-subtitle">revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente</span></h1>
   <div class="cover-credits">
     <strong>Trabalho de Conclusão de Curso (TCC)</strong><br>
     <span class="cover-author">Thales Ferreira Batista<br>Ciência da Computação</span>
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Versão para a defesa · MMAT conferido pelo autor · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção histórica sob o corte 4,0</div>
+<div class="cover-snapshot">Versão para a defesa · MMAT conferido pelo autor · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção original sob o corte 4,0</div>
 
 ---
 layout: default
@@ -204,7 +204,7 @@ class: content-slide flow-slide
 
 <div class="slide-kicker">09 / SELEÇÃO</div>
 
-# Fluxo da seleção histórica sob corte 4,0: 11.904 registros → 18 na lista de leitura
+# Fluxo da seleção original sob corte 4,0: 11.904 registros → 18 na lista de leitura
 
 <div class="tcc-funnel-layout">
   <div class="tcc-funnel">
@@ -273,9 +273,9 @@ class: content-slide tcc-retained-slide
 <div class="tcc-retained-layout">
   <div class="tcc-retained-number"><strong>18</strong><span>registros da<br>lista de leitura</span><div class="tcc-retained-rule"></div><p>Lista de leitura não é inclusão final.</p></div>
   <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata" aria-label="Quatro destinos históricos dos 18 registros: 15 estudos, um relatório Zeng, uma exclusão após resumo e um protocolo"><strong>15</strong><span>estudos empíricos da seleção histórica, incluindo Sokkhey sem cópia verificável</span><strong>1</strong><span>relatório Zeng não recuperado, fora dos 15</span><strong>1</strong><span>exclusão após resumo</span><strong>1</strong><span>protocolo excluído após texto completo</span></div>
+    <div class="tcc-retained-strata" aria-label="Quatro destinos históricos dos 18 registros: 15 estudos, um relatório Zeng, uma exclusão após resumo e um protocolo"><strong>15</strong><span>estudos empíricos da seleção original, incluindo Sokkhey sem cópia verificável</span><strong>1</strong><span>relatório Zeng não recuperado, fora dos 15</span><strong>1</strong><span>exclusão após resumo</span><strong>1</strong><span>protocolo excluído após texto completo</span></div>
     <h2>Desfechos da seleção</h2>
-    <p>Dos 17 relatórios procurados, 15 foram avaliados em texto completo. Sokkhey permanece na seleção histórica sem cópia verificável; Zeng não recebeu MMAT.</p>
+    <p>Dos 17 relatórios procurados, 15 foram avaliados em texto completo. Sokkhey permanece na seleção original sem cópia verificável; Zeng não recebeu MMAT.</p>
     <div class="tcc-guardrail"><span>↗</span><strong>Estudos retidos ≠ evidência homogênea</strong></div>
   </div>
 </div>
@@ -430,7 +430,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte ambígua; a classificação não é diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção histórica, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios, conferidos pelo autor nos 14 com texto recuperado, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; as respostas de Sokkhey são históricas e não foram revalidadas.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção original, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios, conferidos pelo autor nos 14 com texto recuperado, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; as respostas de Sokkhey são históricas e não foram revalidadas.</div>
 
 ---
 layout: default
@@ -539,6 +539,6 @@ class: closing-slide
   <img class="repo-qr" src="/branding/ccw-repository-qr.svg" alt="QR code que abre o repositório público do projeto no GitHub">
   <div class="close-repository-copy"><strong>Aponte a câmera para a fonte pública</strong><span>código, dados derivados e apresentação versionados</span></div>
 </div>
-<p class="close-title"><strong>Ensino Personalizado de Matemática</strong><br>Oportunidades e Técnicas Computacionais</p>
+<p class="close-title"><strong>Ensino Personalizado de Matemática</strong><br>Revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente</p>
 <p class="close-sources">Fonte pública do TCC: <a href="https://thalesfb.github.io/ccw/results/tcc/main.pdf">thalesfb.github.io/ccw/results/tcc/main.pdf</a> · repositório: <a href="https://github.com/thalesfb/ccw">github.com/thalesfb/ccw</a></p>
 </div>

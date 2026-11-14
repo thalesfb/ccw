@@ -149,13 +149,13 @@ class ReviewVisualizer:
                 )
             main_labels = [
                 duplicate_label,
-                f"Priorização histórica\n(n = {count('prioritization')})",
+                f"Priorização por relevância\n(n = {count('prioritization')})",
                 f"Lista preliminar para leitura de resumo\n(n = {count('shortlisted')})",
                 f"Relatórios procurados para texto integral\n(n = {count('reports_sought')})",
                 f"Relatórios avaliados em texto integral\n(n = {display_count(assessed)})",
                 (
                     f"Relatórios empíricos recuperados\n(n = {display_count(recovered)})"
-                ) if retrieval else f"Seleção histórica\n(n = {count('included')})",
+                ) if retrieval else f"Seleção original\n(n = {count('included')})",
             ]
             for y, label in zip(main_y, main_labels):
                 ax.add_patch(Rectangle((main_x-box_width/2, y-box_height/2),
@@ -164,7 +164,7 @@ class ReviewVisualizer:
                         linespacing=1.05, color="#1f2937")
             exclusions = [
                 (main_y[0], f"Excluídos na triagem inicial\n(n = {count('screening_excluded')})"),
-                (main_y[1], f"Não avançaram na priorização histórica\n(n = {count('prioritization_excluded')})"),
+                (main_y[1], f"Não avançaram na priorização\n(n = {count('prioritization_excluded')})"),
                 (main_y[2], f"Excluído após leitura do resumo\n(n = {count('abstract_screening_excluded')})"),
                 (
                     main_y[3],
@@ -639,9 +639,9 @@ Desvio Padrão: {scores.std():.2f}"""
             funnel_stages = [
                 ('Identificação', int(stats['identification']), '#E8F4FD'),
                 ('Após deduplicação', int(stats['screening']), '#B3E5FC'),
-                ('Priorização histórica', int(stats['prioritization']), '#81C784'),
+                ('Priorização por relevância', int(stats['prioritization']), '#81C784'),
                 ('Lista preliminar', int(stats['shortlisted']), '#66BB6A'),
-                ('Seleção histórica', int(stats['included']), '#4CAF50'),
+                ('Seleção original', int(stats['included']), '#4CAF50'),
             ]
 
         stages = [name for name, _, _ in funnel_stages]

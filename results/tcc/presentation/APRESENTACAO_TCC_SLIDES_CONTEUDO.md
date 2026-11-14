@@ -7,7 +7,7 @@
 
 ## Identidade
 
-- **Título:** Ensino Personalizado de Matemática: Oportunidades e Técnicas Computacionais
+- **Título:** Ensino Personalizado de Matemática: revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente
 - **Papel:** storyboard de conteúdo para o deck canônico Slidev de 25 slides; não é o export PPTX editável paralelo de 19 slides
 - **Autor:** Thales Ferreira Batista
 - **Orientação:** Prof. Dr. Rafael Zanin; Prof. Dr. Manassés Ribeiro

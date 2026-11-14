@@ -7,7 +7,7 @@
 
 Este diretório contém um artefato editável auxiliar, não a apresentação que
 será usada na defesa do TCC **Ensino Personalizado de Matemática:
-Oportunidades e Técnicas Computacionais**.
+revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente**.
 
 ## Papéis dos artefatos
 

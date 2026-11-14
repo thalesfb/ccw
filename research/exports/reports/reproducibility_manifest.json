@@ -456,7 +456,7 @@
     {
       "path": "research/exports/reports/summary.json",
       "role": "PRISMA and derived summary statistics",
-      "sha256": "4d960b8cd332c9cc3b1655ec7c40e539e4a03f51901e96dd0bb58807662f6843"
+      "sha256": "0829cbe67c81811ed5bb210893ab98e733049403500f61ed407db55f81227112"
     },
     {
       "path": "research/exports/references/included_papers.bib",
@@ -546,12 +546,12 @@
     {
       "path": "research/src/analysis/reports.py",
       "role": "versioned report and summary generation implementation",
-      "sha256": "7151aad94fe6bb5aaeccf2f61225232026754530edf0eda94bc59ecc637d5440"
+      "sha256": "9c290aef667117c98f0edbece93c8653d484d0819f2383b8684e229294d267bf"
     },
     {
       "path": "research/src/analysis/visualizations.py",
       "role": "versioned visualization generation implementation",
-      "sha256": "b7480260936e5e2e6cd9f90113fba84a6a44243a383e2a9a002fdbcf94245824"
+      "sha256": "f226b4c40e726d000251f706937f5daa64148284ef6a7f109569d5b26ebc0442"
     },
     {
       "path": "research/src/analysis/deep_review_analysis.py",

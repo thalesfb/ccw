@@ -7,7 +7,7 @@
   },
   "source_fingerprint": {
     "algorithm": "sha256",
-    "sha256": "572797c695287bed38acb49a01f2af6c3e334b5c9492b710ee1e014190374398",
+    "sha256": "7969a35afb728f557670d446aa967ba69861a87c3fd96f95f54526e0b40e0efe",
     "paths": [
       "research/data/adjudicated_population_decisions.csv",
       "research/data/adjudicated_record_corrections.csv",
@@ -127,17 +127,17 @@
     {
       "name": "prisma_flow.png",
       "canonical_path": "research/exports/visualizations/prisma_flow.png",
-      "canonical_sha256": "a43cb43ebb7abe633b931b0f06f1f07e0ddce88393c56afcb339c5146a5b08fc",
+      "canonical_sha256": "15089d5565cadd8cf5855d6d630d1b07e3c82e51807d5e30ad5bcef8396e8c9d",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/prisma_flow.png",
-          "sha256": "a43cb43ebb7abe633b931b0f06f1f07e0ddce88393c56afcb339c5146a5b08fc"
+          "sha256": "15089d5565cadd8cf5855d6d630d1b07e3c82e51807d5e30ad5bcef8396e8c9d"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/prisma_flow.png",
-          "sha256": "a43cb43ebb7abe633b931b0f06f1f07e0ddce88393c56afcb339c5146a5b08fc"
+          "sha256": "15089d5565cadd8cf5855d6d630d1b07e3c82e51807d5e30ad5bcef8396e8c9d"
         }
       ]
     },
@@ -161,17 +161,17 @@
     {
       "name": "selection_funnel.png",
       "canonical_path": "research/exports/visualizations/selection_funnel.png",
-      "canonical_sha256": "a808ea65f9562ca892a30243a1bd7fe88895cc2fa43f6276ce803c3a63ae46d6",
+      "canonical_sha256": "5465672c688b636e8b62540132ba8a0447bf8674c61d2eb0f4c10d7f4ac301a6",
       "copies": [
         {
           "consumer": "tcc",
           "path": "results/tcc/images/selection_funnel.png",
-          "sha256": "a808ea65f9562ca892a30243a1bd7fe88895cc2fa43f6276ce803c3a63ae46d6"
+          "sha256": "5465672c688b636e8b62540132ba8a0447bf8674c61d2eb0f4c10d7f4ac301a6"
         },
         {
           "consumer": "presentation",
           "path": "presentation/public/images/selection_funnel.png",
-          "sha256": "a808ea65f9562ca892a30243a1bd7fe88895cc2fa43f6276ce803c3a63ae46d6"
+          "sha256": "5465672c688b636e8b62540132ba8a0447bf8674c61d2eb0f4c10d7f4ac301a6"
         }
       ]
     },
