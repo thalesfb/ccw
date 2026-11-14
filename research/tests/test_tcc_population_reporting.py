@@ -47,7 +47,7 @@ def test_results_table_reports_the_final_selection_flow_without_mislabeling_17_r
     assert "Relatórios avaliados em texto completo & 15" in results
     assert "Protocolos excluídos após texto completo & 1" in results
     assert "Relatórios empíricos recuperados & 14" in results
-    assert "Estudos empíricos mantidos na seleção histórica & 15" in results
+    assert "Estudos empíricos mantidos na seleção original & 15" in results
     assert "mantidos provisoriamente & 15" not in results
     assert "Candidatos empíricos provisórios & 17" not in results
 
@@ -89,9 +89,9 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     normalized_presentation = " ".join(presentation.split())
 
     assert r"\citeonline{Zeng2025_6923} não foi recuperado" in results
-    assert "Os 15 estudos da seleção histórica têm registros de apreciação estruturada" in methodology
-    assert r"Há texto recuperado para 14; \citeonline{Multimodels2020_002} permanece com respostas MMAT históricas não revalidadas" in methodology
-    assert "Sokkhey (2020) permanece com respostas anteriores do" in (ROOT / "results/tcc/pretextuais/resumo.tex").read_text(encoding="utf-8")
+    assert "Os 15 estudos da seleção original têm registros de apreciação estruturada" in methodology
+    assert r"Há texto recuperado para 14; \citeonline{Multimodels2020_002} permanece com respostas MMAT de uma etapa anterior, não conferidas" in methodology
+    assert "o texto de Sokkhey (2020) não pôde ser recuperado" in (ROOT / "results/tcc/pretextuais/resumo.tex").read_text(encoding="utf-8")
     assert "Zeng2025_6923} não foi recuperado e não integra os 15 estudos" in (ROOT / "results/tcc/conteudo/conclusao.tex").read_text(encoding="utf-8")
     assert "os dados disponíveis ao protótipo não contêm as variáveis necessárias" in (ROOT / "results/tcc/conteudo/conclusao.tex").read_text(encoding="utf-8")
     assert r"dois não foram recuperados: \citeonline{Multimodels2020_002} e \citeonline{Zeng2025_6923}" in results
@@ -174,7 +174,7 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     assert "nove registros com texto primário revisado e oito" not in pptx_source
     assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard
     assert "encaminhou 2.486 para elegibilidade" not in storyboard
-    assert "Fluxo da seleção histórica sob corte 4,0: 11.904 registros → 18 na lista de leitura" in slides
+    assert "Fluxo da seleção original sob corte 4,0: 11.904 registros → 18 na lista de leitura" in slides
 
 
 def test_background_uses_examples_and_keeps_study_limits_and_exclusion_in_the_review() -> None:

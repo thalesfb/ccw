@@ -68,7 +68,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         ):
             self.assertIn(author, gap_slide)
             self.assertIn(locator, gap_slide)
-        self.assertIn("15 registros da seleção histórica", gap_slide)
+        self.assertIn("15 registros da seleção original", gap_slide)
         self.assertNotIn("um único revisor", gap_slide)
         self.assertNotIn("dupla avaliação independente", gap_slide)
         self.assertIn("não estimativa de prevalência", gap_slide)
@@ -101,7 +101,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = " ".join(
             (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
         )
-        self.assertIn("material associado aos 15 registros da seleção histórica", slides)
+        self.assertIn("material associado aos 15 registros da seleção original", slides)
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn("Pendente: texto integral da tese não recuperado; MMAT não aplicado.", results)
 
@@ -295,7 +295,7 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_abstract_reports_operational_selection_and_limits_gap_claims(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
-        self.assertIn("O conjunto histórico reúne 15 estudos: 14 têm texto recuperado", abstract)
+        self.assertIn("A seleção reúne 15 estudos, dos quais 14 têm texto completo recuperado", abstract)
         self.assertIn("26 grupos de requisitos", abstract)
         for removed in ("priorização operacional", "mantidos provisoriamente", "adjudicação", "único pesquisador", "DOI/URL"):
             self.assertNotIn(removed, abstract)

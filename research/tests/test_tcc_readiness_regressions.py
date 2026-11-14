@@ -13,7 +13,7 @@ def test_selection_percentages_refer_to_records_not_a_study_population() -> None
 
     assert "dos 11.875 registros únicos triados" in review
     assert "parcela da população inicialmente identificada" not in review
-    assert "Estudos empíricos mantidos na seleção histórica & 15" in review
+    assert "Estudos empíricos mantidos na seleção original & 15" in review
     assert "Relatórios empíricos recuperados & 14" in review
     assert "Relatórios não recuperados & 2" in review
     assert "Sokkhey permanece sem cópia verificável" in review
