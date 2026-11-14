@@ -270,7 +270,7 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "ainda não revisaram especificamente" not in methodology.lower()
     assert r"\label{sec:uso-ferramentas-ia}" in methodology
     assert "código versionado" in methodology
-    assert r"\path{.github/prompts/}" in methodology
+    assert r"\path{.github/prompts/}" not in methodology
     assert r"\ref{apendice:ferramentas-ia}" in methodology
     appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
     selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))

@@ -89,8 +89,8 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     normalized_presentation = " ".join(presentation.split())
 
     assert r"\citeonline{Zeng2025_6923} não foi recuperado" in results
-    assert "Os 15 estudos da seleção original têm registros de apreciação estruturada" in methodology
-    assert r"Há texto recuperado para 14; \citeonline{Multimodels2020_002} permanece com respostas MMAT de uma etapa anterior, não conferidas" in methodology
+    assert "Os 14 estudos da seleção original com texto completo recuperado têm registros de apreciação estruturada" in methodology
+    assert r"\citeonline{Multimodels2020_002} permanece na seleção sem apreciação MMAT, porque não há cópia verificável do texto completo" in methodology
     assert "o texto de Sokkhey (2020) não pôde ser recuperado" in (ROOT / "results/tcc/pretextuais/resumo.tex").read_text(encoding="utf-8")
     assert "Zeng2025_6923} não foi recuperado e não integra os 15 estudos" in (ROOT / "results/tcc/conteudo/conclusao.tex").read_text(encoding="utf-8")
     assert "os dados disponíveis ao protótipo não contêm as variáveis necessárias" in (ROOT / "results/tcc/conteudo/conclusao.tex").read_text(encoding="utf-8")

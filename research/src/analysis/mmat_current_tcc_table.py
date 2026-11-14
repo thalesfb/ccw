@@ -48,6 +48,7 @@ BASIS_LABELS = {
     "historical_appraisal_source_unavailable": "MMAT histórico; fonte indisponível",
     "primary_full_text_scope_exclusion": "Texto integral; fora do escopo",
     "pending_full_text_not_appraised": "Texto pendente; sem MMAT",
+    "source_unavailable_not_appraised": "Texto não recuperado; sem MMAT",
     "abstract_and_metadata_only": "Resumo/metadados",
     "abstract_only": "Resumo",
     "metadata_only": "Metadados",
@@ -234,7 +235,7 @@ def render_table(
             ["", "", *[row[key] or "---" for key in CRITERIA]] for row in rows
         ]),
         r"\begin{longtable}{" + column_spec + "}",
-        rf"\caption{{Triagem e apreciação preliminar pelo MMAT 2018 de {len(rows)} estudos do corpus.}}\label{{qua:mmat-reavaliacao-atual}}\\",
+        rf"\caption{{Triagem e apreciação pelo MMAT 2018 de {len(rows)} estudos do corpus, conferidas pelo autor.}}\label{{qua:mmat-reavaliacao-atual}}\\",
         r"\hline",
         header_row,
         r"\hline",
@@ -244,10 +245,8 @@ def render_table(
         header_row,
         r"\hline",
         r"\endhead",
-        r"\hline",
         r"\multicolumn{9}{r}{\textit{Continua na próxima página}}\\",
         r"\endfoot",
-        r"\hline",
         r"\endlastfoot",
     ]
     for row in rows:
@@ -274,12 +273,12 @@ def render_table(
             _latex_escape(design_label),
             *[row[criterion] or "---" for criterion in CRITERIA],
         ]
-        lines.append(" & ".join(values) + r" \\")
+        lines.append(" & ".join(values) + r" \\ \hline")
     note = (
         r"\par\noindent\textit{Nota:} S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
         r"Y = sim; N = não; CT = não é possível concluir; "
         r"Quant. = quantitativo; rand. = randomizado. "
-        r"(*) \citeonline{Multimodels2020_002}: julgamentos históricos e preliminares, não reconferidos nesta versão. "
+        r"\citeonline{Multimodels2020_002}, sem cópia verificável do texto completo, permanece na seleção original sem respostas MMAT. "
         r"Ver Seção~\ref{sec:avaliacao-qualidade}.\par"
     )
     lines.extend([

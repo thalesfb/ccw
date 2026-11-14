@@ -30,8 +30,10 @@ def study_rows(root: Path = ROOT) -> list[dict[str, str]]:
 def mmat_counts(root: Path = ROOT) -> dict[str, dict[str, dict[str, int]]]:
     included = {row["study_key"] for row in read_csv(root / "research/data/current_synthesis_scope.csv")
                 if row["record_status"] == "included_empirical_core"}
+    # Only appraised records are counted; a record kept in the selection without a
+    # verifiable copy has no MMAT answers (design_pending) and stays out of the tables.
     rows = [row for row in read_csv(root / "research/data/mmat_reassessment_current.csv")
-            if row["study_key"] in included]
+            if row["study_key"] in included and row["design"] != "design_pending"]
     groups = {"screening": rows}
     groups.update({key: [row for row in rows if row["design"] == key]
                    for key in sorted({row["design"] for row in rows})})

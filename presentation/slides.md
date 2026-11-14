@@ -345,7 +345,7 @@ class: content-slide tcc-reporting-slide
 <div class="tcc-reporting-layout">
   <div class="tcc-ct-grid" role="table" aria-label="Respostas CT por categoria MMAT e critério">
     <div class="tcc-ct-head" role="row"><span role="columnheader">Categoria (n)</span><span role="columnheader">Q1</span><span role="columnheader">Q2</span><span role="columnheader">Q3</span><span role="columnheader">Q4</span><span role="columnheader">Q5</span></div>
-    <div role="row"><span role="rowheader">Quantitativo descritivo (8)</span><b class="ct-mid" role="cell">3</b><b class="ct-all" role="cell">8</b><b class="ct-all" role="cell">8</b><b class="ct-all" role="cell">8</b><b class="ct-high" role="cell">7</b></div>
+    <div role="row"><span role="rowheader">Quantitativo descritivo (7)</span><b class="ct-mid" role="cell">2</b><b class="ct-all" role="cell">7</b><b class="ct-all" role="cell">7</b><b class="ct-all" role="cell">7</b><b class="ct-high" role="cell">6</b></div>
     <div role="row"><span role="rowheader">Não randomizado (4)</span><b class="ct-all" role="cell">4</b><b class="ct-mid" role="cell">2</b><b class="ct-mid" role="cell">2</b><b class="ct-mid" role="cell">2</b><b class="ct-high" role="cell">3</b></div>
     <div role="row"><span role="rowheader">Métodos mistos (3)</span><b class="ct-none" role="cell">0</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b><b class="ct-mid" role="cell">1</b></div>
     <p class="tcc-ct-note">Número de respostas CT em cada critério. Q1–Q5 seguem a rubrica de cada categoria.</p>
@@ -430,7 +430,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte ambígua; a classificação não é diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção original, não estimativa de prevalência. O MMAT contém 15 triagens S1/S2 e 15 conjuntos de critérios, conferidos pelo autor nos 14 com texto recuperado, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; as respostas de Sokkhey são históricas e não foram revalidadas.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção original, não estimativa de prevalência. O MMAT contém 14 triagens S1/S2 e 14 conjuntos de critérios, conferidos pelo autor, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; Sokkhey, sem texto recuperado, não recebeu apreciação.</div>
 
 ---
 layout: default

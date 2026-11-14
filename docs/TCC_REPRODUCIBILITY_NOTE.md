@@ -33,7 +33,7 @@ A shortlist contém 18 registros. Um foi excluído após a triagem do resumo. Do
 outros 15 foram avaliados em texto completo. Um protocolo sem resultados
 concluídos foi excluído após essa avaliação, restando 14 relatórios empíricos
 recuperados. A seleção histórica continua com 15 estudos e conserva Sokkhey
-como inclusão histórica, com suas respostas MMAT anteriores sem revalidação.
+na seleção original, sem respostas MMAT.
 Zeng permanece fora dos 15 e sem apreciação MMAT. Não há escore agregado ou
 ranking.
 

@@ -115,8 +115,8 @@ O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
 respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
 uma pontuação agregada. A avaliação é preliminar e foi feita por um único
 revisor. Entre os 15 estudos históricos, 14 têm cópias disponíveis com diferentes
-extensões de leitura; Sokkhey mantém julgamento histórico sem cópia verificável
-para revalidação. CT descreve a evidência disponível ao revisor, com limites
+extensões de leitura; Sokkhey não tem cópia verificável e ficou sem apreciação
+MMAT. CT descreve a evidência disponível ao revisor, com limites
 de acesso e leitura, e não demonstra automaticamente falha do relato.
 A categoria 4 da tese de MacLellan é adaptada à modelagem computacional e não
 certifica a validade dos modelos nem eficácia educacional. Não há ranking de qualidade.
