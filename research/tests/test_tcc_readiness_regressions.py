@@ -46,9 +46,12 @@ def test_tcc_front_pages_preserve_inactive_optional_templates() -> None:
     active_main = "\n".join(
         line for line in main.splitlines() if not line.lstrip().startswith("%")
     )
-    for optional_page in ("dedicatoria", "agradecimentos", "epigrafe", "folhadeautorizacao"):
+    # The author wrote and approved the dedication and acknowledgements (2026-11-14).
+    for optional_page in ("epigrafe", "folhadeautorizacao"):
         assert rf"\include{{pretextuais/{optional_page}}}" not in active_main
         assert (TCC / "pretextuais" / f"{optional_page}.tex").is_file()
+    for author_page in ("dedicatoria", "agradecimentos"):
+        assert rf"\include{{pretextuais/{author_page}}}" in active_main
 
 
 def test_pedagogical_support_uses_plain_language_without_mixing_theories() -> None:

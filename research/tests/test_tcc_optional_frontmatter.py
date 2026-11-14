@@ -6,6 +6,9 @@ import pytest
 
 TCC = Path(__file__).resolve().parents[2] / "results" / "tcc"
 OPTIONAL_PAGES = ("dedicatoria", "agradecimentos", "epigrafe", "folhadeautorizacao")
+# Pages written and approved by the author; the others stay disabled templates.
+AUTHOR_FILLED_PAGES = ("dedicatoria", "agradecimentos")
+UNFILLED_PAGES = tuple(name for name in OPTIONAL_PAGES if name not in AUTHOR_FILLED_PAGES)
 
 
 @pytest.mark.parametrize("name", OPTIONAL_PAGES)
@@ -16,7 +19,19 @@ def test_optional_frontmatter_remains_available_for_author_editing(name: str) ->
     assert source.read_text(encoding="utf-8").strip()
 
 
-@pytest.mark.parametrize("name", OPTIONAL_PAGES)
+@pytest.mark.parametrize("name", AUTHOR_FILLED_PAGES)
+def test_author_filled_frontmatter_is_active_and_has_no_placeholders(name: str) -> None:
+    lines = (TCC / "main.tex").read_text(encoding="utf-8").splitlines()
+    include = rf"\include{{pretextuais/{name}}}"
+    assert sum(include in line and not line.lstrip().startswith("%") for line in lines) == 1
+    source = (TCC / "pretextuais" / f"{name}.tex").read_text(encoding="utf-8")
+    active = "\n".join(line.split("%", 1)[0] for line in source.splitlines())
+    assert len(active.split()) > 20
+    for placeholder in ("[", "ESCREVA", "Escreva aqui", "..."):
+        assert placeholder not in active
+
+
+@pytest.mark.parametrize("name", UNFILLED_PAGES)
 def test_unfilled_optional_frontmatter_is_disabled_by_default(name: str) -> None:
     lines = (TCC / "main.tex").read_text(encoding="utf-8").splitlines()
     include = rf"\include{{pretextuais/{name}}}"
