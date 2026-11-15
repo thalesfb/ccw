@@ -212,7 +212,7 @@ def test_source_gate_rejects_local_leading_overrides(monkeypatch, override, loca
     elif location == "source":
         text = text.replace(r"\fonte{", r"\fonte{" + override, 1)
     else:
-        text = text.replace(r"\textit{Nota:}", r"\textit{Nota:}" + override, 1)
+        text = text.replace(r"\nota{", r"\nota{" + override, 1)
     sources[row["source"]] = text
     monkeypatch.setattr(gate, "included_sources", lambda root: sources)
     with pytest.raises(ValueError, match="Local .*overrides the shared style"):
@@ -237,7 +237,7 @@ def test_expected_source_text_handles_nested_groups_notes_and_aux_references(tmp
     sources[row["source"]] = sources[row["source"]].replace(
         r"\fonte{Elaborado pelo autor (2026).}",
         r"\fonte{Elaborado pelo \textbf{autor}, com \citeonline{PRISMA2020}.}"
-        "\n" + r"\par\noindent\textit{Nota:} Ver Seção~\ref{sec:teste}.\par", 1)
+        "\n" + r"\nota{Ver Seção~\ref{sec:teste}.}", 1)
     monkeypatch.setattr(gate, "included_sources", lambda root: sources)
     (tmp_path / "main.aux").write_text(
         r"\bibciteEXPL{PRISMA2020}{Page et al.}" + "\n" +

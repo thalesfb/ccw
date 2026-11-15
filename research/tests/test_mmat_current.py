@@ -730,7 +730,8 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     assert rendered.index(r"\fonte{Elaborado pelo autor (2026).}") < rendered.index(r"\endgroup")
     assert "Quant. = quantitativo; rand. = randomizado." in rendered
     assert r"\textbf{Base}" not in rendered
-    note = rendered.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
+    assert r"\textit{Nota:}" not in rendered
+    note = rendered.split(r"\nota{", 1)[1].splitlines()[0]
     assert len(note) <= 450
     tcc_results = Path(__file__).resolve().parents[2] / "results/tcc/conteudo/resultadosesperados.tex"
     prose = tcc_results.read_text(encoding="utf-8")

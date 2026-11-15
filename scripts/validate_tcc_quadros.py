@@ -141,6 +141,7 @@ def source_texts(root: Path, policy: dict, auxiliaries: Path) -> dict[int, str]:
         source = text.index(r"\fonte{", start)
         content, _ = source_block(text, source)
         content = re.sub(r"\\(ref|citeonline)\{([^{}]+)\}", resolve, content)
+        content = re.sub(r"\\nota\b", "Nota:", content)
         content = re.sub(r"\\(?:textit|textbf|emph|textrm|textnormal|par|noindent|allowbreak)\b", "", content)
         content = re.sub(r"\\([%&_{}])", r"\1", content)
         if "\\" in content:
