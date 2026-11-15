@@ -8,7 +8,7 @@
       "status": "completed_documentary",
       "owner": "revisão documental",
       "evidence": "Localizadores dos estudos 1, 2, 6, 10, 6916, 6917, 6919 e 6920 conferidos nos PDFs primários em 29/10/2026; os que não apontavam o trecho correto foram corrigidos. A fonte 3 continua sem original.",
-      "next_step": "Usar os localizadores na conferência humana; não interpretar localização como aprovação do julgamento."
+      "next_step": "Manter os localizadores junto das respostas; não interpretar localização como aprovação do julgamento."
     },
     {
       "id": "DOC-02",
@@ -16,7 +16,7 @@
       "status": "completed_documentary",
       "owner": "revisão documental",
       "evidence": "6916/Q5 passa a referir componentes já apreciados; 6920/C2 quantitativo considera a população local e os 428/633 registros; 6920/C5 qualitativo distingue coerência qualitativa de integração mista. CT preservados.",
-      "next_step": "Conferir cada julgamento contra a pergunta correspondente do MMAT e os limites dos textos."
+      "next_step": "Manter explícitos os limites das justificativas e o vínculo de cada resposta com a pergunta correspondente do MMAT."
     },
     {
       "id": "MIX-2026-11-05",
@@ -39,8 +39,8 @@
       "subject": "Revalidar as apreciações do estudo 6919",
       "status": "completed_documentary",
       "owner": "revisão documental",
-      "evidence": "PDF primário localizado no acervo privado, com hash igual ao do manifesto. Releitura das pp. 7–8, 12–14, 18 e 24–25 em 29/10/2026: respostas mantidas, localizadores convertidos para páginas físicas e justificativas de 3.1, 3.4, 1.2 e 1.4 com página.",
-      "next_step": "Incluir 6919 na conferência humana dos julgamentos, como os demais estudos."
+      "evidence": "PDF primário identificado pelo hash registrado no manifesto. Conferência das pp. 7–8, 12–14, 18 e 24–25 em 29/10/2026: respostas mantidas, localizadores convertidos para páginas físicas e justificativas de 3.1, 3.4, 1.2 e 1.4 com página.",
+      "next_step": "Manter os localizadores e as justificativas específicos do estudo 6919 na síntese por critério."
     },
     {
       "id": "SRC-6923",
@@ -55,8 +55,8 @@
       "subject": "Conferência do autor dos julgamentos MMAT",
       "status": "completed_author_review",
       "owner": "autor",
-      "evidence": "Em 13/11/2026 o autor conferiu as 98 respostas dos 14 estudos com texto recuperado, lendo os textos completos e registrando a página consultada: 95 mantidas, 3 alteradas (6915 Q3, 6916 Q2, 6917 Q5) e o estudo 14 reclassificado para a categoria 3. Os componentes dos estudos mistos não integraram a conferência.",
-      "next_step": "Submeter os julgamentos à revisão da orientação científica e, em trabalho futuro, a um segundo avaliador independente; conferir os componentes dos estudos mistos."
+      "evidence": "Em 13/11/2026 o autor conferiu as 98 respostas dos 14 estudos com texto recuperado contra as evidências localizadas e registrou as páginas consultadas: 95 mantidas, 3 alteradas (6915 Q3, 6916 Q2, 6917 Q5) e o estudo 14 reclassificado para a categoria 3. Os componentes dos estudos mistos não integraram a conferência.",
+      "next_step": "Manter explícitos o escopo da conferência, os localizadores consultados e os limites das respostas baseadas nas fontes disponíveis."
     },
     {
       "id": "METH-08",
@@ -64,15 +64,7 @@
       "status": "completed_author_review",
       "owner": "autor",
       "evidence": "Na conferência de 13/11/2026, o autor manteve as rotas de 5, 7 e 8 e reclassificou o estudo 14 para a categoria 3, porque o artigo se declara quase-experimental sem atribuição aleatória. A categoria 4 adaptada do estudo 8 continua sem corresponder literalmente a um desenho apenas descritivo.",
-      "next_step": "Apresentar essas rotas como limitações, sem transformá-las em delineamentos confirmados; submetê-las à revisão da orientação científica."
-    },
-    {
-      "id": "ORI-01",
-      "subject": "Revisão da apreciação MMAT pela orientação científica",
-      "status": "pending_human_review",
-      "owner": "orientação científica",
-      "evidence": "A conferência do autor foi concluída em 13/11/2026; o TCC será encaminhado à orientação em 17/11/2026.",
-      "next_step": "Registrar a devolutiva da orientação sobre julgamentos, rotas operacionais e síntese, mantendo CT quando a informação continuar insuficiente."
+      "next_step": "Apresentar essas rotas como limitações, sem transformá-las em delineamentos confirmados."
     }
   ]
 }

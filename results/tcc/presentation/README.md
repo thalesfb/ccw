@@ -32,9 +32,8 @@ revisão sistemática de técnicas computacionais e especificação de um protó
   define o conteúdo e o layout do PPTX paralelo. Não lê o storyboard, o roteiro
   de falas nem os arquivos TeX.
 
-A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
-após a revisão dos PRs e a validação da orientação, com base no conteúdo
-aprovado.
+A fala não integra este export paralelo. Uma versão de ensaio deve seguir o
+conteúdo vigente do deck canônico Slidev e do manuscrito compilado.
 
 Após merge e deploy bem-sucedido, os endereços públicos são:
 

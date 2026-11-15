@@ -338,3 +338,10 @@ def test_manuscript_reports_current_selection_without_promising_new_reading():
     assert "15 estudos" in texts[0]
     assert "nem valida o corte por leitura humana de uma amostra" in texts[1]
     assert "conferiu as respostas MMAT dos 14 estudos com texto recuperado" in texts[0]
+    methodology = (root / "results/tcc/conteudo/metodologia.tex").read_text(encoding="utf-8")
+    abstract = (root / "results/tcc/pretextuais/resumo.tex").read_text(encoding="utf-8")
+    assert "foram conduzidas pelo autor com apoio de ferramentas de inteligência artificial generativa" in methodology
+    assert "com leitura dos textos completos" not in methodology
+    assert "fase do TCC" not in methodology
+    assert "a triagem em texto completo e a extração também foram conduzidas pelo autor com apoio de IA generativa" in abstract
+    assert "Full-text screening and data extraction were conducted by the author with generative AI support" in abstract

@@ -120,14 +120,16 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertEqual(len(re.findall(r"^layout: \w+$", slides, re.M)), 25)
 
     def test_speech_is_deferred_until_content_approval(self):
-        for path in (
-            ROOT / "presentation/README.md",
-            TCC / "presentation/README.md",
-            ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md",
-        ):
+        for path in (ROOT / "presentation/README.md", ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md"):
             document = " ".join(path.read_text(encoding="utf-8").lower().split())
-            self.assertIn("a fala não integra esta revisão semifinal", document)
-            self.assertIn("após a revisão dos prs e a validação da orientação", document)
+            self.assertIn("a fala ainda não integra o deck canônico", document)
+            self.assertIn("quando o manuscrito e os slides estiverem estabilizados", document)
+            self.assertNotIn("validação da orientação", document)
+        export_readme = " ".join(
+            (TCC / "presentation/README.md").read_text(encoding="utf-8").lower().split()
+        )
+        self.assertIn("a fala não integra este export paralelo", export_readme)
+        self.assertIn("roteiro histórico do export paralelo", export_readme)
 
     def test_public_evidence_note_states_scope_without_private_workflow(self):
         note_path = ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md"
@@ -150,7 +152,7 @@ class EditorialFeedbackTests(unittest.TestCase):
             (ROOT / "research/data/study_contribution_current.json").read_text(encoding="utf-8")
         )
         self.assertIn(date.fromisoformat(coverage["review_date"]).strftime("%d/%m/%Y"), status)
-        self.assertIn("15 têm triagem S1/S2 e apreciação dos critérios", status)
+        self.assertIn("14 triagens S1/S2 e 14 apreciações por categoria", status)
         self.assertIn("Slidev em 25 slides", status)
         self.assertIn("19 slides", status)
         self.assertIn("exportação paralela", status)
@@ -176,7 +178,7 @@ class EditorialFeedbackTests(unittest.TestCase):
             record for record in records
             if record["empirical_status"] != "empirical_status_not_applicable"
         ]
-        primary_text_reviewed = sum(
+        historical_empirical = sum(
             record["empirical_status"] == "empirical_confirmed_external"
             for record in candidates
         )
@@ -189,14 +191,15 @@ class EditorialFeedbackTests(unittest.TestCase):
             for record in candidates
         )
         self.assertEqual(
-            (len(candidates), primary_text_reviewed, pending_full_text, abstract_excluded),
+            (len(candidates), historical_empirical, pending_full_text, abstract_excluded),
             (17, 15, 1, 1),
         )
 
         governance = " ".join((ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md").read_text(encoding="utf-8").split())
-        self.assertIn("núcleo empírico mantém provisoriamente 15 registros", governance)
-        self.assertIn("15 têm triagem S1/S2 e apreciação dos critérios", governance)
-        self.assertIn("1 aguarda texto integral", governance)
+        self.assertIn("15 permanecem na seleção empírica histórica", governance)
+        self.assertIn("texto recuperado para 14", governance)
+        self.assertIn("Sokkhey permanece sem cópia verificável", governance)
+        self.assertIn("Zeng não foi recuperado e está fora dos 15", governance)
         self.assertIn("um registro foi excluído após resumo", governance)
         self.assertNotIn("cinco foram apreciados", governance)
         self.assertNotIn("nove dos 17 candidatos empíricos", governance)
@@ -212,7 +215,8 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("exclusão após resumo", slides)
         self.assertNotIn("cinco candidatos foram apreciados por resumo/metadados", slides)
         self.assertNotIn("17 estudos empíricos provisórios", slides)
-        self.assertIn("Submeter o MMAT a um segundo avaliador independente", slides)
+        self.assertNotIn("Submeter o MMAT a um segundo avaliador independente", slides)
+        self.assertIn("Aplicar o protocolo com docentes, após parecer ético.", slides)
         self.assertIn("14 triagens S1/S2 e 14 conjuntos de critérios", slides)
         self.assertIn("S2: 14 respostas Y e 1 CT no estudo 5", slides)
         self.assertNotIn("validação humana pendente", slides)
@@ -228,7 +232,7 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_recovered_article_authors_and_limit_locator_match_primary_texts(self):
         bibliography = (TCC / "referencias.bib").read_text(encoding="utf-8")
         self.assertIn(
-            r"author = {Aleksandar Peji{\'c} and Piroska Stani{\'c} Molcer",
+            r"author = {Aleksandar Peji{\'c} and {Stani{\'c} Molcer}, Piroska",
             bibliography,
         )
         audit = (ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md").read_text(encoding="utf-8")

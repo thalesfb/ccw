@@ -1,5 +1,6 @@
 """Documentary clarifications must not change the MMAT judgments."""
 from pathlib import Path
+import re
 
 from src.analysis.mmat_current_tcc_table import CRITERIA, load_rows, render_table
 
@@ -12,12 +13,14 @@ def test_historical_mmat_marker_preserves_every_response():
     for row in rows:
         line = next(line for line in table.splitlines()
                     if line.startswith(r"\citeonline{" + row["study_key"] + "}"))
-        assert line.split(" & ")[2:] == [
+        answers = line.split(" & ")[2:]
+        answers[-1] = re.sub(r"\s*\\\\(?:\s*\\hline)?\s*$", "", answers[-1])
+        assert answers == [
             *[row[key] or "---" for key in CRITERIA[:-1]],
-            (row[CRITERIA[-1]] or "---") + " " + "\\\\",
+            row[CRITERIA[-1]] or "---",
         ]
         assert ("(*)" in line) == (row["study_key"] == "Multimodels2020_002")
-    assert "julgamentos históricos e preliminares, não reconferidos nesta versão" in table
+    assert "Respostas conferidas pelo autor (revisor único); não representam score nem avaliação final." in table
 
 
 def test_current_specification_declares_partial_r23_coverage():

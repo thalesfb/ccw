@@ -152,6 +152,9 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "Rafael Zanin" not in appraisal
     assert "Manassés Ribeiro" not in appraisal
     assert "15 records remain in the historical empirical selection" in appraisal
+    assert "study 14 a category-3 route" in appraisal
+    assert "study 14 a category-2 route" not in appraisal
+    assert "recorded appraisals remain preliminary" not in appraisal
     assert "historical and is not presented as the final corpus" in interpretation
     assert "11 studies" not in appraisal
 

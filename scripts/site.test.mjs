@@ -29,7 +29,7 @@ for (const page of expectedPages) {
 }
 
 const homepage = read('index.html');
-assert.match(homepage, /Ver MMAT · 20\/10\/2026/i, 'the homepage must promote the dated MMAT scope');
+assert.match(homepage, /Ver MMAT · conferido em 13\/11\/2026/i, 'the homepage must promote the current dated MMAT review');
 assert.doesNotMatch(homepage, /MMAT histórico \(referência\)/i, 'the homepage must not present the historical page as current');
 assert.match(homepage, /15 estudos empíricos integram a seleção histórica/i, 'the homepage must identify the 15-study selection as historical');
 assert.match(homepage, /com 14 relatórios recuperados/i, 'the homepage must distinguish recovered reports from the historical selection');
