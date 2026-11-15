@@ -75,5 +75,31 @@
       "label": "qua:ferramentas-ia",
       "source": "results/tcc/postextuais/ferramentas-ia.tex"
     }
+  ],
+  "tables": [
+    {
+      "number": 1,
+      "label": "tab:stats-descritivas",
+      "source": "results/tcc/conteudo/resultadosesperados.tex",
+      "has_note": true
+    },
+    {
+      "number": 2,
+      "label": "tab:tipologia-frequencias",
+      "source": "research/exports/references/study_synthesis_tcc.tex",
+      "has_note": false
+    },
+    {
+      "number": 3,
+      "label": "tab:mmat-contagens",
+      "source": "research/exports/references/mmat_counts_tcc.tex",
+      "has_note": false
+    },
+    {
+      "number": 4,
+      "label": "tab:mmat-contagens-componentes",
+      "source": "research/exports/references/mmat_counts_tcc.tex",
+      "has_note": false
+    }
   ]
 }

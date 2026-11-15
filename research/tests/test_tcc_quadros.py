@@ -1,5 +1,6 @@
 """Mechanical editorial rules; these checks do not certify legibility or ABNT."""
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,6 +28,120 @@ def test_body_typography_is_an_editorial_rule_separate_from_captions():
     assert INVENTORY["caption_pt"] == 12
     assert INVENTORY["source_pt"] == 10
     assert INVENTORY["landscape_allowlist"] == []
+
+
+def test_longtable_quadro_blocks_and_their_sources_share_centered_margins():
+    config = (ROOT / "results/tcc/config_inicial.tex").read_text(encoding="utf-8")
+    assert r"\setlength{\LTleft}{\fill}\setlength{\LTright}{\fill}" in config
+    assert r"\begin{minipage}{\LTcapwidth}" in config
+    assert r"\newcommand{\TCCQuadroFonte}" in config
+    assert r"\newcommand{\TCCQuadroNota}" in config
+
+    sources = gate.included_sources(ROOT)
+    longtables = 0
+    for text in sources.values():
+        for match in re.finditer(r"\\begin\{longtable\}", text):
+            end = text.find(r"\end{longtable}", match.end())
+            assert end >= 0
+            source = re.search(r"\\(TCCQuadroFonte|fonte)\{", text[end:])
+            assert source is not None
+            assert source[1] == "TCCQuadroFonte"
+            longtables += 1
+    assert longtables > 0
+
+
+def test_active_table_floats_center_compact_blocks_with_title_and_source():
+    sources = gate.included_sources(ROOT)
+    tables = []
+    for text in sources.values():
+        tables.extend(re.findall(r"\\begin\{table\}.*?\\end\{table\}", text, re.S))
+    assert tables
+    for table in tables:
+        assert r"\centering" in table
+        assert r"\caption{" in table and r"\fonte{" in table
+        if r"\begin{minipage}" in table:
+            minipage_start = table.index(r"\begin{minipage}")
+            minipage_end = table.index(r"\end{minipage}", minipage_start)
+            assert minipage_start < table.index(r"\caption{") < minipage_end
+            assert minipage_start < table.index(r"\fonte{") < minipage_end
+            bodies = [position for marker in (r"\begin{tabularx}", r"\usebox{")
+                      if (position := table.find(marker, minipage_start, minipage_end)) >= 0]
+            assert bodies, "the table body must share the centered caption/source block"
+        else:
+            assert r"\begin{tabularx}{\textwidth}" in table
+    assert len(tables) == len(INVENTORY["tables"])
+    for row in INVENTORY["tables"]:
+        text = sources[row["source"]]
+        assert text.count(r"\label{" + row["label"] + "}") == 1
+        label = text.index(r"\label{" + row["label"] + "}")
+        start = text.rfind(r"\begin{table}", 0, label)
+        end = text.index(r"\end{table}", label)
+        assert (r"\nota{" in text[start:end]) == row["has_note"]
+
+
+class RenderedTablePage:
+    def __init__(self, fault=None, include_title=True, include_source=True, include_note=True):
+        self.fault = fault
+        self.include_title = include_title
+        self.include_source = include_source
+        self.include_note = include_note
+
+    def extract_text(self, visitor_text):
+        rows = []
+        if self.include_title:
+            rows.extend((("Tabela 1 – Exemplo", 100), ("Conteúdo", 100)))
+        source = ("Fonte: autor", 110 if self.fault == "source_alignment" else 100)
+        note = ("Nota: detalhe", 110 if self.fault == "note_alignment" else 100)
+        if self.fault == "note_before_source":
+            rows.extend((note, source))
+        else:
+            if self.include_source:
+                rows.append(source)
+            if self.include_note and self.fault != "missing_note":
+                rows.append(note)
+        for text, x in rows:
+            font_size = 12 if text.startswith("Tabela") or text == "Conteúdo" else 10
+            if ((self.fault == "caption_size" and text.startswith("Tabela"))
+                    or (self.fault == "source_size" and text.startswith("Fonte:"))
+                    or (self.fault == "note_size" and text.startswith("Nota:"))):
+                font_size = 12 if font_size == 10 else 10
+            visitor_text(text, [1, 0, 0, 1, 0, 0], [1, 0, 0, 1, x, 100], {},
+                         font_size * gate.PT_TO_PDF)
+
+
+def test_pdf_table_gate_checks_caption_and_source_share_the_table_margin():
+    reader = SimpleNamespace(pages=[RenderedTablePage()])
+    assert gate.inspect_table_alignments(reader, [1], expected_notes={1}) == [
+        {"number": 1, "caption_x": 100, "source_x": 100, "source_y": 100,
+         "note_x": 100, "pages": [1]}
+    ]
+    with pytest.raises(ValueError, match="table title's horizontal margin"):
+        gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage("source_alignment")]),
+                                     [1], expected_notes={1})
+    with pytest.raises(ValueError, match="note does not follow"):
+        gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage("note_alignment")]),
+                                     [1], expected_notes={1})
+    with pytest.raises(ValueError, match="missing note"):
+        gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage("missing_note")]),
+                                     [1], expected_notes={1})
+    with pytest.raises(ValueError, match="unexpected note"):
+        gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage()]), [1])
+    with pytest.raises(ValueError, match="note must follow its source"):
+        gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage("note_before_source")]),
+                                     [1], expected_notes={1})
+    for fault in ("caption_size", "source_size", "note_size"):
+        with pytest.raises(ValueError, match="unexpected font size"):
+            gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage(fault)]),
+                                         [1], expected_notes={1})
+
+
+def test_pdf_table_gate_requires_title_source_and_note_on_one_page():
+    reader = SimpleNamespace(pages=[
+        RenderedTablePage(include_source=False, include_note=False),
+        RenderedTablePage(include_title=False),
+    ])
+    with pytest.raises(ValueError, match="source on the caption page"):
+        gate.inspect_table_alignments(reader, [1], expected_notes={1})
 
 import importlib.util
 from types import SimpleNamespace
@@ -75,6 +190,8 @@ class RenderedPage:
         matrix = [1, 0, 0, 1, 0, 0]
         for number in range(1, 15):
             runs = [(f"Quadro {number} – Título", 12), ("Dado", 10), ("Fonte: autor", 10)]
+            if number == 7 and self.fault == "note_alignment":
+                runs.append(("Nota: detalhe", 10))
             if number == 7:
                 if self.fault == "source_content":
                     runs[-1:] = [("Fonte:", 10), ("autor", 8)]
@@ -92,7 +209,14 @@ class RenderedPage:
                 if self.fault == "source_first":
                     runs = [runs[0], runs[2], runs[1]]
             for text, size in runs:
-                tm = [.8, 0, 0, .8, 0, 0] if self.fault == "text_scale" else matrix
+                if self.fault == "text_scale":
+                    tm = [.8, 0, 0, .8, 0, 0]
+                elif self.fault == "source_alignment" and text.startswith("Fonte:"):
+                    tm = [1, 0, 0, 1, 8, 0]
+                elif self.fault == "note_alignment" and text.startswith("Nota:"):
+                    tm = [1, 0, 0, 1, 8, 0]
+                else:
+                    tm = matrix
                 visitor_text(text, matrix, tm, {}, size * gate.PT_TO_PDF)
 
 
@@ -116,13 +240,21 @@ def test_continued_caption_can_arrive_as_separate_pdf_fragments():
 
 
 @pytest.mark.parametrize("fault", ["caption", "body", "source", "landscape",
-                                  "missing_source", "source_first", "source_content",
+                                  "missing_source", "source_first", "source_content", "source_alignment",
                                   "header", "continuation_header", "text_scale"])
 def test_pdf_gate_rejects_bad_typography_order_and_unapproved_rotation(fault):
     with pytest.raises(ValueError):
         gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage(fault)]), 0, INVENTORY,
                          {i: f"Quadro {i} – Título" for i in range(1, 15)},
                          rendered_sources())
+
+
+def test_pdf_gate_requires_quadro_notes_to_follow_the_title_margin():
+    sources = rendered_sources()
+    sources[7] = "Fonte: autor. Nota: detalhe"
+    with pytest.raises(ValueError, match="note does not follow the title's horizontal margin"):
+        gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage("note_alignment")]), 0, INVENTORY,
+                         {i: f"Quadro {i} – Título" for i in range(1, 15)}, sources)
 
 
 class FragmentPage(RenderedPage):
@@ -210,9 +342,11 @@ def test_source_gate_rejects_local_leading_overrides(monkeypatch, override, loca
         marker = r"\TCCQuadroSetup{" + row["label"] + "}"
         text = text.replace(marker, marker + override, 1)
     elif location == "source":
-        text = text.replace(r"\fonte{", r"\fonte{" + override, 1)
+        marker = r"\TCCQuadroFonte{" if r"\TCCQuadroFonte{" in text else r"\fonte{"
+        text = text.replace(marker, marker + override, 1)
     else:
-        text = text.replace(r"\nota{", r"\nota{" + override, 1)
+        marker = r"\TCCQuadroNota{" if r"\TCCQuadroNota{" in text else r"\nota{"
+        text = text.replace(marker, marker + override, 1)
     sources[row["source"]] = text
     monkeypatch.setattr(gate, "included_sources", lambda root: sources)
     with pytest.raises(ValueError, match="Local .*overrides the shared style"):

@@ -169,7 +169,7 @@ def render_component_table(
         r"\def\LTcaptype{quadro}",
 
         r"\setlength{\tabcolsep}{2pt}",
-        r"\setlength{\LTleft}{0pt}",
+        r"\setlength{\LTleft}{\fill}",
         r"\setlength{\LTright}{\fill}",
         r"\renewcommand{\arraystretch}{1.15}",
         *_caption_width_measurement(column_spec, headers, [
@@ -202,8 +202,8 @@ def render_component_table(
         lines.append(" & ".join(values) + r" \\ \hline")
     lines.extend([
         r"\end{longtable}",
-        r"\fonte{Elaborado pelo autor (2026).}",
-        r"\nota{C1--C5 = critérios da categoria; Y = sim; N = não; CT = não é possível concluir; Quant. = quantitativo; rand. = randomizado. Justificativas completas no Apêndice~\ref{apendice:mmat-componentes}; ver Seção~\ref{sec:avaliacao-qualidade}.}",
+        r"\TCCQuadroFonte{Elaborado pelo autor (2026).}",
+        r"\TCCQuadroNota{C1--C5 = critérios da categoria; Y = sim; N = não; CT = não é possível concluir; Quant. = quantitativo; rand. = randomizado. Justificativas completas no Apêndice~\ref{apendice:mmat-componentes}; ver Seção~\ref{sec:avaliacao-qualidade}.}",
         r"\endgroup",
     ])
     return "\n".join(lines)
@@ -229,7 +229,7 @@ def render_table(
 
         r"\def\LTcaptype{quadro}",
         r"\setlength{\tabcolsep}{2pt}",
-        r"\setlength{\LTleft}{0pt}",
+        r"\setlength{\LTleft}{\fill}",
         r"\setlength{\LTright}{\fill}",
         *_caption_width_measurement(column_spec, headers, [
             ["", "", *[row[key] or "---" for key in CRITERIA]] for row in rows
@@ -275,7 +275,7 @@ def render_table(
         ]
         lines.append(" & ".join(values) + r" \\ \hline")
     note = (
-        r"\nota{S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
+        r"\TCCQuadroNota{S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
         r"Y = sim; N = não; CT = não é possível concluir; "
         r"Quant. = quantitativo; rand. = randomizado. "
         r"\citeonline{Multimodels2020_002}, sem cópia verificável do texto completo, permanece na seleção original sem respostas MMAT. "
@@ -283,7 +283,7 @@ def render_table(
     )
     lines.extend([
         r"\end{longtable}",
-        r"\fonte{Elaborado pelo autor (2026).}",
+        r"\TCCQuadroFonte{Elaborado pelo autor (2026).}",
         note,
         r"\endgroup",
     ])

@@ -100,6 +100,17 @@
   \vspace{0.15cm}%
 }
 
+% Em quadros longos, legenda, fonte e nota acompanham a largura do quadro.
+% A caixa é centralizada na mancha gráfica; o conteúdo permanece à esquerda.
+\newcommand{\TCCQuadroFonte}[1]{%
+  \noindent\makebox[\textwidth][c]{%
+    \begin{minipage}{\LTcapwidth}\fonte{#1}\end{minipage}}%
+}
+\newcommand{\TCCQuadroNota}[1]{%
+  \noindent\makebox[\textwidth][c]{%
+    \begin{minipage}{\LTcapwidth}\nota{#1}\end{minipage}}%
+}
+
 % Corpo dos quadros: decisão editorial de legibilidade (não prescrita pela ABNT).
 % Identificação/título preservam os 12 pt do template; fonte/nota usam 10 pt.
 \newcommand{\TCCQuadroCaption}{\normalfont\fontsize{12}{14}\selectfont}
@@ -108,7 +119,8 @@
   \SingleSpacing\fontsize{10}{12}\selectfont
   % Sem hifenização nas células: palavras não são cortadas entre linhas.
   \hyphenpenalty=10000\exhyphenpenalty=10000%
-  \setlength{\LTleft}{0pt}\setlength{\LTright}{\fill}%
+  \setlength{\LTleft}{\fill}\setlength{\LTright}{\fill}%
+  \setlength{\LTcapwidth}{\textwidth}%
   \captionnamefont{\TCCQuadroCaption}%
   \captiontitlefont{\TCCQuadroCaption}%
   \typeout{TCCQUADRO|#1|size=\f@size|baseline=\the\baselineskip}%

@@ -596,12 +596,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the current criterion-level MMAT table",
-      "sha256": "d0bb24c033f006adc7e6dde16a2d25443692fdb32ba08773fff19959332c1207"
+      "sha256": "a39e7b7417ae28803324957919470689d721a816b9240ebdc64a362d9d954dd9"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "current MMAT records with separate screening, category responses and unassessed cells",
-      "sha256": "1342cdd13ae9dedf9471340edbb81e883add8b2d6a9d13969d988b227c9306da"
+      "sha256": "19f95c3d38b0def7ebc90c4e0d6bfb5b79338bfca37bc5c62efd1ac2683978f1"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",
@@ -611,12 +611,12 @@
     {
       "path": "scripts/tcc_quadros.json",
       "role": "active fourteen-quadro inventory and authorized editorial typography policy",
-      "sha256": "8335c4681a8fd7b81dd6f505a5a593da83b98bca220d847e1b5acf3adbc2bf27"
+      "sha256": "b7792794cc97fb611615cc43c3bf7bc7801160534d0753a965dfb205132c688f"
     },
     {
       "path": "scripts/validate_tcc_quadros.py",
       "role": "source, compiled typography and PDF checks for the fourteen quadros",
-      "sha256": "1539c1e022d7e488c576487f1476547803d213d10fb3906fee8e3335d6d96dea"
+      "sha256": "ed010c6716a0b94467ddda003009dd7e30ced80e2e9a9113b99bf2ceca00edb1"
     },
     {
       "path": "research/requirements.txt",

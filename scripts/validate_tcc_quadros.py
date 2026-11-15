@@ -1,4 +1,4 @@
-"""Check the declared quadro style and its PDF output; not a legibility certification."""
+"""Check table/quadro block placement and typography; not an ABNT certification."""
 from __future__ import annotations
 
 import argparse
@@ -50,7 +50,10 @@ def braced(text: str, start: int) -> tuple[str, int]:
 
 
 def source_block(text: str, source: int) -> tuple[str, int]:
-    content, end = braced(text, source + len(r"\fonte"))
+    command = re.match(r"\\(?:TCCQuadroFonte|fonte)", text[source:])
+    if not command:
+        raise ValueError("Expected a quadro source command")
+    content, end = braced(text, source + command.end())
     # These are the explicit boundaries used by the active manuscript. A blank
     # paragraph after an ungrouped source ends its scope; adjacent notes stay in it.
     boundary = re.search(r"\n[ \t]*\n|\\(?:begin|end)group\b|\\(?:begin|end)\{quadro\}|"
@@ -80,7 +83,8 @@ def validate_sources(root: Path = ROOT) -> None:
         if not end:
             raise ValueError(f"Missing body end: {row['label']}")
         body_end = label + end.end()
-        source = text.find(r"\fonte{", body_end)
+        source_match = re.search(r"\\(?:TCCQuadroFonte|fonte)\{", text[body_end:])
+        source = body_end + source_match.start() if source_match else -1
         next_caption = text.find(r"\caption{", body_end)
         if not start < caption < label < body_end < source or (0 <= next_caption < source):
             raise ValueError(f"Expected title/number, body, source: {row['label']}")
@@ -138,10 +142,13 @@ def source_texts(root: Path, policy: dict, auxiliaries: Path) -> dict[int, str]:
     for row in policy["quadros"]:
         text = sources[row["source"]]
         start = text.index(r"\label{" + row["label"] + "}")
-        source = text.index(r"\fonte{", start)
+        source_match = re.search(r"\\(?:TCCQuadroFonte|fonte)\{", text[start:])
+        if not source_match:
+            raise ValueError(f"Missing source/notes command: {row['label']}")
+        source = start + source_match.start()
         content, _ = source_block(text, source)
         content = re.sub(r"\\(ref|citeonline)\{([^{}]+)\}", resolve, content)
-        content = re.sub(r"\\nota\b", "Nota:", content)
+        content = re.sub(r"\\(?:TCCQuadroNota|nota)\b", "Nota:", content)
         content = re.sub(r"\\(?:textit|textbf|emph|textrm|textnormal|par|noindent|allowbreak)\b", "", content)
         content = re.sub(r"\\([%&_{}])", r"\1", content)
         if "\\" in content:
@@ -195,11 +202,19 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
             if not text:
                 return
             y = tm[4] * cm[1] + tm[5] * cm[3] + cm[5]
+            x = tm[4] * cm[0] + tm[5] * cm[2] + cm[4]
             # Page numerals in the running head/foot are not quadro fragments.
             if (y > size[1] - 70 or y < 30) and re.fullmatch(r"\d+|[ivxlcdm]+", text, re.I):
                 return
             caption = re.match(r"Quadro\s+(\d+)\s*[–-]", text)
             if source_started:
+                if text.startswith("Nota:"):
+                    records[active]["note_x"] = x
+                    if abs(records[active]["caption_x"] - x) > 2.0:
+                        raise ValueError(
+                            f"Quadro {active}: note does not follow the title's horizontal margin "
+                            f"(title={records[active]['caption_x']:.2f}, note={x:.2f})"
+                        )
                 consume_source(text, cm, tm, font_size)
                 return
             if caption:
@@ -211,7 +226,7 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
                 active, body_started, source_started = number, False, False
                 caption_remaining = [compact(captions[number]), compact(f"Quadro {number} – Continuação")]
                 records.setdefault(number, {"number": number, "pages": set(), "body_runs": 0,
-                                             "source_seen": False})
+                                             "source_seen": False, "caption_x": x})
             if active is None:
                 return
             record = records[active]
@@ -230,6 +245,7 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
             if text.startswith("Fonte:"):
                 if not body_started or not expected_size(font_size, policy["source_pt"]):
                     raise ValueError(f"Quadro {active}: missing body or source typography")
+                records[active]["source_x"] = x
                 source_started = True
                 source_remaining = compact(sources[active])
                 consume_source(text, cm, tm, font_size)
@@ -262,7 +278,96 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
     for row in records.values():
         if not row["source_seen"] or not row["body_runs"]:
             raise ValueError(f"Incomplete rendered quadro {row['number']}")
+        if abs(row["caption_x"] - row.get("source_x", float("inf"))) > 2.0:
+            raise ValueError(f"Quadro {row['number']}: source does not follow the title's horizontal margin")
         row["pages"] = sorted(row["pages"])
+    return [records[number] for number in sorted(records)]
+
+
+def inspect_table_alignments(reader: PdfReader, expected_numbers: list[int],
+                             first_page: int = 0, expected_notes: set[int] | None = None,
+                             caption_pt: float = 12, source_pt: float = 10) -> list[dict]:
+    """Check table label/source/note margins and typography in the compiled PDF."""
+    records = {}
+    active = None
+    expected = set(expected_numbers)
+    expected_notes = expected_notes or set()
+    for page_index in range(first_page, len(reader.pages)):
+        page_number = page_index + 1
+        page = reader.pages[page_index]
+        if active is not None and records[active]["pages"] != [page_number]:
+            record = records[active]
+            if "source_x" not in record:
+                raise ValueError(f"Tabela {active}: missing source on the caption page")
+            if active in expected_notes and "note_x" not in record:
+                raise ValueError(f"Tabela {active}: missing note on the caption page")
+            active = None
+
+        def visit(text, cm, tm, _font, _font_size):
+            nonlocal active
+            text = text.strip()
+            if not text:
+                return
+            x = tm[4] * cm[0] + tm[5] * cm[2] + cm[4]
+            y = tm[4] * cm[1] + tm[5] * cm[3] + cm[5]
+            caption = re.match(r"Tabela\s+(\d+)\s*[–-]", text)
+            if caption:
+                if not expected_size(_font_size, caption_pt):
+                    raise ValueError(f"Tabela caption uses an unexpected font size: {_font_size}")
+                number = int(caption[1])
+                if number not in expected:
+                    raise ValueError(f"Unexpected table number {number}")
+                if active is not None:
+                    record = records[active]
+                    if "source_x" not in record:
+                        raise ValueError(f"Tabela {active}: missing source before the next table")
+                    if active in expected_notes and "note_x" not in record:
+                        raise ValueError(f"Tabela {active}: missing note before the next table")
+                    active = None
+                if number in records:
+                    raise ValueError(f"Tabela {number}: duplicate title in the compiled PDF")
+                active = number
+                records[number] = {"number": number, "caption_x": x, "pages": [page_number]}
+                return
+            if active is None:
+                return
+            if text.startswith("Fonte:") and "source_x" not in records[active]:
+                if not expected_size(_font_size, source_pt):
+                    raise ValueError(f"Tabela {active}: source uses an unexpected font size: {_font_size}")
+                records[active]["source_x"] = x
+                records[active]["source_y"] = y
+                if abs(records[active]["caption_x"] - x) > 2.0:
+                    raise ValueError(
+                        f"Tabela {active}: source does not follow the table title's horizontal margin "
+                        f"(title={records[active]['caption_x']:.2f}, source={x:.2f})"
+                    )
+            elif text.startswith("Nota:"):
+                if active not in expected_notes:
+                    record = records[active]
+                    if (abs(record["caption_x"] - x) <= 2.0
+                            and abs(record.get("source_y", float("inf")) - y) <= 24.0):
+                        raise ValueError(f"Tabela {active}: unexpected note in the compiled PDF")
+                    return
+                if "source_x" not in records[active]:
+                    raise ValueError(f"Tabela {active}: note must follow its source")
+                if "note_x" in records[active]:
+                    raise ValueError(f"Tabela {active}: duplicate note in the compiled PDF")
+                if not expected_size(_font_size, source_pt):
+                    raise ValueError(f"Tabela {active}: note uses an unexpected font size: {_font_size}")
+                records[active]["note_x"] = x
+                if abs(records[active]["caption_x"] - x) > 2.0:
+                    raise ValueError(f"Tabela {active}: note does not follow the table title's horizontal margin")
+                active = None
+
+        page.extract_text(visitor_text=visit)
+    missing = expected - set(records)
+    if missing:
+        raise ValueError(f"Missing table titles in the compiled PDF: {sorted(missing)}")
+    for number, record in records.items():
+        if "source_x" not in record:
+            raise ValueError(f"Tabela {number}: missing source in the compiled PDF")
+        if number in expected_notes and "note_x" not in record:
+            raise ValueError(f"Tabela {number}: missing note in the compiled PDF")
     return [records[number] for number in sorted(records)]
 
 
@@ -301,9 +406,18 @@ def validate(pdf: Path, auxiliaries: Path, log: Path, root: Path = ROOT,
     first_page = reader.get_destination_page_number(reader.named_destinations[anchors[0][1]])
     rows = inspect_pdf(reader, first_page, policy, caption_texts(root, policy),
                        source_texts(root, policy, auxiliaries))
+    table_rows = inspect_table_alignments(
+        reader,
+        [row["number"] for row in policy["tables"]],
+        first_page,
+        {row["number"] for row in policy["tables"] if row.get("has_note")},
+        policy["caption_pt"],
+        policy["source_pt"],
+    )
     if bbox:
-        validate_bbox(bbox, {page for row in rows for page in row["pages"]})
-    return {"quadros": rows, "body_pt": policy["body_pt"],
+        validate_bbox(bbox, {page for row in rows for page in row["pages"]}
+                      | {page for row in table_rows for page in row.get("pages", [])})
+    return {"quadros": rows, "tables": table_rows, "body_pt": policy["body_pt"],
             "baseline_pt": policy["baseline_pt"], "landscape_allowlist": policy["landscape_allowlist"],
             "word_bounds_checked": bbox is not None}
 
