@@ -22,8 +22,11 @@ a validação educacional do protótipo não foram realizadas nesta versão.
 
 > O texto do [TCC](results/tcc/main.tex) é a fonte de verdade do relato científico;
 > os artefatos versionados sustentam suas contagens e sua rastreabilidade. Em
-> 29/10/2026, havia 16 PDFs locais para 18 candidatos; faltavam os registros 3 e
-> 6923. A disponibilidade local não altera retroativamente o fluxo histórico.
+> o estado atual distingue 15 estudos na seleção histórica de 14 relatórios
+> empíricos recuperados. Sokkhey permanece sem cópia verificável; Zeng não integra
+> a seleção. A atualização das fontes não altera retroativamente o fluxo histórico.
+
+![Visão geral atual do TCC: seleção histórica de 15 estudos, 14 textos recuperados, apreciação MMAT e especificação conceitual](results/tcc/images/project_overview_2026-11-15.png)
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
@@ -324,9 +327,15 @@ são distribuídos sob a licença CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONT
 
 ## Uso de IA
 
-A triagem em texto completo, a extração e as respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor. As
-respostas MMAT dos 14 estudos com texto recuperado foram conferidas pelo autor, critério a critério, em 13/11/2026. Detalhes no apêndice de
-ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).
+A seleção e a apreciação MMAT foram conduzidas pelo autor, como revisor único,
+com apoio do pipeline e de ferramentas de IA generativa. A triagem dos textos
+integrais e a extração também foram conduzidas pelo autor com esse apoio. Em
+13/11/2026, o autor conferiu, critério a critério, as 98 respostas dos 14 estudos
+com texto recuperado: 95 foram mantidas e 3 alteradas com base nas evidências
+localizadas. Os componentes dos estudos mistos não integraram essa conferência.
+O apêndice de ferramentas de IA do TCC
+(`results/tcc/postextuais/ferramentas-ia.tex`) descreve as ferramentas e os
+limites de atribuição por etapa.
 
 ## Autor
 

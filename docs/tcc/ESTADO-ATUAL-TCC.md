@@ -22,7 +22,7 @@ O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->
-Em 29/10/2026, há **16 de 18 PDFs locais** identificados por hash; faltam os registros **3 e 6923**. Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova que texto, figuras e apêndices foram examinados integralmente. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte.
+Na conferência de 29/10/2026, havia **16 PDFs locais para 18 registros candidatos**, identificados por hash. Esse total inclui os 14 textos empíricos recuperados entre os 15 estudos da seleção histórica, 1 registro mantido apenas para contexto após a triagem do resumo e 1 protocolo excluído na avaliação de texto integral. Sokkhey (2020), registro 3, permanece na seleção histórica sem cópia verificável; Zeng (2025), registro 6923, também não foi recuperado e está fora da seleção. Assim, os 16 PDFs locais não correspondem a 16 estudos incluídos nem alteram o fluxo PRISMA. A disponibilidade não comprova que todos os elementos visuais e apêndices foram examinados integralmente. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs registrados na conferência de 29/10/2026. As fontes suplementares não foram incorporadas a esse replay. A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte.
 <!-- ccw-sync:end coverage -->
 
 O relatório não recuperado no fluxo histórico é a dissertação de

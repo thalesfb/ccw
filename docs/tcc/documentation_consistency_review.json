@@ -39,10 +39,10 @@
     "research/src/cli.py": "11167c922e5acf1f5d88ce09e3257b97ade4bf46bf7a22287fb645c3f77748ff"
   },
   "reviewed_surfaces": {
-    "README.md": "acdc381a398e24a7b223d05ad5de927a2a22a90d8635b3800da6fe268f028d63",
+    "README.md": "30053fbe28b33f10f4179f1f00ed043fa275fdc4495994109031c00120abb6c4",
     "research/README.md": "2e975e627521581c532db5c7609c2aaad34c2bf57efa520c820e48ef9e74bc0e",
-    "docs/tcc/ESTADO-ATUAL-TCC.md": "673ff017f38e2c30dc768e94991f7b5937422326480e48897c0d70c9dd246816",
-    "docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md": "890f8611211781365bfdabc35cbb63947dd557d96c30185ece1978da94537470",
+    "docs/tcc/ESTADO-ATUAL-TCC.md": "d6abfd2ae512a6b5f7cb9570dace5ec3107bb6c62975fb72e7d011cdc67dfaac",
+    "docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md": "a6af2b14e87f4d05d51ac542d7c0275494df4cbaa934eb2bef72e8c218ceb951",
     "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md": "e6c0de5b0c7b15b3853503b2665a9ab7ea80b2190511048bea6aee219e735d85",
     "presentation/README.md": "3c2a7890bd406361a221b38f0e9691efecf736c499bb65f1b45afb66d8a07d9a",
     "results/tcc/README.md": "2c4620de2b5295a5928728972755171ea629f6d6d4162cedb0416f463d830747",
@@ -54,15 +54,16 @@
     "docs/TCC_REVISION_SCOPE.md": "e581ee67395796db4acd496e661760a2c5ca4822d9ce50e204848d12b015fc62",
     "docs/VERIFICACAO-NUMEROS-PRISMA.md": "76e17686ce016d918e7aa3f722d546ede32ad552ed75b3730c191cc46947617d",
     "docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md": "299c05edb703acbffea4fa9371109f29e568c098acccd43c7ed174d3aad46e3f",
-    "results/tcc/images/README.md": "991e1d8c2400ef0b3586d277b9fa5658320cab59f2225b60d28d8875dd1e481b",
+    "results/tcc/images/README.md": "eb2d48ce4e324a317536effd0c1b58289e1eaca37755b3e0ed1ac04009f2d80d",
+    "scripts/generate_project_overview.py": "888004ca5ea4e1fc1eb727e66bd0d041ea79325789964abd3da23a67d783e0d9",
     "index.html": "f767c4f82ce0ec795282eb0f653f0a4266c472b159a5a94effd3d3312e23968c",
     "research/index.html": "cde467383c078544270cb0cb8ea3e396607676447f1a751f7e988953aa3e1225",
     "results/tcc/index.html": "f39181a8d8bf400addad0d5e2399bcb309deb3ba64dd32fc0ae18381c9aae4e9",
     "presentation/slides.md": "5605d3e323ace23a182c0bd1eb21d9fc3cef295843b2ada01330eb2a73e24663",
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "aa29bf4ceb4113d28bb28ee616891d169a71b046d0988f5de6265690784246d8",
     "scripts/generate_tcc_presentation.py": "0aeef2e5acbfde53a70a49e37e7620a71de64cc2629ad6d66b33a51b1c07133b",
-    "scripts/sync_project_docs.py": "fc786b50b6ae230dbf8652a575fd11a3a87efbce4da95f88243ae213a7712fc7",
+    "scripts/sync_project_docs.py": "9b069f0889a5f88a17bb51c9dee21637fc27871fa8fdad1e29312ff43deb1a9f",
     "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "8595fb05d69663efcea7b7b1ffc180bf69eb2439318ded98128a2d2aa5f0ac19",
-    "results/tcc/images/project_overview_2026-11-03.png": "0eca3178d32ededab1698f86aacc0528a6c377b929d9cf5426e641c6b87dc316"
+    "results/tcc/images/project_overview_2026-11-15.png": "85770cdc21b042806100cfc60ffa952fec240ba4fbdad9bc0e9cbf74517be522"
   }
 }

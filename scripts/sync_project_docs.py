@@ -22,7 +22,7 @@ RECORD_CORRECTIONS = "research/data/adjudicated_record_corrections.csv"
 SELECTION_STATUS = "research/data/selection_status_current.json"
 CONTRIBUTIONS = "research/data/study_contribution_current.json"
 EVIDENCE = "research/data/evidence_sources_current.json"
-OVERVIEW = "results/tcc/images/project_overview_2026-11-03.png"
+OVERVIEW = "results/tcc/images/project_overview_2026-11-15.png"
 REVIEW_RECORD = "docs/tcc/documentation_consistency_review.json"
 INPUTS = (
     INTRO, MANIFEST, CONTRIBUTIONS, EVIDENCE, RECORD_CORRECTIONS, SELECTION_STATUS,
@@ -74,6 +74,7 @@ REVIEW_TARGETS = (
     "docs/VERIFICACAO-NUMEROS-PRISMA.md",
     "docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md",
     "results/tcc/images/README.md",
+    "scripts/generate_project_overview.py",
     "index.html", "research/index.html", "results/tcc/index.html",
     "presentation/slides.md",
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md",
@@ -170,6 +171,16 @@ def render_blocks(root):
     coverage = evidence["source_coverage"]
     if local != coverage["identified_local_pdf_count"] or set(missing) != set(coverage["missing_study_ids"]):
         raise ValueError("source availability disagrees across the versioned manifests")
+    empirical_records = [record for record in records if record["record_status"] == "included_empirical_core"]
+    empirical_local = [record for record in empirical_records if record["full_text_available_locally"]]
+    context_local = [record for record in records
+                     if record["record_status"] == "context_only" and record["full_text_available_locally"]]
+    protocol_local = [record for record in records
+                      if record["record_status"] == "protocol_context_only" and record["full_text_available_locally"]]
+    if (len(empirical_records) != retrieval["historical_empirical_selection"]
+            or len(empirical_local) != retrieval["recovered_empirical_reports"]
+            or local != len(empirical_local) + len(context_local) + len(protocol_local)):
+        raise ValueError("local PDFs do not reconcile with the current empirical, contextual and protocol records")
     dates = (f"Corte da busca: {day(manifest['protocol']['cutoff_date'])}; "
              f"adjudicação inicial: {day(manifest['snapshot_date'])}; "
              f"reconciliação do escopo: {day(manifest['scope_updated_at'])}; "
@@ -216,13 +227,18 @@ def render_blocks(root):
         f"| {label} | {number(value)} | {meaning} |" for label, value, meaning in flow_rows
     )
     replay = evidence["replay_validation"]
+    availability_date = day(matrix.get("availability_check_date", matrix["review_date"]))
     coverage_text = (
-        f"Em {day(matrix.get('availability_check_date', matrix['review_date']))}, há **{local} de {len(records)} PDFs locais** "
-        f"identificados por hash; faltam os registros **{' e '.join(missing)}**. "
-        f"Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova que texto, figuras e apêndices foram examinados integralmente. "
+        f"Na conferência de {availability_date}, havia **{local} PDFs locais para {len(records)} registros candidatos**, identificados por hash. "
+        f"Esse total inclui os {len(empirical_local)} textos empíricos recuperados entre os {len(empirical_records)} estudos da seleção histórica, "
+        f"{len(context_local)} registro mantido apenas para contexto após a triagem do resumo e {len(protocol_local)} protocolo excluído na avaliação de texto integral. "
+        f"Sokkhey (2020), registro 3, permanece na seleção histórica sem cópia verificável; Zeng (2025), registro 6923, também não foi recuperado e está fora da seleção. "
+        f"Assim, os {local} PDFs locais não correspondem a {local} estudos incluídos nem alteram o fluxo PRISMA. "
+        f"A disponibilidade não comprova que todos os elementos visuais e apêndices foram examinados integralmente. "
         f"O replay textual congelado de {day(replay['validation_date'])} abrange "
         f"**{replay['checked_source_count']} fontes e {replay['checked_chunk_count']} trechos**, "
-        f"não os {local} PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. "
+        f"não os {local} PDFs registrados na conferência de {availability_date}. "
+        f"As fontes suplementares não foram incorporadas a esse replay. "
         f"A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte."
     )
     table = ["| ID e referência primária | Páginas físicas com texto examinado | Contribuição delimitada |",
