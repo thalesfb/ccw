@@ -159,7 +159,7 @@ class: content-slide tcc-objectives-slide
   <div class="tcc-objective-step"><span>04</span><strong>Propor o protocolo</strong><p>Avaliar viabilidade e coerência da especificação, com fundamentos, requisitos e condições de execução.</p><em>→ regra docente e conferência técnica</em></div>
 </div>
 
-<div class="tcc-caption">Meios: revisão de 2015–2026 relatada com o PRISMA 2020, apreciação MMAT conferida pelo autor e pipeline versionado. O protocolo está proposto; sua aplicação está pendente.</div>
+<div class="tcc-caption">Meios: revisão de 2015–2026 relatada com o PRISMA 2020, apreciação MMAT conferida pelo autor e fluxo de processamento versionado. O protocolo está proposto; sua aplicação está pendente.</div>
 
 ---
 layout: default

@@ -187,7 +187,7 @@ TCC e não alteram a contagem de estudos incluídos.
 
 Esse exemplo usa apenas o export bibliográfico. No TCC, preserve a bibliografia
 completa declarada em `main.tex`, incluindo as fontes teóricas e metodológicas;
-não a substitua pelo subconjunto de candidatos do pipeline.
+não a substitua pelo subconjunto de candidatos gerado pelo processamento automatizado.
 
 ### Testes
 
@@ -206,7 +206,7 @@ python -m pytest research/tests/test_defense_consistency.py -q
 
 ### Scripts Ativos (Uso Recomendado)
 
-- **`research/src/cli.py`**: Interface CLI oficial para todas operações do pipeline
+- **`research/src/cli.py`**: Interface CLI oficial para as operações de busca e processamento
   - Uso: `python -m research.src.cli [comando] [opções]`
   - Comandos principais: `init-db`, `run-pipeline`, `stats`, `export`, `export-bibtex`, `generate-manifest`, `normalize-prisma`, `validate-exports`, `check-exports`
   - `audit` é legado e depende de um módulo ausente; sua correção deve ser tratada em PR atômico separado
@@ -328,7 +328,7 @@ são distribuídos sob a licença CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONT
 ## Uso de IA
 
 A seleção e a apreciação MMAT foram conduzidas pelo autor, como revisor único,
-com apoio do pipeline e de ferramentas de IA generativa. A triagem dos textos
+com apoio do fluxo automatizado e de ferramentas de IA generativa. A triagem dos textos
 integrais e a extração também foram conduzidas pelo autor com esse apoio. Em
 13/11/2026, o autor conferiu, critério a critério, as 98 respostas dos 14 estudos
 com texto recuperado: 95 foram mantidas e 3 alteradas com base nas evidências

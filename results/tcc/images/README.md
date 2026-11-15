@@ -9,6 +9,9 @@ e das 14 apreciações atuais por critério; Sokkhey permanece sem cópia verifi
 e Zeng está fora da seleção. O quadro não apresenta escore agregado nem certifica
 eficácia educacional.
 
+O rodapé marca 14/11/2026, data do estado documental representado. O nome do
+arquivo registra a atualização visual feita em 15/11/2026.
+
 Os arquivos `project_overview_2026-10-20.png`,
 `project_overview_2026-11-03.png` e `project_overview_current.png` foram
 preservados como registros históricos e não devem ser reutilizados como visão

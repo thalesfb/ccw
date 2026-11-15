@@ -20,7 +20,7 @@
     "results/tcc/conteudo/estudos-requisitos.tex": "57755a0b617c5270b4ce08c9a43439a7ac4af96402ccf3de60e9767a254a321b",
     "results/tcc/conteudo/resultados.tex": "ddb1a90b8d3c4089e188cc050ac4d06d02b42860b6f5a1e190c365f50342c22c",
     "results/tcc/conteudo/conclusao.tex": "f4a49489d86defc2e0c71fd0a4576872e24ece710770572fd39011d943ad6136",
-    "results/tcc/pretextuais/resumo.tex": "2aae7cadf92e3aa4b8785c79dd6df6ce3e650d7fe2d7ca5d11a06ea96baef69f",
+    "results/tcc/pretextuais/resumo.tex": "d08fe2e0998cb5c2b76fecc99cd092a204735ef4d71e7f120ce4c2c4f5e7db56",
     "results/tcc/postextuais/apendice.tex": "ac81861e310a9dbaba57c10fbd9d10298634a98e86f542ae1f70c716c885bfcd",
     "results/tcc/postextuais/ferramentas-ia.tex": "bf194c6282976b208ffe4479a740b11064b508bf4b33612380cc29d4844572a5",
     "results/tcc/config_inicial.tex": "4f99cee515212dd2da3c60d752da7bbe4cb13bb3105ff9d82f5f5afa4ad31b19",
@@ -39,12 +39,12 @@
     "research/src/cli.py": "11167c922e5acf1f5d88ce09e3257b97ade4bf46bf7a22287fb645c3f77748ff"
   },
   "reviewed_surfaces": {
-    "README.md": "0a32bbad7ae0ba4417cb101bb59ae23c5784d70f4f6f53dc54be65f9ee74d407",
+    "README.md": "bc0573cf083f9229a5883787ed646222fcda55af27265d275be15d68008d3e53",
     "research/README.md": "0d6e0e36b120d59f2c316b9b1f1b63dcb6b8831c6585789086fe749e27c363ad",
     "docs/tcc/ESTADO-ATUAL-TCC.md": "1090ad70b7cb6f039238eedbdc6e11a98bb6abc5878aa1778b35a37a95306171",
     "docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md": "a6af2b14e87f4d05d51ac542d7c0275494df4cbaa934eb2bef72e8c218ceb951",
     "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md": "e6c0de5b0c7b15b3853503b2665a9ab7ea80b2190511048bea6aee219e735d85",
-    "presentation/README.md": "3c2a7890bd406361a221b38f0e9691efecf736c499bb65f1b45afb66d8a07d9a",
+    "presentation/README.md": "5d5d9fe5bbc2c13e5ab2fa4a72c247e481886d05c8561e3247a6a7cb2e6839fd",
     "results/tcc/README.md": "2c4620de2b5295a5928728972755171ea629f6d6d4162cedb0416f463d830747",
     "docs/README.md": "09df41bb263fc6d798520d98bc1b796393acbf9e73c9298fd86a034b7ec22e76",
     "docs/tcc/README.md": "8fad19afa8d7e8921bd50a6606724202ada9c5c416d3197311dcd4a965a4755a",
@@ -54,15 +54,15 @@
     "docs/TCC_REVISION_SCOPE.md": "e581ee67395796db4acd496e661760a2c5ca4822d9ce50e204848d12b015fc62",
     "docs/VERIFICACAO-NUMEROS-PRISMA.md": "76e17686ce016d918e7aa3f722d546ede32ad552ed75b3730c191cc46947617d",
     "docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md": "299c05edb703acbffea4fa9371109f29e568c098acccd43c7ed174d3aad46e3f",
-    "results/tcc/images/README.md": "89f986cb61d4ec643e895c1ac0d8538fcf804a5c8b662bd87199afd21bdadd8f",
-    "index.html": "f767c4f82ce0ec795282eb0f653f0a4266c472b159a5a94effd3d3312e23968c",
-    "research/index.html": "cde467383c078544270cb0cb8ea3e396607676447f1a751f7e988953aa3e1225",
-    "results/tcc/index.html": "f39181a8d8bf400addad0d5e2399bcb309deb3ba64dd32fc0ae18381c9aae4e9",
-    "presentation/slides.md": "5605d3e323ace23a182c0bd1eb21d9fc3cef295843b2ada01330eb2a73e24663",
-    "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "aa29bf4ceb4113d28bb28ee616891d169a71b046d0988f5de6265690784246d8",
-    "scripts/generate_tcc_presentation.py": "0aeef2e5acbfde53a70a49e37e7620a71de64cc2629ad6d66b33a51b1c07133b",
+    "results/tcc/images/README.md": "8c9d266eba3c4220d6dfcf8f274ebb3300f5f73a8a22f04b3a571af0b01621ba",
+    "index.html": "062591fae23352aa4b19ebbf9f4024966214f8b4226a6a823de1169189028831",
+    "research/index.html": "cd5ce4344606dbb68db23e397e8f1e1b31b8d7093fc71679e3693cdb3cffd957",
+    "results/tcc/index.html": "5ecb1c6a89b5c00478ab514e95c01536f30557cb0b41409f3327538196a05c0c",
+    "presentation/slides.md": "9e59e7308f0969ee9bd502e108f1104be56b46f0547c3df9d38de389a1c82ae7",
+    "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "b8dcaadcb0232b8ecd07f10cb712a6edf39124e1ad687dd1f02824a105fb2444",
+    "scripts/generate_tcc_presentation.py": "91f79dbee6208fa2694f05df334ec19e09c7aca2fbc0e771cda89812e313bacc",
     "scripts/sync_project_docs.py": "fb52ba548cf682ab222bb42207a946667d5a57efec78e8f6ce1985a2548621c1",
-    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "8595fb05d69663efcea7b7b1ffc180bf69eb2439318ded98128a2d2aa5f0ac19",
-    "results/tcc/images/project_overview_2026-11-15.png": "3b4ad0d70f10c0f5c70bf32d45bc7986f81274b3e9f72595e0939a97e716b227"
+    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "85e98f012afb296aac6593a8b9b6a140b9bcb68904305eed80a65ce40ef6f5a6",
+    "results/tcc/images/project_overview_2026-11-15.png": "4945c4a96af48a05b8c2243f82428483218b316c49846c88c402169b671778a0"
   }
 }
