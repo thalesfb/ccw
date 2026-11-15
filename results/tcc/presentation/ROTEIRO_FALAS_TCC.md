@@ -30,9 +30,9 @@ derivar uma proposta técnica e pedagógica coerente com seus achados e limites.
 ## 4. Objetivos específicos — 0:50
 
 Os objetivos percorrem todo o ciclo do trabalho: realizar a revisão, categorizar
-técnicas e finalidades, analisar limitações, mapear lacunas, manter o pipeline
-auditável e derivar requisitos, critérios de dados e modelos, protocolo de
-avaliação e arquitetura. Implementação funcional e validação com participantes
+técnicas e finalidades, analisar limitações, mapear lacunas, manter o fluxo de
+processamento auditável e derivar requisitos, critérios de dados e modelos,
+protocolo de avaliação e arquitetura. Implementação funcional e validação com participantes
 não fazem parte do escopo executado.
 
 ## 5. Fundamentação — 1:10
@@ -155,7 +155,7 @@ acurácia ou validação com participantes.
 
 ## 18. Contribuições e limites — 1:05
 
-As contribuições são a síntese estruturada, o pipeline automatizado e
+As contribuições são a síntese estruturada, o fluxo automatizado e
 versionado, a distinção entre relevância temática e avaliação metodológica e a
 especificação técnica e pedagógica auditável. Os limites incluem a cobertura
 desigual das fontes, o caráter preliminar da apreciação MMAT e a ausência de

@@ -542,6 +542,17 @@ class EditorialFeedbackTests(unittest.TestCase):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")
         portuguese = abstract.split(r"\begin{resumo}", 1)[1].split(r"\vspace", 1)[0]
         english = abstract.split(r"\begin{resumo}[Abstract]", 1)[1].split(r"\vspace", 1)[0]
+        self.assertIn("fluxo automatizado e versionado", portuguese)
+        self.assertNotIn("pipeline", portuguese.lower())
+        self.assertIn("versioned processing workflow", english)
+        self.assertNotIn("pipeline", english.lower())
+        speaker_script = (TCC / "presentation/ROTEIRO_FALAS_TCC.md").read_text(encoding="utf-8")
+        self.assertNotIn("pipeline", speaker_script.lower())
+        slide_source = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        self.assertNotIn("pipeline", slide_source.lower())
+        pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
+        self.assertIn("processamento automatizado são meios", pptx_source)
+        self.assertNotIn("pipeline são meios", pptx_source)
         bodies = []
         for text in (portuguese, english):
             body = text.split(r"\noindent", 1)[1].strip()

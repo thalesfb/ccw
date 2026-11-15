@@ -23,7 +23,7 @@ protótipo conceitual em aplicação implementada.
 ## Sequência dos slides
 
 A sequência de 11/2026 dá mais peso aos resultados de cada objetivo e às
-regras propostas, e menos ao pipeline de coleta. Gráficos de etiquetas de
+regras propostas, e menos à automação da coleta. Gráficos de etiquetas de
 técnicas de todos os registros e o histograma de relevância saíram do deck,
 porque não descreviam os 15 estudos.
 

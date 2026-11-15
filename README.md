@@ -3,7 +3,7 @@
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
 <!-- ccw-sync:start snapshot -->
-Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
+Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental registrada: 20/10/2026; PDFs locais conferidos por hash: 29/10/2026.
 
 O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. No MMAT conferido pelo autor, há 14 triagens S1/S2 e 14 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
@@ -22,8 +22,11 @@ a validação educacional do protótipo não foram realizadas nesta versão.
 
 > O texto do [TCC](results/tcc/main.tex) é a fonte de verdade do relato científico;
 > os artefatos versionados sustentam suas contagens e sua rastreabilidade. Em
-> 29/10/2026, havia 16 PDFs locais para 18 candidatos; faltavam os registros 3 e
-> 6923. A disponibilidade local não altera retroativamente o fluxo histórico.
+> o estado atual distingue 15 estudos na seleção histórica de 14 relatórios
+> empíricos recuperados. Sokkhey permanece sem cópia verificável; Zeng não integra
+> a seleção. A atualização das fontes não altera retroativamente o fluxo histórico.
+
+![Visão geral atual do TCC: 15 estudos na seleção histórica, 14 textos empíricos recuperados, duas fontes não recuperadas, MMAT de 14 estudos e especificação conceitual](results/tcc/images/project_overview_2026-11-15.png)
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
@@ -184,7 +187,7 @@ TCC e não alteram a contagem de estudos incluídos.
 
 Esse exemplo usa apenas o export bibliográfico. No TCC, preserve a bibliografia
 completa declarada em `main.tex`, incluindo as fontes teóricas e metodológicas;
-não a substitua pelo subconjunto de candidatos do pipeline.
+não a substitua pelo subconjunto de candidatos gerado pelo processamento automatizado.
 
 ### Testes
 
@@ -203,7 +206,7 @@ python -m pytest research/tests/test_defense_consistency.py -q
 
 ### Scripts Ativos (Uso Recomendado)
 
-- **`research/src/cli.py`**: Interface CLI oficial para todas operações do pipeline
+- **`research/src/cli.py`**: Interface CLI oficial para as operações de busca e processamento
   - Uso: `python -m research.src.cli [comando] [opções]`
   - Comandos principais: `init-db`, `run-pipeline`, `stats`, `export`, `export-bibtex`, `generate-manifest`, `normalize-prisma`, `validate-exports`, `check-exports`
   - `audit` é legado e depende de um módulo ausente; sua correção deve ser tratada em PR atômico separado
@@ -302,10 +305,10 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 O protocolo, o snapshot, a disposição dos candidatos e as visualizações estão
 versionados. Em 13/11/2026, o autor conferiu as 98 respostas MMAT dos 14 estudos
 com texto recuperado: 95 foram mantidas e 3 alteradas com base nas evidências
-localizadas. Os componentes dos estudos mistos não foram abrangidos. Os registros
-3 e 6923 continuam sem cópia integral local; essa limitação está documentada e
-não altera a seleção. Trabalhos futuros e eventual aplicação do protocolo devem
-ser relatados separadamente, sem antecipá-los como resultados.
+localizadas. Os componentes dos estudos mistos não foram abrangidos. Sokkhey
+(2020) permanece sem cópia verificável na seleção histórica; Zeng (2025) também
+não foi recuperado e está fora dos 15. Trabalhos futuros e eventual aplicação do
+protocolo devem ser relatados separadamente, sem antecipá-los como resultados.
 
 ## Coerência entre os materiais
 
@@ -324,9 +327,15 @@ são distribuídos sob a licença CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONT
 
 ## Uso de IA
 
-A triagem em texto completo, a extração e as respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor. As
-respostas MMAT dos 14 estudos com texto recuperado foram conferidas pelo autor, critério a critério, em 13/11/2026. Detalhes no apêndice de
-ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).
+A seleção e a apreciação MMAT foram conduzidas pelo autor, como revisor único,
+com apoio do fluxo automatizado e de ferramentas de IA generativa. A triagem dos textos
+integrais e a extração também foram conduzidas pelo autor com esse apoio. Em
+13/11/2026, o autor conferiu, critério a critério, as 98 respostas dos 14 estudos
+com texto recuperado: 95 foram mantidas e 3 alteradas com base nas evidências
+localizadas. Os componentes dos estudos mistos não integraram essa conferência.
+O apêndice de ferramentas de IA do TCC
+(`results/tcc/postextuais/ferramentas-ia.tex`) descreve as ferramentas e os
+limites de atribuição por etapa.
 
 ## Autor
 
