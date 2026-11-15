@@ -517,7 +517,7 @@ class: content-slide tcc-next-slide
 
 <div class="tcc-next-layout">
   <div class="tcc-next-list"><div><b>01</b><span><strong>Tipologia</strong> de finalidades, com limite declarado (OE1).</span></div><div><b>02</b><span><strong>Rastreabilidade</strong> da evidência a 26 grupos de requisitos (OE2, OE3).</span></div><div><b>03</b><span><strong>Regras pré-fixadas</strong> de escolha de modelo e de avaliação (OE3, OE4).</span></div><div><b>04</b><span><strong>Lacunas de relato</strong> como orientação para estudos primários (MMAT conferido pelo autor).</span></div></div>
-  <div class="tcc-next-decision"><span>PRÓXIMOS PASSOS</span><ul><li>Submeter o MMAT a um segundo avaliador independente.</li><li>Aplicar o protocolo com docentes, após parecer ético.</li><li>Testar a regra de modelo em dados reais documentados.</li><li>Codificar itens por registro de representação.</li></ul></div>
+  <div class="tcc-next-decision"><span>PRÓXIMOS PASSOS</span><ul><li>Aplicar o protocolo com docentes, após parecer ético.</li><li>Testar a regra de modelo em dados reais documentados.</li><li>Codificar itens por registro de representação.</li></ul></div>
 </div>
 
 <div class="tcc-caption">Contribuições delimitadas pelo escopo documental. Dados, código e testes versionados permitem reproduzir as contagens e os quadros.</div>

@@ -22,10 +22,10 @@ exigem conferir os resumos do Slidev, do storyboard e do export paralelo, confor
 [`DOCUMENTATION_SYNC.md`](../docs/tcc/DOCUMENTATION_SYNC.md). Para apresentar o
 TCC, use o deck Slidev.
 
-A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
-após a revisão dos PRs e a validação da orientação, com base no conteúdo
-aprovado. O roteiro histórico do export paralelo não é fonte do deck vigente
-nem evidência de sua atualização.
+A fala ainda não integra o deck canônico. O roteiro será preparado quando o
+manuscrito e os slides estiverem estabilizados, com base no conteúdo aprovado.
+O roteiro histórico do export paralelo não é fonte do deck vigente nem
+evidência de sua atualização.
 
 O material em `results/ptc/presentation/` é uma terceira apresentação,
 histórica, referente ao PTC. Serve apenas como referência narrativa e visual,

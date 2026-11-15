@@ -37,8 +37,8 @@ Conferido em 11 de novembro de 2026 contra as listas do PDF compilado.
 - **Quadro 3:** caracterização dos 18 registros da lista preliminar;
 - **Quadros 4 e 5:** finalidade, técnica e população; alvos, validação e
   métricas;
-- **Quadros 6 e 7:** apreciação MMAT preliminar dos 15 estudos e dos
-  componentes dos estudos mistos;
+- **Quadros 6 e 7:** apreciação MMAT por critério para 14 estudos com texto
+  recuperado; componentes dos estudos mistos fora da conferência registrada;
 - **Quadros 8 a 10:** critérios de aceitação; origem dos requisitos;
   observações dos estudos e requisitos;
 - **Quadros 11 a 14 (apêndices):** mapeamento PRISMA 2020; ficha de julgamento

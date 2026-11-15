@@ -528,8 +528,8 @@ const page = `<!doctype html>
         <div class="callout callout-amber notice">
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
-            <h3 id="pending-title">Pendências antes da consolidação</h3>
-            <p><strong>CT não é uma tarefa incompleta.</strong> É um critério apreciado para o qual a informação disponível não permite concluir. A consolidação não depende de obter resposta a todas as perguntas: depende de conferir os julgamentos, registrar limitações e ajustar a síntese ao que as fontes sustentam. As rotas operacionais já estão registradas e foram conferidas pelo autor; um segundo avaliador independente e a conferência dos componentes dos estudos mistos continuam abertos. O protocolo 6921 permanece fora da síntese empírica.</p>
+            <h3 id="pending-title">Limites e tarefas registradas</h3>
+            <p><strong>CT não é uma tarefa incompleta.</strong> É um critério apreciado para o qual a informação disponível não permite concluir; a apreciação não depende de obter resposta a todas as perguntas. A consolidação depende de registrar as evidências localizadas, os limites das fontes e o alcance de cada resposta. As rotas operacionais e suas justificativas estão documentadas; os componentes dos estudos mistos não integraram a conferência registrada. O protocolo 6921 permanece fora da síntese empírica.</p>
           </div>
         </div>
         <h3>Tarefas de consolidação</h3>

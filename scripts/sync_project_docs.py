@@ -219,11 +219,11 @@ def render_blocks(root):
     coverage_text = (
         f"Em {day(matrix.get('availability_check_date', matrix['review_date']))}, há **{local} de {len(records)} PDFs locais** "
         f"identificados por hash; faltam os registros **{' e '.join(missing)}**. "
-        f"Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. "
+        f"Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova que texto, figuras e apêndices foram examinados integralmente. "
         f"O replay textual congelado de {day(replay['validation_date'])} abrange "
         f"**{replay['checked_source_count']} fontes e {replay['checked_chunk_count']} trechos**, "
         f"não os {local} PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. "
-        f"A leitura documental assistida e a revisão científica humana são estados distintos."
+        f"A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte."
     )
     table = ["| ID e referência primária | Páginas físicas com texto examinado | Contribuição delimitada |",
              "| --- | --- | --- |"]

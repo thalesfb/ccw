@@ -128,7 +128,9 @@ def test_pending_page_distinguishes_documentary_tasks_from_uncertain_article_rep
     actions = json.loads((Path(__file__).resolve().parents[1] / 'data/mmat_consolidation_actions_current.json').read_text(encoding='utf-8'))
     assert len({a['id'] for a in actions['actions']}) == len(actions['actions'])
     assert any(a['status'] == 'completed_documentary' for a in actions['actions'])
-    assert any(a['status'] == 'pending_human_review' for a in actions['actions'])
+    assert not any(a['status'] == 'pending_human_review' for a in actions['actions'])
+    assert all('segundo avaliador' not in (a['next_step'] or '').lower() for a in actions['actions'])
+    assert all('revisão da orientação' not in (a['next_step'] or '').lower() for a in actions['actions'])
     assert all(a['evidence'] and a['next_step'] for a in actions['actions'])
 
 
@@ -744,6 +746,8 @@ def test_public_mmat_page_marks_operational_routes_without_certifying_designs():
     assert 'Categoria 3 operacional · alocação desconhecida' in html
     assert 'Categoria 3 · quase-experimento com sorteio contraditório' in html
     assert 'essas rotas não certificam delineamentos' in html.lower()
+    assert 'Limites e tarefas registradas' in html
+    assert 'segundo avaliador independente' not in html.lower()
 
 
 

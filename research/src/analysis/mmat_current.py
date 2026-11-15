@@ -539,19 +539,19 @@ def validate_current_artifacts(
     category_pending_rows = [row for row in core_reassessment if row["design"] == "design_pending"]
     category_appraised_rows = [row for row in core_reassessment if row["design"] != "design_pending"]
     blocking_reasons = [
-        "The empirical corpus retains 15 studies provisionally; all have preliminary screening and category-specific appraisals, including explicitly operational routes. These are not final design or eligibility decisions.",
-        "Studies 5 and 7 use an inferred category-3 route with allocation unknown; study 8 uses an explicitly adapted category-4 route for computational models.",
-        "The preliminary ledger must not be interpreted as a quality score or ranking.",
+        "The historical empirical selection contains 15 studies; 14 with recovered text have current MMAT responses. Sokkhey remains in the selection without a verifiable copy, so its historical responses were not revalidated.",
+        "Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-3 route with conflicting allocation reports.",
+        "MMAT responses are reported by criterion and must not be interpreted as a quality score or ranking.",
         "Study 8 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
     ]
     if len(primary_text_rows) != len(CURRENT_MMAT_STUDY_IDS):
         blocking_reasons.append(
-            f"Only {len(primary_text_rows)} of {len(CURRENT_MMAT_STUDY_IDS)} empirical-core "
-            "studies have externally reviewed full text recorded."
+            f"Only {len(primary_text_rows)} of {len(CURRENT_MMAT_STUDY_IDS)} MMAT studies "
+            "have source text recorded in the source manifest."
         )
     if len(PENDING_FULL_TEXT_STUDY_IDS):
         blocking_reasons.append(
-            "One shortlisted empirical record remains pending primary full text and is excluded from the MMAT denominator."
+            "The shortlisted report 6923 remains unretrieved and outside the historical 15-study MMAT denominator."
         )
     if source_or_period_hold_rows:
         held_ids = ", ".join(row["study_id"] for row in source_or_period_hold_rows)

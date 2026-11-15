@@ -20,13 +20,10 @@ de notas ou de probabilidades preditivas. A entrega é documental: a especifica�
 e seu protocolo de avaliação foram propostos, mas a avaliação da especificação e
 a validação educacional do protótipo não foram realizadas nesta versão.
 
-![Síntese visual do TCC: revisão crítica, MMAT preliminar e especificação conceitual](results/tcc/images/project_overview_2026-11-03.png)
-
 > O texto do [TCC](results/tcc/main.tex) é a fonte de verdade do relato científico;
-> os artefatos versionados sustentam suas contagens e sua rastreabilidade. A imagem
-> é uma síntese, não substitui o manuscrito e não certifica revisão científica
-> concluída. Em 29/10/2026, há 16 PDFs locais para 18 candidatos; faltam os
-> registros 3 e 6923, sem mudança retroativa do fluxo histórico.
+> os artefatos versionados sustentam suas contagens e sua rastreabilidade. Em
+> 29/10/2026, havia 16 PDFs locais para 18 candidatos; faltavam os registros 3 e
+> 6923. A disponibilidade local não altera retroativamente o fluxo histórico.
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
@@ -218,7 +215,7 @@ python -m pytest research/tests/test_defense_consistency.py -q
 
 ## Status do Projeto
 
-### Fase 1: Revisão Sistemática — snapshot adjudicado; MMAT preliminar registrado
+### Fase 1: Revisão Sistemática — snapshot histórico; MMAT conferido por critério
 
 <!-- ccw-sync:start flow -->
 | Etapa | Quantidade | Interpretação |
@@ -303,12 +300,12 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 ### Próximos Passos Imediatos
 
 O protocolo, o snapshot, a disposição dos candidatos e as visualizações estão
-versionados. As respostas MMAT dos 14 estudos com texto recuperado foram conferidas
-pelo autor em 13/11/2026; permanecem pendentes um segundo avaliador independente e a
-revisão final com a orientação. Os registros 3 e 6923
-continuam sem cópia integral local; essa limitação está documentada e não impede
-a continuidade da entrega delimitada. Trabalhos futuros e eventual aplicação do
-protocolo devem ser relatados separadamente, sem antecipá-los como resultados.
+versionados. Em 13/11/2026, o autor conferiu as 98 respostas MMAT dos 14 estudos
+com texto recuperado: 95 foram mantidas e 3 alteradas com base nas evidências
+localizadas. Os componentes dos estudos mistos não foram abrangidos. Os registros
+3 e 6923 continuam sem cópia integral local; essa limitação está documentada e
+não altera a seleção. Trabalhos futuros e eventual aplicação do protocolo devem
+ser relatados separadamente, sem antecipá-los como resultados.
 
 ## Coerência entre os materiais
 

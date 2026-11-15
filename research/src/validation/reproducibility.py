@@ -93,7 +93,7 @@ COMPANION_DOCUMENTS: tuple[tuple[str, str, str], ...] = (
 )
 
 ARTIFACTS: tuple[tuple[str, str], ...] = (
-    ("research/data/mmat_consolidation_actions_current.json", "documentary corrections, source-access blockers and outstanding human appraisal tasks, separate from indeterminate MMAT responses"),
+    ("research/data/mmat_consolidation_actions_current.json", "documentary corrections, source-access blockers and recorded appraisal limits, separate from indeterminate MMAT responses"),
     ("research/data/mmat_operational_decisions_2026-10-28.json", "explicit provisional appraisal routes, source locators and criterion-level decisions for studies 5, 7, 8 and 14"),
     ("research/data/mmat_followup_questions_current.csv", "prepared unsent questions covering indeterminate criteria and structural appraisal holds"),
     ("research/data/mmat_completion_review_2026-10-28.json", "source-linked documentary reappraisal changes and retained measurement uncertainties"),
@@ -231,11 +231,11 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "research/src/analysis/mmat_current_tcc_table.py",
-        "versioned renderer for the preliminary current MMAT table",
+        "versioned renderer for the current criterion-level MMAT table",
     ),
     (
         "research/exports/references/mmat_current_tcc_table.tex",
-        "preliminary MMAT records with separate screening, category responses and unassessed pending cells",
+        "current MMAT records with separate screening, category responses and unassessed cells",
     ),
     (
         "research/exports/references/mmat_component_details_tcc.tex",
@@ -946,11 +946,11 @@ def generate_manifest(
                 f"category-specific appraisal for {mmat_qa['category_appraised_rows']}; "
                 f"{prisma_counts['included']} records remain in the historical empirical selection. "
                 "Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, "
-                "and study 14 a category-2 route with conflicting allocation reports. Distinct datasets "
+                "and study 14 a category-3 route with conflicting allocation reports. Distinct datasets "
                 "within study 8 must not be combined or counted twice. "
                 "Sokkhey remains in the original selection without a verifiable source copy and receives no MMAT answers. "
                 "Zeng is outside the 15-study selection and has no MMAT appraisal. "
-                "The recorded appraisals remain preliminary."
+                "The appraisals are criterion-level records and do not constitute an aggregate study-quality score."
             ),
         },
         "artifact_scope": "research_snapshot",
@@ -991,7 +991,7 @@ def generate_manifest(
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have preliminary category-specific appraisals, including explicit operational routes. {prisma_counts['included']} records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records {current_source_retrieval['reports_not_retrieved']} reports without a verifiable copy, {current_source_retrieval['reports_assessed_at_full_text']} reports assessed at full text, {current_source_retrieval['full_text_exclusions']} protocol excluded, and {current_source_retrieval['recovered_empirical_reports']} empirical reports recovered. Sokkhey remains a historical inclusion without a verifiable source copy and without revalidation of its previous MMAT responses; Zeng is outside the historical selection. One record was excluded after abstract screening. The recorded appraisals remain preliminary.",
+                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have category-specific responses, including explicit operational routes. {prisma_counts['included']} records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records {current_source_retrieval['reports_not_retrieved']} reports without a verifiable copy, {current_source_retrieval['reports_assessed_at_full_text']} reports assessed at full text, {current_source_retrieval['full_text_exclusions']} protocol excluded, and {current_source_retrieval['recovered_empirical_reports']} empirical reports recovered. Sokkhey remains a historical inclusion without a verifiable source copy and without revalidation of its previous MMAT responses; Zeng is outside the historical selection. One record was excluded after abstract screening. Responses are reported by criterion without an aggregate score.",
             ],
         },
     }

@@ -9,9 +9,7 @@ O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27
 Em 20/10/2026, a conferência suplementar do texto integral do registro excluído
 após o resumo confirmou a decisão de escopo; não criou uma nova etapa nem
 alterou as contagens do fluxo PRISMA.
-Os 15 estudos têm S1/S2 e critérios da categoria respondidos; o estudo 8 (tese
-de MacLellan) é apreciado nos componentes matemáticos dos capítulos 5–6, e os
-estudos 5, 7 e 14 usam categorias adaptadas descritas no TCC. Os snapshots anteriores são históricos.
+A apreciação atual registra 14 estudos com texto recuperado; Sokkhey permanece na seleção histórica sem cópia verificável e sem respostas MMAT revalidadas. O estudo 8 (tese de MacLellan) é apreciado nos componentes matemáticos dos capítulos 5–6, e os estudos 5, 7, 8 e 14 usam rotas descritas no TCC. Os snapshots anteriores são históricos.
 
 A reconciliação detalhada da população vigente, incluindo deduplicação, decisões
 de escopo e separação entre candidatos empíricos e contexto, está em
@@ -24,11 +22,11 @@ O manifesto histórico [`research/data/protocol_execution_2025.json`](data/proto
 Sistema modular para revisão sistemática da literatura em educação matemática com técnicas computacionais, com relato orientado pelo PRISMA 2020.
 
 O software e seus testes verificam operações e contratos documentais. A seleção
-científica e a cobertura das fontes permanecem preliminares. Os julgamentos MMAT
-(2018, por critério, sem escore agregado) foram produzidos por ferramentas de IA
-generativa sob o protocolo e os critérios do autor; a conferência critério a
-critério está em andamento. Um teste aprovado não certifica sua validade
-metodológica.
+científica e a cobertura das fontes têm os limites descritos no registro vigente.
+As respostas MMAT de 14 estudos com texto recuperado foram propostas com apoio de
+ferramentas de IA e conferidas pelo autor em 13/11/2026 contra as evidências
+localizadas; a apreciação é apresentada por critério, sem escore agregado. Um
+teste aprovado não certifica validade metodológica.
 
 ---
 
@@ -467,13 +465,13 @@ Os relatórios HTML gerados agora incluem:
 
 A taxa de extração automática do pipeline descreve o processamento técnico do
 snapshot e não equivale à recuperação ou à avaliação científica de fontes
-primárias. A conferência de 29/10/2026 identifica 16 PDFs locais entre os 18
-candidatos; faltam os registros 3 e 6923. O fluxo histórico tem 15 inclusões provisórias,
-15 triagens MMAT S1/S2 e 15 apreciações preliminares por categoria. Esses números
-não comprovam leitura humana integral. Os estudos 5, 7, 8 e 14 têm rotas
-operacionais com limitações explícitas. O replay textual congelado cobre
-12 fontes e 484 trechos, não os 16 PDFs atuais. A avaliação do registro 3 não foi
-revalidada sem o original; 6923 não recebeu respostas. Consulte a
+primárias. A conferência de cobertura de 29/10/2026 identifica 16 PDFs locais
+entre os 18 candidatos; faltam os registros 3 e 6923. A seleção histórica mantém
+15 estudos empíricos; a apreciação atual abrange 14 fontes recuperadas, com
+respostas conferidas pelo autor em 13/11/2026. Sokkhey permanece sem cópia
+verificável e sem revalidação de respostas históricas; Zeng não recebeu respostas.
+Os estudos 5, 7, 8 e 14 têm rotas operacionais com limitações explícitas. O replay
+textual congelado cobre 12 fontes e 484 trechos, não os 16 PDFs atuais. Consulte a
 [matriz de cobertura](../docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md) para
 localizadores e limites, sem converter disponibilidade em elegibilidade.
 
@@ -657,7 +655,7 @@ python -m research.src.cli run-pipeline
 - **Papers com abstract**: 11.885/11.904 (99,8%)
 - **Papers com DOI**: 10.682/11.904 (89,7%)
 - **Papers com ano preenchido**: 11.904/11.904 (100%) no banco bruto; 255 registros do export versionado estão fora do intervalo analítico 2015--2026 após a correção de 6918 para 2014
-- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e ledgers de adjudicação versionados; nova coleta pode variar. O MMAT preliminar abrange os 15 estudos da seleção histórica; Sokkhey (estudo 3) mantém respostas históricas não revalidadas e as respostas foram produzidas por IA, com conferência do autor em andamento.
+- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e registros de decisões versionados; nova coleta pode variar. A apreciação MMAT atual abrange 14 estudos com texto recuperado, com respostas propostas por IA e conferidas pelo autor em 13/11/2026. Sokkhey (estudo 3) permanece na seleção histórica sem cópia verificável e sem respostas revalidadas.
 
 ---
 
@@ -674,7 +672,7 @@ python -m research.src.cli run-pipeline
 ### Metodologia Científica
 
 - ✅ Relato estruturado conforme as diretrizes PRISMA 2020 (não um registro prospectivo ou protocolo completo)
-- ✅ Código e artefatos derivados versionados são públicos; o SQLite operacional é local, dois textos integrais não foram recuperados (Sokkhey e Zeng) e a apreciação MMAT é preliminar
+- ✅ Código e artefatos derivados versionados são públicos; o SQLite operacional é local, dois textos integrais não foram recuperados (Sokkhey e Zeng) e a apreciação MMAT é apresentada por critério para os 14 estudos com texto recuperado
 - ✅ Reprodutibilidade do snapshot documentada por exports e manifesto
 - ✅ Auditoria por exports e ledgers versionados
 - ✅ Rastreabilidade dos 18 registros shortlistados e da decisão de escopo de cada um; isso não equivale a suporte arquivado para todas as afirmações do manuscrito
@@ -714,5 +712,5 @@ python -m research.src.cli run-pipeline
 
 ---
 
-*📅 Última atualização documental: 20 de outubro de 2026*
-*🟡 Status: Snapshot reconciliado em 20 out. 2026 | 15 inclusões empíricas provisórias | MMAT preliminar em 15 estudos; rotas operacionais e incertezas explícitas*
+*📅 Última atualização documental: 14 de novembro de 2026*
+*🟡 Status: snapshot histórico preservado | 15 estudos na seleção histórica, 14 textos recuperados | MMAT conferido por critério nos 14 estudos com fonte disponível*

@@ -22,7 +22,7 @@
 
 | Fase | Descricao | Periodo | Status |
 |------|-----------|---------|--------|
-| Fase 1 | Revisao sistematica e reconciliacao da população | Mar-Nov 2025; adjudicação em 03/09/2026 | População congelada; MMAT final pendente |
+| Fase 1 | Revisao sistematica e reconciliacao da população | Mar-Nov 2025; adjudicação em 03/09/2026 | Seleção histórica preservada; apreciação por critério conferida nas 14 fontes recuperadas |
 | Fase 2 | Desenvolvimento do prototipo (TCC) | Sem prazo vigente | Aguardando decisão da orientação |
 | Fase 3 | Validacao experimental (TCC) | Sem prazo vigente | Não iniciada |
 
@@ -52,7 +52,7 @@
 | BANCA-016 | Referencias adicionadas: STI, adaptativa, avaliacao, metricas | MEDIA |
 | BANCA-017 | Citacao Cochrane no trecho de APIs | BAIXA |
 | BANCA-018 | Cap. Resultados renomeado para Revisao Sistematica | MEDIA |
-| BANCA-019 | Procedimento MMAT definido; reavaliacao preliminar registrada para o snapshot atual, com consolidacao e adjudicacao pendentes | ALTA |
+| BANCA-019 | Procedimento MMAT definido; respostas conferidas pelo autor em 14 estudos com texto recuperado | ALTA |
 
 ---
 
@@ -61,7 +61,7 @@
 ### Etapas concluidas
 
 - Etapa 1: Correcoes PRISMA
-- Etapa 2: procedimento MMAT definido; reavaliacao documental preliminar registrada para os 18 registros da lista preliminar, com consolidacao e adjudicacao pendentes
+- Etapa 2: procedimento MMAT definido; respostas MMAT de 14 estudos com texto recuperado conferidas pelo autor em 13/11/2026; componentes dos estudos mistos fora da conferência
 - Etapa 2.5: Tempo verbal passado
 - Etapa 3: Fundamentacao ensino de matematica
 - Etapa 4: Capitulo do prototipo
@@ -111,7 +111,7 @@ results/tcc/
 
 ## 5. Pipeline MMAT (snapshot vigente e histórico)
 
-O modulo MMAT e standalone e o snapshot vigente possui um ledger de reavaliação por critério para os 18 registros da lista preliminar. A avaliação é preliminar: 14 relatórios empíricos foram recuperados, o protocolo 6921 foi excluído da síntese, e fontes, localizadores e adjudicação ainda precisam ser consolidados antes de qualquer síntese de qualidade metodológica ou afirmação de certeza da evidência.
+O módulo MMAT é standalone e o snapshot vigente possui um ledger por critério para os estudos da seleção histórica. A conferência registrada em 13/11/2026 abrangeu as 98 respostas de 14 estudos com texto recuperado, mantendo 95 e alterando 3; Sokkhey permanece sem cópia verificável e sem respostas revalidadas. O ledger não produz escore agregado nem afirma certeza da evidência.
 
 ### Validar o snapshot vigente
 
@@ -132,7 +132,7 @@ denominador vigente.
 - `research/data/mmat_primary_sources_manifest.csv` — fontes e estados de acesso
 - `research/data/mmat_reassessment_current.csv` — respostas S1/S2 e Q1--Q5 por estudo
 - `research/exports/references/mmat_current_tcc_table.tex` — tabela LaTeX vigente
-- Banco SQLite operacional local (coluna `notes` com o histórico do MMAT); ele não é versionado nem necessário para verificar o snapshot publicado. O ledger vigente registra a reavaliação preliminar dos 18 registros, mas a conclusão final permanece pendente de fontes, localizadores e adjudicação
+- Banco SQLite operacional local (coluna `notes` com o histórico do MMAT); ele não é versionado nem necessário para verificar o snapshot publicado. O ledger vigente registra a conferência por critério das respostas para 14 estudos com texto recuperado; as evidências e os limites estão documentados nas fichas e nos localizadores
 
 ### Testes
 
@@ -140,14 +140,14 @@ denominador vigente.
 python -m pytest research/tests/test_mmat_current.py -q
 ```
 
-Os testes validam o ledger vigente de 18 registros, os cinco critérios por estudo e as respostas Y/N/CT. Isso não deve ser lido como conclusão final de qualidade: a reavaliação documental está registrada, mas ainda depende de consolidação de fontes, localizadores e adjudicação.
+Os testes validam o ledger vigente, seus critérios e as respostas Y/N/CT. Isso não deve ser lido como escore de qualidade: as conclusões permanecem limitadas pelas fontes recuperadas e pelas evidências localizadas em cada ficha.
 
 ### Estado dos artefatos MMAT
 
 | Snapshot | Estado | Uso permitido |
 |-------|-----|---------|
 | Histórico | 17 julgamentos por critério | somente auditoria e rastreabilidade histórica |
-| Vigente | 18 registros; reavaliação preliminar registrada; consolidação pendente | não emitir síntese MMAT final |
+| Vigente | 15 estudos na seleção histórica; 14 com texto recuperado e conferência registrada | síntese por critério, sem escore global |
 
 Não há média ou ranking de qualidade reportado para o conjunto vigente.
 
@@ -212,4 +212,4 @@ Verificar: zero `^!` no log, zero `undefined`.
 
 ## 8. Uso de IA
 
-A triagem em texto completo, a extração e as respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor. A conferência pelo autor, critério a critério, está em andamento. Detalhes no Apêndice de ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).
+A triagem em texto completo, a extração e propostas de respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor. Em 13/11/2026, o autor conferiu as 98 respostas dos 14 estudos com texto recuperado contra as evidências localizadas, manteve 95 e alterou 3; os componentes dos estudos mistos não foram abrangidos. Detalhes no Apêndice de ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).

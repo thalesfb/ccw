@@ -15,7 +15,7 @@ Este documento delimita como a engenharia documental se relaciona com o conteúd
 
 O TCC pode relatar procedimentos reproduzíveis e artefatos versionados, mas não deve atribuir ao protótipo eficácia de ensino, aprendizagem ou diagnóstico sem avaliação empírica adequada. Da mesma forma, a aprovação de um teste ou de um workflow comprova somente a propriedade técnica efetivamente verificada.
 
-As afirmações sobre a revisão sistemática devem distinguir o protocolo descrito, as operações cuja execução está registrada, os resultados derivados do snapshot e as limitações de cobertura. A apreciação MMAT permanece sujeita a verificação independente e adjudicação humana; apoio automatizado não constitui segundo avaliador.
+As afirmações sobre a revisão sistemática devem distinguir o protocolo descrito, as operações cuja execução está registrada, os resultados derivados do snapshot e as limitações de cobertura. A apreciação MMAT é apresentada por critério e apoiada em evidências localizadas nas fontes; o apoio automatizado não substitui a verificação do registro, das justificativas e dos limites de cada resposta.
 
 ## Governança de mudanças
 

@@ -14,7 +14,7 @@ Esses números não comprovam 15 estudos independentes nem disponibilidade atual
 de todas as fontes.
 
 <!-- ccw-sync:start coverage -->
-Em 29/10/2026, há **16 de 18 PDFs locais** identificados por hash; faltam os registros **3 e 6923**. Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. A leitura documental assistida e a revisão científica humana são estados distintos.
+Em 29/10/2026, há **16 de 18 PDFs locais** identificados por hash; faltam os registros **3 e 6923**. Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova que texto, figuras e apêndices foram examinados integralmente. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte.
 <!-- ccw-sync:end coverage -->
 
 A leitura documental assistida por IA compreendeu texto extraível e imagens

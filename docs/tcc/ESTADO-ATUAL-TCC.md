@@ -1,6 +1,6 @@
 # Estado atual e limites da versão do TCC
 
-**Atualização documental:** 3 de novembro de 2026
+**Atualização documental:** 14 de novembro de 2026
 
 Este registro público descreve o estado verificável da versão atual do
 Trabalho de Conclusão de Curso e separa resultados produzidos, validações
@@ -22,16 +22,16 @@ O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->
-Em 29/10/2026, há **16 de 18 PDFs locais** identificados por hash; faltam os registros **3 e 6923**. Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova leitura humana integral. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. A leitura documental assistida e a revisão científica humana são estados distintos.
+Em 29/10/2026, há **16 de 18 PDFs locais** identificados por hash; faltam os registros **3 e 6923**. Essa disponibilidade não altera retroativamente as etapas PRISMA nem comprova que texto, figuras e apêndices foram examinados integralmente. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs atuais. As fontes suplementares não foram incorporadas a esse replay. A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte.
 <!-- ccw-sync:end coverage -->
 
 O relatório não recuperado no fluxo histórico é a dissertação de
 [Zeng (2025), registro 6923](https://doi.org/10.7916/2q6y-bm58). Consulta ao
 Columbia Academic Commons registrada no manifesto de fontes em 13 de outubro de
 2026 informou que os arquivos estarão disponíveis a partir de 16 de maio de
-2027. O resumo público não substitui o texto primário: a elegibilidade e a
-apreciação MMAT desse registro permanecem pendentes, sem alteração das contagens
-PRISMA. O registro 3, [Multimodels2020_002](https://doi.org/10.5573/IEIESPC.2020.9.3.217),
+2027. O resumo público não substitui o texto primário: Zeng está fora da seleção
+histórica de 15 estudos e não recebeu apreciação MMAT, sem alteração das
+contagens PRISMA. O registro 3, [Multimodels2020_002](https://doi.org/10.5573/IEIESPC.2020.9.3.217),
 também está sem cópia integral local: o acesso disponível levou à compra do
 artigo, sem recuperação por via autorizada. Seus julgamentos históricos não
 foram revalidados nesta rodada. Não se infere, da ausência local atual, que
@@ -44,14 +44,20 @@ regenerado para esta revisão e preserva verificadores de integridade dos
 artefatos versionados; a atualização não representa nova consulta às APIs nem
 altera o corte temporal da busca.
 
-O registro de avaliação MMAT 2018 preserva S1 e S2 como perguntas de triagem e Q1--Q5 como
-critérios específicos do delineamento. Dos 15 registros empíricos mantidos
-provisoriamente, 15 têm triagem S1/S2 e apreciação dos critérios. As categorias 3 dos estudos 5 e 7 são rotas operacionais com alocação desconhecida; a categoria 2 do 14 segue o sorteio declarado, mas contraditório; e a categoria 4 do 8 é adaptação à modelagem computacional. A unidade do 8 é uma tese/um relatório com componentes matemáticos, sem duplicar frações reutilizadas. O registro 6923 sem texto integral também não recebeu apreciação; suas
-células permanecem sem resposta, não como CT. O registro
-excluído após resumo e o protocolo sem resultados concluídos estão fora do
-denominador MMAT. O autor realizou a apreciação preliminar com apoio
-automatizado, registrando justificativas e limites por critério. Não há
-escore agregado, ranking ou conclusão de eficácia.
+O registro MMAT 2018 apresenta S1/S2 e os critérios Q1–Q5 por estudo, sem
+escore agregado. Dos 15 estudos empíricos da seleção histórica, 14 têm texto
+recuperado e respostas atuais; Sokkhey permanece sem cópia verificável e suas
+respostas históricas não foram revalidadas. O estudo 14 usa a categoria 3
+quantitativa não randomizada: o artigo se declara quase-experimental sem
+atribuição aleatória (§2.2 e §2.7), embora mencione sorteio das escolas em §2.4.
+Os estudos 5 e 7 usam uma rota operacional da categoria 3; o estudo 8 usa uma
+adaptação da categoria 4 à modelagem computacional. A unidade do estudo 8 é uma
+tese/um relatório com componentes matemáticos, sem duplicar frações reutilizadas.
+O registro 6923 não recebeu apreciação MMAT, e o protocolo 6921 está fora do
+denominador. Em 13/11/2026, o autor conferiu 98 respostas dos 14 estudos com
+texto recuperado contra as evidências localizadas: 95 foram mantidas e 3
+alteradas; os componentes dos estudos mistos não integraram essa conferência.
+A apreciação não gera escore agregado, ranking ou conclusão de eficácia.
 
 ## Implementação e escopo experimental
 
@@ -76,7 +82,8 @@ alteração da regra, nova seleção ou incorporação de estudos adicionais. Ve
 [`REVISAO-LIMIAR-SELECAO-2026-10-31.md`](REVISAO-LIMIAR-SELECAO-2026-10-31.md),
 que documenta o estado da seleção e as limitações do escore utilizado.
 
-A manutenção do corte e do conjunto foi confirmada com a orientação.
+O corte 4,0 e a seleção histórica são mantidos nesta versão; não houve nova
+seleção.
 O valor 4,0 é um corte
 da soma ponderada aplicada aos metadados e resumos: a escala nominal é 0–10,
 enquanto os valores preservados vão de 0–4,5. O protocolo e o código registram
@@ -85,9 +92,10 @@ exata desse número. O valor não é percentual de aderência ou nota de qualida
 
 O escopo desta entrega foi confirmado como revisão crítica da literatura e
 especificação conceitual, sem exigir treinamento ou validação educacional do
-protótipo. Permanecem a conferência dos julgamentos e das rotas operacionais, sem tratá-las como delineamentos confirmados; a eventual
-recuperação dos registros 3 e 6923 por via legítima; e a avaliação do
-impacto dos filtros automatizados sobre a cobertura da revisão. Uma execução
+protótipo. A conferência das respostas MMAT para 14 fontes recuperadas e das rotas
+operacionais está registrada com seus limites; Sokkhey permanece sem fonte
+verificável, e Zeng está fora da seleção. A cobertura dos filtros automatizados
+continua sendo uma limitação do levantamento. Uma execução
 computacional futura dependerá de decisão e protocolo próprios, incluindo
 fonte, termos de uso, desfecho, limiares e divisão dos dados.
 
@@ -122,6 +130,7 @@ governança dos dados e registro reprodutível de procedimentos e resultados.
 ## Limite interpretativo da versão
 
 O estado atual pode ser resumido como **código implementado, testes
-sintéticos verdes, entrega documental, experimento futuro fora do escopo e MMAT preliminar**. A
+sintéticos verdes, entrega documental, experimento futuro fora do escopo e
+apreciação MMAT por critério, sem escore agregado**. A
 apresentação e o manuscrito devem comunicar esse limite sem transformar
 resultados operacionais em evidência de eficácia educacional.

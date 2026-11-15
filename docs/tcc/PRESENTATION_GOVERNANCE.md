@@ -10,10 +10,12 @@ decisões de implementação em afirmações acadêmicas.
 - A fonte de verdade do deck é `presentation/slides.md`, em Slidev.
 - Os números devem continuar reconciliados com
   `research/exports/reports/summary.json`.
-- O estado científico apresentado é o snapshot atual: 18 registros shortlistados,
-  dos quais 15 integram provisoriamente o núcleo empírico, 1 aguarda texto
-  integral, 1 foi excluído após resumo e 1 protocolo foi excluído após texto
-  completo por não apresentar resultados concluídos.
+- O estado científico apresentado é o snapshot atual: 18 registros
+  shortlistados, dos quais 15 permanecem na seleção empírica histórica. Há
+  texto recuperado para 14; Sokkhey permanece sem cópia verificável e sem
+  revalidação das respostas MMAT históricas. Zeng não foi recuperado e está fora
+  dos 15. Um registro foi excluído após o resumo e um protocolo após a leitura
+  do texto completo, por não apresentar resultados concluídos.
 - A apresentação não deve prometer eficácia, validação experimental ou um
   protótipo executado quando a evidência correspondente ainda não existe.
 - O encerramento deve oferecer o repositório por QR code, com destino
@@ -22,10 +24,10 @@ decisões de implementação em afirmações acadêmicas.
 
 ## Roteiro de fala: etapa posterior
 
-A fala não integra esta revisão semifinal. Sua preparação ocorrerá somente
-após a revisão dos PRs e a validação da orientação, com base no conteúdo
-aprovado. O roteiro histórico do export paralelo não integra os contratos de
-atualidade científica do deck; estes conferem o storyboard e o Slidev.
+A fala ainda não integra o deck canônico. O roteiro será preparado quando o
+manuscrito e os slides estiverem estabilizados, com base no conteúdo aprovado.
+O roteiro histórico do export paralelo não integra os contratos de atualidade
+científica do deck; estes conferem o storyboard e o Slidev.
 
 ## Template fornecido: instrução versus requisito
 
@@ -103,9 +105,15 @@ seu efeito sobre o alcance das conclusões.
 Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
 o código do pipeline está implementado, os testes sintéticos estão verdes, o
 experimento com dados reais é continuidade fora do escopo documental desta entrega,
-e o MMAT é preliminar. O núcleo empírico mantém provisoriamente 15 registros:
-15 têm triagem S1/S2 e apreciação dos critérios. As categorias dos estudos 5, 7, 8 e 14 são rotas operacionais explicitamente limitadas, sem confirmar os delineamentos. A unidade do estudo 8 é uma tese com componentes matemáticos; frações reutilizadas entre capítulos não são duplicadas. O registro 6923
-aguarda o texto integral e não recebeu respostas MMAT; um registro foi
+e a apreciação MMAT é apresentada por critério, sem escore agregado. O núcleo
+empírico mantém 15 estudos na seleção histórica; 14 têm texto recuperado e
+respostas conferidas contra as evidências localizadas. Sokkhey permanece na
+seleção sem cópia verificável nem revalidação das respostas históricas. Os
+componentes dos estudos mistos não integraram a conferência registrada. As
+categorias dos estudos 5, 7, 8 e 14 são rotas operacionais explicitamente
+limitadas, sem confirmar os delineamentos. A unidade do estudo 8 é uma tese com
+componentes matemáticos; frações reutilizadas entre capítulos não são duplicadas.
+Zeng não integra os 15 estudos e não recebeu respostas MMAT; um registro foi
 excluído após resumo e um protocolo sem resultados concluídos foi excluído
 após texto completo. O estudo 6919 foi mantido conforme
 o protocolo escrito, que não exige personalização como condição de elegibilidade.
