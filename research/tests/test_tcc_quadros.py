@@ -109,18 +109,12 @@ class RenderedTablePage:
                          font_size * gate.PT_TO_PDF)
 
 
-def test_pdf_table_gate_checks_caption_and_source_share_the_table_margin():
+def test_pdf_table_gate_checks_presence_order_and_font_sizes():
     reader = SimpleNamespace(pages=[RenderedTablePage()])
     assert gate.inspect_table_alignments(reader, [1], expected_notes={1}) == [
         {"number": 1, "caption_x": 100, "source_x": 100, "source_y": 100,
          "note_x": 100, "pages": [1]}
     ]
-    with pytest.raises(ValueError, match="table title's horizontal margin"):
-        gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage("source_alignment")]),
-                                     [1], expected_notes={1})
-    with pytest.raises(ValueError, match="note does not follow"):
-        gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage("note_alignment")]),
-                                     [1], expected_notes={1})
     with pytest.raises(ValueError, match="missing note"):
         gate.inspect_table_alignments(SimpleNamespace(pages=[RenderedTablePage("missing_note")]),
                                      [1], expected_notes={1})
@@ -240,7 +234,7 @@ def test_continued_caption_can_arrive_as_separate_pdf_fragments():
 
 
 @pytest.mark.parametrize("fault", ["caption", "body", "source", "landscape",
-                                  "missing_source", "source_first", "source_content", "source_alignment",
+                                  "missing_source", "source_first", "source_content",
                                   "header", "continuation_header", "text_scale"])
 def test_pdf_gate_rejects_bad_typography_order_and_unapproved_rotation(fault):
     with pytest.raises(ValueError):
@@ -249,12 +243,21 @@ def test_pdf_gate_rejects_bad_typography_order_and_unapproved_rotation(fault):
                          rendered_sources())
 
 
-def test_pdf_gate_requires_quadro_notes_to_follow_the_title_margin():
-    sources = rendered_sources()
-    sources[7] = "Fonte: autor. Nota: detalhe"
-    with pytest.raises(ValueError, match="note does not follow the title's horizontal margin"):
-        gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage("note_alignment")]), 0, INVENTORY,
-                         {i: f"Quadro {i} – Título" for i in range(1, 15)}, sources)
+def test_poppler_gate_requires_title_source_and_note_to_share_the_same_margin(tmp_path):
+    path = tmp_path / "alignment.xml"
+    page = '<page width="595.276" height="841.89">'
+    def line(y, x, words):
+        return ''.join(f'<word xMin="{x + i * 20}" xMax="{x + i * 20 + 18}" yMin="{y}" yMax="{y + 10}">{word}</word>'
+                       for i, word in enumerate(words.split()))
+    xml = ('<html xmlns="http://www.w3.org/1999/xhtml"><body>' + page
+           + line(100, 122, "Quadro 6 – Título")
+           + line(400, 122, "Fonte: autor")
+           + line(420, 122, "Nota: detalhe") + '</page></body></html>')
+    path.write_text(xml, encoding="utf-8")
+    gate.validate_bbox_alignment(path, [{"number": 6, "pages": [1]}], [], {6})
+    path.write_text(xml.replace('xMin="122"', 'xMin="85"', 1), encoding="utf-8")
+    with pytest.raises(ValueError, match="title/source margins differ"):
+        gate.validate_bbox_alignment(path, [{"number": 6, "pages": [1]}], [], {6})
 
 
 class FragmentPage(RenderedPage):

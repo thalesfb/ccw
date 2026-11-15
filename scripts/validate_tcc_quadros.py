@@ -278,8 +278,6 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
     for row in records.values():
         if not row["source_seen"] or not row["body_runs"]:
             raise ValueError(f"Incomplete rendered quadro {row['number']}")
-        if abs(row["caption_x"] - row.get("source_x", float("inf"))) > 2.0:
-            raise ValueError(f"Quadro {row['number']}: source does not follow the title's horizontal margin")
         row["pages"] = sorted(row["pages"])
     return [records[number] for number in sorted(records)]
 
@@ -336,11 +334,6 @@ def inspect_table_alignments(reader: PdfReader, expected_numbers: list[int],
                     raise ValueError(f"Tabela {active}: source uses an unexpected font size: {_font_size}")
                 records[active]["source_x"] = x
                 records[active]["source_y"] = y
-                if abs(records[active]["caption_x"] - x) > 2.0:
-                    raise ValueError(
-                        f"Tabela {active}: source does not follow the table title's horizontal margin "
-                        f"(title={records[active]['caption_x']:.2f}, source={x:.2f})"
-                    )
             elif text.startswith("Nota:"):
                 if active not in expected_notes:
                     record = records[active]
@@ -355,8 +348,6 @@ def inspect_table_alignments(reader: PdfReader, expected_numbers: list[int],
                 if not expected_size(_font_size, source_pt):
                     raise ValueError(f"Tabela {active}: note uses an unexpected font size: {_font_size}")
                 records[active]["note_x"] = x
-                if abs(records[active]["caption_x"] - x) > 2.0:
-                    raise ValueError(f"Tabela {active}: note does not follow the table title's horizontal margin")
                 active = None
 
         page.extract_text(visitor_text=visit)
@@ -393,6 +384,88 @@ def validate_bbox(path: Path, pages: set[int]) -> None:
                 raise ValueError(f"Page {number}: word exceeds paper bounds: {word.text}")
 
 
+def bbox_lines(path: Path) -> list[dict]:
+    """Return Poppler text lines with stable page coordinates."""
+    xml = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "\ufffd", path.read_text(encoding="utf-8"))
+    document = ET.fromstring(xml)
+    lines = []
+    for page_number, page in enumerate(document.findall(".//{*}page"), 1):
+        words = sorted(
+            page.findall(".//{*}word"),
+            key=lambda word: (float(word.attrib["yMin"]), float(word.attrib["xMin"])),
+        )
+        page_lines: list[dict] = []
+        for word in words:
+            y = float(word.attrib["yMin"])
+            if not page_lines or abs(page_lines[-1]["y"] - y) > 1.5:
+                page_lines.append({"page": page_number, "y": y, "words": []})
+            page_lines[-1]["words"].append(word)
+        for line in page_lines:
+            line["words"].sort(key=lambda word: float(word.attrib["xMin"]))
+            line["text"] = " ".join((word.text or "").strip() for word in line["words"]).strip()
+            line["x"] = min(float(word.attrib["xMin"]) for word in line["words"])
+            lines.append(line)
+    return lines
+
+
+def validate_bbox_alignment(path: Path, quadros: list[dict], tables: list[dict],
+                            quadro_notes: set[int], tolerance_pt: float = 2.0) -> None:
+    """Compare caption/source/note text starts using Poppler's rendered word boxes."""
+    lines = bbox_lines(path)
+    events = []
+    for line in lines:
+        text = line["text"]
+        caption = re.match(r"(Quadro|Tabela)\s+(\d+)\s*[–-]", text, re.I)
+        if caption and not re.search(r"continua", text, re.I):
+            events.append({**line, "kind": "caption", "family": caption[1].casefold(),
+                           "number": int(caption[2])})
+        elif text.startswith("Fonte:"):
+            events.append({**line, "kind": "source"})
+        elif text.startswith("Nota:"):
+            events.append({**line, "kind": "note"})
+    events.sort(key=lambda event: (event["page"], event["y"]))
+
+    expected = [("quadro", row["number"], row["pages"][0], row["pages"][-1],
+                 row["number"] in quadro_notes) for row in quadros]
+    expected.extend(("tabela", row["number"], row["pages"][0], row["pages"][-1],
+                     bool(row.get("has_note"))) for row in tables)
+    expected.sort(key=lambda item: (item[2], item[0], item[1]))
+    captions = [event for event in events if event["kind"] == "caption"]
+    for family, number, first_page, last_page, has_note in expected:
+        candidates = [event for event in captions
+                      if event["family"] == family and event["number"] == number
+                      and event["page"] == first_page]
+        if len(candidates) != 1:
+            raise ValueError(f"Poppler could not locate a unique {family} {number} title on page {first_page}")
+        caption = candidates[0]
+        start = events.index(caption)
+        following_caption = next(
+            (index for index in range(start + 1, len(events)) if events[index]["kind"] == "caption"),
+            len(events),
+        )
+        following = events[start + 1:following_caption]
+        source = next((event for event in following
+                       if event["kind"] == "source" and event["page"] >= last_page), None)
+        if source is None:
+            raise ValueError(f"Poppler could not locate the source for {family} {number}")
+        if abs(caption["x"] - source["x"]) > tolerance_pt:
+            raise ValueError(
+                f"{family.title()} {number}: title/source margins differ "
+                f"(title={caption['x']:.2f}, source={source['x']:.2f})"
+            )
+        source_index = following.index(source)
+        note = next((event for event in following[source_index + 1:]
+                     if event["kind"] == "note"), None)
+        if has_note:
+            if note is None:
+                raise ValueError(f"Poppler could not locate the note for {family} {number}")
+            if abs(caption["x"] - note["x"]) > tolerance_pt:
+                raise ValueError(
+                    f"{family.title()} {number}: title/note margins differ "
+                    f"(title={caption['x']:.2f}, note={note['x']:.2f})"
+                )
+
+
 def validate(pdf: Path, auxiliaries: Path, log: Path, root: Path = ROOT,
              bbox: Path | None = None) -> dict:
     validate_sources(root)
@@ -415,8 +488,14 @@ def validate(pdf: Path, auxiliaries: Path, log: Path, root: Path = ROOT,
         policy["source_pt"],
     )
     if bbox:
-        validate_bbox(bbox, {page for row in rows for page in row["pages"]}
-                      | {page for row in table_rows for page in row.get("pages", [])})
+        pages = ({page for row in rows for page in row["pages"]}
+                 | {page for row in table_rows for page in row.get("pages", [])})
+        validate_bbox(bbox, pages)
+        expected_quadro_notes = {number for number, source in source_texts(root, policy, auxiliaries).items()
+                                 if "Nota:" in source}
+        table_notes = {row["number"] for row in policy["tables"] if row.get("has_note")}
+        table_bbox_rows = [{**row, "has_note": row["number"] in table_notes} for row in table_rows]
+        validate_bbox_alignment(bbox, rows, table_bbox_rows, expected_quadro_notes)
     return {"quadros": rows, "tables": table_rows, "body_pt": policy["body_pt"],
             "baseline_pt": policy["baseline_pt"], "landscape_allowlist": policy["landscape_allowlist"],
             "word_bounds_checked": bbox is not None}
