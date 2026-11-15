@@ -23,6 +23,10 @@ def test_body_typography_is_an_editorial_rule_separate_from_captions():
     assert r"\newcommand{\TCCQuadroCaption}" in config
     assert r"\captionnamefont{\TCCQuadroCaption}" in config
     assert r"\captiontitlefont{\TCCQuadroCaption}" in config
+    assert r"\newcommand{\TCCQuadroCaptionLayout}" in config
+    assert r"\def\LT@makecaption##1##2##3" in config
+    assert r"\reset@font\TCCQuadroCaption\raggedright" in config
+    assert r"\phantomsection##3" in config
     assert INVENTORY["body_pt"] == 10
     assert INVENTORY["baseline_pt"] == 12
     assert INVENTORY["caption_pt"] == 12

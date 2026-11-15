@@ -111,6 +111,19 @@
     \begin{minipage}{\LTcapwidth}\nota{#1}\end{minipage}}%
 }
 
+% O longtable centraliza legendas curtas dentro de LTcapwidth por padrão.
+% Uma legenda à esquerda precisa compartilhar a mesma âncora visual da fonte e da nota.
+\makeatletter
+\newcommand{\TCCQuadroCaptionLayout}{%
+  \def\LT@makecaption##1##2##3{%
+    \LT@mcol\LT@cols c{\hbox to\z@{\hss%
+      \parbox[t]\LTcapwidth{%
+        \reset@font\TCCQuadroCaption\raggedright
+        ##1{##2} -- \phantomsection##3\endgraf\vskip\baselineskip}%
+      \hss}}}%
+}
+\makeatother
+
 % Corpo dos quadros: decisão editorial de legibilidade (não prescrita pela ABNT).
 % Identificação/título preservam os 12 pt do template; fonte/nota usam 10 pt.
 \newcommand{\TCCQuadroCaption}{\normalfont\fontsize{12}{14}\selectfont}
@@ -123,6 +136,7 @@
   \setlength{\LTcapwidth}{\textwidth}%
   \captionnamefont{\TCCQuadroCaption}%
   \captiontitlefont{\TCCQuadroCaption}%
+  \TCCQuadroCaptionLayout
   \typeout{TCCQUADRO|#1|size=\f@size|baseline=\the\baselineskip}%
 }
 \makeatother
