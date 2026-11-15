@@ -69,6 +69,10 @@ def test_generated_blocks_update_all_consumers_and_preserve_manual_history(proje
 
 def test_source_table_reflects_available_pdfs_without_changing_inclusion(project):
     blocks = sync.render_blocks(project)
+    assert (
+        "cobertura documental registrada: 20/10/2026; "
+        "PDFs locais conferidos por hash: 29/10/2026"
+    ) in blocks["snapshot"]
     assert "**16 PDFs locais para 18 registros candidatos**" in blocks["coverage"]
     assert "14 textos empíricos recuperados entre os 15 estudos" in blocks["coverage"]
     assert "registro mantido apenas para contexto após a triagem do resumo" in blocks["coverage"]

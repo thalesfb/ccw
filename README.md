@@ -3,7 +3,7 @@
 **Trabalho de Conclusão de Curso - Ciência da Computação - IFC Videira**
 
 <!-- ccw-sync:start snapshot -->
-Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental: 20/10/2026.
+Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental registrada: 20/10/2026; PDFs locais conferidos por hash: 29/10/2026.
 
 O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. No MMAT conferido pelo autor, há 14 triagens S1/S2 e 14 apreciações por categoria; não há escore agregado nem aprovação científica final.
 <!-- ccw-sync:end snapshot -->
@@ -26,7 +26,7 @@ a validação educacional do protótipo não foram realizadas nesta versão.
 > empíricos recuperados. Sokkhey permanece sem cópia verificável; Zeng não integra
 > a seleção. A atualização das fontes não altera retroativamente o fluxo histórico.
 
-![Visão geral atual do TCC: seleção histórica de 15 estudos, 14 textos recuperados, apreciação MMAT e especificação conceitual](results/tcc/images/project_overview_2026-11-15.png)
+![Visão geral atual do TCC: 15 estudos na seleção histórica, 14 textos empíricos recuperados, duas fontes não recuperadas, MMAT de 14 estudos e especificação conceitual](results/tcc/images/project_overview_2026-11-15.png)
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
@@ -305,10 +305,10 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 O protocolo, o snapshot, a disposição dos candidatos e as visualizações estão
 versionados. Em 13/11/2026, o autor conferiu as 98 respostas MMAT dos 14 estudos
 com texto recuperado: 95 foram mantidas e 3 alteradas com base nas evidências
-localizadas. Os componentes dos estudos mistos não foram abrangidos. Os registros
-3 e 6923 continuam sem cópia integral local; essa limitação está documentada e
-não altera a seleção. Trabalhos futuros e eventual aplicação do protocolo devem
-ser relatados separadamente, sem antecipá-los como resultados.
+localizadas. Os componentes dos estudos mistos não foram abrangidos. Sokkhey
+(2020) permanece sem cópia verificável na seleção histórica; Zeng (2025) também
+não foi recuperado e está fora dos 15. Trabalhos futuros e eventual aplicação do
+protocolo devem ser relatados separadamente, sem antecipá-los como resultados.
 
 ## Coerência entre os materiais
 

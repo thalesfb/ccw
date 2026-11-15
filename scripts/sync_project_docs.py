@@ -74,7 +74,6 @@ REVIEW_TARGETS = (
     "docs/VERIFICACAO-NUMEROS-PRISMA.md",
     "docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md",
     "results/tcc/images/README.md",
-    "scripts/generate_project_overview.py",
     "index.html", "research/index.html", "results/tcc/index.html",
     "presentation/slides.md",
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md",
@@ -185,7 +184,8 @@ def render_blocks(root):
              f"adjudicação inicial: {day(manifest['snapshot_date'])}; "
              f"reconciliação do escopo: {day(manifest['scope_updated_at'])}; "
              f"reconciliação de identidade e ano: {day(identity_reconciliation_date)}; "
-             f"cobertura documental: {day(matrix['review_date'])}.")
+             f"cobertura documental registrada: {day(matrix['review_date'])}; "
+             f"PDFs locais conferidos por hash: {day(coverage['hash_rechecked_at'])}.")
     snapshot = (
         f"{dates}\n\n"
         f"O snapshot registra {number(counts['identification'])} registros identificados e "
