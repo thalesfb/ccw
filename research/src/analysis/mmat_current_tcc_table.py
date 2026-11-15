@@ -203,7 +203,7 @@ def render_component_table(
     lines.extend([
         r"\end{longtable}",
         r"\fonte{Elaborado pelo autor (2026).}",
-        r"\par\noindent\textit{Nota:} C1--C5 = critérios da categoria; Y = sim; N = não; CT = não é possível concluir; Quant. = quantitativo; rand. = randomizado. Justificativas completas no Apêndice~\ref{apendice:mmat-componentes}; ver Seção~\ref{sec:avaliacao-qualidade}.\par",
+        r"\nota{C1--C5 = critérios da categoria; Y = sim; N = não; CT = não é possível concluir; Quant. = quantitativo; rand. = randomizado. Justificativas completas no Apêndice~\ref{apendice:mmat-componentes}; ver Seção~\ref{sec:avaliacao-qualidade}.}",
         r"\endgroup",
     ])
     return "\n".join(lines)
@@ -275,11 +275,11 @@ def render_table(
         ]
         lines.append(" & ".join(values) + r" \\ \hline")
     note = (
-        r"\par\noindent\textit{Nota:} S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
+        r"\nota{S1/S2 = perguntas de triagem; Q1--Q5 = critérios da categoria; "
         r"Y = sim; N = não; CT = não é possível concluir; "
         r"Quant. = quantitativo; rand. = randomizado. "
         r"\citeonline{Multimodels2020_002}, sem cópia verificável do texto completo, permanece na seleção original sem respostas MMAT. "
-        r"Ver Seção~\ref{sec:avaliacao-qualidade}.\par"
+        r"Ver Seção~\ref{sec:avaliacao-qualidade}.}"
     )
     lines.extend([
         r"\end{longtable}",

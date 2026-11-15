@@ -47,7 +47,8 @@ def test_generated_mmat_export_is_a_quadro_and_is_self_describing() -> None:
     assert "Quant. = quantitativo" in export
     assert r"\textbf{Base}" not in export
     assert r"\clearpage" not in export
-    assert r"\par\noindent\textit{Nota:}" in export
+    assert export.count(r"\nota{") == 2
+    assert r"\textit{Nota:}" not in export
 
     component_caption = r"\caption{Componentes qualitativos e quantitativos dos estudos de métodos mistos.}"
     component_caption_index = export.index(component_caption)

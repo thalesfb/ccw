@@ -427,16 +427,17 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn(r"\textbf{Estado}", table)
         self.assertLess(
             table.index(r"\fonte{Elaborado pelo autor (2026).}"),
-            table.index(r"\textit{Nota:}"),
+            table.index(r"\nota{"),
         )
         self.assertEqual(table.count(r"\fonte{Elaborado pelo autor (2026).}"), 2)
-        self.assertEqual(table.count(r"\textit{Nota:}"), 2)
+        self.assertEqual(table.count(r"\nota{"), 2)
+        self.assertNotIn(r"\textit{Nota:}", table)
         self.assertNotIn("Um registro foi excluído após a triagem", table)
         self.assertNotIn("um único revisor", review)
         self.assertNotIn("dupla avaliação independente", review)
         self.assertIn("não foram convertidos em escore agregado ou síntese final de qualidade", review)
         self.assertIn("14 estudos do corpus", table)
-        note = table.split(r"\textit{Nota:}", 1)[1].splitlines()[0]
+        note = table.split(r"\nota{", 1)[1].splitlines()[0]
         self.assertLessEqual(len(note), 450)
         self.assertIn(r"A categoria 4 foi adaptada à modelagem computacional da tese de \citeonline{Computational2017_008}", review)
         self.assertIn(r"\TCCQuadroSetup{qua:mmat-reavaliacao-atual}", table)

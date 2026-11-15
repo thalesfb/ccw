@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-15T00:56:51+00:00",
+  "generated_at": "2026-11-15T05:48:18+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -596,12 +596,12 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the current criterion-level MMAT table",
-      "sha256": "fc3ff142b2c413a07e712e0a2a1094aecc898372f73b4b23217488d047877ceb"
+      "sha256": "d0bb24c033f006adc7e6dde16a2d25443692fdb32ba08773fff19959332c1207"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "current MMAT records with separate screening, category responses and unassessed cells",
-      "sha256": "2fd6b26b3156ad86440bc07f297f85296bfc8eae867669fdd5729d16f8d3fabd"
+      "sha256": "1342cdd13ae9dedf9471340edbb81e883add8b2d6a9d13969d988b227c9306da"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",
@@ -616,7 +616,7 @@
     {
       "path": "scripts/validate_tcc_quadros.py",
       "role": "source, compiled typography and PDF checks for the fourteen quadros",
-      "sha256": "40cd91015686fc596b43abde6c51b6366357bf7cc0b944aa4f37d2e700548a82"
+      "sha256": "1539c1e022d7e488c576487f1476547803d213d10fb3906fee8e3335d6d96dea"
     },
     {
       "path": "research/requirements.txt",
