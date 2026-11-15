@@ -414,7 +414,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn(r"\setlength{\tabcolsep}{2pt}", generator)
         self.assertIn("def _caption_width_measurement(", generator)
         self.assertIn(r"\settowidth{\LTcapwidth}{\begin{tabular}{", generator)
-        self.assertIn(r"\setlength{\LTleft}{0pt}", generator)
+        self.assertIn(r"\setlength{\LTleft}{\fill}", generator)
         self.assertIn(r"\setlength{\LTright}{\fill}", generator)
         self.assertIn(r"\multicolumn{9}{r}{\textit{Continua na próxima página}}", generator)
         for width in ("4.5",):
@@ -426,18 +426,18 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn(r"\textbf{S2}", table)
         self.assertNotIn(r"\textbf{Estado}", table)
         self.assertLess(
-            table.index(r"\fonte{Elaborado pelo autor (2026).}"),
-            table.index(r"\nota{"),
+            table.index(r"\TCCQuadroFonte{Elaborado pelo autor (2026).}"),
+            table.index(r"\TCCQuadroNota{"),
         )
-        self.assertEqual(table.count(r"\fonte{Elaborado pelo autor (2026).}"), 2)
-        self.assertEqual(table.count(r"\nota{"), 2)
+        self.assertEqual(table.count(r"\TCCQuadroFonte{Elaborado pelo autor (2026).}"), 2)
+        self.assertEqual(table.count(r"\TCCQuadroNota{"), 2)
         self.assertNotIn(r"\textit{Nota:}", table)
         self.assertNotIn("Um registro foi excluído após a triagem", table)
         self.assertNotIn("um único revisor", review)
         self.assertNotIn("dupla avaliação independente", review)
         self.assertIn("não foram convertidos em escore agregado ou síntese final de qualidade", review)
         self.assertIn("14 estudos do corpus", table)
-        note = table.split(r"\nota{", 1)[1].splitlines()[0]
+        note = table.split(r"\TCCQuadroNota{", 1)[1].splitlines()[0]
         self.assertLessEqual(len(note), 450)
         self.assertIn(r"A categoria 4 foi adaptada à modelagem computacional da tese de \citeonline{Computational2017_008}", review)
         self.assertIn(r"\TCCQuadroSetup{qua:mmat-reavaliacao-atual}", table)

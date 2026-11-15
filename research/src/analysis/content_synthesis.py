@@ -77,7 +77,7 @@ def longtable(
     return "\n".join([
         r"\begingroup\setlength{\tabcolsep}{3pt}\def\LTcaptype{quadro}",
         rf"\TCCQuadroSetup{{{label}}}",
-        r"\setlength{\LTleft}{0pt}",
+        r"\setlength{\LTleft}{\fill}",
         r"\setlength{\LTright}{\fill}",
         *width_measurement,
         r"\renewcommand{\arraystretch}{1.12}",
@@ -87,7 +87,8 @@ def longtable(
         r"\multicolumn{" + str(len(headers)) + r"}{c}{{\TCCQuadroCaption\quadroname\ \thequadro\ -- Continuação}}\\\hline",
         heading, r"\endhead", r"\hline\endfoot\hline\endlastfoot",
         *[" & ".join(row) + r" \\ \hline" for row in rows],
-        r"\end{longtable}\endgroup", r"\fonte{Elaborado pelo autor (2026).}", "",
+        r"\end{longtable}", r"\TCCQuadroFonte{Elaborado pelo autor (2026).}",
+        r"\endgroup", "",
     ])
 
 
