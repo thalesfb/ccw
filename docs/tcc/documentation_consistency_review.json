@@ -4,7 +4,7 @@
   "human_scientific_approval": "pending",
   "canonical_inputs": {
     "results/tcc/conteudo/introducao.tex": "2ca31fadb0c0f96adadd565c37dc09abfa841b6af2ec07aea4abe6f7c26cfd45",
-    "research/exports/reports/reproducibility_manifest.json": "7c742198443ad2bff336abc1453eefa87767e2042f14809ac316d480fad37c64",
+    "research/exports/reports/reproducibility_manifest.json": "8023f6836eddf8be2ecfacf4875d7b03b1624fc195ba78f7dc3d4dae0e3715d0",
     "research/data/study_contribution_current.json": "659ff98284e89b2193db17790de9fcab69bd161049ad182d25c43079f7becbd1",
     "research/data/evidence_sources_current.json": "d3146ebb8a282c8fceaa48f7b6292e289054aa3f478b5aa603f6252afa6a1abe",
     "research/data/adjudicated_record_corrections.csv": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee",
@@ -27,7 +27,7 @@
     "research/src/analysis/mmat_current_tcc_table.py": "a39e7b7417ae28803324957919470689d721a816b9240ebdc64a362d9d954dd9",
     "research/exports/references/mmat_component_details_tcc.tex": "37c08745b59e4b7e29ff5aeef92f6f0f9478c02715b2d7f470cb991b9eb434f5",
     "scripts/tcc_quadros.json": "b7792794cc97fb611615cc43c3bf7bc7801160534d0753a965dfb205132c688f",
-    "scripts/validate_tcc_quadros.py": "ef870d802eec2678fe3e92727e869b4fd377e89eb4bf801135d2dae1acf1b967",
+    "scripts/validate_tcc_quadros.py": "4c2df6a0eb72be38f2f41d88342c5d608514ddef3d805c727fdbb37486b6af84",
     "research/data/current_synthesis_scope.csv": "37cdeebe4c845acb5709eeaee549a64aeb7e50f8413a90977990a0572f7ddb36",
     "research/data/mmat_reassessment_current.csv": "84d8d6574a455c5f2ef6d46171f70fae3da77d5510f594bf38c4f1d91dceaed2",
     "research/data/mmat_component_reassessment_current.csv": "3a0aa4a37e59ca671177b2c5dc6ccc4ab91022c0484c7d23afbad2c6e1f96277",

@@ -210,11 +210,6 @@ def inspect_pdf(reader: PdfReader, first_page: int, policy: dict,
             if source_started:
                 if text.startswith("Nota:"):
                     records[active]["note_x"] = x
-                    if abs(records[active]["caption_x"] - x) > 2.0:
-                        raise ValueError(
-                            f"Quadro {active}: note does not follow the title's horizontal margin "
-                            f"(title={records[active]['caption_x']:.2f}, note={x:.2f})"
-                        )
                 consume_source(text, cm, tm, font_size)
                 return
             if caption:

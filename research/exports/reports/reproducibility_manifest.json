@@ -616,7 +616,7 @@
     {
       "path": "scripts/validate_tcc_quadros.py",
       "role": "source, compiled typography and PDF checks for the fourteen quadros",
-      "sha256": "ef870d802eec2678fe3e92727e869b4fd377e89eb4bf801135d2dae1acf1b967"
+      "sha256": "4c2df6a0eb72be38f2f41d88342c5d608514ddef3d805c727fdbb37486b6af84"
     },
     {
       "path": "research/requirements.txt",
