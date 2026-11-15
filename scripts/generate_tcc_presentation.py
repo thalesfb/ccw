@@ -392,7 +392,7 @@ def build_deck() -> Presentation:
         add_callout(slide, code, body, Inches(0.75), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_BLUE, accent=BLUE, title_size=19, body_size=18)
     for index, (code, body) in enumerate(right):
         add_callout(slide, code, body, Inches(6.9), Inches(1.45 + index * 2.2), Inches(5.65), Inches(1.8), fill=PALE_TEAL, accent=TEAL, title_size=19, body_size=18)
-    add_text(slide, "Revisão, MMAT conferido e pipeline são meios. O protocolo proposto avalia a especificação conceitual; aplicação pendente. Experimento do protótipo é contingência.", Inches(1.0), Inches(6.2), Inches(11.25), Inches(0.65), size=14, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "Revisão, apreciação do MMAT e processamento automatizado são meios. O protocolo proposto avalia a especificação conceitual; aplicação pendente. Experimento do protótipo é contingência.", Inches(1.0), Inches(6.2), Inches(11.25), Inches(0.65), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 5 — Theoretical foundation.
     slide = new_slide(prs, EXPECTED_TITLES[4], 5)

@@ -174,4 +174,4 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 - as frequências técnicas descrevem a seleção histórica após deduplicação,
   não uma síntese de eficácia nem um corpus final;
 - referências teóricas, pedagógicas, metodológicas e técnicas do TCC permanecem
-  separadas das referências derivadas do pipeline.
+  separadas das referências resultantes do processamento automatizado.

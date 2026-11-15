@@ -66,7 +66,7 @@ canônicas são incorporadas de
 [`research/exports/visualizations/`](../../../research/exports/visualizations/).
 O PTC histórico não é fonte desses dados. Referências teóricas, pedagógicas,
 metodológicas e técnicas pertencem à bibliografia própria do TCC e permanecem
-separadas das referências derivadas do pipeline.
+separadas das referências resultantes do processamento automatizado.
 
 O deck apresenta uma especificação conceitual, não uma aplicação funcional.
 Não afirma treinamento com base definitiva, eficácia pedagógica ou validação
