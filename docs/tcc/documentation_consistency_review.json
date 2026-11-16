@@ -39,7 +39,7 @@
     "research/src/cli.py": "11167c922e5acf1f5d88ce09e3257b97ade4bf46bf7a22287fb645c3f77748ff"
   },
   "reviewed_surfaces": {
-    "README.md": "bc0573cf083f9229a5883787ed646222fcda55af27265d275be15d68008d3e53",
+    "README.md": "f5abd2631c11103375bd4a56bdbacc2df69621555abdb8156ef2e9fc5e023c15",
     "research/README.md": "0d6e0e36b120d59f2c316b9b1f1b63dcb6b8831c6585789086fe749e27c363ad",
     "docs/tcc/ESTADO-ATUAL-TCC.md": "1090ad70b7cb6f039238eedbdc6e11a98bb6abc5878aa1778b35a37a95306171",
     "docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md": "a6af2b14e87f4d05d51ac542d7c0275494df4cbaa934eb2bef72e8c218ceb951",
@@ -54,15 +54,15 @@
     "docs/TCC_REVISION_SCOPE.md": "e581ee67395796db4acd496e661760a2c5ca4822d9ce50e204848d12b015fc62",
     "docs/VERIFICACAO-NUMEROS-PRISMA.md": "76e17686ce016d918e7aa3f722d546ede32ad552ed75b3730c191cc46947617d",
     "docs/tcc/AUDITORIA-DIVERGENCIAS-ESPECIFICACAO-CODIGO.md": "299c05edb703acbffea4fa9371109f29e568c098acccd43c7ed174d3aad46e3f",
-    "results/tcc/images/README.md": "8c9d266eba3c4220d6dfcf8f274ebb3300f5f73a8a22f04b3a571af0b01621ba",
+    "results/tcc/images/README.md": "6d84bec010223dd8da156d3a8dfd34c5c4b4ba43fae5f09d3e32af15edb75591",
     "index.html": "062591fae23352aa4b19ebbf9f4024966214f8b4226a6a823de1169189028831",
     "research/index.html": "cd5ce4344606dbb68db23e397e8f1e1b31b8d7093fc71679e3693cdb3cffd957",
     "results/tcc/index.html": "5ecb1c6a89b5c00478ab514e95c01536f30557cb0b41409f3327538196a05c0c",
     "presentation/slides.md": "9e59e7308f0969ee9bd502e108f1104be56b46f0547c3df9d38de389a1c82ae7",
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "b8dcaadcb0232b8ecd07f10cb712a6edf39124e1ad687dd1f02824a105fb2444",
     "scripts/generate_tcc_presentation.py": "91f79dbee6208fa2694f05df334ec19e09c7aca2fbc0e771cda89812e313bacc",
-    "scripts/sync_project_docs.py": "fb52ba548cf682ab222bb42207a946667d5a57efec78e8f6ce1985a2548621c1",
+    "scripts/sync_project_docs.py": "5f2afce167679b9fbf4487f25f0009e185d6535630ff8e436b967b81ba9c13ab",
     "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "85e98f012afb296aac6593a8b9b6a140b9bcb68904305eed80a65ce40ef6f5a6",
-    "results/tcc/images/project_overview_2026-11-15.png": "4945c4a96af48a05b8c2243f82428483218b316c49846c88c402169b671778a0"
+    "results/tcc/images/project_overview_2026-11-16.png": "824c822a088b3e3696b6de5558a59caa553bbec1294ff18c162943f9fcba19d0"
   }
 }

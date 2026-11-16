@@ -22,7 +22,7 @@ RECORD_CORRECTIONS = "research/data/adjudicated_record_corrections.csv"
 SELECTION_STATUS = "research/data/selection_status_current.json"
 CONTRIBUTIONS = "research/data/study_contribution_current.json"
 EVIDENCE = "research/data/evidence_sources_current.json"
-OVERVIEW = "results/tcc/images/project_overview_2026-11-15.png"
+OVERVIEW = "results/tcc/images/project_overview_2026-11-16.png"
 REVIEW_RECORD = "docs/tcc/documentation_consistency_review.json"
 INPUTS = (
     INTRO, MANIFEST, CONTRIBUTIONS, EVIDENCE, RECORD_CORRECTIONS, SELECTION_STATUS,
