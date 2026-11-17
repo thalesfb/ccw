@@ -26,7 +26,7 @@ a validação educacional do protótipo não foram realizadas nesta versão.
 > empíricos recuperados. Sokkhey permanece sem cópia verificável; Zeng não integra
 > a seleção. A atualização das fontes não altera retroativamente o fluxo histórico.
 
-![Visão geral atual do TCC: 15 estudos na seleção histórica, 14 textos empíricos recuperados, duas fontes não recuperadas, MMAT de 14 estudos e especificação conceitual](results/tcc/images/project_overview_2026-11-15.png)
+![Visão geral atual do TCC: 15 estudos na seleção histórica, 14 textos empíricos recuperados, duas fontes não recuperadas, MMAT de 14 estudos e especificação conceitual](results/tcc/images/project_overview_2026-11-16.png)
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
