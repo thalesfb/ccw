@@ -142,7 +142,7 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
     ])
     count_rows = []
     for group, criteria in mmat_counts(root).items():
-        group_name = "Triagem (todos os estudos)" if group == "screening" else GROUPS[group]
+        group_name = "Triagem (14 estudos com texto recuperado)" if group == "screening" else GROUPS[group]
         for criterion, values in criteria.items():
             count_rows.append([tex(group_name), criterion.upper(),
                                *[str(values.get(answer, 0)) for answer in ("Y", "N", "CT")],
@@ -160,7 +160,7 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
                       for group, criteria in component_counts(root).items()
                       for criterion, values in criteria.items()]
     counts_tex += count_table(
-        "Contagens separadas dos componentes dos três estudos mistos.",
+        "Contagens por componente em estudos mistos.",
         "tab:mmat-contagens-componentes",
         "p{6.3cm}crrrr",
         ["Categoria do componente", "Critério", "Y", "N", "CT", "n"],

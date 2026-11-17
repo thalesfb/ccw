@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-15T05:48:18+00:00",
+  "generated_at": "2026-11-17T16:42:20+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -404,14 +404,14 @@
         "The shortlisted report 6923 remains unretrieved and outside the historical 15-study MMAT denominator."
       ]
     },
-    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 14 studies and category-specific appraisal for 14; 15 records remain in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-3 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. Sokkhey remains in the original selection without a verifiable source copy and receives no MMAT answers. Zeng is outside the 15-study selection and has no MMAT appraisal. The appraisals are criterion-level records and do not constitute an aggregate study-quality score."
+    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 14 studies and category-specific appraisal for 14; 15 records remain in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-3 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. Sokkhey remains in the original selection without a verifiable source copy; its historical MMAT responses were not revalidated. Zeng is outside the 15-study selection and has no MMAT appraisal. The appraisals are criterion-level records and do not constitute an aggregate study-quality score."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
     {
       "path": "research/data/mmat_consolidation_actions_current.json",
       "role": "documentary corrections, source-access blockers and recorded appraisal limits, separate from indeterminate MMAT responses",
-      "sha256": "b61159aff8231e10317082f542fe2086b26a196a07a1f8b8ba744bdea5196a9d"
+      "sha256": "314f34b655e6bf7781e49c45cc9f691de476f89f1220c4aa7dd5f154f937050d"
     },
     {
       "path": "research/data/mmat_operational_decisions_2026-10-28.json",
@@ -576,7 +576,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "37951444e78bc841509099713689e949b92be5b06b6587a72d4dd8813933137f"
+      "sha256": "cf7164dff12556889c446a8da2a8373d1d4e414830e0c32d362fbd6ab308f827"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -611,7 +611,7 @@
     {
       "path": "scripts/tcc_quadros.json",
       "role": "active fourteen-quadro inventory and authorized editorial typography policy",
-      "sha256": "b7792794cc97fb611615cc43c3bf7bc7801160534d0753a965dfb205132c688f"
+      "sha256": "802fc7c61055349bfd5ccfa7ebe84a434b53420c065c76e00fd827cd4541b4d1"
     },
     {
       "path": "scripts/validate_tcc_quadros.py",

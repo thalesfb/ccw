@@ -147,7 +147,7 @@ def test_manifest_describes_current_snapshot_without_sqlite() -> None:
     assert "S1/S2 screening for 14 studies and category-specific appraisal for 14" in appraisal
     assert "category-specific appraisal for 14" in appraisal
     assert "three screened studies await design adjudication" not in appraisal
-    assert "Sokkhey remains in the original selection without a verifiable source copy and receives no MMAT answers" in appraisal
+    assert "Sokkhey remains in the original selection without a verifiable source copy; its historical MMAT responses were not revalidated" in appraisal
     assert "Zeng is outside the 15-study selection" in appraisal
     assert "Rafael Zanin" not in appraisal
     assert "Manassés Ribeiro" not in appraisal
@@ -354,7 +354,11 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     )
 
     assert "15/15 tests passing" not in root_html
-    assert "MMAT da seleção histórica conferido pelo autor" in root_html
+    assert "MMAT: 14 estudos com texto recuperado conferidos pelo autor" in root_html
+    assert "Sokkhey mantém respostas históricas não revalidadas" in root_html
+    assert "98 respostas" not in root_html
+    assert "95 foram mantidas" not in root_html
+    assert "3 alteradas" not in root_html
     assert "Seleção histórica" in root_html
     assert "O corte 4,0 e os 15 estudos permanecem inalterados" in root_html
     assert "emenda aprovada" not in root_html

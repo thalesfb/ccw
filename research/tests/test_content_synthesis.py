@@ -37,6 +37,9 @@ def test_mmat_counts_preserve_each_category_and_criterion():
             assert set(values) <= {"Y", "N", "CT"}
     assert len(rows) == 14
     assert sum(counts["screening"]["s1"].values()) == 14
+    count_table = build_outputs(ROOT)["research/exports/references/mmat_counts_tcc.tex"]
+    assert r"Triagem (14 estudos com texto recuperado) & S1" in count_table
+    assert r"Triagem (14 estudos com texto recuperado) & S2" in count_table
     assert counts["mixed_methods"]["q3"] == {"CT": 1, "N": 2}
     assert counts["mixed_methods"]["q4"] == {"CT": 1, "Y": 2}
 

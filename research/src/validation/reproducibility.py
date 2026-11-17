@@ -948,7 +948,7 @@ def generate_manifest(
                 "Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, "
                 "and study 14 a category-3 route with conflicting allocation reports. Distinct datasets "
                 "within study 8 must not be combined or counted twice. "
-                "Sokkhey remains in the original selection without a verifiable source copy and receives no MMAT answers. "
+                "Sokkhey remains in the original selection without a verifiable source copy; its historical MMAT responses were not revalidated. "
                 "Zeng is outside the 15-study selection and has no MMAT appraisal. "
                 "The appraisals are criterion-level records and do not constitute an aggregate study-quality score."
             ),

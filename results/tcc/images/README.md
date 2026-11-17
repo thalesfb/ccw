@@ -1,18 +1,18 @@
 # Imagens do TCC
 
 O infográfico de visão geral usado pelo README é
-[`project_overview_2026-11-16.png`](project_overview_2026-11-16.png). Ele preserva
-a composição da versão de 15/11 e corrige somente os textos sobre a regra de
-escolha de modelo e a data de corte. O fluxo distingue a seleção histórica de
-15 estudos dos 14 relatórios empíricos recuperados; Sokkhey permanece sem cópia
-verificável e Zeng está fora dos 15. O MMAT mostra as 14 apreciações por
-categoria, sem escore agregado nem certificação de eficácia educacional. O
-rodapé mantém somente a data de corte da busca, sem data de estado documental.
+[`project_overview_2026-11-17.png`](project_overview_2026-11-17.png). Ele mantém
+a composição anterior e atualiza os dados para corresponder ao TCC: 15 estudos
+na seleção histórica, 14 textos empíricos recuperados, dois relatórios não
+recuperados, Sokkhey sem revalidação das respostas históricas e Zeng fora dos
+15. No MMAT, os 14 estudos com texto recuperado foram conferidos pelo autor;
+as apreciações separadas dos componentes dos estudos mistos continuam
+preliminares. O rodapé mostra somente a data de corte da busca.
 
-Os arquivos `project_overview_2026-10-20.png`, `project_overview_2026-11-03.png`
-e `project_overview_current.png` foram preservados como registros históricos. A
-versão de 15/11 é a base visual da atualização pontual; o texto do TCC continua
-sendo a fonte para os dados.
+Os arquivos `project_overview_2026-10-20.png`, `project_overview_2026-11-03.png`,
+`project_overview_2026-11-15.png` e `project_overview_current.png` foram
+preservados como registros históricos. O texto do TCC continua sendo a fonte
+para os dados.
 
 As seis visualizações canônicas da revisão são copiadas de
 `research/exports/visualizations/` pelo sincronizador de ativos derivados.
