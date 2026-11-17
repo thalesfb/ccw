@@ -1,9 +1,11 @@
 # Apresentação do TCC — conteúdo dos slides
 
-> **Versão para a defesa — MMAT conferido pelo autor.** O storyboard segue a
-> sequência de 25 slides do deck. O corte 4,0 e a seleção histórica de 15
-> estudos permanecem inalterados; as respostas MMAT foram conferidas pelo autor
-> em 13/11/2026 (3 de 98 alteradas; estudo 14 reclassificado na categoria 3).
+> **Versão para a defesa — MMAT conferido pelo autor nos estudos com texto
+> recuperado.** O storyboard segue a sequência de 25 slides do deck. O corte
+> 4,0 e a seleção histórica de 15 estudos permanecem inalterados; Sokkhey
+> mantém respostas históricas não revalidadas por falta de cópia verificável,
+> e a apreciação separada dos componentes dos estudos mistos continua
+> preliminar.
 
 ## Identidade
 
@@ -100,10 +102,14 @@ uma exclusão após resumo e um protocolo excluído.
 
 ### 14. MMAT conferido
 
-Perguntas S1 e S2, legenda Y/N/CT e estado da apreciação: estudos 5 e 7 em
-categoria 3 operacional, estudo 14 em categoria 3 por desenho quase-experimental,
-estudo 8 em categoria 4 adaptada, sem escore agregado; respostas propostas por IA
-e conferidas pelo autor.
+Perguntas S1 e S2, legenda Y/N/CT e estado da apreciação: nos 14 estudos com
+texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT no estudo em que a
+origem dos dados não foi confirmada. Sokkhey mantém respostas históricas do MMAT
+não revalidadas por falta de cópia verificável. Estudos 5 e 7 estão na categoria 3
+operacional; o estudo 14, na categoria 3 por desenho quase-experimental
+declarado; e o estudo 8, na categoria 4 adaptada. As apreciações separadas dos
+componentes dos estudos mistos continuam preliminares. Não há escore agregado;
+as respostas propostas por IA foram conferidas pelo autor.
 
 ### 15. Resultado do OE1: para que as técnicas são usadas
 

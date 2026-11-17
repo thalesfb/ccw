@@ -454,8 +454,12 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "há perguntas de pesquisa claras?" in html.lower()
     assert "17 candidatos empíricos submetidos ao mmat" not in html.lower()
     assert "15 estudos empíricos da seleção histórica" in html.lower()
-    assert "14 têm s1/s2 respondidas" in html.lower()
-    assert "14 têm apreciação dos critérios da categoria, conferida pelo autor" in html.lower()
+    assert "14 têm respostas s1/s2" in html.lower()
+    assert "14 têm apreciações por categoria conferidas pelo autor" in html.lower()
+    assert "respostas mmat históricas não foram revalidadas" in html.lower()
+    assert "98 respostas" not in html.lower()
+    assert "95 mantidas" not in html.lower()
+    assert "3 alteradas" not in html.lower()
 
     for study_id, expected_text in {
         "7": ("120 participantes", "50/52", "não prova completude"),

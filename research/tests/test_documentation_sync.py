@@ -83,11 +83,22 @@ def test_source_table_reflects_available_pdfs_without_changing_inclusion(project
     assert "12 fontes" in blocks["coverage"] and "484" in blocks["coverage"]
     assert "15 estudos empíricos mantidos na seleção histórica" in blocks["snapshot"]
     assert "conjunto adotado nesta versão" in blocks["snapshot"]
+    assert "respostas históricas não revalidadas" in blocks["snapshot"]
+    assert "componentes dos estudos mistos continuam preliminares" in blocks["snapshot"]
+    assert "aprovação científica final" not in blocks["snapshot"]
     assert "serão avaliados" not in blocks["snapshot"]
     assert "O corte 4,0 permanece inalterado" in blocks["snapshot"]
     assert "85,62%" in blocks["sources"]
     assert "1–5" in blocks["sources"]
     assert "nenhuma" in blocks["sources"]
+
+
+def test_root_readme_uses_latest_overview_art_and_current_text(project):
+    assert sync.OVERVIEW == "results/tcc/images/project_overview_2026-11-17.png"
+    assert (project / sync.OVERVIEW).exists()
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "project_overview_2026-11-17.png" in readme
+    assert "Em o estado atual" not in readme
 
 
 def test_write_does_not_silently_approve_manual_summaries(project):

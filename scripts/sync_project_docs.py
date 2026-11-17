@@ -22,7 +22,7 @@ RECORD_CORRECTIONS = "research/data/adjudicated_record_corrections.csv"
 SELECTION_STATUS = "research/data/selection_status_current.json"
 CONTRIBUTIONS = "research/data/study_contribution_current.json"
 EVIDENCE = "research/data/evidence_sources_current.json"
-OVERVIEW = "results/tcc/images/project_overview_2026-11-16.png"
+OVERVIEW = "results/tcc/images/project_overview_2026-11-17.png"
 REVIEW_RECORD = "docs/tcc/documentation_consistency_review.json"
 INPUTS = (
     INTRO, MANIFEST, CONTRIBUTIONS, EVIDENCE, RECORD_CORRECTIONS, SELECTION_STATUS,
@@ -209,8 +209,10 @@ def render_blocks(root):
         f"{retrieval['reports_assessed_at_full_text']} foram avaliados em texto completo, incluindo "
         f"{retrieval['full_text_exclusions']} protocolo excluído. "
         f"No MMAT conferido pelo autor, há {qa['screening_rows']} triagens S1/S2 e "
-        f"{qa['category_appraised_rows']} apreciações por categoria; "
-        f"não há escore agregado nem aprovação científica final."
+        f"{qa['category_appraised_rows']} apreciações por categoria nos estudos com texto recuperado. "
+        f"Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável; "
+        f"as apreciações separadas dos componentes dos estudos mistos continuam preliminares. "
+        f"Não há escore agregado."
     )
     flow_rows = [
         ("Identificação", counts["identification"], "Registros no snapshot versionado"),

@@ -1,11 +1,12 @@
 # Apresentação Slidev do TCC
 
 > **Versão para a defesa:** `slides.md` é o arquivo que será usado na defesa
-> (banca prevista para 03/12/2026). A capa indica que a apreciação MMAT é
-> preliminar enquanto a conferência pelo autor não terminar. O Slidev, o
-> storyboard e o PPTX ainda descrevem a seleção histórica de 15 estudos sob o
-> corte 4,0. O fluxo foi reconciliado em 31/10/2026; esta correção registra
-> somente o conjunto atual.
+> (banca prevista para 04/12/2026). O TCC é a fonte dos números e das
+> classificações. A conferência do MMAT pelo autor abrange os 14 estudos com
+> texto recuperado; Sokkhey mantém respostas históricas não revalidadas por
+> falta de cópia verificável, e a apreciação separada dos componentes dos
+> estudos mistos continua preliminar. A apresentação descreve a seleção
+> histórica de 15 estudos sob o corte 4,0.
 
 ## Arquivo da defesa
 
@@ -31,12 +32,11 @@ O material em `results/ptc/presentation/` é uma terceira apresentação,
 histórica, referente ao PTC. Serve apenas como referência narrativa e visual,
 nunca como fonte dos números atuais do TCC.
 
-Os gráficos versionados, as contagens do fluxo histórico e as legendas da
-reconciliação de 31/10/2026 estão atualizados. A síntese descreve os 15 estudos
-selecionados historicamente sob o corte 4,0. Não houve mudança do corte,
-nova seleção ou incorporação de estudos adicionais. Os materiais deixam de
-ser identificados como rascunho; a apreciação MMAT segue indicada como
-preliminar até a conferência pelo autor.
+Os gráficos versionados e as contagens do fluxo descrevem a seleção histórica
+de 15 estudos sob o corte 4,0. Não houve mudança do corte, nova seleção ou
+incorporação de estudos adicionais. Os materiais resumem a conferência do MMAT
+nos 14 estudos com texto recuperado e mantêm explícitas as ressalvas sobre
+Sokkhey e sobre os componentes dos estudos mistos.
 
 ## Sequência da defesa (11/2026)
 
@@ -105,7 +105,7 @@ o conteúdo ultrapassar o palco, inclusive nas miniaturas do apresentador.
 
 Após alterar os estilos, confira o build em janelas de 1280 × 720 e
 860 × 1004 pixels. No slide MMAT, S1/S2 e a legenda Y/N/CT devem ficar
-inteiramente acima do rodapé de estado preliminar e dentro do slide.
+inteiramente acima do rodapé de estado da apreciação e dentro do slide.
 Confira também as demais rotas, os gráficos, o menu e o encerramento com QR.
 O tamanho da janela deve alterar a escala, não a ordem ou o número de colunas
 da composição. Esses critérios exigem inspeção no navegador; os testes Node
@@ -162,15 +162,15 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 
 ## Limites científicos
 
-- na seleção histórica sob o corte 4,0, dos 18 registros do MMAT, 15 estudos
+- na seleção histórica sob o corte 4,0, dos 18 registros da lista preliminar, 15 estudos
   empíricos foram mantidos; um registro foi excluído após o resumo, dois dos 17
   relatórios procurados não foram recuperados, 15 foram avaliados em texto
   completo, um protocolo foi excluído e 14 relatórios empíricos foram recuperados;
   Sokkhey permanece entre os 15 apenas como inclusão histórica sem cópia verificável;
-- o MMAT desse recorte histórico é preliminar: a busca tem data de corte em
-  31/08/2026 e o recorte foi reconciliado em 20/10/2026; 15 estudos têm
-  triagem S1/S2 e apreciação preliminar dos critérios por categoria, incluindo
-  as rotas operacionais dos estudos 5, 7, 8 e 14. Não há nota média ou ranking;
+- no MMAT, as respostas dos 14 estudos com texto recuperado foram conferidas
+  pelo autor; Sokkhey mantém respostas históricas não revalidadas por falta de
+  cópia verificável, e a apreciação separada dos componentes dos estudos mistos
+  continua preliminar. Não há nota média ou ranking;
 - as frequências técnicas descrevem a seleção histórica após deduplicação,
   não uma síntese de eficácia nem um corpus final;
 - referências teóricas, pedagógicas, metodológicas e técnicas do TCC permanecem

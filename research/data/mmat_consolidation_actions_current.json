@@ -55,8 +55,8 @@
       "subject": "Conferência do autor dos julgamentos MMAT",
       "status": "completed_author_review",
       "owner": "autor",
-      "evidence": "Em 13/11/2026 o autor conferiu as 98 respostas dos 14 estudos com texto recuperado contra as evidências localizadas e registrou as páginas consultadas: 95 mantidas, 3 alteradas (6915 Q3, 6916 Q2, 6917 Q5) e o estudo 14 reclassificado para a categoria 3. Os componentes dos estudos mistos não integraram a conferência.",
-      "next_step": "Manter explícitos o escopo da conferência, os localizadores consultados e os limites das respostas baseadas nas fontes disponíveis."
+      "evidence": "Em 13/11/2026 o autor conferiu as respostas dos 14 estudos com texto recuperado com base nas evidências localizadas e registrou os respectivos localizadores. As respostas históricas de Sokkhey não foram revalidadas por falta de cópia verificável; as apreciações separadas dos componentes dos estudos mistos permanecem preliminares.",
+      "next_step": "Manter explícitos os limites de cobertura e de recuperação das fontes e os localizadores das evidências consultadas."
     },
     {
       "id": "METH-08",

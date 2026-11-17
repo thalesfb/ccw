@@ -31,10 +31,56 @@ class EditorialFeedbackTests(unittest.TestCase):
         blocks = re.findall(r"\\begin\{(?:grafico|figure|fluxograma)\}.*?\\end\{(?:grafico|figure|fluxograma)\}", review, re.S)
         self.assertEqual(len(blocks), 2)
         self.assertIn(r"\begin{fluxograma}[htbp]", review)
-        self.assertIn(r"\caption{Fluxo de seleção da revisão sistemática.}", review)
+        self.assertIn(r"\caption{Seleção dos estudos da revisão sistemática.}", review)
         self.assertNotIn(r"\label{fig:selection-funnel}", review)
         for block in blocks:
             self.assertLess(block.index(r"\caption"), block.index(r"\includegraphics"))
+
+    def test_prototype_presents_requirements_functions_then_their_links(self):
+        prototype = (TCC / "conteudo/prototipo.tex").read_text(encoding="utf-8")
+        acceptance = (TCC / "conteudo/aceitacao-cenarios.tex").read_text(encoding="utf-8")
+        requirements = prototype.index(r"\input{conteudo/rastreabilidade-requisitos}")
+        study_support = prototype.index(r"\input{conteudo/estudos-requisitos}")
+        functions = prototype.index(r"\input{conteudo/aceitacao-cenarios}")
+        self.assertLess(requirements, study_support)
+        self.assertLess(study_support, functions)
+        self.assertLess(
+            acceptance.index(r"\subsection{Funções da Especificação}"),
+            acceptance.index(r"\subsection{Vínculos e Critérios de Aceitação}"),
+        )
+        for function in ("F01", "F02", "F03", "F04", "F05", "F06", "F07"):
+            self.assertIn(function, acceptance)
+
+    def test_mixed_methods_component_table_is_introduced_before_rendering(self):
+        review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+        start = review.index(r"\subsection{Síntese das Respostas por Critério}")
+        table_input = review.index(r"\input{../../research/exports/references/mmat_counts_tcc.tex}", start)
+        section = review[start:table_input]
+        self.assertIn(r"\ref{tab:mmat-contagens}", section)
+        self.assertIn(r"\ref{tab:mmat-contagens-componentes}", section)
+
+    def test_defense_readme_uses_confirmed_date_and_general_indirect_citation_has_no_locator(self):
+        presentation = (ROOT / "presentation/README.md").read_text(encoding="utf-8")
+        self.assertIn("04/12/2026", presentation)
+        self.assertNotIn("03/12/2026", presentation)
+        self.assertIn("conferência do MMAT pelo autor abrange os 14 estudos com", presentation)
+        self.assertIn("respostas históricas não revalidadas", presentation)
+        self.assertIn("a apreciação separada dos componentes dos estudos mistos", presentation)
+        root_readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertNotIn("95 foram mantidas", root_readme)
+        self.assertNotIn("3 alteradas", root_readme)
+        self.assertNotIn("98 respostas", root_readme)
+        self.assertIn("Sokkhey mantém respostas históricas não revalidadas", root_readme)
+        slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
+        storyboard = (ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md").read_text(encoding="utf-8")
+        for text in (slides, storyboard):
+            self.assertNotIn("3 de 98", text)
+            self.assertIn("Sokkhey mantém respostas históricas", text)
+            self.assertIn("não revalidadas", text)
+            self.assertIn("componentes dos estudos mistos continuam preliminares", text)
+        foundation = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
+        self.assertNotIn(r"\citeonline[p.~42--44]{NRC2001}", foundation)
+        self.assertIn(r"\citeonline{NRC2001}", foundation)
 
     def test_limitations_are_tied_to_consulted_studies_and_bounded(self):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
@@ -211,15 +257,25 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = " ".join(
             (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
         )
-        self.assertIn("Texto não recuperado: sem apreciação", slides)
+        self.assertIn("Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação", slides)
         self.assertIn("exclusão após resumo", slides)
         self.assertNotIn("cinco candidatos foram apreciados por resumo/metadados", slides)
         self.assertNotIn("17 estudos empíricos provisórios", slides)
         self.assertNotIn("Submeter o MMAT a um segundo avaliador independente", slides)
         self.assertIn("Aplicar o protocolo com docentes, após parecer ético.", slides)
         self.assertIn("14 triagens S1/S2 e 14 conjuntos de critérios", slides)
-        self.assertIn("S2: 14 respostas Y e 1 CT no estudo 5", slides)
+        self.assertIn("S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT", slides)
+        self.assertIn("Sokkhey mantém respostas históricas do MMAT não revalidadas", slides)
+        self.assertNotIn("3 de 98", slides)
+        self.assertIn("Sokkhey mantém respostas históricas não revalidadas", slides)
         self.assertNotIn("validação humana pendente", slides)
+
+        ai_appendix = (ROOT / "results/tcc/postextuais/ferramentas-ia.tex").read_text(encoding="utf-8")
+        self.assertNotIn("OpenCode", ai_appendix)
+        self.assertNotIn("98 respostas", ai_appendix)
+        self.assertNotIn("95 respostas", ai_appendix)
+        self.assertIn("O autor conferiu as respostas dos 14 estudos com texto recuperado", ai_appendix)
+        self.assertIn(r"\texttt{.github/prompts/}", ai_appendix)
 
     def test_study_specific_quantitative_claims_have_primary_source_locators(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
@@ -331,7 +387,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
         self.assertNotIn("um único revisor", pptx_source)
         self.assertNotIn("dupla avaliação independente", pptx_source)
-        self.assertIn("MMAT de 14 estudos; Sokkhey sem apreciação", pptx_source)
+        self.assertIn("MMAT conferido nos 14 estudos com texto recuperado; respostas históricas de Sokkhey não revalidadas", pptx_source)
         self.assertNotIn("um único pesquisador", pptx_source)
         self.assertNotIn("conferência humana pendente", pptx_source)
 
@@ -576,21 +632,21 @@ class EditorialFeedbackTests(unittest.TestCase):
         normalized = " ".join(appendix.split())
         self.assertIn("2 & Resumo & Parcial:", normalized)
         self.assertIn("critérios gerais", normalized)
-        self.assertIn("data individual da última consulta", normalized)
-        self.assertIn("total agregado de participantes", normalized)
+        self.assertIn("datas individuais da última busca em cada fonte", normalized)
+        self.assertIn("número de participantes não é agregado", normalized)
         self.assertIn("financiamento", normalized)
         self.assertIn("pré-registro", normalized)
         self.assertIn("https://github.com/thalesfb/ccw/tree/main/research", normalized)
-        self.assertIn("título não identifica o trabalho como revisão sistemática", normalized)
+        self.assertIn("o título não explicita revisão sistemática", normalized)
         registration = next(line for line in appendix.splitlines() if line.startswith("24a &"))
         protocol = next(line for line in appendix.splitlines() if line.startswith("24b &"))
         amendments = next(line for line in appendix.splitlines() if line.startswith("24c &"))
         self.assertIn("não houve registro em plataforma de pré-registro", registration)
         self.assertIn("planejamento inicial", protocol)
-        self.assertIn("histórico do repositório", protocol)
+        self.assertIn("histórico público do repositório", protocol)
         self.assertNotIn("Projeto de Trabalho de Conclusão de Curso", protocol)
-        self.assertIn("planejamento inicial", amendments)
-        self.assertIn("corte 4,0 não tem calibração ou justificativa empírica", amendments)
+        self.assertIn("Em relação ao planejamento inicial", amendments)
+        self.assertIn("corte 4,0 não tem calibração empírica preservada", amendments)
 
     def test_missing_abstract_and_sensitivity_limits_are_reported(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
@@ -654,12 +710,13 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_partial_requirement_links_are_explicit_in_acceptance_table(self):
         acceptance = (TCC / "conteudo/aceitacao-cenarios.tex").read_text(encoding="utf-8")
         self.assertIn("R04 tem vínculo parcial em F04 e F07", acceptance)
-        self.assertIn("F04 & Apresentar resultados individuais e agregados (R04 parcial, R09, R15)", acceptance)
-        self.assertIn("F05 & Explicar estimativas e incertezas (R03, R23 (parcial), R24 (parcial), R26)", acceptance)
-        self.assertIn("F07 & Exportar versões, decisões e saídas (R04 parcial, R06, R10, R11)", acceptance)
+        self.assertIn("F04 & R04 parcial, R09, R15", acceptance)
+        self.assertIn("F05 & R03, R23 parcial, R24 parcial, R26", acceptance)
+        self.assertIn("F07 & R04 parcial, R06, R10, R11", acceptance)
         self.assertIn("R24 tem vínculo parcial em F05", acceptance)
         self.assertIn("R17 circunscreve os testes sintéticos", acceptance)
         self.assertIn("R12 permanece como requisito a operacionalizar", acceptance)
+        self.assertIn(r"\caption{Vínculos entre funções, requisitos e critérios de aceitação.}", acceptance)
 
 
 if __name__ == "__main__":

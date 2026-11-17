@@ -274,17 +274,20 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert r"\ref{apendice:ferramentas-ia}" in methodology
     appendix = _read(TCC_ROOT / "postextuais" / "apendice.tex")
     selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
-    appraisal_row = next(line for line in appendix.splitlines() if line.startswith("11 & Viés nos estudos &"))
+    appraisal_row = next(
+        line for line in appendix.splitlines()
+        if line.startswith("11 & Apreciação metodológica &")
+    )
     assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
-    assert r"Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão" in selection_row
-    assert "regras automatizadas e apoio de IA generativa" in selection_row
+    assert r"Seção~\ref{sec:uso-ferramentas-ia}" in selection_row
+    assert "regras automatizadas e apoio de IA por etapa" in selection_row
     assert "um único revisor" not in selection_row
     assert "dupla avaliação independente" not in selection_row
     assert "orientador" not in selection_row.lower()
     assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
     assert "um único revisor" not in appraisal_row
     assert "dupla avaliação independente" not in appraisal_row
-    assert "apoio de IA generativa" in appraisal_row
+    assert "apoio de IA" in appraisal_row
     assert "orientador" not in appraisal_row.lower()
     assert "a verificação documental permanece incompleta" not in selection_row
     assert "com fontes e julgamentos ainda incompletos" not in appraisal_row

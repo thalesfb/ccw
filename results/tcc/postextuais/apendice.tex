@@ -35,57 +35,57 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \endlastfoot
 1 & Título & Parcial: capa e folha de rosto identificam o tema, mas o título não explicita revisão sistemática. \\
 \hline
-2 & Resumo & Parcial: Resumo e Abstract apresentam objetivo, critérios gerais, fontes e data de corte, métodos, achados, limitações e conclusão, com 15 estudos e 26 grupos de requisitos como resultados quantitativos essenciais. O título não identifica o trabalho como revisão sistemática; não há total agregado de participantes, pois as unidades e os denominadores não são comparáveis, nem a data individual da última consulta a cada fonte. As declarações de financiamento e ausência de pré-registro estão no método, não nos resumos. \\
+2 & Resumo & Parcial: Resumo e Abstract apresentam objetivo, critérios gerais, fontes, data de corte, métodos, achados, limitações e conclusão. Não informam as datas individuais da última busca em cada fonte; o método informa o financiamento e a ausência de registro prospectivo. O número de participantes não é agregado porque as unidades e os denominadores dos estudos não são comparáveis. \\
 \hline
 3 & Justificativa & Localizado: Cap.~\ref{cap:introducao}, Justificativa. \\
 \hline
 4 & Objetivos & Localizado: Cap.~\ref{cap:introducao}, Problema de Pesquisa e Objetivos. \\
 \hline
-5 & Elegibilidade & Parcial: Cap. 3, Critérios de Seleção, e Cap. 4, Caracterização dos Estudos Incluídos, descrevem critérios e situações de inclusão. O Fluxograma~\ref{fig:prisma-flow} e a Tabela~\ref{tab:stats-descritivas} apresentam a seleção pelo corte de relevância 4,0; a relação entre relevância e avaliação de elegibilidade é explicitada no método. \\
+5 & Elegibilidade & Parcial: Cap.~\ref{cap:metodologia}, Critérios de Seleção e Processo de Seleção, e Cap.~\ref{cap:revisao}, Caracterização dos Estudos Incluídos, descrevem os critérios e suas aplicações. O escore 4,0 delimita a seleção operacional e não substitui os critérios de elegibilidade em texto completo; a validação do escore contra esses critérios não foi realizada. \\
 \hline
-6 & Fontes & Parcial: Cap.~\ref{cap:metodologia}, Estratégia de Busca. Não estão discriminadas as datas da última consulta de cada fonte. \\
+6 & Fontes & Parcial: Cap.~\ref{cap:metodologia}, Estratégia de Busca, identifica Semantic Scholar, OpenAlex, Crossref e CORE e descreve as interfaces de API. A data de corte da busca está informada, mas não há data individual da última consulta para cada fonte no histórico preservado. \\
 \hline
-7 & Buscas & Parcial: Cap.~\ref{cap:metodologia}, Estratégia de Busca e Quadro~\ref{qua:camadas-busca}. Há composição canônica e exemplos; o relato por fonte, com filtros e limites, não está completo. \\
+7 & Buscas & Parcial: Cap.~\ref{cap:metodologia}, Estratégia de Busca, Quadro~\ref{qua:camadas-busca} e código \path{research/src/search_terms.py} documentam 72 consultas canônicas, exemplos, limites configurados e diferenças no tratamento por API. O histórico completo de requisições e respostas não está disponível; por isso, não é possível reconstruir a sequência exata executada em cada fonte. \\
 \hline
-8 & Seleção & Parcial: Cap.~\ref{cap:metodologia}, Processo de Seleção, e Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão. A seleção empregou regras automatizadas e apoio de IA generativa, descritos na Seção~\ref{sec:uso-ferramentas-ia}. \\
+8 & Seleção & Parcial: Cap.~\ref{cap:metodologia}, Processo de Seleção, e Seção~\ref{sec:uso-ferramentas-ia} informam que o autor conduziu a triagem e descrevem regras automatizadas e apoio de IA por etapa. O fluxograma apresenta as contagens finais, mas não separa todas as exclusões por decisão automatizada ou humana. \\
 \hline
-9 & Coleta de dados & Parcial: Cap.~\ref{cap:metodologia}, Identificação e Avaliação da Qualidade Metodológica. A obtenção de metadados está descrita; a extração dos textos e sua confirmação não estão integralmente documentadas. \\
+9 & Coleta de dados & Parcial: Cap.~\ref{cap:metodologia}, Processo de Seleção, Avaliação da Qualidade Metodológica e Seção~\ref{sec:extracao-sintese} informam o revisor, o apoio de ferramentas e a matriz de extração. O texto não relata contato com autores dos estudos, e o histórico completo da extração não está disponível. \\
 \hline
-10a & Desfechos & Parcial: Cap.~\ref{cap:metodologia}, Critérios de Seleção, e Quadro~\ref{qua:sintese-estudos-empiricos}. Faltam regras completas para seleção de resultados por desfecho. \\
+10a & Desfechos & Parcial: Cap.~\ref{cap:metodologia}, Critérios de Seleção, e Seção~\ref{sec:extracao-sintese} definem o domínio matemático e registram o alvo de cada estudo. Não foram explicitados, para todos os domínios de desfecho, os períodos de mensuração considerados na extração, nem regras completas para selecionar resultados entre múltiplas medidas do mesmo domínio. \\
 \hline
-10b & Outras variáveis & Parcial: Cap.~\ref{cap:metodologia}, Identificação. Não há definição completa das variáveis extraídas e do tratamento de informação ausente. \\
+10b & Outras variáveis & Parcial: Seção~\ref{sec:extracao-sintese} e matriz \path{research/data/study_synthesis_current.csv} enumeram finalidade, técnica, nível, amostra e unidade, alvo, validação, métrica e fonte. Não há um dicionário completo para todas as variáveis nem regra uniforme para toda informação ausente ou ambígua. \\
 \hline
-11 & Viés nos estudos & Parcial: Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica. O apoio de IA generativa à leitura, às propostas de julgamentos e à conferência é descrito na Seção~\ref{sec:uso-ferramentas-ia}. \\
+11 & Apreciação metodológica & Parcial: Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica, especifica o MMAT 2018, suas categorias, os critérios aplicados e a ausência de julgamento agregado. O autor apreciou os estudos com texto recuperado com apoio de IA; a adaptação do instrumento e os limites dessa apreciação são descritos no método. \\
 \hline
-12 & Medidas de efeito & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos}. As métricas reportadas são heterogêneas; não foi definida medida comum para combinação quantitativa. \\
+12 & Medidas de efeito & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos} e matriz \path{research/data/study_synthesis_current.csv} preservam as métricas e os resultados por estudo. Não foi definida medida comum nem realizada combinação quantitativa. \\
 \hline
-13a & Composição das sínteses & Parcial: Cap.~\ref{cap:metodologia}, Critérios de Seleção, e Cap.~\ref{cap:revisao}, Seção~\ref{sec:caracterizacao-registros}. A síntese empírica considera os 15 estudos selecionados pelo corte de relevância 4,0; o relatório não recuperado, a exclusão após resumo e o protocolo sem resultados concluídos estão discriminados no Quadro~\ref{qua:sintese-estudos-empiricos}. \\
+13a & Composição das sínteses & Parcial: Seção~\ref{sec:extracao-sintese} e Cap.~\ref{cap:revisao}, Seção~\ref{sec:caracterizacao-registros}, descrevem a unidade de análise e as cinco finalidades principais. A seleção histórica tem 15 estudos; a linha de \citeonline{Multimodels2020_002} deriva do registro histórico, sem texto verificável, e não constitui extração conferida. O protocolo excluído e os demais registros da lista preliminar estão identificados no Quadro~\ref{qua:sintese-estudos-empiricos}. \\
 \hline
-13b & Preparação dos dados & Não apresentado: não foi localizado procedimento específico para preparar os resultados extraídos, incluindo estatísticas ausentes ou conversões. \\
+13b & Preparação dos dados & Parcial: Seção~\ref{sec:extracao-sintese} informa que a rotina gera frequências a partir da matriz e mantém as métricas por estudo, sem conversão para uma medida comum ou combinação estatística. O tratamento de estatísticas ausentes e de conversões para apresentação não foi documentado de modo completo. \\
 \hline
 13c & Apresentação & Localizado: Cap.~\ref{cap:revisao}, Fluxo de Seleção, Estatísticas Descritivas, Seção~\ref{sec:caracterizacao-registros} e Avaliação Metodológica com o MMAT. A apresentação não substitui a validação dos dados. \\
 \hline
-13d & Síntese & Parcial: Cap.~\ref{cap:revisao}, Seção~\ref{sec:caracterizacao-registros} e Limitações e Contribuições da Revisão. A heterogeneidade é discutida; a codificação e o procedimento da síntese narrativa não estão inteiramente explicitados. \\
+13d & Síntese & Parcial: Cap.~\ref{cap:metodologia}, Seção~\ref{sec:extracao-sintese}, e Cap.~\ref{cap:revisao}, Seção~\ref{sec:caracterizacao-registros}, descrevem a categorização por finalidade e as frequências. A heterogeneidade é discutida, mas o procedimento completo de codificação e de síntese narrativa não está especificado. \\
 \hline
 13e & Heterogeneidade & Não apresentado: não foi realizado método formal para investigar possíveis causas de heterogeneidade; diferenças entre populações, desenhos e métricas são discutidas qualitativamente. \\
 \hline
 13f & Sensibilidade & Não apresentado: não foi realizada análise de sensibilidade da síntese. A exploração do corte de seleção, discutida na Seção~\ref{sec:limitacoes-revisao}, tem finalidade distinta. \\
 \hline
-14 & Viés de relato & Não apresentado: não foi realizada avaliação formal. Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão, registra a ausência de teste de viés de publicação. \\
+14 & Viés de relato & Não apresentado: não foi avaliado formalmente o risco de viés decorrente de resultados ausentes ou de relato seletivo. Cap.~\ref{cap:revisao}, Limitações e Contribuições da Revisão, também informa que não foi realizado teste de viés de publicação. \\
 \hline
 15 & Certeza & Não apresentado: não foi apresentada avaliação formal da certeza do conjunto de evidências; o MMAT individual não a substitui. \\
 \hline
-16a & Fluxo & Parcial: o Fluxograma~\ref{fig:prisma-flow} e a Tabela~\ref{tab:stats-descritivas} apresentam as etapas e contagens, distinguindo relatórios procurados, não recuperados, avaliados e excluídos. A priorização por relevância é explicitada como etapa automatizada, não de elegibilidade. \\
+16a & Fluxo & Parcial: o Fluxograma~\ref{fig:prisma-flow} e a Tabela~\ref{tab:stats-descritivas} apresentam registros, relatórios procurados, não recuperados e avaliados, além das exclusões e da seleção empírica recuperada. A triagem automatizada, as decisões manuais registradas e a priorização por relevância são descritas no método; o fluxograma não divide todas as exclusões por responsável. \\
 \hline
-16b & Exclusões justificadas & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos}: \citeonline{Imperatrice2025_6921}, protocolo sem resultados empíricos concluídos, excluído após texto completo; \citeonline{Machine2019_007}, excluído após resumo; texto não recuperado, distinto dessas exclusões. \citeonline{UniversityMathematics2026_6919} foi incluído conforme o protocolo escrito. A caracterização do relato pendente limita-se aos metadados e resumos disponíveis. \\
+16b & Exclusões justificadas & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos} identifica \citeonline{Imperatrice2025_6921}, excluído após avaliação do texto completo por ser protocolo sem resultados empíricos concluídos. Os relatórios não recuperados são uma situação distinta das exclusões após avaliação do texto completo. \\
 \hline
-17 & Características & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos}. Os 18 registros da lista preliminar são identificados com sua situação no fluxo; características de amostra e desenho não estão uniformemente detalhadas. Dois relatórios não foram recuperados: \citeonline{Multimodels2020_002}, mantido na seleção original sem cópia verificável, e \citeonline{Zeng2025_6923}, fora dos 15 estudos da seleção. O registro excluído após resumo pertence a etapa distinta e não foi tratado como relatório procurado. \\
+17 & Características & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos} identifica os 15 estudos da seleção histórica e os registros que não a integram. Quatorze estudos têm texto recuperado; \citeonline{Multimodels2020_002} permanece como inclusão histórica sem cópia verificável, e \citeonline{Zeng2025_6923} não integra a seleção. Amostra e delineamento não estão uniformemente detalhados, sobretudo quando a fonte não foi recuperada. \\
 \hline
-18 & Apreciação individual & Parcial: Seção~\ref{sec:qualidade-estudos} e Quadro~\ref{qua:mmat-reavaliacao-atual}. Julgamentos por revisor único, conferidos pelo autor nos 14 estudos com texto recuperado; componentes dos estudos mistos permanecem preliminares. \\
+18 & Apreciação individual & Parcial: Seção~\ref{sec:qualidade-estudos} e Quadro~\ref{qua:mmat-reavaliacao-atual} apresentam os julgamentos por critério dos 14 estudos com texto recuperado. O autor conferiu essas respostas; não conferiu separadamente as apreciações dos componentes qualitativo e quantitativo dos três estudos de métodos mistos. Essas apreciações permanecem registradas como assistidas por IA. Sokkhey não recebeu nova apreciação. \\
 \hline
 19 & Resultados individuais & Parcial: Quadro~\ref{qua:sintese-estudos-empiricos}. Diversas entradas descrevem a abordagem; estimativas e precisão não são apresentadas uniformemente. \\
 \hline
-20a & Síntese e limitações & Parcial: Cap.~\ref{cap:revisao}, Seção~\ref{sec:caracterizacao-registros} e Avaliação Metodológica com o MMAT. Não está completa a ligação entre os estudos de cada síntese e seus julgamentos metodológicos. \\
+20a & Síntese e limitações & Parcial: As seções de caracterização dos estudos e de avaliação metodológica do Cap.~\ref{cap:revisao} apresentam características e julgamentos por desenho. A correspondência entre cada estudo contribuinte, cada síntese narrativa e suas limitações metodológicas não está completa. \\
 \hline
 20b & Sínteses estatísticas & Não aplicável aos resultados de combinação estatística: nenhuma síntese estatística conjunta foi realizada. \\
 \hline
@@ -93,7 +93,7 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 20d & Sensibilidade & Não apresentado para a síntese: a Seção~\ref{sec:limitacoes-revisao} relata a exploração do corte de seleção, que não corresponde a uma análise de robustez dos resultados sintetizados. \\
 \hline
-21 & Viés de relato & Não apresentado: não foram apresentados resultados de avaliação formal de viés decorrente de resultados ausentes. \\
+21 & Viés de relato & Não apresentado: não há resultados de avaliação formal do risco de viés decorrente de resultados ausentes ou de relato seletivo. \\
 \hline
 22 & Certeza & Não apresentado: não foi apresentada classificação formal de certeza por desfecho. \\
 \hline
@@ -107,21 +107,21 @@ A indicação \textit{Localizado} identifica uma passagem pertinente, mas não c
 \hline
 24a & Registro & Localizado: Cap.~\ref{cap:metodologia}, Protocolo e Relato da Revisão Sistemática, declara que não houve registro em plataforma de pré-registro. \\
 \hline
-24b & Protocolo & Parcial: Cap.~\ref{cap:metodologia}, Seção~\ref{sec:protocolo-relato}, descreve o planejamento inicial documentado no histórico do repositório público; não há protocolo pré-registrado. \\
+24b & Protocolo & Parcial: Cap.~\ref{cap:metodologia}, Seção~\ref{sec:protocolo-relato}, informa que não houve protocolo registrado prospectivamente e localiza o planejamento inicial no histórico público do repositório. Esse histórico não equivale a um protocolo autônomo e consolidado. \\
 \hline
-24c & Alterações & Parcial: Cap.~\ref{cap:metodologia}, Seção~\ref{sec:protocolo-relato}, distingue o planejamento inicial documentado no histórico do repositório dos procedimentos executados quanto ao período, aos tipos de publicação e à organização das etapas. A escolha exata do corte 4,0 não tem calibração ou justificativa empírica registrada nas fontes preservadas. \\
+24c & Alterações & Parcial: Em relação ao planejamento inicial, Cap.~\ref{cap:metodologia}, Seção~\ref{sec:protocolo-relato}, informa mudanças de período, tipos documentais e organização das etapas, e registra que o corte 4,0 não tem calibração empírica preservada. Não são apresentados, para cada alteração, o motivo e a etapa da revisão em que foi decidida. \\
 \hline
 25 & Apoio & Localizado: Seção~\ref{sec:apoio-pesquisa}, Protocolo e Relato da Revisão Sistemática. A pesquisa foi desenvolvida no Instituto Federal Catarinense – Campus Videira, com recursos próprios, sem financiamento externo ou participação de financiador nas decisões da revisão. \\
 \hline
 26 & Interesses & Localizado: Seção~\ref{sec:apoio-pesquisa}, Protocolo e Relato da Revisão Sistemática. O autor declara não haver conflitos de interesse relacionados a esta pesquisa. \\
 \hline
-27 & Materiais & Parcial: Código, protocolo de elegibilidade, escopo da síntese, manifestos e avaliações metodológicas estão versionados no \href{https://github.com/thalesfb/ccw/tree/main/research}{repositório público do projeto}, em \path{research/src}, \path{research/data} e \path{research/exports/reports}. Os textos integrais de algumas fontes não foram recuperados e não são redistribuídos; a disponibilidade de cada estudo é indicada no registro de fontes. \\
+27 & Materiais & Parcial: Código, critérios de elegibilidade, escopo, matriz de síntese, reconciliação do fluxo e avaliações MMAT estão versionados em \path{research/src} e \path{research/data} no \href{https://github.com/thalesfb/ccw/tree/main/research}{repositório público}. A matriz principal está em \path{research/data/study_synthesis_current.csv}; o gerador, em \path{research/src/analysis/content_synthesis.py}. Não há formulário autônomo de extração; textos integrais não recuperados ou sem autorização de redistribuição não estão no repositório, e a disponibilidade é indicada no registro de fontes. \\
 \hline
 \end{longtable}
 \TCCQuadroFonte{Elaborado pelo autor (2026), com base em \citeonline{PRISMA2020}.}
 \endgroup
 
-A apreciação MMAT corresponde aos itens 11 e 18 deste mapeamento e foi conduzida pelo autor com apoio de IA, com as respostas verificadas contra as evidências localizadas. Ela não constitui avaliação formal da certeza do conjunto de evidências (itens 15 e 22), não é avaliação de viés de relato (itens 14 e 21) e não permite inferir ausência de viés ou conformidade global. As pendências indicadas restringem o alcance das conclusões e devem ser consideradas juntamente com as limitações apresentadas no Capítulo~\ref{cap:revisao}.
+A apreciação MMAT corresponde aos itens 11 e 18 deste mapeamento. O autor conferiu as respostas por critério dos 14 estudos com texto recuperado, com apoio de IA e evidências localizadas, exceto as apreciações separadas dos componentes qualitativo e quantitativo nos três estudos de métodos mistos. Essas apreciações permanecem registradas como assistidas por IA. O MMAT não constitui avaliação formal da certeza do conjunto de evidências (itens 15 e 22), nem avaliação de viés de relato decorrente de resultados ausentes (itens 14 e 21). Esses limites não permitem inferir ausência de viés ou conformidade global. As pendências indicadas delimitam o alcance das conclusões e devem ser lidas com as limitações do Capítulo~\ref{cap:revisao}.
 
 
 \chapter{REGISTRO DE RECUPERAÇÃO DAS FONTES}
