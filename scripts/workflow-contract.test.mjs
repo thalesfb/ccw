@@ -50,3 +50,16 @@ test('canonical PDF gate and its guide require verification without repository w
   assert.match(guide, /scripts\/check_canonical_pdf\.py/)
   assert.doesNotMatch(guide, /pode atualizar o PDF compilado na branch/)
 })
+
+test('cold LaTeX installs have step timeout and job headroom', () => {
+  const latexJob = qualityWorkflow.split('\n  latex-build:')[1]?.split('\n  canonical-pdf-sync:')[0]
+  assert.ok(latexJob, 'the LaTeX build job must remain present')
+
+  const jobTimeout = Number(latexJob.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1])
+  const installTimeout = Number(latexJob.match(/- name: Install LaTeX dependencies\s*\n\s+timeout-minutes:\s+(\d+)/)?.[1])
+
+  assert.ok(installTimeout >= 25, 'cold package installation needs at least 25 minutes')
+  assert.ok(jobTimeout >= installTimeout + 10, 'the job must leave time for compilation and PDF checks')
+  assert.match(latexJob, /apt-get -o Acquire::Retries=3 update/)
+  assert.match(latexJob, /apt-get -o Acquire::Retries=3 install/)
+})
