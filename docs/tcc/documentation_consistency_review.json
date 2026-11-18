@@ -4,7 +4,7 @@
   "human_scientific_approval": "pending",
   "canonical_inputs": {
     "results/tcc/conteudo/introducao.tex": "2ca31fadb0c0f96adadd565c37dc09abfa841b6af2ec07aea4abe6f7c26cfd45",
-    "research/exports/reports/reproducibility_manifest.json": "232e8542d1e145e2b7097301f4a442e58c773d058cf46b5f19081f267830b5a1",
+    "research/exports/reports/reproducibility_manifest.json": "4845b2b24e13b3a17c09ba4511a322f8405eb7f15de590e84a1e4163292224ed",
     "research/data/study_contribution_current.json": "659ff98284e89b2193db17790de9fcab69bd161049ad182d25c43079f7becbd1",
     "research/data/evidence_sources_current.json": "d3146ebb8a282c8fceaa48f7b6292e289054aa3f478b5aa603f6252afa6a1abe",
     "research/data/adjudicated_record_corrections.csv": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee",

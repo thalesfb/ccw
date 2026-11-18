@@ -409,6 +409,7 @@ const page = `<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Apreciação por critérios do MMAT 2018, conferida pelo autor, para o escopo reconciliado em ${scopeSnapshotLabel}; data de corte ${cutoffDateLabel}.">
   <title>MMAT · critérios Q1–Q5 por categoria · escopo histórico ${scopeSnapshotLabel} · CCW</title>
+  <link rel="icon" type="image/svg+xml" href="../../../public-site/assets/site-favicon.svg">
   <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
 <body>
@@ -561,5 +562,5 @@ const page = `<!doctype html>
 </html>`;
 
 const normalizedPage = page.replace(/^[\t ]+$/gm, '');
-fs.writeFileSync(outputPath, normalizedPage, 'utf8');
+fs.writeFileSync(outputPath, `${normalizedPage}\n`, 'utf8');
 console.log(`generated ${path.relative(root, outputPath)} from ${current.length} current MMAT records`);
