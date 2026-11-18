@@ -47,31 +47,36 @@
     },
     {
       "number": 9,
-      "label": "qua:aceitacao-funcional",
+      "label": "qua:funcoes-especificacao",
       "source": "results/tcc/conteudo/aceitacao-cenarios.tex"
     },
     {
       "number": 10,
+      "label": "qua:aceitacao-funcional",
+      "source": "results/tcc/conteudo/aceitacao-cenarios.tex"
+    },
+    {
+      "number": 11,
       "label": "qua:estudos-requisitos",
       "source": "results/tcc/conteudo/estudos-requisitos.tex"
     },
     {
-      "number": 11,
+      "number": 12,
       "label": "qua:prisma-checklist",
       "source": "results/tcc/postextuais/apendice.tex"
     },
     {
-      "number": 12,
+      "number": 13,
       "label": "qua:formulario-oe4",
       "source": "results/tcc/postextuais/apendice.tex"
     },
     {
-      "number": 13,
+      "number": 14,
       "label": "qua:ficha-aceitacao-documental",
       "source": "results/tcc/postextuais/apendice.tex"
     },
     {
-      "number": 14,
+      "number": 15,
       "label": "qua:ferramentas-ia",
       "source": "results/tcc/postextuais/ferramentas-ia.tex"
     }

@@ -27,7 +27,7 @@ definição de tabela usada pelo IBGE.
 
 ## Mapeamento da versão atual
 
-Conferido em 11 de novembro de 2026 contra as listas do PDF compilado.
+Conferido em 18 de novembro de 2026 contra as listas do PDF compilado.
 
 - **Tabelas 1 e 2:** estatísticas descritivas da revisão; frequência da
   finalidade principal nos 15 estudos;
@@ -39,9 +39,11 @@ Conferido em 11 de novembro de 2026 contra as listas do PDF compilado.
   métricas;
 - **Quadros 6 e 7:** apreciação MMAT por critério para 14 estudos com texto
   recuperado; componentes dos estudos mistos fora da conferência registrada;
-- **Quadros 8 a 10:** critérios de aceitação; origem dos requisitos;
-  observações dos estudos e requisitos;
-- **Quadros 11 a 14 (apêndices):** mapeamento PRISMA 2020; ficha de julgamento
+- **Quadro 8:** origem, derivação e limites dos requisitos;
+- **Quadro 9:** funções da especificação conceitual;
+- **Quadros 10 e 11:** critérios de aceitação; observações dos estudos e
+  requisitos;
+- **Quadros 12 a 15 (apêndices):** mapeamento PRISMA 2020; ficha de julgamento
   por requisito; ficha de aceitação documental; ferramentas de IA;
 - **Fluxograma 1:** fluxo de seleção da revisão;
 - **Fluxogramas 2 e 3:** regra de escolha de modelo (OE3); regras de avaliação
