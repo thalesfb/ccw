@@ -119,4 +119,4 @@ def test_readme_distinguishes_shortlist_from_provisional_empirical_inclusion():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "17 candidatos empíricos provisórios" not in text
     assert "15 estudos empíricos mantidos na seleção histórica" in text
-    assert "14 triagens S1/S2" in text and "14 apreciações por categoria" in text
+    assert "Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT" in text

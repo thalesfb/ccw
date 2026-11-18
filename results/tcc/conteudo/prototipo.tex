@@ -24,7 +24,7 @@ Como parte do corpus inclui estudos do ensino médio, uma aplicação poderá en
 
 No plano funcional, a futura implementação deverá importar dados documentados e relacionados a objetivos curriculares, preservando os metadados necessários à leitura de sua procedência. A partir desses dados, deverá organizar evidências de desempenho por habilidade ou descritor, de modo que a análise mantenha relação explícita com o contexto curricular em que os registros foram produzidos.
 
-Na etapa de análise, o protótipo deverá produzir estimativas para um alvo educacional explicitamente definido, acompanhadas de incertezas e limitações, e apresentar resultados individuais e agregados ao professor. Uma probabilidade preditiva de acerto ou de pertencimento a uma classe de desempenho não será denominada proficiência apenas por resultar de um modelo computacional. A interpretação como proficiência exigirá um modelo de mensuração, uma escala e evidências de validade para o uso pretendido, em consonância com a distinção entre observação e inferência discutida por \citeonline[p.~42--44]{NRC2001}. Essas saídas deverão explicar as variáveis relacionadas a cada estimativa. Por fim, deverá exportar dados, parâmetros e resultados para auditoria das versões, decisões e saídas.
+Na etapa de análise, o protótipo deverá produzir estimativas para um alvo educacional explicitamente definido, acompanhadas de incertezas e limitações, e apresentar resultados individuais e agregados ao professor. Uma probabilidade preditiva de acerto ou de pertencimento a uma classe de desempenho não será denominada proficiência apenas por resultar de um modelo computacional. A interpretação como proficiência exigirá um modelo de mensuração, uma escala e evidências de validade para o uso pretendido, em consonância com a distinção entre observação e inferência discutida por \citeonline{NRC2001}. Essas saídas deverão explicar as variáveis relacionadas a cada estimativa. Por fim, deverá exportar dados, parâmetros e resultados para auditoria das versões, decisões e saídas.
 
 No plano não funcional, a especificação estabelece condições de qualidade e de governança para a implementação futura. A reprodutibilidade deverá ser assegurada pelo registro das versões dos dados, dos parâmetros, dos modelos e das dependências. Complementarmente, a rastreabilidade deverá permitir associar cada resultado à fonte de dados utilizada e à versão do experimento que o produziu. Essa associação é necessária para que uma conclusão possa ser examinada sem perder sua procedência.
 
@@ -92,12 +92,14 @@ A etapa de avaliação e explicabilidade deverá calcular as métricas, analisar
 
 A separação dos componentes deverá favorecer a testabilidade, a rastreabilidade e a substituição controlada de técnicas. Ela também permite localizar em qual etapa uma decisão, uma transformação ou uma limitação foi introduzida. A arquitetura não impõe uma interface específica e poderá ser materializada como caderno computacional interativo, aplicação local, API ou sistema web. Essas formas de execução deverão preservar os requisitos da Seção~\ref{sec:principios-requisitos}.
 
+A Figura~\ref{fig:arquitetura-componentes} sintetiza os componentes e os fluxos descritos nesta seção.
+
 \input{conteudo/arquitetura-figura}
 
 \input{conteudo/rastreabilidade-requisitos}
 
-\input{conteudo/estudos-requisitos}
-
 \input{conteudo/aceitacao-cenarios}
+
+\input{conteudo/estudos-requisitos}
 
 %--------- FIM ESPECIFICAÇÃO DO PROTÓTIPO ------------
