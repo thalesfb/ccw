@@ -30,6 +30,6 @@ O original do estudo 3 não foi recuperado; 6919 retornou HTTP 403 e sua aprecia
 
 ## Proveniência e limites
 
-O arquivo `research/data/mmat_completion_review_2026-10-28.json` registra alterações, páginas físicas, identificadores e hashes das fontes, propostas não adotadas e limites de acesso. As cópias dos textos permanecem no acervo privado. Consultas automatizadas e revisão por agentes não constituem duas avaliações humanas independentes. A conferência humana e a adjudicação continuam pendentes, inclusive para respostas Y e N.
+O arquivo `research/data/mmat_completion_review_2026-10-28.json` registra alterações, páginas físicas, identificadores, hashes das fontes, propostas não adotadas e limites de acesso. Este documento preserva a primeira rodada; o estado atual está na matriz e no registro MMAT vigentes, não nas contagens históricas desta página.
 
 Foi consultado o [guia primário MMAT 2018, hospedado pela University of Colorado](https://medschool.cuanschutz.edu/docs/librariesprovider94/di-docs/methods-(design)-docx/mmat_2018_criteria-manual_2018-08-01_eng.pdf), páginas físicas 2–9. O guia admite estudos empíricos por observação, experimentação ou simulação e distingue critérios dos componentes qualitativo, quantitativo e misto. A aplicação da categoria descritiva a estudos preditivos permanece uma decisão operacional provisória, não um instrumento específico de validação de aprendizado de máquina.

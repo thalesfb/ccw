@@ -4,105 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise de Lacunas da Revisão Sistemática</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
-        .navbar-links { display: flex; gap: 1.5rem; }
-        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
-        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
-        .navbar-links a.active { background: rgba(255,255,255,0.3); }
-        .content { max-width: 1200px; margin: 0 auto; padding: 40px; }
-        .gap-section { margin: 30px 0; padding: 20px; border-left: 4px solid #e74c3c; background: #fdf2f2; }
-        ul { padding-left: 20px; }
-        li { margin: 10px 0; }
-        .no-gaps { color: #27ae60; font-style: italic; }
-    </style>
+    <title>Exploração automatizada do export operacional · CCW</title>
+    <link rel="icon" type="image/svg+xml" href="../../../public-site/assets/site-favicon.svg">
+    <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
-<body>
-     <nav class="navbar">
-         <div class="navbar-content">
-             <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
-             <div class="navbar-links">
-                 <a href="summary_report.html">📈 Resumo</a>
-                 <a href="papers_report_included.html">📄 Registros Retidos</a>
-                 <a href="gap_analysis.html" class="active">📊 Análise de Lacunas</a>
-             </div>
-         </div>
-     </nav>    <div class="content">
-    <h1>Análise de Lacunas da Revisão Sistemática</h1>
+<body class="generated-report">
+    <header class="site-header"><div class="site-shell site-header-inner"><a class="site-brand" href="../../../" aria-label="CCW — voltar à visão geral"><img src="../../../public-site/assets/ifc-campus-videira-horizontal.png" alt="Instituto Federal Catarinense — Campus Videira"><span class="site-brand-copy"><strong>CCW</strong><small>Pesquisa versionada<br>Ciência da Computação</small></span></a><nav class="site-nav site-nav-desktop" aria-label="Navegação principal"><a href="../../../">Visão geral</a><a href="../../index.html" aria-current="page">Revisão sistemática</a><a href="../analysis/mmat_current.html">MMAT</a><a href="../../../presentation/">Apresentação</a><a href="../../../results/ptc/index.html">PTC</a><a href="../../../results/tcc/index.html">TCC</a><a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></nav><details class="site-menu"><summary class="site-menu-toggle" aria-label="Menu principal" aria-controls="site-primary-nav">Menu</summary><nav id="site-primary-nav" class="site-nav site-nav-mobile" aria-label="Navegação principal"><a href="../../../">Visão geral</a><a href="../../index.html" aria-current="page">Revisão sistemática</a><a href="../analysis/mmat_current.html">MMAT</a><a href="../../../presentation/">Apresentação</a><a href="../../../results/ptc/index.html">PTC</a><a href="../../../results/tcc/index.html">TCC</a><a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></nav></details></div></header>
+    <main class="generated-report-main">
+    <div class="site-shell">
+    <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão sistemática</a> / <strong>Exploração automatizada</strong></p>
+    <nav class="report-tabs" aria-label="Relatórios do processamento"><a href="summary_report.html">Resumo operacional</a><a href="papers_report_included.html">Registros do export</a><a href="gap_analysis.html" aria-current="page">Exploração automatizada</a></nav>
+    <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Exploração automatizada · export operacional</span>
+        <h1 id="page-title">Sinais descritivos dos registros exportados</h1>
+        <p class="lede">Esta página não é uma síntese das lacunas da literatura. Ela mostra resultados de regras simples aplicadas a campos operacionais do export.</p>
+    </section>
+    <aside class="report-notice" role="note">
+        <p><strong>Limite de interpretação:</strong> os sinais dependem da cobertura da busca e do preenchimento das etiquetas. Eles não confirmam ausência de temas na literatura, não avaliam qualidade metodológica e não integram as conclusões do TCC.</p>
+        <p>O export versionado contém 11.875 registros. Para a síntese acadêmica, consulte o <a href="../../../results/tcc/index.html">TCC</a> e o <a href="../analysis/mmat_current.html">registro MMAT</a>.</p>
+        <p class="source-note">A regra destaca anos com contagem inferior à metade da média dos anos observados entre 2015 e 2026; classifica etiquetas de tipo abaixo de 30% (experimental) ou 10% (longitudinal), usando todas as linhas como denominador; e procura termos técnicos predefinidos no campo <code>comp_techniques</code>. Campos vazios e variações de rótulo limitam esses sinais. A dimensão geográfica não é calculada.</p>
+    </aside>
 
 
     <div class="gap-section">
-        <h2>Temporal Gaps</h2>
+        <h2>Distribuição temporal no export</h2>
 
         <ul>
 
-            <li>Baixo número de publicações em 2015 (423 artigos)</li>
+            <li>2015: 423 registros no export, abaixo da metade da média dos anos observados (968,2). O sinal depende da cobertura da busca e não comprova baixa produção na literatura.</li>
 
         </ul>
 
     </div>
 
     <div class="gap-section">
-        <h2>Methodological Gaps</h2>
+        <h2>Etiquetas de tipo de estudo</h2>
 
         <ul>
 
-            <li>Poucos estudos experimentais rigorosos</li>
+            <li>A etiqueta operacional “experimental” aparece em 1.103 de 11.875 registros; a frequência fica abaixo do limite descritivo de 30%. Esse rótulo não avalia rigor metodológico.</li>
 
-            <li>Falta de estudos longitudinais</li>
+            <li>Nenhum dos 11.875 registros recebeu a etiqueta operacional “longitudinal”. A frequência fica abaixo do limite descritivo de 10%. 7.514 registros não têm tipo preenchido; por isso, o sinal não demonstra ausência de estudos longitudinais.</li>
 
         </ul>
 
     </div>
 
     <div class="gap-section">
-        <h2>Technical Gaps</h2>
+        <h2>Rótulos de técnicas computacionais</h2>
 
         <ul>
 
-            <li>Pouca representação de Nlp</li>
+            <li>O rótulo de aprendizado por reforço não aparece exatamente no campo comp_techniques do export. Isso não indica ausência da técnica nos estudos.</li>
 
-            <li>Pouca representação de Iot</li>
+            <li>O rótulo de processamento de linguagem natural (PLN) não aparece exatamente no campo comp_techniques do export. Isso não indica ausência da técnica nos estudos.</li>
 
-            <li>Pouca representação de Augmented Reality</li>
+            <li>O rótulo de visão computacional não aparece exatamente no campo comp_techniques do export. Isso não indica ausência da técnica nos estudos.</li>
 
-            <li>Pouca representação de Computer Vision</li>
+            <li>O rótulo de blockchain não aparece exatamente no campo comp_techniques do export. Isso não indica ausência da técnica nos estudos.</li>
 
-            <li>Pouca representação de Reinforcement Learning</li>
+            <li>O rótulo de Internet das Coisas não aparece exatamente no campo comp_techniques do export. Isso não indica ausência da técnica nos estudos.</li>
 
-            <li>Pouca representação de Blockchain</li>
+            <li>O rótulo de realidade aumentada não aparece exatamente no campo comp_techniques do export. Isso não indica ausência da técnica nos estudos.</li>
 
         </ul>
 
     </div>
 
     <div class="gap-section">
-        <h2>Geographical Gaps</h2>
+        <h2>Distribuição geográfica</h2>
 
-        <p class="no-gaps">Nenhuma lacuna significativa identificada nesta categoria.</p>
-
-    </div>
-
-
-    <div class="gap-section">
-        <h2>Recomendações para Pesquisas Futuras</h2>
         <ul>
-            <li>Realizar mais estudos experimentais longitudinais</li>
-            <li>Explorar técnicas emergentes como aprendizado por reforço</li>
-            <li>Desenvolver métricas padronizadas de avaliação</li>
-            <li>Investigar aspectos de usabilidade e aceitação pelos professores</li>
+
+            <li>A distribuição geográfica não é calculada pelo gerador e não foi avaliada nesta exploração.</li>
+
         </ul>
+
     </div>
+
     </div>
-    <div class="footer" style="text-align:center;color:white;margin-top:40px;opacity:0.9;padding:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);">
-    <p><strong>Conclusion Course Work (CCW)</strong></p>
-    <p>Trabalho de Conclusão de Curso - Ciência da Computação</p>
-    <p>Instituto Federal Catarinense - Campus Videira</p>
-    <p>© 2026 Thales Ferreira | <a href="https://github.com/thalesfb/ccw" style="color:#fff;text-decoration:underline;">GitHub</a></p>
-</div>
+    </main>
+    <footer class="site-footer"><div class="site-shell site-footer-inner"><p>Trabalho de Conclusão de Curso · Ciência da Computação · IFC Campus Videira</p><p><a href="../../../results/tcc/index.html">TCC</a> · <a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></p></div></footer>
 </body>
 </html>

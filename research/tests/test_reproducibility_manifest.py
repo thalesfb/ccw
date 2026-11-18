@@ -322,7 +322,7 @@ def test_summary_json_export_does_not_replace_audited_html(tmp_path: Path) -> No
 def test_published_summary_images_use_paths_relative_to_the_report() -> None:
     report_path = REPOSITORY_ROOT / "research" / "exports" / "reports" / "summary_report.html"
     html = report_path.read_text(encoding="utf-8")
-    image_sources = re.findall(r'<img src="([^"]+)"', html)
+    image_sources = re.findall(r'<img src="(\.\./visualizations/[^\"]+)"', html)
 
     assert len(image_sources) == 6
     assert all(source.startswith("../visualizations/") for source in image_sources)
@@ -331,7 +331,7 @@ def test_published_summary_images_use_paths_relative_to_the_report() -> None:
     )
     assert "Score médio operacional" in html
     assert "não é qualidade metodológica" in html
-    assert "Registros Retidos" in html
+    assert "Registros do estágio operacional" in html
     assert "Percentuais das etapas operacionais" in html
     assert "não corresponde ao diagrama PRISMA 2020 completo" in html
     assert "Excluídos na elegibilidade / elegibilidade" not in html
@@ -339,8 +339,15 @@ def test_published_summary_images_use_paths_relative_to_the_report() -> None:
     assert "27 remoções por identidade DOI/URL" in html
     assert "2 relatórios repetidos confirmados manualmente" in html
     assert "(29 no total)" in html
+    assert re.search(r"Snapshot do export operacional: \d{2}/\d{2}/\d{4}", html)
+    assert "Gerado em:" not in html
+    assert "Data de Geração:" not in html
     assert "Não avançaram na priorização histórica" in html
-    assert "o corte 4,0 e os 15 estudos permanecem inalterados" in html
+    assert re.search(
+        r"corte de priorização 4,0 e a\s+seleção histórica de 15 estudos permanecem inalterados",
+        html,
+        re.IGNORECASE,
+    )
     assert "textos integrais adicionais solicitados serão avaliados" not in html
     assert "emenda aprovada" not in html
     assert "priorização por metadados e resumos não equivale à elegibilidade" in html

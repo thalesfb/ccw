@@ -1,5 +1,7 @@
 # Auditoria das referências do TCC
 
+> Este registro consolida verificações bibliográficas feitas em diferentes datas. A situação de cada fonte deve ser consultada em `research/data/reference_audit.csv` e nas bibliografias versionadas; recomendações datadas abaixo não constituem uma fila atual de pendências.
+
 ## Finalidade
 
 Este documento registra a validação bibliográfica e a adequação de uso das referências empregadas no TCC. A auditoria separa quatro perguntas que não devem ser confundidas:
@@ -27,7 +29,7 @@ A planilha canônica está em `research/data/reference_audit.csv`. Ela deve ser 
 
 PRISMA 2020 e PRISMA-P 2015 permanecem fontes distintas: a primeira fundamenta o relato da revisão e a segunda os princípios de protocolo. O MMAT passou a ser citado bibliograficamente pelo artigo revisado por pares de Hong et al., DOI `10.3233/EFI-180221`; o manual continua sendo um documento operacional complementar.
 
-O Cochrane Handbook permanece explicitamente versionado como 6.4 no arquivo bibliográfico porque essa é a versão historicamente registrada no trabalho. A existência de edições posteriores constitui drift de versão e exige avaliação metodológica deliberada; não é corrigida pela simples troca do número da versão.
+O TCC atual cita o Cochrane Handbook na versão 6.5 (2024), conferida na fonte oficial e registrada em `results/tcc/referencias.bib` e no ledger bibliográfico. Essa referência complementar não implica adoção integral de um protocolo Cochrane. A versão 6.4 permanece apenas no material histórico do PTC e não deve ser confundida com a bibliografia do TCC.
 
 ### Fundamentação pedagógica
 
@@ -76,8 +78,10 @@ o ID 14 e não deve ser tratada como removida. Essa lista é a linhagem
 bibliográfica do PTC histórico; ela não deve ser tratada como mapeamento
 automático dos oito registros adjudicados do snapshot vigente.
 
-As seguintes correções prioritárias foram aplicadas ao arquivo bibliográfico
-derivado do pipeline e devem ser sincronizadas com o TCC em PR próprio:
+As seguintes correções foram registradas no arquivo bibliográfico derivado do
+pipeline. Este bloco documenta aquele lote de trabalho; não é uma lista atual de
+ações abertas. Para verificar o estado vigente, consulte `reference_audit.csv`
+e as bibliografias do TCC:
 
 - `Implementation2025_000`: segundo autor, volume, número, páginas e URL DOI;
 - `Math2021_001`: nome completo dos anais, páginas e URL DOI;
@@ -98,7 +102,7 @@ derivado do pipeline e devem ser sincronizadas com o TCC em PR próprio:
 
 As cautelas atuais permanecem explícitas:
 
-- `Innovative2023_005`: o DOI é canônico, mas ano/volume/número devem ser confirmados em fonte editorial antes de sustentar afirmação central;
+- `Innovative2023_005`: DOI, fascículo 9(1), ano do fascículo 2024, artigo 20231524 e páginas 1–16 foram conferidos em fonte editorial; a cautela restante é metodológica e limita afirmações causais ou de eficácia;
 - os registros atuais permanecem sob cautela editorial para afirmações centrais de eficácia: o ledger MMAT separa os estudos com texto primário revisado daqueles em nível de abstract/metadados, e mantém 6921 como protocolo/proposta não aplicável ao MMAT empírico. A inclusão por escopo não elimina pendências de metadados, texto integral, localizadores ou adjudicação metodológica. As mesmas cautelas foram registradas nas entradas BibTeX. Em particular, `Imperatrice2025_6921` não possui DOI ou venue no metadado local.
 
 ## Fontes primárias para decisões técnicas
@@ -157,17 +161,15 @@ Essas referências sustentam a descrição das técnicas. Elas não demonstram q
 
 A auditoria não declara todos os registros como perfeitos. Permanecem, de forma rastreável:
 
-1. decidir se o Cochrane Handbook historicamente citado deve permanecer em 6.4 ou ser atualizado após comparação metodológica com edições posteriores;
-2. confirmar em fonte editorial os metadados ainda ambíguos de `Innovative2023_005`;
-3. revisar a edição bibliográfica de Vygotsky antes de enriquecer campos de editores/edição;
-4. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos. Em 22/10/2026, `SAEB2021` foi corrigida para o volume 1 do relatório de resultados (Inep, 2024, ISBN 978-65-5801-078-4) e permanece apenas como documentação contextual; os microdados de 2023 registrados no código não estão citados no manuscrito;
-5. concluir a apreciação MMAT dos 15 estudos empíricos mantidos
-   provisoriamente: os 15 têm respostas S1/S2 registradas (S1=Y nos 15; S2=Y
-   em 14 e CT em um), e 11 têm apreciação por categoria. Um registro conserva
-   apenas julgamento histórico, sem cópia verificável da fonte. O registro
-   excluído após resumo e o protocolo contextual 6921 permanecem fora dessa avaliação. O
-   ledger vigente já contém decisões e evidências por critério, mas a tabela
-   histórica de 17 estudos não pode ser reutilizada como avaliação atual.
+1. revisar a edição bibliográfica de Vygotsky antes de enriquecer campos de editores/edição;
+2. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos. Em 22/10/2026, `SAEB2021` foi corrigida para o volume 1 do relatório de resultados (Inep, 2024, ISBN 978-65-5801-078-4) e permanece apenas como documentação contextual; os microdados de 2023 registrados no código não estão citados no manuscrito;
+3. manter os limites da apreciação MMAT alinhados ao ledger vigente: 14 dos 15
+   estudos empíricos da seleção histórica têm texto recuperado e apreciação por
+   categoria; nesses 14, S1 recebeu Y em todos e S2 recebeu 13 Y e 1 CT.
+   Sokkhey permanece na seleção histórica sem cópia verificável e suas respostas
+   anteriores não foram revalidadas. Nos estudos de métodos mistos, as respostas
+   dos componentes qualitativo e quantitativo não foram conferidas separadamente.
+   A tabela histórica de 17 estudos não representa a avaliação atual.
 
 Essas pendências não autorizam remover os estudos da revisão nem reescrever resultados. Elas limitam o uso bibliográfico correspondente e devem ser reavaliadas quando o texto ou o pipeline dependerem delas.
 

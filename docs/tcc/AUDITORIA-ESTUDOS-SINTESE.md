@@ -40,18 +40,17 @@ daquele replay. O manifesto
 `research/data/evidence_sources_current.json` registra os 18 IDs do escopo,
 endereços públicos, êxitos e falhas de recuperação, quantidade de páginas e
 hashes dos arquivos obtidos. A correspondência de título ou DOI é uma verificação
-de identidade documental, não aprovação metodológica. Em 13 de novembro de 2026,
-foram conferidas 98 respostas MMAT dos 14 estudos com texto recuperado contra
-evidências localizadas; 95 foram mantidas e três alteradas. Os componentes dos
-estudos mistos não foram abrangidos por essa conferência. Os PDFs e o índice
-SQLite permanecem em cache operacional não versionado.
+de identidade documental, não aprovação metodológica. A conferência documental
+de 13 de novembro de 2026 abrangeu as respostas dos 14 estudos com texto
+recuperado; as respostas dos componentes dos estudos mistos não foram abrangidas.
+O estado por critério está no ledger MMAT vigente.
 
 | Registro | Fonte disponível nesta execução e contribuição delimitada |
 | --- | --- |
 | `Math2021_001` | PDF consultado, 6 páginas; título e DOI conferidos. As métricas e a apreciação metodológica são provisórias e não evidenciam eficácia pedagógica. |
 | `Implementation2025_000` | PDF, 10 páginas. Páginas físicas 2–3: nota escolar, 280 estudantes e divisão 70/30. Página 7: 75% de acurácia de teste e revocação de 43% para a classe baixa. Sustenta resultado preditivo situado, não eficácia de intervenção. |
 | `Multimodels2020_002` | A avaliação histórica cita consulta externa às seções 4.1 e 5, pp. 222–226; não há cópia integral local identificada nesta rodada. O [registro oficial](https://ieiespc.org/ieiespc/ArticleDetail/RD_R/397270) fornece metadados. A anotação histórica não é prova de revalidação atual do texto ou dos julgamentos MMAT. |
-| `Analysis2022_003` | Cópia integral privada identificada por hash, cinco páginas físicas (impressas 1013–1017). Páginas físicas 2–4: dados, codificação e Tabelas 4/6/7/8; página 5: narrativa conflitante. A Tabela 6 reporta DT de 85,62% para 88,75%; a Tabela 8 reporta RF de 93,49% para 94,10%, valores atribuídos a NB na narrativa. Não demonstra generalização, ausência de vazamento ou melhora da aprendizagem. |
+| `Analysis2022_003` | Cópia integral local identificada por hash, cinco páginas físicas (impressas 1013–1017). Páginas físicas 2–4: dados, codificação e Tabelas 4/6/7/8; página 5: narrativa conflitante. A Tabela 6 reporta DT de 85,62% para 88,75%; a Tabela 8 reporta RF de 93,49% para 94,10%, valores atribuídos a NB na narrativa. Não demonstra generalização, ausência de vazamento ou melhora da aprendizagem. |
 | `Design2025_004` | PDF consultado, 6 páginas; título e DOI conferidos. A proposta de trajetórias personalizadas é pertinente; tamanho amostral, alocação e análise inferencial não foram informados. Os autores reconhecem limites de volume e representatividade (PDF p. 5; artigo p. 654). Os efeitos do resumo não são tratados como estimativas confiáveis. |
 | `Identifying2017_006` | PDF, 20 páginas. Estudo de classificação com TIMSS 2011 na Turquia. O resultado depende do alvo, da população e da métrica; não equivale à validação de diagnóstico longitudinal. A classificação reportada não torna confiança do estudante uma causa demonstrada do desempenho. |
 | `Innovative2023_005` | Texto integral conferido em cópia pública que declara licença CC BY 4.0; DOI e fascículo conferem com a fonte editorial. §4.1, pp. 9–11: duas turmas de primeiro ano somam 120 estudantes; tabelas de desfecho apresentam 50 no grupo experimental e 52 no controle. A Tabela 2 informa p=.583 no pré-teste, o que não estabelece equivalência. Não foi localizado método de alocação, unidade atribuída ou explicação para os 18 casos sem desfecho válido; buscas no texto não localizaram sorteio/alocação aleatória. Por isso, não classificar como ensaio randomizado nem como não randomizado sem adjudicação. A referência distingue ano online (2023) e ano do fascículo (2024). |
@@ -76,11 +75,11 @@ registrada no manifesto original; portanto, essa combinação é identificada
 como ambiente de reprodução verificado, não como confirmação retrospectiva da
 instalação usada na extração inicial. O resultado comprova a rastreabilidade
 técnica nesta configuração, mas não resolve a confirmação editorial das fontes
-nem substitui a apreciação científica humana.
+nem valida a interpretação acadêmica dos resultados.
 
 Os registros de afirmação–evidência em
 `research/data/claim_evidence_current.json` cobrem somente as afirmações
 explicitamente confrontadas nesta rodada. O estado `SUPPORTED` documenta o
-suporte ao relato atribuído, não certifica a validade do artigo. Não representa
-conclusão da revisão profunda de todo o manuscrito, apreciação independente
-humana ou encerramento das pendências do MMAT.
+suporte ao relato atribuído, não certifica a validade do artigo. Esta verificação
+é limitada às afirmações listadas, não equivale à revisão integral do manuscrito
+e não encerra as pendências documentais do MMAT.

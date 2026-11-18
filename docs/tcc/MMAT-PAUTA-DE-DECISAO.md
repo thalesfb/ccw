@@ -23,6 +23,6 @@ No estudo 8, resumo e capítulos 5–6 fundamentam S1/S2 positivos. O recorte ma
 
 ## Registro e situação vigente
 
-O registro estruturado preserva as decisões de 28/10/2026; a matriz corrente está nos CSVs da apreciação. O [registro de perguntas](MMAT-PERGUNTAS-PENDENTES.md) documenta as questões preparadas naquele ciclo, e não uma nova tarefa de revisão desta versão. A conferência de 13/11/2026 abrangeu as 98 respostas dos 14 estudos com texto recuperado: 95 foram mantidas e três alteradas, e o estudo 14 passou à categoria 3. Os componentes dos estudos mistos não integraram essa conferência.
+O registro estruturado preserva as decisões de 28/10/2026; a matriz corrente está nos CSVs da apreciação. O [registro de perguntas](MMAT-PERGUNTAS-PENDENTES.md) documenta as questões preparadas naquele ciclo, e não uma nova tarefa de revisão desta versão. Na conferência documental de 13/11/2026, as respostas dos 14 estudos com texto recuperado foram verificadas contra as evidências localizadas e o estudo 14 passou à categoria 3. Os componentes dos estudos mistos não integraram essa conferência.
 
 Informações novas das fontes podem justificar alterações futuras, sempre com registro da evidência. A fonte 3 não foi revalidada; 6919 foi revalidado no PDF primário em 29/10/2026, sem mudança de respostas; 6923 continua sem texto integral.

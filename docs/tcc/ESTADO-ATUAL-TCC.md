@@ -54,10 +54,10 @@ Os estudos 5 e 7 usam uma rota operacional da categoria 3; o estudo 8 usa uma
 adaptação da categoria 4 à modelagem computacional. A unidade do estudo 8 é uma
 tese/um relatório com componentes matemáticos, sem duplicar frações reutilizadas.
 O registro 6923 não recebeu apreciação MMAT, e o protocolo 6921 está fora do
-denominador. Em 13/11/2026, o autor conferiu 98 respostas dos 14 estudos com
-texto recuperado contra as evidências localizadas: 95 foram mantidas e 3
-alteradas; os componentes dos estudos mistos não integraram essa conferência.
-A apreciação não gera escore agregado, ranking ou conclusão de eficácia.
+denominador. Em 13/11/2026, o autor conferiu as respostas dos 14 estudos com
+texto recuperado contra as evidências localizadas; os componentes dos estudos
+mistos não integraram essa conferência e permanecem identificados como assistidos
+por IA. A apreciação não gera escore agregado, ranking ou conclusão de eficácia.
 
 ## Implementação e escopo experimental
 

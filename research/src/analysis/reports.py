@@ -8,6 +8,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
+from urllib.parse import urlsplit
 
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
@@ -22,13 +23,40 @@ from ..processing.dedup import (
 
 logger = logging.getLogger(__name__)
 
+_CHART_PRESENTATION = {
+    "prisma_flow": (
+        "Fluxo operacional de seleção",
+        "Representação operacional da seleção; não corresponde ao diagrama PRISMA 2020 completo.",
+    ),
+    "selection_funnel": (
+        "Funil de registros do export operacional",
+        "Etapas operacionais do export; não representa decisão científica de elegibilidade.",
+    ),
+    "papers_by_year": (
+        "Registros por ano de publicação",
+        "Distribuição temporal dos registros presentes no export operacional.",
+    ),
+    "techniques_distribution": (
+        "Rótulos de técnicas no export",
+        "Frequência de rótulos de técnicas extraídos dos registros do export.",
+    ),
+    "database_coverage": (
+        "Registros por base de dados",
+        "Distribuição dos registros pelas fontes de indexação consultadas.",
+    ),
+    "relevance_distribution": (
+        "Distribuição dos escores operacionais",
+        "Escores de priorização do export; não são medida de qualidade metodológica.",
+    ),
+}
+
 
 def _normalise_external_url(value: object) -> str:
-    """Return a usable external URL for report links.
+    """Return an HTTP(S) URL safe to expose as a report link.
 
     Some API records store a bare DOI in ``url``. Rendering that value as a
     relative HTML link produces a broken link, so normalize DOI-shaped values
-    while leaving ordinary URLs untouched.
+    while rejecting unsupported schemes and malformed URLs.
     """
     if value is None or (isinstance(value, float) and pd.isna(value)):
         return ""
@@ -37,12 +65,33 @@ def _normalise_external_url(value: object) -> str:
         return ""
     if re.match(r"^10\.\d{4,9}/\S+$", url, flags=re.IGNORECASE):
         return f"https://doi.org/{url}"
+    if any(ord(char) < 0x20 or ord(char) == 0x7F for char in url):
+        return ""
+    try:
+        parsed = urlsplit(url)
+        if parsed.port == 0:
+            return ""
+    except ValueError:
+        return ""
+    if (
+        parsed.scheme.lower() not in {"http", "https"}
+        or not parsed.netloc
+        or not parsed.hostname
+        or parsed.username is not None
+        or parsed.password is not None
+    ):
+        return ""
     return url
 
 
 def _normalise_html_whitespace(value: str) -> str:
     """Keep generated HTML stable and free of whitespace-only line changes."""
     return "\n".join(line.rstrip() for line in value.splitlines()).rstrip() + "\n"
+
+
+def _format_pt_br_integer(value: int | float) -> str:
+    """Format an integer count with Brazilian Portuguese thousands separators."""
+    return f"{int(value):,}".replace(",", ".")
 
 class ReportGenerator:
     """Gera relatórios completos da revisão sistemática."""
@@ -67,23 +116,68 @@ class ReportGenerator:
         # Setup Jinja2 environment
         template_dir = Path(__file__).parent / "templates"
         template_dir.mkdir(exist_ok=True)
-        self.env = Environment(loader=FileSystemLoader(template_dir))
+        self.env = Environment(loader=FileSystemLoader(template_dir), autoescape=True)
 
     def _footer_html(self) -> str:
-        """Footer HTML consistent with research/index.html.
-
-        Returns:
-            HTML string to be injected at the end of pages.
-        """
+        """Return the shared public-site footer for generated reports."""
         return (
-            '<div class="footer" style="text-align:center;color:white;margin-top:40px;opacity:0.9;padding:20px;'
-            'background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);">\n'
-            '    <p><strong>Conclusion Course Work (CCW)</strong></p>\n'
-            '    <p>Trabalho de Conclusão de Curso - Ciência da Computação</p>\n'
-            '    <p>Instituto Federal Catarinense - Campus Videira</p>\n'
-            '    <p>© 2026 Thales Ferreira | <a href="https://github.com/thalesfb/ccw" style="color:#fff;text-decoration:underline;">GitHub</a></p>\n'
-            '</div>'
+            '<footer class="site-footer"><div class="site-shell site-footer-inner">'
+            '<p>Trabalho de Conclusão de Curso · Ciência da Computação · IFC Campus Videira</p>'
+            '<p><a href="../../../results/tcc/index.html">TCC</a> · '
+            '<a href="https://github.com/thalesfb/ccw" target="_blank" rel="noopener">Repositório</a></p>'
+            '</div></footer>'
         )
+
+    def _site_header_html(self) -> str:
+        """Return the canonical responsive navigation used by public pages."""
+        links = [
+            ("Visão geral", "../../../", None),
+            ("Revisão sistemática", "../../index.html", "page"),
+            ("MMAT", "../analysis/mmat_current.html", None),
+            ("Apresentação", "../../../presentation/", None),
+            ("PTC", "../../../results/ptc/index.html", None),
+            ("TCC", "../../../results/tcc/index.html", None),
+            ("Repositório", "https://github.com/thalesfb/ccw", None),
+        ]
+
+        def render_links(class_name: str) -> str:
+            rendered = []
+            for label, href, current in links:
+                current_attr = ' aria-current="page"' if current else ""
+                target_attrs = ' target="_blank" rel="noopener"' if href.startswith("https://") else ""
+                rendered.append(f'<a href="{href}"{current_attr}{target_attrs}>{label}</a>')
+            return f'<nav class="site-nav {class_name}" aria-label="Navegação principal">{"".join(rendered)}</nav>'
+
+        desktop_nav = render_links("site-nav-desktop")
+        mobile_nav = render_links("site-nav-mobile").replace(
+            "<nav ", '<nav id="site-primary-nav" ', 1
+        )
+        return (
+            '<header class="site-header"><div class="site-shell site-header-inner">'
+            '<a class="site-brand" href="../../../" aria-label="CCW — voltar à visão geral">'
+            '<img src="../../../public-site/assets/ifc-campus-videira-horizontal.png" '
+            'alt="Instituto Federal Catarinense — Campus Videira">'
+            '<span class="site-brand-copy"><strong>CCW</strong><small>Pesquisa versionada<br>Ciência da Computação</small></span>'
+            '</a>'
+            f'{desktop_nav}'
+            '<details class="site-menu"><summary class="site-menu-toggle" aria-label="Menu principal" '
+            'aria-controls="site-primary-nav">Menu</summary>'
+            f'{mobile_nav}'
+            '</details></div></header>'
+        )
+
+    def _report_tabs_html(self, active_report: str) -> str:
+        """Return the secondary navigation shared by the three report pages."""
+        reports = [
+            ("Resumo operacional", "summary_report.html", "summary"),
+            ("Registros do export", "papers_report_included.html", "papers"),
+            ("Exploração automatizada", "gap_analysis.html", "gaps"),
+        ]
+        links = []
+        for label, href, key in reports:
+            current_attr = ' aria-current="page"' if key == active_report else ""
+            links.append(f'<a href="{href}"{current_attr}>{label}</a>')
+        return f'<nav class="report-tabs" aria-label="Relatórios do processamento">{"".join(links)}</nav>'
 
     def generate_summary_report(
         self,
@@ -137,11 +231,34 @@ class ReportGenerator:
 
         # Create report content
         report_data = {
-            'title': 'Relatório da Revisão Sistemática',
+            'title': 'Resumo operacional da revisão sistemática',
             'subtitle': 'Ensino Personalizado de Matemática: revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente',
             'generated_at': datetime.now().strftime('%d/%m/%Y %H:%M'),
+            'data_scope': {
+                'interpretation': (
+                    'Este JSON preserva contagens do export operacional e uma sobreposição de recuperação reconciliada. '
+                    'Para a seleção científica histórica, consulte o registro de escopo; para a recuperação de fontes, '
+                    'consulte o registro de situação atual. Os contadores operacionais não substituem esses registros.'
+                ),
+                'selection_source': 'research/data/current_synthesis_scope.csv',
+                'retrieval_source': 'research/data/selection_status_current.json',
+            },
             'statistics': report_stats,
-            'charts': [{'name': p.stem, 'path': p} for p in chart_paths],
+            'charts': [
+                {
+                    'name': p.stem,
+                    'path': p,
+                    'label': _CHART_PRESENTATION.get(
+                        p.stem,
+                        (p.stem.replace('_', ' ').capitalize(), p.stem.replace('_', ' ')),
+                    )[0],
+                    'alt': _CHART_PRESENTATION.get(
+                        p.stem,
+                        (p.stem.replace('_', ' ').capitalize(), p.stem.replace('_', ' ')),
+                    )[1],
+                }
+                for p in chart_paths
+            ],
             'config': config or {},
             'included_list': included_list,
             'fulltext_stats': fulltext_stats  # Add fulltext statistics for template
@@ -264,7 +381,7 @@ class ReportGenerator:
         # Create gap analysis report
         report_path = self.output_dir / "gap_analysis.html"
 
-        html_content = self._create_gap_analysis_html(gaps)
+        html_content = self._create_gap_analysis_html(gaps, record_count=len(df))
 
         with open(report_path, 'w', encoding='utf-8') as f:
             f.write(_normalise_html_whitespace(html_content))
@@ -570,7 +687,9 @@ class ReportGenerator:
             'temporal_gaps': [],
             'methodological_gaps': [],
             'technical_gaps': [],
-            'geographical_gaps': []
+            'geographical_gaps': [
+                'A distribuição geográfica não é calculada pelo gerador e não foi avaliada nesta exploração.'
+            ]
         }
 
         # Temporal gaps
@@ -584,11 +703,17 @@ class ReportGenerator:
 
             if not years_in_scope.empty:
                 year_counts = years_in_scope.value_counts().sort_index()
-                # Find years with low publication counts
+                # Flag descriptive counts only; this is not an estimate of
+                # research production or coverage across the literature.
                 mean_count = year_counts.mean()
+                mean_count_display = f"{mean_count:.1f}".replace(".", ",")
                 low_years = year_counts[year_counts < mean_count * 0.5]
                 gaps['temporal_gaps'] = [
-                    f"Baixo número de publicações em {int(year)} ({int(count)} artigos)"
+                    f"{int(year)}: {_format_pt_br_integer(count)} "
+                    f"{'registro' if int(count) == 1 else 'registros'} no export, abaixo da metade da média "
+                    f"dos anos observados ({mean_count_display}). "
+                    "O sinal depende da cobertura da busca "
+                    "e não comprova baixa produção na literatura."
                     for year, count in low_years.items()
                 ]
 
@@ -610,36 +735,66 @@ class ReportGenerator:
                             f"{missing_years[0]}-{missing_years[-1]}"
                         )
 
-        # Technical gaps
+        # Exact-label absence is reported as an export-field signal, not as an
+        # absence of a technique from the studies or literature.
         if 'comp_techniques' in df.columns:
             all_techniques = set()
             for _, row in df.iterrows():
                 if pd.notna(row['comp_techniques']):
-                    techniques = [t.strip() for t in str(row['comp_techniques']).split(';')]
+                    techniques = [
+                        t.strip().casefold()
+                        for t in str(row['comp_techniques']).split(';')
+                    ]
                     all_techniques.update(techniques)
 
-            # Expected techniques that might be missing
             expected_techniques = {
-                'reinforcement_learning', 'nlp', 'computer_vision',
-                'blockchain', 'IoT', 'augmented_reality'
+                'reinforcement_learning': 'aprendizado por reforço',
+                'nlp': 'processamento de linguagem natural (PLN)',
+                'computer_vision': 'visão computacional',
+                'blockchain': 'blockchain',
+                'iot': 'Internet das Coisas',
+                'augmented_reality': 'realidade aumentada',
             }
 
-            missing = expected_techniques - all_techniques
             gaps['technical_gaps'] = [
-                f"Pouca representação de {tech.replace('_', ' ').title()}"
-                for tech in missing
+                f"O rótulo de {label} não aparece exatamente no campo comp_techniques do export. "
+                "Isso não indica ausência da técnica nos estudos."
+                for code, label in expected_techniques.items()
+                if code not in all_techniques
             ]
 
         # Methodological gaps
         if 'study_type' in df.columns:
-            study_types = df['study_type'].value_counts()
             total = len(df)
+            study_types = df['study_type'].fillna('').astype(str).str.strip().str.casefold()
+            missing_types = int(study_types.eq('').sum())
+            experimental_count = int(study_types.eq('experimental').sum())
+            longitudinal_count = int(study_types.eq('longitudinal').sum())
 
-            if study_types.get('experimental', 0) / total < 0.3:
-                gaps['methodological_gaps'].append("Poucos estudos experimentais rigorosos")
+            if total and experimental_count / total < 0.3:
+                gaps['methodological_gaps'].append(
+                    f"A etiqueta operacional “experimental” aparece em {_format_pt_br_integer(experimental_count)} "
+                    f"de {_format_pt_br_integer(total)} registros; a frequência fica abaixo do limite "
+                    "descritivo de 30%. "
+                    "Esse rótulo não avalia rigor metodológico."
+                )
 
-            if study_types.get('longitudinal', 0) / total < 0.1:
-                gaps['methodological_gaps'].append("Falta de estudos longitudinais")
+            if total and longitudinal_count / total < 0.1:
+                if longitudinal_count == 0:
+                    longitudinal_sentence = (
+                        f"Nenhum dos {_format_pt_br_integer(total)} registros recebeu a etiqueta "
+                        "operacional “longitudinal”."
+                    )
+                else:
+                    longitudinal_sentence = (
+                        f"A etiqueta operacional “longitudinal” aparece em "
+                        f"{_format_pt_br_integer(longitudinal_count)} de {_format_pt_br_integer(total)} registros."
+                    )
+                gaps['methodological_gaps'].append(
+                    f"{longitudinal_sentence} A frequência fica abaixo do limite descritivo de 10%. "
+                    f"{_format_pt_br_integer(missing_types)} registros não têm tipo preenchido; por isso, o sinal não demonstra "
+                    "ausência de estudos longitudinais."
+                )
 
         return gaps
 
@@ -668,75 +823,50 @@ class ReportGenerator:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
-        .navbar-links { display: flex; gap: 1.5rem; }
-        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
-        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
-        .navbar-links a.active { background: rgba(255,255,255,0.3); }
-        .content { margin: 40px; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .section { margin: 30px 0; padding: 20px; border-left: 4px solid #4CAF50; background: #f9f9f9; }
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
-        .chart-card { text-align: center; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-card img { width: 100%; max-width: 1200px; height: auto; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #f2f2f2; font-weight: bold; }
-        .highlight { background-color: #fff3cd; padding: 10px; border-radius: 4px; }
-        .paper-item { background: white; padding: 14px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 10px; }
-        .paper-title { font-weight: 600; color: #2c3e50; }
-        .paper-meta { color: #7f8c8d; font-size: 0.95em; }
-    </style>
+    <link rel="icon" type="image/svg+xml" href="../../../public-site/assets/site-favicon.svg">
+    <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="navbar-title">📚 Revisão Sistemática</div>
-            <div class="navbar-links">
-                <a href="summary_report.html" class="active">🔍 Sumário</a>
-                <a href="papers_report_included.html">📄 Registros Retidos</a>
-                <a href="gap_analysis.html">📊 Análise de Lacunas</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="content">
-    <div class="header">
-        <h1>{{ title }}</h1>
+<body class="generated-report">
+    {{ site_header | safe }}
+    <main class="generated-report-main">
+    <div class="site-shell">
+    <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão sistemática</a> / <strong>Resumo operacional</strong></p>
+    {{ report_tabs | safe }}
+    <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Exportação operacional · snapshot da revisão</span>
+        <h1 id="page-title">{{ title }}</h1>
         <h2>{{ subtitle }}</h2>
-        <p><em>Gerado em: {{ generated_at }}</em></p>
-    </div>
+        <p class="report-generated">Snapshot do export operacional: {{ generated_at }}</p>
+    </section>
+    <aside class="report-notice" role="note">
+        <p><strong>Escopo desta página:</strong> este relatório descreve um export operacional e a seleção histórica. Para a apreciação MMAT por critério, consulte o <a href="../analysis/mmat_current.html">registro atual do MMAT</a>; para a síntese acadêmica, consulte o <a href="../../../results/tcc/index.html">TCC</a>.</p>
+        <p>{{ data_scope.interpretation if data_scope is defined else 'As contagens operacionais não substituem os registros versionados de escopo e recuperação.' }} Consulte também o <a href="../../data/current_synthesis_scope.csv">registro de escopo</a> e o <a href="../../data/selection_status_current.json">registro de recuperação</a>.</p>
+    </aside>
 
     <div class="section">
-        <h2>📊 Estatísticas Gerais</h2>
+        <h2>Estatísticas do export</h2>
         <div class="stat-grid">
             <div class="stat-card">
                 <h3>Registros identificados</h3>
-                <h2 style="color: #4CAF50;">{{ statistics.total_papers }}</h2>
+                <h2>{{ statistics.total_papers }}</h2>
             </div>
 
             {% if statistics.prisma %}
             <div class="stat-card">
                 <h3>Identificados</h3>
-                <h2 style="color: #2196F3;">{{ statistics.prisma.identification or 0 }}</h2>
+                <h2>{{ statistics.prisma.identification or 0 }}</h2>
             </div>
             <div class="stat-card">
                 <h3>Registros retidos</h3>
-                <h2 style="color: #FF9800;">{{ statistics.prisma.included or 0 }}</h2>
+                <h2>{{ statistics.prisma.included or 0 }}</h2>
             </div>
             {% endif %}
 
             {% if statistics.relevance %}
             <div class="stat-card">
                 <h3>Score médio operacional</h3>
-                <h2 style="color: #9C27B0;">{{ statistics.relevance.mean }}</h2>
-                <p style="color: #7f8c8d; font-size: 0.9em;">Sobre os registros após a remoção determinística; não é qualidade metodológica.</p>
+                <h2>{{ statistics.relevance.mean }}</h2>
+                <p class="report-muted">Sobre os registros após a remoção determinística; não é qualidade metodológica.</p>
             </div>
             {% endif %}
         </div>
@@ -744,7 +874,7 @@ class ReportGenerator:
 
     {% if statistics.stage_percentages %}
     <div class="section">
-        <h2>📐 Percentuais das etapas operacionais</h2>
+        <h2>Percentuais das etapas operacionais</h2>
         <table>
             <tr><th>Relação</th><th>Percentual</th></tr>
             {% if statistics.prisma.reports_sought is defined %}
@@ -769,7 +899,7 @@ class ReportGenerator:
 
     {% if statistics.deduplication_audit %}
     <div class="section">
-        <h2>🔎 Auditoria de identidade bibliográfica</h2>
+        <h2>Auditoria de identidade bibliográfica</h2>
         <p>DOI/URL exatos são deduplicados como identidade de registro no fluxo PRISMA. A linha de título bruto inclui sobreposição com essas identidades; a linha de título-only mostra os candidatos restantes depois da remoção determinística. Nenhum título é removido automaticamente por igualdade textual.</p>
         <table>
             <tr><th>Indicador</th><th>Grupos</th><th>Linhas repetidas</th><th>Excedentes</th></tr>
@@ -784,8 +914,8 @@ class ReportGenerator:
     </div>
     {% endif %}
 
-    <div class="section" style="border-left-color: #e67e22;">
-        <h2>🗂️ Contexto histórico da deduplicação</h2>
+        <aside class="report-notice report-history" role="note">
+        <h2>Contexto histórico da deduplicação</h2>
         <p>A execução histórica documentava 9.431 registros, 2.517 duplicatas removidas,
         6.914 registros únicos e 17 incluídos. O único log histórico preservado no
         banco informa <code>total_removed=2494</code>; a execução que resolveria essa
@@ -794,33 +924,34 @@ class ReportGenerator:
         brutos, {{ statistics.integrity.deterministic_identity_duplicate_rows }} remoções por identidade DOI/URL e
         {{ statistics.integrity.adjudicated_same_report_duplicate_rows }} relatórios repetidos confirmados manualmente
         ({{ statistics.prisma.duplicates_removed or 0 }} no total), seguidos por
-        {{ statistics.prisma.screening or 0 }} registros na triagem. O fluxo de seleção abaixo mantém a regra histórica;
-        o corte 4,0 e os 15 estudos permanecem inalterados.</p>
-    </div>
+        {{ statistics.prisma.screening or 0 }} registros na triagem. O corte de priorização 4,0 e a
+        seleção histórica de 15 estudos permanecem inalterados.</p>
+    </aside>
 
     {% if fulltext_stats %}
     <div class="section">
-        <h2>📄 Extração de Texto Completo</h2>
+        <h2>Extração automática de texto</h2>
+        <p class="report-muted">A extração automática não comprova recuperação documentada nem leitura do texto para avaliar elegibilidade.</p>
         <div class="stat-grid">
             <div class="stat-card">
                 <h3>Cobertura</h3>
-                <h2 style="color: {% if fulltext_stats.coverage_pct >= 70 %}#4CAF50{% elif fulltext_stats.coverage_pct >= 40 %}#FF9800{% else %}#f44336{% endif %};">
+                <h2>
                     {{ "%.1f"|format(fulltext_stats.coverage_pct) }}%
                 </h2>
-                <p style="color: #7f8c8d; font-size: 0.9em;">{{ fulltext_stats.extracted }}/{{ fulltext_stats.total_papers }} artigos</p>
+                <p class="report-muted">{{ fulltext_stats.extracted }}/{{ fulltext_stats.total_papers }} registros</p>
             </div>
             <div class="stat-card">
                 <h3>Extraídos</h3>
-                <h2 style="color: #4CAF50;">{{ fulltext_stats.extracted }}</h2>
+                <h2>{{ fulltext_stats.extracted }}</h2>
             </div>
             <div class="stat-card">
                 <h3>Falhas</h3>
-                <h2 style="color: #f44336;">{{ fulltext_stats.failed }}</h2>
+                <h2>{{ fulltext_stats.failed }}</h2>
             </div>
         </div>
         {% if fulltext_stats.top_failures %}
-        <h3 style="margin-top: 20px;">Top Causas de Falha:</h3>
-        <table style="max-width: 600px;">
+        <h3>Principais causas de falha</h3>
+        <table class="report-compact-table">
             <tr><th>Causa</th><th>Ocorrências</th></tr>
             {% for reason, count in fulltext_stats.top_failures %}
             <tr>
@@ -835,20 +966,12 @@ class ReportGenerator:
 
     {% if charts %}
     <div class="section">
-        <h2>📈 Visualizações</h2>
+        <h2>Visualizações</h2>
         <div class="chart-grid">
             {% for chart in charts %}
             <div class="chart-card">
-                <h3>{{ chart.name
-                    .replace('_', ' ')
-                    .replace('selection', 'Funil de Seleção')
-                    .replace('funnel', '')
-                    .replace('papers by year', 'Artigos por Ano')
-                    .replace('techniques distribution', 'Distribuição de Técnicas')
-                    .replace('database coverage', 'Cobertura por Base de Dados')
-                    .replace('relevance distribution', 'Distribuição de Relevância')
-                    .title() if chart.name != 'prisma_flow' else 'Fluxo operacional (referência ao PRISMA 2020)' }}</h3>
-                <img src="../visualizations/{{ chart.path.name }}" alt="{{ 'Representação operacional da seleção; não corresponde ao diagrama PRISMA 2020 completo' if chart.name == 'prisma_flow' else chart.name }}">
+                <h3>{{ chart.label }}</h3>
+                <img src="../visualizations/{{ chart.path.name }}" alt="{{ chart.alt }}">
             </div>
             {% endfor %}
         </div>
@@ -857,15 +980,15 @@ class ReportGenerator:
 
     {% if included_list %}
     <div class="section">
-        <h2>✅ Registros Retidos ({{ included_list|length }})</h2>
-        <p>Esta lista representa o estágio operacional retido no snapshot vigente. A população inclui candidatos empíricos provisórios e um protocolo contextual; consulte o relatório de registros para a interpretação individual.</p>
+        <h2>Registros do estágio operacional ({{ included_list|length }})</h2>
+        <p>Esta lista representa os registros com etapa operacional <code>included</code> no export. A população inclui candidatos empíricos provisórios e um protocolo contextual; consulte a seleção histórica e o registro MMAT para a interpretação científica.</p>
         {% for p in included_list %}
         <div class="paper-item">
             <div class="paper-title">{{ p.title }}</div>
             <div class="paper-meta">
                 <strong>Autores:</strong> {{ p.authors }} | <strong>Ano:</strong> {{ p.year }} | <strong>Venue:</strong> {{ p.venue }}
                 {% if p.doi %}| <strong>DOI:</strong> {{ p.doi }}{% endif %}
-                {% if p.url %}| <a href="{{ p.url }}" target="_blank">Link</a>{% endif %}
+                {% if p.url %}| <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer">Link</a>{% endif %}
             </div>
         </div>
         {% endfor %}
@@ -887,20 +1010,27 @@ class ReportGenerator:
     {% endif %}
 
     <div class="section">
-        <h2>ℹ️ Informações do Processo</h2>
+        <h2>Informações do processo</h2>
         <div class="highlight">
-            <p><strong>Data de Geração:</strong> {{ generated_at }}</p>
+            <p><strong>Snapshot do export:</strong> {{ generated_at }}</p>
             <p><strong>Relato:</strong> PRISMA 2020 foi usado como diretriz; consulte o checklist para itens e desvios documentados.</p>
             <p><strong>Filtro operacional:</strong> escore de relevância multicritério sobre metadados e resumos; não equivale à avaliação de elegibilidade de relatórios em texto completo nem substitui a adjudicação científica da população retida.</p>
         </div>
     </div>
     </div>
+    </main>
+    {{ footer_html | safe }}
 </body>
 </html>
         """
 
         template = self.env.from_string(html_template)
-        html_content = template.render(**report_data)
+        html_content = template.render(
+            **report_data,
+            site_header=self._site_header_html(),
+            report_tabs=self._report_tabs_html("summary"),
+            footer_html=self._footer_html(),
+        )
 
         report_path = self.output_dir / "summary_report.html"
 
@@ -933,184 +1063,6 @@ class ReportGenerator:
         # the duplicate-candidate audit from the published report.
         return json_path
 
-    def _create_summary_html(self, report_data: Dict) -> str:
-        """Create HTML content for summary report.
-
-        Args:
-            report_data: Dictionary with report data
-
-        Returns:
-            HTML content
-        """
-        stats = report_data.get('statistics', {})
-        prisma = stats.get('prisma', {})
-
-        html_template = """
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f5f5f5; }
-        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .navbar-title { color: white; font-size: 1.5rem; font-weight: 600; }
-        .navbar-links { display: flex; gap: 1.5rem; }
-        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
-        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
-        .navbar-links a.active { background: rgba(255,255,255,0.3); }
-        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 20px; text-align: center; }
-        .hero h1 { font-size: 2.5rem; margin: 0 0 1rem 0; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; }
-        .content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .card { background: white; border-radius: 8px; padding: 30px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; text-align: center; }
-        .stat-card h3 { font-size: 2.5rem; margin: 0; }
-        .stat-card p { margin: 10px 0 0 0; opacity: 0.9; }
-        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 20px; }
-        .chart-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-card img { width: 100%; height: auto; border-radius: 4px; }
-        .chart-card h3 { margin-top: 0; color: #333; }
-        h2 { color: #333; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
-        .footer { text-align: center; padding: 20px; margin-top: 40px; }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
-            <div class="navbar-links">
-                <a href="summary_report.html" class="active">📈 Resumo</a>
-                <a href="papers_report_included.html">📄 Registros Retidos</a>
-                <a href="gap_analysis.html">🔍 Análise de Lacunas</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="hero">
-        <h1>{{ title }}</h1>
-        <p>{{ subtitle }}</p>
-        <p style="font-size: 0.9rem; margin-top: 20px;">Gerado em: {{ generated_at }}</p>
-    </div>
-
-    <div class="content">
-        <div class="card">
-            <h2>📊 Estatísticas Gerais</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>{{ stats.total_papers }}</h3>
-                    <p>Total de Papers</p>
-                </div>
-                <div class="stat-card">
-                    <h3>{{ prisma.included }}</h3>
-                    <p>Papers Incluídos</p>
-                </div>
-                <div class="stat-card">
-                    <h3>{{ stats.years.min }}-{{ stats.years.max }}</h3>
-                    <p>Intervalo de Anos</p>
-                </div>
-                <div class="stat-card">
-                    <h3>{{ stats.databases|length }}</h3>
-                    <p>Bases de Dados</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>🔍 Fluxo operacional da revisão</h2>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                {% if prisma.reports_sought is defined %}
-                <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Registros após deduplicação submetidos à triagem</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.screening }}</td>
-                </tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos na triagem inicial</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.screening_excluded }}</td></tr>
-                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Registros submetidos à priorização histórica (não é elegibilidade)</td><td style="padding: 12px; text-align: right;">{{ prisma.prioritization }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Não avançaram na priorização histórica</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.prioritization_excluded }}</td></tr>
-                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Selecionados para leitura de resumo</td><td style="padding: 12px; text-align: right;">{{ prisma.shortlisted }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Excluídos após resumo</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.abstract_screening_excluded }}</td></tr>
-                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios buscados para recuperação</td><td style="padding: 12px; text-align: right;">{{ prisma.reports_sought }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Relatórios sem cópia verificável na recuperação atual</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.current_source_retrieval.reports_not_retrieved if prisma.current_source_retrieval is defined else prisma.reports_not_retrieved }}</td></tr>
-                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios avaliados em texto integral</td><td style="padding: 12px; text-align: right;">{{ prisma.current_source_retrieval.reports_assessed_at_full_text if prisma.current_source_retrieval is defined else prisma.eligibility }}</td></tr>
-                <tr><td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">Exclusões após texto integral</td><td style="padding: 12px; text-align: right; color: #dc3545;">{{ prisma.current_source_retrieval.full_text_exclusions if prisma.current_source_retrieval is defined else prisma.eligibility_excluded }}</td></tr>
-                <tr style="background: #f8f9fa;"><td style="padding: 12px; border-bottom: 1px solid #dee2e6;">Relatórios empíricos recuperados</td><td style="padding: 12px; text-align: right;">{{ prisma.current_source_retrieval.recovered_empirical_reports if prisma.current_source_retrieval is defined else prisma.included }}</td></tr>
-                <tr style="background: #d4edda;"><td style="padding: 12px; font-weight: bold;">Estudos da seleção histórica</td><td style="padding: 12px; text-align: right; font-weight: bold; color: #28a745;">{{ prisma.included }}</td></tr>
-                {% else %}
-                <tr style="background: #f8f9fa;">
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Estágio</th>
-                    <th style="padding: 12px; text-align: right; border-bottom: 2px solid #dee2e6;">Quantidade</th>
-                </tr>
-                <tr>
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📚 Identificação</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.identification }}</td>
-                </tr>
-                <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">🔍 Triagem (registros avaliados)</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.screening }}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na triagem</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.screening_excluded }}</td>
-                </tr>
-                <tr style="background: #f8f9fa;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6;">📖 Registros submetidos à priorização operacional</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">{{ prisma.eligibility }}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px; padding-left: 40px; border-bottom: 1px solid #dee2e6;">❌ Excluídos na priorização operacional</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; color: #dc3545;">{{ prisma.eligibility_excluded }}</td>
-                </tr>
-                <tr style="background: #d4edda;">
-                    <td style="padding: 12px; border-bottom: 1px solid #dee2e6; font-weight: bold;">✅ Incluídos (final)</td>
-                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6; font-weight: bold; color: #28a745;">{{ prisma.included }}</td>
-                </tr>
-                {% endif %}
-            </table>
-            <p>A priorização utiliza metadados e resumos e não equivale à avaliação de elegibilidade em texto completo. A seleção histórica mantém 15 estudos; 14 têm relatório empírico recuperado e Sokkhey permanece como inclusão histórica sem cópia verificável. O relatório não recuperado de Zeng não integra os 15. Relatórios sem cópia não são contados como exclusões após texto integral.</p>
-        </div>
-
-        <div class="card">
-            <h2>📈 Visualizações</h2>
-            <div class="chart-grid">
-                <div class="chart-card">
-                    <h3>Fluxo operacional (referência PRISMA 2020)</h3>
-                    <img src="../visualizations/prisma_flow.png" alt="Representação operacional do processo de seleção; não é o diagrama PRISMA completo">
-                </div>
-                <div class="chart-card">
-                    <h3>Funil de Seleção</h3>
-                    <img src="../visualizations/selection_funnel.png" alt="Selection Funnel">
-                </div>
-                <div class="chart-card">
-                    <h3>Distribuição por Ano</h3>
-                    <img src="../visualizations/papers_by_year.png" alt="Papers by Year">
-                </div>
-                <div class="chart-card">
-                    <h3>Técnicas Identificadas</h3>
-                    <img src="../visualizations/techniques_distribution.png" alt="Techniques">
-                </div>
-                <div class="chart-card">
-                    <h3>Cobertura por Base</h3>
-                    <img src="../visualizations/database_coverage.png" alt="Database Coverage">
-                </div>
-                <div class="chart-card">
-                    <h3>Distribuição de Relevância</h3>
-                    <img src="../visualizations/relevance_distribution.png" alt="Relevance Distribution">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{ footer_html | safe }}
-</body>
-</html>
-        """
-
-        template = self.env.from_string(html_template)
-        return template.render(**report_data, stats=stats, prisma=prisma, footer_html=self._footer_html())
-
     def _create_papers_html(self, papers_data: List[Dict], stage: str) -> str:
         """Create HTML content for papers report.
 
@@ -1127,47 +1079,28 @@ class ReportGenerator:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ stage_label }}</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
-        .navbar-links { display: flex; gap: 1.5rem; }
-        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
-        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
-        .navbar-links a.active { background: rgba(255,255,255,0.3); }
-        .content { margin: 40px; max-width: 1200px; margin: 0 auto; padding: 40px; }
-        .paper { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
-        .paper-title { color: #2c3e50; font-size: 1.2em; font-weight: bold; margin-bottom: 10px; }
-        .paper-meta { color: #7f8c8d; font-size: 0.9em; margin-bottom: 15px; }
-        .paper-abstract { text-align: justify; margin: 15px 0; }
-        .paper-techniques { background: #ecf0f1; padding: 10px; border-radius: 4px; margin: 10px 0; }
-        .paper-criteria { background: #d4edda; padding: 10px; border-radius: 4px; margin: 10px 0; border-left: 4px solid #28a745; }
-        .score { float: right; background: #27ae60; color: white; padding: 5px 10px; border-radius: 15px; }
-    </style>
+    <title>{{ stage_label }} · CCW</title>
+    <link rel="icon" type="image/svg+xml" href="../../../public-site/assets/site-favicon.svg">
+    <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
-<body>
-     <nav class="navbar">
-         <div class="navbar-content">
-             <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
-             <div class="navbar-links">
-                 <a href="summary_report.html">📈 Resumo</a>
-                 <a href="papers_report_included.html" class="active">📄 Registros Retidos</a>
-                 <a href="gap_analysis.html">📊 Análise de Lacunas</a>
-             </div>
-         </div>
-     </nav>    <div class="content">
-    <h1>{{ stage_label }}</h1>
-    <p><em>{{ papers_data|length }} registros marcados como retidos no export operacional do pipeline; este estágio não substitui o ledger vigente de elegibilidade do TCC.</em></p>
+<body class="generated-report">
+    {{ site_header | safe }}
+    <main class="generated-report-main">
+    <div class="site-shell">
+    <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão sistemática</a> / <strong>Registros operacionais</strong></p>
+    {{ report_tabs | safe }}
+    <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Exportação operacional · {{ papers_data|length }} registros</span>
+        <h1 id="page-title">{{ stage_label }}</h1>
+        <p class="lede">Registros selecionados pelo campo de etapa do processamento automatizado.</p>
+    </section>
+    <aside class="report-notice" role="note">
+        <p><strong>Como interpretar:</strong> a etapa operacional <code>included</code> não equivale à seleção científica do TCC nem à apreciação MMAT. A lista pode incluir candidatos provisórios e registros contextuais; o escore é de priorização e não mede qualidade metodológica ou eficácia.</p>
+        <p>Consulte o <a href="../analysis/mmat_current.html">registro MMAT</a> e o <a href="../../../results/tcc/index.html">TCC</a> para o estado e a interpretação acadêmica.</p>
+        <p class="source-note">Fonte: <a href="../analysis/papers.csv">export versionado de registros</a>. A extração automática de texto mostrada em cada registro não comprova recuperação nem avaliação integral no TCC.</p>
+    </aside>
     {% if stage == 'included' %}
-    <div class="paper-criteria" style="background:#fff3cd;border-left-color:#f0ad4e;">
-        <strong>Como interpretar:</strong> esta é a população retida pelo fluxo operacional.
-        Ela reúne candidatos empíricos provisórios e um protocolo contextual; não equivale,
-        por si só, à síntese científica final nem a uma classificação de qualidade metodológica.
-        O score exibido é operacional e os sinais registrados abaixo não substituem a adjudicação.
-    </div>
+    <h2>Registros desta etapa operacional</h2>
     {% endif %}
 
     {% for paper in papers_data %}
@@ -1186,7 +1119,7 @@ class ReportGenerator:
             <strong>DOI:</strong> <a href="https://doi.org/{{ paper.doi }}" target="_blank" rel="noopener">{{ paper.doi }}</a><br>
             {% endif %}
             {% if paper.url %}
-            <strong>URL:</strong> <a href="{{ paper.url }}" target="_blank" rel="noopener">{{ paper.url[:60] }}{{ '...' if paper.url|length > 60 else '' }}</a>
+            <strong>URL:</strong> <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.url[:60] }}{{ '...' if paper.url|length > 60 else '' }}</a>
             {% endif %}
         </div>
 
@@ -1198,7 +1131,7 @@ class ReportGenerator:
 
         {% if paper.inclusion_criteria_met %}
         <div class="paper-criteria">
-            <strong>✅ Sinais/gates operacionais registrados:</strong> {{ paper.inclusion_criteria_met }}
+            <strong>Sinais operacionais registrados:</strong> {{ paper.inclusion_criteria_met }}
         </div>
         {% endif %}
 
@@ -1215,10 +1148,10 @@ class ReportGenerator:
         {% endif %}
 
         {% if paper.get('fulltext_extracted') is not none %}
-        <div class="paper-fulltext" style="background: {% if paper.fulltext_extracted %}#d1ecf1{% else %}#f8d7da{% endif %}; padding: 10px; border-radius: 4px; margin: 10px 0; border-left: 4px solid {% if paper.fulltext_extracted %}#17a2b8{% else %}#dc3545{% endif %};">
-            <strong>📄 Extração de Texto Completo:</strong>
+        <div class="paper-fulltext">
+            <strong>Extração automática de texto:</strong>
             {% if paper.fulltext_extracted %}
-                <span style="color: #155724; font-weight: bold;">✅ Extraído</span>
+                <span class="tag tag-green">Extraído</span>
                 {% if paper.fulltext_size %}
                 <br><strong>Tamanho:</strong> {{ "%.1f"|format(paper.fulltext_size / 1024) }} KB
                 {% endif %}
@@ -1226,7 +1159,7 @@ class ReportGenerator:
                 <br><strong>Palavras-chave detectadas:</strong> {{ paper.fulltext_keywords | join(', ') }}
                 {% endif %}
             {% else %}
-                <span style="color: #721c24; font-weight: bold;">❌ Não extraído</span>
+                <span class="tag tag-red">Não extraído</span>
                 {% if paper.pdf_failure_reasons %}
                 <br><strong>Motivo:</strong> {{ paper.pdf_failure_reasons | join(', ') | replace('_', ' ') | title }}
                 {% endif %}
@@ -1236,21 +1169,24 @@ class ReportGenerator:
     </div>
     {% endfor %}
     </div>
+    </main>
     {{ footer_html | safe }}
 </body>
 </html>
         """
 
         template = self.env.from_string(html_template)
-        stage_label = "Relatório de Registros Retidos" if stage == "included" else f"Relatório de Registros — {stage.title()}"
+        stage_label = "Registros retidos no export operacional" if stage == "included" else f"Registros — {stage.title()}"
         return template.render(
             papers_data=papers_data,
             stage=stage,
             stage_label=stage_label,
+            site_header=self._site_header_html(),
+            report_tabs=self._report_tabs_html("papers"),
             footer_html=self._footer_html(),
         )
 
-    def _create_gap_analysis_html(self, gaps: Dict) -> str:
+    def _create_gap_analysis_html(self, gaps: Dict, record_count: int) -> str:
         """Create HTML content for gap analysis.
 
         Args:
@@ -1265,39 +1201,30 @@ class ReportGenerator:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise de Lacunas da Revisão Sistemática</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .navbar-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .navbar-title { color: white; font-size: 1.2rem; font-weight: 600; }
-        .navbar-links { display: flex; gap: 1.5rem; }
-        .navbar-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.2s; }
-        .navbar-links a:hover { background: rgba(255,255,255,0.2); }
-        .navbar-links a.active { background: rgba(255,255,255,0.3); }
-        .content { max-width: 1200px; margin: 0 auto; padding: 40px; }
-        .gap-section { margin: 30px 0; padding: 20px; border-left: 4px solid #e74c3c; background: #fdf2f2; }
-        ul { padding-left: 20px; }
-        li { margin: 10px 0; }
-        .no-gaps { color: #27ae60; font-style: italic; }
-    </style>
+    <title>Exploração automatizada do export operacional · CCW</title>
+    <link rel="icon" type="image/svg+xml" href="../../../public-site/assets/site-favicon.svg">
+    <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
-<body>
-     <nav class="navbar">
-         <div class="navbar-content">
-             <a href="../../../index.html" class="navbar-title" style="text-decoration:none;">Revisão Sistemática - CCW</a>
-             <div class="navbar-links">
-                 <a href="summary_report.html">📈 Resumo</a>
-                 <a href="papers_report_included.html">📄 Registros Retidos</a>
-                 <a href="gap_analysis.html" class="active">📊 Análise de Lacunas</a>
-             </div>
-         </div>
-     </nav>    <div class="content">
-    <h1>Análise de Lacunas da Revisão Sistemática</h1>
+<body class="generated-report">
+    {{ site_header | safe }}
+    <main class="generated-report-main">
+    <div class="site-shell">
+    <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão sistemática</a> / <strong>Exploração automatizada</strong></p>
+    {{ report_tabs | safe }}
+    <section class="page-hero" aria-labelledby="page-title">
+        <span class="eyebrow">Exploração automatizada · export operacional</span>
+        <h1 id="page-title">Sinais descritivos dos registros exportados</h1>
+        <p class="lede">Esta página não é uma síntese das lacunas da literatura. Ela mostra resultados de regras simples aplicadas a campos operacionais do export.</p>
+    </section>
+    <aside class="report-notice" role="note">
+        <p><strong>Limite de interpretação:</strong> os sinais dependem da cobertura da busca e do preenchimento das etiquetas. Eles não confirmam ausência de temas na literatura, não avaliam qualidade metodológica e não integram as conclusões do TCC.</p>
+        <p>O export versionado contém {{ record_count }} registros. Para a síntese acadêmica, consulte o <a href="../../../results/tcc/index.html">TCC</a> e o <a href="../analysis/mmat_current.html">registro MMAT</a>.</p>
+        <p class="source-note">A regra destaca anos com contagem inferior à metade da média dos anos observados entre {{ year_min }} e {{ year_max }}; classifica etiquetas de tipo abaixo de 30% (experimental) ou 10% (longitudinal), usando todas as linhas como denominador; e procura termos técnicos predefinidos no campo <code>comp_techniques</code>. Campos vazios e variações de rótulo limitam esses sinais. A dimensão geográfica não é calculada.</p>
+    </aside>
 
     {% for gap_type, gap_list in gaps.items() %}
     <div class="gap-section">
-        <h2>{{ gap_type.replace('_', ' ').title() }}</h2>
+        <h2>{{ gap_titles[gap_type] }}</h2>
         {% if gap_list %}
         <ul>
             {% for gap in gap_list %}
@@ -1305,25 +1232,30 @@ class ReportGenerator:
             {% endfor %}
         </ul>
         {% else %}
-        <p class="no-gaps">Nenhuma lacuna significativa identificada nesta categoria.</p>
+        <p class="no-gaps">Nenhum sinal foi produzido para esta categoria pelos campos disponíveis.</p>
         {% endif %}
     </div>
     {% endfor %}
-
-    <div class="gap-section">
-        <h2>Recomendações para Pesquisas Futuras</h2>
-        <ul>
-            <li>Realizar mais estudos experimentais longitudinais</li>
-            <li>Explorar técnicas emergentes como aprendizado por reforço</li>
-            <li>Desenvolver métricas padronizadas de avaliação</li>
-            <li>Investigar aspectos de usabilidade e aceitação pelos professores</li>
-        </ul>
     </div>
-    </div>
+    </main>
     {{ footer_html | safe }}
 </body>
 </html>
         """
 
         template = self.env.from_string(html_template)
-        return template.render(gaps=gaps, footer_html=self._footer_html())
+        return template.render(
+            gaps=gaps,
+            gap_titles={
+                "temporal_gaps": "Distribuição temporal no export",
+                "methodological_gaps": "Etiquetas de tipo de estudo",
+                "technical_gaps": "Rótulos de técnicas computacionais",
+                "geographical_gaps": "Distribuição geográfica",
+            },
+            record_count=_format_pt_br_integer(record_count),
+            year_min=self.config.review.year_min,
+            year_max=self.config.review.year_max,
+            site_header=self._site_header_html(),
+            report_tabs=self._report_tabs_html("gaps"),
+            footer_html=self._footer_html(),
+        )
