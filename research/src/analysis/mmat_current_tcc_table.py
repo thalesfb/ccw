@@ -305,7 +305,7 @@ def render_component_details(components: list[dict[str, str]]) -> str:
         prefix = prefixes[row["design"]]
         lines.extend([
             r"\noindent\textbf{" + _study_reference(row, None) + " -- "
-            + categories[row["design"]] + ".}",
+            + categories[row["design"]] + r".}\nopagebreak[4]",
             "",
             " ".join(rf"\textbf{{{prefix}.{index} ({row[criterion]}):}} "
                      + _latex_escape(row[f"evidence_{criterion}"])
