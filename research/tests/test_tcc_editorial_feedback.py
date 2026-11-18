@@ -123,6 +123,42 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn(r"\citeonline[p.~42--44]{NRC2001}", foundation)
         self.assertIn(r"\citeonline{NRC2001}", foundation)
 
+    def test_public_working_notes_do_not_repeat_internal_counts_or_stale_versions(self):
+        paths = (
+            ROOT / "PESQUISA.md",
+            ROOT / "docs/TCC_REFERENCE_AUDIT.md",
+            ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md",
+            ROOT / "docs/tcc/ESTADO-ATUAL-TCC.md",
+            ROOT / "docs/tcc/MMAT-PAUTA-DE-DECISAO.md",
+        )
+        forbidden_tallies = ("98 respostas", "95 foram mantidas", "95 respostas", "3 alteradas")
+        for path in paths:
+            content = path.read_text(encoding="utf-8")
+            for tally in forbidden_tallies:
+                self.assertNotIn(tally, content, msg=f"{path.relative_to(ROOT)} repeats {tally}")
+
+        research_notes = (ROOT / "PESQUISA.md").read_text(encoding="utf-8")
+        reference_audit = (ROOT / "docs/TCC_REFERENCE_AUDIT.md").read_text(encoding="utf-8")
+        self.assertIn("Cochrane Handbook v6.5 (2024)", research_notes)
+        self.assertIn("Cochrane Handbook na versão 6.5 (2024)", reference_audit)
+        self.assertIn("SAEB 2021 (Inep, 2024)", research_notes)
+        self.assertIn("artigo 20231524 e páginas 1–16 foram conferidos", reference_audit)
+        self.assertNotIn("Funciona como CLAUDE.md", research_notes)
+        self.assertNotIn("decidir se o Cochrane Handbook historicamente citado deve permanecer em 6.4", reference_audit)
+        self.assertNotIn("ano/volume/número devem ser confirmados", reference_audit)
+        self.assertIn("S1 recebeu Y em todos e S2 recebeu 13 Y e 1 CT", reference_audit)
+        self.assertNotIn("S1=Y nos 15", reference_audit)
+        self.assertNotIn("S2=Y em 14 e CT em um", reference_audit)
+
+        historical_review = (ROOT / "docs/tcc/MMAT-REVISAO-2026-10-28.md").read_text(encoding="utf-8")
+        self.assertNotIn("duas avaliações humanas independentes", historical_review)
+        self.assertNotIn("conferência humana e a adjudicação continuam pendentes", historical_review)
+        synthesis_audit = " ".join(
+            (ROOT / "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md").read_text(encoding="utf-8").split()
+        )
+        self.assertNotIn("apreciação independente humana", synthesis_audit)
+        self.assertIn("Esta verificação é limitada às afirmações listadas", synthesis_audit)
+
     def test_limitations_are_tied_to_consulted_studies_and_bounded(self):
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         limitations = review.split(r"\section{Limitações e Contribuições da Revisão}", 1)[1]

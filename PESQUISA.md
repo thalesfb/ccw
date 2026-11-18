@@ -1,9 +1,9 @@
 # PESQUISA.md — Contexto e Workflow de Pesquisa Cientifica
 
-> Documento vivo para agentes e pesquisador. Funciona como CLAUDE.md do projeto,
-> rastreador de melhorias baseado em feedback da banca, e guia de workflow.
+> Caderno de trabalho do pesquisador, com contexto, tarefas e procedimentos auxiliares.
+> O TCC e os dados versionados permanecem como fontes do estado acadêmico publicado.
 >
-> **Ultima atualizacao:** 2026-11-11
+> **Ultima atualizacao:** 2026-11-18
 
 > **Fluxo vigente:** as contagens atuais estão no TCC (`results/tcc/main.pdf`) e nos dados versionados em `research/data/`, que são as fontes vigentes; este documento não as substitui. Em resumo: 11.904 registros identificados; 29 duplicatas removidas (27 por DOI/URL e 2 relatórios iguais, manual); 11.875 triados; 9.393 excluídos na triagem; 2.482 na priorização histórica; 2.464 não avançaram; 18 na lista preliminar. O ID 6918 foi corrigido para 2014 e excluído do recorte 2015--2026. A transição entre o conjunto operacional anterior e a população adjudicada está em `docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`.
 
@@ -111,7 +111,7 @@ results/tcc/
 
 ## 5. Pipeline MMAT (snapshot vigente e histórico)
 
-O módulo MMAT é standalone e o snapshot vigente possui um ledger por critério para os estudos da seleção histórica. A conferência registrada em 13/11/2026 abrangeu as 98 respostas de 14 estudos com texto recuperado, mantendo 95 e alterando 3; Sokkhey permanece sem cópia verificável e sem respostas revalidadas. O ledger não produz escore agregado nem afirma certeza da evidência.
+O módulo MMAT possui um ledger por critério para os estudos da seleção histórica. A conferência documental abrangeu os 14 estudos com texto recuperado; Sokkhey permanece sem cópia verificável e sem respostas revalidadas. O ledger não produz escore agregado nem afirma certeza da evidência.
 
 ### Validar o snapshot vigente
 
@@ -202,14 +202,14 @@ Verificar: zero `^!` no log, zero `undefined`.
 |-----------|--------|------------|
 | PRISMA 2020 (Page et al., BMJ 2021) | Guideline de relato | `PRISMA2020` |
 | PRISMA-P 2015 (Moher et al., 2015) | Guideline para protocolos | `PRISMAP2015` |
-| Cochrane Handbook v6.4 (2023) | Conducao da revisao | `CochraneHandbook` |
+| Cochrane Handbook v6.5 (2024) | Referência complementar para a pergunta e a elegibilidade | `CochraneHandbook` |
 | MMAT 2018 (Hong et al.) | Avaliacao de qualidade | `MMAT2018` |
 | BNCC (Brasil, 2018) | Curriculo nacional | `BNCC2018` |
 | PISA 2022 (OECD, 2023) | Dados internacionais | `PISA2022` |
-| SAEB 2021 (INEP, 2022) | Dados nacionais | `SAEB2021` |
+| SAEB 2021 (Inep, 2024) | Documentação contextual dos resultados | `SAEB2021` |
 
 ---
 
 ## 8. Uso de IA
 
-A triagem em texto completo, a extração e propostas de respostas MMAT foram produzidas por ferramentas de IA generativa sob o protocolo e os critérios do autor. Em 13/11/2026, o autor conferiu as 98 respostas dos 14 estudos com texto recuperado contra as evidências localizadas, manteve 95 e alterou 3; os componentes dos estudos mistos não foram abrangidos. Detalhes no Apêndice de ferramentas de IA do TCC (`results/tcc/postextuais/ferramentas-ia.tex`).
+O uso de ferramentas de IA generativa para redação e revisão textual, desenvolvimento e revisão do código, apoio à triagem e à apreciação MMAT está descrito na Metodologia e no Apêndice de ferramentas do TCC (`results/tcc/postextuais/ferramentas-ia.tex`). A responsabilidade pela conferência das fontes, do texto e do código e pelas análises permanece com o autor.

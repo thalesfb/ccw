@@ -12,12 +12,16 @@ const expectedPages = [
   'research/index.html',
   'research/exports/analysis/mmat_current.html',
   'research/exports/analysis/mmat_visualization.html',
+  'research/exports/reports/summary_report.html',
+  'research/exports/reports/papers_report_included.html',
+  'research/exports/reports/gap_analysis.html',
   'results/ptc/index.html',
   'results/tcc/index.html',
 ];
 
 for (const page of expectedPages) {
   const html = read(page);
+  assert.match(html, /<link rel="icon"[^>]*site-favicon\.svg/i, `${page} must link the shared site favicon`);
   assert.match(html, /public-site\/assets\/site\.css/, `${page} must use the shared site stylesheet`);
   assert.match(html, /site-nav/, `${page} must expose the shared navigation`);
   assert.match(html, /site-nav-desktop/, `${page} must expose the desktop navigation variant`);
@@ -46,6 +50,75 @@ assert.match(homepage, /escopo reconciliado/i, 'the homepage must label the curr
 assert.match(homepage, /escopo reconciliado em 20\/10\/2026/i, 'the homepage must distinguish the historical scope reconciliation date');
 assert.match(homepage, /ifc-campus-videira-horizontal\.png/, 'the homepage must use the official IFC mark');
 assert.doesNotMatch(homepage, /linear-gradient|Segoe UI.*Tahoma/i, 'the homepage must not retain the legacy visual system');
+
+const reportPages = [
+  'research/exports/reports/summary_report.html',
+  'research/exports/reports/papers_report_included.html',
+  'research/exports/reports/gap_analysis.html',
+];
+for (const page of reportPages) {
+  const html = read(page);
+  assert.doesNotMatch(html, /linear-gradient|#667eea|#764ba2|font-family:\s*['"]?Segoe UI/i, `${page} must use the shared visual system`);
+  assert.match(html, /Relatórios do processamento/i, `${page} must identify the report area`);
+  assert.equal((html.match(/<h1\b/gi) || []).length, 1, `${page} must have a single page heading`);
+}
+const reportGenerator = read('research/src/analysis/reports.py');
+assert.doesNotMatch(reportGenerator, /def _create_summary_html|#667eea|#764ba2|Segoe UI/i, 'the report generator must not retain its unused legacy summary renderer');
+
+const summaryReport = read('research/exports/reports/summary_report.html');
+assert.match(summaryReport, /exportação operacional/i, 'the generated summary must distinguish its export from the current scientific record');
+assert.match(summaryReport, /Snapshot do export operacional: \d{2}\/\d{2}\/\d{4}/i, 'the report must identify the date as the source snapshot, not the current HTML generation date');
+assert.doesNotMatch(summaryReport, /Gerado em:|Data de Geração:/i, 'the report must not present the snapshot date as the HTML generation time');
+assert.match(summaryReport, /2 relatório\(s\) não recuperado\(s\), 15 avaliado\(s\) e 14 relatório\(s\) empírico\(s\) recuperado\(s\)/i, 'the generated summary must retain the reconciled retrieval counts');
+assert.match(summaryReport, /11\.76%/, 'the summary must use the reconciled report-retrieval percentage');
+assert.match(summaryReport, /6\.67%/, 'the summary must use the reconciled full-text exclusion percentage');
+assert.match(summaryReport, /registro de escopo[\s\S]*registro de recuperação/i, 'the summary must link the versioned selection and retrieval records');
+assert.match(summaryReport, /04\/12\/2026|TCC|MMAT/i, 'the generated summary must point readers to the current TCC or MMAT record');
+assert.match(summaryReport, /Registros por ano de publicação/i, 'the summary charts must use reader-facing Portuguese labels');
+assert.match(summaryReport, /Escores de priorização do export; não são medida de qualidade metodológica/i, 'the relevance chart must explain the limits of the score');
+assert.doesNotMatch(summaryReport, /Database Coverage|Selection Funnel|Papers by Year|Relevance Distribution/i, 'the summary must not expose raw chart identifiers as reader-facing labels');
+
+const gapReport = read('research/exports/reports/gap_analysis.html');
+assert.match(gapReport, /exploração automatizada/i, 'the gap report must be labeled as an automated exploration');
+assert.match(gapReport, /não avalia rigor metodológico/i, 'the gap report must not infer study rigor from operational labels');
+assert.match(gapReport, /distribuição geográfica não é calculada/i, 'the gap report must not claim an uncomputed geographic result');
+assert.match(gapReport, /11\.875 registros/, 'the gap report must format counts using Brazilian Portuguese conventions');
+assert.match(gapReport, /Nenhum dos 11\.875 registros recebeu a etiqueta operacional “longitudinal”/, 'the gap report must describe a zero count in natural language');
+assert.doesNotMatch(gapReport, /Poucos estudos experimentais rigorosos|Nenhuma lacuna significativa identificada|Recomendações para Pesquisas Futuras/i, 'the gap report must not retain unsupported conclusions or generic recommendations');
+
+const papersReport = read('research/exports/reports/papers_report_included.html');
+assert.match(papersReport, /exportação operacional/i, 'the retained-record report must identify its processing source');
+assert.match(papersReport, /não equivale à seleção científica/i, 'the retained-record report must distinguish pipeline retention from scientific inclusion');
+
+function collectHtmlFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    if (entry.name === '.git' || entry.name === 'node_modules') return [];
+    const absolutePath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return collectHtmlFiles(absolutePath);
+    return entry.isFile() && entry.name.endsWith('.html') ? [absolutePath] : [];
+  });
+}
+
+for (const absolutePage of collectHtmlFiles(root)) {
+  const page = path.relative(root, absolutePage);
+  const html = read(page);
+  assert.doesNotMatch(html, /(?:href|src)=["']\s*javascript:/i, `${page} must not expose a script URL`);
+  for (const [, anchor] of html.matchAll(/<a\b[^>]*>/gi)) {
+    if (/\btarget=["']_blank["']/i.test(anchor)) {
+      assert.match(anchor, /\brel=["'][^"']*noopener/i, `${page} must isolate links opened in a new tab`);
+    }
+  }
+  for (const [, rawTarget] of html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)) {
+    const target = rawTarget.trim();
+    if (!target || target.startsWith('#') || /^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(target)) continue;
+    const pathname = decodeURIComponent(target.split(/[?#]/, 1)[0]);
+    if (!pathname) continue;
+    const absoluteTarget = path.resolve(path.dirname(absolutePage), pathname);
+    const relativeTarget = path.relative(root, absoluteTarget);
+    assert.ok(relativeTarget === '' || (!relativeTarget.startsWith('..') && !path.isAbsolute(relativeTarget)), `${page} must not link outside the public repository: ${target}`);
+    assert.ok(fs.existsSync(absoluteTarget), `${page} must not contain a broken local link: ${target}`);
+  }
+}
 
 const researchLanding = read('research/index.html');
 assert.match(researchLanding, /A seleção histórica sob o corte 4,0 reúne 15 estudos empíricos, com 14 relatórios recuperados/i, 'the research landing page must distinguish the historical selection from retrieved reports');

@@ -1,7 +1,12 @@
 {
-  "title": "Relatório da Revisão Sistemática",
+  "title": "Resumo operacional da revisão sistemática",
   "subtitle": "Ensino Personalizado de Matemática: revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente",
   "generated_at": "14/11/2026 11:57",
+  "data_scope": {
+    "interpretation": "Este JSON preserva contagens do export operacional e uma sobreposição de recuperação reconciliada. Para a seleção científica histórica, consulte o registro de escopo; para a recuperação de fontes, consulte o registro de situação atual. Os contadores operacionais não substituem esses registros.",
+    "selection_source": "research/data/current_synthesis_scope.csv",
+    "retrieval_source": "research/data/selection_status_current.json"
+  },
   "statistics": {
     "total_papers": 11904,
     "prisma": {
