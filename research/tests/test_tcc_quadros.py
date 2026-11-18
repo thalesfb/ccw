@@ -7,9 +7,9 @@ ROOT = Path(__file__).resolve().parents[2]
 INVENTORY = json.loads((ROOT / "scripts/tcc_quadros.json").read_text(encoding="utf-8"))
 
 
-def test_all_fourteen_quadros_call_the_shared_style_once():
+def test_all_fifteen_quadros_call_the_shared_style_once():
     rows = INVENTORY["quadros"]
-    assert len(rows) == len({row["label"] for row in rows}) == 14
+    assert len(rows) == len({row["label"] for row in rows}) == 15
     for row in rows:
         text = (ROOT / row["source"]).read_text(encoding="utf-8")
         assert text.count(r"\TCCQuadroSetup{" + row["label"] + "}") == 1
@@ -186,7 +186,7 @@ class RenderedPage:
 
     def extract_text(self, visitor_text):
         matrix = [1, 0, 0, 1, 0, 0]
-        for number in range(1, 15):
+        for number in range(1, 16):
             runs = [(f"Quadro {number} – Título", 12), ("Dado", 10), ("Fonte: autor", 10)]
             if number == 7 and self.fault == "note_alignment":
                 runs.append(("Nota: detalhe", 10))
@@ -219,20 +219,20 @@ class RenderedPage:
 
 
 def rendered_sources():
-    return {i: "Fonte: autor" for i in range(1, 15)}
+    return {i: "Fonte: autor" for i in range(1, 16)}
 
 
 def test_pdf_gate_reads_actual_caption_body_and_source_font_runs():
     result = gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage()]), 0, INVENTORY,
-                              {i: f"Quadro {i} – Título" for i in range(1, 15)},
+                              {i: f"Quadro {i} – Título" for i in range(1, 16)},
                               rendered_sources())
-    assert len(result) == 14
+    assert len(result) == 15
     assert all(row["body_runs"] == 1 and row["source_seen"] for row in result)
 
 
 def test_continued_caption_can_arrive_as_separate_pdf_fragments():
     result = gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage("split_continuation")]),
-                              0, INVENTORY, {i: f"Quadro {i} – Título" for i in range(1, 15)},
+                              0, INVENTORY, {i: f"Quadro {i} – Título" for i in range(1, 16)},
                               rendered_sources())
     assert result[6]["body_runs"] == 2
 
@@ -243,7 +243,7 @@ def test_continued_caption_can_arrive_as_separate_pdf_fragments():
 def test_pdf_gate_rejects_bad_typography_order_and_unapproved_rotation(fault):
     with pytest.raises(ValueError):
         gate.inspect_pdf(SimpleNamespace(pages=[RenderedPage(fault)]), 0, INVENTORY,
-                         {i: f"Quadro {i} – Título" for i in range(1, 15)},
+                         {i: f"Quadro {i} – Título" for i in range(1, 16)},
                          rendered_sources())
 
 
@@ -277,8 +277,8 @@ class FragmentPage(RenderedPage):
 
 def inspect_source_fragments(tail, expected="Fonte: autor. Nota: texto final.", same_page=False):
     sources = rendered_sources()
-    sources[14] = expected
-    runs = [(text, size, y) for i in range(1, 15)
+    sources[15] = expected
+    runs = [(text, size, y) for i in range(1, 16)
             for text, size, y in [(f"Quadro {i} – Título", 12, 120),
                                   ("Dado", 10, 100), ("Fonte: autor", 10, 80)]]
     if same_page:
@@ -286,7 +286,7 @@ def inspect_source_fragments(tail, expected="Fonte: autor. Nota: texto final.", 
         tail = tail[1:]
     pages = [FragmentPage(runs), *[FragmentPage(page) for page in tail]]
     return gate.inspect_pdf(SimpleNamespace(pages=pages), 0, INVENTORY,
-                            {i: f"Quadro {i} – Título" for i in range(1, 15)}, sources)
+                            {i: f"Quadro {i} – Título" for i in range(1, 16)}, sources)
 
 
 @pytest.mark.parametrize("size", [8, 12])
