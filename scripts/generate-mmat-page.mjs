@@ -408,7 +408,7 @@ const page = `<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Apreciação por critérios do MMAT 2018, conferida pelo autor, para o escopo reconciliado em ${scopeSnapshotLabel}; data de corte ${cutoffDateLabel}.">
-  <title>MMAT · escopo ${scopeSnapshotLabel} · CCW</title>
+  <title>MMAT · critérios Q1–Q5 por categoria · escopo histórico ${scopeSnapshotLabel} · CCW</title>
   <link rel="stylesheet" href="../../../public-site/assets/site.css">
 </head>
 <body>
@@ -447,7 +447,7 @@ const page = `<!doctype html>
       <p class="breadcrumb"><a href="../../../">Visão geral</a> / <a href="../../index.html">Revisão</a> / <strong>MMAT · ${scopeSnapshotLabel}</strong></p>
       <section class="page-hero" aria-labelledby="page-title">
         <span class="eyebrow">MMAT 2018 · recorte histórico reconciliado em ${scopeSnapshotLabel}</span>
-        <h1 id="page-title">Apreciação MMAT do recorte histórico</h1>
+        <h1 id="page-title">Apreciação MMAT do recorte histórico: triagem S1/S2 e critérios Q1–Q5</h1>
         <p class="lede">Esta página registra as apreciações MMAT do conjunto histórico selecionado sob o corte 4,0, propostas com apoio de IA e conferidas pelo autor em 13/11/2026 nos 14 estudos com texto recuperado. A busca teve data de corte em ${cutoffDateLabel} e a população foi reconciliada em ${scopeSnapshotLabel}. O corte 4,0 e os 15 estudos permanecem inalterados; este conjunto não é apresentado como corpus final. Esta apreciação não é uma nota global, percentual ou ranking de qualidade.</p>
         <p class="source-note">Data de corte da busca: ${searchCutoffLabel}. Recorte consolidado em ${adjudicatedSnapshotLabel}. Registro MMAT da seleção histórica sob o corte 4,0, reconciliado em ${latestScopeReconciliationLabel}; apreciações registradas até ${latestReviewDateLabel}.</p>
         <div class="action-row">
@@ -504,7 +504,7 @@ const page = `<!doctype html>
 
       <section class="section" aria-labelledby="criteria-title">
         <div class="section-heading">
-          <h2 id="criteria-title">Critérios de apreciação por delineamento</h2>
+          <h2 id="criteria-title">Critérios Q1–Q5 por categoria de delineamento</h2>
           <p>Os códigos Q1–Q5 mudam de formulação conforme o delineamento identificado para o estudo.</p>
         </div>
         <div class="mmat-criteria-groups">${criteriaGroups}</div>
