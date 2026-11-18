@@ -82,6 +82,9 @@ class EditorialFeedbackTests(unittest.TestCase):
             acceptance.index(r"\subsection{Funções da Especificação}"),
             acceptance.index(r"\subsection{Vínculos e Critérios de Aceitação}"),
         )
+        self.assertIn(r"\caption{Funções da especificação conceitual.}", acceptance)
+        self.assertIn(r"\label{qua:funcoes-especificacao}", acceptance)
+        self.assertNotIn(r"\begin{description}", acceptance)
         for function in ("F01", "F02", "F03", "F04", "F05", "F06", "F07"):
             self.assertIn(function, acceptance)
 

@@ -451,7 +451,7 @@ class: content-slide tcc-specification-slide
 
 <div class="tcc-spec-layout">
   <div class="tcc-requirement-examples"><h2>Dois exemplos</h2><p><strong>R02 — separar os conceitos.</strong> Origem: NRC (2001), OECD (2023), BNCC (2018). Decisão: distinguir desempenho, previsão e aprendizagem nas saídas. Limite: não valida uma escala.</p><p><strong>R20 — prevenir vazamento de dados.</strong> Origem: relato ambíguo de Pejić et al. (2021, pp. 50–51), James et al. (2021) e decisão autoral. Decisão: separar treino, validação e teste. Limite: não afirma o que o artigo executou.</p></div>
-  <div class="tcc-spec-delivery"><h2>Origens distintas</h2><p>Seis estudos são citados diretamente em sete grupos; os 15 estudos se ligam a 18 grupos. Fundamentos teóricos e decisões autorais completam a rastreabilidade.</p><small>Vínculo com um estudo é decisão de projeto: não significa que o estudo validou o requisito. Figura 1 e Quadros 8 e 9 do TCC.</small></div>
+  <div class="tcc-spec-delivery"><h2>Origens distintas</h2><p>Seis estudos são citados diretamente em sete grupos; os 15 estudos se ligam a 18 grupos. Fundamentos teóricos e decisões autorais completam a rastreabilidade.</p><small>Vínculo com um estudo é decisão de projeto: não significa que o estudo validou o requisito. Figura 1 e Quadros 8 e 11 do TCC.</small></div>
 </div>
 
 ---

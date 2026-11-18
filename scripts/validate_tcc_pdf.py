@@ -26,21 +26,38 @@ def list_entries(text: str) -> list[tuple[str, str]]:
 
 def validate_quadro_count(auxiliaries: Path) -> int:
     entries = list_entries((auxiliaries / "main.loq").read_text(encoding="utf-8"))
-    if len(entries) != 14:
+    if len(entries) != 15:
         raise ValueError(
-            "Expected fourteen quadros: search strategy, PICOS, study characterization, "
+            "Expected fifteen quadros: search strategy, PICOS, study characterization, "
             "two synthesis matrices, MMAT study appraisal, mixed-method components, "
-            "functional acceptance, requirement traceability, study-requirement matrix, "
+            "requirement traceability, function summary, functional acceptance, "
+            "study-requirement matrix, "
             "PRISMA checklist, teacher-review form, function acceptance form and AI tools; "
             "the MMAT criterion counts are tables"
         )
     return len(entries)
 
 
+def validate_single_page_form(pages: list[str]) -> None:
+    required = (
+        normalize("Ficha individual de julgamento por requisito"),
+        normalize("Preencha uma linha para cada requisito"),
+        normalize("R01"),
+        normalize("R26"),
+        normalize("Fonte: Elaborado pelo autor (2026)"),
+    )
+    if not any(all(term in normalize(page) for term in required) for page in pages):
+        raise ValueError(
+            "The teacher-review form must keep its caption, rows R01 and R26, "
+            "and source together on one page"
+        )
+
+
 def validate(pdf: Path, auxiliaries: Path) -> dict:
     reader = PdfReader(pdf)
     destinations = reader.named_destinations
     pages = [page.extract_text() or "" for page in reader.pages]
+    validate_single_page_form(pages)
     intro_aux = (auxiliaries / "conteudo/introducao.aux").read_text(encoding="utf-8")
     intro_anchor = re.search(r"\\newlabel\{cap:introducao\}.*\{(chapter\.[^}]+)\}", intro_aux)
     if not intro_anchor or intro_anchor[1] not in destinations:

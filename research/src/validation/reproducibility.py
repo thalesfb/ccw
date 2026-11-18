@@ -243,11 +243,11 @@ ARTIFACTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "scripts/tcc_quadros.json",
-        "active fourteen-quadro inventory and authorized editorial typography policy",
+        "active fifteen-quadro inventory and authorized editorial typography policy",
     ),
     (
         "scripts/validate_tcc_quadros.py",
-        "source, compiled typography and PDF checks for the fourteen quadros",
+        "source, compiled typography and PDF checks for the fifteen quadros",
     ),
     (
         "research/requirements.txt",
