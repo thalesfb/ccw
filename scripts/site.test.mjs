@@ -88,7 +88,8 @@ const mmat = read('research/exports/analysis/mmat_current.html');
 assert.doesNotMatch(mmat, /^[\t ]+$/m, 'generated MMAT page must not contain whitespace-only lines');
 assert.match(mmat, /não é uma nota global/i, 'the MMAT page must reject aggregate scoring');
 assert.match(mmat, /arquivo histórico/i, 'the current page must preserve historical provenance');
-assert.match(mmat, /Apreciação MMAT do recorte histórico/i, 'the MMAT page title must identify the historical record');
+assert.match(mmat, /<title>MMAT · critérios Q1–Q5 por categoria · escopo histórico 20\/10\/2026 · CCW<\/title>/, 'the MMAT browser title must identify the criteria and historical scope');
+assert.match(mmat, /<h1 id="page-title">Apreciação MMAT do recorte histórico: triagem S1\/S2 e critérios Q1–Q5<\/h1>/, 'the MMAT page heading must identify screening and category-specific criteria');
 assert.match(mmat, /O corte 4,0 e os 15 estudos permanecem inalterados/i, 'the MMAT page must describe the actual selection without a promised new review');
 assert.match(mmat, /data de corte 31\/08\/2026/i, 'the MMAT page must identify the review cutoff date');
 assert.match(mmat, /recorte histórico reconciliado em 20\/10\/2026/i, 'the MMAT page must distinguish the historical reconciled scope date');
@@ -165,7 +166,7 @@ assert.match(mmat, /Há perguntas de pesquisa claras\?/i, 'the current page must
 assert.match(mmat, /Os dados coletados permitem responder às perguntas de pesquisa\?/i, 'the current page must expose S2');
 assert.match(mmat, /Na seleção histórica sob o corte 4,0, S1 e S2 estão preenchidas para 14 estudos empíricos\. Q1–Q5 foram apreciados em 14;/i, 'the historical empirical records must expose their preliminary appraisals');
 assert.match(mmat, /Are there clear research questions\?/i, 'the current page must preserve the original S1 wording');
-assert.match(mmat, /Critérios de apreciação por delineamento/i, 'the current page must expose design-specific criteria');
+assert.match(mmat, /Critérios Q1–Q5 por categoria de delineamento/i, 'the current page must expose design-specific criteria');
 assert.match(mmat, /MMAT 2018<\/a>/i, 'the current page must cite the MMAT 2018 source');
 assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_current_study_registry\.csv"/, 'the current page must link to the versioned registry at its published path');
 assert.match(mmat, /href="\.\.\/\.\.\/\.\.\/research\/data\/mmat_primary_sources_manifest\.csv"/, 'the current page must expose the primary-source provenance manifest');

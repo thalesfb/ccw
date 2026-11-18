@@ -823,6 +823,7 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
     details = CURRENT_TABLE.with_name("mmat_component_details_tcc.tex").read_text(encoding="utf-8")
     assert "3.1 (CT):" in details
     assert "2.1 (CT):" not in details
+    assert r"\nopagebreak[4]" in details
     assert r"\ref{apendice:mmat-componentes}" in table
     assert r"\ref{sec:avaliacao-qualidade}" in table
     assert "ID" not in table

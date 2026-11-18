@@ -41,6 +41,7 @@ class EditorialFeedbackTests(unittest.TestCase):
                 "apendice:recuperacao-fontes",
                 "apendice:formulario-oe4",
                 "apendice:mmat-componentes",
+                "apendice:mmat-criterios",
                 "apendice:ferramentas-ia",
             },
         )
