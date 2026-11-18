@@ -8,7 +8,7 @@ Este trabalho empregou uma Revisão Sistemática da Literatura para identificar 
 
 Neste relato, registro designa a referência recuperada nas bases durante a identificação e a triagem; relatório, o documento cujo texto completo foi procurado; estudo, a unidade empírica. Os componentes de um mesmo relatório são examinados sem duplicar o estudo ou os dados reutilizados. O corpus empírico apresentado reúne 15 estudos selecionados segundo o corte de relevância 4,0. Neste trabalho, seleção original designa esse conjunto, definido na execução da busca encerrada em 31 de agosto de 2026; as conferências posteriores dos dados não refizeram a seleção.
 
-O PRISMA 2020 orientou o relato da pergunta, das fontes, dos critérios, do processo de seleção e dos resultados \cite{PRISMA2020}. Trata-se de uma diretriz de relato, distinta de um método de busca ou de avaliação da qualidade. O PRISMA-P 2015 (\textit{Preferred Reporting Items for Systematic Review and Meta-Analysis Protocols}) orienta o planejamento e o relato de protocolos \cite{PRISMAP2015}. Seus princípios foram utilizados parcialmente na organização da questão, dos critérios, da estratégia de busca e da forma de síntese. O planejamento inicial está documentado no histórico do repositório, mas não houve registro em plataforma de pré-registro. A consulta complementar ao Handbook não corresponde à adoção integral dos procedimentos de uma revisão Cochrane.
+O PRISMA 2020 orientou o relato da pergunta, das fontes, dos critérios, do processo de seleção e dos resultados \cite{PRISMA2020}. Trata-se de uma diretriz de relato, distinta de um método de busca ou de avaliação da qualidade. O PRISMA-P 2015 (\textit{Preferred Reporting Items for Systematic Review and Meta-Analysis Protocols}) orienta o planejamento e o relato de protocolos \cite{PRISMAP2015}. Seus princípios foram utilizados parcialmente na organização da questão, dos critérios, da estratégia de busca e da forma de síntese. A revisão não foi registrada prospectivamente em uma plataforma de protocolos. A consulta complementar ao Handbook não corresponde à adoção integral dos procedimentos de uma revisão Cochrane.
 
 O código, os dados e os registros da revisão estão disponíveis em repositório público \cite{BatistaCCWCode2026}, o que permite conferir cada contagem e reproduzir as tabelas e figuras deste trabalho.
 
@@ -17,7 +17,7 @@ A lista de verificação PRISMA 2020 foi preenchida retrospectivamente, após a 
 \label{sec:apoio-pesquisa}
 A pesquisa foi conduzida pelo autor no Instituto Federal Catarinense – Campus Videira, com recursos próprios, sem financiamento externo. Não houve entidade financiadora externa com participação no delineamento, na seleção dos estudos, na análise ou na decisão de disponibilização dos resultados. O autor declara não haver conflitos de interesse relacionados a esta pesquisa. A pesquisa não envolveu participantes nem coleta de dados pessoais: utilizou textos científicos e metadados de acesso público. Por isso, não foi submetida ao sistema formado pelo Comitê de Ética em Pesquisa (CEP) e pela Comissão Nacional de Ética em Pesquisa (Conep), conforme o art.~1º, parágrafo único, incisos III e VI, da Resolução do Conselho Nacional de Saúde (CNS) nº~510/2016 \cite{CNS5102016}. A avaliação futura com docentes, descrita no Capítulo~\ref{cap:prototipo}, dependerá dessa apreciação ética.
 
-O planejamento inicial documentado no histórico do repositório considerava publicações de 2015 a 2025 e artigos revisados por pares. Na revisão executada, o período abrangeu 2015 a 2026, com corte em 31 de agosto de 2026, e os tipos documentais incluíram também teses e dissertações, conforme os critérios apresentados neste capítulo. O relato distinguiu a priorização por metadados e resumos da avaliação de elegibilidade em texto completo. A apreciação com o MMAT foi conduzida pelo autor, com apoio de IA generativa na proposta de respostas e na conferência documental por critério, sem escore agregado e sem utilização como regra de exclusão.
+O planejamento inicial considerava publicações de 2015 a 2025 e artigos revisados por pares. Na revisão executada, o período abrangeu 2015 a 2026, com data de corte da busca em 31 de agosto de 2026, e os tipos documentais incluíram também teses e dissertações, conforme os critérios apresentados neste capítulo. O relato distinguiu a priorização por metadados e resumos da avaliação de elegibilidade em texto completo. A apreciação com o MMAT foi conduzida pelo autor, com apoio de IA generativa na proposta de respostas e na conferência documental por critério, sem escore agregado e sem utilização como regra de exclusão.
 
 \section{Estratégia de Busca}
 
@@ -25,7 +25,7 @@ A coleta utilizou interfaces de programação de aplicações (APIs), que permit
 
 A estratégia combinou domínio matemático, técnica computacional e contexto educacional, conforme o Quadro~\ref{qua:camadas-busca}. A expressão configurada conecta essas dimensões por \texttt{AND}, mas seu tratamento varia entre as APIs; não foi aplicada uma semântica booleana uniforme. As grafias foram preservadas conforme a configuração executada, inclusive as formas sem acentuação.
 
-\begin{quadro}[htbp]
+\begin{quadro}[H]
 \TCCQuadroSetup{qua:camadas-busca}
 \centering
 \caption{Camadas da estratégia de busca bilíngue.}
@@ -48,7 +48,7 @@ A estratégia canônica reuniu 72 consultas: 48 em inglês e 24 em português. E
 
 No Crossref, o coletor retira o texto \texttt{AND}, envia os termos à busca bibliográfica, solicita ordenação por relevância e chama uma amostragem de até 100 resultados para obter até 50 itens aceitos. A documentação do serviço define essa amostragem como aleatória; o código não fixa uma semente. Portanto, a resposta não é uma lista reproduzível dos 50 primeiros por relevância \cite{CrossrefTips2025}. No Semantic Scholar, a expressão é enviada com \texttt{AND} literal no campo de consulta. O OpenAlex retira apenas as aspas, preservando \texttt{AND}; esses dois clientes não definem um parâmetro de ordenação. O CORE recebe a expressão e ordena os resultados por ano decrescente. O limite restringe os itens que avançam conforme a ordem retornada pelos serviços; no Crossref, atua sobre a amostra.
 
-O cache pode devolver uma coleção anterior sem reaplicar o limite, e as tentativas do coletor Crossref podem acumular respostas. O conjunto preservado contém pares API/consulta com mais de 50 itens, inclusive mais registros Crossref que os 3.600 nominais de uma passagem. Por isso, não se infere do código atual quantas requisições históricas ocorreram nem quais páginas de resultados foram percorridas. Não houve reprocessamento da busca nesta revisão do relato.
+O cache pode devolver uma coleção anterior sem reaplicar o limite, e as tentativas do coletor Crossref podem acumular respostas. O conjunto preservado contém pares API/consulta com mais de 50 itens, inclusive mais registros Crossref que os 3.600 nominais de uma passagem. Por isso, não se infere do código atual quantas requisições históricas ocorreram nem quais páginas de resultados foram percorridas. A busca não foi reprocessada neste relato.
 
 \section{Critérios de Seleção}
 
@@ -84,6 +84,7 @@ Foram elegíveis artigos de periódicos e trabalhos completos em anais revisados
 Os critérios de exclusão compreenderam metodologia insuficientemente descrita para responder à questão da revisão, foco apenas indireto no ensino ou na aprendizagem de matemática e publicações teóricas sem evidências empíricas compatíveis com o escopo. Também foram considerados inelegíveis editoriais, comentários, erratas e relatórios internos que não correspondessem aos tipos documentais elegíveis, além de textos em idiomas diferentes de inglês e português.
 
 \section{Processo de Seleção}
+\label{sec:processo-selecao}
 
 O processo reuniu identificação, deduplicação, triagem, priorização por relevância e verificação de elegibilidade. O Fluxograma~\ref{fig:prisma-flow} apresenta as contagens e distingue essas etapas.
 
@@ -96,7 +97,7 @@ A priorização por relevância foi aplicada aos registros que passaram pelas re
 
 A função executada limita a soma ponderada ao intervalo nominal de 0 a 10 e arredonda o resultado a duas casas decimais. Nos dados preservados, os escores variaram de 0,0 a 4,5, sem renormalização. O valor 4,0 representa o ponto de corte da soma ponderada: registros com escore igual ou superior a 4,0 permaneceram candidatos à leitura, sujeitos aos demais critérios; os inferiores ao corte foram sinalizados como baixa relevância. O número não representa uma porcentagem de aderência, probabilidade de elegibilidade ou nota de qualidade.
 
-Foi adotado o limiar de 4,0 como ponto de corte heurístico para delimitar o conjunto de estudos analisado. A exploração de sensibilidade descrita na Seção~\ref{sec:limitacoes-revisao} não valida a escolha exata de 4,0 nem substitui a validação do corte por leitura humana de uma amostra, que não foi realizada. A apreciação qualitativa e de risco de viés ocorreu separadamente por meio da aplicação do MMAT 2018.
+Foi adotado o limiar de 4,0 como ponto de corte heurístico para delimitar o conjunto de estudos analisado. A exploração de sensibilidade descrita na Seção~\ref{sec:limitacoes-revisao} não valida a escolha exata de 4,0 nem substitui a validação do corte por leitura humana de uma amostra, que não foi realizada. A apreciação metodológica ocorreu separadamente pelo MMAT 2018, mas não correspondeu à avaliação formal de risco de viés por estudo.
 
 \subsection{Extração dos dados e síntese}
 \label{sec:extracao-sintese}
@@ -116,7 +117,7 @@ Consultas, critérios e código foram mantidos sob controle de versão. Os julga
 \section{Avaliação da Qualidade Metodológica}
 \label{sec:avaliacao-qualidade}
 
-Os 14 estudos da seleção original com texto completo recuperado têm registros de apreciação estruturada com o \textit{Mixed Methods Appraisal Tool} (MMAT), versão 2018 \cite{MMAT2018}; \citeonline{Multimodels2020_002} permanece na seleção sem apreciação MMAT, porque não há cópia verificável do texto completo. A triagem em texto completo, a extração de dados e as respostas aos critérios do MMAT foram conduzidas pelo autor com apoio de ferramentas de inteligência artificial generativa (Apêndice~\ref{apendice:ferramentas-ia}), a partir do protocolo e dos critérios definidos. O autor conferiu as respostas MMAT dos 14 estudos com texto recuperado, critério a critério, com base nas evidências localizadas; as ferramentas auxiliaram a localizar trechos, e os trechos citados foram verificados nos respectivos estudos. Nos três estudos de métodos mistos, essa conferência não abrangeu a apreciação separada dos componentes qualitativo e quantitativo; essas apreciações permanecem registradas como assistidas por IA. O instrumento oferece critérios específicos para estudos qualitativos, quantitativos randomizados, quantitativos não randomizados, quantitativos descritivos e de métodos mistos. As adaptações de categoria e os julgamentos por estudo são apresentados na Seção~\ref{sec:qualidade-estudos}.
+Os 14 estudos da seleção original com texto completo recuperado têm registros de apreciação estruturada com o \textit{Mixed Methods Appraisal Tool} (MMAT), versão 2018 \cite{MMAT2018}; \citeonline{Multimodels2020_002} permanece na seleção sem apreciação MMAT, porque não há cópia verificável do texto completo. A triagem em texto completo, a extração de dados e as respostas aos critérios do MMAT foram conduzidas pelo autor com apoio de ferramentas de inteligência artificial generativa (Apêndice~\ref{apendice:ferramentas-ia}), a partir do protocolo e dos critérios definidos. O autor conferiu as respostas MMAT dos 14 estudos com texto recuperado, critério a critério, com base nas evidências localizadas; as ferramentas auxiliaram a localizar trechos, e os trechos citados foram verificados nos respectivos estudos. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas referentes aos componentes qualitativo e quantitativo; essas respostas permanecem identificadas como assistidas por IA. O instrumento oferece critérios específicos para estudos qualitativos, quantitativos randomizados, quantitativos não randomizados, quantitativos descritivos e de métodos mistos. As adaptações de categoria e os julgamentos por estudo são apresentados na Seção~\ref{sec:qualidade-estudos}.
 
 Inicialmente foram registradas as perguntas S1, ``Há perguntas de pesquisa claras?'', e S2, ``Os dados coletados permitem responder às perguntas de pesquisa?''. Em seguida foram registrados o desenho, os cinco critérios Q1--Q5 correspondentes e as justificativas. Cada critério recebeu Y (``Sim''), N (``Não'') ou \textit{Can't tell} (CT, ``Não é possível concluir com a evidência disponível''). A ausência de avaliação é distinta de CT e não constitui resposta adicional do instrumento.
 
@@ -133,7 +134,7 @@ Na seleção e na apreciação metodológica, o apoio incluiu leitura de título
 
 Cabe ao autor conferir as fontes, aceitar ou rejeitar as sugestões, verificar o texto e o código incorporados e responder pelas análises, interpretações e argumentos apresentados. Testes, validadores e comparação com os documentos originais apoiam essa verificação, sem substituir o julgamento dos critérios de elegibilidade e do MMAT nem demonstrar eficácia educacional.
 
-O Apêndice~\ref{apendice:ferramentas-ia} resume as ferramentas, as famílias e versões registradas e as finalidades gerais do apoio. O histórico parcial das interações não permite atribuir cada trecho do texto ou do código a um modelo específico. Esse histórico incompleto e a dependência de versões dos serviços limitam a reprodução das interações com as ferramentas.
+O Apêndice~\ref{apendice:ferramentas-ia} resume as ferramentas, as famílias e versões registradas e as finalidades gerais do apoio.
 
 \section{Derivação da Especificação do Protótipo}
 

@@ -47,13 +47,13 @@
     },
     {
       "number": 9,
-      "label": "qua:estudos-requisitos",
-      "source": "results/tcc/conteudo/estudos-requisitos.tex"
+      "label": "qua:aceitacao-funcional",
+      "source": "results/tcc/conteudo/aceitacao-cenarios.tex"
     },
     {
       "number": 10,
-      "label": "qua:aceitacao-funcional",
-      "source": "results/tcc/conteudo/aceitacao-cenarios.tex"
+      "label": "qua:estudos-requisitos",
+      "source": "results/tcc/conteudo/estudos-requisitos.tex"
     },
     {
       "number": 11,

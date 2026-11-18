@@ -7,6 +7,7 @@ images. It records an assisted consistency review, not scientific approval.
 
 import argparse
 import csv
+from collections import Counter
 from datetime import date
 import hashlib
 import json
@@ -159,6 +160,20 @@ def render_blocks(root):
         raise ValueError("selection status must describe the unchanged current snapshot")
     with (root / RECORD_CORRECTIONS).open("r", encoding="utf-8-sig", newline="") as handle:
         corrections = list(csv.DictReader(handle))
+    with (root / "research/data/mmat_reassessment_current.csv").open(
+        "r", encoding="utf-8-sig", newline=""
+    ) as handle:
+        current_mmat = [
+            row for row in csv.DictReader(handle)
+            if row["assessment_status"] == "author_conferred_single_reviewer"
+            and row["empirical_status"] == "empirical_confirmed_external"
+        ]
+    screening_counts = {
+        criterion: Counter(row[criterion] for row in current_mmat if row[criterion])
+        for criterion in ("s1", "s2")
+    }
+    if len(current_mmat) != int(qa["screening_rows"]):
+        raise ValueError("current MMAT denominator disagrees with the versioned ledger")
     identity_reconciliation_date = max(row["decision_date"] for row in corrections)
     deterministic_duplicates = int(deduplication["deterministic_identity_duplicate_rows"])
     same_report_duplicates = int(deduplication["adjudicated_same_report_duplicate_rows"])
@@ -208,10 +223,12 @@ def render_blocks(root):
         f"({' e '.join(retrieval['not_retrieved_labels'])}); "
         f"{retrieval['reports_assessed_at_full_text']} foram avaliados em texto completo, incluindo "
         f"{retrieval['full_text_exclusions']} protocolo excluído. "
-        f"No MMAT conferido pelo autor, há {qa['screening_rows']} triagens S1/S2 e "
-        f"{qa['category_appraised_rows']} apreciações por categoria nos estudos com texto recuperado. "
-        f"Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável; "
-        f"as apreciações separadas dos componentes dos estudos mistos continuam preliminares. "
+        f"Nas {qa['screening_rows']} avaliações MMAT dos estudos com texto recuperado, "
+        f"S1 recebeu {screening_counts['s1']['Y']} Y e S2 recebeu {screening_counts['s2']['Y']} Y e "
+        f"{screening_counts['s2']['CT']} CT; o autor conferiu essas respostas. "
+        f"Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável. "
+        f"Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas "
+        f"dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. "
         f"Não há escore agregado."
     )
     flow_rows = [

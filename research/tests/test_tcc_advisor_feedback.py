@@ -56,9 +56,9 @@ def test_prisma_reporting_and_protocol_are_not_conflated() -> None:
     assert "prisma-p 2015" in lowered
     assert "orienta o planejamento e o relato de protocolos" in lowered
     assert "seus princípios foram utilizados parcialmente" in lowered
-    assert "não houve registro em plataforma de pré-registro" in lowered
+    assert "a revisão não foi registrada prospectivamente em uma plataforma de protocolos" in lowered
     assert "planejamento inicial" in lowered
-    assert "histórico do repositório" in lowered
+    assert "histórico do repositório" not in lowered
     for unsupported in (
         "seguiu integralmente",
         "seguiu rigorosamente",
@@ -174,8 +174,8 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     limitations = _read(TCC_CONTENT / "resultadosesperados.tex").split(
         r"\section{Limitações e Contribuições da Revisão}", 1
     )[1]
-    assert "A especificação permaneceu documental" in limitations
-    assert "Não incluiu uma aplicação educacional funcional" in limitations
+    assert "Este trabalho apresenta uma especificação documental" in limitations
+    assert "sem aplicação educacional funcional" in limitations
     assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
     assert "resposta à pergunta ``como estruturar''" in conclusion
     assert "Este trabalho propôs uma especificação técnica e pedagógica" in abstract
@@ -276,7 +276,11 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     selection_row = next(line for line in appendix.splitlines() if line.startswith("8 & Seleção &"))
     appraisal_row = next(
         line for line in appendix.splitlines()
-        if line.startswith("11 & Apreciação metodológica &")
+        if line.startswith("11 & Risco de viés — métodos &")
+    )
+    result_risk_row = next(
+        line for line in appendix.splitlines()
+        if line.startswith("18 & Risco de viés — resultados &")
     )
     assert r"Cap.~\ref{cap:metodologia}, Processo de Seleção" in selection_row
     assert r"Seção~\ref{sec:uso-ferramentas-ia}" in selection_row
@@ -284,10 +288,13 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     assert "um único revisor" not in selection_row
     assert "dupla avaliação independente" not in selection_row
     assert "orientador" not in selection_row.lower()
-    assert r"Cap.~\ref{cap:metodologia}, Avaliação da Qualidade Metodológica" in appraisal_row
+    assert "Não apresentado" in appraisal_row
+    assert "MMAT 2018" in appraisal_row
+    assert "Não apresentado" in result_risk_row
+    assert "MMAT 2018" in result_risk_row
     assert "um único revisor" not in appraisal_row
     assert "dupla avaliação independente" not in appraisal_row
-    assert "apoio de IA" in appraisal_row
+    assert "avaliação formal do risco de viés" in appraisal_row
     assert "orientador" not in appraisal_row.lower()
     assert "a verificação documental permanece incompleta" not in selection_row
     assert "com fontes e julgamentos ainda incompletos" not in appraisal_row

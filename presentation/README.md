@@ -4,8 +4,10 @@
 > (banca prevista para 04/12/2026). O TCC é a fonte dos números e das
 > classificações. A conferência do MMAT pelo autor abrange os 14 estudos com
 > texto recuperado; Sokkhey mantém respostas históricas não revalidadas por
-> falta de cópia verificável, e a apreciação separada dos componentes dos
-> estudos mistos continua preliminar. A apresentação descreve a seleção
+> falta de cópia verificável. Nos três estudos de métodos mistos, o autor não
+> conferiu separadamente as respostas dos componentes qualitativo e
+> quantitativo; elas permanecem identificadas como assistidas por IA. A
+> apresentação descreve a seleção
 > histórica de 15 estudos sob o corte 4,0.
 
 ## Arquivo da defesa
@@ -36,7 +38,9 @@ Os gráficos versionados e as contagens do fluxo descrevem a seleção históric
 de 15 estudos sob o corte 4,0. Não houve mudança do corte, nova seleção ou
 incorporação de estudos adicionais. Os materiais resumem a conferência do MMAT
 nos 14 estudos com texto recuperado e mantêm explícitas as ressalvas sobre
-Sokkhey e sobre os componentes dos estudos mistos.
+Sokkhey. Nos três estudos de métodos mistos, o autor não conferiu
+separadamente as respostas dos componentes qualitativo e quantitativo; elas
+permanecem identificadas como assistidas por IA.
 
 ## Sequência da defesa (11/2026)
 
@@ -169,8 +173,9 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
   Sokkhey permanece entre os 15 apenas como inclusão histórica sem cópia verificável;
 - no MMAT, as respostas dos 14 estudos com texto recuperado foram conferidas
   pelo autor; Sokkhey mantém respostas históricas não revalidadas por falta de
-  cópia verificável, e a apreciação separada dos componentes dos estudos mistos
-  continua preliminar. Não há nota média ou ranking;
+  cópia verificável. Nos três estudos de métodos mistos, o autor não conferiu
+  separadamente as respostas dos componentes qualitativo e quantitativo; elas
+  permanecem identificadas como assistidas por IA. Não há nota média ou ranking;
 - as frequências técnicas descrevem a seleção histórica após deduplicação,
   não uma síntese de eficácia nem um corpus final;
 - referências teóricas, pedagógicas, metodológicas e técnicas do TCC permanecem
