@@ -8,6 +8,8 @@ Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação d
 O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
 <!-- ccw-sync:end snapshot -->
 
+Período coberto pela busca: publicações de 2015 a 2026, com 2026 parcial até a data de corte (31/08/2026).
+
 O estado público, os limites interpretativos e as decisões metodológicas ainda
 pendentes estão resumidos em [`docs/tcc/ESTADO-ATUAL-TCC.md`](docs/tcc/ESTADO-ATUAL-TCC.md).
 
@@ -253,37 +255,20 @@ está em [`docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md`](docs/RECONCIL
 `docs/RECONCILIACAO-BASELINE-2026-08-31.md` permanece como registro histórico
 da baseline operacional anterior.
 
-**Baseline histórico (documento de 27/11/2025; não vigente)**:
+**Baseline histórico (documento de 27/11/2025; não vigente)**: a execução
+anterior, planejada para 2015–2025, documentava 9.431 registros
+identificados, 6.914 únicos e 17 incluídos. Esses números não são
+reproduzíveis de forma independente (o registro dos pares removidos não foi
+preservado) e não descrevem a seleção vigente. A comparação entre as duas
+populações está em
+[`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](docs/RECONCILIACAO-BASELINE-2026-08-31.md).
 
-> O arquivo legado de 6.914 linhas já era uma saída pós-consolidação. Os
-> 2.517 registros foram obtidos pela diferença aritmética `9.431 - 6.914`,
-> mas o ledger dos pares removidos não foi preservado; o resumo histórico do
-> SQLite registra 2.494. Portanto, esses números são contexto histórico não
-> reproduzível independentemente, e não devem ser misturados com as 27
-> identidades DOI/URL auditadas no snapshot atual.
-
-| Etapa | Quantidade | Observação |
-|-------|------------|------------|
-| 📚 **Identificação** | 9.431 | 72 consultas bilíngues × 4 APIs |
-| 🔄 **Duplicatas Removidas** | 2.517 | 26,6% do total |
-| 🔍 **Triagem (Screening)** | 6.914 | Registros únicos avaliados |
-| 📖 **Elegibilidade** | 1.883 | Taxa de exclusão: 72,8% |
-| ❌ **Excluídos (Elegibilidade)** | 1.866 | Taxa de exclusão: 99,1% |
-| ✅ **Incluídos** | 17 | Pontuação ≥ 4.0 |
-| 📊 **Taxa de Inclusão Final** | ~0,18% | Do total identificado |
-
-**Métricas Adicionais do baseline histórico:**
-
-- 🎯 **Pontuação média de relevância:** 4,2 (intervalo: 4,0–4,5)
-- ⚡ **Cache hit rate:** ~92%
-- 📅 **Período coberto:** 2015–2025 (11 anos)
-
-**Síntese Temática do baseline histórico:**
-
-- **Abordagens Técnicas:** ML Supervisionado (76,5%), Deep Learning (11,8%), Sistemas Híbridos (5,9%), Redes Bayesianas (5,9%)
-- **Finalidades Pedagógicas:** Predição (52,9%), Personalização (17,6%), Diagnóstico (11,8%), Recomendação (11,8%), Modelagem (5,9%)
-- **Termos Frequentes:** Machine Learning (58,8%), Assessment (52,9%), Predictive Analytics (47,1%), Adaptive Learning (35,3%)
-- **Desempenho dos Modelos:** Acurácias reportadas de 75% a 96,89%
+**Síntese vigente (15 estudos da seleção histórica)**: as técnicas foram
+organizadas em cinco finalidades: predição/classificação (8),
+personalização ou sistemas tutores inteligentes (3), intervenção didática
+(2), modelagem cognitiva (1) e integração curricular (1). As frequências
+descrevem a seleção, não eficácia nem predominância na literatura. O
+detalhamento está nos capítulos de resultados e de conclusão do TCC.
 
 ### Especificação conceitual — produto documental proposto
 
