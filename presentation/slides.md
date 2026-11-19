@@ -216,7 +216,7 @@ class: content-slide tcc-retained-slide
   <div class="tcc-retained-copy">
     <div class="tcc-retained-strata" aria-label="Na seleção histórica, 14 textos recuperados e Sokkhey sem cópia verificável"><strong>14</strong><span>textos recuperados e conferidos</span><strong>1</strong><span>Sokkhey, sem cópia verificável</span></div>
     <h2>Uma inclusão sem cópia verificável</h2>
-    <p>Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável. Zeng não integra os 15 estudos e não recebeu apreciação.</p>
+    <p>Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável. Zeng não integra os 15 estudos e não recebeu apreciação.</p>
   </div>
 </div>
 
@@ -271,7 +271,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado:</strong> nos 14 textos recuperados, o autor conferiu S1 (14 Y) e S2 (13 Y; 1 CT). Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA. Q1–Q5 variam por categoria; sem escore agregado.</div>
+<div class="tcc-mmat-result"><strong>Estado:</strong> nos 14 textos recuperados, o autor conferiu S1 (14 Y) e S2 (13 Y; 1 CT). Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA. Q1–Q5 variam por categoria; sem escore agregado.</div>
 
 ---
 layout: default

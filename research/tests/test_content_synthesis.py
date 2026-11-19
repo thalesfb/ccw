@@ -64,7 +64,7 @@ def test_study_requirement_matrix_covers_the_same_fifteen_studies():
     import re
 
     matrix = (ROOT / "results/tcc/conteudo/estudos-requisitos.tex").read_text(encoding="utf-8")
-    keys = re.findall(r"\\citeonline\{([^}]+)\}", matrix)
+    keys = re.findall(r"\\estudocite\{([^}]+)\}", matrix)
     assert len(keys) == len(set(keys)) == 15
     assert set(keys) == {row["study_key"] for row in study_rows(ROOT)}
     missing_source_row = next(line for line in matrix.splitlines() if "Multimodels2020_002" in line)

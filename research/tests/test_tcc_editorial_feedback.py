@@ -115,7 +115,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         storyboard = (ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md").read_text(encoding="utf-8")
         self.assertNotIn("3 de 98", slides + storyboard)
         for text in (slides, storyboard):
-            self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT", text)
+            self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT", text)
             self.assertNotIn("não revalidadas", text)
         self.assertIn("respostas dos componentes qualitativo e quantitativo", slides + storyboard)
         foundation = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
@@ -339,7 +339,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("o autor conferiu S1 (14 Y) e S2 (13 Y; 1 CT)", slides)
         self.assertIn("Nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA", slides)
         self.assertNotIn("3 de 98", slides)
-        self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável", slides)
+        self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável", slides)
         self.assertNotIn("validação humana pendente", slides)
 
         ai_appendix = (ROOT / "results/tcc/postextuais/ferramentas-ia.tex").read_text(encoding="utf-8")
