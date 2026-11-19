@@ -153,9 +153,9 @@ def render_component_table(
         "quantitative_descriptive": "Quant. descritivo",
     }
     column_spec = (
-        r"|>{\raggedright\arraybackslash}p{2.2cm}|"
+        r"|>{\raggedright\arraybackslash}p{2.6cm}|"
         r">{\raggedright\arraybackslash}p{2.2cm}|ccccc|"
-        r">{\raggedright\arraybackslash}p{6.1cm}|"
+        r">{\raggedright\arraybackslash}p{5.7cm}|"
     )
     headers = ["Estudo", "Componente", "C1", "C2", "C3", "C4", "C5", "Localização na fonte"]
     header_row = " & ".join(r"\textbf{" + value + "}" for value in headers) + r" \\"
