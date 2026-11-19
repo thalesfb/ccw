@@ -176,7 +176,9 @@ def test_tcc_uses_conclusive_voice_without_fabricated_results() -> None:
     )[1]
     assert "Este trabalho apresenta uma especificação documental" in limitations
     assert "sem aplicação educacional funcional" in limitations
-    assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in results
+    # The objectives balance moved from chapter 6 to the conclusion (advisor feedback, 2026-11-19).
+    assert "O componente propositivo do objetivo geral foi realizado no escopo documental" in conclusion
+    assert "O componente propositivo do objetivo geral" not in results
     assert "resposta à pergunta ``como estruturar''" in conclusion
     assert "Este trabalho propôs uma especificação técnica e pedagógica" in abstract
     assert "protocolo documental para avaliar a viabilidade e a coerência" in abstract
