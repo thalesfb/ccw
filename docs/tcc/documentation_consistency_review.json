@@ -4,12 +4,12 @@
   "human_scientific_approval": "pending",
   "canonical_inputs": {
     "results/tcc/conteudo/introducao.tex": "92054b4f4d95c7789eb27db1099df868565cd2d6a452458982bc576fe7ca0b8d",
-    "research/exports/reports/reproducibility_manifest.json": "852a088c927e25bf09c5b73e4cdc8b7ef1611d1d774123d0902e20beab095e7a",
+    "research/exports/reports/reproducibility_manifest.json": "475454e375a694adda8deb111fefd94d16d6fa3112a94f3fdc4fdfbe20b625a8",
     "research/data/study_contribution_current.json": "988b1bed10f9236c03ad6fb73b0d859fc70bbe2d21ef13e62227d69a2536ff6b",
     "research/data/evidence_sources_current.json": "e16a57b6b3d85d4f1b1afb74e9fd774b865dfded40d5468961bd9e125da683fa",
     "research/data/adjudicated_record_corrections.csv": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee",
     "research/data/selection_status_current.json": "805f1a7d898dd447bced9900ec77cbefd06644b28629580058c6ff2eddaf8fae",
-    "results/tcc/conteudo/fundamentacao.tex": "9f078d87797872aacc33e8b229c18727263a953b9c143ed7d68fe24950fd2a87",
+    "results/tcc/conteudo/fundamentacao.tex": "c22f5bb7ec899e9e68bc057c55c7e5ee69cfa835141035ee39739d2315450e17",
     "results/tcc/conteudo/metodologia.tex": "9f8af0d4b702826761e999e200d356f62a09ea6075a459f9562b50e8e4e0eb26",
     "results/tcc/conteudo/resultadosesperados.tex": "5b0c88819b13e8492f4423b099b23b6469b537a268031a4aeb38948918cccdde",
     "results/tcc/conteudo/prototipo.tex": "88cf52755e6761ceef96850bb587c882a9e5e621cd9eb3367163a5b228b5918c",
@@ -62,7 +62,7 @@
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "00bc3686f62b02b0fc07fdf9b82e1f4dbdf49b6ae941ea47e7dbcd93e0c9c9d8",
     "scripts/generate_tcc_presentation.py": "7e22744796807dd021d997e03f67a2a2a1bfe0d6eb1ae202e2bcd6ce60705d06",
     "scripts/sync_project_docs.py": "c5f26e15429c9f803a87ec6455ef60de99693dcf81c2084f9a38b78532539871",
-    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "f89f79ecb501bf3e53b1fa908149c8fc0b8bd4ec736ae85486fb104bccb65552",
+    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "94a5f4122c56248c810b5d96da3ddcfd5280c10f76be2cf24cd28089511533d6",
     "results/tcc/images/project_overview_2026-11-17.png": "82e973a906a81e026aac166a36565fe346d40e219250151163393661811cef6e"
   }
 }
