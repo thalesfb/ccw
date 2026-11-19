@@ -97,18 +97,19 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     assert r"dois não foram recuperados: \citeonline{Multimodels2020_002} e \citeonline{Zeng2025_6923}" in results
     assert "dos quais 14 têm texto recuperado" in results
     assert "núcleo empírico" not in results
-    assert "dois não foram recuperados (Sokkhey e Zeng)" in normalized_presentation
-    assert "A seleção histórica permanece com 15 estudos" in normalized_presentation
+    assert "15 estudos, 14 textos recuperados, ressalva de Sokkhey e exclusão de Zeng" in normalized_presentation
+    assert "**Seleção histórica.** 15 estudos" in normalized_presentation
     assert "nove registros tiveram" not in results.lower()
     assert "nove registros tiveram" not in presentation.lower()
 
 
 def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
-    presentation = " ".join(
+    storyboard = " ".join(
         (ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md")
         .read_text(encoding="utf-8")
         .split()
     )
+    slides = " ".join((ROOT / "presentation/slides.md").read_text(encoding="utf-8").split())
     appendix = " ".join(
         (ROOT / "results/tcc/postextuais/apendice.tex")
         .read_text(encoding="utf-8")
@@ -119,7 +120,10 @@ def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
         encoding="utf-8"
     )
 
-    assert "17 relatórios foram procurados, dois não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados" in presentation
+    assert "15 estudos, 14 textos recuperados, ressalva de Sokkhey e exclusão de Zeng" in storyboard
+    flow_description = slides.split('id="prisma-flow-description">', 1)[1].split("</p>", 1)[0]
+    assert "17 relatórios procurados; 2 não recuperados; 15 avaliados em texto completo" in flow_description
+    assert "14 textos recuperados; 15 estudos na seleção histórica" in flow_description
     review = " ".join(
         (ROOT / "results/tcc/conteudo/resultadosesperados.tex")
         .read_text(encoding="utf-8").split()
@@ -130,7 +134,7 @@ def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
     assert r"17 relatórios procurados, dois não foram recuperados: \citeonline{Multimodels2020_002} e \citeonline{Zeng2025_6923}. Quinze foram avaliados" in flow
     assert r"\ref{fig:prisma-flow}" in appendix
     assert r"\ref{tab:stats-descritivas}" in appendix
-    assert "quatro não foi recuperado" not in presentation
+    assert "quatro não foi recuperado" not in storyboard
     assert "4 não recuperados, 13 avaliados" not in appendix
     assert "quatro descrições se limitam" not in appendix
     assert "Zeng não recuperado e fora dos 15" in export_readme
@@ -141,8 +145,11 @@ def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
 def test_canonical_defense_deck_uses_reconciled_full_text_counts() -> None:
     slides = " ".join((ROOT / "presentation/slides.md").read_text(encoding="utf-8").split())
     parallel_pptx = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
+    flow_description = slides.split('id="prisma-flow-description">', 1)[1].split("</p>", 1)[0]
 
-    assert "dos 17 relatórios procurados, dois não foram recuperados (sokkhey e zeng) e 15 foram avaliados em texto completo" in slides.lower()
+    assert "17 relatórios procurados; 2 não recuperados; 15 avaliados em texto completo" in flow_description
+    assert "2 não recuperados" in flow_description
+    assert "15 estudos na seleção histórica" in flow_description
     assert "para 13, avaliação em texto completo" not in slides
     assert "Dos 17 relatórios procurados, dois (Sokkhey e Zeng) não foram recuperados e 15 foram avaliados em texto completo" in parallel_pptx
 
@@ -174,7 +181,10 @@ def test_tcc_and_decks_do_not_call_operational_prioritization_eligibility() -> N
     assert "nove registros com texto primário revisado e oito" not in pptx_source
     assert "na elegibilidade; 2.468 excluídos na elegibilidade" not in storyboard
     assert "encaminhou 2.486 para elegibilidade" not in storyboard
-    assert "Fluxo da seleção original sob corte 4,0: 11.904 registros → 18 na lista de leitura" in slides
+    flow_description = " ".join(slides.split('id="prisma-flow-description">', 1)[1].split("</p>", 1)[0].split())
+    assert "11.904 registros identificados" in flow_description
+    assert "18 relatórios na lista" in flow_description
+    assert "2.482 priorizados" in flow_description
 
 
 def test_background_uses_examples_and_keeps_study_limits_and_exclusion_in_the_review() -> None:

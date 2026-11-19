@@ -29,7 +29,7 @@ def test_public_mmat_empirical_metric_matches_the_inclusion_ledger():
     assert metric and int(metric[1]) == retained
 
 
-def test_synthesis_slide_matches_the_provisional_corpus_not_an_undefined_subset():
+def test_synthesis_slide_matches_the_historical_corpus_not_an_undefined_subset():
     scope = read_rows("research/data/current_synthesis_scope.csv")
     retained = sum(row["record_status"] == "included_empirical_core" for row in scope)
     slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
@@ -37,8 +37,8 @@ def test_synthesis_slide_matches_the_provisional_corpus_not_an_undefined_subset(
         r'tcc-synthesis-orbit[\s\S]*?<strong>(\d+)</strong><span>(.*?)</span>', slides
     )
     assert metric and int(metric[1]) == retained
-    assert "provis" in metric[2]
-    synthesis = slides.split("17 / SÍNTESE", 1)[1].split("\n---", 1)[0]
+    assert "seleção histórica" in metric[2]
+    synthesis = slides.split("16 / SÍNTESE", 1)[1].split("\n---", 1)[0]
     assert "inferem proficiência" not in synthesis
     assert "categorias operacionais de desempenho" in synthesis.casefold()
 
