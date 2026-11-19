@@ -79,7 +79,7 @@ def test_unavailable_sources_keep_explicit_access_and_appraisal_limits():
     matrix = json.loads(MATRIX.read_text(encoding="utf-8"))
     rows = {row["study_id"]: row for row in matrix["records"]}
     assert rows["3"]["access_status"] == "purchase_required_reported_by_author"
-    assert rows["3"]["current_appraisal_verification"] == "not_revalidated_without_primary_text"
+    assert rows["3"]["current_appraisal_verification"] == "not_appraised"
     assert rows["6923"]["access_status"] == "repository_embargo"
     assert rows["6923"]["current_appraisal_verification"] == "not_appraised"
 

@@ -39,7 +39,8 @@ assert.match(homepage, /15 estudos empíricos integram a seleção histórica/i,
 assert.match(homepage, /com 14 relatórios recuperados/i, 'the homepage must distinguish recovered reports from the historical selection');
 assert.match(homepage, /dois não foram recuperados \(Sokkhey e Zeng\)/i, 'the homepage must disclose both reports without a verifiable copy');
 assert.match(homepage, /15 foram avaliados em texto completo/i, 'the homepage must report the current full-text denominator');
-assert.match(homepage, /MMAT: 14 estudos com texto recuperado conferidos pelo autor; Sokkhey mantém respostas históricas não revalidadas; componentes mistos preliminares; sem nota global/i, 'the homepage must state the reviewed MMAT scope and its limits');
+assert.match(homepage, /MMAT: 14 estudos com texto recuperado conferidos pelo autor; Sokkhey permanece na seleção original sem apreciação MMAT; componentes mistos preliminares; sem nota global/i, 'the homepage must state the reviewed MMAT scope and its limits');
+assert.doesNotMatch(homepage, /Sokkhey[^<]*respostas MMAT históricas|Sokkhey[^<]*não foram revalidadas/i, 'the homepage must not imply MMAT responses for Sokkhey');
 assert.match(homepage, /O corte 4,0 e a seleção permanecem inalterados/i, 'the homepage must describe the unchanged selection');
 assert.doesNotMatch(homepage, /população vigente|snapshot vigente/i, 'the homepage must not present the pre-amendment snapshot as current');
 assert.match(homepage, /um registro foi excluído após resumo/i, 'the homepage must disclose the abstract-stage exclusion');
@@ -123,6 +124,8 @@ for (const absolutePage of collectHtmlFiles(root)) {
 const researchLanding = read('research/index.html');
 assert.match(researchLanding, /A seleção histórica sob o corte 4,0 reúne 15 estudos empíricos, com 14 relatórios recuperados/i, 'the research landing page must distinguish the historical selection from retrieved reports');
 assert.match(researchLanding, /O registro de apreciação descreve a seleção histórica sob o corte 4,0: 15 estudos empíricos/i, 'the research landing page must identify the MMAT denominator as historical');
+assert.match(researchLanding, /Sokkhey permanece na seleção original sem apreciação MMAT/i, 'the research landing page must state that Sokkhey has no MMAT appraisal');
+assert.doesNotMatch(researchLanding, /Sokkhey[^.]*respostas históricas não revalidadas/i, 'the research landing page must not imply prior MMAT responses for Sokkhey');
 assert.match(researchLanding, /dois dos 17 relatórios procurados não foram recuperados \(Sokkhey e Zeng\)/i, 'the research landing page must disclose both reports without a verifiable copy');
 assert.match(researchLanding, /O corte 4,0 permanece inalterado/i, 'the research landing page must describe the applied cutoff');
 assert.doesNotMatch(researchLanding, /escopo vigente|população retida/i, 'the research landing page must not label the pre-amendment selection as current');
@@ -130,6 +133,10 @@ assert.match(researchLanding, /href="data\/current_synthesis_scope\.csv"/, 'the 
 assert.match(researchLanding, /um registro foi excluído após resumo/i, 'the research landing page must disclose the abstract-stage exclusion');
 assert.match(researchLanding, /um protocolo foi excluído após essa avaliação/i, 'the research landing page must disclose the full-text protocol exclusion');
 assert.doesNotMatch(researchLanding, /17 candidatos empíricos provisórios/i, 'the research landing page must not overstate the empirical candidate count');
+
+const tccLanding = read('results/tcc/index.html');
+assert.match(tccLanding, /Sokkhey permanece entre os 15 da seleção original sem apreciação MMAT/i, 'the TCC landing page must state Sokkhey’s no-appraisal status');
+assert.doesNotMatch(tccLanding, /Sokkhey[^.]*respostas MMAT históricas[^<]*não foram revalidadas/i, 'the TCC landing page must not imply prior MMAT responses for Sokkhey');
 
 const historicalMmat = read('research/exports/analysis/mmat_visualization.html');
 assert.match(historicalMmat, /visualização histórica[^<]*17 registros/i, 'the legacy MMAT visualization must identify its historical 17-study denominator');
@@ -181,13 +188,14 @@ assert.equal((mmat.match(/class="study-title"/g) || []).length, 18, 'the current
 assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">fichas com consulta histórica declarada<\/span>/, 'historical consultation labels must not certify completed human reading');
 assert.match(mmat, /<span class="metric-value">14<\/span><span class="metric-label">registros com triagem MMAT \(S1\/S2\)<\/span>/, 'the current page must distinguish screening records from empirical inclusion');
 assert.match(mmat, /<span class="metric-value">2<\/span><span class="metric-label">relatórios sem cópia verificável na recuperação atual<\/span>/, 'the current page must show both reports without verifiable copies');
-assert.match(mmat, /Dois relatórios não têm cópia verificável: Sokkhey permanece na seleção original; suas respostas MMAT históricas não foram revalidadas por falta de cópia verificável\. Zeng não recebeu MMAT e não integra os 15 estudos históricos\./, 'the current page must distinguish historical Sokkhey responses from the unrecovered Zeng report');
-assert.doesNotMatch(mmat, /Sokkhey[^.]*sem apreciação MMAT|Sokkhey[^.]*não recebeu respostas MMAT/i, 'the current page must not erase Sokkhey historical responses');
+assert.match(mmat, /Dois relatórios não têm cópia verificável: Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo\. Zeng não recebeu MMAT e não integra os 15 estudos históricos\./, 'the current page must state that Sokkhey has no MMAT appraisal');
+assert.match(mmat, /Sokkhey \(2020\), estudo 3, permanece na seleção original sem apreciação MMAT/i, 'the current page must retain the selection and no-appraisal status');
+assert.doesNotMatch(mmat, /Sokkhey[^.]*respostas MMAT históricas|Sokkhey[^.]*não foram revalidadas/i, 'the current page must not imply that MMAT responses exist for Sokkhey');
 assert.match(mmat, /Zeng \(1 registro\) aguarda texto integral e não recebe MMAT\./, 'the no-MMAT statement must refer to Zeng rather than Sokkhey');
 assert.match(mmat, /o acervo local contém 16 PDFs dos 18 registros, identificados por hash\. Faltam os estudos 3 e 6923/, 'the current page must identify both unavailable primary PDFs');
 assert.match(mmat, /A reprodução congelada do índice textual abrange 12 fontes/, 'current PDF availability must not imply a larger retrieval replay');
 const historicalUnverifiedRow = mmat.match(/<tr>\s*<td>3<\/td>[\s\S]*?<\/tr>/)?.[0];
-assert.match(historicalUnverifiedRow, /MMAT histórico; fonte indisponível nesta revisão/, 'historical responses must not imply source-bound revalidation');
+assert.match(historicalUnverifiedRow, /sem apreciação MMAT; texto integral não recuperado/, 'Sokkhey row must state that no MMAT appraisal was performed');
 assert.doesNotMatch(mmat, /abstracts?\/metadados/i, 'the current page should use Portuguese for source-availability labels');
 const zengRow = mmat.match(/<tr>\s*<td>6923<\/td>[\s\S]*?<\/tr>/)?.[0];
 assert.ok(zengRow, 'study 6923 must be present in the current MMAT table');

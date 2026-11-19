@@ -226,7 +226,7 @@ def render_blocks(root):
         f"Nas {qa['screening_rows']} avaliações MMAT dos estudos com texto recuperado, "
         f"S1 recebeu {screening_counts['s1']['Y']} Y e S2 recebeu {screening_counts['s2']['Y']} Y e "
         f"{screening_counts['s2']['CT']} CT; o autor conferiu essas respostas. "
-        f"Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável. "
+        f"Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. "
         f"Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas "
         f"dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. "
         f"Não há escore agregado."

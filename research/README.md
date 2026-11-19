@@ -3,13 +3,13 @@
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental registrada: 20/10/2026; PDFs locais conferidos por hash: 29/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
 <!-- ccw-sync:end snapshot -->
 
 Em 20/10/2026, a conferência suplementar do texto integral do registro excluído
 após o resumo confirmou a decisão de escopo; não criou uma nova etapa nem
 alterou as contagens do fluxo PRISMA.
-A apreciação atual registra 14 estudos com texto recuperado; Sokkhey permanece na seleção histórica sem cópia verificável e sem respostas MMAT revalidadas. O estudo 8 (tese de MacLellan) é apreciado nos componentes matemáticos dos capítulos 5–6, e os estudos 5, 7, 8 e 14 usam rotas descritas no TCC. Os snapshots anteriores são históricos.
+A apreciação atual registra 14 estudos com texto recuperado; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. O estudo 8 (tese de MacLellan) é apreciado nos componentes matemáticos dos capítulos 5–6, e os estudos 5, 7, 8 e 14 usam rotas descritas no TCC. Os snapshots anteriores são históricos.
 
 A reconciliação detalhada da população vigente, incluindo deduplicação, decisões
 de escopo e separação entre candidatos empíricos e contexto, está em
@@ -468,8 +468,8 @@ snapshot e não equivale à recuperação ou à avaliação científica de fonte
 primárias. A conferência de cobertura de 29/10/2026 identifica 16 PDFs locais
 entre os 18 candidatos; faltam os registros 3 e 6923. A seleção histórica mantém
 15 estudos empíricos; a apreciação atual abrange 14 fontes recuperadas, com
-respostas conferidas pelo autor em 13/11/2026. Sokkhey permanece sem cópia
-verificável e sem revalidação de respostas históricas; Zeng não recebeu respostas.
+respostas conferidas pelo autor em 13/11/2026. Sokkhey permanece na seleção
+original sem apreciação MMAT, por falta de cópia verificável do texto completo; Zeng não recebeu respostas.
 Os estudos 5, 7, 8 e 14 têm rotas operacionais com limitações explícitas. O replay
 textual congelado cobre 12 fontes e 484 trechos, não os 16 PDFs atuais. Consulte a
 [matriz de cobertura](../docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md) para
@@ -655,7 +655,7 @@ python -m research.src.cli run-pipeline
 - **Papers com abstract**: 11.885/11.904 (99,8%)
 - **Papers com DOI**: 10.682/11.904 (89,7%)
 - **Papers com ano preenchido**: 11.904/11.904 (100%) no banco bruto; 255 registros do export versionado estão fora do intervalo analítico 2015--2026 após a correção de 6918 para 2014
-- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e registros de decisões versionados; nova coleta pode variar. A apreciação MMAT atual abrange 14 estudos com texto recuperado, com respostas propostas por IA e conferidas pelo autor em 13/11/2026. Sokkhey (estudo 3) permanece na seleção histórica sem cópia verificável e sem respostas revalidadas.
+- **Reprodutibilidade**: o snapshot é representado por exports, manifesto e registros de decisões versionados; nova coleta pode variar. A apreciação MMAT atual abrange 14 estudos com texto recuperado, com respostas propostas por IA e conferidas pelo autor em 13/11/2026. Sokkhey (estudo 3) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo.
 
 ---
 

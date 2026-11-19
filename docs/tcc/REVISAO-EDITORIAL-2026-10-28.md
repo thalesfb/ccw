@@ -28,7 +28,7 @@ Registro histórico da revisão editorial de 28/10/2026: naquele momento, o conj
 | Nyantah et al. (2025), registro 14 | O artigo descreve alocação aleatória em uma passagem e desenho sem atribuição aleatória em outra. Categoria pendente. |
 | MacLellan (2017), registro 8 | Unidade de apreciação entre modelos/simulações e estudos com estudantes ainda não definida. Sem S1/S2 ou Q1–Q5; não somar suas bases distintas. |
 
-As justificativas e localizadores estão em `research/data/mmat_reassessment_current.csv`. Categorizar esses estudos exige resolver a ambiguidade metodológica, não preencher lacunas por conveniência editorial. O relatório não recuperado de Zeng (2025) continua sem MMAT; as respostas históricas de Sokkhey et al. (2020) permanecem sem reconferência do original indisponível nesta revisão.
+As justificativas e localizadores estão em `research/data/mmat_reassessment_current.csv`. Categorizar esses estudos exige resolver a ambiguidade metodológica, não preencher lacunas por conveniência editorial. O relatório não recuperado de Zeng (2025) continua sem MMAT; Sokkhey et al. (2020) permanece sem apreciação MMAT, pois não há cópia verificável do texto integral.
 
 ## Limites restantes
 

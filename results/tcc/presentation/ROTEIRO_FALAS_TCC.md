@@ -114,8 +114,8 @@ sem escolher um algoritmo vencedor.
 O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
 respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
 uma pontuação agregada. O autor conferiu as respostas dos 14 estudos com texto
-recuperado; Sokkhey não tem cópia verificável e suas respostas MMAT históricas
-não foram revalidadas. Nos três estudos de métodos mistos, o autor não conferiu
+recuperado; Sokkhey permanece na seleção original sem apreciação MMAT, por falta
+de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu
 separadamente as respostas dos componentes qualitativo e quantitativo; elas
 permanecem identificadas como assistidas por IA. CT descreve a evidência disponível ao revisor, com limites
 de acesso e leitura, e não demonstra automaticamente falha do relato.

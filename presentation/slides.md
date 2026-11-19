@@ -305,7 +305,7 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado:</strong> 14 estudos com texto recuperado foram conferidos pelo autor. Neles, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT, no estudo em que a origem dos dados não foi confirmada. Sokkhey mantém respostas históricas do MMAT não revalidadas por falta de cópia verificável. Estudos 5 e 7: categoria 3 operacional, alocação desconhecida. Estudo 14: categoria 3, por desenho quase-experimental declarado. Estudo 8: categoria 4 adaptada para modelagem. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Sem escore agregado. Instrumento: Hong et al. (2018); respostas propostas por IA e conferidas pelo autor.</div>
+<div class="tcc-mmat-result"><strong>Estado:</strong> 14 estudos com texto recuperado foram conferidos pelo autor. Neles, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT, no estudo em que a origem dos dados não foi confirmada. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Estudos 5 e 7: categoria 3 operacional, alocação desconhecida. Estudo 14: categoria 3, por desenho quase-experimental declarado. Estudo 8: categoria 4 adaptada para modelagem. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Sem escore agregado. Instrumento: Hong et al. (2018); respostas propostas por IA e conferidas pelo autor.</div>
 
 ---
 layout: default
@@ -430,7 +430,7 @@ class: content-slide tcc-gaps-slide
   <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte ambígua; a classificação não é diagnóstico independente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção original, não estimativa de prevalência. O MMAT contém 14 triagens S1/S2 e 14 conjuntos de critérios, conferidos pelo autor, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção original, não estimativa de prevalência. O MMAT contém 14 triagens S1/S2 e 14 conjuntos de critérios, conferidos pelo autor, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo.</div>
 
 ---
 layout: default

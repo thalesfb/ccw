@@ -79,7 +79,7 @@ function criterion(value) {
 
 function sourceStatus(row, scope) {
   if (row.assessment_basis === 'primary_full_text_scope_exclusion') return '<span class="tag tag-amber">texto integral conferido; fora do escopo matemático</span>';
-  if (coverageById.get(row.study_id)?.current_appraisal_verification === 'not_revalidated_without_primary_text') return '<span class="tag tag-amber">MMAT histórico; fonte indisponível nesta revisão</span>';
+  if (coverageById.get(row.study_id)?.current_appraisal_verification === 'not_appraised' && row.study_id === '3') return '<span class="tag tag-amber">sem apreciação MMAT; texto integral não recuperado</span>';
   if (scope?.empirical_mmat_applicability === 'pending_unit_adjudication') return '<span class="tag tag-amber">MMAT suspenso; unidade de análise pendente</span>';
   if (row.design === 'design_pending' && row.s1) return '<span class="tag tag-amber">texto primário revisado; categoria MMAT pendente</span>';
   if (row.assessment_basis === 'primary_full_text_reviewed_externally') return '<span class="tag tag-green">texto primário revisado</span>';
@@ -93,8 +93,8 @@ function sourceAndAppraisalStatus(row, scope) {
   if (row.assessment_basis === 'primary_full_text_scope_exclusion') {
     return 'Texto integral conferido após a exclusão originalmente registrada na triagem do resumo. Confirmado fora do escopo matemático; MMAT não aplicado. A recuperação suplementar não altera as contagens históricas.';
   }
-  if (coverageById.get(row.study_id)?.current_appraisal_verification === 'not_revalidated_without_primary_text') {
-    return 'Respostas históricas provisórias, não revalidadas nesta revisão por falta do texto integral. A indisponibilidade de acesso não demonstra baixa qualidade nem confirma inelegibilidade.';
+  if (coverageById.get(row.study_id)?.current_appraisal_verification === 'not_appraised' && row.study_id === '3') {
+    return 'Sokkhey (2020) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. A indisponibilidade de acesso não demonstra baixa qualidade nem confirma inelegibilidade.';
   }
   if (scope?.empirical_mmat_applicability === 'pending_unit_adjudication') {
     return 'Texto integral consultado; MMAT suspenso. Elegibilidade e unidade de apreciação aguardam adjudicação humana; nenhum critério recebeu resposta.';
@@ -273,7 +273,7 @@ const notRetrievedLabel = notRetrievedReports === 1
   ? 'relatório sem cópia verificável na recuperação atual'
   : 'relatórios sem cópia verificável na recuperação atual';
 const notRetrievedSummary = notRetrievedReports === 2
-  ? 'Dois relatórios não têm cópia verificável: Sokkhey permanece na seleção original; suas respostas MMAT históricas não foram revalidadas por falta de cópia verificável. Zeng não recebeu MMAT e não integra os 15 estudos históricos.'
+  ? 'Dois relatórios não têm cópia verificável: Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Zeng não recebeu MMAT e não integra os 15 estudos históricos.'
   : `${notRetrievedReports} relatórios não têm cópia verificável na recuperação atual.`;
 const pendingFullTextQuestionSummary = pendingFullText.length === 1
   ? 'Zeng (1 registro) aguarda texto integral e não recebe MMAT.'
@@ -455,7 +455,7 @@ const page = `<!doctype html>
           <a class="btn btn-primary" href="../../index.html">Voltar à revisão</a>
           <a class="btn btn-secondary" href="mmat_visualization.html">Arquivo histórico — 17 registros</a>
         </div>
-        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Este registro histórico contém ${current.length} itens: ${empiricalCore.length} estudos empíricos na seleção histórica sob o corte 4,0, ${abstractOnly.length} registro excluído após a triagem do resumo e 1 protocolo excluído após texto completo. Na recuperação atual, ${notRetrievedReports} dos ${currentSourceRetrieval.reports_sought} relatórios procurados não têm cópia verificável; ${currentSourceRetrieval.reports_assessed_at_full_text} foram avaliados em texto completo e ${currentSourceRetrieval.recovered_empirical_reports} relatórios empíricos foram recuperados. Sokkhey permanece entre os 15 da seleção original; suas respostas MMAT históricas não foram revalidadas por falta de cópia verificável. As apreciações conferidas pelo autor abrangem os 14 estudos com texto recuperado, e os limites de recuperação permanecem explícitos.</p>
+        <p class="source-note">O arquivo legado preserva 17 registros MMAT. Este registro histórico contém ${current.length} itens: ${empiricalCore.length} estudos empíricos na seleção histórica sob o corte 4,0, ${abstractOnly.length} registro excluído após a triagem do resumo e 1 protocolo excluído após texto completo. Na recuperação atual, ${notRetrievedReports} dos ${currentSourceRetrieval.reports_sought} relatórios procurados não têm cópia verificável; ${currentSourceRetrieval.reports_assessed_at_full_text} foram avaliados em texto completo e ${currentSourceRetrieval.recovered_empirical_reports} relatórios empíricos foram recuperados. Sokkhey permanece entre os 15 da seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. As apreciações conferidas pelo autor abrangem os 14 estudos com texto recuperado, e os limites de recuperação permanecem explícitos.</p>
       </section>
 
       <section class="section" aria-labelledby="summary-title">
@@ -483,10 +483,10 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
           <h3>${availableEmpiricalSources} fontes disponíveis nos ${empiricalCore.length} estudos</h3>
-          <p>As fichas conservam declarações históricas de consulta, com diferentes extensões de leitura. Sokkhey (2020), estudo 3, não tem cópia verificável; suas respostas MMAT históricas não foram revalidadas. A disponibilidade de uma fonte também não certifica leitura integral de texto, figuras e apêndices.</p>
+          <p>As fichas conservam declarações de consulta, com diferentes extensões de leitura. Sokkhey (2020), estudo 3, permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. A disponibilidade de uma fonte também não certifica leitura integral de texto, figuras e apêndices.</p>
           <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
-          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sokkhey permanece na seleção histórica sem cópia verificável; suas respostas MMAT históricas não foram revalidadas. O texto de Zeng também não foi recuperado e não recebeu MMAT. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura integral de textos, figuras e apêndices. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
-          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm respostas S1/S2 e ${categoryAppraised.length} têm apreciações por categoria conferidas pelo autor nos estudos com texto recuperado. As respostas históricas de Sokkhey não foram revalidadas. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 3 porque o artigo se declara quase-experimental sem atribuição aleatória, apesar de mencionar sorteio das escolas; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${notRetrievedSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica.</p>
+          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. O texto de Zeng também não foi recuperado e não recebeu MMAT. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura integral de textos, figuras e apêndices. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
+          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm respostas S1/S2 e ${categoryAppraised.length} têm apreciações por categoria conferidas pelo autor nos estudos com texto recuperado. Sokkhey permanece sem apreciação MMAT por falta de cópia verificável do texto completo. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 3 porque o artigo se declara quase-experimental sem atribuição aleatória, apesar de mencionar sorteio das escolas; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${notRetrievedSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica.</p>
         </article>
       </section>
 
@@ -518,7 +518,7 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Os 14 estudos com texto recuperado têm triagem e critérios da categoria conferidos, incluindo rotas operacionais explicitamente limitadas nos estudos 5, 7, 8 e 14. As respostas históricas de Sokkhey não foram revalidadas sem uma cópia verificável. O relatório 6923 não recebeu respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios.</caption>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Os 14 estudos com texto recuperado têm triagem e critérios da categoria conferidos, incluindo rotas operacionais explicitamente limitadas nos estudos 5, 7, 8 e 14. Sokkhey permanece sem apreciação MMAT por falta de cópia verificável do texto completo. O relatório 6923 não recebeu respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios.</caption>
             <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>

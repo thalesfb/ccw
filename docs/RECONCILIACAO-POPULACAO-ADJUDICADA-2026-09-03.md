@@ -111,12 +111,7 @@ Os 18 IDs do snapshot são:
 O arquivo `current_synthesis_scope.csv` distingue atualmente 15 inclusões
 empíricas provisórias, o registro 9 excluído após resumo, o relatório 6923 não
 recuperado no fluxo histórico e o protocolo 6921 excluído após texto completo.
-Os três últimos não integram o denominador empírico MMAT. A reconciliação de
-14/10 registrava 14 conjuntos de respostas S1/S2; esse valor é histórico. Na
-atualização de 07/11, os 15 registros têm respostas S1/S2: S1 recebeu Y nos
-15, e S2 recebeu Y em 14 e CT em um. Onze têm apreciação por categoria; o
-registro de Sokkhey conserva apenas o julgamento histórico, sem cópia verificável.
-Os delineamentos de 5, 7 e 14 e a unidade/elegibilidade de 8 permanecem pendentes.
+Os três últimos não integram o denominador empírico MMAT. A reconciliação de 14/10 registrava 14 conjuntos de respostas S1/S2. A atualização de 07/11 foi corrigida em 18/11: Sokkhey não tem respostas MMAT e permanece sem apreciação por falta de cópia verificável. O recorte atual contém 14 estudos com S1/S2 e apreciação por categoria; S1 recebeu Y nos 14, e S2 recebeu 13 Y e 1 CT. Os delineamentos de 5, 7 e 14 e a unidade/elegibilidade de 8 permanecem pendentes.
 A disponibilidade atual de PDFs é uma dimensão distinta, registrada na
 [matriz de cobertura](tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md).
 

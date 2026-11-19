@@ -3,7 +3,7 @@
 > **Versão para a defesa — MMAT conferido pelo autor nos estudos com texto
 > recuperado.** O storyboard segue a sequência de 25 slides do deck. O corte
 > 4,0 e a seleção histórica de 15 estudos permanecem inalterados; Sokkhey
-> mantém respostas históricas não revalidadas por falta de cópia verificável.
+> permanece sem apreciação MMAT por falta de cópia verificável do texto completo.
 > Nos três estudos de métodos mistos, o autor não conferiu separadamente as
 > respostas dos componentes qualitativo e quantitativo; elas permanecem
 > identificadas como assistidas por IA.
@@ -105,8 +105,8 @@ uma exclusão após resumo e um protocolo excluído.
 
 Perguntas S1 e S2, legenda Y/N/CT e estado da apreciação: nos 14 estudos com
 texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT no estudo em que a
-origem dos dados não foi confirmada. Sokkhey mantém respostas históricas do MMAT
-não revalidadas por falta de cópia verificável. Estudos 5 e 7 estão na categoria 3
+origem dos dados não foi confirmada. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia
+verificável do texto completo. Estudos 5 e 7 estão na categoria 3
 operacional; o estudo 14, na categoria 3 por desenho quase-experimental
 declarado; e o estudo 8, na categoria 4 adaptada. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado;
 as respostas propostas por IA foram conferidas pelo autor.

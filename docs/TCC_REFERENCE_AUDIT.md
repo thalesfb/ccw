@@ -166,8 +166,8 @@ A auditoria não declara todos os registros como perfeitos. Permanecem, de forma
 3. manter os limites da apreciação MMAT alinhados ao ledger vigente: 14 dos 15
    estudos empíricos da seleção histórica têm texto recuperado e apreciação por
    categoria; nesses 14, S1 recebeu Y em todos e S2 recebeu 13 Y e 1 CT.
-   Sokkhey permanece na seleção histórica sem cópia verificável e suas respostas
-   anteriores não foram revalidadas. Nos estudos de métodos mistos, as respostas
+   Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia
+   verificável do texto completo. Nos estudos de métodos mistos, as respostas
    dos componentes qualitativo e quantitativo não foram conferidas separadamente.
    A tabela histórica de 17 estudos não representa a avaliação atual.
 

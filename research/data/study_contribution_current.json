@@ -4,7 +4,7 @@
   "scope": "Cobertura documental e contribuição dos 18 registros candidatos; não adjudica elegibilidade nem certifica leitura humana.",
   "reading_basis": "Leitura assistida por IA do texto extraível e inspeção visual seletiva. Não equivale a leitura humana ou multimodal integral. Cobertura por página refere-se à revisão documental estruturada desta rodada, não à execução histórica da seleção.",
   "population_basis": "18 candidates; 17 reports sought; 2 reports not retrieved (Sokkhey and Zeng); 15 reports assessed at full text; 14 recovered empirical reports; 15 studies remain in the historical selection, including Sokkhey without a verifiable copy.",
-  "no_primary_source_policy": "Preservar decisões e apreciações anteriores como histórico provisório, sem ratificá-las na ausência de fonte examinável.",
+  "no_primary_source_policy": "Na ausência de fonte primária verificável, preservar apenas o status de seleção documentado e não atribuir respostas ou apreciações MMAT ao registro.",
   "records": [
     {
       "study_id": "1",
@@ -89,14 +89,14 @@
       "multimodal_complete": false,
       "human_reading_status": "pending",
       "relationship": "Pendente de confronto com a fonte primária.",
-      "contribution": "O registro identifica um candidato sobre predição matemática; a contribuição substantiva não foi revalidada nesta auditoria.",
+      "contribution": "O registro identifica um candidato sobre predição matemática; sem cópia verificável do texto integral, a contribuição substantiva não pode ser apreciada.",
       "does_not_support": "Metadados e rótulos históricos não confirmam amostra, delineamento, resultados nem respostas MMAT.",
       "claim_locators": "Fonte primária não examinada nesta auditoria.",
-      "coverage_limits": "Sem PDF local. Em 20/10/2026 o autor informou acesso por compra, sem obtenção do original. A ficha histórica não foi ratificada nesta auditoria; falta de acesso não demonstra baixa qualidade nem inelegibilidade.",
+      "coverage_limits": "Sem cópia verificável do texto integral. Não há apreciação MMAT para este registro; a falta de acesso não demonstra baixa qualidade nem inelegibilidade.",
       "identity_note": "Identidade e interpretação permanecem sujeitas à conferência humana.",
       "access_status": "purchase_required_reported_by_author",
       "access_status_date": "2026-10-20",
-      "current_appraisal_verification": "not_revalidated_without_primary_text"
+      "current_appraisal_verification": "not_appraised"
     },
     {
       "study_id": "4",

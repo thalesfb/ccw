@@ -26,7 +26,7 @@ O [registro de perguntas](MMAT-PERGUNTAS-PENDENTES.md) cobre todos os 55 CT, tr�
 
 A [pauta de decisão](MMAT-PAUTA-DE-DECISAO.md) organiza as quatro questões que antecedem novas respostas por categoria, com propostas para revisão e efeitos sobre a matriz. Não registra concordância da orientação.
 
-O original do estudo 3 não foi recuperado; 6919 retornou HTTP 403 e sua apreciação anterior não foi revalidada. A URL editorial do 7 redirecionou para página genérica; a questão de alocação foi mantida a partir do relato disponível, sem declarar nova conferência integral do PDF. O estudo 6923 continua sem texto integral nesta rodada; não se afirma nova verificação de término do embargo.
+O original do estudo 3 não foi recuperado e permanece sem apreciação MMAT; 6919 retornou HTTP 403. A URL editorial do 7 redirecionou para página genérica; a questão de alocação foi mantida a partir do relato disponível, sem declarar nova conferência integral do PDF. O estudo 6923 continua sem texto integral nesta rodada; não se afirma nova verificação de término do embargo.
 
 ## Proveniência e limites
 

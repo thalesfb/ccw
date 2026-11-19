@@ -9,7 +9,7 @@ Registro histórico de decisões operacionais de 28/10 e 07/11/2026. A conferên
 | 14, Nyantah e colaboradores | **Decisão histórica:** categoria 2 conforme o sorteio das escolas declarado, mas contraditório | CT / N / Y / CT / CT | A classificação vigente é categoria 3; a contradição sobre randomização, duas escolas e desequilíbrio inicial permanece. |
 | 8, MacLellan | Uma tese/um relatório, componentes matemáticos dos capítulos 5–6; categoria 4 adaptada | Y / CT / CT / CT / CT | A tese testa hipóteses; a categoria descritiva não corresponde literalmente ao desenho. A adaptação é limitada e não certifica o modelo. |
 
-As fichas vigentes registram respostas S1/S2 para 14 estudos com texto recuperado e apreciação por categoria para esses mesmos estudos; Sokkhey mantém sua inclusão histórica sem cópia verificável nem respostas revalidadas. No estudo 5, S2 é CT porque a origem dos dados não foi confirmada. Isso não altera a seleção nem os critérios Q1–Q5. As respostas são apresentadas por estudo e critério, sem escore agregado. As células dos registros sem apreciação permanecem sem resposta, não CT.
+As fichas vigentes registram respostas S1/S2 para 14 estudos com texto recuperado e apreciação por categoria para esses mesmos estudos; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. No estudo 5, S2 é CT porque a origem dos dados não foi confirmada. Isso não altera a seleção nem os critérios Q1–Q5. As respostas são apresentadas por estudo e critério, sem escore agregado. As células dos registros sem apreciação permanecem sem resposta, não CT.
 
 ## Fundamentos das decisões
 

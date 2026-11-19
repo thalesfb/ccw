@@ -3,8 +3,8 @@
 > **Versão para a defesa:** `slides.md` é o arquivo que será usado na defesa
 > (banca prevista para 04/12/2026). O TCC é a fonte dos números e das
 > classificações. A conferência do MMAT pelo autor abrange os 14 estudos com
-> texto recuperado; Sokkhey mantém respostas históricas não revalidadas por
-> falta de cópia verificável. Nos três estudos de métodos mistos, o autor não
+> texto recuperado; Sokkhey permanece na seleção original sem apreciação MMAT, por falta
+> de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não
 > conferiu separadamente as respostas dos componentes qualitativo e
 > quantitativo; elas permanecem identificadas como assistidas por IA. A
 > apresentação descreve a seleção
@@ -172,8 +172,8 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
   completo, um protocolo foi excluído e 14 relatórios empíricos foram recuperados;
   Sokkhey permanece entre os 15 apenas como inclusão histórica sem cópia verificável;
 - no MMAT, as respostas dos 14 estudos com texto recuperado foram conferidas
-  pelo autor; Sokkhey mantém respostas históricas não revalidadas por falta de
-  cópia verificável. Nos três estudos de métodos mistos, o autor não conferiu
+  pelo autor; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de
+  cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu
   separadamente as respostas dos componentes qualitativo e quantitativo; elas
   permanecem identificadas como assistidas por IA. Não há nota média ou ranking;
 - as frequências técnicas descrevem a seleção histórica após deduplicação,

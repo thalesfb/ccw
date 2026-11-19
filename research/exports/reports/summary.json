@@ -103,7 +103,7 @@
         "recovered_empirical_reports": 14,
         "historical_empirical_selection": 15,
         "historical_empirical_without_verifiable_copy": 1,
-        "interpretation": "This current source-retrieval overlay does not reapply selection or change the historical 15-study selection. Two reports (Sokkhey and Zeng) have no verifiable copy; 15 reports were assessed, the Imperatrice protocol was excluded, and 14 empirical reports have recovered text. Sokkhey remains only as a historical inclusion with its previous MMAT responses, not as a text verified in this review. Machine2019_007 remains the abstract-stage exclusion.",
+        "interpretation": "This current source-retrieval overlay does not reapply selection or change the historical 15-study selection. Two reports (Sokkhey and Zeng) have no verifiable copy; 15 reports were assessed, the Imperatrice protocol was excluded, and 14 empirical reports have recovered text. Sokkhey remains in the original 15-study selection without MMAT appraisal because no verifiable full-text copy is available. Machine2019_007 remains the abstract-stage exclusion.",
         "stage_percentages": {
           "reports_not_retrieved_of_reports_sought": 11.76,
           "full_text_exclusions_of_assessed": 6.67,
