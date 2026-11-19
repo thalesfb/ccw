@@ -306,15 +306,8 @@ small { font-size: 0.73rem; }
 .slidev-layout .slide-kicker { display: none; }
 .slidev-layout.content-slide > * { position: relative; z-index: 1; }
 
-.tcc-question-grid { grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 0.2rem; }
-.tcc-question-grid .rq-card { display: block; min-height: 18.2rem; padding: 0.95rem 1.05rem 0.8rem; border: 0; border-top: 0.34rem solid var(--rq-accent); border-radius: 0; background: transparent; box-shadow: none; }
-.tcc-question-grid .rq-card:not(:last-child) { border-right: 1px solid #d7d9dc; }
-.tcc-question-grid .rq-card > span { display: none; }
-.tcc-question-grid .rq-card > div { min-width: 0; }
-.tcc-q-icon { display: flex; height: 3.25rem; align-items: center; justify-content: center; color: var(--rq-accent); }
-.tcc-q-icon svg { display: block; flex: 0 0 auto; width: 2.7rem; height: 2.7rem; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
-.tcc-question-grid .rq-card > div strong { min-height: 3.1rem; color: var(--tcc-ink); font: 800 1.27rem/1.06 'Asap', sans-serif; text-align: center; }
-.tcc-question-grid .rq-card p { margin-top: 1.25rem; color: var(--tcc-ink); font-size: 1.02rem; line-height: 1.19; font-weight: 500; text-align: center; }
+.tcc-question-grid { display: flex; min-height: 20.5rem; align-items: center; margin-top: 0.35rem; padding: 1.6rem 2rem; border-left: 0.35rem solid #2d707e; background: #f3f8fa; }
+.tcc-question-text { max-width: 58rem; margin: 0 auto; color: var(--tcc-ink) !important; font-family: 'Asap', 'Arial', sans-serif; font-size: 1.9rem; font-weight: 700; line-height: 1.32 !important; text-align: center; }
 .tcc-caption { margin-top: 0.55rem; color: #747b82; font: italic 1rem/1.2 'Asap', sans-serif; text-align: center; }
 
 .problem-hero { gap: 1.55rem; }
@@ -582,23 +575,6 @@ small { font-size: 0.73rem; }
 .tcc-prisma-slide .tcc-prisma-image { display: block; width: 100%; height: 100%; max-width: none !important; max-height: none !important; margin: 0; object-fit: contain; }
 .tcc-prisma-slide .source-note { display: none; }
 
-.tcc-funnel-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.2rem; align-items: center; min-height: 21rem; margin-top: 0.1rem; }
-.tcc-funnel { display: grid; justify-items: center; gap: 0.1rem; }
-.tcc-funnel-stage { position: relative; isolation: isolate; display: flex; min-height: 3.15rem; flex-direction: column; align-items: center; justify-content: center; padding: 0.35rem 0.8rem; color: #111; text-align: center; }
-.tcc-funnel-stage::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--funnel-fill); clip-path: polygon(7% 0, 93% 0, 83% 100%, 17% 100%); }
-.tcc-funnel-stage span { font: 700 0.88rem/1 'Asap', sans-serif; }
-.tcc-funnel-stage strong { margin-top: 0.15rem; font: 800 1.65rem/0.95 'Asap', sans-serif; }
-.tcc-funnel-stage small { max-width: 76%; margin-top: 0.14rem; font-size: 0.68rem; line-height: 1.15; }
-.funnel-identification { width: 100%; --funnel-fill: #9ed3e8; }
-.funnel-dedup { width: 84%; --funnel-fill: #54b0cb; }
-.funnel-screening { width: 67%; --funnel-fill: #7ec2b7; }
-.funnel-inclusion { width: 46%; min-height: 3.7rem; --funnel-fill: #efad4a; }
-.tcc-funnel-notes { display: grid; gap: 1rem; }
-.tcc-funnel-notes p { padding-left: 0.9rem; border-left: 0.27rem solid var(--tcc-green); color: #111; font: 1.05rem/1.18 'Asap', sans-serif; }
-.tcc-funnel-notes p:nth-child(2) { border-left-color: var(--tcc-amber); }
-.tcc-funnel-notes p:nth-child(3) { border-left-color: var(--tcc-red); }
-.tcc-funnel-caption { margin-top: 0.4rem; color: #111; font: 1.04rem/1.18 'Asap', sans-serif; text-align: center; }
-.tcc-funnel-caption strong { font-weight: 800; }
 .tcc-growth-layout { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 1.6rem; align-items: center; min-height: 20.5rem; margin-top: 0.25rem; }
 .tcc-growth-chart { min-height: 17.5rem; padding: 0.55rem 0.7rem; border-bottom: 0.25rem solid var(--tcc-green); }
 .tcc-growth-chart img { display: block; width: 100%; height: 17rem; object-fit: contain; }
@@ -667,11 +643,10 @@ small { font-size: 0.73rem; }
 .tcc-retained-rule { width: 9.5rem; height: 0.28rem; margin: 1.1rem 0 0.75rem; background: #e3a429; }
 .tcc-retained-number p { color: #555 !important; font: italic 0.98rem/1.16 'Asap', sans-serif; }
 .tcc-retained-copy { padding: 0.25rem 0 0.25rem 1.25rem; border-left: 1px solid #cfcfcf; }
-.tcc-retained-strata { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.25rem; }
-.tcc-retained-strata strong { color: #2e9a76 !important; font: 800 3.1rem/0.8 'Asap', sans-serif; }
-.tcc-retained-strata strong:nth-of-type(2) { color: #e3a429 !important; font-size: 1.55rem; }
-.tcc-retained-strata strong:nth-of-type(3) { color: #b4463f !important; }
-.tcc-retained-strata span { margin-right: 0.45rem; font-size: 0.77rem; font-weight: 700; }
+.tcc-retained-strata { display: grid; grid-template-columns: 3.3rem 1fr; align-items: center; gap: 0.45rem 0.65rem; margin-bottom: 1.05rem; }
+.tcc-retained-strata strong { color: #2e9a76 !important; font: 800 2.35rem/0.9 'Asap', sans-serif; }
+.tcc-retained-strata strong:nth-of-type(2) { color: #e3a429 !important; }
+.tcc-retained-strata span { font-size: 0.92rem; line-height: 1.1; font-weight: 700; }
 .tcc-retained-copy h2 { font-size: 2.15rem; line-height: 1; }
 .tcc-retained-copy > p { max-width: 28rem; margin-top: 0.8rem; font: 1.1rem/1.2 'Asap', sans-serif; }
 
@@ -727,11 +702,10 @@ small { font-size: 0.73rem; }
 .tcc-boundary-foot { margin-top: 0.55rem; padding-top: 0.7rem; border-top: 0.28rem solid #111; font: 0.9rem/1.15 'Asap', sans-serif; }
 
 .tcc-gaps-intro { margin-top: -0.15rem; color: #555 !important; font: italic 1rem/1.15 'Asap', sans-serif; }
-.tcc-gaps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 1.1rem; border-top: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; }
-.tcc-gaps-grid > div { min-height: 15.5rem; padding: 0.9rem 1rem 0.55rem; border-right: 1px solid #d2d2d2; }
-.tcc-gaps-grid > div:last-child { border-right: 0; }
+.tcc-gaps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 0.8rem; }
+.tcc-gaps-grid > div { min-height: 12.5rem; padding: 0.9rem 1rem 0.75rem; border: 1px solid #d2d2d2; background: #fafafa; }
 .tcc-gaps-grid b { color: #d77d2f !important; font: 800 4.5rem/0.8 'Asap', sans-serif; }
-.tcc-gaps-grid h2 { margin-top: 1.2rem; font-size: 1.3rem; line-height: 0.98; text-transform: uppercase; }
+.tcc-gaps-grid h2 { margin-top: 1.2rem; font-size: 1.3rem; line-height: 0.98; }
 .tcc-gaps-grid p { margin-top: 0.85rem; color: #222 !important; font: 0.92rem/1.18 'Asap', sans-serif; }
 .tcc-gaps-foot { margin-top: 0.8rem; color: #555; font: 0.88rem/1.16 'Asap', sans-serif; }
 
@@ -889,14 +863,6 @@ small { font-size: 0.73rem; }
 .tcc-objective-core { padding: 0.35rem 1rem; font-size: 1.08rem; line-height: 1.16; }
 
 .tcc-question-grid { margin-top: 0.25rem; }
-.tcc-question-grid .rq-card {
-  min-height: 15.7rem;
-  padding: 0.7rem 0.85rem 0.6rem;
-}
-.tcc-q-icon { height: 2.7rem; }
-.tcc-q-icon svg { width: 2.35rem; height: 2.35rem; }
-.tcc-question-grid .rq-card > div strong { min-height: 2.75rem; font-size: 1.14rem; }
-.tcc-question-grid .rq-card p { margin-top: 0.9rem; font-size: 0.91rem; line-height: 1.16; }
 .tcc-caption { margin-top: 0.45rem; font-size: 0.78rem; line-height: 1.15; }
 
 .tcc-mission-layout { gap: 1.8rem; margin-top: 0.1rem; }
@@ -936,13 +902,6 @@ small { font-size: 0.73rem; }
 .tcc-source-icon svg { width: 2.65rem; height: 2.65rem; }
 .tcc-source-grid p { font-size: 0.91rem; }
 .tcc-source-grid small { font-size: 0.7rem; }
-
-.tcc-funnel-layout { gap: 1.5rem; }
-.tcc-funnel-stage { min-height: 2.75rem; }
-.tcc-funnel-stage strong { font-size: 1.5rem; }
-.tcc-funnel-notes { gap: 0.7rem; }
-.tcc-funnel-notes p { font-size: 0.94rem; line-height: 1.14; }
-.tcc-funnel-caption { margin-top: 0.25rem; font-size: 0.9rem; }
 
 .tcc-growth-layout { gap: 1.25rem; }
 .tcc-growth-chart { min-height: 15.5rem; padding: 0.35rem 0.45rem; }
@@ -997,7 +956,7 @@ small { font-size: 0.73rem; }
 .tcc-mmat-key { margin-top: 0.75rem; }
 .tcc-mmat-key > div { padding: 0.44rem 0; }
 .tcc-mmat-key span { font-size: 0.84rem; }
-.tcc-mmat-result { margin-top: 0.35rem; padding: 0.55rem 0.8rem; font-size: 0.84rem; line-height: 1.25; }
+.tcc-mmat-result { margin-top: 0.35rem; padding: 0.55rem 0.8rem; font-size: 0.9rem; line-height: 1.25; }
 
 .tcc-synthesis-layout { gap: 2.2rem; }
 .tcc-synthesis-orbit { width: 18rem; height: 18rem; }
@@ -1155,7 +1114,6 @@ small { font-size: 0.73rem; }
   .tcc-mission-layout,
   .tcc-search-layout,
   .tcc-source-grid,
-  .tcc-funnel-layout,
   .dedupe-layout,
   .tcc-growth-layout,
   .tcc-technique-layout,
@@ -1172,11 +1130,6 @@ small { font-size: 0.73rem; }
 ) {
   flex: 1 1 auto;
   min-height: 22rem;
-}
-
-/* A two-line heading and a readable source note must fit the export canvas. */
-.slidev-layout.content-slide.flow-slide > .tcc-funnel-layout {
-  min-height: 0;
 }
 
 .tcc-retained-slide .tcc-retained-strata {
@@ -1285,12 +1238,7 @@ small { font-size: 0.73rem; }
   --def-soft: #f3f6f9;
 }
 
-/* Problem slide: question on top, four derived questions mapped to OEs. */
-.tcc-problem-slide .tcc-problem-statement { max-width: 52rem; margin: 0 0 0.9rem; padding: 0.7rem 1rem; border-left: 0.3rem solid var(--def-blue); background: var(--def-soft); color: var(--def-navy) !important; font: italic 1.02rem/1.25 'Times New Roman', 'Nimbus Roman', serif; }
-.tcc-problem-slide .tcc-question-grid .rq-card { min-height: 0; padding-top: 0.7rem; }
-.tcc-problem-slide .tcc-question-grid .rq-card > div strong { min-height: 2.4rem; font-size: 1.05rem; }
-.tcc-problem-slide .tcc-question-grid .rq-card > div strong em { display: block; margin-top: 0.3rem; color: var(--def-muted) !important; font: 700 0.72rem/1 'Times New Roman', 'Nimbus Roman', serif; font-style: normal; letter-spacing: 0.12em; }
-.tcc-problem-slide .tcc-question-grid .rq-card p { margin-top: 0.6rem; font-size: 0.9rem; }
+/* Problem slide: show the research question verbatim. */
 
 /* Didactic slide: two theory claims, one worked example. */
 .tcc-mission-slide .tcc-mission-copy > p { font-size: 1.06rem; line-height: 1.22; }
@@ -1423,7 +1371,6 @@ small { font-size: 0.73rem; }
 
 /* Defense layer: vertical balance and legibility. */
 .slidev-layout:is(.tcc-problem-slide, .tcc-typology-slide, .tcc-reporting-slide, .tcc-axes-slide, .tcc-rules-slide, .tcc-score-slide, .tcc-architecture-slide, .tcc-next-slide, .tcc-specification-slide) > :is(.tcc-question-grid, .tcc-typology-layout, .tcc-reporting-layout, .tcc-axes-grid, .tcc-rules-layout, .tcc-score-layout, .tcc-architecture-layout, .tcc-next-layout, .tcc-spec-layout) { margin-top: auto; margin-bottom: auto; }
-.tcc-problem-slide .tcc-question-grid .rq-card p { font-size: 1rem; }
 .tcc-typology-bars { gap: 0.95rem; }
 .tcc-typology-row > span { font-size: 1.05rem; }
 .tcc-typology-row > small { font-size: 0.82rem; }
