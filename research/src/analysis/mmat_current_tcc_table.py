@@ -21,6 +21,7 @@ from .mmat_current import (
     load_component_reassessments,
     validate_current_artifacts,
 )
+from .study_codes import code_by_key
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -136,11 +137,9 @@ def load_component_rows(path: Path = COMPONENT_DATA_PATH) -> list[dict[str, str]
 
 
 def _study_reference(row: dict[str, str], labels: dict[str, str] | None) -> str:
-    """Use the manuscript bibliography for consistent author/year citations."""
+    """Use the registry code and author-date citation for a corpus study."""
 
-    if labels is not None:
-        return _latex_escape(labels.get(row["study_id"], row["study_key"]))
-    return rf"\citeonline{{{row['study_key']}}}"
+    return rf"\estudocite{{{row['study_key']}}}"
 
 
 def render_component_table(
@@ -212,6 +211,10 @@ def render_component_table(
 def render_table(
     rows: list[dict[str, str]], labels: dict[str, str] | None = None
 ) -> str:
+    codes = code_by_key()
+    missing_codes = sorted({row["study_key"] for row in rows} - codes.keys())
+    if missing_codes:
+        raise ValueError(f"MMAT table contains unregistered study keys: {missing_codes}")
     column_spec = (
         r"|>{\raggedright\arraybackslash}p{4.5cm}|"
         r">{\raggedright\arraybackslash}p{4.5cm}|ccccccc|"

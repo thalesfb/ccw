@@ -12,6 +12,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -124,7 +125,13 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=ROOT / "results/tcc/main.pdf")
     parser.add_argument("--diagnostics", type=Path)
     args = parser.parse_args()
-    compile_document(args.root.resolve(), args.output.resolve(), args.diagnostics)
+    root = args.root.resolve()
+    subprocess.run(
+        [sys.executable, "-m", "src.analysis.study_codes"],
+        cwd=root / "research",
+        check=True,
+    )
+    compile_document(root, args.output.resolve(), args.diagnostics)
 
 
 if __name__ == "__main__":

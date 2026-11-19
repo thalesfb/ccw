@@ -115,7 +115,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         storyboard = (ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md").read_text(encoding="utf-8")
         for text in (slides, storyboard):
             self.assertNotIn("3 de 98", text)
-            self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT", text)
+            self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT", text)
             self.assertNotIn("não revalidadas", text)
             self.assertIn("o autor não conferiu separadamente as respostas", text)
             self.assertIn("permanecem identificadas como assistidas por IA", text)
@@ -342,9 +342,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("Aplicar o protocolo com docentes, após parecer ético.", slides)
         self.assertIn("14 estudos com texto recuperado foram conferidos pelo autor", slides)
         self.assertIn("S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT", slides)
-        self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT", slides)
+        self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT", slides)
         self.assertNotIn("3 de 98", slides)
-        self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável", slides)
+        self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável", slides)
         self.assertNotIn("validação humana pendente", slides)
 
         ai_appendix = (ROOT / "results/tcc/postextuais/ferramentas-ia.tex").read_text(encoding="utf-8")

@@ -110,6 +110,7 @@ jobs:
             tests/test_tcc_visual_classification.py \
             tests/test_tcc_quadros.py \
             tests/test_content_synthesis.py \
+            tests/test_study_codes.py \
             tests/test_pdf_feedback.py \
             tests/test_evidence_retrieval.py \
             tests/test_claim_evidence_artifacts.py \

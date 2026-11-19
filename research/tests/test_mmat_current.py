@@ -248,6 +248,11 @@ def test_current_mmat_qa_explicitly_blocks_final_claim() -> None:
     assert report["final_ready"] is False
     assert report["blocking_reasons"]
     assert not any("source/year eligibility hold" in reason for reason in report["blocking_reasons"])
+    joined_reasons = " ".join(report["blocking_reasons"])
+    assert "Studies E14 and E15" in joined_reasons
+    assert "study E05 an adapted category-4 route" in joined_reasons
+    assert "study E07 a category-3 route" in joined_reasons
+    assert "Study E05 is one thesis/report" in joined_reasons
 
 
 def test_historical_mmat_count_requires_unique_record_ids(tmp_path) -> None:
@@ -421,13 +426,20 @@ def test_study_7_sample_allocation_and_access_limits_are_preserved():
 
 def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     import re
+    import csv
 
     html = CURRENT_HTML.read_text(encoding="utf-8")
     rows = {row["study_id"]: row for row in load_current_reassessment()}
+    root = Path(__file__).resolve().parents[2]
+    with (root / "research/data/study_codes_current.csv").open(encoding="utf-8-sig", newline="") as handle:
+        code_by_id = {row["study_id"]: row["code"] for row in csv.DictReader(handle)}
+    uncoded_labels = {"9": "Uskov et al. (2019)", "6921": "Imperatrice et al. (2025)", "6923": "Zeng (2025)"}
 
     for study_id in rows:
+        reader_id = code_by_id.get(study_id, uncoded_labels.get(study_id))
+        assert reader_id, f"Study {study_id} has no reader-facing label"
         match = re.search(
-            rf"<tr>\s*<td>{re.escape(study_id)}</td>(.*?)</tr>",
+            rf"<tr>\s*<td>{re.escape(reader_id)}</td>(.*?)</tr>",
             html,
             flags=re.DOTALL,
         )
@@ -443,7 +455,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         assert answers == expected, f"Study {study_id} HTML cells differ from the MMAT ledger"
         meta = re.search(r'<span class="study-meta">([^<]+)</span>', match.group(1))
         assert meta, f"Study {study_id} HTML design label missing"
-        assert meta.group(1).startswith(f"{rows[study_id]['study_key']} · ")
+        assert rows[study_id]["study_key"] not in meta.group(1)
 
     assert "uma apreciação preliminar separada dos componentes" in html.lower()
     assert "14 fontes disponíveis nos 15 estudos" in html.lower()
@@ -461,12 +473,12 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "95 mantidas" not in html.lower()
     assert "3 alteradas" not in html.lower()
 
-    for study_id, expected_text in {
-        "7": ("120 participantes", "50/52", "não prova completude"),
-        "8": ("uma tese", "Frações são reutilizadas", "empírico computacional"),
+    for reader_label, expected_text in {
+        "E15": ("120 participantes", "50/52", "não prova completude"),
+        "E05": ("uma tese", "Frações são reutilizadas", "empírico computacional"),
     }.items():
         row = re.search(
-            rf"<tr>\s*<td>{re.escape(study_id)}</td>(.*?)</tr>",
+            rf"<tr>\s*<td>{re.escape(reader_label)}</td>(.*?)</tr>",
             html,
             flags=re.DOTALL,
         )
@@ -481,9 +493,9 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         for text in expected_text:
             assert text.lower() in normalized_note
 
-    for study_id in ("6923",):
+    for reader_label in ("Zeng (2025)",):
         row = re.search(
-            rf"<tr>\s*<td>{re.escape(study_id)}</td>(.*?)</tr>",
+            rf"<tr>\s*<td>{re.escape(reader_label)}</td>(.*?)</tr>",
             html,
             flags=re.DOTALL,
         )
@@ -504,7 +516,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
         assert "criterion-ct" not in evidence_row.group(1)
 
     abstract_excluded = re.search(
-        r"<tr>\s*<td>9</td>(.*?)</tr>", html, flags=re.DOTALL
+        r"<tr>\s*<td>Uskov et al\. \(2019\)</td>(.*?)</tr>", html, flags=re.DOTALL
     )
     assert abstract_excluded
     assert "texto integral conferido; fora do escopo matemático" in abstract_excluded.group(1).lower()
@@ -541,8 +553,9 @@ def test_defense_material_preserves_pending_mmat_decisions() -> None:
         .lower()
         .split()
     )
-    assert "estudos 5 e 7: categoria 3 operacional, alocação desconhecida" in slides
-    assert "estudo 8: categoria 4 adaptada" in slides
+    assert "e14 e e15: categoria 3 operacional, alocação desconhecida" in slides
+    assert "1 ct (e14)" in slides
+    assert "e05: categoria 4 adaptada" in slides
     assert "categoria 3 operacional" in storyboard
     assert "categoria 4 adaptada" in storyboard
 
@@ -596,7 +609,7 @@ def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -
         "CT", "Y", "Y", "N", "Y"
     ]
     assert rows["6915"]["q4"] == "N"
-    assert r"\citeonline{Enhancing2025_012} & Cat. 3 (quase-experimento; sorteio contraditório) & Y & Y & CT & Y & Y & N & CT" in (
+    assert r"\estudocite{Enhancing2025_012} & Cat. 3 (quase-experimento; sorteio contraditório) & Y & Y & CT & Y & Y & N & CT" in (
         CURRENT_TABLE.read_text(encoding="utf-8")
     )
 
@@ -727,8 +740,8 @@ def test_current_mmat_table_contains_only_records_with_screening_responses() -> 
     rendered = render_current_table(rows)
     assert "14 estudos do corpus" in rendered
     main_table, component_table = rendered.split(r"\label{qua:mmat-componentes}", 1)
-    assert len(re.findall(r"^\\citeonline\{[^}]+\} &", main_table, re.M)) == 14
-    assert len(re.findall(r"^\\citeonline\{[^}]+\} &", component_table, re.M)) == 6
+    assert len(re.findall(r"^\\estudocite\{[^}]+\} &", main_table, re.M)) == 14
+    assert len(re.findall(r"^\\estudocite\{[^}]+\} &", component_table, re.M)) == 6
     assert "S1/S2 = perguntas de triagem" in rendered
     assert "Q1--Q5 = critérios da categoria" in rendered
     assert rendered.index(r"\TCCQuadroFonte{Elaborado pelo autor (2026).}") < rendered.index(r"\endgroup")
@@ -817,9 +830,9 @@ def test_current_mmat_tcc_table_is_generated_from_the_current_ledger() -> None:
         load_current_table_rows()
     )
     table = CURRENT_TABLE.read_text(encoding="utf-8")
-    assert r"\citeonline{Enhancing2025_012} & Cat. 3 (quase-experimento" in table
-    assert r"\citeonline{UniversityMathematics2026_6919} & Métodos mistos" in table
-    assert r"\citeonline{UniversityMathematics2026_6919} & Quant. não rand." in table
+    assert r"\estudocite{Enhancing2025_012} & Cat. 3 (quase-experimento" in table
+    assert r"\estudocite{UniversityMathematics2026_6919} & Métodos mistos" in table
+    assert r"\estudocite{UniversityMathematics2026_6919} & Quant. não rand." in table
     details = CURRENT_TABLE.with_name("mmat_component_details_tcc.tex").read_text(encoding="utf-8")
     assert "3.1 (CT):" in details
     assert "2.1 (CT):" not in details

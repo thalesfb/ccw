@@ -2,7 +2,7 @@
   "schema_version": "1.3",
   "snapshot_date": "2026-09-03",
   "scope_updated_at": "2026-10-20",
-  "generated_at": "2026-11-19T04:31:45+00:00",
+  "generated_at": "2026-11-19T05:43:53+00:00",
   "database": {
     "path": "research/systematic_review.sqlite",
     "versioned": false,
@@ -398,13 +398,13 @@
       "final_ready": false,
       "blocking_reasons": [
         "The historical empirical selection contains 15 studies; 14 with recovered text have current MMAT responses. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available.",
-        "Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-3 route with conflicting allocation reports.",
+        "Studies E14 and E15 use an operational category-3 route, study E05 an adapted category-4 route, and study E07 a category-3 route with conflicting allocation reports.",
         "MMAT responses are reported by criterion and must not be interpreted as a quality score or ranking.",
-        "Study 8 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
+        "Study E05 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
         "The shortlisted report 6923 remains unretrieved and outside the historical 15-study MMAT denominator."
       ]
     },
-    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 14 studies and category-specific appraisal for 14; 15 records remain in the historical empirical selection. Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-3 route with conflicting allocation reports. Distinct datasets within study 8 must not be combined or counted twice. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available. Zeng is outside the 15-study selection and has no MMAT appraisal. The appraisals are criterion-level records and do not constitute an aggregate study-quality score."
+    "interpretation": "The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for 14 studies and category-specific appraisal for 14; 15 records remain in the historical empirical selection. Studies E14 and E15 use an operational category-3 route, study E05 an adapted category-4 route, and study E07 a category-3 route with conflicting allocation reports. Distinct datasets within study E05 must not be combined or counted twice. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available. Zeng is outside the 15-study selection and has no MMAT appraisal. The appraisals are criterion-level records and do not constitute an aggregate study-quality score."
   },
   "artifact_scope": "research_snapshot",
   "artifacts": [
@@ -576,7 +576,7 @@
     {
       "path": "research/src/validation/reproducibility.py",
       "role": "versioned generator for this reproducibility manifest",
-      "sha256": "4d7656c6ef20a80ccea756a58fd3751af8d65029d09b51e8ef7fefb03f277ab4"
+      "sha256": "fbe76a653ea8638676a83d284296884cca8c354d56a98d7f13560d482ba569a3"
     },
     {
       "path": "research/src/processing/adjudicated_snapshot.py",
@@ -586,7 +586,7 @@
     {
       "path": "research/src/analysis/mmat_current.py",
       "role": "validator separating provisional retention, screening responses and category-specific MMAT coverage",
-      "sha256": "30e4eaee7e42b5cc5b5646b89e49d120838ccbc7e10d2085385d3f1d6648f38d"
+      "sha256": "865f077aa05b583df98984f58994b1aeec55ed6c6504ea361e4aaba3074adb17"
     },
     {
       "path": "research/src/analysis/study_scope.py",
@@ -596,17 +596,17 @@
     {
       "path": "research/src/analysis/mmat_current_tcc_table.py",
       "role": "versioned renderer for the current criterion-level MMAT table",
-      "sha256": "880110ffb6a92b97f94be9f64213292081944226a4dbb2232b09c676e8db6456"
+      "sha256": "1a3b5d968af425d2f4926f3cd1a8710e3b231c6fcd7bd0094a077310a5d12d9d"
     },
     {
       "path": "research/exports/references/mmat_current_tcc_table.tex",
       "role": "current MMAT records with separate screening, category responses and unassessed cells",
-      "sha256": "19f95c3d38b0def7ebc90c4e0d6bfb5b79338bfca37bc5c62efd1ac2683978f1"
+      "sha256": "110e61811eb4aef79f3a68b0c1f4dc2f7f2d34022e9c77d2a832c3b63e3845ea"
     },
     {
       "path": "research/exports/references/mmat_component_details_tcc.tex",
       "role": "complete unchanged component rationales and source locators rendered in the manuscript appendix",
-      "sha256": "ffe0a445076f520fd4fbe2b4332baa6c7568f7497b9f172ab291574fc1c8c99e"
+      "sha256": "cff45edadcafdfe7d3bf6f7e709f191d2143bb7587608257f7cd4ccc39039f22"
     },
     {
       "path": "scripts/tcc_quadros.json",
@@ -682,7 +682,7 @@
       "External API responses, metadata and cache state can change on a fresh collection.",
       "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
       "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-      "The current empirical MMAT screening denominator is 14; 14 have category-specific responses, including explicit operational routes. 15 records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records 2 reports without a verifiable copy, 15 reports assessed at full text, 1 protocol excluded, and 14 empirical reports recovered. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available; Zeng is outside the historical selection. One record was excluded after abstract screening. Responses are reported by criterion without an aggregate score."
+      "The current empirical MMAT screening denominator is 14; 14 have category-specific responses, including explicit operational routes. 15 records remain in the historical empirical selection. Study E05 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records 2 reports without a verifiable copy, 15 reports assessed at full text, 1 protocol excluded, and 14 empirical reports recovered. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available; Zeng is outside the historical selection. One record was excluded after abstract screening. Responses are reported by criterion without an aggregate score."
     ]
   }
 }

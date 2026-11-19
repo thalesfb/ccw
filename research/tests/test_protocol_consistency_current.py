@@ -303,14 +303,11 @@ def test_tcc_review_table_distinguishes_all_shortlisted_records_by_stage() -> No
 
     pending_rows = [
         line for line in table.splitlines()
-        if line.startswith(r"\citeonline") and "Pendente:" in line
+        if r"\citeonline{Zeng2025_6923}" in line and "Pendente:" in line
     ]
     assert len(pending_rows) == 1
     assert all("MMAT não aplicado" in line for line in pending_rows)
-    for reference_key in {"Zeng2025_6923"}:
-        assert any(
-            f"\\citeonline{{{reference_key}}}" in line for line in pending_rows
-        )
+    assert r"\citeonline{Zeng2025_6923}" in pending_rows[0]
     assert "após resumo" in table.lower()
     assert "excluído da síntese empírica após texto completo" in table.lower()
     assert "não apresentar resultados empíricos concluídos" in table.lower()
