@@ -60,10 +60,10 @@ def test_pedagogical_support_uses_plain_language_without_mixing_theories() -> No
     assert "apoio pedagógico temporário" in foundation
     assert "scaffolding" not in foundation.lower()
     assert "andaimento" not in foundation.lower()
-    # Theories may be compared, but the chapter must state that they are not merged.
+    assert "Piaget" not in foundation
+    # The chapter must also state that the frameworks are not merged.
     assert "não são combinados aqui em uma teoria unificada da aprendizagem" in foundation
     assert "não afirma equivalência entre as teorias" in foundation
-    assert "distinga a superação de obstáculos da acomodação descrita por Piaget" in foundation
 
 
 def test_introduction_limits_prediction_and_methodology_cites_review_frameworks() -> None:
