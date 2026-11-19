@@ -99,3 +99,22 @@ def test_slide_generator_reads_current_registry_and_uses_reader_codes() -> None:
         assert code in deck_text
     assert "estudo 5" not in deck_text.lower()
     assert "estudo 8" not in deck_text.lower()
+
+
+def test_study_tables_list_rows_in_code_order() -> None:
+    root = Path(__file__).resolve().parents[2]
+    code_by_key = {key: code for code, _, key in EXPECTED_CODES}
+    tables = {
+        "research/exports/references/mmat_current_tcc_table.tex": None,
+        "research/exports/references/mmat_component_details_tcc.tex": None,
+        "research/exports/references/study_synthesis_tcc.tex": None,
+        "results/tcc/conteudo/estudos-requisitos.tex": None,
+    }
+    for relative in tables:
+        text = (root / relative).read_text(encoding="utf-8")
+        for block in re.split(r"\\end\{longtable\}", text):
+            row_codes = [
+                code_by_key[key]
+                for key in re.findall(r"^\\estudocite(?:\[[^\]]*\])?\{([^}]+)\}", block, re.M)
+            ]
+            assert row_codes == sorted(row_codes), f"{relative} rows are not in study-code order: {row_codes}"
