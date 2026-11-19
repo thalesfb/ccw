@@ -4,7 +4,7 @@
   "human_scientific_approval": "pending",
   "canonical_inputs": {
     "results/tcc/conteudo/introducao.tex": "2ca31fadb0c0f96adadd565c37dc09abfa841b6af2ec07aea4abe6f7c26cfd45",
-    "research/exports/reports/reproducibility_manifest.json": "3a976922dc4462fc3f7a3e6e95b92ed68dc74a35aaba7ab92e5a2cd2e01b564d",
+    "research/exports/reports/reproducibility_manifest.json": "ca23d1639d5aa67c01006dfc168c850345156b1b4025751f2ade0cf6adc71732",
     "research/data/study_contribution_current.json": "988b1bed10f9236c03ad6fb73b0d859fc70bbe2d21ef13e62227d69a2536ff6b",
     "research/data/evidence_sources_current.json": "e16a57b6b3d85d4f1b1afb74e9fd774b865dfded40d5468961bd9e125da683fa",
     "research/data/adjudicated_record_corrections.csv": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee",
@@ -41,15 +41,15 @@
   "reviewed_surfaces": {
     "README.md": "04885370c4076d8b46674d9c4d4795dca60accc64a85359b64ded5ef06442f46",
     "research/README.md": "abb9b46cbca30318fb303409842c0e7c17f7e81a6ee15acd89649c87b4961370",
-    "docs/tcc/ESTADO-ATUAL-TCC.md": "479843fa3fe1fa80454d6249faf8680d7d5eda824d72d509ebc8d287f1f8514c",
+    "docs/tcc/ESTADO-ATUAL-TCC.md": "2fc9a32d2ef80566c2731255a7f9d3d5444fed5ca3d741ca12c155d8f372fa18",
     "docs/tcc/SOURCE-COVERAGE-AND-CONTRIBUTIONS.md": "764e5c6e02b09c605ff22a70004e1bf5c7a51e1e79616b932b2b83660c95cf7f",
     "docs/RECONCILIACAO-POPULACAO-ADJUDICADA-2026-09-03.md": "47c7c14b494209314f5f204069a9e34ce5097c5ebc746a09ff2c818b1695ed12",
-    "presentation/README.md": "3dccb0d95606bc479c62d72636c1a9477785c8c1f26c24e23e911ed94e150dac",
+    "presentation/README.md": "e40650c2cf607ef70a15fb00fc905f92b1363715631dc6a6a971887df045661c",
     "results/tcc/README.md": "2c4620de2b5295a5928728972755171ea629f6d6d4162cedb0416f463d830747",
     "docs/README.md": "09df41bb263fc6d798520d98bc1b796393acbf9e73c9298fd86a034b7ec22e76",
     "docs/tcc/README.md": "8fad19afa8d7e8921bd50a6606724202ada9c5c416d3197311dcd4a965a4755a",
     "docs/tcc/AUDITORIA-ESTUDOS-SINTESE.md": "dd87e1177dac29024c847bfc4d7e07f69339e0cfb344a89ccb87f1b1af84f4fb",
-    "docs/tcc/REUNIAO-DECISAO-ESCOPO.md": "7ecb4ff2e44e20f8f3e81b97d9b6ec536ed7ef46a39ef4432e580ea74db03949",
+    "docs/tcc/REUNIAO-DECISAO-ESCOPO.md": "c1ca22e287e3ae5f928c923be53822f9e1202d096db33d598e0b94ca495b1708",
     "docs/tcc/NORMATIVE_GOVERNANCE.md": "673f87cbff7ef04811157cfe1320571a710a71d42eb85b370df270ef1451c831",
     "docs/TCC_REVISION_SCOPE.md": "e581ee67395796db4acd496e661760a2c5ca4822d9ce50e204848d12b015fc62",
     "docs/VERIFICACAO-NUMEROS-PRISMA.md": "76e17686ce016d918e7aa3f722d546ede32ad552ed75b3730c191cc46947617d",
@@ -58,11 +58,11 @@
     "index.html": "dbd06fbc52c08b567e6ef360d107402da4ea446e7187782d501b888790dad5c5",
     "research/index.html": "94d92b024f53b186ebaeab7a2b348251476ac56766c3db7dd1d132b34cd4ffa8",
     "results/tcc/index.html": "29609052243a2dda0726e9b450151db3d8bafa45e6cb5c1825ce378d6497def8",
-    "presentation/slides.md": "04c39577bf9bf1619d05c33115e39533fd11b7ec8a8fd9a5644726a922633470",
-    "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "70ab29d1c53cdb721262a12c716c0fbf7288feac23d07306148d7488de847193",
+    "presentation/slides.md": "1ba81d45d251a70ada9ad680b7141f9139b25b1328b0032edfa164d04f0c6ca1",
+    "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "887fd8c949f0fd546b20ef12912e1293b6a09b9076221765bab32d87da77d5a1",
     "scripts/generate_tcc_presentation.py": "41688ff3fa3c79311ad003cb548fc2032892361f646780dbe6d3b68db8382906",
     "scripts/sync_project_docs.py": "c5f26e15429c9f803a87ec6455ef60de99693dcf81c2084f9a38b78532539871",
-    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "ada49a726daa9fb850cc496e8e062357d41ce149996f5487574c4fa2ee47569f",
+    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "5e02bf5a08574c2e6871665ac3ee044285dc1b92d275b2c55f9b163964221b71",
     "results/tcc/images/project_overview_2026-11-17.png": "82e973a906a81e026aac166a36565fe346d40e219250151163393661811cef6e"
   }
 }

@@ -99,7 +99,7 @@ computacional futura dependerá de decisão e protocolo próprios, incluindo
 fonte, termos de uso, desfecho, limiares e divisão dos dados.
 
 A apresentação de defesa canônica é `presentation/slides.md`, compilada com
-Slidev em 25 slides. O PPTX editável em
+Slidev em 24 slides. O PPTX editável em
 `results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx` contém
 19 slides e é uma exportação paralela, gerada por outro script; não é o deck
 Slidev nem é exportado automaticamente dele. Seus resumos devem ser conferidos

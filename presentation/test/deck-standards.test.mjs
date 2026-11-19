@@ -86,11 +86,11 @@ test('reports an MMAT deck that hides S1/S2 or uses an ambiguous legend', () => 
   assert.equal(errors.some((error) => error.includes('Y/N/CT')), true)
 })
 
-test('centers the question icons in a fixed visual box', () => {
+test('centers the literal research question in a readable panel', () => {
   const css = readFileSync(resolve(import.meta.dirname, '..', 'styles', 'index.css'), 'utf8')
 
-  assert.match(css, /\.tcc-q-icon\s*\{[^}]*justify-content:\s*center;/s)
-  assert.match(css, /\.tcc-q-icon\s+svg\s*\{[^}]*display:\s*block;[^}]*flex:\s*0\s+0\s+auto;/s)
+  assert.match(css, /\.tcc-question-grid\s*\{[^}]*display:\s*flex;[^}]*align-items:\s*center;/s)
+  assert.match(css, /\.tcc-question-text\s*\{[^}]*max-width:\s*58rem;[^}]*text-align:\s*center;/s)
 })
 
 test('references public images from the public root for subpath deployment', () => {
