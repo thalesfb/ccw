@@ -85,7 +85,7 @@
   "source_access_limits_this_cycle": [
     {
       "study_id": "3",
-      "status": "source_not_recovered_no_appraisal"
+      "status": "historical_appraisal_not_revalidated_without_primary_text"
     },
     {
       "study_id": "7",

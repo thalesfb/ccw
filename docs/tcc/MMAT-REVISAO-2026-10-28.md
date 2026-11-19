@@ -26,10 +26,12 @@ O [registro de perguntas](MMAT-PERGUNTAS-PENDENTES.md) cobre todos os 55 CT, tr�
 
 A [pauta de decisão](MMAT-PAUTA-DE-DECISAO.md) organiza as quatro questões que antecedem novas respostas por categoria, com propostas para revisão e efeitos sobre a matriz. Não registra concordância da orientação.
 
-O original do estudo 3 não foi recuperado e permanece sem apreciação MMAT; 6919 retornou HTTP 403. A URL editorial do 7 redirecionou para página genérica; a questão de alocação foi mantida a partir do relato disponível, sem declarar nova conferência integral do PDF. O estudo 6923 continua sem texto integral nesta rodada; não se afirma nova verificação de término do embargo.
+O original do estudo 3 não foi recuperado; 6919 retornou HTTP 403 e sua apreciação anterior não foi revalidada. A URL editorial do 7 redirecionou para página genérica; a questão de alocação foi mantida a partir do relato disponível, sem declarar nova conferência integral do PDF. O estudo 6923 continua sem texto integral nesta rodada; não se afirma nova verificação de término do embargo.
 
 ## Proveniência e limites
 
 O arquivo `research/data/mmat_completion_review_2026-10-28.json` registra alterações, páginas físicas, identificadores, hashes das fontes, propostas não adotadas e limites de acesso. Este documento preserva a primeira rodada; o estado atual está na matriz e no registro MMAT vigentes, não nas contagens históricas desta página.
 
 Foi consultado o [guia primário MMAT 2018, hospedado pela University of Colorado](https://medschool.cuanschutz.edu/docs/librariesprovider94/di-docs/methods-(design)-docx/mmat_2018_criteria-manual_2018-08-01_eng.pdf), páginas físicas 2–9. O guia admite estudos empíricos por observação, experimentação ou simulação e distingue critérios dos componentes qualitativo, quantitativo e misto. A aplicação da categoria descritiva a estudos preditivos permanece uma decisão operacional provisória, não um instrumento específico de validação de aprendizado de máquina.
+
+> Atualização (14/11/2026): por decisão do autor, as respostas MMAT anteriores de Sokkhey et al. (2020) foram retiradas; o estudo permanece na seleção original sem apreciação MMAT, por falta de cópia verificável. O texto acima registra o estado da data do documento.
