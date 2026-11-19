@@ -102,11 +102,13 @@
 
 % Em quadros longos, legenda, fonte e nota acompanham a largura do quadro.
 % A caixa é centralizada na mancha gráfica; o conteúdo permanece à esquerda.
+% A nota não se separa da fonte: sem quebra de página entre as duas.
 \newcommand{\TCCQuadroFonte}[1]{%
   \noindent\makebox[\textwidth][c]{%
     \begin{minipage}{\LTcapwidth}\fonte{#1}\end{minipage}}%
 }
 \newcommand{\TCCQuadroNota}[1]{%
+  \par\nobreak
   \noindent\makebox[\textwidth][c]{%
     \begin{minipage}{\LTcapwidth}\nota{#1}\end{minipage}}%
 }

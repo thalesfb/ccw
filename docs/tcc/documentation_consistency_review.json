@@ -4,7 +4,7 @@
   "human_scientific_approval": "pending",
   "canonical_inputs": {
     "results/tcc/conteudo/introducao.tex": "2ca31fadb0c0f96adadd565c37dc09abfa841b6af2ec07aea4abe6f7c26cfd45",
-    "research/exports/reports/reproducibility_manifest.json": "a114f8e772acd55b081d0fb7f705d8ac1ecac3c08448693cc9a9c92e88011333",
+    "research/exports/reports/reproducibility_manifest.json": "02b3f05f78b638a4a55d60c9e08bdf947d8aa4edeed17ac00cc0d7defc8c2a1c",
     "research/data/study_contribution_current.json": "988b1bed10f9236c03ad6fb73b0d859fc70bbe2d21ef13e62227d69a2536ff6b",
     "research/data/evidence_sources_current.json": "e16a57b6b3d85d4f1b1afb74e9fd774b865dfded40d5468961bd9e125da683fa",
     "research/data/adjudicated_record_corrections.csv": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee",
@@ -23,7 +23,7 @@
     "results/tcc/pretextuais/resumo.tex": "4a4ef4a0984c6544d220b6d6e37920b5d2aa2e77df805dcc9b1ac98ede4f38d1",
     "results/tcc/postextuais/apendice.tex": "b52a7e9def712683c76d891fb2d441c4f853be3d36e8975baf86308c00867a78",
     "results/tcc/postextuais/ferramentas-ia.tex": "98c3efcb9c298e9b1744cc865fc6f53cda759a1a8f089eec0d49f7202397d3fa",
-    "results/tcc/config_inicial.tex": "dedcc2afdfc6a6109480bdd641955d8553a5adf060725154010eabcb57493f55",
+    "results/tcc/config_inicial.tex": "e152cc867c490e69dcc9b8c052caf078a1379e5b979c9aad69930e3be5e5d071",
     "research/src/analysis/mmat_current_tcc_table.py": "b5789cd97129384d9fa26c03661cb00311f96fafdad8b9ccbc4b398d6266b5e6",
     "research/exports/references/mmat_component_details_tcc.tex": "cff45edadcafdfe7d3bf6f7e709f191d2143bb7587608257f7cd4ccc39039f22",
     "scripts/tcc_quadros.json": "b01c185e1b70d3aecd6f7a576d06ac5abeacdda10a7140f8a1ef7bb9faec1dbe",
@@ -62,7 +62,7 @@
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "00bc3686f62b02b0fc07fdf9b82e1f4dbdf49b6ae941ea47e7dbcd93e0c9c9d8",
     "scripts/generate_tcc_presentation.py": "7e22744796807dd021d997e03f67a2a2a1bfe0d6eb1ae202e2bcd6ce60705d06",
     "scripts/sync_project_docs.py": "c5f26e15429c9f803a87ec6455ef60de99693dcf81c2084f9a38b78532539871",
-    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "3bbc98f1478daab2147178f9a3fa93a8408f5b41dce965e63f7b8178929bb81e",
+    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "36205b550c66b02f30faf054ef7940aa9e8d37f81cc9be3cb360c1342b61c380",
     "results/tcc/images/project_overview_2026-11-17.png": "82e973a906a81e026aac166a36565fe346d40e219250151163393661811cef6e"
   }
 }
