@@ -38,7 +38,6 @@ test('key narrative slides use the shared inline SVG icon system', () => {
   assert.doesNotMatch(slides, /class="tcc-line-icon">[◎◷◈⌘]/)
   assert.doesNotMatch(slides, /class="tcc-source-icon">[⌘▤⛓⌑]/)
   assert.match(slides, /class="tcc-line-icon"[^>]*>[\s\S]*?<svg\s+viewBox="0 0 32 32"/)
-  assert.match(slides, /class="tcc-q-icon"[^>]*>[\s\S]*?<svg\s+viewBox="0 0 32 32"/)
   assert.match(slides, /class="tcc-source-icon"[^>]*>[\s\S]*?<svg\s+viewBox="0 0 32 32"/)
   assert.match(css, /\.tcc-line-icon svg[\s\S]*stroke-linecap:\s*round/)
   assert.match(css, /\.tcc-source-icon svg[\s\S]*stroke-linejoin:\s*round/)
@@ -53,4 +52,28 @@ test('result slides are drawn in HTML, not as exported keyword-tag charts', () =
   assert.match(slides, /class="tcc-typology-bars"/)
   assert.match(slides, /class="tcc-ct-grid"/)
   assert.match(css, /\.tcc-output-scale\s*\{[^}]*position:\s*relative;/)
+})
+
+test('research question is literal and the PRISMA flow is presented once', () => {
+  assert.match(slides, /Como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura\?/)
+  assert.equal((slides.match(/src="\/images\/prisma_flow\.png"/g) || []).length, 1)
+  assert.doesNotMatch(slides, /tcc-funnel-layout|O destino dos 18 registros/)
+})
+
+test('MMAT status slide keeps its caveats concise and category-specific', () => {
+  const status = slides.match(/<div class="tcc-mmat-result">([\s\S]*?)<\/div>/)?.[1]
+  assert.ok(status)
+  assert.ok(status.length < 500, `MMAT status should stay concise; found ${status.length} characters`)
+  assert.match(status, /Sokkhey/)
+  assert.match(status, /métodos mistos/)
+  assert.match(status, /Q1–Q5 variam por categoria/)
+  assert.match(status, /sem escore agregado/)
+})
+
+test('architecture slide makes the seventh function explicit', () => {
+  const architecture = slides.match(/<div class="slide-kicker">20 \/ ARQUITETURA E SAÍDA<\/div>([\s\S]*?)(?=\r?\n---\r?\n)/)?.[1]
+  assert.ok(architecture)
+  assert.match(architecture, /F07 · registro e exportação/)
+  assert.match(architecture, /F01/)
+  assert.match(architecture, /F06/)
 })
