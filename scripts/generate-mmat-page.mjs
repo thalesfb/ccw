@@ -7,6 +7,8 @@ const currentPath = path.join(root, 'research', 'data', 'mmat_reassessment_curre
 const componentPath = path.join(root, 'research', 'data', 'mmat_component_reassessment_current.csv');
 const registryPath = path.join(root, 'research', 'data', 'mmat_current_study_registry.csv');
 const scopePath = path.join(root, 'research', 'data', 'current_synthesis_scope.csv');
+const studyCodesPath = path.join(root, 'research', 'data', 'study_codes_current.csv');
+const papersPath = path.join(root, 'research', 'exports', 'analysis', 'papers.csv');
 const selectionStatusPath = path.join(root, 'research', 'data', 'selection_status_current.json');
 const reproducibilityManifestPath = path.join(root, 'research', 'exports', 'reports', 'reproducibility_manifest.json');
 const outputPath = path.join(root, 'research', 'exports', 'analysis', 'mmat_current.html');
@@ -52,7 +54,8 @@ function parseCsv(text) {
     row.push(field);
     rows.push(row);
   }
-  const [header, ...data] = rows;
+  const [rawHeader, ...data] = rows;
+  const header = rawHeader.map((key, index) => index === 0 ? key.replace(/^\uFEFF/, '') : key);
   return data.map((values) => Object.fromEntries(header.map((key, index) => [key, values[index] ?? ''])));
 }
 
@@ -231,9 +234,40 @@ const current = parseCsv(fs.readFileSync(currentPath, 'utf8'));
 const componentReassessments = parseCsv(fs.readFileSync(componentPath, 'utf8'));
 const registry = parseCsv(fs.readFileSync(registryPath, 'utf8'));
 const currentScope = parseCsv(fs.readFileSync(scopePath, 'utf8'));
+const studyCodeRows = parseCsv(fs.readFileSync(studyCodesPath, 'utf8'));
+const papers = parseCsv(fs.readFileSync(papersPath, 'utf8'));
 const currentSourceRetrieval = JSON.parse(fs.readFileSync(selectionStatusPath, 'utf8')).current_source_retrieval;
 const reproducibilityManifest = JSON.parse(fs.readFileSync(reproducibilityManifestPath, 'utf8'));
 const registryById = new Map(registry.map((row) => [row.study_id, row]));
+const papersById = new Map(papers.map((row) => [row.id, row]));
+const studyCodeByKey = new Map(studyCodeRows.map((row) => [row.study_key, row.code]));
+const studyCodeById = new Map(studyCodeRows.map((row) => [row.study_id, row.code]));
+if (studyCodeRows.length !== 15
+    || studyCodeRows.some((row, index) => row.code !== `E${String(index + 1).padStart(2, '0')}`)
+    || new Set(studyCodeRows.map((row) => row.study_id)).size !== studyCodeRows.length
+    || JSON.stringify(studyCodeRows.map((row) => [row.study_key, row.study_id]).sort())
+      !== JSON.stringify(currentScope.filter((row) => row.synthesis_role === 'empirical_evidence')
+        .map((row) => [row.study_key, row.study_id]).sort())) {
+  throw new Error('The current study-code registry must contain E01–E15 in reference order.');
+}
+
+function authorDateLabel(studyId) {
+  const paper = papersById.get(String(studyId)) ?? {};
+  const authors = String(paper.authors ?? '').trim();
+  const firstAuthor = authors.split(';')[0].trim();
+  const familyName = firstAuthor.includes(',')
+    ? firstAuthor.split(',', 1)[0].trim()
+    : firstAuthor.split(/\s+/).at(-1) ?? '';
+  const suffix = authors.includes(';') ? ' et al.' : '';
+  const year = String(paper.year ?? registryById.get(String(studyId))?.year_in_snapshot ?? '').trim();
+  return familyName && year ? `${familyName}${suffix} (${year})` : 'Autor-data não informados';
+}
+
+function studyReaderLabel(studyId) {
+  const key = registryById.get(String(studyId))?.study_key;
+  const code = studyCodeByKey.get(key);
+  return code ? `${code} — ${authorDateLabel(studyId)}` : authorDateLabel(studyId);
+}
 const cutoffDate = reproducibilityManifest.protocol.cutoff_date;
 const cutoffDateLabel = formatDate(cutoffDate);
 const scopeSnapshot = currentScope.map((row) => row.snapshot_date).sort().at(-1);
@@ -300,13 +334,13 @@ function componentAppraisalDetails(studyId) {
     }).join('');
     return `<tr><th scope="row">${escapeHtml(componentDesignLabels[assessment.design])}</th><td colspan="2"><ul class="mmat-evidence-grid">${criteria}</ul><p class="source-note"><strong>Fonte:</strong> ${escapeHtml(assessment.source_id)}; <strong>localizador:</strong> ${escapeHtml(assessment.source_locator)}.</p></td></tr>`;
   }).join('');
-  return `<section class="component-assessment" aria-label="Avaliação dos componentes do estudo ${escapeHtml(studyId)}"><h4>Avaliação dos componentes (provisória)</h4><p>Além dos critérios mistos exibidos na linha principal, o MMAT requer apreciação dos componentes qualitativo e quantitativo com categorias apropriadas. O autor realizou estas apreciações preliminares com apoio automatizado; as incertezas estão registradas por critério.</p><table class="mmat-table"><thead><tr><th scope="col">Categoria</th><th scope="col">Critérios, justificativas e fonte</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+  return `<section class="component-assessment" aria-label="Avaliação dos componentes de ${escapeHtml(studyReaderLabel(studyId))}"><h4>Avaliação dos componentes (provisória)</h4><p>Além dos critérios mistos exibidos na linha principal, o MMAT requer apreciação dos componentes qualitativo e quantitativo com categorias apropriadas. O autor realizou estas apreciações preliminares com apoio automatizado; as incertezas estão registradas por critério.</p><table class="mmat-table"><thead><tr><th scope="col">Categoria</th><th scope="col">Critérios, justificativas e fonte</th></tr></thead><tbody>${rows}</tbody></table></section>`;
 }
 const mixedMethodsNote = mixedMethodsStudies.length
   ? `<section class="section" aria-labelledby="mixed-methods-limit-title">
         <div class="callout callout-blue">
           <h2 id="mixed-methods-limit-title">Limite da apreciação de métodos mistos</h2>
-          <p>O guia MMAT recomenda avaliar os componentes qualitativo e quantitativo com as categorias adequadas, além dos critérios da categoria de métodos mistos. Para os registros ${mixedMethodsStudies.map((row) => escapeHtml(row.study_id)).join(', ')}, este recorte apresenta Q1–Q5 da categoria mista e, em cada ficha, uma apreciação preliminar separada dos componentes. O autor realizou estas apreciações preliminares com apoio automatizado. Elas não constituem certificação do delineamento nem avaliação negativa automática dos estudos.</p>
+          <p>O guia MMAT recomenda avaliar os componentes qualitativo e quantitativo com as categorias adequadas, além dos critérios da categoria de métodos mistos. Para ${mixedMethodsStudies.map((row) => escapeHtml(studyReaderLabel(row.study_id))).join(', ')}, este recorte apresenta Q1–Q5 da categoria mista e, em cada ficha, uma apreciação preliminar separada dos componentes. O autor realizou estas apreciações preliminares com apoio automatizado. Elas não constituem certificação do delineamento nem avaliação negativa automática dos estudos.</p>
           <p><a href="https://mixedmethodsappraisaltoolpublic.pbworks.com/w/page/71030694/FAQ" target="_blank" rel="noopener">Orientação dos desenvolvedores do MMAT sobre estudos de métodos mistos</a></p>
         </div>
       </section>`
@@ -394,8 +428,8 @@ const rows = current.map((row) => {
       ? `${designLabels.get(row.design) ?? 'Categoria não informada'} · componente escolar`
       : designLabels.get(row.design) ?? 'Categoria não informada');
   return `<tr>
-    <td>${escapeHtml(row.study_id)}</td>
-    <td><span class="study-title">${escapeHtml(title)}</span><span class="study-meta">${escapeHtml(row.study_key)} · ${escapeHtml(type)}</span></td>
+    <td>${escapeHtml(studyCodeById.get(row.study_id) ?? authorDateLabel(row.study_id))}</td>
+    <td><span class="study-title">${escapeHtml(title)}</span><span class="study-meta">${studyCodeById.has(row.study_id) ? `${escapeHtml(authorDateLabel(row.study_id))} · ` : ''}${escapeHtml(type)}</span></td>
     <td>${sourceStatus(row, scope)}</td>
     <td>${criterion(unitPending ? '' : row.s1)}</td><td>${criterion(unitPending ? '' : row.s2)}</td>
     <td>${criterion(unitPending ? '' : row.q1)}</td><td>${criterion(unitPending ? '' : row.q2)}</td><td>${criterion(unitPending ? '' : row.q3)}</td><td>${criterion(unitPending ? '' : row.q4)}</td><td>${criterion(unitPending ? '' : row.q5)}</td>
@@ -483,10 +517,10 @@ const page = `<!doctype html>
         <article class="surface-card">
           <span class="eyebrow">Status da evidência</span>
           <h3>${availableEmpiricalSources} fontes disponíveis nos ${empiricalCore.length} estudos</h3>
-          <p>As fichas conservam declarações de consulta, com diferentes extensões de leitura. Sokkhey (2020), estudo 3, permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. A disponibilidade de uma fonte também não certifica leitura integral de texto, figuras e apêndices.</p>
+          <p>As fichas conservam declarações de consulta, com diferentes extensões de leitura. ${studyReaderLabel('3')} permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. A disponibilidade de uma fonte também não certifica leitura integral de texto, figuras e apêndices.</p>
           <p>A reprodução congelada do índice textual abrange 12 fontes. As consultas suplementares e o OCR não ampliam automaticamente esse conjunto reproduzido; ele não deve ser confundido com a disponibilidade atual dos PDFs.</p>
-          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Faltam os estudos 3 e 6923. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. O texto de Zeng também não foi recuperado e não recebeu MMAT. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura integral de textos, figuras e apêndices. ${fullTextScopeChecks.length ? 'A conferência suplementar do texto integral do estudo 9 confirmou a exclusão por escopo matemático registrada após o resumo.' : ''}</p>
-          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm respostas S1/S2 e ${categoryAppraised.length} têm apreciações por categoria conferidas pelo autor nos estudos com texto recuperado. Sokkhey permanece sem apreciação MMAT por falta de cópia verificável do texto completo. As rotas dos estudos 5 e 7 usam a categoria 3 operacionalmente, com alocação desconhecida; o estudo 14 usa a categoria 3 porque o artigo se declara quase-experimental sem atribuição aleatória, apesar de mencionar sorteio das escolas; o estudo 8 usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${notRetrievedSummary} ${abstractExclusionSummary} O protocolo 6921 não integrou a seleção empírica histórica.</p>
+          <p>Na conferência de ${sourceCoverage.availability_check_date.split('-').reverse().join('/')}, o acervo local contém ${localPrimaryCount} PDFs dos 18 registros, identificados por hash. Não foram recuperados os textos de ${studyReaderLabel('3')} e ${authorDateLabel('6923')}. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. O texto de Zeng também não foi recuperado e não recebeu MMAT. Disponibilidade local não é elegibilidade; a inclusão na seleção histórica, por sua vez, não comprova leitura integral de textos, figuras e apêndices. ${fullTextScopeChecks.length ? `A conferência suplementar do texto integral de ${authorDateLabel('9')} confirmou a exclusão por escopo matemático registrada após o resumo.` : ''}</p>
+          <p>Dos ${empiricalCore.length} estudos empíricos da seleção histórica, ${mmatAppraised.length} têm respostas S1/S2 e ${categoryAppraised.length} têm apreciações por categoria conferidas pelo autor nos estudos com texto recuperado. Sokkhey permanece sem apreciação MMAT por falta de cópia verificável do texto completo. As rotas de ${studyReaderLabel('5')} e ${studyReaderLabel('7')} usam a categoria 3 operacionalmente, com alocação desconhecida; ${studyReaderLabel('14')} usa a categoria 3 porque o artigo se declara quase-experimental sem atribuição aleatória, apesar de mencionar sorteio das escolas; ${studyReaderLabel('8')} usa a categoria 4 adaptada às análises computacionais de matemática. Essas rotas não certificam delineamentos. Frações reutilizadas entre capítulos da tese não são contadas duas vezes. ${notRetrievedSummary} ${abstractExclusionSummary} O protocolo de ${authorDateLabel('6921')} não integrou a seleção empírica histórica.</p>
         </article>
       </section>
 
@@ -495,7 +529,7 @@ const page = `<!doctype html>
       <section class="section" aria-labelledby="questions-title">
         <div class="section-heading">
           <h2 id="questions-title">Perguntas de triagem do MMAT 2018</h2>
-          <p>Na seleção histórica sob o corte 4,0, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos. Q1–Q5 foram apreciados em ${categoryAppraised.length}; as rotas operacionais e suas incertezas estão identificadas em cada ficha; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo 6921 não apresenta resultados concluídos e não integrou a seleção empírica histórica.</p>
+          <p>Na seleção histórica sob o corte 4,0, S1 e S2 estão preenchidas para ${mmatAppraised.length} estudos empíricos. Q1–Q5 foram apreciados em ${categoryAppraised.length}; as rotas operacionais e suas incertezas estão identificadas em cada ficha; ${pendingFullTextQuestionSummary} ${abstractExclusionSummary} O protocolo de ${authorDateLabel('6921')} não apresenta resultados concluídos e não integrou a seleção empírica histórica.</p>
         </div>
         <div class="mmat-screening-grid">${screeningQuestions}</div>
         <div class="callout callout-blue mmat-question-note">
@@ -518,8 +552,8 @@ const page = `<!doctype html>
         </div>
         <div class="table-wrap">
           <table class="mmat-table">
-            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Os 14 estudos com texto recuperado têm triagem e critérios da categoria conferidos, incluindo rotas operacionais explicitamente limitadas nos estudos 5, 7, 8 e 14. Sokkhey permanece sem apreciação MMAT por falta de cópia verificável do texto completo. O relatório 6923 não recebeu respostas MMAT. O estudo 9 está fora do escopo matemático e o protocolo 6921 não relata resultados concluídos; ambos permanecem sem respostas aos critérios.</caption>
-            <thead><tr><th scope="col">ID</th><th scope="col">Registro</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
+            <caption>Legenda: Y = sim · N = não · CT = não é possível concluir com a evidência disponível · — = não avaliado. Os 14 estudos com texto recuperado têm triagem e critérios da categoria conferidos, incluindo rotas operacionais explicitamente limitadas em ${['5', '7', '8', '14'].map(studyReaderLabel).join(', ')}. Sokkhey permanece sem apreciação MMAT por falta de cópia verificável do texto completo. ${authorDateLabel('6923')} não recebeu respostas MMAT. ${authorDateLabel('9')} está fora do escopo matemático e o protocolo de ${authorDateLabel('6921')} não relata resultados concluídos; ambos permanecem sem respostas aos critérios.</caption>
+            <thead><tr><th scope="col">Código / autor-data</th><th scope="col">Estudo</th><th scope="col">Fonte disponível</th><th scope="col" title="Pergunta de triagem S1">S1</th><th scope="col" title="Pergunta de triagem S2">S2</th><th scope="col" title="Critério específico do delineamento">Q1</th><th scope="col" title="Critério específico do delineamento">Q2</th><th scope="col" title="Critério específico do delineamento">Q3</th><th scope="col" title="Critério específico do delineamento">Q4</th><th scope="col" title="Critério específico do delineamento">Q5</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
         </div>
@@ -530,15 +564,15 @@ const page = `<!doctype html>
           <span class="notice-mark" aria-hidden="true">!</span>
           <div>
             <h3 id="pending-title">Limites e tarefas registradas</h3>
-            <p><strong>CT não é uma tarefa incompleta.</strong> É um critério apreciado para o qual a informação disponível não permite concluir; a apreciação não depende de obter resposta a todas as perguntas. A consolidação depende de registrar as evidências localizadas, os limites das fontes e o alcance de cada resposta. As rotas operacionais e suas justificativas estão documentadas; os componentes dos estudos mistos não integraram a conferência registrada. O protocolo 6921 permanece fora da síntese empírica.</p>
+            <p><strong>CT não é uma tarefa incompleta.</strong> É um critério apreciado para o qual a informação disponível não permite concluir; a apreciação não depende de obter resposta a todas as perguntas. A consolidação depende de registrar as evidências localizadas, os limites das fontes e o alcance de cada resposta. As rotas operacionais e suas justificativas estão documentadas; os componentes dos estudos mistos não integraram a conferência registrada. O protocolo de ${authorDateLabel('6921')} permanece fora da síntese empírica.</p>
           </div>
         </div>
         <h3>Tarefas de consolidação</h3>
         <p>Registro documental de ${escapeHtml(consolidation.review_date.split('-').reverse().join('/'))}. As tarefas abaixo distinguem ajustes documentais, limites de acesso às fontes e informações que permanecem sem confirmação.</p>
         <div class="table-wrap"><table><caption>Estado das ações documentais e científicas</caption><thead><tr><th scope="col">Ação</th><th scope="col">Estado e responsável</th><th scope="col">Evidência</th><th scope="col">Próximo passo</th></tr></thead><tbody>${consolidation.actions.map((a) => `<tr><th scope="row">${escapeHtml(a.subject)}</th><td>${escapeHtml(({completed_documentary:'Correção documental concluída',blocked_source_access:'Acesso ao original pendente',blocked_embargo:'Embargo confirmado',pending_human_review:'Revisão humana pendente',completed_author_review:'Conferência do autor concluída'})[a.status])}<br>${escapeHtml(a.owner)}</td><td>${escapeHtml(a.evidence)}</td><td>${escapeHtml(a.next_step)}</td></tr>`).join('')}</tbody></table></div>
-        <p>${followups.length} perguntas preparadas: limites da evidência disponível por fonte e critério e duas pendências de acesso ao texto. O estudo 3 permanece sem cópia verificável e sem apreciação MMAT; 6923 não recebeu MMAT. Informação insuficiente no material examinado, exame incompleto e cópia indisponível são situações distintas. Se o registro público não permite distinguir a origem de um CT, essa incerteza é preservada. Não são envios obrigatórios. Nenhum contato externo ou resposta de autor foi registrado nesta revisão.</p>
+        <p>${followups.length} perguntas preparadas: limites da evidência disponível por fonte e critério e duas pendências de acesso ao texto. ${studyReaderLabel('3')} permanece sem cópia verificável e sem apreciação MMAT; ${authorDateLabel('6923')} não recebeu MMAT. Informação insuficiente no material examinado, exame incompleto e cópia indisponível são situações distintas. Se o registro público não permite distinguir a origem de um CT, essa incerteza é preservada. Não são envios obrigatórios. Nenhum contato externo ou resposta de autor foi registrado nesta revisão.</p>
         <p><a href="../../../docs/tcc/MMAT-PERGUNTAS-PENDENTES.md">Lista de perguntas por estudo</a> · <a href="../../../research/data/mmat_followup_questions_current.csv">CSV das perguntas</a> · <a href="../../../research/data/mmat_consolidation_actions_current.json">Ações de consolidação e evidências</a></p>
-        ${[...new Set(followups.map((q) => q.study_id))].map((id) => `<details class="surface-card"><summary>Estudo ${escapeHtml(id)} · perguntas pendentes</summary><ul>${followups.filter((q) => q.study_id === id).map((q) => `<li><strong>${escapeHtml(({study:'critérios principais',record:'pendência do registro',qualitative:'componente qualitativo',quantitative:'componente quantitativo'})[q.component])} · ${escapeHtml(({unit:'unidade de apreciação',design:'delineamento',access:'acesso ao texto'})[q.mmat_criterion] ?? q.mmat_criterion)}</strong>: ${escapeHtml(q.question_pt)} <small>Fonte: ${escapeHtml(q.source_id)}; ${escapeHtml(q.evidence_locator)}. Pergunta preparada, não enviada.</small><small><strong>${escapeHtml(coverageLabels[q.coverage_status])}.</strong> ${escapeHtml(q.coverage_notes)} <a href="../../../${escapeHtml(q.coverage_reference)}">Registro público de cobertura</a>.</small></li>`).join('')}</ul></details>`).join('')}
+        ${[...new Set(followups.map((q) => q.study_id))].map((id) => `<details class="surface-card"><summary>${escapeHtml(studyReaderLabel(id))} · perguntas pendentes</summary><ul>${followups.filter((q) => q.study_id === id).map((q) => `<li><strong>${escapeHtml(({study:'critérios principais',record:'pendência do registro',qualitative:'componente qualitativo',quantitative:'componente quantitativo'})[q.component])} · ${escapeHtml(({unit:'unidade de apreciação',design:'delineamento',access:'acesso ao texto'})[q.mmat_criterion] ?? q.mmat_criterion)}</strong>: ${escapeHtml(q.question_pt)} <small>Fonte: ${escapeHtml(q.source_id)}; ${escapeHtml(q.evidence_locator)}. Pergunta preparada, não enviada.</small><small><strong>${escapeHtml(coverageLabels[q.coverage_status])}.</strong> ${escapeHtml(q.coverage_notes)} <a href="../../../${escapeHtml(q.coverage_reference)}">Registro público de cobertura</a>.</small></li>`).join('')}</ul></details>`).join('')}
       </section>
 
       <section class="section surface-card">
