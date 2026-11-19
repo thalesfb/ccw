@@ -21,6 +21,7 @@ from .study_scope import (
     load_candidate_scope,
     load_primary_sources,
 )
+from .study_codes import code_by_id
 
 
 CURRENT_RECORD_IDS = CANDIDATE_STUDY_IDS
@@ -538,11 +539,12 @@ def validate_current_artifacts(
     )
     category_pending_rows = [row for row in core_reassessment if row["design"] == "design_pending"]
     category_appraised_rows = [row for row in core_reassessment if row["design"] != "design_pending"]
+    study_codes = code_by_id()
     blocking_reasons = [
         "The historical empirical selection contains 15 studies; 14 with recovered text have current MMAT responses. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available.",
-        "Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, and study 14 a category-3 route with conflicting allocation reports.",
+        f"Studies {study_codes['5']} and {study_codes['7']} use an operational category-3 route, study {study_codes['8']} an adapted category-4 route, and study {study_codes['14']} a category-3 route with conflicting allocation reports.",
         "MMAT responses are reported by criterion and must not be interpreted as a quality score or ranking.",
-        "Study 8 is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
+        f"Study {study_codes['8']} is one thesis/report with mathematical components; fractions reused across chapters must not be counted twice and seven-domain results are not mathematics-only estimates.",
     ]
     if len(primary_text_rows) != len(CURRENT_MMAT_STUDY_IDS):
         blocking_reasons.append(

@@ -23,6 +23,7 @@ from typing import Any
 
 from ..processing.dedup import normalize_doi
 from ..analysis.mmat_current import validate_current_artifacts
+from ..analysis.study_codes import code_by_id
 from ..config import load_config
 from ..search_terms import get_all_queries
 from .versioned_snapshot import validate_versioned_snapshot
@@ -857,6 +858,7 @@ def generate_manifest(
     """Generate the reproducibility manifest from a local operational DB."""
 
     root = REPOSITORY_ROOT
+    study_codes = code_by_id(root)
     configured_db = os.getenv("CCW_DB_PATH")
     source_db = Path(db_path or configured_db or root / "research" / "systematic_review.sqlite")
     if not source_db.is_absolute():
@@ -945,9 +947,9 @@ def generate_manifest(
                 f"The MMAT ledger describes the historical selection under the 4.0 cutoff: S1/S2 screening for {mmat_denominator} studies and "
                 f"category-specific appraisal for {mmat_qa['category_appraised_rows']}; "
                 f"{prisma_counts['included']} records remain in the historical empirical selection. "
-                "Studies 5 and 7 use an operational category-3 route, study 8 an adapted category-4 route, "
-                "and study 14 a category-3 route with conflicting allocation reports. Distinct datasets "
-                "within study 8 must not be combined or counted twice. "
+            f"Studies {study_codes['5']} and {study_codes['7']} use an operational category-3 route, "
+            f"study {study_codes['8']} an adapted category-4 route, and study {study_codes['14']} a category-3 route with conflicting allocation reports. Distinct datasets "
+            f"within study {study_codes['8']} must not be combined or counted twice. "
                 "Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available. "
                 "Zeng is outside the 15-study selection and has no MMAT appraisal. "
                 "The appraisals are criterion-level records and do not constitute an aggregate study-quality score."
@@ -991,7 +993,7 @@ def generate_manifest(
                 "External API responses, metadata and cache state can change on a fresh collection.",
                 "Title-based duplicate candidates are not semantic adjudications and do not change counts by themselves; the separately documented same-report decisions are included in the current PRISMA duplicate total.",
                 "The seven original manual overrides retain separate evidence ledgers; their approved scope consequences are recorded in the adjudicated population ledger.",
-                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have category-specific responses, including explicit operational routes. {prisma_counts['included']} records remain in the historical empirical selection. Study 8 is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records {current_source_retrieval['reports_not_retrieved']} reports without a verifiable copy, {current_source_retrieval['reports_assessed_at_full_text']} reports assessed at full text, {current_source_retrieval['full_text_exclusions']} protocol excluded, and {current_source_retrieval['recovered_empirical_reports']} empirical reports recovered. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available; Zeng is outside the historical selection. One record was excluded after abstract screening. Responses are reported by criterion without an aggregate score.",
+                f"The current empirical MMAT screening denominator is {mmat_denominator}; {mmat_qa['category_appraised_rows']} have category-specific responses, including explicit operational routes. {prisma_counts['included']} records remain in the historical empirical selection. Study {study_codes['8']} is one thesis/report with mathematical components; its distinct datasets must not be combined or counted twice. The current retrieval overlay records {current_source_retrieval['reports_not_retrieved']} reports without a verifiable copy, {current_source_retrieval['reports_assessed_at_full_text']} reports assessed at full text, {current_source_retrieval['full_text_exclusions']} protocol excluded, and {current_source_retrieval['recovered_empirical_reports']} empirical reports recovered. Sokkhey remains in the original selection without MMAT appraisal because no verifiable full-text copy is available; Zeng is outside the historical selection. One record was excluded after abstract screening. Responses are reported by criterion without an aggregate score.",
             ],
         },
     }

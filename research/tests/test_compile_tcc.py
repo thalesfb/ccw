@@ -2,6 +2,7 @@
 
 import importlib.util
 from pathlib import Path
+import sys
 
 import pytest
 
@@ -55,3 +56,30 @@ def test_latex_gate_rejects_unresolved_references_and_rerun_requests():
         with pytest.raises(RuntimeError):
             BUILD.validate_log(log)
     BUILD.validate_log("Output written on main.pdf (70 pages).")
+
+
+def test_main_generates_study_codes_without_importing_analysis_package(monkeypatch, tmp_path):
+    root = tmp_path / "repo"
+    generated_calls = []
+    compile_calls = []
+    monkeypatch.setattr(BUILD.sys, "argv", [
+        "compile_tcc.py", "--root", str(root), "--output", str(root / "results/tcc/main.pdf")
+    ])
+    monkeypatch.setattr(
+        BUILD.subprocess,
+        "run",
+        lambda command, **kwargs: generated_calls.append((command, kwargs)),
+    )
+    monkeypatch.setattr(
+        BUILD,
+        "compile_document",
+        lambda root, output, diagnostics: compile_calls.append((root, output, diagnostics)),
+    )
+
+    BUILD.main()
+
+    assert generated_calls == [(
+        [sys.executable, str(root / "research/src/analysis/study_codes.py")],
+        {"cwd": root / "research", "check": True},
+    )]
+    assert compile_calls == [(root, root / "results/tcc/main.pdf", None)]

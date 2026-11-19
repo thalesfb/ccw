@@ -15,6 +15,7 @@ Usage from the repository root::
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import sys
 from pathlib import Path
@@ -30,6 +31,24 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "results" / "tcc" / "presentation" / "ensino_personalizado_de_matematica_tcc.pptx"
+STUDY_CODES_PATH = ROOT / "research" / "data" / "study_codes_current.csv"
+STUDY_SCOPE_PATH = ROOT / "research" / "data" / "current_synthesis_scope.csv"
+
+
+def study_codes_by_id() -> dict[str, str]:
+    with STUDY_CODES_PATH.open(encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    with STUDY_SCOPE_PATH.open(encoding="utf-8-sig", newline="") as handle:
+        scope_ids = {
+            row["study_id"] for row in csv.DictReader(handle)
+            if row["synthesis_role"] == "empirical_evidence"
+        }
+    ids = {row["study_id"] for row in rows}
+    if len(rows) != 15 or len(ids) != 15 or ids != scope_ids:
+        raise ValueError("The current study-code registry must map the 15 selected studies exactly once")
+    if [row["code"] for row in rows] != [f"E{index:02d}" for index in range(1, 16)]:
+        raise ValueError("Study codes must be sequential in the reference order")
+    return {row["study_id"]: row["code"] for row in rows}
 
 SLIDE_WIDTH = Inches(13.333)
 SLIDE_HEIGHT = Inches(7.5)
@@ -329,6 +348,7 @@ def new_slide(prs: Presentation, title: str, number: int):
 
 def build_deck() -> Presentation:
     prs = Presentation()
+    study_codes = study_codes_by_id()
     prs.slide_width = SLIDE_WIDTH
     prs.slide_height = SLIDE_HEIGHT
     blank = prs.slide_layouts[6]
@@ -487,7 +507,7 @@ def build_deck() -> Presentation:
     add_text(slide, "avaliação por critério\nsem nota global", Inches(1.05), Inches(2.35), Inches(2.7), Inches(0.85), size=19, color=RGBColor(186, 230, 253), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Instrumento aplicado conforme o desenho metodológico de cada estudo empírico.", Inches(1.1), Inches(4.15), Inches(2.6), Inches(0.75), size=13.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
-    add_callout(slide, "Seleção histórica", "S1/S2 e Q1–Q5: 14 fichas; S2: 14 respostas Y e 1 CT no estudo 5, pois a origem dos dados não foi confirmada; 14 fontes disponíveis. Estudos 5/7: cat. 3 operacional; 14: sorteio contraditório; 8: cat. 4 adaptada. Sokkhey: sem cópia; sem MMAT. Zeng: sem texto e sem MMAT. Leitura variável.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=12.5)
+    add_callout(slide, "Seleção histórica", f"S1/S2 e Q1–Q5: 14 fichas; S2: 14 respostas Y e 1 CT em {study_codes['5']}, pois a origem dos dados não foi confirmada; 14 fontes disponíveis. {study_codes['5']}/{study_codes['7']}: cat. 3 operacional; {study_codes['14']}: sorteio contraditório; {study_codes['8']}: cat. 4 adaptada. Sokkhey ({study_codes['3']}): sem cópia; sem MMAT. Zeng: sem texto e sem MMAT. Leitura variável.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=12.5)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_text(slide, "Mistos (n=3): Q3, 2 N e 1 CT; Q4, 2 Y e 1 CT. Justificativas e limites na matriz pública; sem nota global.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 

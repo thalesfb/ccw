@@ -51,7 +51,7 @@ arquivo documenta a sequência e deve ser mantido junto com ela.
 ## Limites científicos
 
 - A seleção apresentada é histórica e mantém o corte 4,0; a análise de sensibilidade não estima todos os elegíveis abaixo do corte.
-- Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Zeng não integra os 15.
+- Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Zeng não integra os 15.
 - Nos três estudos de métodos mistos, as respostas dos componentes qualitativo e quantitativo continuam identificadas como assistidas por IA; os slides não publicam um placar agregado.
 - As frequências descrevem os estudos da seleção, não eficácia nem predominância em toda a literatura.
 - O protocolo docente e a especificação conceitual não foram aplicados com participantes.

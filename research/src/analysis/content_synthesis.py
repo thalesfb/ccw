@@ -8,6 +8,8 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from .study_codes import code_by_key
+
 ROOT = Path(__file__).resolve().parents[3]
 GROUPS = {
     "quantitative_descriptive": "Quantitativo descritivo",
@@ -113,12 +115,16 @@ def count_table(caption: str, label: str, widths: str, headers: list[str], rows:
 
 def build_outputs(root: Path = ROOT) -> dict[str, str]:
     studies = study_rows(root)
+    codes = code_by_key(root)
     widths = "|" + "|".join(r">{\raggedright\arraybackslash}p{" + width + "cm}"
                              for width in ("2.8", "3.3", "4.1", "4.5")) + "|"
-    first = [[rf"\citeonline{{{row['study_key']}}}", tex(row["purpose"]),
+    first = [[rf"\estudocite{{{row['study_key']}}}", tex(row["purpose"]),
               tex(row["technique"]), tex(row["level"].rstrip(".") + "; " + row["sample"])] for row in studies]
-    second = [[rf"\citeonline{{{row['study_key']}}}", tex(row["target"]),
+    second = [[rf"\estudocite{{{row['study_key']}}}", tex(row["target"]),
                tex(row["validation"].rstrip(".") + " (" + row["source"] + ")."), tex(row["metric"])] for row in studies]
+    missing_codes = sorted({row["study_key"] for row in studies} - codes.keys())
+    if missing_codes:
+        raise ValueError(f"Study synthesis contains unregistered study keys: {missing_codes}")
     text = longtable("Finalidade, técnica e população dos estudos incluídos.", "qua:sintese-tipologia", widths,
                      ["Estudo", "Finalidade principal", "Família de técnica", "Nível e n (unidade)"], first)
     text += longtable("Alvos, validação e métricas dos estudos incluídos.", "qua:sintese-validacao", widths,

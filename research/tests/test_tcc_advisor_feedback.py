@@ -305,7 +305,7 @@ def test_mmat_is_criterion_level_and_has_auditable_provenance() -> None:
     mmat_table = MMAT_LATEX.read_text(encoding="utf-8")
     assert "Q1--Q5 = critérios da categoria" in mmat_table
     for key in ("Villegas2025_6916", "UniversityMathematics2026_6919", "Echeveria2025_6920"):
-        assert rf"\citeonline{{{key}}} & Métodos mistos &" in mmat_table
+        assert rf"\estudocite{{{key}}} & Métodos mistos &" in mmat_table
 
 
 def test_author_created_sources_use_the_standard_year_form() -> None:
