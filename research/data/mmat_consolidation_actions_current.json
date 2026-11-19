@@ -28,11 +28,11 @@
     },
     {
       "id": "SRC-003",
-      "subject": "Recuperar o original do estudo 3 para revalidação",
+      "subject": "Recuperar o original do estudo 3 para realizar a apreciação MMAT",
       "status": "blocked_source_access",
       "owner": "responsável pela revisão / biblioteca",
-      "evidence": "Registro editorial e DOI identificados; consulta direta ao editor expirou em 28/10/2026. Não foi obtida uma cópia do texto integral nesta rodada. O relato anterior de compra necessária não comprova impossibilidade de outras vias legítimas.",
-      "next_step": "Obter cópia legítima pelo editor, biblioteca ou autor e então revalidar todos os critérios históricos."
+      "evidence": "Registro editorial e DOI identificados; consulta direta ao editor expirou em 28/10/2026. Não foi obtida uma cópia do texto integral nesta rodada. Não há cópia verificável do texto integral; por isso, o registro permanece sem apreciação MMAT.",
+      "next_step": "Obter cópia verificável e, se disponível, realizar a apreciação MMAT do estudo."
     },
     {
       "id": "SRC-6919",
@@ -55,7 +55,7 @@
       "subject": "Conferência do autor dos julgamentos MMAT",
       "status": "completed_author_review",
       "owner": "autor",
-      "evidence": "Em 13/11/2026 o autor conferiu as respostas dos 14 estudos com texto recuperado com base nas evidências localizadas e registrou os respectivos localizadores. As respostas históricas de Sokkhey não foram revalidadas por falta de cópia verificável; as apreciações separadas dos componentes dos estudos mistos permanecem preliminares.",
+      "evidence": "Em 13/11/2026 o autor conferiu as respostas dos 14 estudos com texto recuperado com base nas evidências localizadas e registrou os respectivos localizadores. Sokkhey permanece sem apreciação MMAT por falta de cópia verificável; as apreciações separadas dos componentes dos estudos mistos permanecem preliminares.",
       "next_step": "Manter explícitos os limites de cobertura e de recuperação das fontes e os localizadores das evidências consultadas."
     },
     {

@@ -456,7 +456,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "15 estudos empíricos da seleção histórica" in html.lower()
     assert "14 têm respostas s1/s2" in html.lower()
     assert "14 têm apreciações por categoria conferidas pelo autor" in html.lower()
-    assert "respostas mmat históricas não foram revalidadas" in html.lower()
+    assert "sokkhey permanece sem apreciação mmat por falta de cópia verificável do texto completo" in html.lower()
     assert "98 respostas" not in html.lower()
     assert "95 mantidas" not in html.lower()
     assert "3 alteradas" not in html.lower()
@@ -545,7 +545,7 @@ def test_defense_material_summarizes_current_mmat_scope_and_counts() -> None:
     assert "nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por ia." in slides
     assert "sem escore agregado" in slides
     assert "perguntas s1/s2, respostas y/n/ct e variação de q1–q5 por categoria" in storyboard
-    assert "sokkhey permanece na seleção histórica sem cópia verificável" in storyboard
+    assert "sokkhey permanece na seleção original sem apreciação mmat, por falta de cópia verificável" in storyboard
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:

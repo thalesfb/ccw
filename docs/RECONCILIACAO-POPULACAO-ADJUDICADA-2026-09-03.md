@@ -168,3 +168,5 @@ histórico; ela não substitui este documento.
    desenvolvimento;
 3. revisar e reconstruir a apresentação Slidev a partir do TCC e dos artefatos
    vigentes.
+
+> Atualização (14/11/2026): por decisão do autor, as respostas MMAT anteriores de Sokkhey et al. (2020) foram retiradas; o estudo permanece na seleção original sem apreciação MMAT, por falta de cópia verificável. O texto acima registra o estado da data do documento.

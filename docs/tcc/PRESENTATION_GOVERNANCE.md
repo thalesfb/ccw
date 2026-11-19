@@ -12,8 +12,8 @@ decisões de implementação em afirmações acadêmicas.
   `research/exports/reports/summary.json`.
 - O estado científico apresentado é o snapshot atual: 18 registros
   shortlistados, dos quais 15 permanecem na seleção empírica histórica. Há
-  texto recuperado para 14; Sokkhey permanece sem cópia verificável e sem
-  revalidação das respostas MMAT históricas. Zeng não foi recuperado e está fora
+  texto recuperado para 14; Sokkhey permanece na seleção original sem
+  apreciação MMAT, por falta de cópia verificável do texto completo. Zeng não foi recuperado e está fora
   dos 15. Um registro foi excluído após o resumo e um protocolo após a leitura
   do texto completo, por não apresentar resultados concluídos.
 - A apresentação não deve prometer eficácia, validação experimental ou um
@@ -107,8 +107,8 @@ o código do pipeline está implementado, os testes sintéticos estão verdes, o
 experimento com dados reais é continuidade fora do escopo documental desta entrega,
 e a apreciação MMAT é apresentada por critério, sem escore agregado. O núcleo
 empírico mantém 15 estudos na seleção histórica; 14 têm texto recuperado e
-respostas conferidas contra as evidências localizadas. Sokkhey permanece na
-seleção sem cópia verificável nem revalidação das respostas históricas. Os
+respostas conferidas contra as evidências localizadas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia
+verificável do texto completo. Os
 componentes dos estudos mistos não integraram a conferência registrada. As
 categorias dos estudos 5, 7, 8 e 14 são rotas operacionais explicitamente
 limitadas, sem confirmar os delineamentos. A unidade do estudo 8 é uma tese com

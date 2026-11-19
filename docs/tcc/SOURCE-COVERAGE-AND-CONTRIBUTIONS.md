@@ -31,7 +31,7 @@ separa os localizadores impressos e as páginas efetivamente inspecionadas por i
 | --- | --- | --- |
 | 1 — [Math2021_001](https://doi.org/10.1109/SISY52375.2021.9582522) | 1–6 | Exemplifica categorias operacionais derivadas do PISA e motiva cautela com seleção analítica e independência do teste. |
 | 2 — [Implementation2025_000](https://doi.org/10.18178/ijiet.2025.15.1.2228) | 1–10 | Fundamenta examinar desbalanceamento, horizonte da previsão e métricas por classe; a acurácia agregada não resume o desempenho na classe Low. |
-| 3 — [Multimodels2020_002](https://doi.org/10.5573/IEIESPC.2020.9.3.217) | nenhuma | O registro identifica um candidato sobre predição matemática; a contribuição substantiva não foi revalidada nesta auditoria. |
+| 3 — [Multimodels2020_002](https://doi.org/10.5573/IEIESPC.2020.9.3.217) | nenhuma | O registro identifica um candidato sobre predição matemática; sem cópia verificável do texto integral, a contribuição substantiva não pode ser apreciada. |
 | 4 — [Analysis2022_003](https://doi.org/10.1109/DASA54658.2022.9765236) | 1–5 | Compara classificadores e seleção wrapper para notas em classificações binária e de cinco classes. Na matemática, a Tabela 6 informa DT de 85,62% para 88,75%; a Tabela 8 informa RF de 93,49% para 94,10%. Motiva explicitar desfechos, atributos e validação na especificação. |
 | 5 — [Design2025_004](https://doi.org/10.1109/CIPAE66821.2025.00116) | 1–6 | Apresenta uma proposta computacional de personalização e fornece um exemplo de insuficiência de relato sobre amostra e alocação. |
 | 6 — [Identifying2017_006](https://doi.org/10.12738/estp.2017.5.0634) | 1–19 | Exemplifica comparação de classificadores com dados TIMSS e explicita limitações de definição do alvo e relato de validação. |

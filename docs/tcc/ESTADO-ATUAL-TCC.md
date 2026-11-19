@@ -18,7 +18,7 @@ fluxo de desenvolvimento estão em
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental registrada: 20/10/2026; PDFs locais conferidos por hash: 29/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->
@@ -32,10 +32,9 @@ Columbia Academic Commons registrada no manifesto de fontes em 13 de outubro de
 2027. O resumo público não substitui o texto primário: Zeng está fora da seleção
 histórica de 15 estudos e não recebeu apreciação MMAT, sem alteração das
 contagens PRISMA. O registro 3, [Multimodels2020_002](https://doi.org/10.5573/IEIESPC.2020.9.3.217),
-também está sem cópia integral local: o acesso disponível levou à compra do
-artigo, sem recuperação por via autorizada. Seus julgamentos históricos não
-foram revalidados nesta rodada. Não se infere, da ausência local atual, que
-nenhuma consulta histórica tenha ocorrido.
+permanece na seleção original sem apreciação MMAT, por falta de cópia
+verificável do texto completo. A ausência de cópia não permite concluir baixa
+qualidade nem inelegibilidade.
 
 O manifesto distingue as datas de referência: a busca tem corte em 31 de agosto
 de 2026, a adjudicação inicial do escopo ocorreu em 3 de setembro e a
@@ -46,8 +45,8 @@ altera o corte temporal da busca.
 
 O registro MMAT 2018 apresenta S1/S2 e os critérios Q1–Q5 por estudo, sem
 escore agregado. Dos 15 estudos empíricos da seleção histórica, 14 têm texto
-recuperado e respostas atuais; Sokkhey permanece sem cópia verificável e suas
-respostas históricas não foram revalidadas. O estudo 14 usa a categoria 3
+recuperado e respostas atuais; Sokkhey permanece na seleção original sem
+apreciação MMAT, por falta de cópia verificável do texto completo. O estudo 14 usa a categoria 3
 quantitativa não randomizada: o artigo se declara quase-experimental sem
 atribuição aleatória (§2.2 e §2.7), embora mencione sorteio das escolas em §2.4.
 Os estudos 5 e 7 usam uma rota operacional da categoria 3; o estudo 8 usa uma

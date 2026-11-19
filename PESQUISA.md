@@ -26,7 +26,7 @@
 | Fase 2 | Desenvolvimento do prototipo (TCC) | Sem prazo vigente | Aguardando decisão da orientação |
 | Fase 3 | Validacao experimental (TCC) | Sem prazo vigente | Não iniciada |
 
-**Revisao Sistematica vigente:** 11.904 registros identificados; 29 duplicatas removidas; 11.875 triados; 9.393 excluídos na triagem; 2.482 na priorização histórica; 2.464 não avançaram; **18 na lista preliminar**. Dessa lista, 1 foi excluído após o resumo e 17 foram procurados para texto integral; 2 não foram recuperados (Sokkhey 2020 e Zeng 2025); 15 foram avaliados em texto integral, 1 protocolo foi excluído e 14 relatórios empíricos foram recuperados. A seleção histórica sob o corte 4,0 mantém 15 estudos, dos quais 14 têm texto recuperado; Sokkhey permanece com respostas MMAT históricas não revalidadas. O 6918 foi corrigido para 2014 e excluído por estar fora do recorte. As etiquetas do pipeline têm categorias sobrepostas e descrevem o conteúdo bibliográfico, não qualidade metodológica.
+**Revisao Sistematica vigente:** 11.904 registros identificados; 29 duplicatas removidas; 11.875 triados; 9.393 excluídos na triagem; 2.482 na priorização histórica; 2.464 não avançaram; **18 na lista preliminar**. Dessa lista, 1 foi excluído após o resumo e 17 foram procurados para texto integral; 2 não foram recuperados (Sokkhey 2020 e Zeng 2025); 15 foram avaliados em texto integral, 1 protocolo foi excluído e 14 relatórios empíricos foram recuperados. A seleção histórica sob o corte 4,0 mantém 15 estudos, dos quais 14 têm texto recuperado; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. O 6918 foi corrigido para 2014 e excluído por estar fora do recorte. As etiquetas do pipeline têm categorias sobrepostas e descrevem o conteúdo bibliográfico, não qualidade metodológica.
 
 ---
 
@@ -111,7 +111,7 @@ results/tcc/
 
 ## 5. Pipeline MMAT (snapshot vigente e histórico)
 
-O módulo MMAT possui um ledger por critério para os estudos da seleção histórica. A conferência documental abrangeu os 14 estudos com texto recuperado; Sokkhey permanece sem cópia verificável e sem respostas revalidadas. O ledger não produz escore agregado nem afirma certeza da evidência.
+O módulo MMAT possui um ledger por critério para os estudos da seleção histórica. A conferência documental abrangeu os 14 estudos com texto recuperado; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. O ledger não produz escore agregado nem afirma certeza da evidência.
 
 ### Validar o snapshot vigente
 

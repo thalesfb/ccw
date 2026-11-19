@@ -5,7 +5,7 @@
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental registrada: 20/10/2026; PDFs locais conferidos por hash: 29/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey mantém respostas históricas não revalidadas por falta de cópia verificável. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
 <!-- ccw-sync:end snapshot -->
 
 O estado público, os limites interpretativos e as decisões metodológicas ainda
@@ -26,7 +26,7 @@ a validação educacional do protótipo não foram realizadas nesta versão.
 > textos recuperados. Sokkhey permanece sem cópia verificável; Zeng não integra
 > a seleção. A atualização das fontes não altera retroativamente o fluxo histórico.
 
-![Visão geral do TCC: 15 estudos na seleção histórica, 14 textos recuperados, Sokkhey sem revalidação do MMAT, duas fontes não recuperadas e especificação conceitual](results/tcc/images/project_overview_2026-11-17.png)
+![Visão geral do TCC: 15 estudos na seleção histórica, 14 textos recuperados, Sokkhey sem apreciação MMAT, duas fontes não recuperadas e especificação conceitual](results/tcc/images/project_overview_2026-11-17.png)
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
@@ -332,8 +332,8 @@ são distribuídos sob a licença CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONT
 A seleção e a apreciação MMAT foram conduzidas pelo autor, como revisor único,
 com apoio do fluxo automatizado e de ferramentas de IA generativa. A triagem dos textos
 integrais e a extração também foram conduzidas pelo autor com esse apoio. O autor
-conferiu as respostas MMAT dos 14 estudos com texto recuperado; Sokkhey mantém
-respostas históricas não revalidadas por falta de cópia verificável. Nos três
+conferiu as respostas MMAT dos 14 estudos com texto recuperado; Sokkhey permanece
+na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três
 estudos de métodos mistos, o autor não conferiu separadamente as respostas dos
 componentes qualitativo e quantitativo; elas permanecem identificadas como
 assistidas por IA.
