@@ -544,7 +544,7 @@ def test_general_paper_exports_do_not_publish_superseded_mmat_payloads() -> None
     assert "não representam a avaliação vigente" in readme
 
 
-def test_defense_material_preserves_pending_mmat_decisions() -> None:
+def test_defense_material_summarizes_current_mmat_scope_and_counts() -> None:
     root = Path(__file__).resolve().parents[2]
     slides = " ".join((root / "presentation/slides.md").read_text(encoding="utf-8").lower().split())
     storyboard = " ".join(
@@ -553,11 +553,11 @@ def test_defense_material_preserves_pending_mmat_decisions() -> None:
         .lower()
         .split()
     )
-    assert "e14 e e15: categoria 3 operacional, alocação desconhecida" in slides
-    assert "1 ct (e14)" in slides
-    assert "e05: categoria 4 adaptada" in slides
-    assert "categoria 3 operacional" in storyboard
-    assert "categoria 4 adaptada" in storyboard
+    assert "s1 (14 y) e s2 (13 y; 1 ct)" in slides
+    assert "nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por ia." in slides
+    assert "sem escore agregado" in slides
+    assert "perguntas s1/s2, respostas y/n/ct e variação de q1–q5 por categoria" in storyboard
+    assert "sokkhey (e10) permanece na seleção original sem apreciação mmat, por falta de cópia verificável" in storyboard
 
 
 def test_newly_reviewed_primary_sources_have_traceable_provisional_appraisal() -> None:

@@ -1,9 +1,9 @@
 # Export PowerPoint editável paralelo do TCC
 
-> **Desatualizado para a defesa.** Este export e suas visualizações incorporadas
-> refletem a seleção histórica de 15 estudos sob o corte 4,0, com apreciações
-> preliminares e limitações metodológicas explicitadas.
-> Não use estes números como corpus final; a revisão para a defesa permanece suspensa.
+> **Desatualizado para a defesa.** Este export paralelo e suas visualizações
+> refletem a seleção histórica de 15 estudos sob o corte 4,0. Ele não é a fonte
+> do deck atual; use `presentation/slides.md`, que apresenta a mesma seleção
+> histórica com as ressalvas vigentes do TCC.
 
 Este diretório contém um artefato editável auxiliar, não a apresentação que
 será usada na defesa do TCC **Ensino Personalizado de Matemática:
@@ -12,10 +12,10 @@ revisão sistemática de técnicas computacionais e especificação de um protó
 ## Papéis dos artefatos
 
 - [`presentation/slides.md`](../../../presentation/slides.md) é a fonte do deck
-  canônico Slidev da defesa, com 25 slides. O build público fica em
+  canônico Slidev da defesa, com 24 slides. O build público fica em
   `presentation/dist/`.
 - [`APRESENTACAO_TCC_SLIDES_CONTEUDO.md`](APRESENTACAO_TCC_SLIDES_CONTEUDO.md)
-  é o storyboard de conteúdo de 25 slides associado ao deck Slidev; não é lido
+  é o storyboard de conteúdo de 24 slides associado ao deck Slidev; não é lido
   automaticamente pelo compilador.
 - [`ensino_personalizado_de_matematica_tcc.pptx`](ensino_personalizado_de_matematica_tcc.pptx)
   é um export editável paralelo, com 19 slides, gerado independentemente. Não

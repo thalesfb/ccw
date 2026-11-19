@@ -39,7 +39,7 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Versão para a defesa · MMAT conferido pelo autor · busca até 31/08/2026 · fluxo reconciliado em 31/10/2026; seleção original sob o corte 4,0</div>
+<div class="cover-snapshot">Revisão sistemática · seleção histórica de 15 estudos · especificação conceitual</div>
 
 ---
 layout: default
@@ -86,16 +86,9 @@ class: content-slide tcc-problem-slide
 
 <div class="slide-kicker">03 / PROBLEMA DE PESQUISA</div>
 
-# Como estruturar a especificação a partir da literatura?
+# Pergunta de pesquisa
 
-<p class="tcc-problem-statement">Como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura?</p>
-
-<div class="rq-grid tcc-question-grid">
-  <div class="rq-card rq-blue"><span>01</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="13" cy="13" r="7"/><path d="m18.5 18.5 7 7M10 13h6m-3-3v6"/></svg></div><strong>O que a literatura faz? <em>OE1</em></strong><p>Técnicas e finalidades pedagógicas nos estudos selecionados.</p></div></div>
-  <div class="rq-card rq-green"><span>02</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m16 4 13 24H3z"/><path d="M16 11v8m0 5h.01"/></svg></div><strong>O que falta nos relatos? <em>OE2</em></strong><p>Limitações metodológicas e de relato; dimensões técnica, pedagógica e ética.</p></div></div>
-  <div class="rq-card rq-orange"><span>03</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 25h22M7 22V9m0 13 6-7 5 4 7-10"/><path d="m22 8 3-1v3"/></svg></div><strong>Como especificar? <em>OE3</em></strong><p>Requisitos, critérios de dados e modelos e arquitetura de referência.</p></div></div>
-  <div class="rq-card rq-red"><span>04</span><div><div class="tcc-q-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="m16 16 7-6-4 8-7 4zM16 3v3m0 17v3M3 16h3m17 0h3"/></svg></div><strong>Como avaliar a proposta? <em>OE4</em></strong><p>Protocolo para examinar viabilidade e coerência antes de qualquer uso.</p></div></div>
-</div>
+<div class="rq-grid tcc-question-grid"><p class="tcc-question-text">Como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura?</p></div>
 
 ---
 layout: default
@@ -104,7 +97,7 @@ class: content-slide
 
 <div class="slide-kicker">04 / BASE CONCEITUAL</div>
 
-# Cinco níveis que uma saída não deve confundir
+# Cinco distinções interpretativas
 
 <div class="interpretation-ladder">
   <div class="interpretation-level level-blue"><b>01</b><strong>Desempenho observado</strong><span>Acertos, notas, tentativas, estratégias ou tempo registrados em uma tarefa.</span></div>
@@ -198,42 +191,34 @@ class: content-slide tcc-sources-slide
 <div class="tcc-caption">11.875 registros após a remoção histórica de 29 duplicatas (27 por DOI/URL e 2 confirmadas manualmente). A base indicada é a origem da versão mantida; não mede cobertura exclusiva. Teses e dissertações também podiam ser elegíveis.</div>
 
 ---
-layout: default
-class: content-slide flow-slide
----
-
-<div class="slide-kicker">09 / SELEÇÃO</div>
-
-# Fluxo da seleção original sob corte 4,0: 11.904 registros → 18 na lista de leitura
-
-<div class="tcc-funnel-layout">
-  <div class="tcc-funnel">
-    <div class="tcc-funnel-stage funnel-identification"><span>Identificação</span><strong>11.904</strong><small>registros coletados</small></div>
-    <div class="tcc-funnel-stage funnel-dedup"><span>Após deduplicação</span><strong>11.875</strong><small>29 duplicatas removidas</small></div>
-    <div class="tcc-funnel-stage funnel-screening"><span>Após triagem</span><strong>2.482</strong><small>9.393 excluídos</small></div>
-    <div class="tcc-funnel-stage funnel-inclusion"><span>Lista de leitura</span><strong>18</strong><small>2.464 abaixo do corte ou fora do escopo</small></div>
-  </div>
-  <div class="tcc-funnel-notes">
-    <p><strong>Triagem:</strong> critérios automatizados de escopo, resumo e termos metodológicos.</p>
-    <p><strong>Priorização:</strong> escore de relevância com corte 4,0; não equivale a elegibilidade.</p>
-    <p><strong>Resultado:</strong> 15 estudos empíricos, 14 com texto recuperado; Sokkhey permanece sem cópia verificável.</p>
-  </div>
-</div>
-
-<div class="tcc-funnel-caption"><strong>Seleção relatada com referência ao PRISMA 2020.</strong> Após uma exclusão após resumo, dos 17 relatórios procurados, dois não foram recuperados (Sokkhey e Zeng) e 15 foram avaliados em texto completo; um protocolo foi excluído e 14 relatórios empíricos foram recuperados.</div>
-
----
 layout: center
 class: image-slide tcc-prisma-slide
 ---
 
-<div class="slide-kicker">10 / FLUXO PRISMA</div>
+<div class="slide-kicker">09 / FLUXO PRISMA</div>
 
 <h1 class="sr-only">Representação operacional do processo de seleção, com referência ao PRISMA 2020</h1>
+<p class="sr-only" id="prisma-flow-description">Fluxo: 11.904 registros identificados; 29 duplicatas removidas; 11.875 triados; 9.393 excluídos na triagem; 2.482 priorizados; 2.464 excluídos na priorização; 18 relatórios na lista; 1 excluído após resumo; 17 relatórios procurados; 2 não recuperados; 15 avaliados em texto completo; 1 protocolo excluído; 14 textos recuperados; 15 estudos na seleção histórica.</p>
 
-<img src="/images/prisma_flow.png" alt="Representação operacional do processo de seleção; não corresponde ao diagrama PRISMA completo" class="feature-image prisma-image tcc-prisma-image" />
+<img src="/images/prisma_flow.png" alt="Fluxograma de seleção dos estudos da revisão" aria-describedby="prisma-flow-description" class="feature-image prisma-image tcc-prisma-image" />
 
-<small class="source-note">Fluxograma 1 do TCC. Fonte versionada: <code>research/exports/visualizations/prisma_flow.png</code>.</small>
+---
+layout: default
+class: content-slide tcc-retained-slide
+---
+
+<div class="slide-kicker">10 / SELEÇÃO HISTÓRICA</div>
+
+# 15 estudos na seleção; 14 textos recuperados
+
+<div class="tcc-retained-layout">
+  <div class="tcc-retained-number"><strong>15</strong><span>estudos na<br>seleção histórica</span><div class="tcc-retained-rule"></div><p>14 com texto recuperado</p></div>
+  <div class="tcc-retained-copy">
+    <div class="tcc-retained-strata" aria-label="Na seleção histórica, 14 textos recuperados e Sokkhey sem cópia verificável"><strong>14</strong><span>textos recuperados e conferidos</span><strong>1</strong><span>Sokkhey, sem cópia verificável</span></div>
+    <h2>Uma inclusão sem cópia verificável</h2>
+    <p>Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável. Zeng não integra os 15 estudos e não recebeu apreciação.</p>
+  </div>
+</div>
 
 ---
 layout: default
@@ -263,29 +248,10 @@ class: content-slide tcc-score-slide
 
 ---
 layout: default
-class: content-slide tcc-retained-slide
----
-
-<div class="slide-kicker">12 / LISTA DE LEITURA</div>
-
-# O destino dos 18 registros
-
-<div class="tcc-retained-layout">
-  <div class="tcc-retained-number"><strong>18</strong><span>registros da<br>lista de leitura</span><div class="tcc-retained-rule"></div><p>Lista de leitura não é inclusão final.</p></div>
-  <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata" aria-label="Quatro destinos históricos dos 18 registros: 15 estudos, um relatório Zeng, uma exclusão após resumo e um protocolo"><strong>15</strong><span>estudos empíricos da seleção original, incluindo Sokkhey sem cópia verificável</span><strong>1</strong><span>relatório Zeng não recuperado, fora dos 15</span><strong>1</strong><span>exclusão após resumo</span><strong>1</strong><span>protocolo excluído após texto completo</span></div>
-    <h2>Desfechos da seleção</h2>
-    <p>Dos 17 relatórios procurados, 15 foram avaliados em texto completo. Sokkhey permanece na seleção original sem cópia verificável; Zeng não recebeu MMAT.</p>
-    <div class="tcc-guardrail"><span>↗</span><strong>Estudos retidos ≠ evidência homogênea</strong></div>
-  </div>
-</div>
-
----
-layout: default
 class: content-slide tcc-mmat-slide
 ---
 
-<div class="slide-kicker">13 / QUALIDADE METODOLÓGICA</div>
+<div class="slide-kicker">12 / QUALIDADE METODOLÓGICA</div>
 
 # MMAT conferido: critério a critério, sem nota global
 
@@ -305,14 +271,14 @@ class: content-slide tcc-mmat-slide
   </div>
 </div>
 
-<div class="tcc-mmat-result"><strong>Estado:</strong> 14 estudos com texto recuperado foram conferidos pelo autor. Neles, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT (E14), pois a origem dos dados não foi confirmada. Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. E14 e E15: categoria 3 operacional, alocação desconhecida. E07: categoria 3, por desenho quase-experimental declarado. E05: categoria 4 adaptada para modelagem. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Sem escore agregado. Instrumento: Hong et al. (2018); respostas propostas por IA e conferidas pelo autor.</div>
+<div class="tcc-mmat-result"><strong>Estado:</strong> nos 14 textos recuperados, o autor conferiu S1 (14 Y) e S2 (13 Y; 1 CT). Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA. Q1–Q5 variam por categoria; sem escore agregado.</div>
 
 ---
 layout: default
 class: content-slide tcc-typology-slide
 ---
 
-<div class="slide-kicker">14 / RESULTADO — OE1</div>
+<div class="slide-kicker">13 / RESULTADO — OE1</div>
 
 # Para que as técnicas são usadas nos 15 estudos
 
@@ -338,7 +304,7 @@ layout: default
 class: content-slide tcc-reporting-slide
 ---
 
-<div class="slide-kicker">15 / RESULTADO — OE2</div>
+<div class="slide-kicker">14 / RESULTADO — OE2</div>
 
 # O que falta nos relatos: a resposta mais comum é “não é possível concluir”
 
@@ -364,7 +330,7 @@ layout: default
 class: content-slide tcc-axes-slide
 ---
 
-<div class="slide-kicker">16 / RESULTADO — OE2</div>
+<div class="slide-kicker">15 / RESULTADO — OE2</div>
 
 # Três eixos de risco viraram requisitos
 
@@ -381,12 +347,12 @@ layout: default
 class: content-slide tcc-synthesis-slide
 ---
 
-<div class="slide-kicker">17 / SÍNTESE</div>
+<div class="slide-kicker">16 / SÍNTESE</div>
 
 # O que a evidência permite especificar
 
 <div class="tcc-synthesis-layout">
-  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>15</strong><span>estudos<br>provisórios</span><i>evidências<br>relacionadas</i></div>
+  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>15</strong><span>estudos na<br>seleção histórica</span><i>evidências<br>relacionadas</i></div>
   <div class="tcc-synthesis-copy">
     <h2>Condições de projeto, não ranking de modelos.</h2>
     <p>Os estudos classificam e predizem resultados matemáticos com populações, alvos e métricas diferentes. Categorias operacionais de desempenho não equivalem a níveis de proficiência validados.</p>
@@ -401,7 +367,7 @@ layout: default
 class: content-slide tcc-boundary-slide
 ---
 
-<div class="slide-kicker">18 / ALCANCE</div>
+<div class="slide-kicker">17 / ALCANCE</div>
 
 # O que o TCC entrega, e o que não entrega
 
@@ -418,26 +384,24 @@ layout: default
 class: content-slide tcc-gaps-slide
 ---
 
-<div class="slide-kicker">19 / EVIDÊNCIAS E LIMITES</div>
+<div class="slide-kicker">18 / EVIDÊNCIAS E LIMITES</div>
 
 # Exemplos de limitações nos estudos consultados
 
-<p class="tcc-gaps-intro">Quatro exemplos localizados nos textos primários; não são contagem de frequência nem afirmação sobre toda a literatura.</p>
+<p class="tcc-gaps-intro">Dois exemplos dos textos recuperados; ilustram limites, não sua frequência no corpus.</p>
 <div class="tcc-gaps-grid">
-  <div><h2>He et al. (2025)<small>pp. 1, 16, 31–35</small></h2><p><strong>Relato:</strong> oito turmas × 45 = 360, mas amostra declarada n=90; docentes distribuídos de modo desigual entre condições.</p><p><strong>Implicação:</strong> denominador, unidade de análise e confundimento exigem cautela.</p></div>
-  <div><h2>Villegas-Ch et al. (2025)<small>pp. 2, 14, 22</small></h2><p><strong>Relato:</strong> a introdução menciona um semestre; os métodos, seis semanas; a subanálise de programação chega à semana 8.</p><p><strong>Implicação:</strong> não atribuir a semana 8 à matemática nem inferir duração única.</p></div>
-  <div><h2>Nyantah et al. (2025)<small>pp. 101–105</small></h2><p><strong>Relato:</strong> alocação descrita de modo incompatível; diferença no pré-teste; intervenção combina animação e jigsaw.</p><p><strong>Implicação:</strong> não atribuir o resultado à animação isoladamente.</p></div>
-  <div><h2>Echeveria et al. (2025)<small>pp. 65, 69–70</small></h2><p><strong>Relato:</strong> anos letivos 2023–2024 e 2022–2023 em seções diferentes; oito itens do alvo também são preditores.</p><p><strong>Implicação:</strong> coorte ambígua; a classificação não é diagnóstico independente.</p></div>
+  <div><h2>He et al. (2025)</h2><p><strong>Relato:</strong> oito turmas de 45 estudantes (360 no total), mas amostra declarada de 90; distribuição docente desigual entre condições.</p><p><strong>Implicação:</strong> explicitar denominadores e unidade de análise ao interpretar resultados.</p></div>
+  <div><h2>Nyantah et al. (2025)</h2><p><strong>Relato:</strong> o texto descreve a alocação das escolas como aleatória e depois a nega; a intervenção combina animação e jigsaw.</p><p><strong>Implicação:</strong> não presumir randomização nem atribuir o resultado à animação isoladamente.</p></div>
 </div>
 
-<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos localizados no material associado aos 15 registros da seleção original, não estimativa de prevalência. O MMAT contém 14 triagens S1/S2 e 14 conjuntos de critérios, conferidos pelo autor, incluindo adaptações de categoria. Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo.</div>
+<div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos ilustrativos, sem estimativa de prevalência.</div>
 
 ---
 layout: default
 class: content-slide tcc-specification-slide
 ---
 
-<div class="slide-kicker">20 / RESULTADO — OE3</div>
+<div class="slide-kicker">19 / RESULTADO — OE3</div>
 
 # Da evidência aos requisitos: uma cadeia rastreável
 
@@ -450,8 +414,8 @@ class: content-slide tcc-specification-slide
 </div>
 
 <div class="tcc-spec-layout">
-  <div class="tcc-requirement-examples"><h2>Dois exemplos</h2><p><strong>R02 — separar os conceitos.</strong> Origem: NRC (2001), OECD (2023), BNCC (2018). Decisão: distinguir desempenho, previsão e aprendizagem nas saídas. Limite: não valida uma escala.</p><p><strong>R20 — prevenir vazamento de dados.</strong> Origem: relato ambíguo de Pejić et al. (2021, pp. 50–51), James et al. (2021) e decisão autoral. Decisão: separar treino, validação e teste. Limite: não afirma o que o artigo executou.</p></div>
-  <div class="tcc-spec-delivery"><h2>Origens distintas</h2><p>Seis estudos são citados diretamente em sete grupos; os 15 estudos se ligam a 18 grupos. Fundamentos teóricos e decisões autorais completam a rastreabilidade.</p><small>Vínculo com um estudo é decisão de projeto: não significa que o estudo validou o requisito. Figura 1 e Quadros 8 e 11 do TCC.</small></div>
+  <div class="tcc-requirement-examples"><h2>Exemplo: proteção de dados</h2><p><strong>R04:</strong> finalidade, minimização e controle de acesso.</p><p><strong>Funções:</strong> F04 limita a consulta individual; F07 registra e exporta versões, decisões e saídas.</p><p><strong>Aceitação proposta:</strong> perfil autorizado, identificadores pseudonimizados e sem dados pessoais desnecessários.</p><small>Vínculos parciais; critérios ainda não testados.</small></div>
+  <div class="tcc-spec-delivery"><h2>Duas matrizes, duas leituras</h2><p>Os 15 estudos se relacionam a 18 grupos R; outra matriz cita diretamente seis estudos em sete grupos.</p><small>Esses vínculos motivam decisões de projeto; não demonstram validação empírica dos requisitos.</small></div>
 </div>
 
 ---
@@ -459,14 +423,14 @@ layout: default
 class: content-slide tcc-architecture-slide
 ---
 
-<div class="slide-kicker">21 / ARQUITETURA E SAÍDA</div>
+<div class="slide-kicker">20 / ARQUITETURA E SAÍDA</div>
 
 # O professor vê indícios e incerteza, não um veredito
 
 <div class="tcc-architecture-layout">
   <div class="tcc-architecture-path"><div class="arch-node arch-data"><b>F01</b><strong>Ingestão</strong><span>fonte, licença, dicionário</span></div><i>↓</i><div class="arch-node arch-prep"><b>F02</b><strong>Preparação</strong><span>vínculo curricular</span></div><i>↓</i><div class="arch-node arch-model"><b>F03</b><strong>Modelagem</strong><span>alvo e candidatos</span></div><i>↓</i><div class="arch-node arch-eval"><b>F05</b><strong>Avaliação</strong><span>métricas e explicações</span></div><i>↓</i><div class="arch-node arch-present"><b>F04·F06</b><strong>Apresentação</strong><span>revisão docente</span></div></div>
   <div class="tcc-output-card" aria-label="Exemplo fictício de saída por estudante e habilidade">
-    <div class="tcc-output-head">Exemplo fictício · sem dados reais nem modelo treinado</div>
+    <div class="tcc-output-head">F07 · registro e exportação · saída fictícia, sem treino real</div>
     <p class="tcc-output-who"><strong>Estudante A</strong> · comparação de frações</p>
     <div class="tcc-output-metric"><span>Taxa de acertos observada</span><strong>4 de 6 = 0,67</strong><small>intervalo de Wilson de 95%: 0,30–0,90</small></div>
     <div class="tcc-output-scale" aria-hidden="true"><i class="scale-band" style="left: 30%; width: 60%"></i><i class="scale-dot" style="left: 66.7%"></i><i class="scale-cross" style="left: 65%">×</i><span style="left: 0">0</span><span style="left: 50%">0,5</span><span style="left: 100%">1</span></div>
@@ -482,25 +446,25 @@ layout: default
 class: content-slide tcc-rules-slide
 ---
 
-<div class="slide-kicker">22 / OE3 E OE4</div>
+<div class="slide-kicker">21 / OE3 E OE4</div>
 
-# Regras fixadas antes de qualquer dado real
+# Regras do protocolo proposto
 
 <div class="tcc-rules-layout">
   <div class="tcc-rule-panel">
     <h2>Escolha de modelo <em>OE3</em></h2>
     <p class="tcc-rule-start">Referência: regressão logística regularizada</p>
-    <ol class="tcc-rule-steps"><li><b>i</b> perda logarítmica menor: limite superior do IC 95% abaixo de zero (reamostragem por estudante)</li><li><b>ii</b> Brier não piora e ECE não aumenta</li><li><b>iii</b> explicação implementada e conferível (F05)</li></ol>
-    <div class="tcc-rule-outcomes"><span class="ok">três condições → adota o candidato</span><span class="keep">qualquer falha → mantém a referência</span></div>
-    <small>Teste usado uma única vez, para relatar o modelo escolhido. Hoje o <em>gradient boosting</em> falharia em (iii).</small>
+    <ol class="tcc-rule-steps"><li><b>i</b> melhora a perda logarítmica, com IC 95% por estudante</li><li><b>ii</b> Brier não piora; ECE não aumenta</li><li><b>iii</b> explicação local conferível (F05)</li></ol>
+    <div class="tcc-rule-outcomes"><span class="ok">três condições → adota o candidato</span><span class="keep">se falhar → mantém a referência</span></div>
+    <small>Regra para um único candidato; não aplicada a dados educacionais reais.</small>
   </div>
   <div class="tcc-rule-panel">
     <h2>Avaliação da especificação <em>OE4</em></h2>
     <div class="tcc-rule-tracks">
       <div><strong>Regra docente</strong><p>5 docentes, duas rodadas; coerente se ao menos 4 de 5 derem 3 ou 4 em cada dimensão, sem problema crítico.</p><span class="ok">coerente</span><span class="keep">revisar</span></div>
-      <div><strong>Conferência técnica</strong><p>Autor registra e orientador revisa: rastreabilidade, consistência arquitetural e condições de viabilidade.</p><span class="ok">atendido</span><span class="keep">pendente</span></div>
+      <div><strong>Conferência técnica</strong><p>Examina rastreabilidade, consistência da arquitetura e condições de viabilidade.</p><span class="ok">atendido</span><span class="keep">pendente</span></div>
     </div>
-    <small>Viável e coerente só se todos os requisitos passarem nas duas regras. As dimensões docentes incluem a correspondência conceitual com a fonte. Exige parecer ético antes de recrutar.</small>
+    <small>A regra docente também examina a correspondência conceitual com a fonte. A aplicação exige parecer ético.</small>
   </div>
 </div>
 
@@ -511,7 +475,7 @@ layout: default
 class: content-slide tcc-next-slide
 ---
 
-<div class="slide-kicker">23 / CONCLUSÃO</div>
+<div class="slide-kicker">22 / CONCLUSÃO</div>
 
 # Resposta: uma especificação verificável antes dos dados
 

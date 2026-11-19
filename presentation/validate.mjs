@@ -7,7 +7,7 @@ const stylesPath = resolve(import.meta.dirname, 'styles', 'index.css')
 const summaryPath = resolve(import.meta.dirname, '..', 'research', 'exports', 'reports', 'summary.json')
 const slides = readFileSync(presentationPath, 'utf8')
 const css = readFileSync(stylesPath, 'utf8')
-const expectedSlideCount = 25
+const expectedSlideCount = 24
 const slideSeparatorCount = (slides.match(/^---\r?$/gm) || []).length
 const slideCount = slideSeparatorCount / 2
 const summaryText = readFileSync(summaryPath, 'utf8').replace(
@@ -41,6 +41,9 @@ const requiredStatements = [
   '29 de 54',
   '5 de 30',
   '0,30–0,90',
+  'Como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura?',
+  'Q1–Q5 variam por categoria',
+  'F07 · registro e exportação',
 ]
 
 const requiredTemplateMarkers = [
@@ -51,11 +54,12 @@ const requiredTemplateMarkers = [
   'tcc-objective-roadmap',
   'tcc-search-layout',
   'tcc-source-grid',
-  'tcc-funnel-layout',
+  'tcc-retained-layout',
   'tcc-typology-layout',
   'tcc-reporting-layout',
   'tcc-axes-grid',
   'tcc-chain',
+  'tcc-architecture-layout',
   'tcc-output-card',
   'tcc-rules-layout',
 ]
@@ -74,6 +78,9 @@ const forbiddenClaims = [
   '6918',
   'nova rodada',
   'falsos positivos',
+  'O destino dos 18 registros',
+  'Fluxo da seleção original sob corte 4,0',
+  'tcc-funnel-layout',
 ]
 
 const missing = requiredStatements.filter((statement) => !slides.includes(statement))

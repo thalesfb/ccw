@@ -113,12 +113,11 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT", root_readme)
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         storyboard = (ROOT / "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md").read_text(encoding="utf-8")
+        self.assertNotIn("3 de 98", slides + storyboard)
         for text in (slides, storyboard):
-            self.assertNotIn("3 de 98", text)
             self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT", text)
             self.assertNotIn("não revalidadas", text)
-            self.assertIn("o autor não conferiu separadamente as respostas", text)
-            self.assertIn("permanecem identificadas como assistidas por IA", text)
+        self.assertIn("respostas dos componentes qualitativo e quantitativo", slides + storyboard)
         foundation = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
         self.assertNotIn(r"\citeonline[p.~42--44]{NRC2001}", foundation)
         self.assertIn(r"\citeonline{NRC2001}", foundation)
@@ -180,21 +179,17 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("aparecem menos desenvolvidas", gaps + limitations)
 
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
-        gap_slide = slides.split('<div class="slide-kicker">19 / EVIDÊNCIAS E LIMITES</div>', 1)[1].split(
+        gap_slide = slides.split('<div class="slide-kicker">18 / EVIDÊNCIAS E LIMITES</div>', 1)[1].split(
             'class: content-slide tcc-specification-slide', 1
         )[0]
-        for author, locator in (
-            ("He et al. (2025)", "pp. 1, 16, 31–35"),
-            ("Villegas-Ch et al. (2025)", "pp. 2, 14, 22"),
-            ("Nyantah et al. (2025)", "pp. 101–105"),
-            ("Echeveria et al. (2025)", "pp. 65, 69–70"),
-        ):
-            self.assertIn(author, gap_slide)
-            self.assertIn(locator, gap_slide)
-        self.assertIn("15 registros da seleção original", gap_slide)
+        self.assertIn("He et al. (2025)", gap_slide)
+        self.assertIn("Nyantah et al. (2025)", gap_slide)
+        self.assertIn("Dois exemplos dos textos recuperados; ilustram limites, não sua frequência no corpus.", gap_slide)
+        self.assertNotIn("Villegas-Ch et al. (2025)", gap_slide)
+        self.assertNotIn("Echeveria et al. (2025)", gap_slide)
         self.assertNotIn("um único revisor", gap_slide)
         self.assertNotIn("dupla avaliação independente", gap_slide)
-        self.assertIn("não estimativa de prevalência", gap_slide)
+        self.assertIn("sem estimativa de prevalência", gap_slide)
         self.assertNotIn("pp. 1, 14, 22", gap_slide)
         manuscript = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn(r"\citeonline{Villegas2025_6916}", manuscript)
@@ -224,7 +219,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = " ".join(
             (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
         )
-        self.assertIn("material associado aos 15 registros da seleção original", slides)
+        self.assertIn("Dois exemplos dos textos recuperados; ilustram limites, não sua frequência no corpus.", slides)
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         self.assertIn("Pendente: texto integral da tese não recuperado; MMAT não aplicado.", results)
 
@@ -235,12 +230,12 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         normalized_pptx_readme = re.sub(r"\s+", " ", pptx_readme.lower())
         self.assertIn("deck canônico da defesa", slidev_readme.lower())
-        self.assertIn("25 slides", slidev_readme)
+        self.assertIn("24 slides", slidev_readme)
         self.assertIn("export editável paralelo", pptx_readme.lower())
         self.assertIn("19 slides", pptx_readme)
         self.assertIn("não é o arquivo da defesa", normalized_pptx_readme)
-        self.assertEqual(len(re.findall(r"^### \d+\.", storyboard, re.M)), 25)
-        self.assertEqual(len(re.findall(r"^layout: \w+$", slides, re.M)), 25)
+        self.assertEqual(len(re.findall(r"^\d+\. \*\*", storyboard, re.M)), 24)
+        self.assertEqual(len(re.findall(r"^layout: \w+$", slides, re.M)), 24)
 
     def test_speech_is_deferred_until_content_approval(self):
         for path in (ROOT / "presentation/README.md", ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md"):
@@ -276,14 +271,15 @@ class EditorialFeedbackTests(unittest.TestCase):
         )
         self.assertIn(date.fromisoformat(coverage["review_date"]).strftime("%d/%m/%Y"), status)
         self.assertIn("Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT", status)
-        self.assertIn("Slidev em 25 slides", status)
+        self.assertIn("Slidev em 24 slides", status)
         self.assertIn("19 slides", status)
         self.assertIn("exportação paralela", status)
         self.assertNotIn("Colab CLI", status)
         self.assertNotIn("MCP", status)
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
         pptx_source = (ROOT / "scripts/generate_tcc_presentation.py").read_text(encoding="utf-8")
-        self.assertIn("Versão para a defesa · MMAT conferido pelo autor", slides)
+        self.assertIn("o autor conferiu S1 (14 Y) e S2 (13 Y; 1 CT)", slides)
+        self.assertIn("sem escore agregado", slides)
         self.assertNotIn("não usar na defesa", slides)
         self.assertNotIn("Snapshot: 03/09/2026", slides)
         self.assertNotIn("Snapshot adjudicado: 03/09/2026", pptx_source)
@@ -334,15 +330,14 @@ class EditorialFeedbackTests(unittest.TestCase):
         slides = " ".join(
             (ROOT / "presentation/slides.md").read_text(encoding="utf-8").split()
         )
-        self.assertIn("Zeng, fora da seleção e sem texto recuperado, não recebeu apreciação", slides)
-        self.assertIn("exclusão após resumo", slides)
+        self.assertIn("Zeng não integra os 15 estudos e não recebeu apreciação", slides)
+        self.assertIn("1 excluído após resumo", slides)
         self.assertNotIn("cinco candidatos foram apreciados por resumo/metadados", slides)
         self.assertNotIn("17 estudos empíricos provisórios", slides)
         self.assertNotIn("Submeter o MMAT a um segundo avaliador independente", slides)
         self.assertIn("Aplicar o protocolo com docentes, após parecer ético.", slides)
-        self.assertIn("14 estudos com texto recuperado foram conferidos pelo autor", slides)
-        self.assertIn("S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT", slides)
-        self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT", slides)
+        self.assertIn("o autor conferiu S1 (14 Y) e S2 (13 Y; 1 CT)", slides)
+        self.assertIn("Nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA", slides)
         self.assertNotIn("3 de 98", slides)
         self.assertIn("Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável", slides)
         self.assertNotIn("validação humana pendente", slides)
@@ -615,7 +610,7 @@ class EditorialFeedbackTests(unittest.TestCase):
 
     def test_defense_demonstrates_traceability_and_distinguishes_proposal_from_application(self):
         slides = (ROOT / "presentation/slides.md").read_text(encoding="utf-8")
-        for phrase in ("R02", "R20", "26 grupos", "rastreabilidade", "consistência arquitetural",
+        for phrase in ("R02", "R20", "26 grupos", "rastreabilidade", "consistência da arquitetura",
                        "correspondência conceitual", "condições de viabilidade",
                        "11.875 registros após a remoção histórica de 29 duplicatas",
                        "Page et al. (2021)", "Hong et al. (2018)", "National Research Council (2001)"):
