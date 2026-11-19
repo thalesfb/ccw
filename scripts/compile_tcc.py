@@ -127,7 +127,7 @@ def main() -> None:
     args = parser.parse_args()
     root = args.root.resolve()
     subprocess.run(
-        [sys.executable, "-m", "src.analysis.study_codes"],
+        [sys.executable, str(root / "research/src/analysis/study_codes.py")],
         cwd=root / "research",
         check=True,
     )
