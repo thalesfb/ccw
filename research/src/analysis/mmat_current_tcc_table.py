@@ -136,6 +136,13 @@ def load_component_rows(path: Path = COMPONENT_DATA_PATH) -> list[dict[str, str]
     return [row for row in rows if int(row["study_id"]) in CURRENT_MMAT_STUDY_IDS]
 
 
+def _by_study_code(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    """Order rows by the reader-facing study code (E01, E02, ...), keeping ties stable."""
+
+    codes = code_by_key()
+    return sorted(rows, key=lambda row: codes[row["study_key"]])
+
+
 def _study_reference(row: dict[str, str], labels: dict[str, str] | None) -> str:
     """Use the registry code and author-date citation for a corpus study."""
 
@@ -147,15 +154,16 @@ def render_component_table(
 ) -> str:
     if not components:
         return ""
+    components = _by_study_code(components)
     category_labels = {
         "qualitative": "Qualitativo",
         "quantitative_nonrandomized": "Quant. não rand.",
         "quantitative_descriptive": "Quant. descritivo",
     }
     column_spec = (
-        r"|>{\raggedright\arraybackslash}p{2.2cm}|"
+        r"|>{\raggedright\arraybackslash}p{2.6cm}|"
         r">{\raggedright\arraybackslash}p{2.2cm}|ccccc|"
-        r">{\raggedright\arraybackslash}p{6.1cm}|"
+        r">{\raggedright\arraybackslash}p{5.7cm}|"
     )
     headers = ["Estudo", "Componente", "C1", "C2", "C3", "C4", "C5", "Localização na fonte"]
     header_row = " & ".join(r"\textbf{" + value + "}" for value in headers) + r" \\"
@@ -215,6 +223,7 @@ def render_table(
     missing_codes = sorted({row["study_key"] for row in rows} - codes.keys())
     if missing_codes:
         raise ValueError(f"MMAT table contains unregistered study keys: {missing_codes}")
+    rows = _by_study_code(rows)
     column_spec = (
         r"|>{\raggedright\arraybackslash}p{4.5cm}|"
         r">{\raggedright\arraybackslash}p{4.5cm}|ccccccc|"
@@ -297,6 +306,7 @@ def render_table(
 
 
 def render_component_details(components: list[dict[str, str]]) -> str:
+    components = _by_study_code(components)
     """Preserve every component rationale outside the compact comparison matrix."""
     prefixes = {"qualitative": "1", "quantitative_nonrandomized": "3",
                 "quantitative_descriptive": "4"}

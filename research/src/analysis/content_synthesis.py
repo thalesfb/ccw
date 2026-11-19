@@ -116,15 +116,16 @@ def count_table(caption: str, label: str, widths: str, headers: list[str], rows:
 def build_outputs(root: Path = ROOT) -> dict[str, str]:
     studies = study_rows(root)
     codes = code_by_key(root)
+    missing_codes = sorted({row["study_key"] for row in studies} - codes.keys())
+    if missing_codes:
+        raise ValueError(f"Study synthesis contains unregistered study keys: {missing_codes}")
+    studies = sorted(studies, key=lambda row: codes[row["study_key"]])
     widths = "|" + "|".join(r">{\raggedright\arraybackslash}p{" + width + "cm}"
                              for width in ("2.8", "3.3", "4.1", "4.5")) + "|"
     first = [[rf"\estudocite{{{row['study_key']}}}", tex(row["purpose"]),
               tex(row["technique"]), tex(row["level"].rstrip(".") + "; " + row["sample"])] for row in studies]
     second = [[rf"\estudocite{{{row['study_key']}}}", tex(row["target"]),
                tex(row["validation"].rstrip(".") + " (" + row["source"] + ")."), tex(row["metric"])] for row in studies]
-    missing_codes = sorted({row["study_key"] for row in studies} - codes.keys())
-    if missing_codes:
-        raise ValueError(f"Study synthesis contains unregistered study keys: {missing_codes}")
     text = longtable("Finalidade, técnica e população dos estudos incluídos.", "qua:sintese-tipologia", widths,
                      ["Estudo", "Finalidade principal", "Família de técnica", "Nível e n (unidade)"], first)
     text += longtable("Alvos, validação e métricas dos estudos incluídos.", "qua:sintese-validacao", widths,
