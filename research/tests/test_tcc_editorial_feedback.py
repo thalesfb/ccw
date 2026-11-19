@@ -376,11 +376,13 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("primeiro ano de Engenharia Industrial, com dados de 2017 a 2021", audit)
 
     def test_recovered_studies_are_cited_with_precise_units_and_boundaries(self):
+        # Study details are reported in chapter 4, not anticipated in chapter 2.
         foundation = (TCC / "conteudo/fundamentacao.tex").read_text(encoding="utf-8")
-        self.assertIn("classifica estudantes em três categorias operacionais de desempenho", foundation)
-        self.assertIn("50 estudantes do primeiro ano de Engenharia Industrial, observados entre 2017 e 2021", foundation)
-
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
+        for detail in ("classifica estudantes em três categorias operacionais de desempenho",
+                       "50 estudantes do primeiro ano de Engenharia Industrial, observados entre 2017 e 2021"):
+            self.assertIn(detail, results)
+            self.assertNotIn(detail, foundation)
         limitations = results.split(r"\section{Limitações e Contribuições da Revisão}", 1)[1]
         self.assertIn("as três categorias operacionais não têm equivalência demonstrada com os níveis oficiais do PISA", limitations)
         self.assertIn(r"\citeonline{Math2021_001}", results)
@@ -419,8 +421,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertNotIn("lacunas mais recorrentes", discussion.lower())
         self.assertIn("A inclusão no corpus não comprova leitura integral dos textos, figuras e apêndices", limitations)
         self.assertNotIn("adjudicação", discussion)
-        self.assertIn(r"As contagens MMAT da Tabela~\ref{tab:mmat-contagens}", discussion)
-        self.assertIn("sem contar os três estudos mistos novamente", discussion)
+        # Counts stay in chapter 4; the discussion must not restate them.
+        self.assertNotIn(r"\ref{tab:mmat-contagens}", discussion)
+        self.assertIn("foram apreciados separadamente, sem contar estudos adicionais", review)
         self.assertNotIn("parte deles se baseou em resumos e metadados", discussion)
         self.assertNotIn(r"\textbf{OE", discussion)
         self.assertIn(r"\ref{sec:limitacoes-revisao}", discussion)
@@ -449,7 +452,9 @@ class EditorialFeedbackTests(unittest.TestCase):
         method = (TCC / "conteudo/metodologia.tex").read_text(encoding="utf-8")
         conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
         review = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
-        self.assertIn(r"As contagens MMAT da Tabela~\ref{tab:mmat-contagens}", results)
+        # MMAT counts are reported once, in chapter 4; chapter 6 discusses them without repeating.
+        self.assertIn(r"A Tabela~\ref{tab:mmat-contagens} conta respostas por critério", review)
+        self.assertNotIn(r"As contagens MMAT da Tabela~\ref{tab:mmat-contagens}", results)
         self.assertIn(r"A tese de \citeonline{Zeng2025_6923} não foi apreciada por falta do texto integral", review)
         self.assertIn(r"relatório de \citeonline{Zeng2025_6923} não foi recuperado", conclusion)
         self.assertIn("sem estimativa de frequência", review)
@@ -742,13 +747,16 @@ class EditorialFeedbackTests(unittest.TestCase):
     def test_missing_abstract_and_sensitivity_limits_are_reported(self):
         results = (TCC / "conteudo/resultadosesperados.tex").read_text(encoding="utf-8")
         conclusion = (TCC / "conteudo/conclusao.tex").read_text(encoding="utf-8")
+        self.assertIn("4.093", results)
+        self.assertIn("Esse subconjunto de 4.093 registros corresponde a", results)
+        self.assertIn("34,47\\%", results)
+        self.assertIn("43,58\\%", results)
         for text in (results, conclusion):
-            self.assertIn("4.093", text)
-            self.assertIn("Esse subconjunto de 4.093 registros corresponde a", text)
-            self.assertIn("34,47\\%", text)
-            self.assertIn("43,58\\%", text)
             self.assertIn("sensibilidade", text)
             self.assertIn("fonte ou idioma", text)
+        # The conclusion states these limits qualitatively (advisor feedback, 2026-11-19).
+        for detail in ("4.093", "34,47", "43,58", "4.314"):
+            self.assertNotIn(detail, conclusion)
         self.assertIn("13 registros classificados como elegíveis entre os 45", results)
         self.assertIn("29 entre os 54", results)
         self.assertIn("cinco entre os 30", results)
@@ -760,7 +768,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertIn("29 of 54", summary)
         self.assertIn("5 of 30", summary)
         for count in ("13 de 45", "29 de 54", "5 de 30"):
-            self.assertIn(count, conclusion)
+            self.assertNotIn(count, conclusion)
 
     def test_new_abbreviations_are_expanded_before_first_use(self):
         abstract = (TCC / "pretextuais/resumo.tex").read_text(encoding="utf-8")

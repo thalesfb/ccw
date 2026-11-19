@@ -13,15 +13,18 @@ class ObjectiveAlignmentTests(unittest.TestCase):
     def test_intro_and_results_reference_only_four_unique_objectives(self):
         intro = (CONTENT / "introducao.tex").read_text(encoding="utf-8")
         results = (CONTENT / "resultados.tex").read_text(encoding="utf-8")
+        conclusion = (CONTENT / "conclusao.tex").read_text(encoding="utf-8")
         objectives = intro.split(r"\section{Objetivos}", 1)[1].split(
             r"\section{Estrutura do Trabalho}", 1
         )[0]
         labels = re.findall(r"^\\item \((OE\d+)\) ", objectives, re.M)
         self.assertEqual(labels, ["OE1", "OE2", "OE3", "OE4"])
         self.assertNotRegex(results, r"\\textbf\{OE\d+\}")
-        for phrase in ("O OE1 foi desenvolvido", "O OE2 foi desenvolvido nos termos formulados",
+        self.assertNotRegex(conclusion, r"\\textbf\{OE\d+\}")
+        for phrase in ("O OE1 foi desenvolvido", "O OE2 foi atendido nos termos formulados",
                        "O OE3 resultou", "O OE4 resultou"):
-            self.assertIn(phrase, results)
+            self.assertIn(phrase, conclusion)
+            self.assertNotIn(phrase, results)
         self.assertIn(r"\begin{alineas}", objectives)
         self.assertIn(r"\end{alineas}", objectives)
         self.assertNotIn(r"\subsection", objectives)
@@ -83,10 +86,10 @@ class ObjectiveAlignmentTests(unittest.TestCase):
                          ["OE1", "OE2", "OE3", "OE4"])
 
     def test_evaluation_is_proposed_not_claimed_as_completed(self):
+        # The objectives balance lives in the conclusion; chapter 6 no longer repeats it.
         results = (CONTENT / "resultados.tex").read_text(encoding="utf-8")
-        alignment = results.split(r"\section{Atendimento aos Objetivos}", 1)[1].split(
-            r"\section{Discussão Integrada}", 1
-        )[0]
+        self.assertNotIn(r"\section{Atendimento aos Objetivos}", results)
+        alignment = (CONTENT / "conclusao.tex").read_text(encoding="utf-8")
         self.assertIn("protocolo documental", alignment)
         self.assertIn("A aplicação do painel e a avaliação de uma implementação não foram realizadas neste trabalho", alignment)
         self.assertIn("escopo documental", alignment)
