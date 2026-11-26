@@ -39,7 +39,11 @@ class ObjectiveAlignmentTests(unittest.TestCase):
             objectives,
         )
         self.assertIn("discutir conceitualmente dimensões técnicas, pedagógicas e éticas", objectives)
-        self.assertIn("O OE2 foi delimitado à codificação sistemática", intro)
+        # The introduction keeps a single section (objectives); the OE rationale is methodology.
+        self.assertEqual(re.findall(r"\\section\{([^}]+)\}", intro), ["Objetivos"])
+        self.assertNotIn("O OE2 foi delimitado à codificação sistemática", intro)
+        self.assertIn("O OE2 foi delimitado à codificação sistemática",
+                      (CONTENT / "metodologia.tex").read_text(encoding="utf-8"))
         self.assertIn("O OE2 foi atendido nos termos formulados:", (CONTENT / "conclusao.tex").read_text(encoding="utf-8"))
         self.assertIn("(OE3) formular a especificação técnica e pedagógica", objectives)
         self.assertIn(

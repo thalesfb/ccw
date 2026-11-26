@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\caption{Matriz de confusão para uma classe examinada.}
+\label{fig:matriz-confusao}
+\setlength{\unitlength}{1mm}
+\resizebox{0.7\textwidth}{!}{%
+\begin{picture}(115,64)
+\small
+\put(35,52){\makebox(35,12){\shortstack{Classe prevista:\\positiva}}}
+\put(70,52){\makebox(35,12){\shortstack{Classe prevista:\\negativa}}}
+\put(0,30){\makebox(32,22){\shortstack{Classe\\observada:\\positiva}}}
+\put(0,8){\makebox(32,22){\shortstack{Classe\\observada:\\negativa}}}
+\put(35,30){\framebox(35,22){\shortstack{VP\\(verdadeiro positivo)}}}
+\put(70,30){\framebox(35,22){\shortstack{FN\\(falso negativo)}}}
+\put(35,8){\framebox(35,22){\shortstack{FP\\(falso positivo)}}}
+\put(70,8){\framebox(35,22){\shortstack{VN\\(verdadeiro negativo)}}}
+\put(0,0){\makebox(115,7){\scriptsize Precisão: VP/(VP+FP). Revocação: VP/(VP+FN).}}
+\end{picture}
+}%
+\fonte{Elaborado pelo autor (2026).}
+\end{figure}
