@@ -195,8 +195,11 @@ def test_background_uses_examples_and_keeps_study_limits_and_exclusion_in_the_re
     assert "Machine2019_007" not in introduction
     assert r"\citeonline{Machine2019_007}" in review
     assert "Exclusão por escopo registrada após resumo" in review
+    # Selected studies are discussed in the review, not anticipated in the background chapter
+    # (advisor annotation on the 25/11 version).
     for citation in ("Math2021_001", "Design2025_004", "Machine2024_009"):
-        assert f"\\citeonline{{{citation}}}" in foundations
+        assert f"\\citeonline{{{citation}}}" not in foundations
+        assert f"\\citeonline{{{citation}}}" in review
     limitations = review.split(r"\section{Limitações e Contribuições da Revisão}", 1)[1]
     assert "sem equivalência automática com aprendizagem ou eficácia pedagógica" in limitations
     assert "faltam informações sobre amostra, alocação, análise inferencial e incerteza" in limitations
