@@ -507,11 +507,11 @@ class EditorialFeedbackTests(unittest.TestCase):
         technical = theory.split(r"\section{Técnicas Computacionais na Educação}", 1)[1].split(
             r"\section{Avaliação Automatizada e Métricas}", 1
         )[0]
-        self.assertEqual(
-            re.findall(r"\\subsection\{([^}]+)\}", technical),
-            ["Famílias de Modelos Computacionais", "Trabalhos Relacionados"],
-        )
-        self.assertIn(r"\label{sec:trabalhos-relacionados}", technical)
+        self.assertEqual(re.findall(r"\\subsection\{([^}]+)\}", technical), ["Famílias de Modelos Computacionais"])
+        # Related work closes chapter 2 as its own section (co-advisor review, 2026-11-26).
+        sections = re.findall(r"\\section\{([^}]+)\}", theory)
+        self.assertEqual(sections[-1], "Trabalhos Relacionados")
+        self.assertIn(r"\section{Trabalhos Relacionados}" + "\n" + r"\label{sec:trabalhos-relacionados}", theory)
         for phrase in ("alvo e da unidade de análise", "classe majoritária",
                        "proporção de classificações corretas", "não são sinônimos",
                        "James2021"):
