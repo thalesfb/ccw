@@ -509,7 +509,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         )[0]
         self.assertEqual(
             re.findall(r"\\subsection\{([^}]+)\}", technical),
-            ["Modelos Reportados nos Estudos Selecionados", "Trabalhos Relacionados"],
+            ["Famílias de Modelos Computacionais", "Trabalhos Relacionados"],
         )
         self.assertIn(r"\label{sec:trabalhos-relacionados}", technical)
         for phrase in ("alvo e da unidade de análise", "classe majoritária",
