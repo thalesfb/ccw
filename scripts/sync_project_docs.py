@@ -215,9 +215,9 @@ def render_blocks(root):
         f"O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica "
         f"encaminhou {counts['shortlisted']} registros à lista preliminar "
         f"({percentage(counts['shortlisted'], counts['prioritization'])}%), não a inclusões finais: "
-        f"{counts['included']} estudos empíricos mantidos na seleção histórica, dos quais "
+        f"{counts['included']} estudos empíricos mantidos na seleção original, dos quais "
         f"{retrieval['recovered_empirical_reports']} têm relatório recuperado; Sokkhey permanece "
-        f"sem cópia verificável, como inclusão histórica. Houve "
+        f"sem cópia verificável, como inclusão da seleção original. Houve "
         f"{counts['abstract_screening_excluded']} exclusão após resumo. Dos "
         f"{retrieval['reports_sought']} relatórios procurados, {retrieval['reports_not_retrieved']} não foram recuperados "
         f"({' e '.join(retrieval['not_retrieved_labels'])}); "
@@ -240,7 +240,7 @@ def render_blocks(root):
         ("Relatórios procurados", retrieval["reports_sought"], f"{retrieval['reports_not_retrieved']} não recuperados: Sokkhey e Zeng"),
         ("Relatórios avaliados em texto completo", retrieval["reports_assessed_at_full_text"], f"{retrieval['full_text_exclusions']} protocolo excluído; 14 relatórios empíricos recuperados"),
         ("Relatórios empíricos recuperados", retrieval["recovered_empirical_reports"], "Os 14 relatórios com texto recuperado; protocolo excluído não incluído"),
-        ("Seleção histórica de estudos empíricos", retrieval["historical_empirical_selection"], "Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados"),
+        ("Seleção original de estudos empíricos", retrieval["historical_empirical_selection"], "Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados"),
     ]
     flow = "| Etapa | Quantidade | Interpretação |\n| --- | --- | --- |\n" + "\n".join(
         f"| {label} | {number(value)} | {meaning} |" for label, value, meaning in flow_rows
@@ -249,9 +249,9 @@ def render_blocks(root):
     availability_date = day(matrix.get("availability_check_date", matrix["review_date"]))
     coverage_text = (
         f"Na conferência de {availability_date}, havia **{local} PDFs locais para {len(records)} registros candidatos**, identificados por hash. "
-        f"Esse total inclui os {len(empirical_local)} textos empíricos recuperados entre os {len(empirical_records)} estudos da seleção histórica, "
+        f"Esse total inclui os {len(empirical_local)} textos empíricos recuperados entre os {len(empirical_records)} estudos da seleção original, "
         f"{len(context_local)} registro mantido apenas para contexto após a triagem do resumo e {len(protocol_local)} protocolo excluído na avaliação de texto integral. "
-        f"Sokkhey (2020), registro 3, permanece na seleção histórica sem cópia verificável; Zeng (2025), registro 6923, também não foi recuperado e está fora da seleção. "
+        f"Sokkhey (2020), registro 3, permanece na seleção original sem cópia verificável; Zeng (2025), registro 6923, também não foi recuperado e está fora da seleção. "
         f"Assim, os {local} PDFs locais não correspondem a {local} estudos incluídos nem alteram o fluxo PRISMA. "
         f"A disponibilidade não comprova que todos os elementos visuais e apêndices foram examinados integralmente. "
         f"O replay textual congelado de {day(replay['validation_date'])} abrange "

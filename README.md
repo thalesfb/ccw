@@ -5,7 +5,7 @@
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental registrada: 20/10/2026; PDFs locais conferidos por hash: 29/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção original, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão da seleção original. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
 <!-- ccw-sync:end snapshot -->
 
 Período coberto pela busca: publicações de 2015 a 2026, com 2026 parcial até a data de corte (31/08/2026).
@@ -24,11 +24,11 @@ a validação educacional do protótipo não foram realizadas nesta versão.
 
 > O texto do [TCC](results/tcc/main.tex) é a fonte de verdade do relato científico;
 > os artefatos versionados sustentam suas contagens e sua rastreabilidade. O
-> estado atual distingue 15 estudos na seleção histórica, dos quais 14 têm seus
+> estado atual distingue 15 estudos na seleção original, dos quais 14 têm seus
 > textos recuperados. Sokkhey permanece sem cópia verificável; Zeng não integra
 > a seleção. A atualização das fontes não altera retroativamente o fluxo histórico.
 
-![Visão geral do TCC: 15 estudos na seleção histórica, 14 textos recuperados, Sokkhey sem apreciação MMAT, duas fontes não recuperadas e especificação conceitual](results/tcc/images/project_overview_2026-11-17.png)
+![Visão geral do TCC: 15 estudos na seleção original, 14 textos recuperados, Sokkhey sem apreciação MMAT, duas fontes não recuperadas e especificação conceitual](results/tcc/images/project_overview_2026-11-17.png)
 
 ![Fluxo PRISMA do snapshot adjudicado](research/exports/visualizations/prisma_flow.png)
 
@@ -233,7 +233,7 @@ python -m pytest research/tests/test_defense_consistency.py -q
 | Relatórios procurados | 17 | 2 não recuperados: Sokkhey e Zeng |
 | Relatórios avaliados em texto completo | 15 | 1 protocolo excluído; 14 relatórios empíricos recuperados |
 | Relatórios empíricos recuperados | 14 | Os 14 relatórios com texto recuperado; protocolo excluído não incluído |
-| Seleção histórica de estudos empíricos | 15 | Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados |
+| Seleção original de estudos empíricos | 15 | Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados |
 <!-- ccw-sync:end flow -->
 
 Os sete overrides manuais e a correção temporal do ID 6918 estão registrados
@@ -263,7 +263,7 @@ preservado) e não descrevem a seleção vigente. A comparação entre as duas
 populações está em
 [`docs/RECONCILIACAO-BASELINE-2026-08-31.md`](docs/RECONCILIACAO-BASELINE-2026-08-31.md).
 
-**Síntese vigente (15 estudos da seleção histórica)**: as técnicas foram
+**Síntese vigente (15 estudos da seleção original)**: as técnicas foram
 organizadas em cinco finalidades: predição/classificação (8),
 personalização ou sistemas tutores inteligentes (3), intervenção didática
 (2), modelagem cognitiva (1) e integração curricular (1). As frequências
@@ -289,7 +289,7 @@ métricas próprias de eficácia, usabilidade ou aceitação.
 
 O protocolo, o snapshot, a disposição dos candidatos e as visualizações estão
 versionados. O autor conferiu as respostas MMAT dos 14 estudos com texto
-recuperado. Sokkhey (2020) permanece sem cópia verificável na seleção histórica;
+recuperado. Sokkhey (2020) permanece sem cópia verificável na seleção original;
 Zeng (2025) também não foi recuperado e está fora dos 15. Nos três estudos de
 métodos mistos, o autor não conferiu separadamente as respostas dos componentes
 qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA.

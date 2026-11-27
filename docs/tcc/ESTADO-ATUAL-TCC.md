@@ -18,11 +18,11 @@ fluxo de desenvolvimento estão em
 <!-- ccw-sync:start snapshot -->
 Corte da busca: 31/08/2026; adjudicação inicial: 03/09/2026; reconciliação do escopo: 20/10/2026; reconciliação de identidade e ano: 31/10/2026; cobertura documental registrada: 20/10/2026; PDFs locais conferidos por hash: 29/10/2026.
 
-O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção histórica, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão histórica. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
+O snapshot registra 11.904 registros identificados e 29 duplicatas removidas: 27 por identidade DOI/URL e 2 relatórios confirmados manualmente como repetidos. Foram 11.875 registros únicos na triagem, dos quais 9.393 foram excluídos (79,10%). 2.482 avançaram à priorização histórica (20,90% da triagem); 2.464 não avançaram sob a regra histórica (99,27%). O corte 4,0 permanece inalterado e o relato descreve o conjunto adotado nesta versão. A priorização histórica encaminhou 18 registros à lista preliminar (0,73%), não a inclusões finais: 15 estudos empíricos mantidos na seleção original, dos quais 14 têm relatório recuperado; Sokkhey permanece sem cópia verificável, como inclusão da seleção original. Houve 1 exclusão após resumo. Dos 17 relatórios procurados, 2 não foram recuperados (Sokkhey (2020) e Zeng (2025)); 15 foram avaliados em texto completo, incluindo 1 protocolo excluído. Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT; o autor conferiu essas respostas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu separadamente as respostas dos componentes qualitativo e quantitativo; elas permanecem identificadas como assistidas por IA. Não há escore agregado.
 <!-- ccw-sync:end snapshot -->
 
 <!-- ccw-sync:start coverage -->
-Na conferência de 29/10/2026, havia **16 PDFs locais para 18 registros candidatos**, identificados por hash. Esse total inclui os 14 textos empíricos recuperados entre os 15 estudos da seleção histórica, 1 registro mantido apenas para contexto após a triagem do resumo e 1 protocolo excluído na avaliação de texto integral. Sokkhey (2020), registro 3, permanece na seleção histórica sem cópia verificável; Zeng (2025), registro 6923, também não foi recuperado e está fora da seleção. Assim, os 16 PDFs locais não correspondem a 16 estudos incluídos nem alteram o fluxo PRISMA. A disponibilidade não comprova que todos os elementos visuais e apêndices foram examinados integralmente. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs registrados na conferência de 29/10/2026. As fontes suplementares não foram incorporadas a esse replay. A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte.
+Na conferência de 29/10/2026, havia **16 PDFs locais para 18 registros candidatos**, identificados por hash. Esse total inclui os 14 textos empíricos recuperados entre os 15 estudos da seleção original, 1 registro mantido apenas para contexto após a triagem do resumo e 1 protocolo excluído na avaliação de texto integral. Sokkhey (2020), registro 3, permanece na seleção original sem cópia verificável; Zeng (2025), registro 6923, também não foi recuperado e está fora da seleção. Assim, os 16 PDFs locais não correspondem a 16 estudos incluídos nem alteram o fluxo PRISMA. A disponibilidade não comprova que todos os elementos visuais e apêndices foram examinados integralmente. O replay textual congelado de 14/10/2026 abrange **12 fontes e 484 trechos**, não os 16 PDFs registrados na conferência de 29/10/2026. As fontes suplementares não foram incorporadas a esse replay. A tabela delimita as páginas com texto e os elementos visuais registrados para cada fonte.
 <!-- ccw-sync:end coverage -->
 
 O relatório não recuperado no fluxo histórico é a dissertação de
@@ -30,7 +30,7 @@ O relatório não recuperado no fluxo histórico é a dissertação de
 Columbia Academic Commons registrada no manifesto de fontes em 13 de outubro de
 2026 informou que os arquivos estarão disponíveis a partir de 16 de maio de
 2027. O resumo público não substitui o texto primário: Zeng está fora da seleção
-histórica de 15 estudos e não recebeu apreciação MMAT, sem alteração das
+original de 15 estudos e não recebeu apreciação MMAT, sem alteração das
 contagens PRISMA. O registro 3, [Multimodels2020_002](https://doi.org/10.5573/IEIESPC.2020.9.3.217),
 permanece na seleção original sem apreciação MMAT, por falta de cópia
 verificável do texto completo. A ausência de cópia não permite concluir baixa
@@ -44,7 +44,7 @@ artefatos versionados; a atualização não representa nova consulta às APIs ne
 altera o corte temporal da busca.
 
 O registro MMAT 2018 apresenta S1/S2 e os critérios Q1–Q5 por estudo, sem
-escore agregado. Dos 15 estudos empíricos da seleção histórica, 14 têm texto
+escore agregado. Dos 15 estudos empíricos da seleção original, 14 têm texto
 recuperado e respostas atuais; Sokkhey permanece na seleção original sem
 apreciação MMAT, por falta de cópia verificável do texto completo. O estudo 14 usa a categoria 3
 quantitativa não randomizada: o artigo se declara quase-experimental sem
@@ -81,7 +81,7 @@ alteração da regra, nova seleção ou incorporação de estudos adicionais. Ve
 [`REVISAO-LIMIAR-SELECAO-2026-10-31.md`](REVISAO-LIMIAR-SELECAO-2026-10-31.md),
 que documenta o estado da seleção e as limitações do escore utilizado.
 
-O corte 4,0 e a seleção histórica são mantidos nesta versão; não houve nova
+O corte 4,0 e a seleção original são mantidos nesta versão; não houve nova
 seleção.
 O valor 4,0 é um corte
 da soma ponderada aplicada aos metadados e resumos: a escala nominal é 0–10,

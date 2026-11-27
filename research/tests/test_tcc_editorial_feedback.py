@@ -237,23 +237,25 @@ class EditorialFeedbackTests(unittest.TestCase):
         self.assertEqual(len(re.findall(r"^\d+\. \*\*", storyboard, re.M)), 24)
         self.assertEqual(len(re.findall(r"^layout: \w+$", slides, re.M)), 24)
 
-    def test_speech_is_deferred_until_content_approval(self):
+    def test_speech_lives_in_presenter_notes_and_script(self):
         for path in (ROOT / "presentation/README.md", ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md"):
             document = " ".join(path.read_text(encoding="utf-8").lower().split())
-            self.assertIn("a fala ainda não integra o deck canônico", document)
-            self.assertIn("quando o manuscrito e os slides estiverem estabilizados", document)
+            self.assertIn("a fala integra o deck canônico como notas do apresentador", document)
+            self.assertIn("roteiro_falas_tcc.md", document)
+            self.assertIn("test_presentation_script.py", document)
             self.assertNotIn("validação da orientação", document)
         export_readme = " ".join(
             (TCC / "presentation/README.md").read_text(encoding="utf-8").lower().split()
         )
         self.assertIn("a fala não integra este export paralelo", export_readme)
-        self.assertIn("roteiro histórico do export paralelo", export_readme)
+        self.assertIn("roteiro de falas do deck canônico slidev", export_readme)
+        self.assertIn("não se aplica ao export paralelo", export_readme)
 
     def test_public_evidence_note_states_scope_without_private_workflow(self):
         note_path = ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md"
         note = note_path.read_text(encoding="utf-8")
         normalized_note = " ".join(note.split())
-        self.assertIn("a seleção histórica continua com 15 estudos", normalized_note.lower())
+        self.assertIn("a seleção original continua com 15 estudos", normalized_note.lower())
         self.assertIn("dois não têm cópia verificável (Sokkhey e Zeng)", normalized_note)
         self.assertIn("14 relatórios empíricos recuperados", normalized_note)
         self.assertIn("SUPPORTED", normalized_note)
@@ -315,7 +317,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         )
 
         governance = " ".join((ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md").read_text(encoding="utf-8").split())
-        self.assertIn("15 permanecem na seleção empírica histórica", governance)
+        self.assertIn("15 permanecem na seleção empírica original", governance)
         self.assertIn("texto recuperado para 14", governance)
         self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT", governance)
         self.assertIn("Zeng não foi recuperado e está fora dos 15", governance)

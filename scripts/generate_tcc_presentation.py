@@ -80,7 +80,7 @@ EXPECTED_TITLES = [
     "Objetivos específicos",
     "A base conceitual: quatro níveis de interpretação",
     "Desenho metodológico",
-    "Fluxo da seleção histórica sob corte 4,0",
+    "Fluxo da seleção original sob corte 4,0",
     "Fluxo operacional do processo de seleção",
     "Deduplicação: o que foi confirmado",
     "Panorama descritivo do recorte versionado",
@@ -376,7 +376,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Revisão sistemática da literatura e especificação conceitual de protótipo", Inches(1.35), Inches(3.48), Inches(10.65), Inches(0.45), size=20, color=RGBColor(11, 86, 108), align=PP_ALIGN.CENTER)
     add_text(slide, "Thales Ferreira Batista\nCiência da Computação", Inches(4.0), Inches(4.45), Inches(5.35), Inches(0.65), size=16, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
     add_text(slide, "Orientador: Prof. Dr. Rafael Zanin\nCoorientador: Prof. Dr. Manassés Ribeiro", Inches(3.3), Inches(5.35), Inches(6.75), Inches(0.65), size=14, color=RGBColor(20, 20, 20), align=PP_ALIGN.CENTER)
-    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nVersão para a defesa, MMAT conferido pelo autor · fluxo reconciliado em 31/10/2026 · seleção histórica sob o corte 4,0", Inches(1.0), Inches(6.22), Inches(11.3), Inches(0.7), size=10.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
+    add_text(slide, "Instituto Federal Catarinense — Campus Videira\nVersão para a defesa, MMAT conferido pelo autor · fluxo reconciliado em 31/10/2026 · seleção original sob o corte 4,0", Inches(1.0), Inches(6.22), Inches(11.3), Inches(0.7), size=10.5, color=RGBColor(55, 55, 55), align=PP_ALIGN.CENTER)
 
     # 2 — Problem.
     slide = new_slide(prs, EXPECTED_TITLES[1], 2)
@@ -481,7 +481,7 @@ def build_deck() -> Presentation:
     add_metric(slide, "1.073", "assessment", Inches(8.9), Inches(2.95), Inches(3.3), Inches(0.95), fill=PALE_TEAL, accent=TEAL, value_size=21, label_size=10.5)
     add_metric(slide, "863", "IA / inteligência artificial", Inches(8.9), Inches(4.05), Inches(3.3), Inches(0.95), fill=PALE_VIOLET, accent=VIOLET, value_size=21, label_size=10.5)
     add_metric(slide, "771", "machine learning", Inches(8.9), Inches(5.15), Inches(3.3), Inches(0.95), fill=PALE_AMBER, accent=AMBER, value_size=21, label_size=10.5)
-    add_text(slide, "As categorias podem se sobrepor e são calculadas sobre os 11.875 registros da seleção histórica reconciliada. Não representam qualidade ou eficácia.", Inches(0.8), Inches(6.65), Inches(11.7), Inches(0.3), size=11, color=MUTED, align=PP_ALIGN.CENTER)
+    add_text(slide, "As categorias podem se sobrepor e são calculadas sobre os 11.875 registros da seleção original reconciliada. Não representam qualidade ou eficácia.", Inches(0.8), Inches(6.65), Inches(11.7), Inches(0.3), size=11, color=MUTED, align=PP_ALIGN.CENTER)
 
     # 11 — Time and databases.
     slide = new_slide(prs, EXPECTED_TITLES[10], 11)
@@ -496,7 +496,7 @@ def build_deck() -> Presentation:
     add_metric(slide, "18", "registros na lista histórica de leitura", Inches(0.85), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_BLUE, accent=INDIGO, value_size=29, label_size=12)
     add_metric(slide, "15", "estudos históricos sob o corte 4,0", Inches(4.95), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_TEAL, accent=TEAL, value_size=29, label_size=12)
     add_metric(slide, "2", "relatórios sem cópia verificável", Inches(9.05), Inches(1.35), Inches(3.2), Inches(1.35), fill=PALE_AMBER, accent=AMBER, value_size=29, label_size=12)
-    add_callout(slide, "Fluxo de recuperação", "Dos 18 registros, um foi excluído após resumo. Dos 17 relatórios procurados, dois (Sokkhey e Zeng) não foram recuperados e 15 foram avaliados em texto completo; um protocolo foi excluído e 14 relatórios empíricos têm texto recuperado. A seleção histórica mantém 15 estudos, incluindo Sokkhey sem cópia verificável.", Inches(0.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=13)
+    add_callout(slide, "Fluxo de recuperação", "Dos 18 registros, um foi excluído após resumo. Dos 17 relatórios procurados, dois (Sokkhey e Zeng) não foram recuperados e 15 foram avaliados em texto completo; um protocolo foi excluído e 14 relatórios empíricos têm texto recuperado. A seleção original mantém 15 estudos, incluindo Sokkhey sem cópia verificável.", Inches(0.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_BLUE, accent=BLUE, title_size=17, body_size=13)
     add_callout(slide, "Exemplos observados", "Há classificação e predição de resultados matemáticos, com RF, SVM, árvores e redes neurais entre as alternativas examinadas. Categorias operacionais de desempenho não equivalem automaticamente a níveis de proficiência validados.", Inches(6.85), Inches(3.35), Inches(5.65), Inches(1.85), fill=PALE_TEAL, accent=TEAL, title_size=17, body_size=14.5)
     add_text(slide, "Os resultados de artigos individuais permanecem condicionados à população, ao instrumento, à métrica e ao desenho de cada estudo.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=13.5, color=MUTED, align=PP_ALIGN.CENTER)
 
@@ -507,7 +507,7 @@ def build_deck() -> Presentation:
     add_text(slide, "avaliação por critério\nsem nota global", Inches(1.05), Inches(2.35), Inches(2.7), Inches(0.85), size=19, color=RGBColor(186, 230, 253), bold=True, align=PP_ALIGN.CENTER)
     add_text(slide, "Instrumento aplicado conforme o desenho metodológico de cada estudo empírico.", Inches(1.1), Inches(4.15), Inches(2.6), Inches(0.75), size=13.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
     add_callout(slide, "Como foi registrado", "Cinco critérios por desenho, com respostas Sim, Não ou Não é possível determinar. As limitações permanecem visíveis por estudo.", Inches(4.55), Inches(1.25), Inches(3.85), Inches(1.55), fill=PALE_BLUE, accent=BLUE, title_size=16, body_size=14)
-    add_callout(slide, "Seleção histórica", f"S1/S2 e Q1–Q5: 14 fichas; S2: 14 respostas Y e 1 CT em {study_codes['5']}, pois a origem dos dados não foi confirmada; 14 fontes disponíveis. {study_codes['5']}/{study_codes['7']}: cat. 3 operacional; {study_codes['14']}: sorteio contraditório; {study_codes['8']}: cat. 4 adaptada. Sokkhey ({study_codes['3']}): sem cópia; sem MMAT. Zeng: sem texto e sem MMAT. Leitura variável.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=12.5)
+    add_callout(slide, "Seleção original", f"S1/S2 e Q1–Q5: 14 fichas; S2: 14 respostas Y e 1 CT em {study_codes['5']}, pois a origem dos dados não foi confirmada; 14 fontes disponíveis. {study_codes['5']}/{study_codes['7']}: cat. 3 operacional; {study_codes['14']}: sorteio contraditório; {study_codes['8']}: cat. 4 adaptada. Sokkhey ({study_codes['3']}): sem cópia; sem MMAT. Zeng: sem texto e sem MMAT. Leitura variável.", Inches(8.8), Inches(1.25), Inches(3.75), Inches(1.55), fill=PALE_AMBER, accent=AMBER, title_size=16, body_size=12.5)
     add_callout(slide, "O que não foi feito", "Não há média, ranking ou categoria agregada de qualidade. A adjudicação, os localizadores e a recuperação de fontes ainda precisam ser consolidados.", Inches(4.55), Inches(3.35), Inches(8.0), Inches(1.55), fill=PALE_TEAL, accent=TEAL, title_size=16, body_size=14)
     add_text(slide, "Mistos (n=3): Q3, 2 N e 1 CT; Q4, 2 Y e 1 CT. Justificativas e limites na matriz pública; sem nota global.", Inches(1.0), Inches(6.35), Inches(11.2), Inches(0.32), size=14, color=MUTED, align=PP_ALIGN.CENTER)
 
@@ -531,7 +531,7 @@ def build_deck() -> Presentation:
         x = Inches(0.75 + (index % 2) * 6.05)
         y = Inches(1.2 + (index // 2) * 2.15)
         add_callout(slide, title, body, x, y, Inches(5.75), Inches(1.9), fill=fill, accent=accent, title_size=16, body_size=13)
-    add_text(slide, "Exemplos da seleção histórica (n=15); não estimam a frequência da literatura. Dois textos não foram recuperados: Sokkhey permanece como inclusão histórica sem cópia verificável; Zeng está fora dos 15 e não recebeu MMAT. Houve exclusões após resumo e texto completo.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=12.5, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
+    add_text(slide, "Exemplos da seleção original (n=15); não estimam a frequência da literatura. Dois textos não foram recuperados: Sokkhey permanece como inclusão da seleção original sem cópia verificável; Zeng está fora dos 15 e não recebeu MMAT. Houve exclusões após resumo e texto completo.", Inches(0.9), Inches(5.55), Inches(11.55), Inches(0.7), size=12.5, color=SLATE, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE)
 
     # 16 — From evidence to specification.
     slide = new_slide(prs, EXPECTED_TITLES[15], 16)
@@ -566,7 +566,7 @@ def build_deck() -> Presentation:
     # 18 — Contributions and limitations.
     slide = new_slide(prs, EXPECTED_TITLES[17], 18)
     add_callout(slide, "Contribuições", "• tipologia de finalidades, com limite declarado (OE1)\n• rastreabilidade da evidência a 26 grupos de requisitos\n• regras de modelo e de avaliação fixadas antes dos dados\n• lacunas de relato como orientação (MMAT conferido)", Inches(0.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_GREEN, accent=GREEN, title_size=18, body_size=15)
-    add_callout(slide, "Limites assumidos", "• dois textos integrais sem cópia verificável: Sokkhey (inclusão histórica) e Zeng (fora dos 15)\n• fontes e idiomas delimitados\n• MMAT conferido nos 14 estudos com texto recuperado; Sokkhey permanece na seleção original sem apreciação MMAT por falta de cópia verificável do texto completo\n• sem aplicação funcional ou eficácia pedagógica própria", Inches(6.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_AMBER, accent=AMBER, title_size=18, body_size=15)
+    add_callout(slide, "Limites assumidos", "• dois textos integrais sem cópia verificável: Sokkhey (inclusão da seleção original) e Zeng (fora dos 15)\n• fontes e idiomas delimitados\n• MMAT conferido nos 14 estudos com texto recuperado; Sokkhey permanece na seleção original sem apreciação MMAT por falta de cópia verificável do texto completo\n• sem aplicação funcional ou eficácia pedagógica própria", Inches(6.8), Inches(1.25), Inches(5.75), Inches(3.1), fill=PALE_AMBER, accent=AMBER, title_size=18, body_size=15)
     add_text(slide, "Conclusão", Inches(0.85), Inches(5.05), Inches(2.0), Inches(0.35), size=19, color=NAVY, bold=True)
     add_text(slide, "O trabalho respondeu ao escopo ao articular revisão sistemática, fundamentação pedagógica, apreciação metodológica e especificação conceitual — mantendo o professor no centro da interpretação.", Inches(0.85), Inches(5.55), Inches(11.45), Inches(0.7), size=19, color=SLATE, bold=True, align=PP_ALIGN.CENTER)
 
@@ -578,7 +578,7 @@ def build_deck() -> Presentation:
     add_text(slide, "Obrigado", Inches(0.7), Inches(1.75), Inches(11.9), Inches(0.8), size=42, color=WHITE, bold=True, align=PP_ALIGN.CENTER, name="tcc-title")
     add_text(slide, "Perguntas e discussão", Inches(1.0), Inches(2.8), Inches(11.3), Inches(0.45), size=23, color=RGBColor(186, 230, 253), align=PP_ALIGN.CENTER)
     add_text(slide, "Ensino Personalizado de Matemática\nRevisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente", Inches(1.2), Inches(4.35), Inches(10.9), Inches(0.8), size=16, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nVersão para a defesa, MMAT conferido pelo autor · seleção histórica", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
+    add_text(slide, "Thales Ferreira Batista · Ciência da Computação · IFC Videira\nVersão para a defesa, MMAT conferido pelo autor · seleção original", Inches(1.2), Inches(5.8), Inches(10.9), Inches(0.55), size=12.5, color=RGBColor(226, 232, 240), align=PP_ALIGN.CENTER)
 
     return prs
 
@@ -630,7 +630,7 @@ def validate_presentation(path: Path) -> list[str]:
         "Villegas-Ch et al. (2025)",
         "Nyantah et al. (2025)",
         "Echeveria et al. (2025)",
-        "seleção histórica",
+        "seleção original",
         "Dois textos não foram recuperados",
         "Zeng está fora dos 15 e não recebeu MMAT",
         "não estimam a frequência da literatura",

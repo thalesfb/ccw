@@ -1,7 +1,7 @@
 # Apresentação do TCC — conteúdo dos slides
 
 > Storyboard da versão vigente do deck Slidev, com 24 slides incluindo capa e
-> encerramento. Os slides resumem o manuscrito: seleção histórica de 15
+> encerramento. Os slides resumem o manuscrito: seleção original de 15
 > estudos, 14 textos recuperados, Sokkhey sem cópia verificável e Zeng fora dos
 > 15. O protótipo e o protocolo docente são propostas; não há resultados de
 > aplicação com participantes.
@@ -13,7 +13,8 @@
 - **Autor:** Thales Ferreira Batista
 - **Orientação:** Prof. Dr. Rafael Zanin; Prof. Dr. Manassés Ribeiro
 - **Instituição:** IFC — Campus Videira
-- **Atualização da sequência:** 18/11/2026
+- **Atualização da sequência:** 27/11/2026
+- **Roteiro de falas:** notas do apresentador no Slidev e `ROTEIRO_FALAS_TCC.md`
 - **Recorte temporal:** 2015–2026, com data de corte da busca em 31/08/2026
 
 O deck direciona a exposição do problema, método, resultados e limites sem
@@ -33,10 +34,10 @@ arquivo documenta a sequência e deve ser mantido junto com ela.
 8. **Método.** Consultas, idiomas, bases, período, data de corte, PRISMA 2020 e MMAT 2018.
 9. **Fontes.** Semantic Scholar, OpenAlex, Crossref e CORE; 11.875 registros após deduplicação.
 10. **Fluxo PRISMA.** Uma única apresentação do diagrama de seleção.
-11. **Seleção histórica.** 15 estudos, 14 textos recuperados, ressalva de Sokkhey e exclusão de Zeng.
+11. **Seleção original.** 15 estudos, 14 textos recuperados, ressalva de Sokkhey e exclusão de Zeng.
 12. **Corte de relevância.** Sensibilidade exploratória abaixo de 4,0, sem reabrir a seleção.
 13. **MMAT.** Perguntas S1/S2, respostas Y/N/CT e variação de Q1–Q5 por categoria; sem escore agregado.
-14. **OE1.** Finalidades das técnicas na seleção histórica.
+14. **OE1.** Finalidades das técnicas na seleção original.
 15. **OE2.** Respostas CT por categoria e limites de relato; não são escore de qualidade.
 16. **OE2.** Eixos técnico, pedagógico e ético discutidos e relacionados aos requisitos.
 17. **Síntese.** Condições de projeto, sem ranking de modelos ou alegação de eficácia.
@@ -50,7 +51,7 @@ arquivo documenta a sequência e deve ser mantido junto com ela.
 
 ## Limites científicos
 
-- A seleção apresentada é histórica e mantém o corte 4,0; a análise de sensibilidade não estima todos os elegíveis abaixo do corte.
+- A seleção apresentada é a original e mantém o corte 4,0; a análise de sensibilidade não estima todos os elegíveis abaixo do corte.
 - Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Zeng não integra os 15.
 - Nos três estudos de métodos mistos, as respostas dos componentes qualitativo e quantitativo continuam identificadas como assistidas por IA; os slides não publicam um placar agregado.
 - As frequências descrevem os estudos da seleção, não eficácia nem predominância em toda a literatura.

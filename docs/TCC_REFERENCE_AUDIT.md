@@ -164,7 +164,7 @@ A auditoria não declara todos os registros como perfeitos. Permanecem, de forma
 1. revisar a edição bibliográfica de Vygotsky antes de enriquecer campos de editores/edição;
 2. distinguir, quando a fonte SAEB for usada operacionalmente, a documentação de resultados da referência aos microdados efetivamente adquiridos. Em 22/10/2026, `SAEB2021` foi corrigida para o volume 1 do relatório de resultados (Inep, 2024, ISBN 978-65-5801-078-4) e permanece apenas como documentação contextual; os microdados de 2023 registrados no código não estão citados no manuscrito;
 3. manter os limites da apreciação MMAT alinhados ao ledger vigente: 14 dos 15
-   estudos empíricos da seleção histórica têm texto recuperado e apreciação por
+   estudos empíricos da seleção original têm texto recuperado e apreciação por
    categoria; nesses 14, S1 recebeu Y em todos e S2 recebeu 13 Y e 1 CT.
    Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia
    verificável do texto completo. Nos estudos de métodos mistos, as respostas

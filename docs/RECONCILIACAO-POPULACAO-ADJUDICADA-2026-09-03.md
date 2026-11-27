@@ -48,7 +48,7 @@ síntese e a auditoria de identidade indicados acima.
 | Relatórios procurados | 17 | 2 não recuperados: Sokkhey e Zeng |
 | Relatórios avaliados em texto completo | 15 | 1 protocolo excluído; 14 relatórios empíricos recuperados |
 | Relatórios empíricos recuperados | 14 | Os 14 relatórios com texto recuperado; protocolo excluído não incluído |
-| Seleção histórica de estudos empíricos | 15 | Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados |
+| Seleção original de estudos empíricos | 15 | Inclui Sokkhey sem cópia verificável; seleção e corte 4,0 preservados |
 <!-- ccw-sync:end flow -->
 
 Dos **11.904 identificados**, 9.393 (78,91%) foram excluídos na triagem; 2.482

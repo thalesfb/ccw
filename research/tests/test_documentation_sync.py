@@ -81,7 +81,7 @@ def test_source_table_reflects_available_pdfs_without_changing_inclusion(project
     assert "Zeng (2025), registro 6923" in blocks["coverage"]
     assert "não os 16 PDFs registrados na conferência de 29/10/2026" in blocks["coverage"]
     assert "12 fontes" in blocks["coverage"] and "484" in blocks["coverage"]
-    assert "15 estudos empíricos mantidos na seleção histórica" in blocks["snapshot"]
+    assert "15 estudos empíricos mantidos na seleção original" in blocks["snapshot"]
     assert "conjunto adotado nesta versão" in blocks["snapshot"]
     assert "Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo" in blocks["snapshot"]
     assert "Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT" in blocks["snapshot"]

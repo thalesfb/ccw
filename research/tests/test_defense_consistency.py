@@ -23,7 +23,7 @@ def test_public_mmat_empirical_metric_matches_the_inclusion_ledger():
     html = (ROOT / "research/exports/analysis/mmat_current.html").read_text(encoding="utf-8")
     metric = re.search(
         r'<span class="metric-value">(\d+)</span>'
-        r'<span class="metric-label">estudos empíricos na seleção histórica</span>',
+        r'<span class="metric-label">estudos empíricos na seleção original</span>',
         html,
     )
     assert metric and int(metric[1]) == retained
@@ -37,7 +37,7 @@ def test_synthesis_slide_matches_the_historical_corpus_not_an_undefined_subset()
         r'tcc-synthesis-orbit[\s\S]*?<strong>(\d+)</strong><span>(.*?)</span>', slides
     )
     assert metric and int(metric[1]) == retained
-    assert "seleção histórica" in metric[2]
+    assert "seleção original" in metric[2]
     synthesis = slides.split("16 / SÍNTESE", 1)[1].split("\n---", 1)[0]
     assert "inferem proficiência" not in synthesis
     assert "categorias operacionais de desempenho" in synthesis.casefold()
@@ -118,5 +118,5 @@ def test_requirement_origins_are_explicit_without_fabricated_empirical_support()
 def test_readme_distinguishes_shortlist_from_provisional_empirical_inclusion():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "17 candidatos empíricos provisórios" not in text
-    assert "15 estudos empíricos mantidos na seleção histórica" in text
+    assert "15 estudos empíricos mantidos na seleção original" in text
     assert "Nas 14 avaliações MMAT dos estudos com texto recuperado, S1 recebeu 14 Y e S2 recebeu 13 Y e 1 CT" in text

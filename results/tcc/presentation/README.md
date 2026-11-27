@@ -1,9 +1,9 @@
 # Export PowerPoint editável paralelo do TCC
 
 > **Desatualizado para a defesa.** Este export paralelo e suas visualizações
-> refletem a seleção histórica de 15 estudos sob o corte 4,0. Ele não é a fonte
+> refletem a seleção original de 15 estudos sob o corte 4,0. Ele não é a fonte
 > do deck atual; use `presentation/slides.md`, que apresenta a mesma seleção
-> histórica com as ressalvas vigentes do TCC.
+> original com as ressalvas vigentes do TCC.
 
 Este diretório contém um artefato editável auxiliar, não a apresentação que
 será usada na defesa do TCC **Ensino Personalizado de Matemática:
@@ -22,9 +22,10 @@ revisão sistemática de técnicas computacionais e especificação de um protó
   é o arquivo da defesa, não é derivado de `slides.md` e não é sincronizado com
   o deck canônico. A diferença de contagem é intencional entre artefatos com
   papéis distintos, não uma paridade de exportação pendente.
-- [`ROTEIRO_FALAS_TCC.md`](ROTEIRO_FALAS_TCC.md) é um roteiro histórico do
-  export paralelo, fora do escopo e da validação da versão semifinal atual;
-  não deve ser usado como fonte do deck Slidev vigente.
+- [`ROTEIRO_FALAS_TCC.md`](ROTEIRO_FALAS_TCC.md) é o roteiro de falas do deck
+  canônico Slidev: o que mostrar, a fala e o tempo de cada um dos 24 slides,
+  além de perguntas prováveis da banca. Repete as notas do apresentador de
+  `presentation/slides.md`. Não se aplica ao export paralelo.
 - [`material de apresentação do PTC histórico`](../../../results/ptc/presentation/APRESENTACAO_SLIDES_CONTEUDO.md)
   é uma terceira apresentação, de uma etapa anterior. Serve como contexto
   narrativo e visual, nunca como fonte dos números do TCC vigente.
@@ -32,8 +33,8 @@ revisão sistemática de técnicas computacionais e especificação de um protó
   define o conteúdo e o layout do PPTX paralelo. Não lê o storyboard, o roteiro
   de falas nem os arquivos TeX.
 
-A fala não integra este export paralelo. Uma versão de ensaio deve seguir o
-conteúdo vigente do deck canônico Slidev e do manuscrito compilado.
+A fala não integra este export paralelo; o ensaio da defesa usa o deck
+canônico Slidev e o roteiro acima.
 
 Após merge e deploy bem-sucedido, os endereços públicos são:
 

@@ -1,172 +1,191 @@
-# Roteiro de falas — apresentação do TCC
+# Roteiro de falas — defesa do TCC
 
-Tempo sugerido: aproximadamente 18–20 minutos, deixando espaço para perguntas.
-O texto é um guia oral; a redação científica completa permanece em
-`results/tcc/`.
+Roteiro do deck canônico Slidev (`presentation/slides.md`, 24 slides). As mesmas falas estão nas notas do apresentador de cada slide (tecla `P` no Slidev abre o modo apresentador). Ao alterar uma fala, altere os dois lugares; o teste `research/tests/test_presentation_script.py` confere a correspondência.
+
+Tempo total estimado: 23 min 15 s, sem perguntas. Para encurtar, resuma em uma frase os slides 9 (Fontes) e 19 (Exemplos).
+
+Cada bloco indica o que mostrar na tela e a fala sugerida. Os números e as formulações seguem o TCC compilado (`results/tcc/main.pdf`); a fala não acrescenta resultados que o texto não sustenta.
+
+| Slide | Tema | Tempo |
+|---:|---|---:|
+| 1 | Capa | 0:30 |
+| 2 | Contexto — O problema: ler a aprendizagem em turmas heterogêneas | 1:00 |
+| 3 | Objetivo geral — O que o trabalho propõe | 0:45 |
+| 4 | Problema de pesquisa — Pergunta de pesquisa | 0:30 |
+| 5 | Base conceitual — Cinco distinções interpretativas | 1:15 |
+| 6 | Didática da matemática — Acertar ou errar não revela o tipo de erro | 1:00 |
+| 7 | Objetivos específicos — Quatro objetivos, quatro produtos | 1:00 |
+| 8 | Método — Revisão sistemática: busca em três camadas | 1:00 |
+| 9 | Fontes — Quatro bases de indexação complementares | 0:40 |
+| 10 | Fluxo prisma — Fluxograma de seleção | 1:15 |
+| 11 | Seleção original — 15 estudos na seleção; 14 textos recuperados | 0:45 |
+| 12 | Corte de relevância — O corte 4,0 é heurístico: havia elegíveis abaixo dele | 1:00 |
+| 13 | Qualidade metodológica — MMAT conferido: critério a critério, sem nota global | 1:00 |
+| 14 | Resultado — oe1 — Para que as técnicas são usadas nos 15 estudos | 1:15 |
+| 15 | Resultado — oe2 — O que falta nos relatos: a resposta mais comum é “não é possível concluir” | 1:15 |
+| 16 | Resultado — oe2 — Três eixos de risco viraram requisitos | 1:00 |
+| 17 | Síntese — O que a evidência permite especificar | 1:00 |
+| 18 | Alcance — O que o TCC entrega, e o que não entrega | 0:50 |
+| 19 | Evidências e limites — Exemplos de limitações nos estudos consultados | 1:00 |
+| 20 | Resultado — oe3 — Da evidência aos requisitos: uma cadeia rastreável | 1:15 |
+| 21 | Arquitetura e saída — O professor vê indícios e incerteza, não um veredito | 1:15 |
+| 22 | Oe3 e oe4 — Regras do protocolo proposto | 1:15 |
+| 23 | Conclusão — Resposta: uma especificação verificável antes dos dados | 1:15 |
+| 24 | Encerramento | 0:15 |
 
 ## 1. Capa — 0:30
 
-Este trabalho investiga o uso de técnicas computacionais no ensino de
-matemática. O resultado não é apresentado como uma solução pronta: ele combina
-uma revisão sistemática da literatura com uma especificação conceitual de
-protótipo para apoiar a interpretação docente.
+**Mostrar:** título e a faixa inferior (revisão, 15 estudos, especificação conceitual).
 
-## 2. O problema — 1:00
+**Fala:** Boa tarde. Apresento o TCC Ensino Personalizado de Matemática. O trabalho tem duas entregas ligadas entre si: uma revisão sistemática de técnicas computacionais aplicadas ao ensino de matemática e, a partir dela, a especificação de um protótipo para apoiar a interpretação do professor. É uma entrega documental: não há sistema validado em escola.
 
-O ponto de partida são as turmas heterogêneas. Estudantes chegam com
-conhecimentos prévios, ritmos e dificuldades diferentes, e o professor precisa
-interpretar muitas evidências em tempo limitado. Técnicas computacionais podem
-ajudar a organizar esses registros. Isso não significa que o modelo conheça
-sozinho a aprendizagem do estudante ou que possa substituir a decisão
-pedagógica.
+## 2. Contexto — O problema: ler a aprendizagem em turmas heterogêneas — 1:00
 
-## 3. Questão e objetivo — 1:00
+**Mostrar:** frase em destaque à esquerda; depois os quatro cartões, de cima para baixo.
 
-A pergunta é como identificar e sintetizar as principais técnicas aplicadas ao
-ensino de matemática e converter as evidências em uma especificação que apoie o
-professor. O objetivo geral une essas duas frentes: mapear a literatura e
-derivar uma proposta técnica e pedagógica coerente com seus achados e limites.
+**Fala:** Em turmas heterogêneas, a média da turma não mostra onde cada estudante está nem quanta evidência sustenta essa leitura. O professor tem pouco tempo para analisar registros, e a mesma intervenção não atende necessidades distintas. Há literatura sobre técnicas computacionais, mas ela está dispersa em técnicas, alvos e contextos. A premissa do trabalho: a técnica pode organizar evidências, e a interpretação continua com o professor.
 
-## 4. Objetivos específicos — 0:50
+## 3. Objetivo geral — O que o trabalho propõe — 0:45
 
-Os objetivos percorrem todo o ciclo do trabalho: realizar a revisão, categorizar
-técnicas e finalidades, analisar limitações, mapear lacunas, manter o fluxo de
-processamento auditável e derivar requisitos, critérios de dados e modelos,
-protocolo de avaliação e arquitetura. Implementação funcional e validação com participantes
-não fazem parte do escopo executado.
+**Mostrar:** caixa central com o objetivo geral; depois PARA QUÊ e ESCOPO.
 
-## 5. Fundamentação — 1:10
+**Fala:** O objetivo geral é propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada na literatura. O apoio se limita a mostrar ao professor indícios de desempenho e de incerteza por estudante e habilidade, sem substituir seu julgamento. O escopo é revisão e especificação; protótipo validado e avaliação de eficácia ficam fora.
 
-Uma distinção importante organiza a leitura: o indicador de desempenho observado
-é o registro de uma tarefa; a probabilidade preditiva é uma saída condicionada ao
-modelo, aos dados e a um alvo definido; proficiência estimada é uma inferência em
-uma escala; competência envolve mobilizar conhecimentos e estratégias;
-aprendizagem é uma transformação ao longo do tempo. Esses conceitos se
-relacionam, mas não são equivalentes, e a probabilidade preditiva não demonstra,
-isoladamente, eficácia pedagógica. Uma saída computacional deve, portanto, ser
-interpretada como evidência parcial e contextualizada pelo professor.
+## 4. Problema de pesquisa — Pergunta de pesquisa — 0:30
 
-## 6. Método — 1:10
+**Mostrar:** ler a pergunta inteira, sem paráfrase.
 
-O PRISMA 2020 foi usado como diretriz de relato, e os critérios foram
-organizados com apoio do PICOS. A busca utilizou Semantic Scholar, OpenAlex,
-Crossref e CORE, com inglês e português no período de 2015 a 2026. A estratégia
-canônica contém 72 combinações de termos, 48 em inglês e 24 em português. É
-importante dizer com precisão que esse número descreve a composição versionada
-da estratégia; não existe um log histórico completo que permita chamá-lo de
-contagem de chamadas HTTP concluídas.
+**Fala:** A pergunta de pesquisa é esta. A palavra que orienta a resposta é estruturar: o resultado esperado é uma forma rastreável de organizar a especificação a partir da evidência, e não a escolha de um modelo vencedor.
 
-## 7. Contagens — 1:10
+## 5. Base conceitual — Cinco distinções interpretativas — 1:15
 
-O snapshot começa com 11.904 registros. Foram removidas 27 linhas por identidade
-bibliográfica determinística, chegando a 11.877 na triagem. A triagem excluiu
-9.391 registros e encaminhou 2.486 para elegibilidade. Nessa etapa, 2.468 foram
-excluídos e 18 foram retidos operacionalmente. Cada número representa uma etapa
-distinta, por isso não devemos substituir o fluxo por uma única porcentagem.
+**Mostrar:** a escada de 01 a 05, em ordem; ao final, a regra de leitura.
 
-## 8. PRISMA — 0:45
+**Fala:** Antes da revisão, separo cinco termos que a literatura às vezes mistura. Desempenho observado é o que foi registrado na tarefa. Probabilidade preditiva é a saída de um modelo para um alvo definido e com os dados usados; não é proficiência. Proficiência estimada exige modelo de mensuração e evidência de validade. Competência, no sentido da BNCC, é mobilizar conhecimentos, habilidades, atitudes e valores. Aprendizagem, neste trabalho, é mudança ao longo do tempo. A regra que sai daqui: a saída computacional organiza evidência e produz estimativas, mas sozinha não observa a aprendizagem nem demonstra eficácia.
 
-Esta figura é a representação visual do mesmo fluxo. Ela está versionada junto
-dos artefatos de pesquisa e foi incorporada diretamente à apresentação. O
-objetivo é permitir que o leitor acompanhe a transição entre identificação,
-deduplicação, triagem, elegibilidade e retenção.
+## 6. Didática da matemática — Acertar ou errar não revela o tipo de erro — 1:00
 
-## 9. Deduplicação — 1:05
+**Mostrar:** o exemplo do 7º ano; depois o cartão 0/1 ≠ diagnóstico.
 
-A deduplicação atual precisa ser lida com cuidado. As 27 remoções confirmadas
-foram feitas por DOI normalizado ou URL exata: 25 e 2, respectivamente. Também
-foram observados 232 excedentes apenas por título normalizado, mas eles não
-foram removidos automaticamente. Títulos iguais podem indicar versões, erratas
-ou obras diferentes; por isso esses registros continuam como candidatos a uma
-auditoria semântica.
+**Fala:** Dois referenciais da didática da matemática delimitam o que essa saída não capta. Para Duval, compreender exige coordenar ao menos dois registros de representação. Para Brousseau, um erro pode manifestar um obstáculo. No exemplo, errar a conversão do enunciado para 2x + 5 = 15 é diferente de errar ao isolar x, mas os dois viram o mesmo zero num registro binário. Por isso a especificação organiza indícios por habilidade, com incerteza, e deixa o tipo de erro para o professor, na revisão docente da função F06. Codificar itens por registro de representação fica como trabalho futuro.
 
-## 10. Panorama — 0:55
+## 7. Objetivos específicos — Quatro objetivos, quatro produtos — 1:00
 
-O panorama mostra as categorias observadas no conjunto após a remoção
-determinística. Técnica não especificada aparece em 6.399 registros, seguida de
-assessment, IA e machine learning. Essas categorias podem se sobrepor e são
-descritivas. Elas não são uma contagem dos 18 retidos, não são uma nota de
-qualidade e não medem eficácia.
+**Mostrar:** os quatro passos e, em cada um, o produto indicado pela seta.
 
-## 11. Tempo e fontes — 0:50
+**Fala:** Os quatro objetivos específicos geram quatro produtos. OE1 categoriza técnicas e finalidades: resulta na tipologia dos 15 estudos. OE2 codifica limitações metodológicas e de relato com o MMAT e discute os eixos técnico, pedagógico e ético. OE3 formula a especificação: 26 grupos de requisitos, critérios de dados e modelos e a arquitetura. OE4 propõe o protocolo para avaliar a viabilidade e a coerência da especificação. O protocolo está proposto e não foi aplicado.
 
-As distribuições por ano e por fonte ajudam a caracterizar o snapshot. O ano de
-2026 é parcial, com coleta até 31 de agosto, então a barra menor não representa
-uma queda anual da produção científica e não deve ser comparada diretamente com
-anos completos. As figuras mostram como o conjunto foi recuperado, mas não
-permitem concluir que uma base é mais representativa ou que a produção
-científica esteja distribuída de forma uniforme. A cobertura está condicionada
-às fontes, aos idiomas e às condições de disponibilidade dos metadados.
+## 8. Método — Revisão sistemática: busca em três camadas — 1:00
 
-## 12. População retida — 1:05
+**Mostrar:** os hexágonos (três camadas); o cartão de 72 consultas; a faixa PRISMA/MMAT.
 
-Dos 18 registros da lista de leitura, 15 integram a seleção empírica
-histórica, dos quais 14 têm texto recuperado. Um foi excluído após o resumo;
-dois relatórios não foram recuperados: Sokkhey, que permanece como inclusão
-histórica sem cópia verificável, e Zeng, que não integra os 15. Um protocolo
-sem resultados concluídos foi excluído após texto completo. As finalidades dos 15 estudos incluem
-predição/classificação, personalização ou STI, intervenção didática,
-modelagem cognitiva e integração curricular. Isso descreve o conjunto adotado,
-sem escolher um algoritmo vencedor.
+**Fala:** A busca combina três camadas: um termo matemático, um termo de técnica computacional e um termo de educação. Foram 72 consultas canônicas, 48 em inglês e 24 em português, em quatro bases, para 2015 a 2026, com busca encerrada em 31 de agosto de 2026. O PRISMA 2020 orienta o relato, e o MMAT 2018 orienta a apreciação metodológica.
 
-## 13. MMAT — 1:10
+## 9. Fontes — Quatro bases de indexação complementares — 0:40
 
-O MMAT 2018 foi aplicado por critério, conforme o desenho metodológico. As
-respostas são mantidas como Sim, Não ou Não é possível determinar, sem produzir
-uma pontuação agregada. O autor conferiu as respostas dos 14 estudos com texto
-recuperado; Sokkhey permanece na seleção original sem apreciação MMAT, por falta
-de cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu
-separadamente as respostas dos componentes qualitativo e quantitativo; elas
-permanecem identificadas como assistidas por IA. CT descreve a evidência disponível ao revisor, com limites
-de acesso e leitura, e não demonstra automaticamente falha do relato.
-A categoria 4 da tese de MacLellan é adaptada à modelagem computacional e não
-certifica a validade dos modelos nem eficácia educacional. Não há ranking de qualidade.
+**Mostrar:** os quatro cartões com as contagens; a legenda.
 
-## 14. Interpretação dos achados — 1:00
+**Fala:** As quatro bases são complementares: Semantic Scholar, OpenAlex, Crossref e CORE. Depois da remoção de 29 duplicatas ficaram 11.875 registros. A base indicada em cada cartão é a origem da versão mantida, não a cobertura exclusiva daquela base. Se faltar tempo, este slide pode ser dito em uma frase.
 
-A síntese preliminar sustenta um mapa auditável das aplicações e de suas limitações. Ao
-mesmo tempo, os estudos usam populações, instrumentos, variáveis e métricas
-diferentes. Isso impede comparar diretamente todas as acurácias e impede
-transferir o resultado de um artigo para outra escola. Predição de desempenho
-também não é sinônimo de aprendizagem.
+## 10. Fluxo prisma — Fluxograma de seleção — 1:15
 
-## 15. Lacunas — 0:55
+**Mostrar:** percorrer o fluxograma de cima para baixo, apontando cada caixa.
 
-As lacunas mais relevantes estão na explicabilidade, no alinhamento curricular,
-na participação docente, na análise de equidade, na reprodutibilidade e na
-validação em diferentes contextos. Elas orientam decisões da especificação. Uma
-lacuna não é uma prova automática de ineficácia; é um sinal de que uma solução
-futura precisaria tornar essas condições explícitas e avaliáveis.
+**Fala:** Este é o fluxo de seleção. Foram 11.904 registros identificados e 29 duplicatas removidas; 11.875 foram triados, e as regras automáticas excluíram 9.393, em boa parte por resumo ausente ou curto. Dos 2.482 priorizados por escore de relevância, o corte 4,0 deixou 18 na lista preliminar. Um saiu após a leitura do resumo; 17 relatórios foram procurados e dois não foram recuperados, Sokkhey e Zeng. Quinze foram avaliados em texto completo, e um protocolo sem resultados foi excluído. A seleção original fica com 15 estudos, e o próximo slide explica por quê.
 
-## 16. Derivação — 0:55
+## 11. Seleção original — 15 estudos na seleção; 14 textos recuperados — 0:45
 
-O trabalho conecta a revisão à fundamentação pedagógica. Das evidências e
-limitações são derivadas lacunas; das lacunas são derivados requisitos; e esses
-requisitos organizam critérios para dados e modelos, um protocolo de avaliação e
-uma arquitetura de referência. Assim, o protótipo não aparece como uma ideia
-desconectada do levantamento.
+**Mostrar:** o número 15 e a divisão 14 + 1.
 
-## 17. Protótipo conceitual — 1:05
+**Fala:** São 15 estudos na seleção original, 14 com texto recuperado e conferido. Sokkhey permanece na seleção, mas sem apreciação MMAT, e sua linha na síntese se baseia só no resumo publicado. Zeng não foi recuperado e não integra os 15.
 
-A arquitetura separa ingestão, preparação, modelagem, avaliação e explicabilidade
-e apresentação. Ela prevê rastreabilidade, incerteza, revisão humana,
-privacidade e alinhamento curricular. É uma especificação, não uma aplicação
-funcional. Não houve treinamento com uma base definitiva, métricas próprias de
-acurácia ou validação com participantes.
+## 12. Corte de relevância — O corte 4,0 é heurístico: havia elegíveis abaixo dele — 1:00
 
-## 18. Contribuições e limites — 1:05
+**Mostrar:** as três barras; o número 4,0; o aviso de limitação.
 
-As contribuições são a síntese estruturada, o fluxo automatizado e
-versionado, a distinção entre relevância temática e avaliação metodológica e a
-especificação técnica e pedagógica auditável. Os limites incluem a cobertura
-desigual das fontes, o caráter preliminar da apreciação MMAT e a ausência de
-eficácia pedagógica própria. Declarar esses limites faz parte da validade do
-resultado.
+**Fala:** O corte 4,0 serviu para priorizar a leitura e foi mantido. Explorei o que ficou abaixo dele: 13 de 45 registros elegíveis no censo entre 3,75 e 3,95; 29 de 54 na seleção dirigida entre 3,50 e 3,74; e 5 de 30 na amostra estratificada entre 3,00 e 3,49. Os desenhos são diferentes, então não somo as frações nem estimo a perda total. É uma limitação declarada: o recorte não é um censo da literatura, e o escore mede relevância, não qualidade.
 
-## 19. Encerramento — 0:30
+## 13. Qualidade metodológica — MMAT conferido: critério a critério, sem nota global — 1:00
 
-Em síntese, o trabalho respondeu ao escopo ao articular revisão sistemática,
-fundamentação pedagógica, apreciação metodológica e especificação conceitual.
-Sua tese central é que técnicas computacionais podem apoiar a interpretação de
-evidências, desde que seus limites sejam explicitados e o professor permaneça
-no centro da decisão pedagógica. Obrigado; fico à disposição para perguntas.
+**Mostrar:** S1 e S2; a legenda Y/N/CT; a faixa de estado embaixo.
+
+**Fala:** O MMAT funciona em duas etapas: duas perguntas de triagem e depois cinco critérios próprios da categoria do estudo. Cada resposta é Sim, Não ou Não é possível concluir. Nos 14 textos recuperados, S1 teve 14 Sim e S2 teve 13 Sim e 1 Não é possível concluir. A leitura é critério a critério, sem nota global. Nos três estudos de métodos mistos, as respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA.
+
+## 14. Resultado — oe1 — Para que as técnicas são usadas nos 15 estudos — 1:15
+
+**Mostrar:** as cinco barras; depois o aviso de categorias não homogêneas.
+
+**Fala:** Este é o resultado do OE1. Cada estudo recebeu uma finalidade principal: predição ou classificação em 8, personalização ou sistemas tutores em 3, intervenção didática em 2, modelagem cognitiva em 1 e integração curricular em 1. Nos estudos de predição, a finalidade pedagógica aparece apenas pelo alvo previsto, como nota ou desempenho posterior. Há um limite na própria tipologia: predição é uma tarefa computacional, e as outras quatro são finalidades de uso. As frequências descrevem este recorte, não a literatura toda.
+
+## 15. Resultado — oe2 — O que falta nos relatos: a resposta mais comum é “não é possível concluir” — 1:15
+
+**Mostrar:** a grade; destacar a linha quantitativo descritivo (Q2 a Q4 com 7 de 7).
+
+**Fala:** Este é o resultado do OE2. A grade conta quantas vezes cada critério ficou como Não é possível concluir. Nos sete estudos quantitativos descritivos, Q2, Q3 e Q4 ficaram assim em todos. A leitura é que falta informação nos relatos, mais do que falha demonstrada. A consequência para o projeto é exigir que se declarem alvo, população, transformações dos dados e forma de avaliação.
+
+## 16. Resultado — oe2 — Três eixos de risco viraram requisitos — 1:00
+
+**Mostrar:** as três colunas e os códigos R e F de cada uma; o rodapé de equidade.
+
+**Fala:** Os três eixos de risco discutidos no OE2 viraram requisitos. No eixo técnico, validar sem vazar informação: R20 registra quando o desfecho é definido e quais atributos existem nesse momento, e F03 bloqueia a saída que viole isso. No pedagógico, não chamar previsão de proficiência e manter o professor na interpretação. No ético, finalidade, minimização e pseudonimização, com atenção ao art. 14 da LGPD para crianças e adolescentes. A análise de equidade, R23, não foi operacionalizada porque os dados não têm colunas de subgrupo aprovadas.
+
+## 17. Síntese — O que a evidência permite especificar — 1:00
+
+**Mostrar:** a frase de título do bloco e os três pontos numerados.
+
+**Fala:** Como os estudos usam populações, alvos e métricas diferentes, não faz sentido ranquear modelos. O que a evidência permite é fixar condições de projeto: alvo explícito, modelo simples como referência, com a regressão logística, e incerteza visível, porque poucas respostas não sustentam conclusão sobre o estudante.
+
+## 18. Alcance — O que o TCC entrega, e o que não entrega — 0:50
+
+**Mostrar:** as duas colunas; o rodapé de limitações.
+
+**Fala:** O TCC entrega um mapa auditável da literatura e uma especificação com requisitos rastreáveis e regras de avaliação definidas antes dos dados. Não entrega evidência de eficácia: não compara modelos em dados reais, não valida protótipo em escola e não mede efeito na aprendizagem. As limitações principais são o revisor único, a triagem em texto completo e a extração produzidas por modelos de IA, com o MMAT conferido pelo autor, 14 de 15 textos recuperados, a sensibilidade abaixo do corte e a ausência de aplicação com participantes.
+
+## 19. Evidências e limites — Exemplos de limitações nos estudos consultados — 1:00
+
+**Mostrar:** os dois cartões: relato e implicação de cada um.
+
+**Fala:** Dois exemplos mostram o tipo de limite encontrado, sem indicar frequência. Em He e colaboradores, há oito turmas de 45 estudantes e uma amostra de 90 por comparação, sem que o texto explicite essa relação, e um único professor responde pelas duas turmas de controle; por isso a especificação exige declarar denominadores e unidade de análise. Em Nyantah e colaboradores, a alocação aparece como aleatória e depois como quase-experimental, os grupos já diferiam no pré-teste e a intervenção combina animação e jigsaw; não se pode atribuir o resultado à animação isoladamente.
+
+## 20. Resultado — oe3 — Da evidência aos requisitos: uma cadeia rastreável — 1:15
+
+**Mostrar:** a cadeia da esquerda para a direita; depois o exemplo R04 e o quadro das duas matrizes.
+
+**Fala:** O OE3 se organiza como uma cadeia rastreável, que é a Figura 3 do TCC: revisão, 26 grupos de requisitos, sete funções, critérios de aceitação e o protocolo do OE4. No exemplo de proteção de dados, R04 exige finalidade, minimização e controle de acesso; F04 limita a consulta individual e F07 registra e exporta versões; o critério de aceitação pede perfil autorizado e identificadores pseudonimizados. Há duas matrizes: os 15 estudos se relacionam a 18 grupos de requisitos, e seis estudos são citados diretamente em sete grupos. Esses vínculos motivam decisões de projeto; não validam os requisitos.
+
+## 21. Arquitetura e saída — O professor vê indícios e incerteza, não um veredito — 1:15
+
+**Mostrar:** o fluxo F01 a F06 à esquerda; no cartão, apontar o intervalo 0,30–0,90 na régua.
+
+**Fala:** A arquitetura vai da ingestão com fonte, licença e dicionário, F01, à preparação com vínculo curricular, F02, à modelagem, F03, à avaliação com métricas e explicações, F05, e à apresentação com revisão docente, F04 e F06. F07 registra e exporta tudo. À direita, uma saída fictícia: o estudante A acertou 4 de 6 itens de comparação de frações, taxa de 0,67, mas o intervalo de Wilson de 95% vai de 0,30 a 0,90. Com tão poucas respostas, não há conclusão sobre o estudante. A média das probabilidades previstas aparece sem intervalo próprio, a calibração não foi examinada e o alerta de risco fica desabilitado. Quem decide o próximo passo é a professora.
+
+## 22. Oe3 e oe4 — Regras do protocolo proposto — 1:15
+
+**Mostrar:** painel esquerdo, condições i a iii; painel direito, regra docente e conferência técnica.
+
+**Fala:** As regras foram fixadas antes de qualquer dado real. Para o modelo, a referência é a regressão logística regularizada. Um candidato mais complexo só é adotado se cumprir três condições: melhorar a perda logarítmica, com intervalo de 95% por reamostragem pareada por estudante; não piorar o Brier nem aumentar o erro de calibração esperado; e oferecer explicação local conferível. Se falhar, mantém-se a referência. Para o OE4, um painel de cinco docentes avalia cada grupo de requisitos em duas rodadas; o grupo é coerente se ao menos quatro dos cinco derem 3 ou 4 em cada dimensão, sem problema crítico. A conferência técnica é separada. As fichas estão no Apêndice C. Nada disso foi aplicado, e a aplicação depende de parecer ético.
+
+## 23. Conclusão — Resposta: uma especificação verificável antes dos dados — 1:15
+
+**Mostrar:** as quatro contribuições; depois os próximos passos.
+
+**Fala:** Respondendo à pergunta: a especificação se estrutura ligando alvo e população à evidência disponível, convertendo os achados em requisitos e definindo como o professor examina as saídas. O OE1 mostrou que a literatura se concentra em predição, com finalidade pedagógica indireta. O OE2 mostrou que o desempenho reportado não se transfere para a sala de aula sem alvo, população, validação e incerteza. O OE3 converteu essas lacunas em exigências verificáveis. O OE4 fixou os critérios de avaliação antes da aplicação. Os próximos passos são aplicar o protocolo com docentes após parecer ético, testar a regra de modelo em dados reais documentados, construir a correspondência com as habilidades da BNCC e codificar itens por registro de representação.
+
+## 24. Encerramento — 0:15
+
+**Mostrar:** o QR do repositório.
+
+**Fala:** Obrigado. O texto, os dados derivados e o código estão no repositório público, acessível pelo QR. Fico à disposição para as perguntas.
+
+## Perguntas prováveis da banca
+
+- **Por que o corte 4,0 e não outro?** O corte priorizou a leitura e foi mantido. A exploração abaixo dele (13 de 45, 29 de 54 e 5 de 30) mostrou elegíveis de fora; isso é limitação declarada, sem estimativa de perda, e o recorte não é censo da literatura.
+- **Por que manter Sokkhey sem texto completo?** A seleção original não foi refeita depois das conferências. Sokkhey permanece nela, sem apreciação MMAT, e sua linha na síntese se baseia no resumo publicado. Zeng não foi recuperado e está fora dos 15.
+- **Qual foi o papel da IA?** A triagem em texto completo, a extração de dados e as respostas MMAT foram conduzidas com apoio de ferramentas de IA generativa (Apêndice E). O autor conferiu as respostas MMAT dos 14 estudos com texto recuperado, critério a critério; nos três mistos, os componentes separados não foram conferidos e seguem identificados como assistidos por IA. A síntese depende da fidedignidade dessas etapas.
+- **Por que não há protótipo validado?** O escopo é documental. A implementação exploratória serviu só como verificação técnica do fluxo, com dados sintéticos. Validação em escola e avaliação de eficácia são trabalhos futuros.
+- **Por que a regressão logística como referência?** É simples, produz probabilidades e é interpretável. Um candidato mais complexo só é adotado se melhorar a perda logarítmica com intervalo de 95% abaixo de zero, sem piorar Brier nem calibração, e com explicação local conferível.
+- **De onde vem a regra de quatro em cinco docentes?** É uma escolha de projeto (80%) para o painel, não validação estatística do instrumento nem estimativa para uma população docente. Há duas rodadas individuais e uma reunião para discutir divergências sem forçar consenso.
+- **Como ficam os dados de crianças e adolescentes?** A aplicação depende de parecer ético e de base legal; o art. 14 da LGPD exige o melhor interesse do titular. A especificação prevê finalidade, minimização e pseudonimização, que não equivale a anonimização.
+- **O protótipo usa a BNCC?** O adaptador atual aceita só o ASSISTments, com habilidades de um currículo estrangeiro. A correspondência com as habilidades da BNCC não foi construída nem validada e precede qualquer uso no Brasil.
+- **Por que o MMAT sem nota global?** A apreciação é apresentada por critério, sem escore agregado. CT indica informação insuficiente na evidência disponível ao revisor, não falha demonstrada do estudo.
+- **Duval e Brousseau foram operacionalizados?** Não. Eles delimitam o que uma saída binária não capta. O diagnóstico do tipo de erro fica com o professor (F06), e a codificação por registro de representação é trabalho futuro.

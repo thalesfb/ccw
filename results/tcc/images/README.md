@@ -3,7 +3,7 @@
 O infográfico de visão geral usado pelo README é
 [`project_overview_2026-11-17.png`](project_overview_2026-11-17.png). Ele mantém
 a composição da arte de 16/11 e atualiza apenas o painel MMAT, para refletir o
-texto vigente: 15 estudos na seleção histórica, 14 textos empíricos recuperados,
+texto vigente: 15 estudos na seleção original, 14 textos empíricos recuperados,
 duas fontes não recuperadas; Sokkhey permanece sem apreciação MMAT; e
 Zeng fora dos 15. Nas 14 avaliações com texto recuperado, S1 recebeu 14 Y e S2
 recebeu 13 Y e 1 CT; as respostas foram conferidas pelo autor. Nos três estudos
