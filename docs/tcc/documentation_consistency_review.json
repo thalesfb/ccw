@@ -4,13 +4,13 @@
   "human_scientific_approval": "pending",
   "canonical_inputs": {
     "results/tcc/conteudo/introducao.tex": "3204a65d4ac485e2ea2d4c458498771d8f912db15745d949678f88c7e48ffd31",
-    "research/exports/reports/reproducibility_manifest.json": "bf5ee4f5f859819c47fb3eb2c5df8217fca42972f4b41f99fe596052d3633793",
+    "research/exports/reports/reproducibility_manifest.json": "15aa40f2fcb8f3bd0ffe5e46d49b692c82fb20b029e898eee0d6c7414d62f23c",
     "research/data/study_contribution_current.json": "988b1bed10f9236c03ad6fb73b0d859fc70bbe2d21ef13e62227d69a2536ff6b",
     "research/data/evidence_sources_current.json": "e16a57b6b3d85d4f1b1afb74e9fd774b865dfded40d5468961bd9e125da683fa",
     "research/data/adjudicated_record_corrections.csv": "bc0a6f6393746e4a5eea0b2e4f3dac3e9505ea7aa416d9b9a81247fbf231a2ee",
     "research/data/selection_status_current.json": "805f1a7d898dd447bced9900ec77cbefd06644b28629580058c6ff2eddaf8fae",
     "results/tcc/conteudo/fundamentacao.tex": "63bbf9ffd2f01b58a1eacd1951b8fe772d55cd53795d6335eb498ea1a275cebf",
-    "results/tcc/conteudo/metodologia.tex": "72b0e18a73b4e63b64e641d8f39cd1799ec5431d6f68c0023c82e9380ed301f2",
+    "results/tcc/conteudo/metodologia.tex": "679f2971d6524766366527eb0a8447a79a3c580d6df5607a6207a967f6dc9906",
     "results/tcc/conteudo/resultadosesperados.tex": "8f665d330e7e83f2740eda2a8df84d167f249c248306b2e25e83134a5169456b",
     "results/tcc/conteudo/prototipo.tex": "6edbdd23c35d8dd9b10d0ce79142d5ed38beeeeccaf79925a48daef4bf2abc40",
     "results/tcc/conteudo/rastreabilidade-requisitos.tex": "d9d1de783914a550f6fa3e2dee8ba21057cbbb2ee4b21aa99e202a6c0639578c",
@@ -31,8 +31,8 @@
     "research/data/current_synthesis_scope.csv": "0c0f5d8d627cf0037b4ceb8e82370526bb461955304852b10504b335f26b42bf",
     "research/data/mmat_reassessment_current.csv": "84d8d6574a455c5f2ef6d46171f70fae3da77d5510f594bf38c4f1d91dceaed2",
     "research/data/mmat_component_reassessment_current.csv": "3a0aa4a37e59ca671177b2c5dc6ccc4ab91022c0484c7d23afbad2c6e1f96277",
-    "research/data/study_synthesis_current.csv": "410845c91bbe40390285b2126f657b9cdca212c57f77ca1f133b358014a594d0",
-    "research/exports/references/study_synthesis_tcc.tex": "e074a0ae5cdac80419155c06239a64b7ece04e5767215ffa6b5943ebb27ebc92",
+    "research/data/study_synthesis_current.csv": "4771e421a598d8d3477f9b831a692c6f5a42553051b795d3b97e84218b95bd85",
+    "research/exports/references/study_synthesis_tcc.tex": "7e8de31651499586b918bb29f1d3354a04b24eba02a77f2beabda021a04bc882",
     "research/exports/references/mmat_counts_tcc.tex": "d5e524daba4a1613d43890a2ef1f35de404f1e1d9f594fcd308ece71c569cd3c",
     "research/src/analysis/content_synthesis.py": "1e26e94a0af410a37da479657033ab0ae051a7386aaebd8ce943ec3ef2078cfa",
     "docs/tcc/ABNT-2025-CORRECOES.md": "525ba49050ef1f8c2c020b5a20cea85c885f85f5d57bf5ef5d7780a56b768fb9",
@@ -62,7 +62,7 @@
     "results/tcc/presentation/APRESENTACAO_TCC_SLIDES_CONTEUDO.md": "00bc3686f62b02b0fc07fdf9b82e1f4dbdf49b6ae941ea47e7dbcd93e0c9c9d8",
     "scripts/generate_tcc_presentation.py": "7e22744796807dd021d997e03f67a2a2a1bfe0d6eb1ae202e2bcd6ce60705d06",
     "scripts/sync_project_docs.py": "c5f26e15429c9f803a87ec6455ef60de99693dcf81c2084f9a38b78532539871",
-    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "ac95c7e1a5d1d4891ddc2decd542ea78a887ca0e5d12340343270b79ce4242e9",
+    "results/tcc/presentation/ensino_personalizado_de_matematica_tcc.pptx": "8aef2f9c90b299815fa652402ea8abe0342caab5d48507548d5d8202fbd51e96",
     "results/tcc/images/project_overview_2026-11-17.png": "82e973a906a81e026aac166a36565fe346d40e219250151163393661811cef6e"
   }
 }
