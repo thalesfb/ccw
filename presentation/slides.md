@@ -39,7 +39,13 @@ mdc: true
     <span class="cover-supervision">Orientador: Prof. Dr. Rafael Zanin<br>Coorientador: Prof. Dr. Manassés Ribeiro<br>Instituto Federal Catarinense - Campus Videira</span>
   </div>
 </div>
-<div class="cover-snapshot">Revisão sistemática · seleção histórica de 15 estudos · especificação conceitual</div>
+<div class="cover-snapshot">Revisão sistemática · seleção original de 15 estudos · especificação conceitual</div>
+
+<!--
+[0:30] MOSTRAR: título e a faixa inferior (revisão, 15 estudos, especificação conceitual).
+
+FALA: Boa tarde. Apresento o TCC Ensino Personalizado de Matemática. O trabalho tem duas entregas ligadas entre si: uma revisão sistemática de técnicas computacionais aplicadas ao ensino de matemática e, a partir dela, a especificação de um protótipo para apoiar a interpretação do professor. É uma entrega documental: não há sistema validado em escola.
+-->
 
 ---
 layout: default
@@ -63,6 +69,12 @@ class: content-slide tcc-challenge-slide
   </div>
 </div>
 
+<!--
+[1:00] MOSTRAR: frase em destaque à esquerda; depois os quatro cartões, de cima para baixo.
+
+FALA: Em turmas heterogêneas, a média da turma não mostra onde cada estudante está nem quanta evidência sustenta essa leitura. O professor tem pouco tempo para analisar registros, e a mesma intervenção não atende necessidades distintas. Há literatura sobre técnicas computacionais, mas ela está dispersa em técnicas, alvos e contextos. A premissa do trabalho: a técnica pode organizar evidências, e a interpretação continua com o professor.
+-->
+
 ---
 layout: default
 class: content-slide tcc-objective-general-slide
@@ -79,6 +91,12 @@ class: content-slide tcc-objective-general-slide
   <div class="tcc-objective-box tcc-scope"><span>ESCOPO</span><p>Revisão sistemática e especificação documental. Não inclui protótipo validado nem avaliação de eficácia.</p></div>
 </div>
 
+<!--
+[0:45] MOSTRAR: caixa central com o objetivo geral; depois PARA QUÊ e ESCOPO.
+
+FALA: O objetivo geral é propor uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática, fundamentada na literatura. O apoio se limita a mostrar ao professor indícios de desempenho e de incerteza por estudante e habilidade, sem substituir seu julgamento. O escopo é revisão e especificação; protótipo validado e avaliação de eficácia ficam fora.
+-->
+
 ---
 layout: default
 class: content-slide tcc-problem-slide
@@ -89,6 +107,12 @@ class: content-slide tcc-problem-slide
 # Pergunta de pesquisa
 
 <div class="rq-grid tcc-question-grid"><p class="tcc-question-text">Como estruturar uma especificação técnica e pedagógica de protótipo para apoiar a interpretação docente da aprendizagem matemática a partir das evidências e técnicas computacionais identificadas na literatura?</p></div>
+
+<!--
+[0:30] MOSTRAR: ler a pergunta inteira, sem paráfrase.
+
+FALA: A pergunta de pesquisa é esta. A palavra que orienta a resposta é estruturar: o resultado esperado é uma forma rastreável de organizar a especificação a partir da evidência, e não a escolha de um modelo vencedor.
+-->
 
 ---
 layout: default
@@ -109,7 +133,13 @@ class: content-slide
 
 <div class="concept-note"><strong>Regra de leitura:</strong> uma saída computacional organiza evidências e produz estimativas; sozinha, não observa os processos cognitivos, sociais e afetivos da aprendizagem nem demonstra eficácia pedagógica.</div>
 
-<div class="tcc-caption">Elaboração do autor com base em National Research Council (2001), pp. 42–44, OECD (2023) e Brasil / BNCC (2018); não é uma escala validada.</div>
+<div class="tcc-caption">Elaboração do autor com base em National Research Council (2001), OECD (2023) e Brasil / BNCC (2018); não é uma escala validada.</div>
+
+<!--
+[1:15] MOSTRAR: a escada de 01 a 05, em ordem; ao final, a regra de leitura.
+
+FALA: Antes da revisão, separo cinco termos que a literatura às vezes mistura. Desempenho observado é o que foi registrado na tarefa. Probabilidade preditiva é a saída de um modelo para um alvo definido e com os dados usados; não é proficiência. Proficiência estimada exige modelo de mensuração e evidência de validade. Competência, no sentido da BNCC, é mobilizar conhecimentos, habilidades, atitudes e valores. Aprendizagem, neste trabalho, é mudança ao longo do tempo. A regra que sai daqui: a saída computacional organiza evidência e produz estimativas, mas sozinha não observa a aprendizagem nem demonstra eficácia.
+-->
 
 ---
 layout: default
@@ -136,6 +166,12 @@ class: content-slide tcc-mission-slide
   </div>
 </div>
 
+<!--
+[1:00] MOSTRAR: o exemplo do 7º ano; depois o cartão 0/1 ≠ diagnóstico.
+
+FALA: Dois referenciais da didática da matemática delimitam o que essa saída não capta. Para Duval, compreender exige coordenar ao menos dois registros de representação. Para Brousseau, um erro pode manifestar um obstáculo. No exemplo, errar a conversão do enunciado para 2x + 5 = 15 é diferente de errar ao isolar x, mas os dois viram o mesmo zero num registro binário. Por isso a especificação organiza indícios por habilidade, com incerteza, e deixa o tipo de erro para o professor, na revisão docente da função F06. Codificar itens por registro de representação fica como trabalho futuro.
+-->
+
 ---
 layout: default
 class: content-slide tcc-objectives-slide
@@ -153,6 +189,12 @@ class: content-slide tcc-objectives-slide
 </div>
 
 <div class="tcc-caption">Meios: revisão de 2015–2026 relatada com o PRISMA 2020, apreciação MMAT conferida pelo autor e fluxo de processamento versionado. O protocolo está proposto; sua aplicação está pendente.</div>
+
+<!--
+[1:00] MOSTRAR: os quatro passos e, em cada um, o produto indicado pela seta.
+
+FALA: Os quatro objetivos específicos geram quatro produtos. OE1 categoriza técnicas e finalidades: resulta na tipologia dos 15 estudos. OE2 codifica limitações metodológicas e de relato com o MMAT e discute os eixos técnico, pedagógico e ético. OE3 formula a especificação: 26 grupos de requisitos, critérios de dados e modelos e a arquitetura. OE4 propõe o protocolo para avaliar a viabilidade e a coerência da especificação. O protocolo está proposto e não foi aplicado.
+-->
 
 ---
 layout: default
@@ -172,6 +214,12 @@ class: content-slide tcc-search-slide
 
 <div class="tcc-method-strip"><span><b>Relato</b> PRISMA 2020 — Page et al. (2021)</span><span><b>Qualidade</b> MMAT 2018 — Hong et al. (2018)</span><span><b>Consulta</b> “matemática” AND “técnica” AND “educação”</span></div>
 
+<!--
+[1:00] MOSTRAR: os hexágonos (três camadas); o cartão de 72 consultas; a faixa PRISMA/MMAT.
+
+FALA: A busca combina três camadas: um termo matemático, um termo de técnica computacional e um termo de educação. Foram 72 consultas canônicas, 48 em inglês e 24 em português, em quatro bases, para 2015 a 2026, com busca encerrada em 31 de agosto de 2026. O PRISMA 2020 orienta o relato, e o MMAT 2018 orienta a apreciação metodológica.
+-->
+
 ---
 layout: default
 class: content-slide tcc-sources-slide
@@ -190,6 +238,12 @@ class: content-slide tcc-sources-slide
 
 <div class="tcc-caption">11.875 registros após a remoção histórica de 29 duplicatas (27 por DOI/URL e 2 confirmadas manualmente). A base indicada é a origem da versão mantida; não mede cobertura exclusiva. Teses e dissertações também podiam ser elegíveis.</div>
 
+<!--
+[0:40] MOSTRAR: os quatro cartões com as contagens; a legenda.
+
+FALA: As quatro bases são complementares: Semantic Scholar, OpenAlex, Crossref e CORE. Depois da remoção de 29 duplicatas ficaram 11.875 registros. A base indicada em cada cartão é a origem da versão mantida, não a cobertura exclusiva daquela base. Se faltar tempo, este slide pode ser dito em uma frase.
+-->
+
 ---
 layout: center
 class: image-slide tcc-prisma-slide
@@ -198,27 +252,39 @@ class: image-slide tcc-prisma-slide
 <div class="slide-kicker">09 / FLUXO PRISMA</div>
 
 <h1 class="sr-only">Representação operacional do processo de seleção, com referência ao PRISMA 2020</h1>
-<p class="sr-only" id="prisma-flow-description">Fluxo: 11.904 registros identificados; 29 duplicatas removidas; 11.875 triados; 9.393 excluídos na triagem; 2.482 priorizados; 2.464 excluídos na priorização; 18 relatórios na lista; 1 excluído após resumo; 17 relatórios procurados; 2 não recuperados; 15 avaliados em texto completo; 1 protocolo excluído; 14 textos recuperados; 15 estudos na seleção histórica.</p>
+<p class="sr-only" id="prisma-flow-description">Fluxo: 11.904 registros identificados; 29 duplicatas removidas; 11.875 triados; 9.393 excluídos na triagem; 2.482 priorizados; 2.464 excluídos na priorização; 18 relatórios na lista; 1 excluído após resumo; 17 relatórios procurados; 2 não recuperados; 15 avaliados em texto completo; 1 protocolo excluído; 14 textos recuperados; 15 estudos na seleção original.</p>
 
 <img src="/images/prisma_flow.png" alt="Fluxograma de seleção dos estudos da revisão" aria-describedby="prisma-flow-description" class="feature-image prisma-image tcc-prisma-image" />
+
+<!--
+[1:15] MOSTRAR: percorrer o fluxograma de cima para baixo, apontando cada caixa.
+
+FALA: Este é o fluxo de seleção. Foram 11.904 registros identificados e 29 duplicatas removidas; 11.875 foram triados, e as regras automáticas excluíram 9.393, em boa parte por resumo ausente ou curto. Dos 2.482 priorizados por escore de relevância, o corte 4,0 deixou 18 na lista preliminar. Um saiu após a leitura do resumo; 17 relatórios foram procurados e dois não foram recuperados, Sokkhey e Zeng. Quinze foram avaliados em texto completo, e um protocolo sem resultados foi excluído. A seleção original fica com 15 estudos, e o próximo slide explica por quê.
+-->
 
 ---
 layout: default
 class: content-slide tcc-retained-slide
 ---
 
-<div class="slide-kicker">10 / SELEÇÃO HISTÓRICA</div>
+<div class="slide-kicker">10 / SELEÇÃO ORIGINAL</div>
 
 # 15 estudos na seleção; 14 textos recuperados
 
 <div class="tcc-retained-layout">
-  <div class="tcc-retained-number"><strong>15</strong><span>estudos na<br>seleção histórica</span><div class="tcc-retained-rule"></div><p>14 com texto recuperado</p></div>
+  <div class="tcc-retained-number"><strong>15</strong><span>estudos na<br>seleção original</span><div class="tcc-retained-rule"></div><p>14 com texto recuperado</p></div>
   <div class="tcc-retained-copy">
-    <div class="tcc-retained-strata" aria-label="Na seleção histórica, 14 textos recuperados e Sokkhey sem cópia verificável"><strong>14</strong><span>textos recuperados e conferidos</span><strong>1</strong><span>Sokkhey, sem cópia verificável</span></div>
+    <div class="tcc-retained-strata" aria-label="Na seleção original, 14 textos recuperados e Sokkhey sem cópia verificável"><strong>14</strong><span>textos recuperados e conferidos</span><strong>1</strong><span>Sokkhey, sem cópia verificável</span></div>
     <h2>Uma inclusão sem cópia verificável</h2>
-    <p>Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável. Zeng não integra os 15 estudos e não recebeu apreciação.</p>
+    <p>Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável; sua linha na síntese baseia-se no resumo publicado. Zeng não integra os 15 estudos e não recebeu apreciação.</p>
   </div>
 </div>
+
+<!--
+[0:45] MOSTRAR: o número 15 e a divisão 14 + 1.
+
+FALA: São 15 estudos na seleção original, 14 com texto recuperado e conferido. Sokkhey permanece na seleção, mas sem apreciação MMAT, e sua linha na síntese se baseia só no resumo publicado. Zeng não foi recuperado e não integra os 15.
+-->
 
 ---
 layout: default
@@ -245,6 +311,12 @@ class: content-slide tcc-score-slide
 </div>
 
 <div class="tcc-caption">Os estratos usam desenhos amostrais diferentes; as frações não se somam nem estimam a perda total. O escore não mede qualidade metodológica.</div>
+
+<!--
+[1:00] MOSTRAR: as três barras; o número 4,0; o aviso de limitação.
+
+FALA: O corte 4,0 serviu para priorizar a leitura e foi mantido. Explorei o que ficou abaixo dele: 13 de 45 registros elegíveis no censo entre 3,75 e 3,95; 29 de 54 na seleção dirigida entre 3,50 e 3,74; e 5 de 30 na amostra estratificada entre 3,00 e 3,49. Os desenhos são diferentes, então não somo as frações nem estimo a perda total. É uma limitação declarada: o recorte não é um censo da literatura, e o escore mede relevância, não qualidade.
+-->
 
 ---
 layout: default
@@ -273,6 +345,12 @@ class: content-slide tcc-mmat-slide
 
 <div class="tcc-mmat-result"><strong>Estado:</strong> nos 14 textos recuperados, o autor conferiu S1 (14 Y) e S2 (13 Y; 1 CT). Sokkhey (E10) permanece na seleção original sem apreciação MMAT, por falta de cópia verificável do texto completo. Nos três estudos de métodos mistos, respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA. Q1–Q5 variam por categoria; sem escore agregado.</div>
 
+<!--
+[1:00] MOSTRAR: S1 e S2; a legenda Y/N/CT; a faixa de estado embaixo.
+
+FALA: O MMAT funciona em duas etapas: duas perguntas de triagem e depois cinco critérios próprios da categoria do estudo. Cada resposta é Sim, Não ou Não é possível concluir. Nos 14 textos recuperados, S1 teve 14 Sim e S2 teve 13 Sim e 1 Não é possível concluir. A leitura é critério a critério, sem nota global. Nos três estudos de métodos mistos, as respostas dos componentes qualitativo e quantitativo seguem identificadas como assistidas por IA.
+-->
+
 ---
 layout: default
 class: content-slide tcc-typology-slide
@@ -298,6 +376,12 @@ class: content-slide tcc-typology-slide
 </div>
 
 <div class="tcc-caption">Uma finalidade principal por estudo, sem dupla contagem (Tabela 2 e Quadro 4 do TCC). Frequências descrevem o recorte; não indicam eficácia nem predominância na literatura.</div>
+
+<!--
+[1:15] MOSTRAR: as cinco barras; depois o aviso de categorias não homogêneas.
+
+FALA: Este é o resultado do OE1. Cada estudo recebeu uma finalidade principal: predição ou classificação em 8, personalização ou sistemas tutores em 3, intervenção didática em 2, modelagem cognitiva em 1 e integração curricular em 1. Nos estudos de predição, a finalidade pedagógica aparece apenas pelo alvo previsto, como nota ou desempenho posterior. Há um limite na própria tipologia: predição é uma tarefa computacional, e as outras quatro são finalidades de uso. As frequências descrevem este recorte, não a literatura toda.
+-->
 
 ---
 layout: default
@@ -325,6 +409,12 @@ class: content-slide tcc-reporting-slide
 
 <div class="tcc-caption">Tabela 3 do TCC. Respostas conferidas pelo autor (revisor único); não somadas em escore. Nenhum estudo na categoria randomizada.</div>
 
+<!--
+[1:15] MOSTRAR: a grade; destacar a linha quantitativo descritivo (Q2 a Q4 com 7 de 7).
+
+FALA: Este é o resultado do OE2. A grade conta quantas vezes cada critério ficou como Não é possível concluir. Nos sete estudos quantitativos descritivos, Q2, Q3 e Q4 ficaram assim em todos. A leitura é que falta informação nos relatos, mais do que falha demonstrada. A consequência para o projeto é exigir que se declarem alvo, população, transformações dos dados e forma de avaliação.
+-->
+
 ---
 layout: default
 class: content-slide tcc-axes-slide
@@ -342,6 +432,12 @@ class: content-slide tcc-axes-slide
 
 <div class="tcc-axes-foot"><strong>Equidade:</strong> a análise por subgrupos (R23) não foi operacionalizada, pois o contrato de dados vigente não declara colunas de subgrupo aprovadas.</div>
 
+<!--
+[1:00] MOSTRAR: as três colunas e os códigos R e F de cada uma; o rodapé de equidade.
+
+FALA: Os três eixos de risco discutidos no OE2 viraram requisitos. No eixo técnico, validar sem vazar informação: R20 registra quando o desfecho é definido e quais atributos existem nesse momento, e F03 bloqueia a saída que viole isso. No pedagógico, não chamar previsão de proficiência e manter o professor na interpretação. No ético, finalidade, minimização e pseudonimização, com atenção ao art. 14 da LGPD para crianças e adolescentes. A análise de equidade, R23, não foi operacionalizada porque os dados não têm colunas de subgrupo aprovadas.
+-->
+
 ---
 layout: default
 class: content-slide tcc-synthesis-slide
@@ -352,7 +448,7 @@ class: content-slide tcc-synthesis-slide
 # O que a evidência permite especificar
 
 <div class="tcc-synthesis-layout">
-  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>15</strong><span>estudos na<br>seleção histórica</span><i>evidências<br>relacionadas</i></div>
+  <div class="tcc-synthesis-orbit" aria-label="Relação entre desempenho, proficiência e modelagem"><div class="tcc-orbit-ring ring-one"></div><div class="tcc-orbit-ring ring-two"></div><div class="tcc-orbit-ring ring-three"></div><strong>15</strong><span>estudos na<br>seleção original</span><i>evidências<br>relacionadas</i></div>
   <div class="tcc-synthesis-copy">
     <h2>Condições de projeto, não ranking de modelos.</h2>
     <p>Os estudos classificam e predizem resultados matemáticos com populações, alvos e métricas diferentes. Categorias operacionais de desempenho não equivalem a níveis de proficiência validados.</p>
@@ -361,6 +457,12 @@ class: content-slide tcc-synthesis-slide
 </div>
 
 <div class="tcc-caption">A síntese organiza o recorte examinado; não estabelece eficácia pedagógica geral.</div>
+
+<!--
+[1:00] MOSTRAR: a frase de título do bloco e os três pontos numerados.
+
+FALA: Como os estudos usam populações, alvos e métricas diferentes, não faz sentido ranquear modelos. O que a evidência permite é fixar condições de projeto: alvo explícito, modelo simples como referência, com a regressão logística, e incerteza visível, porque poucas respostas não sustentam conclusão sobre o estudante.
+-->
 
 ---
 layout: default
@@ -379,6 +481,12 @@ class: content-slide tcc-boundary-slide
 
 <div class="tcc-boundary-foot"><strong>Limitações:</strong> revisor único, com triagem e extração produzidas por IA e MMAT conferido pelo autor; 14 de 15 com texto recuperado; sensibilidade abaixo de 4,0 com 13/45, 29/54 e 5/30; sem aplicação com participantes.</div>
 
+<!--
+[0:50] MOSTRAR: as duas colunas; o rodapé de limitações.
+
+FALA: O TCC entrega um mapa auditável da literatura e uma especificação com requisitos rastreáveis e regras de avaliação definidas antes dos dados. Não entrega evidência de eficácia: não compara modelos em dados reais, não valida protótipo em escola e não mede efeito na aprendizagem. As limitações principais são o revisor único, a triagem em texto completo e a extração produzidas por modelos de IA, com o MMAT conferido pelo autor, 14 de 15 textos recuperados, a sensibilidade abaixo do corte e a ausência de aplicação com participantes.
+-->
+
 ---
 layout: default
 class: content-slide tcc-gaps-slide
@@ -390,11 +498,17 @@ class: content-slide tcc-gaps-slide
 
 <p class="tcc-gaps-intro">Dois exemplos dos textos recuperados; ilustram limites, não sua frequência no corpus.</p>
 <div class="tcc-gaps-grid">
-  <div><h2>He et al. (2025)</h2><p><strong>Relato:</strong> oito turmas de 45 estudantes (360 no total), mas amostra declarada de 90; distribuição docente desigual entre condições.</p><p><strong>Implicação:</strong> explicitar denominadores e unidade de análise ao interpretar resultados.</p></div>
-  <div><h2>Nyantah et al. (2025)</h2><p><strong>Relato:</strong> o texto descreve a alocação das escolas como aleatória e depois a nega; a intervenção combina animação e jigsaw.</p><p><strong>Implicação:</strong> não presumir randomização nem atribuir o resultado à animação isoladamente.</p></div>
+  <div><h2>He et al. (2025)</h2><p><strong>Relato:</strong> oito turmas de 45 estudantes e amostra de 90 por comparação, sem explicitar a relação; um professor responde pelas duas turmas de controle.</p><p><strong>Implicação:</strong> explicitar denominadores e unidade de análise ao interpretar resultados.</p></div>
+  <div><h2>Nyantah et al. (2025)</h2><p><strong>Relato:</strong> alocação das escolas descrita como aleatória e depois como quase-experimental; grupos já diferiam no pré-teste; animação combinada com jigsaw.</p><p><strong>Implicação:</strong> não presumir randomização nem atribuir o resultado à animação isoladamente.</p></div>
 </div>
 
 <div class="tcc-gaps-foot"><strong>Escopo:</strong> exemplos ilustrativos, sem estimativa de prevalência.</div>
+
+<!--
+[1:00] MOSTRAR: os dois cartões: relato e implicação de cada um.
+
+FALA: Dois exemplos mostram o tipo de limite encontrado, sem indicar frequência. Em He e colaboradores, há oito turmas de 45 estudantes e uma amostra de 90 por comparação, sem que o texto explicite essa relação, e um único professor responde pelas duas turmas de controle; por isso a especificação exige declarar denominadores e unidade de análise. Em Nyantah e colaboradores, a alocação aparece como aleatória e depois como quase-experimental, os grupos já diferiam no pré-teste e a intervenção combina animação e jigsaw; não se pode atribuir o resultado à animação isoladamente.
+-->
 
 ---
 layout: default
@@ -418,6 +532,12 @@ class: content-slide tcc-specification-slide
   <div class="tcc-spec-delivery"><h2>Duas matrizes, duas leituras</h2><p>Os 15 estudos se relacionam a 18 grupos R; outra matriz cita diretamente seis estudos em sete grupos.</p><small>Esses vínculos motivam decisões de projeto; não demonstram validação empírica dos requisitos.</small></div>
 </div>
 
+<!--
+[1:15] MOSTRAR: a cadeia da esquerda para a direita; depois o exemplo R04 e o quadro das duas matrizes.
+
+FALA: O OE3 se organiza como uma cadeia rastreável, que é a Figura 3 do TCC: revisão, 26 grupos de requisitos, sete funções, critérios de aceitação e o protocolo do OE4. No exemplo de proteção de dados, R04 exige finalidade, minimização e controle de acesso; F04 limita a consulta individual e F07 registra e exporta versões; o critério de aceitação pede perfil autorizado e identificadores pseudonimizados. Há duas matrizes: os 15 estudos se relacionam a 18 grupos de requisitos, e seis estudos são citados diretamente em sete grupos. Esses vínculos motivam decisões de projeto; não validam os requisitos.
+-->
+
 ---
 layout: default
 class: content-slide tcc-architecture-slide
@@ -439,7 +559,13 @@ class: content-slide tcc-architecture-slide
   </div>
 </div>
 
-<div class="tcc-caption">Figuras 2 e 3 do TCC. Com 6 respostas, o intervalo cobre de 0,30 a 0,90: pouca evidência não sustenta conclusão sobre o estudante.</div>
+<div class="tcc-caption">Figuras 4 e 5 do TCC. Com 6 respostas, o intervalo cobre de 0,30 a 0,90: pouca evidência não sustenta conclusão sobre o estudante.</div>
+
+<!--
+[1:15] MOSTRAR: o fluxo F01 a F06 à esquerda; no cartão, apontar o intervalo 0,30–0,90 na régua.
+
+FALA: A arquitetura vai da ingestão com fonte, licença e dicionário, F01, à preparação com vínculo curricular, F02, à modelagem, F03, à avaliação com métricas e explicações, F05, e à apresentação com revisão docente, F04 e F06. F07 registra e exporta tudo. À direita, uma saída fictícia: o estudante A acertou 4 de 6 itens de comparação de frações, taxa de 0,67, mas o intervalo de Wilson de 95% vai de 0,30 a 0,90. Com tão poucas respostas, não há conclusão sobre o estudante. A média das probabilidades previstas aparece sem intervalo próprio, a calibração não foi examinada e o alerta de risco fica desabilitado. Quem decide o próximo passo é a professora.
+-->
 
 ---
 layout: default
@@ -470,6 +596,12 @@ class: content-slide tcc-rules-slide
 
 <div class="tcc-caption">Fluxogramas 2 e 3 do TCC. Nenhuma das regras foi aplicada: não houve treinamento com dados reais nem painel docente.</div>
 
+<!--
+[1:15] MOSTRAR: painel esquerdo, condições i a iii; painel direito, regra docente e conferência técnica.
+
+FALA: As regras foram fixadas antes de qualquer dado real. Para o modelo, a referência é a regressão logística regularizada. Um candidato mais complexo só é adotado se cumprir três condições: melhorar a perda logarítmica, com intervalo de 95% por reamostragem pareada por estudante; não piorar o Brier nem aumentar o erro de calibração esperado; e oferecer explicação local conferível. Se falhar, mantém-se a referência. Para o OE4, um painel de cinco docentes avalia cada grupo de requisitos em duas rodadas; o grupo é coerente se ao menos quatro dos cinco derem 3 ou 4 em cada dimensão, sem problema crítico. A conferência técnica é separada. As fichas estão no Apêndice C. Nada disso foi aplicado, e a aplicação depende de parecer ético.
+-->
+
 ---
 layout: default
 class: content-slide tcc-next-slide
@@ -485,6 +617,12 @@ class: content-slide tcc-next-slide
 </div>
 
 <div class="tcc-caption">Contribuições delimitadas pelo escopo documental. Dados, código e testes versionados permitem reproduzir as contagens e os quadros.</div>
+
+<!--
+[1:15] MOSTRAR: as quatro contribuições; depois os próximos passos.
+
+FALA: Respondendo à pergunta: a especificação se estrutura ligando alvo e população à evidência disponível, convertendo os achados em requisitos e definindo como o professor examina as saídas. O OE1 mostrou que a literatura se concentra em predição, com finalidade pedagógica indireta. O OE2 mostrou que o desempenho reportado não se transfere para a sala de aula sem alvo, população, validação e incerteza. O OE3 converteu essas lacunas em exigências verificáveis. O OE4 fixou os critérios de avaliação antes da aplicação. Os próximos passos são aplicar o protocolo com docentes após parecer ético, testar a regra de modelo em dados reais documentados, construir a correspondência com as habilidades da BNCC e codificar itens por registro de representação.
+-->
 
 ---
 layout: center
@@ -506,3 +644,9 @@ class: closing-slide
 <p class="close-title"><strong>Ensino Personalizado de Matemática</strong><br>Revisão sistemática de técnicas computacionais e especificação de um protótipo de apoio à interpretação docente</p>
 <p class="close-sources">Fonte pública do TCC: <a href="https://thalesfb.github.io/ccw/results/tcc/main.pdf">thalesfb.github.io/ccw/results/tcc/main.pdf</a> · repositório: <a href="https://github.com/thalesfb/ccw">github.com/thalesfb/ccw</a></p>
 </div>
+
+<!--
+[0:15] MOSTRAR: o QR do repositório.
+
+FALA: Obrigado. O texto, os dados derivados e o código estão no repositório público, acessível pelo QR. Fico à disposição para as perguntas.
+-->

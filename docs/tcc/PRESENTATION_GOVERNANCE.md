@@ -22,12 +22,13 @@ decisões de implementação em afirmações acadêmicas.
   canônico `https://github.com/thalesfb/ccw`, texto alternativo e uma área
   visual legível para leitura em projeção.
 
-## Roteiro de fala: etapa posterior
+## Roteiro de fala
 
-A fala ainda não integra o deck canônico. O roteiro será preparado quando o
-manuscrito e os slides estiverem estabilizados, com base no conteúdo aprovado.
-O roteiro histórico do export paralelo não integra os contratos de atualidade
-científica do deck; estes conferem o storyboard e o Slidev.
+A fala integra o deck canônico como notas do apresentador em cada slide
+(tecla `P` no Slidev). O mesmo texto, com o que mostrar e o tempo de cada
+slide, está em
+[`ROTEIRO_FALAS_TCC.md`](../../results/tcc/presentation/ROTEIRO_FALAS_TCC.md);
+`research/tests/test_presentation_script.py` confere a correspondência.
 
 ## Template fornecido: instrução versus requisito
 

@@ -37,7 +37,7 @@ def test_synthesis_slide_matches_the_historical_corpus_not_an_undefined_subset()
         r'tcc-synthesis-orbit[\s\S]*?<strong>(\d+)</strong><span>(.*?)</span>', slides
     )
     assert metric and int(metric[1]) == retained
-    assert "seleção histórica" in metric[2]
+    assert "seleção original" in metric[2]
     synthesis = slides.split("16 / SÍNTESE", 1)[1].split("\n---", 1)[0]
     assert "inferem proficiência" not in synthesis
     assert "categorias operacionais de desempenho" in synthesis.casefold()

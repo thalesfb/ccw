@@ -98,7 +98,7 @@ def test_tcc_and_presentation_use_the_updated_primary_text_coverage() -> None:
     assert "dos quais 14 têm texto recuperado" in results
     assert "núcleo empírico" not in results
     assert "15 estudos, 14 textos recuperados, ressalva de Sokkhey e exclusão de Zeng" in normalized_presentation
-    assert "**Seleção histórica.** 15 estudos" in normalized_presentation
+    assert "**Seleção original.** 15 estudos" in normalized_presentation
     assert "nove registros tiveram" not in results.lower()
     assert "nove registros tiveram" not in presentation.lower()
 
@@ -123,7 +123,7 @@ def test_prisma_counts_are_current_in_tcc_presentation_and_appendix() -> None:
     assert "15 estudos, 14 textos recuperados, ressalva de Sokkhey e exclusão de Zeng" in storyboard
     flow_description = slides.split('id="prisma-flow-description">', 1)[1].split("</p>", 1)[0]
     assert "17 relatórios procurados; 2 não recuperados; 15 avaliados em texto completo" in flow_description
-    assert "14 textos recuperados; 15 estudos na seleção histórica" in flow_description
+    assert "14 textos recuperados; 15 estudos na seleção original" in flow_description
     review = " ".join(
         (ROOT / "results/tcc/conteudo/resultadosesperados.tex")
         .read_text(encoding="utf-8").split()
@@ -149,7 +149,7 @@ def test_canonical_defense_deck_uses_reconciled_full_text_counts() -> None:
 
     assert "17 relatórios procurados; 2 não recuperados; 15 avaliados em texto completo" in flow_description
     assert "2 não recuperados" in flow_description
-    assert "15 estudos na seleção histórica" in flow_description
+    assert "15 estudos na seleção original" in flow_description
     assert "para 13, avaliação em texto completo" not in slides
     assert "Dos 17 relatórios procurados, dois (Sokkhey e Zeng) não foram recuperados e 15 foram avaliados em texto completo" in parallel_pptx
 
