@@ -255,7 +255,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         note_path = ROOT / "docs/TCC_REPRODUCIBILITY_NOTE.md"
         note = note_path.read_text(encoding="utf-8")
         normalized_note = " ".join(note.split())
-        self.assertIn("a seleção histórica continua com 15 estudos", normalized_note.lower())
+        self.assertIn("a seleção original continua com 15 estudos", normalized_note.lower())
         self.assertIn("dois não têm cópia verificável (Sokkhey e Zeng)", normalized_note)
         self.assertIn("14 relatórios empíricos recuperados", normalized_note)
         self.assertIn("SUPPORTED", normalized_note)
@@ -317,7 +317,7 @@ class EditorialFeedbackTests(unittest.TestCase):
         )
 
         governance = " ".join((ROOT / "docs/tcc/PRESENTATION_GOVERNANCE.md").read_text(encoding="utf-8").split())
-        self.assertIn("15 permanecem na seleção empírica histórica", governance)
+        self.assertIn("15 permanecem na seleção empírica original", governance)
         self.assertIn("texto recuperado para 14", governance)
         self.assertIn("Sokkhey permanece na seleção original sem apreciação MMAT", governance)
         self.assertIn("Zeng não foi recuperado e está fora dos 15", governance)

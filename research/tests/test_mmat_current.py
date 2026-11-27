@@ -465,7 +465,7 @@ def test_current_mmat_html_cells_match_the_versioned_ledger() -> None:
     assert "perguntas de triagem do mmat 2018" in html.lower()
     assert "há perguntas de pesquisa claras?" in html.lower()
     assert "17 candidatos empíricos submetidos ao mmat" not in html.lower()
-    assert "15 estudos empíricos da seleção histórica" in html.lower()
+    assert "15 estudos empíricos da seleção original" in html.lower()
     assert "14 têm respostas s1/s2" in html.lower()
     assert "14 têm apreciações por categoria conferidas pelo autor" in html.lower()
     assert "sokkhey permanece sem apreciação mmat por falta de cópia verificável do texto completo" in html.lower()

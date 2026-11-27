@@ -11,7 +11,7 @@ decisões de implementação em afirmações acadêmicas.
 - Os números devem continuar reconciliados com
   `research/exports/reports/summary.json`.
 - O estado científico apresentado é o snapshot atual: 18 registros
-  shortlistados, dos quais 15 permanecem na seleção empírica histórica. Há
+  shortlistados, dos quais 15 permanecem na seleção empírica original. Há
   texto recuperado para 14; Sokkhey permanece na seleção original sem
   apreciação MMAT, por falta de cópia verificável do texto completo. Zeng não foi recuperado e está fora
   dos 15. Um registro foi excluído após o resumo e um protocolo após a leitura
@@ -107,7 +107,7 @@ Como limite interpretativo mínimo, o deck deve comunicar a seguinte síntese:
 o código do pipeline está implementado, os testes sintéticos estão verdes, o
 experimento com dados reais é continuidade fora do escopo documental desta entrega,
 e a apreciação MMAT é apresentada por critério, sem escore agregado. O núcleo
-empírico mantém 15 estudos na seleção histórica; 14 têm texto recuperado e
+empírico mantém 15 estudos na seleção original; 14 têm texto recuperado e
 respostas conferidas contra as evidências localizadas. Sokkhey permanece na seleção original sem apreciação MMAT, por falta de cópia
 verificável do texto completo. Os
 componentes dos estudos mistos não integraram a conferência registrada. As

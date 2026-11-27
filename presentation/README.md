@@ -8,7 +8,7 @@
 > conferiu separadamente as respostas dos componentes qualitativo e
 > quantitativo; elas permanecem identificadas como assistidas por IA. A
 > apresentação descreve a seleção
-> histórica de 15 estudos sob o corte 4,0.
+> original de 15 estudos sob o corte 4,0.
 
 ## Arquivo da defesa
 
@@ -35,7 +35,7 @@ O material em `results/ptc/presentation/` é uma terceira apresentação,
 histórica, referente ao PTC. Serve apenas como referência narrativa e visual,
 nunca como fonte dos números atuais do TCC.
 
-Os gráficos versionados e as contagens do fluxo descrevem a seleção histórica
+Os gráficos versionados e as contagens do fluxo descrevem a seleção original
 de 15 estudos sob o corte 4,0. Não houve mudança do corte, nova seleção ou
 incorporação de estudos adicionais. Os materiais resumem a conferência do MMAT
 nos 14 estudos com texto recuperado e mantêm explícitas as ressalvas sobre
@@ -46,7 +46,7 @@ permanecem identificadas como assistidas por IA.
 ## Sequência da defesa (11/2026)
 
 A sequência atual parte do problema de pesquisa literal, apresenta método e
-fluxo PRISMA uma vez, distingue a seleção histórica da análise de sensibilidade
+fluxo PRISMA uma vez, distingue a seleção original da análise de sensibilidade
 e conduz pelos resultados OE1–OE4. A especificação é mostrada por uma cadeia
 R04 → F04/F07 → aceitação parcial, seguida da arquitetura com F01–F07 e de uma
 saída fictícia. Os slides mantêm os limites do manuscrito e não alegam validação
@@ -138,7 +138,7 @@ tipográfica e legibilidade devem ser verificadas no ambiente de exportação.
 Os títulos usam o peso negrito 700, espaçamento natural entre letras e
 entrelinha mínima de 1,12. Não reutilize o espaçamento negativo da composição
 sans-serif anterior com Times: essa combinação comprime e sobrepõe glifos.
-O slide do fluxo usa a figura canônica do TCC; a seleção histórica e a ressalva
+O slide do fluxo usa a figura canônica do TCC; a seleção original e a ressalva
 de Sokkhey aparecem em um slide separado. Ressalvas científicas após o título
 não recebem a opacidade reduzida do tema padrão; sua leitura integra a revisão
 visual do PDF.
@@ -161,17 +161,17 @@ Após o merge, o workflow de publicação compila o deck e o disponibiliza em
 
 ## Limites científicos
 
-- na seleção histórica sob o corte 4,0, dos 18 registros da lista preliminar, 15 estudos
+- na seleção original sob o corte 4,0, dos 18 registros da lista preliminar, 15 estudos
   empíricos foram mantidos; um registro foi excluído após o resumo, dois dos 17
   relatórios procurados não foram recuperados, 15 foram avaliados em texto
   completo, um protocolo foi excluído e 14 relatórios empíricos foram recuperados;
-  Sokkhey permanece entre os 15 apenas como inclusão histórica sem cópia verificável;
+  Sokkhey permanece entre os 15 apenas como inclusão da seleção original sem cópia verificável;
 - no MMAT, as respostas dos 14 estudos com texto recuperado foram conferidas
   pelo autor; Sokkhey permanece na seleção original sem apreciação MMAT, por falta de
   cópia verificável do texto completo. Nos três estudos de métodos mistos, o autor não conferiu
   separadamente as respostas dos componentes qualitativo e quantitativo; elas
   permanecem identificadas como assistidas por IA. Não há nota média ou ranking;
-- as frequências técnicas descrevem a seleção histórica após deduplicação,
+- as frequências técnicas descrevem a seleção original após deduplicação,
   não uma síntese de eficácia nem um corpus final;
 - referências teóricas, pedagógicas, metodológicas e técnicas do TCC permanecem
   separadas das referências resultantes do processamento automatizado.

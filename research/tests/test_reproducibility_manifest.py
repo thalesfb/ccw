@@ -369,12 +369,12 @@ def test_public_pages_do_not_present_operational_scope_as_final_results() -> Non
     assert "98 respostas" not in root_html
     assert "95 foram mantidas" not in root_html
     assert "3 alteradas" not in root_html
-    assert "Seleção histórica" in root_html
+    assert "Seleção original" in root_html
     assert "O corte 4,0 e os 15 estudos permanecem inalterados" in root_html
     assert "emenda aprovada" not in root_html
     assert "na priorização histórica" in root_html
     assert "encaminhados à elegibilidade" not in root_html
-    assert "A seleção histórica mantém 15 estudos empíricos sob o corte 4,0" in tcc_html
+    assert "A seleção original mantém 15 estudos empíricos sob o corte 4,0" in tcc_html
     assert "conferida pelo autor, abrange os 14 estudos com texto recuperado" in tcc_html.lower()
     assert "A aplicação funcional e a validação experimental estão fora do escopo" in tcc_html
     mmat_html = (REPOSITORY_ROOT / "research" / "exports" / "analysis" / "mmat_current.html").read_text(

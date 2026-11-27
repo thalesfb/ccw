@@ -71,7 +71,7 @@ def test_research_readme_uses_operational_prioritization_and_explicit_denominato
     assert "99,27%" in current and "não avançaram sob a regra histórica" in current
     assert "encaminhou 18 registros à lista preliminar (0,73%)" in current
     assert "17 relatórios procurados" in current
-    assert "15 estudos empíricos mantidos na seleção histórica" in current
+    assert "15 estudos empíricos mantidos na seleção original" in current
     assert "14 têm relatório recuperado" in current
     assert "2 não foram recuperados (Sokkhey (2020) e Zeng (2025))" in current
     assert "15 foram avaliados em texto completo" in current

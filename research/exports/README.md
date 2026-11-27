@@ -128,7 +128,7 @@ python -m research.src.cli export-bibtex -o research/references
 ```
 
 `included_papers.bib` contém os 18 registros shortlistados derivados do
-pipeline, não 18 estudos incluídos. A seleção histórica mantém 15 estudos;
+pipeline, não 18 estudos incluídos. A seleção original mantém 15 estudos;
 dois dos 17 relatórios procurados não foram recuperados, 15 foram avaliados em
 texto completo, um protocolo foi excluído e 14 relatórios empíricos foram
 recuperados. Sokkhey permanece entre os 15 sem cópia verificável. Um registro
@@ -197,8 +197,8 @@ não reutilize percentuais de rodadas históricas sem o respectivo manifesto.
 
 ## 🚀 Próximos Passos
 
-### Fase 1 (Revisão Sistemática) - 🟡 SELEÇÃO HISTÓRICA RECONCILIADA; MMAT PRELIMINAR
-- [x] Snapshot de busca reconciliado (11.904 identificados; 29 duplicatas removidas; 11.875 únicos na triagem; 18 na seleção histórica; 15 estudos empíricos sob o corte 4,0)
+### Fase 1 (Revisão Sistemática) - 🟡 SELEÇÃO ORIGINAL RECONCILIADA; MMAT PRELIMINAR
+- [x] Snapshot de busca reconciliado (11.904 identificados; 29 duplicatas removidas; 11.875 únicos na triagem; 18 na seleção original; 15 estudos empíricos sob o corte 4,0)
 - [x] Fluxo histórico de triagem e texto completo reconciliado
 - [x] Descrever o corte 4,0 e o conjunto de 15 estudos efetivamente adotados nesta versão
 - [x] Auditoria de títulos candidatos separada da deduplicação determinística
